@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{3644E12D-D934-41FD-BF7E-83745A216286}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/examples/helloworld-base14/helloworld-base14.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/examples/helloworld/helloworld.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/examples/pdfcontentsgraph/PdfContentsGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/examples/pdfcontentsgraph/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfArray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfCanvas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfColor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfContentsTokenizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfDataType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfDate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfDictionary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfEncoding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfEncodingFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfEncrypt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfError.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfFileStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfFiltersPrivate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfImmediateWriter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfInputDevice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfInputStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfLocale.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfMemStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfMemoryManagement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfName.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfObject.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfObjectStreamParserObject.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfOutputDevice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfOutputStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfOwnedDataType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfParserObject.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfRect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfRefCountedBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfRefCountedInputDevice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfReference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfString.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfTokenizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfVariant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfVecObjects.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfWriter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfXRef.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfXRefStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfXRefStreamParserObject.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfAcroForm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfAction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfAnnotation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfCMapEncoding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfContents.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfDestination.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfDifferenceEncoding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfDocument.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfElement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfEncodingObjectFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfExtGState.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfField.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFileSpec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFont.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontCID.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontCache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontConfigWrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontMetrics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontMetricsBase14.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontMetricsFreetype.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontMetricsObject.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontSimple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontTTFSubset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontTrueType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontType1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontType1Base14.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontType3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfHintStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfIdentityEncoding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfMemDocument.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfNamesTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfOutlines.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfPage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfPagesTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfPagesTreeCache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfPainter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfPainterMM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfShadingPattern.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfSignOutputDevice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfSignatureField.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfStreamedDocument.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfTTFWriter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfTable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfTilingPattern.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfXObject.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/ContentParser/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/CreationTest/CreationTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/FilterTest/FilterTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/FormTest/FormTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/LargeTest/LargeTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/ObjectParserTest/ObjectParserTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/ParserTest/ParserTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/SignTest/SignTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/SignatureTest/NSSSignatureGenerator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/SignatureTest/SignTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/TokenizerTest/TokenizerTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/VariantTest/VariantTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/WatermarkTest/WatermarkTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/unit/BasicTypeTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/unit/ColorTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/unit/DateTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/unit/DeviceTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/unit/ElementTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/unit/EncodingTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/unit/EncryptTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/unit/FilterTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/unit/FontTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/unit/NameTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/unit/PageTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/unit/PagesTreeTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/unit/PainterTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/unit/ParserTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/unit/StringTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/unit/TestUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/unit/TokenizerTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/unit/VariantTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/test/unit/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofobox/boxsetter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofobox/podofobox.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofocolor/colorchanger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofocolor/colorspace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofocolor/dummyconverter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofocolor/graphicsstack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofocolor/grayscaleconverter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofocolor/iconverter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofocolor/luaconverter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofocolor/podofocolor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofocountpages/countpages.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofocrop/podofocrop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofoencrypt/podofoencrypt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofogc/podofogc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofoimg2pdf/ImageConverter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofoimg2pdf/podofoimg2pdf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofoimgextract/ImageExtractor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofoimgextract/podofoimgextract.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofoimpose/charpainter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofoimpose/impositionplan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofoimpose/pdftranslator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofoimpose/planreader_legacy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofoimpose/planreader_lua.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofoimpose/podofoimpose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofoincrementalupdates/incrementalupdates.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofomerge/podofomerge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofonooc/podofonooc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofopages/DeleteOperation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofopages/MoveOperation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofopages/podofopages.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofopdfinfo/pdfinfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofopdfinfo/podofopdfinfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofosign/podofosign.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofotxt2pdf/podofotxt2pdf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofotxtextract/TextExtractor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofotxtextract/podofotxtextract.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofouncompress/Uncompress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofouncompress/podofouncompress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/podofo/tools/podofoxmp/podofoxmp.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/examples/pdfcontentsgraph/PdfContentsGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/Pdf3rdPtyForwardDecl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfCanvas.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfColor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfCompilerCompat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfCompilerCompatPrivate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfContentsTokenizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfDataType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfDate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfDefines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfDefinesPrivate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfDictionary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfEncoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfEncodingFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfEncrypt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfError.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfExtension.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfFileStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfFiltersPrivate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfImmediateWriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfInputDevice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfInputStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfLocale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfMemStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfMemoryManagement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfName.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfObject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfObjectStreamParserObject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfOutputDevice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfOutputStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfOwnedDataType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfParserObject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfRect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfRefCountedBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfRefCountedInputDevice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfReference.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfString.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfTokenizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfVariant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfVecObjects.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfVersion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfWriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfXRef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfXRefStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/PdfXRefStreamParserObject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/podofoapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/util/PdfMutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/util/PdfMutexImpl_noop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/util/PdfMutexImpl_pthread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/util/PdfMutexImpl_win32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/base/util/PdfMutexWrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfAcroForm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfAction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfAnnotation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfCMapEncoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfContents.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfDestination.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfDifferenceEncoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfDocument.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfElement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfEncodingObjectFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfExtGState.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfField.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFileSpec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFont.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontCID.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontCache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontConfigWrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontFactoryBase14Data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontMetrics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontMetricsBase14.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontMetricsFreetype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontMetricsObject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontSimple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontTTFSubset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontTrueType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontType1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontType1Base14.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFontType3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfFunction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfHintStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfIdentityEncoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfMemDocument.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfNamesTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfOutlines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfPage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfPagesTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfPagesTreeCache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfPainter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfPainterMM.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfShadingPattern.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfSignOutputDevice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfSignatureField.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfStreamedDocument.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfTTFWriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfTable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfTilingPattern.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/PdfXObject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/podofo-base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/src/podofo/podofo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/test/PdfTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/test/SignatureTest/NSSSignatureGenerator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/test/SignatureTest/SignatureGenerator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/test/SignatureTest/SimpleSignatureGenerator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/test/unit/BasicTypeTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/test/unit/ColorTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/test/unit/DateTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/test/unit/DeviceTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/test/unit/ElementTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/test/unit/EncodingTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/test/unit/EncryptTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/test/unit/FilterTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/test/unit/FontTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/test/unit/NameTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/test/unit/PageTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/test/unit/PagesTreeTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/test/unit/PainterTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/test/unit/ParserTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/test/unit/StringTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/test/unit/TestUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/test/unit/TokenizerTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/test/unit/VariantTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/test/unit/cppunitextensions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/tools/podofobox/boxsetter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/tools/podofocolor/colorchanger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/tools/podofocolor/colorspace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/tools/podofocolor/dummyconverter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/tools/podofocolor/graphicsstack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/tools/podofocolor/grayscaleconverter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/tools/podofocolor/iconverter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/tools/podofocolor/lua_compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/tools/podofocolor/luaconverter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/tools/podofoimg2pdf/ImageConverter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/tools/podofoimgextract/ImageExtractor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/tools/podofoimpose/charpainter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/tools/podofoimpose/impositionplan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/tools/podofoimpose/lua_compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/tools/podofoimpose/pdftranslator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/tools/podofoimpose/planreader_legacy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/tools/podofoimpose/planreader_lua.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/tools/podofopages/DeleteOperation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/tools/podofopages/MoveOperation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/tools/podofopages/Operation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/tools/podofopdfinfo/pdfinfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/tools/podofotxtextract/TextExtractor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/tools/podofouncompress/Uncompress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/podofo/vcincludes/unistd.h" />
+    <Image Include="../../thirdparty/owemdjee/podofo/doc/podofo_architecture.png" />
+    <Image Include="../../thirdparty/owemdjee/podofo/test/CreationTest/resources/watzmann.jpg" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/podofo/src/podofo/doc/podofo-doc.rc" />
+    <Text Include="../../thirdparty/owemdjee/podofo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/CODINGSTYLE.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/CONTRIBUTIONS.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/podofo/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/podofo/README.html" />
+    <Text Include="../../thirdparty/owemdjee/podofo/TODO" />
+    <Text Include="../../thirdparty/owemdjee/podofo/cmake_uninstall.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/podofo/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/examples/helloworld-base14/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/examples/helloworld/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/examples/pdfcontentsgraph/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/examples/pdfcontentsgraph/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/man/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/podofo_config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/podofo/src/podofo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/src/podofo/libpodofo.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/podofo/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/test/ContentParser/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/test/CreationTest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/test/FilterTest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/test/FormTest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/test/LargeTest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/test/ObjectParserTest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/test/ParserTest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/test/SignTest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/test/SignatureTest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/test/TokenizerTest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/test/VariantTest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/test/WatermarkTest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/test/pdfs/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/test/pdfs/inline-image.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/test/system/podofo-system.sh" />
+    <Text Include="../../thirdparty/owemdjee/podofo/test/unit/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/tools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/tools/podofobox/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/tools/podofocolor/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/tools/podofocolor/example.lua" />
+    <Text Include="../../thirdparty/owemdjee/podofo/tools/podofocountpages/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/tools/podofocrop/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/tools/podofoencrypt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/tools/podofogc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/tools/podofoimg2pdf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/tools/podofoimgextract/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/tools/podofoimpose/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/tools/podofoimpose/README.html" />
+    <Text Include="../../thirdparty/owemdjee/podofo/tools/podofoincrementalupdates/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/tools/podofomerge/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/tools/podofonooc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/tools/podofopages/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/tools/podofopdfinfo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/tools/podofosign/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/tools/podofotxt2pdf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/tools/podofotxtextract/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/tools/podofouncompress/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/podofo/tools/podofoxmp/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

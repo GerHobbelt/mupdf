@@ -1,0 +1,4 @@
+
+also-ignore:
+	/ApprovalTests/
+	/tests/

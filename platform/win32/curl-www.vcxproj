@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{3644E12D-D934-41FD-BF7E-83745A638DAC}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/curl-www/libcurl/c/curlgtk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/curl-www/libcurl/c/tinytest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/curl-www/libcurl/c/tinytest2.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/curl-www/docs/adv-related-box.inc" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/apple-touch-icon-precomposed.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/apple-touch-icon.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/survey/charts/chart.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/survey/charts/chart_002.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/survey/charts/chart_003.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/survey/charts/chart_004.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/survey/charts/chart_005.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/survey/charts/chart_006.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/survey/charts/chart_007.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/survey/charts/chart_008.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/survey/charts/chart_009.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/survey/charts/chart_010.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/survey/charts/chart_011.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/survey/charts/chart_012.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/survey/charts/chart_013.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/survey/charts/chart_014.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/survey/charts/chart_015.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/survey/charts/chart_016.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/a-day-in-my-life-2018.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/advanced-http-scripting-2017.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/altsvc-for-the-people-2018.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/apache-http2-testing.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/common-libcurl-mistakes.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/console-services-2018.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/containerized-curl-testing-2018.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/creating-console-websites-2017.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/curl-apache-tailscale.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/curl-better.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/curl-ci-2018.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/curl-ci-velocity.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/curl-containers-lessons.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/curl-docker.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/curl-doh-2018.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/curl-driving-it-2019.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/curl-fips-windows.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/curl-for-network-debugger-2017.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/curl-hyper.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/curl-in-iot.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/curl-now-and-then-2017.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/curl-performance-tools.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/curl-quic-2018.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/curl-security-2021.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/curl-security-past-present.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/curl-test-suite-2017.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/curl-website-2017.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/curl-with-rust.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/curlator-2019.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/deprecating-legacy.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/effective-test-case-2019.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/experimental-code.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/getting-started-2022.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/google-and-proxies-2018.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/gource-2019.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/governance-2019.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/help-me-if-you-can-2020.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/hobby-project-with-a-billion.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/how-google-uses-curl-2017.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/http2-curl.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/http3-in-curl-2019.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/http3-in-curl-2020.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/http3-in-curl.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/hyper-in-curl.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/interfacing-rust.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/internet-all-the-things-2015.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/landing-code.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/libcurl-for-r.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/libcurl-in-apache.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/libcurl-under-hood.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/life-of-a-distro-hacker-2017.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/negotiate-support.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/quic-details-2019.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/quic-http3-curl.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/redhat-distributes-curl-2018.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/state-of-curl-2019.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/state-of-curl-2022.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/testing-for-security.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/the-curl-book-2017.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/the-state-of-curl-2020.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/the-state-of-curl-2021.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/up-to-date-legacy-2017.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/urls-2018.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/web-transport-2017.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/websocket-support-2017.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/welcome-to-curlup-2018.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/why-redhat-switched-to-nss-2017.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/wrapping-curl-2017.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/docs/videos/t/you-know-whats-cool-2017.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/favicon.gif" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/favicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/libcurl/big.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/libcurl/small.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/libcurl/small.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/logo/curl-logo.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/logo/curl-logo.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/logo/curl-symbol-transparent.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/logo/curl-symbol.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/logo/curl-symbol.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/logo/curl-transparent.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/logo/curl-up.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/pix/crux.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/pix/everything-curl.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/pix/irc-screenshot.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/pix/linuxfromscratch.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/pix/minix.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/pix/plan9.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/pix/powered_by_curl.gif" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/pix/powered_by_curl2.gif" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/pix/powered_by_curl3.gif" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/pix/powered_by_curl4.gif" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/pix/powered_by_curl5.gif" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/pix/powered_by_curl6.gif" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/pix/powered_by_curl7.gif" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/pix/powered_by_curl8.gif" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/pix/serenityos2.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/pix/silver/EyA.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/pix/silver/monkeybreadsoftware.jpg" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/pix/silver/surebet.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/pix/tru64unix.png" />
+    <Image Include="../../thirdparty/owemdjee/curl-www/pix/unslung2.png" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/README.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/bootstrap.sh" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/ca/mozilla-ca.sh" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/ca/parse-certs.sh" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/ca/update.sh" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/dev/autocurl.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/dev/dev.js" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/dl/mod.js" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2000-0973.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2003-1605.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2005-0490.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2005-3185.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2005-4077.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2006-1061.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2007-3564.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2009-0037.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2009-2417.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2010-0734.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2010-3842.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2011-2192.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2011-3389.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2012-0036.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2013-0249.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2013-1944.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2013-2174.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2013-4545.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2013-6422.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2014-0015.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2014-0138.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2014-0139.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2014-1263.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2014-2522.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2014-3613.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2014-3620.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2014-3707.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2014-8150.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2014-8151.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2015-3143.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2015-3144.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2015-3145.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2015-3148.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2015-3153.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2015-3236.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2015-3237.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-0754.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-0755.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-3739.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-4802.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-5419.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-5420.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-5421.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-7141.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-7167.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-8615.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-8616.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-8617.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-8618.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-8619.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-8620.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-8621.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-8622.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-8623.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-8624.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-8625.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-9586.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-9594.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-9952.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2016-9953.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2017-1000099.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2017-1000100.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2017-1000101.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2017-1000254.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2017-1000257.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2017-2629.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2017-7407.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2017-7468.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2017-8816.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2017-8817.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2017-8818.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2017-9502.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2018-0500.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2018-1000005.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2018-1000007.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2018-1000120.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2018-1000121.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2018-1000122.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2018-1000300.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2018-1000301.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2018-14618.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2018-16839.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2018-16840.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2018-16842.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2018-16890.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2019-15601.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2019-3822.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2019-3823.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2019-5435.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2019-5436.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2019-5443.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2019-5481.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2019-5482.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2020-8169.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2020-8177.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2020-8231.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2020-8284.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2020-8285.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2020-8286.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2021-22876.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2021-22890.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2021-22897.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2021-22898.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2021-22901.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2021-22922.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2021-22923.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2021-22924.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2021-22925.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2021-22926.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2021-22945.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2021-22946.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2021-22947.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2022-22576.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2022-27774.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2022-27775.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2022-27776.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2022-27778.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2022-27779.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2022-27780.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2022-27781.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2022-27782.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2022-30115.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2022-32205.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2022-32206.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2022-32207.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2022-32208.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2022-32221.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2022-35252.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2022-35260.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2022-42915.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2022-42916.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2022-43551.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/CVE-2022-43552.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/_readme.curl.html" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/_readme.html" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/_readme.libcurl.html" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/adv_20140422.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/docs/videos/videolist.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/logo/README.md" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/draft-brezak-spnego-http-04.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/draft-earhart-url-smtp-00.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/draft-ietf-secsh-scp-sftp-ssh-uri-04.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/draft-luotonen-web-proxy-tunneling-01.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/draft-murchison-sasl-login-00.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/draft-murray-auth-ftp-ssl-16.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc0821.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc0822.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc0850.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc0854.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc0959.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc0974.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1035.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1081.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1123.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1225.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1350.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1425.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1427.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1436.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1460.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1510.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1635.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1639.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1651.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1653.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1725.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1730.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1734.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1738.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1777.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1808.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1867.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1869.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1870.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1884.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1928.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1939.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1945.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1950.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1951.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1952.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1959.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc1964.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2045.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2046.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2047.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2048.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2049.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2060.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2061.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2068.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2095.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2104.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2109.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2133.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2145.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2183.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2184.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2192.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2195.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2222.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2228.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2229.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2231.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2246.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2255.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2326.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2373.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2384.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2388.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2389.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2396.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2428.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2449.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2459.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2478.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2487.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2518.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2553.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2554.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2577.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2595.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2616.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2617.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2640.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2718.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2732.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2817.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2818.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2821.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2831.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2854.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2936.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2964.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc2965.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc3207.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc3280.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc3490.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc3493.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc3501.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc3513.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc3617.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc3659.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc3961.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc3986.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc4120.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc4121.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc4178.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc4217.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc4248.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc4346.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc4366.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc4422.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc4511.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc4516.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc4559.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc4616.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc4954.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc4959.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc5034.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc5092.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc5321.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc5322.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc5335.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc5336.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc5849.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc5890.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc6531.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc6532.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc6749.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc7230.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc7231.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc7232.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc7233.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc7234.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc7235.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc7238.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc7540.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc7541.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc7628.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc7838.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc8314.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc8446.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc8484.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc8999.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc9000.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc9001.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc9002.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc9110.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc9111.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc9112.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc9113.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc9114.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/rfc/rfc9204.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/robots.txt" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/security.txt.in" />
+    <Text Include="../../thirdparty/owemdjee/curl-www/updatedash.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

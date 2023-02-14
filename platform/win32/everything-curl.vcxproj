@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{3644E12D-D934-41FD-BF7E-83745A615F76}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+  <ItemGroup>
+    <Image Include="../../thirdparty/owemdjee/everything-curl/cover.jpg" />
+    <Image Include="../../thirdparty/owemdjee/everything-curl/cover_small.jpg" />
+    <Image Include="../../thirdparty/owemdjee/everything-curl/curl-logo.jpg" />
+    <Image Include="../../thirdparty/owemdjee/everything-curl/http/multipart-form.png" />
+    <Image Include="../../thirdparty/owemdjee/everything-curl/internals/slide-libcurl-backends.jpg" />
+    <Image Include="../../thirdparty/owemdjee/everything-curl/internals/slide-protocol-handlers.jpg" />
+    <Image Include="../../thirdparty/owemdjee/everything-curl/internals/slide-transfer-state-machine.jpg" />
+    <Image Include="../../thirdparty/owemdjee/everything-curl/project/curl-runs-in-all-your-devices.jpg" />
+    <Image Include="../../thirdparty/owemdjee/everything-curl/project/devgraph-800.png" />
+    <Image Include="../../thirdparty/owemdjee/everything-curl/project/release-cycle.png" />
+    <Image Include="../../thirdparty/owemdjee/everything-curl/project/ten-billion.jpg" />
+    <Image Include="../../thirdparty/owemdjee/everything-curl/usingcurl/chrome-copy-as-curl.png" />
+    <Image Include="../../thirdparty/owemdjee/everything-curl/usingcurl/firefox-cliget.png" />
+    <Image Include="../../thirdparty/owemdjee/everything-curl/usingcurl/firefox-copy-as-curl.png" />
+    <Image Include="../../thirdparty/owemdjee/everything-curl/usingcurl/proxies/proxy-firefox-screenshot.png" />
+    <Image Include="../../thirdparty/owemdjee/everything-curl/usingcurl/safari-copy-as-curl.png" />
+    <Image Include="../../thirdparty/owemdjee/everything-curl/usingcurl/tls/wireshark-screenshot.png" />
+    <Image Include="../../thirdparty/owemdjee/everything-curl/usingcurl/tls/wireshark-ssl-master-secret.png" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/GUIDELINES.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/LAYOUT.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/SUMMARY.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/badwords.txt" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/bindings.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/bookindex.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/build.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/build/autotools.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/build/boringssl.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/build/cmake.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/build/deps.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/build/tls.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/build/windows.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/cmdline.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/cmdline/configfile.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/cmdline/globbing.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/cmdline/listopts.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/cmdline/options.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/cmdline/passwords.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/cmdline/progressmeter.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/cmdline/urls.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/cmdline/urls/auth.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/cmdline/urls/browsers.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/cmdline/urls/connreuse.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/cmdline/urls/fragment.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/cmdline/urls/ftptype.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/cmdline/urls/host.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/cmdline/urls/options.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/cmdline/urls/parallel.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/cmdline/urls/path.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/cmdline/urls/port.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/cmdline/urls/scheme.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/cmdline/versions.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/firsttbd.sh" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/ftp.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/ftp/cmds.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/ftp/dirlist.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/ftp/ftps.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/ftp/traversedir.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/ftp/twoconnections.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/ftp/upload.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/get.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/get/docker.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/get/linux.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/get/macos.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/get/win-msys2.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/get/win-vcpkg.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/get/windows.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/how-to-read.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/altsvc.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/auth.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/basics.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/browserlike.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/cheatsheet.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/conditionals.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/cookies.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/cookies/fileformat.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/hsts.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/http2.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/http3.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/https.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/modify/fragment.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/modify/headers.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/modify/method.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/modify/referer.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/modify/target.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/modify/user-agent.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/multipart.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/post.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/post/binary.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/post/browsersends.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/post/chunked.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/post/content-type.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/post/convert-to-get.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/post/expect100.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/post/hiddenfields.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/post/javascript.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/post/json.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/post/simple.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/post/url-encode.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/postvspost.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/put.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/ranges.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/redirects.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/requests.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/response.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/http/versions.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/backends.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/caches.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/content-encoding.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/easy.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/handler.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/memory-debugging.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/multi.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/resolving.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/statemachines.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/structs.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/tests.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/tests/autobuilds.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/tests/build.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/tests/ci.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/tests/curl.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/tests/debug.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/tests/file-format.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/tests/libcurl.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/tests/run.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/tests/servers.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/tests/torture.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/tests/unit.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/tests/valgrind.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/timeouts.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/internals/windows-vs-unix.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/lang.sh" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl-http.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl-http/alt-svc.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl-http/auth.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl-http/cookies.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl-http/download.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl-http/headerapi.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl-http/headerapi/get.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl-http/headerapi/iterate.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl-http/headerapi/struct.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl-http/hsts.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl-http/multiplexing.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl-http/ranges.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl-http/requests.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl-http/responses.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl-http/upload.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl-http/versions.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/--libcurl.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/api.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/caches.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/callbacks.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/callbacks/conversions.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/callbacks/debug.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/callbacks/ftpmatch.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/callbacks/header.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/callbacks/hsts.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/callbacks/openclosesocket.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/callbacks/prereq.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/callbacks/progress.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/callbacks/read.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/callbacks/resolver.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/callbacks/rtsp.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/callbacks/seek.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/callbacks/sockopt.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/callbacks/sshkey.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/callbacks/sslcontext.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/callbacks/trailers.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/callbacks/write.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/cleanup.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/connectionreuse.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/cplusplus.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/curlcode.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/drive.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/drive/easy.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/drive/multi-socket.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/drive/multi.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/easyhandle.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/examples.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/examples/ftplist.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/examples/get.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/examples/getinmem.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/examples/http-ul-nonblock.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/examples/login.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/getinfo.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/globalinit.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/headers.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/names.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/options.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/options/all.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/options/info.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/options/num.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/options/strings.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/options/tls.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/proxies.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/sharing.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/threading.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/url.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/url/append-query.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/url/get-part.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/url/get.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/url/include.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/url/init.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/url/parse.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/url/redirect.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/url/set-part.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/url/setopt.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/verbose.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/ws.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/ws/concept.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/ws/meta.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/ws/options.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/ws/read.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/ws/support.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/ws/urls.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/libcurl/ws/write.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/lines.sh" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/project.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/project/bugs.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/project/coc.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/project/comm.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/project/devel.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/project/devteam.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/project/does.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/project/etiquette.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/project/future.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/project/maillists.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/project/name.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/project/releases.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/project/security.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/project/started.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/project/support.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/project/trust.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/project/users.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/protocols.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/protocols/curl.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/protocols/network.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/protocols/protocols.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/showall.sh" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/source.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/source/contributing.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/source/layout.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/source/opensource.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/source/opensource/copyright.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/source/opensource/license.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/source/options.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/source/reportvuln.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/source/style.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/source/web.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/spellcheck.sh" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/stats.sh" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/tbd.sh" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/connections.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/connections/interface.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/connections/keepalive.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/connections/local-port.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/connections/name.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/connections/timeout.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/copyas.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/dict.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/downloads.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/downloads/browsers.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/downloads/charsets.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/downloads/compression.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/downloads/content-disp.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/downloads/max-filesize.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/downloads/metadata-fs.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/downloads/multiple.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/downloads/raw.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/downloads/redirects.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/downloads/resume.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/downloads/retry.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/downloads/storing.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/downloads/url-named.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/downloads/whatis.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/mqtt.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/netrc.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/persist.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/proxies.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/proxies/auth.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/proxies/captive.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/proxies/discover.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/proxies/env.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/proxies/headers.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/proxies/http.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/proxies/https.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/proxies/mitm.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/proxies/pac.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/proxies/socks.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/proxies/type.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/reademail.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/returns.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/scpsftp.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/smtp.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/telnet.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/tftp.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/timeouts.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/tls.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/tls/auth.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/tls/backends.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/tls/ciphers.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/tls/clientcert.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/tls/enable.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/tls/pinning.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/tls/sslkeylogfile.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/tls/stapling.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/tls/verify.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/tls/versions.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/transfers.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/transfers/rate-limiting.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/transfers/request-rate.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/transfers/tooslow.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/uploads.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/verbose.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/verbose/trace.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/verbose/writeout.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/usingcurl/version.md" />
+    <Text Include="../../thirdparty/owemdjee/everything-curl/wordlist.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

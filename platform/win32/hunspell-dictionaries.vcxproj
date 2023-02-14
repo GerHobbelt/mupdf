@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{3644E12D-D934-41FD-BF7E-83745A031A41}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+  <ItemGroup>
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/bg/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/bg/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/bg/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/bg/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/br/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/br/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/br/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/br/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ca-valencia/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ca-valencia/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ca-valencia/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ca-valencia/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ca/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ca/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ca/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ca/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/cs/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/cs/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/cs/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/cs/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/cy/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/cy/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/cy/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/cy/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/da/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/da/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/da/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/da/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/de-AT/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/de-AT/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/de-AT/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/de-AT/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/de-CH/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/de-CH/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/de-CH/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/de-CH/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/de/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/de/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/de/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/de/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/el-polyton/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/el-polyton/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/el-polyton/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/el-polyton/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/el/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/el/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/el/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/el/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/en-AU/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/en-AU/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/en-AU/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/en-AU/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/en-CA/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/en-CA/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/en-CA/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/en-CA/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/en-GB/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/en-GB/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/en-GB/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/en-GB/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/en-ZA/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/en-ZA/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/en-ZA/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/en-ZA/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/en/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/en/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/en/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/en/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/eo/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/eo/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/eo/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/eo/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-AR/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-AR/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-AR/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-AR/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-BO/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-BO/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-BO/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-BO/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-CL/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-CL/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-CL/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-CL/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-CO/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-CO/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-CO/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-CO/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-CR/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-CR/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-CR/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-CR/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-CU/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-CU/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-CU/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-CU/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-DO/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-DO/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-DO/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-DO/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-EC/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-EC/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-EC/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-EC/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-GT/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-GT/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-GT/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-GT/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-HN/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-HN/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-HN/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-HN/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-MX/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-MX/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-MX/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-MX/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-NI/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-NI/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-NI/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-NI/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-PA/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-PA/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-PA/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-PA/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-PE/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-PE/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-PE/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-PE/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-PH/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-PH/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-PH/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-PH/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-PR/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-PR/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-PR/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-PR/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-PY/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-PY/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-PY/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-PY/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-SV/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-SV/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-SV/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-SV/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-US/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-US/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-US/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-US/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-UY/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-UY/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-UY/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-UY/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-VE/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-VE/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-VE/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es-VE/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/es/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/et/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/et/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/et/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/et/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/eu/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/eu/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/eu/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/eu/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/fa/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/fa/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/fa/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/fa/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/fo/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/fo/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/fo/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/fo/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/fr/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/fr/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/fr/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/fr/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/fur/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/fur/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/fur/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/fur/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/fy/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/fy/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/fy/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/fy/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ga/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ga/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ga/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ga/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/gd/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/gd/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/gd/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/gd/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/gl/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/gl/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/gl/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/gl/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/he/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/he/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/he/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/he/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/hr/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/hr/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/hr/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/hr/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/hu/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/hu/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/hu/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/hu/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/hy/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/hy/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/hy/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/hy/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/hyw/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/hyw/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/hyw/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/hyw/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ia/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ia/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ia/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ia/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ie/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ie/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ie/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ie/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/is/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/is/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/is/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/is/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/it/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/it/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/it/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/it/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ka/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ka/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ka/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ka/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ko/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ko/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ko/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ko/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/la/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/la/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/la/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/la/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/lb/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/lb/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/lb/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/lb/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/lt/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/lt/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/lt/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/lt/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ltg/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ltg/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ltg/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ltg/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/lv/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/lv/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/lv/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/lv/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/mk/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/mk/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/mk/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/mk/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/mn/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/mn/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/mn/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/mn/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/nb/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/nb/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/nb/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/nb/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/nds/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/nds/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/nds/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/nds/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ne/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ne/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ne/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ne/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/nl/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/nl/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/nl/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/nl/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/nn/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/nn/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/nn/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/nn/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/oc/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/oc/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/oc/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/oc/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/pl/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/pl/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/pl/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/pl/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/pt-PT/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/pt-PT/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/pt-PT/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/pt-PT/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/pt/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/pt/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/pt/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/pt/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ro/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ro/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ro/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ro/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ru/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ru/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ru/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/ru/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/rw/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/rw/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/rw/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/rw/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sk/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sk/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sk/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sk/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sl/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sl/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sl/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sl/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sr-Latn/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sr-Latn/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sr-Latn/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sr-Latn/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sr/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sr/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sr/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sr/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sv-FI/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sv-FI/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sv-FI/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sv-FI/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sv/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sv/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sv/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/sv/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/tk/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/tk/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/tk/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/tk/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/tlh-Latn/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/tlh-Latn/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/tlh-Latn/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/tlh-Latn/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/tlh/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/tlh/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/tlh/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/tlh/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/tr/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/tr/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/tr/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/tr/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/uk/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/uk/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/uk/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/uk/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/vi/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/vi/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/vi/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/dictionaries/vi/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/package.json" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/script/crawl.sh" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/script/generate.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/script/list-of-dictionaries.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/script/publish.sh" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/script/template/index.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/script/template/index.js" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/script/template/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/hunspell-dictionaries/test.js" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

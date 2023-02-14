@@ -16,12 +16,14 @@ fi
 
 mknewproj() {
 	libname=$( echo lib$1 | sed -E -e 's/^liblib/lib/' -e 's/-?lib$//i' )
-	if ! test -f $1.vcxproj -o -f $libname.vcxproj ; then
-		echo "mknewproj: $libname"
-		cp -n libcpuid.vcxproj $libname.vcxproj
-		node ./patch-vcxproj.js $libname.vcxproj
-		./update-vcxproj.sh $libname.vcxproj
-		node ./refill-vcxproj.js $libname.vcxproj
+	if ! test -f $1.vcxproj ; then
+		if ! test -f $libname.vcxproj ; then
+			echo "mknewproj: $libname"
+			cp -n libcpuid.vcxproj $libname.vcxproj
+			node ./patch-vcxproj.js $libname.vcxproj
+			./update-vcxproj.sh $libname.vcxproj
+			./refill-vcxproj.sh $libname.vcxproj
+		fi
 	fi
 }
 
@@ -32,7 +34,18 @@ mknewAPPproj() {
 		cp -n mutool.vcxproj $libname.vcxproj
 		node ./patch-vcxproj.js $libname.vcxproj
 		./update-vcxproj.sh $libname.vcxproj
-		node ./refill-vcxproj.js $libname.vcxproj
+		./refill-vcxproj.sh $libname.vcxproj
+	fi
+}
+
+mknewMISCproj() {
+	libname=$1
+	if ! test -f $libname.vcxproj ; then
+		echo "mknewMISCproj: $libname"
+		cp -n collection-0.vcxproj $libname.vcxproj
+		node ./patch-vcxproj.js $libname.vcxproj
+		./update-vcxproj.sh $libname.vcxproj
+		./refill-vcxproj.sh $libname.vcxproj
 	fi
 }
 
@@ -832,6 +845,12 @@ if [[ "$ARG" =~ [2] ]] ; then
 	for f in  $myapplist  ; do
 		if [[ $f =~ $FILTER ]] ; then
 			mknewAPPproj $f
+		fi
+	done
+
+	for f in  $misclist  ; do
+		if [[ $f =~ $FILTER ]] ; then
+			mknewMISCproj $f
 		fi
 	done
 fi

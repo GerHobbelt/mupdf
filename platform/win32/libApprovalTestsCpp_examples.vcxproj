@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP_EXAMPLES;APPROVALTESTSCPP_EXAMPLES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -124,7 +124,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests;../../thirdparty/owemdjee/boost/libs/test/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP_EXAMPLES;APPROVALTESTSCPP_EXAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -150,7 +150,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests;../../thirdparty/owemdjee/boost/libs/test/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP_EXAMPLES;APPROVALTESTSCPP_EXAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -179,7 +179,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests;../../thirdparty/owemdjee/boost/libs/test/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP_EXAMPLES;APPROVALTESTSCPP_EXAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -205,7 +205,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests;../../thirdparty/owemdjee/boost/libs/test/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAPPROVALTESTSCPP_EXAMPLES;APPROVALTESTSCPP_EXAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -226,75 +226,6 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/ApprovalUtils.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/Storyboard.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/comparators/ComparatorDisposer.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/comparators/ComparatorFactory.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/comparators/TextFileComparator.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/core/ApprovalException.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/core/FileApprover.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/core/Options.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/integrations/FrameworkIntegrations.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/integrations/google/GoogleConfiguration.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/integrations/google/GoogleCustomizationsFactory.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/launchers/SystemLauncher.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/ApprovalTestNamer.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/DefaultNamerDisposer.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/DefaultNamerFactory.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/ExistingFileNamer.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/FileNameSanitizerDisposer.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/FileNameSanitizerFactory.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/HelpMessages.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/NamerFactory.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/SectionNameDisposer.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/SeparateApprovedAndReceivedDirectoriesNamer.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/SubdirectoryDisposer.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/TemplatedCustomNamer.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/AutoApproveIfMissingReporter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/AutoApproveReporter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/BlockingReporter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/CIBuildOnlyReporter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/CIBuildOnlyReporterUtils.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/ClipboardReporter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/CombinationReporter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/CommandReporter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/ConvertForCygwin.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/CrossPlatformReporters.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/CustomReporter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/DefaultFrontLoadedReporter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/DefaultReporter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/DefaultReporterDisposer.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/DefaultReporterFactory.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/DiffInfo.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/DiffPrograms.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/DiffReporter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/EnvironmentVariableReporter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/FirstWorkingReporter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/FrontLoadedReporterDisposer.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/FrontLoadedReporterFactory.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/GenericDiffReporter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/LinuxReporters.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/MacReporters.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/QuietReporter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/ReporterFactory.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/TextDiffReporter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/WindowsReporters.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/scrubbers/Scrubbers.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/DateUtils.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/EmptyFileCreatorByType.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/EmptyFileCreatorDisposer.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/EmptyFileCreatorFactory.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/ExceptionCollector.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/FileUtils.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/FileUtilsSystemSpecific.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/Grid.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/MachineBlocker.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/MoreHelpMessages.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/Path.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/StringUtils.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/SystemUtils.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/writers/ExistingFile.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/writers/StringWriter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/boost_starter/boost_starter_main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/boost_starter/boost_starter_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/catch2_existing_main/Catch2ApprovalsTests.cpp" />
@@ -321,176 +252,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/out_of_source/out_of_source_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/out_of_source/source_subdir/source_sub_dir_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/ut_starter/ut_starter_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/Boost_Tests/BoostTestApprovalTestsTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/Boost_Tests/boost_test_main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/CMake_Tests/catch2_checks/catch2_cmake_checks.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/CMake_Tests/doctest_checks/doctest_cmake_checks.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/Catch2_Tests/catch2_test_main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/Catch2_Tests/docs/Catch2DocsSamples.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/Catch2_Tests/namers/Catch2NamerTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/CppUTest_Tests/CppUTestApprovalsTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/CppUTest_Tests/cputest_main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/CppUTest_Tests/namers/CppUTestNamerTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/ApprovalsExamples.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/ApprovalsTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/CombinationExamples.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/CombinationTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/CustomizingToStringTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/DocTestApprovalTestTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/GameOfLifeTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/StoryboardTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/VectorTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/comparators/ComparatorDisposerTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/core/ApprovalExceptionTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/core/FileApproverExamples.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/core/FileApproverTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/core/OptionsExamples.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/core/OptionsTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/CombinationsSampleCode.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/ContainerRequirementsDocs.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/DateTimeScrubbingSamples.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/DisposableSamples.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/DocTestDocsSamples.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/ForgottenToConfigure.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/OverviewExamples.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/ToStringExample.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/ToStringTemplateExample.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/ToStringWrapperExample.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/Tutorial.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/doctest_main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/namers/DocTestNamerTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/namers/NamerExamples.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/namers/NamerTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/namers/TemplatedCustomNamerExamples.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/namers/TemplatedCustomNamerTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/BlockingReporterTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/CIBuildOnlyReporterTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/CommandLineReporterTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/CustomReporterTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/EnvironmentVariableReporterTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/ReporterFactoryTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/ReporterTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/TextDiffReporterTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/scrubbers/GuidScrubberTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/scrubbers/ScrubberTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/CartesianProductTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/DateUtilsTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/EmptyFileCreatorByTypeTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/ExceptionCollectorTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/FileUtilsExamples.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/FileUtilsSystemSpecificTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/FileUtilsTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/GridTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/MachineBlockerTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/PathTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/StringUtilsTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/SystemUtilsTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/writers/StringWriterTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/GoogleTest_Tests/GoogleTestApprovalsTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/GoogleTest_Tests/googletest_main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/GoogleTest_Tests/namers/GoogleFixtureNamerCustomizationTests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/GoogleTest_Tests/namers/GoogleNamerTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/UT_Tests/UTApprovalTestTests.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/ApprovalTests.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/ApprovalTestsVersion.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/ApprovalUtils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/Approvals.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/ApprovalsMacroDefaults.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/CombinationApprovals.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/Storyboard.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/comparators/ComparatorDisposer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/comparators/ComparatorFactory.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/comparators/TextFileComparator.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/core/ApprovalComparator.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/core/ApprovalException.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/core/ApprovalNamer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/core/ApprovalWriter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/core/FileApprover.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/core/Options.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/core/Reporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/integrations/FrameworkIntegrations.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/integrations/boost_test/BoostTestApprovals.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/integrations/catch/Catch2Approvals.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/integrations/cpputest/CppUTestApprovals.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/integrations/doctest/DocTestApprovals.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/integrations/fmt/FmtApprovals.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/integrations/fmt/FmtToString.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/integrations/google/GoogleConfiguration.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/integrations/google/GoogleCustomizationsFactory.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/integrations/google/GoogleTestApprovals.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/integrations/ut/UTApprovals.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/launchers/CommandLauncher.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/launchers/SystemLauncher.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/ApprovalTestNamer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/DefaultNamerDisposer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/DefaultNamerFactory.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/ExistingFileNamer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/FileNameSanitizerDisposer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/FileNameSanitizerFactory.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/HelpMessages.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/NamerFactory.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/SectionNameDisposer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/SeparateApprovedAndReceivedDirectoriesNamer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/SubdirectoryDisposer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/namers/TemplatedCustomNamer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/AutoApproveIfMissingReporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/AutoApproveReporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/BlockingReporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/CIBuildOnlyReporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/CIBuildOnlyReporterUtils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/ClipboardReporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/CombinationReporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/CommandReporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/ConvertForCygwin.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/CrossPlatformReporters.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/CustomReporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/DefaultFrontLoadedReporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/DefaultReporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/DefaultReporterDisposer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/DefaultReporterFactory.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/DiffInfo.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/DiffPrograms.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/DiffReporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/EnvironmentVariableReporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/FirstWorkingReporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/FrontLoadedReporterDisposer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/FrontLoadedReporterFactory.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/GenericDiffReporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/LinuxReporters.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/MacReporters.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/QuietReporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/ReporterFactory.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/TextDiffReporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/reporters/WindowsReporters.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/scrubbers/Scrubbers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/Blocker.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/CartesianProduct.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/DateUtils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/EmptyFileCreatorByType.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/EmptyFileCreatorDisposer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/EmptyFileCreatorFactory.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/ExceptionCollector.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/FileUtils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/FileUtilsSystemSpecific.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/Grid.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/MachineBlocker.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/Macros.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/MoreHelpMessages.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/Path.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/StringMaker.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/StringUtils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/SystemUtils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/utilities/WinMinGWUtils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/writers/ExistingFile.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/writers/StringWriter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/fmt_approvals_demo/FmtAsDefault.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/examples/out_of_source/DocTestReporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/Catch2_Tests/StyleGuide.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/GameOfLife.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/DoNothingLauncher.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/FakeReporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/TestReporter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/TestUtils.h" />
     <Image Include="../../thirdparty/owemdjee/ApprovalTestsCpp/doc/images/ApprovalTests.cpp.IntroGraphic.gif" />
     <Image Include="../../thirdparty/owemdjee/ApprovalTestsCpp/doc/images/ApprovalTests_v.10.1.1_compilation_times.png" />
     <Image Include="../../thirdparty/owemdjee/ApprovalTestsCpp/doc/images/ScrubberOverview.png" />
@@ -503,7 +266,6 @@
     <Image Include="../../thirdparty/owemdjee/ApprovalTestsCpp/doc/images/tutorial/01_new_failure.png" />
     <Image Include="../../thirdparty/owemdjee/ApprovalTestsCpp/doc/images/tutorial/02_approving.png" />
     <Image Include="../../thirdparty/owemdjee/ApprovalTestsCpp/doc/images/tutorial/03_approved.png" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/ApprovalTests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/BUILD-Windows.md" />
     <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/CMake/cpputest/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/CMake/cpputest/CMakeLists.txt.in" />
@@ -772,146 +534,9 @@
     <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/scripts/clone_dependencies.sh" />
     <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/scripts/create_simulated_single_header.sh" />
     <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/scripts/reformat_code.sh" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/Boost_Tests/BoostTestApprovalTestsTests.ModuleName.SuiteName.NestedSuiteName.TestCaseName.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/Boost_Tests/BoostTestApprovalTestsTests.ModuleName.SuiteName.TestCaseName.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/Boost_Tests/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/CMake_Tests/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/CMake_Tests/catch2_checks/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/CMake_Tests/doctest_checks/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/Catch2_Tests/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/Catch2_Tests/docs/approval_tests/Catch2DocsSamples.MultipleOutputFiles-DataDriven.American.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/Catch2_Tests/docs/approval_tests/Catch2DocsSamples.MultipleOutputFiles-DataDriven.British.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/Catch2_Tests/docs/approval_tests/Catch2DocsSamples.MultipleOutputFiles-DataDriven.French.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/Catch2_Tests/docs/approval_tests/Catch2DocsSamples.MultipleOutputFiles-ForOneObject.American.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/Catch2_Tests/docs/approval_tests/Catch2DocsSamples.MultipleOutputFiles-ForOneObject.British.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/Catch2_Tests/docs/approval_tests/Catch2DocsSamples.MultipleOutputFiles-ForOneObject.French.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/Catch2_Tests/namers/approval_tests/Catch2NamerTests.Clean_Up_Filename_Transforms.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/Catch2_Tests/sample.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/CppUTest_Tests/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/CppUTest_Tests/CppUTestApprovalsTests.ApprovalTestsGroup.TestStreamableObject.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/CppUTest_Tests/CppUTestApprovalsTests.ApprovalTestsGroup.YouCanVerifyText.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/ApprovalsExamples.VerifyingNoException.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/ApprovalsTests.TestNonCopyableStreamableObject.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/ApprovalsTests.TestStreamableObject.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/ApprovalsTests.Test_Unicode.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/ApprovalsTests.VerifyingException.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/ApprovalsTests.YouCanVerifyText.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/ApprovalsTests.YouCanVerifyWithConverterLambda.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/ApprovalsTests.YouCanVerifyWithConverterWrapperClass.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/ApprovalsTests.YouCanVerifyWithConverterWrapperFunction.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/CombinationExamples.CombinationsStartingPoint.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/CombinationExamples.YouCanVerifyCombinationsOf2.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/CombinationTests.CombinationsApiWithHeadersAndOptions.With_Header.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/CombinationTests.CombinationsApiWithHeadersAndOptions.Without_Header.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/CombinationTests.YouCanVerifyCombinationsOf1.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/CombinationTests.YouCanVerifyCombinationsOf10.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/CombinationTests.YouCanVerifyCombinationsOf9.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/CustomizingToStringTests.Combinations_with_CustomToStringClass.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/CustomizingToStringTests.Test_Combinations_inputs_from_StringMaker.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/CustomizingToStringTests.Test_toString_from_StringMaker.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/CustomizingToStringTests.Test_toString_from_Template.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/CustomizingToStringTests.Test_toString_from_Template_and_using.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/CustomizingToStringTests.Test_toString_from_ostream_operator.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/DocTestApprovalTestTests.YouCanSpecifyAllOptions.approved.json" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/DocTestApprovalTestTests.YouCanSpecifyYourFileExtensionWithFormatter.approved.md" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/DocTestApprovalTestTests.YouCanSpecifyYourFileExtensionWithToString.approved.csv" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/GameOfLifeTests.Demo_15-step_blinker.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/StoryboardTests.Adding_Storyboard_Frames.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/StoryboardTests.Storyboard_customization_mechanisms.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/VectorTests.VerifyAllStartingPoint.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/VectorTests.YouCanVerifyInitializerLists.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/VectorTests.YouCanVerifyIteratorRange.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/VectorTests.YouCanVerifyVectors.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/VectorTests.YouCanVerifyVectorsWithStandardText.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/approval_tests/VectorTests.YouCanVerifyVectorsWithStandardTextNoHeader.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/core/approval_tests/FileApproverTests.ItRejectsMatchingReceivedAndApprovedNames.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/core/approval_tests/FileApproverTests.ItScrubsExistingFiles.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/core/approval_tests/FileApproverTests.ItVerifiesExistingFiles.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/CombinationsSampleCode.YouCanVerifyCombinationsOf3.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/CombinationsSampleCode.YouCanVerifyCombinationsOf3WithAuto.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/ContainerRequirementsDocs.Required_interface_for_verifyAllCombinations.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/ContainerRequirementsDocs.Required_interface_for_verifyAll_on_C_array.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/ContainerRequirementsDocs.Required_interface_for_verifyAll_on_container.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/ContainerRequirementsDocs.Required_interface_for_verifyAll_on_iterators.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/DateTimeScrubbingSamples.Test_DateTime_scrubbing_-_with_default_format.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/DateTimeScrubbingSamples.Test_DateTime_scrubbing_-_with_specific_format.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/DocTestDocsSamples.ApprovalTests-MultipleOutputFiles-AutoApprove.American.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/DocTestDocsSamples.ApprovalTests-MultipleOutputFiles-AutoApprove.British.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/DocTestDocsSamples.ApprovalTests-MultipleOutputFiles-AutoApprove.French.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/DocTestDocsSamples.ApprovalTests-MultipleOutputFiles-DataDriven.American.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/DocTestDocsSamples.ApprovalTests-MultipleOutputFiles-DataDriven.British.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/DocTestDocsSamples.ApprovalTests-MultipleOutputFiles-DataDriven.French.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/DocTestDocsSamples.ApprovalTests-MultipleOutputFiles-ForOneObject.American.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/DocTestDocsSamples.ApprovalTests-MultipleOutputFiles-ForOneObject.British.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/DocTestDocsSamples.ApprovalTests-MultipleOutputFiles-ForOneObject.French.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/DocTestDocsSamples.MultipleOutputFiles-ForOneObject.American.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/DocTestDocsSamples.MultipleOutputFiles-ForOneObject.British.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/DocTestDocsSamples.MultipleOutputFiles-ForOneObject.French.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/ForgottenToConfigure.HelpMessage.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/ForgottenToConfigure.HelpMessageForIncorrectBoostUTConfig.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/ForgottenToConfigure.HelpMessageForIncorrectBuildConfig.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/OverviewExamples.SandwichExampleWithApprovals.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/ToStringExample.ToStringsAreHelpful.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/ToStringTemplateExample.ToStringTemplatesAreHelpful.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/ToStringWrapperExample.AlternativeFormattingCanBeEasyToRead.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/ToStringWrapperExample.AlternativeFormattingCanBeEasyToRead2.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/ToStringWrapperExample.MultipleLinesCanBeHardToRead.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/Tutorial.HelloApprovals.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/Tutorial.WritableBooks1.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/docs/approval_tests/Tutorial.WritableBooks2.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/namers/approval_tests/CustomName.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/namers/approval_tests/DocTestNamerTests.It_can_verify_tests_with_spaces.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/namers/approval_tests/NamerTests.Test_Root_Directory_Help_Message.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/namers/approval_tests/TemplatedCustomNamerTests.Demo_all_namer_templates.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/namers/approval_tests/TemplatedCustomNamerTests.Test_non-unique_name.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/namers/approval_tests/approved/NamerExamples.SeparateApprovedAndReceivedDirectoriesNamer.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/_a.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/_r.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/approval_tests/CommandLineReporterTests.Test_Command_Lines.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/approval_tests/CustomReporterTests.Creating_Custom_Reporters.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/approval_tests/EnvironmentVariableReporterTests.HelpMessage_for_invalid_reporter.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/approval_tests/EnvironmentVariableReporterTests.HelpMessage_for_unknown_reporter.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/approval_tests/ReporterFactoryTests.Find_a_valid_reporter_-_on_Windows.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/approval_tests/ReporterFactoryTests.Find_valid_reporter_with_leading+trailing_space.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/approval_tests/ReporterFactoryTests.Find_valid_reporter_with_wrong_case.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/approval_tests/ReporterFactoryTests.Verify_all_valid_env_var_values.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/reporters/approval_tests/TextDiffReporterTests.Reporters_Launch_Command.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/sample.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/scrubbers/approval_tests/GuidScrubberTests.Input_with_multiple_GUIDs.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/scrubbers/approval_tests/GuidScrubberTests.Scrubbing_in_verifyAll-2.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/scrubbers/approval_tests/GuidScrubberTests.Scrubbing_in_verifyAll.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/scrubbers/approval_tests/GuidScrubberTests.Scrubbing_via_Lambda.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/scrubbers/approval_tests/ScrubberTests.createRegexScrubber.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/scrubbers/approval_tests/ScrubberTests.createRegexScrubber_with_fixed_result.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/scrubbers/approval_tests/ScrubberTests.createRegexScrubber_with_string_input_and_fixed_result.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/scrubbers/approval_tests/ScrubberTests.regex_scrubber.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/scrubbers/approval_tests/ScrubberTests.regex_scrubber_with_full_customisation.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/approval_tests/DateUtilsTests.createDateTime.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/approval_tests/ExceptionCollectorTests.ExceptionCollector.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/approval_tests/FileUtilsSystemSpecificTests.ItCanCopyAFile.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/approval_tests/FileUtilsTests.It_reads_sample_file.txt_correctly.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/approval_tests/GridTests.Print_Coordinates.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/approval_tests/GridTests.Print_Grid.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/approval_tests/GridTests.Print_Simple.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/utilities/approval_tests/sample_file.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/DocTest_Tests/writers/approval_tests/StringWriterTests.ItGivesMeaningfulErrorIfWritingFails.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/GoogleTest_Tests/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/GoogleTest_Tests/approval_tests/GoogleTestApprovalsTests.TestStreamableObject.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/GoogleTest_Tests/approval_tests/GoogleTestApprovalsTests.YouCanVerifyText.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/GoogleTest_Tests/namers/approval_tests/GoogleNamerTest.TestSuffixMatcher.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/UT_Tests/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/UT_Tests/approval_tests/UTApprovalTestTests.AnotherWayItCanVerifyAFile.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/UT_Tests/approval_tests/UTApprovalTestTests.ItCanUseMultipleVerify.section_1.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/UT_Tests/approval_tests/UTApprovalTestTests.ItCanUseMultipleVerify.section_2.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/UT_Tests/approval_tests/UTApprovalTestTests.ItCanVerifyAFile.approved.txt" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/UT_Tests/approval_tests/UTApprovalTestTests.YouCanSpecifyYourFileExtensionWithFormatter.approved.md" />
-    <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/tests/UT_Tests/approval_tests/UTApprovalTestTests.YouCanSpecifyYourFileExtensionWithToString.approved.csv" />
     <Text Include="../../thirdparty/owemdjee/ApprovalTestsCpp/to_do.txt" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  

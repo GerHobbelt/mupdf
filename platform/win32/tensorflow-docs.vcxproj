@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{3644E12D-D934-41FD-BF7E-83745ADFC1AC}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+  <ItemGroup>
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/data_performance_analysis/async_long_name.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/data_performance_analysis/example_1_cropped.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/data_performance_analysis/example_2_cropped.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/data_performance_analysis/get_next_fast.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/data_performance_analysis/get_next_slow.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/data_performance_analysis/map_long_name.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/data_performance_analysis/prefetch.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/data_performance_analysis/trace_viewer.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/gpu_perf_analysis/gpu_kernels.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/gpu_perf_analysis/input_pipeline_analyzer.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/gpu_perf_analysis/opp_placement.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/gpu_perf_analysis/overview_page.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/gpu_perf_analysis/performance_summary.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/gpu_perf_analysis/tensorflow_stats_page.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/gpu_perf_analysis/traceview_excessive_copy.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/gpu_perf_analysis/traceview_gpu_idle.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/gpu_perf_analysis/traceview_host_contention.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/gpu_perf_analysis/traceview_ideal.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/gpu_perf_analysis/traceview_kernel_gaps.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/gpu_perf_analysis/traceview_multi_gpu.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/gpu_perf_analysis/traceview_step_gaps.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/graph_optimization/meta_optimizer_disabled.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/graph_optimization/meta_optimizer_enabled.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/graph_optimization/optimized_graph.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/graph_optimization/user_defined_graph.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/intro_to_graphs/two-layer-network.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/sparse_tensor.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/3-axis_block.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/3-axis_front.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/3-axis_numpy.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/3-axis_stack.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/4-axis_block.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/broadcasting.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/index1.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/index2.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/matrix.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/ragged.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/reshape-bad.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/reshape-bad2.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/reshape-bad3.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/reshape-bad4.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/reshape-before.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/reshape-good1.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/reshape-good2.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/scalar.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/shape.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/shape2.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/sparse.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/string-split.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/strings.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensor/vector.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tensorboard_graph.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_profiler/capture_profile.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_profiler/gpu_kernel_stats.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_profiler/input_op_stats.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_profiler/input_pipeline_analyzer.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_profiler/memory_breakdown_table.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_profiler/memory_profile_summary.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_profiler/memory_timeline_graph.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_profiler/memory_timeline_graph_popup.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_profiler/overview_page.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_profiler/pod_viewer.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_profiler/python_tracer.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_profiler/tf_data_all_hosts.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_profiler/tf_data_graph.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_profiler/tf_data_graph_selector.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_profiler/tf_data_summary.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_profiler/tf_stats.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_profiler/trace_viewer.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_slicing/gather_1.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_slicing/gather_2.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_slicing/gather_nd_sparse.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_slicing/slice_1d_1.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_slicing/slice_1d_2.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_slicing/slice_1d_3.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/images/tf_slicing/slice_2d_1.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/migrate/images/tensorboard_TF1.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/migrate/images/tensorboard_TF2.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/tutorials/images/images/before_fine_tuning.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/tutorials/images/images/fine_tuning.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/tutorials/sequences/images/text_generation_sampling.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/tutorials/sequences/images/text_generation_training.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/customization/images/full_network_penguin.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/customization/images/penguins_ds_species.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/distribute/images/tensorboard_distributed_training_with_keras.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/generative/images/Green_Sea_Turtle_grazing_seagrass.jpg" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/generative/images/adversarial_example.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/generative/images/cvae_latent_space.jpg" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/generative/images/cycle_loss.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/generative/images/cyclegan_model.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/generative/images/dis.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/generative/images/dogception.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/generative/images/gan1.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/generative/images/gan2.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/generative/images/gan_diagram.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/generative/images/gen.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/generative/images/horse2zebra_1.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/generative/images/horse2zebra_2.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/generative/images/image_denoise_fmnist_results.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/generative/images/intro_autoencoder_result.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/generative/images/kadinsky-turtle.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/generative/images/kadinsky.jpg" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/generative/images/stylized-image.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/images/images/before_fine_tuning.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/images/images/fine_tuning.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/images/images/tensorboard_transfer_learning_with_hub.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/interpretability/images/IG_fireboat.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/load_data/images/csv/Titanic.jpg" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/load_data/images/csv/fonts.jpg" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/load_data/images/csv/traffic.jpg" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/quickstart/images/beginner/run_cell_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/reinforcement_learning/images/cartpole-v0.gif" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/structured_data/images/baseline.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/structured_data/images/conv_window.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/structured_data/images/last_window.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/structured_data/images/lstm_1_window.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/structured_data/images/lstm_many_window.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/structured_data/images/multistep_autoregressive.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/structured_data/images/multistep_conv.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/structured_data/images/multistep_dense.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/structured_data/images/multistep_last.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/structured_data/images/multistep_lstm.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/structured_data/images/multistep_repeat.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/structured_data/images/narrow_window.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/structured_data/images/raw_window.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/structured_data/images/raw_window_1h.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/structured_data/images/raw_window_24h.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/structured_data/images/residual.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/structured_data/images/split_window.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/structured_data/images/wide_conv_window.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/structured_data/images/wide_window.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/text/images/tensorboard-1.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/text/images/tensorboard-2.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/text/images/word2vec_full_softmax.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/text/images/word2vec_negative_sampling.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/text/images/word2vec_skipgram.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/text/images/word2vec_skipgram_objective.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/text/images/word2vec_tensorboard.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/understanding/images/sngp.png" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/about/bib.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/community/contribute/code.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/community/contribute/code_style.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/community/contribute/community.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/community/contribute/docs.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/community/contribute/docs_ref.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/community/contribute/docs_style.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/community/contribute/index.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/community/contribute/rfc_process.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/community/contribute/sigs.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/community/contribute/tests.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/community/mailing-lists.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/community/sig_playbook.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/core/index.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/create_op.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/data_performance_analysis.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/gpu_performance_analysis.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/keras/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/migrate/migrate_tf2.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/profiler.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/guide/versions.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/install/docker.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/install/errors.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/install/gpu_plugins.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/install/lang_java_legacy.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/install/pip.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/install/source.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/install/source_windows.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/checkpoints.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/custom_estimators.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/datasets.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/datasets_for_estimators.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/debugger.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/embedding.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/estimators.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/extend/architecture.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/extend/bindings.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/extend/cc.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/extend/filesystem.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/extend/formats.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/extend/model_files.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/extend/op.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/feature_columns.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/graph_viz.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/graphs.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/low_level_intro.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/performance/benchmarks.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/performance/datasets.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/performance/overview.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/premade_estimators.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/saved_model.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/tensorboard_histograms.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/tensors.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/using_gpu.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/using_tpu.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/variables.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/guide/version_compat.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/tutorials/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/tutorials/eager/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/tutorials/images/deep_cnn.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/tutorials/images/image_recognition.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/tutorials/keras/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/tutorials/representation/kernel_methods.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/tutorials/representation/linear.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/tutorials/representation/word2vec.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/tutorials/sequences/audio_recognition.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/tutorials/sequences/recurrent.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/r1/tutorials/sequences/recurrent_quickdraw.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/site/en/tutorials/tensorflow_text/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/release_tools/push_version_to_github.sh" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/release_tools/update_versions.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/spelltest/spelltest.sh" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/spelltest/wordlist.txt" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/templates/build_docs.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/templates/subsite/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/templates/subsite/g3doc/api_docs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/templates/subsite/g3doc/api_docs/python/index.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/templates/subsite/g3doc/bar_guide.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/templates/subsite/g3doc/examples/baz_example.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/templates/subsite/g3doc/examples/index.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/templates/subsite/g3doc/overview.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/templates/subsite/g3doc/tutorials/foo_tutorial.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/templates/subsite/g3doc/tutorials/index.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/templates/tflite_model_page_template.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/compat_test/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/compat_test/estimator.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/config.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/doc_controls.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/doc_controls_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/doc_generator_visitor.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/doc_generator_visitor_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/gen_java/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/gen_java/run-javadoc-for-tf.sh" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/generate_lib.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/generate_lib_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/get_source.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/obj_type.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/parser.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/parser_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/pretty_docs/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/pretty_docs/base_page.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/pretty_docs/class_page.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/pretty_docs/docs_for_object.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/pretty_docs/function_page.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/pretty_docs/module_page.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/pretty_docs/pretty_docs_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/pretty_docs/type_alias_page.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/public_api.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/public_api_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/reference_resolver.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/reference_resolver_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/report/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/report/linter.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/report/linter_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/report/schema/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/report/schema/api_report_generated_pb2.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/report/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/signature.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/signature_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/toc.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/toc_processing.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/toc_processing_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/toc_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/traverse.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/traverse_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/api_generator/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/modeling/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/plots/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/tools/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/tools/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/tools/nbcp/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/tools/nbcp/__main__.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/tools/nbfmt/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/tools/nbfmt/__main__.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/tools/nbfmt/notebook_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/tools/nbfmt/notebook_utils_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/tools/nblint/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/tools/nblint/__main__.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/tools/nblint/decorator.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/tools/nblint/fix.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/tools/nblint/linter.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/tools/nblint/style/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/tools/nblint/style/google.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/tools/nblint/style/tensorflow.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/tools/nblint/style/tensorflow_docs_l10n.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/vis/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/vis/embed.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/vis/webp_animation.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow-docs/tools/tensorflow_docs/vis/webp_test.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

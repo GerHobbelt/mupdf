@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{3644E12D-D934-41FD-BF7E-83745A7F00B8}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/impl/src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cef-pdf/src/Client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cef-pdf/src/Common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cef-pdf/src/Job/Job.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cef-pdf/src/Job/Manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cef-pdf/src/Job/StdInputStreamReader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cef-pdf/src/PrintHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cef-pdf/src/RenderHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cef-pdf/src/RenderProcessHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cef-pdf/src/SchemeHandlerFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cef-pdf/src/Server/Server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cef-pdf/src/Server/Session.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cef-pdf/src/Server/SessionManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cef-pdf/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cef-pdf/src/subprocess.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/async_result.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/basic_datagram_socket.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/basic_deadline_timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/basic_io_object.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/basic_raw_socket.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/basic_seq_packet_socket.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/basic_serial_port.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/basic_signal_set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/basic_socket.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/basic_socket_acceptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/basic_socket_iostream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/basic_socket_streambuf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/basic_stream_socket.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/basic_streambuf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/basic_streambuf_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/basic_waitable_timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/buffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/buffered_read_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/buffered_read_stream_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/buffered_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/buffered_stream_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/buffered_write_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/buffered_write_stream_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/buffers_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/completion_condition.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/connect.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/coroutine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/datagram_socket_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/deadline_timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/deadline_timer_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/addressof.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/array_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/assert.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/atomic_count.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/base_from_completion_cond.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/bind_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/buffer_resize_guard.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/buffer_sequence_adapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/buffered_stream_storage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/call_stack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/chrono_time_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/completion_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/consuming_buffers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/cstdint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/date_time_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/deadline_timer_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/dependent_type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/descriptor_ops.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/descriptor_read_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/descriptor_write_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/dev_poll_reactor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/epoll_reactor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/eventfd_select_interrupter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/fd_set_adapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/fenced_block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/gcc_arm_fenced_block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/gcc_hppa_fenced_block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/gcc_sync_fenced_block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/gcc_x86_fenced_block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/handler_alloc_helpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/handler_cont_helpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/handler_invoke_helpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/handler_tracking.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/handler_type_requirements.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/hash_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/impl/dev_poll_reactor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/impl/epoll_reactor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/impl/kqueue_reactor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/impl/select_reactor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/impl/service_registry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/impl/strand_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/impl/task_io_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/impl/win_iocp_io_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/impl/winrt_timer_scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/io_control.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/keyword_tss_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/kqueue_reactor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/limits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/local_free_on_block_exit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/macos_fenced_block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/noncopyable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/null_event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/null_fenced_block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/null_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/null_reactor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/null_signal_blocker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/null_socket_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/null_static_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/null_thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/null_tss_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/object_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/old_win_sdk_compat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/op_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/operation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/pipe_select_interrupter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/pop_options.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/posix_event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/posix_fd_set_adapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/posix_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/posix_signal_blocker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/posix_static_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/posix_thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/posix_tss_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/push_options.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/reactive_descriptor_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/reactive_null_buffers_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/reactive_serial_port_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/reactive_socket_accept_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/reactive_socket_connect_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/reactive_socket_recv_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/reactive_socket_recvfrom_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/reactive_socket_recvmsg_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/reactive_socket_send_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/reactive_socket_sendto_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/reactive_socket_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/reactive_socket_service_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/reactor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/reactor_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/reactor_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/reactor_op_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/regex_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/resolve_endpoint_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/resolve_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/resolver_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/resolver_service_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/scoped_lock.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/scoped_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/select_interrupter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/select_reactor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/service_registry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/shared_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/signal_blocker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/signal_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/signal_init.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/signal_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/signal_set_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/socket_holder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/socket_ops.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/socket_option.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/socket_select_interrupter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/socket_types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/solaris_fenced_block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/static_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/std_event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/std_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/std_static_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/std_thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/strand_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/task_io_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/task_io_service_operation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/task_io_service_thread_info.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/thread_info_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/throw_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/throw_exception.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/timer_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/timer_queue_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/timer_queue_ptime.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/timer_queue_set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/timer_scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/timer_scheduler_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/tss_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/type_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/variadic_templates.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/wait_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/wait_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/weak_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_fd_set_adapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_fenced_block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_iocp_handle_read_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_iocp_handle_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_iocp_handle_write_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_iocp_io_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_iocp_null_buffers_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_iocp_operation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_iocp_overlapped_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_iocp_overlapped_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_iocp_serial_port_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_iocp_socket_accept_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_iocp_socket_connect_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_iocp_socket_recv_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_iocp_socket_recvfrom_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_iocp_socket_recvmsg_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_iocp_socket_send_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_iocp_socket_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_iocp_socket_service_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_iocp_thread_info.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_object_handle_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_static_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/win_tss_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/wince_thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/winrt_async_manager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/winrt_async_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/winrt_resolve_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/winrt_resolver_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/winrt_socket_connect_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/winrt_socket_recv_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/winrt_socket_send_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/winrt_ssocket_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/winrt_ssocket_service_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/winrt_timer_scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/winrt_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/winsock_init.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/detail/wrapped_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/error_code.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/generic/basic_endpoint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/generic/datagram_protocol.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/generic/detail/endpoint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/generic/raw_protocol.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/generic/seq_packet_protocol.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/generic/stream_protocol.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/handler_alloc_hook.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/handler_continuation_hook.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/handler_invoke_hook.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/handler_type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/high_resolution_timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/impl/buffered_read_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/impl/buffered_write_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/impl/connect.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/impl/io_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/impl/read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/impl/read_at.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/impl/read_until.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/impl/serial_port_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/impl/spawn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/impl/src.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/impl/use_future.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/impl/write.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/impl/write_at.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/io_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ip/address.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ip/address_v4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ip/address_v6.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ip/basic_endpoint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ip/basic_resolver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ip/basic_resolver_entry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ip/basic_resolver_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ip/basic_resolver_query.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ip/detail/endpoint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ip/detail/socket_option.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ip/host_name.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ip/icmp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ip/impl/address.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ip/impl/address_v4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ip/impl/address_v6.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ip/impl/basic_endpoint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ip/multicast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ip/resolver_query_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ip/resolver_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ip/tcp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ip/udp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ip/unicast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ip/v6_only.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/is_read_buffered.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/is_write_buffered.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/local/basic_endpoint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/local/connect_pair.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/local/datagram_protocol.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/local/detail/endpoint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/local/stream_protocol.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/placeholders.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/posix/basic_descriptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/posix/basic_stream_descriptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/posix/descriptor_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/posix/stream_descriptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/posix/stream_descriptor_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/raw_socket_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/read.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/read_at.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/read_until.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/seq_packet_socket_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/serial_port.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/serial_port_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/serial_port_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/signal_set.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/signal_set_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/socket_acceptor_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/socket_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/spawn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/basic_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/context_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/context_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/detail/buffered_handshake_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/detail/engine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/detail/handshake_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/detail/io.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/detail/openssl_init.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/detail/openssl_types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/detail/password_callback.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/detail/read_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/detail/shutdown_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/detail/stream_core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/detail/verify_callback.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/detail/write_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/impl/context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/impl/src.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/old/basic_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/old/context_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/old/detail/openssl_context_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/old/detail/openssl_operation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/old/detail/openssl_stream_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/old/stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/old/stream_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/rfc2818_verification.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/stream_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/stream_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/verify_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/ssl/verify_mode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/steady_timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/strand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/stream_socket_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/streambuf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/system_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/system_timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/time_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/unyield.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/use_future.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/version.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/wait_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/waitable_timer_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/windows/basic_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/windows/basic_object_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/windows/basic_random_access_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/windows/basic_stream_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/windows/object_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/windows/object_handle_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/windows/overlapped_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/windows/random_access_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/windows/random_access_handle_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/windows/stream_handle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/windows/stream_handle_service.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/write.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/write_at.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/asio/asio/yield.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/src/Client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/src/Common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/src/Job/ContentProvider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/src/Job/Job.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/src/Job/Loader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/src/Job/Local.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/src/Job/Manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/src/Job/Printer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/src/Job/Remote.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/src/Job/StdInput.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/src/Job/StdInputStreamReader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/src/Job/Visitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/src/PrintHandler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/src/RenderHandler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/src/RenderProcessHandler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/src/SchemeHandlerFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/src/Server/Http.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/src/Server/Server.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/src/Server/Session.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/cef-pdf/src/Server/SessionManager.h" />
+    <Text Include="../../thirdparty/owemdjee/cef-pdf/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/cef-pdf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cef-pdf/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cef-pdf/src/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

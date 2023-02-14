@@ -1,0 +1,1074 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{3644E12D-D934-41FD-BF7E-83745A7591EC}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/bvt/shared-test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/bvt/static-test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/external/src/gtest/gtest-all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/agglomerative.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/bsas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/clique.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/clique_block.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/cluster_data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/cure.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/dbscan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/fcm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/gmeans.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/hsyncnet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/kmeans.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/kmeans_data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/kmeans_plus_plus.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/kmedians.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/kmedoids.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/mbsas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/optics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/optics_descriptor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/ordering_analyser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/pam_build.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/random_center_initializer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/rock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/silhouette.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/silhouette_ksearch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/silhouette_ksearch_data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/somsc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/syncnet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/ttsas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/cluster/xmeans.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/container/adjacency_bit_matrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/container/adjacency_connector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/container/adjacency_factory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/container/adjacency_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/container/adjacency_matrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/container/adjacency_weight_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/container/kdnode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/container/kdtree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/container/kdtree_balanced.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/container/kdtree_searcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/differential/differ_factor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/agglomerative_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/bsas_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/clique_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/cure_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/dbscan_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/elbow_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/fcm_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/gmeans_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/hhn_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/hsyncnet_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/interface_property.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/kmeans_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/kmedians_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/kmedoids_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/legion_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/mbsas_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/metric_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/optics_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/pam_build_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/pcnn_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/pyclustering_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/pyclustering_package.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/rock_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/silhouette_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/som_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/sync_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/syncnet_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/syncpr_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/ttsas_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/interface/xmeans_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/nnet/dynamic_analyser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/nnet/hhn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/nnet/legion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/nnet/pcnn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/nnet/som.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/nnet/sync.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/nnet/syncpr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/parallel/spinlock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/parallel/task.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/parallel/thread_executor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/parallel/thread_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/utils/linalg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/utils/math.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/utils/metric.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/utils/random.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/src/utils/stats.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/answer_reader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/samples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utenv_check.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utenv_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-adjacency.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-adjacency_bit_matrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-adjacency_connector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-adjacency_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-adjacency_matrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-adjacency_weight_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-agglomerative.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-bsas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-clique.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-cure.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-dbscan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-differential.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-dynamic_analyser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-elbow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-fcm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-gmeans.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-hhn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-hsyncnet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-agglomerative.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-bsas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-clique.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-cure.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-dbscan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-elbow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-fcm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-gmeans.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-hhn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-hsyncnet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-kmeans.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-kmedians.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-kmedoids.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-legion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-mbsas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-metric.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-optics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-pam_build.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-pcnn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-pyclustering.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-silhouette.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-som.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-sync.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-syncnet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-syncpr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-ttsas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-interface-xmeans.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-kdtree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-kmeans.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-kmeans_plus_plus.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-kmedians.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-kmedoids.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-legion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-linalg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-mbsas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-optics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-ordering_analyser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-pam_build.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-parallel_for.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-pcnn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-random_center_initializer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-rock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-silhouette.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-silhouette_ksearch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-som.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-somsc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-spinlock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-stats.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-sync.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-syncnet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-syncpr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-thread_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-ttsas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-utils-algorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-utils-metric.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-xmeans.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/external/include/gtest/gtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/agglomerative.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/bsas.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/bsas_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/center_initializer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/clique.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/clique_block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/clique_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/cluster_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/cure.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/cure_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/data_type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/dbscan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/dbscan_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/elbow.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/elbow_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/fcm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/fcm_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/gmeans.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/gmeans_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/hsyncnet.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/kmeans.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/kmeans_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/kmeans_plus_plus.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/kmedians.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/kmedians_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/kmedoids.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/kmedoids_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/mbsas.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/mbsas_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/optics.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/optics_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/optics_descriptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/ordering_analyser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/pam_build.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/random_center_initializer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/rock.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/silhouette.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/silhouette_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/silhouette_ksearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/silhouette_ksearch_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/somsc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/somsc_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/syncnet.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/ttsas.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/ttsas_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/xmeans.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/cluster/xmeans_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/container/adjacency.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/container/adjacency_bit_matrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/container/adjacency_connector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/container/adjacency_factory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/container/adjacency_list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/container/adjacency_matrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/container/adjacency_weight_list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/container/dynamic_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/container/ensemble_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/container/kdnode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/container/kdtree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/container/kdtree_balanced.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/container/kdtree_searcher.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/definitions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/differential/differ_factor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/differential/differ_state.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/differential/equation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/differential/runge_kutta_4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/differential/runge_kutta_fehlberg_45.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/differential/solve_type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/agglomerative_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/bsas_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/clique_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/cure_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/dbscan_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/elbow_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/fcm_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/gmeans_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/hhn_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/hsyncnet_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/interface_property.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/kmeans_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/kmedians_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/kmedoids_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/legion_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/mbsas_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/metric_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/optics_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/pam_build_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/pcnn_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/pyclustering_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/pyclustering_package.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/rock_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/silhouette_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/som_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/sync_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/syncnet_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/syncpr_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/ttsas_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/interface/xmeans_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/nnet/dynamic_analyser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/nnet/hhn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/nnet/legion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/nnet/network.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/nnet/pcnn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/nnet/som.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/nnet/sync.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/nnet/syncpr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/parallel/parallel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/parallel/spinlock.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/parallel/task.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/parallel/thread_executor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/parallel/thread_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/utils/algorithm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/utils/linalg.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/utils/math.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/utils/metric.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/utils/random.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/utils/stats.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/include/pyclustering/utils/traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/answer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/answer_reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/samples.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utenv_check.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utenv_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-adjacency.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/utest-elbow.hpp" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/agglomerative_lsun_clustering_single_link.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/bang_blocks_chainlink.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/bang_clustering_chainlink.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/bang_dendrogram_chainlink.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/birch_cf_encoding_lsun.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/birch_clustering_old_faithful.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/clique_clustering_target.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/clique_clustering_with_noise.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/dbscan_atom_visualizer.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/elbow_example_simple_03.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/ema_old_faithful_clustering.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/example_cluster_place.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/fcm_segmentation_stpetersburg.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/fcps_cluster_analysis.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/fsync_sync_examples.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/ga_clustering_sample_simple_04.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/gmeans_example_clustering.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/gmeans_hepta_multidim_visualizer.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/gmeans_lsun_multidim_visualizer.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/hhn_architecture.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/hhn_three_ensembles.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/kd_tree_balanced_lsun.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/kd_tree_balanced_two_diamonds.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/kd_tree_unbalanced_two_diamonds.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/kmeans_example_clustering.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/kmeans_plusplus_initializer_results.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/optics_example_clustering.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/optics_noise_tetra.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/pam_build_initial_medoids.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/pam_clustering_tetra.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/pam_clustering_two_diamonds.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/pyclustering_build_msvc.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/silhouette_ksearch_hepta.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/silhouette_score_for_various_K.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/sync_partial_synchronization.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/sync_som_image_segmentation.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/target_som_processing.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/xmeans_clustering_famous_iris.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/xmeans_clustering_famous_iris_filtered.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/xmeans_clustering_mndl_target.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/img/xmeans_clustering_simple3.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/logo/pyclustering_logo_01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/logo/pyclustering_logo_01_small.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/docs/logo/pyclustering_logo_02.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageBuildings.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageFieldFlower.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageFieldTree.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageNile.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageNileSmall.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageSimple01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageSimple02.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageSimple03.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageSimple04.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageSimple05.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageSimple06.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageSimple07.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageSimple08.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageSimple09.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageSimple10.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageSimple11.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageSimple12.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageSimple13.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageSimple14.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageSimple15.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageSimple16.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageSimple17.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageSimple18.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageSimpleBeach.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageSimpleBuilding.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageSimpleFruits.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageSimpleFruitsSmall.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageThinBlackLines01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageThinBlackLines02.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageThinBlackLines03.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageWhiteSea.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/ImageWhiteSeaSmall.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample02.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample03.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample04.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample05.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample06.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample07.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample08.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample09.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample10.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample11.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample12.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample13.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample14.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample15.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample16.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample17.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample18.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample19.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample20.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample21.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample22.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample23.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample24.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_0_Sample25.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample02.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample03.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample04.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample05.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample06.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample07.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample08.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample09.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample10.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample11.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample12.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample13.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample14.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample15.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample16.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample17.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample18.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample19.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample20.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample21.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample22.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample23.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample24.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_1_Sample25.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample02.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample03.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample04.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample05.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample06.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample07.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample08.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample09.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample10.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample11.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample12.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample13.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample14.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample15.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample16.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample17.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample18.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample19.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample20.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample21.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample22.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample23.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample24.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_2_Sample25.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample02.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample03.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample04.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample05.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample06.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample07.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample08.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample09.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample10.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample11.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample12.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample13.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample14.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample15.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample16.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample17.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample18.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample19.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample20.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample21.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample22.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample23.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample24.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_3_Sample25.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample02.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample03.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample04.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample05.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample06.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample07.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample08.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample09.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample10.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample11.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample12.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample13.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample14.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample15.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample16.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample17.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample18.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample19.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample20.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample21.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample22.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample23.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample24.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_4_Sample25.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample02.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample03.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample04.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample05.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample06.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample07.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample08.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample09.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample10.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample11.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample12.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample13.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample14.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample15.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample16.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample17.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample18.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample19.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample20.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample21.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample22.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample23.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample24.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_5_Sample25.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample02.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample03.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample04.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample05.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample06.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample07.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample08.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample09.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample10.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample11.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample12.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample13.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample14.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample15.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample16.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample17.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample18.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample19.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample20.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample21.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample22.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample23.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample24.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_6_Sample25.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample02.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample03.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample04.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample05.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample06.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample07.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample08.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample09.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample10.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample11.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample12.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample13.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample14.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample15.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample16.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample17.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample18.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample19.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample20.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample21.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample22.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample23.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample24.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_7_Sample25.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample02.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample03.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample04.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample05.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample06.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample07.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample08.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample09.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample10.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample11.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample12.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample13.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample14.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample15.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample16.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample17.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample18.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample19.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample20.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample21.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample22.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample23.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample24.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_8_Sample25.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample02.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample03.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample04.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample05.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample06.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample07.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample08.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample09.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample10.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample11.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample12.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample13.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample14.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample15.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample16.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample17.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample18.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample19.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample20.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample21.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample22.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample23.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample24.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/digits/Digit_9_Sample25.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_A_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_B_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_C_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_D_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_E_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_F_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_G_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_H_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_I_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_J_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_K_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_L_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_M_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_N_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_O_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_P_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_Q_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_R_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_S_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_T_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_U_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_V_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_W_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_X_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_Y_Sample01.png" />
+    <Image Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/images/symbols/Symbol_Z_Sample01.png" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/CHANGES" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/PKG-INFO.rst" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/ccore/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/ccore/bvt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/ccore/external/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/ccore/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/ccore/tst/ut-runner.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/ci/appveyor-ci.ps1" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/ci/cloud/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/ci/cloud/__main__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/ci/cloud/cloud/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/ci/cloud/cloud/task.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/ci/cloud/cloud/task_handler.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/ci/cloud/cloud/yandex_disk.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/ci/cloud/tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/ci/cloud/tests/test_cloud.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/ci/github-ci.sh" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/ci/travis-ci.sh" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/docs/page/cpp_pyclustering_intro.md" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/paper/paper.md" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/agglomerative.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/bang.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/birch.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/bsas.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/center_initializer.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/clarans.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/clique.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/cure.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/dbscan.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/elbow.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/ema.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/encoder.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/agglomerative_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/bang_example.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/birch_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/bsas_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/center_initializer_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/clarans_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/clique_example.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/cure_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/dbscan_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/dbscan_segmentation.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/elbow_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/ema_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/fcm_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/ga_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/general_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/gmeans_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/hsyncnet_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/kmeans_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/kmeans_segmentation.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/kmedians_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/kmedoids_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/mbsas_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/optics_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/rock_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/silhouette_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/somsc_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/syncnet_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/syncsom_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/syncsom_segmentation.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/ttsas_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/examples/xmeans_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/fcm.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/ga.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/ga_maths.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/generator.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/gmeans.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/hsyncnet.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/kmeans.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/kmedians.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/kmedoids.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/mbsas.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/optics.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/rock.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/silhouette.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/somsc.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/syncnet.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/syncsom.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/agglomerative_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/bang_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/bsas_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/clique_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/cure_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/dbscan_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/elbow_template.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/fcm_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/gmeans_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/hsyncnet_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/integration/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/integration/it_agglomerative.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/integration/it_bsas.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/integration/it_clique.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/integration/it_cure.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/integration/it_dbscan.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/integration/it_elbow.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/integration/it_fcm.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/integration/it_gmeans.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/integration/it_hsyncnet.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/integration/it_kmeans.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/integration/it_kmedians.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/integration/it_kmedoids.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/integration/it_mbsas.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/integration/it_optics.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/integration/it_rock.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/integration/it_silhouette.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/integration/it_somsc.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/integration/it_syncnet.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/integration/it_ttsas.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/integration/it_xmeans.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/kmeans_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/kmedians_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/kmedoids_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/mbsas_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/optics_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/rock_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/silhouette_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/somsc_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/syncnet_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/ttsas_template.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_agglomerative.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_bang.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_birch.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_bsas.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_center_initializer.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_clarans.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_clique.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_cure.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_dbscan.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_elbow.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_ema.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_encoder.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_fcm.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_ga.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_general.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_generator.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_gmeans.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_hsyncnet.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_kmeans.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_kmedians.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_kmedoids.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_mbsas.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_optics.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_rock.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_silhouette.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_somsc.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_syncnet.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_syncsom.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_ttsas.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_visualizer.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/unit/ut_xmeans.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/tests/xmeans_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/ttsas.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/cluster/xmeans.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/container/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/container/cftree.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/container/examples/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/container/examples/kdtree_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/container/kdtree.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/container/tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/container/tests/unit/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/container/tests/unit/ut_cftree.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/container/tests/unit/ut_kdtree.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/agglomerative_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/bsas_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/clique_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/converter.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/cure_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/dbscan_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/definitions.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/elbow_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/fcm_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/gmeans_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/hhn_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/hsyncnet_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/kmeans_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/kmedians_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/kmedoids_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/legion_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/mbsas_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/metric_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/optics_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/pam_build_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/pcnn_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/pyclustering_package.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/rock_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/silhouette_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/som_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/sync_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/syncnet_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/syncpr_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/tests/ut_package.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/ttsas_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/core/xmeans_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/gcolor/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/gcolor/dsatur.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/gcolor/examples/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/gcolor/examples/dsatur_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/gcolor/examples/hysteresis_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/gcolor/examples/sync_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/gcolor/hysteresis.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/gcolor/sync.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/gcolor/tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/gcolor/tests/ut_dsatur.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/gcolor/tests/ut_hysteresis.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/gcolor/tests/ut_sync.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/cnn.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/dynamic_visualizer.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/examples/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/examples/cnn_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/examples/fsync_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/examples/hhn_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/examples/hhn_segmentation.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/examples/hysteresis_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/examples/legion_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/examples/legion_segmentation.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/examples/pcnn_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/examples/pcnn_segmentation.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/examples/som_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/examples/som_recognition.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/examples/sync_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/examples/syncpr_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/examples/syncsegm_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/fsync.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/hhn.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/hysteresis.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/legion.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/pcnn.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/som.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/sync.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/syncpr.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/syncsegm.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/hhn_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/integration/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/integration/it_hhn.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/integration/it_legion.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/integration/it_pcnn.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/integration/it_som.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/integration/it_sync.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/integration/it_syncpr.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/integration/it_syncsegm.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/legion_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/pcnn_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/som_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/sync_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/syncpr_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/syncsegm_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/unit/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/unit/ut_cnn.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/unit/ut_dynamic_visualizer.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/unit/ut_fsync.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/unit/ut_hhn.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/unit/ut_hysteresis.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/unit/ut_legion.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/unit/ut_nnet.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/unit/ut_pcnn.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/unit/ut_som.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/unit/ut_sync.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/unit/ut_syncpr.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/nnet/tests/unit/ut_syncsegm.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/samples/definitions.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/tests/__main__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/tests/assertion.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/tests/suite_holder.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/tests/tests_runner.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/utils/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/utils/color.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/utils/dimension.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/utils/examples/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/utils/examples/utils_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/utils/graph.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/utils/metric.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/utils/sampling.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/utils/tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/utils/tests/integration/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/utils/tests/integration/it_metric.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/utils/tests/sampling_templates.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/utils/tests/unit/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/utils/tests/unit/ut_dimension.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/utils/tests/unit/ut_metric.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/utils/tests/unit/ut_sampling.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/pyclustering/utils/tests/unit/ut_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/pyclustering/setup.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

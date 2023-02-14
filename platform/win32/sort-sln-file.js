@@ -67,6 +67,7 @@ if (debug) console.log("Sorted: ", {prjarr});
 
 slnstr = header_section + prjarr.map((el) => el.l).join('\n') + global_section;
 
+slnstr = slnstr.replace(/    /g, '\t');
 
 if (debug) console.log({slnstr});
 
