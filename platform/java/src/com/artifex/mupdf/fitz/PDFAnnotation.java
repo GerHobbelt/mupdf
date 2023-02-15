@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -337,20 +337,19 @@ public class PDFAnnotation
 	public void setAppearance(DisplayList list) {
 		setNativeAppearanceDisplayList(null, null, null, list);
 	}
+	public void setAppearance(Image image) {
+		setNativeAppearanceImage(image);
+	}
 
 	public native boolean hasFileSpecification();
 	public native void setFileSpecification(PDFObject fs);
 	public native PDFObject getFileSpecification();
 
-	public void setAppearance(Image image) {
-		setNativeAppearanceImage(image);
-	}
+	public native boolean getHiddenForEditing();
+	public native void setHiddenForEditing(boolean hidden);
 	
 	public native void setStampImage(Image image);
 
 	private native void updateAppearanceFromDisplayList(DisplayList dlist);
 	public void updateAppearance(DisplayList dlist) {updateAppearanceFromDisplayList(dlist);}
-
-	public native boolean getHiddenForEditing();
-	public native void setHiddenForEditing(boolean hidden);
 }
