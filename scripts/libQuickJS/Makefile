@@ -1,9 +1,12 @@
-#
 
 QJSC=qjsc.exe
 
 DSTDIR=$(PROJDIR)/../../scripts/libQuickJS/
 SRCDIR=$(PROJDIR)/../../thirdparty/owemdjee/QuickJS/
+
+DEPENDENCIES=													\
+		$(PROJDIR)/../../scripts/libQuickJS/Makefile			\
+		$(QJSC)				
 
 all:						\
 		$(DSTDIR)qjscalc.c  \
@@ -16,11 +19,11 @@ clean:
 	-rm -f $(DSTDIR)qjsrepl.c
 
 
-$(DSTDIR)qjscalc.c: $(SRCDIR)qjscalc.js
-	$(QJSC) -v -fbignum -m -c -o $@ $?
+$(DSTDIR)qjscalc.c: $(SRCDIR)qjscalc.js $(DEPENDENCIES)
+	$(QJSC) -v -fbignum -m -c -o $@  $(SRCDIR)qjscalc.js
 
-$(DSTDIR)qjsrepl.c: $(SRCDIR)repl.js
-	$(QJSC) -v -fbignum -m -c -o $@ $?
+$(DSTDIR)qjsrepl.c: $(SRCDIR)repl.js $(DEPENDENCIES)
+	$(QJSC) -v -fbignum -m -c -o $@  $(SRCDIR)repl.js
 
 
 
