@@ -736,6 +736,9 @@ zxing-cpp
 
 SymSpell
 
+libdtm
+prvhash
+
 EOT
 )
 
