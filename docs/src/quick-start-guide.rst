@@ -15,13 +15,7 @@ Quick Start Guide
 ===============================
 
 
-:title:`MuPDF` is a lightweight :title:`PDF`, :title:`XPS`, and :title:`E-book` viewer.
 
-
-:title:`MuPDF` consists of a software library, command line tools, and viewers for various platforms.
-
-
-To get started with :title:`MuPDF` a developer should :ref:`acquire the source code<quick_start_acquire_source_code>` and :ref:`build the library<quick_start_building_the_library>`.
 
 
 .. _quick_start_acquire_source_code:
@@ -57,8 +51,6 @@ On :title:`Windows` there is a :title:`Visual Studio` solution file in ``platfor
 
 
 To build the required DLLs, load ``platform/win32/mupdf.sln`` into :title:`Visual Studio`, and select the required architecture from the drop down - then right click on ``libmupdf`` in the solution explorer and choose “Build”.
-
-todo: check details here - https://www.codeproject.com/Articles/1190061/Compiling-MuPDF-DLL-to-Render-and-Edit-PDF-Documen
 
 
 :title:`macOS`
@@ -132,38 +124,15 @@ Supported file formats
 --------------------------------
 
 
-// TODO - make this comprehensive and look better..
-
 .. _supported_document_formats:
-
-Document
-~~~~~~~~~~~~~~~~~~~
-
-
-:title:`MuPDF` supports the following document formats:
-
-``pdf``
-
-``epub``
-
-``xps``
-
-``cbz``
-
-
 .. _supported_image_formats:
 
 
-Image
-~~~~~~~~~~~~~~~~~~~
+:title:`MuPDF` supports the following file formats:
 
-:title:`MuPDF` supports the following image formats:
+``pdf``, ``epub``, ``xps``, ``cbz``, ``mobi``, ``fb2``, ``svg``
 
-``svg``
-
-``png``
-
-``jpg``
+And a suite of image types, e.g. ``png``, ``jpg``, ``bmp`` etc.
 
 
 

@@ -111,12 +111,11 @@ A ``Pixmap`` object contains a color raster image (short for pixel map). The com
     :arg yRes: ``Int`` Y resolution in dots per inch.
 
 
-.. method:: saveAsPNG(fileName, saveAlpha)
+.. method:: saveAsPNG(fileName)
 
     Save the ``Pixmap`` as a :title:`PNG`. Only works for :title:`Gray` and :title:`RGB` images.
 
     :arg fileName: ``String``.
-    :arg saveAlpha: ``Boolean``.
 
 
 .. method:: invert()
