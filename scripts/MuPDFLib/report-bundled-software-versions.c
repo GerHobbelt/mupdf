@@ -56,7 +56,7 @@ static const char* libzstd_version = "zstd v1.5.0 (https://github.com/facebook/z
 static const char* lib_nas_filelock_version = "lib_nas_filelock v0.1 (https://github.com/GerHobbelt/lib_nas_lockfile)";
 static const char* libcryptopp_version = "Crypto++ v" FZ_VERSION_ELEMENT_STR(CRYPTOPP_MAJOR) "." FZ_VERSION_ELEMENT_STR(CRYPTOPP_MINOR) "." FZ_VERSION_ELEMENT_STR(CRYPTOPP_REVISION) " (https://github.com/weidai11/cryptopp)";
 static const char* libfmt_version = "fmt v8.0.0 (https://github.com/fmtlib/fmt)";
-static char libsqlite_version[1024];
+static char libsqlite_version[2048];
 static const char* libsvgcharter_version = "charter v2018.01.09 (https://github.com/Mandarancio/charter)";
 static const char* libtinyexpr_version = "tinyexpr (https://github.com/codeplea/tinyexpr)";
 static const char* libsoldout_version = "libsoldout/upskirt/sundown/scidown (http://fossil.instinctive.eu/libsoldout/)";
