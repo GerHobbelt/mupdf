@@ -244,7 +244,9 @@ const specialFilenames = [
   "TODO", 
   "CHANGES", 
   "ChangeLog[^/]*", 
-  "Contributors"
+  "Contributors",
+  "SConstruct",
+  "SConscript"
 ];
 let specialFilenameRes = [];
 
@@ -368,6 +370,8 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
     case '.cmd':
     case '.cppcode':
     case '.csv':
+    case '.cmake':
+    case '.bazel':
     case '.gcc':
     case '.gperf':
     case '.htcpp':
@@ -398,6 +402,7 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
     case '.xml':
     case '.y':
     case '.tcl':
+    case '.nsi':
         filterDirs.add('Misc Files');
         base = path.dirname(f);
         if (base === '.') {

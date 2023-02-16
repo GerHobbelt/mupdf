@@ -738,6 +738,7 @@ SymSpell
 
 libdtm
 prvhash
+vxl
 
 EOT
 )
@@ -819,6 +820,7 @@ manticoresearch
 uberlog
 pmt-png-tools
 libchm_io
+gperf-hash
 
 EOT
 )
