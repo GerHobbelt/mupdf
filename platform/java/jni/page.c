@@ -456,7 +456,7 @@ FUN(Page_getLabel)(JNIEnv *env, jobject self)
 	char buf[100];
 
 	if (!ctx || !page)
-		return;
+		return NULL;
 
 	fz_try(ctx)
 		fz_page_label(ctx, page, buf, sizeof buf);
