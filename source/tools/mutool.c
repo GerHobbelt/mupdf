@@ -162,6 +162,14 @@ static struct {
 
 	{ {.fa = sqlite_main }, "sqlite", "SQLite3 tool" },
 #if defined(MUTOOL_EX)
+	{ {.fa = sqlite_ext_expert_main }, "sqlite_expert", "SQLite3 expert tool" },
+	{ {.fa = sqlite_fts3view_main }, "sqlite_fts3view", "SQLite3 fts3view tool" },
+	{ {.fa = sqlite_lsmtest_main }, "sqlite_lsmtest", "SQLite3 lsmtest tool" },
+	{ {.fa = sqlite_rbu_main }, "sqlite_rbu", "SQLite3 rbu tool" },
+	{ {.fa = sqlite_ext_session_changeset_main }, "sqlite_session_changeset", "SQLite3 session_changeset tool" },
+	{ {.fa = sqlite_ext_session_speed_test_main }, "sqlite_session_speed_test", "SQLite3 session_speed_test tool" },
+	{ {.fa = sqlite_lemon_main }, "sqlite_lemon", "SQLite3 lemon tool" },
+
 	{ {.fa = sqlite_dbhash_main }, "sqlite_dbhash", "SQLite3 dbhash tool" },
 	{ {.fa = sqlite_dbtotxt_main }, "sqlite_dbtotxt", "SQLite3 dbtotxt tool" },
 	{ {.fa = sqlite_diff_main }, "sqlite_diff", "SQLite3 diff tool" },
