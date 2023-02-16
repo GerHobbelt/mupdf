@@ -30,11 +30,11 @@ Link Dictionary Object
 
 A link is a dictionary with keys for:
 
-``bounds``
+`bounds`
     A rectangle describing the link's location on the page.
 
-``uri``
-    A ``uri`` describing either a document internal destination or a :title:`URL` for a web page.
+`uri`
+    A `uri` describing either a document internal destination or a :title:`URL` for a web page.
 
 
 .. _mutool_run_js_api_link_dest:
@@ -47,28 +47,28 @@ A link destination points to a location within a document and how a document vie
 
 It consists of a dictionary with keys for:
 
-``chapter``
+`chapter`
     The chapter within the document.
 
-``page``
+`page`
     The page within the document.
 
-``type``
+`type`
     Either "Fit", "FitB", "FitH", "FitBH", "FitV", "FitBV", "FitR" or "XYZ", controlling which of the keys below exist.
 
-``x``
+`x`
     The left coordinate, valid for "FitV", "FitBV", "FitR" and "XYZ".
 
-``y``
+`y`
     The top coordinate, valid for "FitH", "FitBH", "FitR" and "XYZ".
 
-``width``
+`width`
     The width of the zoomed in region, valid for "XYZ".
 
-``height``
+`height`
     The height of the zoomed in region, valid for "XYZ".
 
-``zoom``
+`zoom`
     The zoom factor, valid for "XYZ".
 
 
@@ -89,21 +89,21 @@ In order to retieve information from this object see methods described within :r
 Embedded File Object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This ``Object`` contains metadata about an embedded file, it has properties for:
+This `Object` contains metadata about an embedded file, it has properties for:
 
-``filename``
+`filename`
     The name of the embedded file.
 
-``mimetype``
-    The :title:`MIME` type of the embedded file, or ``undefined`` if none exists.
+`mimetype`
+    The :title:`MIME` type of the embedded file, or `undefined` if none exists.
 
-``size``
+`size`
     The size in bytes of the embedded file contents.
 
-``creationDate``
+`creationDate`
     The creation date of the embedded file.
 
-``modificationDate``
+`modificationDate`
     The modification date of the embedded file.
 
 
@@ -112,12 +112,12 @@ This ``Object`` contains metadata about an embedded file, it has properties for:
 PDF Journal Object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This ``Object`` contains a numbered array of operations and a reference into this list indicating the current position.
+This `Object` contains a numbered array of operations and a reference into this list indicating the current position.
 
-``position``
+`position`
     The current position in the journal.
 
-``steps``
+`steps`
     An array containing the name of each step in the journal.
 
 
@@ -131,31 +131,31 @@ Stroking State Object
 
 The stroking state is a dictionary with keys for:
 
-    - ``startCap``, ``dashCap``, ``endCap``
+    - `startCap`, `dashCap`, `endCap`
         "Butt", "Round", "Square", or "Triangle".
 
-    - ``lineCap``
-        Set ``startCap``, ``dashCap``, and ``endCap`` all at once.
+    - `lineCap`
+        Set `startCap`, `dashCap`, and `endCap` all at once.
 
-    - ``lineJoin``
+    - `lineJoin`
         "Miter", "Round", "Bevel", or "MiterXPS".
 
-    - ``lineWidth``
+    - `lineWidth`
         Thickness of the line.
 
-    - ``miterLimit``
+    - `miterLimit`
         Maximum ratio of the miter length to line width, before beveling the join instead.
 
-    - ``dashPhase``
+    - `dashPhase`
         Starting offset for dash pattern.
 
-    - ``dashes``
+    - `dashes`
         Array of on/off dash lengths.
 
 
 **Example:**
 
-    ``{dashes:[5,10], lineWidth:3, lineCap:'Round'}``
+    `{dashes:[5,10], lineWidth:3, lineCap:'Round'}`
 
 
 
@@ -165,15 +165,15 @@ The stroking state is a dictionary with keys for:
 Outline Iterator Object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This ``Object`` has properties for:
+This `Object` has properties for:
 
-``title``
+`title`
     The title of the item.
 
-``uri``
+`uri`
     A :title:`URI` pointing to the destination. Likely to be a document internal link that can be resolved by :ref:`Document.resolveLink()<mutool_run_js_api_document_resolveLink>`, otherwise a link to a web page.
 
-``open``
+`open`
     *True* if the item should be opened when shown in a tree view.
 
 
@@ -186,28 +186,28 @@ Text Layout Object
 
 A description of layouted text value from a text widget with keys:
 
-``matrix``
+`matrix`
     Normal transform matrix for the layouted text.
 
-``invMatrix``
+`invMatrix`
     Inverted transform matrix for the layouted text.
 
-``lines``
-    An array of text lines belonging to the layouted text, a ``lines`` object contains:
+`lines`
+    An array of text lines belonging to the layouted text, a `lines` object contains:
 
-    - ``x`` The X coordinate for the text line.
-    - ``y`` The Y coordinate for the text line.
-    - ``fontSize`` The text size used for the layouted text line.
-    - ``index`` The index of the beginning of the line in the text string.
-    - ``rect`` The bounding rectangle for the text line.
-    - ``chars`` An array of characters in the text line.
+    - `x` The X coordinate for the text line.
+    - `y` The Y coordinate for the text line.
+    - `fontSize` The text size used for the layouted text line.
+    - `index` The index of the beginning of the line in the text string.
+    - `rect` The bounding rectangle for the text line.
+    - `chars` An array of characters in the text line.
 
-        A ``chars`` object contains:
+        A `chars` object contains:
 
-        - ``x`` The position of the character.
-        - ``advance`` The advance of the character.
-        - ``index`` The index of the character in the text string.
-        - ``rect`` The bounding :ref:`Rectangle<mutool_run_js_api_rectangle>` for the character.
+        - `x` The position of the character.
+        - `advance` The advance of the character.
+        - `index` The index of the character in the text string.
+        - `rect` The bounding :ref:`Rectangle<mutool_run_js_api_rectangle>` for the character.
 
 
 
@@ -216,24 +216,24 @@ A description of layouted text value from a text widget with keys:
 Signature Configuration Object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A signature configuration object has properties with ``Boolean`` values as follows:
+A signature configuration object has properties with `Boolean` values as follows:
 
-``showLabels``
+`showLabels`
     Whether to include both labels and values or just values on the right hand side.
 
-``showDN``
+`showDN`
     Whether to include the distinguished name on the right hand side.
 
-``showTextName``
+`showTextName`
     Whether to include the name of the signatory on the right hand side.
 
-``showDate``
+`showDate`
     Whether to include the date of signing on the right hand side.
 
-``showGraphicName``
+`showGraphicName`
     Whether to include the signatory name on the left hand side.
 
-``showLogo``
+`showLogo`
     Whether to include the :title:`MuPDF` logo in the background.
 
 
@@ -243,11 +243,11 @@ A signature configuration object has properties with ``Boolean`` values as follo
 Placement Result Object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``filled``
+`filled`
     The rectangle of the actual area that was used.
 
-``more``
-    *True* if more content remains to be placed, otherwise *false* if all content fits in the ``Story``.
+`more`
+    *True* if more content remains to be placed, otherwise *false* if all content fits in the `Story`.
 
 
 

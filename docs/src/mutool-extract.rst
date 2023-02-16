@@ -15,7 +15,7 @@
 ==========================================
 
 
-The ``extract`` command can be used to extract images and font files from a :title:`PDF` file. The image and font files will be saved out to the same folder which the file originates from.
+The `extract` command can be used to extract images and font files from a :title:`PDF` file. The image and font files will be saved out to the same folder which the file originates from.
 
 
 
@@ -28,19 +28,19 @@ The ``extract`` command can be used to extract images and font files from a :tit
 .. include:: optional-command-line-note.rst
 
 
-``[options]``
+`[options]`
    Options are as follows:
 
-      ``-p`` password
+      `-p` password
             Use the specified password if the file is encrypted.
 
-      ``-r``
+      `-r`
             Convert images to RGB when extracting them.
 
-      ``-a``
+      `-a`
             Embed SMasks as alpha channel.
 
-      ``-N``
+      `-N`
             Do not use ICC color conversions.
 
 
@@ -48,13 +48,13 @@ The ``extract`` command can be used to extract images and font files from a :tit
 ----
 
 
-``input.pdf``
+`input.pdf`
    Input file name. Must be a :title:`PDF` file.
 
 ----
 
 
-``[object numbers]``
+`[object numbers]`
    An array of object ids to extract from. If no object numbers are given on the command line, all images and fonts will be extracted from the file.
 
 .. include:: footer.rst

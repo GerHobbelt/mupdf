@@ -14,7 +14,7 @@
 ==========================================
 
 
-The ``pages`` command prints out ``MediaBox``, ``CropBox``, etc. as well as ``Rotation`` and ``UserUnit`` for each page given (or all if not specified).
+The `pages` command prints out `MediaBox`, `CropBox`, etc. as well as `Rotation` and `UserUnit` for each page given (or all if not specified).
 
 
 .. code-block:: bash
@@ -25,22 +25,22 @@ The ``pages`` command prints out ``MediaBox``, ``CropBox``, etc. as well as ``Ro
 .. include:: optional-command-line-note.rst
 
 
-``[options]``
+`[options]`
    Options are as follows:
 
-      ``-p`` password
+      `-p` password
          Use the specified password if the file is encrypted.
 
 
 ----
 
-``input.pdf``
+`input.pdf`
    Input file name. Must be a :title:`PDF` file.
 
 ----
 
 
-``[pages]``
+`[pages]`
    Comma separated list of page numbers and ranges. If no pages are supplied then all document pages will be considered for the output file.
 
 

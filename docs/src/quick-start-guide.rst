@@ -27,12 +27,12 @@ There are a few options for acquiring the source code as follows:
 
 - Download an official :title:`MuPDF` release here: `MuPDF Releases`_.
 - Check out the :title:`Github` repository here: `MuPDF on Github`_.
-- Or check out the latest development source directly from our canonical git repository: ``git clone --recursive git://git.ghostscript.com/mupdf.git``.
+- Or check out the latest development source directly from our canonical git repository: `git clone --recursive git://git.ghostscript.com/mupdf.git`.
 
 
 .. note::
 
-      If you have checked out a :title:`git repo` then in the "mupdf" directory, update the third party libraries with: ``git submodule update --init``.
+      If you have checked out a :title:`git repo` then in the "mupdf" directory, update the third party libraries with: `git submodule update --init`.
 
 
 .. _quick_start_building_the_library:
@@ -44,13 +44,13 @@ Building the library
 :title:`Windows`
 ~~~~~~~~~~~~~~~~~~~~
 
-On :title:`Windows` there is a :title:`Visual Studio` solution file in ``platform/win32/mupdf.sln``.
+On :title:`Windows` there is a :title:`Visual Studio` solution file in `platform/win32/mupdf.sln`.
 
 
 **Using Microsoft Visual Studio**
 
 
-To build the required DLLs, load ``platform/win32/mupdf.sln`` into :title:`Visual Studio`, and select the required architecture from the drop down - then right click on ``libmupdf`` in the solution explorer and choose “Build”.
+To build the required DLLs, load `platform/win32/mupdf.sln` into :title:`Visual Studio`, and select the required architecture from the drop down - then right click on `libmupdf` in the solution explorer and choose “Build”.
 
 
 :title:`macOS`
@@ -76,9 +76,9 @@ This will then install the viewer, command line tools, libraries, and header fil
 
 You will also need the X11 headers and libraries if you're building on :title:`Linux`. These can typically be found in the xorg-dev package.
 
-Alternatively, if you only want the command line tools, you can build with ``HAVE_X11=no``.
+Alternatively, if you only want the command line tools, you can build with `HAVE_X11=no`.
 
-The new :title:`OpenGL` based viewer also needs :title:`OpenGL` headers and libraries. If you're building on :title:`Linux`, install the ``mesa-common-dev``, ``libgl1-mesa-dev`` packages, and ``libglu1-mesa-dev`` packages. You'll also need several X11 development packages: ``xorg-dev``, ``libxcursor-dev``, ``libxrandr-dev``, and ``libxinerama-dev``. To skip building the :title:`OpenGL` viewer, build with ``HAVE_GLUT=no``.
+The new :title:`OpenGL` based viewer also needs :title:`OpenGL` headers and libraries. If you're building on :title:`Linux`, install the `mesa-common-dev`, `libgl1-mesa-dev` packages, and `libglu1-mesa-dev` packages. You'll also need several X11 development packages: `xorg-dev`, `libxcursor-dev`, `libxrandr-dev`, and `libxinerama-dev`. To skip building the :title:`OpenGL` viewer, build with `HAVE_GLUT=no`.
 
 To install the viewer, command line tools, libraries, and header files on your system:
 
@@ -88,7 +88,7 @@ To install the viewer, command line tools, libraries, and header files on your s
    make prefix=/usr/local install
 
 
-To install only the command line tools, libraries, and headers invoke ``make`` like this:
+To install only the command line tools, libraries, and headers invoke `make` like this:
 
 .. code-block:: bash
 
@@ -100,11 +100,11 @@ To install only the command line tools, libraries, and headers invoke ``make`` l
 
 .. note::
 
-   Results of the build can be found in ``build/release`` in your "mupdf" folder.
+   Results of the build can be found in `build/release` in your "mupdf" folder.
 
-   Building for both :title:`macOS` & :title:`Linux` depend on having both ``autoconf`` and ``automake`` installed on your system. If this software is not already on your system (usually ``usr/local/bin``) then it can be installed from the `GNU website`_.
+   Building for both :title:`macOS` & :title:`Linux` depend on having both `autoconf` and `automake` installed on your system. If this software is not already on your system (usually `usr/local/bin`) then it can be installed from the `GNU website`_.
 
-   Alternatively, ``autoconf`` and ``automake`` can be installed via :title:`Brew` by running: ``brew install autoconf automake``.
+   Alternatively, `autoconf` and `automake` can be installed via :title:`Brew` by running: `brew install autoconf automake`.
 
 
 
@@ -130,9 +130,9 @@ Supported file formats
 
 :title:`MuPDF` supports the following file formats:
 
-``pdf``, ``epub``, ``xps``, ``cbz``, ``mobi``, ``fb2``, ``svg``
+`pdf`, `epub`, `xps`, `cbz`, `mobi`, `fb2`, `svg`
 
-And a suite of image types, e.g. ``png``, ``jpg``, ``bmp`` etc.
+And a suite of image types, e.g. `png`, `jpg`, `bmp` etc.
 
 
 

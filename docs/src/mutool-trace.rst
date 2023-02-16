@@ -15,7 +15,7 @@
 ==========================================
 
 
-The ``trace`` command prints a trace of device calls needed to render a page.
+The `trace` command prints a trace of device calls needed to render a page.
 
 
 .. code-block:: bash
@@ -26,34 +26,34 @@ The ``trace`` command prints a trace of device calls needed to render a page.
 .. include:: optional-command-line-note.rst
 
 
-``[options]``
+`[options]`
    Options are as follows:
 
 
-   ``-p`` password
+   `-p` password
       Use the specified password if the file is encrypted.
-   ``-W`` width
+   `-W` width
       Page width in points for :title:`EPUB` layout.
-   ``-H`` height
+   `-H` height
       Page height in points for :title:`EPUB` layout.
-   ``-S`` size
+   `-S` size
       Font size in points for :title:`EPUB` layout.
-   ``-U`` filename
+   `-U` filename
       User CSS stylesheet for :title:`EPUB` layout.
-   ``-X``
+   `-X`
       Disable document styles for :title:`EPUB` layout.
-   ``-d``
+   `-d`
       Use display list.
 
 
 ----
 
-``file``
+`file`
    Input file name. The input can be any of the :ref:`document formats supported by MuPDF<supported_document_formats>`.
 
 ----
 
-``[pages]``
+`[pages]`
    Comma separated list of page ranges. The first page is "1", and the last page is "N". The default is "1-N".
 
 ----

@@ -12,11 +12,11 @@
 
 
 
-``PDFObject``
+`PDFObject`
 --------------
 
 
-All functions that take ``PDFObjects``, do automatic translation between :title:`JavaScript` objects and ``PDFObjects`` using a few basic rules:
+All functions that take `PDFObjects`, do automatic translation between :title:`JavaScript` objects and `PDFObjects` using a few basic rules:
 
 
 - Null, booleans, and numbers are translated directly.
@@ -29,7 +29,7 @@ All functions that take ``PDFObjects``, do automatic translation between :title:
 
 **Instance properties**
 
-``length``
+`length`
 
     Length of the array.
 
@@ -40,7 +40,7 @@ All functions that take ``PDFObjects``, do automatic translation between :title:
 
 .. method:: get(ref)
 
-    Access dictionaries and arrays in the ``PDFObject``.
+    Access dictionaries and arrays in the `PDFObject`.
 
     :arg ref: Key or index.
     :return: The value for the key or index.
@@ -48,7 +48,7 @@ All functions that take ``PDFObjects``, do automatic translation between :title:
 
 .. method:: put(ref, value)
 
-    Put information into dictionaries and arrays in the ``PDFObject``. Dictionaries and arrays can also be accessed using normal property syntax: ``obj.Foo = 42; delete obj.Foo; x = obj[5]``.
+    Put information into dictionaries and arrays in the `PDFObject`. Dictionaries and arrays can also be accessed using normal property syntax: `obj.Foo = 42; delete obj.Foo; x = obj[5]`.
 
     :arg ref: Key or index.
     :arg value: The value for the key or index.
@@ -56,7 +56,7 @@ All functions that take ``PDFObjects``, do automatic translation between :title:
 
 .. method:: delete(ref)
 
-    Delete a reference from a ``PDFObject``.
+    Delete a reference from a `PDFObject`.
 
     :arg ref: Key or index.
 
@@ -68,22 +68,22 @@ All functions that take ``PDFObjects``, do automatic translation between :title:
 
 .. method:: isArray()
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 .. method:: isDictionary()
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 .. method:: forEach(fun)
 
-    Iterate over all the entries in a dictionary or array and call ``fun`` for each key-value pair.
+    Iterate over all the entries in a dictionary or array and call `fun` for each key-value pair.
 
-    :arg fun: Function in the format ``function(key,value){...}``.
+    :arg fun: Function in the format `function(key,value){...}`.
 
 
 .. method:: push(item)
 
-    Append ``item`` to the end of the array.
+    Append `item` to the end of the array.
 
     :arg item: Item to add.
 
@@ -92,14 +92,14 @@ All functions that take ``PDFObjects``, do automatic translation between :title:
 
     Returns the object as a pretty-printed string.
 
-    :return: ``String``.
+    :return: `String`.
 
 
 .. method:: valueOf()
 
-    Convert primitive :title:`PDF` objects to a corresponding primitive ``Null``, ``Boolean``, ``Number`` or ``String`` :title:`JavaScript` objects. Indirect :title:`PDF` objects get converted to the string "R" while :title:`PDF` names are converted to plain strings. :title:`PDF` arrays or dictionaries are returned unchanged.
+    Convert primitive :title:`PDF` objects to a corresponding primitive `Null`, `Boolean`, `Number` or `String` :title:`JavaScript` objects. Indirect :title:`PDF` objects get converted to the string "R" while :title:`PDF` names are converted to plain strings. :title:`PDF` arrays or dictionaries are returned unchanged.
 
-    :return: ``Null`` \| ``Boolean`` \| ``Number`` \| ``String``.
+    :return: `Null` \| `Boolean` \| `Number` \| `String`.
 
 
 ----
@@ -113,33 +113,33 @@ The only way to access a stream is via an indirect object, since all streams are
 
     Is the object an indirect reference.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 .. method:: asIndirect()
 
     Return the object number the indirect reference points to.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 
 .. method:: isStream()
 
     *True* if the object is an indirect reference pointing to a stream.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 
 .. method:: readStream()
 
-    Read the contents of the stream object into a ``Buffer``.
+    Read the contents of the stream object into a `Buffer`.
 
-    :return: ``Buffer``.
+    :return: `Buffer`.
 
 .. method:: readRawStream()
 
-    Read the raw, uncompressed, contents of the stream object into a ``Buffer``.
+    Read the raw, uncompressed, contents of the stream object into a `Buffer`.
 
-    :return: ``Buffer``.
+    :return: `Buffer`.
 
 .. method:: writeObject(obj)
 
@@ -151,14 +151,14 @@ The only way to access a stream is via an indirect object, since all streams are
 
     Update the contents of the stream the indirect reference points to. This will update the "Length", "Filter" and "DecodeParms" automatically.
 
-    :arg buffer: ``Buffer``.
+    :arg buffer: `Buffer`.
 
 .. method:: writeRawStream(buffer)
 
     Update the contents of the stream the indirect reference points to. The buffer must contain already compressed data that matches the "Filter" and "DecodeParms". This will update the "Length" automatically, but leave the "Filter" and "DecodeParms" untouched.
 
 
-    :arg buffer: ``Buffer``.
+    :arg buffer: `Buffer`.
 
 
 ----
@@ -169,60 +169,60 @@ Primitive :title:`PDF` objects such as booleans, names, and numbers can usually 
 
 .. method:: isNull()
 
-    Returns *true* if the object is a ``null`` object.
+    Returns *true* if the object is a `null` object.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 .. method:: isBoolean()
 
-    Returns *true* if the object is a ``Boolean`` object.
+    Returns *true* if the object is a `Boolean` object.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 .. method:: asBoolean()
 
     Get the boolean primitive value.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 .. method:: isNumber()
 
-    Returns *true* if the object is a ``Number`` object.
+    Returns *true* if the object is a `Number` object.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 .. method:: asNumber()
 
     Get the number primitive value.
 
-    :return: ``Integer``.
+    :return: `Integer`.
 
 .. method:: isName()
 
-    Returns *true* if the object is a ``Name`` object.
+    Returns *true* if the object is a `Name` object.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 .. method:: asName()
 
     Get the name as a string.
 
-    :return: ``String``.
+    :return: `String`.
 
 .. method:: isString()
 
-    Returns *true* if the object is a ``String`` object.
+    Returns *true* if the object is a `String` object.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 .. method:: asString()
 
     Convert a "text string" to a :title:`JavaScript` unicode string.
 
-    :return: ``String``.
+    :return: `String`.
 
 .. method:: asByteString()
 
     Convert a string to an array of byte values.
 
-    :return: ``[...]``.
+    :return: `[...]`.

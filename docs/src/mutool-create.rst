@@ -14,7 +14,7 @@
 ==========================================
 
 
-The ``create`` command creates a new :title:`PDF` file with the contents created from one or more input files containing graphics commands.
+The `create` command creates a new :title:`PDF` file with the contents created from one or more input files containing graphics commands.
 
 
 .. code-block:: bash
@@ -26,26 +26,26 @@ The ``create`` command creates a new :title:`PDF` file with the contents created
 
 
 
-``[-o output.pdf]``
+`[-o output.pdf]`
    The output filename. Defaults to "out.pdf" if not supplied.
 
 
 ----
 
-``[-O options]``
-   The ``-O`` argument is a comma separated list of options for writing the :title:`PDF` file:
+`[-O options]`
+   The `-O` argument is a comma separated list of options for writing the :title:`PDF` file:
 
       .. include:: mutool-comma-separated-list-of-options.rst
 
 ----
 
 
-``page.txt``
+`page.txt`
    :ref:`Page content stream<mutool_create_page_content_streams>` with annotations for creating resources.
 
 ----
 
-``[page2.txt ...]``
+`[page2.txt ...]`
    Define multiple :ref:`page content streams<mutool_create_page_content_streams>` as required.
 
 

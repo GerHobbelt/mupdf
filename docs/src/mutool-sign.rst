@@ -14,7 +14,7 @@
 ==========================================
 
 
-The ``sign`` command reads an input :title:`PDF` file and by default prints information about each signature field object. The command applies to the signature field objects given, or every signature field if none are specified. Given suitable option signature fields can be verified, cleared or signed using a given certificate and certificate password.
+The `sign` command reads an input :title:`PDF` file and by default prints information about each signature field object. The command applies to the signature field objects given, or every signature field if none are specified. Given suitable option signature fields can be verified, cleared or signed using a given certificate and certificate password.
 
 
 .. code-block:: bash
@@ -26,38 +26,38 @@ The ``sign`` command reads an input :title:`PDF` file and by default prints info
 
 
 
-``[options]``
+`[options]`
    Options are as follows:
 
-   ``-p`` password
+   `-p` password
       Use the specified password if the file is encrypted.
 
-   ``-v``
+   `-v`
       Verify each signature field and check whether the document has changed since signing.
 
-   ``-c``
+   `-c`
       Revert each signed signature field back to its unsigned state.
 
-   ``-s`` certificate file
+   `-s` certificate file
       Sign each signature field with the certificate in the given file.
 
-   ``-P`` certificate password
+   `-P` certificate password
       The password used together with the certificate to sign a signature field.
 
-   ``-o`` filename
+   `-o` filename
       Output :title:`PDF` file name.
 
 
 ----
 
-``input.pdf``
+`input.pdf`
    The input :title:`PDF` document.
 
 ----
 
 
-``[signature object numbers]``
-   Can be used to specify a particular set of signature field objects to apply the ``sign`` command to.
+`[signature object numbers]`
+   Can be used to specify a particular set of signature field objects to apply the `sign` command to.
 
 ----
 
@@ -69,11 +69,11 @@ Signing digital signatures in :title:`MuPDF` requires that you have a PFX certif
 
 1) Generate a self-signed certificate and private key:
 
-``$ openssl req -x509 -days 365 -newkey rsa:2048 -keyout cert.pem -out cert.pem``
+`$ openssl req -x509 -days 365 -newkey rsa:2048 -keyout cert.pem -out cert.pem`
 
 2) Convert to PFX format:
 
-``$ openssl pkcs12 -export -in cert.pem -out cert.pfx``
+`$ openssl pkcs12 -export -in cert.pem -out cert.pfx`
 
 
 

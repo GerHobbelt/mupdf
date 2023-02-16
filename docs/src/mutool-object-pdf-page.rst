@@ -12,22 +12,22 @@
 
 
 
-``PDFPage``
+`PDFPage`
 ---------------
 
 .. method:: getAnnotations()
 
     Return array of all annotations on the page.
 
-    :return: ``[]``.
+    :return: `[]`.
 
 
 .. method:: createAnnotation(type)
 
     Create a new blank annotation of a given :ref:`type<mutool_run_js_api_annotation_types>`.
 
-    :arg type: ``String`` representing :ref:`annotation type<mutool_run_js_api_annotation_types>`.
-    :return: ``PDFAnnotation``.
+    :arg type: `String` representing :ref:`annotation type<mutool_run_js_api_annotation_types>`.
+    :return: `PDFAnnotation`.
 
 
 .. _mutool_run_js_api_annotation_types:
@@ -77,14 +77,14 @@
 
     Delete the annotation from the page.
 
-    :arg annot: ``PDFAnnotation``.
+    :arg annot: `PDFAnnotation`.
 
 
 .. method:: getWidgets()
 
     Return array of all :ref:`widgets<mutool_object_pdf_widget>` on the page.
 
-    :return: ``[]``.
+    :return: `[]`.
 
 
 .. method:: update()
@@ -95,8 +95,8 @@
 
     Applies redactions to the page.
 
-    :arg blackBoxes: ``Boolean`` Whether to use black boxes at each redaction or not.
-    :arg imageMethod: ``Integer``. ``0`` for no redactions, ``1`` to redact entire images, ``2`` for redacting just the covered pixels.
+    :arg blackBoxes: `Boolean` Whether to use black boxes at each redaction or not.
+    :arg imageMethod: `Integer`. `0` for no redactions, `1` to redact entire images, `2` for redacting just the covered pixels.
 
     .. note::
 
@@ -110,13 +110,13 @@
 
 .. method:: toPixmap(transform, colorspace, alpha, renderExtra, usage)
 
-    Render the page into a ``Pixmap`` using the given ``colorspace`` and ``alpha`` while applying the ``transform``. Rendering of annotations/widgets can be disabled. A page can be rendered for e.g. "View" or "Print" ``usage``.
+    Render the page into a `Pixmap` using the given `colorspace` and `alpha` while applying the `transform`. Rendering of annotations/widgets can be disabled. A page can be rendered for e.g. "View" or "Print" `usage`.
 
-    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
-    :arg colorspace: ``ColorSpace``.
-    :arg alpha: ``Boolean``.
-    :arg renderExtra: ``Boolean``.
-    :usage: ``String``.
+    :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg colorspace: `ColorSpace`.
+    :arg alpha: `Boolean`.
+    :arg renderExtra: `Boolean`.
+    :usage: `String`.
 
 
 
@@ -124,7 +124,7 @@
 
     Return the transform from :title:`Fitz` page space (upper left page origin, y descending, 72 dpi) to :title:`PDF` user space (arbitrary page origin, y ascending, UserUnit dpi).
 
-    :return: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :return: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
 
 
