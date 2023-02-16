@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -124,14 +124,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/taglib/bindings/c;../../thirdparty/owemdjee/taglib/taglib/xm;../../thirdparty/owemdjee/taglib/taglib/it;../../thirdparty/owemdjee/taglib/taglib/trueaudio;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TAGLIB_STATIC;BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -150,15 +150,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/taglib/bindings/c;../../thirdparty/owemdjee/taglib/taglib/xm;../../thirdparty/owemdjee/taglib/taglib/it;../../thirdparty/owemdjee/taglib/taglib/trueaudio;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TAGLIB_STATIC;BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -179,14 +179,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/taglib/bindings/c;../../thirdparty/owemdjee/taglib/taglib/xm;../../thirdparty/owemdjee/taglib/taglib/it;../../thirdparty/owemdjee/taglib/taglib/trueaudio;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TAGLIB_STATIC;BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -205,15 +205,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/taglib/bindings/c;../../thirdparty/owemdjee/taglib/taglib/xm;../../thirdparty/owemdjee/taglib/taglib/it;../../thirdparty/owemdjee/taglib/taglib/trueaudio;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TAGLIB_STATIC;BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -225,8 +225,257 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ItemGroup>
+    <ClInclude Include="../../scripts/taglib/taglib_config.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/bindings/c/tag_c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/examples/framelist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/examples/strip-id3v1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/examples/tagreader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/examples/tagreader_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/examples/tagwriter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/ape/apefile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/ape/apefooter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/ape/apeitem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/ape/apeproperties.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/ape/apetag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/asf/asfattribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/asf/asffile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/asf/asfpicture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/asf/asfproperties.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/asf/asftag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/audioproperties.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/fileref.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/flac/flacfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/flac/flacmetadatablock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/flac/flacpicture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/flac/flacproperties.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/flac/flacunknownmetadatablock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/it/itfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/it/itproperties.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mod/modfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mod/modfilebase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mod/modproperties.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mod/modtag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mp4/mp4atom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mp4/mp4coverart.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mp4/mp4file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mp4/mp4item.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mp4/mp4properties.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mp4/mp4tag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpc/mpcfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpc/mpcproperties.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1/id3v1genres.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1/id3v1tag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/attachedpictureframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/chapterframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/commentsframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/eventtimingcodesframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/generalencapsulatedobjectframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/ownershipframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/podcastframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/popularimeterframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/privateframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/relativevolumeframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/synchronizedlyricsframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/tableofcontentsframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/textidentificationframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/uniquefileidentifierframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/unknownframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/unsynchronizedlyricsframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/urllinkframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/id3v2extendedheader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/id3v2footer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/id3v2frame.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/id3v2framefactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/id3v2header.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/id3v2synchdata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/id3v2tag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/mpegfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/mpegheader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/mpegproperties.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/xingheader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/ogg/flac/oggflacfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/ogg/oggfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/ogg/oggpage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/ogg/oggpageheader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/ogg/opus/opusfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/ogg/opus/opusproperties.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/ogg/speex/speexfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/ogg/speex/speexproperties.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis/vorbisfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis/vorbisproperties.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/ogg/xiphcomment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/riff/aiff/aifffile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/riff/aiff/aiffproperties.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/riff/rifffile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/riff/wav/infotag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/riff/wav/wavfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/riff/wav/wavproperties.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/s3m/s3mfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/s3m/s3mproperties.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/tag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/tagunion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/tagutils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tbytevector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tbytevectorlist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tbytevectorstream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tdebug.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tdebuglistener.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tfilestream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tiostream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tpropertymap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/trefcounter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tstring.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tstringlist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tzlib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/trueaudio/trueaudiofile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/trueaudio/trueaudioproperties.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/wavpack/wavpackfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/wavpack/wavpackproperties.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/xm/xmfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/taglib/xm/xmproperties.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/bindings/c/tag_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/ape/apefile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/ape/apefooter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/ape/apeitem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/ape/apeproperties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/ape/apetag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/asf/asfattribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/asf/asffile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/asf/asfpicture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/asf/asfproperties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/asf/asftag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/asf/asfutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/audioproperties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/fileref.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/flac/flacfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/flac/flacmetadatablock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/flac/flacpicture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/flac/flacproperties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/flac/flacunknownmetadatablock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/it/itfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/it/itproperties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mod/modfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mod/modfilebase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mod/modfileprivate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mod/modproperties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mod/modtag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mp4/mp4atom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mp4/mp4coverart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mp4/mp4file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mp4/mp4item.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mp4/mp4properties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mp4/mp4tag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpc/mpcfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpc/mpcproperties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1/id3v1genres.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1/id3v1tag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/attachedpictureframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/chapterframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/commentsframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/eventtimingcodesframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/generalencapsulatedobjectframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/ownershipframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/podcastframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/popularimeterframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/privateframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/relativevolumeframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/synchronizedlyricsframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/tableofcontentsframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/textidentificationframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/uniquefileidentifierframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/unknownframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/unsynchronizedlyricsframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames/urllinkframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/id3v2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/id3v2extendedheader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/id3v2footer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/id3v2frame.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/id3v2framefactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/id3v2header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/id3v2synchdata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/id3v2tag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/mpegfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/mpegheader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/mpegproperties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/mpegutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/xingheader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/ogg/flac/oggflacfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/ogg/oggfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/ogg/oggpage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/ogg/oggpageheader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/ogg/opus/opusfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/ogg/opus/opusproperties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/ogg/speex/speexfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/ogg/speex/speexproperties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis/vorbisfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis/vorbisproperties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/ogg/xiphcomment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/riff/aiff/aifffile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/riff/aiff/aiffproperties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/riff/rifffile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/riff/riffutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/riff/wav/infotag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/riff/wav/wavfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/riff/wav/wavproperties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/s3m/s3mfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/s3m/s3mproperties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/tag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/taglib_export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/tagunion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/tagutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/taglib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tbytevector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tbytevectorlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tbytevectorstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tdebug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tdebuglistener.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tfilestream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tiostream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tpropertymap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/trefcounter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tstring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tstringlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/toolkit/tzlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/trueaudio/trueaudiofile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/trueaudio/trueaudioproperties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/wavpack/wavpackfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/wavpack/wavpackproperties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/xm/xmfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/taglib/xm/xmproperties.h" />
+    <Text Include="../../thirdparty/owemdjee/taglib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/taglib/ConfigureChecks.cmake" />
+    <Text Include="../../thirdparty/owemdjee/taglib/Doxyfile.cmake" />
+    <Text Include="../../thirdparty/owemdjee/taglib/INSTALL.md" />
+    <Text Include="../../thirdparty/owemdjee/taglib/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/taglib/README.md" />
+    <Text Include="../../thirdparty/owemdjee/taglib/bindings/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/taglib/bindings/README" />
+    <Text Include="../../thirdparty/owemdjee/taglib/bindings/c/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/taglib/bindings/c/taglib_c.pc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/taglib/cmake_uninstall.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/taglib/config.h.cmake" />
+    <Text Include="../../thirdparty/owemdjee/taglib/doc/README" />
+    <Text Include="../../thirdparty/owemdjee/taglib/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/taglib/taglib-config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/taglib/taglib-config.cmd.cmake" />
+    <Text Include="../../thirdparty/owemdjee/taglib/taglib.pc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/taglib/taglib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/taglib/taglib/ape/ape-tag-format.txt" />
+    <Text Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/id3v2.2.0.txt" />
+    <Text Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/id3v2.3.0.txt" />
+    <Text Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/id3v2.4.0-frames.txt" />
+    <Text Include="../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/id3v2.4.0-structure.txt" />
+    <Text Include="../../thirdparty/owemdjee/taglib/taglib/taglib_config.h.cmake" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  

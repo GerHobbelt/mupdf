@@ -113,6 +113,8 @@ const projectMap = {
 	"libYAC": "YACLib",
 	"libhnsw": "hnswlib",
 	"libnms": "nmslib",
+	"libtag": "taglib",
+	"libtag_tests": "taglib",
 	"libsafestring": "safestringlib",
 	"libCache": "CacheLib",
 	"libyaml-tests": "libyaml",

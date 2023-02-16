@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libtag_tests</ProjectName>
+    <ProjectGuid>{A60D8641-5A1C-4D29-8970-7518FF2DAF08}</ProjectGuid>
+    <RootNamespace>libtag_tests</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TAGLIB_STATIC;BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TAGLIB_STATIC;BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TAGLIB_STATIC;BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TAGLIB_STATIC;BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_aiff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_ape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_apetag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_asf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_bytevector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_bytevectorlist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_bytevectorstream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_fileref.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_flac.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_flacpicture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_flacunknownmetadatablock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_id3v1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_id3v2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_info.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_it.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_mod.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_mp4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_mp4coverart.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_mp4item.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_mpc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_mpeg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_ogg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_oggflac.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_opus.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_propertymap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_riff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_s3m.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_speex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_synchdata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_trueaudio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_wav.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_wavpack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_xiphcomment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/taglib/tests/test_xm.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/tests/plainfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/taglib/tests/utils.h" />
+    <Text Include="../../thirdparty/owemdjee/taglib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/taglib/ConfigureChecks.cmake" />
+    <Text Include="../../thirdparty/owemdjee/taglib/Doxyfile.cmake" />
+    <Text Include="../../thirdparty/owemdjee/taglib/INSTALL.md" />
+    <Text Include="../../thirdparty/owemdjee/taglib/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/taglib/README.md" />
+    <Text Include="../../thirdparty/owemdjee/taglib/cmake_uninstall.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/taglib/config.h.cmake" />
+    <Text Include="../../thirdparty/owemdjee/taglib/doc/README" />
+    <Text Include="../../thirdparty/owemdjee/taglib/taglib-config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/taglib/taglib-config.cmd.cmake" />
+    <Text Include="../../thirdparty/owemdjee/taglib/taglib.pc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/taglib/tests/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
