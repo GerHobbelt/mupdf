@@ -13,19 +13,19 @@
 
 
 
-``Image``
+`Image`
 ------------
 
-``Image`` objects are similar to ``Pixmaps``, but can contain compressed data.
+`Image` objects are similar to `Pixmaps`, but can contain compressed data.
 
 
 .. method:: new Image(ref)
 
     *Constructor method*.
 
-    Create a new image from a ``Pixmap`` data, or load an image from a file.
+    Create a new image from a `Pixmap` data, or load an image from a file.
 
-    :return: ``Image``.
+    :return: `Image`.
 
     **Example**
 
@@ -48,22 +48,22 @@
 
 .. method:: getXResolution()
 
-    Returns the x resolution for the ``Image``.
+    Returns the x resolution for the `Image`.
 
-    :return: ``Int`` Image resolution in dots per inch.
+    :return: `Int` Image resolution in dots per inch.
 
 
 .. method:: getYResolution()
 
-    Returns the y resolution for the ``Image``.
+    Returns the y resolution for the `Image`.
 
-    :return: ``Int`` Image resolution in dots per inch.
+    :return: `Int` Image resolution in dots per inch.
 
 .. method:: getColorSpace()
 
-    Returns the ``ColorSpace`` for the ``Image``.
+    Returns the `ColorSpace` for the `Image`.
 
-    :return: ``ColorSpace``.
+    :return: `ColorSpace`.
 
 
 
@@ -71,43 +71,43 @@
 
     Number of colors; plus one if an alpha channel is present.
 
-    :return: ``Integer``.
+    :return: `Integer`.
 
 
 .. method:: getBitsPerComponent()
 
     Returns the number of bits per component.
 
-    :return: ``Integer``.
+    :return: `Integer`.
 
 
 .. method:: getInterpolate()
 
     Returns *true* if interpolated was used during decoding.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 
 .. method:: getImageMask()
 
     Returns *true* if this image is an image mask.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 .. method:: getMask()
 
-    Get another ``Image`` used as a mask for this one.
+    Get another `Image` used as a mask for this one.
 
-    :return: ``Image`` (or ``null``).
+    :return: `Image` (or `null`).
 
 
 
 .. method:: toPixmap(scaledWidth, scaledHeight)
 
-    Create a ``Pixmap`` from the image. The ``scaledWidth`` and ``scaledHeight`` arguments are optional, but may be used to decode a down-scaled ``Pixmap``.
+    Create a `Pixmap` from the image. The `scaledWidth` and `scaledHeight` arguments are optional, but may be used to decode a down-scaled `Pixmap`.
 
     :arg scaledWidth: Width value.
     :arg scaledHeight: Height value.
 
-    :return: ``Pixmap``.
+    :return: `Pixmap`.
 

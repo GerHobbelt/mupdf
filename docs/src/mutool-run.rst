@@ -16,7 +16,7 @@
 
 
 
-The ``run`` command executes a :title:`JavaScript` program, which has access to most of the features of the :title:`MuPDF` library. The command supports :title:`ECMAScript` 5 syntax in strict mode. All of the :title:`MuPDF` constructors and functions live in the global object, and the command line arguments are accessible from the global ``scriptArgs`` object. The name of the script is in the global ``scriptPath`` variable.
+The `run` command executes a :title:`JavaScript` program, which has access to most of the features of the :title:`MuPDF` library. The command supports :title:`ECMAScript` 5 syntax in strict mode. All of the :title:`MuPDF` constructors and functions live in the global object, and the command line arguments are accessible from the global `scriptArgs` object. The name of the script is in the global `scriptPath` variable.
 
 See the :ref:`mutool JavaScript API<mutool_run_javascript_api>` for more.
 
@@ -34,7 +34,7 @@ See the :ref:`mutool JavaScript API<mutool_run_javascript_api>` for more.
 
 
 
-``script.js``
+`script.js`
    The :title:`JavaScript` file which you would like to run.
 
 
@@ -46,8 +46,8 @@ See the :ref:`mutool JavaScript API<mutool_run_javascript_api>` for more.
 
 
 
-``[ arguments ... ]``
-   If invoked without any arguments, it will drop you into an interactive :title:`REPL` (read-eval-print-loop). To exit this loop type ``quit()`` (same as pressing *ctrl-C* two times).
+`[ arguments ... ]`
+   If invoked without any arguments, it will drop you into an interactive :title:`REPL` (read-eval-print-loop). To exit this loop type `quit()` (same as pressing *ctrl-C* two times).
 
 
 
@@ -56,29 +56,29 @@ See the :ref:`mutool JavaScript API<mutool_run_javascript_api>` for more.
 
 Several global functions that are common for command line shells are available:
 
-``gc(report)``
+`gc(report)`
    Run the garbage collector to free up memory. Optionally report statistics on the garbage collection.
 
-``load(fileName)``
+`load(fileName)`
    Load and execute script in "fileName".
 
-``print(...)``
-   Print arguments to ``stdout``, separated by spaces and followed by a newline.
+`print(...)`
+   Print arguments to `stdout`, separated by spaces and followed by a newline.
 
-``quit()``
+`quit()`
    Exit the shell.
 
-``read(fileName)``
+`read(fileName)`
    Read the contents of a file and return them as a :title:`UTF-8` decoded string.
 
-``readline()``
-   Read one line of input from ``stdin`` and return it as a string.
+`readline()`
+   Read one line of input from `stdin` and return it as a string.
 
-``require(module)``
+`require(module)`
    Load a :title:`JavaScript` module.
 
-``write(...)``
-   Print arguments to ``stdout``, separated by spaces.
+`write(...)`
+   Print arguments to `stdout`, separated by spaces.
 
 
 

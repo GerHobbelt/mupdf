@@ -43,46 +43,46 @@ Command Line Options
 
 
 
-``[options]``
+`[options]`
 
 
-   ``-p`` password
+   `-p` password
       The password needed to open a password protected :title:`PDF` file.
-   ``-r`` resolution
-      Set the initial zoom level, specified as DPI. The default value is ``72``.
-   ``-W`` width
+   `-r` resolution
+      Set the initial zoom level, specified as DPI. The default value is `72`.
+   `-W` width
       Set the page width in points for :title:`EPUB` layout.
-   ``-H`` height
+   `-H` height
       Set the page height in points for :title:`EPUB` layout.
-   ``-S`` size
+   `-S` size
       Set the default font size in points for :title:`EPUB` layout.
-   ``-U`` stylesheet
+   `-U` stylesheet
       Specify a :title:`CSS` file containing user styles to load for :title:`EPUB` layout.
-   ``-X``
+   `-X`
       Ignore publisher styles for :title:`EPUB` layout.
-   ``-J``
+   `-J`
       Disable :title:`JavaScript` in :title:`PDF` forms.
-   ``-A`` level
+   `-A` level
       Set anti-aliasing level or pixel rendering rule.
 
-      - ``0``: off.
-      - ``2``: 4 levels.
-      - ``4``: 16 levels.
-      - ``8``: 256 levels.
-      - ``9``: using centre of pixel rule.
-      - ``10``: using any part of a pixel rule.
+      - `0`: off.
+      - `2`: 4 levels.
+      - `4`: 16 levels.
+      - `8`: 256 levels.
+      - `9`: using centre of pixel rule.
+      - `10`: using any part of a pixel rule.
 
-   ``-I``
+   `-I`
       Start in inverted color mode.
-   ``-B`` hex-color
-      Set black tint color (default ``303030``).
-   ``-C`` hex-color
-      Set white tint color (default ``FFFFF0``).
-   ``-Y`` factor
+   `-B` hex-color
+      Set black tint color (default `303030`).
+   `-C` hex-color
+      Set white tint color (default `FFFFF0`).
+   `-Y` factor
       Set UI scaling factor (default calculated from screen DPI).
 
 
-``[page]``
+`[page]`
    The initial page number to show.
 
 
@@ -245,7 +245,7 @@ Several commands can take a number argument entered before the key, to modify th
 :title:`muraster`
 ---------------------
 
-This is a much simpler version of ``mutool draw`` command. As such it can be used to quickly rasterize an input file with a set of options.
+This is a much simpler version of `mutool draw` command. As such it can be used to quickly rasterize an input file with a set of options.
 
 
 
@@ -257,69 +257,69 @@ Command Line Options
 
    muraster [options] file [pages]
 
-``[options]``
+`[options]`
 
-   ``-p`` password
+   `-p` password
       The password needed to open a password protected :title:`PDF` file.
-   ``-o`` filename
+   `-o` filename
       The output file name.
-   ``-F`` format
-      The output format (default inferred from output file name), e.g. ``pam``, ``pbm``, ``pgm``, ``pkm``, ``ppm``.
+   `-F` format
+      The output format (default inferred from output file name), e.g. `pam`, `pbm`, `pgm`, `pkm`, `ppm`.
 
-   ``-s`` information
+   `-s` information
       Show extra information:
-      - ``m``: show memory use.
-      - ``t``: show timings.
+      - `m`: show memory use.
+      - `t`: show timings.
 
-   ``-R`` rotation
-      Set a rotation for the output (default ``auto``):
-      - ``auto``.
-      - ``0``.
-      - ``90``.
-      - ``180``.
-      - ``270``.
-      - ``clockwise``.
+   `-R` rotation
+      Set a rotation for the output (default `auto`):
+      - `auto`.
+      - `0`.
+      - `90`.
+      - `180`.
+      - `270`.
+      - `clockwise`.
 
 
-   ``-r`` x,y
+   `-r` x,y
       Comma separated x and y resolution in DPI (default: 300,300).
-   ``-w`` width
+   `-w` width
       Printable width (in inches) (default: 8.27).
-   ``-h`` height
+   `-h` height
       Printable height (in inches) (default: 11.69).
-   ``-f``
+   `-f`
       Fit file to page if too large.
-   ``-B`` height
+   `-B` height
       Set the minimum band height (e.g. 32).
-   ``-M`` memory
+   `-M` memory
       Sets the maximum band memory (e.g. 655360).
 
-   ``-W`` width
+   `-W` width
       Page width for EPUB layout.
-   ``-H`` height
+   `-H` height
       Page height for EPUB layout.
-   ``-S`` size
+   `-S` size
       Font size for EPUB layout.
-   ``-U`` filename
+   `-U` filename
       File name of user stylesheet for EPUB layout
-   ``-X``
+   `-X`
       Disable document styles for EPUB layout
 
-   ``-A`` level
+   `-A` level
       Set anti-aliasing level.
 
-      - ``0``: off.
-      - ``2``: 4 levels.
-      - ``4``: 16 levels.
-      - ``8``: 256 levels.
+      - `0`: off.
+      - `2`: 4 levels.
+      - `4`: 16 levels.
+      - `8`: 256 levels.
 
-   ``-A`` graphics level / text level
+   `-A` graphics level / text level
       Independently set the anti-aliasing levels for graphics and text.
 
-      e.g. ``-A 0/4``.
+      e.g. `-A 0/4`.
 
 
-``[pages]``
+`[pages]`
    A comma separated list of page numbers and ranges.
 
 
@@ -343,7 +343,7 @@ This will render a raster file from page one of the input file "mupdf_explored.p
 
 .. note::
 
-  It is advised to use `rlwrap`_ with ``mutool`` for command line history and cursor navigation (this can be also installed via :title:`Homebrew` or :title:`MacPorts`).
+  It is advised to use `rlwrap`_ with `mutool` for command line history and cursor navigation (this can be also installed via :title:`Homebrew` or :title:`MacPorts`).
 
 
 

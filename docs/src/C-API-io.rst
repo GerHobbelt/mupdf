@@ -11,7 +11,7 @@ I/O API
 Buffers
 -----------------------------------------
 
-In order to represent a generic chunks of data we use the ``fz_buffer`` structure.
+In order to represent a generic chunks of data we use the `fz_buffer` structure.
 
 
 .. code-block:: c
@@ -29,17 +29,17 @@ In order to represent a generic chunks of data we use the ``fz_buffer`` structur
 
 There are many ways to create a buffer. Some create a buffer shared immutable data, others with data you can edit, and others by copying or decoding other data.
 
-``fz_buffer *fz_new_buffer(fz_context *ctx, size_t capacity);``
+`fz_buffer *fz_new_buffer(fz_context *ctx, size_t capacity);`
     Create a new empty buffer, with the given initial capacity.
 
-``fz_buffer *fz_new_buffer_from_shared_data(fz_context *ctx, const unsigned char *data, size_t size);``
+`fz_buffer *fz_new_buffer_from_shared_data(fz_context *ctx, const unsigned char *data, size_t size);`
     Create a new buffer wrapping the given data pointer. The data is only referenced, and will not be freed when the buffer is destroyed. The data pointer must **not** change or disappear while the buffer lives.
 
-``fz_buffer *fz_new_buffer_from_copied_data(fz_context *ctx, const unsigned char *data, size_t size);``
+`fz_buffer *fz_new_buffer_from_copied_data(fz_context *ctx, const unsigned char *data, size_t size);`
     Create a buffer containing a copy of the data pointed to.
 
-``fz_buffer *fz_new_buffer_from_base64(fz_context *ctx, const char *data, size_t size);``
-    Create a buffer containing the decoded ``BASE64`` data.
+`fz_buffer *fz_new_buffer_from_base64(fz_context *ctx, const char *data, size_t size);`
+    Create a buffer containing the decoded `BASE64` data.
 
 
 
@@ -62,22 +62,22 @@ Sometimes you want to create buffers piece by piece by appending strings or othe
 
 You can also write a bit stream with the following functions. The buffer length always covers all the bits in the buffer, including any unused ones in the last byte, which will always be zero.
 
-``void fz_append_bits(fz_context *ctx, fz_buffer *buf, int value, int count);``
+`void fz_append_bits(fz_context *ctx, fz_buffer *buf, int value, int count);`
     Write the lower count bits from value into the buffer.
 
-``void fz_append_bits_pad(fz_context *ctx, fz_buffer *buf);``
+`void fz_append_bits_pad(fz_context *ctx, fz_buffer *buf);`
     Write enough zero bits to be byte aligned.
 
 
 You can use the buffer data as a zero-terminated C string by calling the following function. This will ensure that there is a zero terminator after the last byte and return a pointer to the first byte. This pointer is only borrowed, and should only be used briefly, before the buffer is changed again (which may reallocate or free the data).
 
-``const char *fz_string_from_buffer(fz_context *ctx, fz_buffer *buf);``
+`const char *fz_string_from_buffer(fz_context *ctx, fz_buffer *buf);`
     You can also read and write the contents of a buffer to file.
 
-``fz_buffer *fz_read_file(fz_context *ctx, const char *filename);``
+`fz_buffer *fz_read_file(fz_context *ctx, const char *filename);`
     Read the contents of a file into a buffer.
 
-``void fz_save_buffer(fz_context *ctx, fz_buffer *buf, const char *filename);``
+`void fz_save_buffer(fz_context *ctx, fz_buffer *buf, const char *filename);`
     Save the contents of a buffer to a file.
 
 
@@ -96,13 +96,13 @@ An input stream reads data from a source. Some stream types can decompress and d
     void fz_drop_stream(fz_context *ctx, fz_stream *stm);
 
 
-``fz_stream *fz_open_file(fz_context *ctx, const char *filename);``
+`fz_stream *fz_open_file(fz_context *ctx, const char *filename);`
     Open a stream reading the contents of a file.
 
-``fz_stream *fz_open_memory(fz_context *ctx, const unsigned char *data, size_t len);``
+`fz_stream *fz_open_memory(fz_context *ctx, const unsigned char *data, size_t len);`
     Open a stream reading from the data pointer.
 
-``fz_stream *fz_open_buffer(fz_context *ctx, fz_buffer *buf);``
+`fz_stream *fz_open_buffer(fz_context *ctx, fz_buffer *buf);`
     Open a stream reading from a buffer.
 
 The basic stream operations you expect are available.
@@ -116,11 +116,11 @@ The basic stream operations you expect are available.
     size_t fz_skip(fz_context *ctx, fz_stream *stm, size_t len);
 
 
-``fz_buffer *fz_read_all(fz_context *ctx, fz_stream *stm, size_t initial);``
+`fz_buffer *fz_read_all(fz_context *ctx, fz_stream *stm, size_t initial);`
     Read the remaining data into a new buffer.
 
-``char *fz_read_line(fz_context *ctx, fz_stream *stm, char *buf, size_t n);``
-    Behaves like ``fgets()``.
+`char *fz_read_line(fz_context *ctx, fz_stream *stm, char *buf, size_t n);`
+    Behaves like `fgets()`.
 
 
 .. code-block:: c
@@ -241,10 +241,10 @@ Outputs can be created to write to files or buffers. You can also implement your
 
 The usual suspects are available, as well as functions to write integers of various sizes and byte orders.
 
-``void fz_seek_output(fz_context *ctx, fz_output *out, int64_t off, int whence);``
+`void fz_seek_output(fz_context *ctx, fz_output *out, int64_t off, int whence);`
     Seek to a location in the output. This is not available for all output types.
 
-``int64_t fz_tell_output(fz_context *ctx, fz_output *out);``
+`int64_t fz_tell_output(fz_context *ctx, fz_output *out);`
     Tell the current write location of the output stream.
 
 

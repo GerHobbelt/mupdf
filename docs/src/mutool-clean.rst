@@ -14,7 +14,7 @@
 ==========================================
 
 
-The ``clean`` command pretty prints and rewrites the syntax of a :title:`PDF` file. It can be used to repair broken files, expand compressed streams, filter out a range of pages, etc.
+The `clean` command pretty prints and rewrites the syntax of a :title:`PDF` file. It can be used to repair broken files, expand compressed streams, filter out a range of pages, etc.
 
 .. code-block:: bash
 
@@ -23,82 +23,82 @@ The ``clean`` command pretty prints and rewrites the syntax of a :title:`PDF` fi
 .. include:: optional-command-line-note.rst
 
 
-``[options]``
+`[options]`
    Options are as follows:
 
-      ``-p`` password
+      `-p` password
          Use the specified password if the file is encrypted.
 
-      ``-g``
+      `-g`
          Garbage collect unused objects.
 
-      ``-gg``
-         In addition to ``-g`` compact xref table.
+      `-gg`
+         In addition to `-g` compact xref table.
 
-      ``-ggg``
-         In addition to ``-gg`` merge duplicate objects.
+      `-ggg`
+         In addition to `-gg` merge duplicate objects.
 
-      ``-gggg``
-         In addition to ``-ggg`` check streams for duplication.
+      `-gggg`
+         In addition to `-ggg` check streams for duplication.
 
-      ``-l``
+      `-l`
          Linearize PDF.
 
-      ``-D``
+      `-D`
          Save file without encryption.
 
-      ``-E`` encryption
-         Save file with new encryption (``rc4-40``, ``rc4-128``, ``aes-128``, or ``aes-256``).
+      `-E` encryption
+         Save file with new encryption (`rc4-40`, `rc4-128`, `aes-128`, or `aes-256`).
 
-      ``-O`` owner_password
+      `-O` owner_password
          Owner password (only if encrypting).
 
-      ``-U`` user_password
+      `-U` user_password
          User password (only if encrypting).
 
-      ``-P`` permission
+      `-P` permission
          Permission flags (only if encrypting).
 
-      ``-a``
+      `-a`
          ASCII hex encode binary streams.
 
-      ``-d``
+      `-d`
          Decompress streams.
 
-      ``-z``
+      `-z`
          Deflate uncompressed streams.
 
-      ``-f``
+      `-f`
          Compress font streams.
 
-      ``-i``
+      `-i`
          Compress image streams.
 
-      ``-c``
+      `-c`
          Clean content streams.
 
-      ``-s``
+      `-s`
          Sanitize content streams.
 
-      ``-A``
+      `-A`
          Create appearance streams for annotations.
 
-      ``-AA``
+      `-AA`
          Recreate appearance streams for annotations.
 
-      ``-m``
+      `-m`
          Preserve metadata.
 
 
 ----
 
 
-``input.pdf``
+`input.pdf`
    Input file name. Must be a :title:`PDF` file.
 
 ----
 
-``[output.pdf]``
+`[output.pdf]`
    The output file. Must be a :title:`PDF` file.
 
    .. note::
@@ -107,7 +107,7 @@ The ``clean`` command pretty prints and rewrites the syntax of a :title:`PDF` fi
 
 ----
 
-``[pages]``
+`[pages]`
    Comma separated list of page numbers and ranges. If no pages are supplied then all document pages will be considered for the output file.
 
 

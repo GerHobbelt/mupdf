@@ -11,24 +11,24 @@
 .. _mutool_run_js_api_device:
 
 
-``Device``
+`Device`
 ------------------
 
 All built-in devices have the methods listed below. Any function that accepts a device will also accept a :title:`JavaScript` object with the same methods. Any missing methods are simply ignored, so you only need to create methods for the device calls you care about.
 
-Many of the methods take graphics objects as arguments: ``Path``, ``Text``, ``Image`` and ``Shade``.
+Many of the methods take graphics objects as arguments: `Path`, `Text`, `Image` and `Shade`.
 
 Colors are specified as arrays with the appropriate number of components for the color space.
 
-The methods that clip graphics must be balanced with a corresponding ``popClip``.
+The methods that clip graphics must be balanced with a corresponding `popClip`.
 
 .. method:: fillPath(path, evenOdd, transform, colorspace, color, alpha, colorParams)
 
     Fill a path.
 
-    :arg path: ``Path`` object.
+    :arg path: `Path` object.
     :arg evenOdd: The `even odd rule`_ to use.
-    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg colorspace: The :ref:`ColorSpace<mutool_run_javascript_api_colorspace>`.
     :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
     :arg alpha: The :ref:`alpha value<mutool_run_js_api_alpha>`.
@@ -45,9 +45,9 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
 
     Stroke a path.
 
-    :arg path: ``Path`` object.
+    :arg path: `Path` object.
     :arg stroke: The :ref:`stroke dictionary<mutool_run_js_api_stroke_dictionary>`.
-    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg colorspace: The :ref:`ColorSpace<mutool_run_javascript_api_colorspace>`.
     :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
     :arg alpha: The :ref:`alpha value<mutool_run_js_api_alpha>`.
@@ -63,18 +63,18 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
 
     Clip a path.
 
-    :arg path: ``Path`` object.
+    :arg path: `Path` object.
     :arg evenOdd: The `even odd rule`_ to use.
-    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
 
 .. method:: clipStrokePath(path, stroke, transform)
 
     Clip & stroke a path.
 
-    :arg path: ``Path`` object.
+    :arg path: `Path` object.
     :arg stroke: The :ref:`stroke dictionary<mutool_run_js_api_stroke_dictionary>`.
-    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
 
 
@@ -82,8 +82,8 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
 
     Fill a text object.
 
-    :arg text: ``Text`` object.
-    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg text: `Text` object.
+    :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg colorspace: The :ref:`ColorSpace<mutool_run_javascript_api_colorspace>`.
     :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
     :arg alpha: The :ref:`alpha value<mutool_run_js_api_alpha>`.
@@ -93,9 +93,9 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
 
     Stroke a text object.
 
-    :arg text: ``Text`` object.
+    :arg text: `Text` object.
     :arg stroke: The :ref:`stroke dictionary<mutool_run_js_api_stroke_dictionary>`.
-    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg colorspace: The :ref:`ColorSpace<mutool_run_javascript_api_colorspace>`.
     :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
     :arg alpha: The :ref:`alpha value<mutool_run_js_api_alpha>`.
@@ -105,23 +105,23 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
 
     Clip a text object.
 
-    :arg text: ``Text`` object.
-    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg text: `Text` object.
+    :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
 .. method:: clipStrokeText(text, stroke, transform)
 
     Clip & stroke a text object.
 
-    :arg text: ``Text`` object.
+    :arg text: `Text` object.
     :arg stroke: The :ref:`stroke dictionary<mutool_run_js_api_stroke_dictionary>`.
-    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
 .. method:: ignoreText(text, transform)
 
     Invisible text that can be searched but should not be visible, such as for overlaying a scanned OCR image.
 
-    :arg text: ``Text`` object.
-    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg text: `Text` object.
+    :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
 
 
@@ -135,16 +135,16 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
 
 
     :arg shade: The gradient.
-    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg alpha: The :ref:`alpha value<mutool_run_js_api_alpha>`.
     :arg colorParams: The :ref:`color parameters object<mutool_run_js_api_color_params>`.
 
 .. method:: fillImage(image, transform, alpha, colorParams)
 
-    Draw an image. An image always fills a unit rectangle ``[0,0,1,1]``, so must be transformed to be placed and drawn at the appropriate size.
+    Draw an image. An image always fills a unit rectangle `[0,0,1,1]`, so must be transformed to be placed and drawn at the appropriate size.
 
-    :arg image: ``Image`` object.
-    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg image: `Image` object.
+    :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg alpha: The :ref:`alpha value<mutool_run_js_api_alpha>`.
     :arg colorParams: The :ref:`color parameters object<mutool_run_js_api_color_params>`.
 
@@ -152,8 +152,8 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
 
     An image mask is an image without color. Fill with the color where the image is opaque.
 
-    :arg image: ``Image`` object.
-    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg image: `Image` object.
+    :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg colorspace: The :ref:`ColorSpace<mutool_run_javascript_api_colorspace>`.
     :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
     :arg alpha: The :ref:`alpha value<mutool_run_js_api_alpha>`.
@@ -163,8 +163,8 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
 
     Clip graphics using the image to mask the areas to be drawn.
 
-    :arg image: ``Image`` object.
-    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg image: `Image` object.
+    :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
 
 .. method:: popClip()
@@ -174,10 +174,10 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
 
 .. method:: beginMask(area, luminosity, backdropColorspace, backdropColor, backdropAlpha, colorParams)
 
-    Create a soft mask. Any drawing commands between ``beginMask`` and ``endMask`` are grouped and used as a clip mask.
+    Create a soft mask. Any drawing commands between `beginMask` and `endMask` are grouped and used as a clip mask.
 
-    :arg area: ``Path`` Mask area.
-    :arg luminosity: ``Boolean`` If luminosity is *true*, the mask is derived from the luminosity (grayscale value) of the graphics drawn; otherwise the color is ignored completely and the mask is derived from the alpha of the group.
+    :arg area: `Path` Mask area.
+    :arg luminosity: `Boolean` If luminosity is *true*, the mask is derived from the luminosity (grayscale value) of the graphics drawn; otherwise the color is ignored completely and the mask is derived from the alpha of the group.
     :arg backdropColorspace: The :ref:`ColorSpace<mutool_run_javascript_api_colorspace>`.
     :arg backdropColor: The :ref:`color value<mutool_run_js_api_colors>`.
     :arg backdropAlpha: The  :ref:`alpha value<mutool_run_js_api_alpha>`.
@@ -193,11 +193,11 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
 
 .. method:: beginGroup(area, isolated, knockout, blendmode, alpha)
 
-    Push/pop a transparency blending group. See the PDF reference for details on ``isolated`` and ``knockout``.
+    Push/pop a transparency blending group. See the PDF reference for details on `isolated` and `knockout`.
 
-    :arg area: ``Path`` Blend area.
-    :arg isolated: ``Boolean``.
-    :arg knockout: ``Boolean``.
+    :arg area: `Path` Blend area.
+    :arg isolated: `Boolean`.
+    :arg knockout: `Boolean`.
     :arg blendmode: Blendmode is one of the standard :title:`PDF` blend modes: "Normal", "Multiply", "Screen", etc.
     :arg alpha: The :ref:`alpha value<mutool_run_js_api_alpha>`.
 
@@ -214,14 +214,14 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
 
 .. method:: beginTile(areaRect, viewRect, xStep, yStep, transform, id)
 
-    Draw a tiling pattern. Any drawing commands between ``beginTile`` and ``endTile`` are grouped and then repeated across the whole page. Apply a clip mask to restrict the pattern to the desired shape.
+    Draw a tiling pattern. Any drawing commands between `beginTile` and `endTile` are grouped and then repeated across the whole page. Apply a clip mask to restrict the pattern to the desired shape.
 
-    :arg areaRect: ``[ulx,uly,lrx,lry]`` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
-    :arg viewRect: ``[ulx,uly,lrx,lry]`` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
-    :arg xStep: ``Integer`` representing ``x`` step.
-    :arg yStep: ``Integer`` representing ``y`` step.
-    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
-    :arg id: ``Integer`` The purpose of ``id`` is to allow for efficient caching of rendered tiles. If ``id`` is ``0``, then no caching is performed. If it is non-zero, then it assumed to uniquely identify this tile.
+    :arg areaRect: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+    :arg viewRect: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+    :arg xStep: `Integer` representing `x` step.
+    :arg yStep: `Integer` representing `y` step.
+    :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg id: `Integer` The purpose of `id` is to allow for efficient caching of rendered tiles. If `id` is `0`, then no caching is performed. If it is non-zero, then it assumed to uniquely identify this tile.
 
 
 .. method:: endTile()
@@ -239,7 +239,7 @@ The methods that clip graphics must be balanced with a corresponding ``popClip``
 
     Begin a marked-content layer with the given tag.
 
-    :arg tag: ``String``.
+    :arg tag: `String`.
 
 .. method:: endLayer()
 

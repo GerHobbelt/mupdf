@@ -10,7 +10,7 @@
 .. _mutool_run_js_api_display_list_device:
 
 
-``DisplayListDevice``
+`DisplayListDevice`
 --------------------------------------------------------
 
 
@@ -21,9 +21,9 @@
 
     Create a device for recording onto a display list.
 
-    :arg displayList: ``DisplayList``.
+    :arg displayList: `DisplayList`.
 
-    :return: ``DisplayListDevice``.
+    :return: `DisplayListDevice`.
 
     **Example**
 

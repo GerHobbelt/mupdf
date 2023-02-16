@@ -11,10 +11,10 @@
 
 
 
-``Buffer``
+`Buffer`
 --------------
 
-The ``Buffer`` objects are used for working with binary data. They can be used much like arrays, but are much more efficient since they only store bytes.
+The `Buffer` objects are used for working with binary data. They can be used much like arrays, but are much more efficient since they only store bytes.
 
 
 
@@ -24,7 +24,7 @@ The ``Buffer`` objects are used for working with binary data. They can be used m
 
     Create a new empty buffer.
 
-    :return: ``Buffer``.
+    :return: `Buffer`.
 
     **Example**
 
@@ -41,7 +41,7 @@ The ``Buffer`` objects are used for working with binary data. They can be used m
 
     :arg fileName: The path to the file to read.
 
-    :return: ``Buffer``.
+    :return: `Buffer`.
 
     **Example**
 
@@ -55,12 +55,12 @@ The ``Buffer`` objects are used for working with binary data. They can be used m
 
 
 
-``length``
+`length`
 
    The number of bytes in the buffer. `Read-only`.
 
 
-``[n]``
+`[n]`
 
     Read/write the byte at index 'n'. Will throw exceptions on out of bounds accesses.
 

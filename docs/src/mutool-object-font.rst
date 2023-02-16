@@ -13,10 +13,10 @@
 
 
 
-``Font``
+`Font`
 ---------------
 
-``Font`` objects can be created from :title:`TrueType`, :title:`OpenType`, :title:`Type1` or :title:`CFF` fonts. In :title:`PDF` there are also special :title:`Type3` fonts.
+`Font` objects can be created from :title:`TrueType`, :title:`OpenType`, :title:`Type1` or :title:`CFF` fonts. In :title:`PDF` there are also special :title:`Type3` fonts.
 
 
 .. method:: new Font(ref)
@@ -42,11 +42,11 @@
     - :title:`Symbol`.
     - :title:`ZapfDingbats`.
 
-    The built-in CJK fonts are referenced by language code: ``zh-Hant``, ``zh-Hans``, ``ja``, ``ko``.
+    The built-in CJK fonts are referenced by language code: `zh-Hant`, `zh-Hans`, `ja`, `ko`.
 
     :arg ref: Font name or file name.
 
-    :return: ``Font``.
+    :return: `Font`.
 
     **Example**
 
@@ -60,7 +60,7 @@
 
     Get the font name.
 
-    :return: ``String``.
+    :return: `String`.
 
 
 .. method:: encodeCharacter(unicode)
@@ -77,7 +77,7 @@
     Return advance width for a glyph in either horizontal or vertical writing mode.
 
     :arg glyph: The glyph.
-    :arg wmode: ``0`` for horizontal writing, and ``1`` for vertical writing.
+    :arg wmode: `0` for horizontal writing, and `1` for vertical writing.
 
     :return: Width for a glyph.
 
@@ -86,25 +86,25 @@
 
     Returns *true* if font is bold.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 .. method:: isItalic()
 
     Returns *true* if font is italic.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 
 .. method:: isMono()
 
     Returns *true* if font is monospaced.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 
 .. method:: isSerif()
 
     Returns *true* if font is serif.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 

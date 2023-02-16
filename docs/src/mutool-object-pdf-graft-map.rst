@@ -11,7 +11,7 @@
 .. _mutool_run_js_api_pdf_graft_map:
 
 
-``PDFGraftMap``
+`PDFGraftMap`
 ----------------
 
 .. method:: graftObject(object)
@@ -26,7 +26,7 @@
 
     Graft a page at the given page number from the source document to the requested page number in the destination document connected to the map.
 
-    :arg map: ``PDFGraftMap``.
+    :arg map: `PDFGraftMap`.
     :arg dstPageNumber: Destination page number.
     :arg srcDoc: Source document.
     :arg srcPageNumber: Source page number.

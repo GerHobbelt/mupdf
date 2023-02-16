@@ -10,48 +10,48 @@
 .. _mutool_run_js_api_pdf_annotation:
 
 
-``PDFAnnotation``
+`PDFAnnotation`
 ----------------------
 
-:title:`PDF` Annotations belong to a specific ``PDFPage`` and may be created/changed/removed. Because annotation appearances may change (for several reasons) it is possible to scan through the annotations on a page and query them whether a re-render is necessary. Finally redaction annotations can be applied to a ``PDFPage``, destructively removing content from the page.
+:title:`PDF` Annotations belong to a specific `PDFPage` and may be created/changed/removed. Because annotation appearances may change (for several reasons) it is possible to scan through the annotations on a page and query them whether a re-render is necessary. Finally redaction annotations can be applied to a `PDFPage`, destructively removing content from the page.
 
 
 .. method:: bound()
 
     Returns a rectangle containing the location and dimension of the annotation.
 
-    :return: ``[ulx,uly,lrx,lry]`` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+    :return: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
 
 
 .. method:: run(device, transform)
 
     Calls the device functions to draw the annotation.
 
-    :arg device: ``Device``.
-    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg device: `Device`.
+    :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
 
 .. method:: toPixmap(transform, colorspace, alpha)
 
-    Render the annotation into a ``Pixmap``, using the transform and colorspace.
+    Render the annotation into a `Pixmap`, using the transform and colorspace.
 
-    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
-    :arg colorspace: ``ColorSpace``.
-    :arg alpha: ``Boolean``.
+    :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg colorspace: `ColorSpace`.
+    :arg alpha: `Boolean`.
 
 
 .. method:: toDisplayList()
 
-    Record the contents of the annotation into a ``DisplayList``.
+    Record the contents of the annotation into a `DisplayList`.
 
-    :return: ``DisplayList``.
+    :return: `DisplayList`.
 
 
 .. method:: getObject()
 
-    Get the underlying ``PDFObject`` for an annotation.
+    Get the underlying `PDFObject` for an annotation.
 
-    :return: ``PDFObject``.
+    :return: `PDFObject`.
 
 
 .. method:: process(processor)
@@ -65,19 +65,19 @@
 
     Set the annotation appearance stream for the given appearance. The desired appearance is given as a transform along with a display list.
 
-    :arg appearance: ``String`` Appearance stream ("N", "R" or "D").
-    :arg state: ``String`` "On" or "Off".
-    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
-    :arg displayList: ``DisplayList``.
+    :arg appearance: `String` Appearance stream ("N", "R" or "D").
+    :arg state: `String` "On" or "Off".
+    :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg displayList: `DisplayList`.
 
 .. method:: setAppearance(appearance, state, transform, bbox, resources, contents)
 
     Set the annotation appearance stream for the given appearance. The desired appearance is given as a transform along with a bounding box, a :title:`PDF` dictionary of resources and a content stream.
 
-    :arg appearance: ``String`` Appearance stream ("N", "R" or "D").
-    :arg state: ``String`` "On" or "Off".
-    :arg transform: ``[a,b,c,d,e,f]``. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
-    :arg bbox: ``[ulx,uly,lrx,lry]`` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+    :arg appearance: `String` Appearance stream ("N", "R" or "D").
+    :arg state: `String` "On" or "Off".
+    :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+    :arg bbox: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
     :arg resources: Resources object.
     :arg contents: Contents string.
 
@@ -107,13 +107,13 @@
 
     Get the annotation as being hot, *i.e.* that the pointer is hovering over the annotation.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 .. method:: setHot(hot)
 
     Set the annotation as being hot, *i.e.* that the pointer is hovering over the annotation.
 
-    :arg hot: ``Boolean``.
+    :arg hot: `Boolean`.
 
 
 ----
@@ -124,19 +124,19 @@ These properties are available for all annotation types.
 
     Return the annotation type.
 
-    :return: ``String`` :ref:`Annotation type<mutool_run_js_api_annotation_types>`.
+    :return: `String` :ref:`Annotation type<mutool_run_js_api_annotation_types>`.
 
 .. method:: getFlags()
 
     Get the annotation flags.
 
-    :return: ``Integer`` which determines the bit-field value.
+    :return: `Integer` which determines the bit-field value.
 
 .. method:: setFlags(flags)
 
     Set the annotation flags.
 
-    :arg flags: ``Integer`` which determines the bit-field value.
+    :arg flags: `Integer` which determines the bit-field value.
 
 
 **Annotation flags**
@@ -147,25 +147,25 @@ These properties are available for all annotation types.
 
    * - **Bit position**
      - **Name**
-   * - ``1``
+   * - `1`
      - Invisible
-   * - ``2``
+   * - `2`
      - Hidden
-   * - ``3``
+   * - `3`
      - Print
-   * - ``4``
+   * - `4`
      - NoZoom
-   * - ``5``
+   * - `5`
      - NoRotate
-   * - ``6``
+   * - `6`
      - NoView
-   * - ``7``
+   * - `7`
      - ReadOnly
-   * - ``8``
+   * - `8`
      - Locked
-   * - ``9``
+   * - `9`
      - ToggleNoView
-   * - ``10``
+   * - `10`
      - LockedContents
 
 
@@ -176,26 +176,26 @@ These properties are available for all annotation types.
 
     Get the annotation contents.
 
-    :return: ``String``.
+    :return: `String`.
 
 .. method:: setContents(text)
 
     Set the annotation contents.
 
-    :arg text: ``String``.
+    :arg text: `String`.
 
 
 .. method:: getBorder()
 
     Get the annotation border line width in points.
 
-    :return: ``Float``.
+    :return: `Float`.
 
 .. method:: setBorder(width)
 
-    Set the annotation border line width in points. Use ``setBorderWidth()`` to avoid removing the border effect.
+    Set the annotation border line width in points. Use `setBorderWidth()` to avoid removing the border effect.
 
-    :arg width: ``Float`` Border width.
+    :arg width: `Float` Border width.
 
 
 .. method:: getColor()
@@ -224,58 +224,58 @@ These properties are available for all annotation types.
 
 .. method:: getCreationDate()
 
-    Get the annotation creation date as a :title:`JavaScript` ``Date`` object.
+    Get the annotation creation date as a :title:`JavaScript` `Date` object.
 
-    :return: ``Date``.
+    :return: `Date`.
 
 .. method:: setCreationDate(milliseconds)
 
     Set the creation date to the number of milliseconds since the epoch.
 
-    :arg milliseconds: ``Integer`` Milliseconds value.
+    :arg milliseconds: `Integer` Milliseconds value.
 
 
 
 .. method:: getModificationDate()
 
-    Get the annotation modification date as a :title:`JavaScript` ``Date`` object.
+    Get the annotation modification date as a :title:`JavaScript` `Date` object.
 
-    :return: ``Date``.
+    :return: `Date`.
 
 
 .. method:: setModificationDate(milliseconds)
 
     Set the annotation modification date to the number of milliseconds since the epoch.
 
-    :arg milliseconds: ``Integer`` Milliseconds value.
+    :arg milliseconds: `Integer` Milliseconds value.
 
 
 .. method:: getQuadding()
 
     Get the annotation quadding (justification).
 
-    :return: Quadding value, ``0`` for left-justified, ``1`` for centered, ``2`` for right-justified.
+    :return: Quadding value, `0` for left-justified, `1` for centered, `2` for right-justified.
 
 
 .. method:: setQuadding(value)
 
     Set the annotation quadding (justification).
 
-    :arg value: Quadding value, ``0`` for left-justified, ``1`` for centered, ``2`` for right-justified.
+    :arg value: Quadding value, `0` for left-justified, `1` for centered, `2` for right-justified.
 
 
 .. method:: getLanguage()
 
     Get the annotation language (or the get the inherited document language).
 
-    :return: ``String``.
+    :return: `String`.
 
 
 .. method:: setLanguage(language)
 
     Set the annotation language.
 
-    :arg language: ``String``.
+    :arg language: `String`.
 
 
 
@@ -288,28 +288,28 @@ These properties are only present for some annotation types, so support for them
 
     Get the annotation bounding box.
 
-    :return: ``[ulx,uly,lrx,lry]`` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+    :return: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
 
 .. method:: setRect(rect)
 
     Set the annotation bounding box.
 
-    :arg rect: ``[ulx,uly,lrx,lry]`` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+    :arg rect: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
 
 
 .. method:: getDefaultAppearance()
 
     Get the default text appearance used for free text annotations.
 
-    :return: ``{font:String, size:Integer, color:[r,g,b]}`` Returns an object with the key/value pairs.
+    :return: `{font:String, size:Integer, color:[r,g,b]}` Returns an object with the key/value pairs.
 
 
 .. method:: setDefaultAppearance(font, size, color)
 
     Set the default text appearance used for free text annotations.
 
-    :arg font: ``String``.
-    :arg size: ``Integer``.
+    :arg font: `String`.
+    :arg size: `Integer`.
     :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
 
 
@@ -317,7 +317,7 @@ These properties are only present for some annotation types, so support for them
 
     Checks whether the annotation has support for an interior color.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 .. method:: getInteriorColor()
 
@@ -337,42 +337,42 @@ These properties are only present for some annotation types, so support for them
 
     Checks whether the annotation has an author.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 .. method:: getAuthor()
 
     Gets the annotation author.
 
-    :return: ``String``.
+    :return: `String`.
 
 
 .. method:: setAuthor(author)
 
     Sets the annotation author.
 
-    :arg author: ``String``.
+    :arg author: `String`.
 
 
 .. method:: hasLineEndingStyles()
 
     Checks the support for line ending styles.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 
 .. method:: getLineEndingStyles()
 
     Gets the line ending styles object.
 
-    :return: ``{start:String, end:String}`` Returns an object with the key/value pairs.
+    :return: `{start:String, end:String}` Returns an object with the key/value pairs.
 
 
 .. method:: setLineEndingStyles(start, end)
 
     Sets the line ending styles object.
 
-    :arg start: ``String``.
-    :arg end: ``String``.
+    :arg start: `String`.
+    :arg end: `String`.
 
 
 .. list-table::
@@ -397,20 +397,20 @@ These properties are only present for some annotation types, so support for them
 
     Checks the support for annotation icon.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 .. method:: getIcon()
 
     Gets the annotation icon.
 
-    :return: ``String``.
+    :return: `String`.
 
 
 .. method:: setIcon(name)
 
     Sets the annotation icon.
 
-    :arg name: ``String``.
+    :arg name: `String`.
 
 
 .. list-table::
@@ -480,42 +480,42 @@ These properties are only present for some annotation types, so support for them
 
     Checks the support for annotation line.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 
 .. method:: getLine()
 
-    Get line end points, represented by an array of two points, each represented as an ``[x, y]`` array.
+    Get line end points, represented by an array of two points, each represented as an `[x, y]` array.
 
-    :return: ``[[x,y],...]``.
+    :return: `[[x,y],...]`.
 
 
 .. method:: setLine(endpoints)
 
 
-    Set line end points, represented by an array of two points, each represented as an ``[x, y]`` array.
+    Set line end points, represented by an array of two points, each represented as an `[x, y]` array.
 
-    :arg endpoints: ``[[x,y],...]``.
+    :arg endpoints: `[[x,y],...]`.
 
 
 .. method:: hasOpen()
 
     Checks the support for annotation open state.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 
 .. method:: isOpen()
 
     Get annotation open state.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 .. method:: setIsOpen(state)
 
     Set annotation open state.
 
-    :arg state: ``Boolean``.
+    :arg state: `Boolean`.
 
 
 .. note::
@@ -527,13 +527,13 @@ These properties are only present for some annotation types, so support for them
 
     Checks support for the annotation file specification.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 .. method:: getFilespec()
 
     Gets the file specification object.
 
-    :return: ``Object`` :ref:`File Specification Object<mutool_run_js_api_file_spec_object>`.
+    :return: `Object` :ref:`File Specification Object<mutool_run_js_api_file_spec_object>`.
 
 
 
@@ -544,7 +544,7 @@ These properties are only present for some annotation types, so support for them
 
     Sets the file specification object.
 
-    :arg fileSpecObject: ``Object`` :ref:`File Specification object<mutool_run_js_api_file_spec_object>`.
+    :arg fileSpecObject: `Object` :ref:`File Specification object<mutool_run_js_api_file_spec_object>`.
 
 
 ----
@@ -555,52 +555,52 @@ The border drawn around some annotations can be controlled by:
 
     Check support for the annotation border style.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 .. method:: getBorderStyle()
 
     Get the annotation border style, either of "Solid" or "Dashed".
 
-    :return: ``String``.
+    :return: `String`.
 
 
 .. method:: setBorderStyle(style)
 
     Set the annotation border style, either of "Solid" or "Dashed".
 
-    :arg: ``String``.
+    :arg: `String`.
 
 
 .. method:: getBorderWidth()
 
     Get the border width in points.
 
-    :return: ``Float``.
+    :return: `Float`.
 
 .. method:: setBorderWidth(width)
 
     Set the border width in points. Retain any existing border effects.
 
-    :arg width: ``Float``
+    :arg width: `Float`
 
 
 .. method:: getBorderDashCount()
 
     Returns the number of items in the border dash pattern.
 
-    :return: ``Integer``.
+    :return: `Integer`.
 
 .. method:: getBorderDashItem(i)
 
     Returns the length of dash pattern item i.
 
-    :arg i: ``Integer`` Item index.
-    :return: ``Integer``.
+    :arg i: `Integer` Item index.
+    :return: `Integer`.
 
 
 .. method:: setBorderDashPattern(dashPattern)
 
-    Set the annotation border dash pattern to the given array of dash item lengths. The supplied array represents the respective line stroke and gap lengths, e.g. ``[1,1]`` sets a small dash and small gap, ``[2,1,4,1]`` would set a medium dash, a small gap, a longer dash and then another small gap.
+    Set the annotation border dash pattern to the given array of dash item lengths. The supplied array represents the respective line stroke and gap lengths, e.g. `[1,1]` sets a small dash and small gap, `[2,1,4,1]` would set a medium dash, a small gap, a longer dash and then another small gap.
 
     :arg dashpattern: [Integer, Integer, ....]
 
@@ -612,7 +612,7 @@ The border drawn around some annotations can be controlled by:
 
     Append an item (of the given length) to the end of the border dash pattern.
 
-    :arg length: ``Integer``.
+    :arg length: `Integer`.
 
 
 Annotations that have a border effect allows the effect to be controlled by:
@@ -621,31 +621,31 @@ Annotations that have a border effect allows the effect to be controlled by:
 
     Check support for annotation border effect.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 .. method:: getBorderEffect()
 
     Get the annotation border effect, either of "None" or "Cloudy".
 
-    :return: ``String``.
+    :return: `String`.
 
 .. method:: setBorderEffect(effect)
 
     Set the annotation border effect, either of "None" or "Cloudy".
 
-    :arg: ``String``.
+    :arg: `String`.
 
 .. method:: getBorderEffectIntensity()
 
     Get the annotation border effect intensity.
 
-    :return: ``Integer``.
+    :return: `Integer`.
 
 .. method:: setBorderEffectIntensity(intensity)
 
-    Set the annotation border effect intensity. Recommended values are between ``0`` and ``2`` inclusive.
+    Set the annotation border effect intensity. Recommended values are between `0` and `2` inclusive.
 
-    :arg: ``Integer``.
+    :arg: `Integer`.
 
 ----
 
@@ -655,19 +655,19 @@ Ink annotations consist of a number of strokes, each consisting of a sequence of
 
     Check support for the annotation ink list.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 .. method:: getInkList()
 
     Get the annotation ink list, represented as an array of strokes, each an array of points each an array of its X/Y coordinates.
 
-    :return: ``[]``.
+    :return: `[]`.
 
 .. method:: setInkList(inkList)
 
     Set the annotation ink list, represented as an array of strokes, each an array of points each an array of its X/Y coordinates.
 
-    :arg: ``[]``.
+    :arg: `[]`.
 
 .. method:: clearInkList()
 
@@ -677,7 +677,7 @@ Ink annotations consist of a number of strokes, each consisting of a sequence of
 
     To the list of strokes, append a stroke, represented as an array of vertices each an array of its X/Y coordinates.
 
-    :arg stroke: ``[]``.
+    :arg stroke: `[]`.
 
 .. method:: addInkListStroke()
 
@@ -687,7 +687,7 @@ Ink annotations consist of a number of strokes, each consisting of a sequence of
 
     Append a vertex to end of the last stroke in the ink annotation. The vertex is an array of its X/Y coordinates.
 
-    :arg vertex: ``[]``.
+    :arg vertex: `[]`.
 
 
 Text markup and redaction annotations consist of a set of quadadrilaterals controlled by:
@@ -696,19 +696,19 @@ Text markup and redaction annotations consist of a set of quadadrilaterals contr
 
     Check support for the annotation quadpoints.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 .. method:: getQuadPoints()
 
     Get the annotation quadpoints, describing the areas affected by text markup annotations and link annotations.
 
-    :return: ``[]``.
+    :return: `[]`.
 
 .. method:: setQuadPoints(quadPoints)
 
     Set the annotation quadpoints, describing the areas affected by text markup annotations and link annotations.
 
-    :arg quadPoints: ``[]``.
+    :arg quadPoints: `[]`.
 
 .. method:: clearQuadPoints()
 
@@ -718,7 +718,7 @@ Text markup and redaction annotations consist of a set of quadadrilaterals contr
 
     Append a single quad point as an array of 8 elements, where each pair are the X/Y coordinates of a corner of the quad.
 
-    :arg quadpoint: ``[]``.
+    :arg quadpoint: `[]`.
 
 
 Polygon and polyline annotations consist of a sequence of vertices with a straight line between them. Those can be controlled by:
@@ -727,19 +727,19 @@ Polygon and polyline annotations consist of a sequence of vertices with a straig
 
     Check support for the annotation vertices.
 
-    :return: ``Boolean``.
+    :return: `Boolean`.
 
 .. method:: getVertices()
 
     Get the annotation vertices, represented as an array of vertices each an array of its X/Y coordinates.
 
-    :return: ``[]``.
+    :return: `[]`.
 
 .. method:: setVertices(vertices)
 
     Set the annotation vertices, represented as an array of vertices each an array of its X/Y coordinates.
 
-    :arg vertices: ``[]``.
+    :arg vertices: `[]`.
 
 .. method:: clearVertices()
 
@@ -750,7 +750,7 @@ Polygon and polyline annotations consist of a sequence of vertices with a straig
 
     Append a single vertex as an array of its X/Y coordinates.
 
-    :arg vertex: ``[]``.
+    :arg vertex: `[]`.
 
 
 Stamp annotations have the option to set a custom image as its appearance.
@@ -759,6 +759,6 @@ Stamp annotations have the option to set a custom image as its appearance.
 
     Set a custom image appearance for a stamp annotation.
 
-    :arg image: ``Image``.
+    :arg image: `Image`.
 
 
