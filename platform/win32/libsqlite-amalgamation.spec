@@ -6,4 +6,4 @@ also-ignore:
 	sqlite3_checker.c
 	
 	user_code.c
-	
+	shell.c
