@@ -20,7 +20,7 @@
 extern "C" {
 #endif
 
-#if defined(DISABLED_LEGACY_ENGINE)
+#if DISABLED_LEGACY_ENGINE
 
 TESS_API int tesseract_ambiguous_words_main(int argc, const char** argv) {
 	fz_error(NULL, "tess_ambiguous_words is not available in this build.\n");

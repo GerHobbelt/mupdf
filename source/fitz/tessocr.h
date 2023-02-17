@@ -56,6 +56,10 @@ void ocr_recognise(fz_context *ctx,
 
 void ocr_set_leptonica_stderr_handler(fz_context *ctx);
 
+#if defined(BUILD_MONOLITHIC)
+int tesseract_tool_main(int argc, const char** argv);
+#endif
+
 #ifdef __cplusplus
 }
 #endif

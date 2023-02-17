@@ -13,8 +13,12 @@
 #include <string.h>
 #include <stdio.h>
 
+#if defined(BUILD_MONOLITHIC)
+#define main tesseract_tool_main
+#else
 #ifdef _MSC_VER
 #define main main_utf8
+#endif
 #endif
 
 int main(int argc, const char** argv)
@@ -62,7 +66,9 @@ int main(int argc, const char** argv)
 	return rv;
 }
 
-#ifdef _MSC_VER
+
+#if !defined(BUILD_MONOLITHIC) && defined(_MSC_VER)
+
 int wmain(int argc, const wchar_t *wargv[])
 {
 	const char **argv = fz_argv_from_wargv(argc, wargv);
@@ -72,4 +78,5 @@ int wmain(int argc, const wchar_t *wargv[])
 	fz_free_argv(argc, argv);
 	return ret;
 }
+
 #endif

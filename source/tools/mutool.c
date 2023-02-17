@@ -48,7 +48,9 @@
 #include "../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/QuickJS-C++-Wrapper/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/BLAKE3/c/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/libarchive/contrib/monolithic_examples.h"
 #include "../../thirdparty/jbig2dec/monolithic_examples.h"
+#include "../../source/fitz/tessocr.h"
 #undef BUILD_MONOLITHIC
 
 #include "../../scripts/MuPDFLib/versions-api.h"
@@ -119,7 +121,9 @@ static struct {
 #endif
 
 #if defined(MUTOOL_EX)
-	{ {.fa = tesseract_main }, "tesseract", "OCR given image or PDF" },
+	// DO NOT use tesseract_main() for this as that one does not set up the mupdf/fitz+leptonica+jpeg environments the way we need & expect in monolithic build mode.
+	{ {.fa = tesseract_tool_main }, "tesseract", "OCR given image or PDF" },
+	//{ {.fa = tesseract_main }, "tesseract", "OCR given image or PDF" },
 #endif
 
 #if defined(MUTOOL_EX)
@@ -365,6 +369,19 @@ static struct {
 #if defined(MUTOOL_EX)
 	{ {.fa = BLAKE3_example_main }, "BLAKE3_example", "BLAKE3_example tool" },
 	{ {.fa = BLAKE3_demo_main }, "BLAKE3_demo", "BLAKE3_demo tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = arch_bsdcat_main }, "bsdcat", "bsdcat tool" },
+#if 0   // TODO: properly port the shar example (when we feel the need) to Win32/64 and then remove this condition right here...
+	{ {.fa = arch_shar_main }, "shar", "shar tool" },
+#endif
+	{ {.fa = arch_untar_contrib_main }, "untar_alt", "libarchive's untar_contrib tool" },
+	{ {.fa = arch_cpio_main }, "cpio", "cpio tool" },
+	{ {.fa = arch_untar_main }, "untar", "untar tool" },
+	{ {.fa = arch_minitar_main }, "minitar", "minitar tool" },
+	{ {.fa = arch_tarfilter_main }, "tarfilter", "tarfilter tool" },
+	{ {.fa = arch_bsdtar_main }, "bsdtar", "bsdtar tool" },
 #endif
 
 	{ {.fa = report_version }, "version", "report version of this build / tools" },

@@ -9,6 +9,7 @@
 #include "mupdf/fitz/config.h"
 #include "mupdf/fitz/system.h"
 #include "mupdf/fitz/context.h"
+#include "mupdf/fitz/string-util.h"
 
 #include "mupdf/fitz/getopt.h"
 
@@ -51,7 +52,7 @@ getopt(int argc, const char * const *argv, const char *optstring)
 	place = strchr(optstring, c);
 
 	if (!place || c == ':') {
-		fz_error(NULL, "%s: unknown option -%c", argv[0], c);
+		fz_error(NULL, "%s: unknown option -%c", fz_basename(argv[0]), c);
 		return '?';
 	}
 
@@ -64,7 +65,7 @@ getopt(int argc, const char * const *argv, const char *optstring)
 			optarg = argv[optind];
 			optind++;
 		} else {
-			fz_error(NULL, "%s: option requires argument -%c", argv[0], c);
+			fz_error(NULL, "%s: option requires argument -%c", fz_basename(argv[0]), c);
 			return ':';
 		}
 	}

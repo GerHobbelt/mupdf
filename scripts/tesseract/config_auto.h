@@ -29,9 +29,11 @@
 #endif
 #define HAVE_LEPTONICA                   1
 #define HAVE_LIBCURL                     1
+#define HAVE_LIBARCHIVE                  1
+#define LIBARCHIVE_STATIC                1
 #define CURL_STATICLIB                   1
 #define HAVE_MUPDF                       1
-#ifdef __SSE4_1__
+#if defined(__SSE4_1__) || defined(__AVX2__) // anyone with AVX2 surely has SSE4.1 as well
 #define HAVE_SSE4_1                      1
 #endif
 #define HAVE_TESSERACT                   1
@@ -46,6 +48,10 @@
 
 #define GRAPHICS_DISABLED                1
 #define DISABLED_LEGACY_ENGINE           0
+
+#undef PANGO_ENABLE_ENGINE
+
+#undef HAS_LIBICU
 
 #if !defined(DISABLED_LEGACY_ENGINE)
 #define DISABLED_LEGACY_ENGINE           0

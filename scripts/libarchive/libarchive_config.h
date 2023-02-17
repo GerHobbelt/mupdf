@@ -485,7 +485,7 @@ typedef uint64_t uintmax_t;
 
 /* Define to 1 if you have the <dirent.h> header file, and it defines `DIR'.
    */
-/* #undef HAVE_DIRENT_H */
+#define HAVE_DIRENT_H
 
 /* Define to 1 if you have the `dirfd' function. */
 /* #undef HAVE_DIRFD */
@@ -1339,3 +1339,7 @@ typedef uint64_t uintmax_t;
 
 /* Define to `unsigned int' if <sys/types.h> does not define. */
 /* #undef uintptr_t */
+
+#ifndef PATH_MAX
+#define PATH_MAX 2048
+#endif
