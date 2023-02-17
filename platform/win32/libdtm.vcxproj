@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libdtm</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFCABA6D}</ProjectGuid>
+    <RootNamespace>libdtm</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDTM;DTM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDTM;DTM_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDTM;DTM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDTM;DTM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDTM;DTM_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDTM;DTM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDTM;DTM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDTM;DTM_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDTM;DTM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDTM;DTM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDTM;DTM_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDTM;DTM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/c2_lib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/gsl-wrappers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/lda-seq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/lda.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/main-aggregate-ss.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/main-fit_seq_docs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/main-fit_seq_topics.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/main-lda-e-step.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/main-lda-m-step.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/param.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/params.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/ss-lm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/strutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm/data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm/gsl-wrappers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm/lda-seq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm/lda.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm/param.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm/params.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm/ss-lm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/dtm/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/lib/math/gradient_projection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/lib/math/gradient_projection_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/lib/math/logspace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/lib/math/logspace_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/lib/math/specialfunc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/src/gflags.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/src/gflags_completions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/src/gflags_reporting.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/src/gflags_unittest-main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/src/gflags_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/src/gflags_unittest_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/local/lib/binsrch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/local/lib/morph.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/local/lib/search.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/local/lib/wnglobal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/local/lib/wnhelp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/local/lib/wnrtl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libdtm/local/lib/wnutil.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/c2_lib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/gsl-wrappers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/lda-seq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/lda.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/main-fit_seq_topics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/main.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/param.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/params.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/ss-lm-fit_seq_topics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/ss-lm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/strutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/dtm/data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/dtm/gsl-wrappers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/dtm/lda-seq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/dtm/lda.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/dtm/main.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/dtm/param.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/dtm/params.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/dtm/ss-lm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/dtm/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/gslwrap/include/gslwrap/histogram.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/gslwrap/include/gslwrap/matrix_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/gslwrap/include/gslwrap/matrix_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/gslwrap/include/gslwrap/matrix_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/gslwrap/include/gslwrap/matrix_vector_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/gslwrap/include/gslwrap/min_fminimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/gslwrap/include/gslwrap/multimin_fdfminimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/gslwrap/include/gslwrap/permutation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/gslwrap/include/gslwrap/random_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/gslwrap/include/gslwrap/random_number_distribution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/gslwrap/include/gslwrap/vector_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/gslwrap/include/gslwrap/vector_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/gslwrap/include/gslwrap/vector_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/lib/math/gradient_projection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/lib/math/gsl_matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/lib/math/gsl_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/lib/math/logspace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/lib/math/logspace_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/lib/math/optimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/lib/math/specialfunc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/lib/math/vectorops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/src/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/src/gflags/gflags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/src/gflags/gflags_completions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/src/google/gflags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/src/google/gflags_completions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/src/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_blas.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_blas_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_block.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_block_char.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_block_complex_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_block_complex_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_block_complex_long_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_block_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_block_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_block_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_block_long.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_block_long_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_block_short.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_block_uchar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_block_uint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_block_ulong.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_block_ushort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_bspline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_cblas.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_cdf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_chebyshev.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_check_range.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_combination.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_complex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_complex_math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_const_cgs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_const_cgsm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_const_mks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_const_mksa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_const_num.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_deriv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_dft_complex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_dft_complex_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_dht.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_diff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_eigen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_errno.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_fft.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_fft_complex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_fft_complex_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_fft_halfcomplex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_fft_halfcomplex_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_fft_real.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_fft_real_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_fit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_heapsort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_histogram.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_histogram2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_ieee_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_integration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_interp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_linalg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_machine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_matrix_char.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_matrix_complex_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_matrix_complex_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_matrix_complex_long_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_matrix_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_matrix_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_matrix_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_matrix_long.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_matrix_long_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_matrix_short.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_matrix_uchar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_matrix_uint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_matrix_ulong.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_matrix_ushort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_min.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_mode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_monte.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_monte_miser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_monte_plain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_monte_vegas.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_multifit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_multifit_nlin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_multimin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_multiroots.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_nan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_ntuple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_odeiv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permutation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_char.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_complex_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_complex_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_complex_long_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_long.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_long_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_short.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_uchar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_uint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_ulong.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_ushort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_vector_char.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_vector_complex_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_vector_complex_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_vector_complex_long_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_vector_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_vector_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_vector_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_vector_long.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_vector_long_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_vector_short.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_vector_uchar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_vector_uint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_vector_ulong.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_permute_vector_ushort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_poly.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_pow_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_precision.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_qrng.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_randist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_rng.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_roots.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_airy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_bessel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_clausen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_coulomb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_coupling.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_dawson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_debye.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_dilog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_elementary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_ellint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_elljac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_erf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_exp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_expint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_fermi_dirac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_gamma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_gegenbauer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_hyperg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_laguerre.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_lambert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_legendre.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_mathieu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_pow_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_psi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_result.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_synchrotron.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_transport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_trig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sf_zeta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_siman.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort_char.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort_long.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort_long_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort_short.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort_uchar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort_uint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort_ulong.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort_ushort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort_vector_char.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort_vector_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort_vector_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort_vector_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort_vector_long.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort_vector_long_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort_vector_short.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort_vector_uchar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort_vector_uint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort_vector_ulong.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sort_vector_ushort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_specfunc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_spline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_statistics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_statistics_char.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_statistics_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_statistics_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_statistics_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_statistics_long.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_statistics_long_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_statistics_short.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_statistics_uchar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_statistics_uint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_statistics_ulong.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_statistics_ushort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_sys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_vector_char.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_vector_complex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_vector_complex_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_vector_complex_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_vector_complex_long_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_vector_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_vector_float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_vector_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_vector_long.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_vector_long_double.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_vector_short.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_vector_uchar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_vector_uint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_vector_ulong.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_vector_ushort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_wavelet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/gsl/gsl_wavelet2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/algo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/algobase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/bvector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/char_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/concept_checks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/container_concepts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/defalloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/deque.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/hash_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/hash_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/hashtable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/heap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/multimap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/multiset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/pair.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/pthread_alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/rope.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/ropeimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/sequence_concepts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/slist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_algo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_algobase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_bvector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_construct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_ctraits_fns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_deque.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_exception.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_hash_fun.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_hash_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_hash_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_hashtable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_heap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_iterator_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_multimap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_multiset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_numeric.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_pair.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_range_errors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_raw_storage_iter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_relops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_rope.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_slist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_string_fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_tempbuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_threads.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_uninitialized.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/stl_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/tempbuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/type_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libdtm/local/include/stl/vector.h" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/dtm-parallel/README" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/dtm/sample.sh" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/README" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/packages/deb.sh" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/packages/deb/changelog" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/packages/rpm.sh" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/python/gflags.py" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/python/gflags2man.py" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/python/gflags_unittest.py" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/python/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/python/test_module_bar.py" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/python/test_module_foo.py" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/src/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/src/gflags/gflags.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/src/gflags/gflags_completions.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/src/gflags_completions.sh" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/lib/util/gflags-1.1/src/gflags_unittest.sh" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/local/lib/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libdtm/local/lib/Makefile.in" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

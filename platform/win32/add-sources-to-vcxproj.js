@@ -371,6 +371,9 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
     case '.cppcode':
     case '.csv':
     case '.cmake':
+    case '.config':
+    case '.conf':
+    case '.cfg':
     case '.bazel':
     case '.gcc':
     case '.gperf':

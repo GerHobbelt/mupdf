@@ -18,8 +18,9 @@ also-ignore:
 
 
 special-inject:
+  <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/wxWidgets/src/common/dummy.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-
+  </ItemGroup>
 	

@@ -233,17 +233,21 @@
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
   </Target>
   <ItemGroup>
-    <ClInclude Include="../../scripts/googlelog-unittest/pch.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="../../scripts/googlelog-unittest/pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\scripts\googlelog-unittest\main.cpp" />
-    <ClCompile Include="..\..\scripts\googlelog-unittest\test_glog.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="../../scripts/googlelog-unittest/packages.config" />
+    <ClInclude Include="../../scripts/googlelog-unittest/pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../scripts/googlelog-unittest/main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../scripts/googlelog-unittest/test_glog.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="../../scripts/googlelog-unittest/packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/glog/bazel/example/main.cc" />
@@ -272,12 +276,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/utilities_unittest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/vlog_is_on.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/glog/src/windows/port.cc" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/b/config.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/b/glog/export.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/b/glog/logging.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/b/glog/raw_logging.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/b/glog/stl_logging.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glog/b/glog/vlog_is_on.h" />
     <ClInclude Include="../../thirdparty/owemdjee/glog/src/base/commandlineflags.h" />
     <ClInclude Include="../../thirdparty/owemdjee/glog/src/base/googleinit.h" />
     <ClInclude Include="../../thirdparty/owemdjee/glog/src/base/mutex.h" />
@@ -299,16 +297,24 @@
     <ClInclude Include="../../thirdparty/owemdjee/glog/src/windows/dirent.h" />
     <ClInclude Include="../../thirdparty/owemdjee/glog/src/windows/port.h" />
     <ResourceCompile Include="../../thirdparty/owemdjee/glog/cmake/VersionResource.rc" />
+    <Text Include="../../thirdparty/owemdjee/glog/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/glog/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/glog/CONTRIBUTORS" />
     <Text Include="../../thirdparty/owemdjee/glog/ChangeLog" />
     <Text Include="../../thirdparty/owemdjee/glog/README.rst" />
-    <Text Include="../../thirdparty/owemdjee/glog/b/CMakeCache.txt" />
-    <Text Include="../../thirdparty/owemdjee/glog/b/CMakeFiles/3.22.0-rc1/VCTargetsPath.txt" />
-    <Text Include="../../thirdparty/owemdjee/glog/b/CMakeFiles/TargetDirectories.txt" />
-    <Text Include="../../thirdparty/owemdjee/glog/b/DartConfiguration.tcl" />
+    <Text Include="../../thirdparty/owemdjee/glog/bazel/example/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/glog/build_win_cmake.bat" />
+    <Text Include="../../thirdparty/owemdjee/glog/cmake/DetermineGflagsNamespace.cmake" />
+    <Text Include="../../thirdparty/owemdjee/glog/cmake/FindUnwind.cmake" />
+    <Text Include="../../thirdparty/owemdjee/glog/cmake/GetCacheVariables.cmake" />
+    <Text Include="../../thirdparty/owemdjee/glog/cmake/RunCleanerTest1.cmake" />
+    <Text Include="../../thirdparty/owemdjee/glog/cmake/RunCleanerTest2.cmake" />
+    <Text Include="../../thirdparty/owemdjee/glog/cmake/RunCleanerTest3.cmake" />
+    <Text Include="../../thirdparty/owemdjee/glog/cmake/TestInitPackageConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/glog/cmake/TestPackageConfig.cmake" />
     <Text Include="../../thirdparty/owemdjee/glog/cmake/VersionInfo.in" />
+    <Text Include="../../thirdparty/owemdjee/glog/cmake/_check_os.cmake" />
+    <Text Include="../../thirdparty/owemdjee/glog/cmake/_generate_product_version_win.cmake" />
     <Text Include="../../thirdparty/owemdjee/glog/glog-config.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/glog/glog-modules.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/glog/libglog.pc.in" />

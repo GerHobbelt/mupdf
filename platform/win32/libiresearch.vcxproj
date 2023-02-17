@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIRESEARCH;IRESEARCH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -131,7 +131,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIRESEARCH;IRESEARCH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/iresearch/core;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/iresearch/external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -158,7 +158,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIRESEARCH;IRESEARCH_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/iresearch/core;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/iresearch/external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -186,7 +186,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIRESEARCH;IRESEARCH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/iresearch/core;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/iresearch/external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -213,7 +213,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIRESEARCH;IRESEARCH_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/iresearch/core;../../thirdparty/owemdjee/abseil-cpp;../../thirdparty/owemdjee/iresearch/external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -1248,6 +1248,31 @@
     <Text Include="../../thirdparty/owemdjee/iresearch/LICENSE.md" />
     <Text Include="../../thirdparty/owemdjee/iresearch/README.md" />
     <Text Include="../../thirdparty/owemdjee/iresearch/THIRD_PARTY_README.md" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/AddCompilerFlag.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/CheckCCompilerFlag.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/CheckCXXCompilerFlag.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/CheckMicCCompilerFlag.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/CheckMicCXXCompilerFlag.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/CodeCoverage.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/FindASan.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/FindBFD.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/FindBoostLocal.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/FindGTestLocal.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/FindICU.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/FindLz4.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/FindMSan.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/FindSanitizers.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/FindSnowball.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/FindTSan.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/FindUBSan.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/FindUnwind.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/FindUring.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/HexEncodeFile.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/OptimizeForArchitecture.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/PVS-Studio.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/UpdateModule.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/Utils.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/cmake/sanitize-helpers.cmake" />
     <Text Include="../../thirdparty/owemdjee/iresearch/core/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/iresearch/external/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/iresearch/external/fastText/CMakeLists.txt" />
@@ -1288,6 +1313,9 @@
     <Text Include="../../thirdparty/owemdjee/iresearch/external/text/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/iresearch/external/text/LICENSE_1_0.txt" />
     <Text Include="../../thirdparty/owemdjee/iresearch/external/text/README.md" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/cmake/Disassemble.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/cmake/dependencies.cmake" />
+    <Text Include="../../thirdparty/owemdjee/iresearch/external/text/cmake/text-config.cmake" />
     <Text Include="../../thirdparty/owemdjee/iresearch/external/text/doc/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/iresearch/external/text/doc/generate_perf_charts.sh" />
     <Text Include="../../thirdparty/owemdjee/iresearch/external/text/doc/make_perf_chart.py" />
@@ -1362,7 +1390,8 @@
     <Text Include="../../thirdparty/owemdjee/iresearch/utils/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/iresearch/utils/README.md" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

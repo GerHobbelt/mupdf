@@ -52,22 +52,23 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
@@ -79,7 +80,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +112,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLIPP;CLIPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -140,6 +141,9 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <MASM>
+      <AdditionalOptions>/nologo /D_M_X86 /W3 /Cx /Zi /safeseh %(AdditionalOptions)</AdditionalOptions>
+    </MASM>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
@@ -168,6 +172,9 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <MASM>
+      <AdditionalOptions>/nologo /D_M_X86 /W3 /Cx /Zi /safeseh %(AdditionalOptions)</AdditionalOptions>
+    </MASM>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -197,6 +204,9 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <MASM>
+      <AdditionalOptions>/nologo /D_M_X64 /W3 /Cx /Zi %(AdditionalOptions)</AdditionalOptions>
+    </MASM>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -225,41 +235,12 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <MASM>
+      <AdditionalOptions>/nologo /D_M_X64 /W3 /Cx /Zi %(AdditionalOptions)</AdditionalOptions>
+    </MASM>
   </ItemDefinitionGroup>
   <!-- Source Files -->
   <!-- The order of the first three matters -->
-  <ItemGroup>
-    <CustomBuild Condition="'$(Platform)'=='Win32'" Include="..\..\thirdparty\owemdjee\cryptopp\rdrand.asm">
-      <Message>Building and assembling rdrand.asm</Message>
-      <Command>ml.exe /c /nologo /D_M_X86 /W3 /Cx /Zi /safeseh /Fo"$(IntDir)rdrand-x86.obj" "%(FullPath)"</Command>
-      <Outputs>$(IntDir)\rdrand-x86.obj;%(Outputs)</Outputs>
-    </CustomBuild>
-    <CustomBuild Condition="'$(Platform)'=='x64'" Include="..\..\thirdparty\owemdjee\cryptopp\rdrand.asm">
-      <Message>Building and assembling rdrand.asm</Message>
-      <Command>ml64.exe /c /nologo /D_M_X64 /W3 /Cx /Zi /Fo"$(IntDir)rdrand-x64.obj" "%(FullPath)"</Command>
-      <Outputs>$(IntDir)\rdrand-x64.obj;%(Outputs)</Outputs>
-    </CustomBuild>
-    <CustomBuild Condition="'$(Platform)'=='Win32'" Include="..\..\thirdparty\owemdjee\cryptopp\rdseed.asm">
-      <Message>Building and assembling rdseed.asm</Message>
-      <Command>ml.exe /c /nologo /D_M_X86 /W3 /Cx /Zi /safeseh /Fo"$(IntDir)rdseed-x86.obj" "%(FullPath)"</Command>
-      <Outputs>$(IntDir)\rdseed-x86.obj;%(Outputs)</Outputs>
-    </CustomBuild>
-    <CustomBuild Condition="'$(Platform)'=='x64'" Include="..\..\thirdparty\owemdjee\cryptopp\rdseed.asm">
-      <Message>Building and assembling rdseed.asm</Message>
-      <Command>ml64.exe /c /nologo /D_M_X64 /W3 /Cx /Zi /Fo"$(IntDir)rdseed-x64.obj" "%(FullPath)"</Command>
-      <Outputs>$(IntDir)\rdseed-x64.obj;%(Outputs)</Outputs>
-    </CustomBuild>
-    <CustomBuild Condition="'$(Platform)'=='x64'" Include="..\..\thirdparty\owemdjee\cryptopp\x64dll.asm">
-      <Message>Building and assembling x64dll.asm</Message>
-      <Command>ml64.exe /c /nologo /D_M_X64 /W3 /Zi /Fo"$(IntDir)x64dll.obj" "%(FullPath)"</Command>
-      <Outputs>$(IntDir)x64dll.obj;%(Outputs)</Outputs>
-    </CustomBuild>
-    <CustomBuild Condition="'$(Platform)'=='x64'" Include="..\..\thirdparty\owemdjee\cryptopp\x64masm.asm">
-      <Message>Building and Assembling x64masm.asm</Message>
-      <Command>ml64.exe /c /nologo /D_M_X64 /W3 /Zi /Fo"$(IntDir)x64masm.obj" "%(FullPath)"</Command>
-      <Outputs>$(IntDir)x64masm.obj;%(Outputs)</Outputs>
-    </CustomBuild>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
@@ -681,6 +662,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/cryptopp/zdeflate.h" />
     <ClInclude Include="../../thirdparty/owemdjee/cryptopp/zinflate.h" />
     <ClInclude Include="../../thirdparty/owemdjee/cryptopp/zlib.h" />
+    <MASM Include="../../thirdparty/owemdjee/cryptopp/rdrand.asm" />
+    <MASM Include="../../thirdparty/owemdjee/cryptopp/rdseed.asm" />
+    <MASM Include="../../thirdparty/owemdjee/cryptopp/x64dll.asm" />
+    <MASM Include="../../thirdparty/owemdjee/cryptopp/x64masm.asm" />
     <ResourceCompile Include="../../thirdparty/owemdjee/cryptopp/cryptopp.rc" />
     <Text Include="../../thirdparty/owemdjee/cryptopp/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/cryptopp/Filelist.txt" />
@@ -689,29 +674,6 @@
     <Text Include="../../thirdparty/owemdjee/cryptopp/License.txt" />
     <Text Include="../../thirdparty/owemdjee/cryptopp/Readme.txt" />
     <Text Include="../../thirdparty/owemdjee/cryptopp/Security.md" />
-    <Text Include="../../thirdparty/owemdjee/cryptopp/TestScripts/change-version.sh" />
-    <Text Include="../../thirdparty/owemdjee/cryptopp/TestScripts/configure.sh" />
-    <Text Include="../../thirdparty/owemdjee/cryptopp/TestScripts/coverity-linux.txt" />
-    <Text Include="../../thirdparty/owemdjee/cryptopp/TestScripts/coverity-macosx.txt" />
-    <Text Include="../../thirdparty/owemdjee/cryptopp/TestScripts/coverity-windows.txt" />
-    <Text Include="../../thirdparty/owemdjee/cryptopp/TestScripts/cryptdll-windows.cmd" />
-    <Text Include="../../thirdparty/owemdjee/cryptopp/TestScripts/cryptest-android-mk.sh" />
-    <Text Include="../../thirdparty/owemdjee/cryptopp/TestScripts/cryptest-android.sh" />
-    <Text Include="../../thirdparty/owemdjee/cryptopp/TestScripts/cryptest-autotools.sh" />
-    <Text Include="../../thirdparty/owemdjee/cryptopp/TestScripts/cryptest-coverage.sh" />
-    <Text Include="../../thirdparty/owemdjee/cryptopp/TestScripts/cryptest-ios.sh" />
-    <Text Include="../../thirdparty/owemdjee/cryptopp/TestScripts/cryptest-pem.sh" />
-    <Text Include="../../thirdparty/owemdjee/cryptopp/TestScripts/cryptest-symbols.sh" />
-    <Text Include="../../thirdparty/owemdjee/cryptopp/TestScripts/cryptest-tidy.sh" />
-    <Text Include="../../thirdparty/owemdjee/cryptopp/TestScripts/cryptest.sh" />
-    <Text Include="../../thirdparty/owemdjee/cryptopp/TestScripts/governor.sh" />
-    <Text Include="../../thirdparty/owemdjee/cryptopp/TestScripts/install-ndk.sh" />
-    <Text Include="../../thirdparty/owemdjee/cryptopp/TestScripts/make-benchmarks.sh" />
-    <Text Include="../../thirdparty/owemdjee/cryptopp/TestScripts/reset-fork.sh" />
-    <Text Include="../../thirdparty/owemdjee/cryptopp/TestScripts/setenv-android.sh" />
-    <Text Include="../../thirdparty/owemdjee/cryptopp/TestScripts/setenv-embedded.sh" />
-    <Text Include="../../thirdparty/owemdjee/cryptopp/TestScripts/setenv-ios.sh" />
-    <Text Include="../../thirdparty/owemdjee/cryptopp/TestScripts/setenv-macos.sh" />
     <Text Include="../../thirdparty/owemdjee/cryptopp/TestVectors/Readme.txt" />
     <Text Include="../../thirdparty/owemdjee/cryptopp/TestVectors/aead.txt" />
     <Text Include="../../thirdparty/owemdjee/cryptopp/TestVectors/aes.txt" />
@@ -794,12 +756,12 @@
     <Text Include="../../thirdparty/owemdjee/cryptopp/TestVectors/xchacha.txt" />
     <Text Include="../../thirdparty/owemdjee/cryptopp/TestVectors/xts.txt" />
     <Text Include="../../thirdparty/owemdjee/cryptopp/aes_armv4.S" />
+    <Text Include="../../thirdparty/owemdjee/cryptopp/cryptopp-config.cmake" />
     <Text Include="../../thirdparty/owemdjee/cryptopp/sha1_armv4.S" />
     <Text Include="../../thirdparty/owemdjee/cryptopp/sha256_armv4.S" />
     <Text Include="../../thirdparty/owemdjee/cryptopp/sha512_armv4.S" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  

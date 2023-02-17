@@ -6,7 +6,9 @@ sources:
 	../../scripts/googlelog-unittest/packages.config
 	
 special-inject:	
+  <ItemGroup>
     <ClCompile Include="../../scripts/googlelog-unittest/pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
 	

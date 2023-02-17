@@ -25,3 +25,4 @@ sources:
     ..\..\source\tools\pdftagged.c
     ..\..\thirdparty\mujs\main.c
     ..\..\thirdparty\mujs\pp.c
+    ..\..\source\tools\tesseract_tool.c

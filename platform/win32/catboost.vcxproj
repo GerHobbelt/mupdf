@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CATBOOST;CATBOOST_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -131,7 +131,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CATBOOST;CATBOOST_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/catboost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -158,7 +158,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CATBOOST;CATBOOST_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/catboost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -186,7 +186,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CATBOOST;CATBOOST_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/catboost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -213,7 +213,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CATBOOST;CATBOOST_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/catboost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -16048,6 +16048,7 @@
     <Text Include="../../thirdparty/owemdjee/catboost/build/external_resources/ymake/resources.json" />
     <Text Include="../../thirdparty/owemdjee/catboost/build/mapping.conf.json" />
     <Text Include="../../thirdparty/owemdjee/catboost/build/platform.md" />
+    <Text Include="../../thirdparty/owemdjee/catboost/build/platform/clang/arch.cmake" />
     <Text Include="../../thirdparty/owemdjee/catboost/build/platform/clang/clang14.json" />
     <Text Include="../../thirdparty/owemdjee/catboost/build/platform/linux_sdk/README.md" />
     <Text Include="../../thirdparty/owemdjee/catboost/build/platform/local_so/readme.md" />
@@ -16179,6 +16180,7 @@
     <Text Include="../../thirdparty/owemdjee/catboost/build/scripts/fix_java_command_file_cp.py" />
     <Text Include="../../thirdparty/owemdjee/catboost/build/scripts/fix_msvc_output.py" />
     <Text Include="../../thirdparty/owemdjee/catboost/build/scripts/fs_tools.py" />
+    <Text Include="../../thirdparty/owemdjee/catboost/build/scripts/gather_swig_java.cmake" />
     <Text Include="../../thirdparty/owemdjee/catboost/build/scripts/gen_aar_gradle_script.py" />
     <Text Include="../../thirdparty/owemdjee/catboost/build/scripts/gen_java_codenav_entry.py" />
     <Text Include="../../thirdparty/owemdjee/catboost/build/scripts/gen_java_codenav_protobuf.py" />
@@ -18455,6 +18457,18 @@
     <Text Include="../../thirdparty/owemdjee/catboost/ci/fixup_python_version.py" />
     <Text Include="../../thirdparty/owemdjee/catboost/ci/fixups_for_freebsd.sh" />
     <Text Include="../../thirdparty/owemdjee/catboost/ci/webdav_upload.py" />
+    <Text Include="../../thirdparty/owemdjee/catboost/cmake/FindJNITarget.cmake" />
+    <Text Include="../../thirdparty/owemdjee/catboost/cmake/archive.cmake" />
+    <Text Include="../../thirdparty/owemdjee/catboost/cmake/conan.cmake" />
+    <Text Include="../../thirdparty/owemdjee/catboost/cmake/cuda.cmake" />
+    <Text Include="../../thirdparty/owemdjee/catboost/cmake/cython.cmake" />
+    <Text Include="../../thirdparty/owemdjee/catboost/cmake/fat_object.cmake" />
+    <Text Include="../../thirdparty/owemdjee/catboost/cmake/fbs.cmake" />
+    <Text Include="../../thirdparty/owemdjee/catboost/cmake/global_flags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/catboost/cmake/global_vars.cmake" />
+    <Text Include="../../thirdparty/owemdjee/catboost/cmake/protobuf.cmake" />
+    <Text Include="../../thirdparty/owemdjee/catboost/cmake/swig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/catboost/cmake/yandex_common.cmake" />
     <Text Include="../../thirdparty/owemdjee/catboost/conanfile.txt" />
     <Text Include="../../thirdparty/owemdjee/catboost/contrib/CMakeLists.android-arm.txt" />
     <Text Include="../../thirdparty/owemdjee/catboost/contrib/CMakeLists.android-arm64.txt" />
@@ -19215,6 +19229,7 @@
     <Text Include="../../thirdparty/owemdjee/catboost/contrib/libs/tbb/README.md" />
     <Text Include="../../thirdparty/owemdjee/catboost/contrib/libs/tbb/RELEASE_NOTES.md" />
     <Text Include="../../thirdparty/owemdjee/catboost/contrib/libs/tbb/SYSTEM_REQUIREMENTS.md" />
+    <Text Include="../../thirdparty/owemdjee/catboost/contrib/libs/tbb/WORKSPACE.bazel" />
     <Text Include="../../thirdparty/owemdjee/catboost/contrib/libs/tcmalloc/CMakeLists.linux.txt" />
     <Text Include="../../thirdparty/owemdjee/catboost/contrib/libs/tcmalloc/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/catboost/contrib/libs/tcmalloc/CONTRIBUTING.md" />
@@ -22386,6 +22401,7 @@
     <Text Include="../../thirdparty/owemdjee/catboost/contrib/python/pandas/py2/pandas/util/_tester.py" />
     <Text Include="../../thirdparty/owemdjee/catboost/contrib/python/pandas/py2/pandas/util/_validators.py" />
     <Text Include="../../thirdparty/owemdjee/catboost/contrib/python/pandas/py2/pandas/util/testing.py" />
+    <Text Include="../../thirdparty/owemdjee/catboost/contrib/python/pandas/py2/symbols.cmake" />
     <Text Include="../../thirdparty/owemdjee/catboost/contrib/python/pandas/py3/README.md" />
     <Text Include="../../thirdparty/owemdjee/catboost/contrib/python/pandas/py3/pandas/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/catboost/contrib/python/pandas/py3/pandas/_config/__init__.py" />
@@ -22682,6 +22698,7 @@
     <Text Include="../../thirdparty/owemdjee/catboost/contrib/python/pandas/py3/pandas/util/_validators.py" />
     <Text Include="../../thirdparty/owemdjee/catboost/contrib/python/pandas/py3/pandas/util/testing.py" />
     <Text Include="../../thirdparty/owemdjee/catboost/contrib/python/pandas/py3/pandas/util/version/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/catboost/contrib/python/pandas/py3/symbols.cmake" />
     <Text Include="../../thirdparty/owemdjee/catboost/contrib/python/parso/py2/AUTHORS.txt" />
     <Text Include="../../thirdparty/owemdjee/catboost/contrib/python/parso/py2/LICENSE.txt" />
     <Text Include="../../thirdparty/owemdjee/catboost/contrib/python/parso/py2/README.rst" />
@@ -28872,7 +28889,8 @@
     <Xml Include="../../thirdparty/owemdjee/catboost/contrib/python/setuptools/py2/setuptools/command/launcher manifest.xml" />
     <Xml Include="../../thirdparty/owemdjee/catboost/contrib/python/setuptools/py3/setuptools/command/launcher manifest.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  
