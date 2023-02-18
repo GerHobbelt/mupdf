@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -94,7 +94,7 @@
     <CustomBuildAfterTargets>
     </CustomBuildAfterTargets>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -126,8 +126,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXFORMBUILDER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -139,7 +139,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface;../../thirdparty/owemdjee/wxFormBuilder/src;../../thirdparty/owemdjee/wxFormBuilder/subprojects/ticpp;../../thirdparty/owemdjee/wxFormBuilder/third_party/md5;../../thirdparty/owemdjee/wxFormBuilder/data/platform/windows;../../include;../../thirdparty/owemdjee/boost/libs/dll/include;../../thirdparty/owemdjee/boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface;../../thirdparty/owemdjee/wxFormBuilder/src;../../thirdparty/owemdjee/wxFormBuilder/subprojects/ticpp;../../thirdparty/owemdjee/wxFormBuilder/third_party/md5;../../thirdparty/owemdjee/wxFormBuilder/data/platform/windows;../../include;../../scripts/boost/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BOOST_FILESYSTEM_NO_CXX20_ATOMIC_REF;TIXML_USE_STL;TIXML_USE_TICPP;BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXUSINGDLL;HAVE_MUPDF;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -186,7 +186,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface;../../thirdparty/owemdjee/wxFormBuilder/src;../../thirdparty/owemdjee/wxFormBuilder/subprojects/ticpp;../../thirdparty/owemdjee/wxFormBuilder/third_party/md5;../../thirdparty/owemdjee/wxFormBuilder/data/platform/windows;../../include;../../thirdparty/owemdjee/boost/libs/dll/include;../../thirdparty/owemdjee/boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface;../../thirdparty/owemdjee/wxFormBuilder/src;../../thirdparty/owemdjee/wxFormBuilder/subprojects/ticpp;../../thirdparty/owemdjee/wxFormBuilder/third_party/md5;../../thirdparty/owemdjee/wxFormBuilder/data/platform/windows;../../include;../../scripts/boost/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BOOST_FILESYSTEM_NO_CXX20_ATOMIC_REF;TIXML_USE_STL;TIXML_USE_TICPP;BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXUSINGDLL;HAVE_MUPDF;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -236,7 +236,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface;../../thirdparty/owemdjee/wxFormBuilder/src;../../thirdparty/owemdjee/wxFormBuilder/subprojects/ticpp;../../thirdparty/owemdjee/wxFormBuilder/third_party/md5;../../thirdparty/owemdjee/wxFormBuilder/data/platform/windows;../../include;../../thirdparty/owemdjee/boost/libs/dll/include;../../thirdparty/owemdjee/boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface;../../thirdparty/owemdjee/wxFormBuilder/src;../../thirdparty/owemdjee/wxFormBuilder/subprojects/ticpp;../../thirdparty/owemdjee/wxFormBuilder/third_party/md5;../../thirdparty/owemdjee/wxFormBuilder/data/platform/windows;../../include;../../scripts/boost/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BOOST_FILESYSTEM_NO_CXX20_ATOMIC_REF;TIXML_USE_STL;TIXML_USE_TICPP;BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXUSINGDLL;HAVE_MUPDF;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -283,7 +283,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface;../../thirdparty/owemdjee/wxFormBuilder/src;../../thirdparty/owemdjee/wxFormBuilder/subprojects/ticpp;../../thirdparty/owemdjee/wxFormBuilder/third_party/md5;../../thirdparty/owemdjee/wxFormBuilder/data/platform/windows;../../include;../../thirdparty/owemdjee/boost/libs/dll/include;../../thirdparty/owemdjee/boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;../../thirdparty/owemdjee/wxFormBuilder/sdk/plugin_interface;../../thirdparty/owemdjee/wxFormBuilder/src;../../thirdparty/owemdjee/wxFormBuilder/subprojects/ticpp;../../thirdparty/owemdjee/wxFormBuilder/third_party/md5;../../thirdparty/owemdjee/wxFormBuilder/data/platform/windows;../../include;../../scripts/boost/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BOOST_FILESYSTEM_NO_CXX20_ATOMIC_REF;TIXML_USE_STL;TIXML_USE_TICPP;BUILD_MONOLITHIC;BUILDING_WXFORMBUILDER;WXUSINGDLL;HAVE_MUPDF;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -737,8 +737,7 @@
     <Xml Include="../../thirdparty/owemdjee/wxFormBuilder/resources/xml/icons.xml" />
     <Xml Include="../../thirdparty/owemdjee/wxFormBuilder/resources/xml/objtypes.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
