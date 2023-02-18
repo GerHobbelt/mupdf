@@ -773,7 +773,7 @@ compressed_image_get_pixmap(fz_context *ctx, const fz_image *image_, fz_irect *s
 		break;
 #if FZ_ENABLE_JPX
 	case FZ_IMAGE_JPX:
-		tile = fz_load_jpx(ctx, image->buffer->buffer->data, image->buffer->buffer->len, NULL);
+		tile = fz_load_jpx(ctx, image->buffer->buffer->data, image->buffer->buffer->len, image->super.colorspace);
 		break;
 #else
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Jpeg2000 not supported in this build");
