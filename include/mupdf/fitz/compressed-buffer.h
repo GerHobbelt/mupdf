@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -122,7 +122,7 @@ fz_stream *fz_open_image_decomp_stream_from_buffer(fz_context *ctx, fz_compresse
 fz_stream *fz_open_image_decomp_stream(fz_context *ctx, fz_stream *, fz_compression_params *, int *l2factor);
 
 /**
-	Recognise image formats by looking for magic signatures.
+	Recognise image formats by looking for magic signatures (inspects the first 16 bytes).
 */
 int fz_recognize_image_format(fz_context *ctx, const unsigned char *p, int size);
 
