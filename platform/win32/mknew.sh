@@ -739,6 +739,9 @@ SymSpell
 libdtm
 prvhash
 vxl
+libmetalink
+wget2
+wxCurl
 
 EOT
 )
@@ -758,6 +761,9 @@ h2o-server
 nsis
 olena
 sumatrapdf
+
+metalink-cli
+metalink-mini-downloader
 
 EOT
 )
