@@ -1,0 +1,10 @@
+//
+// symlink-like file is generated using the platform/win32/prep_boost_include_directories.sh shell script.
+//
+// ** DO NOT EDIT ** (adjust the regenerator shell script mentioned above instead!)
+//
+
+#pragma once
+
+#include "../../../thirdparty/owemdjee/boost/libs/atomic/include/boost/atomic/detail/caps_arch_msvc_x86.hpp"
+
