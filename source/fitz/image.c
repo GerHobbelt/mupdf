@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -820,14 +820,6 @@ compressed_image_get_pixmap(fz_context *ctx, const fz_image *image_, fz_irect *s
 		fz_catch(ctx)
 			fz_rethrow(ctx);
 
-		/* CMYK JPEGs in XPS documents have to be inverted */
-		if (image->super.invert_cmyk_jpeg &&
-			image->buffer->params.type == FZ_IMAGE_JPEG &&
-			fz_colorspace_is_cmyk(ctx, image->super.colorspace) &&
-			image->buffer->params.u.jpeg.color_transform)
-		{
-			fz_invert_pixmap_raw(ctx, tile);
-		}
 		break;
 	}
 
@@ -1122,7 +1114,6 @@ fz_new_image_of_size(fz_context *ctx, int w, int h, int bpc, fz_colorspace *colo
 	image->bpc = bpc;
 	image->n = (colorspace ? fz_colorspace_n(ctx, colorspace) : 1);
 	image->colorspace = fz_keep_colorspace(ctx, colorspace);
-	image->invert_cmyk_jpeg = 1;
 	image->interpolate = interpolate;
 	image->imagemask = imagemask;
 	image->use_colorkey = (colorkey != NULL);
