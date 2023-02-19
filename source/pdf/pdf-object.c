@@ -32,6 +32,8 @@
 
 #if FZ_ENABLE_PDF
 
+#define PDF_SANE_MAX_TREE_DEPTH   600 /* SumatraPDF */   // alt: 100 /* Artifex */
+
 #define PDF_MAKE_NAME(STRING,NAME) STRING,
 static const char *PDF_NAME_LIST[] = {
 	"", "", "", /* dummy slots for null, true, and false */
@@ -2160,25 +2162,13 @@ pdf_dict_get(fz_context *ctx, pdf_obj *obj, pdf_obj *key)
 		return NULL;
 	if (!OBJ_IS_NAME(key))
 		return NULL;
-	if (0) fprintf(stderr, "%s:%i:%s: key=%p\n",
-			__FILE__, __LINE__, __FUNCTION__,
-			key
-			);
+
 	if (key < PDF_LIMIT)
 		i = pdf_dict_find(ctx, obj, key);
 	else
 	{
-		const char* n = pdf_to_name(ctx, key);
-		if (0) fprintf(stderr, "%s:%i:%s: n=%s\n",
-				__FILE__, __LINE__, __FUNCTION__,
-				n
-				);
 		i = pdf_dict_finds(ctx, obj, pdf_to_name(ctx, key));
 	}
-	if (0) fprintf(stderr, "%s:%i:%s: i=%i\n",
-			__FILE__, __LINE__, __FUNCTION__,
-			i
-			);
 	if (i >= 0)
 		return DICT(obj)->items[i].v;
 	return NULL;
@@ -2642,7 +2632,10 @@ pdf_cycle(fz_context *ctx, pdf_cycle_list *here, pdf_cycle_list *up, pdf_obj *ob
 			{
 				// cycle detected: see if `countdown` is depleted by now
 				if (x->countdown <= 0)
+				{
+					here->countdown = up->countdown - 1;
 					return 1;
+				}
 				// otherwise, silently allow the cycle to proceed yet another round
 				//
 				// NOTE: make sure to copy the countdown to `here` as *that* will be
@@ -4584,7 +4577,7 @@ pdf_dict_get_inheritable_imp(fz_context *ctx, pdf_obj *node, pdf_obj *key, int d
 		return val;
 	if (pdf_cycle(ctx, &cycle, cycle_up, node))
 		fz_throw(ctx, FZ_ERROR_GENERIC, "cycle in tree (parents)");
-	if (depth > 100)
+	if (depth > PDF_SANE_MAX_TREE_DEPTH)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "too much recursion in tree (parents)");
 	node = pdf_dict_get(ctx, node, PDF_NAME(Parent));
 	if (node)
@@ -4607,7 +4600,7 @@ pdf_dict_getp_inheritable_imp(fz_context *ctx, pdf_obj *node, const char *path, 
 		return val;
 	if (pdf_cycle(ctx, &cycle, cycle_up, node))
 		fz_throw(ctx, FZ_ERROR_GENERIC, "cycle in tree (parents)");
-	if (depth > 100)
+	if (depth > PDF_SANE_MAX_TREE_DEPTH)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "too much recursion in tree (parents)");
 	node = pdf_dict_get(ctx, node, PDF_NAME(Parent));
 	if (node)

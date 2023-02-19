@@ -162,7 +162,7 @@ fz_write_pixmap_as_jpeg(fz_context *ctx, fz_output *out, const fz_pixmap *pix, i
 
 		if (fz_colorspace_is_subtractive(ctx, pix->colorspace))
 		{
-			// treat `fz_pixmap *pix` as mutable: reverseee the invert op now.
+			// treat `fz_pixmap *pix` as mutable: reverse the invert op now.
 			fz_invert_pixmap_raw(ctx, (fz_pixmap*)pix);
 		}
 

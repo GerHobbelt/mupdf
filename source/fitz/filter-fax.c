@@ -726,7 +726,9 @@ eol:
 			fax->dim = 2;
 	}
 
-	/* If we're not expecting an EOL, try and align. If the alignment is invalid
+	/* SumatraPDF: from https://bugs.ghostscript.com/show_bug.cgi?id=702896 */
+	/*
+     * If we're not expecting an EOL, try and align. If the alignment is invalid
 	 * (not all zeros), skip it and turn off the alignment flag.
 	 *
 	 * A note about how this works: when we start reading a line (in "loop"

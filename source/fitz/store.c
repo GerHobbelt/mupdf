@@ -584,7 +584,7 @@ fz_store_item(fz_context *ctx, void *key, void *val_, size_t itemsize, const fz_
 			//    by a competing thread from under my arse as soon as the lock was lifted just
 			//    above.
 			//
-			// My fault wqs I was thinking insert/find/remove, but there's also
+			// My fault was I was thinking insert/find/remove, but there's also
 			// `fz_empty_store()` to consider!! Now that one sounds nice and atomic
 			// at first glance and it really doesn't matter if it is, because
 			// I finally got to the point where I could look at the `item` and
