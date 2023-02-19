@@ -122,8 +122,8 @@ struct pdf_cycle_list {
 	pdf_cycle_list *up;
 	int num;
 	int countdown;
-
 };
+
 /**
 	Mark & detect cycles in the `pdf_obj` graph.
 
