@@ -2278,10 +2278,8 @@ bulktest_main(int argc, const char **argv)
 						//
 						// construct the other parameters from the first:
 						char* p = fz_strdup(ctx, template_argv[0]);
+						fz_normalize_path(ctx, p, strlen(p) + 1, p);
 						char* q1 = strrchr(p, '/');
-						char* q2 = strrchr(p, '\\');
-						if (q2 > q1)
-							q1 = q2;
 						if (q1)
 						{
 							*q1 = 0;
