@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_MANTICORE;MANTICORE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -124,7 +124,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/manticoresearch/src;../../thirdparty/owemdjee/manticoresearch/src/replication;../../thirdparty/owemdjee/manticore-columnar;../../thirdparty/owemdjee/manticore-columnar/util;../../thirdparty/owemdjee/pthread-win32;../../scripts/boost/include;../../thirdparty/owemdjee/fast_pfor/headers;../../thirdparty/owemdjee/zstd/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/manticoresearch/src;../../thirdparty/owemdjee/manticoresearch/src/replication;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/manticore-columnar;../../thirdparty/owemdjee/boost/libs/fiber/include;../../thirdparty/owemdjee/manticore-columnar/util;../../thirdparty/owemdjee/boost;../../thirdparty/owemdjee/fast_pfor/headers;../../thirdparty/owemdjee/zstd/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>USE_LITTLE_ENDIAN;BUILD_MONOLITHIC;BUILDING_MANTICORE;MANTICORE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -150,7 +150,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/manticoresearch/src;../../thirdparty/owemdjee/manticoresearch/src/replication;../../thirdparty/owemdjee/manticore-columnar;../../thirdparty/owemdjee/manticore-columnar/util;../../thirdparty/owemdjee/pthread-win32;../../scripts/boost/include;../../thirdparty/owemdjee/fast_pfor/headers;../../thirdparty/owemdjee/zstd/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/manticoresearch/src;../../thirdparty/owemdjee/manticoresearch/src/replication;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/manticore-columnar;../../thirdparty/owemdjee/boost/libs/fiber/include;../../thirdparty/owemdjee/manticore-columnar/util;../../thirdparty/owemdjee/boost;../../thirdparty/owemdjee/fast_pfor/headers;../../thirdparty/owemdjee/zstd/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>USE_LITTLE_ENDIAN;BUILD_MONOLITHIC;BUILDING_MANTICORE;MANTICORE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -179,7 +179,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/manticoresearch/src;../../thirdparty/owemdjee/manticoresearch/src/replication;../../thirdparty/owemdjee/manticore-columnar;../../thirdparty/owemdjee/manticore-columnar/util;../../thirdparty/owemdjee/pthread-win32;../../scripts/boost/include;../../thirdparty/owemdjee/fast_pfor/headers;../../thirdparty/owemdjee/zstd/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/manticoresearch/src;../../thirdparty/owemdjee/manticoresearch/src/replication;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/manticore-columnar;../../thirdparty/owemdjee/boost/libs/fiber/include;../../thirdparty/owemdjee/manticore-columnar/util;../../thirdparty/owemdjee/boost;../../thirdparty/owemdjee/fast_pfor/headers;../../thirdparty/owemdjee/zstd/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>USE_LITTLE_ENDIAN;BUILD_MONOLITHIC;BUILDING_MANTICORE;MANTICORE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -205,7 +205,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/manticoresearch/src;../../thirdparty/owemdjee/manticoresearch/src/replication;../../thirdparty/owemdjee/manticore-columnar;../../thirdparty/owemdjee/manticore-columnar/util;../../thirdparty/owemdjee/pthread-win32;../../scripts/boost/include;../../thirdparty/owemdjee/fast_pfor/headers;../../thirdparty/owemdjee/zstd/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/manticoresearch/src;../../thirdparty/owemdjee/manticoresearch/src/replication;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/manticore-columnar;../../thirdparty/owemdjee/boost/libs/fiber/include;../../thirdparty/owemdjee/manticore-columnar/util;../../thirdparty/owemdjee/boost;../../thirdparty/owemdjee/fast_pfor/headers;../../thirdparty/owemdjee/zstd/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>USE_LITTLE_ENDIAN;BUILD_MONOLITHIC;BUILDING_MANTICORE;MANTICORE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -730,8 +730,11 @@
     <Text Include="../../thirdparty/owemdjee/manticoresearch/api/libsphinxclient/smoke.cmake" />
     <Text Include="../../thirdparty/owemdjee/manticoresearch/api/libsphinxclient/smoke_data.csv" />
     <Text Include="../../thirdparty/owemdjee/manticoresearch/api/libsphinxclient/smoke_ref.txt" />
+    <Text Include="../../thirdparty/owemdjee/manticoresearch/api/libsphinxclient/smoke_test.conf" />
     <Text Include="../../thirdparty/owemdjee/manticoresearch/api/libsphinxclient/smoke_test.sh" />
     <Text Include="../../thirdparty/owemdjee/manticoresearch/api/ruby/README.rdoc" />
+    <Text Include="../../thirdparty/owemdjee/manticoresearch/api/ruby/spec/sphinx/sphinx-id64.conf" />
+    <Text Include="../../thirdparty/owemdjee/manticoresearch/api/ruby/spec/sphinx/sphinx.conf" />
     <Text Include="../../thirdparty/owemdjee/manticoresearch/api/sphinxapi.py" />
     <Text Include="../../thirdparty/owemdjee/manticoresearch/api/test.py" />
     <Text Include="../../thirdparty/owemdjee/manticoresearch/api/test2.py" />
@@ -1148,6 +1151,7 @@
     <Text Include="../../thirdparty/owemdjee/manticoresearch/misc/resolve.py" />
     <Text Include="../../thirdparty/owemdjee/manticoresearch/misc/stopwords/languages_list.txt" />
     <Text Include="../../thirdparty/owemdjee/manticoresearch/misc/suggest/README" />
+    <Text Include="../../thirdparty/owemdjee/manticoresearch/misc/suggest/suggest.conf" />
     <Text Include="../../thirdparty/owemdjee/manticoresearch/misc/winbundle/EXPATConfig.cmake" />
     <Text Include="../../thirdparty/owemdjee/manticoresearch/misc/winbundle/IconvConfig.cmake" />
     <Text Include="../../thirdparty/owemdjee/manticoresearch/misc/winbundle/MysqlConfig.cmake" />
@@ -1206,6 +1210,7 @@
     <Text Include="../../thirdparty/owemdjee/manticoresearch/test/html_120.txt" />
     <Text Include="../../thirdparty/owemdjee/manticoresearch/test/ql/README" />
     <Text Include="../../thirdparty/owemdjee/manticoresearch/test/ql/qltest.py" />
+    <Text Include="../../thirdparty/owemdjee/manticoresearch/test/ql/sphinx.conf" />
     <Text Include="../../thirdparty/owemdjee/manticoresearch/test/ql/t.cmd" />
     <Text Include="../../thirdparty/owemdjee/manticoresearch/test/ql/t2.cmd" />
     <Text Include="../../thirdparty/owemdjee/manticoresearch/test/stopwords.txt" />
@@ -1325,6 +1330,10 @@
     <Text Include="../../thirdparty/owemdjee/manticoresearch/test/test_409/wf1.txt" />
     <Text Include="../../thirdparty/owemdjee/manticoresearch/test/test_409/wf3.txt" />
     <Text Include="../../thirdparty/owemdjee/manticoresearch/test/test_432/data1.csv" />
+    <Text Include="../../thirdparty/owemdjee/manticoresearch/test/test_columnar.conf" />
+    <Text Include="../../thirdparty/owemdjee/manticoresearch/test/test_icu.conf" />
+    <Text Include="../../thirdparty/owemdjee/manticoresearch/test/test_odbc.conf" />
+    <Text Include="../../thirdparty/owemdjee/manticoresearch/test/test_re.conf" />
     <Text Include="../../thirdparty/owemdjee/manticoresearch/test/ubertest.php.in" />
     <Text Include="../../thirdparty/owemdjee/manticoresearch/test/wordforms.txt" />
     <Xml Include="../../thirdparty/owemdjee/manticoresearch/doc/manpages.xml" />
@@ -1755,7 +1764,8 @@
     <Xml Include="../../thirdparty/owemdjee/manticoresearch/test/test_452/test.xml" />
     <Xml Include="../../thirdparty/owemdjee/manticoresearch/test/test_453/test.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  
