@@ -97,7 +97,7 @@ size_t fz_strlcat(char *dst, const char *src, size_t n);
 
 	This is similar to regular RTL strncpy() with these differences:
 
-	- `fz_strncpy_s()` DOES NOT pad `dst` with extra NUL bytes
+	- `fz_strncpy_s()` DOES NOT pad `dst` with surplus NUL bytes
 	  after the string-sentinel (NUL).
 	- no more than `dstsiz` characters in `src` will be accessed
 	  at any time, hence you can legally feed this function a

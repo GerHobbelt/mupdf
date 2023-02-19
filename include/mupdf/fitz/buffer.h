@@ -79,7 +79,7 @@ size_t fz_buffer_storage(fz_context *ctx, fz_buffer *buf, unsigned char **datap)
 	Ensure that a buffer's data ends in a
 	0 byte, and return a pointer to the buffer content.
 
-	WARNING: If the buffer may contain NUL bytes, these will prematurely terminate
+	WARNING: If the buffer contains NUL data bytes, these will prematurely terminate
 	the returned C string. Use
 
 		fz_terminate_buffer(ctx, buf);

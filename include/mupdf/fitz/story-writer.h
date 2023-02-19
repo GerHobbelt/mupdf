@@ -28,6 +28,10 @@
 
 #if FZ_ENABLE_HTML
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
  * A fz_story_element_position plus page number information; used with
  * fz_write_story() and fz_write_stabilized_story().
@@ -207,6 +211,10 @@ void fz_write_stabilized_story(
 		void *pagefn_ref,
 		fz_archive *archive
 		);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

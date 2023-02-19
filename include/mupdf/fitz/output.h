@@ -493,7 +493,7 @@ void fz_truncate_output(fz_context *, fz_output *);
 
 	The naive implementation would have cost O(M+N) instead: copy M old/existing + 1 write (+ 1 rename).
 	As we expect 'M' to be large/huge, compared to the amount of data we expect to append,
-	the append-on-close scheme was chosen to reduce I/O costs.
+	the append-on-close scheme was chosen to reduce I/O costs (assuming 3N < M+N for the average case).
 
 	Note:
 
