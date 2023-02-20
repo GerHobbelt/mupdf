@@ -178,11 +178,8 @@ static void clearinfo(fz_context *ctx, globals *glo)
 
 static void closexref(fz_context *ctx, globals *glo)
 {
-	if (glo->doc)
-	{
-		pdf_drop_document(ctx, glo->doc);
-		glo->doc = NULL;
-	}
+	pdf_drop_document(ctx, glo->doc);
+	glo->doc = NULL;
 
 	clearinfo(ctx, glo);
 }
