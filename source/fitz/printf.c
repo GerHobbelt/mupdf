@@ -1293,9 +1293,55 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					fmtputc(&out, '"');
 				break;
 
+#if FZ_ENABLE_PDF
+
+			case 'O':
+				// print pdf_object a.k.a. 'node'
+				{
+					size_t len = 0;
+					pdf_obj* node = va_arg(args, pdf_obj*);
+					fz_context* ctx2 = ctx ? ctx : fz_get_global_context();
+					const char* str = pdf_sprint_obj_to_json(ctx2, NULL, 1024, &len, node, PDF_PRINT_RESOLVE_ALL_INDIRECT | PDF_PRINT_LIMITED_ARRAY_DUMP | PDF_PRINT_JSON_BINARY_DATA_AS_HEX_PLUS_RAW | PDF_DO_NOT_THROW_ON_CONTENT_PARSE_FAULTS | PDF_PRINT_JSON_DEPTH_LEVEL(4));
+
+					int linecount = w > 1 ? w : 12;
+					int truncated = 0;
+
+					const char *nlp = strchr(str, '\n');
+					while (--linecount > 0 && nlp)
+					{
+						nlp = strchr(nlp + 1, '\n');
+					}
+					if (nlp)
+					{
+						((char*)nlp)[0] = 0;
+						truncated = 1;
+					}
+					char buf[400];
+					fz_strncpy_s(ctx2, buf, str, sizeof(buf));
+					// push the truncated marker: if the already trancated output is long enough, it will 'connect':
+					size_t offset = sizeof(buf) - sizeof("(...truncated...)");
+					size_t slen = strlen(buf);
+					if (truncated && slen < offset)
+						offset = slen;
+					strcpy(buf + offset, "(...truncated...)");
+
+					fz_free(ctx2, str);
+					str = buf;
+
+					if (0)
+					{
+			case 's':
+						str = va_arg(args, const char*);
+					}
+
+#else
+
 			case 's':
 				{
 					const char* str = va_arg(args, const char*);
+
+#endif
+
 					// when precision has been specified, but is NEGATIVE, than this is a special mode:
 					// discover how to best print the data buffer:
 					if (p < 0 && str && *str) {

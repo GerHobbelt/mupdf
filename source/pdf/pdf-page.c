@@ -72,7 +72,7 @@ pdf_load_page_tree_imp(fz_context *ctx, pdf_document *doc, pdf_obj *node, int id
 	}
 	else if (type == NULL)
 	{
-		fz_warn(ctx, "non-page object in page tree (%s) -- ignoring the (probably corrupt) fast page tree", pdf_to_name_not_null(ctx, type));
+		fz_warn(ctx, "non-page object in page tree -- ignoring the (probably corrupt) fast page tree for node: %O", node);
 	}
 	else
 	{
