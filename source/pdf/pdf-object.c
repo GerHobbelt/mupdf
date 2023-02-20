@@ -4319,6 +4319,8 @@ static void fmt_obj_to_json(fz_context* ctx, struct fmt* fmt, pdf_obj* obj)
 										i--;
 										if (isspace(string_value[i]))
 											string_value[i] = 0;
+										else
+											break;
 									}
 
 									fz_error(ctx, "%s\n", string_value);
