@@ -465,7 +465,7 @@ pdf_dev_font(fz_context *ctx, pdf_device *pdev, fz_font *font, fz_matrix trm)
 	// TODO: vertical wmode
 
 	if (fz_font_t3_procs(ctx, font))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "pdf device does not support type 3 fonts");
+		fz_throw(ctx, FZ_ERROR_GENERIC, "pdf device does not support type 3 fonts (font name: %q)", font->name);
 
 	if (font->flags.is_base14)
 		gs->font = pdf_dev_add_base14_font_res(ctx, pdev, font);

@@ -1464,7 +1464,8 @@ static void show_progress_on_stderr(struct logconfig* logcfg, progress_msg_level
             else if (!strncmp(message, "ERR:", 4))
             {
                 //fprintf(stderr, u8"❎");
-                fprintf(stderr, "[E]");
+				fprintf(stderr, "[E]");
+				fprintf(stderr, "\n%s\n", message);
             }
             else if (!strncmp(message, "::ECHO: ", 8))
             {
@@ -1488,11 +1489,25 @@ static void show_progress_on_stderr(struct logconfig* logcfg, progress_msg_level
             }
             else
             {
-                switch (level)
+				static int state = 0;
+				switch (level)
                 {
                 case PML_ERROR:
-                    fprintf(stderr, "?");
-                    break;
+					fprintf(stderr, "?");
+					if (!strncmp(message, "LEAK? #", 7))
+					{
+						state++;
+					}
+					else
+					{
+						state = 0;
+					}
+					// only list a limited number of reported leaks per file/run:
+					// we 'fake' that heuristic by shutting up the leak reporter until
+					// we've observed some *other* error in the meantime:
+					if (state < 3)
+						fprintf(stderr, "\n%s\n", message);
+					break;
 
                 case PML_WARNING:
                     fprintf(stderr, "w");
@@ -2277,8 +2292,9 @@ bulktest_main(int argc, const char **argv)
 						// apparently we're loading a LST file instead of a full-fledged TSV.
 						//
 						// construct the other parameters from the first:
-						char* p = fz_strdup(ctx, template_argv[0]);
+						char* p = template_argv[0];
 						fz_normalize_path(ctx, p, strlen(p) + 1, p);
+						p = fz_strdup(ctx, p);
 						char* q1 = strrchr(p, '/');
 						if (q1)
 						{
