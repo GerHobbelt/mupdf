@@ -4543,7 +4543,9 @@ pdf_sprint_obj_to_json(fz_context* ctx, char* buf, size_t cap, size_t* len, pdf_
 
 	if (!buf || cap == 0)
 	{
-		fmt.cap = 1024;
+		if (cap == 0)
+			cap = 1024;
+		fmt.cap = cap;
 		fmt.buf = NULL;
 		fmt.ptr = Memento_label(fz_malloc(ctx, fmt.cap), "fmt_buf");
 	}
