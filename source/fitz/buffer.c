@@ -225,6 +225,7 @@ void
 fz_grow_buffer(fz_context *ctx, fz_buffer *buf)
 {
 	size_t newsize = (buf->cap * 3) / 2;
+	newsize = (newsize + 15) & ~15;   // 'align' upwards to 16-byte sizes
 	if (newsize == 0)
 		newsize = 256;
 	fz_resize_buffer(ctx, buf, newsize);
