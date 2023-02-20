@@ -561,7 +561,7 @@ fz_outline_iterator *pdf_new_outline_iterator(fz_context *ctx, pdf_document *doc
 		//
 		// I'm sure I'm missing something here, probably some dependency thing or what-not, but after 4+ hours of looking
 		// I haven't found what's wrong, so the leakage prevention code wins, bad luck for the page cache for the outline...
-		if (page_tree_loaded && 01)
+		if (page_tree_loaded)
 			pdf_drop_page_tree(ctx, doc);
 
 		pdf_drop_mark_bits(ctx, marks);
