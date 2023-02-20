@@ -1543,7 +1543,7 @@ static void prepare_object_for_alteration(fz_context *ctx, pdf_obj *obj, pdf_obj
 	}
 
 	/* Drop the reverse page map on any modification to the document. */
-	if (doc && !doc->caching_object && doc->rev_page_map)
+	while (doc && !doc->caching_object && doc->rev_page_map)
 		pdf_drop_page_tree(ctx, doc);
 
 	if (val)

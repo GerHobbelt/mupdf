@@ -503,6 +503,7 @@ fz_outline_iterator *pdf_new_outline_iterator(fz_context *ctx, pdf_document *doc
 	pdf_mark_bits *marks;
 	pdf_outline_iterator *iter = NULL;
 	int fixed = 0;
+	int page_tree_loaded = 0;
 
 	/* Walk the outlines to spot problems that might bite us later
 	 * (in particular, for cycles). */
@@ -517,6 +518,8 @@ fz_outline_iterator *pdf_new_outline_iterator(fz_context *ctx, pdf_document *doc
 			/* cache page tree for fast link destination lookups. This
 			 * will be dropped 'just in time' on writes to the doc. */
 			pdf_load_page_tree(ctx, doc);
+			page_tree_loaded = 1;
+
 			fz_try(ctx)
 			{
 				/* Pass through the outlines once, fixing inconsistencies */
@@ -540,9 +543,28 @@ fz_outline_iterator *pdf_new_outline_iterator(fz_context *ctx, pdf_document *doc
 		}
 	}
 	fz_always(ctx)
+	{
+		// [GerHobbelt]: to be explained: this call here effectively nukes the cache, but also PREVENTS a large number of small
+		// memory leaks.
+		//
+		// The odd part is that this same API is called later (at document modification *plus* at drop_document time) and when
+		// the reference counter is checked then (WITHOUT this API call here) it LOOKS like the same cleanup is performed YET
+		// we're stuck with a ton of heap allocation leakages at the end then.
+		//
+		// I'm sure I'm missing something here, probably some dependency thing or what-not, but after 4+ hours of looking
+		// I haven't found what's wrong, so the leakage prevention code wins, bad luck for the page cache for the outline...
+		if (page_tree_loaded)
+			pdf_drop_page_tree(ctx, doc);
+
 		pdf_drop_mark_bits(ctx, marks);
+	}
 	fz_catch(ctx)
+	{
+		if (page_tree_loaded)
+			pdf_drop_page_tree(ctx, doc);
+
 		fz_rethrow(ctx);
+	}
 
 	iter = fz_new_derived_outline_iter(ctx, pdf_outline_iterator, &doc->super);
 	iter->super.del = pdf_outline_iterator_del;

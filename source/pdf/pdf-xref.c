@@ -1437,9 +1437,10 @@ read_xref_section(fz_context *ctx, pdf_document *doc, int64_t ofs)
 	int64_t xrefstmofs = 0;
 	int64_t prevofs = 0;
 
-	trailer = pdf_read_xref(ctx, doc, ofs);
 	fz_try(ctx)
 	{
+		trailer = pdf_read_xref(ctx, doc, ofs);
+
 		pdf_set_populating_xref_trailer(ctx, doc, trailer);
 
 		/* FIXME: do we overwrite free entries properly? */
@@ -1890,6 +1891,9 @@ static void
 pdf_drop_document_imp(fz_context *ctx, pdf_document *doc)
 {
 	int i;
+
+	while (doc && doc->rev_page_map)
+		pdf_drop_page_tree(ctx, doc);
 
 	fz_defer_reap_start(ctx);
 
@@ -2959,10 +2963,6 @@ static int __pdf_authenticate_password(fz_context* ctx, fz_document* doc, const 
 static int __pdf_has_permission(fz_context* ctx, fz_document* doc, fz_permission permission)
 {
 	return pdf_has_permission(ctx, pdf_document_from_fz_document(ctx, doc), permission);
-}
-static fz_outline* __pdf_load_outline(fz_context* ctx, fz_document* doc)
-{
-	return pdf_load_outline(ctx, pdf_document_from_fz_document(ctx, doc));
 }
 static fz_outline_iterator* __pdf_new_outline_iterator(fz_context* ctx, fz_document* doc)
 {
