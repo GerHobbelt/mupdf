@@ -108,9 +108,6 @@
     <Filter Include="Source Files\examples">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0033}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\examples\avscolor">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0032}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\examples\mmenu">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0034}</UniqueIdentifier>
     </Filter>
@@ -152,19 +149,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/examples/avscolor/termcolor.cpp">
-      <Filter>Source Files\examples\avscolor</Filter>
-    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/tvision/examples/mmenu/mmenu.cpp">
       <Filter>Source Files\examples\mmenu</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/examples/mmenu/test.cpp">
+    <ClCompile Include="..\..\thirdparty\owemdjee\tvision\examples\mmenu\mm_test.cpp">
       <Filter>Source Files\examples\mmenu</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/examples/palette/palette.cpp">
+    <ClCompile Include="..\..\thirdparty\owemdjee\tvision\examples\palette\palette_example.cpp">
       <Filter>Source Files\examples\palette</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/examples/palette/test.cpp">
+    <ClCompile Include="..\..\thirdparty\owemdjee\tvision\examples\palette\p_test.cpp">
       <Filter>Source Files\examples\palette</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/tvision/examples/tvdemo/ascii.cpp">
@@ -263,6 +257,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/events.cpp">
       <Filter>Source Files\source\platform</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/far2l.cpp">
+      <Filter>Source Files\source\platform</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/findfrst.cpp">
       <Filter>Source Files\source\platform</Filter>
     </ClCompile>
@@ -315,6 +312,9 @@
       <Filter>Source Files\source\platform</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/win32con.cpp">
+      <Filter>Source Files\source\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/windows.cpp">
       <Filter>Source Files\source\platform</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/winwidth.cpp">
@@ -656,6 +656,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tcheckbo.cpp">
       <Filter>Source Files\source\tvision</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tclipbrd.cpp">
+      <Filter>Source Files\source\tvision</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tcluster.cpp">
       <Filter>Source Files\source\tvision</Filter>
     </ClCompile>
@@ -815,6 +818,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tsurface.cpp">
       <Filter>Source Files\source\tvision</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/ttimerqu.cpp">
+      <Filter>Source Files\source\tvision</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/ttprvlns.cpp">
       <Filter>Source Files\source\tvision</Filter>
     </ClCompile>
@@ -845,10 +851,19 @@
     <ClCompile Include="../../thirdparty/owemdjee/tvision/test/platform/base64.test.cpp">
       <Filter>Source Files\test\platform</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/tvision/test/platform/far2l.test.cpp">
+      <Filter>Source Files\test\platform</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/tvision/test/platform/terminal.test.cpp">
       <Filter>Source Files\test\platform</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/tvision/test/platform/ttext.test.cpp">
+      <Filter>Source Files\test\platform</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/tvision/test/tvision/tkey.test.cpp">
+      <Filter>Source Files\test\tvision</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/tvision/test/tvision/ttimerqu.test.cpp">
       <Filter>Source Files\test\tvision</Filter>
     </ClCompile>
     <ClInclude Include="../../thirdparty/owemdjee/tvision/examples/mmenu/cmds.h">
@@ -1013,9 +1028,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/base64.h">
       <Filter>Header Files\include\tvision\internal</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/buffdisp.h">
-      <Filter>Header Files\include\tvision\internal</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/codepage.h">
       <Filter>Header Files\include\tvision\internal</Filter>
     </ClInclude>
@@ -1028,7 +1040,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/cursor.h">
       <Filter>Header Files\include\tvision\internal</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/dispbuff.h">
+      <Filter>Header Files\include\tvision\internal</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/events.h">
+      <Filter>Header Files\include\tvision\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/far2l.h">
       <Filter>Header Files\include\tvision\internal</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/findfrst.h">
