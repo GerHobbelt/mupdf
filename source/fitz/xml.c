@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+﻿// Copyright (C) 2004-2022 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -473,17 +473,93 @@ size_t xml_parse_entity(int *c, const char *a)
 	return 1;
 }
 
-static inline int isname(int c)
+static inline int isname(const char* p)
 {
-	return c == '.' || c == '-' || c == '_' || c == ':' ||
-		(c >= '0' && c <= '9') ||
-		(c >= 'A' && c <= 'Z') ||
-		(c >= 'a' && c <= 'z');
+	const unsigned char c = *p;
+	if (c < Runeself)
+		return c == '.' || c == '-' || c == '_' || c == ':' ||
+			(c >= '0' && c <= '9') ||
+			(c >= 'A' && c <= 'Z') ||
+			(c >= 'a' && c <= 'z');
+
+	int rune;
+	int l = fz_chartorune_unsafe(&rune, p);
+
+	if (l <= 1)
+		return 0;    // bad UTF8 char is NOT a name/identifier char
+
+	// VERY rough check for non-white, non-punctuation as we want to be fast and not bother with
+	// very detailed checks here: afteer all, anything downstream using the tags and otheer 'identifiers'
+	// we extract/decode this way, will know instantly that this is crap when it actually *is*...
+	if (rune < 0x10000)
+	{ 
+		if ((rune >= 0x0080 && rune < 0x2000) || (rune >= 0x2070 && rune < 0x2190) || (rune >= 0x2440 && rune < 0x2500) ||
+			(rune >= 0x2C00 && rune < 0xD800) || (rune >= 0xF900 && rune < 0xFFF0))
+		{
+			return l;
+		}
+	}
+	else
+	{
+		if (rune >= 0x10000 && rune < 0x3FF80)
+		{
+			return l;
+		}
+	}
+
+	// anything else: tough luck, cannot be part of a namee/id:
+	return 0;
 }
 
-static inline int iswhite(int c)
+static inline const char* jump_past_name(const char* p)
 {
-	return c == ' ' || c == '\r' || c == '\n' || c == '\t';
+	int l;
+	do {
+		l = isname(p);
+		p += l;         // we can do this, thanks to the way we coded isname()
+	} while (l);
+	return p;
+}
+
+static inline int iswhite(const char *p)
+{
+	const unsigned char c = *p;
+	if (c < Runeself)
+		return c == ' ' || c == '\r' || c == '\n' || c == '\t';
+
+	/*
+ 	 	•	other space characters: 2000 ␣-200A ␣
+ 	 	→	00A0 ␣ no-break space
+ 	 	→	200B ⬚ zero width space
+ 	 	→	202F ␣ narrow no-break space
+ 	 	→	2060 ⬚ word joiner
+ 	 	→	2420 ␠ symbol for space
+ 	 	→	2422 ␢ blank symbol
+ 	 	→	2423 ␣ open box
+ 	 	→	3000 ␣ ideographic space
+ 	 	→	FEFF ⬚ zero width no-break space
+	*/
+	int rune;
+	int l = fz_chartorune_unsafe(&rune, p);
+	if (l <= 1)
+		return 0;    // bad UTF8 char is NOT a space
+
+	if ((rune >= 0x2000 && rune <= 0x200A) || rune == 0x00A0 || rune == 0x202F)
+		return l;
+
+	// we don't consideer the rest of the 'spaces' as possibly valid in an XML (or hairy/buggered XML) environment.
+	// We are only *so* flexible & lenient.
+	return 0;
+}
+
+static inline const char* jump_past_white(const char* p)
+{
+	int l;
+	do {
+		l = iswhite(p);
+		p += l;         // we can do this, thanks to the way we coded iswhite()
+	} while (l);
+	return p;
 }
 
 static void xml_emit_open_tag(fz_context *ctx, struct parser *parser, const char *a, const char *b, int is_text)
@@ -610,7 +686,7 @@ static void xml_emit_text(fz_context *ctx, struct parser *parser, const char *a,
 	if (!parser->preserve_white)
 	{
 		for (p = a; p < b; p++)
-			if (!iswhite(*p))
+			if (!iswhite(p))
 				break;
 		if (p == b)
 			return;
@@ -690,8 +766,8 @@ parse_element:
 	if (*p == '/') { ++p; goto parse_closing_element; }
 	if (*p == '!') { ++p; goto parse_comment; }
 	if (*p == '?') { ++p; goto parse_processing_instruction; }
-	while (iswhite(*p)) ++p;
-	if (isname(*p))
+	p = jump_past_white(p);
+	if (isname(p))
 		goto parse_element_name;
 	return "syntax error in element";
 
@@ -742,12 +818,12 @@ parse_processing_instruction:
 	return "end of data in processing instruction";
 
 parse_closing_element:
-	while (iswhite(*p)) ++p;
+	p = jump_past_white(p);
 	mark = p;
-	while (isname(*p)) ++p;
+	p = jump_past_name(p);
 	if (close_tag(ctx, parser, mark, p))
 		return "opening and closing tag mismatch";
-	while (iswhite(*p)) ++p;
+	p = jump_past_white(p);
 	if (*p != '>')
 		return "syntax error in closing element";
 	++p;
@@ -755,7 +831,7 @@ parse_closing_element:
 
 parse_element_name:
 	mark = p;
-	while (isname(*p)) ++p;
+	p = jump_past_name(p);
 	xml_emit_open_tag(ctx, parser, mark, p, 0);
 	if (*p == '>') {
 		++p;
@@ -766,13 +842,13 @@ parse_element_name:
 		p += 2;
 		goto parse_text;
 	}
-	if (iswhite(*p))
+	if (iswhite(p))
 		goto parse_attributes;
 	return "syntax error after element name";
 
 parse_attributes:
-	while (iswhite(*p)) ++p;
-	if (isname(*p))
+	p = jump_past_white(p);
+	if (isname(p))
 		goto parse_attribute_name;
 	if (*p == '>') {
 		++p;
@@ -787,14 +863,14 @@ parse_attributes:
 
 parse_attribute_name:
 	mark = p;
-	while (isname(*p)) ++p;
+	p = jump_past_name(p);
 	xml_emit_att_name(ctx, parser, mark, p);
-	while (iswhite(*p)) ++p;
+	p = jump_past_white(p);
 	if (*p == '=') { ++p; goto parse_attribute_value; }
 	return "syntax error after attribute name";
 
 parse_attribute_value:
-	while (iswhite(*p)) ++p;
+	p = jump_past_white(p);
 	quote = *p++;
 	mark = p;
 
@@ -1096,7 +1172,7 @@ static void xml_from_gumbo(fz_context *ctx, struct parser *parser, GumboNode *no
 			if (tag[0] == '<')
 				++tag;
 			for (end = tag; end < sentinel; ++end)
-				if (end[0] == '>' || end[0] == '/' || iswhite(end[0]))
+				if (end[0] == '>' || end[0] == '/' || iswhite(end))
 					break;
 		}
 		xml_emit_open_tag(ctx, parser, tag, end, 0);
