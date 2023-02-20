@@ -465,7 +465,7 @@ struct pdf_document
     // - 0x02: page list repair.
     int repair_attempted;
     int repair_in_progress;
-	int caching_object; /* True while we are parsing an object. */
+	int non_structural_change; /* True if we are modifying the document in a way that does not change the (page) structure */
 
     /* Flag to be set while loading signature details */
     int reading_unencrypted_and_uncached;
