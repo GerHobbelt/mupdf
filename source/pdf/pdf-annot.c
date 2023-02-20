@@ -430,6 +430,9 @@ pdf_annot_type_from_string(fz_context *ctx, const char *subtype)
 static void
 begin_annot_op(fz_context *ctx, pdf_annot *annot, const char *op)
 {
+	if (annot->page == NULL)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot alter annotation deleted from page");
+
 	pdf_begin_operation(ctx, annot->page->doc, op);
 }
 
@@ -935,6 +938,8 @@ pdf_delete_annot(fz_context *ctx, pdf_page *page, pdf_annot *annot)
 			pdf_obj *fields = pdf_dict_get(ctx, acroform, PDF_NAME(Fields));
 			(void)remove_from_tree(ctx, fields, annot->obj, NULL);
 		}
+
+		annot->page = NULL;
 
 		/* The garbage collection pass when saving will remove the annot object,
 		 * removing it here may break files if multiple pages use the same annot. */

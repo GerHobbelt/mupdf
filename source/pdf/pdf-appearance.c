@@ -3036,7 +3036,12 @@ pdf_signature_info(fz_context *ctx, const char *name, pdf_pkcs7_distinguished_na
 void
 pdf_annot_push_local_xref(fz_context *ctx, pdf_annot *annot)
 {
-	pdf_document *doc = annot->page->doc;
+	pdf_document *doc;
+
+	if (annot->page == NULL)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot push local xref, since annotation deleted from page");
+
+	doc = annot->page->doc;
 
 #ifdef PDF_DEBUG_APPEARANCE_SYNTHESIS
 	if (doc->local_xref_nesting == 0 && doc->local_xref)
@@ -3048,7 +3053,12 @@ pdf_annot_push_local_xref(fz_context *ctx, pdf_annot *annot)
 void
 pdf_annot_ensure_local_xref(fz_context *ctx, pdf_annot *annot)
 {
-	pdf_document *doc = annot->page->doc;
+	pdf_document *doc;
+
+	if (annot->page == NULL)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot ensure local xref, since annotation deleted from page");
+
+	doc = annot->page->doc;
 
 	if (doc->local_xref != NULL)
 		return;
