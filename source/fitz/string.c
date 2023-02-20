@@ -922,17 +922,6 @@ bad:
 	return 1;
 }
 
-/*
-* 'Unsafe' version of chars->unicode point: this one assumes your
-* input string is properly NUL terminated, which will help it detect
-* invalid UTF8 inputs.
-*/
-int
-fz_chartorune_unsafe(int* rune, const char* str)
-{
-	return fz_chartorune(rune, str, 7 /* arbitrary */);
-}
-
 int
 fz_runetochar(char *str, int rune)
 {
