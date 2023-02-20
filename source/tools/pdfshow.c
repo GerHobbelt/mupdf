@@ -317,6 +317,7 @@ static void showjs(void)
 		showtext(src, srclength, 0);
 		fz_free(ctx, src);
 	}
+	pdf_drop_name_tree(ctx, tree);
 }
 
 static void showaction(pdf_obj* action, const char* name)

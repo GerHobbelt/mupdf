@@ -1063,17 +1063,17 @@ static void pdf_js_load_document_level(pdf_js *js)
 {
 	fz_context *ctx = js->ctx;
 	pdf_document *doc = js->doc;
-	pdf_obj *javascript;
+	pdf_obj *javascript = NULL;
 	int len, i;
 	int in_op = 0;
-
-	javascript = pdf_load_name_tree(ctx, doc, PDF_NAME(JavaScript));
-	len = pdf_dict_len(ctx, javascript);
 
 	fz_var(in_op);
 
 	fz_try(ctx)
 	{
+		javascript = pdf_load_name_tree(ctx, doc, PDF_NAME(JavaScript));
+		len = pdf_dict_len(ctx, javascript);
+
 		pdf_begin_operation(ctx, doc, "Document level Javascript");
 		in_op = 1;
 		for (i = 0; i < len; i++)
@@ -1102,7 +1102,8 @@ static void pdf_js_load_document_level(pdf_js *js)
 	{
 		if (in_op)
 			pdf_end_operation(ctx, doc);
-		pdf_drop_obj(ctx, javascript);
+
+		pdf_drop_name_tree(ctx, javascript);
 	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);

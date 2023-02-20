@@ -137,11 +137,8 @@ static void clearinfo(fz_context* ctx, globals* glo)
 
 static void closexref(fz_context* ctx, globals* glo)
 {
-	if (glo->doc)
-	{
-		pdf_drop_document(ctx, glo->doc);
-		glo->doc = NULL;
-	}
+	pdf_drop_document(ctx, glo->doc);
+	glo->doc = NULL;
 
 	clearinfo(ctx, glo);
 }
@@ -537,8 +534,11 @@ showglobalinfo(fz_context* ctx, globals* glo)
 		}
 
 		// See if there's any embedded JavaScript code
+		pdf_obj* javascript = NULL;
+		int js_outline_level = -1;
+
+		fz_try(ctx)
 		{
-			pdf_obj* javascript;
 			int len, i;
 			
 			javascript = pdf_load_name_tree(ctx, doc, PDF_NAME(JavaScript));
@@ -546,7 +546,7 @@ showglobalinfo(fz_context* ctx, globals* glo)
 
 			if (len > 0)
 			{
-				int js_outline_level = write_item_starter_block(ctx, out, "EmbeddedJavaScripts", '[');
+				js_outline_level = write_item_starter_block(ctx, out, "EmbeddedJavaScripts", '[');
 
 				fz_try(ctx)
 				{
@@ -592,6 +592,17 @@ showglobalinfo(fz_context* ctx, globals* glo)
 					fz_rethrow(ctx);
 				}
 			}
+		}
+		fz_always(ctx)
+		{
+			if (js_outline_level >= 0)
+				write_level_end_guaranteed(ctx, out, ']', js_outline_level);
+
+			pdf_drop_name_tree(ctx, javascript);
+		}
+		fz_catch(ctx)
+		{
+			fz_error(ctx, "Error while processing PDF Outlines: %s\n", fz_caught_message(ctx));
 		}
 
 		// and dump a PDF internal aspects list while we're at it: use that

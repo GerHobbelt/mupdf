@@ -266,10 +266,16 @@ pdf_obj *pdf_lookup_name(fz_context *ctx, pdf_document *doc, pdf_obj *which, pdf
 /*
 	Load a nametree, flattening it into a single dictionary.
 
-	The caller is responsible for pdf_dropping the returned
-	reference.
+	The caller is responsible for dropping the returned
+	reference by invoking pdf_drop_name_tree().
 */
 pdf_obj *pdf_load_name_tree(fz_context *ctx, pdf_document *doc, pdf_obj *which);
+
+static inline void
+pdf_drop_name_tree(fz_context *ctx, pdf_obj *name_tree)
+{
+	pdf_drop_obj(ctx, name_tree);
+}
 
 /*
 	Lookup needle in the given number tree.

@@ -332,7 +332,7 @@ static void retainpages(fz_context *ctx, globals *glo, int argc, const char** ar
 
 		pdf_drop_obj(ctx, names);
 		pdf_drop_obj(ctx, dests);
-		pdf_drop_obj(ctx, olddests);
+		pdf_drop_name_tree(ctx, olddests);
 	}
 
 	/* Edit each pages /Annot list to remove any links that point to nowhere. */
