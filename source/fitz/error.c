@@ -283,7 +283,7 @@ static void prepare_message(char* buf, size_t bufsize, const char* fmt, va_list 
 	// has the input been truncated?
 	if (len == endidx)
 	{
-		strcpy(buf - sizeof("(...truncated...)"), "(...truncated...)");
+		strcpy(buf + bufsize - sizeof("(...truncated...)"), "(...truncated...)");
 		return;
 	}
 
