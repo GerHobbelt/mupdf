@@ -10710,6 +10710,9 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "Pixmap.saveAsPNM", ffi_Pixmap_saveAsPNM, 1);
 		jsB_propfun(J, "Pixmap.saveAsPBM", ffi_Pixmap_saveAsPBM, 1);
 		jsB_propfun(J, "Pixmap.saveAsPKM", ffi_Pixmap_saveAsPKM, 1);
+		// Pixmap.saveAsPCL?, PCLM?, PDFOCR?, PSD?, PWG?
+
+		// Pixmap.halftone() -> Bitmap
 		jsB_propfun(J, "Pixmap.md5", ffi_Pixmap_md5, 0);
 	}
 	js_setregistry(J, "fz_pixmap");
