@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>tvision</ProjectName>
+    <ProjectGuid>{A10D8644-5A1C-4D29-8970-7518FF5340C1}</ProjectGuid>
+    <RootNamespace>tvision</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;4324;4589;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTVISION;TVISION_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/tvision/include;../../thirdparty/owemdjee/tvision/include/tvision/compat/borland;..\..\thirdparty\owemdjee\tvision;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTVISION;TVISION_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTVISION;TVISION_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/tvision/include;../../thirdparty/owemdjee/tvision/include/tvision/compat/borland;..\..\thirdparty\owemdjee\tvision;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTVISION;TVISION_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/tvision/include;../../thirdparty/owemdjee/tvision/include/tvision/compat/borland;..\..\thirdparty\owemdjee\tvision;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTVISION;TVISION_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTVISION;TVISION_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/tvision/include;../../thirdparty/owemdjee/tvision/include/tvision/compat/borland;..\..\thirdparty\owemdjee\tvision;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTVISION;TVISION_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/tvision/include;../../thirdparty/owemdjee/tvision/include/tvision/compat/borland;..\..\thirdparty\owemdjee\tvision;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTVISION;TVISION_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTVISION;TVISION_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/tvision/include;../../thirdparty/owemdjee/tvision/include/tvision/compat/borland;..\..\thirdparty\owemdjee\tvision;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTVISION;TVISION_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/tvision/include;../../thirdparty/owemdjee/tvision/include/tvision/compat/borland;..\..\thirdparty\owemdjee\tvision;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTVISION;TVISION_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTVISION;TVISION_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/tvision/include;../../thirdparty/owemdjee/tvision/include/tvision/compat/borland;..\..\thirdparty\owemdjee\tvision;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+  <ItemGroup>
+    <ProjectReference Include="libtvision.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff5340c1}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../scripts/tvision/monolithic_main.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/pch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/app.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/buffers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/colors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/colorsel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/compat/borland/_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/compat/borland/_null.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/compat/borland/alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/compat/borland/dir.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/compat/borland/dos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/compat/borland/fstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/compat/borland/io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/compat/borland/iomanip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/compat/borland/iosfwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/compat/borland/iostream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/compat/borland/mem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/compat/borland/strstrea.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/compat/malloc/malloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/compat/windows/windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/dialogs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/drawbuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/editors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/hardware.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/help.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/helpbase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/ansidisp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/base64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/codepage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/constarr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/constmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/cursor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/dispbuff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/far2l.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/findfrst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/getenv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/gpminput.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/linuxcon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/ncurdisp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/ncursinp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/pathconv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/scrlife.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/sighandl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/sigwinch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/stdioctl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/strings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/termdisp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/terminal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/unixcon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/win32con.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/winwidth.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/menus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/monolithic_examples.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/msgbox.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/objects.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/outline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/scrncell.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/stddlg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/surface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/system.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/textview.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/tkeys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/tobjstrm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/tspan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/tstrview.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/ttext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/ttypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/tv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/tvobjs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/validate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/views.h" />
+    <Text Include="../../thirdparty/owemdjee/tvision/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tvision/README.md" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
