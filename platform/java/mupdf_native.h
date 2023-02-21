@@ -5918,6 +5918,14 @@ JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_Pixmap_tint
 JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_Pixmap_convertToColorSpace
   (JNIEnv *, jobject, jobject, jobject, jobject, jint, jboolean);
 
+/*
+ * Class:     com_artifex_mupdf_fitz_Pixmap
+ * Method:    getMD5
+ * Signature: ()[B
+ */
+JNIEXPORT jbyteArray JNICALL Java_com_artifex_mupdf_fitz_Pixmap_getMD5
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif

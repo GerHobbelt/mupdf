@@ -4569,6 +4569,26 @@ static void ffi_Pixmap_saveAsPKM(js_State *J)
 		rethrow(J);
 }
 
+static void ffi_Pixmap_md5(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_pixmap *pixmap = ffi_topixmap(J, 0);
+	unsigned char digest[16] = { 0 };
+	size_t i;
+
+	fz_try(ctx)
+		fz_md5_pixmap(ctx, pixmap, digest);
+	fz_catch(ctx)
+		rethrow(J);
+
+	js_newarray(J);
+	for (i = 0; i < nelem(digest); ++i)
+	{
+		js_pushnumber(J, digest[i]);
+		js_setindex(J, -2, i);
+	}
+}
+
 static void ffi_Pixmap_convertToColorSpace(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -10660,6 +10680,7 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "Pixmap.saveAsPNM", ffi_Pixmap_saveAsPNM, 1);
 		jsB_propfun(J, "Pixmap.saveAsPBM", ffi_Pixmap_saveAsPBM, 1);
 		jsB_propfun(J, "Pixmap.saveAsPKM", ffi_Pixmap_saveAsPKM, 1);
+		jsB_propfun(J, "Pixmap.md5", ffi_Pixmap_md5, 0);
 	}
 	js_setregistry(J, "fz_pixmap");
 

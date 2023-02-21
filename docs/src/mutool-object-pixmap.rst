@@ -197,4 +197,8 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
     :return: `Pixmap`.
 
+.. method:: md5()
 
+    Compute a checksum for the image. This is not used for cryptography, but only reveals whether two images are identical.
+
+    :return: `[Int]` The MD5 sum of the image.
