@@ -1434,6 +1434,9 @@ static int ffi_imagedata_has(js_State *J, void *image_data_, const char *key)
 	fz_context *ctx = js_getcontext(J);
 	fz_compressed_buffer *image_data = image_data_;
 
+	if (image_data == NULL)
+		return 0;
+
 	if (!strcmp(key, "buffer"))
 	{
 		ffi_pushbuffer(J, fz_keep_buffer(ctx, image_data->buffer));
@@ -4755,7 +4758,7 @@ static void ffi_new_Image(js_State *J)
 		fz_catch(ctx)
 			rethrow(J);
 	}
-	else if (js_isuserdata(J, 1, "fz_compressed_buffer"))
+	else if (js_isuserdata(J, 1, "fz_compressed_buffer") && js_touserdata(J, 1, "fz_compressed_buffer"))
 	{
 		fz_compressed_buffer *copy, *image_data = js_touserdata(J, 1, "fz_compressed_buffer");
 		int w = js_tointeger(J, 3);
