@@ -4382,6 +4382,14 @@ JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_PDFObject_resolve
 
 /*
  * Class:     com_artifex_mupdf_fitz_PDFObject
+ * Method:    equals
+ * Signature: (Lcom/artifex/mupdf/fitz/PDFObject;)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_PDFObject_equals
+  (JNIEnv *, jobject, jobject);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFObject
  * Method:    readStream
  * Signature: ()[B
  */
@@ -5526,6 +5534,38 @@ JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_Pixmap_saveAsPNG
  */
 JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_Pixmap_saveAsJPEG
   (JNIEnv *, jobject, jstring, jint);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_Pixmap
+ * Method:    saveAsPAM
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_Pixmap_saveAsPAM
+  (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_Pixmap
+ * Method:    saveAsPNM
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_Pixmap_saveAsPNM
+  (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_Pixmap
+ * Method:    saveAsPBM
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_Pixmap_saveAsPBM
+  (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_Pixmap
+ * Method:    saveAsPKM
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_Pixmap_saveAsPKM
+  (JNIEnv *, jobject, jstring);
 
 /*
  * Class:     com_artifex_mupdf_fitz_Pixmap
