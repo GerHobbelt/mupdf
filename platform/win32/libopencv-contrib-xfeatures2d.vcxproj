@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libopencv-contrib-xfeatures2d</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFD77C77}</ProjectGuid>
+    <RootNamespace>libopencv-contrib-xfeatures2d</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5054;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2D_STATICLIB;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2D_STATICLIB;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2D_STATICLIB;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2D_STATICLIB;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2D_STATICLIB;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2D_STATICLIB;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2D_STATICLIB;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2D_STATICLIB;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2D_STATICLIB;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2D_STATICLIB;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2D_STATICLIB;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2D_STATICLIB;BUILDING_LIBOPENCV_CONTRIB_XFEATURES2D;OPENCV_CONTRIB_XFEATURES2_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/perf/perf_beblid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/perf/perf_daisy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/perf/perf_latch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/perf/perf_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/perf/perf_msd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/perf/perf_surf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/perf/perf_surf.cuda.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/perf/perf_surf.ocl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/perf/perf_teblid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/perf/perf_vgg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/samples/bagofwords_classification.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/samples/gms_matcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/samples/pct_signatures.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/samples/pct_webcam.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/samples/shape_transformation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/samples/surf_matcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/samples/video_homography.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/affine_feature2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/beblid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/boostdesc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/brief.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/daisy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/ellipticKeyPoint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/fast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/freak.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/gms.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/harris_lapace_detector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/latch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/logos.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/logos/Logos.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/logos/Match.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/logos/Point.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/logos/PointPair.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/lucid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/msd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/pct_signatures.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/pct_signatures/grayscale_bitmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/pct_signatures/pct_clusterizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/pct_signatures/pct_sampler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/pct_signatures_sqfd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/stardetector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/surf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/surf.cuda.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/surf.ocl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/tbmr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/vgg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/xfeatures2d_init.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/test/test_detectors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/test/test_features2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/test/test_gms_matcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/test/test_keypoints.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/test/test_logos_matcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/test/test_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/test/test_rotation_and_scale_invariance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/test/test_surf.cuda.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/test/test_surf.ocl.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include/opencv2/xfeatures2d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include/opencv2/xfeatures2d/cuda.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include/opencv2/xfeatures2d/nonfree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/misc/python/pyopencv_sift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/misc/python/pyopencv_xfeatures2d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/misc/python/shadow_sift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/perf/perf_precomp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/beblid.p256.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/beblid.p512.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/logos/Logos.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/logos/Match.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/logos/Point.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/logos/PointPair.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/msd_pyramid.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/pct_signatures/constants.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/pct_signatures/distance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/pct_signatures/grayscale_bitmap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/pct_signatures/pct_clusterizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/pct_signatures/pct_sampler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/pct_signatures/similarity.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/precomp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/surf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/teblid.p256.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/src/teblid.p512.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/test/test_precomp.hpp" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/cmake/download_boostdesc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/cmake/download_vgg.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/misc/objc/gen_dict.json" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/misc/python/test/test_cuda_xfeatures2d.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/misc/python/test/test_descriptors.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/misc/python/test/test_sift_compatibility.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/samples/export-boostdesc.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

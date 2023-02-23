@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libopencv-contrib-rgbd</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF933FEC}</ProjectGuid>
+    <RootNamespace>libopencv-contrib-rgbd</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5054;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_RGBD;OPENCV_CONTRIB_RGBD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_RGBD;OPENCV_CONTRIB_RGBD_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_RGBD;OPENCV_CONTRIB_RGBD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_RGBD;OPENCV_CONTRIB_RGBD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_RGBD;OPENCV_CONTRIB_RGBD_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_RGBD;OPENCV_CONTRIB_RGBD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_RGBD;OPENCV_CONTRIB_RGBD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_RGBD;OPENCV_CONTRIB_RGBD_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_RGBD;OPENCV_CONTRIB_RGBD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_RGBD;OPENCV_CONTRIB_RGBD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_RGBD;OPENCV_CONTRIB_RGBD_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_RGBD;OPENCV_CONTRIB_RGBD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/perf/perf_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/perf/perf_tsdf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/samples/colored_kinfu_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/samples/dynafu_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/samples/kinfu_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/samples/large_kinfu_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/samples/linemod.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/samples/odometry_evaluation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/colored_kinfu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/colored_tsdf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/depth_cleaner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/depth_registration.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/depth_to_3d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/dqb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/dynafu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/dynafu_tsdf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/fast_icp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/hash_tsdf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/kinfu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/kinfu_frame.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/large_kinfu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/linemod.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/nonrigid_icp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/normal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/odometry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/plane.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/pose_graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/tsdf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/tsdf_functions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/volume.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/warpfield.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/test/ocl/test_tsdf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/test/test_colored_kinfu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/test/test_dynafu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/test/test_kinfu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/test/test_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/test/test_normal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/test/test_odometry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/test/test_pose_graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/test/test_registration.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/test/test_tsdf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/test/test_utils.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/include/opencv2/rgbd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/include/opencv2/rgbd/colored_kinfu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/include/opencv2/rgbd/depth.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/include/opencv2/rgbd/detail/pose_graph.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/include/opencv2/rgbd/dynafu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/include/opencv2/rgbd/intrinsics.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/include/opencv2/rgbd/kinfu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/include/opencv2/rgbd/large_kinfu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/include/opencv2/rgbd/linemod.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/include/opencv2/rgbd/volume.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/misc/python/pyopencv_linemod.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/perf/perf_precomp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/samples/io_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/colored_tsdf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/depth_to_3d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/dqb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/dynafu_tsdf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/fast_icp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/hash_tsdf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/kinfu_frame.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/marchingcubes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/nonrigid_icp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/precomp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/sparse_block_matrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/submap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/tsdf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/tsdf_functions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/src/warpfield.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/test/test_precomp.hpp" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/LICENSE_KinectFusion.md" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/LICENSE_WillowGarage.md" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/misc/python/test/test_rgbd.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/rgbd/samples/kinfu_demo.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libopencv-contrib-sfm</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFB6AC57}</ProjectGuid>
+    <RootNamespace>libopencv-contrib-sfm</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5054;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_SFM;OPENCV_CONTRIB_SFM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_SFM;OPENCV_CONTRIB_SFM_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_SFM;OPENCV_CONTRIB_SFM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_SFM;OPENCV_CONTRIB_SFM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_SFM;OPENCV_CONTRIB_SFM_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_SFM;OPENCV_CONTRIB_SFM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_SFM;OPENCV_CONTRIB_SFM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_SFM;OPENCV_CONTRIB_SFM_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_SFM;OPENCV_CONTRIB_SFM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_SFM;OPENCV_CONTRIB_SFM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_SFM;OPENCV_CONTRIB_SFM_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_SFM;OPENCV_CONTRIB_SFM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/samples/import_reconstruction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/samples/match_reconstruct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/samples/recon2v.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/samples/scene_reconstruction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/samples/trajectory_reconstruction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/conditioning.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/fundamental.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/io.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/correspondence/feature_matching.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/correspondence/matches.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/correspondence/nRobustViewMatching.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/conditioning.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/euclidean_resection.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/fundamental.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/fundamental_kernel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/homography.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/panography.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/panography_kernel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/projection.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/robust_estimation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/robust_fundamental.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/robust_resection.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/triangulation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/twoviewtriangulation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/numeric/numeric.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/numeric/poly.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/bundle.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/camera_intrinsics.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/distortion_models.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/initialize_reconstruction.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/intersect.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/keyframe_selection.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/pipeline.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/reconstruction.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/reconstruction_scale.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/resect.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/tracks.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/numeric.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/projection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/reconstruct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/robust.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/simple_pipeline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/triangulation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/test/scene.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/test/test_common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/test/test_conditioning.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/test/test_fundamental.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/test/test_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/test/test_numeric.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/test/test_projection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/test/test_reconstruct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/test/test_robust.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/test/test_simple_pipeline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/test/test_triangulation.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/include/opencv2/sfm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/include/opencv2/sfm/conditioning.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/include/opencv2/sfm/fundamental.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/include/opencv2/sfm/io.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/include/opencv2/sfm/numeric.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/include/opencv2/sfm/projection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/include/opencv2/sfm/reconstruct.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/include/opencv2/sfm/robust.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/include/opencv2/sfm/simple_pipeline.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/include/opencv2/sfm/triangulation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/io/io_bundler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_capi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/base/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/base/vector_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/correspondence/bipartite_graph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/correspondence/feature.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/correspondence/feature_matching.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/correspondence/matches.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/correspondence/nRobustViewMatching.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/correspondence/nViewMatchingInterface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/logging/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/conditioning.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/euclidean_resection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/fundamental.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/fundamental_kernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/homography.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/homography_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/homography_parameterization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/nviewtriangulation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/panography.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/panography_kernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/projection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/random_sample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/resection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/resection_kernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/robust_estimation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/robust_fundamental.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/robust_resection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/triangulation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/two_view_kernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/twoviewtriangulation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/numeric/function_derivative.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/numeric/levenberg_marquardt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/numeric/numeric.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/numeric/poly.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/bundle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/callbacks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/camera_intrinsics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/camera_intrinsics_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/distortion_models.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/initialize_reconstruction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/intersect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/keyframe_selection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/pipeline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/reconstruction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/reconstruction_scale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/resect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/tracks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/precomp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/test/scene.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/test/test_precomp.hpp" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/doc/pics/desktop_trajectory.png" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/doc/pics/import_sagrada_familia.png" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/doc/pics/sagrada_familia_input.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/doc/pics/sagrada_familia_reconstruction.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/doc/pics/temple_input.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/doc/pics/temple_reconstruction.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/samples/data/images/resized_IMG_2889.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/samples/data/images/resized_IMG_2890.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/samples/data/images/resized_IMG_2891.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/samples/data/images/resized_IMG_2892.jpg" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/cmake/FindGflags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/cmake/FindGlog.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/samples/data/backyard_tracks.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/samples/data/desktop_tracks.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/samples/data/images/dataset_files.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/samples/data/recon2v_checkerboards.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/CMake/Installation.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/correspondence/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/multiview/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/numeric/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light/libmv/simple_pipeline/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

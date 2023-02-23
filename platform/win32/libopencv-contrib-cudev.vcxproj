@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libopencv-contrib-cudev</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF353781}</ProjectGuid>
+    <RootNamespace>libopencv-contrib-cudev</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5054;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CUDEV;OPENCV_CONTRIB_CUDEV_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CUDEV;OPENCV_CONTRIB_CUDEV_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CUDEV;OPENCV_CONTRIB_CUDEV_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CUDEV;OPENCV_CONTRIB_CUDEV_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CUDEV;OPENCV_CONTRIB_CUDEV_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CUDEV;OPENCV_CONTRIB_CUDEV_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CUDEV;OPENCV_CONTRIB_CUDEV_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CUDEV;OPENCV_CONTRIB_CUDEV_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CUDEV;OPENCV_CONTRIB_CUDEV_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CUDEV;OPENCV_CONTRIB_CUDEV_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CUDEV;OPENCV_CONTRIB_CUDEV_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CUDEV;OPENCV_CONTRIB_CUDEV_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/src/stub.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/test/test_main.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/block/block.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/block/detail/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/block/detail/reduce_key_val.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/block/dynamic_smem.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/block/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/block/scan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/block/vec_distance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/expr/binary_func.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/expr/binary_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/expr/color.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/expr/deriv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/expr/expr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/expr/per_element_func.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/expr/reduction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/expr/unary_func.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/expr/unary_op.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/expr/warping.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/functional/color_cvt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/functional/detail/color_cvt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/functional/functional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/functional/tuple_adapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/grid/copy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/grid/detail/copy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/grid/detail/histogram.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/grid/detail/integral.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/grid/detail/minmaxloc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/grid/detail/pyr_down.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/grid/detail/pyr_up.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/grid/detail/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/grid/detail/reduce_to_column.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/grid/detail/reduce_to_row.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/grid/detail/split_merge.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/grid/detail/transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/grid/detail/transpose.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/grid/histogram.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/grid/integral.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/grid/pyramids.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/grid/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/grid/reduce_to_vec.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/grid/split_merge.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/grid/transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/grid/transpose.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/ptr2d/constant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/ptr2d/deriv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/ptr2d/detail/gpumat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/ptr2d/extrapolation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/ptr2d/glob.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/ptr2d/gpumat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/ptr2d/interpolation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/ptr2d/lut.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/ptr2d/mask.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/ptr2d/remap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/ptr2d/resize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/ptr2d/texture.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/ptr2d/traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/ptr2d/transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/ptr2d/warping.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/ptr2d/zip.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/util/atomic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/util/detail/tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/util/detail/type_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/util/limits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/util/saturate_cast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/util/simd_functions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/util/tuple.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/util/type_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/util/vec_math.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/util/vec_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/warp/detail/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/warp/detail/reduce_key_val.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/warp/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/warp/scan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/warp/shuffle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/include/opencv2/cudev/warp/warp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/test/test_precomp.hpp" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/cudev/test/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

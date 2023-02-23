@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libopencv-contrib-cvv</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF80024D}</ProjectGuid>
+    <RootNamespace>libopencv-contrib-cvv</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5054;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CVV;OPENCV_CONTRIB_CVV_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CVV;OPENCV_CONTRIB_CVV_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CVV;OPENCV_CONTRIB_CVV_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CVV;OPENCV_CONTRIB_CVV_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CVV;OPENCV_CONTRIB_CVV_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CVV;OPENCV_CONTRIB_CVV_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CVV;OPENCV_CONTRIB_CVV_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CVV;OPENCV_CONTRIB_CVV_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CVV;OPENCV_CONTRIB_CVV_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CVV;OPENCV_CONTRIB_CVV_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CVV;OPENCV_CONTRIB_CVV_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_CVV;OPENCV_CONTRIB_CVV_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/samples/cvv_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/controller/view_controller.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/extension_api/api.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/call_window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/image_call_tab.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/main_call_window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/overview_group_subtable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/overview_panel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/overview_table.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/overview_table_row.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/rawview_group_subtable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/rawview_table.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/rawview_table_row.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/impl/call.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/impl/data_controller.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/impl/dmatch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/impl/filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/impl/filter_call.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/impl/final_show.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/impl/init.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/impl/match_call.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/impl/show_image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/impl/single_image_call.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/accordion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/collapsable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/filter/changed_pixels_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/filter/channelreorderfilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/filter/diffFilterWidget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/filter/grayfilterwidget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/filter/overlayfilterwidget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/filter/sobelfilterwidget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/histogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/histogramoptpanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/cvvkeypoint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/cvvmatch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/cvvpointmatch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/falsecolorkeypointpen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/falsecolormatchpen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/keypointintervallselection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/keypointmanagement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/keypointportionselector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/keypointselectionselector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/keypointsettingsselector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/keypointshowsetting.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/keypointvaluechooser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/matchintervallselection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/matchmanagement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/matchportionselector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/matchscene.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/matchselectionselector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/matchsettingsselector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/matchshowsetting.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/rawview_window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/showinrawviewwidget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/singlecolorkeypointpen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/singlecolormatchpen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/zoomableproxyobject.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/stfl_query_widget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/stfl_query_widget_lineedit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/synczoomwidget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/zoomableimage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/zoomableimageoptpanel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/stfl/stringutils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/view/defaultfilterview.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/view/dual_filter_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/view/image_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/view/linematchview.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/view/pointmatchview.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/view/rawview.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/view/singlefilterview.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/view/translationsmatchview.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/test/test_debug_flag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/test/test_is_any_of.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/test/test_location.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/test/test_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/test/test_observer_ptr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/test/test_reference.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include/opencv2/cvv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include/opencv2/cvv/call_meta_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include/opencv2/cvv/cvv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include/opencv2/cvv/debug_mode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include/opencv2/cvv/dmatch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include/opencv2/cvv/filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include/opencv2/cvv/final_show.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include/opencv2/cvv/show_image.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/controller/view_controller.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/extension_api/api.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/call_tab.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/call_window.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/filter_call_tab.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/image_call_tab.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/main_call_window.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/match_call_tab.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/multiview_call_tab.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/overview_group_subtable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/overview_panel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/overview_table.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/overview_table_row.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/rawview_group_subtable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/rawview_table.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/rawview_table_row.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/gui/tabwidget.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/impl/call.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/impl/data_controller.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/impl/filter_call.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/impl/init.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/impl/match_call.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/impl/single_image_call.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/accordion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/autofilterwidget.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/collapsable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/filter/changed_pixels_widget.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/filter/channelreorderfilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/filter/diffFilterWidget.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/filter/grayfilterwidget.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/filter/overlayfilterwidget.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/filter/sobelfilterwidget.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/filterfunctionwidget.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/filterselectorwidget.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/histogram.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/histogramoptpanel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/intervallselector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/colorutil.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/cvvkeypoint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/cvvmatch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/cvvpointmatch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/falsecolorkeypointpen.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/falsecolormatchpen.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/keypointintervallselection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/keypointmanagement.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/keypointportionselector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/keypointselection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/keypointselectionselector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/keypointsettings.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/keypointsettingsselector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/keypointshowsetting.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/keypointvaluechooser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/matchintervallselection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/matchmanagement.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/matchportionselector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/matchscene.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/matchselection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/matchselectionselector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/matchsettings.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/matchsettingsselector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/matchshowsetting.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/rawview_window.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/showinrawviewwidget.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/singlecolorkeypointpen.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/singlecolormatchpen.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/matchview/zoomableproxyobject.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/portionselector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/registerhelper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/signalslot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/stfl_query_widget.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/stfl_query_widget_completer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/stfl_query_widget_lineedit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/synczoomwidget.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/zoomableimage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/qtutil/zoomableimageoptpanel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/stfl/element_group.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/stfl/stfl_engine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/stfl/stringutils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/util/observer_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/util/util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/view/defaultfilterview.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/view/dual_filter_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/view/filter_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/view/image_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/view/linematchview.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/view/match_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/view/pointmatchview.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/view/rawview.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/view/singlefilterview.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/src/view/translationsmatchview.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/test/test_precomp.hpp" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/tutorials/images/01_overview_single.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/tutorials/images/02_single_image_view.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/tutorials/images/03_overview_two.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/tutorials/images/04_default_filter_view.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/tutorials/images/05_default_filter_view_high_zoom.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/tutorials/images/06_default_filter_view_edges.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/tutorials/images/07_dual_filter_view_edges.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/tutorials/images/08_overview_all.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/tutorials/images/09_overview_filtered_type_match.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/tutorials/images/10_line_match_view-cutout-small.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/tutorials/images/10_line_match_view-cutout.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/tutorials/images/10_line_match_view.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/tutorials/images/11_line_match_view_portion_selector.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/tutorials/images/12_translation_match_view_portion_selector.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/tutorials/images/13_raw_view.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/tutorials/images/14_overview_group_by_line.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/tutorials/images/Visual_Debugging_Introduction_Tutorial_Cover.jpg" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/cvv/README.md" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

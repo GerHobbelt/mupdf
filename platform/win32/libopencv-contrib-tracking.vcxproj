@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libopencv-contrib-tracking</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFBCBD2C}</ProjectGuid>
+    <RootNamespace>libopencv-contrib-tracking</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5054;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_TRACKING;OPENCV_CONTRIB_TRACKING_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_TRACKING;OPENCV_CONTRIB_TRACKING_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_TRACKING;OPENCV_CONTRIB_TRACKING_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_TRACKING;OPENCV_CONTRIB_TRACKING_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_TRACKING;OPENCV_CONTRIB_TRACKING_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_TRACKING;OPENCV_CONTRIB_TRACKING_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_TRACKING;OPENCV_CONTRIB_TRACKING_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_TRACKING;OPENCV_CONTRIB_TRACKING_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_TRACKING;OPENCV_CONTRIB_TRACKING_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_TRACKING;OPENCV_CONTRIB_TRACKING_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_TRACKING;OPENCV_CONTRIB_TRACKING_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_TRACKING;OPENCV_CONTRIB_TRACKING_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/perf/perf_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/perf/perf_trackers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/samples/benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/samples/csrt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/samples/goturnTracker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/samples/kcf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/samples/multiTracker_dataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/samples/multitracker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/samples/tracker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/samples/tracker_dataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/samples/tracking_by_matching.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/samples/tutorial_customizing_cn_tracker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/samples/tutorial_introduction_to_tracker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/samples/tutorial_multitracker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/augmented_unscented_kalman.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/feature.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/featureColorName.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/gtrUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/kuhn_munkres.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/mosseTracker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/multiTracker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/multiTracker_alt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/onlineBoosting.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/tldDataset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/tldDetector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/tldEnsembleClassifier.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/tldModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/tldTracker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/tldUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/tracker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/trackerBoosting.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/trackerBoostingModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/trackerCSRT.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/trackerCSRTScaleEstimation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/trackerCSRTSegmentation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/trackerCSRTUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/trackerFeature.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/trackerFeatureSet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/trackerKCF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/trackerMIL_legacy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/trackerMedianFlow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/trackerSampler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/trackerSamplerAlgorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/trackerStateEstimator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/tracking_by_matching.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/tracking_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/unscented_kalman.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/test/test_aukf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/test/test_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/test/test_trackerParametersIO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/test/test_trackers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/test/test_ukf.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/include/opencv2/tracking.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/include/opencv2/tracking/feature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/include/opencv2/tracking/kalman_filters.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/include/opencv2/tracking/onlineBoosting.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/include/opencv2/tracking/tldDataset.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/include/opencv2/tracking/tracking.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/include/opencv2/tracking/tracking_by_matching.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/include/opencv2/tracking/tracking_internals.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/misc/python/pyopencv_tracking.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/perf/perf_precomp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/samples/samples_utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/PFSolver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/TrackingFunctionPF.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/gtrUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/kuhn_munkres.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/legacy/tracker.legacy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/legacy/trackerCSRT.legacy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/legacy/trackerKCF.legacy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/multiTracker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/precomp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/tldDetector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/tldEnsembleClassifier.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/tldModel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/tldTracker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/tldUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/trackerBoostingModel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/trackerCSRTScaleEstimation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/trackerCSRTSegmentation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/trackerCSRTUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/src/tracking_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/test/test_precomp.hpp" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/misc/java/gen_dict.json" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/misc/objc/gen_dict.json" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/misc/python/test/test_tracking_contrib.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/samples/multitracker.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/tracking/samples/tracker.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
