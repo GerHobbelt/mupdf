@@ -95,6 +95,8 @@ only store bytes.
 <dl>
 <dt>new Buffer()
 <dd>Create a new empty buffer.
+<dt>new Buffer(original)
+<dd>Create a new buffer with a copy of the data from the original buffer.
 <dt>readFile(fileName)
 <dd>Create a new buffer with the contents of a file.
 <dt>Buffer#length
@@ -319,6 +321,28 @@ ColorSpace
 <dd>A grayscale colorspace has one component, RGB has 3, CMYK has 4, and DeviceN may have any number of components.
 <dt>ColorSpace#toString()
 <dd>Return name of Colorspace.
+<dt>ColorSpace#isGray()
+<dd>Returns true if the object is a gray color space.
+<dt>ColorSpace#isRGB()
+<dd>Returns true if the object is an RGB color space.
+<dt>ColorSpace#isCMYK()
+<dd>Returns true if the object is a CMYK color space.
+<dt>ColorSpace#isIndexed()
+<dd>Returns true if the object is a Indexed color space.
+<dt>ColorSpace#isLab()
+<dd>Returns true if the object is a Lab color space.
+<dt>ColorSpace#isDeviceN()
+<dd>Returns true if the object is a Device N color space.
+<dt>ColorSpace#isLabICC()
+<dd>Returns true if the object is a Lab ICC color space.
+<dt>ColorSpace#isSubtractive()
+<dd>Returns true if the object is a subtractive color space.
+<dt>ColorSpace#isDevice()
+<dd>Returns true if the object is a Device color space.
+<dt>ColorSpace#isDeviceGray()
+<dd>Returns true if the object is a Deice gray color space.
+<dt>ColorSpace#isDeviceCMYK()
+<dd>Returns true if the object is a Deice CMYK color space.
 </dl>
 
 <h2>
@@ -371,6 +395,8 @@ tiles of a page.
 <dt>Pixmap#warp(points, width, height)
 <dd>Return a warped subsection of the pixmap, where the result has the requested dimensions. Points give the
 corner points of a convex quadrilateral within the pixmap to be warped, represented as [x0, y0, x1, y1, x2, y2, x3, y3].
+<dt>Pixmap#convertToColorSpace(colorspace, proof, defaultColorSpaces, colorParams, keepAlpha)
+<dd>Convert pixmap into a new pixmap of a desired colorspace. A proofing colorspace, a set of default colorspaces and color parameters used during conversion may be specified. Finally a boolean indicates if alpha should be preserved (default is to not preserve alpha).
 </dl>
 
 <h2>
@@ -517,6 +543,28 @@ Apply a clip mask to restrict the pattern to the desired shape.
 </dl>
 
 <dl>
+<dt>Device#renderFlags(set, clear)
+<dd>Set/clear device rendering flags. Both set and clear are arrays where each element is a flag name:
+"mask", "color", "uncacheable", "fillcolor-undefined", "strokecolor-undefined", "startcap-undefined",
+"dashcap-undefined", "endcap-undefined", "linejoin-undefined", "miterlimit-undefined",
+"linewidth-undefined", "bbox-defined", or "gridfit-as-tiled".
+<dt>Device#setDefaultColorSpaces(defaults)
+<dd>Change the set of default colorspaces for the device. See the DefaultColorSpaces object.
+</dl>
+
+<dl>
+<dt>Device#beginStructure(standard, raw, uid)
+<dt>Device#endStructure()
+<dd>Begin/end a standard structure element, the raw tag name and a unique identifier.
+</dl>
+
+<dl>
+<dt>Device#beginMetatext(type, text)
+<dt>Device#endMetatext()
+<dd>Begin/end meta text information, the type (either of "ActualText", "Alt", "Abbreviation", or "Title") and the text value itself.
+</dl>
+
+<dl>
 <dt>Device#close()
 <dd>Tell the device that we are done, and flush any pending output.
 </dl>
@@ -532,6 +580,21 @@ ColorParams is a dictionary with keys for:
 <dd>True if overprint is activated.
 <dt>ColorParams.overPrintMode:
 <dd>The overprint mode.
+</dl>
+
+<p>
+DefaultColorSpaces is a an object with keys for:
+<dl>
+<dt>DefaultColorSpaces#getDefaultGray()
+<dt>DefaultColorSpaces#getDefaultRGB()
+<dt>DefaultColorSpaces#getDefaultCMYK()
+<dt>DefaultColorSpaces#getOutputIntent()
+<dd>Get the default gray/RGB/CMYK colorspace, or the output intent.
+<dt>DefaultColorSpaces#setDefaultGray(colorspace)
+<dt>DefaultColorSpaces#setDefaultRGB(colorspace)
+<dt>DefaultColorSpaces#setDefaultCMYK(colorspace)
+<dt>DefaultColorSpaces#setOutputIntent(colorspace)
+<dd>Set the default gray/RGB/CMYK colorspace, or the output intent, to the provided colorspace.
 </dl>
 
 <h2>
@@ -724,6 +787,8 @@ The label must be an array or object with three values: style, prefix, and start
 Style can be one of the following strings: "", "D", "R", "r", "A", or "a".
 Start is the ordinal with which to start numbering.
 If the label is null, any attached label is removed instead.
+<dt>PDFDocument#getVersion()
+<dd>Returns the PDF document version as an intenger multiplied by 10, so e.g. a PDF-1.4 document would return 14.
 </dl>
 
 <h3>

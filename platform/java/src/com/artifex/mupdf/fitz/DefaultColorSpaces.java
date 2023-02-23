@@ -22,13 +22,13 @@
 
 package com.artifex.mupdf.fitz;
 
-public class Image
+public class DefaultColorSpaces
 {
 	static {
 		Context.init();
 	}
 
-	protected long pointer;
+	private long pointer;
 
 	protected native void finalize();
 
@@ -36,42 +36,17 @@ public class Image
 		finalize();
 	}
 
-	private native long newNativeFromPixmap(Pixmap pixmap);
-	private native long newNativeFromFile(String filename);
-	private native long newNativeFromBytes(byte[] bytes);
-	private native long newNativeFromBuffer(Buffer buffer);
-
-	protected Image(long p) {
+	private DefaultColorSpaces(long p) {
 		pointer = p;
 	}
 
-	public Image(Pixmap pixmap) {
-		pointer = newNativeFromPixmap(pixmap);
-	}
+	public native void setDefaultGray(ColorSpace cs);
+	public native void setDefaultRGB(ColorSpace cs);
+	public native void setDefaultCMYK(ColorSpace cs);
+	public native void setOutputIntent(ColorSpace cs);
 
-	public Image(String filename) {
-		pointer = newNativeFromFile(filename);
-	}
-
-	public Image(byte[] bytes) {
-		pointer = newNativeFromBytes(bytes);
-	}
-
-	public Image(Buffer buffer) {
-		pointer = newNativeFromBuffer(buffer);
-	}
-
-	public native int getWidth();
-	public native int getHeight();
-	public native int getXResolution();
-	public native int getYResolution();
-
-	public native ColorSpace getColorSpace();
-	public native int getNumberOfComponents();
-	public native int getBitsPerComponent();
-	public native boolean getImageMask();
-	public native boolean getInterpolate();
-	public native Image getMask();
-
-	public native Pixmap toPixmap();
+	public native ColorSpace getDefaultGray();
+	public native ColorSpace getDefaultRGB();
+	public native ColorSpace getDefaultCMYK();
+	public native ColorSpace getOutputIntent();
 }
