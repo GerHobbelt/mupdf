@@ -1,0 +1,740 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libopencv-gapi</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFCE16E5}</ProjectGuid>
+    <RootNamespace>libopencv-gapi</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>5054;4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_GAPI;OPENCV_GAPI_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/highgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__OPENCV_BUILD;BUILD_MONOLITHIC;BUILDING_LIBOPENCV_GAPI;OPENCV_GAPI_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_GAPI;OPENCV_GAPI_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_GAPI;OPENCV_GAPI_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/highgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__OPENCV_BUILD;BUILD_MONOLITHIC;BUILDING_LIBOPENCV_GAPI;OPENCV_GAPI_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_GAPI;OPENCV_GAPI_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_GAPI;OPENCV_GAPI_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/highgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__OPENCV_BUILD;BUILD_MONOLITHIC;BUILDING_LIBOPENCV_GAPI;OPENCV_GAPI_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_GAPI;OPENCV_GAPI_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_GAPI;OPENCV_GAPI_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/highgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__OPENCV_BUILD;BUILD_MONOLITHIC;BUILDING_LIBOPENCV_GAPI;OPENCV_GAPI_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_GAPI;OPENCV_GAPI_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/common/gapi_core_perf_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/common/gapi_imgproc_perf_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/common/gapi_render_perf_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/common/gapi_video_perf_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/cpu/gapi_core_perf_tests_cpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/cpu/gapi_core_perf_tests_fluid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/cpu/gapi_imgproc_perf_tests_cpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/cpu/gapi_imgproc_perf_tests_fluid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/cpu/gapi_video_perf_tests_cpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/gpu/gapi_core_perf_tests_gpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/gpu/gapi_imgproc_perf_tests_gpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/internal/gapi_compiler_perf_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/perf_bench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/perf_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/render/gapi_render_perf_tests_ocv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/streaming/gapi_streaming_source_perf_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/api_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/draw_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/face_detection_mtcnn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/gaze_estimation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/infer_ie_onnx_hybrid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/infer_single_roi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/infer_ssd_onnx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/oak_basic_infer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/oak_copy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/oak_rgb_camera_encoding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/oak_small_hetero_pipeline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/onevpl_infer_with_advanced_device_selection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/onevpl_source_to_bgr_conv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/pipeline_modeling_tool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/privacy_masking_camera.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/semantic_segmentation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/slides_blur_gapi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/slides_sobel_cv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/slides_sobel_gapi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/text_detection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/garray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/gbackend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/gcall.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/gcomputation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/gframe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/ginfer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/gkernel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/gmat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/gnode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/gopaque.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/gorigin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/gproto.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/grunarg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/gscalar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/kernels_core.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/kernels_imgproc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/kernels_nnparsers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/kernels_stereo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/kernels_streaming.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/kernels_video.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/media.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/operators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/render.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/render_ocv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/rmat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/s11n.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/common/gcompoundbackend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/common/gcompoundkernel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/common/gmetabackend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/common/serialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/cpu/gcpubackend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/cpu/gcpucore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/cpu/gcpuimgproc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/cpu/gcpukernel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/cpu/gcpustereo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/cpu/gcpuvideo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/cpu/gnnparsers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/fluid/gfluidbackend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/fluid/gfluidbuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/fluid/gfluidcore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/fluid/gfluidcore_func.dispatch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/fluid/gfluidimgproc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/fluid/gfluidimgproc_func.dispatch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/ie/bindings_ie.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/ie/giebackend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/ie/giebackend/giewrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/oak/goak.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/oak/goak_memory_adapters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/oak/goakbackend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/ocl/goclbackend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/ocl/goclcore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/ocl/goclimgproc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/ocl/goclkernel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/onnx/bindings_onnx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/onnx/gonnxbackend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/plaidml/gplaidmlbackend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/plaidml/gplaidmlcore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/python/gpythonbackend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/render/ft_render.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/render/grenderocv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/streaming/gstreamingbackend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/gcompiled.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/gcompiler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/gislandmodel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/gmodel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/gmodelbuilder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/gstreaming.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/passes/dump_dot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/passes/exec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/passes/helpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/passes/intrin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/passes/islands.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/passes/kernels.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/passes/meta.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/passes/pattern_matching.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/passes/perform_substitution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/passes/streaming.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/passes/transformations.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/executor/gabstractexecutor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/executor/gabstractstreamingexecutor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/executor/gasync.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/executor/gexecutor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/executor/gstreamingexecutor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/executor/gtbbexecutor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/gstreamer/gstreamer_buffer_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/gstreamer/gstreamer_media_adapter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/gstreamer/gstreamer_pipeline_facade.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/gstreamer/gstreamerenv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/gstreamer/gstreamerpipeline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/gstreamer/gstreamersource.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/accelerators/accel_policy_cpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/accelerators/accel_policy_dx11.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/accelerators/accel_policy_va_api.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/accelerators/dx11_alloc_resource.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/accelerators/surface/base_frame_adapter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/accelerators/surface/cpu_frame_adapter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/accelerators/surface/dx11_frame_adapter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/accelerators/surface/surface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/accelerators/surface/surface_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/accelerators/utils/shared_lock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/cfg_param_device_selector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/cfg_params.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/cfg_params_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/data_provider_dispatcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/data_provider_interface_exception.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/default.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/demux/async_mfp_demux_data_provider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/device_selector_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/decode/decode_engine_legacy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/decode/decode_session.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/engine_session.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/preproc/preproc_dispatcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/preproc/preproc_engine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/preproc/preproc_session.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/preproc/utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/preproc_engine_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/processing_engine_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/transcode/transcode_engine_legacy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/transcode/transcode_session.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/file_data_provider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/source.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/source_priv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/utils/itt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_compoundkernel_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_core_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_imgproc_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_operators_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_render_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_stereo_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_video_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/cpu/gapi_core_tests_cpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/cpu/gapi_core_tests_fluid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/cpu/gapi_imgproc_tests_cpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/cpu/gapi_imgproc_tests_fluid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/cpu/gapi_ocv_stateful_kernel_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/cpu/gapi_operators_tests_cpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/cpu/gapi_operators_tests_fluid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/cpu/gapi_stereo_tests_cpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/cpu/gapi_video_tests_cpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/executor/gtbbexecutor_internal_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_array_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_async_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_basic_hetero_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_compile_args_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_desc_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_fluid_parallel_rois_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_fluid_resize_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_fluid_roi_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_fluid_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_fluid_test_kernels.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_frame_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_gcompiled_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_gcomputation_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_gpu_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_graph_meta_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_kernel_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_opaque_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_plaidml_pipelines.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_planar_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_sample_pipelines.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_scalar_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_smoke_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_transform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_typed_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_util_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gpu/gapi_core_tests_gpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gpu/gapi_imgproc_tests_gpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gpu/gapi_operators_tests_gpu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/infer/gapi_infer_ie_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/infer/gapi_infer_onnx_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/infer/gapi_infer_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/internal/gapi_int_backend_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/internal/gapi_int_dynamic_graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/internal/gapi_int_executor_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/internal/gapi_int_garg_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/internal/gapi_int_gmetaarg_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/internal/gapi_int_gmodel_builder_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/internal/gapi_int_island_fusion_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/internal/gapi_int_island_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/internal/gapi_int_pattern_matching_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/internal/gapi_int_perform_substitution_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/internal/gapi_int_proto_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/internal/gapi_int_recompilation_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/internal/gapi_int_vectorref_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/internal/gapi_transactions_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/oak/gapi_tests_oak.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/own/conc_queue_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/own/gapi_types_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/own/last_written_value_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/own/mat_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/own/scalar_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/render/ftp_render_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/render/gapi_render_tests_ocv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/rmat/rmat_integration_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/rmat/rmat_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/rmat/rmat_view_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/s11n/gapi_s11n_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/s11n/gapi_sample_pipelines_s11n.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/streaming/gapi_gstreamer_pipeline_facade_int_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/streaming/gapi_gstreamersource_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/streaming/gapi_streaming_sync_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/streaming/gapi_streaming_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/streaming/gapi_streaming_utils_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/streaming/gapi_streaming_vpl_core_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/streaming/gapi_streaming_vpl_data_provider.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/streaming/gapi_streaming_vpl_device_selector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/streaming/gapi_streaming_vpp_preproc_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/test_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/util/any_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/util/optional_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/util/variant_tests.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/cpu/core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/cpu/gcpukernel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/cpu/imgproc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/cpu/stereo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/cpu/video.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/fluid/core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/fluid/gfluidbuffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/fluid/gfluidkernel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/fluid/imgproc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/garg.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/garray.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/gasync_context.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/gcall.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/gcommon.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/gcompiled.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/gcompiled_async.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/gcompoundkernel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/gcomputation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/gcomputation_async.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/gframe.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/gkernel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/gmat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/gmetaarg.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/gopaque.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/gproto.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/gpu/core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/gpu/ggpukernel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/gpu/imgproc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/gscalar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/gstreaming.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/gtransform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/gtype_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/gtyped.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/imgproc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/infer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/infer/bindings_ie.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/infer/bindings_onnx.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/infer/ie.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/infer/onnx.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/infer/parsers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/media.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/oak/infer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/oak/oak.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/ocl/core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/ocl/goclkernel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/ocl/imgproc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/opencv_includes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/operators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/own/assert.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/own/convert.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/own/cvdefs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/own/exports.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/own/mat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/own/saturate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/own/scalar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/own/types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/plaidml/core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/plaidml/gplaidmlkernel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/plaidml/plaidml.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/python/python.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/render.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/render/render.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/render/render_types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/rmat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/s11n.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/s11n/base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/stereo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/streaming/cap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/streaming/desync.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/streaming/format.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/streaming/gstreamer/gstreamerpipeline.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/streaming/gstreamer/gstreamersource.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/streaming/meta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/streaming/onevpl/accel_types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/streaming/onevpl/cfg_params.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/streaming/onevpl/data_provider_interface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/streaming/onevpl/default.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/streaming/onevpl/device_selector_interface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/streaming/onevpl/source.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/streaming/source.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/streaming/sync.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/util/any.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/util/compiler_hints.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/util/copy_through_move.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/util/optional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/util/throw.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/util/type_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/util/util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/util/variant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/video.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/pyopencv_gapi.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/python_bridge.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/shadow_gapi.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/common/gapi_core_perf_tests.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/common/gapi_core_perf_tests_inl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/common/gapi_imgproc_perf_tests.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/common/gapi_imgproc_perf_tests_inl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/common/gapi_render_perf_tests.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/common/gapi_render_perf_tests_inl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/common/gapi_video_perf_tests.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/common/gapi_video_perf_tests_inl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/perf/perf_precomp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/pipeline_modeling_tool/dummy_source.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/pipeline_modeling_tool/pipeline.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/pipeline_modeling_tool/pipeline_builder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/pipeline_modeling_tool/utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/gbackend_priv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/gcall_priv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/gcomputation_priv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/gnode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/gnode_priv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/gorigin.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/gproto_priv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/ocv_mask_creator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/render_ocv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/render_priv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/common/gbackend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/common/gmetabackend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/common/serialization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/cpu/gcpubackend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/cpu/gnnparsers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/fluid/gfluidbackend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/fluid/gfluidbuffer_priv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/fluid/gfluidcore_func.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/fluid/gfluidcore_func.simd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/fluid/gfluidcore_simd_sse41.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/fluid/gfluidimgproc_func.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/fluid/gfluidimgproc_func.simd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/fluid/gfluidimgproc_simd_avx2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/fluid/gfluidutils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/ie/giebackend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/ie/giebackend/giewrapper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/ie/util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/oak/oak_memory_adapters.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/ocl/goclbackend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/ocl/goclcore.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/ocl/goclimgproc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/onnx/gonnxbackend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/plaidml/gplaidmlbackend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/plaidml/plaidml_util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/render/ft_render.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/render/ft_render_priv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/streaming/gstreamingbackend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/streaming/gstreamingkernel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/gcompiled_priv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/gcompiler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/gislandmodel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/gmodel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/gmodel_priv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/gmodelbuilder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/gobjref.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/gstreaming_priv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/passes/helpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/passes/passes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/passes/pattern_matching.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/transactions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/executor/conc_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/executor/gabstractexecutor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/executor/gabstractstreamingexecutor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/executor/gexecutor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/executor/gstreamingexecutor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/executor/gtbbexecutor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/executor/last_value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/logger.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/precomp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/gstreamer/gstreamer_buffer_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/gstreamer/gstreamer_media_adapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/gstreamer/gstreamer_pipeline_facade.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/gstreamer/gstreamerenv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/gstreamer/gstreamerpipeline_priv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/gstreamer/gstreamerptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/gstreamer/gstreamersource_priv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/accelerators/accel_policy_cpu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/accelerators/accel_policy_dx11.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/accelerators/accel_policy_interface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/accelerators/accel_policy_va_api.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/accelerators/dx11_alloc_resource.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/accelerators/surface/base_frame_adapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/accelerators/surface/cpu_frame_adapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/accelerators/surface/dx11_frame_adapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/accelerators/surface/surface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/accelerators/surface/surface_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/accelerators/utils/elastic_barrier.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/accelerators/utils/shared_lock.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/cfg_param_device_selector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/cfg_params_parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/data_provider_defines.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/data_provider_dispatcher.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/demux/async_mfp_demux_data_provider.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/decode/decode_engine_legacy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/decode/decode_session.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/engine_session.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/preproc/preproc_dispatcher.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/preproc/preproc_engine.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/preproc/preproc_session.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/preproc/utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/preproc/vpp_preproc_defines.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/preproc_defines.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/preproc_engine_interface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/processing_engine_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/transcode/transcode_engine_legacy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/engine/transcode/transcode_session.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/file_data_provider.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/onevpl_export.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/source_priv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/utils/itt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_core_tests.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_core_tests_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_core_tests_inl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_imgproc_tests.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_imgproc_tests_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_imgproc_tests_inl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_operators_tests.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_operators_tests_inl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_parsers_tests_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_render_tests.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_stereo_tests.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_stereo_tests_inl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_streaming_tests_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_tests_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_tests_helpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_video_tests.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_video_tests_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_video_tests_inl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/cpu/gapi_ocv_stateful_kernel_test_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_fluid_test_kernels.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gapi_mock_kernels.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/opencl_kernels_test_gapi.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/rmat/rmat_test_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/test_precomp.hpp" />
+    <Image Include="../../thirdparty/owemdjee/opencv/modules/gapi/doc/pics/demo.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv/modules/gapi/doc/pics/gapi_scheme.png" />
+    <Image Include="../../thirdparty/owemdjee/opencv/modules/gapi/doc/pics/render_example.png" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/cmake/DownloadADE.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/cmake/init.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/cmake/standalone.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/doc/10-hld-overview.md" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/doc/slides/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/doc/slides/get_sty.sh" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/package/gapi/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/samples/gaze_estimation.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/test/test_gapi_core.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/test/test_gapi_imgproc.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/test/test_gapi_infer.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/test/test_gapi_infer_onnx.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/test/test_gapi_render.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/test/test_gapi_sample_pipelines.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/test/test_gapi_stateful_kernel.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/test/test_gapi_streaming.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/test/test_gapi_types.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/pipeline_modeling_tool/test_pipeline_modeling_tool.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/scripts/measure_privacy_masking.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/compiler/README.md" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>

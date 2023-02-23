@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libopencv-videoio</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF11BCBB}</ProjectGuid>
+    <RootNamespace>libopencv-videoio</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>5054;4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_VIDEOIO;OPENCV_VIDEOIO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/highgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__OPENCV_BUILD;BUILD_MONOLITHIC;BUILDING_LIBOPENCV_VIDEOIO;OPENCV_VIDEOIO_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_VIDEOIO;OPENCV_VIDEOIO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_VIDEOIO;OPENCV_VIDEOIO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/highgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__OPENCV_BUILD;BUILD_MONOLITHIC;BUILDING_LIBOPENCV_VIDEOIO;OPENCV_VIDEOIO_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_VIDEOIO;OPENCV_VIDEOIO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_VIDEOIO;OPENCV_VIDEOIO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/highgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__OPENCV_BUILD;BUILD_MONOLITHIC;BUILDING_LIBOPENCV_VIDEOIO;OPENCV_VIDEOIO_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_VIDEOIO;OPENCV_VIDEOIO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_VIDEOIO;OPENCV_VIDEOIO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/highgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__OPENCV_BUILD;BUILD_MONOLITHIC;BUILDING_LIBOPENCV_VIDEOIO;OPENCV_VIDEOIO_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_VIDEOIO;OPENCV_VIDEOIO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/perf/perf_input.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/perf/perf_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/perf/perf_output.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/backend_plugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/backend_static.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_android_camera.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_android_mediandk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_aravis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_dc1394_v2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_dshow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_ffmpeg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_gphoto2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_gstreamer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_images.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_librealsense.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_mfx_common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_mfx_plugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_mfx_reader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_mfx_writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_mjpeg_decoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_mjpeg_encoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_msmf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_obsensor/obsensor_stream_channel_msmf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_obsensor/obsensor_stream_channel_v4l2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_obsensor/obsensor_uvc_stream_channel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_obsensor_capture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_openni2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_pvapi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_ueye.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_v4l.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_winrt/CaptureFrameGrabber.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_winrt/MediaStreamSink.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_winrt_bridge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_winrt_capture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_winrt_video.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_ximea.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_xine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/container_avi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/videoio_c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/videoio_registry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/test/test_audio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/test/test_camera.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/test/test_container_avi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/test/test_dynamic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/test/test_ffmpeg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/test/test_gstreamer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/test/test_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/test/test_mfx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/test/test_microphone.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/test/test_orientation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/test/test_plugins.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/videoio/test/test_video_io.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/include/opencv2/videoio.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/include/opencv2/videoio/cap_ios.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/include/opencv2/videoio/cap_winrt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/include/opencv2/videoio/container_avi.private.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/include/opencv2/videoio/doc/hwaccel.doc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/include/opencv2/videoio/legacy/constants_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/include/opencv2/videoio/registry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/include/opencv2/videoio/videoio.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/include/opencv2/videoio/videoio_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/misc/objc/ios/CvCamera2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/misc/python/pyopencv_videoio.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/perf/perf_camera.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/perf/perf_precomp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/backend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/backend_plugin_legacy.impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_dshow.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_ffmpeg_hw.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_ffmpeg_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_ffmpeg_legacy_api.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_interface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_librealsense.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_mfx_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_mfx_reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_mfx_writer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_msmf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_obsensor/obsensor_stream_channel_interface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_obsensor/obsensor_stream_channel_msmf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_obsensor/obsensor_stream_channel_v4l2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_obsensor/obsensor_uvc_stream_channel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_obsensor_capture.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_winrt/CaptureFrameGrabber.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_winrt/MFIncludes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_winrt/MediaSink.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_winrt/MediaStreamSink.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_winrt_bridge.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_winrt_capture.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/cap_winrt_video.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/ffmpeg_codecs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/plugin_api.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/plugin_capture_api.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/plugin_writer_api.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/precomp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/videoio_registry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/src/wrl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/videoio/test/test_precomp.hpp" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/cmake/detect_android_camera.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/cmake/detect_android_mediandk.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/cmake/detect_aravis.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/cmake/detect_avfoundation.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/cmake/detect_dc1394.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/cmake/detect_dshow.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/cmake/detect_ffmpeg.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/cmake/detect_gphoto.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/cmake/detect_gstreamer.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/cmake/detect_ios.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/cmake/detect_msdk.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/cmake/detect_msmf.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/cmake/detect_obsensor.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/cmake/detect_openni2.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/cmake/detect_pvapi.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/cmake/detect_realsense.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/cmake/detect_ueye.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/cmake/detect_v4l.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/cmake/detect_ximea.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/cmake/detect_xine.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/cmake/init.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/cmake/plugin.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/misc/build_plugins.sh" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/misc/gen_dict.json" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/misc/objc/gen_dict.json" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/misc/plugin_ffmpeg/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/misc/plugin_ffmpeg/build-standalone.sh" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/misc/plugin_ffmpeg/build-ubuntu.sh" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/misc/plugin_gstreamer/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/misc/plugin_gstreamer/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/videoio/misc/python/test/test_videoio.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>

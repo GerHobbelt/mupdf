@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libopencv-objdetect</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFDACE89}</ProjectGuid>
+    <RootNamespace>libopencv-objdetect</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>5054;4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_OBJDETECT;OPENCV_OBJDETECT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/highgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__OPENCV_BUILD;BUILD_MONOLITHIC;BUILDING_LIBOPENCV_OBJDETECT;OPENCV_OBJDETECT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_OBJDETECT;OPENCV_OBJDETECT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_OBJDETECT;OPENCV_OBJDETECT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/highgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__OPENCV_BUILD;BUILD_MONOLITHIC;BUILDING_LIBOPENCV_OBJDETECT;OPENCV_OBJDETECT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_OBJDETECT;OPENCV_OBJDETECT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_OBJDETECT;OPENCV_OBJDETECT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/highgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__OPENCV_BUILD;BUILD_MONOLITHIC;BUILDING_LIBOPENCV_OBJDETECT;OPENCV_OBJDETECT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_OBJDETECT;OPENCV_OBJDETECT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_OBJDETECT;OPENCV_OBJDETECT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/highgui/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__OPENCV_BUILD;BUILD_MONOLITHIC;BUILDING_LIBOPENCV_OBJDETECT;OPENCV_OBJDETECT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_OBJDETECT;OPENCV_OBJDETECT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/perf/opencl/perf_cascades.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/perf/opencl/perf_hogdetect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/perf/perf_aruco.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/perf/perf_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/perf/perf_qrcode_pipeline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/aruco/apriltag/apriltag_quad_thresh.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/aruco/apriltag/zmaxheap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/aruco/aruco_board.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/aruco/aruco_detector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/aruco/aruco_dictionary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/aruco/aruco_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/aruco/charuco_detector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/cascadedetect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/cascadedetect_convert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/detection_based_tracker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/face_detect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/face_recognize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/hog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/qrcode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/qrcode_encoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/test/opencl/test_hogdetector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/test/test_aruco_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/test/test_arucodetection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/test/test_boarddetection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/test/test_cascadeandhog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/test/test_charucodetection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/test/test_face.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/test/test_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/test/test_qrcode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/objdetect/test/test_qrcode_encode.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/objdetect/include/opencv2/objdetect.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/objdetect/include/opencv2/objdetect/aruco_board.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/objdetect/include/opencv2/objdetect/aruco_detector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/objdetect/include/opencv2/objdetect/aruco_dictionary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/objdetect/include/opencv2/objdetect/charuco_detector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/objdetect/include/opencv2/objdetect/detection_based_tracker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/objdetect/include/opencv2/objdetect/face.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/objdetect/include/opencv2/objdetect/objdetect.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/objdetect/misc/python/pyopencv_objdetect.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/objdetect/perf/perf_precomp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/aruco/apriltag/apriltag_quad_thresh.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/aruco/apriltag/predefined_dictionaries_apriltag.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/aruco/apriltag/unionfind.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/aruco/apriltag/zarray.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/aruco/apriltag/zmaxheap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/aruco/aruco_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/aruco/predefined_dictionaries.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/cascadedetect.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/precomp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/objdetect/src/qrcode_encoder_table.inl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/objdetect/test/test_aruco_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/objdetect/test/test_precomp.hpp" />
+    <Image Include="../../thirdparty/owemdjee/opencv/modules/objdetect/doc/pics/haarfeatures.png" />
+    <Image Include="../../thirdparty/owemdjee/opencv/modules/objdetect/tutorials/images/singlemarkersaxes.jpg" />
+    <Image Include="../../thirdparty/owemdjee/opencv/modules/objdetect/tutorials/images/singlemarkersaxes2.jpg" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/objdetect/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/objdetect/misc/python/test/test_facedetect.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/objdetect/misc/python/test/test_objdetect_aruco.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/objdetect/misc/python/test/test_peopledetect.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/objdetect/misc/python/test/test_qrcode_detect.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
