@@ -101,68 +101,65 @@
     <Filter Include="Misc Files\scripts">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0028}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\scripts\zuul">
+    <Filter Include="Misc Files\src">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0029}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\src">
+    <Filter Include="Misc Files\tests">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0030}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tests">
+    <Filter Include="Misc Files\tests\certs">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0031}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tests\certs">
+    <Filter Include="Misc Files\tests\certs\scripts">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0032}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tests\certs\scripts">
+    <Filter Include="Misc Files\tests\data">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0033}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tests\data">
+    <Filter Include="Misc Files\tests\libtest">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0034}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tests\libtest">
+    <Filter Include="Misc Files\tests\server">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0035}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tests\server">
+    <Filter Include="Misc Files\tests\tests-httpd">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0036}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tests\tests-httpd">
+    <Filter Include="Misc Files\tests\tests-httpd\testenv">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0037}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tests\tests-httpd\testenv">
+    <Filter Include="Misc Files\tests\unit">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0038}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tests\unit">
+    <Filter Include="Misc Files\winbuild">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0039}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\winbuild">
+    <Filter Include="Resource Files">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0040}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
+    <Filter Include="Resource Files\src">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0041}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\src">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0042}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\docs">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0044}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\docs\examples">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0043}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\docs\examples">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0042}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\src">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0045}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0044}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\tests">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0047}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\tests\libtest">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0046}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\tests\libtest">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0045}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\tests\server">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0048}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0047}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\tests\unit">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0049}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0048}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -908,6 +905,9 @@
       <Filter>Source Files\tests\libtest</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/curl/tests/libtest/lib2304.c">
+      <Filter>Source Files\tests\libtest</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/curl/tests/libtest/lib2305.c">
       <Filter>Source Files\tests\libtest</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/curl/tests/libtest/lib2402.c">
@@ -1888,12 +1888,6 @@
     <Text Include="../../thirdparty/curl/scripts/installcheck.sh">
       <Filter>Misc Files\scripts</Filter>
     </Text>
-    <Text Include="../../thirdparty/curl/scripts/zuul/before_script.sh">
-      <Filter>Misc Files\scripts\zuul</Filter>
-    </Text>
-    <Text Include="../../thirdparty/curl/scripts/zuul/script.sh">
-      <Filter>Misc Files\scripts\zuul</Filter>
-    </Text>
     <Text Include="../../thirdparty/curl/src/CMakeLists.txt">
       <Filter>Misc Files\src</Filter>
     </Text>
@@ -1960,6 +1954,9 @@
     <Text Include="../../thirdparty/curl/tests/smbserver.py">
       <Filter>Misc Files\tests</Filter>
     </Text>
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/Makefile.am">
+      <Filter>Misc Files\tests\tests-httpd</Filter>
+    </Text>
     <Text Include="../../thirdparty/curl/tests/tests-httpd/README.md">
       <Filter>Misc Files\tests\tests-httpd</Filter>
     </Text>
@@ -1967,6 +1964,9 @@
       <Filter>Misc Files\tests\tests-httpd</Filter>
     </Text>
     <Text Include="../../thirdparty/curl/tests/tests-httpd/conftest.py">
+      <Filter>Misc Files\tests\tests-httpd</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/scorecard.py">
       <Filter>Misc Files\tests\tests-httpd</Filter>
     </Text>
     <Text Include="../../thirdparty/curl/tests/tests-httpd/test_01_basic.py">
@@ -1984,7 +1984,25 @@
     <Text Include="../../thirdparty/curl/tests/tests-httpd/test_05_errors.py">
       <Filter>Misc Files\tests\tests-httpd</Filter>
     </Text>
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_06_eyeballs.py">
+      <Filter>Misc Files\tests\tests-httpd</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_07_upload.py">
+      <Filter>Misc Files\tests\tests-httpd</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_08_caddy.py">
+      <Filter>Misc Files\tests\tests-httpd</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_09_push.py">
+      <Filter>Misc Files\tests\tests-httpd</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_10_proxy.py">
+      <Filter>Misc Files\tests\tests-httpd</Filter>
+    </Text>
     <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/__init__.py">
+      <Filter>Misc Files\tests\tests-httpd\testenv</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/caddy.py">
       <Filter>Misc Files\tests\tests-httpd\testenv</Filter>
     </Text>
     <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/certs.py">
