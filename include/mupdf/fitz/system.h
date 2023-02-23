@@ -68,7 +68,7 @@ typedef unsigned __int64 uint64_t;
 
 // See also https://en.cppreference.com/w/c/string/byte/strtok 'Note' section:
 #if defined(_MSC_VER)
-#define strtok_r	strtok_s
+#  define strtok_r(str, delim, saveptr) strtok_s(str, delim, saveptr)
 #endif
 
 

@@ -135,6 +135,7 @@ _ACRTIMP _CRTALLOCATOR char* __cdecl _strdup(
 #include <direct.h>
 #include <io.h>
 #include <fcntl.h>
+#include <wingdi.h>
 #include <commdlg.h>
 #include <shellapi.h>
 #include <winbase.h>

@@ -1139,9 +1139,11 @@
 
 #define RETSIGTYPE void
 
+#if 0
 #ifdef _WIN32
 	/* don't suck in all of the win32 api */
 #	define WIN32_LEAN_AND_MEAN 1
+#endif
 #endif
 
 #ifndef LDAP_NEEDS_PROTOTYPES

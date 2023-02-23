@@ -24,6 +24,7 @@
 
 #ifdef _WIN32
 #include <windows.h>
+#include <wingdi.h>
 #include <commdlg.h>
 #include <shellapi.h>
 #endif
