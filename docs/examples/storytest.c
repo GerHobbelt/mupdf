@@ -408,7 +408,7 @@ int main(int argc, const char **argv)
 				"<p>This WordIs<span style=\"color:red\">ExtremelyImprobablyStupidlyMonumentallyActually</span>QuiteLong, and it's not wrapped.\n"
 				"</body>\n"
 				;
-		buf = fz_new_buffer_from_copied_data(ctx, html, strlen(html)+1);
+		buf = fz_new_buffer_from_copied_data(ctx, (const unsigned char *)html, strlen(html)+1);
 
 		story = fz_new_story(ctx, buf, "", 11, NULL);
 
@@ -449,7 +449,7 @@ int main(int argc, const char **argv)
 	{
 		writer = fz_new_pdf_writer(ctx, "out.pdf", "");
 
-		buf = fz_new_buffer_from_copied_data(ctx, snark, strlen(snark)+1);
+		buf = fz_new_buffer_from_copied_data(ctx, (const unsigned char *)snark, strlen(snark)+1);
 
 		archive = fz_open_directory(ctx, ".");
 
@@ -559,7 +559,7 @@ int main(int argc, const char **argv)
 
 		writer = fz_new_pdf_writer(ctx, "out3.pdf", "");
 
-		buf = fz_new_buffer_from_copied_data(ctx, festival_template, strlen(festival_template)+1);
+		buf = fz_new_buffer_from_copied_data(ctx, (const unsigned char *)festival_template, strlen(festival_template)+1);
 		story = fz_new_story(ctx, buf, "", 11, NULL);
 
 		dom = fz_story_document(ctx, story);
