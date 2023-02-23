@@ -2292,7 +2292,7 @@ bulktest_main(int argc, const char **argv)
 						// apparently we're loading a LST file instead of a full-fledged TSV.
 						//
 						// construct the other parameters from the first:
-						char* p = template_argv[0];
+						char* p = (char *)template_argv[0];
 						fz_normalize_path(ctx, p, strlen(p) + 1, p);
 						p = fz_strdup(ctx, p);
 						char* q1 = strrchr(p, '/');
