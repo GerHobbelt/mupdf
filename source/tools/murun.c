@@ -624,6 +624,8 @@ static void ffi_pushcolorspace(js_State *J, fz_colorspace *colorspace)
 		js_getregistry(J, "DeviceGray");
 	else if (colorspace == fz_device_cmyk(ctx))
 		js_getregistry(J, "DeviceCMYK");
+	else if (colorspace == fz_device_lab(ctx))
+		js_getregistry(J, "DeviceLab");
 	else {
 		js_getregistry(J, "fz_colorspace");
 		js_newuserdata(J, "fz_colorspace", fz_keep_colorspace(ctx, colorspace), ffi_gc_fz_colorspace);
@@ -4498,6 +4500,13 @@ static void ffi_Image_getInterpolate(js_State *J)
 	js_pushboolean(J, image->interpolate);
 }
 
+static void ffi_Image_getOrientation(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_image *image = js_touserdata(J, 0, "fz_image");
+	js_pushnumber(J, fz_image_orientation(ctx, image));
+}
+
 static void ffi_Image_getImageMask(js_State *J)
 {
 	fz_image *image = js_touserdata(J, 0, "fz_image");
@@ -4537,6 +4546,40 @@ static void ffi_Image_toPixmap(js_State *J)
 		rethrow(J);
 
 	ffi_pushpixmap(J, pixmap);
+}
+
+static void ffi_Image_getColorKey(js_State *J)
+{
+	fz_image *image = js_touserdata(J, 0, "fz_image");
+	int i;
+	if (image->use_colorkey)
+	{
+		js_newarray(J);
+		for (i = 0; i < 2 * image->n; ++i)
+		{
+			js_pushnumber(J, image->colorkey[i]);
+			js_setindex(J, -2, i);
+		}
+	}
+	else
+		js_pushnull(J);
+}
+
+static void ffi_Image_getDecode(js_State *J)
+{
+	fz_image *image = js_touserdata(J, 0, "fz_image");
+	int i;
+	if (image->use_decode)
+	{
+		js_newarray(J);
+		for (i = 0; i < 2 * image->n; ++i)
+		{
+			js_pushnumber(J, image->decode[i]);
+			js_setindex(J, -2, i);
+		}
+	}
+	else
+		js_pushnull(J);
 }
 
 static void ffi_Shade_bound(js_State *J)
@@ -9578,6 +9621,10 @@ int murun_main(int argc, const char** argv)
 		js_getregistry(J, "fz_colorspace");
 		js_newuserdata(J, "fz_colorspace", fz_keep_colorspace(ctx, fz_device_cmyk(ctx)), ffi_gc_fz_colorspace);
 		js_setregistry(J, "DeviceCMYK");
+
+		js_getregistry(J, "fz_colorspace");
+		js_newuserdata(J, "fz_colorspace", fz_keep_colorspace(ctx, fz_device_lab(ctx)), ffi_gc_fz_colorspace);
+		js_setregistry(J, "DeviceLab");
 	}
 
 	js_getregistry(J, "Userdata");
@@ -9613,8 +9660,11 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "Image.getYResolution", ffi_Image_getYResolution, 0);
 		jsB_propfun(J, "Image.getNumberOfComponents", ffi_Image_getNumberOfComponents, 0);
 		jsB_propfun(J, "Image.getBitsPerComponent", ffi_Image_getBitsPerComponent, 0);
-		jsB_propfun(J, "Image.getInterpolate", ffi_Image_getInterpolate, 0);
 		jsB_propfun(J, "Image.getImageMask", ffi_Image_getImageMask, 0);
+		jsB_propfun(J, "Image.getInterpolate", ffi_Image_getInterpolate, 0);
+		jsB_propfun(J, "Image.getColorKey", ffi_Image_getColorKey, 0);
+		jsB_propfun(J, "Image.getDecode", ffi_Image_getDecode, 0);
+		jsB_propfun(J, "Image.getOrientation", ffi_Image_getOrientation, 0);
 		jsB_propfun(J, "Image.getMask", ffi_Image_getMask, 0);
 		jsB_propfun(J, "Image.toPixmap", ffi_Image_toPixmap, 2);
 	}
@@ -10048,6 +10098,9 @@ int murun_main(int argc, const char** argv)
 
 		js_getregistry(J, "DeviceCMYK");
 		js_defproperty(J, -2, "DeviceCMYK", JS_DONTENUM | JS_READONLY | JS_DONTCONF);
+
+		js_getregistry(J, "DeviceLab");
+		js_defproperty(J, -2, "DeviceLab", JS_DONTENUM | JS_READONLY | JS_DONTCONF);
 
 		jsB_propfun(J, "setUserCSS", ffi_setUserCSS, 2);
 	}
