@@ -49,6 +49,7 @@
 #include "../../thirdparty/owemdjee/QuickJS-C++-Wrapper/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/BLAKE3/c/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libarchive/contrib/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/tesslinesplit/monolithic_examples.h"
 #include "../../thirdparty/jbig2dec/monolithic_examples.h"
 #include "../../source/fitz/tessocr.h"
 #undef BUILD_MONOLITHIC
@@ -145,6 +146,9 @@ static struct {
 	{ {.fa = tesseract_lstm_training_main }, "tess_lstm_training", "OCR training helper utility" },
 
 	{ {.fa = tesseract_text2image_main }, "tess_text2image", "OCR training helper utility" },
+
+	{ {.fa = tesslinesplit_kraken_main }, "tesslinesplit_kraken", "OCR tesseract linesplit (Kraken) helper utility" },
+	{ {.fa = tesslinesplit_ocular_main }, "tesslinesplit_ocular", "OCR tesseract line split (Ocular) helper utility" },
 #endif
 
 	{ {.fa = curl_main }, "curl", "access/fetch a given URI" },
