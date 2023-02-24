@@ -190,11 +190,7 @@ void *ocr_init(fz_context *ctx, const char *language, const char *datadir)
 	ocr_set_leptonica_stderr_handler(ctx);
 
 	setPixMemoryManager(leptonica_malloc, leptonica_free);
-#if defined(_DEBUG) && defined(_CRTDBG_REPORT_FLAG)
-	api = new (_CLIENT_BLOCK, __FILE__, __LINE__) tesseract::TessBaseAPI();
-#else
 	api = new tesseract::TessBaseAPI();
-#endif  // _DEBUG
 
 	if (api == NULL)
 	{

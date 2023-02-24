@@ -94,6 +94,14 @@
 #endif
 
 #include <crtdbg.h>
+
+#if defined(_DEBUG) && defined(_CRTDBG_REPORT_FLAG)
+
+#ifndef NEW_CBDBG // new operator: debug clientblock:
+#define NEW_CBDBG new (_CLIENT_BLOCK, __FILE__, __LINE__)
+#define new NEW_CBDBG
+#endif
+#endif
 #endif
 
 /*
