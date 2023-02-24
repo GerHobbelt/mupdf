@@ -615,7 +615,7 @@ bmp_read_bitmap(fz_context *ctx, struct info *info, const unsigned char *begin, 
 
 	fz_try(ctx)
 	{
-		pix = fz_new_pixmap(ctx, info->cs, width, height, NULL, 1);
+		pix = fz_new_pixmap(ctx, info->cs, width, height, NULL, info->abits > 0);
 		fz_set_pixmap_resolution(ctx, pix, info->xres, info->yres);
 		fz_clear_pixmap(ctx, pix);
 	}
@@ -703,7 +703,8 @@ bmp_read_bitmap(fz_context *ctx, struct info *info, const unsigned char *begin, 
 				*dp++ = (r * rmult) >> rtrunc;
 				*dp++ = (g * gmult) >> gtrunc;
 				*dp++ = (b * bmult) >> btrunc;
-				*dp++ = info->abits == 0 ? a : (a * amult) >> atrunc;
+				if (info->abits > 0)
+					*dp++ = (a * amult) >> atrunc;
 				sp += 4;
 			}
 			break;
@@ -713,7 +714,8 @@ bmp_read_bitmap(fz_context *ctx, struct info *info, const unsigned char *begin, 
 				*dp++ = sp[2];
 				*dp++ = sp[1];
 				*dp++ = sp[0];
-				*dp++ = 255;
+				if (info->abits > 0)
+					*dp++ = 255;
 				sp += 3;
 			}
 			break;
@@ -730,7 +732,8 @@ bmp_read_bitmap(fz_context *ctx, struct info *info, const unsigned char *begin, 
 				*dp++ = (r * rmult) >> rtrunc;
 				*dp++ = (g * gmult) >> gtrunc;
 				*dp++ = (b * bmult) >> btrunc;
-				*dp++ = info->abits == 0 ? 255 : (a * amult) >> atrunc;
+				if (info->abits > 0)
+					*dp++ = (a * amult) >> atrunc;
 				sp += 2;
 			}
 			break;
@@ -740,7 +743,8 @@ bmp_read_bitmap(fz_context *ctx, struct info *info, const unsigned char *begin, 
 				*dp++ = info->palette[3 * sp[0] + 0];
 				*dp++ = info->palette[3 * sp[0] + 1];
 				*dp++ = info->palette[3 * sp[0] + 2];
-				*dp++ = 255;
+				if (info->abits > 0)
+					*dp++ = 255;
 				sp++;
 			}
 			break;
@@ -756,7 +760,8 @@ bmp_read_bitmap(fz_context *ctx, struct info *info, const unsigned char *begin, 
 				*dp++ = info->palette[3 * idx + 0];
 				*dp++ = info->palette[3 * idx + 1];
 				*dp++ = info->palette[3 * idx + 2];
-				*dp++ = 255;
+				if (info->abits > 0)
+					*dp++ = 255;
 			}
 			break;
 		case 2:
@@ -773,7 +778,8 @@ bmp_read_bitmap(fz_context *ctx, struct info *info, const unsigned char *begin, 
 				*dp++ = info->palette[3 * idx + 0];
 				*dp++ = info->palette[3 * idx + 1];
 				*dp++ = info->palette[3 * idx + 2];
-				*dp++ = 255;
+				if (info->abits > 0)
+					*dp++ = 255;
 			}
 			break;
 		case 1:
@@ -794,14 +800,16 @@ bmp_read_bitmap(fz_context *ctx, struct info *info, const unsigned char *begin, 
 				*dp++ = info->palette[3 * idx + 0];
 				*dp++ = info->palette[3 * idx + 1];
 				*dp++ = info->palette[3 * idx + 2];
-				*dp++ = 255;
+				if (info->abits > 0)
+					*dp++ = 255;
 			}
 			break;
 		}
 	}
 
 	fz_free(ctx, decompressed);
-	fz_premultiply_pixmap(ctx, pix);
+	if (info->abits > 0)
+		fz_premultiply_pixmap(ctx, pix);
 	return pix;
 }
 
