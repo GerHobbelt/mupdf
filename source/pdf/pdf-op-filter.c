@@ -1496,7 +1496,6 @@ end_segment(fz_context *ctx, segmenter_data_t *sd)
 	if (sd->p->options->culler(ctx, sd->p->options->opaque, r, sd->type))
 	{
 		/* This segment can be skipped */
-		sd=sd;
 	}
 	else
 	{
