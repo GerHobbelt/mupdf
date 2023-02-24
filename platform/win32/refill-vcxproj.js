@@ -247,6 +247,12 @@ const projectMap = {
 	"libopencv-contrib-xobjdetect": "opencv_contrib/modules/xobjdetect",
 	"libopencv-contrib-xphoto": "opencv_contrib/modules/xphoto",
 	
+	"libdlfcn-win32-testmain": "dlfcn-win32",
+	"libdlfcn-win32-testdll1": "dlfcn-win32",
+	"libdlfcn-win32-testdll2": "dlfcn-win32",
+	"libdlfcn-win32-testdll3": "dlfcn-win32",
+	"libdlfcn-win32-test-dladdr": "dlfcn-win32",
+	
 	"sqlite_tools": "sqlite-amalgamation",
 };
 

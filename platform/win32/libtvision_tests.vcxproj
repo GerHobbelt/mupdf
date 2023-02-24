@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -111,8 +111,8 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTVISION;TVISION_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -226,7 +226,6 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/examples/avscolor/termcolor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/tvision/examples/mmenu/mm_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/tvision/examples/mmenu/mmenu.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/tvision/examples/palette/p_test.cpp" />
@@ -255,211 +254,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/tvision/examples/tvforms/tvforms.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/tvision/examples/tvhc/tvhc.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/tvision/hello.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/ansidisp.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/base64.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/buffdisp.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/codepage.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/colors.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/cursor.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/dir.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/events.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/far2l.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/findfrst.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/gpminput.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/hardware.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/linuxcon.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/ncurdisp.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/ncursinp.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/platfcon.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/platform.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/scrlife.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/sighandl.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/sigwinch.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/stdioctl.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/strings.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/termdisp.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/terminal.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/ttext.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/unixcon.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/win32con.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/windows.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/platform/winwidth.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/colorsel.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/drivers.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/drivers2.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/edits.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/editstat.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/framelin.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/geninc.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/grp.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/hardwrvr.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/help.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/helpbase.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/histlist.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/mapcolor.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/menu.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/misc.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/msgbox.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/new.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/newstr.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmbkgrnd.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmbutton.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmchdrdl.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmchkbox.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmclrsel.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmclustr.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmcollct.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmdialog.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmdirbox.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmdircol.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmdsktop.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmeditor.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmfilcol.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmfildlg.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmfillst.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmframe.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmgroup.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmhist.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nminptln.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmlabel.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmlstbox.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmlstvwr.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmmnubar.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmmnubox.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmmnupop.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmmnuvw.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmmulchk.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmoutlin.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmprmtxt.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmrbtns.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmrescol.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmscoll.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmscrbar.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmscroll.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmstctxt.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmstddlg.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmstline.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmstrcol.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmstrlst.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmvalida.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmview.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/nmwindow.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/palette.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/popupmnu.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/prntcnst.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sbkgrnd.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sbutton.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/schdrdlg.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/scheckbo.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sclrsel.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/scluster.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sdesktop.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sdialog.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sdircoll.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sdirlist.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/seditors.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sfilcoll.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sfildlg.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sfilelst.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sfinfpne.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sfinputl.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sframe.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sgroup.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/shistory.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sinputli.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/slabel.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/slistbox.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/slstview.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/smenubar.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/smenubox.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/smenupop.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/smnuview.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/smulchkb.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/soutline.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sparamte.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sradiobu.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/srescoll.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sscrlbar.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sscrolle.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sstatict.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sstatusl.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sstrcoll.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sstrlst.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/stddlg.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/strmstat.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/svalid.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/sview.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/swindow.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/syserr.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tapplica.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tbkgrnd.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tbutton.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tchdrdlg.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tcheckbo.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tclipbrd.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tcluster.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tcmdset.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tcollect.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tdesktop.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tdialog.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tdircoll.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tdirlist.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/teditor1.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/teditor2.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/teditwnd.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tevent.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/textview.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tfildlg.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tfilecol.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tfiledtr.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tfillist.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tframe.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tgrmv.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tgroup.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/thistory.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/thistwin.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/thstview.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tindictr.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tinputli.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tkey.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tlabel.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tlistbox.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tlstview.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tmemo.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tmenubar.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tmenubox.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tmenupop.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tmnuview.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tmouse.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tmulchkb.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tobject.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tobjstrm.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/toutline.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tparamte.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tprogram.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tradiobu.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/trescoll.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tresfile.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tscreen.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tscrlbar.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tscrolle.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tsortcol.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tstatict.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tstatusl.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tstrcoll.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tstrlist.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tstrview.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tsurface.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/ttimerqu.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/ttprvlns.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tvalidat.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tvcursor.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tvexposd.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tview.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tvtext1.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tvtext2.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/tvwrite.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/tvision/source/tvision/twindow.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/tvision/test/platform/base64.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/tvision/test/platform/far2l.test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/tvision/test/platform/terminal.test.cpp" />
@@ -547,6 +341,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/win32con.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/internal/winwidth.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/menus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/monolithic_examples.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/msgbox.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/objects.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/outline.h" />
@@ -567,23 +362,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/util.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/validate.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tvision/include/tvision/views.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tvision/source/tvision/tv.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/tvision/test/test.h" />
-    <Image Include="../../thirdparty/owemdjee/tvision/examples/avscolor/termcolor.png" />
-    <NASM Include="../../thirdparty/owemdjee/tvision/source/tvision/edits.asm" />
-    <NASM Include="../../thirdparty/owemdjee/tvision/source/tvision/framelin.asm" />
-    <NASM Include="../../thirdparty/owemdjee/tvision/source/tvision/hardware.asm" />
-    <NASM Include="../../thirdparty/owemdjee/tvision/source/tvision/swapst.asm" />
-    <NASM Include="../../thirdparty/owemdjee/tvision/source/tvision/sysint.asm" />
-    <NASM Include="../../thirdparty/owemdjee/tvision/source/tvision/tgrmv.asm" />
-    <NASM Include="../../thirdparty/owemdjee/tvision/source/tvision/ttprvlns.asm" />
-    <NASM Include="../../thirdparty/owemdjee/tvision/source/tvision/tvcursor.asm" />
-    <NASM Include="../../thirdparty/owemdjee/tvision/source/tvision/tvexposd.asm" />
-    <NASM Include="../../thirdparty/owemdjee/tvision/source/tvision/tvwrite.asm" />
     <Text Include="../../thirdparty/owemdjee/tvision/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/tvision/README.md" />
     <Text Include="../../thirdparty/owemdjee/tvision/examples/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/tvision/examples/avscolor/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/tvision/examples/mmenu/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/tvision/examples/palette/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/tvision/examples/palette/README.md" />
@@ -593,11 +375,9 @@
     <Text Include="../../thirdparty/owemdjee/tvision/examples/tvforms/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/tvision/examples/tvhc/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/tvision/examples/tvhc/demohelp.txt" />
-    <Text Include="../../thirdparty/owemdjee/tvision/source/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/tvision/test/CMakeLists.txt" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
