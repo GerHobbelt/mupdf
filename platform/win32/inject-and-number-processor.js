@@ -1,3 +1,6 @@
+//
+// analyze obsidian lab notes MD filee and chop it into sections, each of which will get a header, etc.
+//
 
 const path = require('path');
 const fs = require('fs');
