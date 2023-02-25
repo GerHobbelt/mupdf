@@ -1117,7 +1117,7 @@ Wrappers for a MuPDF function `fz_foo()` are available in multiple forms:
 
 
 Constructors using MuPDF functions
-----------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Wrapper class constructors are created for each MuPDF function that returns an
 instance of a MuPDF struct.
@@ -1139,7 +1139,7 @@ We cope with this in two ways:
 
 
 Default constructors
---------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 All wrapper classes have a default constructor.
 
@@ -1159,7 +1159,7 @@ All wrapper classes have a default constructor.
 
 
 Raw constructors
-----------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Many wrapper classes have constructors that take a pointer to the underlying
 MuPDF C struct. These are usually for internal use only. They do not call
@@ -1168,7 +1168,7 @@ owned.
 
 
 POD wrapper classes
--------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Class wrappers for MuPDF structs default to having a `m_internal` member which
 points to an instance of the wrapped struct. This works well for MuPDF structs
@@ -1450,6 +1450,8 @@ Here is an example PDF filter written in Python that removes alternating items:
         document.pdf_save_document('foo.pdf', mupdf.PdfWriteOptions())
 
 |expand_end|
+
+
 
 
 
