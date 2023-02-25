@@ -154,9 +154,3 @@ An example input file, which adds an image, a triangle and some text:
 
 
 .. External links
-
-
-
-
-
-

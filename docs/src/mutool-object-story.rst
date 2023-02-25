@@ -52,5 +52,3 @@
 
     :arg device: :ref:`Device<mutool_object_device>`.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
-
-

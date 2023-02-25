@@ -73,6 +73,3 @@ The `merge` command is used to pick out pages from two or more files and merge t
 
 
 .. External links
-
-
-

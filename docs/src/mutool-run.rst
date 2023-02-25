@@ -163,8 +163,3 @@ Advanced examples
 
 
 .. External links
-
-
-
-
-

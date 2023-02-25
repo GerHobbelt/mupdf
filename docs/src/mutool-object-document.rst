@@ -142,5 +142,3 @@
     Returns *true* if the document is a :title:`PDF` document.
 
     :return: `Boolean`.
-
-

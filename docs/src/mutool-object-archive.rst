@@ -121,6 +121,3 @@
 
     :arg name: `String`.
     :arg buffer: `Buffer`.
-
-
-

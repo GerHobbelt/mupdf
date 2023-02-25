@@ -95,8 +95,3 @@
     Returns *true* if the page is from a :title:`PDF` document.
 
     :return: `Boolean`.
-
-
-
-
-

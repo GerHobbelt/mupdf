@@ -62,9 +62,3 @@ The `extract` command can be used to extract images and font files from a :title
 
 
 .. External links
-
-
-
-
-
-

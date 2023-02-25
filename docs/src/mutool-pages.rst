@@ -54,9 +54,3 @@ The `pages` command prints out `MediaBox`, `CropBox`, etc. as well as `Rotation`
 
 
 .. External links
-
-
-
-
-
-

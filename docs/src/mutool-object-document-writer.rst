@@ -59,5 +59,3 @@
 .. method:: close()
 
     Finish the document and flush any pending output.
-
-

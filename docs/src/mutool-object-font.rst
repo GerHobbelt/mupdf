@@ -107,4 +107,3 @@
     Returns *true* if font is serif.
 
     :return: `Boolean`.
-

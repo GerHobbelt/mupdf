@@ -264,7 +264,3 @@ Pixmaps can be tinted, inverted, scaled, gamma corrected, and converted to other
 
 `fz_pixmap *fz_scale_pixmap(fz_context *ctx, fz_pixmap *src, float x, float y, float w, float h, const fz_irect *clip);`
    Scale the pixmap up or down in size to fit the rectangle. Will return `NULL` if the scaling factors are out of range. This applies fancy filtering and will anti-alias the edges for subpixel positioning if using non-integer coordinates. If the clip rectangle is set, the returned pixmap may be subset to fit the clip rectangle. Pass `NULL` to the clip if you want the whole pixmap scaled.
-
-
-
-

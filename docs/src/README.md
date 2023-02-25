@@ -33,7 +33,7 @@ This then creates the HTML documentation within the folder "build" in the root o
 
 
 - First ensure you have [rst2pdf](https://pypi.org/project/rst2pdf/) installed:
-	
+
 
 `python -m pip install rst2pdf`
 
@@ -49,7 +49,4 @@ This will then generate a single PDF for all of the documentation within `build/
 ---
 
 
-For full details see: [Using Sphinx](https://www.sphinx-doc.org/en/master/usage/index.html) 
-
-
-
+For full details see: [Using Sphinx](https://www.sphinx-doc.org/en/master/usage/index.html)

@@ -149,9 +149,3 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
     :arg points: `[x0, y0, x1, y1, x2, y2, x3, y3, ...]` Points give the corner points of a convex quadrilateral within the `Pixmap` to be warped.
     :arg width: `Int` .
     :arg height: `Int`.
-
-
-
-
-
-

@@ -445,6 +445,3 @@ Compatibility
 
 
 .. include:: footer.rst
-
-
-

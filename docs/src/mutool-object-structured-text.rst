@@ -37,8 +37,3 @@
 
     :arg p: Start point in format `{x:y}`.
     :arg q: End point in format `{x:y}`.
-
-
-
-
-

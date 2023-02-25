@@ -533,4 +533,3 @@ The following functions can be used to copy objects from one document to another
 .. External links
 
 .. _Mimetype: https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
-

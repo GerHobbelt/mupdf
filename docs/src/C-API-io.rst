@@ -311,5 +311,3 @@ We can also create new :title:`Zip` archives.
     void fz_write_zip_entry(fz_context *ctx, fz_zip_writer *zip, const char *name, fz_buffer *buf, int compress);
     void fz_close_zip_writer(fz_context *ctx, fz_zip_writer *zip);
     void fz_drop_zip_writer(fz_context *ctx, fz_zip_writer *zip);
-
-

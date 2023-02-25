@@ -113,9 +113,3 @@ The `show` command will print the specified objects and streams to `stdout`. Str
 
 
 .. External links
-
-
-
-
-
-

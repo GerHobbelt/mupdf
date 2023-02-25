@@ -116,8 +116,3 @@ The `clean` command pretty prints and rewrites the syntax of a :title:`PDF` file
 
 
 .. External links
-
-
-
-
-

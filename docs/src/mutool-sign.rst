@@ -84,9 +84,3 @@ Signing digital signatures in :title:`MuPDF` requires that you have a PFX certif
 
 
 .. External links
-
-
-
-
-
-

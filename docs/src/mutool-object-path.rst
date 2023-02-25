@@ -130,5 +130,3 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
     Transform path by the given transform matrix.
 
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>` for the path.
-
-

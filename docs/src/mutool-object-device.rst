@@ -251,8 +251,3 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 .. External links:
 
 .. _even odd rule: https://en.wikipedia.org/wiki/Even–odd_rule
-
-
-
-
-

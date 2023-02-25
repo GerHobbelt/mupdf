@@ -472,6 +472,3 @@ These are simple mathematical operations that can not throw errors, so do not ne
 
 `fz_matrix fz_transform_page(fz_rect mediabox, float resolution, float rotate);`
     Create a transform matrix to draw a page at a given resolution and rotation. The scaling factors are adjusted so that the page covers a whole number of pixels. Resolution is given in dots per inch. Rotation is expressed in degrees (`0`, `90`, `180`, and `270` are valid values).
-
-
-

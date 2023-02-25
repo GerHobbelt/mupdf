@@ -11,6 +11,3 @@
    a.setAttribute("href", "https://artifex.com/contributor/feedback.php?url="+url_string);
 
    </script>
-
-
-

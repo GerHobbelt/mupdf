@@ -60,6 +60,3 @@ The `poster` command reads the input PDF file and for each page chops it up into
 
 
 .. External links
-
-
-

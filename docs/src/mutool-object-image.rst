@@ -110,4 +110,3 @@
     :arg scaledHeight: Height value.
 
     :return: `Pixmap`.
-

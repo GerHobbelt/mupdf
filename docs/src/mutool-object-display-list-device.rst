@@ -30,4 +30,3 @@
     .. code-block:: javascript
 
         var displayListDevice = new DisplayListDevice(my_display_list);
-

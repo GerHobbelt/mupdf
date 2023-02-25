@@ -159,4 +159,3 @@ A typical structure for a fetcher process (see `curl-stream.c`, `mupdf-curl` in 
 
 
 .. External links
-

@@ -114,5 +114,3 @@ The `Buffer` objects are used for working with binary data. They can be used muc
     Write the contents of the buffer to a file.
 
     :arg fileName: Filename to save to.
-
-

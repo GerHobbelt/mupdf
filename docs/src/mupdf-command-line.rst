@@ -467,5 +467,3 @@ There are also several tools specifically for working with :title:`PDF` files:
 
 .. _GLUT: https://freeglut.sourceforge.net
 .. _rlwrap: https://github.com/hanslub42/rlwrap
-
-

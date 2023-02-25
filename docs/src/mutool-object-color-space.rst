@@ -53,6 +53,3 @@
         var cs = DeviceRGB;
         var num = cs.getNumberOfComponents();
         print(num);  //3
-
-
-

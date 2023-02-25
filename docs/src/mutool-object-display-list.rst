@@ -77,5 +77,3 @@ A display list records all the device calls for playback later. If you want to r
 
     :arg needle: `String`.
     :return: `[]`.
-
-

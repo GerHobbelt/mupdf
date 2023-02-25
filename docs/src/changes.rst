@@ -143,5 +143,3 @@ Changes from 1.14 to 1.15
 .. External links
 
 .. _CHANGES: https://github.com/ArtifexSoftware/mupdf/blob/master/CHANGES
-
-

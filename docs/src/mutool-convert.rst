@@ -170,5 +170,3 @@ The `convert` command converts an input file into another format.
 
 
 .. External links
-
-

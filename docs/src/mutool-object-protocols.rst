@@ -248,8 +248,3 @@ Placement Result Object
 
 `more`
     *True* if more content remains to be placed, otherwise *false* if all content fits in the `Story`.
-
-
-
-
-

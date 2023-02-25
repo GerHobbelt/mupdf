@@ -79,6 +79,3 @@ An outline iterator is can be used to walk over all the items in an :title:`Outl
     Updates the current item with the properties of the supplied item.
 
     :arg item: `Object` which conforms to the :ref:`Outline Iterator Object<mutool_run_js_api_outline_iterator_object>`.
-
-
-

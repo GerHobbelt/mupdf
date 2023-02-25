@@ -107,5 +107,3 @@ These are the third party libraries used by :title:`MuPDF`.
 .. _Leptonica: https://github.com/DanBloomberg/leptonica
 .. _jbig2dec: http://jbig2dec.com/
 .. _MuJS: http://mujs.com/
-
-

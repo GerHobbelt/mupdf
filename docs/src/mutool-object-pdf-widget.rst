@@ -224,9 +224,3 @@ To create a signer object an instance of `PDFPKCS7Signer` is required.
     .. code-block:: javascript
 
         var signer = new PDFPKCS7Signer(<file_name>,<password>);
-
-
-
-
-
-

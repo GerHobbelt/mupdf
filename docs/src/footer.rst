@@ -31,6 +31,3 @@
           :width: 0
           :height: 0
           :target: https://discord.gg/TSpYGBW4eq
-
-
-

@@ -105,8 +105,3 @@ The `draw` command will render a document to image files, convert to another vec
 
 
 .. External links
-
-
-
-
-

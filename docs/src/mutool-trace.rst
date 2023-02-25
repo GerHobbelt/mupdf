@@ -91,9 +91,3 @@ The trace takes the form of an XML document, with the root element being the doc
 
 
 .. External links
-
-
-
-
-
-

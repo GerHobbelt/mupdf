@@ -760,5 +760,3 @@ Stamp annotations have the option to set a custom image as its appearance.
     Set a custom image appearance for a stamp annotation.
 
     :arg image: `Image`.
-
-

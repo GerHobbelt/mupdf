@@ -67,5 +67,3 @@ The `info` command shows info about the objects on pages in an input file. For e
 
 
 .. External links
-
-

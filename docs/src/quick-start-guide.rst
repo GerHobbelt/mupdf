@@ -149,4 +149,3 @@ And a suite of image types, e.g. `png`, `jpg`, `bmp` etc.
 .. _MuPDF Releases: https://mupdf.com/releases/index.html
 .. _MuPDF on Github: https://github.com/ArtifexSoftware/mupdf
 .. _GNU website: https://www.gnu.org/software/automake/
-
