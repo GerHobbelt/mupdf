@@ -1244,6 +1244,7 @@ fz_image_type_name(int type)
 	case FZ_IMAGE_PNG: return "png";
 	case FZ_IMAGE_PNM: return "pnm";
 	case FZ_IMAGE_TIFF: return "tiff";
+	case FZ_IMAGE_WEBP: return "webp";
 	}
 }
 
@@ -1265,6 +1266,7 @@ fz_lookup_image_type(const char *type)
 	if (!strcmp(type, "png")) return FZ_IMAGE_PNG;
 	if (!strcmp(type, "pnm")) return FZ_IMAGE_PNM;
 	if (!strcmp(type, "tiff")) return FZ_IMAGE_TIFF;
+	if (!strcmp(type, "webp")) return FZ_IMAGE_WEBP;
 	return FZ_IMAGE_UNKNOWN;
 }
 

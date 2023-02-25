@@ -9,9 +9,9 @@ ifeq ($(USE_SYSTEM_LIBS),yes)
   # lcms2mt is strongly preferred
   USE_SYSTEM_LCMS2 := yes
   USE_SYSTEM_LIBJPEG := yes
+  USE_SYSTEM_LIBWEBP := yes
   USE_SYSTEM_MUJS := no # not available
   USE_SYSTEM_OPENJPEG := yes
-  USE_SYSTEM_WEBP := no # not tested
   USE_SYSTEM_ZLIB := yes
   USE_SYSTEM_GLUT := yes
   USE_SYSTEM_CURL := yes
@@ -233,7 +233,7 @@ endif
 
 # --- WebP ---
 
-ifeq ($(USE_SYSTEM_WEBP),yes)
+ifeq ($(USE_SYSTEM_LIBWEBP),yes)
   THIRD_CFLAGS += $(SYS_WEBP_CFLAGS)
   THIRD_LIBS += $(SYS_WEBP_LIBS)
 else
