@@ -1891,6 +1891,8 @@ pdf_drop_document_imp(fz_context *ctx, pdf_document *doc)
 	fz_drop_stream(ctx, doc->file);
 	pdf_drop_crypt(ctx, doc->crypt);
 
+	pdf_drop_page_tree(ctx, doc);
+
 	pdf_drop_obj(ctx, doc->linear_obj);
 	if (doc->linear_page_refs)
 	{
