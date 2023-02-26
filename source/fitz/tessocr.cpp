@@ -30,9 +30,13 @@ static fz_context *leptonica_mem = NULL;
 static int event = 0;
 #endif
 
-void *leptonica_malloc(size_t size)
+#undef fz_malloc_no_throw
+#undef fz_realloc_no_throw
+
+
+void *leptonica_malloc(size_t size   FZDBG_DECL_ARGS)
 {
-	void *ret = Memento_label(fz_malloc_no_throw(leptonica_mem, size), "leptonica_malloc");
+	void *ret = Memento_label(fz_malloc_no_throw(leptonica_mem, size   FZDBG_PASS), "leptonica_malloc");
 #if DEBUG_ALLOCS
 	fz_info(leptonica_mem, "dbg: %d LEPTONICA_MALLOC(%p) %d -> %p\n", event++, leptonica_mem, (int)size, ret);
 #endif
@@ -47,9 +51,9 @@ void leptonica_free(void *ptr)
 	fz_free(leptonica_mem, ptr);
 }
 
-void *leptonica_calloc(size_t numelm, size_t elemsize)
+void *leptonica_calloc(size_t numelm, size_t elemsize   FZDBG_DECL_ARGS)
 {
-	void *ret = leptonica_malloc(numelm * elemsize);
+	void *ret = leptonica_malloc(numelm * elemsize   FZDBG_PASS);
 
 	if (ret)
 		memset(ret, 0, numelm * elemsize);
@@ -60,9 +64,9 @@ void *leptonica_calloc(size_t numelm, size_t elemsize)
 }
 
 /* Not currently actually used */
-void *leptonica_realloc(void *ptr, size_t blocksize)
+void *leptonica_realloc(void *ptr, size_t blocksize   FZDBG_DECL_ARGS)
 {
-	void *ret = fz_realloc_no_throw(leptonica_mem, ptr, blocksize);
+	void *ret = fz_realloc_no_throw(leptonica_mem, ptr, blocksize   FZDBG_PASS);
 
 #if DEBUG_ALLOCS
 	fz_info(leptonica_mem, "dbg: %d LEPTONICA_REALLOC %p,%d -> %p\n", event++, ptr, (int)blocksize, ret);
@@ -195,7 +199,7 @@ void *ocr_init(fz_context *ctx, const char *language, const char *datadir)
 	if (api == NULL)
 	{
 		ocr_clear_leptonica_mem(ctx);
-		setPixMemoryManager(malloc, free);
+		setPixMemoryManager(NULL, NULL);
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Tesseract initialisation failed");
 	}
 
@@ -213,7 +217,7 @@ void *ocr_init(fz_context *ctx, const char *language, const char *datadir)
 	{
 		delete api;
 		ocr_clear_leptonica_mem(ctx);
-		setPixMemoryManager(malloc, free);
+		setPixMemoryManager(NULL, NULL);
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Tesseract initialisation failed");
 	}
 
@@ -230,7 +234,7 @@ void ocr_fin(fz_context *ctx, void *api_)
 	api->End();
 	delete api;
 	ocr_clear_leptonica_mem(ctx);
-	setPixMemoryManager(malloc, free);
+	setPixMemoryManager(NULL, NULL);
 }
 
 static inline int isbigendian(void)
