@@ -35,10 +35,6 @@
 #include <windows.h>
 #endif
 
-#if defined(WASM_SKIP_TRY_CATCH)
-#include "emscripten.h"
-#endif
-
 
 #define QUIET_ERROR				0x0001
 #define QUIET_WARN				0x0002
@@ -447,7 +443,6 @@ void fz_get_error_callback(fz_context* ctx, fz_error_print_callback** print, voi
 
 FZ_NORETURN static void _throw(fz_context *ctx, int code)
 {
-#if !defined(WASM_SKIP_TRY_CATCH)
 	if (ctx->error.top > ctx->error.stack_base)
 	{
 		ctx->error.top->state += 2;
@@ -534,15 +529,6 @@ FZ_NORETURN static void _throw(fz_context *ctx, int code)
 
 		exit(666 /* EXIT_FAILURE */ );
 	}
-#else
-		EM_ASM({
-			let message = UTF8ToString($0);
-			console.error("mupdf:", message);
-			throw new libmupdf.MupdfError(message);
-		}, ctx->error.message);
-		// Unreachable
-		exit(EXIT_FAILURE);
-#endif
 }
 
 fz_jmp_buf *fz_push_try(fz_context *ctx)
