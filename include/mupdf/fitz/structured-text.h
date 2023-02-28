@@ -248,6 +248,68 @@ void fz_print_stext_page_as_text(fz_context *ctx, fz_output *out, fz_stext_page 
 int fz_search_stext_page(fz_context *ctx, fz_stext_page *text, const char *needle, int *hit_mark, fz_quad *hit_bbox, int hit_max);
 
 /**
+	Searching for text, iterator-style API.
+
+	Example usage:
+
+		fz_search_stext_state *state = fz_search_stext_create(ctx, stext_page);
+		fz_search_stext_set_needle(state, "foo");
+		while (fz_search_stext_next(ctx, state))
+		{
+			for(;;)
+			{
+				fz_quad *quad = fz_search_stext_next_quad(ctx, state);
+				if (!quad) break;
+				...
+			}
+		}
+		fz_search_stext_destroy(ctx, state);
+*/
+
+typedef struct fz_search_stext_state fz_search_stext_state;
+
+typedef fz_quad (*fz_search_stext_bboxfn)(fz_context *ctx, fz_stext_line *line, fz_stext_char *ch);
+
+/**
+	Creates a new fz_search_stext_state. Will contain a borrowed
+	reference to `stext_page.
+*/
+fz_search_stext_state *fz_search_stext_create(fz_context *ctx, fz_stext_page *stext_page);
+
+/**
+	Destroys a fz_search_stext_state previously returned by
+	fz_search_stext_create();
+*/
+void fz_search_stext_destroy(fz_context *ctx, fz_search_stext_state *state);
+
+/**
+	Sets the text to look for. The string pointed to by `needle` is not copied,
+	so must remain valid.
+*/
+void fz_search_stext_set_needle(fz_context *ctx, fz_search_stext_state *state, const char *needle);
+
+/**
+	Sets optional function to transform each fz_stext_char's .quad member
+	before looking to amalgamate individual glyph's quads.
+*/
+void fz_search_stext_set_bboxfn(fz_context *ctx, fz_search_stext_state *state, fz_search_stext_bboxfn bboxfn);
+
+/**
+	Finds the next match. The quads for the match can be found with repeated
+	calls to fz_search_stext_next_quad().
+
+	Returns zero if found, otherwise +1.
+*/
+int fz_search_stext_next(fz_context *ctx, fz_search_stext_state *state);
+
+/**
+	To be called multiple times after fz_search_stext_next() returns zero.
+	Returns pointer to next quad, or NULL if no more quads.
+*/
+const fz_quad *fz_search_stext_next_quad(fz_context *ctx, fz_search_stext_state *state);
+
+
+/**
 	Return a list of quads to highlight lines inside the selection
 	points.
 */
