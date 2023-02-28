@@ -35,6 +35,8 @@ extern "C" {
 int fzPushHeapDbgPurpose(const char* s, int l);
 int fzPopHeapDbgPurpose(int related_dummy, int l);
 
+void fzMarkHeapDbgApplicationStart(void);
+
 #ifdef __cplusplus
 }
 #endif
@@ -49,6 +51,8 @@ static int prefix ## HEAPDBG_SECTION_END = fzPopHeapDbgPurpose(prefix ## HEAPDBG
 
 #define FZ_HEAPDBG_TRACKER_SECTION_START_MARKER(prefix)  /**/
 #define FZ_HEAPDBG_TRACKER_SECTION_END_MARKER(prefix)    /**/
+
+#define fzMarkHeapDbgApplicationStart()                  /**/
 
 #endif
 

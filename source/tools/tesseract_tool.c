@@ -56,6 +56,10 @@ int main(int argc, const char** argv)
 
 	ocr_set_leptonica_stderr_handler(ctx);
 
+#ifndef BUILD_MONOLITHIC
+	fzMarkHeapDbgApplicationStart();
+#endif
+
 	//fz_info(ctx, "usage: tesseract <command> [options]");
 	int rv = tesseract_main(argc, argv);
 

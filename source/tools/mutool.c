@@ -626,6 +626,10 @@ int mutool_main(int argc, const char** argv)
 
 	atexit(mu_drop_context);
 
+#ifndef MUTOOL_AS_BULKTEST_CMD
+	fzMarkHeapDbgApplicationStart();
+#endif
+
     if (argc == 0)
     {
         fz_error(ctx, "No command name found!");
