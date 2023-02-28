@@ -772,15 +772,6 @@ flush_text(fz_context *ctx, fz_stext_device *dev)
 }
 
 static void
-flush_text(fz_context *ctx, fz_stext_device *dev)
-{
-	fz_stext_page *page = dev->page;
-
-	/* Find current position to enter new text. */
-	prepend_line_if_possible(ctx, page->last_block, dev->pen);
-}
-
-static void
 fz_add_stext_char(fz_context *ctx, fz_stext_device *dev, fz_font *font, int c, int glyph, fz_matrix trm, float adv, int wmode, int force_new_line)
 {
 	/* ignore when one unicode character maps to multiple glyphs */
