@@ -235,7 +235,7 @@ debugbreak
 delegate
 diffutils
 dirent
-djvulibre
+###### djvulibre -- already exists as libdjvu
 dlfcn-win32
 dlib
 docxBox
@@ -799,6 +799,8 @@ math-atlas
 c-blosc2
 cpp-btree
 CHM-lib
+libdjvulibre
+libdjvu_io
 dtl-diff-template-library
 enkiTS-TaskScheduler
 lda-Familia
