@@ -29,6 +29,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <intrin.h>		// __debugbreak()
 
 #ifdef _WIN32
 #include <windows.h>
@@ -465,17 +466,73 @@ FZ_NORETURN static void _throw(fz_context *ctx, int code)
 	else
 	{
 		ASSERT(ctx->error.top == ctx->error.stack_base);
-		fz_flush_warnings(ctx);
-		if (ctx->error.print)
-			ctx->error.print(ctx, ctx->error.print_user, "aborting process from uncaught error!");
-		fz_flush_all_std_logging_channels(ctx);
+
+		// wrap every 'independent' statement in its own try-catch block, for we want to
+		// **ignore** their failure(s). Which is also why we only try to report this at the
+		// first level, as nested exceptions are... an indication of bad things going *worse*.
+		//
+		// If all else fails, you at least get the identifying exit code and/or debugger invocation.
+		//
+		//                                   (fingers crossed)
+		//
+		if (ctx->within_throw_call == 0)
+		{
+			fz_try(ctx)
+			{
+				fz_flush_warnings(ctx);
+			}
+			fz_always(ctx)
+			{
+				ctx->within_throw_call = 0;
+			}
+			fz_catch(ctx)
+			{
+				// ignore internal failures: those will occur when we cannot write to stderr,
+				// which is deemed a non-fatal problem.
+			}
+
+			fz_try(ctx)
+			{
+				if (ctx->error.print)
+					ctx->error.print(ctx, ctx->error.print_user, "aborting process from uncaught error!");
+			}
+			fz_always(ctx)
+			{
+				ctx->within_throw_call = 0;
+			}
+			fz_catch(ctx)
+			{
+				// ignore internal failures: those will occur when we cannot write to stderr,
+				// which is deemed a non-fatal problem.
+			}
+
+			fz_try(ctx)
+			{
+				fz_flush_all_std_logging_channels(ctx);
+			}
+			fz_always(ctx)
+			{
+				ctx->within_throw_call = 0;
+			}
+			fz_catch(ctx)
+			{
+				// ignore internal failures: those will occur when we cannot write to stderr,
+				// which is deemed a non-fatal problem.
+			}
+		}
+
+#if defined(_CrtDbgBreak)
+		_CrtDbgBreak();
+#endif
+		__debugbreak();
 
 #if 0
 		/* SumatraPDF: crash rather than exit */
 		char* p = 0;
 		*p = 0;
 #endif
-		exit(EXIT_FAILURE);
+
+		exit(666 /* EXIT_FAILURE */ );
 	}
 #else
 		EM_ASM({
@@ -752,6 +809,129 @@ FZ_NORETURN void fz_vthrow(fz_context* ctx, int code, const char* fmt, va_list a
 
 			_throw(ctx, code);
 		}
+		else
+		{
+			ctx->within_throw_call++;
+
+			if (ctx->within_throw_call == 2)
+			{
+				fz_try(ctx)
+				{
+					fz_flush_all_std_logging_channels(ctx);
+				}
+				fz_always(ctx)
+				{
+					ctx->within_throw_call = 2;
+				}
+				fz_catch(ctx)
+				{
+					// ignore internal failures: those will occur when we cannot write to stderr,
+					// which is deemed a non-fatal problem.
+				}
+
+				fz_output* err = fz_stderr(ctx);
+				fz_output* dbg = fz_stdods(ctx);
+
+				fz_try(ctx)
+				{
+					char msgbuf[LONGLINE];
+					fz_vsnprintf(msgbuf, sizeof(msgbuf), fmt, ap);
+
+					if (dbg != err)
+					{
+						fz_try(ctx)
+						{
+							fz_write_string(ctx, dbg, msgbuf);
+						}
+						fz_always(ctx)
+						{
+							ctx->within_throw_call = 2;
+						}
+						fz_catch(ctx)
+						{
+							// ignore internal failures: those will occur when we cannot write to stderr,
+							// which is deemed a non-fatal problem.
+						}
+					}
+
+					fz_try(ctx)
+					{
+						fz_write_string(ctx, err, msgbuf);
+					}
+					fz_always(ctx)
+					{
+						ctx->within_throw_call = 2;
+					}
+					fz_catch(ctx)
+					{
+						// ignore internal failures: those will occur when we cannot write to stderr,
+						// which is deemed a non-fatal problem.
+					}
+				}
+				fz_always(ctx)
+				{
+					ctx->within_throw_call = 2;
+				}
+				fz_catch(ctx)
+				{
+					// ignore internal failures: those will occur when we cannot write to stderr,
+					// which is deemed a non-fatal problem.
+				}
+
+				const char* fatal_msg = "\nERROR:FATAL: Application code throws an fz_throw() exception without a valid context! Aborting process from uncaught error!\n";
+				if (dbg != err)
+				{
+					fz_try(ctx)
+					{
+						fz_write_string(ctx, dbg, fatal_msg);
+					}
+					fz_always(ctx)
+					{
+						ctx->within_throw_call = 2;
+					}
+					fz_catch(ctx)
+					{
+						// ignore internal failures: those will occur when we cannot write to stderr,
+						// which is deemed a non-fatal problem.
+					}
+				}
+
+				fz_try(ctx)
+				{
+					fz_write_string(ctx, err, fatal_msg);
+				}
+				fz_always(ctx)
+				{
+					ctx->within_throw_call = 2;
+				}
+				fz_catch(ctx)
+				{
+					// ignore internal failures: those will occur when we cannot write to stderr,
+					// which is deemed a non-fatal problem.
+				}
+
+				fz_try(ctx)
+				{
+					fz_flush_all_std_logging_channels(ctx);
+				}
+				fz_always(ctx)
+				{
+					ctx->within_throw_call = 2;
+				}
+				fz_catch(ctx)
+				{
+					// ignore internal failures: those will occur when we cannot write to stderr,
+					// which is deemed a non-fatal problem.
+				}
+
+				ctx->within_throw_call = 2;
+			}
+
+			ctx->within_throw_call--;
+
+			_throw(ctx, FZ_ERROR_ABORT); // internal state is not sane any more: abort abort abort
+		}
+		// we never get here: if & else both _throw()
 	}
 	else
 	{
@@ -770,21 +950,34 @@ FZ_NORETURN void fz_vthrow(fz_context* ctx, int code, const char* fmt, va_list a
 			char msgbuf[LONGLINE];
 			fz_vsnprintf(msgbuf, sizeof(msgbuf), fmt, ap);
 
-			fz_write_string(ctx, err, msgbuf);
+			// First write to the debug channel, rather than the stderr channel, as at least on Win32
+			// that channel is less prone to curious failures: stderr can be closed (my mistake) or
+			// redirected/piped to another app, which fails to fetch the data and thus locks up the 
+			// system's pipe buffer (others' mistake). Meanwhile, the debug channel doesn't suffer
+			// from those issues... unless the application code itself redirected it, in which case YMMV.
+			//
+			// Either way, `ctx == NULL` so there's no exception stack, so there's no try/catch
+			// possible here-abouts.
+			
 			if (dbg != err)
+			{
 				fz_write_string(ctx, dbg, msgbuf);
+			}
+			fz_write_string(ctx, err, msgbuf);
 		}
 
 		const char* fatal_msg = "\nERROR:FATAL: Application code throws an fz_throw() exception without a valid context! Aborting process from uncaught error!\n";
-		fz_write_string(ctx, err, fatal_msg);
 		if (dbg != err)
+		{
 			fz_write_string(ctx, dbg, fatal_msg);
+		}
+		fz_write_string(ctx, err, fatal_msg);
 
 		fz_flush_all_std_logging_channels(ctx);
 
 		within_throw_call--;
 
-		exit(EXIT_FAILURE);
+		exit(665 /* EXIT_FAILURE */);  // 666 is reserved for another place: see further above.
 	}
 }
 
