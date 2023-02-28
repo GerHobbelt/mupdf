@@ -371,6 +371,8 @@ pdf_repair_xref(fz_context *ctx, pdf_document *doc)
 	doc->repair_attempted |= 0x01;
 	doc->repair_in_progress = 1;
 
+	pdf_drop_page_tree_internal(ctx, doc);
+	doc->page_tree_broken = 0;
 	pdf_forget_xref(ctx, doc);
 
 	fz_seek(ctx, doc->file, 0, 0);
