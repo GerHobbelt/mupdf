@@ -597,6 +597,9 @@ static void add_hit_char(fz_context *ctx, struct highlight *hits, int *hit_mark,
 }
 
 int
+fz_search_stext_page_test(fz_context *ctx, fz_stext_page *page, const char *needle, int *hit_mark, fz_quad *quads, int max_quads);
+
+int
 fz_search_stext_page(fz_context *ctx, fz_stext_page *page, const char *needle, int *hit_mark, fz_quad *quads, int max_quads)
 {
 	struct highlight hits;
@@ -670,5 +673,270 @@ no_more_matches:;
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 
+	#ifndef NDEBUG
+	{
+		int *hit_mark2 = (hit_mark) ? fz_malloc(ctx, sizeof(*hit_mark2) * max_quads) : NULL;
+		fz_quad *quads2 = fz_malloc(ctx, sizeof(*quads2) * max_quads);
+		memset(quads2, 0, sizeof(*quads2) * max_quads);
+		int ret2 = fz_search_stext_page_test(ctx, page, needle, hit_mark2, quads2, max_quads);
+		assert(ret2 == hits.len);
+		int i;
+		for (i=0; i<ret2; ++i)
+		{
+			if (hit_mark2) assert(hit_mark2[i] == hit_mark[i]);
+		}
+		for (i=0; i<ret2; ++i)
+		{
+			if (hit_mark2) assert(hit_mark2[i] == hit_mark[i]);
+			assert(quads2[i].ul.x == quads[i].ul.x);
+			assert(quads2[i].ul.y == quads[i].ul.y);
+			assert(quads2[i].ur.x == quads[i].ur.x);
+			assert(quads2[i].ur.y == quads[i].ur.y);
+			assert(quads2[i].ll.x == quads[i].ll.x);
+			assert(quads2[i].ll.y == quads[i].ll.y);
+			assert(quads2[i].lr.x == quads[i].lr.x);
+			assert(quads2[i].lr.y == quads[i].lr.y);
+		}
+		fz_free(ctx, quads2);
+		fz_free(ctx, hit_mark2);
+	}
+	#endif
+
 	return hits.len;
+}
+
+int
+fz_search_stext_page_test(fz_context *ctx, fz_stext_page *page, const char *needle, int *hit_mark, fz_quad *quads, int max_quads)
+{
+	int i = 0;
+	fz_search_stext_state *state = fz_search_stext_create(ctx, page);
+	fz_search_stext_set_needle(ctx, state, needle);
+	while (fz_search_stext_next(ctx, state))
+	{
+		int first = 1;
+		for (; ; ++i, first=0)
+		{
+			const fz_quad *quad = fz_search_stext_next_quad(ctx, state);
+			if (!quad)
+				break;
+			if (i < max_quads)
+			{
+				if (hit_mark)
+					hit_mark[i] = first;
+				quads[i] = *quad;
+			}
+		}
+	}
+	fz_search_stext_destroy(ctx, state);
+	return (i < max_quads) ? i : max_quads;
+}
+
+/* Internal state for block/line/ch position. */
+typedef struct
+{
+	fz_stext_page *stext_page;
+	fz_stext_block *block;
+	fz_stext_line *line;
+	fz_stext_char *ch;
+} fz_search_stext_pos;
+
+/* Moves pos->block to next block. Returns number of extra newlines from block
+ends. */
+static int s_next_block(fz_search_stext_pos *pos)
+{
+	int newlines = 0;
+	for(;;)
+	{
+		if (pos->block)
+		{
+			if (pos->block->type == FZ_STEXT_BLOCK_TEXT)
+				newlines += 1;
+			pos->block = pos->block->next;
+		}
+		else
+		{
+			pos->block = pos->stext_page->first_block;
+		}
+		if (!pos->block) return newlines;
+		if (pos->block->type == FZ_STEXT_BLOCK_TEXT) return newlines;
+	}
+}
+
+/* Updates pos->line and pos->block to next line. Returns number of extra
+newlines from line/block ends. */
+static int s_next_line(fz_search_stext_pos *pos)
+{
+	int newlines = 0;
+	if (pos->line)
+	{
+		pos->line = pos->line->next;
+		newlines += 1;
+	}
+	for(;;)
+	{
+		if (pos->line) return newlines;
+		newlines += s_next_block(pos);
+		if (!pos->block) return newlines;
+		pos->line = pos->block->u.t.first_line;
+	}
+}
+
+/* Moves pos->ch, pos->line and pos->block to next character. Returns number of
+extra newlines from line/block ends. */
+static int s_next_char(fz_search_stext_pos *pos)
+{
+	int newlines = 0;
+	if (pos->ch) pos->ch = pos->ch->next;
+	for(;;)
+	{
+		if (pos->ch) return newlines;
+		newlines += s_next_line(pos);
+		if (!pos->line) return newlines;
+		pos->ch = pos->line->first_char;
+	}
+}
+
+struct fz_search_stext_state
+{
+	float hfuzz;	/* Controls amalgamation of glyph bboxes. */
+	float vfuzz;
+	fz_buffer *buffer;  /* String of text, with newlines after each line and block. */
+	fz_search_stext_pos pos; /* Block/line/char matching .c_pos. */
+	const char *c_pos;  /* Current position in .buffer. */
+	const char *c_end;  /* End of current match .buffer. */
+	fz_quad quad;   /* Uses as return from fz_search_stext_next_quad(). */
+	fz_search_stext_bboxfn bboxfn;
+	const char *needle;
+};
+
+fz_search_stext_state *fz_search_stext_create(fz_context *ctx, fz_stext_page *stext_page)
+{
+	fz_search_stext_state *state = fz_malloc(ctx, sizeof(*state));
+	memset(state, 0, sizeof(*state));
+	fz_try(ctx)
+	{
+		state->buffer = fz_new_buffer_from_stext_page(ctx, stext_page);
+	}
+	fz_catch(ctx)
+	{
+		fz_free(ctx, state);
+		fz_rethrow(ctx);
+	}
+	state->needle = NULL;
+	state->bboxfn = NULL;
+	state->pos.stext_page = stext_page;
+	state->pos.block = NULL;
+	state->pos.line = NULL;
+	state->pos.ch = NULL;
+	state->c_pos = fz_string_from_buffer(ctx, state->buffer);
+	state->hfuzz = 0.2f; /* merge kerns but not large gaps */
+	state->vfuzz = 0.1f;
+	return state;
+}
+
+void fz_search_stext_destroy(fz_context *ctx, fz_search_stext_state *state)
+{
+	fz_drop_buffer(ctx, state->buffer);
+	fz_free(ctx, state);
+}
+
+void fz_search_stext_set_needle(fz_context *ctx, fz_search_stext_state *state, const char *needle)
+{
+	state->needle = needle;
+}
+
+void fz_search_stext_set_bboxfn(fz_context *ctx, fz_search_stext_state *state, fz_search_stext_bboxfn bboxfn)
+{
+	state->bboxfn = bboxfn;
+}
+
+/* Increments both state->c_pos and state->pos to the next character. */
+static void s_search_next_char(fz_search_stext_state *state)
+{
+	if (state->pos.ch)
+	{
+		int c;
+		int n = fz_chartorune(&c, state->c_pos);
+		assert(c == state->pos.ch->c);
+		state->c_pos += n;
+	}
+	int newlines = s_next_char(&state->pos);
+	int i;
+	for (i=0; i<newlines; ++i)
+	{
+		assert(*state->c_pos == '\n');
+		state->c_pos += 1;
+	}
+	return;
+}
+
+int fz_search_stext_next(fz_context *ctx, fz_search_stext_state *state)
+{
+	const char *next;
+	assert(state->needle);
+	next = find_string(state->c_pos, state->needle, &state->c_end);
+	if (next)
+	{
+		/* Increment state->pos to point at same character as `next`. */
+		for(;;)
+		{
+			assert(state->c_pos <= next);
+			if (state->c_pos == next)
+				break;
+			s_search_next_char(state);
+		}
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+const fz_quad *fz_search_stext_next_quad(fz_context *ctx, fz_search_stext_state *state)
+{
+	/* We can go beyond state->c_end if *state->c_end is a virtual newline from
+	end of line or end of block. */
+	if (state->c_pos >= state->c_end)
+		return NULL;
+	assert(state->pos.ch);
+	state->quad = (state->bboxfn) ? state->bboxfn(ctx, state->pos.line, state->pos.ch) : state->pos.ch->quad;
+	for(;;)
+	{
+		float vfuzz;
+		float hfuzz;
+		fz_quad ch_quad;
+
+		assert(state->c_pos < state->c_end);
+		s_search_next_char(state);
+		if (state->c_pos >= state->c_end)
+		{
+			if (state->c_pos > state->c_end)
+			{
+				/* The ony reason we should go beyond c_end is if next
+				character is in a new line or block - in this case we skip over
+				newline characters. */
+				assert(*state->c_end == '\n');
+			}
+			return &state->quad;
+		}
+		vfuzz = state->pos.ch->size * state->vfuzz;
+		hfuzz = state->pos.ch->size * state->hfuzz;
+		ch_quad = (state->bboxfn) ? state->bboxfn(ctx, state->pos.line, state->pos.ch) : state->pos.ch->quad;
+		if (1
+				&& hdist(&state->pos.line->dir, &state->quad.lr, &ch_quad.ll) < hfuzz
+				&& vdist(&state->pos.line->dir, &state->quad.lr, &ch_quad.ll) < vfuzz
+				&& hdist(&state->pos.line->dir, &state->quad.ur, &ch_quad.ul) < hfuzz
+				&& vdist(&state->pos.line->dir, &state->quad.ur, &ch_quad.ul) < vfuzz
+				)
+		{
+			/* Extend the current quad to include the next glyph. */
+			state->quad.ur = ch_quad.ur;
+			state->quad.lr = ch_quad.lr;
+		}
+		else
+		{
+			return &state->quad;
+		}
+	}
 }
