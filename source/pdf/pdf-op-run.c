@@ -290,9 +290,9 @@ end_softmask(fz_context *ctx, pdf_run_processor *pr, softmask_save *save)
 static void
 pdf_push_tk_group(fz_context *ctx, pdf_run_processor *pr)
 {
+#if 0
 	fz_rect rect = fz_infinite_rect;
 
-#if 0
 	fz_begin_group(ctx, pr->dev, rect, NULL, 0 /* isolated */, 1, FZ_BLEND_NORMAL, 1.0);
 	pr->tos.tk_group_pushed = 1;
 #endif
@@ -1659,7 +1659,6 @@ end_layer(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val)
 	if (obj)
 	{
 		fz_end_layer(ctx, proc->dev);
-		return;
 	}
 }
 
