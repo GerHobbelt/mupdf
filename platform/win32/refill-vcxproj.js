@@ -98,6 +98,7 @@ const projectMap = {
 	"libXMP-Toolkit": "XMP-Toolkit-SDK",
 	"qrencode-test": "libqrencode",
 	"libicu": "unicode-icu",
+	"libicu_tools": "unicode-icu",
 	"libicu_tests": "unicode-icu",
 	"liblcms2_tests": "lcms2",
 	"libleptonica_tools": "leptonica",
