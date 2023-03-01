@@ -92,6 +92,7 @@ typedef struct
 FZ_NORETURN void fz_vthrow(fz_context *ctx, int errcode, const char *fmt, va_list ap);
 FZ_NORETURN void fz_throw(fz_context *ctx, int errcode, const char *fmt, ...);
 FZ_NORETURN void fz_rethrow(fz_context *ctx);
+void fz_morph_error(fz_context *ctx, int fromcode, int tocode);
 void fz_verror(fz_context* ctx, const char* fmt, va_list ap);
 void fz_error(fz_context* ctx, const char* fmt, ...);
 void fz_vwarn(fz_context *ctx, const char *fmt, va_list ap);
