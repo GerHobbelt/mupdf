@@ -51,20 +51,20 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -78,7 +78,7 @@
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -110,15 +110,15 @@
       <EnableUnitySupport>true</EnableUnitySupport>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Custom</Optimization>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEPTONICA_TOOLS;LEPTONICA_TOOLS_STATICLIB;LEPTONICA_INTERCEPT_ALLOC=1;HAVE_LIBPNG=1;HAVE_LIBTIFF=1;HAVE_LIBJPEG=1;HAVE_LIBZ=1;HAVE_LIBZ_NG=1;HAVE_LIBGIF=1;HAVE_LIBUNGIF=0;HAVE_LIBWEBP=1;HAVE_LIBWEBP_ANIM=0;HAVE_LIBJP2K=1;_CRT_SECURE_NO_WARNINGS;OPJ_STATIC;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_LIB</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\scripts\leptonica/include/leptonica;..\..\scripts\libjpeg-turbo;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\thirdparty\leptonica\src;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\scripts\zlib;../../thirdparty/owemdjee/libgif;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;..\..\thirdparty\leptonica\prog;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -131,7 +131,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\scripts\leptonica/include/leptonica;..\..\scripts\libjpeg-turbo;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\thirdparty\leptonica\src;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\scripts\zlib;../../thirdparty/owemdjee/libgif;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -141,7 +141,7 @@
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEPTONICA_TOOLS;LEPTONICA_TOOLS_STATICLIB;LEPTONICA_INTERCEPT_ALLOC=1;HAVE_LIBPNG=1;HAVE_LIBTIFF=1;HAVE_LIBJPEG=1;HAVE_LIBZ=1;HAVE_LIBZ_NG=1;HAVE_LIBGIF=1;HAVE_LIBUNGIF=0;HAVE_LIBWEBP=1;HAVE_LIBWEBP_ANIM=0;HAVE_LIBJP2K=1;_CRT_SECURE_NO_WARNINGS;OPJ_STATIC;WIN32;NDEBUG;_LIB</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\scripts\leptonica/include/leptonica;..\..\scripts\libjpeg-turbo;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\thirdparty\leptonica\src;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\scripts\zlib;../../thirdparty/owemdjee/libgif;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;..\..\thirdparty\leptonica\prog;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -154,7 +154,7 @@
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\scripts\leptonica/include/leptonica;..\..\scripts\libjpeg-turbo;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\thirdparty\leptonica\src;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\scripts\zlib;../../thirdparty/owemdjee/libgif;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -164,7 +164,7 @@
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEPTONICA_TOOLS;LEPTONICA_TOOLS_STATICLIB;LEPTONICA_INTERCEPT_ALLOC=1;HAVE_LIBPNG=1;HAVE_LIBTIFF=1;HAVE_LIBJPEG=1;HAVE_LIBZ=1;HAVE_LIBZ_NG=1;HAVE_LIBGIF=1;HAVE_LIBUNGIF=0;HAVE_LIBWEBP=1;HAVE_LIBWEBP_ANIM=0;HAVE_LIBJP2K=1;_CRT_SECURE_NO_WARNINGS;OPJ_STATIC;_CRTDBG_MAP_ALLOC;_DEBUG;_LIB</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\scripts\leptonica/include/leptonica;..\..\scripts\libjpeg-turbo;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\thirdparty\leptonica\src;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\scripts\zlib;../../thirdparty/owemdjee/libgif;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;..\..\thirdparty\leptonica\prog;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -177,7 +177,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\scripts\leptonica/include/leptonica;..\..\scripts\libjpeg-turbo;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\thirdparty\leptonica\src;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\scripts\zlib;../../thirdparty/owemdjee/libgif;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -187,7 +187,7 @@
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEPTONICA_TOOLS;LEPTONICA_TOOLS_STATICLIB;LEPTONICA_INTERCEPT_ALLOC=1;HAVE_LIBPNG=1;HAVE_LIBTIFF=1;HAVE_LIBJPEG=1;HAVE_LIBZ=1;HAVE_LIBZ_NG=1;HAVE_LIBGIF=1;HAVE_LIBUNGIF=0;HAVE_LIBWEBP=1;HAVE_LIBWEBP_ANIM=0;HAVE_LIBJP2K=1;_CRT_SECURE_NO_WARNINGS;OPJ_STATIC;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\scripts\leptonica/include/leptonica;..\..\scripts\libjpeg-turbo;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\thirdparty\leptonica\src;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\scripts\zlib;../../thirdparty/owemdjee/libgif;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;..\..\thirdparty\leptonica\prog;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -200,7 +200,7 @@
       <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\scripts\leptonica/include/leptonica;..\..\scripts\libjpeg-turbo;..\..\scripts\libpng;..\..\scripts\libtiff;..\..\thirdparty\leptonica\src;..\..\thirdparty\jbig2dec;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\openjpeg\src\lib\openjp2;..\..\thirdparty\libpng;..\..\thirdparty\libtiff\libtiff;..\..\thirdparty\zlib;..\..\scripts\zlib;../../thirdparty/owemdjee/libgif;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
@@ -334,51 +334,6 @@
     <ClCompile Include="../../thirdparty/leptonica/prog/fpix1_reg.c" />
     <ClCompile Include="../../thirdparty/leptonica/prog/fpix2_reg.c" />
     <ClCompile Include="../../thirdparty/leptonica/prog/fpixcontours.c" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/adaptmap_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/affine_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/barcode_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/baseline_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/bilateral_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/bilinear_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/binarize_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/blend_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/boxfunc3_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/boxfunc4_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/boxfunc5_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/boxfunc_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/ccbord_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/ccthin_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/checkerboard_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/classapp_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/colorfill_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/colorquant_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/compare_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/dewarp_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/edge_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/enhance_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/fhmtgen_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/finditalic_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/flipdetect_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/fpix2_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/graphics_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/graymorph_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/grayquant_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/jpegiostub_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/kernel_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/mask_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/maze_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/morph_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/morphapp_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/pageseg_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/paintcmap_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/pix1_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/pix3_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/pix4_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/pix_orient_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/pix_rotate_shear_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/pixa_recog_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/pixconv_fuzzer.cc" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/fuzzing/recog_basic_fuzzer.cc" />
     <ClCompile Include="../../thirdparty/leptonica/prog/gammatest.c" />
     <ClCompile Include="../../thirdparty/leptonica/prog/genfonts_reg.c" />
     <ClCompile Include="../../thirdparty/leptonica/prog/gifio_reg.c" />
@@ -447,6 +402,7 @@
     <ClCompile Include="../../thirdparty/leptonica/prog/paint_reg.c" />
     <ClCompile Include="../../thirdparty/leptonica/prog/paintmask_reg.c" />
     <ClCompile Include="../../thirdparty/leptonica/prog/partifytest.c" />
+    <ClCompile Include="../../thirdparty/leptonica/prog/partition_reg.c" />
     <ClCompile Include="../../thirdparty/leptonica/prog/partitiontest.c" />
     <ClCompile Include="../../thirdparty/leptonica/prog/pdfio1_reg.c" />
     <ClCompile Include="../../thirdparty/leptonica/prog/pdfio2_reg.c" />
@@ -550,10 +506,8 @@
     <ClCompile Include="../../thirdparty/leptonica/prog/writemtiff.c" />
     <ClCompile Include="../../thirdparty/leptonica/prog/writetext_reg.c" />
     <ClCompile Include="../../thirdparty/leptonica/prog/xformbox_reg.c" />
-    <ClCompile Include="../../thirdparty/leptonica/prog/xtractprotos.c" />
     <ClCompile Include="../../thirdparty/leptonica/prog/yuvtest.c" />
     <ClInclude Include="../../thirdparty/leptonica/prog/autogen.137.h" />
-    <ClInclude Include="../../thirdparty/leptonica/prog/fuzzing/leptfuzz.h" />
     <Image Include="../../thirdparty/leptonica/moller52.jpg" />
     <Image Include="../../thirdparty/leptonica/prog/1555.003.jpg" />
     <Image Include="../../thirdparty/leptonica/prog/1555.007.jpg" />
@@ -747,8 +701,6 @@
     <Text Include="../../thirdparty/leptonica/prog/CMakeLists.txt" />
     <Text Include="../../thirdparty/leptonica/prog/Makefile.am" />
     <Text Include="../../thirdparty/leptonica/prog/flipsels.txt" />
-    <Text Include="../../thirdparty/leptonica/prog/fuzzing/README.md" />
-    <Text Include="../../thirdparty/leptonica/prog/fuzzing/oss-fuzz-build.sh" />
     <Text Include="../../thirdparty/leptonica/prog/hmttemplate1.txt" />
     <Text Include="../../thirdparty/leptonica/prog/hmttemplate2.txt" />
     <Text Include="../../thirdparty/leptonica/prog/leptonica-license.txt" />
@@ -760,8 +712,7 @@
     <Text Include="../../thirdparty/leptonica/run_cmake.sh" />
     <Text Include="../../thirdparty/leptonica/style-guide.txt" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
