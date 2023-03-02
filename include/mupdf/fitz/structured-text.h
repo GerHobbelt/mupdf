@@ -353,12 +353,12 @@ void fz_search_stext_set_bboxfn(fz_context *ctx, fz_search_stext_state *state, f
 	Finds the next match. The quads for the match can be found with repeated
 	calls to fz_search_stext_next_quad().
 
-	Returns zero if found, otherwise +1.
+	Returns +1 if found, otherwise zero.
 */
 int fz_search_stext_next(fz_context *ctx, fz_search_stext_state *state);
 
 /**
-	To be called multiple times after fz_search_stext_next() returns zero.
+	To be called multiple times after fz_search_stext_next() returns +1.
 	Returns pointer to next quad, or NULL if no more quads.
 */
 const fz_quad *fz_search_stext_next_quad(fz_context *ctx, fz_search_stext_state *state);
