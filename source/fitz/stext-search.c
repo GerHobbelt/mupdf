@@ -711,11 +711,9 @@ fz_search_stext_page_test(fz_context *ctx, fz_stext_page *page, const char *need
 	int i = 0;
 	fz_search_stext_state *state = fz_search_stext_create(ctx, page);
 	fz_search_stext_set_needle(ctx, state, needle);
-	for(;;)
+	while (fz_search_stext_next(ctx, state))
 	{
 		int first = 1;
-		if (fz_search_stext_next(ctx, state))
-			break;
 		for (; ; ++i, first=0)
 		{
 			const fz_quad *quad = fz_search_stext_next_quad(ctx, state);
@@ -887,11 +885,11 @@ int fz_search_stext_next(fz_context *ctx, fz_search_stext_state *state)
 				break;
 			s_search_next_char(state);
 		}
-		return 0;
+		return 1;
 	}
 	else
 	{
-		return 1;
+		return 0;
 	}
 }
 
