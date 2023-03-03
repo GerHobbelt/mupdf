@@ -301,6 +301,11 @@ void pdf_run_annot(fz_context *ctx, pdf_annot *annot, fz_device *dev, fz_matrix 
 
 	doc = page->doc;
 
+	if (!page)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "annotation not bound to any page");
+
+	doc = page->doc;
+
 	nocache = !!(dev->hints & FZ_NO_CACHE);
 	if (nocache)
 		pdf_mark_xref(ctx, doc);
