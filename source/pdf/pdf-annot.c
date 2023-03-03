@@ -1365,20 +1365,6 @@ pdf_annot_line_ending_styles(fz_context *ctx, pdf_annot *annot,
 		fz_rethrow(ctx);
 }
 
-enum pdf_line_ending
-pdf_annot_line_start_style(fz_context *ctx, pdf_annot *annot)
-{
-	pdf_obj *le = pdf_dict_get(ctx, annot->obj, PDF_NAME(LE));
-	return pdf_line_ending_from_name(ctx, pdf_array_get(ctx, le, 0));
-}
-
-enum pdf_line_ending
-pdf_annot_line_end_style(fz_context *ctx, pdf_annot *annot)
-{
-	pdf_obj *le = pdf_dict_get(ctx, annot->obj, PDF_NAME(LE));
-	return pdf_line_ending_from_name(ctx, pdf_array_get(ctx, le, 1));
-}
-
 void
 pdf_set_annot_line_ending_styles(fz_context *ctx, pdf_annot *annot,
 		enum pdf_line_ending start_style,
@@ -1403,20 +1389,6 @@ pdf_set_annot_line_ending_styles(fz_context *ctx, pdf_annot *annot,
 	}
 
 	pdf_dirty_annot(ctx, annot);
-}
-
-void
-pdf_set_annot_line_start_style(fz_context *ctx, pdf_annot *annot, enum pdf_line_ending s)
-{
-	enum pdf_line_ending e = pdf_annot_line_end_style(ctx, annot);
-	pdf_set_annot_line_ending_styles(ctx, annot, s, e);
-}
-
-void
-pdf_set_annot_line_end_style(fz_context *ctx, pdf_annot *annot, enum pdf_line_ending e)
-{
-	enum pdf_line_ending s = pdf_annot_line_start_style(ctx, annot);
-	pdf_set_annot_line_ending_styles(ctx, annot, s, e);
 }
 
 static pdf_obj *border_style_subtypes[] = {
