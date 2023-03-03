@@ -2239,11 +2239,14 @@ pdf_annot_has_interior_color(fz_context *ctx, pdf_annot *annot)
 void
 pdf_annot_interior_color(fz_context *ctx, pdf_annot *annot, int *n, float color[4])
 {
+	pdf_obj *ic;
+
 	pdf_annot_push_local_xref(ctx, annot);
 
 	fz_try(ctx)
 	{
-		pdf_obj *ic = pdf_dict_get(ctx, annot->obj, PDF_NAME(IC));
+		check_allowed_subtypes(ctx, annot, PDF_NAME(IC), interior_color_subtypes);
+		ic = pdf_dict_get(ctx, annot->obj, PDF_NAME(IC));
 		pdf_annot_color_imp(ctx, ic, n, color);
 	}
 	fz_always(ctx)
@@ -2259,7 +2262,10 @@ pdf_set_annot_interior_color(fz_context *ctx, pdf_annot *annot, int n, const flo
 
 	fz_try(ctx)
 	{
+		check_allowed_subtypes(ctx, annot, PDF_NAME(IC), interior_color_subtypes);
 		pdf_set_annot_color_imp(ctx, annot, PDF_NAME(IC), n, color, interior_color_subtypes);
+	}
+	fz_always(ctx) {
 		end_annot_op(ctx, annot);
 	}
 	fz_catch(ctx)
