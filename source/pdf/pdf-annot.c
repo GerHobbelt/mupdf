@@ -431,8 +431,8 @@ pdf_annot_type_from_string(fz_context *ctx, const char *subtype)
 static void
 begin_annot_op(fz_context *ctx, pdf_annot *annot, const char *op)
 {
-	if (annot->page == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot alter annotation deleted from page");
+	if (!annot->page)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "annotation not bound to any page");
 
 	pdf_begin_operation(ctx, annot->page->doc, op);
 }
@@ -907,6 +907,9 @@ pdf_delete_annot(fz_context *ctx, pdf_page *page, pdf_annot *annot)
 
 	/* Remove annot from page's list */
 	*annotptr = annot->next;
+
+	/* Annot may no longer borrow page pointer, since they are separated  */
+	annot->page = NULL;
 
 	/* If the removed annotation was the last in the list adjust the end pointer */
 	if (*annotptr == NULL)

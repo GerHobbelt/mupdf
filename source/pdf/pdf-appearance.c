@@ -3038,8 +3038,8 @@ pdf_annot_push_local_xref(fz_context *ctx, pdf_annot *annot)
 {
 	pdf_document *doc;
 
-	if (annot->page == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot push local xref, since annotation deleted from page");
+	if (!annot->page)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "annotation not bound to any page");
 
 	doc = annot->page->doc;
 
