@@ -1097,7 +1097,18 @@ pdf_set_annot_rect(fz_context *ctx, pdf_annot *annot, fz_rect rect)
 const char *
 pdf_annot_contents(fz_context *ctx, pdf_annot *annot)
 {
-	return pdf_dict_get_text_string(ctx, annot->obj, PDF_NAME(Contents));
+	const char *contents = NULL;
+
+	pdf_annot_push_local_xref(ctx, annot);
+
+	fz_try(ctx)
+		contents = pdf_dict_get_text_string(ctx, annot->obj, PDF_NAME(Contents));
+	fz_always(ctx)
+		pdf_annot_pop_local_xref(ctx, annot);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+
+	return contents;
 }
 
 void
