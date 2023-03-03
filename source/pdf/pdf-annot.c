@@ -2926,6 +2926,8 @@ pdf_clear_annot_ink_list(fz_context *ctx, pdf_annot *annot)
 	{
 		check_allowed_subtypes(ctx, annot, PDF_NAME(InkList), ink_list_subtypes);
 		pdf_dict_del(ctx, annot->obj, PDF_NAME(InkList));
+	}
+	fz_always(ctx)
 		end_annot_op(ctx, annot);
 	}
 	fz_catch(ctx)
