@@ -1023,7 +1023,7 @@ pdf_set_annot_rect(fz_context *ctx, pdf_annot *annot, fz_rect rect)
 {
 	fz_matrix page_ctm, inv_page_ctm;
 
-	pdf_begin_operation(ctx, annot->page->doc, "Set rectangle");
+	begin_annot_op(ctx, annot, "Set rectangle");
 
 	fz_try(ctx)
 	{
@@ -1037,7 +1037,7 @@ pdf_set_annot_rect(fz_context *ctx, pdf_annot *annot, fz_rect rect)
 		pdf_dirty_annot(ctx, annot);
 	}
 	fz_always(ctx)
-		pdf_end_operation(ctx, annot->page->doc);
+		end_annot_op(ctx, annot);
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 }
@@ -1346,10 +1346,11 @@ pdf_set_annot_line_ending_styles(fz_context *ctx, pdf_annot *annot,
 		enum pdf_line_ending start_style,
 		enum pdf_line_ending end_style)
 {
-	pdf_document *doc = annot->page->doc;
+	pdf_document *doc;
 	pdf_obj *style;
 
 	begin_annot_op(ctx, annot, "Set line endings");
+	doc = annot->page->doc;
 
 	fz_try(ctx)
 	{
@@ -2339,11 +2340,12 @@ void pdf_clear_annot_vertices(fz_context *ctx, pdf_annot *annot)
 
 void pdf_add_annot_vertex(fz_context *ctx, pdf_annot *annot, fz_point p)
 {
-	pdf_document *doc = annot->page->doc;
+	pdf_document *doc;
 	fz_matrix page_ctm, inv_page_ctm;
 	pdf_obj *vertices;
 
 	begin_annot_op(ctx, annot, "Add point");
+	doc = annot->page->doc;
 
 	fz_try(ctx)
 	{
@@ -2533,11 +2535,12 @@ pdf_clear_annot_quad_points(fz_context *ctx, pdf_annot *annot)
 void
 pdf_add_annot_quad_point(fz_context *ctx, pdf_annot *annot, fz_quad quad)
 {
-	pdf_document *doc = annot->page->doc;
+	pdf_document *doc;
 	fz_matrix page_ctm, inv_page_ctm;
 	pdf_obj *quad_points;
 
 	begin_annot_op(ctx, annot, "Add quad point");
+	doc = annot->page->doc;
 
 	fz_try(ctx)
 	{
@@ -3042,13 +3045,23 @@ pdf_print_default_appearance(fz_context *ctx, char *buf, int nbuf, const char *f
 void
 pdf_annot_default_appearance(fz_context *ctx, pdf_annot *annot, const char **font, float *size, int *n, float color[4])
 {
-	pdf_obj *da = pdf_dict_get_inheritable(ctx, annot->obj, PDF_NAME(DA));
-	if (!da)
+	pdf_obj *da;
+	pdf_annot_push_local_xref(ctx, annot);
+
+	fz_try(ctx)
 	{
-		pdf_obj *trailer = pdf_trailer(ctx, annot->page->doc);
-		da = pdf_dict_getl(ctx, trailer, PDF_NAME(Root), PDF_NAME(AcroForm), PDF_NAME(DA), NULL);
+		da = pdf_dict_get_inheritable(ctx, annot->obj, PDF_NAME(DA));
+		if (!da)
+		{
+			pdf_obj *trailer = pdf_trailer(ctx, annot->page->doc);
+			da = pdf_dict_getl(ctx, trailer, PDF_NAME(Root), PDF_NAME(AcroForm), PDF_NAME(DA), NULL);
+		}
+		pdf_parse_default_appearance(ctx, pdf_to_str_buf(ctx, da), font, size, n, color);
 	}
-	pdf_parse_default_appearance(ctx, pdf_to_str_buf(ctx, da), font, size, n, color);
+	fz_always(ctx)
+		pdf_annot_pop_local_xref(ctx, annot);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
 }
 
 void
@@ -3212,7 +3225,7 @@ pdf_set_annot_appearance(fz_context *ctx, pdf_annot *annot, const char *appearan
 void
 pdf_set_annot_appearance_from_display_list(fz_context *ctx, pdf_annot *annot, const char *appearance, const char *state, fz_matrix ctm, fz_display_list *list)
 {
-	pdf_document *doc = annot->page->doc;
+	pdf_document *doc;
 	fz_device *dev = NULL;
 	pdf_obj *res = NULL;
 	fz_buffer *contents = NULL;
@@ -3227,6 +3240,7 @@ pdf_set_annot_appearance_from_display_list(fz_context *ctx, pdf_annot *annot, co
 	fz_var(res);
 
 	begin_annot_op(ctx, annot, "Set appearance stream");
+	doc = annot->page->doc;
 
 	fz_try(ctx)
 	{
@@ -3253,12 +3267,13 @@ pdf_set_annot_appearance_from_display_list(fz_context *ctx, pdf_annot *annot, co
 
 void pdf_set_annot_stamp_image(fz_context *ctx, pdf_annot *annot, fz_image *img)
 {
-	pdf_document *doc = annot->page->doc;
+	pdf_document *doc;
 	fz_buffer *buf = NULL;
 	pdf_obj *res = NULL;
 	pdf_obj *res_xobj;
 
 	begin_annot_op(ctx, annot, "Set stamp image");
+	doc = annot->page->doc;
 
 	fz_var(res);
 	fz_var(buf);
