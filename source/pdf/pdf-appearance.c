@@ -3219,6 +3219,7 @@ pdf_annot_push_local_xref(fz_context *ctx, pdf_annot *annot)
 	if (!annot->page)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "annotation not bound to any page");
 
+
 	doc = annot->page->doc;
 
 #ifdef PDF_DEBUG_APPEARANCE_SYNTHESIS
