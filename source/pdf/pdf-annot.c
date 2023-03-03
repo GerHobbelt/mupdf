@@ -1155,9 +1155,9 @@ pdf_set_annot_rect(fz_context *ctx, pdf_annot *annot, fz_rect rect)
 
 		pdf_dict_put_rect(ctx, annot->obj, PDF_NAME(Rect), rect);
 		pdf_dirty_annot(ctx, annot);
-
-		end_annot_op(ctx, annot);
 	}
+	fz_always(ctx)
+		end_annot_op(ctx, annot);
 	fz_catch(ctx)
 	{
 		pdf_abandon_operation(ctx, annot->page->doc);
