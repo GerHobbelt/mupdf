@@ -2474,13 +2474,14 @@ pdf_annot_quad_point(fz_context *ctx, pdf_annot *annot, int idx)
 void
 pdf_set_annot_quad_points(fz_context *ctx, pdf_annot *annot, int n, const fz_quad *q)
 {
-	pdf_document *doc = annot->page->doc;
+	pdf_document *doc;
 	fz_matrix page_ctm, inv_page_ctm;
 	pdf_obj *quad_points;
 	fz_quad quad;
 	int i;
 
 	begin_annot_op(ctx, annot, "Set quad points");
+	doc = annot->page->doc;
 
 	fz_try(ctx)
 	{
@@ -2669,7 +2670,7 @@ pdf_annot_ink_list_stroke_vertex(fz_context *ctx, pdf_annot *annot, int i, int k
 void
 pdf_set_annot_ink_list(fz_context *ctx, pdf_annot *annot, int n, const int *count, const fz_point *v)
 {
-	pdf_document *doc = annot->page->doc;
+	pdf_document *doc;
 	fz_matrix page_ctm, inv_page_ctm;
 	pdf_obj *ink_list = NULL, *stroke;
 	fz_point point;
@@ -2678,6 +2679,7 @@ pdf_set_annot_ink_list(fz_context *ctx, pdf_annot *annot, int n, const int *coun
 	fz_var(ink_list);
 
 	begin_annot_op(ctx, annot, "Set ink list");
+	doc = annot->page->doc;
 
 	fz_try(ctx)
 	{
