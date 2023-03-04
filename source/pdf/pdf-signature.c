@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -31,6 +31,21 @@ enum
 	PDF_SIGFLAGS_SIGSEXIST = 1,
 	PDF_SIGFLAGS_APPENDONLY = 2
 };
+
+static void
+begin_annot_op(fz_context *ctx, pdf_annot *annot, const char *op)
+{
+	if (!annot->page)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "annotation not bound to any page");
+
+	pdf_begin_operation(ctx, annot->page->doc, op);
+}
+
+static void
+end_annot_op(fz_context *ctx, pdf_annot *annot)
+{
+	pdf_end_operation(ctx, annot->page->doc);
+}
 
 void pdf_write_digest(fz_context *ctx, fz_output *out, pdf_obj *byte_range, pdf_obj *field, size_t hexdigest_offset, size_t hexdigest_length, pdf_pkcs7_signer *signer)
 {
@@ -215,7 +230,7 @@ pdf_sign_signature_with_appearance(fz_context *ctx, pdf_annot *widget, pdf_pkcs7
 	pdf_document *doc = widget->page->doc;
 
 	if (pdf_widget_is_readonly(ctx, widget))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Signature is read only, it cannot be signed.");
+		fz_throw(ctx, FZ_ERROR_GENERIC, "read only signature cannot be signed");
 
 	pdf_begin_operation(ctx, doc, "Sign signature");
 
@@ -408,15 +423,16 @@ void pdf_clear_signature(fz_context *ctx, pdf_annot *widget)
 	int flags;
 	fz_display_list *dlist = NULL;
 
+	if (pdf_widget_is_readonly(ctx, widget))
+		fz_throw(ctx, FZ_ERROR_GENERIC, "read only signature cannot be cleared");
+
+	begin_annot_op(ctx, widget, "Clear Signature");
+
 	fz_var(dlist);
 	fz_try(ctx)
 	{
 		fz_text_language lang = pdf_annot_language(ctx, (pdf_annot *)widget);
 		fz_rect rect = pdf_annot_rect(ctx, widget);
-
-		pdf_begin_operation(ctx, widget->page->doc, "Clear Signature");
-		if (pdf_widget_is_readonly(ctx, widget))
-			fz_throw(ctx, FZ_ERROR_GENERIC, "Signature read only, it cannot be cleared.");
 
 		pdf_xref_remove_unsaved_signature(ctx, ((pdf_annot *)widget)->page->doc, ((pdf_annot *)widget)->obj);
 
@@ -436,8 +452,8 @@ void pdf_clear_signature(fz_context *ctx, pdf_annot *widget)
 	}
 	fz_always(ctx)
 	{
-		pdf_end_operation(ctx, widget->page->doc);
 		fz_drop_display_list(ctx, dlist);
+		end_annot_op(ctx, widget);
 	}
 	fz_catch(ctx)
 	{
@@ -531,6 +547,8 @@ char *pdf_signature_format_distinguished_name(fz_context *ctx, pdf_pkcs7_disting
 
 pdf_pkcs7_distinguished_name *pdf_signature_get_widget_signatory(fz_context *ctx, pdf_pkcs7_verifier *verifier, pdf_annot *widget)
 {
+	if (!widget->page)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "annotation not bound to any page");
 	return pdf_signature_get_signatory(ctx, verifier, widget->page->doc, widget->obj);
 }
 
@@ -556,6 +574,8 @@ pdf_pkcs7_distinguished_name *pdf_signature_get_signatory(fz_context *ctx, pdf_p
 
 pdf_signature_error pdf_check_widget_digest(fz_context *ctx, pdf_pkcs7_verifier *verifier, pdf_annot *widget)
 {
+	if (!widget->page)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "annotation not bound to any page");
 	return pdf_check_digest(ctx, verifier, widget->page->doc, widget->obj);
 }
 
@@ -586,6 +606,8 @@ pdf_signature_error pdf_check_digest(fz_context *ctx, pdf_pkcs7_verifier *verifi
 
 pdf_signature_error pdf_check_widget_certificate(fz_context *ctx, pdf_pkcs7_verifier *verifier, pdf_annot *w)
 {
+	if (!w->page)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "annotation not bound to any page");
 	return pdf_check_certificate(ctx, verifier, w->page->doc, w->obj);
 }
 
