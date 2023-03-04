@@ -1823,6 +1823,7 @@ pdf_set_annot_border_effect_intensity(fz_context *ctx, pdf_annot *annot, float i
 	pdf_dirty_annot(ctx, annot);
 }
 
+// FIXME: should these two be moved to some document related file? which one?
 fz_text_language
 pdf_document_language(fz_context *ctx, pdf_document *doc)
 {
