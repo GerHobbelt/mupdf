@@ -65,6 +65,8 @@ pdf_new_pixmap_from_annot(fz_context *ctx, pdf_annot *annot, fz_matrix ctm, fz_c
 	fz_var(dev);
 
 	rect = pdf_bound_annot(ctx, annot);
+	if (fz_is_infinite_irect(bbox))
+		fz_throw(ctx, FZ_ERROR_GENERIC, "infinite annot bounds");
 	rect = fz_transform_rect(rect, ctm);
 	bbox = fz_round_rect(rect);
 	if (fz_is_infinite_irect(bbox))
