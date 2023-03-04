@@ -233,14 +233,15 @@ static void enact_sig_locking(fz_context *ctx, pdf_document *doc, pdf_obj *sig)
 void
 pdf_sign_signature_with_appearance(fz_context *ctx, pdf_annot *widget, pdf_pkcs7_signer *signer, int64_t t, fz_display_list *disp_list)
 {
-	pdf_document *doc = widget->page->doc;
+	pdf_document *doc;
 
 	if (pdf_dict_get(ctx, widget->obj, PDF_NAME(FT)) != PDF_NAME(Sig))
 		fz_throw(ctx, FZ_ERROR_GENERIC, "annotation is not a signature widget");
 	if (pdf_annot_is_readonly(ctx, widget))
 		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Signature is read only, it cannot be signed.");
 
-	pdf_begin_operation(ctx, doc, "Sign signature");
+	begin_annot_op(ctx, widget, "Sign signature");
+	doc = widget->page->doc;
 
 	fz_try(ctx)
 	{
@@ -270,7 +271,7 @@ pdf_sign_signature_with_appearance(fz_context *ctx, pdf_annot *widget, pdf_pkcs7
 			pdf_dict_put_int(ctx, form, PDF_NAME(SigFlags), sf | PDF_SIGFLAGS_SIGSEXIST | PDF_SIGFLAGS_APPENDONLY);
 
 		pdf_signature_set_value(ctx, doc, wobj, signer, t);
-		pdf_end_operation(ctx, doc);
+		end_annot_op(ctx, doc);
 	}
 	fz_catch(ctx)
 	{
@@ -461,11 +462,11 @@ void pdf_clear_signature(fz_context *ctx, pdf_annot *widget)
 
 		dlist = pdf_signature_appearance_unsigned(ctx, rect, lang);
 		pdf_set_annot_appearance_from_display_list(ctx, widget, "N", NULL, fz_identity, dlist);
-		end_annot_op(ctx, widget);
 	}
 	fz_always(ctx)
 	{
 		fz_drop_display_list(ctx, dlist);
+		end_annot_op(ctx, widget);
 	}
 	fz_catch(ctx)
 	{

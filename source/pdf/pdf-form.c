@@ -1194,7 +1194,6 @@ int pdf_set_text_field_value(fz_context *ctx, pdf_annot *widget, const char *upd
 		{
 			rc = pdf_set_annot_field_value(ctx, doc, widget, update);
 		}
-		end_annot_op(ctx, widget);
 	}
 	fz_always(ctx)
 	{
@@ -1203,6 +1202,7 @@ int pdf_set_text_field_value(fz_context *ctx, pdf_annot *widget, const char *upd
 		fz_free(ctx, new_change);
 		fz_free(ctx, evt.newChange);
 		fz_free(ctx, merged_value);
+		end_annot_op(ctx, widget);
 	}
 	fz_catch(ctx)
 	{
