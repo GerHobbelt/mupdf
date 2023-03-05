@@ -5109,6 +5109,14 @@ JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_PDFWidget_getDistinguished
 
 /*
  * Class:     com_artifex_mupdf_fitz_PDFWidget
+ * Method:    incrementalChangesSinceSigning
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_PDFWidget_incrementalChangesSinceSigning
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFWidget
  * Method:    validateSignature
  * Signature: ()I
  */
