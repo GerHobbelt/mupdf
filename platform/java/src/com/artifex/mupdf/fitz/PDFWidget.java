@@ -249,6 +249,7 @@ public class PDFWidget extends PDFAnnotation
 		return !incrementalChangeAfterSigning();
 	}
 	public native PKCS7DistinguishedName getDistinguishedName(PKCS7Verifier verifier);
+	public native boolean incrementalChangesSinceSigning();
 
 	public native int validateSignature();
 	public native void clearSignature();
