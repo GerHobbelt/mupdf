@@ -109,6 +109,8 @@
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -421,9 +423,7 @@
     <Text Include="../../thirdparty/owemdjee/libxml2/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/libxml2/NEWS" />
     <Text Include="../../thirdparty/owemdjee/libxml2/README.md" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/README.tests" />
     <Text Include="../../thirdparty/owemdjee/libxml2/README.zOS" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/TODO" />
     <Text Include="../../thirdparty/owemdjee/libxml2/autogen.sh" />
     <Text Include="../../thirdparty/owemdjee/libxml2/build_glob.py" />
     <Text Include="../../thirdparty/owemdjee/libxml2/check-relaxng-test-suite.py" />
@@ -446,14 +446,13 @@
     <Text Include="../../thirdparty/owemdjee/libxml2/include/private/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/libxml2/libxml-2.0-uninstalled.pc.in" />
     <Text Include="../../thirdparty/owemdjee/libxml2/libxml-2.0.pc.in" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/libxml.spec.in" />
     <Text Include="../../thirdparty/owemdjee/libxml2/libxml2-config.cmake.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/libxml2/libxml2-config.cmake.in" />
-    <Text Include="../../thirdparty/owemdjee/libxml2/optim/hash_dict.txt" />
     <Text Include="../../thirdparty/owemdjee/libxml2/post_update.sh" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/schemas/changelog093_1_0" />
     <Text Include="../../thirdparty/owemdjee/libxml2/result/schemas/changelog093_1_0.err" />
     <Text Include="../../thirdparty/owemdjee/libxml2/test/XInclude/ents/inc.txt" />
+    <Text Include="../../thirdparty/owemdjee/libxml2/test/XInclude/ents/invalid_char.txt" />
     <Text Include="../../thirdparty/owemdjee/libxml2/test/XInclude/ents/isolatin.txt" />
     <Text Include="../../thirdparty/owemdjee/libxml2/test/XInclude/ents/something.txt" />
     <Text Include="../../thirdparty/owemdjee/libxml2/test/c14n/1-1-without-comments/world.txt" />
@@ -469,7 +468,6 @@
     <Text Include="../../thirdparty/owemdjee/libxml2/xstc/xstc.py" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/doc/libxml2-api.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/doc/libxml2-refs.xml" />
-    <Xml Include="../../thirdparty/owemdjee/libxml2/doc/symbols.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/doc/xmlcatalog.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/doc/xmllint.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/example/gjobs.xml" />
@@ -754,6 +752,7 @@
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/XInclude/docs/fallback5.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/XInclude/docs/fallback6.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/XInclude/docs/include.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxml2/test/XInclude/docs/invalid_char.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/XInclude/docs/nodes.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/XInclude/docs/nodes2.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/XInclude/docs/nodes3.xml" />
@@ -891,6 +890,7 @@
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/issue151.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/name.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/name2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/rec_att_default.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/rec_ext_ent.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/utf8-1.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/errors/utf8-2.xml" />
@@ -922,13 +922,18 @@
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/pi.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/pi2.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/recurse/good.xml" />
-    <Xml Include="../../thirdparty/owemdjee/libxml2/test/recurse/goodattr.xml" />
-    <Xml Include="../../thirdparty/owemdjee/libxml2/test/recurse/lol1.xml" />
-    <Xml Include="../../thirdparty/owemdjee/libxml2/test/recurse/lol2.xml" />
-    <Xml Include="../../thirdparty/owemdjee/libxml2/test/recurse/lol3.xml" />
-    <Xml Include="../../thirdparty/owemdjee/libxml2/test/recurse/lol4.xml" />
-    <Xml Include="../../thirdparty/owemdjee/libxml2/test/recurse/lol5.xml" />
-    <Xml Include="../../thirdparty/owemdjee/libxml2/test/recurse/lol6.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxml2/test/recurse/good_attr.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxml2/test/recurse/huge_dtd.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxml2/test/recurse/lol_classic.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxml2/test/recurse/lol_eg.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxml2/test/recurse/lol_ep.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxml2/test/recurse/lol_ig_attr.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxml2/test/recurse/lol_ig_content.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxml2/test/recurse/lol_ip_content.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxml2/test/recurse/lol_ip_value.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxml2/test/recurse/lol_long_name.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxml2/test/recurse/lol_long_value.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libxml2/test/recurse/lol_param.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/relaxng/302836_0.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/relaxng/307377_0.xml" />
     <Xml Include="../../thirdparty/owemdjee/libxml2/test/relaxng/307377_1.xml" />

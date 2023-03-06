@@ -109,6 +109,8 @@
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -454,6 +456,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/hrss/hrss.c" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/hrss/hrss_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/impl_dispatch_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/kyber/keccak.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/kyber/kyber_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/lhash/lhash.c" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/lhash/lhash_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/mem.c" />
@@ -586,8 +590,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_lib.c" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_ncons.c" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_ocsp.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_pci.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_pcia.c" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_pcons.c" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_pmaps.c" />
     <ClCompile Include="../../thirdparty/owemdjee/boringssl/crypto/x509v3/v3_prn.c" />
@@ -728,6 +730,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/fipsmodule/tls/internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/hrss/internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/kyber/internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/lhash/internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/obj/obj_dat.h" />
     <ClInclude Include="../../thirdparty/owemdjee/boringssl/crypto/pkcs7/internal.h" />
@@ -856,6 +859,7 @@
     <Text Include="../../thirdparty/owemdjee/boringssl/SANDBOXING.md" />
     <Text Include="../../thirdparty/owemdjee/boringssl/STYLE.md" />
     <Text Include="../../thirdparty/owemdjee/boringssl/cmake/OpenSSLConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/cmake/go.cmake" />
     <Text Include="../../thirdparty/owemdjee/boringssl/cmake/perlasm.cmake" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/blake2/blake2b256_tests.txt" />
@@ -925,6 +929,8 @@
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/hpke/hpke_test_vectors.txt" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/hpke/test-vectors.json" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/hpke/translate_test_vectors.py" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/hrss/asm/poly_rq_mul.S" />
+    <Text Include="../../thirdparty/owemdjee/boringssl/crypto/kyber/keccak_tests.txt" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/obj/README" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/obj/objects.txt" />
     <Text Include="../../thirdparty/owemdjee/boringssl/crypto/perlasm/readme" />

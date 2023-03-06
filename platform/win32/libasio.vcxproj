@@ -109,6 +109,8 @@
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -237,6 +239,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/associated_allocator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/associated_cancellation_slot.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/associated_executor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/associated_immediate_executor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/associator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/async_result.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/awaitable.hpp" />
@@ -263,6 +266,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/bind_allocator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/bind_cancellation_slot.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/bind_executor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/bind_immediate_executor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/buffer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/buffer_registration.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/buffered_read_stream.hpp" />
@@ -349,6 +353,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/impl/strand_service.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/impl/win_iocp_io_context.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/impl/winrt_timer_scheduler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/initiate_defer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/initiate_dispatch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/initiate_post.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_control.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_object_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_uring_descriptor_read_at_op.hpp" />
@@ -626,14 +633,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/connect.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/connect_pipe.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/consign.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/defer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/deferred.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/detached.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/dispatch.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/execution_context.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/executor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/io_context.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/post.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/prepend.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/read.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/read_at.hpp" />

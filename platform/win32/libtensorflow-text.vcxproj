@@ -109,6 +109,8 @@
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -273,6 +275,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/regex_split_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/rouge_l_kernel.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/rouge_l_kernel_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/round_robin_trimmer_kernel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/round_robin_trimmer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/round_robin_trimmer_tflite.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/sentence_breaking_kernels.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/sentence_breaking_utils.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/sentence_breaking_utils_test.cc" />
@@ -334,6 +339,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/ops/sentencepiece_ops.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/ops/split_merge_tokenize_op.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/ops/tokenizer_from_logits_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/ops/trimmer_ops.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/ops/trimmer_ops_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/ops/unicode_script_tokenize_op.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/ops/whitespace_tokenize_op.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/ops/whitespace_tokenizer_op.cc" />
@@ -376,6 +383,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/phrase_tokenizer_model_builder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/ragged_tensor_to_tensor_tflite.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/regex_split.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/round_robin_trimmer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/round_robin_trimmer_kernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/round_robin_trimmer_kernel_template.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/round_robin_trimmer_tflite.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/sentence_breaking_utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/sentence_fragmenter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/sentence_fragmenter_v2.h" />
@@ -395,6 +406,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/spanning_tree_iterator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/string_vocab.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/text_kernels_test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/trimmer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/whitespace_tokenizer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/whitespace_tokenizer_config_builder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow-text/tensorflow_text/core/kernels/whitespace_tokenizer_kernel.h" />

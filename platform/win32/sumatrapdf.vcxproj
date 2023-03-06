@@ -104,6 +104,8 @@
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -1136,7 +1138,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/ext/mujs/jscompile.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/ext/mujs/jsdate.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/ext/mujs/jsdtoa.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/ext/mujs/jsdump.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/ext/mujs/jserror.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/ext/mujs/jsfunction.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/ext/mujs/jsgc.c" />
@@ -1407,6 +1408,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/java/jni/android/androiddrawdevice.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/java/jni/android/androidfonts.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/java/jni/android/androidimage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/java/jni/archive.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/java/jni/buffer.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/java/jni/colorspace.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/java/jni/context.c" />
@@ -1422,6 +1424,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/java/jni/font.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/java/jni/image.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/java/jni/link.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/java/jni/multiarchive.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/java/jni/nativedevice.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/java/jni/outlineiterator.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/java/jni/page.c" />
@@ -1441,6 +1444,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/java/jni/strokestate.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/java/jni/structuredtext.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/java/jni/text.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/java/jni/treearchive.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/java/jni/wrap.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/java/mupdf_native.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/wasm/lib/wrap.c" />
@@ -1534,6 +1538,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/fitz/outline.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/fitz/output-cbz.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/fitz/output-docx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/fitz/output-jpeg.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/fitz/output-pcl.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/fitz/output-pclm.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/fitz/output-pdfocr.c" />
@@ -1618,6 +1623,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/pdf/pdf-nametree.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/pdf/pdf-object.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/pdf/pdf-op-buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/pdf/pdf-op-color.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/pdf/pdf-op-filter.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/pdf/pdf-op-run.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/pdf/pdf-outline.c" />
@@ -1627,6 +1633,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/pdf/pdf-repair.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/pdf/pdf-resources.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/pdf/pdf-run.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/pdf/pdf-shade-recolor.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/pdf/pdf-shade.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/pdf/pdf-signature.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/pdf/pdf-store.c" />
@@ -1657,8 +1664,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/tools/pdfmerge.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/tools/pdfpages.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/tools/pdfposter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/tools/pdfrecolor.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/tools/pdfshow.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/tools/pdfsign.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/tools/pdftrim.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/xps/xps-common.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/xps/xps-doc.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/xps/xps-glyphs.c" />
@@ -2769,13 +2778,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/ext/lzma/C/XzCrc64.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/ext/lzma/C/XzEnc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/ext/mujs/astnames.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/ext/mujs/jsbuiltin.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/ext/mujs/jscompile.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/ext/mujs/jsi.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/ext/mujs/jslex.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/ext/mujs/jsparse.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/ext/mujs/jsrun.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/ext/mujs/jsvalue.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/ext/mujs/mujs.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/ext/mujs/opnames.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/ext/mujs/regexp.h" />
@@ -4112,9 +4115,9 @@
     <Text Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/docs/logo/mupdf.xpm" />
     <Text Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/java/winmake.bat" />
     <Text Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/wasm/lib/mupdf.js" />
+    <Text Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/wasm/mupdf-view-page.js" />
     <Text Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/wasm/mupdf-view-worker.js" />
     <Text Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/wasm/mupdf-view.js" />
-    <Text Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/wasm/package-lock.json" />
     <Text Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/wasm/package.json" />
     <Text Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/wasm/readme.html" />
     <Text Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/platform/wasm/test-server.js" />

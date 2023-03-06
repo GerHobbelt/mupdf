@@ -109,6 +109,8 @@
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -226,12 +228,21 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/hnswlib/examples/searchKnnCloserFirst_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/hnswlib/examples/updates_test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/hnswlib/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hnswlib/examples/cpp/example_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hnswlib/examples/cpp/example_mt_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hnswlib/examples/cpp/example_mt_replace_deleted.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hnswlib/examples/cpp/example_mt_search.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hnswlib/examples/cpp/example_replace_deleted.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hnswlib/examples/cpp/example_search.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/hnswlib/python_bindings/bindings.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/hnswlib/sift_1b.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/hnswlib/sift_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hnswlib/tests/cpp/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hnswlib/tests/cpp/multiThreadLoad_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hnswlib/tests/cpp/multiThread_replace_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hnswlib/tests/cpp/searchKnnCloserFirst_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hnswlib/tests/cpp/searchKnnWithFilter_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hnswlib/tests/cpp/sift_1b.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hnswlib/tests/cpp/sift_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/hnswlib/tests/cpp/updates_test.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/hnswlib/hnswlib/bruteforce.h" />
     <ClInclude Include="../../thirdparty/owemdjee/hnswlib/hnswlib/hnswalg.h" />
     <ClInclude Include="../../thirdparty/owemdjee/hnswlib/hnswlib/hnswlib.h" />
@@ -243,25 +254,32 @@
     <Text Include="../../thirdparty/owemdjee/hnswlib/MANIFEST.in" />
     <Text Include="../../thirdparty/owemdjee/hnswlib/README.md" />
     <Text Include="../../thirdparty/owemdjee/hnswlib/TESTING_RECALL.md" />
-    <Text Include="../../thirdparty/owemdjee/hnswlib/download_bigann.py" />
-    <Text Include="../../thirdparty/owemdjee/hnswlib/examples/example.py" />
-    <Text Include="../../thirdparty/owemdjee/hnswlib/examples/example_old.py" />
-    <Text Include="../../thirdparty/owemdjee/hnswlib/examples/git_tester.py" />
-    <Text Include="../../thirdparty/owemdjee/hnswlib/examples/pyw_hnswlib.py" />
-    <Text Include="../../thirdparty/owemdjee/hnswlib/examples/speedtest.py" />
-    <Text Include="../../thirdparty/owemdjee/hnswlib/examples/update_gen_data.py" />
+    <Text Include="../../thirdparty/owemdjee/hnswlib/examples/cpp/EXAMPLES.md" />
+    <Text Include="../../thirdparty/owemdjee/hnswlib/examples/python/EXAMPLES.md" />
+    <Text Include="../../thirdparty/owemdjee/hnswlib/examples/python/example.py" />
+    <Text Include="../../thirdparty/owemdjee/hnswlib/examples/python/example_filter.py" />
+    <Text Include="../../thirdparty/owemdjee/hnswlib/examples/python/example_replace_deleted.py" />
+    <Text Include="../../thirdparty/owemdjee/hnswlib/examples/python/example_search.py" />
+    <Text Include="../../thirdparty/owemdjee/hnswlib/examples/python/example_serialization.py" />
+    <Text Include="../../thirdparty/owemdjee/hnswlib/examples/python/pyw_hnswlib.py" />
     <Text Include="../../thirdparty/owemdjee/hnswlib/python_bindings/LazyIndex.py" />
     <Text Include="../../thirdparty/owemdjee/hnswlib/python_bindings/__init__.py" />
-    <Text Include="../../thirdparty/owemdjee/hnswlib/python_bindings/tests/__init__.py" />
-    <Text Include="../../thirdparty/owemdjee/hnswlib/python_bindings/tests/bindings_test.py" />
-    <Text Include="../../thirdparty/owemdjee/hnswlib/python_bindings/tests/bindings_test_getdata.py" />
-    <Text Include="../../thirdparty/owemdjee/hnswlib/python_bindings/tests/bindings_test_labels.py" />
-    <Text Include="../../thirdparty/owemdjee/hnswlib/python_bindings/tests/bindings_test_metadata.py" />
-    <Text Include="../../thirdparty/owemdjee/hnswlib/python_bindings/tests/bindings_test_pickle.py" />
-    <Text Include="../../thirdparty/owemdjee/hnswlib/python_bindings/tests/bindings_test_recall.py" />
-    <Text Include="../../thirdparty/owemdjee/hnswlib/python_bindings/tests/bindings_test_resize.py" />
-    <Text Include="../../thirdparty/owemdjee/hnswlib/python_bindings/tests/bindings_test_spaces.py" />
     <Text Include="../../thirdparty/owemdjee/hnswlib/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/hnswlib/tests/cpp/download_bigann.py" />
+    <Text Include="../../thirdparty/owemdjee/hnswlib/tests/cpp/update_gen_data.py" />
+    <Text Include="../../thirdparty/owemdjee/hnswlib/tests/python/bindings_test.py" />
+    <Text Include="../../thirdparty/owemdjee/hnswlib/tests/python/bindings_test_filter.py" />
+    <Text Include="../../thirdparty/owemdjee/hnswlib/tests/python/bindings_test_getdata.py" />
+    <Text Include="../../thirdparty/owemdjee/hnswlib/tests/python/bindings_test_labels.py" />
+    <Text Include="../../thirdparty/owemdjee/hnswlib/tests/python/bindings_test_metadata.py" />
+    <Text Include="../../thirdparty/owemdjee/hnswlib/tests/python/bindings_test_pickle.py" />
+    <Text Include="../../thirdparty/owemdjee/hnswlib/tests/python/bindings_test_recall.py" />
+    <Text Include="../../thirdparty/owemdjee/hnswlib/tests/python/bindings_test_replace.py" />
+    <Text Include="../../thirdparty/owemdjee/hnswlib/tests/python/bindings_test_resize.py" />
+    <Text Include="../../thirdparty/owemdjee/hnswlib/tests/python/bindings_test_spaces.py" />
+    <Text Include="../../thirdparty/owemdjee/hnswlib/tests/python/bindings_test_stress_mt_replace.py" />
+    <Text Include="../../thirdparty/owemdjee/hnswlib/tests/python/git_tester.py" />
+    <Text Include="../../thirdparty/owemdjee/hnswlib/tests/python/speedtest.py" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

@@ -109,6 +109,8 @@
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -252,6 +254,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libffi/src/nios2/ffi.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libffi/src/or1k/ffi.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libffi/src/pa/ffi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libffi/src/pa/ffi64.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libffi/src/powerpc/ffi.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libffi/src/powerpc/ffi_darwin.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libffi/src/powerpc/ffi_linux64.c" />
@@ -268,6 +271,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libffi/src/tramp.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libffi/src/types.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libffi/src/vax/ffi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libffi/src/wasm32/ffi.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libffi/src/x86/ffi.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libffi/src/x86/ffi64.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libffi/src/x86/ffiw64.c" />
@@ -277,7 +281,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/libffi/testsuite/libffi.bhaible/testcases.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libffi/testsuite/libffi.call/align_mixed.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libffi/testsuite/libffi.call/align_stdcall.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libffi/testsuite/libffi.call/bpo-38748.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libffi/testsuite/libffi.call/bpo_38748.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libffi/testsuite/libffi.call/err_bad_typedef.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libffi/testsuite/libffi.call/float.c" />
     <ClCompile Include="../../thirdparty/owemdjee/libffi/testsuite/libffi.call/float1.c" />
@@ -510,6 +514,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/libffi/src/sparc/internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libffi/src/tile/ffitarget.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libffi/src/vax/ffitarget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libffi/src/wasm32/ffitarget.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libffi/src/x86/asmnames.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libffi/src/x86/ffitarget.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libffi/src/x86/internal.h" />
@@ -571,6 +576,7 @@
     <Text Include="../../thirdparty/owemdjee/libffi/src/nios2/sysv.S" />
     <Text Include="../../thirdparty/owemdjee/libffi/src/or1k/sysv.S" />
     <Text Include="../../thirdparty/owemdjee/libffi/src/pa/hpux32.S" />
+    <Text Include="../../thirdparty/owemdjee/libffi/src/pa/hpux64.S" />
     <Text Include="../../thirdparty/owemdjee/libffi/src/pa/linux.S" />
     <Text Include="../../thirdparty/owemdjee/libffi/src/powerpc/aix.S" />
     <Text Include="../../thirdparty/owemdjee/libffi/src/powerpc/aix_closure.S" />
@@ -596,6 +602,11 @@
     <Text Include="../../thirdparty/owemdjee/libffi/src/xtensa/sysv.S" />
     <Text Include="../../thirdparty/owemdjee/libffi/stamp-h.in" />
     <Text Include="../../thirdparty/owemdjee/libffi/testsuite/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libffi/testsuite/emscripten/build-tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/libffi/testsuite/emscripten/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/libffi/testsuite/emscripten/conftest.py" />
+    <Text Include="../../thirdparty/owemdjee/libffi/testsuite/emscripten/node-tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/libffi/testsuite/emscripten/test_libffi.py" />
     <Text Include="../../thirdparty/owemdjee/libffi/testsuite/libffi.bhaible/README" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >

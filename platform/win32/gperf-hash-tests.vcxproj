@@ -109,6 +109,8 @@
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -231,11 +233,17 @@
     <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/lib/getopt1.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/lib/hash.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/src/bool-array.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/src/graph2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/src/graph3.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/src/hash-table.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/src/input.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/src/keyword-list.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/src/keyword.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/src/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/src/mi_vector_hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/src/nbperf-bdz.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/src/nbperf-chm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/src/nbperf-chm3.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/src/options.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/src/output-javascript.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/src/output-lua.cc" />
@@ -243,28 +251,44 @@
     <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/src/positions.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/src/search.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/src/version.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/tests/perf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/tests/perf_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/tests/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/tests/test1.c" />
     <ClCompile Include="../../thirdparty/owemdjee/gperf-hash/tests/test2.c" />
     <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/lib/getline.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/lib/getopt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/lib/hash.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/bool-array.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/bool-array.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/crc3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/fnv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/fnv3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/graph2.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/hash-table.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/input.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/keyword-list.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/keyword-list.icc" />
     <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/keyword.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/keyword.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/mi_vector_hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/nbperf.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/options.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/options.icc" />
     <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/output-javascript.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/output-lua.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/output.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/output.icc" />
     <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/positions.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/positions.icc" />
     <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/search.h" />
     <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/wyhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/src/wyhash3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gperf-hash/tests/perf.h" />
+    <Image Include="../../thirdparty/owemdjee/gperf-hash/doc/gperf.png" />
+    <Image Include="../../thirdparty/owemdjee/gperf-hash/doc/run.png" />
+    <Image Include="../../thirdparty/owemdjee/gperf-hash/doc/size.png" />
     <Text Include="../../thirdparty/owemdjee/gperf-hash/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/gperf-hash/ChangeLog" />
     <Text Include="../../thirdparty/owemdjee/gperf-hash/Makefile.in" />
@@ -313,6 +337,8 @@
     <Text Include="../../thirdparty/owemdjee/gperf-hash/tests/modula3.gperf" />
     <Text Include="../../thirdparty/owemdjee/gperf-hash/tests/objc.gperf" />
     <Text Include="../../thirdparty/owemdjee/gperf-hash/tests/pascal.gperf" />
+    <Text Include="../../thirdparty/owemdjee/gperf-hash/tests/perf_img.sh" />
+    <Text Include="../../thirdparty/owemdjee/gperf-hash/tests/perf_plot.py" />
     <Text Include="../../thirdparty/owemdjee/gperf-hash/tests/permut2.gperf" />
     <Text Include="../../thirdparty/owemdjee/gperf-hash/tests/permut3.gperf" />
     <Text Include="../../thirdparty/owemdjee/gperf-hash/tests/permutc2.gperf" />
