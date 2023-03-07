@@ -224,8 +224,10 @@ static int EnableMemLeakChecking(void)
 	// memory which may be used to simulate low-memory condition)
 
 	//_CrtSetBreakAlloc(744);  /* Break at memalloc{744}, or 'watch' _crtBreakAlloc */
+	 
 	//const int desired_flags = (_CRTDBG_ALLOC_MEM_DF | _CRTDBG_DELAY_FREE_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	const int desired_flags = (_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	//const int desired_flags = (_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	const int desired_flags = (_CRTDBG_ALLOC_MEM_DF);
 	int flags = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
 	flags |= desired_flags;
 	_CrtSetDbgFlag(flags);
@@ -245,6 +247,42 @@ static int EnableMemLeakChecking(void)
 }
 
 static int fz_memleak_checking_is_set_up = EnableMemLeakChecking();
+
+void fz_TurnHeapLeakReportingAtProgramExitOn(void)
+{
+	const int desired_flags = _CRTDBG_LEAK_CHECK_DF;
+	int flags = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
+	flags |= desired_flags;
+	_CrtSetDbgFlag(flags);
+}
+
+void *fz_TakeHeapSnapshot(void)
+{
+	_CrtMemState *data = (_CrtMemState *)calloc(1, sizeof(*data));
+	_CrtMemCheckpoint(data);
+	return data;
+}
+
+void fz_ReportHeapLeakageAgainstSnapshot(void *snapshot_)
+{
+	_CrtMemState *snapshot = (_CrtMemState *)snapshot_;
+	_CrtMemState snap_now;
+	_CrtMemCheckpoint(&snap_now);
+	_CrtMemState state_now;
+	int rv = _CrtMemDifference(&state_now, snapshot, &snap_now);
+
+	_CrtDbgReport(_CRT_WARN, NULL, 0, NULL, "%s", "\n\n### Heap memory allocation statistics: AT START:\n\n");
+
+	_CrtMemDumpStatistics(snapshot);
+
+	_CrtDbgReport(_CRT_WARN, NULL, 0, NULL, "%s", "\n\n### Heap memory allocation statistics: DELTA:\n\n");
+
+	_CrtMemDumpStatistics(&state_now);
+
+	_CrtDbgReport(_CRT_WARN, NULL, 0, NULL, "%s", "\n\n### Heap leakage report:\n\n");
+
+	_CrtMemDumpAllObjectsSince(snapshot);
+}
 
 #else
 

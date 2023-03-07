@@ -262,6 +262,7 @@ file
 filesystem
 flat_hash_map
 fluent-bit
+fmem
 fmt
 fmtlog
 folly
@@ -658,6 +659,7 @@ uchardet
 ucto
 uctodata
 ucx
+ugrep
 uint128_t
 unicode-cldr
 unicode-icu

@@ -35,6 +35,11 @@ extern "C" {
 int fzPushHeapDbgPurpose(const char* s, int l);
 int fzPopHeapDbgPurpose(int related_dummy, int l);
 
+void fz_TurnHeapLeakReportingAtProgramExitOn(void);
+
+void *fz_TakeHeapSnapshot(void);
+void fz_ReportHeapLeakageAgainstSnapshot(void *snapshot_);
+
 #ifdef __cplusplus
 }
 #endif
@@ -49,6 +54,11 @@ static int prefix ## HEAPDBG_SECTION_END = fzPopHeapDbgPurpose(prefix ## HEAPDBG
 
 #define FZ_HEAPDBG_TRACKER_SECTION_START_MARKER(prefix)  /**/
 #define FZ_HEAPDBG_TRACKER_SECTION_END_MARKER(prefix)    /**/
+
+#define fz_TurnHeapLeakReportingAtProgramExitOn()        ((void)0)
+
+#define fz_TakeHeapSnapshot()							 ((void *)0)
+#define fz_ReportHeapLeakageAgainstSnapshot(snap)		 ((void)0)
 
 #endif
 

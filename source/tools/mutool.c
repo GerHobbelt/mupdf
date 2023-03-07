@@ -28,6 +28,7 @@
 #include "mupdf/mutool.h"
 #include "mupdf/helpers/mu-threads.h"
 #include "mupdf/helpers/jmemcust.h"
+#include "mupdf/helpers/debugheap.h"
 
 #define BUILD_MONOLITHIC 1
 #include "../../thirdparty/tesseract/include/tesseract/capi_training_tools.h"
@@ -72,7 +73,7 @@ static int report_version(int argc, const char** argv);
 typedef int tool_f(void);
 typedef int tool_fa(int argc, const char** argv);
 
-static struct {
+static struct tool_spec {
 	union
 	{
 		tool_f* f;
@@ -875,6 +876,47 @@ static void mu_drop_context(void)
     }
 }
 
+static int run_tool(struct tool_spec *spec, int argc, const char **argv, int time_the_run, int show_heap_leakage)
+{
+	void* snapshot = fz_TakeHeapSnapshot();
+
+#define MAX_ARGV_SIZE   500
+
+	const char* argarr[MAX_ARGV_SIZE];
+	if (!argv[0] && argc <= MAX_ARGV_SIZE - 1)
+	{
+		// do NOT damage the original argv[] array any further: plugging in arbitrary strings in there
+		// would cause memory corruption later on as we'll attempt to free() the elements at the end.
+		//
+		// So we make a local copy of the argv[] set and feed that one to the destination tool...
+		argarr[0] = spec->name;
+		if (argc > 1)
+			memcpy(argarr + 1, argv + 1, (argc - 1) * sizeof(argarr[0]));
+		argarr[argc] = NULL;
+
+		argv = argarr;
+	}
+
+#undef MAX_ARGV_SIZE 
+
+	nanotimer_data_t timer;
+	nanotimer(&timer);
+	nanotimer_start(&timer);
+	int rv = spec->func.fa(argc, argv);
+	double dt = nanotimer_get_elapsed_ms(&timer);
+
+	if (show_heap_leakage)
+	{
+		fz_ReportHeapLeakageAgainstSnapshot(snapshot);
+	}
+
+	if (time_the_run)
+	{
+		fz_info(ctx, "### Elapsed time: %f milliseconds\n", dt);
+	}
+	return rv;
+}
+
 #ifdef GPERF
 #include "gperftools/profiler.h"
 
@@ -947,6 +989,23 @@ int mutool_main(int argc, const char** argv)
         return EXIT_FAILURE;
     }
 
+	int argstart = 1;
+	int time_the_run = 0;
+	int show_heap_leakage = 0;
+
+	for (; argc > argstart; argstart++)
+	{
+		const char* arg = argv[argstart];
+		if (!strcmp(arg, "-t"))
+			time_the_run = 1;
+		else if (!strcmp(arg, "-d"))
+			show_heap_leakage = 1;
+		else if (!strcmp(arg, "-z"))
+			fz_TurnHeapLeakReportingAtProgramExitOn();
+		else
+			break;
+	}
+
     /* Check argv[0] */
 
     if (argc > 0)
@@ -961,48 +1020,70 @@ int mutool_main(int argc, const char** argv)
             strcpy(buf, "mupdf");
             strcat(buf, tools[i].name);
             assert(strlen(buf) < sizeof(buf));
-            if (namematch(end, start, buf) || namematch(end, start, buf + 2))
-                return tools[i].func.fa(argc, argv);
+			if (namematch(end, start, buf) || namematch(end, start, buf + 2))
+			{
+				argstart--;
+				argv[argstart] = argv[0];
+				return run_tool(&tools[i], argc - argstart, argv + argstart, time_the_run, show_heap_leakage);
+			}
             strcpy(buf, "mu");
             strcat(buf, tools[i].name);
             assert(strlen(buf) < sizeof(buf));
             if (namematch(end, start, buf) || namematch(end, start, buf + 2))
-                return tools[i].func.fa(argc, argv);
+			{
+				argstart--;
+				argv[argstart] = argv[0];
+				return run_tool(&tools[i], argc - argstart, argv + argstart, time_the_run, show_heap_leakage);
+			}
         }
     }
 
     /* Check argv[1] */
 
-    if (argc > 1)
+    if (argc > argstart)
     {
         for (i = 0; i < (int)nelem(tools); i++)
         {
-            start = argv[1];
+            start = argv[argstart];
             end = start + strlen(start);
             // test for variants: mupdf<NAME>, pdf<NAME>, mu<NAME> and <NAME>:
             strcpy(buf, "mupdf");
             strcat(buf, tools[i].name);
             assert(strlen(buf) < sizeof(buf));
             if (namematch(end, start, buf) || namematch(end, start, buf + 2))
-                return tools[i].func.fa(argc - 1, argv + 1);
+			{
+				argv[argstart] = NULL;
+				return run_tool(&tools[i], argc - argstart, argv + argstart, time_the_run, show_heap_leakage);
+			}
             strcpy(buf, "mu");
             strcat(buf, tools[i].name);
             assert(strlen(buf) < sizeof(buf));
             if (namematch(end, start, buf) || namematch(end, start, buf + 2))
-                return tools[i].func.fa(argc - 1, argv + 1);
-        }
-        if (!strcmp(argv[1], "-v"))
+			{
+				argv[argstart] = NULL;
+				return run_tool(&tools[i], argc - argstart, argv + argstart, time_the_run, show_heap_leakage);
+			}
+		}
+        if (!strcmp(argv[argstart], "-v"))
         {
             fz_info(ctx, "mutool version %s", FZ_VERSION);
             return EXIT_SUCCESS;
         }
-        fz_error(ctx, "mutool: unrecognized command '%s'\n", argv[1]);
+        fz_error(ctx, "mutool: unrecognized command '%s'\n", argv[argstart]);
     }
 
     /* Print usage */
 
 	fz_info(ctx, "mutool version %s\n", FZ_VERSION);
-    fz_info(ctx, "usage: mutool <command> [options]");
+    fz_info(ctx, "usage: mutool [mutool-options] <command> [command-options]\n");
+	fz_info(ctx, "\n\
+mutool-options:\n\
+\n\
+-t     measure time elapsed and report at exit\n\
+-d     report heap memory leakage for invoked tool\n\
+-z     report total heap leakage at exit\n\
+\n\
+Commands:\n\n");
 
     size_t max_tool_name_len = 0;
     for (i = 0; i < (int)nelem(tools); i++)
