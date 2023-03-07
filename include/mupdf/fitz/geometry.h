@@ -756,6 +756,11 @@ fz_irect fz_translate_irect(fz_irect a, int xoff, int yoff);
 int fz_contains_rect(fz_rect a, fz_rect b);
 
 /**
+	Returns true if rect a overlaps rect b.
+*/
+int fz_rects_overlap(fz_rect a, fz_rect b);
+
+/**
 	Apply a transformation to a point.
 
 	transform: Transformation matrix to apply. See fz_concat,
