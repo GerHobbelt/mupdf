@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libugrep</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF7E3CFE}</ProjectGuid>
+    <RootNamespace>libugrep</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUGREP;UGREP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUGREP;UGREP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUGREP;UGREP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUGREP;UGREP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUGREP;UGREP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUGREP;UGREP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUGREP;UGREP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUGREP;UGREP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUGREP;UGREP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUGREP;UGREP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUGREP;UGREP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUGREP;UGREP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/lib/block_scripts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/lib/convert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/lib/debug.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/lib/error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/lib/input.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/lib/language_scripts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/lib/letter_scripts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/lib/matcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/lib/matcher_avx2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/lib/matcher_avx512bw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/lib/pattern.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/lib/posix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/lib/simd_avx2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/lib/simd_avx512bw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/lib/unicode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/lib/utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/msvc/include_common/empty.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/msvc/include_pcre2/pcre2_chartables.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/msvc/include_ugrep/matcher_avx2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/msvc/include_ugrep/matcher_avx512bw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/src/cnf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/src/glob.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/src/output.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/src/query.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/src/screen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/src/stats.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/src/ugrep.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/src/vkey.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ugrep/src/zopen.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/include/reflex/abslexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/include/reflex/absmatcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/include/reflex/bits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/include/reflex/boostmatcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/include/reflex/convert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/include/reflex/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/include/reflex/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/include/reflex/flexlexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/include/reflex/input.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/include/reflex/matcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/include/reflex/pattern.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/include/reflex/pcre2matcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/include/reflex/posix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/include/reflex/ranges.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/include/reflex/setop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/include/reflex/simd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/include/reflex/stdmatcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/include/reflex/timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/include/reflex/traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/include/reflex/unicode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/include/reflex/utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/msvc/include_pcre2/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/msvc/include_pcre2/pcre2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/msvc/include_ugrep/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/msvc/include_ugrep/pcre2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/src/cnf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/src/flag.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/src/glob.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/src/mmap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/src/output.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/src/query.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/src/screen.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/src/stats.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/src/ugrep.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/src/vkey.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/src/zopen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ugrep/src/zstream.hpp" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/bin/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/include/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/lib/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/lib/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/lib/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/makemake.sh" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/man.sh" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/msvc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/patterns/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/patterns/c++/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/patterns/c/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/patterns/cpp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/patterns/cs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/patterns/html/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/patterns/java/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/patterns/js/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/patterns/json/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/patterns/markdown/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/patterns/perl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/patterns/php/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/patterns/python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/patterns/ruby/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/patterns/rust/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/patterns/scala/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/patterns/swift/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/patterns/xml/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/src/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/tests/Hello.bat" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/tests/Hello.sh" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/tests/Hello.txt" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/tests/empty.txt" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/tests/emptyline.txt" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/tests/gen.sh" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/tests/lorem.latin1.txt" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/tests/lorem.utf16.txt" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/tests/lorem.utf32.txt" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/tests/lorem.utf8.txt" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/tests/verify.sh" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/vs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/vs/ugrep/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/ugrep/vs/ugrep/ugrep/include/README.txt" />
+    <Xml Include="../../thirdparty/owemdjee/ugrep/msvc/include_ugrep/manifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ugrep/vs/ugrep/manifest.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

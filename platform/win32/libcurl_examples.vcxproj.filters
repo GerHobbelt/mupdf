@@ -116,16 +116,16 @@
     <Filter Include="Misc Files\tests\data">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0033}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tests\libtest">
+    <Filter Include="Misc Files\tests\http">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0034}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tests\server">
+    <Filter Include="Misc Files\tests\http\testenv">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0035}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tests\tests-httpd">
+    <Filter Include="Misc Files\tests\libtest">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0036}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tests\tests-httpd\testenv">
+    <Filter Include="Misc Files\tests\server">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0037}</UniqueIdentifier>
     </Filter>
     <Filter Include="Misc Files\tests\unit">
@@ -150,16 +150,25 @@
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0044}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\tests">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0046}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0048}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\tests\libtest">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0045}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\tests\server">
+    <Filter Include="Source Files\tests\http">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0047}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\tests\http\testenv">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0046}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tests\http\testenv\mod_curltest">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0045}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tests\libtest">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0049}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tests\server">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0050}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\tests\unit">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0048}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0051}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -622,6 +631,9 @@
     <ClCompile Include="../../thirdparty/curl/src/tool_xattr.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/curl/tests/http/testenv/mod_curltest/mod_curltest.c">
+      <Filter>Source Files\tests\http\testenv\mod_curltest</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/curl/tests/libtest/chkdecimalpoint.c">
       <Filter>Source Files\tests\libtest</Filter>
     </ClCompile>
@@ -896,6 +908,9 @@
       <Filter>Source Files\tests\libtest</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/curl/tests/libtest/lib1959.c">
+      <Filter>Source Files\tests\libtest</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/curl/tests/libtest/lib1960.c">
       <Filter>Source Files\tests\libtest</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/curl/tests/libtest/lib2301.c">
@@ -1924,6 +1939,9 @@
     <Text Include="../../thirdparty/curl/tests/config.in">
       <Filter>Misc Files\tests</Filter>
     </Text>
+    <Text Include="../../thirdparty/curl/tests/conftest.py">
+      <Filter>Misc Files\tests</Filter>
+    </Text>
     <Text Include="../../thirdparty/curl/tests/data/CMakeLists.txt">
       <Filter>Misc Files\tests\data</Filter>
     </Text>
@@ -1932,6 +1950,81 @@
     </Text>
     <Text Include="../../thirdparty/curl/tests/dictserver.py">
       <Filter>Misc Files\tests</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/Makefile.am">
+      <Filter>Misc Files\tests\http</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/README.md">
+      <Filter>Misc Files\tests\http</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/config.ini.in">
+      <Filter>Misc Files\tests\http</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/conftest.py">
+      <Filter>Misc Files\tests\http</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/scorecard.py">
+      <Filter>Misc Files\tests\http</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/test_01_basic.py">
+      <Filter>Misc Files\tests\http</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/test_02_download.py">
+      <Filter>Misc Files\tests\http</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/test_03_goaway.py">
+      <Filter>Misc Files\tests\http</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/test_04_stuttered.py">
+      <Filter>Misc Files\tests\http</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/test_05_errors.py">
+      <Filter>Misc Files\tests\http</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/test_06_eyeballs.py">
+      <Filter>Misc Files\tests\http</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/test_07_upload.py">
+      <Filter>Misc Files\tests\http</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/test_08_caddy.py">
+      <Filter>Misc Files\tests\http</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/test_09_push.py">
+      <Filter>Misc Files\tests\http</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/test_10_proxy.py">
+      <Filter>Misc Files\tests\http</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/test_11_unix.py">
+      <Filter>Misc Files\tests\http</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/test_12_reuse.py">
+      <Filter>Misc Files\tests\http</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/testenv/__init__.py">
+      <Filter>Misc Files\tests\http\testenv</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/testenv/caddy.py">
+      <Filter>Misc Files\tests\http\testenv</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/testenv/certs.py">
+      <Filter>Misc Files\tests\http\testenv</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/testenv/curl.py">
+      <Filter>Misc Files\tests\http\testenv</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/testenv/env.py">
+      <Filter>Misc Files\tests\http\testenv</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/testenv/httpd.py">
+      <Filter>Misc Files\tests\http\testenv</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/testenv/nghttpx.py">
+      <Filter>Misc Files\tests\http\testenv</Filter>
+    </Text>
+    <Text Include="../../thirdparty/curl/tests/http/testenv/ports.py">
+      <Filter>Misc Files\tests\http\testenv</Filter>
     </Text>
     <Text Include="../../thirdparty/curl/tests/libtest/CMakeLists.txt">
       <Filter>Misc Files\tests\libtest</Filter>
@@ -1953,72 +2046,6 @@
     </Text>
     <Text Include="../../thirdparty/curl/tests/smbserver.py">
       <Filter>Misc Files\tests</Filter>
-    </Text>
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/Makefile.am">
-      <Filter>Misc Files\tests\tests-httpd</Filter>
-    </Text>
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/README.md">
-      <Filter>Misc Files\tests\tests-httpd</Filter>
-    </Text>
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/config.ini.in">
-      <Filter>Misc Files\tests\tests-httpd</Filter>
-    </Text>
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/conftest.py">
-      <Filter>Misc Files\tests\tests-httpd</Filter>
-    </Text>
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/scorecard.py">
-      <Filter>Misc Files\tests\tests-httpd</Filter>
-    </Text>
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_01_basic.py">
-      <Filter>Misc Files\tests\tests-httpd</Filter>
-    </Text>
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_02_download.py">
-      <Filter>Misc Files\tests\tests-httpd</Filter>
-    </Text>
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_03_goaway.py">
-      <Filter>Misc Files\tests\tests-httpd</Filter>
-    </Text>
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_04_stuttered.py">
-      <Filter>Misc Files\tests\tests-httpd</Filter>
-    </Text>
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_05_errors.py">
-      <Filter>Misc Files\tests\tests-httpd</Filter>
-    </Text>
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_06_eyeballs.py">
-      <Filter>Misc Files\tests\tests-httpd</Filter>
-    </Text>
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_07_upload.py">
-      <Filter>Misc Files\tests\tests-httpd</Filter>
-    </Text>
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_08_caddy.py">
-      <Filter>Misc Files\tests\tests-httpd</Filter>
-    </Text>
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_09_push.py">
-      <Filter>Misc Files\tests\tests-httpd</Filter>
-    </Text>
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_10_proxy.py">
-      <Filter>Misc Files\tests\tests-httpd</Filter>
-    </Text>
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/__init__.py">
-      <Filter>Misc Files\tests\tests-httpd\testenv</Filter>
-    </Text>
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/caddy.py">
-      <Filter>Misc Files\tests\tests-httpd\testenv</Filter>
-    </Text>
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/certs.py">
-      <Filter>Misc Files\tests\tests-httpd\testenv</Filter>
-    </Text>
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/curl.py">
-      <Filter>Misc Files\tests\tests-httpd\testenv</Filter>
-    </Text>
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/env.py">
-      <Filter>Misc Files\tests\tests-httpd\testenv</Filter>
-    </Text>
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/httpd.py">
-      <Filter>Misc Files\tests\tests-httpd\testenv</Filter>
-    </Text>
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/nghttpx.py">
-      <Filter>Misc Files\tests\tests-httpd\testenv</Filter>
     </Text>
     <Text Include="../../thirdparty/curl/tests/unit/CMakeLists.txt">
       <Filter>Misc Files\tests\unit</Filter>
