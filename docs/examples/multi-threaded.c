@@ -216,7 +216,6 @@ int main(int argc, const char** argv)
 			fz_rect bbox;
 			fz_display_list *list;
 			fz_device *dev = NULL;
-			fz_pixmap *pix;
 			struct thread_data *data;
 
 			fz_var(dev);

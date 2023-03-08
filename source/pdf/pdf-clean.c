@@ -461,7 +461,7 @@ pdf_redact_end_page(fz_context *ctx, fz_buffer *buf, void *opaque)
 	pdf_page *page = opaque;
 	pdf_annot *annot;
 	pdf_obj *qp;
-	int i, n;
+	int i;
 
 	for (annot = pdf_first_annot(ctx, page); annot; annot = pdf_next_annot(ctx, annot))
 	{
