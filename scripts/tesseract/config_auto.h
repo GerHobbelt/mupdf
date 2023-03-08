@@ -6,7 +6,7 @@
 #define FAST_FLOAT   1
 
 // defined: support image sizes > 32K*32K pixels.
-#define LARGE_IMAGES 1
+#undef LARGE_IMAGES 
 
 
 // https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros?redirectedfrom=MSDN&view=msvc-160
