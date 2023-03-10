@@ -326,6 +326,11 @@ pdf_parse_crypt_filter(fz_context *ctx, pdf_crypt_filter *cf, pdf_crypt *crypt, 
 				cf->method = PDF_CRYPT_AESV3;
 			else
 				fz_warn(ctx, "unknown encryption method: %s", pdf_to_name(ctx, obj));
+
+			if (crypt->r == 4 && cf->method != PDF_CRYPT_NONE && cf->method != PDF_CRYPT_RC4 && cf->method != PDF_CRYPT_AESV2)
+				fz_warn(ctx, "unexpected encryption method for revision 4 crypto: %s", pdf_to_name(ctx, obj));
+			else if ((crypt->r == 5 || crypt->r == 6) && cf->method != PDF_CRYPT_NONE && cf->method != PDF_CRYPT_AESV3)
+				cf->method = PDF_CRYPT_AESV3;
 		}
 
 		obj = pdf_dict_get(ctx, dict, PDF_NAME(Length));
@@ -346,7 +351,7 @@ pdf_parse_crypt_filter(fz_context *ctx, pdf_crypt_filter *cf, pdf_crypt *crypt, 
 		(cf->length < 40 || cf->length > 128))
 		fz_throw(ctx, FZ_ERROR_GENERIC, "invalid key length: %d", cf->length);
 	if ((crypt->r == 5 || crypt->r == 6) && cf->length != 256)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "invalid key length: %d", cf->length);
+		cf->length = 256;
 }
 
 /*
