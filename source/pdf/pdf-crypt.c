@@ -330,7 +330,7 @@ pdf_parse_crypt_filter(fz_context *ctx, pdf_crypt_filter *cf, pdf_crypt *crypt, 
 				fz_warn(ctx, "unknown encryption method: %s", pdf_to_name_not_null(ctx, obj));
 
 			if (crypt->r == 4 && cf->method != PDF_CRYPT_NONE && cf->method != PDF_CRYPT_RC4 && cf->method != PDF_CRYPT_AESV2)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "unexpected encryption method for revision 4 crypto: %s", pdf_to_name(ctx, obj));
+				fz_warn(ctx, "unexpected encryption method for revision 4 crypto: %s", pdf_to_name(ctx, obj));
 			else if ((crypt->r == 5 || crypt->r == 6) && cf->method != PDF_CRYPT_NONE && cf->method != PDF_CRYPT_AESV3)
 				cf->method = PDF_CRYPT_AESV3;
 		}
