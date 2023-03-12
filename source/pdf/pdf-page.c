@@ -1094,12 +1094,6 @@ pdf_drop_page_imp(fz_context *ctx, fz_page *_page)
 	}
 	pdf_drop_annots(ctx, page->annots);
 
-	widget = page->widgets;
-	while (widget)
-	{
-		widget->page = NULL;
-		widget = widget->next;
-	}
 	pdf_drop_obj(ctx, page->obj);
 }
 

@@ -1744,11 +1744,14 @@ static void load_document(void)
 		anchor = strchr(filename + 7, '#');
 		if (anchor)
 		{
-			memmove(anchor + 1, anchor, strlen(anchor) + 1);
-			*anchor = 0;
+			// prevent buffer overflow:
+			filename[sizeof(filename) - 2] = 0;
+			char* dst = &filename[anchor - filename];
+			memmove(dst + 1, anchor, strlen(anchor) + 1);
+			*dst = 0;                  // is:   *anchor = 0; but with non-const pointer
 			anchor++;
 		}
-		memmove(filename, filename + 7, strlen(filename));
+		memmove(filename, filename + 7, strlen(filename) + 1);
 	}
 
 	/* If there was an accelerator to load, what would it be called? */

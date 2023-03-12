@@ -430,7 +430,7 @@ void pdf_clear_signature(fz_context *ctx, pdf_annot *widget)
 
 	if (pdf_dict_get(ctx, widget->obj, PDF_NAME(FT)) != PDF_NAME(Sig))
 		fz_throw(ctx, FZ_ERROR_GENERIC, "annotation is not a signature widget");
-	if (pdf_widget_is_readonly(ctx, widget))
+	if (pdf_annot_is_readonly(ctx, widget))
 		fz_throw(ctx, FZ_ERROR_GENERIC, "read only signature cannot be cleared");
 
 	begin_annot_op(ctx, widget, "Clear Signature");

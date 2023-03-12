@@ -75,7 +75,7 @@ pdf_parse_link_dest_to_file(fz_context *ctx, pdf_document *doc, const char *file
 	if (file && pdf_is_name(ctx, dest))
 		name = pdf_to_name(ctx, dest);
 	else if (file && pdf_is_string(ctx, dest))
-		name = pdf_to_text_string(ctx, dest);
+		name = pdf_to_text_string(ctx, dest, NULL);
 	else
 	{
 		pdf_obj *arg1, *arg2, *arg3, *arg4;
@@ -222,7 +222,7 @@ pdf_parse_file_spec(fz_context *ctx, pdf_document *doc, pdf_obj *file_spec, pdf_
 	}
 
 	is_url = pdf_dict_get(ctx, file_spec, PDF_NAME(FS)) == PDF_NAME(URL);
-	file = pdf_to_text_string(ctx, filename);
+	file = pdf_to_text_string(ctx, filename, NULL);
 	return pdf_parse_link_dest_to_file(ctx, doc, file, is_url, dest);
 }
 
@@ -1071,7 +1071,7 @@ pdf_obj *pdf_new_filespec(fz_context *ctx, pdf_document *doc, const char *filena
 		for (i = 0, s = filename; *s && i + 1 < len; ++i)
 		{
 			int c;
-			s += fz_chartorune(&c, s);
+			s += fz_chartorune_unsafe(&c, s);
 			asciiname[i] = (c >= 32 && c <= 126) ? c : '_';
 		}
 		asciiname[i] = 0;
