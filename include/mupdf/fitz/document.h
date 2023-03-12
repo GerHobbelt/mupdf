@@ -566,6 +566,14 @@ fz_link_dest fz_resolve_link_dest(fz_context *ctx, fz_document *doc, const char 
 char *fz_format_link_uri(fz_context *ctx, fz_document *doc, fz_link_dest dest);
 
 /**
+	Format a remote link to a page number, location, and possible viewing parameters,
+	suitable for use with fz_create_link.
+
+	Returns a newly allocated string that the caller must free.
+*/
+char *fz_format_remote_link_uri(fz_context *ctx, fz_document *doc, const char *file, int is_url, const char *name, fz_link_dest dest);
+
+/**
 	Resolve an internal link to a page number.
 
 	xp, yp: Pointer to store coordinate of destination on the page.

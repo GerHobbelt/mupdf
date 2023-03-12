@@ -15,6 +15,8 @@ ifeq ($(build),debug)
   BUILD_FLAGS := -DDEBUG -O0 -g
 else ifeq ($(build),memento)
   BUILD_FLAGS := -DDEBUG -O0 -g -DMEMENTO
+else ifeq ($(build),sanitize)
+  BUILD_FLAGS := -g -fno-omit-frame-pointer -fsanitize=address -fsanitize=leak
 else
   BUILD_FLAGS := -DNDEBUG -O2
 endif
@@ -44,7 +46,12 @@ JAVA_CFLAGS := \
 	-I $(JAVA_HOME)/include/linux \
 	$(shell pkg-config --cflags freetype2) \
 	$(shell pkg-config --cflags libcrypto)
-JAVA_LIBS := \
+ifeq ($(build),sanitize)
+JAVA_LIBS := -lasan
+else
+JAVA_LIBS :=
+endif
+JAVA_LIBS += \
 	$(shell pkg-config --libs freetype2) \
 	$(shell pkg-config --libs libcrypto) \
 	-lm \
@@ -121,6 +128,9 @@ examples: $(MUPDF_JAVA) $(EXAMPLE_JAVA_OBJECTS) $(MUPDF_JAR)
 run-storytest: $(MUPDF_JAVA) $(EXAMPLE_JAVA_OBJECTS) $(MUPDF_JAR)
 	$(JAVA) -classpath ../../$(OUT)/ -Djava.library.path="../../$(OUT)" example.StoryTest $$MUPDF_ARGS
 
+run-testapi: $(MUPDF_JAVA) $(EXAMPLE_JAVA_OBJECTS) $(MUPDF_JAR)
+	$(JAVA) -classpath ../../$(OUT)/ -Djava.library.path="../../$(OUT)" example.TestAPI $$MUPDF_ARGS
+
 run-example: $(MUPDF_JAVA) $(EXAMPLE_JAVA_OBJECTS) $(MUPDF_JAR)
 	$(JAVA) -classpath ../../$(OUT)/ -Djava.library.path="../../$(OUT)" example.Example $$MUPDF_ARGS
 
@@ -132,6 +142,9 @@ run-multithreadedwithpool: $(MUPDF_JAVA) $(EXAMPLE_JAVA_OBJECTS) $(MUPDF_JAR)
 
 gdb: $(MUPDF_JAVA) $(EXAMPLE_JAVA_OBJECTS) $(MUPDF_JAR)
 	gdb --args $(JAVA) -classpath ../../$(OUT) -Djava.library.path="../../$(OUT)" example.Viewer $$MUPDF_ARGS
+
+gdb-testapi: $(MUPDF_JAVA) $(EXAMPLE_JAVA_OBJECTS) $(MUPDF_JAR)
+	gdb --args $(JAVA) -classpath ../../$(OUT) -Djava.library.path="../../$(OUT)" example.TestAPI $$MUPDF_ARGS
 
 clean:
 	rm -f $(LIBRARY_JAVA_OBJECTS) $(subst .class,\$$*.class,$(LIBRARY_JAVA_OBJECTS))

@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -512,6 +512,9 @@ pdf_obj *pdf_button_field_on_state(fz_context *ctx, pdf_obj *field)
 static void
 begin_annot_op(fz_context *ctx, pdf_annot *annot, const char *op)
 {
+	if (!annot->page)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "annotation not bound to any page");
+
 	pdf_begin_operation(ctx, annot->page->doc, op);
 }
 
@@ -1034,7 +1037,12 @@ pdf_annot *
 pdf_create_signature_widget(fz_context *ctx, pdf_page *page, char *name)
 {
 	fz_rect rect = { 12, 12, 12+100, 12+50 };
-	pdf_annot *annot = pdf_create_annot_raw(ctx, page, PDF_ANNOT_WIDGET);
+	pdf_annot *annot;
+
+	pdf_begin_operation(ctx, page->doc, "Create signature");
+
+	annot = pdf_create_annot_raw(ctx, page, PDF_ANNOT_WIDGET);
+
 	fz_try(ctx)
 	{
 		pdf_obj *obj = annot->obj;
@@ -1061,6 +1069,8 @@ pdf_create_signature_widget(fz_context *ctx, pdf_page *page, char *name)
 		lock = pdf_dict_put_dict(ctx, obj, PDF_NAME(Lock), 1);
 		pdf_dict_put(ctx, lock, PDF_NAME(Action), PDF_NAME(All));
 	}
+	fz_always(ctx)
+		pdf_end_operation(ctx, page->doc);
 	fz_catch(ctx)
 	{
 		pdf_delete_annot(ctx, page, annot);
@@ -1129,14 +1139,15 @@ merge_changes(fz_context *ctx, const char *value, int start, int end, const char
 
 int pdf_set_text_field_value(fz_context *ctx, pdf_annot *widget, const char *update)
 {
-	pdf_document *doc = widget->page->doc;
+	pdf_document *doc;
 	pdf_keystroke_event evt = { 0 };
 	char *new_change = NULL;
 	char *new_value = NULL;
 	char *merged_value = NULL;
 	int rc = 1;
 
-	pdf_begin_operation(ctx, doc, "Edit text field");
+	begin_annot_op(ctx, widget, "Edit text field");
+	doc = widget->page->doc;
 
 	fz_var(new_value);
 	fz_var(new_change);
@@ -1175,12 +1186,12 @@ int pdf_set_text_field_value(fz_context *ctx, pdf_annot *widget, const char *upd
 	}
 	fz_always(ctx)
 	{
-		pdf_end_operation(ctx, doc);
 		fz_free(ctx, new_value);
 		fz_free(ctx, evt.newValue);
 		fz_free(ctx, new_change);
 		fz_free(ctx, evt.newChange);
 		fz_free(ctx, merged_value);
+		end_annot_op(ctx, widget);
 	}
 	fz_catch(ctx)
 	{
@@ -1524,11 +1535,23 @@ fz_stream *pdf_signature_hash_bytes(fz_context *ctx, pdf_document *doc, pdf_obj 
 	return bytes;
 }
 
+int pdf_incremental_change_since_signing_widget(fz_context *ctx, pdf_annot *widget)
+{
+	if (!widget->page)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "annotation not bound to any page");
+	return pdf_signature_incremental_change_since_signing(ctx, widget->page->doc, widget->obj);
+}
+
 int pdf_signature_incremental_change_since_signing(fz_context *ctx, pdf_document *doc, pdf_obj *signature)
 {
 	fz_range *byte_range = NULL;
 	int byte_range_len;
 	int changed = 0;
+
+	if (pdf_dict_get(ctx, signature, PDF_NAME(FT)) != PDF_NAME(Sig))
+		fz_throw(ctx, FZ_ERROR_GENERIC, "annotation is not a signature widget");
+	if (!pdf_signature_is_signed(ctx, doc, signature))
+		return 0;
 
 	fz_var(byte_range);
 	fz_try(ctx)
@@ -1584,6 +1607,10 @@ int pdf_annot_is_signed(fz_context *ctx, pdf_annot *widget)
 {
 	if (widget == NULL)
 		return 0;
+
+	if (!widget->page)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "annotation not bound to any page");
+
 	return pdf_signature_is_signed(ctx, widget->page->doc, widget->obj);
 }
 

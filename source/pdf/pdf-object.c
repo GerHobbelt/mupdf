@@ -526,6 +526,18 @@ pdf_document *pdf_get_indirect_document(fz_context *ctx, pdf_obj *obj)
 	return NULL;
 }
 
+void pdf_unbind_obj_document(fz_context *ctx, pdf_obj *obj, pdf_document *doc)
+{
+	if (obj < PDF_LIMIT)
+		return;
+	else if (obj->kind == PDF_INDIRECT)
+		REF(obj)->doc = doc;
+	else if (obj->kind == PDF_ARRAY)
+		ARRAY(obj)->doc = doc;
+	else if (obj->kind == PDF_DICT)
+		DICT(obj)->doc = doc;
+}
+
 pdf_document *pdf_get_bound_document(fz_context *ctx, pdf_obj *obj)
 {
 	if (obj < PDF_LIMIT)

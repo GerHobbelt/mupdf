@@ -128,6 +128,7 @@ public class PDFAnnotation
 	public native void setFlags(int flags);
 	public native String getContents();
 	public native void setContents(String contents);
+	public native boolean hasRect();
 	public native Rect getRect();
 	public native void setRect(Rect rect);
 	public native float getBorder();
@@ -293,6 +294,7 @@ public class PDFAnnotation
 	public native int getLanguage();
 	public native void setLanguage(int lang);
 
+	public native boolean hasQuadding();
 	public native int getQuadding();
 	public native void setQuadding(int quadding);
 

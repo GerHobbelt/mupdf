@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -3335,6 +3335,9 @@ int
 pdf_update_annot(fz_context *ctx, pdf_annot *annot)
 {
 	int changed;
+
+	if (!annot->page)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "annotation not bound to any page");
 
 	if (annot->page->doc->resynth_required)
 		update_all_appearances(ctx, annot->page);

@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -106,7 +106,7 @@ fz_is_external_link(fz_context *ctx, const char *uri)
 
 fz_link_dest fz_make_link_dest_none(void)
 {
-	fz_link_dest dest = { { -1, -1 }, FZ_LINK_DEST_XYZ, NAN, NAN, NAN, NAN, NAN };
+	fz_link_dest dest = { { -1, -1 }, FZ_LINK_DEST_UNKNOWN, NAN, NAN, NAN, NAN, NAN };
 	return dest;
 }
 

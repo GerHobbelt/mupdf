@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -356,7 +356,7 @@ FUN(PDFWidget_incrementalChangeAfterSigning)(JNIEnv *env, jobject self)
 	if (!ctx || !widget || !pdf) return JNI_FALSE;
 
 	fz_try(ctx)
-		change = pdf_signature_incremental_change_since_signing(ctx, pdf, pdf_annot_obj(ctx, widget));
+		change = pdf_incremental_change_since_signing_widget(ctx, widget);
 	fz_catch(ctx)
 		jni_rethrow(env, ctx);
 
@@ -775,4 +775,21 @@ FUN(PDFWidget_getLabel)(JNIEnv *env, jobject self)
 		jni_rethrow(env, ctx);
 
 	return (*env)->NewStringUTF(env, text);
+}
+
+JNIEXPORT jboolean JNICALL
+FUN(PDFWidget_incrementalChangesSinceSigning)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *widget = from_PDFWidget_safe(env, self);
+	int changed = JNI_FALSE;
+
+	if (!ctx || !widget) return JNI_FALSE;
+
+	fz_try(ctx)
+		changed = pdf_incremental_change_since_signing_widget(ctx, widget);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return changed;
 }

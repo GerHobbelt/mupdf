@@ -316,7 +316,8 @@ fz_link_dest pdf_resolve_link_dest(fz_context *ctx, pdf_document *doc, const cha
 /*
 	Create a destination object given an internal link URI.
 */
-pdf_obj *pdf_new_destination_from_link(fz_context *ctx, pdf_document *doc, const char *uri);
+pdf_obj *pdf_new_destination_from_link(fz_context *ctx, pdf_document *doc, const char *uri, char **file);
+pdf_obj *pdf_new_destination_from_dest(fz_context *ctx, pdf_document *doc, fz_link_dest dest, int is_remote);
 
 /*
 	Create an action object given a link URI. The action will
@@ -334,13 +335,16 @@ pdf_obj *pdf_new_action_from_link(fz_context *ctx, pdf_document *doc, const char
 
 	The resulting string must be freed by the caller.
 */
-char *pdf_format_link_uri(fz_context *ctx, fz_link_dest dest);
+char *pdf_format_link_uri(fz_context *ctx, pdf_document *doc, fz_link_dest dest);
+char *pdf_format_remote_link_uri(fz_context *ctx, pdf_document *doc, const char *file, int is_url, const char *name, fz_link_dest dest);
+
+pdf_obj *pdf_new_filespec(fz_context *ctx, pdf_document *doc, const char *file, pdf_obj *embedded_file);
 
 /*
 	Parse an internal link URI that uses the Adobe specification
 	"parameters for opening PDF files".
 */
-fz_link_dest pdf_parse_link_uri(fz_context *ctx, const char *uri);
+fz_link_dest pdf_parse_link_uri(fz_context *ctx, const char *uri, char **file, char **name);
 
 /*
 	Create transform to fit appearance stream to annotation Rect
@@ -450,6 +454,10 @@ int pdf_annot_has_interior_color(fz_context *ctx, pdf_annot *annot);
 */
 int pdf_annot_has_line_ending_styles(fz_context *ctx, pdf_annot *annot);
 
+/*
+	Check to see if an annotation has quadding.
+*/
+int pdf_annot_has_quadding(fz_context *ctx, pdf_annot *annot);
 /*
 	Check to see if an annotation has a border.
 */
@@ -722,11 +730,7 @@ void pdf_add_annot_ink_list(fz_context *ctx, pdf_annot *annot, int n, fz_point s
 void pdf_set_annot_icon_name(fz_context *ctx, pdf_annot *annot, const char *name);
 void pdf_set_annot_is_open(fz_context *ctx, pdf_annot *annot, int is_open);
 
-enum pdf_line_ending pdf_annot_line_start_style(fz_context *ctx, pdf_annot *annot);
-enum pdf_line_ending pdf_annot_line_end_style(fz_context *ctx, pdf_annot *annot);
 void pdf_annot_line_ending_styles(fz_context *ctx, pdf_annot *annot, enum pdf_line_ending *start_style, enum pdf_line_ending *end_style);
-void pdf_set_annot_line_start_style(fz_context *ctx, pdf_annot *annot, enum pdf_line_ending s);
-void pdf_set_annot_line_end_style(fz_context *ctx, pdf_annot *annot, enum pdf_line_ending e);
 void pdf_set_annot_line_ending_styles(fz_context *ctx, pdf_annot *annot, enum pdf_line_ending start_style, enum pdf_line_ending end_style);
 
 const char *pdf_annot_icon_name(fz_context *ctx, pdf_annot *annot);
@@ -898,7 +902,8 @@ int pdf_verify_embedded_file_checksum(fz_context *ctx, pdf_obj *fs);
 
 pdf_obj* pdf_embedded_file_stream(fz_context* ctx, pdf_obj* fs);
 
-char *pdf_parse_link_dest(fz_context *ctx, pdf_document *doc, pdf_obj *obj);
+char *pdf_parse_link_dest(fz_context *ctx, pdf_document *doc, pdf_obj *dest);
+char *pdf_parse_link_dest_to_file(fz_context *ctx, pdf_document *doc, const char *file, int is_url, pdf_obj *dest);
 char *pdf_parse_link_action(fz_context *ctx, pdf_document *doc, pdf_obj *obj, int pagenum);
 pdf_obj *pdf_lookup_dest(fz_context *ctx, pdf_document *doc, pdf_obj *needle);
 fz_link *pdf_load_link_annots(fz_context *ctx, pdf_document *, pdf_page *, pdf_obj *annots, int pagenum, fz_matrix page_ctm);

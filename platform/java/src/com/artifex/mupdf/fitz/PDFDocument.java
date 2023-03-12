@@ -224,6 +224,7 @@ public class PDFDocument extends Document
 
 	public native void setPageLabels(int index, int style, String prefix, int start);
 	public native void deletePageLabels(int index);
+	public native String formatRemoteLinkURI(LinkDestination dest, String file, String name, boolean isURL);
 
 	public native int countSignatures();
 

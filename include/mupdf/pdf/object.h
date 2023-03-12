@@ -379,6 +379,7 @@ int64_t pdf_to_date(fz_context *ctx, pdf_obj *time);
 
 pdf_document *pdf_get_indirect_document(fz_context *ctx, pdf_obj *obj);
 pdf_document *pdf_get_bound_document(fz_context *ctx, pdf_obj *obj);
+void pdf_unbind_obj_document(fz_context *ctx, pdf_obj *obj, pdf_document *pdf);
 void pdf_set_int(fz_context *ctx, pdf_obj *obj, int64_t i);
 
 /* Voodoo to create PDF_NAME(Foo) macros from name-table.h */

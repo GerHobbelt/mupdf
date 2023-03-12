@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -75,6 +75,7 @@ typedef struct fz_link
 
 typedef enum
 {
+	FZ_LINK_DEST_UNKNOWN,
 	FZ_LINK_DEST_FIT,
 	FZ_LINK_DEST_FIT_B,
 	FZ_LINK_DEST_FIT_H,

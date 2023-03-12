@@ -296,6 +296,20 @@ FUN(PDFAnnotation_setCreationDate)(JNIEnv *env, jobject self, jlong time)
 		jni_rethrow_void(env, ctx);
 }
 
+JNIEXPORT jboolean JNICALL
+FUN(PDFAnnotation_hasRect)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
+	jboolean has = JNI_FALSE;
+
+	fz_try(ctx)
+		has = pdf_annot_has_rect(ctx, annot);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return has;
+}
 JNIEXPORT jobject JNICALL
 FUN(PDFAnnotation_getRect)(JNIEnv *env, jobject self)
 {
@@ -934,6 +948,21 @@ FUN(PDFAnnotation_setLanguage)(JNIEnv *env, jobject self, jint lang)
 		pdf_set_annot_language(ctx, annot, lang);
 	fz_catch(ctx)
 		jni_rethrow_void(env, ctx);
+}
+
+JNIEXPORT jboolean JNICALL
+FUN(PDFAnnotation_hasQuadding)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	pdf_annot *annot = from_PDFAnnotation(env, self);
+	jboolean has = JNI_FALSE;
+
+	fz_try(ctx)
+		has = pdf_annot_has_quadding(ctx, annot);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return has;
 }
 
 JNIEXPORT jint JNICALL
