@@ -263,7 +263,25 @@ static void fast_gray_to_rgb(fz_context *ctx, const fz_pixmap *src, fz_pixmap *d
 		/* Common, no spots case */
 		if (da)
 		{
-			if (sa)
+			if (sa && sn == 1)
+			{
+				while (h--)
+				{
+					size_t ww = w;
+					while (ww--)
+					{
+						d[0] = 0;
+						d[1] = 0;
+						d[2] = 0;
+						d[3] = s[0];
+						s += 1;
+						d += 4;
+					}
+					d += d_line_inc;
+					s += s_line_inc;
+				}
+			}
+			else if (sa)
 			{
 				while (h--)
 				{
