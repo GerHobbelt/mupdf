@@ -650,6 +650,8 @@ tiff_decode_tiles(fz_context *ctx, struct tiff *tiff)
 					fz_throw(ctx, FZ_ERROR_GENERIC, "invalid tile offset %u", offset);
 				if (rlen > (unsigned)(tiff->ep - rp))
 					fz_throw(ctx, FZ_ERROR_GENERIC, "invalid tile byte count %u", rlen);
+				if (rlen == 0)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "tile byte count zero");
 
 				decoded = tiff_decode_data(ctx, tiff, rp, rlen, data, wlen);
 				tiff_paste_subsampled_tile(ctx, tiff, data, decoded, tiff->tilewidth, tiff->tilelength, x, y);
@@ -675,6 +677,8 @@ tiff_decode_tiles(fz_context *ctx, struct tiff *tiff)
 					fz_throw(ctx, FZ_ERROR_GENERIC, "invalid tile offset %u", offset);
 				if (rlen > (unsigned)(tiff->ep - rp))
 					fz_throw(ctx, FZ_ERROR_GENERIC, "invalid tile byte count %u", rlen);
+				if (rlen == 0)
+					fz_throw(ctx, FZ_ERROR_GENERIC, "tile byte count zero");
 
 				if (tiff_decode_data(ctx, tiff, rp, rlen, data, wlen) != wlen)
 					fz_throw(ctx, FZ_ERROR_GENERIC, "decoded tile is the wrong size");
@@ -727,6 +731,8 @@ tiff_decode_strips(fz_context *ctx, struct tiff *tiff)
 				fz_throw(ctx, FZ_ERROR_GENERIC, "invalid strip offset %u", offset);
 			if (rlen > (unsigned)(tiff->ep - rp))
 				fz_throw(ctx, FZ_ERROR_GENERIC, "invalid strip byte count %u", rlen);
+			if (rlen == 0)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "strip byte count zero");
 
 			decoded = tiff_decode_data(ctx, tiff, rp, rlen, data, wlen);
 			tiff_paste_subsampled_tile(ctx, tiff, data, decoded, tiff->imagewidth, tiff->rowsperstrip, 0, y);
@@ -747,6 +753,8 @@ tiff_decode_strips(fz_context *ctx, struct tiff *tiff)
 				fz_throw(ctx, FZ_ERROR_GENERIC, "invalid strip offset %u", offset);
 			if (rlen > (unsigned)(tiff->ep - rp))
 				fz_throw(ctx, FZ_ERROR_GENERIC, "invalid strip byte count %u", rlen);
+			if (rlen == 0)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "strip byte count zero");
 
 			/* if imagelength is not a multiple of rowsperstrip, adjust the expectation of the size of the decoded data */
 			if (y + tiff->rowsperstrip >= tiff->imagelength)
@@ -806,10 +814,26 @@ static void
 tiff_read_tag_value(unsigned *p, struct tiff *tiff, unsigned type, unsigned ofs, unsigned n)
 {
 	unsigned den;
+	unsigned divisor;
 
 	if (ofs > (unsigned)(tiff->ep - tiff->bp))
 		ofs = (unsigned)(tiff->ep - tiff->bp);
 	tiff->rp = tiff->bp + ofs;
+
+	switch (type)
+	{
+	default:
+	case TBYTE: divisor = 1; break;
+	case TSHORT: divisor = 2; break;
+	case TLONG: divisor = 4; break;
+	case TRATIONAL: divisor = 8; break;
+	}
+
+	if (n > (tiff->ep - tiff->rp) / divisor)
+	{
+		unsigned newn = (tiff->ep - tiff->rp) / divisor;
+		memset(&p[newn], 0, (n - newn) * sizeof (unsigned));
+	}
 
 	while (n--)
 	{
@@ -832,8 +856,8 @@ tiff_read_tag_value(unsigned *p, struct tiff *tiff, unsigned type, unsigned ofs,
 	}
 }
 
-static void
-tiff_read_tag(fz_context *ctx, struct tiff *tiff, unsigned offset)
+static unsigned
+tiff_read_tag(fz_context *ctx, struct tiff *tiff, unsigned offset, unsigned lasttag)
 {
 	unsigned tag;
 	unsigned type;
@@ -843,6 +867,9 @@ tiff_read_tag(fz_context *ctx, struct tiff *tiff, unsigned offset)
 	tiff->rp = tiff->bp + offset;
 
 	tag = readshort(tiff);
+	if (tag < lasttag)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "tiff tags in non-ascending order");
+
 	type = readshort(tiff);
 	count = tiff_readlong(tiff);
 
@@ -866,6 +893,8 @@ tiff_read_tag(fz_context *ctx, struct tiff *tiff, unsigned offset)
 		break;
 	case BitsPerSample:
 		tiff_read_tag_value(&tiff->bitspersample, tiff, type, value, 1);
+		if (tiff->bitspersample > 32)
+			tiff->bitspersample = 32;
 		break;
 	case Compression:
 		tiff_read_tag_value(&tiff->compression, tiff, type, value, 1);
@@ -931,6 +960,15 @@ tiff_read_tag(fz_context *ctx, struct tiff *tiff, unsigned offset)
 	case StripOffsets:
 		if (tiff->stripoffsets)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "at most one strip offsets tag allowed");
+		if (tiff->rowsperstrip == 0)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "invalid strip dimensions");
+		{
+			unsigned strips = tiff->imagelength;
+			if (tiff->rowsperstrip != 0xFFFFFFFF && tiff->rowsperstrip < tiff->imagelength)
+				strips = (tiff->imagelength + tiff->rowsperstrip - 1) / tiff->rowsperstrip;
+			if (count > strips)
+				count = strips;
+		}
 		tiff->stripoffsets = Memento_label(fz_malloc_array(ctx, count, unsigned), "tiff_stripoffsets");
 		tiff_read_tag_value(tiff->stripoffsets, tiff, type, value, count);
 		tiff->stripoffsetslen = count;
@@ -939,6 +977,15 @@ tiff_read_tag(fz_context *ctx, struct tiff *tiff, unsigned offset)
 	case StripByteCounts:
 		if (tiff->stripbytecounts)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "at most one strip byte counts tag allowed");
+		if (tiff->rowsperstrip == 0)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "invalid strip dimensions");
+		{
+			unsigned strips = tiff->imagelength;
+			if (tiff->rowsperstrip != 0xFFFFFFFF && tiff->rowsperstrip < tiff->imagelength)
+				strips = (tiff->imagelength + tiff->rowsperstrip - 1) / tiff->rowsperstrip;
+			if (count > strips)
+				count = strips;
+		}
 		tiff->stripbytecounts = Memento_label(fz_malloc_array(ctx, count, unsigned), "tiff_stripbytecounts");
 		tiff_read_tag_value(tiff->stripbytecounts, tiff, type, value, count);
 		tiff->stripbytecountslen = count;
@@ -963,6 +1010,21 @@ tiff_read_tag(fz_context *ctx, struct tiff *tiff, unsigned offset)
 	case TileOffsets:
 		if (tiff->tileoffsets)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "at most one tile offsets tag allowed");
+		if (tiff->tilelength == 0 || tiff->tilewidth == 0)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "invalid tile dimensions");
+		{
+			unsigned tilesdown = (tiff->imagelength + tiff->tilelength - 1) / tiff->tilelength;
+			unsigned tilesacross = (tiff->imagewidth + tiff->tilewidth - 1) / tiff->tilewidth;
+			unsigned tilesperimage = tilesacross * tilesdown;
+			unsigned maxoffsets;
+
+			if (tiff->planar == 1 && count > tilesperimage)
+				maxoffsets = tilesperimage;
+			else
+				maxoffsets = tiff->samplesperpixel * tilesperimage;
+			if (count > maxoffsets)
+				count = maxoffsets;
+		}
 		tiff->tileoffsets = Memento_label(fz_malloc_array(ctx, count, unsigned), "tiff_tileoffsets");
 		tiff_read_tag_value(tiff->tileoffsets, tiff, type, value, count);
 		tiff->tileoffsetslen = count;
@@ -971,6 +1033,21 @@ tiff_read_tag(fz_context *ctx, struct tiff *tiff, unsigned offset)
 	case TileByteCounts:
 		if (tiff->tilebytecounts)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "at most one tile byte counts tag allowed");
+		if (tiff->tilelength == 0 || tiff->tilewidth == 0)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "invalid tile dimensions");
+		{
+			unsigned tilesdown = (tiff->imagelength + tiff->tilelength - 1) / tiff->tilelength;
+			unsigned tilesacross = (tiff->imagewidth + tiff->tilewidth - 1) / tiff->tilewidth;
+			unsigned tilesperimage = tilesacross * tilesdown;
+			unsigned maxbytecounts;
+
+			if (tiff->planar == 1 && count > tilesperimage)
+				maxbytecounts = tilesperimage;
+			else
+				maxbytecounts = tiff->samplesperpixel * tilesperimage;
+			if (count > maxbytecounts)
+				count = maxbytecounts;
+		}
 		tiff->tilebytecounts = Memento_label(fz_malloc_array(ctx, count, unsigned), "tiff_tilebytecounts");
 		tiff_read_tag_value(tiff->tilebytecounts, tiff, type, value, count);
 		tiff->tilebytecountslen = count;
@@ -980,6 +1057,8 @@ tiff_read_tag(fz_context *ctx, struct tiff *tiff, unsigned offset)
 		/* fz_warn(ctx, "unknown tag: %d t=%d n=%d", tag, type, count); */
 		break;
 	}
+
+	return tag;
 }
 
 static void
@@ -1109,6 +1188,7 @@ tiff_read_ifd(fz_context *ctx, struct tiff *tiff)
 	unsigned offset;
 	unsigned count;
 	unsigned i;
+	unsigned lasttag = 0;
 
 	offset = tiff->rp - tiff->bp;
 
@@ -1120,7 +1200,7 @@ tiff_read_ifd(fz_context *ctx, struct tiff *tiff)
 	offset += 2;
 	for (i = 0; i < count; i++)
 	{
-		tiff_read_tag(ctx, tiff, offset);
+		lasttag = tiff_read_tag(ctx, tiff, offset, lasttag);
 		offset += 12;
 	}
 }
@@ -1161,6 +1241,8 @@ tiff_decode_ifd(fz_context *ctx, struct tiff *tiff)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "bits per sample illegal %d", tiff->bitspersample);
 	if (tiff->samplesperpixel == 0 || tiff->samplesperpixel >= FZ_MAX_COLORS)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "components per pixel out of range");
+	if (tiff->samplesperpixel < tiff->extrasamples)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "components per pixel out of range when compared to extra samples");
 	/* Bug 706071: Check for overflow in the stride calculation separately. */
 	if (tiff->imagewidth > (UINT_MAX - 7) / tiff->samplesperpixel / tiff->bitspersample)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "image too large");
