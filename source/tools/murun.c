@@ -566,6 +566,8 @@ static void ffi_pushrect(js_State *J, fz_rect rect)
 	js_pushnumber(J, rect.y1); js_setindex(J, -2, 3);
 }
 
+#if FZ_ENABLE_PDF
+
 static fz_quad ffi_toquad(js_State *J, int idx)
 {
 	fz_quad quad;
@@ -579,6 +581,8 @@ static fz_quad ffi_toquad(js_State *J, int idx)
 	js_getindex(J, idx, 7); quad.lr.y = js_tonumber(J, -1); js_pop(J, 1);
 	return quad;
 }
+
+#endif /* FZ_ENABLE_PDF */
 
 static void ffi_pushquad(js_State *J, fz_quad quad)
 {
@@ -1285,8 +1289,6 @@ static void ffi_pushbuffer(js_State *J, fz_buffer *buf)
 			ffi_gc_fz_buffer);
 }
 
-#if FZ_ENABLE_PDF
-
 static fz_buffer *ffi_tobuffer(js_State *J, int idx)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -1310,8 +1312,6 @@ static fz_buffer *ffi_tobuffer(js_State *J, int idx)
 
 	return buf;
 }
-
-#endif /* FZ_ENABLE_PDF */
 
 /* device calling into js from c */
 
