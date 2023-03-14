@@ -857,12 +857,12 @@ void fz_search_stext_set_bboxfn(fz_context *ctx, fz_search_stext_state *state, f
 }
 
 /* Increments both state->c_pos and state->pos to the next character. */
-static void s_search_next_char(fz_search_stext_state *state)
+static void s_search_next_char(fz_context* ctx, fz_search_stext_state *state)
 {
 	if (state->pos.ch)
 	{
 		int c;
-		int n = fz_chartorune(&c, state->c_pos);
+		int n = fz_chartorune_unsafe(&c, state->c_pos);
 		assert(c == state->pos.ch->c);
 		state->c_pos += n;
 	}
@@ -889,7 +889,7 @@ int fz_search_stext_next(fz_context *ctx, fz_search_stext_state *state)
 			assert(state->c_pos <= next);
 			if (state->c_pos == next)
 				break;
-			s_search_next_char(state);
+			s_search_next_char(ctx, state);
 		}
 		return 1;
 	}
@@ -914,7 +914,7 @@ const fz_quad *fz_search_stext_next_quad(fz_context *ctx, fz_search_stext_state 
 		fz_quad ch_quad;
 
 		assert(state->c_pos < state->c_end);
-		s_search_next_char(state);
+		s_search_next_char(ctx, state);
 		if (state->c_pos >= state->c_end)
 		{
 			if (state->c_pos > state->c_end)
