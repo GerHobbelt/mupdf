@@ -266,9 +266,10 @@ tiff_expand_colormap(fz_context *ctx, struct tiff *tiff)
 	int maxval = 1 << tiff->bitspersample;
 	unsigned char *samples;
 	unsigned char *src, *dst;
-	unsigned int x, y;
+	unsigned int x, y, k;
 	unsigned int stride;
 	unsigned int srcstride;
+	unsigned int comps;
 
 	/* colormap has first all red, then all green, then all blue values */
 	/* colormap values are 0..65535, bits is 4 or 8 */
@@ -280,7 +281,29 @@ tiff_expand_colormap(fz_context *ctx, struct tiff *tiff)
 	if (tiff->bitspersample != 1 && tiff->bitspersample != 2 && tiff->bitspersample != 4 && tiff->bitspersample != 8 && tiff->bitspersample != 16)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "invalid number of bits for RGBPal");
 
-	if (tiff->colormaplen < (unsigned)maxval * 3)
+	switch (tiff->photometric)
+	{
+	case 0: /* WhiteIsZero -- inverted */
+	case 1: /* BlackIsZero */
+	case 4: /* Transparency mask */
+	case 32844: /* SGI CIE Log 2 L (16bpp Greyscale) */
+		comps = 1;
+		break;
+	default:
+	case 2: /* RGB */
+	case 3: /* RGBPal */
+	case 6: /* YCbCr */
+	case 8: /* Direct L*a*b* encoding. a*, b* signed values */
+	case 9: /* ICC Style L*a*b* encoding */
+	case 32845: /* SGI CIE Log 2 L, u, v (24bpp or 32bpp) */
+		comps = 3;
+		break;
+	case 5: /* CMYK */
+		comps = 4;
+		break;
+	}
+
+	if (tiff->colormaplen < (unsigned)maxval * comps)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "insufficient colormap data");
 
 	if (tiff->imagelength > UINT_MAX / tiff->imagewidth / (tiff->samplesperpixel + 2))
@@ -290,7 +313,7 @@ tiff_expand_colormap(fz_context *ctx, struct tiff *tiff)
 	if (tiff->stride < 0 || srcstride > (unsigned int)tiff->stride)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "insufficient data for format");
 
-	stride = tiff->imagewidth * (3 + !!tiff->extrasamples) * 2;
+	stride = tiff->imagewidth * (comps + !!tiff->extrasamples) * 2;
 
 	samples = Memento_label(fz_malloc(ctx, (size_t)stride * tiff->imagelength), "tiff_samples");
 
@@ -302,13 +325,15 @@ tiff_expand_colormap(fz_context *ctx, struct tiff *tiff)
 
 		for (x = 0; x < tiff->imagewidth; x++)
 		{
-			int c = tiff_getcomp(src, s++, tiff->bitspersample);
-			*dst++ = tiff->colormap[c + 0] >> 8;
-			*dst++ = tiff->colormap[c + 0];
-			*dst++ = tiff->colormap[c + maxval] >> 8;
-			*dst++ = tiff->colormap[c + maxval];
-			*dst++ = tiff->colormap[c + maxval * 2] >> 8;
-			*dst++ = tiff->colormap[c + maxval * 2];
+			if (tiff->samplesperpixel > tiff->extrasamples)
+			{
+				int c = tiff_getcomp(src, s++, tiff->bitspersample);
+				for (k = 0; k < comps; k++)
+				{
+					*dst++ = tiff->colormap[c + maxval * k] >> 8;
+					*dst++ = tiff->colormap[c + maxval * k];
+				}
+			}
 			if (tiff->extrasamples)
 			{
 				/* Assume the first is alpha, and skip the rest. */
@@ -994,6 +1019,32 @@ tiff_read_tag(fz_context *ctx, struct tiff *tiff, unsigned offset, unsigned last
 	case ColorMap:
 		if (tiff->colormap)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "at most one color map allowed");
+		{
+			unsigned comps;
+			switch (tiff->photometric)
+			{
+			case 0: /* WhiteIsZero -- inverted */
+			case 1: /* BlackIsZero */
+			case 4: /* Transparency mask */
+			case 32844: /* SGI CIE Log 2 L (16bpp Greyscale) */
+				comps = 1;
+				break;
+			default:
+			case 2: /* RGB */
+			case 3: /* RGBPal */
+			case 6: /* YCbCr */
+			case 8: /* Direct L*a*b* encoding. a*, b* signed values */
+			case 9: /* ICC Style L*a*b* encoding */
+			case 32845: /* SGI CIE Log 2 L, u, v (24bpp or 32bpp) */
+				comps = 3;
+				break;
+			case 5: /* CMYK */
+				comps = 4;
+				break;
+			}
+			if (count > (unsigned) (comps * (1 << tiff->bitspersample)))
+				count = (unsigned) (comps * (1 << tiff->bitspersample));
+		}
 		tiff->colormap = Memento_label(fz_malloc_array(ctx, count, unsigned), "tiff_colormap");
 		tiff_read_tag_value(tiff->colormap, tiff, type, value, count);
 		tiff->colormaplen = count;
