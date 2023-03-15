@@ -767,6 +767,13 @@ sumatrapdf
 metalink-cli
 metalink-mini-downloader
 
+jbig2enc
+cpplocate
+ogdf
+libfann
+IdGenerator
+grok-jpeg2000
+
 EOT
 )
 
@@ -787,6 +794,8 @@ tensorflow-docs
 
 wordfreq
 wordfrequency
+
+archive-hocr-tools
 
 EOT
 )
