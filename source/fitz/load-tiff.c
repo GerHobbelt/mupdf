@@ -93,6 +93,7 @@ struct tiff
 	unsigned g3opts;
 	unsigned g4opts;
 	unsigned predictor;
+	unsigned orientation;
 
 	unsigned ycbcrsubsamp[2];
 
@@ -129,6 +130,7 @@ enum
 #define PhotometricInterpretation 262
 #define FillOrder 266
 #define StripOffsets 273
+#define Orientation 274
 #define SamplesPerPixel 277
 #define RowsPerStrip 278
 #define StripByteCounts 279
@@ -999,6 +1001,10 @@ tiff_read_tag(fz_context *ctx, struct tiff *tiff, unsigned offset, unsigned last
 		tiff->stripoffsetslen = count;
 		break;
 
+	case Orientation:
+		tiff_read_tag_value(&tiff->orientation, tiff, type, value, 1);
+		break;
+
 	case StripByteCounts:
 		if (tiff->stripbytecounts)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "at most one strip byte counts tag allowed");
@@ -1598,8 +1604,10 @@ fz_load_tiff(fz_context *ctx, const unsigned char *buf, size_t len)
 	return fz_load_tiff_subimage(ctx, buf, len, 0);
 }
 
+static uint8_t tiff_orientation_to_mupdf[9] = { 0, 1, 5, 3, 7, 6, 4, 8, 2 };
+
 void
-fz_load_tiff_info_subimage(fz_context *ctx, const unsigned char *buf, size_t len, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, int subimage)
+fz_load_tiff_info_subimage(fz_context *ctx, const unsigned char *buf, size_t len, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, uint8_t *orientationp, int subimage)
 {
 	struct tiff tiff = { 0 };
 
@@ -1621,6 +1629,10 @@ fz_load_tiff_info_subimage(fz_context *ctx, const unsigned char *buf, size_t len
 			tiff.colorspace = fz_keep_colorspace(ctx, fz_device_rgb(ctx));
 		}
 		*cspacep = fz_keep_colorspace(ctx, tiff.colorspace);
+
+		*orientationp = 0;
+		if (tiff.orientation >= 1 && tiff.orientation <= 8)
+			*orientationp = tiff_orientation_to_mupdf[tiff.orientation];
 	}
 	fz_always(ctx)
 	{
@@ -1643,9 +1655,9 @@ fz_load_tiff_info_subimage(fz_context *ctx, const unsigned char *buf, size_t len
 }
 
 void
-fz_load_tiff_info(fz_context *ctx, const unsigned char *buf, size_t len, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep)
+fz_load_tiff_info(fz_context *ctx, const unsigned char *buf, size_t len, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, uint8_t *orientationp)
 {
-	fz_load_tiff_info_subimage(ctx, buf, len, wp, hp, xresp, yresp, cspacep, 0);
+	fz_load_tiff_info_subimage(ctx, buf, len, wp, hp, xresp, yresp, cspacep, orientationp, 0);
 }
 
 int

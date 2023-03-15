@@ -206,12 +206,13 @@ fz_load_jbig2_subimage_count(fz_context *ctx, const unsigned char *buf, size_t l
 }
 
 void
-fz_load_jbig2_info_subimage(fz_context *ctx, const unsigned char *buf, size_t len, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, int subimage)
+fz_load_jbig2_info_subimage(fz_context *ctx, const unsigned char *buf, size_t len, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, uint8_t *orientationp, int subimage)
 {
 	struct info jbig2 = { 0 };
 
 	jbig2_read_image(ctx, &jbig2, buf, len, 1, subimage);
 	*cspacep = fz_keep_colorspace(ctx, jbig2.cspace);
+	*orientationp = 1;
 	*wp = jbig2.width;
 	*hp = jbig2.height;
 	*xresp = jbig2.xres;
@@ -232,9 +233,9 @@ fz_load_jbig2(fz_context *ctx, const unsigned char *buf, size_t len)
 }
 
 void
-fz_load_jbig2_info(fz_context *ctx, const unsigned char *buf, size_t len, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep)
+fz_load_jbig2_info(fz_context *ctx, const unsigned char *buf, size_t len, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, uint8_t *orientationp)
 {
-	fz_load_jbig2_info_subimage(ctx, buf, len, wp, hp, xresp, yresp, cspacep, 0);
+	fz_load_jbig2_info_subimage(ctx, buf, len, wp, hp, xresp, yresp, cspacep, orientationp, 0);
 }
 
 #endif

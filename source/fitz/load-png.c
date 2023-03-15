@@ -683,7 +683,7 @@ fz_load_png(fz_context *ctx, const unsigned char *p, size_t total)
 }
 
 void
-fz_load_png_info(fz_context *ctx, const unsigned char *p, size_t total, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep)
+fz_load_png_info(fz_context *ctx, const unsigned char *p, size_t total, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, uint8_t *orientationp)
 {
 	struct info png = { 0 };
 
@@ -696,6 +696,7 @@ fz_load_png_info(fz_context *ctx, const unsigned char *p, size_t total, int *wp,
 	}
 
 	*cspacep = png.cs;
+	*orientationp = 1;
 	*wp = png.width;
 	*hp = png.height;
 	*xresp = png.xres;

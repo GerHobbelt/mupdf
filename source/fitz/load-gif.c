@@ -635,12 +635,13 @@ fz_load_gif(fz_context *ctx, const unsigned char *p, size_t total)
 }
 
 void
-fz_load_gif_info(fz_context *ctx, const unsigned char *p, size_t total, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep)
+fz_load_gif_info(fz_context *ctx, const unsigned char *p, size_t total, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, uint8_t *orientationp)
 {
 	struct info gif;
 
 	gif_read_image(ctx, &gif, p, total, 1);
 	*cspacep = fz_keep_colorspace(ctx, fz_device_rgb(ctx));
+	*orientationp = 1;
 	*wp = gif.width;
 	*hp = gif.height;
 	*xresp = gif.xres;

@@ -1336,11 +1336,11 @@ fz_new_image_from_buffer(fz_context *ctx, fz_buffer *buffer)
 	switch (type)
 	{
 	case FZ_IMAGE_PNM:
-		fz_load_pnm_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_pnm_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 #if FZ_ENABLE_JPX
 	case FZ_IMAGE_JPX:
-		fz_load_jpx_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_jpx_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 #else
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Jpeg2000 (JPX) not supported in this build");
@@ -1356,33 +1356,33 @@ fz_new_image_from_buffer(fz_context *ctx, fz_buffer *buffer)
 #endif
 		break;
 	case FZ_IMAGE_PNG:
-		fz_load_png_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_png_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 	case FZ_IMAGE_JXR:
-		fz_load_jxr_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_jxr_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 #if FZ_ENABLE_WEBP
 	case FZ_IMAGE_WEBP:
-		fz_load_webp_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_webp_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 #else
 		fz_throw(ctx, FZ_ERROR_GENERIC, "WEBP not supported in this build");
 #endif
 #if FZ_ENABLE_TIFF
 	case FZ_IMAGE_TIFF:
-		fz_load_tiff_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_tiff_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 #else
 		fz_throw(ctx, FZ_ERROR_GENERIC, "TIFF not supported in this build");
 #endif
 	case FZ_IMAGE_GIF:
-		fz_load_gif_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_gif_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 	case FZ_IMAGE_BMP:
-		fz_load_bmp_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_bmp_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 	case FZ_IMAGE_JBIG2:
-		fz_load_jbig2_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_jbig2_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		bpc = 1;
 		break;
 	default:

@@ -1036,11 +1036,12 @@ fz_load_pnm(fz_context *ctx, const unsigned char *p, size_t total)
 }
 
 void
-fz_load_pnm_info(fz_context *ctx, const unsigned char *p, size_t total, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep)
+fz_load_pnm_info(fz_context *ctx, const unsigned char *p, size_t total, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, uint8_t *orientationp)
 {
 	struct info pnm = { 0 };
 	(void) pnm_read_image(ctx, &pnm, p, total, 1, 0);
 	*cspacep = fz_keep_colorspace(ctx, pnm.cs); /* pnm.cs is a borrowed device colorspace */
+	*orientationp = 1;
 	*wp = pnm.width;
 	*hp = pnm.height;
 	*xresp = 72;
