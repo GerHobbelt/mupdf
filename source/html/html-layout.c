@@ -674,9 +674,8 @@ break_node(fz_context *ctx, fz_html_flow *node, layout_data *ld, float w)
 	split_pos = measure_string_to_fit(ctx, s, node, ld->hb_buf, w);
 	if (split_pos == 0)
 	{
-		/* No sensible chunk fitted - we can't split, but this should
-		 * be a candidate for breaking. */
-		return node;
+		/* No sensible chunk fitted - we can't split! */
+		return NULL;
 	}
 
 	new_node = fz_html_split_flow(ctx, ld->pool, node, split_pos);
