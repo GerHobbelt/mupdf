@@ -64,8 +64,12 @@ img_bound_page(fz_context *ctx, fz_page *page_)
 	fz_image *image = page->image;
 	int xres, yres;
 	fz_rect bbox;
-	uint8_t orientation = fz_image_orientation(ctx, page->image);
+	uint8_t orientation = 0;
 
+	if (!image)
+		return fz_empty_rect;
+
+	orientation = fz_image_orientation(ctx, page->image);
 	fz_image_resolution(image, &xres, &yres);
 	bbox.x0 = bbox.y0 = 0;
 	if (orientation == 0 || (orientation & 1) == 1)
@@ -89,9 +93,14 @@ img_run_page(fz_context *ctx, fz_page *page_, fz_device *dev, fz_matrix ctm, fz_
 	fz_image *image = page->image;
 	int xres, yres;
 	float w, h;
-	uint8_t orientation = fz_image_orientation(ctx, page->image);
-	fz_matrix immat = fz_image_orientation_matrix(ctx, page->image);
+	uint8_t orientation;
+	fz_matrix immat;
 
+	if (!image)
+		return;
+
+	orientation = fz_image_orientation(ctx, page->image);
+	immat = fz_image_orientation_matrix(ctx, page->image);
 	fz_image_resolution(image, &xres, &yres);
 	if (orientation == 0 || (orientation & 1) == 1)
 	{
