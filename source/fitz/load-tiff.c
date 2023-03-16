@@ -950,6 +950,9 @@ tiff_read_tag(fz_context *ctx, struct tiff *tiff, unsigned offset, unsigned last
 	case StripOffsets:
 		tiff->stripoffsetslen = count;
 		break;
+	case Orientation:
+		tiff_read_tag_value(ctx, &tiff->orientation, tiff, type, value, 1);
+		break;
 	case SamplesPerPixel:
 		tiff_read_tag_value(ctx, &tiff->samplesperpixel, tiff, type, value, 1);
 		break;

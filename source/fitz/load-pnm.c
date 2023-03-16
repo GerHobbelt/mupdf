@@ -1055,6 +1055,19 @@ fz_load_pnm_subimage(fz_context *ctx, const unsigned char *p, size_t total, int 
 	return pnm_read_image(ctx, &pnm, p, total, 0, subimage);
 }
 
+void
+fz_load_pnm_info_subimage(fz_context *ctx, const unsigned char *p, size_t total, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, uint8_t *orientationp, int subimage)
+{
+	struct info pnm = { 0 };
+	(void) pnm_read_image(ctx, &pnm, p, total, 1, subimage);
+	*cspacep = fz_keep_colorspace(ctx, pnm.cs); /* pnm.cs is a borrowed device colorspace */
+	*orientationp = 1;
+	*wp = pnm.width;
+	*hp = pnm.height;
+	*xresp = 72;
+	*yresp = 72;
+}
+
 int
 fz_load_pnm_subimage_count(fz_context *ctx, const unsigned char *p, size_t total)
 {

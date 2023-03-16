@@ -41,6 +41,8 @@ typedef struct
 	const char *format;
 	int page_count;
 	fz_pixmap *(*load_subimage)(fz_context *ctx, const unsigned char *p, size_t total, int subimage);
+	void (*load_info_subimage)(fz_context *ctx, const unsigned char *p, size_t total, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, uint8_t *orientationp, int subimage);
+
 } img_document;
 
 static void
@@ -78,6 +80,7 @@ img_bound_page(fz_context *ctx, fz_page *page_)
 		bbox.y1 = image->w * DPI / xres;
 		bbox.x1 = image->h * DPI / yres;
 	}
+
 	return bbox;
 }
 
@@ -121,6 +124,9 @@ img_load_page(fz_context *ctx, fz_document *doc_, int chapter, int number)
 	fz_pixmap *pixmap = NULL;
 	fz_image *image = NULL;
 	img_page *page = NULL;
+	int w, h, xres, yres;
+	uint8_t orientation;
+	fz_colorspace *cs = NULL;
 
 	if (number < 0 || number >= doc->page_count)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot load page %d", number);
@@ -131,17 +137,29 @@ img_load_page(fz_context *ctx, fz_document *doc_, int chapter, int number)
 
 	fz_try(ctx)
 	{
-		if (doc->load_subimage)
+		if (doc->load_info_subimage && doc->load_subimage)
 		{
 			size_t len;
 			unsigned char *data;
+
 			len = fz_buffer_storage(ctx, doc->buffer, &data);
-			pixmap = doc->load_subimage(ctx, data, len, number);
-			image = fz_new_image_from_pixmap(ctx, pixmap, NULL);
+			doc->load_info_subimage(ctx, data, len, &w, &h, &xres, &yres, &cs, &orientation, number);
+
+			fz_try(ctx)
+			{
+				pixmap = doc->load_subimage(ctx, data, len, number);
+				image = fz_new_image_from_pixmap(ctx, pixmap, NULL);
+			}
+			fz_catch(ctx)
+				image = NULL;
 		}
 		else
 		{
-			image = fz_new_image_from_buffer(ctx, doc->buffer);
+			fz_image_info_from_buffer(ctx, doc->buffer, &w, &h, &xres, &yres, &cs, &orientation);
+			fz_try(ctx)
+				image = fz_new_image_from_buffer(ctx, doc->buffer);
+			fz_catch(ctx)
+				image = NULL;
 		}
 
 		page = fz_new_derived_page(ctx, img_page, doc_);
@@ -154,6 +172,7 @@ img_load_page(fz_context *ctx, fz_document *doc_, int chapter, int number)
 	{
 		fz_drop_image(ctx, image);
 		fz_drop_pixmap(ctx, pixmap);
+		fz_drop_colorspace(ctx, cs);
 	}
 	fz_catch(ctx)
 	{
@@ -200,6 +219,7 @@ img_open_document_with_stream(fz_context *ctx, fz_stream *file)
 #if FZ_ENABLE_TIFF 
 		case FZ_IMAGE_TIFF:
 			doc->page_count = fz_load_tiff_subimage_count(ctx, data, len);
+			doc->load_info_subimage = fz_load_tiff_info_subimage;
 			doc->load_subimage = fz_load_tiff_subimage;
 			doc->format = "TIFF";
 			break;
@@ -207,6 +227,7 @@ img_open_document_with_stream(fz_context *ctx, fz_stream *file)
 
 		case FZ_IMAGE_PNM:
 			doc->page_count = fz_load_pnm_subimage_count(ctx, data, len);
+			doc->load_info_subimage = fz_load_pnm_info_subimage;
 			doc->load_subimage = fz_load_pnm_subimage;
 			doc->format = "PNM";
 			break;
@@ -214,12 +235,16 @@ img_open_document_with_stream(fz_context *ctx, fz_stream *file)
 		case FZ_IMAGE_JBIG2:
 			doc->page_count = fz_load_jbig2_subimage_count(ctx, data, len);
 			if (doc->page_count > 1)
+			{
+				doc->load_info_subimage = fz_load_jbig2_info_subimage;
 				doc->load_subimage = fz_load_jbig2_subimage;
+			}
 			doc->format = "JBIG2";
 			break;
 		
 		case FZ_IMAGE_BMP:
 			doc->page_count = fz_load_bmp_subimage_count(ctx, data, len);
+			doc->load_info_subimage = fz_load_bmp_info_subimage;
 			doc->load_subimage = fz_load_bmp_subimage;
 			doc->format = "BMP";
 			break;
