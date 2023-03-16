@@ -1275,6 +1275,58 @@ fz_recognize_image_format(fz_context *ctx, unsigned char p[8])
 	return FZ_IMAGE_UNKNOWN;
 }
 
+void
+fz_image_info_from_buffer(fz_context *ctx, fz_buffer *buffer, int *w, int *h, int *xres, int *yres, fz_colorspace **cspace, uint8_t *orientation)
+{
+	size_t len = buffer->len;
+	unsigned char *buf = buffer->data;
+	int type;
+
+	if (len < 8)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "unknown image file format");
+
+	*w = 0;
+	*h = 0;
+	*xres = 0;
+	*yres = 0;
+	*cspace = NULL;
+	*orientation = 0;
+
+	type = fz_recognize_image_format(ctx, buf);
+	switch (type)
+	{
+	case FZ_IMAGE_PNM:
+		fz_load_pnm_info(ctx, buf, len, w, h, xres, yres, cspace, orientation);
+		break;
+	case FZ_IMAGE_JPX:
+		fz_load_jpx_info(ctx, buf, len, w, h, xres, yres, cspace, orientation);
+		break;
+	case FZ_IMAGE_JPEG:
+		fz_load_jpeg_info(ctx, buf, len, w, h, xres, yres, cspace, orientation);
+		break;
+	case FZ_IMAGE_PNG:
+		fz_load_png_info(ctx, buf, len, w, h, xres, yres, cspace, orientation);
+		break;
+	case FZ_IMAGE_JXR:
+		fz_load_jxr_info(ctx, buf, len, w, h, xres, yres, cspace, orientation);
+		break;
+	case FZ_IMAGE_TIFF:
+		fz_load_tiff_info(ctx, buf, len, w, h, xres, yres, cspace, orientation);
+		break;
+	case FZ_IMAGE_GIF:
+		fz_load_gif_info(ctx, buf, len, w, h, xres, yres, cspace, orientation);
+		break;
+	case FZ_IMAGE_BMP:
+		fz_load_bmp_info(ctx, buf, len, w, h, xres, yres, cspace, orientation);
+		break;
+	case FZ_IMAGE_JBIG2:
+		fz_load_jbig2_info(ctx, buf, len, w, h, xres, yres, cspace, orientation);
+		break;
+	default:
+		fz_throw(ctx, FZ_ERROR_GENERIC, "unknown image file format");
+	}
+}
+
 fz_image *
 fz_new_image_from_buffer(fz_context *ctx, fz_buffer *buffer)
 {
@@ -1296,31 +1348,31 @@ fz_new_image_from_buffer(fz_context *ctx, fz_buffer *buffer)
 	switch (type)
 	{
 	case FZ_IMAGE_PNM:
-		fz_load_pnm_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_pnm_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 	case FZ_IMAGE_JPX:
-		fz_load_jpx_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_jpx_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 	case FZ_IMAGE_JPEG:
 		fz_load_jpeg_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 	case FZ_IMAGE_PNG:
-		fz_load_png_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_png_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 	case FZ_IMAGE_JXR:
-		fz_load_jxr_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_jxr_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 	case FZ_IMAGE_TIFF:
-		fz_load_tiff_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_tiff_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 	case FZ_IMAGE_GIF:
-		fz_load_gif_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_gif_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 	case FZ_IMAGE_BMP:
-		fz_load_bmp_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_bmp_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 	case FZ_IMAGE_JBIG2:
-		fz_load_jbig2_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_jbig2_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		bpc = 1;
 		break;
 	default:
