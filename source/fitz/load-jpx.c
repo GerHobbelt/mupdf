@@ -621,7 +621,7 @@ fz_load_jpx(fz_context *ctx, const unsigned char *data, size_t size, fz_colorspa
 }
 
 void
-fz_load_jpx_info(fz_context *ctx, const unsigned char *data, size_t size, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep)
+fz_load_jpx_info(fz_context *ctx, const unsigned char *data, size_t size, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, uint8_t *orientationp)
 {
 	fz_jpxd state = { 0 };
 
@@ -636,6 +636,7 @@ fz_load_jpx_info(fz_context *ctx, const unsigned char *data, size_t size, int *w
 		fz_rethrow(ctx);
 
 	*cspacep = state.cs;
+	*orientationp = 1;
 	*wp = state.width;
 	*hp = state.height;
 	*xresp = state.xres;

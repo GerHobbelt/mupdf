@@ -457,13 +457,14 @@ fz_load_psd(fz_context *ctx, const unsigned char *p, size_t total)
 }
 
 void
-fz_load_psd_info(fz_context *ctx, const unsigned char *p, size_t total, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep)
+fz_load_psd_info(fz_context *ctx, const unsigned char *p, size_t total, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, uint8_t *orientation)
 {
 	struct info psd;
 
 	psd_read_image(ctx, &psd, p, total, 1);
 
 	*cspacep = psd.cs;
+	*orientation = 1;
 	*wp = psd.width;
 	*hp = psd.height;
 	*xresp = psd.xres;

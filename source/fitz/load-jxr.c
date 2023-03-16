@@ -462,6 +462,7 @@ fz_load_jxr_info(fz_context *ctx, const unsigned char *data, size_t size, int *w
 
 	jxr_read_image(ctx, data, size, &info, 1);
 	*cspacep = fz_keep_colorspace(ctx, info.cspace); /* info.cspace is a borrowed device colorspace */
+	*orientationp = 1;
 	*wp = info.width;
 	*hp = info.height;
 	*xresp = info.xres;
