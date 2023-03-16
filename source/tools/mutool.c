@@ -295,6 +295,7 @@ static struct tool_spec {
 	{ {.fa = lept_corrupttest_main }, "lept_corrupttest", "leptonica corrupttest test/tool" },
 	{ {.fa = lept_crop_reg_main }, "lept_crop", "leptonica crop_reg test/tool" },
 	{ {.fa = lept_croptext_main }, "lept_croptext", "leptonica croptext test/tool" },
+	{ {.fa = lept_custom_log_plot_test_main }, "lept_custom_log_plot_test", "leptonica custom log+plot output test" },
 	{ {.fa = lept_deskew_it_main }, "lept_deskew_it", "leptonica deskew_it test/tool" },
 	{ {.fa = lept_dewarp_reg_main }, "lept_dewarp", "leptonica dewarp_reg test/tool" },
 	{ {.fa = lept_dewarprules_main }, "lept_dewarprules", "leptonica dewarprules test/tool" },
@@ -496,6 +497,7 @@ static struct tool_spec {
 	{ {.fa = lept_textorient_main }, "lept_textorient", "leptonica textorient test/tool" },
 	{ {.fa = lept_texturefill_reg_main }, "lept_texturefill", "leptonica texturefill_reg test/tool" },
 	{ {.fa = lept_threshnorm_reg_main }, "lept_threshnorm", "leptonica threshnorm_reg test/tool" },
+	{ {.fa = lept_thresholding_test_main }, "lept_thresholding", "leptonica thresholding demo test/tool" },
 	{ {.fa = lept_tiffpdftest_main }, "lept_tiffpdftest", "leptonica tiffpdftest test/tool" },
 	{ {.fa = lept_translate_reg_main }, "lept_translate", "leptonica translate_reg test/tool" },
 	{ {.fa = lept_trctest_main }, "lept_trctest", "leptonica trctest test/tool" },
@@ -673,7 +675,7 @@ static struct tool_spec {
 #endif
 
 #if defined(MUTOOL_EX)
-	{ {.fa = BLAKE3_example_main }, "BLAKE3_example", "BLAKE3_example tool" },
+	{ {.f = BLAKE3_example_main }, "BLAKE3_example", "BLAKE3_example tool" },
 	{ {.fa = BLAKE3_demo_main }, "BLAKE3_demo", "BLAKE3_demo tool" },
 #endif
 
