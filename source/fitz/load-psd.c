@@ -463,8 +463,8 @@ fz_load_psd_info(fz_context *ctx, const unsigned char *p, size_t total, int *wp,
 
 	psd_read_image(ctx, &psd, p, total, 1);
 
-    *orientation = 0;
 	*cspacep = psd.cs;
+	*orientation = 1;
 	*wp = psd.width;
 	*hp = psd.height;
 	*xresp = psd.xres;
