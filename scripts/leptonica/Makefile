@@ -9,19 +9,20 @@ TARGETS=
 all : $(TARGETS)
 	echo "Target: all --> done"
 	echo "BINDIR=$(BINDIR)"
-	-mkdir "$(BINDIR)../../bin/"
-	-mkdir "$(BINDIR)../../bin/demo-data/"
-	-robocopy /S /COPY:DAT /DCOPY:DAT /PURGE ../../thirdparty/leptonica/prog/ "$(BINDIR)../../bin/demo-data/" * /XF *.c /XF *.cc /XF *.h 
-	-del "$(BINDIR)../../bin/demo-data/*.c"
-	-del "$(BINDIR)../../bin/demo-data/*.cc"
-	-del "$(BINDIR)../../bin/demo-data/*.h"
+	-mkdir "$(BINDIR)/../../lept/"
+	-mkdir "$(BINDIR)/../../lept/demo-data/"
+	-robocopy /S /COPY:DAT /DCOPY:DAT /PURGE ../../thirdparty/leptonica/prog/ "$(BINDIR)/../../lept/demo-data/" * /XF *.c /XF *.cc /XF *.h
+	-del "$(BINDIR)/../../lept/demo-data/*.c"
+	-del "$(BINDIR)/../../lept/demo-data/*.cc"
+	-del "$(BINDIR)/../../lept/demo-data/*.h"
+	-copy ../../thirdparty/leptonica/prog/kernel_reg.c "$(BINDIR)/../../lept/demo-data/"
 
 rebuild : clean all
 	echo "Target: rebuild --> done"
 
 clean :
 	echo "Target: clean --> done"
-	-rmdir /S "$(BINDIR)../../bin/demo-data/"
+	-rmdir /S "$(BINDIR)/../../lept/demo-data/"
 
 
 .PHONY : all clean rebuild
