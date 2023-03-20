@@ -97,7 +97,7 @@ int fz_jpeg_dflt_sys_mem_register(j_common_ptr cinfo)
 
 void fz_set_default_jpeg_sys_mem_mgr(void)
 {
-	// registeer a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
+	// register a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
 	jpeg_sys_mem_set_default_setup(fz_jpeg_dflt_sys_mem_register);
 }
 

@@ -2700,7 +2700,7 @@ int main(int argc, const char** argv)
 		ctx = fz_get_global_context();
 	}
 
-	// registeer a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
+	// register a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
 	fz_set_default_jpeg_sys_mem_mgr();
 
 	atexit(mu_drop_context);
