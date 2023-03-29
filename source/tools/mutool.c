@@ -474,6 +474,7 @@ static struct tool_spec {
 	{ {.fa = lept_scaleandtile_main }, "lept_scaleandtile", "leptonica scaleandtile test/tool" },
 	{ {.fa = lept_scaletest1_main }, "lept_scaletest1", "leptonica scaletest1 test/tool" },
 	{ {.fa = lept_scaletest2_main }, "lept_scaletest2", "leptonica scaletest2 test/tool" },
+	{ {.fa = lept_scaleimages_main }, "lept_scaleimages", "leptonica scaleimages test/tool" },
 	{ {.fa = lept_seedfilltest_main }, "lept_seedfilltest", "leptonica seedfilltest test/tool" },
 	{ {.fa = lept_seedspread_reg_main }, "lept_seedspread", "leptonica seedspread_reg test/tool" },
 	{ {.fa = lept_selio_reg_main }, "lept_selio", "leptonica selio_reg test/tool" },
@@ -514,6 +515,7 @@ static struct tool_spec {
 	{ {.fa = lept_writetext_reg_main }, "lept_writetext", "leptonica writetext_reg test/tool" },
 	{ {.fa = lept_xformbox_reg_main }, "lept_xformbox", "leptonica xformbox_reg test/tool" },
 	{ {.fa = lept_yuvtest_main }, "lept_yuvtest", "leptonica yuvtest test/tool" },
+	{ {.fa = lept_issue675_check_main }, "lept_issue675", "leptonica BMP test for leptonica issue #675" },
 #endif
 
 #if defined(MUTOOL_EX)
