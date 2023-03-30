@@ -528,6 +528,7 @@ void fz_parse_css(fz_context *ctx, fz_css *css, const char *source, const char *
 fz_css_property *fz_parse_css_properties(fz_context *ctx, fz_pool *pool, const char *source);
 void fz_drop_css(fz_context *ctx, fz_css *css);
 void fz_debug_css(fz_context *ctx, fz_css *css);
+void fz_debug_css_style(fz_context *ctx, const fz_css_style *style);
 const char *fz_css_property_name(int name);
 
 void fz_match_css(fz_context *ctx, fz_css_match *match, fz_css_match *up, fz_css *css, fz_xml *node);
