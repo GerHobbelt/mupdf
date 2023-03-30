@@ -1941,7 +1941,7 @@ fz_debug_html_flow(fz_context *ctx, fz_html_flow *flow, int level)
 		}
 		// printf(" y=%g x=%g w=%g", flow->y, flow->x, flow->w);
 		if (flow->type == FLOW_IMAGE)
-			printf(" h=%g", flow->h);
+			printf(" w=%g h=%g", flow->w, flow->h);
 		if (flow->type == FLOW_WORD)
 			printf(" text='%s'", flow->content.text);
 		printf("\n");
@@ -2075,8 +2075,8 @@ fz_debug_html_box(fz_context *ctx, fz_html_box *box, int level)
 #ifndef NDEBUG
 		printf(" <%s>", box->tag);
 #endif
-		// printf(" em=%g", box->em);
-		// printf(" x=%g y=%g w=%g b=%g", box->x, box->y, box->w, box->b);
+		printf(" em=%g", box->s.layout.em);
+		printf(" x=%g y=%g w=%g b=%g", box->s.layout.x, box->s.layout.y, box->s.layout.w, box->s.layout.b);
 		if (box->structure != FZ_HTML_STRUCT_UNKNOWN)
 			printf(" struct=(%s)", fz_html_structure_to_string(box->structure));
 
@@ -2090,13 +2090,18 @@ fz_debug_html_box(fz_context *ctx, fz_html_box *box, int level)
 			printf(" href=(%s)", box->href);
 		printf("\n");
 
+#ifndef NDEBUG
+		if (fz_atoi(getenv("FZ_DEBUG_HTML_STYLE")))
+			fz_debug_css_style(ctx, box->style);
+#endif
+
 		if (box->type == BOX_BLOCK || box->type == BOX_TABLE) {
 			indent(level+1);
 			printf(">margin=(%g %g %g %g)\n", box->u.block.margin[0], box->u.block.margin[1], box->u.block.margin[2], box->u.block.margin[3]);
-			//indent(level+1);
-			//printf(">padding=(%g %g %g %g)\n", box->u.block.padding[0], box->u.block.padding[1], box->u.block.padding[2], box->u.block.padding[3]);
-			//indent(level+1);
-			//printf(">border=(%g %g %g %g)\n", box->u.block.border[0], box->u.block.border[1], box->u.block.border[2], box->u.block.border[3]);
+			indent(level+1);
+			printf(">padding=(%g %g %g %g)\n", box->u.block.padding[0], box->u.block.padding[1], box->u.block.padding[2], box->u.block.padding[3]);
+			indent(level+1);
+			printf(">border=(%g %g %g %g)\n", box->u.block.border[0], box->u.block.border[1], box->u.block.border[2], box->u.block.border[3]);
 		}
 
 		if (box->down)
