@@ -90,7 +90,7 @@
     <Filter Include="Header Files\src\layers">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0026}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\src\layers\fast_convolution">
+    <Filter Include="Header Files\src\layers\cpu_kernels">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0027}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\src\ocl4dnn">
@@ -219,7 +219,7 @@
     <Filter Include="Source Files\src\layers">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0069}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src\layers\fast_convolution">
+    <Filter Include="Source Files\src\layers\cpu_kernels">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0070}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\src\ocl4dnn">
@@ -428,6 +428,15 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/correlation_layer.cpp">
       <Filter>Source Files\src\layers</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/cpu_kernels/conv_depthwise.cpp">
+      <Filter>Source Files\src\layers\cpu_kernels</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/cpu_kernels/conv_winograd_f63.cpp">
+      <Filter>Source Files\src\layers\cpu_kernels</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/cpu_kernels/convolution.cpp">
+      <Filter>Source Files\src\layers\cpu_kernels</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/crop_and_resize_layer.cpp">
       <Filter>Source Files\src\layers</Filter>
     </ClCompile>
@@ -442,18 +451,6 @@
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/eltwise_layer.cpp">
       <Filter>Source Files\src\layers</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/fast_convolution/depthwise_convolution.cpp">
-      <Filter>Source Files\src\layers\fast_convolution</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/fast_convolution/fast_convolution.avx2.cpp">
-      <Filter>Source Files\src\layers\fast_convolution</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/fast_convolution/fast_convolution.cpp">
-      <Filter>Source Files\src\layers\fast_convolution</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/fast_convolution/winograd_3x3s1_f63.cpp">
-      <Filter>Source Files\src\layers\fast_convolution</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/flatten_layer.cpp">
       <Filter>Source Files\src\layers</Filter>
@@ -1190,11 +1187,17 @@
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layer_internals.hpp">
       <Filter>Header Files\src</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/fast_convolution/fast_convolution.hpp">
-      <Filter>Header Files\src\layers\fast_convolution</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/cpu_kernels/conv_block.simd.hpp">
+      <Filter>Header Files\src\layers\cpu_kernels</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/fast_convolution/fast_convolution.simd.hpp">
-      <Filter>Header Files\src\layers\fast_convolution</Filter>
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/cpu_kernels/conv_depthwise.simd.hpp">
+      <Filter>Header Files\src\layers\cpu_kernels</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/cpu_kernels/conv_winograd_f63.simd.hpp">
+      <Filter>Header Files\src\layers\cpu_kernels</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/cpu_kernels/convolution.hpp">
+      <Filter>Header Files\src\layers\cpu_kernels</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/src/layers/layers_common.hpp">
       <Filter>Header Files\src\layers</Filter>
@@ -1365,6 +1368,9 @@
       <Filter>Header Files\test</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/test/test_onnx_conformance_layer_filter_opencv_cpu_denylist.inl.hpp">
+      <Filter>Header Files\test</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/test/test_onnx_conformance_layer_filter_opencv_denylist.inl.hpp">
       <Filter>Header Files\test</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/dnn/test/test_onnx_conformance_layer_filter_opencv_ocl_fp16_denylist.inl.hpp">
