@@ -684,6 +684,48 @@ find_metadata(fz_context *ctx, fz_xml *metadata, const char *key)
 	return NULL;
 }
 
+static fz_buffer *
+read_container_and_prefix(fz_context *ctx, fz_archive *zip, char *prefix, size_t prefix_len)
+{
+	int n = fz_count_archive_entries(ctx, zip);
+	int i;
+
+	prefix[0] = 0;
+
+	/* First off, look for the container.xml at the top level. */
+	for (i = 0; i < n; i++)
+	{
+		const char *p = fz_list_archive_entry(ctx, zip, i);
+
+		if (!strcmp(p, "META-INF/container.xml"))
+			return fz_read_archive_entry(ctx, zip, "META-INF/container.xml");
+	}
+
+	/* If that failed, look for the first such file in a subdirectory. */
+	for (i = 0; i < n; i++)
+	{
+		const char *p = fz_list_archive_entry(ctx, zip, i);
+		size_t z = strlen(p);
+		const char z0 = sizeof("META-INF/container.xml")-1;
+
+		if (z < z0)
+			continue;
+		if (!strcmp(p + z - z0, "META-INF/container.xml"))
+		{
+			if (z - z0 >= prefix_len)
+			{
+				fz_warn(ctx, "Ignoring %s as path too long.", p);
+				continue;
+			}
+			memcpy(prefix, p, z-z0);
+			prefix[z-z0] = 0;
+			return fz_read_archive_entry(ctx, zip, p);
+		}
+	}
+
+	return fz_read_archive_entry(ctx, zip, "META-INF/container.xml");
+}
+
 static void
 epub_parse_header(fz_context *ctx, epub_document *doc)
 {
@@ -697,26 +739,48 @@ epub_parse_header(fz_context *ctx, epub_document *doc)
 	const char *full_path;
 	const char *version;
 	char ncx[2048], s[2048];
+	char *prefixed_full_path = NULL;
+	size_t prefix_len;
 	epub_chapter **tailp;
 	int i;
-
-	if (fz_has_archive_entry(ctx, zip, "META-INF/rights.xml"))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "EPUB is locked by DRM");
-	if (fz_has_archive_entry(ctx, zip, "META-INF/encryption.xml"))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "EPUB is locked by DRM");
 
 	fz_var(buf);
 	fz_var(container_xml);
 	fz_var(content_opf);
+	fz_var(prefixed_full_path);
 
 	fz_try(ctx)
 	{
-		/* parse META-INF/container.xml to find OPF */
 
-		buf = fz_read_archive_entry(ctx, zip, "META-INF/container.xml");
+		/* parse META-INF/container.xml to find OPF */
+		/* Reuse base_uri to read the prefix. */
+		buf = read_container_and_prefix(ctx, zip, base_uri, sizeof(base_uri));
 		container_xml = fz_parse_xml(ctx, buf, 0);
 		fz_drop_buffer(ctx, buf);
 		buf = NULL;
+
+		/* Some epub files can be prefixed by a directory name. This (normally
+		 * empty!) will be in base_uri. */
+		prefix_len = strlen(base_uri);
+		{
+			/* Further abuse base_uri to hold a temporary name. */
+			const size_t z0 = sizeof("META-INF/rights.xml")-1;
+			if (sizeof(base_uri) <= prefix_len + z0)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "Prefix too long in epub");
+			strcpy(base_uri + prefix_len, "META-INF/rights.xml");
+			if (fz_has_archive_entry(ctx, zip, base_uri))
+				fz_throw(ctx, FZ_ERROR_GENERIC, "EPUB is locked by DRM");
+		}
+
+		{
+			/* Further abuse base_uri to hold a temporary name. */
+			const size_t z0 = sizeof("META-INF/encryption.xml")-1;
+			if (sizeof(base_uri) <= prefix_len + z0)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "Prefix too long in epub");
+			strcpy(base_uri + prefix_len, "META-INF/encryption.xml");
+			if (fz_has_archive_entry(ctx, zip, base_uri))
+				fz_throw(ctx, FZ_ERROR_GENERIC, "EPUB is locked by DRM");
+		}
 
 		container = fz_xml_find(fz_xml_root(container_xml), "container");
 		rootfiles = fz_xml_find_down(container, "rootfiles");
@@ -725,11 +789,15 @@ epub_parse_header(fz_context *ctx, epub_document *doc)
 		if (!full_path)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot find root file in EPUB");
 
-		fz_dirname(base_uri, full_path, sizeof base_uri);
+		fz_dirname(base_uri+prefix_len, full_path, sizeof(base_uri) - prefix_len);
+
+		prefixed_full_path = fz_malloc(ctx, strlen(full_path) + prefix_len + 1);
+		memcpy(prefixed_full_path, base_uri, prefix_len);
+		strcpy(prefixed_full_path + prefix_len, full_path);
 
 		/* parse OPF to find NCX and spine */
 
-		buf = fz_read_archive_entry(ctx, zip, full_path);
+		buf = fz_read_archive_entry(ctx, zip, prefixed_full_path);
 		content_opf = fz_parse_xml(ctx, buf, 0);
 		fz_drop_buffer(ctx, buf);
 		buf = NULL;
@@ -782,6 +850,7 @@ epub_parse_header(fz_context *ctx, epub_document *doc)
 		fz_drop_xml(ctx, content_opf);
 		fz_drop_xml(ctx, container_xml);
 		fz_drop_buffer(ctx, buf);
+		fz_free(ctx, prefixed_full_path);
 	}
 	fz_catch(ctx)
 		fz_rethrow(ctx);
