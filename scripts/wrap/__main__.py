@@ -1876,6 +1876,8 @@ def csharp_settings(build_dirs):
     csc: C# compiler.
     mono: C# interpreter ("" on Windows).
     mupdf_cs: MuPDF C# code.
+
+    E.g. on Windows `csc` can be: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/Roslyn/csc.exe
     '''
     # On linux requires:
     #   sudo apt install mono-devel
@@ -1887,7 +1889,12 @@ def csharp_settings(build_dirs):
     # which might be because of mixing gcc and clang?
     #
     if state.state_.windows:
-        csc = '"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/Roslyn/csc.exe"'
+        import wdev
+        vs = wdev.WindowsVS()
+        jlib.log('{vs.description_ml()=}')
+        csc = vs.csc
+        jlib.log('{csc=}')
+        assert csc, f'Unable to find csc.exe'
         mono = ''
     else:
         mono = 'mono'
@@ -2476,7 +2483,7 @@ def main2():
                     jlib.build(
                             ('test-csharp.cs', mupdf_cs),
                             out,
-                            f'{csc} -out:{{OUT}} {{IN}}',
+                            f'"{csc}" -out:{{OUT}} {{IN}}',
                             )
                     if state.state_.windows:
                         out_rel = os.path.relpath( out, build_dirs.dir_so)
@@ -2507,7 +2514,7 @@ def main2():
                 jlib.build(
                         ('scripts/mupdfwrap_gui.cs', mupdf_cs),
                         out,
-                        f'{csc} -unsafe {references}  -out:{{OUT}} {{IN}}'
+                        f'"{csc}" -unsafe {references}  -out:{{OUT}} {{IN}}'
                         )
                 if state.state_.windows:
                     # Don't know how to mimic Unix's LD_LIBRARY_PATH, so for
