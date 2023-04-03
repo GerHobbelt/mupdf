@@ -1074,7 +1074,6 @@ static void
 pdf_drop_page_imp(fz_context *ctx, fz_page *_page)
 {
 	pdf_page* page = (pdf_page*)_page;
-	pdf_annot *widget;
 	pdf_annot *annot;
 	pdf_link *link;
 

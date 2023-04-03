@@ -617,8 +617,8 @@ bmp_read_bitmap(fz_context *ctx, struct info *info, const unsigned char *begin, 
 	{
 		fz_warn(ctx, "premature end in bitmap data in bmp image");
 
-		height = (end - ssp) / sstride;
-		if (height == 0 || height > SHRT_MAX)
+		int32_t h = (end - ssp) / sstride;
+		if (h == 0 || h > SHRT_MAX)
 		{
 			fz_free(ctx, decompressed);
 			fz_throw(ctx, FZ_ERROR_GENERIC, "image dimensions out of range in bmp image");

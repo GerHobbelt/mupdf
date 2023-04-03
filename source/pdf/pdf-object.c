@@ -519,6 +519,9 @@ int pdf_to_gen(fz_context *ctx, pdf_obj *obj)
 	return 0;
 }
 
+/*
+	DEPRECATED: Do not use in new code.
+*/
 pdf_document *pdf_get_indirect_document(fz_context *ctx, pdf_obj *obj)
 {
 	if (OBJ_IS_INDIRECT(obj))
@@ -538,6 +541,9 @@ void pdf_unbind_obj_document(fz_context *ctx, pdf_obj *obj, pdf_document *doc)
 		DICT(obj)->doc = doc;
 }
 
+/*
+	DEPRECATED: Do not use in new code.
+*/
 pdf_document *pdf_get_bound_document(fz_context *ctx, pdf_obj *obj)
 {
 	if (obj < PDF_LIMIT)
@@ -549,6 +555,16 @@ pdf_document *pdf_get_bound_document(fz_context *ctx, pdf_obj *obj)
 	if (obj->kind == PDF_DICT)
 		return DICT(obj)->doc;
 	return NULL;
+}
+
+/*
+	This implementation will do to provide the required
+	API change in advance of the rewrite to use weak references
+	in the next version.
+*/
+pdf_document *pdf_pin_document(fz_context *ctx, pdf_obj *obj)
+{
+	return pdf_keep_document(ctx, pdf_get_bound_document(ctx, obj));
 }
 
 int pdf_objcmp_resolve(fz_context *ctx, pdf_obj *a, pdf_obj *b)
