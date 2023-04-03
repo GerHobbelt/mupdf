@@ -745,6 +745,13 @@ libmetalink
 wget2
 wxCurl
 
+fmemopen_windows
+Capture2Text
+rotate_detection
+easyloggingpp
+twain_library
+libprecog
+
 EOT
 )
 
@@ -796,6 +803,9 @@ wordfreq
 wordfrequency
 
 archive-hocr-tools
+
+LeptonicaDocsSite
+UnofficialLeptDocs
 
 EOT
 )
