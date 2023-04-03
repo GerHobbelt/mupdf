@@ -453,9 +453,15 @@ FZ_NORETURN static void _throw(fz_context *ctx, int code)
 
 		// SumatraPDF: https://fossies.org/linux/tcsh/win32/fork.c#l_212
 		// https://stackoverflow.com/questions/26605063/an-invalid-or-unaligned-stack-was-encountered-during-an-unwind-operation
-		#ifdef _M_AMD64
+#if defined(_WIN32) && defined (_M_AMD64)
+		/* This is a horrible hack to work around a reported problem with the windows
+		 * runtimes. See https://bugs.ghostscript.com/show_bug.cgi?id=706403 for more
+		 * details. Essentially, some combination of windows build flags, possibly
+		 * related to jumping between boundaries between binaries built in DLL/non-DLL
+		 * modes can apparently cause crashes. The workaround for this is to set the
+		 * frame pointer to 0. */
 		((_JUMP_BUFFER*)&ctx->error.top->buffer)->Frame = 0;
-		#endif
+#endif
 		fz_longjmp(ctx->error.top->buffer, 1);
 	}
 	else
