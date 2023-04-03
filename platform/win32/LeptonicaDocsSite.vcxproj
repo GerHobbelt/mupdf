@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{3644E12D-D934-41FD-BF7E-83745AFFB574}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+  <ItemGroup>
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/bc_s.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/closed.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/dir_61ed67b9681d6f703e8b8e8b1c23e5fa_dep.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/dir_faab2570f696acb282f5a88394f96a54_dep.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/doxygen.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/ftv2blank.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/ftv2doc.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/ftv2folderclosed.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/ftv2folderopen.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/ftv2lastnode.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/ftv2link.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/ftv2mlastnode.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/ftv2mnode.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/ftv2node.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/ftv2plastnode.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/ftv2pnode.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/ftv2splitbar.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/ftv2vertline.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/graph_legend.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/moller52-tiny.jpg" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/nav_f.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/nav_h.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/open.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/search/close.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/search/mag_sel.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/search/search_l.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/search/search_m.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/search/search_r.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_boxa__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_boxaa__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_c_c_bord__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_c_c_borda__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_double_linked_list__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_f_pixa__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_g_plot__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_jb_classer__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_jb_data__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_jb_find_templates_state__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_l___bmf__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_l___dewarp__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_l___pdf___data__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_l___ptraa__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_l___queue__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_l___stack__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_l___w_shed__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_numa2d__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_numa_hash__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_numaa__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_partition_element__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_pix__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_pix_memory_store__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_pix_tiling__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_pixa__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_pixa_comp__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_pixaa__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_pixacc__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_ptaa__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/struct_sela__coll__graph.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/tab_a.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/tab_b.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/tab_h.png" />
+    <Image Include="../../thirdparty/owemdjee/LeptonicaDocsSite/tab_s.png" />
+    <Text Include="../../thirdparty/owemdjee/LeptonicaDocsSite/jquery.js" />
+    <Text Include="../../thirdparty/owemdjee/LeptonicaDocsSite/navtree.js" />
+    <Text Include="../../thirdparty/owemdjee/LeptonicaDocsSite/resize.js" />
+    <Text Include="../../thirdparty/owemdjee/LeptonicaDocsSite/search/search.js" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
