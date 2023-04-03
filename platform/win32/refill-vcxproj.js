@@ -31,6 +31,7 @@ function checkDirAndReportPlusExitOnSuccess(p) {
 	}
 }
 
+let testpath;
 
 if (projname.startsWith("libboost-")) {
 	let tst_projname = projname.replace(/^libboost-/, '');
@@ -256,8 +257,6 @@ const projectMap = {
 	
 	"sqlite_tools": "sqlite-amalgamation",
 };
-
-let testpath;
 
 for (const key in projectMap) {
 	let value = projectMap[key];
