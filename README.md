@@ -37,7 +37,9 @@ See also: https://github.com/jimmejardine/qiqqa-open-source/blob/master/DEVELOPE
 
 When you intend to check this out in relation to Qiqqa, then please grab the Qiqqa repository as everything in *this* `mupdf` repository is included there as a git **submodule** and keeping the relative paths' relationships intact will ease your use of the entire sourcecode tree.
 
-If you are, however, interested in this augmented mupdf material *per sé*, then do fork this repository itself and load the *submodules* we use in here to build the pdf/document tools.
+> If you are, however, interested in this augmented mupdf material *per sé*, then do fork this repository itself and load the *submodules* we use in here to build the pdf/document tools.
+>
+> When you don't want to be bothered with the (slightly bothersome) `git submodule` management part then, [**there's also a _snapshot repository_ of this codebase plus all relevant submodules' sources available here**](https://github.com/GerHobbelt/qiqqa_tooling_devtree_snapshots): check that one out when you don't plan to edit this C/C++ code collection, but want to compile from source with minimum preparation / hassle.
 
 To fetch the repository find `Git Bash` from Windows' start menu and run:
 
