@@ -1016,6 +1016,8 @@ pnm_read_image(fz_context *ctx, struct info *pnm, const unsigned char *p, size_t
 		else
 			fz_throw(ctx, FZ_ERROR_GENERIC, "unsupported portable anymap signature (0x%02x, 0x%02x)", signature[0], signature[1]);
 
+		p = pnm_read_whites_and_eols(ctx, p, e, 0);
+
 		if (onlymeta)
 			subimages++;
 		if (subimage >= 0)
