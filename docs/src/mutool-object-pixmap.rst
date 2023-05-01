@@ -126,6 +126,31 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
     :arg quality: `Int`.
 
 
+.. method:: saveAsPAM(fileName)
+
+    Save the `Pixmap` as a :title:`PAM`.
+
+    :arg fileName: `String`.
+
+.. method:: saveAsPNM(fileName)
+
+    Save the `Pixmap` as a :title:`PNM`. Only works for :title:`Gray` and :title:`RGB` images without alpha.
+
+    :arg fileName: `String`.
+
+.. method:: saveAsPBM(fileName)
+
+    Save the `Pixmap` as a :title:`PBM`. Only works for :title:`Gray` and :title:`RGB` images without alpha.
+
+    :arg fileName: `String`.
+
+.. method:: saveAsPKM(fileName)
+
+    Save the `Pixmap` as a :title:`PKM`. Only works for :title:`Gray` and :title:`RGB` images without alpha.
+
+    :arg fileName: `String`.
+
+
 
 .. method:: invert()
 
