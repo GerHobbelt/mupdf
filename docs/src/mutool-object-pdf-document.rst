@@ -48,6 +48,11 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
         var pdfDocument = new PDFDocument("my-file.pdf");
 
 
+.. method:: getVersion()
+
+    Returns the :title:`PDF` document version as an integer multiplied by 10, so e.g. a PDF-1.4 document would return 14.
+
+    :return: `Integer`.
 
 
 .. method:: save(fileName, options)
