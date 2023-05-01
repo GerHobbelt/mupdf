@@ -88,6 +88,17 @@
     :return: `Boolean`.
 
 
+.. method:: getColorKey()
+
+    Returns an array with 2 * N integers for an N component image with color key masking, or `null` if masking is not used. Each pair of integers define an interval, and component values within that interval are not painted.
+
+    :return: `[]`.
+
+.. method:: getDecode()
+
+    Returns an array with 2 * N numbers for an N component image with color mapping, or `null` if mapping is not used. Each pair of numbers define the lower and upper values to which the component values are mapped linearly.
+
+    :return: `[]`.
 
 
 .. method:: getOrientation()
