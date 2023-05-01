@@ -53,3 +53,49 @@
         var cs = DeviceRGB;
         var num = cs.getNumberOfComponents();
         print(num);  //3
+
+
+`DefaultColorSpaces`
+------------------------------
+
+`DefaultColorSpaces` is an object with keys for:
+
+.. method:: getDefaultGray()
+
+    Get the default gray colorspace.
+
+    :return: `ColorSpace`.
+
+.. method:: getDefaultRGB()
+
+    Get the default RGB colorspace.
+
+    :return: `ColorSpace`.
+
+.. method:: getDefaultCMYK()
+
+    Get the default CMYK colorspace.
+
+    :return: `ColorSpace`.
+
+.. method:: getOutputIntent()
+
+    Get the output intent.
+
+    :return: `ColorSpace`.
+
+.. method:: setDefaultGray(colorspace)
+
+    :arg colorspace: `ColorSpace`.
+
+.. method:: setDefaultRGB(colorspace)
+
+    :arg colorspace: `ColorSpace`.
+
+.. method:: setDefaultCMYK(colorspace)
+
+    :arg colorspace: `ColorSpace`.
+
+.. method:: setOutputIntent(colorspace)
+
+    :arg colorspace: `ColorSpace`.
