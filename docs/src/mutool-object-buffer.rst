@@ -109,6 +109,17 @@ The `Buffer` objects are used for working with binary data. They can be used muc
 
     :arg data: Data buffer.
 
+
+.. method:: slice(start end)
+
+    Create a new buffer containing a (subset of) the data in this buffer. Start and end are offsets from the beginning of this buffer, and if negative from the end of this buffer.
+
+    :arg start: Start index.
+    :arg start: End index.
+
+    :return: `Buffer`.
+
+
 .. method:: save(fileName)
 
     Write the contents of the buffer to a file.
