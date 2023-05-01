@@ -252,7 +252,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
 .. method:: setDefaultColorSpaces(defaults)
 
-    Change the set of default colorspaces for the device. See the :ref:`DefaultColorSpaces<mutool_object_color_space>` object.
+    Change the set of default colorspaces for the device. See the :ref:`DefaultColorSpaces<mutool_object_default_color_spaces>` object.
 
     :arg defaults: `Object`.
 
