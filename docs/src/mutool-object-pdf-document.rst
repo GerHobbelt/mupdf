@@ -107,16 +107,21 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
     :return: `Boolean`.
 
 
-.. method:: setPageLabels(index, label)
+.. method:: setPageLabels(index, style, prefix, start)
 
     Sets the page label numbering for the page and all pages following it, until the next page with an attached label.
-    - The label must be an array or object with three values: style, prefix, and start.
-    - Style can be one of the following strings: "", "D", "R", "r", "A", or "a".
-    - Start is the ordinal with which to start numbering.
-    - If the label is null, any attached label is removed instead.
 
-    :arg index: `Int`.
-    :arg label: `String`.
+    :arg index: `Integer`.
+    :arg style: `String` Can be one of the following strings: "", "D", "R", "r", "A", or "a".
+    :arg prefix: `String`.
+    :arg start: `Integer` The ordinal with which to start numbering.
+
+
+.. method:: deletePageLabels(index)
+
+    Removes any associated page label from the page.
+
+    :arg index: `Integer`.
 
 
 .. method:: getTrailer()
