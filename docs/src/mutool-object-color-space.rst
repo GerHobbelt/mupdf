@@ -34,6 +34,10 @@
 
     The default CMYK colorspace.
 
+`DeviceLab`
+
+    The default Lab colorspace.
+
 
 ----
 
@@ -53,6 +57,13 @@
         var cs = DeviceRGB;
         var num = cs.getNumberOfComponents();
         print(num);  //3
+
+
+.. method:: toString()
+
+    Return name of `ColorSpace`.
+
+    :return: `String`.
 
 
 .. method:: isGray()
