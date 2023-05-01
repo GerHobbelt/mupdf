@@ -118,6 +118,15 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
     :arg fileName: `String`.
 
 
+.. method:: saveAsJPEG(fileName, quality)
+
+    Save the `Pixmap` as a :title:`JPEG`. Only works for :title:`Gray`, :title:`RGB` and :title:`CMYK` images.
+
+    :arg fileName: `String`.
+    :arg quality: `Int`.
+
+
+
 .. method:: invert()
 
     Invert all pixels. All components are processed, except alpha which is unchanged.
