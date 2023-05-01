@@ -243,9 +243,10 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 .. method:: renderFlags(set, clear)
 
     Set/clear device rendering flags. Both set and clear are arrays where each element is a flag name:
-"mask", "color", "uncacheable", "fillcolor-undefined", "strokecolor-undefined", "startcap-undefined",
-"dashcap-undefined", "endcap-undefined", "linejoin-undefined", "miterlimit-undefined",
-"linewidth-undefined", "bbox-defined", or "gridfit-as-tiled".
+
+    "mask", "color", "uncacheable", "fillcolor-undefined", "strokecolor-undefined", "startcap-undefined",
+    "dashcap-undefined", "endcap-undefined", "linejoin-undefined", "miterlimit-undefined",
+    "linewidth-undefined", "bbox-defined", or "gridfit-as-tiled".
 
     :arg set: `[]`.
     :arg clear: `[]`.
