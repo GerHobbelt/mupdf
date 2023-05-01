@@ -55,6 +55,75 @@
         print(num);  //3
 
 
+.. method:: isGray()
+
+    Returns true if the object is a gray color space.
+
+    :return: `Boolean`.
+
+.. method:: isRGB()
+
+    Returns true if the object is an RGB color space.
+
+    :return: `Boolean`.
+
+.. method:: isCMYK()
+
+    Returns true if the object is a CMYK color space.
+
+    :return: `Boolean`.
+
+.. method:: isIndexed()
+
+    Returns true if the object is an Indexed color space.
+
+    :return: `Boolean`.
+
+.. method:: isLab()
+
+    Returns true if the object is a Lab color space.
+
+    :return: `Boolean`.
+
+.. method:: isDeviceN()
+
+    Returns true if the object is a Device N color space.
+
+    :return: `Boolean`.
+
+.. method:: isLabICC()
+
+    Returns true if the object is a Lab ICC color space.
+
+    :return: `Boolean`.
+
+.. method:: isSubtractive()
+
+    Returns true if the object is a subtractive color space.
+
+    :return: `Boolean`.
+
+.. method:: isDevice()
+
+    Returns true if the object is a Device color space.
+
+    :return: `Boolean`.
+
+.. method:: isDeviceGray()
+
+    Returns true if the object is a Device gray color space.
+
+    :return: `Boolean`.
+
+.. method:: isDeviceCMYK()
+
+    Returns true if the object is a Device CMYK color space.
+
+    :return: `Boolean`.
+
+
+.. _mutool_object_default_color_spaces:
+
 `DefaultColorSpaces`
 ------------------------------
 
