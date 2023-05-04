@@ -51,6 +51,7 @@ To get started with :title:`MuPDF` a developer should :ref:`acquire the source c
    :maxdepth: 2
 
    progressive-loading.rst
+   android-library.rst
    changes.rst
    third-party.rst
 
