@@ -4799,6 +4799,11 @@ int pdf_dict_get_int(fz_context *ctx, pdf_obj *dict, pdf_obj *key)
 	return pdf_to_int(ctx, pdf_dict_get(ctx, dict, key));
 }
 
+int64_t pdf_dict_get_int64(fz_context *ctx, pdf_obj *dict, pdf_obj *key)
+{
+	return pdf_to_int64(ctx, pdf_dict_get(ctx, dict, key));
+}
+
 float pdf_dict_get_real(fz_context *ctx, pdf_obj *dict, pdf_obj *key)
 {
 	return pdf_to_real(ctx, pdf_dict_get(ctx, dict, key));
