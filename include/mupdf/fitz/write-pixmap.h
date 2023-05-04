@@ -257,6 +257,10 @@ fz_band_writer *fz_new_png_band_writer(fz_context *ctx, fz_output *out);
 	Ownership of the buffer is returned.
 */
 fz_buffer *fz_new_buffer_from_image_as_png(fz_context *ctx, const fz_image *image, fz_color_params color_params);
+fz_buffer *fz_new_buffer_from_image_as_pnm(fz_context *ctx, const fz_image *image, fz_color_params color_params);
+fz_buffer *fz_new_buffer_from_image_as_pam(fz_context *ctx, const fz_image *image, fz_color_params color_params);
+fz_buffer *fz_new_buffer_from_image_as_psd(fz_context *ctx, const fz_image *image, fz_color_params color_params);
+fz_buffer *fz_new_buffer_from_image_as_jpeg(fz_context *ctx, const fz_image *image, fz_color_params color_params, int quality);
 
 /**
 	Re-encode a given pixmap as a PNG into a buffer.
@@ -264,6 +268,10 @@ fz_buffer *fz_new_buffer_from_image_as_png(fz_context *ctx, const fz_image *imag
 	Ownership of the buffer is returned.
 */
 fz_buffer *fz_new_buffer_from_pixmap_as_png(fz_context *ctx, const fz_pixmap *pixmap, fz_color_params color_params);
+fz_buffer *fz_new_buffer_from_pixmap_as_pnm(fz_context *ctx, const fz_pixmap *pixmap, fz_color_params color_params);
+fz_buffer *fz_new_buffer_from_pixmap_as_pam(fz_context *ctx, const fz_pixmap *pixmap, fz_color_params color_params);
+fz_buffer *fz_new_buffer_from_pixmap_as_psd(fz_context *ctx, const fz_pixmap *pix, fz_color_params color_params);
+fz_buffer *fz_new_buffer_from_pixmap_as_jpeg(fz_context *ctx, const fz_pixmap *pixmap, fz_color_params color_params, int quality);
 
 /**
 	Set default PNG output compression level: 0..9, Z_DEFAULT_COMPRESSION (-1) by default
