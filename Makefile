@@ -63,7 +63,6 @@ endif
 LINK_CMD = $(QUIET_LINK) $(MKTGTDIR) ; $(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 TAGS_CMD = $(QUIET_TAGS) ctags -R --c-kinds=+p --exclude=platform/python --exclude=platform/c++
 WINDRES_CMD = $(QUIET_WINDRES) $(MKTGTDIR) ; $(WINDRES) $< $@
-OBJCOPY_CMD = $(QUIET_OBJCOPY) $(MKTGTDIR) ; $(LD) -r -b binary -z noexecstack -o $@ $<
 GENDEF_CMD = $(QUIET_GENDEF) gendef - $< > $@
 DLLTOOL_CMD = $(QUIET_DLLTOOL) dlltool -d $< -D $(notdir $(^:%.def=%.dll)) -l $@
 
@@ -220,13 +219,24 @@ generated/%.ttf.c : %.ttf $(HEXDUMP_SH) ; $(QUIET_GEN) $(MKTGTDIR) ; bash $(HEXD
 generated/%.ttc.c : %.ttc $(HEXDUMP_SH) ; $(QUIET_GEN) $(MKTGTDIR) ; bash $(HEXDUMP_SH) > $@ $<
 
 ifeq ($(HAVE_OBJCOPY),yes)
+  OBJCOPY_CMD = $(QUIET_OBJCOPY) $(MKTGTDIR) ; $(LD) -r -b binary -z noexecstack -o $@ $<
+else
+  ifneq ($(PYODIDE_ROOT),)
+    # Pyodide build; pyodide's replacement `ld` does not support `-b binary`
+    # so we use scripts/bin2obj.py instead. This generates _binary_foo[] and
+    # _binary_foo_size symbols.
+    OBJCOPY_CMD = $(QUIET_OBJCOPY) $(MKTGTDIR) ; ./scripts/bin2obj.py -i $< -o $@
+  endif
+endif
+
+ifeq ($(OBJCOPY_CMD),)
+  MUPDF_OBJ += $(FONT_GEN:%.c=$(OUT)/%.o)
+else
   MUPDF_OBJ += $(FONT_BIN:%=$(OUT)/%.o)
   $(OUT)/%.cff.o : %.cff ; $(OBJCOPY_CMD)
   $(OUT)/%.otf.o : %.otf ; $(OBJCOPY_CMD)
   $(OUT)/%.ttf.o : %.ttf ; $(OBJCOPY_CMD)
   $(OUT)/%.ttc.o : %.ttc ; $(OBJCOPY_CMD)
-else
-  MUPDF_OBJ += $(FONT_GEN:%.c=$(OUT)/%.o)
 endif
 
 generate: $(FONT_GEN)
