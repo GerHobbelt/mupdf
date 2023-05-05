@@ -18,11 +18,8 @@ sys.path.insert(0, os.path.abspath("."))
 # ones.
 # extensions = ["sphinx.ext.autodoc", "sphinx.ext.coverage", "sphinx.ext.ifconfig"]
 extensions = []
-if hasattr(os, "uname") and os.uname()[0] == "OpenBSD":
-    # rst2pdf is not available on OpenBSD.
-    pass
-elif hasattr(os, "uname") and os.uname()[0] == "Darwin":
-    # rst2pdf is not available on MacOS.
+if hasattr(os, "uname") and os.uname()[0] in ("OpenBSD", "Darwin"):
+    # rst2pdf is not available on OpenBSD or MacOS.
     pass
 else:
     extensions.append("rst2pdf.pdfbuilder")

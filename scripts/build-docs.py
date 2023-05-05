@@ -107,11 +107,8 @@ def build(pip):
                 package = line.strip()
                 if package.startswith('#') or not package:
                     continue
-                if openbsd and package == 'rst2pdf':
-                    print(f'Not installing on OpenBSD because does not work: {package}')
-                    continue
-                if macos and package == 'rst2pdf':
-                    print(f'Not installing on MacOS because does not work: {package}')
+                if (openbsd or macos) and package == 'rst2pdf':
+                    print(f'Not installing on OpenBSD/MacOS because install fails: {package}')
                     continue
                 command += f' {package}'
 
