@@ -205,7 +205,14 @@ else ifeq ($(OS),MACOS)
   endif
 
 else ifeq ($(OS),Linux)
-  HAVE_OBJCOPY := yes
+  ifeq ($(PYODIDE_ROOT),)
+    HAVE_OBJCOPY := yes
+  else
+    # Pyodide build; we use `scripts/bin2obj.py` instead of `ld -b binary`, and
+    # need to not define HAVE_OBJCOPY. We also need to specify -sTOTAL_MEMORY
+    # here to avoid `wasm-ld: error: initial memory too small` errors.
+    LDFLAGS += -sTOTAL_MEMORY=48MB
+  endif
 
   ifeq ($(shell pkg-config --exists freetype2 && echo yes),yes)
 	SYS_FREETYPE_CFLAGS := $(shell pkg-config --cflags freetype2)
@@ -272,7 +279,9 @@ else ifeq ($(OS),Linux)
 	X11_LIBS := $(shell pkg-config --libs x11 xext)
   endif
 
-  HAVE_LIBCRYPTO := $(shell pkg-config --exists 'libcrypto >= 1.1.0' && echo yes)
+  ifeq ($(HAVE_LIBCRYPTO),)
+    HAVE_LIBCRYPTO := $(shell pkg-config --exists 'libcrypto >= 1.1.0' && echo yes)
+  endif
   ifeq ($(HAVE_LIBCRYPTO),yes)
 	LIBCRYPTO_CFLAGS := $(shell pkg-config --cflags libcrypto) -DHAVE_LIBCRYPTO
 	LIBCRYPTO_LIBS := $(shell pkg-config --libs libcrypto)
