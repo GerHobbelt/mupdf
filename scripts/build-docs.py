@@ -69,6 +69,7 @@ def build(pip):
 
     windows = platform.system() == 'Windows'
     openbsd = platform.system() == 'OpenBSD'
+    macos = platform.system() == 'Darwin'
 
     root = os.path.relpath(os.path.abspath(f'{__file__}/../..'))
     dir_in = f'{root}/docs/src'
@@ -108,6 +109,9 @@ def build(pip):
                     continue
                 if openbsd and package == 'rst2pdf':
                     print(f'Not installing on OpenBSD because does not work: {package}')
+                    continue
+                if macos and package == 'rst2pdf':
+                    print(f'Not installing on MacOS because does not work: {package}')
                     continue
                 command += f' {package}'
 

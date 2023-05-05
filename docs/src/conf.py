@@ -21,6 +21,9 @@ extensions = []
 if hasattr(os, "uname") and os.uname()[0] == "OpenBSD":
     # rst2pdf is not available on OpenBSD.
     pass
+elif hasattr(os, "uname") and os.uname()[0] == "Darwin":
+    # rst2pdf is not available on MacOS.
+    pass
 else:
     extensions.append("rst2pdf.pdfbuilder")
 
