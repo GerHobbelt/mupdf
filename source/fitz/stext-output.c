@@ -318,7 +318,7 @@ fz_print_stext_block_as_html(fz_context *ctx, fz_output *out, fz_stext_block *bl
 		if (line->first_char)
 		{
 			h = line->first_char->size;
-			y = line->first_char->origin.y - h * 0.8;
+			y = line->first_char->origin.y - h * 0.8f;
 		}
 
 		fz_write_printf(ctx, out, "<p style=\"position:absolute;white-space:pre;margin:0;padding:0;top:%gpt;left:%gpt;line-height:%.1fpt\" data-mediabox=\"%R\">", y, x, h, &line->bbox);
