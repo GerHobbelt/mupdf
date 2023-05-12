@@ -210,6 +210,7 @@ static int oldtint = 0, currenttint = 0;
 static int oldinvert = 0, currentinvert = 0;
 static int oldicc = 1, currenticc = 1;
 static int oldaa = 8, currentaa = 8;
+static int oldgamma = 0, currentgamma = 0;
 static int oldseparations = 1, currentseparations = 1;
 static fz_location oldpage = {0,0}, currentpage = {0,0};
 static float oldzoom = DEFRES, currentzoom = DEFRES;
@@ -1063,6 +1064,7 @@ void render_page(void)
 	transform_page();
 
 	fz_set_aa_level(ctx, currentaa);
+	fz_set_gamma_blending(ctx, currentgamma);
 
 	if (page_contents_changed)
 	{
@@ -1103,7 +1105,6 @@ void render_page(void)
 	if (currentinvert)
 	{
 		fz_invert_pixmap_luminance(ctx, pix);
-		fz_gamma_pixmap(ctx, pix, 1 / 1.4f);
 	}
 	if (currenttint)
 	{
@@ -1136,7 +1137,8 @@ void render_page_if_changed(void)
 		oldtint != currenttint ||
 		oldicc != currenticc ||
 		oldseparations != currentseparations ||
-		oldaa != currentaa)
+		oldaa != currentaa ||
+		oldgamma != currentgamma)
 	{
 		page_contents_changed = 1;
 	}
@@ -1152,6 +1154,7 @@ void render_page_if_changed(void)
 		oldicc = currenticc;
 		oldseparations = currentseparations;
 		oldaa = currentaa;
+		oldgamma = currentgamma;
 		page_contents_changed = 0;
 		page_annots_changed = 0;
 	}
@@ -2417,6 +2420,10 @@ static void do_app(void)
 				currentpage = fz_next_page(ctx, doc, currentpage);
 			break;
 
+		case 'B':
+			currentgamma = !currentgamma;
+			break;
+
 		case 'A':
 			if (number == 0)
 				currentaa = (currentaa == 8 ? 0 : 8);
@@ -3154,7 +3161,7 @@ int main(int argc, const char** argv)
 	glutInit(&argc, argv);
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "p:r:IW:H:S:U:XJA:B:C:T:Y:R:c:")) != -1)
+	while ((c = fz_getopt(argc, argv, "gp:r:IW:H:S:U:XJA:B:C:T:Y:R:c:")) != -1)
 	{
 		switch (c)
 		{
@@ -3169,6 +3176,7 @@ int main(int argc, const char** argv)
 		case 'U': layout_css = fz_optarg; break;
 		case 'X': layout_use_doc_css = 0; break;
 		case 'J': enable_js = !enable_js; break;
+		case 'g': currentgamma = !currentgamma; break;
 		case 'A': currentaa = fz_atoi(fz_optarg); break;
 		case 'C': currenttint = 1; tint_white = strtol(fz_optarg, NULL, 16); break;
 		case 'B': currenttint = 1; tint_black = strtol(fz_optarg, NULL, 16); break;

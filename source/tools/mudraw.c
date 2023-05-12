@@ -364,6 +364,7 @@ static int out_cs = CS_UNSET;
 static const char *proof_filename = NULL;
 fz_colorspace *proof_cs = NULL;
 static const char *icc_filename = NULL;
+static int use_gamma = 0;
 static float gamma_value = 1;
 static int invert = 0;
 static int kill = 0;
@@ -531,6 +532,11 @@ static int usage(void)
 		"        filename of ICC profile)\n"
 		"  -e -  proof icc profile (filename of ICC profile)\n"
 		"  -G -  apply gamma correction\n"
+#if FZ_ENABLE_GAMMA
+		"\t-g -\tuse gamma blending\n"
+#else
+		"\t-g -\tuse gamma blending (disabled in this build)\n"
+#endif
 		"  -I    invert colors\n"
 		"\n"
 		"  -A -  number of bits of anti-aliasing (0 to 8)\n"
@@ -2693,6 +2699,7 @@ int main(int argc, const char** argv)
 	proof_filename = NULL;
 	proof_cs = NULL;
 	icc_filename = NULL;
+	use_gamma = 0;
 	gamma_value = 1;
 	invert = 0;
 	band_height = 0;
@@ -2778,7 +2785,7 @@ int main(int argc, const char** argv)
 	atexit(mu_drop_context);
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:d:U:XLvVPl:y:Yz:Z:NO:am:x:hj:J:K")) != -1)
+	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:gG:Is:A:DiW:H:S:T:t:d:U:XLvVPl:y:Yz:Z:NO:am:x:hj:J:K")) != -1)
 	{
 		switch (c)
 		{
@@ -2802,6 +2809,13 @@ int main(int argc, const char** argv)
 		case 'c': out_cs = parse_colorspace(fz_optarg); break;
 		case 'e': proof_filename = fz_optarg; break;
 		case 'G': gamma_value = fz_atof(fz_optarg); break;
+		case 'g':
+#if FZ_ENABLE_GAMMA
+			use_gamma = 1;
+#else
+			fz_warn(ctx, "Gamma blending not supported in this build");
+#endif
+			break;
 		case 'I': invert++; break;
 		case 'j': parse_render_options(ctx, &master_cookie, fz_optarg); break;
 		case 'J': fz_default_png_compression_level(fz_atoi(fz_optarg)); break;
@@ -2974,6 +2988,9 @@ int main(int argc, const char** argv)
 	}
 
 	fz_attach_cookie_to_context(ctx, &master_cookie);
+
+	if (use_gamma)
+		fz_set_gamma_blending(ctx, 1);
 
 	fz_try(ctx)
 	{

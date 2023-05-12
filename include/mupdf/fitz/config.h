@@ -59,6 +59,13 @@
 /* #define FZ_PLOTTERS_N 1 */
 
 /**
+	Choose to enable/disable the option for Gamma blending.
+
+	To disable, define FZ_ENABLE_GAMMA to 0.
+*/
+/* #define FZ_ENABLE_GAMMA 0 */
+
+/**
 	Choose which document agents to include.
 	By default all are enabled. To avoid building unwanted
 	ones, define FZ_ENABLE_... to 0.
@@ -207,6 +214,10 @@
 #if FZ_PLOTTERS_G == 0 && FZ_PLOTTERS_RGB == 0 && FZ_PLOTTERS_CMYK == 0
 #undef FZ_PLOTTERS_N
 #define FZ_PLOTTERS_N 1
+#endif
+
+#ifndef FZ_ENABLE_GAMMA
+#define FZ_ENABLE_GAMMA 1
 #endif
 
 #ifndef FZ_ENABLE_PDF
