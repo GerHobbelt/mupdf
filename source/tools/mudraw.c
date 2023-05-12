@@ -336,6 +336,7 @@ static int out_cs = CS_UNSET;
 static const char *proof_filename = NULL;
 fz_colorspace *proof_cs = NULL;
 static const char *icc_filename = NULL;
+static int use_gamma = 0;
 static float gamma_value = 1;
 static int invert = 0;
 static int kill = 0;
@@ -448,6 +449,11 @@ static int usage(void)
 		"\t-c -\tcolorspace (mono, gray, grayalpha, rgb, rgba, cmyk, cmykalpha, filename of ICC profile)\n"
 		"\t-e -\tproof icc profile (filename of ICC profile)\n"
 		"\t-G -\tapply gamma correction\n"
+#if FZ_ENABLE_GAMMA
+		"\t-g -\tuse gamma blending\n"
+#else
+		"\t-g -\tuse gamma blending (disabled in this build)\n"
+#endif
 		"\t-I\tinvert colors\n"
 		"\n"
 		"\t-A -\tnumber of bits of antialiasing (0 to 8)\n"
@@ -2026,7 +2032,7 @@ int mudraw_main(int argc, char **argv)
 
 	fz_var(doc);
 
-	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:d:U:XLvPl:y:Yz:Z:NO:am:K")) != -1)
+	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:gG:Is:A:DiW:H:S:T:t:d:U:XLvPl:y:Yz:Z:NO:am:K")) != -1)
 	{
 		switch (c)
 		{
@@ -2049,6 +2055,13 @@ int mudraw_main(int argc, char **argv)
 		case 'c': out_cs = parse_colorspace(fz_optarg); break;
 		case 'e': proof_filename = fz_optarg; break;
 		case 'G': gamma_value = fz_atof(fz_optarg); break;
+		case 'g':
+#if FZ_ENABLE_GAMMA
+			use_gamma = 1;
+#else
+			fz_warn(ctx, "Gamma blending not supported in this build");
+#endif
+			break;
 		case 'I': invert++; break;
 
 		case 'W': layout_w = fz_atof(fz_optarg); break;
@@ -2180,6 +2193,9 @@ int mudraw_main(int argc, char **argv)
 		fprintf(stderr, "cannot initialise context\n");
 		exit(1);
 	}
+
+	if (use_gamma)
+		fz_set_gamma_blending(ctx, 1);
 
 	fz_try(ctx)
 	{

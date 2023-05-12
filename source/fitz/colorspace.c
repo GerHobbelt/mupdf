@@ -105,6 +105,12 @@ void fz_new_colorspace_context(fz_context *ctx)
 	cct->bgr = fz_new_colorspace(ctx, FZ_COLORSPACE_BGR, FZ_COLORSPACE_IS_DEVICE, 3, "DeviceBGR");
 	cct->cmyk = fz_new_colorspace(ctx, FZ_COLORSPACE_CMYK, FZ_COLORSPACE_IS_DEVICE, 4, "DeviceCMYK");
 	cct->lab = fz_new_colorspace(ctx, FZ_COLORSPACE_LAB, FZ_COLORSPACE_IS_DEVICE, 3, "Lab");
+
+#if FZ_ENABLE_GAMMA
+	fz_measure_colorspace_linearity(ctx, cct->gray);
+	fz_measure_colorspace_linearity(ctx, cct->rgb);
+	fz_measure_colorspace_linearity(ctx, cct->bgr);
+#endif
 }
 
 void fz_enable_icc(fz_context *ctx)
@@ -164,6 +170,27 @@ fz_colorspace *fz_device_cmyk(fz_context *ctx)
 fz_colorspace *fz_device_lab(fz_context *ctx)
 {
 	return ctx->colorspace->lab;
+}
+
+void fz_set_gamma_blending(fz_context *ctx, int gamma_blending)
+{
+	if (!ctx || !ctx->colorspace)
+		return;
+
+#if FZ_ENABLE_GAMMA
+	ctx->colorspace->gamma_blending = gamma_blending;
+#else
+	if (gamma_blending)
+		fz_warn(ctx, "Gamma blending support not in this build");
+#endif
+}
+
+int fz_get_gamma_blending(fz_context *ctx)
+{
+	if (!ctx || !ctx->colorspace)
+		return 0;
+
+	return ctx->colorspace->gamma_blending;
 }
 
 /* Same order as needed by LCMS */
@@ -340,6 +367,10 @@ fz_drop_colorspace_imp(fz_context *ctx, fz_storable *cs_)
 	}
 #endif
 
+#if FZ_ENABLE_GAMMA
+	fz_free(ctx, cs->gamma);
+#endif
+
 	fz_free(ctx, cs->name);
 	fz_free(ctx, cs);
 }
@@ -475,6 +506,11 @@ fz_new_icc_colorspace(fz_context *ctx, enum fz_colorspace_type type, int flags, 
 		fz_drop_colorspace(ctx, cs);
 		fz_rethrow(ctx);
 	}
+
+#if FZ_ENABLE_GAMMA
+	fz_measure_colorspace_linearity(ctx, cs);
+#endif
+
 	return cs;
 #else
 	switch (type)

@@ -941,7 +941,7 @@ fz_draw_clip_stroke_path(fz_context *ctx, fz_device *devp, const fz_path *path, 
 }
 
 static void
-draw_glyph(unsigned char *colorbv, fz_pixmap *dst, fz_glyph *glyph,
+draw_glyph(fz_context *ctx, unsigned char *colorbv, fz_pixmap *dst, fz_glyph *glyph,
 	int xorig, int yorig, const fz_irect *scissor, fz_overprint *eop)
 {
 	unsigned char *dp;
@@ -970,42 +970,11 @@ draw_glyph(unsigned char *colorbv, fz_pixmap *dst, fz_glyph *glyph,
 	dp = dst->samples + (y - dst->y) * (size_t)dst->stride + (x - dst->x) * (size_t)dst->n;
 	if (msk == NULL)
 	{
-		fz_paint_glyph(colorbv, dst, dp, glyph, w, h, skip_x, skip_y, eop);
+		fz_paint_glyph(ctx, colorbv, dst, dp, glyph, w, h, skip_x, skip_y, eop);
 	}
 	else
 	{
-		unsigned char *mp = msk->samples + skip_y * msk->stride + skip_x;
-		int da = dst->alpha;
-
-		if (dst->colorspace)
-		{
-			fz_span_color_painter_t *fn;
-
-			fn = fz_get_span_color_painter(dst->n, da, colorbv, eop);
-			if (fn == NULL)
-				return;
-			while (h--)
-			{
-				(*fn)(dp, mp, dst->n, w, colorbv, da, eop);
-				dp += dst->stride;
-				mp += msk->stride;
-			}
-		}
-		else
-		{
-			fz_span_painter_t *fn;
-			int col = colorbv ? colorbv[0] : 255;
-
-			fn = fz_get_span_painter(da, 1, 0, col, eop);
-			if (fn == NULL)
-				return;
-			while (h--)
-			{
-				(*fn)(dp, da, mp, 1, 0, w, col, eop);
-				dp += dst->stride;
-				mp += msk->stride;
-			}
-		}
+		fz_paint_glyph_pixmap(ctx, colorbv, dst, dp, msk, w, h, skip_x, skip_y, eop);
 	}
 }
 
@@ -1071,11 +1040,11 @@ fz_draw_fill_text(fz_context *ctx, fz_device *devp, const fz_text *text, fz_matr
 				int y = floorf(trm.f);
 				if (pixmap == NULL || pixmap->n == 1)
 				{
-					draw_glyph(colorbv, state->dest, glyph, x, y, &state->scissor, eop);
+					draw_glyph(ctx, colorbv, state->dest, glyph, x, y, &state->scissor, eop);
 					if (state->shape)
-						draw_glyph(&shapebv, state->shape, glyph, x, y, &state->scissor, 0);
+						draw_glyph(ctx, &shapebv, state->shape, glyph, x, y, &state->scissor, 0);
 					if (state->group_alpha)
-						draw_glyph(&shapebva, state->group_alpha, glyph, x, y, &state->scissor, 0);
+						draw_glyph(ctx, &shapebva, state->group_alpha, glyph, x, y, &state->scissor, 0);
 				}
 				else
 				{
@@ -1165,11 +1134,11 @@ fz_draw_stroke_text(fz_context *ctx, fz_device *devp, const fz_text *text, const
 				int y = (int)trm.f;
 				if (pixmap == NULL || pixmap->n == 1)
 				{
-					draw_glyph(colorbv, state->dest, glyph, x, y, &state->scissor, eop);
+					draw_glyph(ctx, colorbv, state->dest, glyph, x, y, &state->scissor, eop);
 					if (state->shape)
-						draw_glyph(&solid, state->shape, glyph, x, y, &state->scissor, 0);
+						draw_glyph(ctx, &solid, state->shape, glyph, x, y, &state->scissor, 0);
 					if (state->group_alpha)
-						draw_glyph(&alpha_byte, state->group_alpha, glyph, x, y, &state->scissor, 0);
+						draw_glyph(ctx, &alpha_byte, state->group_alpha, glyph, x, y, &state->scissor, 0);
 				}
 				else
 				{
@@ -1285,11 +1254,11 @@ fz_draw_clip_text(fz_context *ctx, fz_device *devp, const fz_text *text, fz_matr
 				{
 					int x = (int)trm.e;
 					int y = (int)trm.f;
-					draw_glyph(NULL, state[1].mask, glyph, x, y, &bbox, 0);
+					draw_glyph(ctx, NULL, state[1].mask, glyph, x, y, &bbox, 0);
 					if (state[1].shape)
-						draw_glyph(NULL, state[1].shape, glyph, x, y, &bbox, 0);
+						draw_glyph(ctx, NULL, state[1].shape, glyph, x, y, &bbox, 0);
 					if (state[1].group_alpha)
-						draw_glyph(NULL, state[1].group_alpha, glyph, x, y, &bbox, 0);
+						draw_glyph(ctx, NULL, state[1].group_alpha, glyph, x, y, &bbox, 0);
 					fz_drop_glyph(ctx, glyph);
 				}
 				else
@@ -1409,11 +1378,11 @@ fz_draw_clip_stroke_text(fz_context *ctx, fz_device *devp, const fz_text *text, 
 				{
 					int x = (int)trm.e;
 					int y = (int)trm.f;
-					draw_glyph(NULL, mask, glyph, x, y, &bbox, 0);
+					draw_glyph(ctx, NULL, mask, glyph, x, y, &bbox, 0);
 					if (shape)
-						draw_glyph(NULL, shape, glyph, x, y, &bbox, 0);
+						draw_glyph(ctx, NULL, shape, glyph, x, y, &bbox, 0);
 					if (group_alpha)
-						draw_glyph(NULL, group_alpha, glyph, x, y, &bbox, 0);
+						draw_glyph(ctx, NULL, group_alpha, glyph, x, y, &bbox, 0);
 					fz_drop_glyph(ctx, glyph);
 				}
 				else
@@ -2330,6 +2299,10 @@ fz_draw_begin_group(fz_context *ctx, fz_device *devp, fz_rect area, fz_colorspac
 
 	if (dev->top == 0 && dev->resolve_spots)
 		state = push_group_for_separations(ctx, dev, fz_default_color_params /* FIXME */, dev->default_cs);
+
+	/* FIXME: gamma blending only works in additive colorspaces */
+	if (fz_get_gamma_blending(ctx) && fz_colorspace_is_subtractive(ctx, cs))
+		cs = NULL;
 
 	if (cs != NULL)
 		model = fz_default_colorspace(ctx, dev->default_cs, cs);

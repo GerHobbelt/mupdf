@@ -279,6 +279,18 @@ fz_colorspace *fz_device_cmyk(fz_context *ctx);
 fz_colorspace *fz_device_lab(fz_context *ctx);
 
 /**
+	Tell MuPDF whether to adjust for gamma in certain color blending operations,
+	so that the blending math is computed in a linear color space.
+*/
+void fz_set_gamma_blending(fz_context *ctx, int gamma_blending);
+
+/**
+	Check whether MuPDF has been told to take note of gamma
+	during blending operations.
+*/
+int fz_get_gamma_blending(fz_context *ctx);
+
+/**
 	Assign a name for a given colorant in a colorspace.
 
 	Used while initially setting up a colorspace. The string is
@@ -392,6 +404,18 @@ void fz_set_default_output_intent(fz_context *ctx, fz_default_colorspaces *defau
 
 /* Implementation details: subject to change. */
 
+#if FZ_ENABLE_GAMMA
+
+typedef struct
+{
+	uint16_t to_linear[256];
+	uint8_t from_linear[4096];
+} fz_gamma_table;
+
+const fz_gamma_table *fz_colorspace_gamma_tables(fz_colorspace *colorspace);
+
+#endif
+
 struct fz_colorspace
 {
 	fz_key_storable key_storable;
@@ -399,6 +423,9 @@ struct fz_colorspace
 	int flags;
 	int n;
 	char *name;
+#if FZ_ENABLE_GAMMA
+	fz_gamma_table *gamma;
+#endif
 	union {
 #if FZ_ENABLE_ICC
 		struct {
