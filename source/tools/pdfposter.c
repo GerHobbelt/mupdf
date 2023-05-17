@@ -229,6 +229,8 @@ int pdfposter_main(int argc, const char** argv)
 
 	x_factor = 0;
 	y_factor = 0;
+	x_dir = 1;
+	offset = 0;
 
 	fz_getopt_reset();
 	while ((c = fz_getopt(argc, argv, "x:y:o:p:r")) != -1)
