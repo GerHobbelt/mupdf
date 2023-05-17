@@ -113,6 +113,25 @@ and stick to using the premultiplied form.
 
 #if FZ_ENABLE_GAMMA
 
+static const int16_t unpremultiply[256] = {
+	0, 65280, 32640, 21760, 16320, 13056, 10880, 9325, 8160, 7253, 6528, 5934, 5440, 5021, 4662, 4352,
+	4080, 3840, 3626, 3435, 3264, 3108, 2967, 2838, 2720, 2611, 2510, 2417, 2331, 2251, 2176, 2105,
+	2040, 1978, 1920, 1865, 1813, 1764, 1717, 1673, 1632, 1592, 1554, 1518, 1483, 1450, 1419, 1388,
+	1360, 1332, 1305, 1280, 1255, 1231, 1208, 1186, 1165, 1145, 1125, 1106, 1088, 1070, 1052, 1036,
+	1020, 1004, 989, 974, 960, 946, 932, 919, 906, 894, 882, 870, 858, 847, 836, 826,
+	816, 805, 796, 786, 777, 768, 759, 750, 741, 733, 725, 717, 709, 701, 694, 687,
+	680, 672, 666, 659, 652, 646, 640, 633, 627, 621, 615, 610, 604, 598, 593, 588,
+	582, 577, 572, 567, 562, 557, 553, 548, 544, 539, 535, 530, 526, 522, 518, 514,
+	510, 506, 502, 498, 494, 490, 487, 483, 480, 476, 473, 469, 466, 462, 459, 456,
+	453, 450, 447, 444, 441, 438, 435, 432, 429, 426, 423, 421, 418, 415, 413, 410,
+	408, 405, 402, 400, 398, 395, 393, 390, 388, 386, 384, 381, 379, 377, 375, 373,
+	370, 368, 366, 364, 362, 360, 358, 356, 354, 352, 350, 349, 347, 345, 343, 341,
+	340, 338, 336, 334, 333, 331, 329, 328, 326, 324, 323, 321, 320, 318, 316, 315,
+	313, 312, 310, 309, 307, 306, 305, 303, 302, 300, 299, 298, 296, 295, 294, 292,
+	291, 290, 288, 287, 286, 285, 283, 282, 281, 280, 278, 277, 276, 275, 274, 273,
+	272, 270, 269, 268, 267, 266, 265, 264, 263, 262, 261, 260, 259, 258, 257, 256
+};
+
 static fz_forceinline int FZ_BLEND_GAMMA(int src_srgb, int dst_srgb, int alpha, const fz_gamma_table *gamma)
 {
 	// alpha is 0..256
@@ -122,6 +141,22 @@ static fz_forceinline int FZ_BLEND_GAMMA(int src_srgb, int dst_srgb, int alpha, 
 	int dst_lin = gamma->to_linear[dst_srgb];
 	int result = (((src_lin - dst_lin) * alpha) + (dst_lin << 8)) >> 8;
 	return gamma->from_linear[result];
+}
+
+static fz_forceinline int FZ_BLEND_GAMMA_DA(int src_srgb, int dst_srgb_a, int dst_alpha, int src_alpha, const fz_gamma_table *gamma)
+{
+	// over = asrc * src + adest * ddst + asrc * adst * src
+	// src_alpha is 0..256
+	// dst_alpha is 0..255
+	// out_alpha is 0..256
+	int dst_srgb = (dst_srgb_a * unpremultiply[dst_alpha]) >> 8;
+	int src_lin = gamma->to_linear[src_srgb];
+	int dst_lin = gamma->to_linear[dst_srgb];
+	// FIXME: THIS IS ALL WRONG!
+	int out_alpha = (dst_alpha * src_alpha) >> 8;
+	int out_lin = ((src_alpha * src_lin) + (dst_alpha * dst_lin) + (out_alpha * src_lin)) >> 8;
+	int out_srgb = gamma->from_linear[out_lin];
+	return (out_srgb * out_alpha) >> 8;
 }
 
 #endif /* FZ_ENABLE_GAMMA */
@@ -1210,7 +1245,7 @@ template_span_with_color_1_da_solid_gamma(byte * FZ_RESTRICT dp, const byte * FZ
 		}
 		else if (ma != 0)
 		{
-			dp[0] = FZ_BLEND_GAMMA(g, dp[0], ma, gamma);
+			dp[0] = FZ_BLEND_GAMMA_DA(g, dp[0], dp[1], ma, gamma);
 			dp[1] = FZ_BLEND(255, dp[1], ma);
 		}
 		dp += 2;
@@ -1230,7 +1265,7 @@ template_span_with_color_1_da_alpha_gamma(byte * FZ_RESTRICT dp, const byte * FZ
 		if (ma != 0)
 		{
 			ma = FZ_COMBINE(ma, sa);
-			dp[0] = FZ_BLEND_GAMMA(g, dp[0], ma, gamma);
+			dp[0] = FZ_BLEND_GAMMA_DA(g, dp[0], dp[1], ma, gamma);
 			dp[1] = FZ_BLEND(255, dp[1], ma);
 		}
 		dp += 2;
@@ -1258,9 +1293,9 @@ template_span_with_color_3_da_solid_gamma(byte * FZ_RESTRICT dp, const byte * FZ
 		}
 		else if (ma != 0)
 		{
-			dp[0] = FZ_BLEND_GAMMA(r, dp[0], ma, gamma);
-			dp[1] = FZ_BLEND_GAMMA(g, dp[1], ma, gamma);
-			dp[2] = FZ_BLEND_GAMMA(b, dp[2], ma, gamma);
+			dp[0] = FZ_BLEND_GAMMA_DA(r, dp[0], dp[3], ma, gamma);
+			dp[1] = FZ_BLEND_GAMMA_DA(g, dp[1], dp[3], ma, gamma);
+			dp[2] = FZ_BLEND_GAMMA_DA(b, dp[2], dp[3], ma, gamma);
 			dp[3] = FZ_BLEND(255, dp[3], ma);
 		}
 		dp += 4;
@@ -1283,9 +1318,9 @@ template_span_with_color_3_da_alpha_gamma(byte * FZ_RESTRICT dp, const byte * FZ
 		if (ma != 0)
 		{
 			ma = FZ_COMBINE(ma, sa);
-			dp[0] = FZ_BLEND_GAMMA(r, dp[0], ma, gamma);
-			dp[1] = FZ_BLEND_GAMMA(g, dp[1], ma, gamma);
-			dp[2] = FZ_BLEND_GAMMA(b, dp[2], ma, gamma);
+			dp[0] = FZ_BLEND_GAMMA_DA(r, dp[0], dp[3], ma, gamma);
+			dp[1] = FZ_BLEND_GAMMA_DA(g, dp[1], dp[3], ma, gamma);
+			dp[2] = FZ_BLEND_GAMMA_DA(b, dp[2], dp[3], ma, gamma);
 			dp[3] = FZ_BLEND(255, dp[3], ma);
 		}
 		dp += 4;
@@ -1315,10 +1350,10 @@ template_span_with_color_4_da_solid_gamma(byte * FZ_RESTRICT dp, const byte * FZ
 		}
 		else if (ma != 0)
 		{
-			dp[0] = FZ_BLEND_GAMMA(c, dp[0], ma, gamma);
-			dp[1] = FZ_BLEND_GAMMA(m, dp[1], ma, gamma);
-			dp[2] = FZ_BLEND_GAMMA(y, dp[2], ma, gamma);
-			dp[3] = FZ_BLEND_GAMMA(k, dp[3], ma, gamma);
+			dp[0] = FZ_BLEND_GAMMA_DA(c, dp[0], dp[4], ma, gamma);
+			dp[1] = FZ_BLEND_GAMMA_DA(m, dp[1], dp[4], ma, gamma);
+			dp[2] = FZ_BLEND_GAMMA_DA(y, dp[2], dp[4], ma, gamma);
+			dp[3] = FZ_BLEND_GAMMA_DA(k, dp[3], dp[4], ma, gamma);
 			dp[4] = FZ_BLEND(255, dp[4], ma);
 		}
 		dp += 5;
@@ -1342,10 +1377,10 @@ template_span_with_color_4_da_alpha_gamma(byte * FZ_RESTRICT dp, const byte * FZ
 		if (ma != 0)
 		{
 			ma = FZ_COMBINE(ma, sa);
-			dp[0] = FZ_BLEND_GAMMA(c, dp[0], ma, gamma);
-			dp[1] = FZ_BLEND_GAMMA(m, dp[1], ma, gamma);
-			dp[2] = FZ_BLEND_GAMMA(y, dp[2], ma, gamma);
-			dp[3] = FZ_BLEND_GAMMA(k, dp[3], ma, gamma);
+			dp[0] = FZ_BLEND_GAMMA_DA(c, dp[0], dp[4], ma, gamma);
+			dp[1] = FZ_BLEND_GAMMA_DA(m, dp[1], dp[4], ma, gamma);
+			dp[2] = FZ_BLEND_GAMMA_DA(y, dp[2], dp[4], ma, gamma);
+			dp[3] = FZ_BLEND_GAMMA_DA(k, dp[3], dp[4], ma, gamma);
 			dp[4] = FZ_BLEND(255, dp[4], ma);
 		}
 		dp += 5;
@@ -1377,16 +1412,29 @@ template_span_with_color_N_general_solid_gamma(byte * FZ_RESTRICT dp, const byte
 		}
 		else if (ma != 0)
 		{
-			if (n1 > 0)
-				dp[0] = FZ_BLEND_GAMMA(color[0], dp[0], ma, gamma);
-			if (n1 > 1)
-				dp[1] = FZ_BLEND_GAMMA(color[1], dp[1], ma, gamma);
-			if (n1 > 2)
-				dp[2] = FZ_BLEND_GAMMA(color[2], dp[2], ma, gamma);
-			for (k = 3; k < n1; k++)
-				dp[k] = FZ_BLEND_GAMMA(color[k], dp[k], ma, gamma);
 			if (da)
+			{
+				if (n1 > 0)
+					dp[0] = FZ_BLEND_GAMMA_DA(color[0], dp[0], dp[n1], ma, gamma);
+				if (n1 > 1)
+					dp[1] = FZ_BLEND_GAMMA_DA(color[1], dp[1], dp[n1], ma, gamma);
+				if (n1 > 2)
+					dp[2] = FZ_BLEND_GAMMA_DA(color[2], dp[2], dp[n1], ma, gamma);
+				for (k = 3; k < n1; k++)
+					dp[k] = FZ_BLEND_GAMMA_DA(color[k], dp[k], dp[n1], ma, gamma);
 				dp[n1] = FZ_BLEND(255, dp[n1], ma);
+			}
+			else
+			{
+				if (n1 > 0)
+					dp[0] = FZ_BLEND_GAMMA(color[0], dp[0], ma, gamma);
+				if (n1 > 1)
+					dp[1] = FZ_BLEND_GAMMA(color[1], dp[1], ma, gamma);
+				if (n1 > 2)
+					dp[2] = FZ_BLEND_GAMMA(color[2], dp[2], ma, gamma);
+				for (k = 3; k < n1; k++)
+					dp[k] = FZ_BLEND_GAMMA(color[k], dp[k], ma, gamma);
+			}
 		}
 		dp += n;
 	}
@@ -1403,16 +1451,29 @@ template_span_with_color_N_general_alpha_gamma(byte * FZ_RESTRICT dp, const byte
 	{
 		int ma = *mp++;
 		ma = FZ_COMBINE(FZ_EXPAND(ma), sa);
-		if (n1 > 0)
-			dp[0] = FZ_BLEND_GAMMA(color[0], dp[0], ma, gamma);
-		if (n1 > 1)
-			dp[1] = FZ_BLEND_GAMMA(color[1], dp[1], ma, gamma);
-		if (n1 > 2)
-			dp[2] = FZ_BLEND_GAMMA(color[2], dp[2], ma, gamma);
-		for (k = 3; k < n1; k++)
-			dp[k] = FZ_BLEND_GAMMA(color[k], dp[k], ma, gamma);
 		if (da)
+		{
+			if (n1 > 0)
+				dp[0] = FZ_BLEND_GAMMA_DA(color[0], dp[0], dp[n1], ma, gamma);
+			if (n1 > 1)
+				dp[1] = FZ_BLEND_GAMMA_DA(color[1], dp[1], dp[n1], ma, gamma);
+			if (n1 > 2)
+				dp[2] = FZ_BLEND_GAMMA_DA(color[2], dp[2], dp[n1], ma, gamma);
+			for (k = 3; k < n1; k++)
+				dp[k] = FZ_BLEND_GAMMA_DA(color[k], dp[k], dp[n1], ma, gamma);
 			dp[n1] = FZ_BLEND(255, dp[n1], ma);
+		}
+		else
+		{
+			if (n1 > 0)
+				dp[0] = FZ_BLEND_GAMMA(color[0], dp[0], ma, gamma);
+			if (n1 > 1)
+				dp[1] = FZ_BLEND_GAMMA(color[1], dp[1], ma, gamma);
+			if (n1 > 2)
+				dp[2] = FZ_BLEND_GAMMA(color[2], dp[2], ma, gamma);
+			for (k = 3; k < n1; k++)
+				dp[k] = FZ_BLEND_GAMMA(color[k], dp[k], ma, gamma);
+		}
 		dp += n;
 	}
 	while (--w);
@@ -1446,11 +1507,19 @@ template_span_with_color_N_general_op_solid_gamma(byte * FZ_RESTRICT dp, const b
 		}
 		else if (ma != 0)
 		{
-			for (k = 0; k < n1; k++)
-				if (fz_overprint_component(eop, k))
-					dp[k] = FZ_BLEND_GAMMA(color[k], dp[k], ma, gamma);
 			if (da)
-				dp[n1] = FZ_BLEND(255, dp[k], ma);
+			{
+				for (k = 0; k < n1; k++)
+					if (fz_overprint_component(eop, k))
+						dp[k] = FZ_BLEND_GAMMA_DA(color[k], dp[k], dp[n1], ma, gamma);
+				dp[n1] = FZ_BLEND(255, dp[n1], ma);
+			}
+			else
+			{
+				for (k = 0; k < n1; k++)
+					if (fz_overprint_component(eop, k))
+						dp[k] = FZ_BLEND_GAMMA(color[k], dp[k], ma, gamma);
+			}
 		}
 		dp += n;
 	}
@@ -1467,11 +1536,19 @@ template_span_with_color_N_general_op_alpha_gamma(byte * FZ_RESTRICT dp, const b
 	{
 		int ma = *mp++;
 		ma = FZ_COMBINE(FZ_EXPAND(ma), sa);
-		for (k = 0; k < n1; k++)
-			if (fz_overprint_component(eop, k))
-				dp[k] = FZ_BLEND_GAMMA(color[k], dp[k], ma, gamma);
 		if (da)
-			dp[k] = FZ_BLEND(255, dp[k], ma);
+		{
+			for (k = 0; k < n1; k++)
+				if (fz_overprint_component(eop, k))
+					dp[k] = FZ_BLEND_GAMMA_DA(color[k], dp[k], dp[n1], ma, gamma);
+			dp[n1] = FZ_BLEND(255, dp[n1], ma);
+		}
+		else
+		{
+			for (k = 0; k < n1; k++)
+				if (fz_overprint_component(eop, k))
+					dp[k] = FZ_BLEND_GAMMA(color[k], dp[k], ma, gamma);
+		}
 		dp += n;
 	}
 	while (--w);
