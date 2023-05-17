@@ -39,6 +39,7 @@ static fz_context* ctx = NULL;
 
 static int x_factor = 0;
 static int y_factor = 0;
+static int x_dir = 1;
 static int offset = 0;
 
 static int usage(void)
@@ -48,7 +49,9 @@ static int usage(void)
 		"\t-p -\tpassword\n"
 		"\t-x\tx decimation factor\n"
 		"\t-y\ty decimation factor\n"
+		"\t-r\tsplit right-to-left\n"
 		"\t-o\toffset\n");
+		);
 	return EXIT_FAILURE;
 }
 
@@ -155,7 +158,9 @@ static void decimatepages(fz_context *ctx, pdf_document *doc)
 
 		for (y = yf-1; y >= 0; y--)
 		{
-			for (x = 0; x < xf; x++)
+			int x0 = (x_dir > 0) ? 0 : xf-1;
+			int x1 = (x_dir > 0) ? xf : -1;
+			for (x = x0; x != x1; x += x_dir)
 			{
 				pdf_obj *newpageobj, *newpageref, *newmediabox;
 				fz_rect mb;
@@ -226,13 +231,15 @@ int pdfposter_main(int argc, const char** argv)
 	y_factor = 0;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "x:y:p:")) != -1)
+	while ((c = fz_getopt(argc, argv, "x:y:o:p:r")) != -1)
 	{
 		switch (c)
 		{
 		case 'p': password = fz_optarg; break;
 		case 'x': x_factor = atoi(fz_optarg); break;
 		case 'y': y_factor = atoi(fz_optarg); break;
+		case 'r': x_dir = -1; break;
+		case 'o': offset = atoi(fz_optarg); break;
 		default: return usage();
 		}
 	}

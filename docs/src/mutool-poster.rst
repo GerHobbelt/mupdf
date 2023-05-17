@@ -40,6 +40,12 @@ The `poster` command reads the input PDF file and for each page chops it up into
    `-y` y decimation factor
       Pieces to vertically divide each page into.
 
+   `-r`
+      Split horizontally from right to left (default splits from left to right).
+
+   `-o`
+      offset page decimation (TBD)
+
 
 ----
 
