@@ -77,6 +77,7 @@ EXPORTS
 	ocr_recognise
 	ocr_set_leptonica_mem
 	ocr_set_leptonica_stderr_handler
+	tesseract_tool_main
 
 	tesseract_ambiguous_words_main
 	tesseract_classifier_tester_main
@@ -205,6 +206,9 @@ EXPORTS
 	fz_set_cpu_core_count
 	fzPopHeapDbgPurpose
 	fzPushHeapDbgPurpose
+	fz_ReportHeapLeakageAgainstSnapshot
+	fz_TakeHeapSnapshot
+	fz_TurnHeapLeakReportingAtProgramExitOn
 	fz_chdir
 	fz_fopen_utf8
 	fz_is_absolute_path
@@ -213,11 +217,14 @@ EXPORTS
 	fz_mkdir_for_file
 	fz_mkdirp_utf8
 	fz_normalize_path
+	fz_path_is_directory
+	fz_path_is_regular_file
 	fz_remove_utf8
 	fz_sanitize_path
 	fz_sanitize_path_ex
 	fz_stat_ctime
 	fz_stat_mtime
+	fz_stat_size
 	fz_jpeg_dflt_sys_mem_register
 	fz_jpeg_sys_mem_register
 	fz_set_default_jpeg_sys_mem_mgr
@@ -251,6 +258,7 @@ EXPORTS
 	fz_drop_document
 	fz_drop_page
 	fz_format_link_uri
+	fz_format_remote_link_uri
 	fz_has_permission
 	fz_is_document_reflowable
 	fz_keep_document
@@ -274,8 +282,10 @@ EXPORTS
 	fz_open_accelerated_document
 	fz_open_accelerated_document_with_stream
 	fz_open_document
+	fz_open_document_with_buffer
 	fz_open_document_with_stream
 	fz_output_accelerator
+	fz_page_label
 	fz_page_number_from_location
 	fz_page_presentation
 	fz_page_separations
@@ -420,6 +430,7 @@ EXPORTS
 	fz_clear_buffer
 	fz_clone_buffer
 	fz_drop_buffer
+	fz_ensure_buffer
 	fz_grow_buffer
 	fz_keep_buffer
 	fz_md5_buffer
@@ -429,6 +440,7 @@ EXPORTS
 	fz_new_buffer_from_data
 	fz_new_buffer_from_shared_data
 	fz_resize_buffer
+	fz_slice_buffer
 	fz_string_from_buffer
 	fz_terminate_buffer
 	fz_trim_buffer
@@ -485,6 +497,8 @@ EXPORTS
 	fz_deflate
 	fz_compressed_buffer_size
 	fz_drop_compressed_buffer
+	fz_image_type_name
+	fz_lookup_image_type
 	fz_open_compressed_buffer
 	fz_open_image_decomp_stream
 	fz_open_image_decomp_stream_from_buffer
@@ -531,6 +545,7 @@ EXPORTS
 	fz_malloc
 	fz_malloc_no_throw
 	fz_memrnd
+	fz_morph_error
 	fz_new_context_imp
 	fz_push_try
 	fz_realloc
@@ -635,6 +650,7 @@ EXPORTS
 	fz_set_default_colorspaces
 	fz_stroke_path
 	fz_stroke_text
+	fz_structure_from_string
 	fz_structure_to_string
 	fz_bound_display_list
 	fz_display_list_is_empty
@@ -769,6 +785,7 @@ EXPORTS
 	fz_quad_is_axis_oriented
 	fz_rect_from_irect
 	fz_rect_from_quad
+	fz_rects_overlap
 	fz_rotate
 	fz_round_rect
 	fz_scale
@@ -867,6 +884,7 @@ EXPORTS
 	fz_new_svg_device
 	fz_new_svg_device_with_id
 	fz_asprintf
+	fz_channel_is_any_stdout
 	fz_close_output
 	fz_drop_output
 	fz_flush_output
@@ -1087,7 +1105,6 @@ EXPORTS
 	fz_tell
 	fz_basename
 	fz_chartorune
-	fz_chartorune_unsafe
 	fz_cleanname
 	fz_dirname
 	fz_format_output_path
@@ -1144,7 +1161,13 @@ EXPORTS
 	fz_print_stext_page_as_xml
 	fz_print_stext_trailer_as_html
 	fz_print_stext_trailer_as_xhtml
+	fz_search_stext_create
+	fz_search_stext_destroy
+	fz_search_stext_next
+	fz_search_stext_next_quad
 	fz_search_stext_page
+	fz_search_stext_set_bboxfn
+	fz_search_stext_set_needle
 	fz_set_stext_options_images_handler
 	fz_snap_selection
 	fz_argv_from_wargv
@@ -1401,6 +1424,7 @@ EXPORTS
 	pdf_annot_has_line_ending_styles
 	pdf_annot_has_open
 	pdf_annot_has_quad_points
+	pdf_annot_has_quadding
 	pdf_annot_has_rect
 	pdf_annot_has_vertices
 	pdf_annot_hidden_for_editing
@@ -1414,9 +1438,7 @@ EXPORTS
 	pdf_annot_is_standard_stamp
 	pdf_annot_language
 	pdf_annot_line
-	pdf_annot_line_end_style
 	pdf_annot_line_ending_styles
-	pdf_annot_line_start_style
 	pdf_annot_modification_date
 	pdf_annot_needs_new_ap
 	pdf_annot_needs_resynthesis
@@ -1455,6 +1477,7 @@ EXPORTS
 	pdf_first_raw_annot
 	pdf_first_widget
 	pdf_format_link_uri
+	pdf_format_remote_link_uri
 	pdf_get_embedded_file_params
 	pdf_get_widget_editing_state
 	pdf_is_embedded_file
@@ -1471,8 +1494,10 @@ EXPORTS
 	pdf_lookup_number
 	pdf_name_from_line_ending
 	pdf_new_action_from_link
+	pdf_new_destination_from_dest
 	pdf_new_destination_from_link
 	pdf_new_display_list_from_annot
+	pdf_new_filespec
 	pdf_new_link
 	pdf_new_pixmap_from_annot
 	pdf_new_stext_page_from_annot
@@ -1482,6 +1507,7 @@ EXPORTS
 	pdf_parse_default_appearance
 	pdf_parse_link_action
 	pdf_parse_link_dest
+	pdf_parse_link_dest_to_file
 	pdf_parse_link_uri
 	pdf_print_default_appearance
 	pdf_resolve_link
@@ -1511,9 +1537,7 @@ EXPORTS
 	pdf_set_annot_is_open
 	pdf_set_annot_language
 	pdf_set_annot_line
-	pdf_set_annot_line_end_style
 	pdf_set_annot_line_ending_styles
-	pdf_set_annot_line_start_style
 	pdf_set_annot_modification_date
 	pdf_set_annot_opacity
 	pdf_set_annot_popup
@@ -1564,6 +1588,8 @@ EXPORTS
 	pdf_crypt_permissions
 	pdf_crypt_permissions_encryption
 	pdf_crypt_revision
+	pdf_crypt_stream_method
+	pdf_crypt_string_method
 	pdf_crypt_user_encryption
 	pdf_crypt_user_password
 	pdf_crypt_version
@@ -1571,6 +1597,7 @@ EXPORTS
 	pdf_drop_crypt
 	pdf_encrypt_data
 	pdf_encrypted_len
+	pdf_incremental_change_since_signing_widget
 	pdf_new_crypt
 	pdf_new_encrypt
 	pdf_open_crypt
@@ -1591,6 +1618,7 @@ EXPORTS
 	pdf_count_layers
 	pdf_create_document
 	pdf_delete_page
+	pdf_delete_page_labels
 	pdf_delete_page_range
 	pdf_deselect_layer_config_ui
 	pdf_document_from_fz_document
@@ -1626,6 +1654,8 @@ EXPORTS
 	pdf_open_document
 	pdf_open_document_with_stream
 	pdf_page_from_fz_page
+	pdf_page_label
+	pdf_page_label_imp
 	pdf_page_write
 	pdf_parse_write_options
 	pdf_read_journal
@@ -1636,6 +1666,7 @@ EXPORTS
 	pdf_select_layer_config_ui
 	pdf_set_document_language
 	pdf_set_layer_config_as_default
+	pdf_set_page_labels
 	pdf_specifics
 	pdf_toggle_layer_config_ui
 	pdf_was_repaired
@@ -1942,6 +1973,7 @@ EXPORTS
 	pdf_objcmp_resolve
 	pdf_objkindstr
 	pdf_parse_date
+	pdf_pin_document
 	pdf_print_encrypted_obj
 	pdf_print_obj
 	pdf_print_obj_to_json
@@ -1971,6 +2003,7 @@ EXPORTS
 	pdf_to_str_len
 	pdf_to_string
 	pdf_to_text_string
+	pdf_unbind_obj_document
 	pdf_undo
 	pdf_undoredo_state
 	pdf_undoredo_step
@@ -1979,6 +2012,7 @@ EXPORTS
 	pdf_count_pages
 	pdf_drop_ocg
 	pdf_drop_page_tree
+	pdf_drop_page_tree_internal
 	pdf_filter_annot_contents
 	pdf_filter_page_contents
 	pdf_flatten_inheritable_page_items
@@ -2136,6 +2170,14 @@ EXPORTS
 
 ; libJPEG exports
 
+	jpeg12_crop_scanline
+	jpeg12_read_raw_data
+	jpeg12_read_scanlines
+	jpeg12_skip_scanlines
+	jpeg12_write_raw_data
+	jpeg12_write_scanlines
+	jpeg16_read_scanlines
+	jpeg16_write_scanlines
 	jpeg_CreateCompress
 	jpeg_CreateDecompress
 	jpeg_abort
@@ -2155,6 +2197,7 @@ EXPORTS
 	jpeg_destroy
 	jpeg_destroy_compress
 	jpeg_destroy_decompress
+	jpeg_enable_lossless
 	jpeg_finish_compress
 	jpeg_finish_decompress
 	jpeg_finish_output
@@ -2200,6 +2243,44 @@ EXPORTS
 
 	TJBUFSIZE
 	TJBUFSIZEYUV
+	tj3Alloc
+	tj3Compress12
+	tj3Compress16
+	tj3Compress8
+	tj3CompressFromYUV8
+	tj3CompressFromYUVPlanes8
+	tj3DecodeYUV8
+	tj3DecodeYUVPlanes8
+	tj3Decompress12
+	tj3Decompress16
+	tj3Decompress8
+	tj3DecompressHeader
+	tj3DecompressToYUV8
+	tj3DecompressToYUVPlanes8
+	tj3Destroy
+	tj3EncodeYUV8
+	tj3EncodeYUVPlanes8
+	tj3Free
+	tj3Get
+	tj3GetErrorCode
+	tj3GetErrorStr
+	tj3GetScalingFactors
+	tj3Init
+	tj3JPEGBufSize
+	tj3LoadImage12
+	tj3LoadImage16
+	tj3LoadImage8
+	tj3SaveImage12
+	tj3SaveImage16
+	tj3SaveImage8
+	tj3Set
+	tj3SetCroppingRegion
+	tj3SetScalingFactor
+	tj3Transform
+	tj3YUVBufSize
+	tj3YUVPlaneHeight
+	tj3YUVPlaneSize
+	tj3YUVPlaneWidth
 	tjAlloc
 	tjBufSize
 	tjBufSizeYUV
@@ -2344,6 +2425,7 @@ EXPORTS
 	JxlEncoderSetCms
 	JxlEncoderSetCodestreamLevel
 	JxlEncoderSetExtraChannelBlendInfo
+	JxlEncoderSetExtraChannelDistance
 	JxlEncoderSetExtraChannelInfo
 	JxlEncoderSetExtraChannelName
 	JxlEncoderSetFrameBitDepth
@@ -3020,6 +3102,7 @@ EXPORTS
 	BrotliDecoderHasMoreOutput
 	BrotliDecoderIsFinished
 	BrotliDecoderIsUsed
+	BrotliDecoderSetMetadataCallbacks
 	BrotliDecoderSetParameter
 	BrotliDecoderTakeOutput
 	BrotliDecoderVersion
@@ -3170,6 +3253,7 @@ EXPORTS
 	sqlite3_hard_heap_limit64
 	sqlite3_initialize
 	sqlite3_interrupt
+	sqlite3_is_interrupted
 	sqlite3_keyword_check
 	sqlite3_keyword_count
 	sqlite3_keyword_name
