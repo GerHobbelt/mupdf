@@ -1893,8 +1893,10 @@ pdf_drop_document_imp(fz_context *ctx, pdf_document *doc)
 {
 	int i;
 
+#if 0
 	while (doc && doc->rev_page_map)
-		pdf_drop_page_tree(ctx, doc);
+		pdf_drop_page_tree(ctx, doc);  	/* Historical entry point. Now does nothing. We drop 'just in time'. */
+#endif
 
 	fz_defer_reap_start(ctx);
 
