@@ -111,7 +111,7 @@
 
     Set the image orientation to the given orientation.
 
-    :arg orientation: `Integer` Orientation value.
+    :arg orientation: `Integer` Orientation value from the table below:
 
 
 ** Orientation values **

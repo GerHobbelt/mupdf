@@ -244,9 +244,9 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
     Set/clear device rendering flags. Both set and clear are arrays where each element is a flag name:
 
-    "mask", "color", "uncacheable", "fillcolor-undefined", "strokecolor-undefined", "startcap-undefined",
-    "dashcap-undefined", "endcap-undefined", "linejoin-undefined", "miterlimit-undefined",
-    "linewidth-undefined", "bbox-defined", or "gridfit-as-tiled".
+    `"mask"`, `"color"`, `"uncacheable"`, `"fillcolor-undefined"`, `"strokecolor-undefined"`, `"startcap-undefined"`,
+    `"dashcap-undefined"`, `"endcap-undefined"`, `"linejoin-undefined"`, `"miterlimit-undefined"`,
+    `"linewidth-undefined"`, `"bbox-defined"`, or `"gridfit-as-tiled"`.
 
     :arg set: `[]`.
     :arg clear: `[]`.
@@ -273,7 +273,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
     Begin meta text information.
 
-    :arg type: `String`. The type (either of "ActualText", "Alt", "Abbreviation", or "Title")
+    :arg type: `String`. The type (either of `"ActualText"`, `"Alt"`, `"Abbreviation"`, or `"Title"`)
     :arg text: `String`. The text value.
 
 
