@@ -27,6 +27,7 @@
 
 fz_pixmap *fz_load_jpeg(fz_context *ctx, const unsigned char *data, size_t size);
 fz_pixmap *fz_load_png(fz_context *ctx, const unsigned char *data, size_t size);
+fz_pixmap *fz_load_psd(fz_context *ctx, const unsigned char *data, size_t size);
 #if FZ_ENABLE_TIFF
 fz_pixmap *fz_load_tiff(fz_context *ctx, const unsigned char *data, size_t size);
 #endif
@@ -47,6 +48,7 @@ void fz_load_jpeg_info(fz_context *ctx, const unsigned char *data, size_t size, 
 void fz_load_jpx_info(fz_context *ctx, const unsigned char *data, size_t size, int *w, int *h, int *xres, int *yres, fz_colorspace **cspace, uint8_t *orientation);
 #endif
 void fz_load_png_info(fz_context *ctx, const unsigned char *data, size_t size, int *w, int *h, int *xres, int *yres, fz_colorspace **cspace, uint8_t *orientation);
+void fz_load_psd_info(fz_context *ctx, const unsigned char *data, size_t size, int *w, int *h, int *xres, int *yres, fz_colorspace **cspace, uint8_t *orientation);
 #if FZ_ENABLE_TIFF
 void fz_load_tiff_info(fz_context *ctx, const unsigned char *data, size_t size, int *w, int *h, int *xres, int *yres, fz_colorspace **cspace, uint8_t *orientation);
 #endif
