@@ -31,8 +31,6 @@
 #include "pixmap-imp.h"
 
 #include <ft2build.h>
-#include "hb.h"
-#include "hb-ft.h"
 
 #include "mupdf/assertions.h"
 
