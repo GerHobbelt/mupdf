@@ -530,6 +530,12 @@ end_annot_op(fz_context *ctx, pdf_annot *annot)
 	pdf_end_operation(ctx, annot->page->doc);
 }
 
+static void
+abandon_annot_op(fz_context *ctx, pdf_annot *annot)
+{
+	pdf_abandon_operation(ctx, annot->page->doc);
+}
+
 static void toggle_check_box(fz_context *ctx, pdf_annot *annot)
 {
 	pdf_document *doc = annot->page->doc;
@@ -564,11 +570,13 @@ static void toggle_check_box(fz_context *ctx, pdf_annot *annot)
 		pdf_dict_put(ctx, grp, PDF_NAME(V), val);
 		set_check_grp(ctx, doc, grp, val);
 		doc->recalculate = 1;
-	}
-	fz_always(ctx)
 		end_annot_op(ctx, annot);
+	}
 	fz_catch(ctx)
+	{
+		abandon_annot_op(ctx, annot);
 		fz_rethrow(ctx);
+	}
 
 	pdf_set_annot_has_changed(ctx, annot);
 }
@@ -619,13 +627,14 @@ pdf_update_page(fz_context *ctx, pdf_page *page)
 		for (annot = page->annots; annot; annot = annot->next)
 			if (pdf_update_annot(ctx, annot))
 				changed = 1;
-	}
-	fz_always(ctx)
-	{
+
 		pdf_end_operation(ctx, page->doc);
 	}
 	fz_catch(ctx)
+	{
+		pdf_abandon_operation(ctx, page->doc);
 		fz_rethrow(ctx);
+	}
 
 	return changed;
 }
@@ -1189,6 +1198,7 @@ int pdf_set_text_field_value(fz_context *ctx, pdf_annot *widget, const char *upd
 		{
 			rc = pdf_set_annot_field_value(ctx, doc, widget, update);
 		}
+		end_annot_op(ctx, widget);
 	}
 	fz_always(ctx)
 	{
@@ -1197,10 +1207,10 @@ int pdf_set_text_field_value(fz_context *ctx, pdf_annot *widget, const char *upd
 		fz_free(ctx, new_change);
 		fz_free(ctx, evt.newChange);
 		fz_free(ctx, merged_value);
-		end_annot_op(ctx, widget);
 	}
 	fz_catch(ctx)
 	{
+		pdf_abandon_operation(ctx, doc);
 		fz_warn(ctx, "could not set widget text");
 		rc = 0;
 	}
@@ -1238,15 +1248,16 @@ int pdf_edit_text_field_value(fz_context *ctx, pdf_annot *widget, const char *va
 			*selStart = evt.selStart + (int)strlen(change);
 			*selEnd = *selStart;
 		}
+		pdf_end_operation(ctx, doc);
 	}
 	fz_always(ctx)
 	{
-		pdf_end_operation(ctx, doc);
 		fz_free(ctx, evt.newValue);
 		fz_free(ctx, evt.newChange);
 	}
 	fz_catch(ctx)
 	{
+		pdf_abandon_operation(ctx, doc);
 		fz_warn(ctx, "could not process text widget keystroke");
 		rc = 0;
 	}
@@ -1387,11 +1398,11 @@ void pdf_choice_widget_set_value(fz_context *ctx, pdf_annot *tw, int n, const ch
 		pdf_dict_del(ctx, annot->obj, PDF_NAME(I));
 
 		pdf_field_mark_dirty(ctx, annot->obj);
-	}
-	fz_always(ctx)
 		end_annot_op(ctx, annot);
+	}
 	fz_catch(ctx)
 	{
+		abandon_annot_op(ctx, annot);
 		pdf_drop_obj(ctx, optarr);
 		fz_rethrow(ctx);
 	}
@@ -2052,15 +2063,18 @@ static void pdf_execute_js_action(fz_context *ctx, pdf_document *doc, pdf_obj *t
 			pdf_begin_operation(ctx, doc, "Javascript Event");
 			in_op = 1;
 			pdf_js_execute(doc->js, buf, code, NULL);
+			pdf_end_operation(ctx, doc);
 		}
 		fz_always(ctx)
 		{
-			if (in_op)
-				pdf_end_operation(ctx, doc);
 			fz_free(ctx, code);
 		}
 		fz_catch(ctx)
+		{
+			if (in_op)
+				pdf_abandon_operation(ctx, doc);
 			fz_rethrow(ctx);
+		}
 	}
 }
 
@@ -2211,11 +2225,15 @@ annot_execute_action(fz_context *ctx, pdf_annot *annot, const char *act)
 	begin_annot_op(ctx, annot, "JavaScript action");
 
 	fz_try(ctx)
+	{
 		pdf_execute_action(ctx, annot->page->doc, annot->obj, act);
-	fz_always(ctx)
 		end_annot_op(ctx, annot);
+	}
 	fz_catch(ctx)
+	{
+		abandon_annot_op(ctx, annot);
 		fz_rethrow(ctx);
+	}
 }
 
 void pdf_annot_event_enter(fz_context *ctx, pdf_annot *annot)
@@ -2246,11 +2264,13 @@ void pdf_annot_event_up(fz_context *ctx, pdf_annot *annot)
 			pdf_execute_action_chain(ctx, annot->page->doc, annot->obj, "A", action, NULL);
 		else
 			pdf_execute_action(ctx, annot->page->doc, annot->obj, "AA/U");
-	}
-	fz_always(ctx)
 		end_annot_op(ctx, annot);
+	}
 	fz_catch(ctx)
+	{
+		abandon_annot_op(ctx, annot);
 		fz_rethrow(ctx);
+	}
 }
 
 void pdf_annot_event_focus(fz_context *ctx, pdf_annot *annot)

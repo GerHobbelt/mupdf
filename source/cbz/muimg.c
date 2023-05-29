@@ -273,6 +273,23 @@ img_open_document_with_stream(fz_context *ctx, fz_stream *file)
 	return (fz_document*)doc;
 }
 
+static int
+img_recognize_content(fz_context *ctx, fz_stream *stream)
+{
+	unsigned char data[8];
+	size_t n = fz_read(ctx, stream, data, 8);
+	int fmt;
+
+	if (n != 8)
+		return 0;
+
+	fmt = fz_recognize_image_format(ctx, data);
+	if (fmt != FZ_IMAGE_UNKNOWN)
+		return 100;
+
+	return 0;
+}
+
 static const char *img_extensions[] =
 {
 	"bmp",
@@ -340,7 +357,8 @@ fz_document_handler img_document_handler =
 	img_extensions,
 	img_mimetypes,
 	NULL,
-	NULL
+	NULL,
+	img_recognize_content
 };
 
 #endif

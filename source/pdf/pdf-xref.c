@@ -3008,11 +3008,13 @@ pdf_set_metadata(fz_context *ctx, pdf_document *doc, const char *key, const char
 		if (!strncmp(key, FZ_META_INFO, strlen(FZ_META_INFO)))
 			key += strlen(FZ_META_INFO);
 		pdf_dict_put_text_string(ctx, info, pdf_new_name(ctx, key), value);
-	}
-	fz_always(ctx)
 		pdf_end_operation(ctx, doc);
+	}
 	fz_catch(ctx)
+	{
+		pdf_abandon_operation(ctx, doc);
 		fz_rethrow(ctx);
+	}
 }
 
 static fz_link_dest
@@ -3657,6 +3659,36 @@ static const char *pdf_mimetypes[] =
 	NULL
 };
 
+static int
+pdf_recognize_doc_content(fz_context *ctx, fz_stream *stream)
+{
+	const char *match = "%PDF-";
+	int pos = 0;
+	int n = 4096+5;
+	int c;
+
+	do
+	{
+		c = fz_read_byte(ctx, stream);
+		if (c == EOF)
+			return 0;
+		if (c == match[pos])
+		{
+			pos++;
+			if (pos == 5)
+				return 100;
+		}
+		else
+		{
+			/* Restart matching, but recheck c against the start. */
+			pos = (c == match[0]);
+		}
+	}
+	while (--n > 0);
+
+	return 0;
+}
+
 fz_document_handler pdf_document_handler =
 {
 	NULL,
@@ -3665,7 +3697,8 @@ fz_document_handler pdf_document_handler =
 	pdf_extensions,
 	pdf_mimetypes,
 	NULL,
-	NULL
+	NULL,
+	pdf_recognize_doc_content
 };
 
 void pdf_mark_xref(fz_context *ctx, pdf_document *doc)

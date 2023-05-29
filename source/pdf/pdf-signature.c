@@ -267,13 +267,11 @@ pdf_sign_signature_with_appearance(fz_context *ctx, pdf_annot *widget, pdf_pkcs7
 			pdf_dict_put_drop(ctx, form, PDF_NAME(SigFlags), pdf_new_int(ctx, sf | PDF_SIGFLAGS_SIGSEXIST | PDF_SIGFLAGS_APPENDONLY));
 
 		pdf_signature_set_value(ctx, doc, wobj, signer, t);
-	}
-	fz_always(ctx)
-	{
 		pdf_end_operation(ctx, doc);
 	}
 	fz_catch(ctx)
 	{
+		pdf_abandon_operation(ctx, doc);
 		fz_rethrow(ctx);
 	}
 }
@@ -456,14 +454,15 @@ void pdf_clear_signature(fz_context *ctx, pdf_annot *widget)
 
 		dlist = pdf_signature_appearance_unsigned(ctx, rect, lang);
 		pdf_set_annot_appearance_from_display_list(ctx, widget, "N", NULL, fz_identity, dlist);
+		end_annot_op(ctx, widget);
 	}
 	fz_always(ctx)
 	{
 		fz_drop_display_list(ctx, dlist);
-		end_annot_op(ctx, widget);
 	}
 	fz_catch(ctx)
 	{
+		pdf_abandon_operation(ctx, widget->page->doc);
 		fz_rethrow(ctx);
 	}
 }
