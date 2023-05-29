@@ -1251,7 +1251,7 @@ static void layout_table(fz_context *ctx, layout_data *ld, fz_html_box *box, fz_
 					if (restart)
 					{
 						restart->end = row;
-						return;
+						goto exit;
 					}
 					else
 					{
@@ -1263,6 +1263,7 @@ static void layout_table(fz_context *ctx, layout_data *ld, fz_html_box *box, fz_
 
 			box->s.layout.b = row->s.layout.b + spacing;
 		}
+		exit:;
 	}
 	fz_always(ctx)
 		fz_free(ctx, colw);

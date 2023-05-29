@@ -395,6 +395,12 @@ static void ffi_gc_fz_image(js_State *J, void *image)
 	fz_drop_image(ctx, image);
 }
 
+static void ffi_gc_fz_image_data(js_State *J, void *image_data)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_drop_compressed_buffer(ctx, image_data);
+}
+
 static void ffi_gc_fz_display_list(js_State *J, void *list)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -732,6 +738,30 @@ static void ffi_pushcolor(js_State *J, fz_colorspace *colorspace, const float *c
 		js_pushnull(J);
 	}
 	js_pushnumber(J, alpha);
+}
+
+static void ffi_todecode(js_State *J, int idx, float *decode)
+{
+	int i, n = fz_clampi(js_getlength(J, idx), 0, FZ_MAX_COLORS * 2);
+	for (i = 0; i < n; ++i) {
+		js_getindex(J, idx, i);
+		decode[i] = js_tonumber(J, -1);
+		js_pop(J, 1);
+	}
+	for (; i < FZ_MAX_COLORS * 2; ++i)
+		decode[i] = 0;
+}
+
+static void ffi_tocolorkey(js_State *J, int idx, int *colorkey)
+{
+	int i, n = fz_clampi(js_getlength(J, idx), 0, FZ_MAX_COLORS * 2);
+	for (i = 0; i < n; ++i) {
+		js_getindex(J, idx, i);
+		colorkey[i] = js_tonumber(J, -1);
+		js_pop(J, 1);
+	}
+	for (; i < FZ_MAX_COLORS * 2; ++i)
+		colorkey[i] = 0;
 }
 
 static struct color ffi_tocolor(js_State *J, int idx)
@@ -1291,12 +1321,6 @@ static void ffi_pushimage(js_State *J, fz_image *image)
 	js_newuserdata(J, "fz_image", fz_keep_image(ctx, image), ffi_gc_fz_image);
 }
 
-static void ffi_pushimage_own(js_State *J, fz_image *image)
-{
-	js_getregistry(J, "fz_image");
-	js_newuserdata(J, "fz_image", image, ffi_gc_fz_image);
-}
-
 static int is_number(const char *key, int *idx)
 {
 	char *end;
@@ -1397,6 +1421,106 @@ static fz_buffer *ffi_tobuffer(js_State *J, int idx)
 	}
 
 	return buf;
+}
+
+#endif /* FZ_ENABLE_PDF */
+
+static void ffi_pushimage_own(js_State *J, fz_image *image)
+{
+	js_getregistry(J, "fz_image");
+	js_newuserdata(J, "fz_image", image, ffi_gc_fz_image);
+}
+
+static int ffi_imagedata_has(js_State *J, void *image_data_, const char *key)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_compressed_buffer *image_data = image_data_;
+
+	if (!strcmp(key, "buffer"))
+	{
+		ffi_pushbuffer(J, fz_keep_buffer(ctx, image_data->buffer));
+		return 1;
+	}
+
+	if (!strcmp(key, "params"))
+	{
+		js_newobject(J);
+		js_pushstring(J, fz_image_type_name(image_data->params.type));
+		js_setproperty(J, -2, "type");
+
+		switch (image_data->params.type)
+		{
+		case FZ_IMAGE_FAX:
+			js_pushnumber(J, image_data->params.u.fax.columns);
+			js_setproperty(J, -2, "columns");
+			js_pushnumber(J, image_data->params.u.fax.rows);
+			js_setproperty(J, -2, "rows");
+			js_pushnumber(J, image_data->params.u.fax.k);
+			js_setproperty(J, -2, "k");
+			js_pushboolean(J, image_data->params.u.fax.end_of_line);
+			js_setproperty(J, -2, "endOfLine");
+			js_pushboolean(J, image_data->params.u.fax.encoded_byte_align);
+			js_setproperty(J, -2, "encodedByteAlign");
+			js_pushboolean(J, image_data->params.u.fax.end_of_block);
+			js_setproperty(J, -2, "endOfBlock");
+			js_pushboolean(J, image_data->params.u.fax.black_is_1);
+			js_setproperty(J, -2, "blackIs1");
+			js_pushboolean(J, image_data->params.u.fax.damaged_rows_before_error);
+			js_setproperty(J, -2, "damagedRowsBeforeError");
+			break;
+		case FZ_IMAGE_FLATE:
+			js_pushnumber(J, image_data->params.u.flate.columns);
+			js_setproperty(J, -2, "columns");
+			js_pushnumber(J, image_data->params.u.flate.colors);
+			js_setproperty(J, -2, "colors");
+			js_pushnumber(J, image_data->params.u.flate.predictor);
+			js_setproperty(J, -2, "predictor");
+			js_pushnumber(J, image_data->params.u.flate.bpc);
+			js_setproperty(J, -2, "bitsPerComponent");
+			break;
+		case FZ_IMAGE_LZW:
+			js_pushnumber(J, image_data->params.u.lzw.columns);
+			js_setproperty(J, -2, "columns");
+			js_pushnumber(J, image_data->params.u.lzw.colors);
+			js_setproperty(J, -2, "colors");
+			js_pushnumber(J, image_data->params.u.lzw.predictor);
+			js_setproperty(J, -2, "predictor");
+			js_pushnumber(J, image_data->params.u.lzw.bpc);
+			js_setproperty(J, -2, "bitsPerComponent");
+			js_pushnumber(J, image_data->params.u.lzw.early_change);
+			js_setproperty(J, -2, "earlyChange");
+			break;
+		case FZ_IMAGE_JBIG2:
+			js_pushnumber(J, image_data->params.u.jbig2.embedded);
+			js_setproperty(J, -2, "embedded");
+			if (image_data->params.u.jbig2.globals)
+				ffi_pushbuffer(J, fz_keep_buffer(ctx, image_data->params.u.jbig2.globals->encoded));
+			else
+				js_pushnull(J);
+			js_setproperty(J, -2, "globals");
+			break;
+		case FZ_IMAGE_JPEG:
+			js_pushnumber(J, image_data->params.u.jpeg.color_transform);
+			js_setproperty(J, -2, "colorTransform");
+			break;
+		case FZ_IMAGE_JPX:
+			js_pushnumber(J, image_data->params.u.jpx.smask_in_data);
+			js_setproperty(J, -2, "sMaskInData");
+			break;
+		}
+
+		return 1;
+	}
+
+	return 0;
+}
+
+static void ffi_pushimagedata_own(js_State *J, fz_compressed_buffer *image_data)
+{
+	js_getregistry(J, "fz_compressed_buffer");
+	js_newuserdatax(J, "fz_compressed_buffer", image_data,
+		ffi_imagedata_has, NULL, NULL,
+		ffi_gc_fz_image_data);
 }
 
 /* device calling into js from c */
@@ -4445,6 +4569,26 @@ static void ffi_Pixmap_saveAsPKM(js_State *J)
 		rethrow(J);
 }
 
+static void ffi_Pixmap_md5(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_pixmap *pixmap = ffi_topixmap(J, 0);
+	unsigned char digest[16] = { 0 };
+	size_t i;
+
+	fz_try(ctx)
+		fz_md5_pixmap(ctx, pixmap, digest);
+	fz_catch(ctx)
+		rethrow(J);
+
+	js_newarray(J);
+	for (i = 0; i < nelem(digest); ++i)
+	{
+		js_pushnumber(J, digest[i]);
+		js_setindex(J, -2, i);
+	}
+}
+
 static void ffi_Pixmap_convertToColorSpace(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -4582,8 +4726,8 @@ static void ffi_new_Image(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
 	fz_image *image = NULL;
-
 	fz_image *mask = NULL;
+
 	if (js_isuserdata(J, 2, "fz_image"))
 		mask = js_touserdata(J, 2, "fz_image");
 
@@ -4595,7 +4739,7 @@ static void ffi_new_Image(js_State *J)
 			rethrow(J);
 	} else if (js_isuserdata(J, 1, "fz_buffer")) {
 		fz_buffer *buffer = ffi_tobuffer(J, 1);
-		fz_buffer *globals = js_isdefined(J, 2) ? ffi_tobuffer(J, 2) : NULL;
+		fz_buffer *globals = js_iscoercible(J, 2) ? ffi_tobuffer(J, 2) : NULL;
 		fz_buffer *allocated = NULL;
 
 		fz_var(allocated);
@@ -4615,7 +4759,87 @@ static void ffi_new_Image(js_State *J)
 			fz_drop_buffer(ctx, allocated);
 		fz_catch(ctx)
 			rethrow(J);
-	} else {
+	}
+	else if (js_isuserdata(J, 1, "fz_compressed_buffer"))
+	{
+		fz_compressed_buffer *copy, *image_data = js_touserdata(J, 1, "fz_compressed_buffer");
+		int w = js_tointeger(J, 3);
+		int h = js_tointeger(J, 4);
+		int bpc = js_tointeger(J, 5);
+		fz_colorspace *colorspace = js_iscoercible(J, 6) ? js_touserdata(J, 6, "fz_colorspace") : NULL;
+		int xres = js_iscoercible(J, 7) ? js_tointeger(J, 7) : 72;
+		int yres = js_iscoercible(J, 8) ? js_tointeger(J, 8) : 72;
+		int interpolate = js_iscoercible(J, 9) ? js_toboolean(J, 9) : 0;
+		int imagemask = js_iscoercible(J, 10) ? js_toboolean(J, 10) : 0;
+		float decode[FZ_MAX_COLORS * 2] = { 0 };
+		int has_decode = 0;
+		int colorkey[FZ_MAX_COLORS * 2] = { 0 };
+		int has_colorkey = 0;
+
+		if (js_iscoercible(J, 11))
+		{
+			has_decode = 1;
+			ffi_todecode(J, 11, decode);
+		}
+		if (js_iscoercible(J, 12))
+		{
+			has_colorkey = 1;
+			ffi_tocolorkey(J, 12, colorkey);
+		}
+
+		fz_try(ctx)
+		{
+			copy = fz_malloc_struct(ctx, fz_compressed_buffer);
+			copy->params.type = image_data->params.type;
+
+			switch (copy->params.type)
+			{
+			case FZ_IMAGE_FAX:
+				copy->params.u.fax.columns = image_data->params.u.fax.columns;
+				copy->params.u.fax.rows = image_data->params.u.fax.rows;
+				copy->params.u.fax.k = image_data->params.u.fax.k;
+				copy->params.u.fax.end_of_line = image_data->params.u.fax.end_of_line;
+				copy->params.u.fax.encoded_byte_align = image_data->params.u.fax.encoded_byte_align;
+				copy->params.u.fax.end_of_block = image_data->params.u.fax.end_of_block;
+				copy->params.u.fax.black_is_1 = image_data->params.u.fax.black_is_1;
+				break;
+			case FZ_IMAGE_FLATE:
+				copy->params.u.flate.columns = image_data->params.u.flate.columns;
+				copy->params.u.flate.colors = image_data->params.u.flate.colors;
+				copy->params.u.flate.predictor = image_data->params.u.flate.predictor;
+				copy->params.u.flate.bpc = image_data->params.u.flate.bpc;
+				break;
+			case FZ_IMAGE_LZW:
+				copy->params.u.lzw.columns = image_data->params.u.lzw.columns;
+				copy->params.u.lzw.colors = image_data->params.u.lzw.colors;
+				copy->params.u.lzw.predictor = image_data->params.u.lzw.predictor;
+				copy->params.u.lzw.bpc = image_data->params.u.lzw.bpc;
+				copy->params.u.lzw.early_change = image_data->params.u.lzw.early_change;
+				break;
+			case FZ_IMAGE_JBIG2:
+				copy->params.u.jbig2.embedded = image_data->params.u.jbig2.embedded;
+				copy->params.u.jbig2.globals = fz_keep_jbig2_globals(ctx, image_data->params.u.jbig2.globals);
+				break;
+			case FZ_IMAGE_JPEG:
+				copy->params.u.jpeg.color_transform = image_data->params.u.jpeg.color_transform;
+				break;
+			case FZ_IMAGE_JPX:
+				copy->params.u.jpx.smask_in_data = image_data->params.u.jpx.smask_in_data;
+				break;
+			}
+
+			copy->buffer = fz_keep_buffer(ctx, image_data->buffer);
+
+			image = fz_new_image_from_compressed_buffer(ctx,
+				w, h, bpc, colorspace, xres, yres,
+				interpolate, imagemask, has_decode ? &decode[0] : NULL, has_colorkey ? &colorkey[0] : NULL,
+				copy, mask);
+		}
+		fz_catch(ctx)
+			rethrow(J);
+	}
+	else
+	{
 		const char *name = js_tostring(J, 1);
 		fz_try(ctx)
 		{
@@ -4628,6 +4852,184 @@ static void ffi_new_Image(js_State *J)
 	}
 
 	ffi_pushimage_own(J, image);
+}
+
+static void ffi_new_ImageData(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_compressed_buffer *image_data = NULL;
+	int type = FZ_IMAGE_UNKNOWN;
+	fz_buffer *buffer = NULL;
+	fz_buffer *globals = NULL;
+	int encoded_byte_align = 0, color_transform = 0, smask_in_data = 0;
+	int end_of_block = 0, early_change = 0, end_of_line = 0, black_is_1 = 1;
+	int predictor = 0, embedded = 0, columns = 0, colors = 0, rows = 0;
+	int bpc = 0, k = 0, damaged_rows_before_error = 0;
+
+	if (js_try(J))
+	{
+		fz_drop_buffer(ctx, globals);
+		fz_drop_buffer(ctx, buffer);
+		js_throw(J);
+	}
+
+	buffer = ffi_tobuffer(J, 1);
+
+	if (js_isobject(J, 2) && js_hasproperty(J, 2, "type"))
+	{
+		js_getproperty(J, 2, "type");
+		type = fz_lookup_image_type(js_tostring(J, -1));
+		js_pop(J, 1);
+
+		switch (type)
+		{
+		case FZ_IMAGE_FAX:
+			js_getproperty(J, 2, "columns");
+			columns = js_tointeger(J, -1);
+			js_pop(J, 1);
+			js_getproperty(J, 2, "rows");
+			rows = js_tointeger(J, -1);
+			js_pop(J, 1);
+			js_getproperty(J, 2, "k");
+			k = js_tointeger(J, -1);
+			js_pop(J, 1);
+			js_getproperty(J, 2, "endOfLine");
+			end_of_line = js_toboolean(J, -1);
+			js_pop(J, 1);
+			js_getproperty(J, 2, "encodedByteAlign");
+			encoded_byte_align = js_toboolean(J, -1);
+			js_pop(J, 1);
+			js_getproperty(J, 2, "endOfBlock");
+			end_of_block = js_toboolean(J, -1);
+			js_pop(J, 1);
+			js_getproperty(J, 2, "blackIs1");
+			black_is_1 = js_toboolean(J, -1);
+			js_pop(J, 1);
+			js_getproperty(J, 2, "damagedRowsBeforeError");
+			damaged_rows_before_error = js_tointeger(J, -1);
+			js_pop(J, 1);
+			break;
+		case FZ_IMAGE_FLATE:
+			js_getproperty(J, 2, "columns");
+			columns = js_tointeger(J, -1);
+			js_pop(J, 1);
+			js_getproperty(J, 2, "colors");
+			colors = js_tointeger(J, -1);
+			js_pop(J, 1);
+			js_getproperty(J, 2, "predictor");
+			predictor = js_tointeger(J, -1);
+			js_pop(J, 1);
+			js_getproperty(J, 2, "bitsPerComponent");
+			bpc = js_tointeger(J, -1);
+			js_pop(J, 1);
+			break;
+		case FZ_IMAGE_LZW:
+			js_getproperty(J, 2, "columns");
+			columns = js_tointeger(J, -1);
+			js_pop(J, 1);
+			js_getproperty(J, 2, "colors");
+			colors = js_tointeger(J, -1);
+			js_pop(J, 1);
+			js_getproperty(J, 2, "predictor");
+			predictor = js_tointeger(J, -1);
+			js_pop(J, 1);
+			js_getproperty(J, 2, "bitsPerComponent");
+			bpc = js_tointeger(J, -1);
+			js_pop(J, 1);
+			js_getproperty(J, 2, "earlyChange");
+			early_change = js_tointeger(J, -1);
+			js_pop(J, 1);
+			break;
+		case FZ_IMAGE_JBIG2:
+			js_getproperty(J, 2, "embedded");
+			embedded = js_tointeger(J, -1);
+			js_pop(J, 1);
+			js_getproperty(J, 2, "globals");
+			if (js_iscoercible(J, -1))
+				globals = ffi_tobuffer(J, -1);
+			js_pop(J, 1);
+			break;
+		case FZ_IMAGE_JPEG:
+			js_getproperty(J, 2, "colorTransform");
+			color_transform = js_tointeger(J, -1);
+			js_pop(J, 1);
+			break;
+		case FZ_IMAGE_JPX:
+			js_getproperty(J, 2, "sMaskInData");
+			smask_in_data = js_tointeger(J, -1);
+			js_pop(J, 1);
+			break;
+		}
+	}
+
+	js_endtry(J);
+
+	fz_var(buffer);
+	fz_var(image_data);
+	fz_try(ctx)
+	{
+		image_data = fz_malloc_struct(ctx, fz_compressed_buffer);
+		image_data->params.type = type;
+
+		switch (type)
+		{
+		case FZ_IMAGE_UNKNOWN:
+			if (buffer->len < 8)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "unknown image file format");
+			image_data->params.type = fz_recognize_image_format(ctx, buffer->data);
+			if (image_data->params.type == FZ_IMAGE_JPEG)
+				image_data->params.u.jpeg.color_transform = -1;
+			break;
+		case FZ_IMAGE_FAX:
+			image_data->params.u.fax.columns = columns;
+			image_data->params.u.fax.rows = rows;
+			image_data->params.u.fax.k = k;
+			image_data->params.u.fax.end_of_line = end_of_line;
+			image_data->params.u.fax.encoded_byte_align = encoded_byte_align;
+			image_data->params.u.fax.end_of_block = end_of_block;
+			image_data->params.u.fax.black_is_1 = black_is_1;
+			image_data->params.u.fax.damaged_rows_before_error = damaged_rows_before_error;
+			break;
+		case FZ_IMAGE_FLATE:
+			image_data->params.u.flate.columns = columns;
+			image_data->params.u.flate.colors = colors;
+			image_data->params.u.flate.predictor = predictor;
+			image_data->params.u.flate.bpc = bpc;
+			break;
+		case FZ_IMAGE_LZW:
+			image_data->params.u.lzw.columns = columns;
+			image_data->params.u.lzw.colors = colors;
+			image_data->params.u.lzw.predictor = predictor;
+			image_data->params.u.lzw.bpc = bpc;
+			image_data->params.u.lzw.early_change = early_change;
+			break;
+		case FZ_IMAGE_JBIG2:
+			image_data->params.u.jbig2.embedded = embedded;
+			if (globals)
+				image_data->params.u.jbig2.globals = fz_new_jbig2_globals(ctx, globals);
+			break;
+		case FZ_IMAGE_JPEG:
+			image_data->params.u.jpeg.color_transform = color_transform;
+			break;
+		case FZ_IMAGE_JPX:
+			image_data->params.u.jpx.smask_in_data = smask_in_data;
+			break;
+		}
+
+		image_data->buffer = fz_keep_buffer(ctx, buffer);
+	}
+	fz_always(ctx)
+	{
+		fz_drop_buffer(ctx, globals);
+		fz_drop_buffer(ctx, buffer);
+	}
+	fz_catch(ctx)
+	{
+		fz_drop_compressed_buffer(ctx, image_data);
+		rethrow(J);
+	}
+
+	ffi_pushimagedata_own(J, image_data);
 }
 
 static void ffi_Image_getWidth(js_State *J)
@@ -4718,6 +5120,69 @@ static void ffi_Image_toPixmap(js_State *J)
 		rethrow(J);
 
 	ffi_pushpixmap(J, pixmap);
+}
+
+static void ffi_Image_getImageData(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_image *image = js_touserdata(J, 0, "fz_image");
+	fz_compressed_buffer *image_data = NULL;
+	fz_compressed_buffer *original;
+
+	fz_var(image_data);
+
+	fz_try(ctx)
+	{
+		original = fz_compressed_image_buffer(ctx, image);
+		if (original != NULL)
+		{
+			image_data = fz_malloc_struct(ctx, fz_compressed_buffer);
+			image_data->buffer = fz_keep_buffer(ctx, original->buffer);
+			image_data->params.type = original->params.type;
+			switch (image_data->params.type)
+			{
+			case FZ_IMAGE_FAX:
+				image_data->params.u.fax.columns = original->params.u.fax.columns;
+				image_data->params.u.fax.rows = original->params.u.fax.rows;
+				image_data->params.u.fax.k = original->params.u.fax.k;
+				image_data->params.u.fax.end_of_line = original->params.u.fax.end_of_line;
+				image_data->params.u.fax.encoded_byte_align = original->params.u.fax.encoded_byte_align;
+				image_data->params.u.fax.end_of_block = original->params.u.fax.end_of_block;
+				image_data->params.u.fax.black_is_1 = original->params.u.fax.black_is_1;
+				break;
+			case FZ_IMAGE_FLATE:
+				image_data->params.u.flate.columns = original->params.u.flate.columns;
+				image_data->params.u.flate.colors = original->params.u.flate.colors;
+				image_data->params.u.flate.predictor = original->params.u.flate.predictor;
+				image_data->params.u.flate.bpc = original->params.u.flate.bpc;
+				break;
+			case FZ_IMAGE_LZW:
+				image_data->params.u.lzw.columns = original->params.u.lzw.columns;
+				image_data->params.u.lzw.colors = original->params.u.lzw.colors;
+				image_data->params.u.lzw.predictor = original->params.u.lzw.predictor;
+				image_data->params.u.lzw.bpc = original->params.u.lzw.bpc;
+				image_data->params.u.lzw.early_change = original->params.u.lzw.early_change;
+				break;
+			case FZ_IMAGE_JBIG2:
+				image_data->params.u.jbig2.embedded = original->params.u.jbig2.embedded;
+				image_data->params.u.jbig2.globals = fz_new_jbig2_globals(ctx, original->params.u.jbig2.globals->encoded);
+				break;
+			case FZ_IMAGE_JPEG:
+				image_data->params.u.jpeg.color_transform = original->params.u.jpeg.color_transform;
+				break;
+			case FZ_IMAGE_JPX:
+				image_data->params.u.jpx.smask_in_data = original->params.u.jpx.smask_in_data;
+				break;
+			}
+		}
+	}
+	fz_catch(ctx)
+	{
+		fz_drop_compressed_buffer(ctx, image_data);
+		rethrow(J);
+	}
+
+	ffi_pushimagedata_own(J, image_data);
 }
 
 static void ffi_Image_getColorKey(js_State *J)
@@ -5329,7 +5794,8 @@ static void ffi_StructuredText_walk(js_State *J)
 					js_pushnull(J);
 					ffi_pushrect(J, line->bbox);
 					js_pushboolean(J, line->wmode);
-					js_call(J, 2);
+					ffi_pushpoint(J, line->dir);
+					js_call(J, 3);
 					js_pop(J, 1);
 				}
 
@@ -6264,7 +6730,7 @@ static void ffi_PDFDocument_getEmbeddedFileParams(js_State *J)
 
 	fz_try(ctx)
 		pdf_get_embedded_file_params(ctx, fs, &params);
-	fz_catch (ctx)
+	fz_catch(ctx)
 		rethrow(J);
 
 	ffi_pushembeddedfileparams(J, &params);
@@ -6279,7 +6745,7 @@ static void ffi_PDFDocument_getEmbeddedFileContents(js_State *J)
 
 	fz_try(ctx)
 		contents = pdf_load_embedded_file_contents(ctx, fs);
-	fz_catch (ctx)
+	fz_catch(ctx)
 		rethrow(J);
 
 	ffi_pushbuffer(J, contents);
@@ -6926,6 +7392,16 @@ static void ffi_PDFDocument_endOperation(js_State *J)
 	pdf_document *pdf = js_touserdata(J, 0, "pdf_document");
 	fz_try(ctx)
 		pdf_end_operation(ctx, pdf);
+	fz_catch(ctx)
+		rethrow(J);
+}
+
+static void ffi_PDFDocument_abandonOperation(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_document *pdf = js_touserdata(J, 0, "pdf_document");
+	fz_try(ctx)
+		pdf_abandon_operation(ctx, pdf);
 	fz_catch(ctx)
 		rethrow(J);
 }
@@ -10110,8 +10586,13 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "Image.getMask", ffi_Image_getMask, 0);
 		jsB_propfun(J, "Image.toPixmap", ffi_Image_toPixmap, 2);
 		jsB_propfun(J, "Image.setOrientation", ffi_Image_setOrientation, 1);
+		jsB_propfun(J, "Image.getImageData", ffi_Image_getImageData, 0);
 	}
 	js_setregistry(J, "fz_image");
+
+	js_getregistry(J, "Userdata");
+	js_newobjectx(J);
+	js_setregistry(J, "fz_compressed_buffer");
 
 	js_getregistry(J, "Userdata");
 	js_newobjectx(J);
@@ -10210,6 +10691,7 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "Pixmap.saveAsPNM", ffi_Pixmap_saveAsPNM, 1);
 		jsB_propfun(J, "Pixmap.saveAsPBM", ffi_Pixmap_saveAsPBM, 1);
 		jsB_propfun(J, "Pixmap.saveAsPKM", ffi_Pixmap_saveAsPKM, 1);
+		jsB_propfun(J, "Pixmap.md5", ffi_Pixmap_md5, 0);
 	}
 	js_setregistry(J, "fz_pixmap");
 
@@ -10289,6 +10771,7 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "PDFDocument.beginOperation", ffi_PDFDocument_beginOperation, 1);
 		jsB_propfun(J, "PDFDocument.beginImplicitOperation", ffi_PDFDocument_beginImplicitOperation, 0);
 		jsB_propfun(J, "PDFDocument.endOperation", ffi_PDFDocument_endOperation, 0);
+		jsB_propfun(J, "PDFDocument.abandonOperation", ffi_PDFDocument_abandonOperation, 0);
 		jsB_propfun(J, "PDFDocument.canUndo", ffi_PDFDocument_canUndo, 0);
 		jsB_propfun(J, "PDFDocument.canRedo", ffi_PDFDocument_canRedo, 0);
 		jsB_propfun(J, "PDFDocument.undo", ffi_PDFDocument_undo, 0);
@@ -10538,6 +11021,7 @@ int murun_main(int argc, const char** argv)
 		jsB_propcon(J, "fz_buffer", "Buffer", ffi_new_Buffer, 1);
 		jsB_propcon(J, "fz_pixmap", "Pixmap", ffi_new_Pixmap, 3);
 		jsB_propcon(J, "fz_image", "Image", ffi_new_Image, 2);
+		jsB_propcon(J, "fz_compressed_buffer", "ImageData", ffi_new_ImageData, 2);
 		jsB_propcon(J, "fz_font", "Font", ffi_new_Font, 2);
 		jsB_propcon(J, "fz_text", "Text", ffi_new_Text, 0);
 		jsB_propcon(J, "fz_path", "Path", ffi_new_Path, 0);

@@ -606,6 +606,9 @@ int
 fz_search_stext_page_test(fz_context *ctx, fz_stext_page *page, const char *needle, int *hit_mark, fz_quad *quads, int max_quads);
 
 int
+fz_search_stext_page_test(fz_context *ctx, fz_stext_page *page, const char *needle, int *hit_mark, fz_quad *quads, int max_quads);
+
+int
 fz_search_stext_page(fz_context *ctx, fz_stext_page *page, const char *needle, int *hit_mark, fz_quad *quads, int max_quads)
 {
 	struct highlight hits;

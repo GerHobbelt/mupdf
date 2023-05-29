@@ -161,3 +161,101 @@
     :arg scaledHeight: Height value.
 
     :return: `Pixmap`.
+
+.. method:: getImageData()
+
+    Return the image data for the image.
+
+    :return: `ImageData`.
+
+`ImageData`
+------------------------------
+
+`ImageData` is an object with keys for:
+
+`buffer`
+    The buffer supplied when creating the ImageData.
+
+`type`
+    The type from the image data parameters.
+
+`params`
+    An `ImageDataParams` dictionary containting the image data parameters.
+
+
+`ImageDataParams`
+------------------------------
+
+`ImageDataParams` is an object with keys for:
+
+`type`
+    Either of "raw", "fax", "flate", "lzw", "rld", "bmp", "gif", "jbig2", "jpeg", "jpx", "jxr", "png", "pnm", "tiff" or "unknown".
+
+`columns`
+    Width of the image in pixels (can be specified for fax, flate and lzw).
+
+`rows`
+    Height of the image in scanlines (can be specified for fax).
+
+`k`
+    Encoding scheme: < 0 for pure 2D encoding (Group 4), 0 for pure 1D encoding (Group 3, 1D), > 0 for mixed 1D and 2D encoding (Group3, 2D) where each 1D line is at most followed by <em>k - 1</em> 2D lines (can be specified for fax).
+
+`endOfLine`
+    Boolean flag indicating whether end-of-line bit patterns are required in the encoding (can be specified for fax).
+
+`encodedByteAlign`
+    Boolean flag indicating whether extar 0 bits before each encoded line should be expected (can be specified for fax).
+
+`endOfBlock`
+    Boolean flag indicating whether the encoded data is terminated by an end-of-block pattern (can be specified for fax).
+
+`blackIs1`
+    Boolean flag indicating whether 1 bits are to be interpreted as 1 and 0 bits as white, or the reverse (can be specified for fax).
+
+`damagedRowsBeforeError`
+    Number of damaged rows of data before an error occurs. (can be specified for fax).
+
+`predictor`
+    Predictor algorithm to decode the image, either of (can be specified for flate or lzw) from the table below:
+
+.. list-table::
+   :header-rows: 0
+
+   * - **1**
+     - None
+   * - **2**
+     - TIFF predictor 2 (only valid for lzw)
+   * - **10**
+     - PNG None
+   * - **11**
+     - PNG Sub
+   * - **12**
+     - PNG Up
+   * - **13**
+     - PNG Average
+   * - **14**
+     - PNG Paeth
+   * - **15**
+     - Optimal PNG predictor per scanline.
+
+
+`colors`
+    Number of interleaved color components per sample if predictor is > 1 (can be specified for flate or lzw).
+
+`bitsPerComponent`
+    Number of bits used to represent each color component if predictor is > 1 (can be specified for flate or lzw). Valid values are 1, 2, 4, 8, or 16.
+
+`earlyChange`
+    Code length increases are postponed as long as possible if set 0, or occurs one code early if set to 1 (can be specified for lzw).
+
+`embedded`
+    Boolean flag indicating whether the image data uses embedded organisation (can be specified for jbig2).
+
+`globals`
+    A buffer containing encoded global jbig2 segments (can be specified for jbig2)
+
+`colorTransform`
+    The color transform to use, 0 for no transform or 1 for YUV-to-RGB transform for 3 component images, or YUVK-to-CMYK for 4 compnent images, after decoding (can be specified for jpeg)
+
+`sMaskInData`
+    If 0 encoded soft-mask data is ignored, if 1 the image's data stream includes soft-mask data, if 2 the image's components contain colors that have been pre-blended with a background and an opacity channel (can be specified for jpx).

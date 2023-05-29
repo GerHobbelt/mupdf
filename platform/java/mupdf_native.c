@@ -112,6 +112,14 @@ static jclass cls_Story;
 static jclass cls_IOException;
 static jclass cls_IllegalArgumentException;
 static jclass cls_Image;
+static jclass cls_ImageData;
+static jclass cls_ImageData_FaxParams;
+static jclass cls_ImageData_FlateParams;
+static jclass cls_ImageData_JBIG2Params;
+static jclass cls_ImageData_JPEGParams;
+static jclass cls_ImageData_JPXParams;
+static jclass cls_ImageData_Params;
+static jclass cls_ImageData_LZWParams;
 static jclass cls_IndexOutOfBoundsException;
 static jclass cls_IntegerArray;
 static jclass cls_Link;
@@ -194,6 +202,31 @@ static jfieldID fid_FitzInputStream_markpos;
 static jfieldID fid_FitzInputStream_pointer;
 static jfieldID fid_Font_pointer;
 static jfieldID fid_Story_pointer;
+static jfieldID fid_ImageData_FaxParams_blackIs1;
+static jfieldID fid_ImageData_FaxParams_columns;
+static jfieldID fid_ImageData_FaxParams_damagedRowsBeforeError;
+static jfieldID fid_ImageData_FaxParams_encodedByteAlign;
+static jfieldID fid_ImageData_FaxParams_endOfBlock;
+static jfieldID fid_ImageData_FaxParams_endOfLine;
+static jfieldID fid_ImageData_FaxParams_k;
+static jfieldID fid_ImageData_FaxParams_rows;
+static jfieldID fid_ImageData_FlateParams_bitsPerComponent;
+static jfieldID fid_ImageData_FlateParams_colors;
+static jfieldID fid_ImageData_FlateParams_columns;
+static jfieldID fid_ImageData_FlateParams_predictor;
+static jfieldID fid_ImageData_JBIG2Params_embedded;
+static jfieldID fid_ImageData_JBIG2Params_globals;
+static jfieldID fid_ImageData_JPEGParams_colorTransform;
+static jfieldID fid_ImageData_JPXParams_sMaskInData;
+static jfieldID fid_ImageData_LZWParams_bitsPerComponent;
+static jfieldID fid_ImageData_LZWParams_colors;
+static jfieldID fid_ImageData_LZWParams_columns;
+static jfieldID fid_ImageData_LZWParams_earlyChange;
+static jfieldID fid_ImageData_LZWParams_predictor;
+static jfieldID fid_ImageData_Params_type;
+static jfieldID fid_ImageData_buffer;
+static jfieldID fid_ImageData_params;
+static jfieldID fid_ImageData_pointer;
 static jfieldID fid_Image_pointer;
 static jfieldID fid_Link_pointer;
 static jfieldID fid_LinkDestination_chapter;
@@ -329,6 +362,14 @@ static jmethodID mid_DOMAttribute_init;
 static jmethodID mid_FitzInputStream_init;
 static jmethodID mid_Font_init;
 static jmethodID mid_Image_init;
+static jmethodID mid_ImageData_init;
+static jmethodID mid_ImageData_FaxParams_init;
+static jmethodID mid_ImageData_FlateParams_init;
+static jmethodID mid_ImageData_LZWParams_init;
+static jmethodID mid_ImageData_JBIG2Params_init;
+static jmethodID mid_ImageData_JPEGParams_init;
+static jmethodID mid_ImageData_JPXParams_init;
+static jmethodID mid_ImageData_Params_init;
 static jmethodID mid_Link_init;
 static jmethodID mid_Location_init;
 static jmethodID mid_Matrix_init;
@@ -1023,6 +1064,54 @@ static int find_fids(JNIEnv *env)
 	fid_Image_pointer = get_field(&err, env, "pointer", "J");
 	mid_Image_init = get_method(&err, env, "<init>", "(J)V");
 
+	cls_ImageData_FaxParams = get_class(&err, env, PKG"ImageData$FaxParams");
+	fid_ImageData_FaxParams_columns = get_field(&err, env, "columns", "I");
+	fid_ImageData_FaxParams_rows = get_field(&err, env, "rows", "I");
+	fid_ImageData_FaxParams_k = get_field(&err, env, "k", "I");
+	fid_ImageData_FaxParams_endOfBlock = get_field(&err, env, "endOfBlock", "Z");
+	fid_ImageData_FaxParams_endOfLine = get_field(&err, env, "endOfLine", "Z");
+	fid_ImageData_FaxParams_encodedByteAlign = get_field(&err, env, "encodedByteAlign", "Z");
+	fid_ImageData_FaxParams_blackIs1 = get_field(&err, env, "blackIs1", "Z");
+	fid_ImageData_FaxParams_damagedRowsBeforeError = get_field(&err, env, "damagedRowsBeforeError", "I");
+	mid_ImageData_FaxParams_init = get_method(&err, env, "<init>", "(IIIZZZZI)V");
+
+	cls_ImageData_FlateParams = get_class(&err, env, PKG"ImageData$FlateParams");
+	fid_ImageData_FlateParams_columns = get_field(&err, env, "columns", "I");
+	fid_ImageData_FlateParams_colors = get_field(&err, env, "colors", "I");
+	fid_ImageData_FlateParams_predictor = get_field(&err, env, "predictor", "I");
+	fid_ImageData_FlateParams_bitsPerComponent = get_field(&err, env, "bitsPerComponent", "I");
+	mid_ImageData_FlateParams_init = get_method(&err, env, "<init>", "(IIII)V");
+
+	cls_ImageData_JBIG2Params = get_class(&err, env, PKG"ImageData$JBIG2Params");
+	fid_ImageData_JBIG2Params_embedded = get_field(&err, env, "embedded", "I");
+	fid_ImageData_JBIG2Params_globals = get_field(&err, env, "globals", "L"PKG"Buffer;");
+	mid_ImageData_JBIG2Params_init = get_method(&err, env, "<init>", "(IL"PKG"Buffer;)V");
+
+	cls_ImageData_JPEGParams = get_class(&err, env, PKG"ImageData$JPEGParams");
+	fid_ImageData_JPEGParams_colorTransform = get_field(&err, env, "colorTransform", "I");
+	mid_ImageData_JPEGParams_init = get_method(&err, env, "<init>", "(I)V");
+
+	cls_ImageData_JPXParams = get_class(&err, env, PKG"ImageData$JPXParams");
+	fid_ImageData_JPXParams_sMaskInData = get_field(&err, env, "sMaskInData", "I");
+	mid_ImageData_JPXParams_init = get_method(&err, env, "<init>", "(I)V");
+
+	cls_ImageData_LZWParams = get_class(&err, env, PKG"ImageData$LZWParams");
+	fid_ImageData_LZWParams_columns = get_field(&err, env, "columns", "I");
+	fid_ImageData_LZWParams_colors = get_field(&err, env, "colors", "I");
+	fid_ImageData_LZWParams_predictor = get_field(&err, env, "predictor", "I");
+	fid_ImageData_LZWParams_bitsPerComponent = get_field(&err, env, "bitsPerComponent", "I");
+	fid_ImageData_LZWParams_earlyChange = get_field(&err, env, "earlyChange", "I");
+	mid_ImageData_LZWParams_init = get_method(&err, env, "<init>", "(IIIII)V");
+
+	cls_ImageData_Params = get_class(&err, env, PKG"ImageData$Params");
+	fid_ImageData_Params_type = get_field(&err, env, "type", "I");
+	mid_ImageData_Params_init = get_method(&err, env, "<init>", "(I)V");
+
+	cls_ImageData = get_class(&err, env, PKG"ImageData");
+	fid_ImageData_buffer = get_field(&err, env, "buffer", "L"PKG"Buffer;");
+	fid_ImageData_params = get_field(&err, env, "params", "L"PKG"ImageData$Params;");
+	mid_ImageData_init = get_method(&err, env, "<init>", "(J)V");
+
 	cls_Link = get_class(&err, env, PKG"Link");
 	fid_Link_pointer = get_field(&err, env, "pointer", "J");
 	mid_Link_init = get_method(&err, env, "<init>", "(J)V");
@@ -1314,6 +1403,14 @@ static void lose_fids(JNIEnv *env)
 	(*env)->DeleteGlobalRef(env, cls_ArrayOfQuad);
 	(*env)->DeleteGlobalRef(env, cls_Buffer);
 	(*env)->DeleteGlobalRef(env, cls_ColorSpace);
+	(*env)->DeleteGlobalRef(env, cls_ImageData);
+	(*env)->DeleteGlobalRef(env, cls_ImageData_FaxParams);
+	(*env)->DeleteGlobalRef(env, cls_ImageData_FlateParams);
+	(*env)->DeleteGlobalRef(env, cls_ImageData_JBIG2Params);
+	(*env)->DeleteGlobalRef(env, cls_ImageData_JPEGParams);
+	(*env)->DeleteGlobalRef(env, cls_ImageData_JPXParams);
+	(*env)->DeleteGlobalRef(env, cls_ImageData_Params);
+	(*env)->DeleteGlobalRef(env, cls_ImageData_LZWParams);
 	(*env)->DeleteGlobalRef(env, cls_Context);
 	(*env)->DeleteGlobalRef(env, cls_Context_Log);
 	(*env)->DeleteGlobalRef(env, cls_Context_Version);
@@ -1445,6 +1542,7 @@ JNIEXPORT void JNICALL JNI_OnUnload(JavaVM *vm, void *reserved)
 #include "jni/fitzinputstream.c"
 #include "jni/font.c"
 #include "jni/image.c"
+#include "jni/imagedata.c"
 #include "jni/link.c"
 #include "jni/multiarchive.c"
 #include "jni/outlineiterator.c"

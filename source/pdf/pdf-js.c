@@ -1097,16 +1097,18 @@ static void pdf_js_load_document_level(pdf_js *js)
 			pdf_js_execute(js, buf, codebuf, NULL);
 			fz_free(ctx, codebuf);
 		}
+		pdf_end_operation(ctx, doc);
 	}
 	fz_always(ctx)
 	{
-		if (in_op)
-			pdf_end_operation(ctx, doc);
-
 		pdf_drop_name_tree(ctx, javascript);
 	}
 	fz_catch(ctx)
+	{
+		if (in_op)
+			pdf_abandon_operation(ctx, doc);
 		fz_rethrow(ctx);
+	}
 }
 
 void pdf_js_event_init(pdf_js *js, pdf_obj *target, const char *value, int willCommit)
@@ -1283,13 +1285,13 @@ void pdf_js_execute(pdf_js *js, const char *name, const char *source, char **res
 				js_pop(J, 1);
 			}
 		}
-	}
-	fz_always(ctx)
-	{
 		pdf_end_operation(ctx, js->doc);
 	}
 	fz_catch(ctx)
+	{
+		pdf_abandon_operation(ctx, js->doc);
 		fz_rethrow(ctx);
+	}
 }
 
 pdf_js_console *pdf_js_get_console(fz_context *ctx, pdf_document *doc)
