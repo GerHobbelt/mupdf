@@ -25,7 +25,7 @@ Within the "docs" folder update the associated restructured text (`.rst`) files.
 
 `sphinx-build -b html src build`
 
-> To force build all the stuff in the `_static` folder ( e.g. CSS), do:
+> To force build all the stuff in the `_static` folder (e.g. CSS), do:
 > `sphinx-build -a -b html src build`
 
 This then creates the HTML documentation within the folder "build" in the root of "docs".
