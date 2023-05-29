@@ -109,6 +109,7 @@ typedef struct {
 	fz_matrix ctm;
 	float xstep, ystep;
 	fz_irect area;
+	int flags;
 } fz_draw_state;
 
 typedef struct fz_draw_device
@@ -1856,7 +1857,8 @@ fz_draw_fill_image(fz_context *ctx, fz_device *devp, fz_image *image, fz_matrix 
 	if (color_params.op == 0)
 		eop = NULL;
 
-	local_ctm = fz_gridfit_matrix(devp->flags & FZ_DEVFLAG_GRIDFIT_AS_TILED, local_ctm);
+	if (!(dev->flags & FZ_DRAWDEV_FLAGS_TYPE3))
+		local_ctm = fz_gridfit_matrix(devp->flags & FZ_DEVFLAG_GRIDFIT_AS_TILED, local_ctm);
 
 	src_area = find_src_area_required(local_ctm, image, clip);
 	if (fz_is_empty_irect(src_area))
@@ -1973,7 +1975,8 @@ fz_draw_fill_image_mask(fz_context *ctx, fz_device *devp, fz_image *image, fz_ma
 	if (image->w == 0 || image->h == 0)
 		return;
 
-	local_ctm = fz_gridfit_matrix(devp->flags & FZ_DEVFLAG_GRIDFIT_AS_TILED, local_ctm);
+	if (!(dev->flags & FZ_DRAWDEV_FLAGS_TYPE3))
+		local_ctm = fz_gridfit_matrix(devp->flags & FZ_DEVFLAG_GRIDFIT_AS_TILED, local_ctm);
 
 	src_area = find_src_area_required(local_ctm, image, clip);
 	if (fz_is_empty_irect(src_area))
@@ -2052,7 +2055,8 @@ fz_draw_clip_image_mask(fz_context *ctx, fz_device *devp, fz_image *image, fz_ma
 		return;
 	}
 
-	local_ctm = fz_gridfit_matrix(devp->flags & FZ_DEVFLAG_GRIDFIT_AS_TILED, local_ctm);
+	if (!(dev->flags & FZ_DRAWDEV_FLAGS_TYPE3))
+		local_ctm = fz_gridfit_matrix(devp->flags & FZ_DEVFLAG_GRIDFIT_AS_TILED, local_ctm);
 
 	src_area = find_src_area_required(local_ctm, image, clip);
 	if (fz_is_empty_irect(src_area))
@@ -2717,6 +2721,8 @@ fz_draw_begin_tile(fz_context *ctx, fz_device *devp, fz_rect area, fz_rect view,
 		fz_knockout_begin(ctx, dev);
 
 	state = push_stack(ctx, dev, "tile");
+	state[1].flags = dev->flags;
+	dev->flags &= ~FZ_DRAWDEV_FLAGS_TYPE3;
 
 	local_view = fz_transform_rect(view, ctm);
 	bbox = fz_irect_from_rect(local_view);
@@ -2816,6 +2822,7 @@ fz_draw_end_tile(fz_context *ctx, fz_device *devp)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "unexpected end tile");
 
 	state = pop_stack(ctx, dev, "tile");
+	dev->flags = state[1].flags;
 
 	xstep = state[1].xstep;
 	ystep = state[1].ystep;
@@ -3130,6 +3137,7 @@ new_draw_device(fz_context *ctx, fz_matrix transform, fz_pixmap *dest, const fz_
 	dev->stack[0].scissor.y0 = dest->y;
 	dev->stack[0].scissor.x1 = dest->x + dest->w;
 	dev->stack[0].scissor.y1 = dest->y + dest->h;
+	dev->stack[0].flags = dev->flags;
 
 	if (clip)
 	{

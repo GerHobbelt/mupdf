@@ -4623,56 +4623,33 @@ void pdf_print_obj_to_json(fz_context* ctx, fz_output* out, pdf_obj* obj, int fl
 
 /* Convenience functions */
 
-static pdf_obj *
-pdf_dict_get_inheritable_imp(fz_context *ctx, pdf_obj *node, pdf_obj *key)
-{
-	pdf_cycle_list cycle[PDF_SANE_MAX_TREE_DEPTH];
-	pdf_cycle_list* cycle_up = NULL;
-	int depth;
 
-	for (depth = 0; node && depth < PDF_SANE_MAX_TREE_DEPTH; depth++)
-	{
-		pdf_obj* val = pdf_dict_get(ctx, node, key);
-		if (val)
-			return val;
-		if (pdf_cycle(ctx, &cycle[depth], cycle_up, node))
-			fz_throw(ctx, FZ_ERROR_GENERIC, "cycle in tree (parents)");
-		cycle_up = &cycle[depth];
-		node = pdf_dict_get(ctx, node, PDF_NAME(Parent));
-	}
+/*
+	Uses Floyd's cycle finding algorithm, modified to avoid starting
+	the 'slow' pointer for a while.
 
-	if (depth >= PDF_SANE_MAX_TREE_DEPTH)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "too much recursion in tree (parents)");
-
-	return NULL;
-}
-
+	https://www.geeksforgeeks.org/floyds-cycle-finding-algorithm/
+*/
 pdf_obj *
 pdf_dict_get_inheritable(fz_context *ctx, pdf_obj *node, pdf_obj *key)
 {
-	return pdf_dict_get_inheritable_imp(ctx, node, key);
-}
+	pdf_obj *slow = node;
+	int halfbeat = 11; /* Don't start moving slow pointer for a while. */
 
-static pdf_obj *
-pdf_dict_getp_inheritable_imp(fz_context *ctx, pdf_obj *node, const char *path)
-{
-	pdf_cycle_list cycle[PDF_SANE_MAX_TREE_DEPTH];
-	pdf_cycle_list* cycle_up = NULL;
-	int depth;
-
-	for (depth = 0; node && depth < PDF_SANE_MAX_TREE_DEPTH; depth++)
+	while (node)
 	{
-		pdf_obj* val = pdf_dict_getp(ctx, node, path);
+		pdf_obj *val = pdf_dict_get(ctx, node, key);
 		if (val)
 			return val;
-		if (pdf_cycle(ctx, &cycle[depth], cycle_up, node))
-			fz_throw(ctx, FZ_ERROR_GENERIC, "cycle in tree (parents)");
-		cycle_up = &cycle[depth];
 		node = pdf_dict_get(ctx, node, PDF_NAME(Parent));
+		if (node == slow)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "cycle in resources");
+		if (--halfbeat == 0)
+		{
+			slow = pdf_dict_get(ctx, slow, PDF_NAME(Parent));
+			halfbeat = 2;
+		}
 	}
-
-	if (depth >= PDF_SANE_MAX_TREE_DEPTH)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "too much recursion in tree (parents)");
 
 	return NULL;
 }
@@ -4680,7 +4657,25 @@ pdf_dict_getp_inheritable_imp(fz_context *ctx, pdf_obj *node, const char *path)
 pdf_obj *
 pdf_dict_getp_inheritable(fz_context *ctx, pdf_obj *node, const char *path)
 {
-	return pdf_dict_getp_inheritable_imp(ctx, node, path);
+	pdf_obj *slow = node;
+	int halfbeat = 11; /* Don't start moving slow pointer for a while. */
+
+	while (node)
+	{
+		pdf_obj *val = pdf_dict_getp(ctx, node, path);
+		if (val)
+			return val;
+		node = pdf_dict_get(ctx, node, PDF_NAME(Parent));
+		if (node == slow)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "cycle in resources");
+		if (--halfbeat == 0)
+		{
+			slow = pdf_dict_get(ctx, slow, PDF_NAME(Parent));
+			halfbeat = 2;
+		}
+	}
+
+	return NULL;
 }
 
 void pdf_dict_put_bool(fz_context *ctx, pdf_obj *dict, pdf_obj *key, int x)
