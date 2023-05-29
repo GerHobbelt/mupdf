@@ -78,6 +78,9 @@ struct pdf_gstate
 	pdf_material stroke;
 	pdf_material fill;
 
+	/* pattern paint type 2 */
+	int ismask;
+
 	/* text state */
 	pdf_text_state text;
 
@@ -505,6 +508,8 @@ pdf_show_pattern(fz_context *ctx, pdf_run_processor *pr, pdf_pattern *pat, int p
 
 	if (pat->ismask)
 	{
+		/* Inhibit any changes to the color since we're drawing an uncolored pattern. */
+		gstate->ismask = 1;
 		pdf_unset_pattern(ctx, pr, PDF_FILL);
 		pdf_unset_pattern(ctx, pr, PDF_STROKE);
 		if (what == PDF_FILL)
@@ -1312,6 +1317,8 @@ pdf_init_gstate(fz_context *ctx, pdf_gstate *gs, fz_matrix ctm)
 
 	gs->fill.color_params = fz_default_color_params;
 	gs->stroke.color_params = fz_default_color_params;
+
+	gs->ismask = 0;
 }
 
 static void
@@ -1334,6 +1341,10 @@ pdf_set_colorspace(fz_context *ctx, pdf_run_processor *pr, int what, fz_colorspa
 	int n = fz_colorspace_n(ctx, colorspace);
 
 	gstate = pdf_flush_text(ctx, pr);
+
+	/* Don't change color if we're drawing an uncolored pattern tile! */
+	if (gstate->ismask)
+		return;
 
 	mat = what == PDF_FILL ? &gstate->fill : &gstate->stroke;
 
@@ -1362,6 +1373,10 @@ pdf_set_color(fz_context *ctx, pdf_run_processor *pr, int what, float *v)
 	pdf_material *mat;
 
 	gstate = pdf_flush_text(ctx, pr);
+
+	/* Don't change color if we're drawing an uncolored pattern tile! */
+	if (gstate->ismask)
+		return;
 
 	mat = what == PDF_FILL ? &gstate->fill : &gstate->stroke;
 
@@ -1764,6 +1779,9 @@ push_marked_content(fz_context *ctx, pdf_run_processor *proc, const char *tagstr
 	fz_structure standard;
 	pdf_obj *mc_dict = NULL;
 
+	/* Flush any pending text so it's not in the wrong layer. */
+	pdf_flush_text(ctx, proc);
+
 	if (!tagstr)
 		tagstr = "Untitled";
 	tag = pdf_new_name(ctx, tagstr);
@@ -1850,6 +1868,9 @@ pop_marked_content(fz_context *ctx, pdf_run_processor *proc, int neat)
 		pdf_drop_obj(ctx, val);
 		return;
 	}
+
+	/* Make sure that any pending text is written into the correct layer. */
+	pdf_flush_text(ctx, proc);
 
 	/* Close structure/layers here, in reverse order to how we opened them. */
 	fz_try(ctx)
