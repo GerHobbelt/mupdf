@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libpmemkv</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFB8087D}</ProjectGuid>
+    <RootNamespace>libpmemkv</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMKV;PMEMKV_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMKV;PMEMKV_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMKV;PMEMKV_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMKV;PMEMKV_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMKV;PMEMKV_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMKV;PMEMKV_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMKV;PMEMKV_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMKV;PMEMKV_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMKV;PMEMKV_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMKV;PMEMKV_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMKV;PMEMKV_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMKV;PMEMKV_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_basic_c/pmemkv_basic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_basic_cpp/pmemkv_basic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_comparator_c/pmemkv_comparator.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_comparator_cpp/pmemkv_comparator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_config_c/pmemkv_basic_config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_config_c/pmemkv_config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_fill_cpp/pmemkv_fill.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_iterator_c/pmemkv_iterator.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_iterator_cpp/pmemkv_iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_open_cpp/pmemkv_open.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_pmemobj_cpp/pmemkv_pmemobj.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_transaction_c/pmemkv_transaction.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_transaction_cpp/pmemkv_transaction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/src/engine.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/src/engines-experimental/csmap.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/src/engines-experimental/radix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/src/engines-experimental/robinhood.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/src/engines-experimental/stree.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/src/engines-experimental/tree3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/src/engines-testing/dram_vcmap.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/src/engines/blackhole.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/src/engines/cmap.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/src/engines/vcmap.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/src/engines/vsmap.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/src/fast_hash.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/src/iterator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/src/libpmemkv.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/src/libpmemkv_json_config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/src/out.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/c_api/null_db_config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/common/check_is_pmem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/common/test_backtrace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/comparator/basic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/comparator/basic_persistent.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/comparator/custom_reopen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/comparator/custom_reopen.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/comparator/default_reopen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/comparator/default_reopen.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/compatibility/cmap.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/config/config_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/config/config_cpp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/config/deprecated_config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/config/deprecated_config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/config/json_to_config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/all/error_handling_oom.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/all/iterate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/all/iterator_basic.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/all/iterator_not_supported.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/all/open.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/all/put_get_remove.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/all/put_get_remove_charset_params.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/all/put_get_remove_long_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/all/put_get_remove_not_aligned.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/all/put_get_remove_params.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/all/put_get_std_map.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/concurrent/iterate_params.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/concurrent/iterator_concurrent.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/concurrent/put_get_remove_gen_params.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/concurrent/put_get_remove_params.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/concurrent/put_get_remove_single_op_params.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/memkind/error_handling.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/persistent/not_found_verify.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/persistent/overwrite_verify.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/persistent/put_get_std_map_multiple_reopen.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/persistent/put_remove_verify.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/persistent/put_verify.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/persistent/put_verify_asc_params.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/persistent/put_verify_desc_params.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/pmemobj/create_or_error_if_exists.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/pmemobj/error_handling_create.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/pmemobj/error_handling_defrag.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/pmemobj/error_handling_tx_oid.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/pmemobj/error_handling_tx_oom.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/pmemobj/error_handling_tx_path.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/pmemobj/mock_tx_alloc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/pmemobj/put_get_std_map_defrag.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/pmemobj/put_get_std_map_oid.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/pmreorder/erase.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/pmreorder/insert.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/pmreorder/iterator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/pmreorder/recover.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/sorted/get_above_gen_params.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/sorted/get_all_gen_params.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/sorted/get_below_gen_params.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/sorted/get_between_gen_params.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/sorted/get_equal_above_gen_params.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/sorted/get_equal_below_gen_params.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/sorted/iterate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/sorted/iterator_sorted.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/transaction/not_supported.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/transaction/put.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/transaction/put_pmreorder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/transaction/remove.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/engines/blackhole/blackhole_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/error_msg_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/result/result.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmemkv/tests/wrong_engine_name_test.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/comparator/comparator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/comparator/pmemobj_comparator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/comparator/volatile_comparator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/engines-experimental/csmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/engines-experimental/radix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/engines-experimental/robinhood.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/engines-experimental/stree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/engines-experimental/stree/persistent_b_tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/engines-experimental/tree3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/engines-testing/dram_vcmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/engines/basic_vcmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/engines/blackhole.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/engines/cmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/engines/memkind_allocator_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/engines/vcmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/engines/vsmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/exceptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/fast_hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/libpmemkv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/libpmemkv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/libpmemkv_json_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/out.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/pmemobj_engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/polymorphic_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/transaction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/valgrind/drd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/valgrind/helgrind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/valgrind/memcheck.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/valgrind/pmemcheck.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/src/valgrind/valgrind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/tests/common/test_backtrace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/tests/common/unittest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/tests/common/unittest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/pmemobj/error_handling_tx.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/pmemobj/mock_tx_alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/put_get_std_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmemkv/tests/engine_scenarios/sorted/iterate.hpp" />
+    <Image Include="../../thirdparty/owemdjee/pmemkv/doc/architecture.png" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/INSTALLING.md" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/cmake/FindLIBPMEM.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/cmake/FindLIBPMEMOBJ.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/cmake/cmake_uninstall.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/cmake/helpers.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/cmake/libpmemobj++.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/cmake/memkind.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/cmake/packages.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/cmake/rapidjson.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/cmake/tbb.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/doc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/doc/ENGINES-experimental.md" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/doc/ENGINES-testing.md" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/doc/RELEASE_STEPS.md" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/doc/libpmemkv.3.md.in" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/doc/libpmemkv.7.md" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/doc/libpmemkv.Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/doc/libpmemkv_config.3.md.in" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/doc/libpmemkv_iterator.3.md.in" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/doc/libpmemkv_json_config.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/doc/libpmemkv_tx.3.md.in" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_basic_c/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_basic_cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_comparator_c/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_comparator_cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_config_c/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_fill_cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_iterator_c/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_iterator_cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_open_cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_pmemobj_cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_transaction_c/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/examples/pmemkv_transaction_cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/libpmemkv.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/libpmemkv_json_config.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/src/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/src/valgrind/README" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/cmake/pmreorder.conf" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/cmake/run_default.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/compatibility/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/compatibility/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/compatibility/cmap.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/ctest_helpers.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/engines/blackhole/default.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/engines/dram/default.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/engines/memkind_based/default.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/engines/memkind_based/default_no_config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/engines/memkind_based/memkind/error_handling.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/engines/pmemobj_based/default.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/engines/pmemobj_based/default_no_config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/engines/pmemobj_based/helpers.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/engines/pmemobj_based/persistent/insert_check.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/engines/pmemobj_based/pmemobj/create_if_missing.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/engines/pmemobj_based/pmemobj/error_handling_create.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/engines/pmemobj_based/pmemobj/error_handling_tx_oid.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/engines/pmemobj_based/pmemobj/error_handling_tx_path.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/engines/pmemobj_based/pmemobj/put_get_std_map_create_or_error_if_exists.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/engines/pmemobj_based/pmemobj/put_get_std_map_oid.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/engines/pmemobj_based/pmreorder/erase.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/engines/pmemobj_based/pmreorder/insert.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/engines/pmemobj_based/pmreorder/iterator.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/engines/pmemobj_based/pmreorder/pmreorder.conf" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/engines/pmemobj_based/pmreorder/recover.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/helpers.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/tests/true.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/check_license/check-headers.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/check_license/file-exceptions.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/docker/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/docker/images/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/docker/images/build-image.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/docker/images/download-scripts.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/docker/images/install-bindings-dependencies.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/docker/images/install-libndctl.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/docker/images/install-libpmemobj-cpp.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/docker/images/install-memkind.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/docker/images/install-pmdk.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/docker/images/install-rapidjson.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/docker/images/install-valgrind.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/docker/images/push-image.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/docker/prepare-for-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/docker/pull-or-rebuild-image.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/docker/run-bindings.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/docker/run-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/docker/run-compatibility.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/docker/run-coverity.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/docker/run-doc-update.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/docker/run-test-building.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/docker/set-ci-vars.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/jenkins/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/jenkins/scripts/common.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/jenkins/scripts/createNamespace.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/jenkins/scripts/removeNamespaces.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmemkv/utils/md2man/md2man.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -301,6 +301,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/example/error_handling_example.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/example/error_policies_example.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/example/error_policy_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/example/estrin_vs_horner_accuracy.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/example/f_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/example/factorial_example.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/example/fft_sines_table.cpp" />
@@ -468,6 +469,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/reporting/performance/constants_performance.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/reporting/performance/cubic_roots_performance.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/reporting/performance/ellint_performance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/reporting/performance/estrin_performance.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/reporting/performance/is_intel_win.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/reporting/performance/jacobi_theta_performance.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/reporting/performance/logaddexp_performance.cpp" />
@@ -1021,8 +1023,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/git_issue_810.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/git_issue_826.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/git_issue_845.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/git_issue_898.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/git_issue_959.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/git_issue_961.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/header_deprecated_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/hypot_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/issue893.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/jacobi_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/lanczos_smoothing_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/legendre_stieltjes_test.cpp" />
@@ -1063,7 +1069,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/quaternion_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/quintic_hermite_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/rsqrt_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/scipy_issue_14901.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/scipy_issue_15101.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/scipy_issue_17146.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/scipy_issue_17388.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/scipy_issue_17916.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/scipy_issue_17916_nct.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/septic_hermite_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/signal_statistics_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/simple_continued_fraction_test.cpp" />
@@ -1125,6 +1136,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/test_ellint_d.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/test_erf.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/test_error_handling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/test_estrin.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/test_expint.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/test_exponential_dist.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/math/test/test_extreme_value.cpp" />
@@ -1827,6 +1839,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/math/include/boost/math/tools/detail/rational_horner3_8.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/math/include/boost/math/tools/detail/rational_horner3_9.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/math/include/boost/math/tools/engel_expansion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/math/include/boost/math/tools/estrin.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/math/include/boost/math/tools/fraction.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/math/include/boost/math/tools/header_deprecated.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/math/include/boost/math/tools/is_constant_evaluated.hpp" />
@@ -2352,6 +2365,7 @@
     <Image Include="../../thirdparty/owemdjee/boost/libs/math/doc/graphs/geometric_pdf_2.png" />
     <Image Include="../../thirdparty/owemdjee/boost/libs/math/doc/graphs/geometric_pdf_discrete.png" />
     <Image Include="../../thirdparty/owemdjee/boost/libs/math/doc/graphs/hermite.png" />
+    <Image Include="../../thirdparty/owemdjee/boost/libs/math/doc/graphs/horner_vs_estrin_accuracy.png" />
     <Image Include="../../thirdparty/owemdjee/boost/libs/math/doc/graphs/hyperbolic.png" />
     <Image Include="../../thirdparty/owemdjee/boost/libs/math/doc/graphs/hyperexponential_pdf.png" />
     <Image Include="../../thirdparty/owemdjee/boost/libs/math/doc/graphs/hyperexponential_pdf_samemean.png" />
@@ -2502,6 +2516,7 @@
     <Text Include="../../thirdparty/owemdjee/boost/libs/math/doc/quaternion/output_more.txt" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/math/example/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/math/example/dot_net_example/boost_math/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/boost/libs/math/example/dot_net_example/distribution_explorer/App.config" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/math/example/dot_net_example/distribution_explorer/distribution.txt" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/math/example/dot_net_example/distribution_explorer/readme.txt" />
     <Text Include="../../thirdparty/owemdjee/boost/libs/math/meta/libraries.json" />

@@ -1,0 +1,1036 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libpmemobj-cpp</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF37C19E}</ProjectGuid>
+    <RootNamespace>libpmemobj-cpp</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMOBJ_CPP;PMEMOBJ_CPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMOBJ_CPP;PMEMOBJ_CPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMOBJ_CPP;PMEMOBJ_CPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMOBJ_CPP;PMEMOBJ_CPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMOBJ_CPP;PMEMOBJ_CPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMOBJ_CPP;PMEMOBJ_CPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMOBJ_CPP;PMEMOBJ_CPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMOBJ_CPP;PMEMOBJ_CPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMOBJ_CPP;PMEMOBJ_CPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMOBJ_CPP;PMEMOBJ_CPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMOBJ_CPP;PMEMOBJ_CPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMEMOBJ_CPP;PMEMOBJ_CPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/benchmarks/concurrent_hash_map/insert_open.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/benchmarks/radix/radix_tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/benchmarks/self_relative_pointer/assignment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/benchmarks/self_relative_pointer/get.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/array/array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/concurrent_hash_map/concurrent_hash_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/concurrent_hash_map/concurrent_hash_map_string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/defrag/defrag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/inline_string/inline_string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/make_persistent/make_persistent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/map_cli/map_cli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/mpsc_queue/mpsc_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/mutex/mutex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/panaconda/panaconda.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/persistent/persistent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pman/pman.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pmpong/Ball.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pmpong/GameController.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pmpong/GameOverView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pmpong/GameView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pmpong/MainGame.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pmpong/MenuView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pmpong/Paddle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pmpong/PongGameStatus.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pmpong/Pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pool/pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pool/pool_as_class_member.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/queue/queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/radix_tree/radix_tree_basic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/radix_tree/radix_tree_complex_value.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/radix_tree/radix_tree_custom_key.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/radix_tree/radix_tree_dot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/radix_tree/radix_tree_inline_string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/radix_tree/radix_tree_inline_string_uint8t_key.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/segment_vector/segment_vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/simplekv/simplekv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/simplekv_rebuild/simplekv_rebuild.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/simplekv_rebuild/simplekv_rebuild_string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/slab/slab.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/string/string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/transaction/transaction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/v/v.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/aggregate_initialization/aggregate_initialization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/allocator/allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/array/array_algorithms.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/array/array_is_aggregate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/array/array_iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/array/array_iterator_noconv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/array/array_modifiers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/array/array_slice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/array/array_slice_pmreorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/check_is_pmem/check_is_pmem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/common/helpers_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/compatibility/concurrent_hash_map_feature_size/concurrent_hash_map_feature_size.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/compatibility/version/version_1.10.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/compatibility/version/version_1.11.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/compatibility/version/version_1.12.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/compatibility/version/version_1.7.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/compatibility/version/version_1.8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/compatibility/version/version_1.9.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map/concurrent_hash_map_deadlock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map/concurrent_hash_map_defrag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map/concurrent_hash_map_insert_erase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map/concurrent_hash_map_insert_lookup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map/concurrent_hash_map_insert_or_assign.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map/concurrent_hash_map_insert_reopen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map/concurrent_hash_map_layout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map/concurrent_hash_map_pmreorder_simple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map/concurrent_hash_map_rehash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map/concurrent_hash_map_rehash_check.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map/concurrent_hash_map_rehash_deadlock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map/concurrent_hash_map_rehash_recursive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map/concurrent_hash_map_singlethread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map/concurrent_hash_map_tbb_insert_erase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map/concurrent_hash_map_tbb_insert_lookup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map/concurrent_hash_map_tx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map_pmreorder_break_insert/concurrent_hash_map_pmreorder_break_insert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map_pmreorder_erase/concurrent_hash_map_pmreorder_erase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map_pmreorder_multiple_buckets/concurrent_hash_map_pmreorder_multiple_buckets.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map_rehash_break/concurrent_hash_map_rehash_break.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_map/concurrent_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_map/concurrent_map_insert_reopen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_map/concurrent_map_pmreorder_simple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_map/concurrent_map_singlethread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_map/concurrent_map_tx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_map_mt_gdb/concurrent_map_mt_gdb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_map_pmreorder_erase/concurrent_map_pmreorder_erase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/cond_var/cond_var.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/cond_var/cond_var_posix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ctl/ctl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ctl_win/ctl_win.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/defrag/defrag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/defrag/defrag_vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/detail_common/detail_common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ebr/ebr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/enumerable_thread_specific/enumerable_thread_specific_access.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/enumerable_thread_specific/enumerable_thread_specific_ctor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/enumerable_thread_specific/enumerable_thread_specific_initialize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/enumerable_thread_specific/enumerable_thread_specific_iterators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/enumerable_thread_specific/enumerable_thread_specific_layout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/enumerable_thread_specific/enumerable_thread_specific_size.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/array.cons/copy_assignment.fail.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/array.cons/default.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/array.cons/implicit_copy.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/array.cons/implicit_copy_const.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/array.cons/initializer_list.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/array.data/data.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/array.data/data_const.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/array.fill/fill.fail.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/array.fill/fill.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/array.size/size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/array.special/swap.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/array.swap/swap.fail.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/array.swap/swap.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/array.tuple/get.fail.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/array.tuple/get.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/array.tuple/get_const.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/array.tuple/get_const_rv.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/array.tuple/get_rv.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/at.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/begin.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/compare.fail_0.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/compare.fail_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/compare.fail_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/compare.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/contiguous.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/empty.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/front_back.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/indexing.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/iterators.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/max_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/size_and_alignment.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/array/types.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/char.bad.fail.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.access/at.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.access/back.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.access/front.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.access/index.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.capacity/capacity.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.capacity/clear.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.capacity/empty.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.capacity/length.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.capacity/max_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.capacity/over_max_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.capacity/reserve.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.capacity/resize_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.capacity/resize_size_char.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.capacity/shrink_to_fit.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.capacity/size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.cons/T_size_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.cons/brace_assignment.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.cons/char_assignment.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.cons/copy.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.cons/copy_assignment.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.cons/dtor_noexcept.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.cons/initializer_list.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.cons/initializer_list_assignment.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.cons/iter_alloc.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.cons/move.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.cons/move_assignment.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.cons/pointer_alloc.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.cons/pointer_assignment.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.cons/pointer_size_alloc.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.cons/size_char_alloc.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.cons/string_view.fail.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.cons/string_view.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.cons/string_view_assignment.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.cons/substr.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ends_with/ends_with.char.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ends_with/ends_with.ptr.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ends_with/ends_with.string_view.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.iterators/begin.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.iterators/cbegin.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.iterators/cend.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.iterators/crbegin.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.iterators/crend.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.iterators/end.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.iterators/iterators.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.iterators/rbegin.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.iterators/rend.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/nothing_to_do.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_append/T_size_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_append/initializer_list.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_append/iterator.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_append/pointer.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_append/pointer_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_append/push_back.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_append/size_char.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_append/string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_append/string_size_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_append/string_view.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_assign/T_size_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_assign/initializer_list.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_assign/iterator.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_assign/pointer.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_assign/pointer_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_assign/rv_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_assign/size_char.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_assign/string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_assign/string_size_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_assign/string_view.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_copy/copy.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_erase/iter.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_erase/iter_iter.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_erase/pop_back.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_erase/size_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_insert/iter_char.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_insert/iter_initializer_list.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_insert/iter_iter_iter.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_insert/iter_size_char.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_insert/size_T_size_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_insert/size_pointer.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_insert/size_pointer_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_insert/size_size_char.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_insert/size_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_insert/size_string_size_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_insert/string_view.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_op_plus_equal/char.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_op_plus_equal/initializer_list.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_op_plus_equal/pointer.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_op_plus_equal/string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_replace/iter_iter_initializer_list.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_replace/iter_iter_iter_iter.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_replace/iter_iter_pointer.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_replace/iter_iter_pointer_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_replace/iter_iter_size_char.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_replace/iter_iter_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_replace/iter_iter_string_view.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_replace/size_size_T_size_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_replace/size_size_pointer.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_replace/size_size_pointer_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_replace/size_size_size_char.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_replace/size_size_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_replace/size_size_string_size_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_replace/size_size_string_view.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/string_swap/swap.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string.io/get_line.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string.io/get_line_delim.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string.io/get_line_delim_rv.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string.io/get_line_rv.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string.io/stream_extract.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string.io/stream_insert.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string.special/swap.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string.special/swap_noexcept.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_op+/char_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_op+/pointer_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_op+/string_char.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_op+/string_pointer.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_op+/string_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_opeq/pointer_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_opeq/string_pointer.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_opeq/string_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_opeq/string_string_view.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_opeq/string_view_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_opge/pointer_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_opge/string_pointer.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_opge/string_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_opge/string_string_view.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_opge/string_view_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_opgt/pointer_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_opgt/string_pointer.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_opgt/string_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_opgt/string_string_view.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_opgt/string_view_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_ople/pointer_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_ople/string_pointer.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_ople/string_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_ople/string_string_view.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_ople/string_view_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_oplt/pointer_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_oplt/string_pointer.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_oplt/string_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_oplt/string_string_view.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_oplt/string_view_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_opne/pointer_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_opne/string_pointer.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_opne/string_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_opne/string_string_view.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.nonmembers/string_opne/string_view_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string.accessors/c_str.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string.accessors/data.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_compare/pointer.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_compare/size_size_T_size_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_compare/size_size_pointer.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_compare/size_size_pointer_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_compare/size_size_string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_compare/size_size_string_size_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_compare/size_size_string_view.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_compare/string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_compare/string_view.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find.first.not.of/char_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find.first.not.of/pointer_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find.first.not.of/pointer_size_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find.first.not.of/string_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find.first.not.of/string_view_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find.first.of/char_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find.first.of/pointer_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find.first.of/pointer_size_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find.first.of/string_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find.first.of/string_view_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find.last.not.of/char_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find.last.not.of/pointer_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find.last.not.of/pointer_size_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find.last.not.of/string_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find.last.not.of/string_view_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find.last.of/char_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find.last.of/pointer_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find.last.of/pointer_size_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find.last.of/string_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find.last.of/string_view_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find/char_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find/pointer_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find/pointer_size_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find/string_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_find/string_view_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_rfind/char_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_rfind/pointer_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_rfind/pointer_size_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_rfind/string_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_rfind/string_view_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.ops/string_substr/substr.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.require/contiguous.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.starts_with/starts_with.char.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.starts_with/starts_with.ptr.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.starts_with/starts_with.string_view.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/traits_mismatch.fail.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/types.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/contains.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.access/empty.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.access/iterator.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.access/max_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.access/size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.cons/alloc.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.cons/assign_initializer_list.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.cons/compare.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.cons/compare_alloc.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.cons/copy.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.cons/copy_alloc.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.cons/copy_assign.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.cons/default.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.cons/dtor_noexcept.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.cons/initializer_list.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.cons/initializer_list_compare.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.cons/initializer_list_compare_alloc.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.cons/iter_iter.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.cons/iter_iter_comp_alloc.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.cons/move.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.cons/move_alloc.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.cons/move_assign.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.modifiers/clear.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.modifiers/emplace.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.modifiers/erase_iter.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.modifiers/erase_iter_iter.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.modifiers/erase_key.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.modifiers/insert_cv.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.modifiers/insert_initializer_list.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.modifiers/insert_iter_iter.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.modifiers/insert_or_assign.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.modifiers/insert_rv.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.modifiers/try.emplace.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.ops/count.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.ops/count0.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.ops/equal_range.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.ops/equal_range0.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.ops/equal_range_transparent.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.ops/find.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.ops/find0.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.ops/lower_bound.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.ops/lower_bound0.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.ops/upper_bound.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.ops/upper_bound0.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.special/member_swap.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/map.special/non_member_swap.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/types.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.access/at.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.access/back.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.access/data.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.access/front.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.access/index.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.capacity/capacity.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.comparison/opeq.string_view.pointer.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.comparison/opeq.string_view.string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.comparison/opeq.string_view.string_view.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.comparison/opge.string_view.pointer.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.comparison/opge.string_view.string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.comparison/opge.string_view.string_view.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.comparison/opgt.string_view.pointer.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.comparison/opgt.string_view.string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.comparison/opgt.string_view.string_view.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.comparison/ople.string_view.pointer.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.comparison/ople.string_view.string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.comparison/ople.string_view.string_view.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.comparison/oplt.string_view.pointer.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.comparison/oplt.string_view.string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.comparison/oplt.string_view.string_view.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.comparison/opne.string_view.pointer.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.comparison/opne.string_view.string.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.comparison/opne.string_view.string_view.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.iterators/begin.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.iterators/end.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.iterators/rbegin.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.iterators/rend.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.modifiers/remove_prefix.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.modifiers/remove_suffix.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.modifiers/swap.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.ops/compare.pointer.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.ops/compare.pointer_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.ops/compare.size_size_sv.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.ops/compare.size_size_sv_pointer_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.ops/compare.size_size_sv_size_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.ops/compare.sv.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.ops/copy.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/string.view/string.view.ops/substr.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/contiguous.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/iterators.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/types.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.capacity/capacity.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.capacity/empty.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.capacity/max_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.capacity/reserve.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.capacity/resize_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.capacity/resize_size_value.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.capacity/shrink_to_fit.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.capacity/size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.capacity/swap.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.cons/assign_copy.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.cons/assign_initializer_list.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.cons/assign_iter_iter.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.cons/assign_move.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.cons/assign_size_value.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.cons/construct_default.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.cons/construct_iter_iter.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.cons/construct_size.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.cons/construct_size_value.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.cons/copy.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.cons/dtor_noexcept.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.cons/initializer_list.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.cons/move.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.cons/op_equal_initializer_list.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.data/data.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.data/data_const.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.modifiers/clear.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.modifiers/emplace.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.modifiers/emplace_back.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.modifiers/emplace_extra.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.modifiers/erase_iter.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.modifiers/erase_iter_iter.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.modifiers/insert_iter_initializer_list.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.modifiers/insert_iter_iter_iter.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.modifiers/insert_iter_rvalue.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.modifiers/insert_iter_size_value.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.modifiers/insert_iter_value.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.modifiers/pop_back.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.modifiers/push_back.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.modifiers/push_back_exception_safety.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.modifiers/push_back_rvalue.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/vector/vector.special/swap.pass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/inline_string/inline_string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/iterator_traits/iterator_traits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/make_persistent/make_persistent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/make_persistent/make_persistent_array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/make_persistent/make_persistent_array_atomic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/make_persistent/make_persistent_atomic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/map/map_ctor_and_assignment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/map/map_ctor_exception_nopmem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/map/map_ctor_exception_notx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/map/map_find_lower_lower_eq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/map/map_txabort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mpsc_queue/basic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mpsc_queue/consume_interrupt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mpsc_queue/consume_multipass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mpsc_queue/empty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mpsc_queue/mt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mpsc_queue/pmreorder/recovery.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mpsc_queue/pmreorder/recovery_after_consume.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mpsc_queue/recovery_order.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mpsc_queue/ringbuf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mutex/mutex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mutex/mutex_posix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mutex/shared_mutex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mutex/shared_mutex_posix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mutex/timed_mtx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mutex/timed_mtx_posix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/p_ext/p_ext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/pair/pair.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/pool/pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/pool/pool_cleanup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/pool/pool_primitives.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/pool/pool_win.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ptr/atomic_persistent_aware_ptr_pmem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ptr/atomic_persistent_aware_ptr_pmreorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ptr/ptr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ptr/ptr_arith.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ptr/self_relative_ptr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ptr/self_relative_ptr_arith.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ptr/self_relative_ptr_atomic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ptr/self_relative_ptr_atomic_pmem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/radix_tree/radix_basic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/radix_tree/radix_concurrent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/radix_tree/radix_concurrent_erase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/radix_tree/radix_concurrent_iterate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/radix_tree/radix_concurrent_overwrite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/radix_tree/radix_garbage_collection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/radix_tree/radix_large.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/radix_tree/radix_tx_abort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/string/string_access.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/string/string_assign_tx_abort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/string/string_capacity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/string/string_exceptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/string/string_layout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/string/string_modifiers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/string/string_range.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/string/string_snapshot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/string/string_swap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/string_view/string_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/temp_value/temp_value.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/test_backtrace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/transaction/transaction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/transaction/transaction_basic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/transaction/transaction_flat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/v/v.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/valgrind_internal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/vector/vector_assign_exceptions_length.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/vector/vector_assign_exceptions_oom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/vector/vector_assign_txabort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/vector/vector_capacity_exceptions_length.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/vector/vector_capacity_exceptions_oom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/vector/vector_capacity_txabort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/vector/vector_comp_operators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/vector/vector_ctor_capacity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/vector/vector_ctor_check_copy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/vector/vector_ctor_exceptions_nopmem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/vector/vector_ctor_exceptions_notx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/vector/vector_ctor_exceptions_oom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/vector/vector_ctor_move.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/vector/vector_data_access.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/vector/vector_dtor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/vector/vector_iterators_access.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/vector/vector_layout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/vector/vector_modifiers_exceptions_oom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/vector/vector_modifiers_txabort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/vector/vector_modifiers_type_requirements.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/vector/vector_parameters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/vector/vector_range.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/vector/vector_std_arg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/volatile_state/volatile_state.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/benchmarks/measure.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/libpmemobj_cpp_examples_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/libpmemobj_cpp_examples_list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/map_cli/ctree_map_persistent.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/map_cli/ctree_map_transient.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/panaconda/panaconda.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pmpong/Ball.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pmpong/GameConstants.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pmpong/GameController.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pmpong/GameOverView.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pmpong/GameView.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pmpong/MenuView.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pmpong/Paddle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pmpong/PongGameStatus.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pmpong/Pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pmpong/View.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/simplekv/simplekv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/simplekv_rebuild/simplekv_rebuild.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/allocation_flag.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/allocator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/condition_variable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/container/array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/container/basic_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/container/concurrent_hash_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/container/detail/concurrent_skip_list_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/container/detail/contiguous_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/container/detail/segment_vector_policies.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/container/segment_vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/container/string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/container/vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/defrag.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/detail/array_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/detail/atomic_backoff.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/detail/check_persistent_ptr_array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/detail/common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/detail/conversions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/detail/ctl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/detail/ebr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/detail/enumerable_thread_specific.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/detail/integer_sequence.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/detail/iterator_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/detail/life.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/detail/make_atomic_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/detail/pair.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/detail/persistent_pool_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/detail/pool_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/detail/ringbuf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/detail/self_relative_ptr_base_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/detail/specialization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/detail/tagged_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/detail/temp_value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/detail/template_helpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/detail/variadic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/detail/volatile_state.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/experimental/atomic_persistent_aware_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/experimental/atomic_self_relative_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/experimental/concurrent_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/experimental/inline_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/experimental/mpsc_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/experimental/radix_tree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/experimental/self_relative_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/experimental/self_relative_ptr_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/experimental/v.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/make_persistent.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/make_persistent_array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/make_persistent_array_atomic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/make_persistent_atomic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/p.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/persistent_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/persistent_ptr_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/pexceptions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/pext.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/shared_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/slice.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/string_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/timed_mutex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/transaction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/common/helper_algorithm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/common/helper_classes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/common/iterators_support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/common/list_wrapper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/common/map_wrapper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/common/pthread_common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/common/thread_helpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/common/transaction_helpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/common/unittest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/common/unittest_windows.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map/concurrent_hash_map_layout.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map/concurrent_hash_map_string_test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map/concurrent_hash_map_test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map/concurrent_hash_map_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/container_generic/container_txabort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/container_generic/ctor_and_assignment.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/container_generic/ctor_exceptions_nopmem.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/container_generic/ctor_exceptions_notx.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/string.modifiers/throwing_iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/basic_string/test_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/default_only.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/emplaceable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/is_transparent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/map/private_constructor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mpsc_queue/queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ptr/ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ptr/ptr_arith.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ptr/self_relative_ptr_atomic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/radix_tree/radix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/test_backtrace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/transaction/transaction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/valgrind_internal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/wrap_pmemobj_defrag.h" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/benchmarks/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/benchmarks/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/cmake/FindLIBPMEM.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/cmake/FindLIBPMEMOBJ.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/cmake/check_compiling_issues.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/cmake/cmake_uninstall.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/cmake/functions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/cmake/libpmemobj++-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/cmake/libpmemobj++.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/cmake/packages.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/cmake/tbb.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/cmake/version.hpp.in" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/doc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/doc/RELEASE_STEPS.md" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/doc/libpmemobj++.Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/doc/shared/pointer_requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/doc/shared/self_relative_pointer_implementation.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/README" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/array/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/array/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/concurrent_hash_map/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/defrag/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/inline_string/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/make_persistent/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/map_cli/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/mpsc_queue/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/mutex/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/panaconda/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/panaconda/README" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/panaconda/conf.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/persistent/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pman/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pman/README" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pmpong/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pmpong/README" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/pool/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/queue/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/radix_tree/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/segment_vector/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/simplekv/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/simplekv_rebuild/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/slab/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/string/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/transaction/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/examples/v/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/include/libpmemobj++/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/array/array_slice_0.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/array/array_slice_pmreorder_0.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/array/array_slice_pmreorder_1.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/array/pmreorder.conf" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/cmake/common_0.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/cmake/pmreorder.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/cmake/run_default.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/compatibility/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/compatibility/run.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/compatibility/version/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map/check_is_pmem.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map/check_is_pmem_defrag.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map/pmreorder.conf" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map_pmreorder_break_insert/break_before_persist.gdb.in" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map_pmreorder_break_insert/concurrent_hash_map_pmreorder_break_insert.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map_pmreorder_break_insert/pmreorder.conf" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map_pmreorder_erase/concurrent_hash_map_pmreorder_erase_0.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map_pmreorder_erase/pmreorder.conf" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map_pmreorder_multiple_buckets/pmreorder.conf" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_hash_map_rehash_break/concurrent_hash_map_rehash_break.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_map/pmreorder.conf" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_map_mt_gdb/concurrent_map_mt_gdb_0.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_map_mt_gdb/concurrent_map_mt_gdb_1.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_map_mt_gdb/concurrent_map_mt_gdb_2.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_map_pmreorder_break_insert/break_before_set_next.gdb.in" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_map_pmreorder_break_insert/concurrent_map_pmreorder_break_insert.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_map_pmreorder_break_insert/pmreorder.conf" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_map_pmreorder_erase/concurrent_map_pmreorder_erase_0.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/concurrent_map_pmreorder_erase/pmreorder.conf" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ctest_helpers.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ctl/ctl_0.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ctl/pool.set.in" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ctl_win/pool.set.in" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ex-pman/ex-pman_0.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ex-pman/prepare_input.sh" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ex-queue/ex-queue_0.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/cmake/run_default.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/CREDITS.TXT" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/LICENSE.TXT" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/external/libcxx/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/helpers.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mpsc_queue/basic.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mpsc_queue/mpsc_queue_consume_interrupt.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mpsc_queue/pmreorder/recovery_0.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mpsc_queue/pmreorder/recovery_1.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mpsc_queue/pmreorder/recovery_2.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mpsc_queue/pmreorder/recovery_3.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mpsc_queue/pmreorder/recovery_after_consume.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/mpsc_queue/recovery_order.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/pool/pool_0.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/pool/pool_1.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/pool/pool_10.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/pool/pool_11.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/pool/pool_2.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/pool/pool_3.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/pool/pool_4.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/pool/pool_5.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/pool/pool_6.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/pool/pool_7.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/pool/pool_8.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/pool/pool_9.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/pool/pool_cleanup_0.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/pool/pool_win_0.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/pool/pool_win_1.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/pool/pool_win_2.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/pool/pool_win_3.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ptr/atomic_pmreorder_0.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ptr/atomic_pmreorder_1.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/ptr/atomic_pmreorder_2.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/tests/true.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/utils/check_license/check-headers.sh" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/utils/check_license/file-exceptions.sh" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/utils/docker/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/utils/docker/images/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/utils/docker/images/build-image.sh" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/utils/docker/images/download-scripts.sh" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/utils/docker/images/install-libndctl.sh" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/utils/docker/images/install-pmdk.sh" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/utils/docker/images/install-valgrind.sh" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/utils/docker/images/push-image.sh" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/utils/docker/prepare-for-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/utils/docker/pull-or-rebuild-image.sh" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/utils/docker/run-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/utils/docker/run-coverity.sh" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/utils/docker/run-doc-update.sh" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/utils/docker/set-ci-vars.sh" />
+    <Text Include="../../thirdparty/owemdjee/libpmemobj-cpp/utils/make_release.sh" />
+    <Xml Include="../../thirdparty/owemdjee/libpmemobj-cpp/doc/DoxygenLayout.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

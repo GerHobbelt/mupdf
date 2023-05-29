@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{00811970-815B-4F64-BC9D-219078B5D832}</ProjectGuid>
+    <RootNamespace>qpdf</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_QPDF;QPDF_STATICLIB;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_QPDF;QPDF_STATICLIB;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_QPDF;QPDF_STATICLIB;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_QPDF;QPDF_STATICLIB;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="cryptlib.vcxproj">
+      <Project>{424334e5-addf-490d-ba7b-46cf3686b48d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libarchive.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff18377f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libhighway.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff021a57}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpthread-win32.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8df2c2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite_tools.vcxproj">
+      <Project>{6e890463-3eeb-4cce-b8bd-5aa89148c35a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="MuPDFLib_static.vcxproj">
+      <Project>{a60d8644-5815-4d29-8970-7518ff518d62}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbase58x.vcxproj">
+      <Project>{0501bedf-3191-46a9-9997-288466675b82}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libBLAKE3.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc1880387f83}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfmt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffaf3a53}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreetype.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-a58957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgumbo-parser.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-358957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libharfbuzz.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-258957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjbig2dec.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-958957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-turbo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblcms2.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-158957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuhelpers.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce88099485a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmujs.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-858957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-6222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbrotli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7760d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcrow.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff84e35}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcurl.vcxproj">
+      <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libextract.vcxproj">
+      <Project>{da38ca0b-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreeglut.vcxproj">
+      <Project>{a1b75d29-9f5c-4a0f-b368-322a10477d0c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgif.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffddd6be}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-xl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa838c1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libleptonica.vcxproj">
+      <Project>{ca0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblz4.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff50b44d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf_default_handlers.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-1222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuthreads.vcxproj">
+      <Project>{de21fa8a-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmutool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libopenjpeg.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-758957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpkcs7.vcxproj">
+      <Project>{22462382-b30d-42a5-bf07-ee1a35e25d21}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpng.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-658957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libqiqqatool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc18808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libQuickJS.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0e57ba}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libresources.vcxproj">
+      <Project>{52dcab29-c8ee-4422-954c-29afa6b33e22}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite-amalgamation.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3a7bc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsvgcharter.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7fcf79}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtesseract.vcxproj">
+      <Project>{ac0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtiff.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-558957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtinyexpr.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff33b1b5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libupskirt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff789ba9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libwebp.vcxproj">
+      <Project>{105f884a-c170-4c30-a810-c7da2103002f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libxml2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa57a44}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzlib.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzopfli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff03e6ca}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzstd.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="lib_nas_lockfile.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0a15c6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="png-pmt-tools-lib.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1147a4}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/examples/pdf-bookmarks.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/examples/pdf-count-strings.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/examples/pdf-create.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/examples/pdf-double-page-size.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/examples/pdf-filter-tokens.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/examples/pdf-invert-images.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/examples/pdf-linearize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/examples/pdf-mod-info.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/examples/pdf-npages.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/examples/pdf-overlay-page.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/examples/pdf-parse-content.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/examples/pdf-set-form-values.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/examples/pdf-split-pages.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/AES_PDF_native.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/BitStream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/BitWriter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/Buffer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/BufferInputSource.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/ClosedFileInputSource.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/ContentNormalizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/CryptoRandomDataProvider.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/FileInputSource.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/InputSource.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/InsecureRandomDataProvider.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/JSON.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/MD5.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/MD5_native.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/OffsetInputSource.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/Pipeline.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/Pl_AES_PDF.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/Pl_ASCII85Decoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/Pl_ASCIIHexDecoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/Pl_Buffer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/Pl_Concatenate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/Pl_Count.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/Pl_DCT.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/Pl_Discard.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/Pl_Flate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/Pl_LZWDecoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/Pl_MD5.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/Pl_PNGFilter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/Pl_QPDFTokenizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/Pl_RC4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/Pl_RunLength.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/Pl_SHA2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/Pl_StdioFile.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/Pl_TIFFPredictor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDF-cc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDFAcroFormDocumentHelper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDFAnnotationObjectHelper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDFCryptoProvider.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDFCrypto_gnutls.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDFCrypto_native.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDFCrypto_openssl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDFExc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDFFormFieldObjectHelper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDFMatrix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDFNameTreeObjectHelper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDFNumberTreeObjectHelper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDFObjGen.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDFObject.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDFObjectHandle.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDFOutlineDocumentHelper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDFOutlineObjectHelper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDFPageDocumentHelper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDFPageLabelDocumentHelper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDFPageObjectHelper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDFSystemError.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDFTokenizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDFWriter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDFXRefEntry.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDF_Array.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDF_Bool.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDF_Dictionary.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDF_InlineImage.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDF_Integer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDF_Name.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDF_Null.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDF_Operator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDF_Real.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDF_Reserved.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDF_Stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDF_String.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDF_encryption.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDF_linearization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDF_optimization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QPDF_pages.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QTC.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/QUtil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/RC4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/RC4_native.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/SHA2_native.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/SecureRandomDataProvider.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/SparseOHArray.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf-c.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/rijndael.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/sha2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/sha2big.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libqpdf/sph/md_helper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/aes.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/ascii85.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/bits.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/buffer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/closed_file_input_source.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/concatenate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/cxx11.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/dct_compress.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/dct_uncompress.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/flate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/hex.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/input_source.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/json.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/lzw.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/main_from_wmain.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/matrix.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/md5.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/numrange.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/pointer_holder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/predictors.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/qintc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/qutil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/random.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/rc4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/runlength.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/sha2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/libtests/sparse_array.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/qpdf/fix-qdf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/qpdf/pdf_from_scratch.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/qpdf/qpdf-ctest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/qpdf/qpdf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/qpdf/test_driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/qpdf/test_large_file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/qpdf/test_parsedoffset.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/qpdf/test_pdf_doc_encoding.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/qpdf/test_pdf_unicode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/qpdf/test_renumber.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/qpdf/test_tokenizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/qpdf/test_unicode_filenames.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/qpdf/test_xref.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/qpdf/zlib-flate/zlib-flate.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/Buffer.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/BufferInputSource.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/ClosedFileInputSource.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/Constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/DLL.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/FileInputSource.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/InputSource.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/JSON.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/Pipeline.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/Pl_Buffer.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/Pl_Concatenate.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/Pl_Count.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/Pl_DCT.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/Pl_Discard.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/Pl_Flate.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/Pl_QPDFTokenizer.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/Pl_RunLength.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/Pl_StdioFile.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/PointerHolder.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QIntC.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDF.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFAcroFormDocumentHelper.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFAnnotationObjectHelper.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFCryptoImpl.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFCryptoProvider.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFDocumentHelper.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFExc.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFFormFieldObjectHelper.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFNameTreeObjectHelper.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFNumberTreeObjectHelper.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFObjGen.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFObject.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFObjectHandle.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFObjectHelper.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFOutlineDocumentHelper.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFOutlineObjectHelper.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFPageDocumentHelper.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFPageLabelDocumentHelper.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFPageObjectHelper.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFSystemError.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFTokenizer.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFWriter.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QPDFXRefEntry.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QTC.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/QUtil.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/RandomDataProvider.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/Types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/include/qpdf/qpdf-c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/bits.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/AES_PDF_native.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/BitStream.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/BitWriter.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/ContentNormalizer.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/CryptoRandomDataProvider.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/InsecureRandomDataProvider.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/MD5.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/MD5_native.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/OffsetInputSource.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/Pl_AES_PDF.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/Pl_ASCII85Decoder.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/Pl_ASCIIHexDecoder.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/Pl_LZWDecoder.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/Pl_MD5.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/Pl_PNGFilter.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/Pl_RC4.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/Pl_SHA2.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/Pl_TIFFPredictor.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/QPDFCrypto_gnutls.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/QPDFCrypto_native.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/QPDFCrypto_openssl.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/QPDFMatrix.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/QPDF_Array.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/QPDF_Bool.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/QPDF_Dictionary.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/QPDF_InlineImage.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/QPDF_Integer.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/QPDF_Name.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/QPDF_Null.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/QPDF_Operator.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/QPDF_Real.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/QPDF_Reserved.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/QPDF_Stream.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/QPDF_String.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/RC4.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/RC4_native.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/SHA2_native.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/SecureRandomDataProvider.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/SparseOHArray.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/rijndael.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/sph/sph_sha2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/libqpdf/sph/sph_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/qpdf/win32/qpdf/qpdf-config.h" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/NOTICE.md" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/README-appimage.md" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/README-hardening.md" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/README-maintainer.md" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/README-what-to-download.md" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/README-windows-install.txt" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/README-windows.md" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/README.md" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/TODO" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/autoconf.mk.in" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/azure-pipelines/build-windows.bat" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/completions/README.md" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/libqpdf.map.in" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/libqpdf.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/libqpdf/qpdf/qpdf-config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/libtests/qtest/ascii85/base85.in" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/libtests/qtest/hex/hex.in" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/libtests/qtest/lzw/lzw1.in" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/libtests/qtest/lzw/lzw2.in" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/libtests/qtest/md5/md5.in" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/libtests/qtest/rc4/test1.in" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/libtests/qtest/rc4/test2.in" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/libtests/qtest/rc4/test3.in" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/libtests/qtest/rc4/test4.in" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/libtests/qtest/rc4/test5.in" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/manual/README" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/manual/fix-qdf.1.in" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/manual/html.xsl.in" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/manual/print.xsl.in" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/manual/qpdf.1.in" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/manual/zlib-flate.1.in" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/pdf-doc-to-utf8.in" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/unicode-errors.in" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/qpdf/unicode.in" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/qpdf/qtest/storage/README" />
+    <Text Include="../../thirdparty/owemdjee/qpdf/qtest/README.txt" />
+    <Xml Include="../../thirdparty/owemdjee/qpdf/appimage/qpdf.appdata.xml" />
+    <Xml Include="../../thirdparty/owemdjee/qpdf/manual/qpdf-manual.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

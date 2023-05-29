@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libcpp-terminal</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF2367FA}</ProjectGuid>
+    <RootNamespace>libcpp-terminal</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_TERMINAL;CPP_TERMINAL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_TERMINAL;CPP_TERMINAL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_TERMINAL;CPP_TERMINAL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_TERMINAL;CPP_TERMINAL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_TERMINAL;CPP_TERMINAL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_TERMINAL;CPP_TERMINAL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_TERMINAL;CPP_TERMINAL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_TERMINAL;CPP_TERMINAL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_TERMINAL;CPP_TERMINAL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_TERMINAL;CPP_TERMINAL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_TERMINAL;CPP_TERMINAL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_TERMINAL;CPP_TERMINAL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/color.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/cursor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/event.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/input.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/io.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/key.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/options.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/cursor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/input.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/screen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/terminal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/terminfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/tty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/prompt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/screen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/style.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/terminal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/examples/cin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/examples/colors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/examples/keys.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/examples/kilo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/examples/menu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/examples/menu_window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/examples/minimal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/examples/prompt_immediate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/examples/prompt_multiline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/examples/prompt_not_immediate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/examples/prompt_simple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/examples/read_stdin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/tests/attach_console.test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-terminal/tests/test_terminal.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/color.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/cursor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/exception.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/input.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/io.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/options.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/conversion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/macros.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/prompt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/screen.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/style.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/terminal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/terminfo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/tty.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/version.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/window.hpp" />
+    <Text Include="../../thirdparty/owemdjee/cpp-terminal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpp-terminal/README.md" />
+    <Text Include="../../thirdparty/owemdjee/cpp-terminal/ci/examples.ps1" />
+    <Text Include="../../thirdparty/owemdjee/cpp-terminal/ci/examples.sh" />
+    <Text Include="../../thirdparty/owemdjee/cpp-terminal/cmake/Warnings.cmake" />
+    <Text Include="../../thirdparty/owemdjee/cpp-terminal/cmake/cpp-terminalConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/platforms/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/version.cpp.in" />
+    <Text Include="../../thirdparty/owemdjee/cpp-terminal/cpp-terminal/version.hpp.in" />
+    <Text Include="../../thirdparty/owemdjee/cpp-terminal/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpp-terminal/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpp-terminal/tests/test-standalone/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

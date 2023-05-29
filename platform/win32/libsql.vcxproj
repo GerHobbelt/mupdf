@@ -1,0 +1,886 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libsql</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFEC8684}</ProjectGuid>
+    <RootNamespace>libsql</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQL;SQL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQL;SQL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQL;SQL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQL;SQL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQL;SQL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQL;SQL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQL;SQL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQL;SQL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQL;SQL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQL;SQL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQL;SQL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQL;SQL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/autoconf/tea/win/nmakehlp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/async/sqlite3async.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/changes-vtab-common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/changes-vtab-common.test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/changes-vtab-data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/changes-vtab-read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/changes-vtab-read.test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/changes-vtab-write.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/changes-vtab-write.test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/changes-vtab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/changes-vtab.test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/core_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/crsqlite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/crsqlite.test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/ext-data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/ext-data.test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/get-table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/is-crr.test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/rs-fract.test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/tableinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/tableinfo.test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/tests.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/triggers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/triggers.test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/crr/src/util.test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/expert/expert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/expert/sqlite3expert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/expert/test_expert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts3/fts3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts3/fts3_aux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts3/fts3_expr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts3/fts3_hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts3/fts3_icu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts3/fts3_porter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts3/fts3_snippet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts3/fts3_term.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts3/fts3_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts3/fts3_tokenize_vtab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts3/fts3_tokenizer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts3/fts3_tokenizer1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts3/fts3_unicode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts3/fts3_unicode2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts3/fts3_write.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts3/tool/fts3view.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts5/fts5_aux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts5/fts5_buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts5/fts5_config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts5/fts5_expr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts5/fts5_hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts5/fts5_index.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts5/fts5_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts5/fts5_storage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts5/fts5_tcl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts5/fts5_test_mi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts5/fts5_test_tok.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts5/fts5_tokenize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts5/fts5_unicode2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts5/fts5_varint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/fts5/fts5_vocab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/icu/icu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/lsmtest1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/lsmtest2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/lsmtest3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/lsmtest4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/lsmtest5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/lsmtest6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/lsmtest7.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/lsmtest8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/lsmtest9.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/lsmtest_bt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/lsmtest_datasource.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/lsmtest_func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/lsmtest_io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/lsmtest_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/lsmtest_mem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/lsmtest_tdb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/lsmtest_tdb2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/lsmtest_tdb3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/lsmtest_tdb4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/lsmtest_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/lsmtest_win32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm_ckpt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm_file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm_mem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm_mutex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm_shared.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm_sorted.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm_str.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm_tree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm_unix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm_varint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm_vtab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm_win32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/amatch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/anycollseq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/appendvfs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/base64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/base85.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/basexx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/blobio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/btreeinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/carray.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/cksumvfs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/closure.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/completion.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/csv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/dbdump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/decimal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/eval.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/explain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/fileio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/fossildelta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/ieee754.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/memstat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/memtrace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/memvfs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/mmapwarm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/nextchar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/noop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/normalize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/percentile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/prefixes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/qpvtab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/regexp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/remember.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/rot13.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/scrub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/series.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/sha1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/shathree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/showauth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/spellfix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/sqlar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/stmt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/templatevtab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/totype.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/uint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/unionvtab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/urifuncs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/uuid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/vfslog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/vfsstat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/vtablog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/vtshim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/wholenumber.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/zipfile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/misc/zorder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/rbu/rbu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/rbu/sqlite3rbu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/rbu/test_rbu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/recover/dbdata.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/recover/sqlite3recover.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/recover/test_recover.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/repair/checkfreelist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/repair/checkindex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/rtree/geopoly.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/rtree/rtree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/rtree/test_rtreedoc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/session/changeset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/session/session_speed_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/session/sqlite3session.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/session/test_session.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/udf/wasmedge_bindings.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/userauth/userauth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/vwal/vwal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/wasm/api/sqlite3-wasm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/wasm/c-pp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/wasm/example_extra_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/ext/wasm/version-info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/mptest/mptest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/alter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/analyze.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/attach.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/auth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/backup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/bitvec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/btmutex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/btree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/build.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/callback.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/complete.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/ctime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/date.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/dbpage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/dbstat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/delete.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/expr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/fault.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/fkey.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/global.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/insert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/json.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/legacy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/loadext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/malloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/mem0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/mem1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/mem2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/mem3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/mem5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/memdb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/memjournal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/mutex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/mutex_noop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/mutex_unix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/mutex_w32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/notify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/os.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/os_kv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/os_unix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/os_win.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/pager.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/pcache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/pcache1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/pragma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/prepare.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/printf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/random.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/resolve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/rowset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/select.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/status.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/tclsqlite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test9.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_async.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_autoext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_backup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_bestindex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_blob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_btree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_delete.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_demovfs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_devsym.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_fs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_func.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_hexio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_intarray.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_journal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_loadext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_malloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_md5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_multiplex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_mutex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_onefile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_osinst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_pcache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_quota.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_rtree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_schema.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_sqllog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_superlock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_syscall.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_tclsh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_tclvar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_thread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_vdbecov.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_vfs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_vfstrace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_windirent.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_window.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/test_wsd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/threads.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/tokenize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/treeview.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/trigger.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/update.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/upsert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/utf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/vacuum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/vdbe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/vdbeapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/vdbeaux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/vdbeblob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/vdbemem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/vdbesort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/vdbetrace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/vdbevtab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/vtab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/wal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/walker.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/where.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/wherecode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/whereexpr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/src/window.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/test/atrc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/test/crashtest1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/test/kvtest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/test/ossshell.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/test/speedtest1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/test/startup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/test/threadtest1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/test/threadtest2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/test/threadtest3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/test/threadtest4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/test/threadtest5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/test/tt3_checkpoint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/test/tt3_index.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/test/tt3_lookaside1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/test/tt3_shared.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/test/tt3_stress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/test/tt3_vacuum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/test/vt02.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/test/wordcount.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/checkSpacing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/dbhash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/dbtotxt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/enlargedb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/extract.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/fast_vacuum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/getlock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/index_usage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/lemon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/lempar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/libvers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/loadfts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/logest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/max-limits.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/mkkeywordhash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/mksourceid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/offsets.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/pagesig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/rollback-test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/showdb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/showjournal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/showlocks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/showshm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/showstat4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/showwal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/speedtest16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/speedtest8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/speedtest8inst1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/sqldiff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/srcck1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/stripccomments.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/tool/varint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/vsixtest/App.xaml.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/vsixtest/MainPage.xaml.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libsql/vsixtest/pch.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/async/sqlite3async.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/crr/rs/sqlite-rs-embedded/sqlite3_capi/wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/crr/src/changes-vtab-common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/crr/src/changes-vtab-read.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/crr/src/changes-vtab-write.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/crr/src/changes-vtab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/crr/src/consts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/crr/src/crsqlite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/crr/src/ext-data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/crr/src/ext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/crr/src/get-table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/crr/src/tableinfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/crr/src/triggers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/crr/src/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/expert/sqlite3expert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/fts3/fts3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/fts3/fts3Int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/fts3/fts3_hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/fts3/fts3_tokenizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/fts5/fts5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/fts5/fts5Int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/icu/sqliteicu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/lsmtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/lsmtest_tdb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsmInt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/misc/carray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/rbu/sqlite3rbu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/recover/sqlite3recover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/rtree/rtree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/rtree/sqlite3rtree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/session/sqlite3session.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/udf/wasm_bindings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/userauth/sqlite3userauth.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/ext/wasm/api/sqlite3-wasi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/btree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/btreeInt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/hwtime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/msvc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/os_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/os_setup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/os_win.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/page_header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/pager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/pcache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/pragma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/sqlite3ext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/sqliteInt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/sqliteLimit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/test_intarray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/test_multiplex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/test_quota.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/test_windirent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/vdbe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/vdbeInt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/vxworks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/wal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/src/whereInt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/vsixtest/App.xaml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/vsixtest/MainPage.xaml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libsql/vsixtest/pch.h" />
+    <Image Include="../../thirdparty/owemdjee/libsql/art/sqlite370.ico" />
+    <Image Include="../../thirdparty/owemdjee/libsql/art/sqlite370.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libsql/vsixtest/Assets/LockScreenLogo.scale-200.png" />
+    <Image Include="../../thirdparty/owemdjee/libsql/vsixtest/Assets/SplashScreen.scale-200.png" />
+    <Image Include="../../thirdparty/owemdjee/libsql/vsixtest/Assets/Square150x150Logo.scale-200.png" />
+    <Image Include="../../thirdparty/owemdjee/libsql/vsixtest/Assets/Square44x44Logo.scale-200.png" />
+    <Image Include="../../thirdparty/owemdjee/libsql/vsixtest/Assets/Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Image Include="../../thirdparty/owemdjee/libsql/vsixtest/Assets/StoreLogo.png" />
+    <Image Include="../../thirdparty/owemdjee/libsql/vsixtest/Assets/Wide310x150Logo.scale-200.png" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/libsql/src/sqlite3.rc" />
+    <Text Include="../../thirdparty/owemdjee/libsql/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/libsql/Makefile.msc" />
+    <Text Include="../../thirdparty/owemdjee/libsql/README-SQLite.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/autoconf/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libsql/autoconf/Makefile.msc" />
+    <Text Include="../../thirdparty/owemdjee/libsql/autoconf/README.first" />
+    <Text Include="../../thirdparty/owemdjee/libsql/autoconf/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/libsql/autoconf/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/libsql/autoconf/tea/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/libsql/autoconf/tea/README" />
+    <Text Include="../../thirdparty/owemdjee/libsql/autoconf/tea/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/libsql/autoconf/tea/pkgIndex.tcl.in" />
+    <Text Include="../../thirdparty/owemdjee/libsql/autoconf/tea/win/makefile.vc" />
+    <Text Include="../../thirdparty/owemdjee/libsql/autoconf/tea/win/rules.vc" />
+    <Text Include="../../thirdparty/owemdjee/libsql/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/libsql/contrib/bootstrap.fedora.sh" />
+    <Text Include="../../thirdparty/owemdjee/libsql/contrib/sqlitecon.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/doc/F2FS.txt" />
+    <Text Include="../../thirdparty/owemdjee/libsql/doc/json-enhancements.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/doc/libsql_extensions.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/doc/pager-invariants.txt" />
+    <Text Include="../../thirdparty/owemdjee/libsql/doc/trusted-schema.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/doc/vdbesort-memory.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/doc/vfs-shm.txt" />
+    <Text Include="../../thirdparty/owemdjee/libsql/doc/wal-lock.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/async/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/crr/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/crr/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/crr/nodejs-helper.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/crr/nodejs-helper.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/crr/nodejs-install-helper.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/crr/package.json" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/crr/rs/bundle/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/crr/rs/core/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/crr/rs/fractindex-core/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/crr/rs/integration-check/notes.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/crr/rs/integration-check/valgrind.sh" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/crr/rs/sqlite-rs-embedded/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/crr/rs/sqlite-rs-embedded/sqlite3_allocator/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/crr/rs/sqlite-rs-embedded/sqlite_nostd/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/crr/rs/sqlite-rs-embedded/sqlite_web/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/expert/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/fts3/README.content" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/fts3/README.syntax" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/fts3/README.tokenizers" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/fts3/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/fts3/fts3speed.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/fts3/tool/fts3cov.sh" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/fts3/unicode/CaseFolding.txt" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/fts3/unicode/UnicodeData.txt" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/fts3/unicode/mkunicode.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/fts3/unicode/parseunicode.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/fts5/extract_api_docs.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/fts5/fts5parse.y" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/fts5/mkportersteps.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/fts5/test/fts5_common.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/fts5/tool/fts5speed.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/fts5/tool/fts5txt2db.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/fts5/tool/loadfts5.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/fts5/tool/mkfts5c.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/fts5/tool/showfts5.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/icu/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/lsm1/Makefile.msc" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/lsm1/lsm-test/README" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/lsm1/test/lsm1_common.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/lsm1/tool/mklsm1c.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/misc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/rbu/rbu_common.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/recover/recover_common.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/repair/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/repair/sqlite3_checker.c.in" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/repair/sqlite3_checker.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/repair/test/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/repair/test/test.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/rtree/README" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/rtree/rtree_perf.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/rtree/rtree_util.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/rtree/util/randomshape.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/rtree/viewrtree.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/rtree/visual01.txt" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/session/session_common.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/userauth/user-auth.txt" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/EXPORTED_FUNCTIONS.fiddle.in" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/README-dist.txt" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/api/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/api/extern-post-js.c-pp.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/api/extern-pre-js.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/api/post-js-footer.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/api/post-js-header.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/api/pre-js.c-pp.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/api/sqlite3-api-cleanup.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/api/sqlite3-api-glue.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/api/sqlite3-api-oo1.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/api/sqlite3-api-prologue.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/api/sqlite3-api-worker1.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/api/sqlite3-license-version-header.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/api/sqlite3-opfs-async-proxy.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/api/sqlite3-v-helper.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/api/sqlite3-vfs-opfs.c-pp.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/api/sqlite3-worker1-promiser.c-pp.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/api/sqlite3-worker1.c-pp.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/batch-runner.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/common/SqliteTestUtil.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/common/whwasmutil.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/demo-123.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/demo-jsstorage.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/demo-worker1-promiser.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/demo-worker1.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/fiddle/fiddle-worker.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/fiddle/fiddle.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/fiddle/serve.py" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/jaccwabyt/jaccwabyt.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/jaccwabyt/jaccwabyt.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/scratchpad-wasmfs-main.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/speedtest1-worker.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/split-speedtest1-script.sh" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/test-opfs-vfs.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/tester1.c-pp.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/tests/opfs/concurrency/test.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ext/wasm/tests/opfs/concurrency/worker.js" />
+    <Text Include="../../thirdparty/owemdjee/libsql/libsql.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libsql/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/libsql/magic.txt" />
+    <Text Include="../../thirdparty/owemdjee/libsql/mkso.sh" />
+    <Text Include="../../thirdparty/owemdjee/libsql/sqlite.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libsql/sqlite3.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libsql/sqlite_cfg.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libsql/src/in-operator.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/src/parse.y" />
+    <Text Include="../../thirdparty/owemdjee/libsql/src/rust/libsql-shell/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/src/shell.c.in" />
+    <Text Include="../../thirdparty/owemdjee/libsql/src/sqlite.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/bc_common.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/boundary1.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/boundary2.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/boundary3.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/boundary4.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/filter2.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/fts3_common.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/genesis.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/lemon-test01.y" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/lock_common.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/make-where7.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/malloc_common.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/malloctraceviewer.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/pg_common.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/randexpr1.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/releasetest_data.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/run-wordcount.sh" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/show_speedtest1_rtree.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/tester.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/testrunner.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/testrunner_data.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/thread_common.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/time-wordcount.sh" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/upfrom1.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/wal_common.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/wapp.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/wapptest.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/window2.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/window3.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/window4.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/window7.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/window8.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/test/windowerr.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/GetTclKit.bat" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/build-all-msvc.bat" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/build-shell.sh" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/cg_anno.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/dbtotxt.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/extract-sqlite3h.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/fragck.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/generate-artifacts.sh" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/genfkey.README" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/kvtest-speed.sh" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/merge-test.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/mkautoconfamal.sh" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/mkccode.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/mkctimec.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/mkmsvcmin.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/mkopcodec.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/mkopcodeh.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/mkopts.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/mkpragmatab.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/mkshellc.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/mkspeedsql.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/mksqlite3c-noext.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/mksqlite3c.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/mksqlite3h.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/mksqlite3internalh.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/mkvsix.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/omittest-msvc.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/omittest.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/opcodesum.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/pre-release.sh" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/replace.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/restore_jrnl.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/run-speed-test.sh" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/soak1.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/spaceanal.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/speed-check.sh" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/speedtest.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/speedtest2.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/split-sqlite3c.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/sqlite3_analyzer.c.in" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/sqltclsh.c.in" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/sqltclsh.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/stack_usage.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/symbols-mingw.sh" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/symbols.sh" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/vdbe-compress.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/vdbe_profile.tcl" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/warnings-clang.sh" />
+    <Text Include="../../thirdparty/owemdjee/libsql/tool/warnings.sh" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vsixtest/vsixtest.tcl" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
