@@ -831,18 +831,6 @@ epub_parse_header(fz_context *ctx, epub_document *doc)
 	fz_try(ctx)
 	{
 		/* parse META-INF/encryption.xml to figure out which entries are encrypted */
-		if (fz_has_archive_entry(ctx, zip, "META-INF/encryption.xml"))
-		{
-			fz_warn(ctx, "EPUB may be locked by DRM");
-
-			buf = fz_read_archive_entry(ctx, zip, "META-INF/encryption.xml");
-			encryption_xml = fz_parse_xml(ctx, buf, 0);
-			fz_drop_buffer(ctx, buf);
-			buf = NULL;
-
-			epub_parse_encryption(ctx, doc, fz_xml_find(fz_xml_root(encryption_xml), "encryption"));
-			zip = doc->zip;
-		}
 
 		/* parse META-INF/container.xml to find OPF */
 		/* Reuse base_uri to read the prefix. */
@@ -850,6 +838,29 @@ epub_parse_header(fz_context *ctx, epub_document *doc)
 		container_xml = fz_parse_xml(ctx, buf, 0);
 		fz_drop_buffer(ctx, buf);
 		buf = NULL;
+
+		/* Some epub files can be prefixed by a directory name. This (normally
+		 * empty!) will be in base_uri. */
+		prefix_len = strlen(base_uri);
+		{
+			/* Further abuse base_uri to hold a temporary name. */
+			const size_t z0 = sizeof("META-INF/encryption.xml")-1;
+			if (sizeof(base_uri) <= prefix_len + z0)
+				fz_throw(ctx, FZ_ERROR_GENERIC, "Prefix too long in epub");
+			strcpy(base_uri + prefix_len, "META-INF/encryption.xml");
+			if (fz_has_archive_entry(ctx, zip, base_uri))
+			{
+				fz_warn(ctx, "EPUB may be locked by DRM");
+
+				buf = fz_read_archive_entry(ctx, zip, base_uri);
+				encryption_xml = fz_parse_xml(ctx, buf, 0);
+				fz_drop_buffer(ctx, buf);
+				buf = NULL;
+
+				epub_parse_encryption(ctx, doc, fz_xml_find(fz_xml_root(encryption_xml), "encryption"));
+				zip = doc->zip;
+			}
+		}
 
 		/* Some epub files can be prefixed by a directory name. This (normally
 		 * empty!) will be in base_uri. */
