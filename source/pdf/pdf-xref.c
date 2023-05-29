@@ -466,6 +466,55 @@ pdf_xref_entry *pdf_get_xref_entry_no_null(fz_context *ctx, pdf_document *doc, i
 	fz_throw(ctx, FZ_ERROR_GENERIC, "cannot find object in xref (%d 0 R), but not allowed to return NULL", i);
 }
 
+void pdf_xref_entry_map(fz_context *ctx, pdf_document *doc, void (*fn)(fz_context *, pdf_xref_entry *, int, pdf_document *, void *), void *arg)
+{
+	int xref_len = pdf_xref_len(ctx, doc);
+	int i, j;
+	pdf_xref_subsec *sub;
+	int xref_base = doc->xref_base;
+
+	fz_try(ctx)
+	{
+		/* Map over any active local xref first. */
+		if (doc->local_xref && doc->local_xref_nesting > 0)
+		{
+			pdf_xref *xref = doc->local_xref;
+
+			for (sub = xref->subsec; sub != NULL; sub = sub->next)
+			{
+				for (i = sub->start; i < sub->start + sub->len; i++)
+				{
+					pdf_xref_entry *entry = &sub->table[i - sub->start];
+					if (entry->type)
+						fn(ctx, entry, i, doc, arg);
+				}
+			}
+		}
+
+		for (j = 0; j < doc->num_xref_sections; j++)
+		{
+			pdf_xref *xref = &doc->xref_sections[j];
+			doc->xref_base = j;
+
+			for (sub = xref->subsec; sub != NULL; sub = sub->next)
+			{
+				for (i = sub->start; i < sub->start + sub->len; i++)
+				{
+					pdf_xref_entry *entry = &sub->table[i - sub->start];
+					if (entry->type)
+						fn(ctx, entry, i, doc, arg);
+				}
+			}
+		}
+	}
+	fz_always(ctx)
+	{
+		doc->xref_base = xref_base;
+	}
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+}
+
 /*
 	Ensure we have an incremental xref section where we can store
 	updated versions of indirect objects. This is a new xref section
@@ -1524,6 +1573,11 @@ pdf_read_xref_sections(fz_context *ctx, pdf_document *doc, int64_t ofs, int read
 			if (!read_previous)
 				break;
 		}
+
+		/* For pathological files, such as chinese-example.pdf, where the original
+		 * xref in the file is highly fragmented, we can safely solidify it here
+		 * with no ill effects. */
+		ensure_solid_xref(ctx, doc, 0, doc->num_xref_sections-1);
 	}
 	fz_always(ctx)
 	{
@@ -1567,6 +1621,31 @@ pdf_prime_xref_index(fz_context *ctx, pdf_document *doc)
 	}
 }
 
+static void
+check_xref_entry_offsets(fz_context *ctx, pdf_xref_entry *entry, int i, pdf_document *doc, void *arg)
+{
+	int xref_len = (int)(intptr_t)arg;
+
+	if (entry->type == 'n')
+	{
+		/* Special case code: "0000000000 * n" means free,
+		 * according to some producers (inc Quartz) */
+		if (entry->ofs == 0)
+			entry->type = 'f';
+		else if (entry->ofs <= 0 || entry->ofs >= doc->file_size)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "object offset out of range: %d (%d 0 R)", (int)entry->ofs, i);
+	}
+	else if (entry->type == 'o')
+	{
+		/* Read this into a local variable here, because pdf_get_xref_entry
+		 * may solidify the xref, hence invalidating "entry", meaning we
+		 * need a stashed value for the throw. */
+		int64_t ofs = entry->ofs;
+		if (ofs <= 0 || ofs >= xref_len || pdf_get_xref_entry_no_null(ctx, doc, ofs)->type != 'n')
+			fz_throw(ctx, FZ_ERROR_GENERIC, "invalid reference to an objstm that does not exist: %d (%d 0 R)", (int)ofs, i);
+	}
+}
+
 /*
  * load xref tables from pdf
  *
@@ -1576,7 +1655,6 @@ pdf_prime_xref_index(fz_context *ctx, pdf_document *doc)
 static void
 pdf_load_xref(fz_context *ctx, pdf_document *doc)
 {
-	int i;
 	int xref_len;
 	pdf_xref_entry *entry;
 
@@ -1603,28 +1681,7 @@ pdf_load_xref(fz_context *ctx, pdf_document *doc)
 
 	/* broken pdfs where object offsets are out of range */
 	xref_len = pdf_xref_len(ctx, doc);
-	for (i = 0; i < xref_len; i++)
-	{
-		entry = pdf_get_xref_entry(ctx, doc, i);
-		if (entry && entry->type == 'n')
-		{
-			/* Special case code: "0000000000 * n" means free,
-			 * according to some producers (inc Quartz) */
-			if (entry->ofs == 0)
-				entry->type = 'f';
-			else if (entry->ofs <= 0 || entry->ofs >= doc->file_size)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "object offset out of range: %d (%d 0 R)", (int)entry->ofs, i);
-		}
-		if (entry && entry->type == 'o')
-		{
-			/* Read this into a local variable here, because pdf_get_xref_entry
-			 * may solidify the xref, hence invalidating "entry", meaning we
-			 * need a stashed value for the throw. */
-			int64_t ofs = entry->ofs;
-			if (ofs <= 0 || ofs >= xref_len || pdf_get_xref_entry_no_null(ctx, doc, ofs)->type != 'n')
-				fz_throw(ctx, FZ_ERROR_GENERIC, "invalid reference to an objstm that does not exist: %d (%d 0 R)", (int)ofs, i);
-		}
-	}
+	pdf_xref_entry_map(ctx, doc, check_xref_entry_offsets, (void *)(intptr_t)xref_len);
 }
 
 static void
