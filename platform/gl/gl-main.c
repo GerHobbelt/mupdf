@@ -38,6 +38,7 @@
 #include "mujs.h"
 
 #ifndef _WIN32
+#include <sys/stat.h> /* for mkdir */
 #include <unistd.h> /* for getcwd */
 #include <spawn.h> /* for posix_spawn */
 extern char **environ; /* see environ (7) */
@@ -508,7 +509,7 @@ fz_mkdir(char *path)
 
 	return ret;
 #else
-	return mkdir(path);
+	return mkdir(path, S_IRWXU | S_IRWXG | S_IRWXO);
 #endif
 }
 

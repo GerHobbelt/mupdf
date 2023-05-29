@@ -56,6 +56,7 @@
 #include <fcntl.h>
 #include <direct.h> /* for getcwd */
 #else
+#include <sys/stat.h> /* for mkdir */
 #include <unistd.h> /* for getcwd */
 #endif
 
@@ -2290,7 +2291,7 @@ fz_mkdir(char *path)
 
 	return ret;
 #else
-	return mkdir(path);
+	return mkdir(path, S_IRWXU | S_IRWXG | S_IRWXO);
 #endif
 }
 
