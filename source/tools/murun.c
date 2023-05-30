@@ -1423,8 +1423,6 @@ static fz_buffer *ffi_tobuffer(js_State *J, int idx)
 	return buf;
 }
 
-#endif /* FZ_ENABLE_PDF */
-
 static void ffi_pushimage_own(js_State *J, fz_image *image)
 {
 	js_getregistry(J, "fz_image");
@@ -1494,7 +1492,7 @@ static int ffi_imagedata_has(js_State *J, void *image_data_, const char *key)
 			js_pushnumber(J, image_data->params.u.jbig2.embedded);
 			js_setproperty(J, -2, "embedded");
 			if (image_data->params.u.jbig2.globals)
-				ffi_pushbuffer(J, fz_keep_buffer(ctx, image_data->params.u.jbig2.globals->encoded));
+				ffi_pushbuffer(J, fz_keep_buffer(ctx, image_data->params.u.jbig2.globals));
 			else
 				js_pushnull(J);
 			js_setproperty(J, -2, "globals");
@@ -4976,7 +4974,7 @@ static void ffi_new_ImageData(js_State *J)
 		case FZ_IMAGE_UNKNOWN:
 			if (buffer->len < 8)
 				fz_throw(ctx, FZ_ERROR_GENERIC, "unknown image file format");
-			image_data->params.type = fz_recognize_image_format(ctx, buffer->data);
+			image_data->params.type = fz_recognize_image_format(ctx, buffer->data, buffer->len);
 			if (image_data->params.type == FZ_IMAGE_JPEG)
 				image_data->params.u.jpeg.color_transform = -1;
 			break;
@@ -5006,7 +5004,7 @@ static void ffi_new_ImageData(js_State *J)
 		case FZ_IMAGE_JBIG2:
 			image_data->params.u.jbig2.embedded = embedded;
 			if (globals)
-				image_data->params.u.jbig2.globals = fz_new_jbig2_globals(ctx, globals);
+				image_data->params.u.jbig2.globals = fz_keep_jbig2_globals(ctx, globals);
 			break;
 		case FZ_IMAGE_JPEG:
 			image_data->params.u.jpeg.color_transform = color_transform;
@@ -5165,7 +5163,7 @@ static void ffi_Image_getImageData(js_State *J)
 				break;
 			case FZ_IMAGE_JBIG2:
 				image_data->params.u.jbig2.embedded = original->params.u.jbig2.embedded;
-				image_data->params.u.jbig2.globals = fz_new_jbig2_globals(ctx, original->params.u.jbig2.globals->encoded);
+				image_data->params.u.jbig2.globals = fz_keep_jbig2_globals(ctx, original->params.u.jbig2.globals);
 				break;
 			case FZ_IMAGE_JPEG:
 				image_data->params.u.jpeg.color_transform = original->params.u.jpeg.color_transform;
@@ -7623,7 +7621,7 @@ static void ffi_PDFObject_getString(js_State *J)
 	pdf_obj *obj = ffi_PDFObject_get_imp(J);
 	const char *string = NULL;
 	fz_try(ctx)
-		string = pdf_to_text_string(ctx, obj);
+		string = pdf_to_text_string(ctx, obj, NULL);
 	fz_catch(ctx)
 		rethrow(J);
 	js_pushstring(J, string);

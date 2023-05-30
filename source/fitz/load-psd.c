@@ -22,7 +22,12 @@
 
 #include "mupdf/fitz.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
+#include "color-imp.h"
 #include "pixmap-imp.h"
+
+#include "mupdf/assertions.h"
 
 #include <limits.h>
 #include <string.h>
@@ -470,3 +475,5 @@ fz_load_psd_info(fz_context *ctx, const unsigned char *p, size_t total, int *wp,
 	*xresp = psd.xres;
 	*yresp = psd.xres;
 }
+
+#endif

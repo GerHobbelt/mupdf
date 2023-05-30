@@ -400,7 +400,7 @@ fz_save_pixmap_as_pam(fz_context *ctx, const fz_pixmap *pixmap, const char *file
 }
 
 static fz_buffer *
-buffer_from_pixmap(fz_context *ctx, const fz_pixmap *pix, fz_color_params color_params, int drop,
+buffer_from_pixmap(fz_context *ctx, fz_pixmap *pix, fz_color_params color_params, int drop,
 	void (*do_write)(fz_context *ctx, fz_output *out, const fz_pixmap *pix))
 {
 	fz_buffer *buf = NULL;
@@ -440,7 +440,7 @@ fz_new_buffer_from_image_as_pnm(fz_context *ctx, const fz_image *image, fz_color
 fz_buffer *
 fz_new_buffer_from_pixmap_as_pnm(fz_context *ctx, const fz_pixmap *pix, fz_color_params color_params)
 {
-	return buffer_from_pixmap(ctx, pix, color_params, 0, fz_write_pixmap_as_pnm);
+	return buffer_from_pixmap(ctx, (fz_pixmap *)pix, color_params, 0, fz_write_pixmap_as_pnm);
 }
 
 fz_buffer *
@@ -453,7 +453,7 @@ fz_new_buffer_from_image_as_pam(fz_context *ctx, const fz_image *image, fz_color
 fz_buffer *
 fz_new_buffer_from_pixmap_as_pam(fz_context *ctx, const fz_pixmap *pix, fz_color_params color_params)
 {
-	return buffer_from_pixmap(ctx, pix, color_params, 0, fz_write_pixmap_as_pam);
+	return buffer_from_pixmap(ctx, (fz_pixmap *)pix, color_params, 0, fz_write_pixmap_as_pam);
 }
 
 #endif

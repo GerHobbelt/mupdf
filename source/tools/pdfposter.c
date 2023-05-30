@@ -50,8 +50,8 @@ static int usage(void)
 		"\t-x\tx decimation factor\n"
 		"\t-y\ty decimation factor\n"
 		"\t-r\tsplit right-to-left\n"
-		"\t-o\toffset\n");
-		);
+		"\t-o\toffset\n"
+	);
 	return EXIT_FAILURE;
 }
 

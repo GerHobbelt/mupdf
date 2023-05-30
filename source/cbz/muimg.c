@@ -276,14 +276,14 @@ img_open_document_with_stream(fz_context *ctx, fz_stream *file)
 static int
 img_recognize_content(fz_context *ctx, fz_stream *stream)
 {
-	unsigned char data[8];
-	size_t n = fz_read(ctx, stream, data, 8);
+	unsigned char data[16];
+	size_t n = fz_read(ctx, stream, data, sizeof(data));
 	int fmt;
 
 	if (n != 8)
 		return 0;
 
-	fmt = fz_recognize_image_format(ctx, data);
+	fmt = fz_recognize_image_format(ctx, data, sizeof(data));
 	if (fmt != FZ_IMAGE_UNKNOWN)
 		return 100;
 

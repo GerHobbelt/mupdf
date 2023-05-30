@@ -1342,7 +1342,7 @@ fz_image_info_from_buffer(fz_context *ctx, fz_buffer *buffer, int *w, int *h, in
 	*cspace = NULL;
 	*orientation = 0;
 
-	type = fz_recognize_image_format(ctx, buf);
+	type = fz_recognize_image_format(ctx, buf, len);
 	switch (type)
 	{
 	case FZ_IMAGE_PNM:

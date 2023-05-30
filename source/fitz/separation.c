@@ -28,6 +28,7 @@
 #include "pixmap-imp.h"
 
 #include "mupdf/assertions.h"
+
 #include <string.h>
 
 struct fz_separations

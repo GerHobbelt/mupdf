@@ -124,3 +124,5 @@ void fz_measure_colorspace_linearity(fz_context *ctx, fz_colorspace *colorspace)
 #endif
 
 #endif
+
+#endif

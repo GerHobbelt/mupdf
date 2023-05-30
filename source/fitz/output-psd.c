@@ -410,7 +410,7 @@ fz_band_writer *fz_new_psd_band_writer(fz_context *ctx, fz_output *out)
 }
 
 static fz_buffer *
-psd_from_pixmap(fz_context *ctx, const fz_pixmap *pix, fz_color_params color_params, int drop)
+psd_from_pixmap(fz_context *ctx, fz_pixmap *pix, fz_color_params color_params, int drop)
 {
 	fz_buffer *buf = NULL;
 	fz_output *out = NULL;
@@ -449,7 +449,7 @@ fz_new_buffer_from_image_as_psd(fz_context *ctx, const fz_image *image, fz_color
 fz_buffer *
 fz_new_buffer_from_pixmap_as_psd(fz_context *ctx, const fz_pixmap *pix, fz_color_params color_params)
 {
-	return psd_from_pixmap(ctx, pix, color_params, 0);
+	return psd_from_pixmap(ctx, (fz_pixmap *)pix, color_params, 0);
 }
 
 #endif

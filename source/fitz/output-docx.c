@@ -207,6 +207,10 @@ static void dev_fill_image(fz_context *ctx, fz_device *dev_, fz_image *img, fz_m
 				if (extract_add_image(
 						dev->writer->extract,
 						type,
+						ctm.a,
+						ctm.b,
+						ctm.c,
+						ctm.d,
 						ctm.e /*x*/,
 						ctm.f /*y*/,
 						img->w /*w*/,
@@ -891,6 +895,8 @@ fz_document_writer *fz_new_odt_writer(fz_context *ctx, const char *path, const c
 
 #else
 
+#if 0
+
 fz_document_writer *fz_new_odt_writer_with_output(fz_context *ctx, fz_output *out, const char *options)
 {
 	fz_throw(ctx, FZ_ERROR_GENERIC, "DOCX/ODT writer not enabled");
@@ -914,5 +920,7 @@ fz_document_writer *fz_new_docx_writer(fz_context *ctx, const char *path, const 
 	fz_throw(ctx, FZ_ERROR_GENERIC, "DOCX writer not enabled");
 	return NULL;
 }
+
+#endif
 
 #endif
