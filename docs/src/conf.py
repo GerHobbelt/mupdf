@@ -45,7 +45,7 @@ copyright = "2004-2023, Artifex"
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = "1.22.0"
+release = "1.23.0"
 
 # The short X.Y version
 version = release
