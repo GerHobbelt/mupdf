@@ -95,7 +95,7 @@ The `draw` command will render a document to image files, convert to another vec
 ----
 
 `[pages]`
-   Comma separated list of page ranges. The first page is "1", and the last page is "N". The default is "1-N".
+   Comma separated list of page ranges. The first page is "1", and the last page is "N". The default is "1-N". For input formats like :title:`EPUB` or :title:`MOBI` this lists the sequential chapter numbers.
 
 
 

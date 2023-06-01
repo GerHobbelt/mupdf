@@ -11,3 +11,13 @@
    a.setAttribute("href", "https://artifex.com/contributor/feedback.php?utm_source=rtd-mupdf&utm_medium=rtd&utm_content=header-link&url="+url_string);
 
    </script>
+
+
+.. |mutool_tag| raw:: html
+
+   <span class="mutool_tag">mutool only</span>
+
+
+.. |wasm_tag| raw:: html
+
+   <span class="wasm_tag">wasm only</span>
