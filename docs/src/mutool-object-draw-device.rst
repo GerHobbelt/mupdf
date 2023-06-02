@@ -5,6 +5,7 @@
 
 .. default-domain:: js
 
+.. include:: html_tags.rst
 
 .. _mutool_object_draw_device:
 

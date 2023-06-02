@@ -4,6 +4,7 @@
 
 .. default-domain:: js
 
+.. include:: html_tags.rst
 
 .. _mutool_object_page:
 
@@ -12,34 +13,152 @@
 `Page`
 -------------
 
+
+**Instance methods**
+
 .. method:: bound()
+
+    |mutool_tag|
 
     Returns a :ref:`rectangle<mutool_run_js_api_rectangle>` containing the page dimensions.
 
     :return: `[ulx,uly,lrx,lry]`.
 
-.. method:: run(device, transform, skipAnnotations)
+    **Example**
 
-    Calls device functions for all the contents on the page, using the specified `transform` :ref:`matrix<mutool_run_js_api_matrix>`. The `device` can be one of the built-in devices or a :title:`JavaScript` object with methods for the device calls. The `transform` maps from user space points to device space pixels. If `skipAnnotations` is *true* then annotations are ignored.
+    .. code-block:: javascript
+
+        let rect = page.bound();
+
+.. method:: getBounds()
+
+    |wasm_tag|
+
+    Returns a :ref:`rectangle<mutool_run_js_api_rectangle>` containing the page dimensions.
+
+    :return: `[ulx,uly,lrx,lry]`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        let rect = page.getBounds();
+
+
+.. _Page_run:
+
+
+.. method:: run(device, matrix)
+
+    |wasm_tag|
+
+    Calls device functions for all the contents on the page, using the specified transform :ref:`matrix<mutool_run_js_api_matrix>`. The `device` can be one of the built-in devices or a :title:`JavaScript` object with methods for the device calls. The `matrix` maps from user space points to device space pixels.
 
     :arg device: The device object.
-    :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
-    :arg skipAnnotations: `Boolean`.
+    :arg matrix: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
-.. method:: toPixmap(transform, colorspace, alpha, skipAnnotations)
+    **Example**
 
-    Render the page into a :ref:`Pixmap<mutool_run_js_api_pixmap>`, using the `transform` and `colorspace`. If `alpha` is *true*, the page will be drawn on a transparent background, otherwise white.
+    .. code-block:: javascript
 
-    :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+        let rect = page.run(obj, mupdf.Matrix.identity);
+
+    |tor_todo| Make mutool run method match this.
+
+
+.. method:: runPageContents(device, matrix)
+
+    |wasm_tag|
+
+    This is the same as the :ref:`run<Page_run>` method above but it only considers the page itself and omits annotations and widgets.
+
+    :arg device: The device object.
+    :arg matrix: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        let rect = page.runPageContents(obj, mupdf.Matrix.identity);
+
+    |tor_todo| Make mutool run method match this.
+
+
+.. method:: runPageAnnots(device, matrix)
+
+    |wasm_tag|
+
+    This is the same as the :ref:`run<Page_run>` method above but it only considers the page annotations.
+
+    :arg device: The device object.
+    :arg matrix: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        let rect = page.runPageAnnots(obj, mupdf.Matrix.identity);
+
+    |tor_todo| Make mutool run method match this.
+
+
+.. method:: runPageWidgets(device, matrix)
+
+    |wasm_tag|
+
+    This is the same as the :ref:`run<Page_run>` method above but it only considers the page widgets.
+
+    :arg device: The device object.
+    :arg matrix: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        let rect = page.runPageWidgets(obj, mupdf.Matrix.identity);
+
+    |tor_todo| Make mutool run method match this.
+
+.. method:: toPixmap(matrix, colorspace, alpha, showExtras)
+
+    Render the page into a :ref:`Pixmap<mutool_run_js_api_pixmap>`, using the specified transform :ref:`matrix<mutool_run_js_api_matrix>` and `colorspace`. If `alpha` is *true*, the page will be drawn on a transparent background, otherwise white. If `showExtras` is *true* then the operation will include any page annotations and/or widgets.
+
+    :arg matrix: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg colorspace: `ColorSpace`.
     :arg alpha: `Boolean`.
-    :arg skipAnnotations: `Boolean`.
+    :arg showExtras: `Boolean`.
 
-.. method:: toDisplayList(skipAnnotations)
+    :return: `Pixmap`.
 
-    Record the contents on the page into a `DisplayList`.
+    .. note::
 
-    :arg skipAnnotations: `Boolean`.
+        In :title:`MuPDF WASM` `alpha` & `showExtras` default to *true* unless otherwise specified.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        let pixmap = page.toPixmap(mupdf.Martrix.identity, mupdf.ColorSpace.DeviceRGB, true, true);
+
+.. method:: toDisplayList(showExtras)
+
+    Record the contents on the page into a `DisplayList`_. If `showExtras` is *true* then the operation will include any page annotations and/or widgets.
+
+
+    :arg showExtras: `Boolean`.
+
+    :return: `DisplayList`.
+
+    .. note::
+
+        In :title:`MuPDF WASM` `showExtras` defaults to *true* unless otherwise specified.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        let displayList = page.toDisplayList(true);
+
 
 .. method:: toStructuredText(options)
 
@@ -48,6 +167,14 @@
     :arg options: `String`.
     :return: `StructuredText`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        let sText = page.toStructuredText("preserve-whitespace");
+
+
+    |jamie_todo| Pick up from here .......
 
 
 .. method:: search(needle)

@@ -3,6 +3,8 @@
 
 .. default-domain:: js
 
+.. include:: html_tags.rst
+
 .. _mutool_object_buffer:
 
 .. _mutool_run_js_api_buffer:

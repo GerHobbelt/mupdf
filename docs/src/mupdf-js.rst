@@ -8,6 +8,7 @@
 .. title:: MuPDF & JavaScript
 
 .. include:: header.rst
+.. include:: html_tags.rst
 
 .. meta::
    :description: MuPDF documentation

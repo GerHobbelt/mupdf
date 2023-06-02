@@ -4,6 +4,8 @@
 .. default-domain:: js
 
 
+.. include:: html_tags.rst
+
 .. _mutool_object_color_space:
 
 .. _mutool_run_javascript_api_colorspace:
