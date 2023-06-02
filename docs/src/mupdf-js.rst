@@ -32,127 +32,11 @@ Both usages are, in fact, very similar and here we show code samples and the API
 API's generally work for both environments, however if an API is specific to only one usage then the |mutool_tag| or |wasm_tag| tag will be shown.
 
 
-Global :title:`MuPDF` methods
-------------------------------------------
 
 
+.. note::
 
-
-
-.. method:: print(...)
-
-   |mutool_tag|
-
-   Print arguments to `stdout`, separated by spaces and followed by a newline.
-
-   :arg ...: Arguments to print.
-
-   **Example**
-
-   .. code-block:: javascript
-
-      var document = new Document.openDocument("my_pdf.pdf");
-      print(document); // [object pdf_document]
-
-
-
-
-.. method:: write(...)
-
-   |mutool_tag|
-
-   Print arguments to `stdout`, separated by spaces.
-
-   :arg ...: Arguments to print.
-
-
-
-
-.. method:: repr(object)
-
-   |mutool_tag|
-
-   Format the `object` into a string with :title:`JavaScript` syntax.
-
-   :arg object: Object to format.
-
-
-   **Example**
-
-   .. code-block:: javascript
-
-      var document = new Document.openDocument("my_pdf.pdf");
-      repr(document); // "[userdata pdf_document]"
-
-
-
-.. method:: gc(report)
-
-   |mutool_tag|
-
-   Run the garbage collector to free up memory. Optionally report statistics on the garbage collection.
-
-   :arg report: `Boolean` If *true* then the results will be printed to `stdout`.
-
-
-
-
-.. method:: load(fileName)
-
-   |mutool_tag|
-
-   Load and execute script in `fileName`.
-
-   :arg fileName: `String` :title:`JavaScript` file to load.
-
-
-
-
-.. method:: read(fileName)
-
-   |mutool_tag|
-
-   Read the contents of a file and return them as a :title:`UTF-8` decoded string.
-
-   :arg fileName: `String`.
-
-
-
-.. method:: readline()
-
-   |mutool_tag|
-
-   Read one line of input from `stdin` and return it as a string.
-
-   :return: `String`.
-
-
-
-.. method:: require(module)
-
-   |mutool_tag|
-
-   Load a :title:`JavaScript` module.
-
-   :arg module: Module to load.
-
-
-.. method:: setUserCSS(userStyleSheet, usePublisherStyles)
-
-   Set user styles and whether to use publisher styles when laying out reflowable documents.
-
-   :arg userStyleSheet: Link to :title:`CSS` stylesheet file.
-   :arg usePublisherStyles: `Boolean`.
-
-
-
-.. method:: quit()
-
-   |mutool_tag|
-
-   Exit the shell.
-
-
+   In the code examples, if you are developing for `mutool run` then the `mupdf` prefix is optional.
 
 
 
@@ -164,9 +48,7 @@ These objects are not instantiated as such. All dimensions are in points unless 
 .. _mutool_run_js_api_matrix:
 
 
-.. note::
 
-   In the code exmaples, if you are developing for `mutool` then the `mupdf` prefix is optional.
 
 
 Matrices
@@ -380,7 +262,10 @@ For example:
 Color parameters
 ~~~~~~~~~~~~~~~~~~~~
 
+|mutool_tag|
+
 This object is a dictionary with keys for:
+
 
 `renderingIntent`
     Either of "Perceptual", "RelativeColorimetric", "Saturation" or "AbsoluteColorimetric".
@@ -395,13 +280,13 @@ This object is a dictionary with keys for:
     The overprint mode. Can be either `0` or `1`.
 
 
+
 .. _mutool_run_js_api_alpha:
 
 Alpha
 ~~~~~~~~~~~~
 
 Alpha values are floats between `0` and `1`, whereby `0` denotes full transparency & `1` denotes full opacity.
-
 
 
 .. include:: mutool-object-protocols.rst
@@ -455,6 +340,131 @@ Alpha values are floats between `0` and `1`, whereby `0` denotes full transparen
 .. include:: mutool-object-story.rst
 
 .. include:: mutool-object-xml.rst
+
+
+
+
+Global :title:`MuPDF` methods
+------------------------------------------
+
+
+
+
+
+.. method:: print(...)
+
+   |mutool_tag|
+
+   Print arguments to `stdout`, separated by spaces and followed by a newline.
+
+   :arg ...: Arguments to print.
+
+   **Example**
+
+   .. code-block:: javascript
+
+      var document = new Document.openDocument("my_pdf.pdf");
+      print(document); // [object pdf_document]
+
+
+
+
+.. method:: write(...)
+
+   |mutool_tag|
+
+   Print arguments to `stdout`, separated by spaces.
+
+   :arg ...: Arguments to print.
+
+
+
+
+.. method:: repr(object)
+
+   |mutool_tag|
+
+   Format the `object` into a string with :title:`JavaScript` syntax.
+
+   :arg object: Object to format.
+
+
+   **Example**
+
+   .. code-block:: javascript
+
+      var document = new Document.openDocument("my_pdf.pdf");
+      repr(document); // "[userdata pdf_document]"
+
+
+
+.. method:: gc(report)
+
+   |mutool_tag|
+
+   Run the garbage collector to free up memory. Optionally report statistics on the garbage collection.
+
+   :arg report: `Boolean` If *true* then the results will be printed to `stdout`.
+
+
+
+
+.. method:: load(fileName)
+
+   |mutool_tag|
+
+   Load and execute script in `fileName`.
+
+   :arg fileName: `String` :title:`JavaScript` file to load.
+
+
+
+
+.. method:: read(fileName)
+
+   |mutool_tag|
+
+   Read the contents of a file and return them as a :title:`UTF-8` decoded string.
+
+   :arg fileName: `String`.
+
+
+
+.. method:: readline()
+
+   |mutool_tag|
+
+   Read one line of input from `stdin` and return it as a string.
+
+   :return: `String`.
+
+
+
+.. method:: require(module)
+
+   |mutool_tag|
+
+   Load a :title:`JavaScript` module.
+
+   :arg module: Module to load.
+
+
+.. method:: setUserCSS(userStyleSheet, usePublisherStyles)
+
+   Set user styles and whether to use publisher styles when laying out reflowable documents.
+
+   :arg userStyleSheet: Link to :title:`CSS` stylesheet file.
+   :arg usePublisherStyles: `Boolean`.
+
+
+
+.. method:: quit()
+
+   |mutool_tag|
+
+   Exit the shell.
+
+
 
 .. _mutool_run_js_api_pdf_processor:
 
