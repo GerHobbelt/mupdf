@@ -65,9 +65,6 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
         var rect = pixmap.getBounds();
 
 
-    |tor_todo| In WASM, TypeError: libmupdf._wasm_pixmap_x is not a function
-
-
 .. method:: getWidth()
 
     :return: `Int` The width value.
@@ -129,6 +126,20 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
         var cs = pixmap.getColorSpace();
 
+
+.. method:: setResolution(xRes, yRes)
+
+    Set `x` & `y` resolution.
+
+    :arg xRes: `Int` X resolution in dots per inch.
+    :arg yRes: `Int` Y resolution in dots per inch.
+
+
+    .. code-block:: javascript
+
+        pixmap.setResolution(300, 300);
+
+
 .. method:: getXResolution()
 
     Returns the `x` resolution for the `Pixmap`.
@@ -150,6 +161,7 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
         var yRes = pixmap.getYResolution();
 
+
 .. method:: getSample(x, y, index)
 
     |mutool_tag|
@@ -166,57 +178,83 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
         var sample = pixmap.getSample(0,0,0);
 
 
-.. method:: setResolution(xRes, yRes)
 
-    Set `x` & `y` resolution.
-
-    :arg xRes: `Int` X resolution in dots per inch.
-    :arg yRes: `Int` Y resolution in dots per inch.
-
-
-    .. code-block:: javascript
-
-        pixmap.setResolution(300);
 
 
 .. method:: saveAsPNG(fileName)
+
+    |mutool_tag|
 
     Save the `Pixmap` as a :title:`PNG`. Only works for :title:`Gray` and :title:`RGB` images.
 
     :arg fileName: `String`.
 
+    .. code-block:: javascript
+
+        pixmap.saveAsPNG("fileName.png");
+
 
 .. method:: saveAsJPEG(fileName, quality)
+
+    |mutool_tag|
 
     Save the `Pixmap` as a :title:`JPEG`. Only works for :title:`Gray`, :title:`RGB` and :title:`CMYK` images.
 
     :arg fileName: `String`.
     :arg quality: `Int`.
 
+    .. code-block:: javascript
+
+        pixmap.saveAsPNG("fileName.jpg", 80);
+
 
 .. method:: saveAsPAM(fileName)
+
+    |mutool_tag|
 
     Save the `Pixmap` as a :title:`PAM`.
 
     :arg fileName: `String`.
 
+    .. code-block:: javascript
+
+        pixmap.saveAsPAM("fileName.pam");
+
 .. method:: saveAsPNM(fileName)
+
+    |mutool_tag|
 
     Save the `Pixmap` as a :title:`PNM`. Only works for :title:`Gray` and :title:`RGB` images without alpha.
 
     :arg fileName: `String`.
 
+    .. code-block:: javascript
+
+        pixmap.saveAsPNM("fileName.pnm");
+
 .. method:: saveAsPBM(fileName)
+
+    |mutool_tag|
 
     Save the `Pixmap` as a :title:`PBM`. Only works for :title:`Gray` and :title:`RGB` images without alpha.
 
     :arg fileName: `String`.
 
+    .. code-block:: javascript
+
+        pixmap.saveAsPBM("fileName.pbm");
+
 .. method:: saveAsPKM(fileName)
+
+    |mutool_tag|
 
     Save the `Pixmap` as a :title:`PKM`. Only works for :title:`Gray` and :title:`RGB` images without alpha.
 
     :arg fileName: `String`.
+
+    .. code-block:: javascript
+
+        pixmap.saveAsPKM("fileName.pkm");
 
 
 
@@ -224,9 +262,17 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
     Invert all pixels. All components are processed, except alpha which is unchanged.
 
+    .. code-block:: javascript
+
+        pixmap.invert();
+
 .. method:: invertLuminance()
 
     Transform all pixels so that luminance of each pixel is inverted, and the chrominance remains as unchanged as possible. All components are processed, except alpha which is unchanged.
+
+    .. code-block:: javascript
+
+        pixmap.invertLuminance();
 
 .. method:: gamma(gamma)
 
@@ -236,6 +282,10 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
     :arg gamma: `Float`.
 
+    .. code-block:: javascript
+
+        pixmap.gamma(3);
+
 .. method:: tint(black, white)
 
     Tint all pixels in a :title:`RGB`, :title:`BGR` or :title:`Gray` `Pixmap`. Map black and white respectively to the given hex :title:`RGB` values.
@@ -243,17 +293,32 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
     :arg black: `Integer`.
     :arg white: `Integer`.
 
+    .. code-block:: javascript
+
+        pixmap.tint(0xffff00, 0xffff00);
+
+
 
 .. method:: warp(points, width, height)
 
+    |mutool_tag|
+
     Return a warped subsection of the `Pixmap`, where the result has the requested dimensions.
 
-    :arg points: `[x0, y0, x1, y1, x2, y2, x3, y3, ...]` Points give the corner points of a convex quadrilateral within the `Pixmap` to be warped.
-    :arg width: `Int` .
+    :arg points: `[x0, y0, x1, y1, x2, y2, x3, y3, x4, y4]` Points give the corner points of a convex quadrilateral within the `Pixmap` to be warped.
+    :arg width: `Int`.
     :arg height: `Int`.
+
+    :return: `Pixmap`.
+
+    .. code-block:: javascript
+
+        var warpedPixmap = pixmap.warp([0,0,100,0,0,100,100,100],200,200);
 
 
 .. method:: convertToColorSpace(colorspace, proof, defaultColorSpaces, colorParams, keepAlpha)
+
+    |mutool_tag|
 
     Convert pixmap into a new pixmap of a desired colorspace. A proofing colorspace, a set of default colorspaces and color parameters used during conversion may be specified. Finally a boolean indicates if alpha should be preserved (default is to not preserve alpha).
 
@@ -264,3 +329,88 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
     :arg keepAlpha: `Boolean`.
 
     :return: `Pixmap`.
+
+
+    |tor_todo| Can't get any joy out of this one ...
+
+
+.. method:: getPixels()
+
+    |wasm_tag|
+
+    Returns an array of pixels for the `Pixmap`.
+
+
+    :return: `[...]`.
+
+    .. code-block:: javascript
+
+        var pixels = pixmap.getPixels();
+
+
+.. method:: asPNG()
+
+    |wasm_tag|
+
+    Returns a buffer of the `Pixmap` as a :title:`PNG`.
+
+
+    :return: `Buffer`.
+
+    .. code-block:: javascript
+
+        var buffer = pixmap.asPNG();
+
+    |tor_todo| TypeError: buffer.readByte is not a function
+
+
+.. method:: asPSD()
+
+    |wasm_tag|
+
+    Returns a buffer of the `Pixmap` as a :title:`PSD`.
+
+
+    :return: `Buffer`.
+
+    .. code-block:: javascript
+
+        var buffer = pixmap.asPSD();
+
+    |tor_todo| TypeError: libmupdf._wasm_new_buffer_from_pixmap_as_psd is not a function
+
+
+.. method:: asPAM()
+
+    |wasm_tag|
+
+    Returns a buffer of the `Pixmap` as a :title:`PAM`.
+
+
+    :return: `Buffer`.
+
+    .. code-block:: javascript
+
+        var buffer = pixmap.asPAM();
+
+    |tor_todo| TypeError: buffer.readByte is not a function
+
+
+.. method:: asJPEG(quality)
+
+    |wasm_tag|
+
+    Returns a buffer of the `Pixmap` as a :title:`JPEG`. Note, if the`Pixmap` has an alpha channel then an exception will be thrown.
+
+
+    :return: `Buffer`.
+
+    .. code-block:: javascript
+
+        var buffer = pixmap.asJPEG(80);
+
+    |tor_todo| TypeError: buffer.readByte is not a function
+
+
+
+
