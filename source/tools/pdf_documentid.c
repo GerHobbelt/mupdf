@@ -2,6 +2,9 @@
 // Create a non-zero *positive* 64-bit document id suitable for Manticore and other uses.
 // The source is assumed to be a Qiqqa v2 fingerprint hash for a given input file (PDF)
 //
+// See also:
+// - http://jakegoulding.com/blog/2011/02/06/sqlite-64-bit-integers/
+// - https://manual.manticoresearch.com/Installation/Migration_from_Sphinx#Document-IDs-in-Manticore-3.x
 
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
