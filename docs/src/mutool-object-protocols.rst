@@ -22,22 +22,6 @@ The following objects are standard :title:`JavaScript` objects with assumed prop
 
 
 
-.. _mutool_run_js_api_links:
-
-.. _mutool_run_js_api_link_dict:
-
-Link Dictionary Object
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-A link is a dictionary with keys for:
-
-`bounds`
-    A rectangle describing the link's location on the page.
-
-`uri`
-    A `uri` describing either a document internal destination or a :title:`URL` for a web page.
-
-
 .. _mutool_run_js_api_link_dest:
 
 

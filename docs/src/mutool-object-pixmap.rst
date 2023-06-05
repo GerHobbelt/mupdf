@@ -23,7 +23,7 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
     Create a new pixmap. The pixel data is **not** initialized; and will contain garbage.
 
-    :arg colorspace: `Colorspace`.
+    :arg colorspace: `ColorSpace`.
     :arg bounds: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
     :arg alpha: `Boolean`.
 
@@ -33,28 +33,58 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
     .. code-block:: javascript
 
-        var pixmap = new Pixmap(DeviceRGB, [0,0,100,100], true);
+        var pixmap = new mupdf.Pixmap(mupdf.ColorSpace.DeviceRGB, [0,0,100,100], true);
+
+
+**Instance methods**
 
 
 .. method:: clear(value)
 
-    Clear the pixels to the specified value. Pass `255` for white, or `undefined` for transparent.
+    Clear the pixels to the specified value. Pass `255` for white, or "undefined" for transparent.
 
     :arg value: Pixel value.
 
-.. method:: bound()
+    **Example**
+
+    .. code-block:: javascript
+
+        pixmap.clear("undefined");
+
+
+.. method:: getBounds()
 
     Return the pixmap bounds.
 
     :return: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var rect = pixmap.getBounds();
+
+
+    |tor_todo| In WASM, TypeError: libmupdf._wasm_pixmap_x is not a function
+
+
 .. method:: getWidth()
 
     :return: `Int` The width value.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var w = pixmap.getWidth();
+
 .. method:: getHeight()
 
     :return: `Int` The height value.
+
+    .. code-block:: javascript
+
+        var h = pixmap.getHeight();
 
 .. method:: getNumberOfComponents()
 
@@ -62,11 +92,22 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
     :return: `Int` Number of color components.
 
+    .. code-block:: javascript
+
+        var num = pixmap.getNumberOfComponents();
+
 .. method:: getAlpha()
 
     *True* if alpha channel is present.
 
     :return: `Boolean`.
+
+    .. code-block:: javascript
+
+        var alpha = pixmap.getAlpha();
+
+
+    |tor_todo| In WASM, TypeError: pixmap.getAlpha is not a function
 
 .. method:: getStride()
 
@@ -74,17 +115,29 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
     :return: `Int`.
 
+    .. code-block:: javascript
+
+        var stride = pixmap.getStride();
+
 .. method:: getColorSpace()
 
     Returns the `ColorSpace` for the `Pixmap`.
 
     :return: `ColorSpace`.
 
+    .. code-block:: javascript
+
+        var cs = pixmap.getColorSpace();
+
 .. method:: getXResolution()
 
     Returns the `x` resolution for the `Pixmap`.
 
     :return: `Int` Resolution in dots per inch.
+
+    .. code-block:: javascript
+
+        var xRes = pixmap.getXResolution();
 
 
 .. method:: getYResolution()
@@ -93,16 +146,24 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
     :return: `Int` Resolution in dots per inch.
 
+    .. code-block:: javascript
 
+        var yRes = pixmap.getYResolution();
 
-.. method:: getSample(x, y, k)
+.. method:: getSample(x, y, index)
 
-    Get the value of component `k` at position `x`, `y` (relative to the image origin: 0, 0 is the top left pixel).
+    |mutool_tag|
+
+    Get the value of component `index` at position `x`, `y` (relative to the image origin: 0, 0 is the top left pixel).
 
     :arg x: X co-ordinate.
     :arg y: Y co-ordinate.
-    :arg k: Component.
+    :arg index: Component index. i.e. For CMYK ColorSpaces 0 = Cyan, for RGB 0 = Red etc.
     :return: `Int`.
+
+    .. code-block:: javascript
+
+        var sample = pixmap.getSample(0,0,0);
 
 
 .. method:: setResolution(xRes, yRes)
@@ -111,6 +172,11 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
     :arg xRes: `Int` X resolution in dots per inch.
     :arg yRes: `Int` Y resolution in dots per inch.
+
+
+    .. code-block:: javascript
+
+        pixmap.setResolution(300);
 
 
 .. method:: saveAsPNG(fileName)

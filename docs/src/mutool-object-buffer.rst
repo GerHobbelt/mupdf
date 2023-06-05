@@ -112,7 +112,7 @@
 
     .. code-block:: javascript
 
-        let length = buffer.getLength();
+        var length = buffer.getLength();
 
 
 .. method:: writeByte(b)
@@ -242,7 +242,7 @@
 
     .. code-block:: javascript
 
-        let arr = buffer.asUint8Array();
+        var arr = buffer.asUint8Array();
 
 
 .. method:: asString()
@@ -257,4 +257,4 @@
 
     .. code-block:: javascript
 
-        let str = buffer.asString();
+        var str = buffer.asString();
