@@ -1,6 +1,7 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+----
 
 .. default-domain:: js
 
@@ -33,7 +34,12 @@
 
     .. code-block:: javascript
 
-        var image = new Image("my-image-file.png");
+        var image = new mupdf.Image(pixmap);
+
+
+
+
+|instance_methods|
 
 
 .. method:: getWidth()
@@ -42,17 +48,36 @@
 
     :return: The width value.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var width = image.getWidth();
+
+
 .. method:: getHeight()
 
     Get the image height in pixels.
 
     :return: The height value.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var height = image.getHeight();
+
 .. method:: getXResolution()
 
     Returns the x resolution for the `Image`.
 
     :return: `Int` Image resolution in dots per inch.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var xRes = image.getXResolution();
 
 
 .. method:: getYResolution()
@@ -61,12 +86,24 @@
 
     :return: `Int` Image resolution in dots per inch.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var yRes = image.getYResolution();
+
+
 .. method:: getColorSpace()
 
     Returns the `ColorSpace` for the `Image`.
 
     :return: `ColorSpace`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var cs = image.getColorSpace();
 
 
 .. method:: getNumberOfComponents()
@@ -75,12 +112,24 @@
 
     :return: `Integer`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var num = image.getNumberOfComponents();
+
 
 .. method:: getBitsPerComponent()
 
     Returns the number of bits per component.
 
     :return: `Integer`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var bits = image.getBitsPerComponent();
 
 
 .. method:: getInterpolate()
@@ -89,18 +138,37 @@
 
     :return: `Boolean`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var interpolate = image.getInterpolate();
+
 
 .. method:: getColorKey()
 
     Returns an array with 2 * N integers for an N component image with color key masking, or `null` if masking is not used. Each pair of integers define an interval, and component values within that interval are not painted.
 
-    :return: `[]`.
+    :return: `[...]` or `null`.
+
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var interpolate = image.getInterpolate();
 
 .. method:: getDecode()
 
     Returns an array with 2 * N numbers for an N component image with color mapping, or `null` if mapping is not used. Each pair of numbers define the lower and upper values to which the component values are mapped linearly.
 
-    :return: `[]`.
+    :return: `[...]` or `null`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var arr = image.getDecode();
 
 
 .. method:: getOrientation()
@@ -109,6 +177,12 @@
 
     :return: `Integer`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var orientation = image.getOrientation();
+
 .. method:: setOrientation(orientation)
 
     Set the image orientation to the given orientation.
@@ -116,27 +190,33 @@
     :arg orientation: `Integer` Orientation value from the table below:
 
 
-.. list-table::
-   :header-rows: 0
+    .. list-table::
+       :header-rows: 0
 
-   * - **0**
-     - Undefined
-   * - **1**
-     - 0 degree ccw rotation. (Exif = 1)
-   * - **2**
-     - 90 degree ccw rotation. (Exif = 8)
-   * - **3**
-     - 180 degree ccw rotation. (Exif = 3)
-   * - **4**
-     - 270 degree ccw rotation. (Exif = 6)
-   * - **5**
-     - flip on X. (Exif = 2)
-   * - **6**
-     - flip on X, then rotate ccw by 90 degrees. (Exif = 5)
-   * - **7**
-     - flip on X, then rotate ccw by 180 degrees. (Exif = 4)
-   * - **8**
-     - flip on X, then rotate ccw by 270 degrees. (Exif = 7)
+       * - **0**
+         - Undefined
+       * - **1**
+         - 0 degree ccw rotation. (Exif = 1)
+       * - **2**
+         - 90 degree ccw rotation. (Exif = 8)
+       * - **3**
+         - 180 degree ccw rotation. (Exif = 3)
+       * - **4**
+         - 270 degree ccw rotation. (Exif = 6)
+       * - **5**
+         - flip on X. (Exif = 2)
+       * - **6**
+         - flip on X, then rotate ccw by 90 degrees. (Exif = 5)
+       * - **7**
+         - flip on X, then rotate ccw by 180 degrees. (Exif = 4)
+       * - **8**
+         - flip on X, then rotate ccw by 270 degrees. (Exif = 7)
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var orientation = image.setOrientation(4);
 
 
 .. method:: getImageMask()
@@ -145,11 +225,24 @@
 
     :return: `Boolean`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var mask = image.getImageMask();
+
+
 .. method:: getMask()
 
     Get another `Image` used as a mask for this one.
 
     :return: `Image` (or `null`).
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var img = image.getMask();
 
 
 
@@ -157,7 +250,15 @@
 
     Create a `Pixmap` from the image. The `scaledWidth` and `scaledHeight` arguments are optional, but may be used to decode a down-scaled `Pixmap`.
 
-    :arg scaledWidth: Width value.
-    :arg scaledHeight: Height value.
+    :arg scaledWidth: `Float`.
+    :arg scaledHeight: `Float`.
 
     :return: `Pixmap`.
+
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var pixmap = image.toPixmap();
+

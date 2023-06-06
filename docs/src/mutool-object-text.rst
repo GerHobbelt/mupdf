@@ -1,6 +1,7 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+----
 
 .. default-domain:: js
 
@@ -39,7 +40,9 @@ A `Text` object contains text.
     |tor_todo| TypeError: libmupdf._wasm_new_text is not a function
 
 
-**Instance methods**
+
+
+|instance_methods|
 
 .. method:: showGlyph(font, transform, glyph, unicode, wmode)
 

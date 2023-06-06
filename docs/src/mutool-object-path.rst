@@ -1,6 +1,7 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+----
 
 .. default-domain:: js
 
@@ -38,7 +39,8 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
 
 
 
-**Instance methods**
+|instance_methods|
+
 
 
 .. method:: getBounds(stroke, transform)

@@ -1,3 +1,8 @@
+.. |instance_methods| raw:: html
+
+   <span class="instance_methods_tag">Instance methods</span>
+
+
 .. |mutool_tag| raw:: html
 
    <span class="mutool_tag">mutool only</span>

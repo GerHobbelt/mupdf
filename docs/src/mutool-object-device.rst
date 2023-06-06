@@ -1,6 +1,8 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+----
+
 .. default-domain:: js
 
 .. include:: html_tags.rst
@@ -24,7 +26,9 @@ Colors are specified as arrays with the appropriate number of components for the
 The methods that clip graphics must be balanced with a corresponding `popClip`.
 
 
-**Instance methods**
+
+
+|instance_methods|
 
 .. method:: fillPath(path, evenOdd, transform, colorspace, color, alpha, colorParams)
 

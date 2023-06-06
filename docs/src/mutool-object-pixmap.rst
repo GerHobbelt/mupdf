@@ -1,6 +1,7 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+----
 
 .. default-domain:: js
 
@@ -36,7 +37,8 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
         var pixmap = new mupdf.Pixmap(mupdf.ColorSpace.DeviceRGB, [0,0,100,100], true);
 
 
-**Instance methods**
+
+|instance_methods|
 
 
 .. method:: clear(value)

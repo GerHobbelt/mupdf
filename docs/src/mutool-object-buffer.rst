@@ -1,6 +1,8 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+----
+
 .. default-domain:: js
 
 .. include:: html_tags.rst
@@ -67,9 +69,9 @@
 
         var buffer = mupdf.readFile("my_file.pdf");
 
-----
 
-**Instance properties**
+
+|instance_methods|
 
 
 

@@ -1,6 +1,7 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+----
 
 .. default-domain:: js
 
@@ -60,8 +61,7 @@
     |tor_todo| WASM: ReferenceError: name is not defined
 
 
-
-**Instance methods**
+|instance_methods|
 
 
 .. method:: getName()
@@ -99,7 +99,7 @@
     :arg glyph: The glyph as unicode character.
     :arg wmode: `0` for horizontal writing, and `1` for vertical writing.
 
-    :return: Width for a glyph.
+    :return: Width for the glyph.
 
     **Example**
 

@@ -322,7 +322,6 @@ Alpha values are floats between `0` and `1`, whereby `0` denotes full transparen
 
 .. include:: mutool-object-font.rst
 
-
 .. include:: mutool-object-image.rst
 
 .. include:: mutool-object-document-writer.rst

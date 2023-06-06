@@ -1,6 +1,7 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+----
 
 .. default-domain:: js
 
@@ -36,9 +37,9 @@ All functions that take `PDFObjects`, do automatic translation between :title:`J
     Length of the array.
 
 
-----
 
-**Instance methods**
+
+|instance_methods|
 
 .. method:: get(ref)
 

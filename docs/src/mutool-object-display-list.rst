@@ -1,6 +1,8 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+----
+
 .. default-domain:: js
 
 
@@ -38,7 +40,8 @@ A display list records all the device calls for playback later. If you want to r
         var displayList = new mupdf.DisplayList([0,0,100,100]);
 
 
-**Instance methods**
+
+|instance_methods|
 
 
 .. method:: run(device, transform)

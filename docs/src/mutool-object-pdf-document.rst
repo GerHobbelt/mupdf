@@ -2,6 +2,8 @@
 .. All Rights Reserved.
 
 
+----
+
 .. default-domain:: js
 
 .. include:: html_tags.rst
@@ -32,10 +34,14 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     .. code-block:: javascript
 
-        var pdfDocument = new PDFDocument();
+        var pdfDocument = new mupdf.PDFDocument();
+
+    |tor_todo| WASM: TypeError: libmupdf._wasm_pdf_create_document is not a function
 
 
 .. method:: new PDFDocument(fileName)
+
+    |mutool_tag|
 
     *Constructor method*.
 
@@ -50,19 +56,36 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
         var pdfDocument = new PDFDocument("my-file.pdf");
 
 
+|instance_methods|
+
+
 .. method:: getVersion()
 
     Returns the :title:`PDF` document version as an integer multiplied by 10, so e.g. a PDF-1.4 document would return 14.
 
     :return: `Integer`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var version = pdfDocument.getVersion();
+
 
 .. method:: save(fileName, options)
+
+    |mutool_tag|
 
     Write the `PDFDocument` to file. The write options are a string of comma separated options (see the :ref:`mutool convert options<mutool_convert>`).
 
     :arg fileName: The name of the file to save to.
     :options: The options as key-value pairs.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var version = pdfDocument.save("my_fileName.pdf", {compress-images:true});
 
 
 .. method:: canBeSavedIncrementally()
@@ -71,11 +94,26 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :return: `Boolean`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var canBeSavedIncrementally = pdfDocument.canBeSavedIncrementally();
+
+    |tor_todo| WASM: TypeError: libmupdf._wasm_pdf_can_be_saved_incrementally is not a function
+
+
 .. method:: countVersions()
 
     Returns the number of versions of the document in a :title:`PDF` file, typically 1 + the number of updates.
 
     :return: `Integer`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var versionNum = pdfDocument.countVersions();
 
 
 .. method:: countUnsavedVersions()
@@ -84,11 +122,23 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :return: `Integer`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var unsavedVersionNum = pdfDocument.countUnsavedVersions();
+
 .. method:: validateChangeHistory()
 
     Check the history of the document, return the last version that checks out OK. Returns `0` if the entire history is OK, `1` if the next to last version is OK, but the last version has issues, etc.
 
     :return: `Integer`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var changeHistory = pdfDocument.validateChangeHistory();
 
 .. method:: hasUnsavedChanges()
 
@@ -96,11 +146,26 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :return: `Boolean`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var hasUnsavedChanges = pdfDocument.hasUnsavedChanges();
+
+
 .. method:: wasPureXFA()
+
+    |mutool_tag|
 
     Returns *true* if the document was an :title:`XFA` form without :title:`AcroForm` fields.
 
     :return: `Boolean`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var wasPureXFA = pdfDocument.wasPureXFA();
 
 .. method:: wasRepaired()
 
@@ -108,14 +173,27 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :return: `Boolean`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var wasRepaired = pdfDocument.wasRepaired();
+
+
 .. method:: setPageLabels(index, style, prefix, start)
 
     Sets the page label numbering for the page and all pages following it, until the next page with an attached label.
 
     :arg index: `Integer`.
-    :arg style: `String` Can be one of the following strings: `""`, `"D"`, `"R"`, `"r"`, `"A"`, or `"a"`.
+    :arg style: `String` Can be one of the following strings: `""` (none), `"D"` (decimal), `"R"` (roman numerals upper-case), `"r"` (roman numerals lower-case), `"A"` (alpha upper-case), or `"a"` (alpha lower-case).
     :arg prefix: `String`.
     :arg start: `Integer` The ordinal with which to start numbering.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        pdfDocument.setPageLabels(0, "D", "Prefix", 1);
 
 
 .. method:: deletePageLabels(index)
@@ -124,24 +202,50 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :arg index: `Integer`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        pdfDocument.deletePageLabels(0);
+
 
 .. method:: getTrailer()
 
     The trailer dictionary. This contains indirect references to the "Root" and "Info" dictionaries. See: :ref:`PDF object access<mutool_run_js_api_pdf_object_access>`.
 
-    :return: The trailer dictionary.
+    :return: `PDFObject` The trailer dictionary.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var dict = pdfDocument.getTrailer();
 
 .. method:: countObjects()
 
     Return the number of objects in the :title:`PDF`. Object number `0` is reserved, and may not be used for anything. See: :ref:`PDF object access<mutool_run_js_api_pdf_object_access>`.
 
-    :return: Object count.
+    :return: `Integer` Object count.
+
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var num = pdfDocument.countObjects();
+
 
 .. method:: createObject()
 
     Allocate a new numbered object in the :title:`PDF`, and return an indirect reference to it. The object itself is uninitialized.
 
     :return: The new object.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var obj = pdfDocument.createObject();
 
 
 .. method:: deleteObject(obj)
@@ -150,6 +254,12 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :arg obj: The object to delete.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        pdfDocument.deleteObject(obj);
+
 ----
 
 
@@ -157,19 +267,45 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
 .. method:: enableJS()
 
+    |mutool_tag|
+
     Enable interpretation of document :title:`JavaScript` actions.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        pdfDocument.enableJS();
 
 .. method:: disableJS()
 
+    |mutool_tag|
+
     Disable interpretation of document :title:`JavaScript` actions.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        pdfDocument.disableJS();
+
 .. method:: isJSSupported()
+
+    |mutool_tag|
 
     Returns *true* if interpretation of document :title:`JavaScript` actions is supported.
 
     :return: `Boolean`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var isSupported = pdfDocument.isJSSupported();
+
 .. method:: setJSEventListener(listener)
+
+    |mutool_tag|
 
     Calls the listener whenever a document :title:`JavaScript` action triggers an event.
 
@@ -180,6 +316,12 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
         At present this listener will only trigger when a document :title:`JavaScript` action triggers an alert.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        pdfDocument.setJSEventListener({});
+
 ----
 
 **PDF journalling**
@@ -188,23 +330,57 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     Activate journalling for the document.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        pdfDocument.enableJournal();
+
 .. method:: getJournal()
 
     Returns a :ref:`PDF Journal Object<mutool_run_js_api_pdf_journal_object>`.
 
     :return: `Object` :ref:`PDF Journal Object<mutool_run_js_api_pdf_journal_object>`.
 
-.. method:: beginOperation()
+    **Example**
 
-    Begin a journal operation
+    .. code-block:: javascript
+
+        var journal = pdfDocument.getJournal();
+
+.. method:: beginOperation(op)
+
+    Begin a journal operation.
+
+    :arg length: `String` The name of the operation.
+
+
+    **Example**
+
+    .. code-block:: javascript
+
+        pdfDocument.beginOperation("my_operation");
 
 .. method:: beginImplicitOperation()
 
     Begin an implicit journal operation. Implicit operations are operations that happen due to other operations, e.g. updating an annotation.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        pdfDocument.beginImplicitOperation();
+
+
 .. method:: endOperation()
 
     End a previously started normal or implicit operation. After this it can be undone/redone using the methods below.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        pdfDocument.beginImplicitOperation();
 
 .. method:: canUndo()
 
@@ -212,19 +388,43 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :return: `Boolean`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var canUndo = pdfDocument.canUndo();
+
 .. method:: canRedo()
 
     Returns *true* if redo is possible in this state.
 
     :return: `Boolean`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var canRedo = pdfDocument.canRedo();
+
 .. method:: undo()
 
     Move backwards in the undo history. Changes to the document after this throws away all subsequent history.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        pdfDocument.undo();
+
 .. method:: redo()
 
     Move forwards in the undo history.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        pdfDocument.redo();
 
 
 

@@ -1,6 +1,8 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+----
+
 
 .. default-domain:: js
 
@@ -37,9 +39,9 @@
         var document = new mupdf.Document.openDocument("my_pdf.pdf", "application/pdf");
 
 
-----
 
-**Instance methods**
+
+|instance_methods|
 
 .. method:: needsPassword()
 
