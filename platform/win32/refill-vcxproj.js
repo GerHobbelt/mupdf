@@ -254,6 +254,10 @@ const projectMap = {
 	"libdlfcn-win32-testdll2": "dlfcn-win32",
 	"libdlfcn-win32-testdll3": "dlfcn-win32",
 	"libdlfcn-win32-test-dladdr": "dlfcn-win32",
+
+	//"libpthread-win32-jumbo": "pthread-win32",
+	//"libpthread-win32-EH": "pthread-win32",
+	//"libpthread-win32-JMP": "pthread-win32",
 	
 	"sqlite_tools": "sqlite-amalgamation",
 };

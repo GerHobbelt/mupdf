@@ -543,6 +543,9 @@ promise-cpp
 promise-hpp
 proxygen
 pthread-win32
+pthread-win32-jumbo
+pthread-win32-EH
+pthread-win32-JMP
 pthreadpool
 pybind11
 pyclustering
