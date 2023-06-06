@@ -3123,7 +3123,9 @@ pdf_open_document_with_stream(fz_context *ctx, fz_stream *file)
 		char message[sizeof(ctx->error.message)];
 		int caught = fz_caught(ctx);
 		fz_strncpy_s(ctx, message, fz_caught_message(ctx), sizeof message);
+
 		fz_drop_document(ctx, &doc->super);
+
 		fz_throw(ctx, caught, "%s", message);
 	}
 	return doc;

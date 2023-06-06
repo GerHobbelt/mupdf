@@ -35,6 +35,10 @@
 #include <windows.h>
 #endif
 
+#ifndef countof
+#define countof(x)   (sizeof(x) / sizeof((x)[0]))
+#endif
+
 
 #define QUIET_ERROR				0x0001
 #define QUIET_WARN				0x0002
@@ -295,7 +299,60 @@ static void prepare_message(char* buf, size_t bufsize, const char* fmt, va_list 
 	}
 }
 
-#define prepmsg(buf, fmt, ap)   prepare_message(buf, sizeof buf, fmt, ap)
+#define prepmsg(buf, fmt, ap)   prepare_message(buf, sizeof(buf), fmt, ap)
+
+static void prepare_append_message(char* buf, size_t bufsize, const char *joinstr, const char* msg)
+{
+	size_t endidx = bufsize - 1;
+
+	size_t len = strlen(buf);
+	size_t msglen = strlen(msg);
+	size_t joinlen = strlen(joinstr);
+	// as each message will be automatically appended with a LINEFEED suitable for the output channel of choice,
+	// we will now strip off one(1) LF at the end of the message, iff it has any.
+	//
+	// We only strip off one LF as messages with multiple LF characters at the end must have surely intended
+	// to be output that way.
+	if (msg[msglen - 1] == '\n')
+	{
+		msglen--;
+	}
+
+	// truncate the combo?
+	if (len + joinlen + msglen >= endidx)
+	{
+		// heuristic: keep half of what was, allow half of the space for the new msg:
+		const char trunc_msg[] = "(...truncated...)";
+		const size_t trunc_msglen = sizeof(trunc_msg);
+
+		size_t desired_len = bufsize / 2 - trunc_msglen / 2;
+		// calculate where the truncation will land:
+		size_t remaining_len = endidx - len - trunc_msglen;
+		if (desired_len < remaining_len)
+			desired_len = remaining_len;
+		if (msglen > desired_len)
+		{
+			size_t offset = msglen - desired_len;
+			msg += offset;
+			msglen -= offset;
+		}
+		len = endidx - msglen - trunc_msglen;
+		strcpy(buf + len, trunc_msg);
+		len += trunc_msglen;
+	}
+	else
+	{
+		// inject separator between existing message and the piece to be appended:
+		strcpy(buf + len, joinstr);
+		len++;
+	}
+
+	memcpy(buf + len, msg, msglen);
+	len += msglen;
+	buf[len] = 0;
+}
+
+#define prepaddmsg(buf, join, msg)   prepare_append_message(buf, sizeof(buf), join, msg)
 
 void fz_vwarn(fz_context *ctx, const char *fmt, va_list ap)
 {
@@ -628,14 +685,14 @@ void fz_copy_ephemeral_system_error_explicit(fz_context* ctx, int errorcode, con
 {
 	// do not replace any existing errorcode! First comer is the winner!
 	int idx = ctx->error.system_errdepth;
-	ASSERT(idx >= 0 && idx < 3);
+	ASSERT(idx >= 0 && idx < countof(ctx->error.system_errcode));
 	if (ctx->error.system_errcode[idx])
 	{
 		++idx;
-		if (idx >= 3)
-			idx = 2;
+		if (idx >= countof(ctx->error.system_errcode))
+			idx = countof(ctx->error.system_errcode) - 1;
 		// except that the LAST level will always carry the LATEST error...
-		ASSERT0(idx >= 0 && idx < 3);
+		ASSERT0(idx >= 0 && idx < countof(ctx->error.system_errcode));
 		ctx->error.system_errdepth = idx;
 	}
 
@@ -643,11 +700,13 @@ void fz_copy_ephemeral_system_error_explicit(fz_context* ctx, int errorcode, con
 		errorcode = -1; // unknown/unidentified error.
 
 	// keep a copy of the ephemeral system error code:
-	ASSERT0(idx >= 0 && idx < 3);
+	ASSERT0(idx >= 0 && idx < countof(ctx->error.system_errcode));
 	ctx->error.system_errcode[idx] = category_code | (errorcode & errorcode_mask);
 
 	const char* category_lead_msg = (category_code == FZ_ERROR_C_RTL_SERIES ? "rtl error: " : "system error: ");
-	fz_strncpy_s(ctx, ctx->error.system_error_message[idx], category_lead_msg, sizeof(ctx->error.system_error_message[idx]));
+	char* const errmsgbuf = ctx->error.system_error_message[idx];
+	const size_t errmsgbufsize = sizeof(ctx->error.system_error_message[idx]);
+	fz_strncpy_s(ctx, errmsgbuf, category_lead_msg, errmsgbufsize);
 
 	if (!errormessage || !errormessage[0])
 	{
@@ -662,8 +721,8 @@ void fz_copy_ephemeral_system_error_explicit(fz_context* ctx, int errorcode, con
 			else
 			{
 #if defined(_WIN32)
-				size_t offset = strlen(ctx->error.system_error_message[idx]);
-				FormatMessageA((FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS), NULL, errorcode, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), ctx->error.system_error_message[idx] + offset, sizeof(ctx->error.system_error_message[idx]) - offset, NULL);
+				size_t offset = strlen(errmsgbuf);
+				FormatMessageA((FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS), NULL, errorcode, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), errmsgbuf + offset, errmsgbufsize - offset, NULL);
 				return;
 #endif
 			}
@@ -671,18 +730,23 @@ void fz_copy_ephemeral_system_error_explicit(fz_context* ctx, int errorcode, con
 
 		if (!errormessage || !errormessage[0])
 		{
-			size_t offset = strlen(ctx->error.system_error_message[idx]);
+			size_t offset = strlen(errmsgbuf);
 
 			if (errorcode < 0xFFFF)
-				fz_snprintf(ctx->error.system_error_message[idx] + offset, sizeof(ctx->error.system_error_message[idx]) - offset, "unknown/unidentified error code %d", errorcode);
+				fz_snprintf(errmsgbuf + offset, errmsgbufsize - offset, "unknown/unidentified error code %d", errorcode);
 			else
 				// some segmented errorcode: dumnp as HEX value!
-				fz_snprintf(ctx->error.system_error_message[idx] + offset, sizeof(ctx->error.system_error_message[idx]) - offset, "unknown/unidentified error code 0x%08x", errorcode);
+				fz_snprintf(errmsgbuf + offset, errmsgbufsize - offset, "unknown/unidentified error code 0x%08x", errorcode);
 			return;
 		}
 	}
 
-	fz_strncat_s(ctx, ctx->error.system_error_message[idx], errormessage, sizeof(ctx->error.system_error_message[idx]));
+	errmsgbuf[errmsgbufsize - 2] = 0;   // helper to quickly detect buffer 'overflow' --> truncated message
+	fz_strncat_s(ctx, errmsgbuf, errormessage, errmsgbufsize);
+	if (errmsgbuf[errmsgbufsize - 2])
+	{
+		strcpy(errmsgbuf + errmsgbufsize - sizeof("(...truncated...)"), "(...truncated...)");
+	}
 }
 
 
@@ -690,6 +754,8 @@ void fz_replace_ephemeral_system_error(fz_context* ctx, int errorcode, const cha
 {
 	// brutally replace any existing errorcode!
 	int idx = ctx->error.system_errdepth;
+	char* const errmsgbuf = ctx->error.system_error_message[idx];
+	const size_t errmsgbufsize = sizeof(ctx->error.system_error_message[idx]);
 
 	if (errorcode != 0)
 	{
@@ -706,7 +772,7 @@ void fz_replace_ephemeral_system_error(fz_context* ctx, int errorcode, const cha
 			if (!errormessage[0])
 			{
 				const char* category_lead_msg = (fz_is_rtl_error(errorcode) ? "rtl error: " : "system error: ");
-				fz_strncpy_s(ctx, ctx->error.system_error_message[idx], category_lead_msg, sizeof(ctx->error.system_error_message[idx]));
+				fz_strncpy_s(ctx, errmsgbuf, category_lead_msg, errmsgbufsize);
 
 				if (errorcode == -1)
 					errormessage = "unknown/unidentified error";
@@ -719,8 +785,8 @@ void fz_replace_ephemeral_system_error(fz_context* ctx, int errorcode, const cha
 					else
 					{
 #if defined(_WIN32)
-						size_t offset = strlen(ctx->error.system_error_message[idx]);
-						FormatMessageA((FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS), NULL, errorcode, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), ctx->error.system_error_message[idx] + offset, sizeof(ctx->error.system_error_message[idx]) - offset, NULL);
+						size_t offset = strlen(errmsgbuf);
+						FormatMessageA((FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS), NULL, errorcode, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), errmsgbuf + offset, errmsgbufsize - offset, NULL);
 						return;
 #endif
 					}
@@ -728,25 +794,26 @@ void fz_replace_ephemeral_system_error(fz_context* ctx, int errorcode, const cha
 
 				if (!errormessage || !errormessage[0])
 				{
-					size_t offset = strlen(ctx->error.system_error_message[idx]);
+					size_t offset = strlen(errmsgbuf);
 					if (errorcode < 0xFFFF)
-						fz_snprintf(ctx->error.system_error_message[idx] + offset, sizeof(ctx->error.system_error_message[idx]) - offset, "unknown/unidentified error code %d", errorcode);
+						fz_snprintf(errmsgbuf + offset, errmsgbufsize - offset, "unknown/unidentified error code %d", errorcode);
 					else
 						// some segmented errorcode: dumnp as HEX value!
-						fz_snprintf(ctx->error.system_error_message[idx] + offset, sizeof(ctx->error.system_error_message[idx]) - offset, "unknown/unidentified error code 0x%08x", errorcode);
+						fz_snprintf(errmsgbuf + offset, errmsgbufsize - offset, "unknown/unidentified error code 0x%08x", errorcode);
 					return;
 				}
 			}
-
-			fz_strncpy_s(ctx, ctx->error.system_error_message[idx], errormessage, sizeof(ctx->error.system_error_message[idx]));
 		}
 	}
-	else
+
+	// ONLY non-empty error message overrides. We don't do defaults here as the `replace` API is intended for explicit overrides only!
+	if (errormessage != NULL && errormessage[0])
 	{
-		// ONLY non-empty error message overrides. We don't do defaults here as the `replace` API is intended for explicit overrides only!
-		if (errormessage != NULL && errormessage[0])
+		errmsgbuf[errmsgbufsize - 2] = 0;   // helper to quickly detect buffer 'overflow' --> truncated message
+		fz_strncpy_s(ctx, errmsgbuf, errormessage, errmsgbufsize);
+		if (errmsgbuf[errmsgbufsize - 2])
 		{
-			fz_strncpy_s(ctx, ctx->error.system_error_message[idx], errormessage, sizeof(ctx->error.system_error_message[idx]));
+			strcpy(errmsgbuf + errmsgbufsize - sizeof("(...truncated...)"), "(...truncated...)");
 		}
 	}
 }
@@ -779,32 +846,33 @@ void fz_log_error_printf(fz_context *ctx, const char *fmt, ...)
 
 void fz_vlog_error_printf(fz_context *ctx, const char *fmt, va_list ap)
 {
-	char message[256];
+	char buf[sizeof ctx->error.message];
+
+	if (!ctx && fz_has_global_context())
+	{
+		ctx = fz_get_global_context();
+	}
 
 	fz_flush_warnings(ctx);
-	if (ctx->error.print)
-	{
-		fz_vsnprintf(message, sizeof message, fmt, ap);
-		message[sizeof(message) - 1] = 0;
 
-		ctx->error.print(ctx->error.print_user, message);
-	}
+	prepmsg(buf, fmt, ap);
+
+	fz_log_error(ctx, buf);
 }
 
 void fz_log_error(fz_context *ctx, const char *str)
 {
+	if (!ctx && fz_has_global_context())
+	{
+		ctx = fz_get_global_context();
+	}
+
 	fz_flush_warnings(ctx);
-	if (ctx->error.print)
+
+	if (ctx && ctx->error.print)
 		ctx->error.print(ctx, ctx->error.print_user, str);
-}
-
-/* coverity[+kill] */
-FZ_NORETURN void fz_vthrow(fz_context *ctx, int code, const char *fmt, va_list ap)
-{
-	fz_vsnprintf(ctx->error.message, sizeof ctx->error.message, fmt, ap);
-	ctx->error.message[sizeof(ctx->error.message) - 1] = 0;
-
-	throw(ctx, code);
+	else
+		fz_default_error_callback(ctx, NULL, str);
 }
 
 

@@ -210,7 +210,8 @@ int muconvert_main(int argc, const char** argv)
 		fz_register_document_handlers(ctx);
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "cannot register document handlers: %s", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_log_error(ctx, "cannot register document handlers.");
 		fz_drop_context(ctx);
 		return EXIT_FAILURE;
 	}

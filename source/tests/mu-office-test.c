@@ -323,7 +323,8 @@ save_png(const MuOfficeBitmap *bitmap, const char *filename)
 	}
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "save_png failed! %s", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_log_error_printf(ctx, "save_png failed! file: %s", filename);
 		errored = 1;
 	}
 

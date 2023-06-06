@@ -1852,8 +1852,6 @@ int main(int argc, const char** argv)
 	fz_locks_context *locks = NULL;
 	size_t max_store = FZ_STORE_DEFAULT;
 
-	fz_var(doc);
-
 	// reset global vars: this tool MAY be re-invoked via bulktest or others and should RESET completely between runs:
 	//mudraw_is_toplevel_ctx = 0;
 	//ctx = NULL;
@@ -2237,6 +2235,8 @@ int main(int argc, const char** argv)
 			{
 				int layouttime;
 				fz_document* doc = NULL;
+
+				fz_var(doc);
 
 				fz_try(ctx)
 				{
