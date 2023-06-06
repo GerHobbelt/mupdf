@@ -453,6 +453,7 @@ psd_read_image(fz_context *ctx, struct info *info, const unsigned char *p, size_
 					q -= m*n - 1;
 				}
 
+				/* But alpha is not */
 				if (alpha)
 				{
 					size_t M = m;
