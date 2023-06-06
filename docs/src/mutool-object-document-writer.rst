@@ -3,6 +3,7 @@
 
 .. default-domain:: js
 
+.. include:: html_tags.rst
 
 .. _mutool_object_document_writer:
 

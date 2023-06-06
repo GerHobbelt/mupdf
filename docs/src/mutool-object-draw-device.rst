@@ -5,6 +5,7 @@
 
 .. default-domain:: js
 
+.. include:: html_tags.rst
 
 .. _mutool_object_draw_device:
 
@@ -18,8 +19,6 @@
 The `DrawDevice` can be used to render to a :ref:`Pixmap<mutool_run_js_api_pixmap>`; either by running a :ref:`Page<mutool_run_js_api_page>` with it or by calling its methods directly.
 
 
-
-
 .. method:: new DrawDevice(transform, pixmap)
 
     *Constructor method*.
@@ -29,8 +28,10 @@ The `DrawDevice` can be used to render to a :ref:`Pixmap<mutool_run_js_api_pixma
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg pixmap: `Pixmap`.
 
+    :return: `DrawDevice`.
+
     **Example**
 
     .. code-block:: javascript
 
-        var pixmap = new DrawDevice(Identity, pixmap);
+        var drawDevice = new mupdf.DrawDevice(Matrix.identity, pixmap);

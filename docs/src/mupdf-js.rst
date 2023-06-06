@@ -8,6 +8,7 @@
 .. title:: MuPDF & JavaScript
 
 .. include:: header.rst
+.. include:: html_tags.rst
 
 .. meta::
    :description: MuPDF documentation
@@ -296,6 +297,8 @@ Alpha values are floats between `0` and `1`, whereby `0` denotes full transparen
 .. include:: mutool-object-document.rst
 
 .. include:: mutool-object-page.rst
+
+.. include:: mutool-object-link.rst
 
 .. include:: mutool-object-structured-text.rst
 

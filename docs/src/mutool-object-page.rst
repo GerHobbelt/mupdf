@@ -4,6 +4,7 @@
 
 .. default-domain:: js
 
+.. include:: html_tags.rst
 
 .. _mutool_object_page:
 
@@ -12,34 +13,136 @@
 `Page`
 -------------
 
-.. method:: bound()
+
+**Instance methods**
+
+.. method:: getBounds()
 
     Returns a :ref:`rectangle<mutool_run_js_api_rectangle>` containing the page dimensions.
 
     :return: `[ulx,uly,lrx,lry]`.
 
-.. method:: run(device, transform, skipAnnotations)
+    **Example**
 
-    Calls device functions for all the contents on the page, using the specified `transform` :ref:`matrix<mutool_run_js_api_matrix>`. The `device` can be one of the built-in devices or a :title:`JavaScript` object with methods for the device calls. The `transform` maps from user space points to device space pixels. If `skipAnnotations` is *true* then annotations are ignored.
+    .. code-block:: javascript
+
+        var rect = page.getBounds();
+
+
+.. _Page_run:
+
+
+.. method:: run(device, matrix)
+
+    |wasm_tag|
+
+    Calls device functions for all the contents on the page, using the specified transform :ref:`matrix<mutool_run_js_api_matrix>`. The `device` can be one of the built-in devices or a :title:`JavaScript` object with methods for the device calls. The `matrix` maps from user space points to device space pixels.
 
     :arg device: The device object.
-    :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
-    :arg skipAnnotations: `Boolean`.
+    :arg matrix: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
-.. method:: toPixmap(transform, colorspace, alpha, skipAnnotations)
+    **Example**
 
-    Render the page into a :ref:`Pixmap<mutool_run_js_api_pixmap>`, using the `transform` and `colorspace`. If `alpha` is *true*, the page will be drawn on a transparent background, otherwise white.
+    .. code-block:: javascript
 
-    :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+        var rect = page.run(obj, mupdf.Matrix.identity);
+
+    |tor_todo| Make mutool run method match this.
+
+
+.. method:: runPageContents(device, matrix)
+
+    |wasm_tag|
+
+    This is the same as the :ref:`run<Page_run>` method above but it only considers the page itself and omits annotations and widgets.
+
+    :arg device: The device object.
+    :arg matrix: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var rect = page.runPageContents(obj, mupdf.Matrix.identity);
+
+    |tor_todo| Make mutool run method match this.
+
+
+.. method:: runPageAnnots(device, matrix)
+
+    |wasm_tag|
+
+    This is the same as the :ref:`run<Page_run>` method above but it only considers the page annotations.
+
+    :arg device: The device object.
+    :arg matrix: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var rect = page.runPageAnnots(obj, mupdf.Matrix.identity);
+
+    |tor_todo| Make mutool run method match this.
+
+
+.. method:: runPageWidgets(device, matrix)
+
+    |wasm_tag|
+
+    This is the same as the :ref:`run<Page_run>` method above but it only considers the page widgets.
+
+    :arg device: The device object.
+    :arg matrix: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var rect = page.runPageWidgets(obj, mupdf.Matrix.identity);
+
+    |tor_todo| Make mutool run method match this.
+
+.. method:: toPixmap(matrix, colorspace, alpha, showExtras)
+
+    Render the page into a :ref:`Pixmap<mutool_run_js_api_pixmap>`, using the specified transform :ref:`matrix<mutool_run_js_api_matrix>` and `colorspace`. If `alpha` is *true*, the page will be drawn on a transparent background, otherwise white. If `showExtras` is *true* then the operation will include any page annotations and/or widgets.
+
+    :arg matrix: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg colorspace: `ColorSpace`.
     :arg alpha: `Boolean`.
-    :arg skipAnnotations: `Boolean`.
+    :arg showExtras: `Boolean`.
 
-.. method:: toDisplayList(skipAnnotations)
+    :return: `Pixmap`.
 
-    Record the contents on the page into a `DisplayList`.
+    .. note::
 
-    :arg skipAnnotations: `Boolean`.
+        In :title:`MuPDF WASM` `alpha` & `showExtras` default to *true* unless otherwise specified.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var pixmap = page.toPixmap(mupdf.Martrix.identity, mupdf.ColorSpace.DeviceRGB, true, true);
+
+.. method:: toDisplayList(showExtras)
+
+    Record the contents on the page into a `DisplayList`_. If `showExtras` is *true* then the operation will include any page annotations and/or widgets.
+
+
+    :arg showExtras: `Boolean`.
+
+    :return: `DisplayList`.
+
+    .. note::
+
+        In :title:`MuPDF WASM` `showExtras` defaults to *true* unless otherwise specified.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var displayList = page.toDisplayList(true);
+
 
 .. method:: toStructuredText(options)
 
@@ -48,22 +151,57 @@
     :arg options: `String`.
     :return: `StructuredText`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var sText = page.toStructuredText("preserve-whitespace");
 
 
-.. method:: search(needle)
+.. method:: search(needle, max_hits)
 
     Search for `needle` text on the page, and return an array with :ref:`rectangles<mutool_run_js_api_rectangle>` of all matches found.
 
     :arg needle: `String`.
+    :arg max_hits: `Integer` Defaults to 500 unless otherwise specified.
     :return: `[]`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var results = page.search("my phrase");
+
+
+    |tor_todo| TypeError: libmupdf._wasm_search_page is not a function.
 
 
 
 .. method:: getLinks()
 
-    Return an array of all the links on the page. Each link is an object with a 'bounds' property, and either a 'page' or 'uri' property, depending on whether it's an internal or external link. See: :ref:`Links<mutool_run_js_api_links>`.
+    Return an array of all the links on the page. Each link is an object with a 'bounds' property, and either a 'page' or 'uri' property, depending on whether it's an internal or external link. See: :ref:`Link<mutool_object_link>`.
 
     :return: `[]`.
+
+
+    .. code-block:: javascript
+
+        var links = page.getLinks();
+        var link = links[0];
+        var linkDestination = doc.resolveLink(link)
+
+
+    |tor_todo| I tried this:
+
+    .. code-block:: javascript
+
+        var links = page.getLinks();
+        var link = links[0];
+        var linkDestination = doc.resolveLink(link)
+        console.log("linkDestination="+linkDestination);
+
+    |tor_todo| In **mutool** it returned `[object object]` which had all the :ref:`link dest<mutool_run_js_api_link_dest>` info in it, in **wasm** is returned `1`, I expected it to return a link dictionary ?
+
 
 
 .. _mutool_run_js_api_page_create_link:
@@ -75,20 +213,30 @@
 
     :arg rect: :ref:`Rectangle<mutool_run_js_api_rectangle>` for the link.
     :arg destinationUri: `String`.
-    :return: `Object` :ref:`Link dictionary<mutool_run_js_api_link_dict>`.
+    :return: :ref:`Link<mutool_object_link>`.
 
     **Example**
 
     .. code-block:: javascript
 
-        var link = page.createLink([0,0,100,100],"http://mupdf.com");
+        var link = page.createLink([0,0,100,100], "http://mupdf.com");
+
+    |tor_todo| How to create links between pages ( i.e. with :ref:`link dest<mutool_run_js_api_link_dest>` info ) ?
 
 
 .. method:: deleteLink(link)
 
     Delete the link from the page.
 
-    :arg link: `Object` :ref:`Link dictionary<mutool_run_js_api_link_dict>`.
+    :arg link: :ref:`Link<mutool_object_link>`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        page.deleteLink(link_obj);
+
+    |tor_todo| Did not work in either mutool or wasm (function did not exist)
 
 
 .. method:: getLabel()
@@ -97,9 +245,29 @@
 
     :return: `String`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var label = page.getLabel();
+
+
 
 .. method:: isPDF()
 
     Returns *true* if the page is from a :title:`PDF` document.
 
     :return: `Boolean`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var isPDF = page.isPDF();
+
+
+    .. note::
+
+        As `PDFPage` extends `Page` this method will return **false**. It is only if we actually have an instance of a `PDFPage` when this method is overriden to return **true**.
+
+

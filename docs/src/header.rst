@@ -24,11 +24,4 @@
     </script>
 
 
-.. |mutool_tag| raw:: html
 
-   <span class="mutool_tag">mutool only</span>
-
-
-.. |wasm_tag| raw:: html
-
-   <span class="wasm_tag">wasm only</span>

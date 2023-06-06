@@ -4,6 +4,8 @@
 .. default-domain:: js
 
 
+.. include:: html_tags.rst
+
 .. _mutool_object_display_list:
 
 
@@ -23,7 +25,7 @@ A display list records all the device calls for playback later. If you want to r
 
     *Constructor method*.
 
-    Create an empty display list. The mediabox rectangle has the bounds of the page in points.
+    Create an empty display list. The mediabox rectangle should be the bounds of the page.
 
     :arg mediabox: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
 
@@ -33,8 +35,10 @@ A display list records all the device calls for playback later. If you want to r
 
     .. code-block:: javascript
 
-        var displayList = new DisplayList([0,0,100,100]);
+        var displayList = new mupdf.DisplayList([0,0,100,100]);
 
+
+**Instance methods**
 
 
 .. method:: run(device, transform)

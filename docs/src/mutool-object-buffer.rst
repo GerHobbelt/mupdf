@@ -3,6 +3,8 @@
 
 .. default-domain:: js
 
+.. include:: html_tags.rst
+
 .. _mutool_object_buffer:
 
 .. _mutool_run_js_api_buffer:
@@ -110,7 +112,7 @@
 
     .. code-block:: javascript
 
-        let length = buffer.getLength();
+        var length = buffer.getLength();
 
 
 .. method:: writeByte(b)
@@ -240,7 +242,7 @@
 
     .. code-block:: javascript
 
-        let arr = buffer.asUint8Array();
+        var arr = buffer.asUint8Array();
 
 
 .. method:: asString()
@@ -255,4 +257,4 @@
 
     .. code-block:: javascript
 
-        let str = buffer.asString();
+        var str = buffer.asString();

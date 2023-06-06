@@ -4,6 +4,8 @@
 
 .. default-domain:: js
 
+.. include:: html_tags.rst
+
 .. _mutool_object_document:
 
 
@@ -49,7 +51,7 @@
 
     .. code-block:: javascript
 
-        let needsPassword = document.needsPassword();
+        var needsPassword = document.needsPassword();
 
 
 .. method:: authenticatePassword(password)
@@ -63,7 +65,7 @@
 
     .. code-block:: javascript
 
-        let auth = document.authenticatePassword("abracadabra");
+        var auth = document.authenticatePassword("abracadabra");
 
 
 .. method:: hasPermission(permission)
@@ -77,7 +79,7 @@
 
     .. code-block:: javascript
 
-        let canEdit = document.hasPermission("edit");
+        var canEdit = document.hasPermission("edit");
 
 
 .. method:: getMetaData(key)
@@ -91,7 +93,7 @@
 
     .. code-block:: javascript
 
-        let metaData = document.getMetaData("format");
+        var metaData = document.getMetaData("format");
 
 
 .. method:: setMetaData(key, value)
@@ -118,7 +120,7 @@
 
     .. code-block:: javascript
 
-        let isReflowable = document.isReflowable();
+        var isReflowable = document.isReflowable();
 
     .. note::
 
@@ -150,7 +152,7 @@
 
     .. code-block:: javascript
 
-        let numPages = document.countPages();
+        var numPages = document.countPages();
 
 
 .. method:: loadPage(number)
@@ -163,7 +165,7 @@
 
     .. code-block:: javascript
 
-        let page = document.loadPage(0); // loads the 1st page of the document
+        var page = document.loadPage(0); // loads the 1st page of the document
 
 .. method:: loadOutline()
 
@@ -176,7 +178,7 @@
 
     .. code-block:: javascript
 
-        let outline = document.loadOutline();
+        var outline = document.loadOutline();
 
 
 .. method:: outlineIterator()
@@ -191,7 +193,7 @@
 
     .. code-block:: javascript
 
-        let obj = document.outlineIterator();
+        var obj = document.outlineIterator();
 
 
 .. _mutool_run_js_api_document_resolveLink:
@@ -208,7 +210,7 @@
 
     .. code-block:: javascript
 
-        let linkDestination = document.resolveLink("my_uri");
+        var linkDestination = document.resolveLink(my_link);
 
 
 
@@ -222,7 +224,7 @@
 
     .. code-block:: javascript
 
-        let isPDF = document.isPDF();
+        var isPDF = document.isPDF();
 
 
 .. method:: formatLinkURI(linkDestination)
@@ -239,6 +241,6 @@
 
     .. code-block:: javascript
 
-        let str = document.formatLinkURI(linkDestination);
+        var str = document.formatLinkURI(linkDestination);
 
 
