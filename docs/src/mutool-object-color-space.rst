@@ -39,10 +39,30 @@
     The default Lab colorspace.
 
 
-----
+**Methods**
 
 
-**Instance methods**
+
+
+
+.. method:: new ColorSpace(from, name)
+
+    |wasm_tag|
+
+    *Constructor method*.
+
+    Create a new `ColorSpace`.
+
+    :arg from: As used by users (and not internally) should be a buffer containing an ICC profile.
+    :arg name: A user descriptive name.
+
+    :return: `ColorSpace`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var icc_colorspace = new ColorSpace(fs.readFileSync("SWOP.icc"), "SWOP");
 
 
 .. method:: getNumberOfComponents()
