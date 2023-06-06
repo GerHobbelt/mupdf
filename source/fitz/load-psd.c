@@ -214,7 +214,9 @@ psd_read_image(fz_context *ctx, struct info *info, const unsigned char *p, size_
 		c = get16be(&source);
 		if (c == 4) /* CMYK (+ Spots?) */
 		{
-			if (n < 4)
+			if (n == 5)
+				alpha = 1;
+			else if (n != 4)
 				fz_throw(ctx, FZ_ERROR_GENERIC, "CMYK PSD with %d chans not supported!", n);
 			info->cs = fz_keep_colorspace(ctx, fz_device_cmyk(ctx));
 		}
@@ -375,14 +377,27 @@ psd_read_image(fz_context *ctx, struct info *info, const unsigned char *p, size_
 			}
 			else
 			{
-				int N = n;
+				int N = n - alpha;
 
+				/* CMYK is inverted */
 				while (N--)
 				{
 					size_t M = m;
 					while (M--)
 					{
 						*q = 255 - unpack8(&source);
+						q += n;
+					}
+					q -= m*n - 1;
+				}
+
+				/* But alpha is not */
+				if (alpha)
+				{
+					size_t M = m;
+					while (M--)
+					{
+						*q = unpack8(&source);
 						q += n;
 					}
 					q -= m*n - 1;
@@ -418,7 +433,7 @@ psd_read_image(fz_context *ctx, struct info *info, const unsigned char *p, size_
 			}
 			else
 			{
-				int N = n;
+				int N = n - alpha;
 
 				while (N--)
 				{
@@ -427,6 +442,19 @@ psd_read_image(fz_context *ctx, struct info *info, const unsigned char *p, size_
 					while (M--)
 					{
 						*q = 255 - unpack8(&source);
+						(void)unpack8(&source);
+						q += n;
+					}
+					q -= m*n - 1;
+				}
+
+				if (alpha)
+				{
+					size_t M = m;
+
+					while (M--)
+					{
+						*q = unpack8(&source);
 						(void)unpack8(&source);
 						q += n;
 					}
