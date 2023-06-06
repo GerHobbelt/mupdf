@@ -176,7 +176,8 @@ int pdfclean_main(int argc, const char** argv)
 	}
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "%s", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_log_error_printf(ctx, "cannot clean '%s'", outfile);
 		errors++;
 		// delete damaged/incomplete output file:
 		unlink(outfile);

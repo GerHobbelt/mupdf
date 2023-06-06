@@ -321,7 +321,7 @@ int pdfcreate_main(int argc, const char** argv)
 	}
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "%s", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
 		error = EXIT_FAILURE;
 	}
 

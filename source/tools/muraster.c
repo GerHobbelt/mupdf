@@ -1846,7 +1846,6 @@ static void mu_drop_context(void)
 int main(int argc, const char** argv)
 {
 	const char *password = "";
-	fz_document *doc = NULL;
 	int c;
 	fz_alloc_context trace_alloc_ctx = { &trace_info, trace_malloc, trace_realloc, trace_free };
 	fz_alloc_context *alloc_ctx = NULL;
@@ -2237,6 +2236,7 @@ int main(int argc, const char** argv)
 			while (fz_optind < argc)
 			{
 				int layouttime;
+				fz_document* doc = NULL;
 
 				fz_try(ctx)
 				{
@@ -2297,8 +2297,8 @@ int main(int argc, const char** argv)
 		}
 		fz_catch(ctx)
 		{
-			fz_drop_document(ctx, doc);
-			fz_error(ctx, "cannot draw '%s': %s", filename, fz_caught_message(ctx));
+			fz_log_error(ctx, fz_caught_message(ctx));
+			fz_log_error_printf(ctx, "cannot draw '%s'", filename);
 			errored = 1;
 		}
 	}
@@ -2377,9 +2377,9 @@ int main(int argc, const char** argv)
 	}
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "%s", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
 		if (!errored) {
-			fz_error(ctx, "Rendering failed");
+			fz_error(ctx, "Rendering failed.");
 			errored = 1;
 		}
 	}
