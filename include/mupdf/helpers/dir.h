@@ -98,8 +98,22 @@ void fz_normalize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, c
  *
  * The path is assumed to have been normalized already, hence little intermezzos like '/./'
  * shall not exist in the input. IFF they do, they will be sanitized to '/_/'.
+ *
+ * Path elements (filename, directory names) are restricted to a maximum length of 255 characters
+ * *each* (Linux FS limit).
+ *
+ * The entire path will be reduced to the given `dstpath_bufsize`;
+ * reductions are done by first reducing the filename length, until it is less
+ * or equal to 13 characters, after which directory elements are reduced, one after the other,
+ * until we've reached the desired total path length.
+ *
+ * Returns 0 when no sanitization has taken place. Returns 1 when only the filename part
+ * of the path has been sanitized. Returns 2 or higher when any of the directory parts have
+ * been sanitized: this is useful when calling code wishes to speed up their FS I/O by
+ * selectively executing `mkdirp` only when the directory elements are sanitized and thus
+ * "may be new".
  */
-void fz_sanitize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, const char* path);
+int fz_sanitize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, const char* path);
 
 /**
 	Replace any path-invalid characters from the input path.
@@ -125,9 +139,15 @@ void fz_sanitize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, co
 	`start_at_offset` position is sanitized. It is assumed that the non-zero offset ALWAYS points past any critical
 	UNC or MSWindows Drive designation parts of the path.
 
-	Overwrites the `path` string in place.
+	Modifies the `path` string in place.
+ 
+    Returns 0 when no sanitization has taken place. Returns 1 when only the filename part
+    of the path has been sanitized. Returns 2 or higher when any of the directory parts have
+    been sanitized: this is useful when calling code wishes to speed up their FS I/O by
+    selectively executing `mkdirp` only when the directory elements are sanitized and thus
+    "may be new".
 */
-char* fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, char replace_sequence, size_t start_at_offset);
+int fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, size_t start_at_offset, size_t maximum_path_length);
 
 /**
 	Produce a relative path in `dst` for the given absolute path `abspath`, when considered relative to absolute path `relative_to_abspath`.
