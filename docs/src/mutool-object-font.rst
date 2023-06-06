@@ -54,8 +54,14 @@
 
     .. code-block:: javascript
 
-        var font = new Font("Times-Roman");
+        var font = new mupdf.Font("Times-Roman");
 
+
+    |tor_todo| WASM: ReferenceError: name is not defined
+
+
+
+**Instance methods**
 
 
 .. method:: getName()
@@ -63,6 +69,12 @@
     Get the font name.
 
     :return: `String`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var name = font.getName();
 
 
 .. method:: encodeCharacter(unicode)
@@ -73,15 +85,27 @@
 
     :return: Glyph index.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var index = font.encodeCharacter(0x42);
+
 
 .. method:: advanceGlyph(glyph, wmode)
 
     Return advance width for a glyph in either horizontal or vertical writing mode.
 
-    :arg glyph: The glyph.
+    :arg glyph: The glyph as unicode character.
     :arg wmode: `0` for horizontal writing, and `1` for vertical writing.
 
     :return: Width for a glyph.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var width = font.advanceGlyph(0x42, 0);
 
 
 .. method:: isBold()
@@ -90,11 +114,24 @@
 
     :return: `Boolean`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var isBold = font.isBold();
+
+
 .. method:: isItalic()
 
     Returns *true* if font is italic.
 
     :return: `Boolean`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var isItalic = font.isItalic();
 
 
 .. method:: isMono()
@@ -103,9 +140,21 @@
 
     :return: `Boolean`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var isMono = font.isMono();
+
 
 .. method:: isSerif()
 
     Returns *true* if font is serif.
 
     :return: `Boolean`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var isSerif = font.isSerif();

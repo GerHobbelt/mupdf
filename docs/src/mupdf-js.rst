@@ -37,7 +37,9 @@ API's generally work for both environments, however if an API is specific to onl
 
 .. note::
 
-   In the code examples, if you are developing for `mutool run` then the `mupdf` prefix is optional.
+   - In the code examples, if you are developing for `mutool run` then the `mupdf` prefix is optional.
+
+   - `mutool run` supports :title:`ECMAScript 5` syntax in strict mode, but not :title:`ECMAScript 6` and above.
 
 
 
@@ -319,6 +321,7 @@ Alpha values are floats between `0` and `1`, whereby `0` denotes full transparen
 .. include:: mutool-object-text.rst
 
 .. include:: mutool-object-font.rst
+
 
 .. include:: mutool-object-image.rst
 

@@ -33,9 +33,13 @@ A `Text` object contains text.
 
     .. code-block:: javascript
 
-        var text = new Text();
+        var text = new mupdf.Text();
 
 
+    |tor_todo| TypeError: libmupdf._wasm_new_text is not a function
+
+
+**Instance methods**
 
 .. method:: showGlyph(font, transform, glyph, unicode, wmode)
 
@@ -47,10 +51,15 @@ A `Text` object contains text.
 
     :arg font: `Font` object.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
-    :arg glyph:
-    :arg unicode:
+    :arg glyph: `Integer`.
+    :arg unicode: `Integer`.
     :arg wmode: `0` for horizontal writing, and `1` for vertical writing.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        text.showGlyph(new mupdf.Font("Times-Roman"), mupdf.Matrix.identity, -1, -1, 0);
 
 .. method:: showString(font, transform, string)
 
@@ -59,6 +68,13 @@ A `Text` object contains text.
     :arg font: `Font` object.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg string: String content for `Text` object.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        text.showString(new mupdf.Font("Times-Roman"), mupdf.Matrix.identity, "Hello");
+
 
 .. method:: walk(textWalker)
 

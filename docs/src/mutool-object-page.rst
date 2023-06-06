@@ -122,7 +122,7 @@
 
     .. code-block:: javascript
 
-        var pixmap = page.toPixmap(mupdf.Martrix.identity, mupdf.ColorSpace.DeviceRGB, true, true);
+        var pixmap = page.toPixmap(mupdf.Matrix.identity, mupdf.ColorSpace.DeviceRGB, true, true);
 
 .. method:: toDisplayList(showExtras)
 
@@ -164,7 +164,7 @@
 
     :arg needle: `String`.
     :arg max_hits: `Integer` Defaults to 500 unless otherwise specified.
-    :return: `[]`.
+    :return: `[...]`.
 
     **Example**
 
@@ -181,7 +181,7 @@
 
     Return an array of all the links on the page. Each link is an object with a 'bounds' property, and either a 'page' or 'uri' property, depending on whether it's an internal or external link. See: :ref:`Link<mutool_object_link>`.
 
-    :return: `[]`.
+    :return: `[...]`.
 
 
     .. code-block:: javascript

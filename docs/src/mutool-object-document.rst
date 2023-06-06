@@ -171,7 +171,7 @@
 
     Returns an array with the outline (also known as "table of contents" or "bookmarks"). In the array is an object for each heading with the property 'title', and a property 'page' containing the page number. If the object has a 'down' property, it contains an array with all the sub-headings for that entry.
 
-    :return: `[]`.
+    :return: `[...]`.
 
 
     **Example**

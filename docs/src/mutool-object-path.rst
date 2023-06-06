@@ -31,16 +31,30 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
 
     .. code-block:: javascript
 
-        var path = new Path();
+        var path = new mupdf.Path();
 
 
-.. method:: bound(stroke, transform)
+    |tor_todo|  WASM, TypeError: libmupdf._wasm_new_path is not a function
+
+
+
+**Instance methods**
+
+
+.. method:: getBounds(stroke, transform)
 
     Return a bounding rectangle for the path.
 
     :arg stroke: `Float` The stroke for the path.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>` for the path.
     :return: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var rect = path.getBounds(1.0, mupdf.Matrix.identity);
 
 
 
@@ -51,12 +65,26 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
     :arg x: X coordinate.
     :arg y: Y coordinate.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        path.moveTo(10, 10);
+
+
 .. method:: lineTo(x, y)
 
     Draw a line to the coordinate.
 
     :arg x: X coordinate.
     :arg y: Y coordinate.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        path.lineTo(20,20);
+
 
 .. method:: curveTo(x1, y1, x2, y2, x3, y3)
 
@@ -69,6 +97,13 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
     :arg x3: X3 coordinate.
     :arg y3: Y3 coordinate.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        path.curveTo(0, 0, 10, 10, 100, 100);
+
+
 .. method:: curveToV(cx, cy, ex, ey)
 
     Draw a cubic bezier curve to (`ex`, `ey`) using the start point and (`cx`, `cy`) as control points.
@@ -77,6 +112,12 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
     :arg cy: CY coordinate.
     :arg ex: EX coordinate.
     :arg ey: EY coordinate.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        path.curveToV(0, 0, 100, 100);
 
 
 .. method:: curveToY(cx, cy, ex, ey)
@@ -88,9 +129,23 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
     :arg ex: EX coordinate.
     :arg ey: EY coordinate.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        path.curveToY(0, 0, 100, 100);
+
+
 .. method:: closePath()
 
     Close the path by drawing a line to the last `moveTo`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        path.closePath();
+
 
 .. method:: rect(x1, y1, x2, y2)
 
@@ -100,6 +155,13 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
     :arg y1: Y1 coordinate.
     :arg x2: X2 coordinate.
     :arg y2: Y2 coordinate.
+
+
+    **Example**
+
+    .. code-block:: javascript
+
+        path.rect(0,0,100,100);
 
 
 .. method:: walk(pathWalker)
@@ -132,3 +194,12 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
     Transform path by the given transform matrix.
 
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>` for the path.
+
+
+    **Example**
+
+    .. code-block:: javascript
+
+        path.transform(mupdf.Matrix.scale(2,2));
+
+

@@ -32,3 +32,7 @@
     .. code-block:: javascript
 
         var displayListDevice = new DisplayListDevice(my_display_list);
+
+
+
+    |tor_todo| In mutool - `TypeError: not a fz_display_list` , In WASM - `TypeError: libmupdf._wasm_new_list_device` is not a function

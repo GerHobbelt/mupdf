@@ -34,4 +34,4 @@ The `DrawDevice` can be used to render to a :ref:`Pixmap<mutool_run_js_api_pixma
 
     .. code-block:: javascript
 
-        var drawDevice = new mupdf.DrawDevice(Matrix.identity, pixmap);
+        var drawDevice = new mupdf.DrawDevice(mupdf.Matrix.identity, pixmap);
