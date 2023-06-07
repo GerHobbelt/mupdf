@@ -53,7 +53,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     .. code-block:: javascript
 
-        var pdfDocument = new PDFDocument("my-file.pdf");
+        var pdfDocument = new mupdf.PDFDocument("my-file.pdf");
 
 
 |instance_methods|
@@ -263,7 +263,8 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 ----
 
 
-**PDF JavaScript actions**
+:title:`PDF` :title:`JavaScript` actions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. method:: enableJS()
 
@@ -324,7 +325,8 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
 ----
 
-**PDF journalling**
+:title:`PDF` journalling
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. method:: enableJournal()
 
@@ -434,7 +436,8 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
 .. _mutool_run_js_api_pdf_object_access:
 
-**PDF Object Access**
+:title:`PDF` Object Access
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A :title:`PDF` document contains objects, similar to those in :title:`JavaScript`: arrays, dictionaries, strings, booleans, and numbers. At the root of the :title:`PDF` document is the trailer object; which contains pointers to the meta data dictionary and the catalog object which contains the pages and other information.
 
@@ -460,6 +463,12 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :arg obj: Object to add.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        pdfDocument.addObject(obj);
+
 
 .. method:: addStream(buffer, object)
 
@@ -468,6 +477,13 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
     :arg buffer: `Buffer` object.
     :arg object: The object to stream to.
 
+    :return: `Object`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var stream = pdfDocument.addStream(buffer, object);
 
 
 
@@ -478,7 +494,13 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
     :arg buffer: `Buffer` object.
     :arg object: The object to stream to.
 
+    :return: `Object`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var stream = pdfDocument.addRawStream(buffer, object);
 
 
 .. method:: newNull()
@@ -487,13 +509,48 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :return: `PDFObject`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var obj = pdfDocument.newNull();
+
+
+
 .. method:: newBoolean(boolean)
+
+    |mutool_tag|
 
     Create a new boolean object.
 
     :arg boolean: The boolean value.
 
     :return: `PDFObject`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var obj = pdfDocument.newBoolean(true);
+
+
+.. method:: newBool(boolean)
+
+    |wasm_tag|
+
+    Create a new boolean object.
+
+    :arg boolean: The boolean value.
+
+    :return: `PDFObject`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var obj = pdfDocument.newBool(true);
+
+
 
 .. method:: newInteger(number)
 
@@ -503,6 +560,13 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :return: `PDFObject`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var obj = pdfDocument.newInteger(1);
+
+
 .. method:: newReal(number)
 
     Create a new real number object.
@@ -510,6 +574,12 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
     :arg number: The number value.
 
     :return: `PDFObject`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var obj = pdfDocument.newReal(1);
 
 
 .. method:: newString(string)
@@ -520,14 +590,29 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :return: `PDFObject`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var obj = pdfDocument.newString("hello");
+
 
 .. method:: newByteString(byteString)
+
+    |wasm_tag|
 
     Create a new byte string object.
 
     :arg byteString: `String`.
 
     :return: `PDFObject`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var obj = pdfDocument.newByteString("hello");
+
 
 
 .. method:: newName(string)
@@ -538,14 +623,29 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :return: `PDFObject`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var obj = pdfDocument.newName("hello");
+
+
 .. method:: newIndirect(objectNumber, generation)
 
     Create a new indirect object.
 
-    :arg objectNumber: The string value.
-    :arg generation: The string value.
+    :arg objectNumber: `Integer`.
+    :arg generation: `Integer`.
 
     :return: `PDFObject`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var obj = pdfDocument.newIndirect(1, 1);
+
+
 
 .. method:: newArray()
 
@@ -553,17 +653,30 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :return: `PDFObject`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var obj = pdfDocument.newArray();
+
+
 .. method:: newDictionary()
 
     Create a new dictionary object.
 
     :return: `PDFObject`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var obj = pdfDocument.newDictionary();
 
 
 ----
 
-**PDF Page Access**
+:title:`PDF` Page Access
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 All page objects are structured into a page tree, which defines the order the pages appear in.
 
@@ -571,22 +684,44 @@ All page objects are structured into a page tree, which defines the order the pa
 
     Number of pages in the document.
 
-    :return: Page number.
+    :return: `Integer` Page number.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var pageCount = pdfDocument.countPages();
 
 .. method:: findPage(number)
 
     Return the `PDFPage` object for a page number.
 
-    :arg number: The page number, the first page is number zero.
+    :arg number: `Integer` The page number, the first page is number zero.
 
     :return: `PDFPage`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var page = pdfDocument.findPage(0);
 
 
 .. method:: findPageNumber(page)
 
+    |mutool_tag|
+
     Given a `PDFPage` object, find the page number in the document.
 
+    :arg page: `PDFPage` instance.
+
     :return: `Integer`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var pageNumber = pdfDocument.findPageNumber(page);
 
 
 .. method:: deletePage(number)
@@ -595,10 +730,18 @@ All page objects are structured into a page tree, which defines the order the pa
 
     :arg number: The page number, the first page is number zero.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        pdfDocument.deletePage(0);
+
+
+.. _mutool_insertPage:
 
 .. method:: insertPage(at, page)
 
-    Insert the `PDFPage` object in the page tree at the location. If 'at' is -1, at the end of the document.
+    Insert the `PDFPage` object in the page tree at the location. If ``at`` is -1, at the end of the document.
 
     Pages consist of a content stream, and a resource dictionary containing all of the fonts and images used.
 
@@ -606,9 +749,17 @@ All page objects are structured into a page tree, which defines the order the pa
     :arg page: The `PDFPage` to insert.
 
 
+    **Example**
+
+    .. code-block:: javascript
+
+        pdfDocument.insertPage(-1, page);
+
+
+
 .. method:: addPage(mediabox, rotate, resources, contents)
 
-    Create a new page object. Note: this function does NOT add it to the page tree.
+    Create a new `PDFPage` object. Note: this function does NOT add it to the page tree, use :ref:`insertPage<mutool_insertPage>` to do that.
 
     :arg mediabox: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
     :arg rotate: Rotation value.
@@ -621,6 +772,19 @@ All page objects are structured into a page tree, which defines the order the pa
 
     **Example**
 
+    .. code-block:: javascript
+
+        var resources = pdfDocument.addObject(pdfDocument.newName("blank"));
+        var blankPage = pdfDocument.addPage([0,0,300,350], 0, resources, "");
+
+
+    |tor_todo| WASM: //TypeError: doc.newNull is not a function
+
+
+    **Example**
+
+    |mutool_tag|
+
     .. literalinclude:: ../examples/pdf-create.js
        :caption: docs/examples/pdf-create.js
        :language: javascript
@@ -628,57 +792,120 @@ All page objects are structured into a page tree, which defines the order the pa
 
 .. method:: addSimpleFont(font, encoding)
 
-    Create a PDF object from the `Font` object as a simple font.
+    Create a `PDFObject` from the `Font` object as a simple font.
 
     :arg font: `Font`.
     :arg encoding: The encoding to use. Encoding is either "Latin" (CP-1252), "Greek" (ISO-8859-7), or "Cyrillic" (KOI-8U). The default is "Latin".
 
+    :return: `PDFObject`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var obj = pdfDocument.addSimpleFont(new mupdf.Font("Times-Roman"), "Latin");
+
+    |tor_todo| WASM: ReferenceError: name is not defined
+
 
 .. method:: addCJKFont(font, language, wmode, style)
 
-    Create a PDF object from the Font object as a UTF-16 encoded CID font for the given language ("zh-Hant", "zh-Hans", "ko", or "ja"), writing mode ("H" or "V"), and style ("serif" or "sans-serif").
+    Create a `PDFObject` from the Font object as a UTF-16 encoded CID font for the given language ("zh-Hant", "zh-Hans", "ko", or "ja"), writing mode ("H" or "V"), and style ("serif" or "sans-serif").
 
     :arg font: `Font`.
     :arg language: `String`.
     :arg wmode: `0` for horizontal writing, and `1` for vertical writing.
     :arg style: `String`.
 
+    :return: `PDFObject`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var obj = pdfDocument.addCJKFont(new mupdf.Font("Times-Roman"), "ja", "V", "serif");
+
+    |tor_todo| WASM: ReferenceError: name is not defined
+
+
 .. method:: addFont(font)
 
-    Create a :title:`PDF` object from the `Font` object as an Identity-H encoded CID font.
+    Create a `PDFObject` from the `Font` object as an Identity-H encoded CID font.
 
     :arg font: `Font`.
+
+    :return: `PDFObject`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var obj = pdfDocument.addFont(new mupdf.Font("Times-Roman"));
+
+    |tor_todo| WASM: ReferenceError: name is not defined
 
 
 .. method:: addImage(image)
 
-    Create a :title:`PDF` object from the `Image` object.
+    Create a `PDFObject` from the `Image` object.
 
     :arg image: `Image`.
 
+    :return: `PDFObject`.
+
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var obj = pdfDocument.addImage(new mupdf.Image(pixmap));
+
+    |tor_todo| WASM: // TypeError: libmupdf._wasm_new_from_pixmap is not a function
+
+
 .. method:: loadImage(obj)
 
-    Load an `Image` from a :title:`PDF` object (typically an indirect reference to an image resource).
+    Load an `Image` from a `PDFObject` (typically an indirect reference to an image resource).
 
     :arg obj: `PDFObject`.
 
+    :return: `Image`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var image = pdfDocument.loadImage(obj);
 
 
 ----
 
 
-The following functions can be used to copy objects from one document to another:
+Copying objects accross :title:`PDFs`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following functions can be used to copy objects from one :title:`PDF` document to another:
 
 
 
 .. method:: graftObject(object)
 
+    |mutool_tag|
+
     Deep copy an object into the destination document. This function will not remember previously copied objects. If you are copying several objects from the same source document using multiple calls, you should use a graft map instead.
 
     :arg object: Object to graft.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        pdfDocument.graftObject(obj);
+
 
 .. method:: graftPage(dstDoc, dstPageNumber, srcDoc, srcPageNumber)
+
+    |mutool_tag|
 
     Graft a page and its resources at the given page number from the source document to the requested page number in the destination document.
 
@@ -687,11 +914,25 @@ The following functions can be used to copy objects from one document to another
     :arg srcDoc: Source document.
     :arg srcPageNumber: Source page number.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        pdfDocument.graftObject(docB, 0, docA, 0);
+
 .. method:: newGraftMap()
+
+    |mutool_tag|
 
     Create a graft map on the destination document, so that objects that have already been copied can be found again. Each graft map should only be used with one source document. Make sure to create a new graft map for each source document used.
 
     :return: `PDFGraftMap`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var graftMap = pdfDocument.newGraftMap();
 
 
 ----
@@ -699,8 +940,8 @@ The following functions can be used to copy objects from one document to another
 
 .. _mutool_object_pdf_document_embedded_files:
 
-**Embedded files in PDFs**
-
+Embedded files in :title:`PDFs`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 
@@ -711,9 +952,9 @@ The following functions can be used to copy objects from one document to another
 
     :arg filename: `String`.
     :arg mimetype: `String` See: Mimetype_.
-    :arg contents: Contents string. This represents the page content stream - see section 3.7.1 in the PDF 1.7 specification.
-    :arg creationDate: `Integer` Milliseconds value.
-    :arg modificationDate: `Integer` Milliseconds value.
+    :arg contents: `Buffer`.
+    :arg creationDate: `Date`.
+    :arg modificationDate: `Date`.
     :arg addChecksum: `Boolean`.
 
     :return: `Object` :ref:`File Specification Object<mutool_run_js_api_file_spec_object>`.
@@ -724,32 +965,65 @@ The following functions can be used to copy objects from one document to another
         After embedding a file into a :title:`PDF`, it can be connected to an annotation using :ref:`PDFAnnotation.setFilespec()<mutool_run_js_api_pdf_annotation_setFilespec>`.
 
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var fileSpecObject = pdfDocument.addEmbeddedFile("my_file.jpg",
+                                                         "image/jpeg",
+                                                         buffer,
+                                                         new Date(),
+                                                         new Date(),
+                                                         false);
+
+
+    |tor_todo| MUTOOL - the `creationDate` & `modificationDate` are in milliseconds since 1970, not a JS Date object.
+
+
 .. method:: getEmbeddedFileParams(fileSpecObject)
 
-    Return an object describing the file referenced by the `filespecObject`.
+    Return an object describing the file referenced by the `fileSpecObject`.
 
     :arg fileSpecObject: `Object` :ref:`File Specification Object<mutool_run_js_api_file_spec_object>`.
 
     :return: `Object` :ref:`Embedded File Object<mutool_run_js_api_pdf_document_embedded_file_object>`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var obj = pdfDocument.getEmbeddedFileParams(fileSpecObject);
+
+
 .. method:: getEmbeddedFileContents(fileSpecObject)
 
-    Returns a `Buffer` with the contents of the embedded file referenced by the `filespecObject`.
+    Returns a `Buffer` with the contents of the embedded file referenced by the `fileSpecObject`.
 
     :arg fileSpecObject: `Object` :ref:`File Specification Object<mutool_run_js_api_file_spec_object>`.
 
     :return: :ref:`Buffer<mutool_object_buffer>`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var buffer = pdfDocument.getEmbeddedFileContents(fileSpecObject);
+
+
 .. method:: verifyEmbeddedFileChecksum(fileSpecObject)
 
     Verify the :title:`MD5` checksum of the embedded file contents.
 
-     :arg fileSpecObject: `Object` :ref:`File Specification Object<mutool_run_js_api_file_spec_object>`.
+    :arg fileSpecObject: `Object` :ref:`File Specification Object<mutool_run_js_api_file_spec_object>`.
 
-     :return: `Boolean`.
+    :return: `Boolean`.
 
 
+    **Example**
 
+    .. code-block:: javascript
+
+        var fileChecksum = pdfDocument.verifyEmbeddedFileChecksum(fileSpecObject);
 
 
 

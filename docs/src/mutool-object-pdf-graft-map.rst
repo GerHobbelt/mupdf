@@ -17,11 +17,21 @@
 `PDFGraftMap`
 ----------------
 
+|mutool_tag|
+
+|instance_methods|
+
 .. method:: graftObject(object)
 
     Use the graft map to copy objects, with the ability to remember previously copied objects.
 
     :arg object: Object to graft.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        graftMap.graftObject(obj);
 
 
 
@@ -33,3 +43,9 @@
     :arg dstPageNumber: Destination page number.
     :arg srcDoc: Source document.
     :arg srcPageNumber: Source page number.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        graftMap.graftPage(map, 0, doc, 0);
