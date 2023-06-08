@@ -384,6 +384,14 @@ JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_Context_emptyStore
 
 /*
  * Class:     com_artifex_mupdf_fitz_Context
+ * Method:    shrinkStore
+ * Signature: (I)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_Context_shrinkStore
+  (JNIEnv *, jclass, jint);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_Context
  * Method:    enableICC
  * Signature: ()V
  */
