@@ -72,6 +72,38 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
         var version = pdfDocument.getVersion();
 
 
+
+.. method:: setLanguage(lang)
+
+    |wasm_tag|
+
+    Sets the language for the document.
+
+    :arg lang: `String`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        pdfDocument.setLanguage("en");
+
+
+
+.. method:: getLanguage()
+
+    |wasm_tag|
+
+    Gets the language for the document.
+
+    :return: `String`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var lang = pdfDocument.getLanguage();
+
+
 .. method:: save(fileName, options)
 
     |mutool_tag|
@@ -79,13 +111,31 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
     Write the `PDFDocument` to file. The write options are a string of comma separated options (see the :ref:`mutool convert options<mutool_convert>`).
 
     :arg fileName: The name of the file to save to.
-    :options: The options as key-value pairs.
+    :arg options: The options as key-value pairs.
 
     **Example**
 
     .. code-block:: javascript
 
-        var version = pdfDocument.save("my_fileName.pdf", {compress-images:true});
+        pdfDocument.save("my_fileName.pdf", {"compress-images":true});
+
+
+
+.. method:: saveToBuffer(options)
+
+    |wasm_tag|
+
+    Saves the document to a buffer.
+
+    :arg options: The options as key-value pairs.
+    :return: `Buffer`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var buffer = pdfDocument.saveToBuffer({"compress-images":true});
+
 
 
 .. method:: canBeSavedIncrementally()
@@ -459,15 +509,17 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
 .. method:: addObject(obj)
 
-    Add 'obj' to the :title:`PDF` as a numbered object, and return an indirect reference to it.
+    Add `obj` to the :title:`PDF` as a numbered object, and return an indirect reference to it.
 
     :arg obj: Object to add.
+
+    :return: `Object`.
 
     **Example**
 
     .. code-block:: javascript
 
-        pdfDocument.addObject(obj);
+        var ref = pdfDocument.addObject(obj);
 
 
 .. method:: addStream(buffer, object)
@@ -647,9 +699,11 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
 
 
-.. method:: newArray()
+.. method:: newArray(capacity)
 
     Create a new array object.
+
+    :arg capacity: `Integer` Defaults to `8`.
 
     :return: `PDFObject`.
 
@@ -660,9 +714,11 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
         var obj = pdfDocument.newArray();
 
 
-.. method:: newDictionary()
+.. method:: newDictionary(capacity)
 
     Create a new dictionary object.
+
+    :arg capacity: `Integer` Defaults to `8`.
 
     :return: `PDFObject`.
 
@@ -692,9 +748,10 @@ All page objects are structured into a page tree, which defines the order the pa
 
         var pageCount = pdfDocument.countPages();
 
-.. method:: findPage(number)
 
-    Return the `PDFPage` object for a page number.
+.. method:: loadPage(number)
+
+    Return the `PDFPage` for a page number.
 
     :arg number: `Integer` The page number, the first page is number zero.
 
@@ -704,14 +761,28 @@ All page objects are structured into a page tree, which defines the order the pa
 
     .. code-block:: javascript
 
-        var page = pdfDocument.findPage(0);
+        var page = pdfDocument.loadPage(0);
+
+.. method:: findPage(number)
+
+    Return the `PDFObject` for a page number.
+
+    :arg number: `Integer` The page number, the first page is number zero.
+
+    :return: `PDFObject`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var obj = pdfDocument.findPage(0);
 
 
 .. method:: findPageNumber(page)
 
     |mutool_tag|
 
-    Given a `PDFPage` object, find the page number in the document.
+    Given a `PDFPage` instance, find the page number in the document.
 
     :arg page: `PDFPage` instance.
 
@@ -1008,6 +1079,8 @@ Embedded files in :title:`PDFs`
     .. code-block:: javascript
 
         var buffer = pdfDocument.getEmbeddedFileContents(fileSpecObject);
+
+    |tor_todo| WASM, TypeError: libmupdf._wasm_pdf_load_embedded_file_contents is not a function
 
 
 .. method:: verifyEmbeddedFileChecksum(fileSpecObject)

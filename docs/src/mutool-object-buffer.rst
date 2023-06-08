@@ -71,7 +71,7 @@
 
 
 
-|instance_methods|
+|instance_props|
 
 
 
@@ -98,9 +98,7 @@
 
 
 
-----
-
-**Instance methods**
+|instance_methods|
 
 .. method:: getLength()
 

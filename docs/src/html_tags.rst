@@ -1,3 +1,8 @@
+.. |instance_props| raw:: html
+
+   <span class="instance_props_tag">Instance properties</span>
+
+
 .. |instance_methods| raw:: html
 
    <span class="instance_methods_tag">Instance methods</span>
