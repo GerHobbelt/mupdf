@@ -871,6 +871,14 @@ These properties are only present for some annotation types, so support for them
 
     :return: `[[x,y],...]`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var line = annotation.getLine();
+
+    |tor_todo| WASM TypeError: annotation.getLine is not a function
+
 
 .. method:: setLine(endpoints)
 
@@ -879,12 +887,28 @@ These properties are only present for some annotation types, so support for them
 
     :arg endpoints: `[[x,y],...]`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        annotation.setLine([0,0], [100,100], [150, 175]);
+
+    |tor_todo| WASM TypeError: annotation.setLine is not a function
+
 
 .. method:: hasOpen()
 
     Checks the support for annotation open state.
 
     :return: `Boolean`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var hasOpen = annotation.hasOpen();
+
+    |tor_todo| WASM TypeError: annotation.hasLine is not a function
 
 
 .. method:: isOpen()
@@ -893,29 +917,64 @@ These properties are only present for some annotation types, so support for them
 
     :return: `Boolean`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var isOpen = annotation.isOpen();
+
 .. method:: setIsOpen(state)
 
     Set annotation open state.
 
     :arg state: `Boolean`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        annotation.setIsOpen(true);
+
+    |tor_todo| WASM TypeError: libmupdf._wasm_pdf_annot_set_is_open is not a function
+
 
 .. note::
 
-    "Open" refers to whether the annotation has an open state or is opened - e.g. A note icon is considered "Open" if the user has clicked on it to view its contents.
+    "Open" refers to whether the annotation has an open state or is opened - e.g. A Text Note annotation is considered "Open" if the user has clicked on it to view its contents.
 
 
 .. method:: hasFilespec()
+
+    |mutool_tag|
 
     Checks support for the annotation file specification.
 
     :return: `Boolean`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var hasFileSpec = annotation.hasFilespec();
+
+
+
+
+
 .. method:: getFilespec()
+
+    |mutool_tag|
 
     Gets the file specification object.
 
     :return: `Object` :ref:`File Specification Object<mutool_run_js_api_file_spec_object>`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var fileSpec = annotation.getFilespec(true);
+
 
 
 
@@ -924,12 +983,29 @@ These properties are only present for some annotation types, so support for them
 
 .. method:: setFilespec(fileSpecObject)
 
+    |mutool_tag|
+
     Sets the file specification object.
 
     :arg fileSpecObject: `Object` :ref:`File Specification object<mutool_run_js_api_file_spec_object>`.
 
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var fileSpec = annotation.setFilespec({filename:"my_file.pdf",
+                                               mimetype:"application/pdf",
+                                               size:1000,
+                                               creationDate:date,
+                                               modificationDate:date});
+
+
+
+
+
 ----
+
 
 The border drawn around some annotations can be controlled by:
 
@@ -939,11 +1015,28 @@ The border drawn around some annotations can be controlled by:
 
     :return: `Boolean`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var hasBorder = annotation.hasBorder();
+
+    |tor_todo| WASM, TypeError: annotation.hasBorder is not a function
+
+
 .. method:: getBorderStyle()
 
     Get the annotation border style, either of "Solid" or "Dashed".
 
     :return: `String`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var borderStyle = annotation.getBorderStyle();
+
+    |tor_todo| WASM, TypeError: annotation.getBorderStyle is not a function
 
 
 .. method:: setBorderStyle(style)
@@ -952,6 +1045,14 @@ The border drawn around some annotations can be controlled by:
 
     :arg: `String`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        annotation.setBorderStyle("Dashed");
+
+    |tor_todo| WASM, TypeError: annotation.getBorderStyle is not a function
+
 
 .. method:: getBorderWidth()
 
@@ -959,11 +1060,29 @@ The border drawn around some annotations can be controlled by:
 
     :return: `Float`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var w = annotation.getBorderWidth();
+
+    |tor_todo| WASM, TypeError: annotation.getBorderWidth is not a function
+
+
 .. method:: setBorderWidth(width)
 
     Set the border width in points. Retain any existing border effects.
 
-    :arg width: `Float`
+    :arg width: `Float`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        annotation.setBorderWidth(1.5);
+
+
+    |tor_todo| WASM, TypeError: annotation.setBorderWidth is not a function
 
 
 .. method:: getBorderDashCount()
@@ -972,6 +1091,14 @@ The border drawn around some annotations can be controlled by:
 
     :return: `Integer`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var dashCount = annotation.getBorderDashCount();
+
+    |tor_todo| WASM, TypeError:
+
 .. method:: getBorderDashItem(i)
 
     Returns the length of dash pattern item i.
@@ -979,22 +1106,55 @@ The border drawn around some annotations can be controlled by:
     :arg i: `Integer` Item index.
     :return: `Integer`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var length = annotation.getBorderDashItem(0);
+
+    |tor_todo| WASM, TypeError:
+
 
 .. method:: setBorderDashPattern(dashPattern)
 
     Set the annotation border dash pattern to the given array of dash item lengths. The supplied array represents the respective line stroke and gap lengths, e.g. `[1,1]` sets a small dash and small gap, `[2,1,4,1]` would set a medium dash, a small gap, a longer dash and then another small gap.
 
-    :arg dashpattern: [Integer, Integer, ....]
+    :arg dashpattern: [Integer, Integer, ....].
+
+    **Example**
+
+    .. code-block:: javascript
+
+        annotation.setBorderDashPattern([2,1,4,1]);
+
+    |tor_todo| WASM, TypeError:
 
 .. method:: clearBorderDash()
 
     Clear the entire border dash pattern for an annotation.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        annotation.clearBorderDash();
+
+    |tor_todo| WASM, TypeError:
+
 
 .. method:: addBorderDashItem(length)
 
     Append an item (of the given length) to the end of the border dash pattern.
 
     :arg length: `Integer`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        annotation.addBorderDashItem(10);
+
+    |tor_todo| WASM, TypeError:
 
 
 Annotations that have a border effect allows the effect to be controlled by:
@@ -1005,11 +1165,30 @@ Annotations that have a border effect allows the effect to be controlled by:
 
     :return: `Boolean`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var hasEffect = annotation.hasBorderEffect();
+
+
+    |tor_todo| WASM, TypeError:
+
+
 .. method:: getBorderEffect()
 
     Get the annotation border effect, either of "None" or "Cloudy".
 
     :return: `String`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var effect = annotation.getBorderEffect();
+
+    |tor_todo| WASM, TypeError:
+
 
 .. method:: setBorderEffect(effect)
 
@@ -1017,17 +1196,45 @@ Annotations that have a border effect allows the effect to be controlled by:
 
     :arg: `String`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        annotation.setBorderEffect("None");
+
+    |tor_todo| WASM, TypeError:
+
+
 .. method:: getBorderEffectIntensity()
 
     Get the annotation border effect intensity.
 
     :return: `Integer`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var intensity = annotation.getBorderEffectIntensity();
+
+
+    |tor_todo| WASM, TypeError:
+
+
 .. method:: setBorderEffectIntensity(intensity)
 
     Set the annotation border effect intensity. Recommended values are between `0` and `2` inclusive.
 
     :arg: `Integer`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        annotation.setBorderEffectIntensity(2);
+
+
+    |tor_todo| WASM, TypeError:
 
 ----
 
@@ -1039,21 +1246,59 @@ Ink annotations consist of a number of strokes, each consisting of a sequence of
 
     :return: `Boolean`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var hasInkList = annotation.hasInkList();
+
+
 .. method:: getInkList()
 
     Get the annotation ink list, represented as an array of strokes, each an array of points each an array of its X/Y coordinates.
 
-    :return: `[]`.
+    :return: `[...]`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var inkList = annotation.getInkList();
 
 .. method:: setInkList(inkList)
 
     Set the annotation ink list, represented as an array of strokes, each an array of points each an array of its X/Y coordinates.
 
-    :arg: `[]`.
+    :arg: `[...]`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var inkList = annotation.setInkList([
+                                                [
+                                                    [0,0]
+                                                ],
+                                                [
+                                                    [10,10], [20,20], [30,30]
+                                                ]
+                                            ]);
+
+
+    |tor_todo| WASM TypeError: libmupdf._wasm_pdf_annot_clear_ink_list is not a function
 
 .. method:: clearInkList()
 
     Clear the list of ink strokes for the annotation.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        annotation.clearInkList();
+
+    |tor_todo| WASM, TypeError: libmupdf._wasm_pdf_annot_clear_ink_list is not a function
+
 
 .. method:: addInkList(stroke)
 
@@ -1061,15 +1306,48 @@ Ink annotations consist of a number of strokes, each consisting of a sequence of
 
     :arg stroke: `[]`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        annotation.addInkList(
+                                [
+                                    [0,0]
+                                ],
+                                [
+                                    [10,10], [20,20], [30,30]
+                                ]
+                             );
+
+    |tor_todo| WASM, TypeError: annotation.addInkList is not a function
+
+
 .. method:: addInkListStroke()
 
     Add a new empty stroke to the ink annotation.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        annotation.addInkListStroke();
+
+    |tor_todo| WASM, TypeError: libmupdf._wasm_pdf_annot_add_ink_list_stroke is not a function
+
 
 .. method:: addInkListStrokeVertex(vertex)
 
     Append a vertex to end of the last stroke in the ink annotation. The vertex is an array of its X/Y coordinates.
 
-    :arg vertex: `[]`.
+    :arg vertex: `[...]`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        annotation.addInkListStrokeVertex([0,0]);
+
+    |tor_todo| WASM, TypeError: libmupdf._wasm_pdf_annot_add_ink_list_stroke_vertex is not a function
 
 
 Text markup and redaction annotations consist of a set of quadadrilaterals controlled by:
@@ -1080,27 +1358,65 @@ Text markup and redaction annotations consist of a set of quadadrilaterals contr
 
     :return: `Boolean`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var hasQuadPoints = annotation.hasQuadPoints();
+
+    |tor_todo| WASM, TypeError: annotation.hasQuadPoints is not a function
+
 .. method:: getQuadPoints()
 
     Get the annotation quadpoints, describing the areas affected by text markup annotations and link annotations.
 
-    :return: `[]`.
+    :return: `[...]`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var quadPoints = annotation.getQuadPoints();
 
 .. method:: setQuadPoints(quadPoints)
 
     Set the annotation quadpoints, describing the areas affected by text markup annotations and link annotations.
 
-    :arg quadPoints: `[]`.
+    :arg quadPoints: `[...]`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        annotation.setQuadPoints([
+                                    [1,2,3,4,5,6,7,8],
+                                    [1,2,3,4,5,6,7,8],
+                                    [1,2,3,4,5,6,7,8]
+
+                                ]);
 
 .. method:: clearQuadPoints()
 
     Clear the list of quad points for the annotation.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        annotation.clearQuadPoints();
+
 
 .. method:: addQuadPoint(quadpoint)
 
     Append a single quad point as an array of 8 elements, where each pair are the X/Y coordinates of a corner of the quad.
 
     :arg quadpoint: `[]`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        annotation.setQuadPoints([1,2,3,4,5,6,7,8]);
 
 
 Polygon and polyline annotations consist of a sequence of vertices with a straight line between them. Those can be controlled by:
@@ -1111,28 +1427,68 @@ Polygon and polyline annotations consist of a sequence of vertices with a straig
 
     :return: `Boolean`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var hasVertices = annotation.hasVertices();
+
+    |tor_todo| WASM, TypeError: annotation.hasVertices is not a function
+
+
 .. method:: getVertices()
 
     Get the annotation vertices, represented as an array of vertices each an array of its X/Y coordinates.
 
-    :return: `[]`.
+    :return: `[...]`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var vertices = annotation.getVertices();
+
 
 .. method:: setVertices(vertices)
 
     Set the annotation vertices, represented as an array of vertices each an array of its X/Y coordinates.
 
-    :arg vertices: `[]`.
+    :arg vertices: `[...]`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        annotation.setVertices([
+                                [0,0],
+                                [10,10],
+                                [20,20]
+                              ]);
 
 .. method:: clearVertices()
 
     Clear the list of vertices for the annotation.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        annotation.clearVertices();
 
 
 .. method:: addVertex(vertex)
 
     Append a single vertex as an array of its X/Y coordinates.
 
-    :arg vertex: `[]`.
+    :arg vertex: `[...]`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        annotation.addVertex([0,0]);
+
+    |tor_todo| WASM, TypeError: libmupdf._wasm_pdf_annot_add_vertex is not a function
 
 
 Stamp annotations have the option to set a custom image as its appearance.
@@ -1142,3 +1498,14 @@ Stamp annotations have the option to set a custom image as its appearance.
     Set a custom image appearance for a stamp annotation.
 
     :arg image: `Image`.
+
+
+    **Example**
+
+    .. code-block:: javascript
+
+        annotation.setStampImage(image);
+
+    |tor_todo| WASM, TypeError: annotation.setStampImage is not a function
+
+
