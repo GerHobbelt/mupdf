@@ -105,19 +105,27 @@ public class PDFObject implements Iterable<PDFObject>
 	}
 
 	private native PDFObject getArray(int index);
-	private native PDFObject getDictionary(String name);
+	private native PDFObject getDictionary(String name, boolean inheritable);
 	private native PDFObject getDictionaryKey(int index);
 
 	public PDFObject get(int index) {
 		return getArray(index);
 	}
 
+	public PDFObject get(String name, boolean inheritable) {
+		return getDictionary(name, inheritable);
+	}
+
 	public PDFObject get(String name) {
-		return getDictionary(name);
+		return getDictionary(name, false);
+	}
+
+	public PDFObject get(PDFObject name, boolean inheritable) {
+		return getDictionary(name != null ? name.asName() : null, inheritable);
 	}
 
 	public PDFObject get(PDFObject name) {
-		return getDictionary(name != null ? name.asName() : null);
+		return get(name, false);
 	}
 
 	private native void putArrayBoolean(int index, boolean b);
