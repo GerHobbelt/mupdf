@@ -15,8 +15,12 @@
 `XML`
 -------------
 
+|mutool_tag|
 
 This represents an :title:`HTML` or an :title:`XML` node. It is a helper class intended to access the :title:`DOM` (:title:`Document Object Model`) content of a :ref:`Story<mutool_object_story>` object.
+
+
+|instance_methods|
 
 
 .. method:: body()
@@ -25,11 +29,24 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
 
     :return: `XML`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var result = xml.body();
+
+
 .. method:: documentElement()
 
     Return an `XML` for the top level element.
 
     :return: `XML`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var result = xml.documentElement();
 
 .. method:: createElement(tag)
 
@@ -39,6 +56,12 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
 
     :return: `XML`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var result = xml.createElement("div");
+
 
 .. method:: createTextNode(text)
 
@@ -47,6 +70,12 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
     :arg text: `String`.
 
     :return: `XML`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var result = xml.createElement("Hello world!");
 
 .. method:: find(tag, attribute, value)
 
@@ -58,6 +87,14 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
 
     :return: `XML`.
 
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var result = xml.find("tag", "attribute", "value");
+
+
 .. method:: findNext(tag, attribute, value)
 
     Find the next element matching the `tag`, `attribute` and `value`. Set either of those to `null` to match anything.
@@ -68,6 +105,12 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
 
     :return: `XML`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var result = xml.findNext("tag", "attribute", "value");
+
 
 .. method:: appendChild(dom, childDom)
 
@@ -75,6 +118,12 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
 
     :arg dom: `XML`.
     :arg childDom: `XML`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        xml.appendChild(dom, childDom);
 
 
 .. method:: insertBefore(dom, elementDom)
@@ -84,6 +133,13 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
     :arg dom: `XML`.
     :arg elementDom: `XML`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        xml.insertBefore(dom, elementDom);
+
+
 .. method:: insertAfter(dom, elementDom)
 
     Insert an element after this element, unlinking the new element from its current position if required.
@@ -91,10 +147,24 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
     :arg dom: `XML`.
     :arg elementDom: `XML`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        xml.insertAfter(dom, elementDom);
 
 .. method:: remove()
 
     Remove this element from the `XML`. The element can be added back elsewhere if required.
+
+    :return: `XML`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var result = xml.remove();
+
 
 .. method:: clone()
 
@@ -102,11 +172,23 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
 
     :return: `XML`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var result = xml.clone();
+
 .. method:: firstChild()
 
     Return the first child of the element as a `XML`, or `null` if no child exist.
 
     :return: `XML` \| `null`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var result = xml.firstChild();
 
 .. method:: parent()
 
@@ -114,17 +196,37 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
 
     :return: `XML` \| `null`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var result = xml.parent();
+
 .. method:: next()
 
     Return the next element as a `XML`, or `null` if no such element exists.
 
     :return: `XML` \| `null`.
 
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var result = xml.next();
+
 .. method:: previous()
 
     Return the previous element as a `XML`, or `null` if no such element exists.
 
     :return: `XML` \| `null`.
+
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var result = xml.previous();
 
 .. method:: addAttribute(attribute, value)
 
@@ -135,11 +237,25 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
 
     :return: `XML`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var result = xml.addAttribute("attribute", "value");
+
+
 .. method:: removeAttribute(attribute)
 
     Remove the specified attribute from the element.
 
     :arg attribute: `String`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        xml.removeAttribute("attribute");
+
 
 .. method:: attribute(attribute)
 
@@ -149,8 +265,23 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
 
     :return: `String` \| `null`.
 
+    **Example**
+
+    .. code-block:: javascript
+
+        var result = xml.attribute("attribute");
+
+
 .. method:: getAttributes()
 
     Returns a dictionary object with properties and their values corresponding to the element's attributes and their values.
 
     :return: `{}`.
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var dict = xml.getAttributes();
+
+

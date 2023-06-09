@@ -18,6 +18,8 @@
 
 :title:`PDF` Annotations belong to a specific `PDFPage` and may be created/changed/removed. Because annotation appearances may change (for several reasons) it is possible to scan through the annotations on a page and query them to see whether a re-render is necessary. Finally redaction annotations can be applied to a `PDFPage`, destructively removing content from the page.
 
+To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_js_api_pdf_page>`, to create an annotation see: :ref:`PDFPage createAnnotation()<mutool_run_js_api_pdf_page_createAnnotation>`.
+
 
 |instance_methods|
 

@@ -15,6 +15,7 @@
 `Story`
 -------------
 
+|mutool_tag|
 
 .. method:: new Story(contents, userCSS, em, archive)
 
@@ -33,7 +34,11 @@
 
     .. code-block:: javascript
 
-        var story = new Story(<contents>, <css>, <em>, <archive>);
+        var story = new mupdf.Story(<contents>, <css>, <em>, <archive>);
+
+
+|instance_methods|
+
 
 .. method:: document()
 
@@ -41,11 +46,30 @@
 
     :return: :ref:`XML<mutool_object_xml>`.
 
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var xml = story.document();
+
+
+
 .. method:: place(rect)
 
     Place (or continue placing) a `Story` into the supplied rectangle, returning a :ref:`Placement Result Object<mutool_run_js_api_object_story_placement_result_object>`. Call `draw()` to draw the placed content before calling `place()` again to continue placing remaining content.
 
     :arg rect: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+
+    :return: :ref:`Placement Result Object<mutool_run_js_api_object_story_placement_result_object>`.
+
+
+    **Example**
+
+    .. code-block:: javascript
+
+        var result = story.place([0,0,100,100]);
+
 
 
 .. method:: draw(device, transform)
@@ -54,3 +78,15 @@
 
     :arg device: :ref:`Device<mutool_object_device>`.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+
+
+    **Example**
+
+    .. code-block:: javascript
+
+        story.draw(device, mupdf.Matrix.identity);
+
+
+
+
+

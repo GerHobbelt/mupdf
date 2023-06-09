@@ -18,6 +18,8 @@
 `PDFPage`
 ---------------
 
+
+
 |instance_methods|
 
 .. method:: getAnnotations()
@@ -32,6 +34,8 @@
 
         var annots = pdfPage.getAnnotations();
 
+
+.. _mutool_run_js_api_pdf_page_createAnnotation:
 
 .. method:: createAnnotation(type)
 
@@ -102,6 +106,8 @@
 
         pdfPage.deleteAnnotation(annot);
 
+
+.. _mutool_run_js_api_pdf_page_getWidgets:
 
 .. method:: getWidgets()
 

@@ -183,6 +183,8 @@
         var outline = document.loadOutline();
 
 
+.. _mutool_run_js_api_document_outlineIterator:
+
 .. method:: outlineIterator()
 
     |mutool_tag|
