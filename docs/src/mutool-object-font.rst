@@ -51,7 +51,7 @@
 
     :return: `Font`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -70,7 +70,7 @@
 
     :return: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -85,7 +85,7 @@
 
     :return: Glyph index.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -101,7 +101,7 @@
 
     :return: Width for the glyph.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -114,7 +114,7 @@
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -127,7 +127,7 @@
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -140,7 +140,7 @@
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -153,7 +153,7 @@
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

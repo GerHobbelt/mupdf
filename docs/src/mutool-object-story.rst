@@ -30,7 +30,7 @@
     :arg archive: An `Archive` from which to load resources for rendering. Currently supported resource types are images and text fonts. If omitted, the `Story` will not try to look up any such data and may thus produce incomplete output.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -47,7 +47,7 @@
     :return: :ref:`XML<mutool_object_xml>`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -64,7 +64,7 @@
     :return: :ref:`Placement Result Object<mutool_run_js_api_object_story_placement_result_object>`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -80,7 +80,7 @@
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

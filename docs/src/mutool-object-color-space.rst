@@ -61,7 +61,7 @@
 
     :return: `ColorSpace`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -73,7 +73,7 @@
     A grayscale colorspace has one component, RGB has 3, CMYK has 4, and DeviceN may have any number of components.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

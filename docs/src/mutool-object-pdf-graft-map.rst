@@ -27,7 +27,7 @@
 
     :arg object: Object to graft.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -44,7 +44,7 @@
     :arg srcDoc: Source document.
     :arg srcPageNumber: Source page number.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

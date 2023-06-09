@@ -30,7 +30,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
     :return: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -44,7 +44,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
     :arg device: `Device`.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -61,7 +61,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :return: `Pixmap`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -76,7 +76,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :return: `DisplayList`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -90,7 +90,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :return: `PDFObject`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -103,7 +103,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :arg processor: User defined function.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -121,7 +121,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg displayList: `DisplayList`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -140,7 +140,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
     :arg resources: Resources object.
     :arg contents: Contents string.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -169,7 +169,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     Update the appearance stream to account for changes in the annotation.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -184,7 +184,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -199,7 +199,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :arg hot: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -215,7 +215,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -229,7 +229,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :arg hidden: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -242,7 +242,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :return: `String` :ref:`Annotation type<mutool_run_js_api_annotation_types>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -255,7 +255,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :return: `Integer` which determines the bit-field value.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -268,7 +268,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :arg flags: `Integer` which determines the bit-field value.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -315,7 +315,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :return: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -327,7 +327,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :arg text: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -342,7 +342,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :return: `Float`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -357,7 +357,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :arg width: `Float` Border width.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -369,7 +369,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :return: The :ref:`color value<mutool_run_js_api_colors>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -384,7 +384,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -398,7 +398,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :return: The :ref:`opacity<mutool_run_js_api_alpha>` value.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -412,7 +412,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :arg opacity: The :ref:`opacity<mutool_run_js_api_alpha>` value.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -425,7 +425,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :return: `Date`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -439,7 +439,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :arg date: `Date`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -454,7 +454,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :return: `Date`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -467,7 +467,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :arg date: `Date`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -485,7 +485,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :return: Quadding value, `0` for left-justified, `1` for centered, `2` for right-justified.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -498,7 +498,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :arg value: Quadding value, `0` for left-justified, `1` for centered, `2` for right-justified.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -512,7 +512,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :return: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -525,7 +525,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     :arg language: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -544,7 +544,7 @@ These properties are only present for some annotation types, so support for them
 
     :return: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -558,7 +558,7 @@ These properties are only present for some annotation types, so support for them
 
     :arg rect: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -571,7 +571,7 @@ These properties are only present for some annotation types, so support for them
 
     :return: `{font:String, size:Integer, color:[r,g,b]}` Returns an object with the key/value pairs.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -588,7 +588,7 @@ These properties are only present for some annotation types, so support for them
     :arg size: `Integer`.
     :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -601,7 +601,7 @@ These properties are only present for some annotation types, so support for them
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -616,7 +616,7 @@ These properties are only present for some annotation types, so support for them
 
     :return: The :ref:`color value<mutool_run_js_api_colors>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -631,7 +631,7 @@ These properties are only present for some annotation types, so support for them
 
     :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -649,7 +649,7 @@ These properties are only present for some annotation types, so support for them
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -663,7 +663,7 @@ These properties are only present for some annotation types, so support for them
 
     :return: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -676,7 +676,7 @@ These properties are only present for some annotation types, so support for them
 
     :arg author: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -689,7 +689,7 @@ These properties are only present for some annotation types, so support for them
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -704,7 +704,7 @@ These properties are only present for some annotation types, so support for them
 
     :return: `{start:String, end:String}` Returns an object with the key/value pairs.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -720,7 +720,7 @@ These properties are only present for some annotation types, so support for them
     :arg start: `String`.
     :arg end: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -755,7 +755,7 @@ These properties are only present for some annotation types, so support for them
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -770,7 +770,7 @@ These properties are only present for some annotation types, so support for them
 
     :return: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -783,7 +783,7 @@ These properties are only present for some annotation types, so support for them
 
     :arg name: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -858,7 +858,7 @@ These properties are only present for some annotation types, so support for them
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -873,7 +873,7 @@ These properties are only present for some annotation types, so support for them
 
     :return: `[[x,y],...]`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -889,7 +889,7 @@ These properties are only present for some annotation types, so support for them
 
     :arg endpoints: `[[x,y],...]`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -904,13 +904,13 @@ These properties are only present for some annotation types, so support for them
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
         var hasOpen = annotation.hasOpen();
 
-    |tor_todo| WASM TypeError: annotation.hasLine is not a function
+    |tor_todo| WASM TypeError: annotation.hasOpen is not a function
 
 
 .. method:: isOpen()
@@ -919,7 +919,7 @@ These properties are only present for some annotation types, so support for them
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -931,7 +931,7 @@ These properties are only present for some annotation types, so support for them
 
     :arg state: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -953,7 +953,7 @@ These properties are only present for some annotation types, so support for them
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -971,7 +971,7 @@ These properties are only present for some annotation types, so support for them
 
     :return: `Object` :ref:`File Specification Object<mutool_run_js_api_file_spec_object>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -992,7 +992,7 @@ These properties are only present for some annotation types, so support for them
     :arg fileSpecObject: `Object` :ref:`File Specification object<mutool_run_js_api_file_spec_object>`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1017,7 +1017,7 @@ The border drawn around some annotations can be controlled by:
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1032,7 +1032,7 @@ The border drawn around some annotations can be controlled by:
 
     :return: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1047,7 +1047,7 @@ The border drawn around some annotations can be controlled by:
 
     :arg: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1062,7 +1062,7 @@ The border drawn around some annotations can be controlled by:
 
     :return: `Float`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1077,7 +1077,7 @@ The border drawn around some annotations can be controlled by:
 
     :arg width: `Float`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1093,7 +1093,7 @@ The border drawn around some annotations can be controlled by:
 
     :return: `Integer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1108,7 +1108,7 @@ The border drawn around some annotations can be controlled by:
     :arg i: `Integer` Item index.
     :return: `Integer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1123,7 +1123,7 @@ The border drawn around some annotations can be controlled by:
 
     :arg dashpattern: [Integer, Integer, ....].
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1135,7 +1135,7 @@ The border drawn around some annotations can be controlled by:
 
     Clear the entire border dash pattern for an annotation.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1150,7 +1150,7 @@ The border drawn around some annotations can be controlled by:
 
     :arg length: `Integer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1167,7 +1167,7 @@ Annotations that have a border effect allows the effect to be controlled by:
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1183,7 +1183,7 @@ Annotations that have a border effect allows the effect to be controlled by:
 
     :return: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1198,7 +1198,7 @@ Annotations that have a border effect allows the effect to be controlled by:
 
     :arg: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1213,7 +1213,7 @@ Annotations that have a border effect allows the effect to be controlled by:
 
     :return: `Integer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1229,7 +1229,7 @@ Annotations that have a border effect allows the effect to be controlled by:
 
     :arg: `Integer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1248,7 +1248,7 @@ Ink annotations consist of a number of strokes, each consisting of a sequence of
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1261,7 +1261,7 @@ Ink annotations consist of a number of strokes, each consisting of a sequence of
 
     :return: `[...]`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1273,7 +1273,7 @@ Ink annotations consist of a number of strokes, each consisting of a sequence of
 
     :arg: `[...]`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1293,7 +1293,7 @@ Ink annotations consist of a number of strokes, each consisting of a sequence of
 
     Clear the list of ink strokes for the annotation.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1308,7 +1308,7 @@ Ink annotations consist of a number of strokes, each consisting of a sequence of
 
     :arg stroke: `[]`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1328,7 +1328,7 @@ Ink annotations consist of a number of strokes, each consisting of a sequence of
 
     Add a new empty stroke to the ink annotation.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1343,7 +1343,7 @@ Ink annotations consist of a number of strokes, each consisting of a sequence of
 
     :arg vertex: `[...]`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1360,7 +1360,7 @@ Text markup and redaction annotations consist of a set of quadadrilaterals contr
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1374,7 +1374,7 @@ Text markup and redaction annotations consist of a set of quadadrilaterals contr
 
     :return: `[...]`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1386,7 +1386,7 @@ Text markup and redaction annotations consist of a set of quadadrilaterals contr
 
     :arg quadPoints: `[...]`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1401,7 +1401,7 @@ Text markup and redaction annotations consist of a set of quadadrilaterals contr
 
     Clear the list of quad points for the annotation.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1414,7 +1414,7 @@ Text markup and redaction annotations consist of a set of quadadrilaterals contr
 
     :arg quadpoint: `[]`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1429,7 +1429,7 @@ Polygon and polyline annotations consist of a sequence of vertices with a straig
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1444,7 +1444,7 @@ Polygon and polyline annotations consist of a sequence of vertices with a straig
 
     :return: `[...]`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1457,7 +1457,7 @@ Polygon and polyline annotations consist of a sequence of vertices with a straig
 
     :arg vertices: `[...]`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1471,7 +1471,7 @@ Polygon and polyline annotations consist of a sequence of vertices with a straig
 
     Clear the list of vertices for the annotation.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1484,7 +1484,7 @@ Polygon and polyline annotations consist of a sequence of vertices with a straig
 
     :arg vertex: `[...]`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1502,7 +1502,7 @@ Stamp annotations have the option to set a custom image as its appearance.
     :arg image: `Image`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

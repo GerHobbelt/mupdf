@@ -28,7 +28,7 @@
 
     :return: `[...]`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -44,7 +44,7 @@
     :arg type: `String` representing :ref:`annotation type<mutool_run_js_api_annotation_types>`.
     :return: `PDFAnnotation`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -100,7 +100,7 @@
 
     :arg annot: `PDFAnnotation`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -115,7 +115,7 @@
 
     :return: `[...]`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -126,7 +126,7 @@
 
     Loop through all annotations of the page and update them. Returns true if re-rendering is needed because at least one annotation was changed (due to either events or :title:`JavaScript` actions or annotation editing).
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -143,7 +143,7 @@
 
         Redactions are secure as they remove the affected content completely.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -156,7 +156,7 @@
     :arg processor: User defined function.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -175,7 +175,7 @@
 
     :return: `Pixmap`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -193,7 +193,7 @@
 
         :return: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
-        **Example**
+        |example_tag|
 
         .. code-block:: javascript
 

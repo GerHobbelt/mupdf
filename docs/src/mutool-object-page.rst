@@ -25,7 +25,7 @@
 
     :return: `[ulx,uly,lrx,lry]`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -44,7 +44,7 @@
     :arg device: The device object.
     :arg matrix: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -62,7 +62,7 @@
     :arg device: The device object.
     :arg matrix: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -80,7 +80,7 @@
     :arg device: The device object.
     :arg matrix: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -98,7 +98,7 @@
     :arg device: The device object.
     :arg matrix: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -121,7 +121,7 @@
 
         In :title:`MuPDF WASM` `alpha` & `showExtras` default to *true* unless otherwise specified.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -140,11 +140,14 @@
 
         In :title:`MuPDF WASM` `showExtras` defaults to *true* unless otherwise specified.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
         var displayList = page.toDisplayList(true);
+
+
+.. _mutool_page_toStructuredText:
 
 
 .. method:: toStructuredText(options)
@@ -154,7 +157,7 @@
     :arg options: `String`.
     :return: `StructuredText`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -169,7 +172,7 @@
     :arg max_hits: `Integer` Defaults to 500 unless otherwise specified.
     :return: `[...]`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -194,19 +197,6 @@
         var linkDestination = doc.resolveLink(link)
 
 
-    |tor_todo| I tried this:
-
-    .. code-block:: javascript
-
-        var links = page.getLinks();
-        var link = links[0];
-        var linkDestination = doc.resolveLink(link)
-        console.log("linkDestination="+linkDestination);
-
-    |tor_todo| In **mutool** it returned `[object object]` which had all the :ref:`link dest<mutool_run_js_api_link_dest>` info in it, in **wasm** is returned `1`, I expected it to return a link dictionary ?
-
-
-
 .. _mutool_run_js_api_page_create_link:
 
 
@@ -215,16 +205,23 @@
     Create a new link within the rectangle on the page, linking to the destination URI string.
 
     :arg rect: :ref:`Rectangle<mutool_run_js_api_rectangle>` for the link.
-    :arg destinationUri: `String`.
+    :arg destinationUri: :ref:`link destination object<mutool_run_js_api_link_dest>` \| `String`.
     :return: :ref:`Link<mutool_object_link>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
-        var link = page.createLink([0,0,100,100], "http://mupdf.com");
+        var link = page.createLink([0,0,100,100], {chapter:0,
+                                                   page:0,
+                                                   type:"FitV",
+                                                   x:0,
+                                                   y:0,
+                                                   width:100,
+                                                   height:50,
+                                                   zoom:1});
 
-    |tor_todo| How to create links between pages ( i.e. with :ref:`link dest<mutool_run_js_api_link_dest>` info ) ?
+
 
 
 .. method:: deleteLink(link)
@@ -233,13 +230,13 @@
 
     :arg link: :ref:`Link<mutool_object_link>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
         page.deleteLink(link_obj);
 
-    |tor_todo| Did not work in either mutool or wasm (function did not exist)
+    |tor_todo| WASM TypeError: page.deleteLink is not a function
 
 
 .. method:: getLabel()
@@ -248,7 +245,7 @@
 
     :return: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -262,7 +259,7 @@
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

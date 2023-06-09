@@ -4,6 +4,8 @@
 
 .. default-domain:: js
 
+.. include:: html_tags.rst
+
 
 .. title:: MuPDF & JavaScript
 
@@ -31,7 +33,6 @@
 Both usages are, in fact, very similar and here we show code samples and the API for both.
 
 API's generally work for both environments, however if an API is specific to only one usage then the |mutool_tag| or |wasm_tag| tag will be shown.
-
 
 
 
@@ -79,7 +80,7 @@ This matrix is represented in :title:`JavaScript` as `[a,b,c,d,e,f]`.
 
    The identity matrix, short hand for `[1,0,0,1,0,0]`.
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 
@@ -96,7 +97,7 @@ This matrix is represented in :title:`JavaScript` as `[a,b,c,d,e,f]`.
 
    :return: `[a,b,c,d,e,f]`.
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 
@@ -112,7 +113,7 @@ This matrix is represented in :title:`JavaScript` as `[a,b,c,d,e,f]`.
 
    :return: `[a,b,c,d,e,f]`.
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 
@@ -126,7 +127,7 @@ This matrix is represented in :title:`JavaScript` as `[a,b,c,d,e,f]`.
 
    :return: `[a,b,c,d,e,f]`.
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 
@@ -141,7 +142,7 @@ This matrix is represented in :title:`JavaScript` as `[a,b,c,d,e,f]`.
 
    :return: `[a,b,c,d,e,f]`.
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 
@@ -156,7 +157,7 @@ This matrix is represented in :title:`JavaScript` as `[a,b,c,d,e,f]`.
 
    :return: `[a,b,c,d,e,f]`.
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 
@@ -186,7 +187,7 @@ If the minimum x coordinate is bigger than the maximum x coordinate, :title:`MuP
 
    :return: `Boolean`.
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 
@@ -203,7 +204,7 @@ If the minimum x coordinate is bigger than the maximum x coordinate, :title:`MuP
 
    :return: `Boolean`.
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 
@@ -219,7 +220,7 @@ If the minimum x coordinate is bigger than the maximum x coordinate, :title:`MuP
 
    :return: `Boolean`.
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 
@@ -237,7 +238,7 @@ If the minimum x coordinate is bigger than the maximum x coordinate, :title:`MuP
 
    :return: `[a,b,c,d,e,f]`.
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 
@@ -364,7 +365,7 @@ Global :title:`MuPDF` methods
 
    :arg ...: Arguments to print.
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 
@@ -394,7 +395,7 @@ Global :title:`MuPDF` methods
    :arg object: Object to format.
 
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 

@@ -27,7 +27,7 @@
 
     :return: `Buffer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -44,7 +44,7 @@
 
     :return: `Buffer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -63,7 +63,7 @@
 
     :return: `Buffer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -89,7 +89,7 @@
     Read/write the byte at index 'n'. Will throw exceptions on out of bounds accesses.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -108,7 +108,7 @@
 
     :return: `Integer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -121,7 +121,7 @@
 
     :arg b: The byte value.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -136,7 +136,7 @@
 
     :arg at: `Integer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -151,7 +151,7 @@
 
     :arg c: The character value.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -164,7 +164,7 @@
 
     :arg ...: List of arguments.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -177,7 +177,7 @@
 
     :arg ...: List of arguments.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -190,7 +190,7 @@
 
     :arg data: Data buffer.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -208,7 +208,7 @@
 
     :return: `Buffer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -223,7 +223,7 @@
 
     :arg fileName: Filename to save to.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -238,7 +238,7 @@
 
     :return: `Uint8Array`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -253,7 +253,7 @@
 
     :return: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

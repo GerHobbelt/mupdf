@@ -32,7 +32,7 @@
     :return: `Document`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -49,7 +49,7 @@
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -63,7 +63,7 @@
     :arg password: The password to attempt authentication with.
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -77,7 +77,7 @@
     :arg permission: `String` The permission to seek for, e.g. "edit".
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -91,7 +91,7 @@
     :arg key: `String`.
     :return: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -105,7 +105,7 @@
     :arg key: `String`.
     :arg value: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -118,7 +118,7 @@
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -137,7 +137,7 @@
     :arg pageHeight: `Int`.
     :arg fontSize: `Int`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -150,7 +150,7 @@
 
     :return: `Int`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -163,7 +163,7 @@
 
     :return: `Page` or `PDFPage`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -176,7 +176,7 @@
     :return: `[...]`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -193,7 +193,7 @@
 
     :return: `OutlineIterator`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -210,7 +210,7 @@
     :arg uri: `String`.
     :return: :ref:`Link destination<mutool_run_js_api_link_dest>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -224,7 +224,7 @@
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -241,7 +241,7 @@
     :return: `String`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

@@ -37,7 +37,7 @@
     :arg options: The options as key-value pairs.
     :return: `DocumentWriter`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -61,7 +61,7 @@
     :arg options: The options as key-value pairs.
     :return: `DocumentWriter`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -84,7 +84,7 @@
 
     :return: `Device`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -97,7 +97,7 @@
 
     :arg device: `Device`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -108,7 +108,7 @@
 
     Finish the document and flush any pending output.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

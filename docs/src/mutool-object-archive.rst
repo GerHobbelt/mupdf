@@ -30,7 +30,7 @@
 
     :return: `Archive`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -45,7 +45,7 @@
 
     :return: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -57,7 +57,7 @@
 
     :return: `Integer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -71,7 +71,7 @@
 
     :return: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -86,7 +86,7 @@
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -101,7 +101,7 @@
 
     :return: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -121,7 +121,7 @@
 
     :return: `MultiArchive`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -137,7 +137,7 @@
     :arg subArchive: `Archive`.
     :arg path: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -158,7 +158,7 @@
 
     :return: `TreeArchive`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -174,7 +174,7 @@
     :arg name: `String`.
     :arg buffer: `Buffer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

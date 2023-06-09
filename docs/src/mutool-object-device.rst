@@ -43,7 +43,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     :arg colorParams: The :ref:`color parameters object<mutool_run_js_api_color_params>`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -64,7 +64,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     :arg alpha: The :ref:`alpha value<mutool_run_js_api_alpha>`.
     :arg colorParams: The :ref:`color parameters object<mutool_run_js_api_color_params>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -88,7 +88,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -106,7 +106,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     :arg stroke: The :ref:`stroke dictionary<mutool_run_js_api_stroke_dictionary>`.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -128,7 +128,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     :arg alpha: The :ref:`alpha value<mutool_run_js_api_alpha>`.
     :arg colorParams: The :ref:`color parameters object<mutool_run_js_api_color_params>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -148,7 +148,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     :arg alpha: The :ref:`alpha value<mutool_run_js_api_alpha>`.
     :arg colorParams: The :ref:`color parameters object<mutool_run_js_api_color_params>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -168,7 +168,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     :arg text: `Text` object.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -185,7 +185,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     :arg stroke: The :ref:`stroke dictionary<mutool_run_js_api_stroke_dictionary>`.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -202,7 +202,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     :arg text: `Text` object.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -227,7 +227,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     :arg colorParams: The :ref:`color parameters object<mutool_run_js_api_color_params>`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -245,7 +245,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     :arg colorParams: The :ref:`color parameters object<mutool_run_js_api_color_params>`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -267,7 +267,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     :arg colorParams: The :ref:`color parameters object<mutool_run_js_api_color_params>`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -285,7 +285,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -298,7 +298,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
     Pop the clip mask installed by the last clipping operation.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -317,7 +317,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     :arg colorParams: The :ref:`color parameters object<mutool_run_js_api_color_params>`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -331,7 +331,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
     Ends the mask.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -355,7 +355,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
        :scale: 50%
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -369,7 +369,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
     Ends the blending group.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -388,7 +388,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     :arg id: `Integer` The purpose of `id` is to allow for efficient caching of rendered tiles. If `id` is `0`, then no caching is performed. If it is non-zero, then it assumed to uniquely identify this tile.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -399,7 +399,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
     Ends the tiling pattern.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -412,7 +412,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
     :arg tag: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -423,7 +423,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
     End a marked-content layer.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -441,7 +441,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     :arg set: `[]`.
     :arg clear: `[]`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -457,7 +457,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     :arg defaults: `Object`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -473,7 +473,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     :arg raw: `String`. The tag name.
     :arg uid: `String`. The unique identifier.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -486,7 +486,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
     End a standard structure element.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -504,7 +504,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     :arg text: `String`. The text value.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -518,7 +518,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
     End meta text information.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -533,7 +533,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     Tell the device that we are done, and flush any pending output. Ensure that no items are left on the stack before closing.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

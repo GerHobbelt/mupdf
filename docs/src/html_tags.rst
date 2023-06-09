@@ -8,6 +8,11 @@
    <span class="instance_methods_tag">Instance methods</span>
 
 
+.. |example_tag| raw:: html
+
+   <span class="example_tag">EXAMPLE</span>
+
+
 .. |mutool_tag| raw:: html
 
    <span class="mutool_tag">mutool only</span>

@@ -35,7 +35,7 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
     :return: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -50,7 +50,7 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
     :return: `Integer` which determines the bit-field value.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -63,7 +63,7 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
     :return: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -76,7 +76,7 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
     :arg rect: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -89,7 +89,7 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
     :return: `Integer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -103,7 +103,7 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
     :return: `String`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -116,7 +116,7 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
     :arg value: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -128,7 +128,7 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
     :arg value: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -141,7 +141,7 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
     :return: `Integer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -153,7 +153,7 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
     :return: `[...]`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -168,13 +168,13 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
     :return: `Object`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
         var layout = widget.layoutTextWidget();
 
-    |tor_todo| WASM, Even says that in the mupdf.js source file
+    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 
 .. method:: isReadOnly()
@@ -184,7 +184,7 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
     :return: `Boolean`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -198,7 +198,7 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
     :return: `String`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -211,13 +211,13 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
         var state = widget.getEditingState();
 
-    |tor_todo| WASM, Even says that in the mupdf.js source file
+    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 
 .. method:: setEditingState(state)
@@ -226,14 +226,14 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
     :arg state: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
         widget.getEditingState(false);
 
 
-    |tor_todo| WASM, Even says that in the mupdf.js source file
+    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 .. note::
 
@@ -243,7 +243,7 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
     Update the appearance stream to account for changes to the widget.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -255,13 +255,13 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
         var isSigned = widget.isSigned();
 
-    |tor_todo| WASM, Even says that in the mupdf.js source file
+    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 
 .. method:: validateSignature()
@@ -270,14 +270,14 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
     :return: `Integer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
         var validNum = widget.validateSignature();
 
 
-    |tor_todo| WASM, Even says that in the mupdf.js source file
+    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 .. method:: checkCertificate()
 
@@ -285,14 +285,14 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
     :return: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
         var result = widget.checkCertificate();
 
 
-    |tor_todo| WASM, Even says that in the mupdf.js source file
+    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 
 .. method:: getSignatory()
@@ -301,7 +301,7 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
     :return: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -321,14 +321,14 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
     :return: `Pixmap`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
         var pixmap = widget.previewSignature(signer, {showLabels:true, showDate:true}, image, "", "");
 
 
-    |tor_todo| WASM, Even says that in the mupdf.js source file
+    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 
 
@@ -345,108 +345,108 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
     :arg location: `String`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
         widget.sign(signer, {showLabels:true, showDate:true}, image, "", "");
 
 
-    |tor_todo| WASM, Even says that in the mupdf.js source file
+    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 
 .. method:: clearSignature()
 
     Clear a signed signature, making it unsigned again.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
         widget.clearSignature();
 
 
-    |tor_todo| WASM, Even says that in the mupdf.js source file
+    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 
 .. method:: eventEnter()
 
     Trigger the event when the pointing device enters a widget's active area.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
         widget.eventEnter();
 
 
-    |tor_todo| WASM, Even says that in the mupdf.js source file
+    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 
 .. method:: eventExit()
 
     Trigger the event when the pointing device exits a widget's active area.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
         widget.eventExit();
 
 
-    |tor_todo| WASM, Even says that in the mupdf.js source file
+    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 .. method:: eventDown()
 
     Trigger the event when the pointing device's button is depressed within a widget's active area.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
         widget.eventDown();
 
 
-    |tor_todo| WASM, Even says that in the mupdf.js source file
+    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 .. method:: eventUp()
 
     Trigger the event when the pointing device's button is released within a widget's active area.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
         widget.eventUp();
 
 
-    |tor_todo| WASM, Even says that in the mupdf.js source file
+    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 .. method:: eventFocus()
 
     Trigger the event when the a widget gains input focus.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
         widget.eventFocus();
 
 
-    |tor_todo| WASM, Even says that in the mupdf.js source file
+    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 .. method:: eventBlur()
 
     Trigger the event when the a widget loses input focus.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
         widget.eventBlur();
 
 
-    |tor_todo| WASM, Even says that in the mupdf.js source file
+    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 
 
@@ -469,7 +469,7 @@ To create a signer object an instance of `PDFPKCS7Signer` is required.
     :return: `PDFPKCS7Signer`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

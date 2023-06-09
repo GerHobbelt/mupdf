@@ -28,7 +28,7 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
 
     :return: `Path`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -52,7 +52,7 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
     :return: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -67,7 +67,7 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
     :arg x: X coordinate.
     :arg y: Y coordinate.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -81,7 +81,7 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
     :arg x: X coordinate.
     :arg y: Y coordinate.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -99,7 +99,7 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
     :arg x3: X3 coordinate.
     :arg y3: Y3 coordinate.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -115,7 +115,7 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
     :arg ex: EX coordinate.
     :arg ey: EY coordinate.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -131,7 +131,7 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
     :arg ex: EX coordinate.
     :arg ey: EY coordinate.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -142,7 +142,7 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
 
     Close the path by drawing a line to the last `moveTo`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -159,7 +159,7 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
     :arg y2: Y2 coordinate.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -178,7 +178,7 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
         A path walker object has callback methods that are called when `walk()` walks over `moveTo`, `lineTo`, `curveTo` and `closePath` operators in a `Path`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -198,7 +198,7 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>` for the path.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

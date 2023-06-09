@@ -30,7 +30,7 @@
 
     :return: `Image`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -49,7 +49,7 @@
 
     :return: The width value.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -62,7 +62,7 @@
 
     :return: The height value.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -74,7 +74,7 @@
 
     :return: `Int` Image resolution in dots per inch.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -87,7 +87,7 @@
 
     :return: `Int` Image resolution in dots per inch.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -100,7 +100,7 @@
 
     :return: `ColorSpace`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -113,7 +113,7 @@
 
     :return: `Integer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -126,7 +126,7 @@
 
     :return: `Integer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -139,7 +139,7 @@
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -153,7 +153,7 @@
     :return: `[...]` or `null`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -165,7 +165,7 @@
 
     :return: `[...]` or `null`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -178,7 +178,7 @@
 
     :return: `Integer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -213,7 +213,7 @@
        * - **8**
          - flip on X, then rotate ccw by 270 degrees. (Exif = 7)
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -226,7 +226,7 @@
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -239,7 +239,7 @@
 
     :return: `Image` (or `null`).
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -257,7 +257,7 @@
     :return: `Pixmap`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

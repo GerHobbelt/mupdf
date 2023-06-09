@@ -31,7 +31,7 @@ The `DrawDevice` can be used to render to a :ref:`Pixmap<mutool_run_js_api_pixma
 
     :return: `DrawDevice`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

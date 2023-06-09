@@ -46,7 +46,7 @@ All functions that take `PDFObjects`, do automatic translation between :title:`J
     :arg ref: Key or index.
     :return: The value for the key or index.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -60,7 +60,7 @@ All functions that take `PDFObjects`, do automatic translation between :title:`J
     :arg ref: Key or index.
     :arg value: The value for the key or index.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -77,7 +77,7 @@ All functions that take `PDFObjects`, do automatic translation between :title:`J
 
     :arg ref: Key or index.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -90,7 +90,7 @@ All functions that take `PDFObjects`, do automatic translation between :title:`J
 
     :return: Object.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -106,7 +106,7 @@ All functions that take `PDFObjects`, do automatic translation between :title:`J
     :arg other: `PDFObject`.
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -117,7 +117,7 @@ All functions that take `PDFObjects`, do automatic translation between :title:`J
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -127,7 +127,7 @@ All functions that take `PDFObjects`, do automatic translation between :title:`J
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -139,7 +139,7 @@ All functions that take `PDFObjects`, do automatic translation between :title:`J
 
     :arg fun: Function in the format `function(key,value){...}`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -152,7 +152,7 @@ All functions that take `PDFObjects`, do automatic translation between :title:`J
 
     :arg item: Item to add.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -167,7 +167,7 @@ All functions that take `PDFObjects`, do automatic translation between :title:`J
 
     :return: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -182,7 +182,7 @@ All functions that take `PDFObjects`, do automatic translation between :title:`J
 
     :return: `Null` \| `Boolean` \| `Number` \| `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -204,7 +204,7 @@ The only way to access a stream is via an indirect object, since all streams are
     :return: `Boolean`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -218,7 +218,7 @@ The only way to access a stream is via an indirect object, since all streams are
     :return: `Integer`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -231,7 +231,7 @@ The only way to access a stream is via an indirect object, since all streams are
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -244,7 +244,7 @@ The only way to access a stream is via an indirect object, since all streams are
 
     :return: `Buffer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -256,7 +256,7 @@ The only way to access a stream is via an indirect object, since all streams are
 
     :return: `Buffer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -268,7 +268,7 @@ The only way to access a stream is via an indirect object, since all streams are
 
     :arg obj: Object to update.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -280,7 +280,7 @@ The only way to access a stream is via an indirect object, since all streams are
 
     :arg buffer: `Buffer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -294,7 +294,7 @@ The only way to access a stream is via an indirect object, since all streams are
     :arg buffer: `Buffer`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -314,7 +314,7 @@ Primitive :title:`PDF` objects such as booleans, names, and numbers can usually 
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -326,7 +326,7 @@ Primitive :title:`PDF` objects such as booleans, names, and numbers can usually 
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -338,7 +338,7 @@ Primitive :title:`PDF` objects such as booleans, names, and numbers can usually 
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -350,7 +350,7 @@ Primitive :title:`PDF` objects such as booleans, names, and numbers can usually 
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -362,7 +362,7 @@ Primitive :title:`PDF` objects such as booleans, names, and numbers can usually 
 
     :return: `Integer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -374,7 +374,7 @@ Primitive :title:`PDF` objects such as booleans, names, and numbers can usually 
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -386,7 +386,7 @@ Primitive :title:`PDF` objects such as booleans, names, and numbers can usually 
 
     :return: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -398,7 +398,7 @@ Primitive :title:`PDF` objects such as booleans, names, and numbers can usually 
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -410,7 +410,7 @@ Primitive :title:`PDF` objects such as booleans, names, and numbers can usually 
 
     :return: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -422,7 +422,7 @@ Primitive :title:`PDF` objects such as booleans, names, and numbers can usually 
 
     :return: `[...]`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

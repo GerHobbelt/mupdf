@@ -30,7 +30,7 @@ A `Text` object contains text.
 
     :return: `Text`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -58,7 +58,7 @@ A `Text` object contains text.
     :arg unicode: `Integer`.
     :arg wmode: `0` for horizontal writing, and `1` for vertical writing.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -72,7 +72,7 @@ A `Text` object contains text.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg string: String content for `Text` object.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -86,7 +86,7 @@ A `Text` object contains text.
     :arg textWalker: The text walker object. A user definable :title:`JavaScript` object which can be used to trigger your own functions on the text methods.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

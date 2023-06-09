@@ -29,7 +29,7 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
 
     :return: `XML`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -42,7 +42,7 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
 
     :return: `XML`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -56,7 +56,7 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
 
     :return: `XML`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -71,7 +71,7 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
 
     :return: `XML`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -88,7 +88,7 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
     :return: `XML`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -105,7 +105,7 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
 
     :return: `XML`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -119,7 +119,7 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
     :arg dom: `XML`.
     :arg childDom: `XML`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -133,7 +133,7 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
     :arg dom: `XML`.
     :arg elementDom: `XML`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -147,7 +147,7 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
     :arg dom: `XML`.
     :arg elementDom: `XML`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -159,7 +159,7 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
 
     :return: `XML`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -172,7 +172,7 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
 
     :return: `XML`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -184,7 +184,7 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
 
     :return: `XML` \| `null`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -196,7 +196,7 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
 
     :return: `XML` \| `null`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -209,7 +209,7 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
     :return: `XML` \| `null`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -222,7 +222,7 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
     :return: `XML` \| `null`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -237,7 +237,7 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
 
     :return: `XML`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -250,7 +250,7 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
 
     :arg attribute: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -265,7 +265,7 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
 
     :return: `String` \| `null`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -278,7 +278,7 @@ This represents an :title:`HTML` or an :title:`XML` node. It is a helper class i
 
     :return: `{}`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

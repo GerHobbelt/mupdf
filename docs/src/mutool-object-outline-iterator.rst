@@ -35,7 +35,7 @@ An outline iterator is can be used to walk over all the items in an :title:`Outl
 
     :return: `Object`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -47,7 +47,7 @@ An outline iterator is can be used to walk over all the items in an :title:`Outl
 
     :return: `Int`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -59,7 +59,7 @@ An outline iterator is can be used to walk over all the items in an :title:`Outl
 
     :return: `Int`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -71,7 +71,7 @@ An outline iterator is can be used to walk over all the items in an :title:`Outl
 
     :return: `Int`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -84,7 +84,7 @@ An outline iterator is can be used to walk over all the items in an :title:`Outl
 
     :return: `Int`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -105,7 +105,7 @@ An outline iterator is can be used to walk over all the items in an :title:`Outl
 
     :return: `Int`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -118,7 +118,7 @@ An outline iterator is can be used to walk over all the items in an :title:`Outl
 
     :return: `Int`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -131,7 +131,7 @@ An outline iterator is can be used to walk over all the items in an :title:`Outl
     :arg item: `Object` which conforms to the :ref:`Outline Iterator Object<mutool_run_js_api_outline_iterator_object>`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

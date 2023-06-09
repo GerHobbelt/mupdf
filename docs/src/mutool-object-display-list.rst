@@ -33,7 +33,7 @@ A display list records all the device calls for playback later. If you want to r
 
     :return: `DisplayList`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -51,7 +51,7 @@ A display list records all the device calls for playback later. If you want to r
     :arg device: `Device`.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -66,7 +66,7 @@ A display list records all the device calls for playback later. If you want to r
     :return: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -86,7 +86,7 @@ A display list records all the device calls for playback later. If you want to r
     :return: `Pixmap`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -101,7 +101,7 @@ A display list records all the device calls for playback later. If you want to r
     :arg options: `String`.
     :return: `StructuredText`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -117,7 +117,7 @@ A display list records all the device calls for playback later. If you want to r
     :return: `[...]`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

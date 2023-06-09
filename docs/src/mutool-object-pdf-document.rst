@@ -30,7 +30,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :return: `PDFDocument`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -49,7 +49,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :return: `PDFDocument`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -65,7 +65,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :return: `Integer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -81,7 +81,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :arg lang: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -97,7 +97,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :return: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -113,7 +113,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
     :arg fileName: The name of the file to save to.
     :arg options: The options as key-value pairs.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -130,7 +130,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
     :arg options: The options as key-value pairs.
     :return: `Buffer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -144,7 +144,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -159,7 +159,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :return: `Integer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -172,7 +172,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :return: `Integer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -184,7 +184,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :return: `Integer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -196,7 +196,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -211,7 +211,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -223,7 +223,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -239,7 +239,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
     :arg prefix: `String`.
     :arg start: `Integer` The ordinal with which to start numbering.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -252,7 +252,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :arg index: `Integer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -265,7 +265,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :return: `PDFObject` The trailer dictionary.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -278,7 +278,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
     :return: `Integer` Object count.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -291,7 +291,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :return: The new object.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -304,7 +304,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :arg obj: The object to delete.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -322,7 +322,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     Enable interpretation of document :title:`JavaScript` actions.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -334,7 +334,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     Disable interpretation of document :title:`JavaScript` actions.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -348,7 +348,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -367,7 +367,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
         At present this listener will only trigger when a document :title:`JavaScript` action triggers an alert.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -382,7 +382,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     Activate journalling for the document.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -394,7 +394,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :return: `Object` :ref:`PDF Journal Object<mutool_run_js_api_pdf_journal_object>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -407,7 +407,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
     :arg length: `String` The name of the operation.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -417,7 +417,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     Begin an implicit journal operation. Implicit operations are operations that happen due to other operations, e.g. updating an annotation.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -428,7 +428,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     End a previously started normal or implicit operation. After this it can be undone/redone using the methods below.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -440,7 +440,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -452,7 +452,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -462,7 +462,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     Move backwards in the undo history. Changes to the document after this throws away all subsequent history.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -472,7 +472,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
     Move forwards in the undo history.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -515,7 +515,7 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :return: `Object`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -531,7 +531,7 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :return: `Object`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -548,7 +548,7 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :return: `Object`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -561,7 +561,7 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :return: `PDFObject`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -579,7 +579,7 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :return: `PDFObject`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -596,7 +596,7 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :return: `PDFObject`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -612,7 +612,7 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :return: `PDFObject`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -627,7 +627,7 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :return: `PDFObject`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -642,7 +642,7 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :return: `PDFObject`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -659,7 +659,7 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :return: `PDFObject`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -675,7 +675,7 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :return: `PDFObject`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -691,7 +691,7 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :return: `PDFObject`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -707,7 +707,7 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :return: `PDFObject`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -722,7 +722,7 @@ Some dictionaries in :title:`PDF` also have attached binary data. These are call
 
     :return: `PDFObject`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -742,7 +742,7 @@ All page objects are structured into a page tree, which defines the order the pa
 
     :return: `Integer` Page number.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -757,7 +757,7 @@ All page objects are structured into a page tree, which defines the order the pa
 
     :return: `PDFPage`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -771,7 +771,7 @@ All page objects are structured into a page tree, which defines the order the pa
 
     :return: `PDFObject`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -788,7 +788,7 @@ All page objects are structured into a page tree, which defines the order the pa
 
     :return: `Integer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -801,7 +801,7 @@ All page objects are structured into a page tree, which defines the order the pa
 
     :arg number: The page number, the first page is number zero.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -820,7 +820,7 @@ All page objects are structured into a page tree, which defines the order the pa
     :arg page: The `PDFPage` to insert.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -841,7 +841,7 @@ All page objects are structured into a page tree, which defines the order the pa
     :return: `PDFPage`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -852,7 +852,7 @@ All page objects are structured into a page tree, which defines the order the pa
     |tor_todo| WASM: //TypeError: doc.newNull is not a function
 
 
-    **Example**
+    |example_tag|
 
     |mutool_tag|
 
@@ -870,7 +870,7 @@ All page objects are structured into a page tree, which defines the order the pa
 
     :return: `PDFObject`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -890,7 +890,7 @@ All page objects are structured into a page tree, which defines the order the pa
 
     :return: `PDFObject`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -907,7 +907,7 @@ All page objects are structured into a page tree, which defines the order the pa
 
     :return: `PDFObject`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -925,7 +925,7 @@ All page objects are structured into a page tree, which defines the order the pa
     :return: `PDFObject`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -942,7 +942,7 @@ All page objects are structured into a page tree, which defines the order the pa
 
     :return: `Image`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -967,7 +967,7 @@ The following functions can be used to copy objects from one :title:`PDF` docume
 
     :arg object: Object to graft.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -985,7 +985,7 @@ The following functions can be used to copy objects from one :title:`PDF` docume
     :arg srcDoc: Source document.
     :arg srcPageNumber: Source page number.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -999,7 +999,7 @@ The following functions can be used to copy objects from one :title:`PDF` docume
 
     :return: `PDFGraftMap`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1036,7 +1036,7 @@ Embedded files in :title:`PDFs`
         After embedding a file into a :title:`PDF`, it can be connected to an annotation using :ref:`PDFAnnotation.setFilespec()<mutool_run_js_api_pdf_annotation_setFilespec>`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1059,7 +1059,7 @@ Embedded files in :title:`PDFs`
 
     :return: `Object` :ref:`Embedded File Object<mutool_run_js_api_pdf_document_embedded_file_object>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1074,7 +1074,7 @@ Embedded files in :title:`PDFs`
 
     :return: :ref:`Buffer<mutool_object_buffer>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -1092,7 +1092,7 @@ Embedded files in :title:`PDFs`
     :return: `Boolean`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

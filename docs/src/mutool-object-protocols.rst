@@ -139,7 +139,7 @@ The stroking state is a dictionary with keys for:
         Array of on/off dash lengths.
 
 
-**Example**
+|example_tag|
 
     `{dashes:[5,10], lineWidth:3, lineCap:'Round'}`
 
