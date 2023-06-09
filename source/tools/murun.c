@@ -6885,27 +6885,51 @@ static void ffi_PDFGraftMap_graftPage(js_State *J)
 		rethrow(J);
 }
 
-static void ffi_PDFObject_get(js_State *J)
+static void ffi_PDFObject_get_imp(js_State *J, int inheritable)
 {
 	fz_context *ctx = js_getcontext(J);
 	pdf_obj *obj = js_touserdata(J, 0, "pdf_obj");
+	pdf_obj *val = NULL;
 
 	if (js_isuserdata(J, 1, "pdf_obj")) {
 		pdf_obj *key = js_touserdata(J, 1, "pdf_obj");
-		pdf_obj *val = NULL;
 		fz_try(ctx)
-			val = pdf_dict_get(ctx, obj, key);
+			if (inheritable)
+				val = pdf_dict_get_inheritable(ctx, obj, key);
+			else
+				val = pdf_dict_get(ctx, obj, key);
 		fz_catch(ctx)
 			rethrow(J);
-		if (val)
-			ffi_pushobj(J, pdf_keep_obj(ctx, val));
-		else
-			js_pushnull(J);
+	} else if (inheritable) {
+		const char *key = js_tostring(J, 1);
+		fz_try(ctx)
+			if (inheritable)
+				val = pdf_dict_gets_inheritable(ctx, obj, key);
+			else
+				val = pdf_dict_gets(ctx, obj, key);
+		fz_catch(ctx)
+			rethrow(J);
 	} else {
 		const char *key = js_tostring(J, 1);
-		if (!ffi_pdf_obj_has(J, obj, key))
-			js_pushundefined(J);
+		fz_try(ctx)
+			val = pdf_dict_gets(ctx, obj, key);
+		fz_catch(ctx)
+			rethrow(J);
 	}
+	if (val)
+		ffi_pushobj(J, pdf_keep_obj(ctx, val));
+	else
+		js_pushundefined(J);
+}
+
+static void ffi_PDFObject_get(js_State *J)
+{
+	ffi_PDFObject_get_imp(J, 0);
+}
+
+static void ffi_PDFObject_getInheritable(js_State *J)
+{
+	ffi_PDFObject_get_imp(J, 1);
 }
 
 static void ffi_PDFObject_put(js_State *J)
@@ -9999,6 +10023,7 @@ int murun_main(int argc, char **argv)
 	js_getregistry(J, "Userdata");
 	js_newobjectx(J);
 	{
+		jsB_propfun(J, "PDFObject.getInheritable", ffi_PDFObject_getInheritable, 1);
 		jsB_propfun(J, "PDFObject.get", ffi_PDFObject_get, 1);
 		jsB_propfun(J, "PDFObject.put", ffi_PDFObject_put, 2);
 		jsB_propfun(J, "PDFObject.push", ffi_PDFObject_push, 1);
