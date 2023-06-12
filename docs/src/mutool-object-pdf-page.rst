@@ -18,6 +18,7 @@
 `PDFPage`
 ---------------
 
+Extends :ref:`Page<mutool_run_js_api_page>`.
 
 
 |instance_methods|

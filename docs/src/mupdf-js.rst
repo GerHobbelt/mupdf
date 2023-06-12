@@ -44,6 +44,40 @@ API's generally work for both environments, however if an API is specific to onl
 
 
 
+Class A-Z Index
+------------------
+
+- :ref:`Archive<mutool_run_js_api_object_archive>`
+- :ref:`Buffer<mutool_run_js_api_buffer>`
+- :ref:`ColorSpace<mutool_run_js_api_colorspace>`
+- :ref:`Device<mutool_run_js_api_device>`
+- :ref:`Document<mutool_run_js_api_document>`
+- :ref:`DocumentWriter<mutool_run_js_api_document_writer>`
+- :ref:`DisplayList<mutool_run_js_api_display_list>`
+- :ref:`DisplayListDevice<mutool_run_js_api_display_list_device>`
+- :ref:`DrawDevice<mutool_run_js_api_draw_device>`
+- :ref:`Image<mutool_run_js_api_image>`
+- :ref:`Font<mutool_run_js_api_font>`
+- :ref:`Link<mutool_run_js_api_link>`
+- :ref:`OutlineIterator<mutool_run_js_api_object_outline_iterator>`
+- :ref:`Page<mutool_run_js_api_page>`
+- :ref:`Path<mutool_run_js_api_path>`
+- :ref:`PDFAnnotation<mutool_run_js_api_pdf_annotation>`
+- :ref:`PDFDocument<mutool_run_js_api_pdf_document>`
+- :ref:`PDFGraftMap<mutool_run_js_api_pdf_graft_map>`
+- :ref:`PDFObject<mutool_run_js_api_pdf_object>`
+- :ref:`PDFPage<mutool_run_js_api_pdf_page>`
+- :ref:`PDFWidget<mutool_run_js_api_object_pdf_widget>`
+- :ref:`Pixmap<mutool_run_js_api_pixmap>`
+- :ref:`Story<mutool_run_js_api_object_story>`
+- :ref:`StructuredText<mutool_run_js_api_structured_text>`
+- :ref:`Text<mutool_run_js_api_text>`
+- :ref:`XML<mutool_run_js_api_object_xml>`
+
+
+
+
+
 Matrices and Rectangles
 ----------------------------
 

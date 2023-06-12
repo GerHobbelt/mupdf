@@ -14,7 +14,7 @@
 `Page`
 -------------
 
-
+The base class for a :ref:`PDF Page<mutool_run_js_api_pdf_page>`.
 
 
 |instance_methods|
@@ -129,7 +129,7 @@
 
 .. method:: toDisplayList(showExtras)
 
-    Record the contents on the page into a `DisplayList`_. If `showExtras` is *true* then the operation will include any page annotations and/or widgets.
+    Record the contents on the page into a :ref:`DisplayList<mutool_object_display_list>`. If `showExtras` is *true* then the operation will include any page annotations and/or widgets.
 
 
     :arg showExtras: `Boolean`.
