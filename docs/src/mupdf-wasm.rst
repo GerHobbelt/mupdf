@@ -27,11 +27,11 @@ Installing
 
    .. code-block:: javascript
 
-      const fs = require("fs")
-      const mupdf = require("mupdf")
+      const fs = require("fs");
+      const mupdf = require("mupdf");
       mupdf.ready.then(function () {
          console.log(mupdf);
-      })
+      });
 
 
 - Save this file as "test.js".
@@ -42,6 +42,23 @@ Installing
 
 
 - It should print the `mupdf` object along with details on the internal objects.
+
+
+Loading a Document
+----------------------
+
+The following :title:`JavaScript` sample demonstrates how to load a local document and then print out the page count. Ensure you have a valid :title:`PDF` for "my_document.pdf" file alongside this :title:`JavaScript` sample before trying it.
+
+
+   .. code-block:: javascript
+
+      const fs = require("fs");
+      const mupdf = require("mupdf");
+      mupdf.ready.then(function () {
+         var input = fs.readFileSync("my_document.pdf");
+         var doc = mupdf.Document.openDocument(input, "application/pdf");
+         console.log(doc.countPages());
+      })
 
 
 Trying the Viewer
