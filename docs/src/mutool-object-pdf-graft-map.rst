@@ -1,8 +1,11 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+----
 
 .. default-domain:: js
+
+.. include:: html_tags.rst
 
 .. _mutool_object_pdf_graft_map:
 
@@ -14,11 +17,21 @@
 `PDFGraftMap`
 ----------------
 
+|mutool_tag|
+
+|instance_methods|
+
 .. method:: graftObject(object)
 
     Use the graft map to copy objects, with the ability to remember previously copied objects.
 
     :arg object: Object to graft.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        graftMap.graftObject(obj);
 
 
 
@@ -30,3 +43,9 @@
     :arg dstPageNumber: Destination page number.
     :arg srcDoc: Source document.
     :arg srcPageNumber: Source page number.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        graftMap.graftPage(map, 0, doc, 0);

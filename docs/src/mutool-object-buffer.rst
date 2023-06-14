@@ -1,14 +1,15 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+----
+
 .. default-domain:: js
+
+.. include:: html_tags.rst
 
 .. _mutool_object_buffer:
 
 .. _mutool_run_js_api_buffer:
-
-
-
 
 
 `Buffer`
@@ -26,11 +27,11 @@
 
     :return: `Buffer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
-        var buffer = new Buffer();
+        var buffer = new mupdf.Buffer();
 
 
 .. method:: new Buffer(original)
@@ -43,8 +44,16 @@
 
     :return: `Buffer`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var buffer = new mupdf.Buffer(buffer);
+
 
 .. method:: readFile(fileName)
+
+    |mutool_tag|
 
     *Constructor method*.
 
@@ -54,29 +63,33 @@
 
     :return: `Buffer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
-        var buffer = readFile("my_file.pdf");
+        var buffer = mupdf.readFile("my_file.pdf");
 
-----
 
-**Instance properties**
+
+|instance_props|
 
 
 
 `length`
 
-   The number of bytes in the buffer. `Read-only`.
+    |mutool_tag|
+
+    The number of bytes in the buffer. `Read-only`.
 
 
 `[n]`
 
+    |mutool_tag|
+
     Read/write the byte at index 'n'. Will throw exceptions on out of bounds accesses.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -85,9 +98,22 @@
 
 
 
-----
+|instance_methods|
 
-**Instance methods**
+.. method:: getLength()
+
+    |wasm_tag|
+
+    Returns the number of bytes in the buffer. `Read-only`.
+
+    :return: `Integer`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var length = buffer.getLength();
+
 
 .. method:: writeByte(b)
 
@@ -95,12 +121,42 @@
 
     :arg b: The byte value.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        buffer.writeByte("byte_value");
+
+
+.. method:: readByte(at)
+
+    |wasm_tag|
+
+    Read the byte at the supplied index.
+
+    :arg at: `Integer`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        buffer.readByte(0);
+
 
 .. method:: writeRune(c)
+
+    |mutool_tag|
 
     Encode a unicode character as UTF-8 and append to the end of the buffer.
 
     :arg c: The character value.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        buffer.writeRune("a");
+
 
 .. method:: writeLine(...)
 
@@ -108,31 +164,97 @@
 
     :arg ...: List of arguments.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        buffer.writeLine("a line");
+
+
 .. method:: write(...)
 
     Append arguments to the end of the buffer, separated by spaces.
 
     :arg ...: List of arguments.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        buffer.write("hello");
+
+
 .. method:: writeBuffer(data)
 
-    Append the contents of the 'data' buffer to the end of the buffer.
+    Append the contents of the `data` buffer to the end of the buffer.
 
     :arg data: Data buffer.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        buffer.writeBuffer(anotherBuffer);
 
 
 .. method:: slice(start end)
 
+    |mutool_tag|
+
     Create a new buffer containing a (subset of) the data in this buffer. Start and end are offsets from the beginning of this buffer, and if negative from the end of this buffer.
 
     :arg start: Start index.
-    :arg start: End index.
+    :arg end: End index.
 
     :return: `Buffer`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var newBuffer = buffer.slice(0,10);
 
 
 .. method:: save(fileName)
 
+    |mutool_tag|
+
     Write the contents of the buffer to a file.
 
     :arg fileName: Filename to save to.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        buffer.save("my_buffer_filename");
+
+
+.. method:: asUint8Array()
+
+    |wasm_tag|
+
+    Returns the buffer as a `Uint8Array`.
+
+    :return: `Uint8Array`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var arr = buffer.asUint8Array();
+
+
+.. method:: asString()
+
+    |wasm_tag|
+
+    Returns the buffer as a `String`.
+
+    :return: `String`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var str = buffer.asString();
