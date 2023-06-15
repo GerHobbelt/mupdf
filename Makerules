@@ -46,7 +46,7 @@ endif
 
 ifeq ($(OS),MACOS)
   LDREMOVEUNREACH := -Wl,-dead_strip
-  SO := so
+  SO := dylib
 else
   LDREMOVEUNREACH := -Wl,--gc-sections
   ifeq ($(OS),MINGW)
@@ -84,7 +84,7 @@ ifeq ($(build),debug)
   LDFLAGS += -g
 else ifeq ($(build),release)
   CFLAGS += -pipe -O2 -DNDEBUG
-  LDFLAGS += $(LDREMOVEUNREACH)
+  LDFLAGS += $(LDREMOVEUNREACH) -Wl,-s
 else ifeq ($(build),small)
   CFLAGS += -pipe -Os -DNDEBUG
   LDFLAGS += $(LDREMOVEUNREACH) -Wl,-s
