@@ -2210,6 +2210,7 @@ def link_l_flags( sos, ld_origin=None):
     so that libraries will be searched for next to each other. This can be
     disabled by setting ld_origin to false.
     '''
+    darwin = (platform.system() == 'Darwin')
     dirs = set()
     names = []
     if isinstance( sos, str):
@@ -2224,8 +2225,7 @@ def link_l_flags( sos, ld_origin=None):
         if name.endswith( '.so'):
             dirs.add( dir_)
             names.append( f'-l {name[3:-3]}')
-        elif name.endswith( '.dylib'):
-            # macos.
+        elif darwin and name.endswith( '.dylib'):
             dirs.add( dir_)
             names.append( f'-l {name[3:-6]}')
         elif name.endswith( '.a'):
@@ -2243,7 +2243,7 @@ def link_l_flags( sos, ld_origin=None):
         if platform.system() != 'Windows':
             ld_origin = True
     if ld_origin:
-        if platform.system() == 'Darwin':
+        if darwin:
             # As well as this link flag, it is also necessary to use
             # `install_name_tool -change` to rename internal names to
             # `@rpath/<leafname>`.
