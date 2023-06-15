@@ -3121,6 +3121,8 @@ cleanup_destruction(void)
 
 	fz_flush_warnings(ctx);
 
+	console_fin();
+
 	fz_drop_stext_page(ctx, page_text);
 	page_text = NULL;
 	if (search_needle)
