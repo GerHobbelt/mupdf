@@ -46,7 +46,7 @@ endif
 
 ifeq ($(OS),MACOS)
   LDREMOVEUNREACH := -Wl,-dead_strip
-  SO := dylib
+  SO := so
 else
   LDREMOVEUNREACH := -Wl,--gc-sections
   ifeq ($(OS),MINGW)
@@ -70,7 +70,7 @@ ifeq ($(shared),yes)
   build_prefix += shared-
   LIB_CFLAGS = -fPIC
   ifeq ($(OS),MACOS)
-    LIB_LDFLAGS = -dynamiclib
+    LIB_LDFLAGS = -shared -Wl,-rpath,@loader_path/.
   else
     LIB_LDFLAGS = -shared
   endif
@@ -84,7 +84,7 @@ ifeq ($(build),debug)
   LDFLAGS += -g
 else ifeq ($(build),release)
   CFLAGS += -pipe -O2 -DNDEBUG
-  LDFLAGS += $(LDREMOVEUNREACH) -Wl,-s
+  LDFLAGS += $(LDREMOVEUNREACH)
 else ifeq ($(build),small)
   CFLAGS += -pipe -Os -DNDEBUG
   LDFLAGS += $(LDREMOVEUNREACH) -Wl,-s
