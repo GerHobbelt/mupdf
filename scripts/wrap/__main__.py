@@ -1204,10 +1204,12 @@ def _get_m_command( build_dirs):
                 in_prefix = False
             elif flag == 'shared':
                 make_args += ' shared=yes'
-                if 0 and state.state_.macos:
-                    suffix = '.dylib'
-                else:
-                    suffix = '.so'
+                # `suffix` determines the name of libraries that we create, for
+                # example libmupdfcpp.so, but not libmupdf.so itself - this is
+                # created by `Makefile` etc. We do specify libmupdf.so when
+                # linking but the suffix is unused and on macos we will use
+                # libmupdf.dylib if present.
+                suffix = '.so'
                 build_prefix += f'{flag}-'
                 in_prefix = False
             else:
