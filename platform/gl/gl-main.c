@@ -725,6 +725,8 @@ static void info_dialog(void)
 	ui_dialog_end();
 }
 
+static void cleanup_destruction(void);
+
 static char error_message[256];
 static void error_dialog(void)
 {
@@ -733,7 +735,10 @@ static void error_dialog(void)
 	ui_label("%C %s", 0x1f4a3, error_message); /* BOMB */
 	ui_layout(B, NONE, S, ui.padsize, ui.padsize);
 	if (ui_button("Quit") || ui.key == KEY_ENTER || ui.key == KEY_ESCAPE || ui.key == 'q')
+	{
+		cleanup_destruction();
 		glutLeaveMainLoop();
+	}
 	ui_dialog_end();
 }
 void ui_show_error_dialog(const char *fmt, ...)
@@ -797,7 +802,10 @@ static void quit_dialog(void)
 			do_save_pdf_file();
 		ui_spacer();
 		if (ui_button("Discard") || ui.key == 'q')
+		{
+			cleanup_destruction();
 			glutLeaveMainLoop();
+		}
 		ui_layout(L, NONE, S, 0, 0);
 		if (ui_button("Cancel") || ui.key == KEY_ESCAPE)
 			ui.dialog = NULL;
@@ -3102,6 +3110,12 @@ static void cleanup(void)
 
 	ui_finish();
 
+	cleanup_destruction();
+}
+
+static void
+cleanup_destruction(void)
+{
 	fz_drop_pixmap(ctx, page_contents);
 	page_contents = NULL;
 #ifndef NDEBUG
@@ -3113,8 +3127,14 @@ static void cleanup(void)
 
 	fz_flush_warnings(ctx);
 
-	fz_drop_output(ctx, trace_file);
 	fz_drop_stext_page(ctx, page_text);
+	page_text = NULL;
+	if (search_needle)
+	{
+		fz_free(ctx, search_needle);
+		search_needle = NULL;
+	}
+	fz_drop_output(ctx, trace_file);
 	fz_drop_separations(ctx, seps);
 	fz_drop_link(ctx, links);
 	fz_drop_page(ctx, fzpage);
