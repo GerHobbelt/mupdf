@@ -1493,7 +1493,7 @@ def build( build_dirs, swig_command, args, vs_upgrade):
                         cpp_files_text += ' ' + os.path.relpath(i)
                     if 'shared' in dir_so_flags:
                         libmupdfcpp = f'{build_dirs.dir_so}/libmupdfcpp.so'
-                        libmupdf = f'{build_dirs.dir_so}/libmupdf.so'
+                        libmupdf = f'{build_dirs.dir_so}/libmupdf{suffix}'
                         command = ( textwrap.dedent(
                                 f'''
                                 {compiler}
@@ -1763,13 +1763,10 @@ def build( build_dirs, swig_command, args, vs_upgrade):
                         else:
                             raise Exception( f'Cannot find `python-config`, tried: {python_configs}')
                         jlib.log( 'Using {python_config=}')
-                        # --cflags gives things like
-                        # -Wno-unused-result -g etc, so we just use
-                        # --includes.
+                        # `--cflags` gives things like `-Wno-unused-result -g`
+                        # etc, -so we just use `--includes`.
                         flags_compile = jlib.system( f'{python_config} --includes', out='return', verbose=1).replace('\n', ' ')
                         flags_link = jlib.system( f'{python_config} --ldflags', out='return', verbose=1).replace('\n', ' ')
-                        #include3 = jlib.system( f'{python_config} --includes --ldflags', out='return', verbose=1)
-                        #include3 = include3.replace( '\n', ' ')
                         if state.state_.macos:
                             # We need this to avoid numerous errors like:
                             #
@@ -1789,7 +1786,7 @@ def build( build_dirs, swig_command, args, vs_upgrade):
 
                     dir_so_flags = os.path.basename( build_dirs.dir_so).split( '-')
                     if 'shared' in dir_so_flags:
-                        libmupdf        = f'{build_dirs.dir_so}/libmupdf.so'
+                        libmupdf        = f'{build_dirs.dir_so}/libmupdf{suffix}'
                         libmupdfthird   = f''
                         libmupdfcpp     = f'{build_dirs.dir_so}/libmupdfcpp.so'
                     elif 'fpic' in dir_so_flags:
@@ -1878,7 +1875,7 @@ def build( build_dirs, swig_command, args, vs_upgrade):
                     sos = []
                     sos.append( f'{build_dirs.dir_so}/libmupdfcpp.so')
                     if os.path.basename( build_dirs.dir_so).startswith( 'shared-'):
-                        sos.append( f'{build_dirs.dir_so}/libmupdf.so')
+                        sos.append( f'{build_dirs.dir_so}/libmupdf{suffix}')
                     command = ( textwrap.dedent(
                             f'''
                             {compiler}
