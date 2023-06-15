@@ -1409,7 +1409,7 @@ def command_env_text( command, env_extra):
 
 def system(
         command,
-        verbose=None,
+        verbose=True,
         raise_errors=True,
         out=sys.stdout,
         prefix=None,
@@ -1841,7 +1841,7 @@ def fs_update( text, filename, return_different=False):
         fs_rename( filename_temp, filename)
 
 
-def fs_find_in_paths( name, paths=None):
+def fs_find_in_paths( name, paths=None, verbose=False):
     '''
     Looks for `name` in paths and returns complete path. `paths` is list/tuple
     or `os.pathsep`-separated string; if `None` we use `$PATH`. If `name`
@@ -1851,12 +1851,22 @@ def fs_find_in_paths( name, paths=None):
         return name if os.path.isfile( name) else None
     if paths is None:
         paths = os.environ.get( 'PATH', '')
+        if verbose:
+            log('From os.environ["PATH"]: {paths=}')
     if isinstance( paths, str):
         paths = paths.split( os.pathsep)
+        if verbose:
+            log('After split: {paths=}')
     for path in paths:
         p = os.path.join( path, name)
+        if verbose:
+            log('Checking {p=}')
         if os.path.isfile( p):
+            if verbose:
+                log('Returning because is file: {p!r}')
             return p
+    if verbose:
+        log('Returning None because not found: {name!r}')
 
 
 def fs_mtime( filename, default=0):
