@@ -70,7 +70,7 @@ ifeq ($(shared),yes)
   build_prefix += shared-
   LIB_CFLAGS = -fPIC
   ifeq ($(OS),MACOS)
-    LIB_LDFLAGS = -dynamiclib -Wl,-rpath,@loader_path/.
+    LIB_LDFLAGS = -dynamiclib
   else
     LIB_LDFLAGS = -shared
   endif
