@@ -2224,6 +2224,10 @@ def link_l_flags( sos, ld_origin=None):
         if name.endswith( '.so'):
             dirs.add( dir_)
             names.append( f'-l {name[3:-3]}')
+        elif name.endswith( '.dylib'):
+            # macos.
+            dirs.add( dir_)
+            names.append( f'-l {name[3:-6]}')
         elif name.endswith( '.a'):
             names.append( so)
         else:
