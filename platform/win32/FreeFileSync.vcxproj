@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{00811970-815B-4F64-BC9D-2190782FCF8A}</ProjectGuid>
+    <RootNamespace>FreeFileSync</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FREEFILESYNC;FREEFILESYNC_STATICLIB;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FREEFILESYNC;FREEFILESYNC_STATICLIB;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FREEFILESYNC;FREEFILESYNC_STATICLIB;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FREEFILESYNC;FREEFILESYNC_STATICLIB;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/RealTimeSync/application.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/RealTimeSync/config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/RealTimeSync/folder_selector2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/RealTimeSync/gui_generated.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/RealTimeSync/main_dlg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/RealTimeSync/monitor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/RealTimeSync/tray_menu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/afs/abstract.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/afs/concrete.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/afs/ftp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/afs/gdrive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/afs/init_curl_libssh2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/afs/native.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/afs/sftp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/application.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/algorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/binary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/comparison.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/db_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/dir_lock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/file_hierarchy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/icon_loader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/parallel_scan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/path_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/speed_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/structures.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/synchronization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/versioning.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base_tools.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ffs_paths.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/icon_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/localization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/log_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/status_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/abstract_folder_picker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/batch_config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/batch_status_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/cfg_grid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/command_box.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/file_grid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/file_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/folder_history_box.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/folder_selector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/gui_generated.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/gui_status_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/log_panel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/main_dlg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/progress_indicator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/search_grid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/small_dlgs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/sync_cfg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/tray_icon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/tree_grid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/triple_splitter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/version_check.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/libcurl/curl_wrap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/wx+/file_drop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/wx+/graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/wx+/grid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/wx+/image_resources.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/wx+/image_tools.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/wx+/popup_dlg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/wx+/popup_dlg_generated.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/wx+/taskbar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/wx+/tooltip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/xBRZ/src/xbrz.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/zen/argon2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/zen/dir_watcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/zen/file_access.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/zen/file_io.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/zen/file_path.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/zen/file_traverser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/zen/format_unit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/zen/http.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/zen/legacy_compiler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/zen/open_ssl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/zen/process_exec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/zen/process_priority.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/zen/recycler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/zen/resolve_path.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/zen/shutdown.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/zen/sys_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/zen/sys_info.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/zen/sys_version.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/zen/thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/zen/zlib_wrap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/FreeFileSync/zen/zstring.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/RealTimeSync/app_icon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/RealTimeSync/application.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/RealTimeSync/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/RealTimeSync/folder_selector2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/RealTimeSync/gui_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/RealTimeSync/main_dlg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/RealTimeSync/monitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/RealTimeSync/tray_menu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/afs/abstract.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/afs/abstract_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/afs/concrete.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/afs/ftp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/afs/ftp_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/afs/gdrive.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/afs/init_curl_libssh2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/afs/native.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/afs/sftp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/application.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/algorithm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/binary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/cmp_filetime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/comparison.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/db_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/dir_exist_async.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/dir_lock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/file_hierarchy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/icon_loader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/lock_holder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/norm_filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/parallel_scan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/path_filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/process_callback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/soft_filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/speed_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/status_handler_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/structures.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/synchronization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base/versioning.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/base_tools.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ffs_paths.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/icon_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/localization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/log_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/parse_lng.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/parse_plural.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/return_codes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/status_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/abstract_folder_picker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/app_icon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/batch_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/batch_status_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/cfg_grid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/command_box.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/file_grid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/file_grid_attr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/file_view.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/folder_history_box.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/folder_pair.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/folder_selector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/gui_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/gui_status_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/log_panel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/main_dlg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/progress_indicator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/search_grid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/small_dlgs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/sync_cfg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/tray_icon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/tree_grid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/tree_grid_attr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/triple_splitter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/ui/version_check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Source/version/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/libcurl/curl_wrap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/libssh2/libssh2_wrap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/wx+/app_main.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/wx+/async_task.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/wx+/bitmap_button.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/wx+/choice_enum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/wx+/context_menu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/wx+/dc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/wx+/file_drop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/wx+/graph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/wx+/grid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/wx+/image_holder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/wx+/image_resources.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/wx+/image_tools.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/wx+/no_flicker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/wx+/popup_dlg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/wx+/popup_dlg_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/wx+/rtl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/wx+/std_button_layout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/wx+/taskbar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/wx+/toggle_button.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/wx+/tooltip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/wx+/window_layout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/wx+/window_tools.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/xBRZ/src/xbrz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/xBRZ/src/xbrz_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/xBRZ/src/xbrz_tools.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/argon2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/base64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/basic_math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/build_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/crc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/dir_watcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/error_log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/file_access.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/file_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/file_io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/file_path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/file_traverser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/format_unit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/globals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/guid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/http.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/i18n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/legacy_compiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/open_ssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/perf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/process_exec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/process_priority.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/recycler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/resolve_path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/ring_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/scope_guard.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/serialize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/shutdown.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/socket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/stl_tools.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/stream_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/string_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/string_tools.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/string_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/symlink_target.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/sys_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/sys_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/sys_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/type_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/utf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/warn_static.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/zlib_wrap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zen/zstring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zenXml/zenxml/cvrt_struc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zenXml/zenxml/cvrt_text.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zenXml/zenxml/dom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zenXml/zenxml/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/FreeFileSync/zenXml/zenxml/xml.h" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/FreeFileSync/FreeFileSync/Build/Resources/Gtk2Styles.rc" />
+    <Text Include="../../thirdparty/owemdjee/FreeFileSync/Bugs.txt" />
+    <Text Include="../../thirdparty/owemdjee/FreeFileSync/Changelog.txt" />
+    <Text Include="../../thirdparty/owemdjee/FreeFileSync/License.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>

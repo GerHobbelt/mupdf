@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 /*
  * mutool -- swiss army knife of pdf manipulation tools
@@ -28,6 +28,7 @@
 #include "mupdf/mutool.h"
 #include "mupdf/helpers/mu-threads.h"
 #include "mupdf/helpers/jmemcust.h"
+#include "mupdf/helpers/debugheap.h"
 
 #define BUILD_MONOLITHIC 1
 #include "../../thirdparty/tesseract/include/tesseract/capi_training_tools.h"
@@ -50,7 +51,9 @@
 #include "../../thirdparty/owemdjee/BLAKE3/c/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libarchive/contrib/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/tesslinesplit/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/tvision/include/tvision/monolithic_examples.h"
 #include "../../thirdparty/jbig2dec/monolithic_examples.h"
+#include "../../thirdparty/leptonica/prog/monolithic_examples.h"
 #include "../../source/fitz/tessocr.h"
 #undef BUILD_MONOLITHIC
 
@@ -70,7 +73,7 @@ static int report_version(int argc, const char** argv);
 typedef int tool_f(void);
 typedef int tool_fa(int argc, const char** argv);
 
-static struct {
+static struct tool_spec {
 	union
 	{
 		tool_f* f;
@@ -79,6 +82,7 @@ static struct {
 
 	const char *name;
     const char *desc;
+	int keep_path;              // 1: copy the argv[0] path into the tool's argv[0]; i.e. the tool needs the full path to the executable.
 } tools[] = {
 #if FZ_ENABLE_PDF
 	{ {.fa = pdfclean_main }, "clean", "rewrite pdf file" },
@@ -212,6 +216,309 @@ static struct {
 #endif
 
 #if defined(MUTOOL_EX)
+	{ {.fa = lept_adaptmap_dark_main }, "lept_adaptmap_dark", "leptonica adaptmap_dark test/tool" },
+	{ {.fa = lept_adaptmap_reg_main }, "lept_adaptmap", "leptonica adaptmap_reg test/tool" },
+	{ {.fa = lept_adaptnorm_reg_main }, "lept_adaptnorm", "leptonica adaptnorm_reg test/tool" },
+	{ {.fa = lept_affine_reg_main }, "lept_affine", "leptonica affine_reg test/tool" },
+	{ {.fa = lept_alltests_reg_main }, "lept_alltests", "leptonica alltests_reg test/tool", 1 },
+	{ {.fa = lept_alphaops_reg_main }, "lept_alphaops", "leptonica alphaops_reg test/tool" },
+	{ {.fa = lept_alphaxform_reg_main }, "lept_alphaxform", "leptonica alphaxform_reg test/tool" },
+	{ {.fa = lept_arabic_lines_main }, "lept_arabic_lines", "leptonica arabic_lines test/tool" },
+	{ {.fa = lept_arithtest_main }, "lept_arithtest", "leptonica arithtest test/tool" },
+	{ {.fa = lept_autogentest1_main }, "lept_autogentest1", "leptonica autogentest1 test/tool" },
+	{ {.fa = lept_autogentest2_main }, "lept_autogentest2", "leptonica autogentest2 test/tool" },
+	{ {.fa = lept_barcodetest_main }, "lept_barcodetest", "leptonica barcodetest test/tool" },
+	{ {.fa = lept_baseline_reg_main }, "lept_baseline", "leptonica baseline_reg test/tool" },
+	{ {.fa = lept_bilateral1_reg_main }, "lept_bilateral1", "leptonica bilateral1_reg test/tool" },
+	{ {.fa = lept_bilateral2_reg_main }, "lept_bilateral2", "leptonica bilateral2_reg test/tool" },
+	{ {.fa = lept_bilinear_reg_main }, "lept_bilinear", "leptonica bilinear_reg test/tool" },
+	{ {.fa = lept_binarize_reg_main }, "lept_binarize", "leptonica binarize_reg test/tool" },
+	{ {.fa = lept_binarize_set_main }, "lept_binarize_set", "leptonica binarize_set test/tool" },
+	{ {.fa = lept_binarizefiles_main }, "lept_binarizefiles", "leptonica binarizefiles test/tool" },
+	{ {.fa = lept_bincompare_main }, "lept_bincompare", "leptonica bincompare test/tool" },
+	{ {.fa = lept_binmorph1_reg_main }, "lept_binmorph1", "leptonica binmorph1_reg test/tool" },
+	{ {.fa = lept_binmorph2_reg_main }, "lept_binmorph2", "leptonica binmorph2_reg test/tool" },
+	{ {.fa = lept_binmorph3_reg_main }, "lept_binmorph3", "leptonica binmorph3_reg test/tool" },
+	{ {.fa = lept_binmorph4_reg_main }, "lept_binmorph4", "leptonica binmorph4_reg test/tool" },
+	{ {.fa = lept_binmorph5_reg_main }, "lept_binmorph5", "leptonica binmorph5_reg test/tool" },
+	{ {.fa = lept_binmorph6_reg_main }, "lept_binmorph6", "leptonica binmorph6_reg test/tool" },
+	{ {.fa = lept_blackwhite_reg_main }, "lept_blackwhite", "leptonica blackwhite_reg test/tool" },
+	{ {.fa = lept_blend1_reg_main }, "lept_blend1", "leptonica blend1_reg test/tool" },
+	{ {.fa = lept_blend2_reg_main }, "lept_blend2", "leptonica blend2_reg test/tool" },
+	{ {.fa = lept_blend3_reg_main }, "lept_blend3", "leptonica blend3_reg test/tool" },
+	{ {.fa = lept_blend4_reg_main }, "lept_blend4", "leptonica blend4_reg test/tool" },
+	{ {.fa = lept_blend5_reg_main }, "lept_blend5", "leptonica blend5_reg test/tool" },
+	{ {.fa = lept_blendcmaptest_main }, "lept_blendcmaptest", "leptonica blendcmaptest test/tool" },
+	{ {.fa = lept_boxa1_reg_main }, "lept_boxa1", "leptonica boxa1_reg test/tool" },
+	{ {.fa = lept_boxa2_reg_main }, "lept_boxa2", "leptonica boxa2_reg test/tool" },
+	{ {.fa = lept_boxa3_reg_main }, "lept_boxa3", "leptonica boxa3_reg test/tool" },
+	{ {.fa = lept_boxa4_reg_main }, "lept_boxa4", "leptonica boxa4_reg test/tool" },
+	{ {.fa = lept_buffertest_main }, "lept_buffertest", "leptonica buffertest test/tool" },
+	{ {.fa = lept_bytea_reg_main }, "lept_bytea", "leptonica bytea_reg test/tool" },
+	{ {.fa = lept_ccbord_reg_main }, "lept_ccbord", "leptonica ccbord_reg test/tool" },
+	{ {.fa = lept_ccbordtest_main }, "lept_ccbordtest", "leptonica ccbordtest test/tool" },
+	{ {.fa = lept_cctest1_main }, "lept_cctest1", "leptonica cctest1 test/tool" },
+	{ {.fa = lept_ccthin1_reg_main }, "lept_ccthin1", "leptonica ccthin1_reg test/tool" },
+	{ {.fa = lept_ccthin2_reg_main }, "lept_ccthin2", "leptonica ccthin2_reg test/tool" },
+	{ {.fa = lept_checkerboard_reg_main }, "lept_checkerboard", "leptonica checkerboard_reg test/tool" },
+	{ {.fa = lept_circle_reg_main }, "lept_circle", "leptonica circle_reg test/tool" },
+	{ {.fa = lept_cleanpdf_main }, "lept_cleanpdf", "leptonica cleanpdf test/tool" },
+	{ {.fa = lept_cmapquant_reg_main }, "lept_cmapquant", "leptonica cmapquant_reg test/tool" },
+	{ {.fa = lept_colorcontent_reg_main }, "lept_colorcontent", "leptonica colorcontent_reg test/tool" },
+	{ {.fa = lept_colorfill_reg_main }, "lept_colorfill", "leptonica colorfill_reg test/tool" },
+	{ {.fa = lept_coloring_reg_main }, "lept_coloring", "leptonica coloring_reg test/tool" },
+	{ {.fa = lept_colorize_reg_main }, "lept_colorize", "leptonica colorize_reg test/tool" },
+	{ {.fa = lept_colormask_reg_main }, "lept_colormask", "leptonica colormask_reg test/tool" },
+	{ {.fa = lept_colormorph_reg_main }, "lept_colormorph", "leptonica colormorph_reg test/tool" },
+	{ {.fa = lept_colorquant_reg_main }, "lept_colorquant", "leptonica colorquant_reg test/tool" },
+	{ {.fa = lept_colorseg_reg_main }, "lept_colorseg", "leptonica colorseg_reg test/tool" },
+	{ {.fa = lept_colorsegtest_main }, "lept_colorsegtest", "leptonica colorsegtest test/tool" },
+	{ {.fa = lept_colorspace_reg_main }, "lept_colorspace", "leptonica colorspace_reg test/tool" },
+	{ {.fa = lept_compare_reg_main }, "lept_compare", "leptonica compare_reg test/tool" },
+	{ {.fa = lept_comparepages_main }, "lept_comparepages", "leptonica comparepages test/tool" },
+	{ {.fa = lept_comparepixa_main }, "lept_comparepixa", "leptonica comparepixa test/tool" },
+	{ {.fa = lept_comparetest_main }, "lept_comparetest", "leptonica comparetest test/tool" },
+	{ {.fa = lept_compfilter_reg_main }, "lept_compfilter", "leptonica compfilter_reg test/tool" },
+	{ {.fa = lept_concatpdf_main }, "lept_concatpdf", "leptonica concatpdf test/tool" },
+	{ {.fa = lept_conncomp_reg_main }, "lept_conncomp", "leptonica conncomp_reg test/tool" },
+	{ {.fa = lept_contrasttest_main }, "lept_contrasttest", "leptonica contrasttest test/tool" },
+	{ {.fa = lept_conversion_reg_main }, "lept_conversion", "leptonica conversion_reg test/tool" },
+	{ {.fa = lept_convertfilestopdf_main }, "lept_convertfilestopdf", "leptonica convertfilestopdf test/tool" },
+	{ {.fa = lept_convertfilestops_main }, "lept_convertfilestops", "leptonica convertfilestops test/tool" },
+	{ {.fa = lept_convertformat_main }, "lept_convertformat", "leptonica convertformat test/tool" },
+	{ {.fa = lept_convertsegfilestopdf_main }, "lept_convertsegfilestopdf", "leptonica convertsegfilestopdf test/tool" },
+	{ {.fa = lept_convertsegfilestops_main }, "lept_convertsegfilestops", "leptonica convertsegfilestops test/tool" },
+	{ {.fa = lept_converttogray_main }, "lept_converttogray", "leptonica converttogray test/tool" },
+	{ {.fa = lept_converttopdf_main }, "lept_converttopdf", "leptonica converttopdf test/tool" },
+	{ {.fa = lept_converttops_main }, "lept_converttops", "leptonica converttops test/tool" },
+	{ {.fa = lept_convolve_reg_main }, "lept_convolve", "leptonica convolve_reg test/tool" },
+	{ {.fa = lept_cornertest_main }, "lept_cornertest", "leptonica cornertest test/tool" },
+	{ {.fa = lept_corrupttest_main }, "lept_corrupttest", "leptonica corrupttest test/tool" },
+	{ {.fa = lept_crop_reg_main }, "lept_crop", "leptonica crop_reg test/tool" },
+	{ {.fa = lept_croptext_main }, "lept_croptext", "leptonica croptext test/tool" },
+	{ {.fa = lept_custom_log_plot_test_main }, "lept_custom_log_plot_test", "leptonica custom log+plot output test" },
+	{ {.fa = lept_deskew_it_main }, "lept_deskew_it", "leptonica deskew_it test/tool" },
+	{ {.fa = lept_dewarp_reg_main }, "lept_dewarp", "leptonica dewarp_reg test/tool" },
+	{ {.fa = lept_dewarprules_main }, "lept_dewarprules", "leptonica dewarprules test/tool" },
+	{ {.fa = lept_dewarptest1_main }, "lept_dewarptest1", "leptonica dewarptest1 test/tool" },
+	{ {.fa = lept_dewarptest2_main }, "lept_dewarptest2", "leptonica dewarptest2 test/tool" },
+	{ {.fa = lept_dewarptest3_main }, "lept_dewarptest3", "leptonica dewarptest3 test/tool" },
+	{ {.fa = lept_dewarptest4_main }, "lept_dewarptest4", "leptonica dewarptest4 test/tool" },
+	{ {.fa = lept_dewarptest5_main }, "lept_dewarptest5", "leptonica dewarptest5 test/tool" },
+	{ {.fa = lept_digitprep1_main }, "lept_digitprep1", "leptonica digitprep1 test/tool" },
+	{ {.fa = lept_displayboxa_main }, "lept_displayboxa", "leptonica displayboxa test/tool" },
+	{ {.fa = lept_displayboxes_on_pixa_main }, "lept_displayboxes_on_pixa", "leptonica displayboxes_on_pixa test/tool" },
+	{ {.fa = lept_displaypix_main }, "lept_displaypix", "leptonica displaypix test/tool" },
+	{ {.fa = lept_displaypixa_main }, "lept_displaypixa", "leptonica displaypixa test/tool" },
+	{ {.fa = lept_distance_reg_main }, "lept_distance", "leptonica distance_reg test/tool" },
+	{ {.fa = lept_dither_reg_main }, "lept_dither", "leptonica dither_reg test/tool" },
+	{ {.fa = lept_dna_reg_main }, "lept_dna", "leptonica dna_reg test/tool" },
+	{ {.fa = lept_dwalineargen_main }, "lept_dwalineargen", "leptonica dwalineargen test/tool" },
+	{ {.fa = lept_dwamorph1_reg_main }, "lept_dwamorph1", "leptonica dwamorph1_reg test/tool" },
+	{ {.fa = lept_dwamorph2_reg_main }, "lept_dwamorph2", "leptonica dwamorph2_reg test/tool" },
+	{ {.fa = lept_edge_reg_main }, "lept_edge", "leptonica edge_reg test/tool" },
+	{ {.fa = lept_encoding_reg_main }, "lept_encoding", "leptonica encoding_reg test/tool" },
+	{ {.fa = lept_enhance_reg_main }, "lept_enhance", "leptonica enhance_reg test/tool" },
+	{ {.fa = lept_equal_reg_main }, "lept_equal", "leptonica equal_reg test/tool" },
+	{ {.fa = lept_expand_reg_main }, "lept_expand", "leptonica expand_reg test/tool" },
+	{ {.fa = lept_extrema_reg_main }, "lept_extrema", "leptonica extrema_reg test/tool" },
+	{ {.fa = lept_falsecolor_reg_main }, "lept_falsecolor", "leptonica falsecolor_reg test/tool" },
+	{ {.fa = lept_fcombautogen_main }, "lept_fcombautogen", "leptonica fcombautogen test/tool" },
+	{ {.fa = lept_fhmtauto_reg_main }, "lept_fhmtauto", "leptonica fhmtauto_reg test/tool" },
+	{ {.fa = lept_fhmtautogen_main }, "lept_fhmtautogen", "leptonica fhmtautogen test/tool" },
+	{ {.fa = lept_fileinfo_main }, "lept_fileinfo", "leptonica fileinfo test/tool" },
+	{ {.fa = lept_files_reg_main }, "lept_files", "leptonica files_reg test/tool" },
+	{ {.fa = lept_find_colorregions_main }, "lept_find_colorregions", "leptonica find_colorregions test/tool" },
+	{ {.fa = lept_findbinding_main }, "lept_findbinding", "leptonica findbinding test/tool" },
+	{ {.fa = lept_findcorners_reg_main }, "lept_findcorners", "leptonica findcorners_reg test/tool" },
+	{ {.fa = lept_findpattern1_main }, "lept_findpattern1", "leptonica findpattern1 test/tool" },
+	{ {.fa = lept_findpattern2_main }, "lept_findpattern2", "leptonica findpattern2 test/tool" },
+	{ {.fa = lept_findpattern3_main }, "lept_findpattern3", "leptonica findpattern3 test/tool" },
+	{ {.fa = lept_findpattern_reg_main }, "lept_findpattern", "leptonica findpattern_reg test/tool" },
+	{ {.fa = lept_flipdetect_reg_main }, "lept_flipdetect", "leptonica flipdetect_reg test/tool" },
+	{ {.fa = lept_fmorphauto_reg_main }, "lept_fmorphauto", "leptonica fmorphauto_reg test/tool" },
+	{ {.fa = lept_fmorphautogen_main }, "lept_fmorphautogen", "leptonica fmorphautogen test/tool" },
+	{ {.fa = lept_fpix1_reg_main }, "lept_fpix1", "leptonica fpix1_reg test/tool" },
+	{ {.fa = lept_fpix2_reg_main }, "lept_fpix2", "leptonica fpix2_reg test/tool" },
+	{ {.fa = lept_fpixcontours_main }, "lept_fpixcontours", "leptonica fpixcontours test/tool" },
+	{ {.fa = lept_gammatest_main }, "lept_gammatest", "leptonica gammatest test/tool" },
+	{ {.fa = lept_genfonts_reg_main }, "lept_genfonts", "leptonica genfonts_reg test/tool" },
+	{ {.fa = lept_gifio_reg_main }, "lept_gifio", "leptonica gifio_reg test/tool" },
+	{ {.fa = lept_graphicstest_main }, "lept_graphicstest", "leptonica graphicstest test/tool" },
+	{ {.fa = lept_grayfill_reg_main }, "lept_grayfill", "leptonica grayfill_reg test/tool" },
+	{ {.fa = lept_graymorph1_reg_main }, "lept_graymorph1", "leptonica graymorph1_reg test/tool" },
+	{ {.fa = lept_graymorph2_reg_main }, "lept_graymorph2", "leptonica graymorph2_reg test/tool" },
+	{ {.fa = lept_graymorphtest_main }, "lept_graymorphtest", "leptonica graymorphtest test/tool" },
+	{ {.fa = lept_grayquant_reg_main }, "lept_grayquant", "leptonica grayquant_reg test/tool" },
+	{ {.fa = lept_hardlight_reg_main }, "lept_hardlight", "leptonica hardlight_reg test/tool" },
+	{ {.fa = lept_hash_reg_main }, "lept_hash", "leptonica hash_reg test/tool" },
+	{ {.fa = lept_hashtest_main }, "lept_hashtest", "leptonica hashtest test/tool" },
+	{ {.fa = lept_heap_reg_main }, "lept_heap", "leptonica heap_reg test/tool" },
+	{ {.fa = lept_histoduptest_main }, "lept_histoduptest", "leptonica histoduptest test/tool" },
+	{ {.fa = lept_histotest_main }, "lept_histotest", "leptonica histotest test/tool" },
+	{ {.fa = lept_htmlviewer_main }, "lept_htmlviewer", "leptonica htmlviewer test/tool" },
+	{ {.fa = lept_imagetops_main }, "lept_imagetops", "leptonica imagetops test/tool" },
+	{ {.fa = lept_insert_reg_main }, "lept_insert", "leptonica insert_reg test/tool" },
+	{ {.fa = lept_ioformats_reg_main }, "lept_ioformats", "leptonica ioformats_reg test/tool" },
+	{ {.fa = lept_iomisc_reg_main }, "lept_iomisc", "leptonica iomisc_reg test/tool" },
+	{ {.fa = lept_italic_reg_main }, "lept_italic", "leptonica italic_reg test/tool" },
+	{ {.fa = lept_jbclass_reg_main }, "lept_jbclass", "leptonica jbclass_reg test/tool" },
+	{ {.fa = lept_jbcorrelation_main }, "lept_jbcorrelation", "leptonica jbcorrelation test/tool" },
+	{ {.fa = lept_jbrankhaus_main }, "lept_jbrankhaus", "leptonica jbrankhaus test/tool" },
+	{ {.fa = lept_jbwords_main }, "lept_jbwords", "leptonica jbwords test/tool" },
+	{ {.fa = lept_jp2kio_reg_main }, "lept_jp2kio", "leptonica jp2kio_reg test/tool" },
+	{ {.fa = lept_jpegio_reg_main }, "lept_jpegio", "leptonica jpegio_reg test/tool" },
+	{ {.fa = lept_kernel_reg_main }, "lept_kernel", "leptonica kernel_reg test/tool" },
+	{ {.fa = lept_label_reg_main }, "lept_label", "leptonica label_reg test/tool" },
+	{ {.fa = lept_lightcolortest_main }, "lept_lightcolortest", "leptonica lightcolortest test/tool" },
+	{ {.fa = lept_lineremoval_reg_main }, "lept_lineremoval", "leptonica lineremoval_reg test/tool" },
+	{ {.fa = lept_listtest_main }, "lept_listtest", "leptonica listtest test/tool" },
+	{ {.fa = lept_livre_adapt_main }, "lept_livre_adapt", "leptonica livre_adapt test/tool" },
+	{ {.fa = lept_livre_hmt_main }, "lept_livre_hmt", "leptonica livre_hmt test/tool" },
+	{ {.fa = lept_livre_makefigs_main }, "lept_livre_makefigs", "leptonica livre_makefigs test/tool" },
+	{ {.fa = lept_livre_orient_main }, "lept_livre_orient", "leptonica livre_orient test/tool" },
+	{ {.fa = lept_livre_pageseg_main }, "lept_livre_pageseg", "leptonica livre_pageseg test/tool" },
+	{ {.fa = lept_livre_seedgen_main }, "lept_livre_seedgen", "leptonica livre_seedgen test/tool" },
+	{ {.fa = lept_livre_tophat_main }, "lept_livre_tophat", "leptonica livre_tophat test/tool" },
+	{ {.fa = lept_locminmax_reg_main }, "lept_locminmax", "leptonica locminmax_reg test/tool" },
+	{ {.fa = lept_logicops_reg_main }, "lept_logicops", "leptonica logicops_reg test/tool" },
+	{ {.fa = lept_lowaccess_reg_main }, "lept_lowaccess", "leptonica lowaccess_reg test/tool" },
+	{ {.fa = lept_lowsat_reg_main }, "lept_lowsat", "leptonica lowsat_reg test/tool" },
+	{ {.fa = lept_maketile_main }, "lept_maketile", "leptonica maketile test/tool" },
+	{ {.fa = lept_maptest_main }, "lept_maptest", "leptonica maptest test/tool" },
+	{ {.fa = lept_maze_reg_main }, "lept_maze", "leptonica maze_reg test/tool" },
+	{ {.fa = lept_misctest1_main }, "lept_misctest1", "leptonica misctest1 test/tool" },
+	{ {.fa = lept_modifyhuesat_main }, "lept_modifyhuesat", "leptonica modifyhuesat test/tool" },
+	{ {.fa = lept_morphseq_reg_main }, "lept_morphseq", "leptonica morphseq_reg test/tool" },
+	{ {.fa = lept_morphtest1_main }, "lept_morphtest1", "leptonica morphtest1 test/tool" },
+	{ {.fa = lept_mtiff_reg_main }, "lept_mtiff", "leptonica mtiff_reg test/tool" },
+	{ {.fa = lept_multitype_reg_main }, "lept_multitype", "leptonica multitype_reg test/tool" },
+	{ {.fa = lept_nearline_reg_main }, "lept_nearline", "leptonica nearline_reg test/tool" },
+	{ {.fa = lept_newspaper_reg_main }, "lept_newspaper", "leptonica newspaper_reg test/tool" },
+	{ {.fa = lept_numa1_reg_main }, "lept_numa1", "leptonica numa1_reg test/tool" },
+	{ {.fa = lept_numa2_reg_main }, "lept_numa2", "leptonica numa2_reg test/tool" },
+	{ {.fa = lept_numa3_reg_main }, "lept_numa3", "leptonica numa3_reg test/tool" },
+	{ {.fa = lept_numaranktest_main }, "lept_numaranktest", "leptonica numaranktest test/tool" },
+	{ {.fa = lept_otsutest1_main }, "lept_otsutest1", "leptonica otsutest1 test/tool" },
+	{ {.fa = lept_otsutest2_main }, "lept_otsutest2", "leptonica otsutest2 test/tool" },
+	{ {.fa = lept_overlap_reg_main }, "lept_overlap", "leptonica overlap_reg test/tool" },
+	{ {.fa = lept_pageseg_reg_main }, "lept_pageseg", "leptonica pageseg_reg test/tool" },
+	{ {.fa = lept_pagesegtest1_main }, "lept_pagesegtest1", "leptonica pagesegtest1 test/tool" },
+	{ {.fa = lept_pagesegtest2_main }, "lept_pagesegtest2", "leptonica pagesegtest2 test/tool" },
+	{ {.fa = lept_paint_reg_main }, "lept_paint", "leptonica paint_reg test/tool" },
+	{ {.fa = lept_paintmask_reg_main }, "lept_paintmask", "leptonica paintmask_reg test/tool" },
+	{ {.fa = lept_partifytest_main }, "lept_partifytest", "leptonica partifytest test/tool" },
+	{ {.fa = lept_partition_reg_main }, "lept_partition", "leptonica partition_reg test/tool" },
+	{ {.fa = lept_partitiontest_main }, "lept_partitiontest", "leptonica partitiontest test/tool" },
+	{ {.fa = lept_pdfio1_reg_main }, "lept_pdfio1", "leptonica pdfio1_reg test/tool" },
+	{ {.fa = lept_pdfio2_reg_main }, "lept_pdfio2", "leptonica pdfio2_reg test/tool" },
+	{ {.fa = lept_pdfseg_reg_main }, "lept_pdfseg", "leptonica pdfseg_reg test/tool" },
+	{ {.fa = lept_percolatetest_main }, "lept_percolatetest", "leptonica percolatetest test/tool" },
+	{ {.fa = lept_pixa1_reg_main }, "lept_pixa1", "leptonica pixa1_reg test/tool" },
+	{ {.fa = lept_pixa2_reg_main }, "lept_pixa2", "leptonica pixa2_reg test/tool" },
+	{ {.fa = lept_pixaatest_main }, "lept_pixaatest", "leptonica pixaatest test/tool" },
+	{ {.fa = lept_pixadisp_reg_main }, "lept_pixadisp", "leptonica pixadisp_reg test/tool" },
+	{ {.fa = lept_pixafileinfo_main }, "lept_pixafileinfo", "leptonica pixafileinfo test/tool" },
+	{ {.fa = lept_pixalloc_reg_main }, "lept_pixalloc", "leptonica pixalloc_reg test/tool" },
+	{ {.fa = lept_pixcomp_reg_main }, "lept_pixcomp", "leptonica pixcomp_reg test/tool" },
+	{ {.fa = lept_pixmem_reg_main }, "lept_pixmem", "leptonica pixmem_reg test/tool" },
+	{ {.fa = lept_pixserial_reg_main }, "lept_pixserial", "leptonica pixserial_reg test/tool" },
+	{ {.fa = lept_pixtile_reg_main }, "lept_pixtile", "leptonica pixtile_reg test/tool" },
+	{ {.fa = lept_plottest_main }, "lept_plottest", "leptonica plottest test/tool" },
+	{ {.fa = lept_pngio_reg_main }, "lept_pngio", "leptonica pngio_reg test/tool" },
+	{ {.fa = lept_pnmio_reg_main }, "lept_pnmio", "leptonica pnmio_reg test/tool" },
+	{ {.fa = lept_printimage_main }, "lept_printimage", "leptonica printimage test/tool" },
+	{ {.fa = lept_printsplitimage_main }, "lept_printsplitimage", "leptonica printsplitimage test/tool" },
+	{ {.fa = lept_printtiff_main }, "lept_printtiff", "leptonica printtiff test/tool" },
+	{ {.fa = lept_projection_reg_main }, "lept_projection", "leptonica projection_reg test/tool" },
+	{ {.fa = lept_projective_reg_main }, "lept_projective", "leptonica projective_reg test/tool" },
+	{ {.fa = lept_psio_reg_main }, "lept_psio", "leptonica psio_reg test/tool" },
+	{ {.fa = lept_psioseg_reg_main }, "lept_psioseg", "leptonica psioseg_reg test/tool" },
+	{ {.fa = lept_pta_reg_main }, "lept_pta", "leptonica pta_reg test/tool" },
+	{ {.fa = lept_ptra1_reg_main }, "lept_ptra1", "leptonica ptra1_reg test/tool" },
+	{ {.fa = lept_ptra2_reg_main }, "lept_ptra2", "leptonica ptra2_reg test/tool" },
+	{ {.fa = lept_quadtree_reg_main }, "lept_quadtree", "leptonica quadtree_reg test/tool" },
+	{ {.fa = lept_rank_reg_main }, "lept_rank", "leptonica rank_reg test/tool" },
+	{ {.fa = lept_rankbin_reg_main }, "lept_rankbin", "leptonica rankbin_reg test/tool" },
+	{ {.fa = lept_rankhisto_reg_main }, "lept_rankhisto", "leptonica rankhisto_reg test/tool" },
+	{ {.fa = lept_rasterop_reg_main }, "lept_rasterop", "leptonica rasterop_reg test/tool" },
+	{ {.fa = lept_rasteropip_reg_main }, "lept_rasteropip", "leptonica rasteropip_reg test/tool" },
+	{ {.fa = lept_rasteroptest_main }, "lept_rasteroptest", "leptonica rasteroptest test/tool" },
+	{ {.fa = lept_rbtreetest_main }, "lept_rbtreetest", "leptonica rbtreetest test/tool" },
+	{ {.fa = lept_recog_bootnum1_main }, "lept_recog_bootnum1", "leptonica recog_bootnum1 test/tool" },
+	{ {.fa = lept_recog_bootnum2_main }, "lept_recog_bootnum2", "leptonica recog_bootnum2 test/tool" },
+	{ {.fa = lept_recog_bootnum3_main }, "lept_recog_bootnum3", "leptonica recog_bootnum3 test/tool" },
+	{ {.fa = lept_recogsort_main }, "lept_recogsort", "leptonica recogsort test/tool" },
+	{ {.fa = lept_recogtest1_main }, "lept_recogtest1", "leptonica recogtest1 test/tool" },
+	{ {.fa = lept_recogtest2_main }, "lept_recogtest2", "leptonica recogtest2 test/tool" },
+	{ {.fa = lept_recogtest3_main }, "lept_recogtest3", "leptonica recogtest3 test/tool" },
+	{ {.fa = lept_recogtest4_main }, "lept_recogtest4", "leptonica recogtest4 test/tool" },
+	{ {.fa = lept_recogtest5_main }, "lept_recogtest5", "leptonica recogtest5 test/tool" },
+	{ {.fa = lept_recogtest6_main }, "lept_recogtest6", "leptonica recogtest6 test/tool" },
+	{ {.fa = lept_recogtest7_main }, "lept_recogtest7", "leptonica recogtest7 test/tool" },
+	{ {.fa = lept_rectangle_reg_main }, "lept_rectangle", "leptonica rectangle_reg test/tool" },
+	{ {.fa = lept_reducetest_main }, "lept_reducetest", "leptonica reducetest test/tool" },
+	{ {.fa = lept_removecmap_main }, "lept_removecmap", "leptonica removecmap test/tool" },
+	{ {.fa = lept_renderfonts_main }, "lept_renderfonts", "leptonica renderfonts test/tool" },
+	{ {.fa = lept_replacebytes_main }, "lept_replacebytes", "leptonica replacebytes test/tool" },
+	{ {.fa = lept_rotate1_reg_main }, "lept_rotate1", "leptonica rotate1_reg test/tool" },
+	{ {.fa = lept_rotate2_reg_main }, "lept_rotate2", "leptonica rotate2_reg test/tool" },
+	{ {.fa = lept_rotate_it_main }, "lept_rotate_it", "leptonica rotate_it test/tool" },
+	{ {.fa = lept_rotatefastalt_main }, "lept_rotatefastalt", "leptonica rotatefastalt test/tool" },
+	{ {.fa = lept_rotateorth_reg_main }, "lept_rotateorth", "leptonica rotateorth_reg test/tool" },
+	{ {.fa = lept_rotateorthtest1_main }, "lept_rotateorthtest1", "leptonica rotateorthtest1 test/tool" },
+	{ {.fa = lept_rotatetest1_main }, "lept_rotatetest1", "leptonica rotatetest1 test/tool" },
+	{ {.fa = lept_runlengthtest_main }, "lept_runlengthtest", "leptonica runlengthtest test/tool" },
+	{ {.fa = lept_scale_it_main }, "lept_scale_it", "leptonica scale_it test/tool" },
+	{ {.fa = lept_scale_reg_main }, "lept_scale", "leptonica scale_reg test/tool" },
+	{ {.fa = lept_scaleandtile_main }, "lept_scaleandtile", "leptonica scaleandtile test/tool" },
+	{ {.fa = lept_scaletest1_main }, "lept_scaletest1", "leptonica scaletest1 test/tool" },
+	{ {.fa = lept_scaletest2_main }, "lept_scaletest2", "leptonica scaletest2 test/tool" },
+	{ {.fa = lept_scaleimages_main }, "lept_scaleimages", "leptonica scaleimages test/tool" },
+	{ {.fa = lept_seedfilltest_main }, "lept_seedfilltest", "leptonica seedfilltest test/tool" },
+	{ {.fa = lept_seedspread_reg_main }, "lept_seedspread", "leptonica seedspread_reg test/tool" },
+	{ {.fa = lept_selio_reg_main }, "lept_selio", "leptonica selio_reg test/tool" },
+	{ {.fa = lept_settest_main }, "lept_settest", "leptonica settest test/tool" },
+	{ {.fa = lept_sharptest_main }, "lept_sharptest", "leptonica sharptest test/tool" },
+	{ {.fa = lept_shear1_reg_main }, "lept_shear1", "leptonica shear1_reg test/tool" },
+	{ {.fa = lept_shear2_reg_main }, "lept_shear2", "leptonica shear2_reg test/tool" },
+	{ {.fa = lept_sheartest_main }, "lept_sheartest", "leptonica sheartest test/tool" },
+	{ {.fa = lept_showedges_main }, "lept_showedges", "leptonica showedges test/tool" },
+	{ {.fa = lept_skew_reg_main }, "lept_skew", "leptonica skew_reg test/tool" },
+	{ {.fa = lept_skewtest_main }, "lept_skewtest", "leptonica skewtest test/tool" },
+	{ {.fa = lept_smallpix_reg_main }, "lept_smallpix", "leptonica smallpix_reg test/tool" },
+	{ {.fa = lept_smoothedge_reg_main }, "lept_smoothedge", "leptonica smoothedge_reg test/tool" },
+	{ {.fa = lept_sorttest_main }, "lept_sorttest", "leptonica sorttest test/tool" },
+	{ {.fa = lept_speckle_reg_main }, "lept_speckle", "leptonica speckle_reg test/tool" },
+	{ {.fa = lept_splitcomp_reg_main }, "lept_splitcomp", "leptonica splitcomp_reg test/tool" },
+	{ {.fa = lept_splitimage2pdf_main }, "lept_splitimage2pdf", "leptonica splitimage2pdf test/tool" },
+	{ {.fa = lept_splitpdf_main }, "lept_splitpdf", "leptonica splitpdf test/tool" },
+	{ {.fa = lept_string_reg_main }, "lept_string", "leptonica string_reg test/tool" },
+	{ {.fa = lept_subpixel_reg_main }, "lept_subpixel", "leptonica subpixel_reg test/tool" },
+	{ {.fa = lept_sudokutest_main }, "lept_sudokutest", "leptonica sudokutest test/tool" },
+	{ {.fa = lept_textorient_main }, "lept_textorient", "leptonica textorient test/tool" },
+	{ {.fa = lept_texturefill_reg_main }, "lept_texturefill", "leptonica texturefill_reg test/tool" },
+	{ {.fa = lept_threshnorm_reg_main }, "lept_threshnorm", "leptonica threshnorm_reg test/tool" },
+	{ {.fa = lept_thresholding_test_main }, "lept_thresholding", "leptonica thresholding demo test/tool" },
+	{ {.fa = lept_tiffpdftest_main }, "lept_tiffpdftest", "leptonica tiffpdftest test/tool" },
+	{ {.fa = lept_translate_reg_main }, "lept_translate", "leptonica translate_reg test/tool" },
+	{ {.fa = lept_trctest_main }, "lept_trctest", "leptonica trctest test/tool" },
+	{ {.fa = lept_underlinetest_main }, "lept_underlinetest", "leptonica underlinetest test/tool" },
+	{ {.fa = lept_warper_reg_main }, "lept_warper", "leptonica warper_reg test/tool" },
+	{ {.fa = lept_warpertest_main }, "lept_warpertest", "leptonica warpertest test/tool" },
+	{ {.fa = lept_watershed_reg_main }, "lept_watershed", "leptonica watershed_reg test/tool" },
+	{ {.fa = lept_webpanimio_reg_main }, "lept_webpanimio", "leptonica webpanimio_reg test/tool" },
+	{ {.fa = lept_webpio_reg_main }, "lept_webpio", "leptonica webpio_reg test/tool" },
+	{ {.fa = lept_wordboxes_reg_main }, "lept_wordboxes", "leptonica wordboxes_reg test/tool" },
+	{ {.fa = lept_wordsinorder_main }, "lept_wordsinorder", "leptonica wordsinorder test/tool" },
+	{ {.fa = lept_writemtiff_main }, "lept_writemtiff", "leptonica writemtiff test/tool" },
+	{ {.fa = lept_writetext_reg_main }, "lept_writetext", "leptonica writetext_reg test/tool" },
+	{ {.fa = lept_xformbox_reg_main }, "lept_xformbox", "leptonica xformbox_reg test/tool" },
+	{ {.fa = lept_yuvtest_main }, "lept_yuvtest", "leptonica yuvtest test/tool" },
+	{ {.fa = lept_issue675_check_main }, "lept_issue675", "leptonica BMP test for leptonica issue #675" },
+#endif
+
+#if defined(MUTOOL_EX)
 	//{ {.fa = jpeginfo_main }, "jpeginfo", "jpeginfo tool" },
 #endif
 
@@ -270,6 +577,7 @@ static struct {
 	{ {.fa = qjscompress_main }, "qjscompress", "qjscompress tool" },
 	{ {.fa = qjs_unicode_gen_main }, "qjs_unicode_gen", "qjs_unicode_gen tool" },
 	{ {.fa = qjs_test262_main }, "qjs_test262", "qjs_test262 conformance test tool" },
+	{ {.fa = qjs_sample_app_main }, "qjs_sample_app", "quickjs_sample_app tool" },
 #endif
 
 #if defined(MUTOOL_EX)
@@ -371,7 +679,7 @@ static struct {
 #endif
 
 #if defined(MUTOOL_EX)
-	{ {.fa = BLAKE3_example_main }, "BLAKE3_example", "BLAKE3_example tool" },
+	{ {.f = BLAKE3_example_main }, "BLAKE3_example", "BLAKE3_example tool" },
 	{ {.fa = BLAKE3_demo_main }, "BLAKE3_demo", "BLAKE3_demo tool" },
 #endif
 
@@ -386,6 +694,20 @@ static struct {
 	{ {.fa = arch_minitar_main }, "minitar", "minitar tool" },
 	{ {.fa = arch_tarfilter_main }, "tarfilter", "tarfilter tool" },
 	{ {.fa = arch_bsdtar_main }, "bsdtar", "bsdtar tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.f = tvision_mmenu_main }, "tv_mmenu", "Turbo Vision mmenu demo/test/tool" },
+	{ {.f = tvision_palette_test_main }, "tv_palette", "Turbo Vision palette demo/test/tool" },
+	{ {.fa = tvision_tvdemo_main }, "tv_tvdemo", "Turbo Vision tvdemo demo/test/tool" },
+	{ {.fa = tvision_tvdir_main }, "tv_tvdir", "Turbo Vision tvdir demo/test/tool" },
+	{ {.fa = tvision_tvedit_main }, "tv_tvedit", "Turbo Vision tvedit demo/test/tool" },
+	{ {.f = tvision_genphone_main }, "tv_genphone", "Turbo Vision genphone demo/test/tool" },
+	{ {.f = tvision_genparts_main }, "tv_genparts", "Turbo Vision genparts demo/test/tool" },
+	{ {.f = tvision_tvforms_main }, "tv_tvforms", "Turbo Vision tvforms demo/test/tool" },
+	{ {.fa = tvision_tvhc_main }, "tv_tvhc", "Turbo Vision tvhc demo/test/tool" },
+	{ {.f = tvision_hello_main }, "tv_hello", "Turbo Vision hello demo/test/tool" },
+	{ {.f = tvision_geninc_main }, "tv_geninc", "Turbo Vision geninc demo/test/tool" },
 #endif
 
 	{ {.fa = report_version }, "version", "report version of this build / tools" },
@@ -543,6 +865,9 @@ static void mu_drop_context(void)
         // so the atexit handler won't have to bother with it.
         ASSERT_AND_CONTINUE(fz_has_global_context());
         ctx = fz_get_global_context();
+
+		ocr_clear_leptonica_mem(ctx);
+
         fz_drop_context_locks(ctx);
     }
 
@@ -558,6 +883,68 @@ static void mu_drop_context(void)
 
         tool_is_toplevel_ctx = 0;
     }
+}
+
+static int run_tool(struct tool_spec *spec, int argc, const char **argv, int time_the_run, int show_heap_leakage, const char *app_argv0)
+{
+	void* snapshot = fz_TakeHeapSnapshot();
+	char* exe_path = NULL;
+	const char** argarr = fz_malloc(ctx, (argc + 2) * sizeof(argarr[0]));
+
+		// do NOT damage the original argv[] array any further: plugging in arbitrary strings in there
+		// would cause memory corruption later on as we'll attempt to free() the elements at the end.
+		//
+		// So we make a local copy of the argv[] set and feed that one to the destination tool...
+		switch (spec->keep_path)
+		{
+		default:
+			argarr[0] = spec->name;
+			break;
+
+		case 1:
+			const char *xp = app_argv0;
+			const char* pe = fz_basename(xp);
+			int plen = (pe - xp);
+			exe_path = fz_asprintf(ctx, "%.*s%s%s", plen, xp, spec->name,
+#if defined(_WIN32)
+				".exe"
+#else
+				""
+#endif
+				);
+			argarr[0] = exe_path;
+			break;
+
+		case 2:
+			argarr[0] = app_argv0;
+			break;
+		}
+
+		if (argc > 1)
+			memcpy(argarr + 1, argv + 1, (argc - 1) * sizeof(argarr[0]));
+		argarr[argc] = NULL;
+
+		argv = argarr;
+
+	nanotimer_data_t timer;
+	nanotimer(&timer);
+	nanotimer_start(&timer);
+	int rv = spec->func.fa(argc, argv);
+	double dt = nanotimer_get_elapsed_ms(&timer);
+
+	if (show_heap_leakage)
+	{
+		fz_ReportHeapLeakageAgainstSnapshot(snapshot);
+	}
+
+	if (time_the_run)
+	{
+		fz_info(ctx, "### Elapsed time: %f milliseconds\n", dt);
+	}
+
+	fz_free(ctx, exe_path);
+	fz_free(ctx, argarr);
+	return rv;
 }
 
 #ifdef GPERF
@@ -621,8 +1008,15 @@ int mutool_main(int argc, const char** argv)
         ctx = fz_get_global_context();
     }
 
-	// registeer a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
-	fz_set_default_jpeg_sys_mem_mgr();
+	if (tool_is_toplevel_ctx)
+	{
+		// register a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
+		fz_set_default_jpeg_sys_mem_mgr();
+
+		ocr_set_leptonica_mem(ctx);
+
+		ocr_set_leptonica_stderr_handler(ctx);
+	}
 
 	atexit(mu_drop_context);
 
@@ -635,6 +1029,23 @@ int mutool_main(int argc, const char** argv)
         fz_error(ctx, "No command name found!");
         return EXIT_FAILURE;
     }
+
+	int argstart = 1;
+	int time_the_run = 0;
+	int show_heap_leakage = 0;
+
+	for (; argc > argstart; argstart++)
+	{
+		const char* arg = argv[argstart];
+		if (!strcmp(arg, "-t"))
+			time_the_run = 1;
+		else if (!strcmp(arg, "-d"))
+			show_heap_leakage = 1;
+		else if (!strcmp(arg, "-z"))
+			fz_TurnHeapLeakReportingAtProgramExitOn();
+		else
+			break;
+	}
 
     /* Check argv[0] */
 
@@ -650,48 +1061,66 @@ int mutool_main(int argc, const char** argv)
             strcpy(buf, "mupdf");
             strcat(buf, tools[i].name);
             assert(strlen(buf) < sizeof(buf));
-            if (namematch(end, start, buf) || namematch(end, start, buf + 2))
-                return tools[i].func.fa(argc, argv);
+			if (namematch(end, start, buf) || namematch(end, start, buf + 2))
+			{
+				argstart--;
+				return run_tool(&tools[i], argc - argstart, argv + argstart, time_the_run, show_heap_leakage, argv[0]);
+			}
             strcpy(buf, "mu");
             strcat(buf, tools[i].name);
             assert(strlen(buf) < sizeof(buf));
             if (namematch(end, start, buf) || namematch(end, start, buf + 2))
-                return tools[i].func.fa(argc, argv);
+			{
+				argstart--;
+				return run_tool(&tools[i], argc - argstart, argv + argstart, time_the_run, show_heap_leakage, argv[0]);
+			}
         }
     }
 
     /* Check argv[1] */
 
-    if (argc > 1)
+    if (argc > argstart)
     {
         for (i = 0; i < (int)nelem(tools); i++)
         {
-            start = argv[1];
+            start = argv[argstart];
             end = start + strlen(start);
             // test for variants: mupdf<NAME>, pdf<NAME>, mu<NAME> and <NAME>:
             strcpy(buf, "mupdf");
             strcat(buf, tools[i].name);
             assert(strlen(buf) < sizeof(buf));
             if (namematch(end, start, buf) || namematch(end, start, buf + 2))
-                return tools[i].func.fa(argc - 1, argv + 1);
+			{
+				return run_tool(&tools[i], argc - argstart, argv + argstart, time_the_run, show_heap_leakage, argv[0]);
+			}
             strcpy(buf, "mu");
             strcat(buf, tools[i].name);
             assert(strlen(buf) < sizeof(buf));
             if (namematch(end, start, buf) || namematch(end, start, buf + 2))
-                return tools[i].func.fa(argc - 1, argv + 1);
-        }
-        if (!strcmp(argv[1], "-v"))
+			{
+				return run_tool(&tools[i], argc - argstart, argv + argstart, time_the_run, show_heap_leakage, argv[0]);
+			}
+		}
+        if (!strcmp(argv[argstart], "-v"))
         {
             fz_info(ctx, "mutool version %s", FZ_VERSION);
             return EXIT_SUCCESS;
         }
-        fz_error(ctx, "mutool: unrecognized command '%s'\n", argv[1]);
+        fz_error(ctx, "mutool: unrecognized command '%s'\n", argv[argstart]);
     }
 
     /* Print usage */
 
 	fz_info(ctx, "mutool version %s\n", FZ_VERSION);
-    fz_info(ctx, "usage: mutool <command> [options]");
+    fz_info(ctx, "usage: mutool [mutool-options] <command> [command-options]\n");
+	fz_info(ctx, "\n\
+mutool-options:\n\
+\n\
+-t     measure time elapsed and report at exit\n\
+-d     report heap memory leakage for invoked tool\n\
+-z     report total heap leakage at exit\n\
+\n\
+Commands:\n\n");
 
     size_t max_tool_name_len = 0;
     for (i = 0; i < (int)nelem(tools); i++)

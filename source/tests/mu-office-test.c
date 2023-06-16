@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 /*
  * mu-office-test - Simple test for Muoffice.
@@ -323,7 +323,8 @@ save_png(const MuOfficeBitmap *bitmap, const char *filename)
 	}
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "save_png failed! %s", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_log_error_printf(ctx, "save_png failed! file: %s", filename);
 		errored = 1;
 	}
 

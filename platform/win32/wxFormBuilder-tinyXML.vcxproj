@@ -124,6 +124,8 @@
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -241,16 +243,6 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\subprojects\ticpp\ticpp.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\subprojects\ticpp\tinystr.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\subprojects\ticpp\tinyxml.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\subprojects\ticpp\tinyxmlerror.cpp" />
-    <ClCompile Include="..\..\thirdparty\owemdjee\wxFormBuilder\subprojects\ticpp\tinyxmlparser.cpp" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\wxFormBuilder\subprojects\ticpp\ticpp.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\wxFormBuilder\subprojects\ticpp\ticppapi.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\wxFormBuilder\subprojects\ticpp\ticpprc.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\wxFormBuilder\subprojects\ticpp\tinystr.h" />
-    <ClInclude Include="..\..\thirdparty\owemdjee\wxFormBuilder\subprojects\ticpp\tinyxml.h" />
     <Text Include="..\..\thirdparty\owemdjee\wxFormBuilder\subprojects\ticpp\build_instructions.txt" />
     <Text Include="..\..\thirdparty\owemdjee\wxFormBuilder\subprojects\ticpp\changes.txt" />
     <Text Include="..\..\thirdparty\owemdjee\wxFormBuilder\subprojects\ticpp\CMakeLists.txt" />
@@ -266,6 +258,11 @@
     <None Include="..\..\thirdparty\owemdjee\wxFormBuilder\subprojects\ticpp\README.md" />
     <None Include="..\..\thirdparty\owemdjee\wxFormBuilder\subprojects\ticpp\ticpp.lua" />
     <None Include="..\..\thirdparty\owemdjee\wxFormBuilder\subprojects\ticpp\ticpp4.lua" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="libticpp.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff2c3908}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

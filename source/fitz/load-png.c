@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 
@@ -683,7 +683,7 @@ fz_load_png(fz_context *ctx, const unsigned char *p, size_t total)
 }
 
 void
-fz_load_png_info(fz_context *ctx, const unsigned char *p, size_t total, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep)
+fz_load_png_info(fz_context *ctx, const unsigned char *p, size_t total, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, uint8_t *orientationp)
 {
 	struct info png = { 0 };
 
@@ -696,6 +696,7 @@ fz_load_png_info(fz_context *ctx, const unsigned char *p, size_t total, int *wp,
 	}
 
 	*cspacep = png.cs;
+	*orientationp = 1;
 	*wp = png.width;
 	*hp = png.height;
 	*xresp = png.xres;

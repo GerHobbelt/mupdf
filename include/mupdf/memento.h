@@ -8,11 +8,13 @@
    This software is provided AS-IS with no warranty, either express or
    implied.
 
-   This software is distributed under license and may not be copied, modified
-   or distributed except as expressly authorized under the terms of that
-   license. Refer to licensing information at http://www.artifex.com
-   or contact Artifex Software, Inc.,  1305 Grant Avenue - Suite 200,
-   Novato, CA 94945, U.S.A., +1(415)492-9861, for further information.
+   This software is distributed under license and may not be copied,
+   modified or distributed except as expressly authorized under the terms
+   of the license contained in the file COPYING in this distribution.
+
+   Refer to licensing information at http://www.artifex.com or contact
+   Artifex Software, Inc.,  39 Mesa Street, Suite 108A, San Francisco,
+   CA 94129, USA, for further information.
 */
 
 /* Memento: A library to aid debugging of memory leaks/heap corruption.
@@ -281,6 +283,15 @@ void Memento_stats(void);
 void *Memento_label(void *, const char *);
 void Memento_tick(void);
 int Memento_setVerbose(int verbose_flag);
+
+/* Terminate backtraces if we see specified function name. E.g.
+'cfunction_call' will exclude Python interpreter functions when Python calls C
+code. Returns 0 on success, -1 on failure (out of memory). */
+int Memento_addBacktraceLimitFnname(const char *fnname);
+
+/* If <atexitfin> is 0, we do not call Memento_fin() in an atexit() handler. */
+int Memento_setAtexitFin(int atexitfin);
+
 int Memento_setIgnoreNewDelete(int ignore);
 
 void *Memento_malloc(size_t s);
@@ -404,6 +415,8 @@ void Memento_showHash(unsigned int hash);
 #define Memento_sequence()                 (0)
 #define Memento_squeezing()                (0)
 #define Memento_setVerbose(A)              (A)
+#define Memento_addBacktraceLimitFnname(A) (0)
+#define Memento_setAtexitFin(atexitfin)    (0)
 
 #endif /* MEMENTO */
 

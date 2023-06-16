@@ -262,6 +262,7 @@ file
 filesystem
 flat_hash_map
 fluent-bit
+fmem
 fmt
 fmtlog
 folly
@@ -518,7 +519,6 @@ pdf2htmlEX
 pdfgrep
 pdfium
 pelikan
-percona-server
 pevents
 phash-gpl
 phf-hash
@@ -543,6 +543,9 @@ promise-cpp
 promise-hpp
 proxygen
 pthread-win32
+pthread-win32-jumbo
+pthread-win32-EH
+pthread-win32-JMP
 pthreadpool
 pybind11
 pyclustering
@@ -658,6 +661,7 @@ uchardet
 ucto
 uctodata
 ucx
+ugrep
 uint128_t
 unicode-cldr
 unicode-icu
@@ -743,6 +747,43 @@ libmetalink
 wget2
 wxCurl
 
+fmemopen_windows
+Capture2Text
+rotate_detection
+easyloggingpp
+twain_library
+libprecog
+
+adaptiveqf
+cpp-terminal
+cqf
+density
+densityxx
+doxa
+fast-lzma2
+fastfilter_cpp
+hsluv-c
+iceberghashtable
+libdivide
+libpmemobj-cpp
+libsql
+lizard
+lzham_codec
+openvino
+pmdk
+pmdk-tests
+pmemkv
+pmemkv-bench
+snappy
+spookyhash
+squash
+unqlite
+libvcopy
+vmem
+vmemcache
+vtm
+xor-and-binary-fuse-filter
+
 EOT
 )
 
@@ -765,6 +806,21 @@ sumatrapdf
 metalink-cli
 metalink-mini-downloader
 
+jbig2enc
+cpplocate
+ogdf
+libfann
+IdGenerator
+grok-jpeg2000
+
+FreeFileSync
+filecopyex3
+fswatch
+lzbench
+p7zip
+qpdf
+vcopy
+
 EOT
 )
 
@@ -785,6 +841,11 @@ tensorflow-docs
 
 wordfreq
 wordfrequency
+
+archive-hocr-tools
+
+LeptonicaDocsSite
+UnofficialLeptDocs
 
 EOT
 )

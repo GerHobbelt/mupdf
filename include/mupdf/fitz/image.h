@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #ifndef MUPDF_FITZ_IMAGE_H
 #define MUPDF_FITZ_IMAGE_H
@@ -266,6 +266,12 @@ fz_image *fz_new_image_from_compressed_buffer(fz_context *ctx, int w, int h, int
 fz_image *fz_new_image_from_pixmap(fz_context *ctx, fz_pixmap *pixmap, fz_image *mask);
 
 /**
+	Extract image meta data from a buffer of data, e.g. image
+	width, height, resolution colorspace and orientation.
+*/
+void fz_image_info_from_buffer(fz_context *ctx, fz_buffer *buffer, int *w, int *h, int *xres, int *yres, fz_colorspace **cspace, uint8_t *orientation);
+
+/**
 	Create a new image from a
 	buffer of data, inferring its type from the format
 	of the data.
@@ -423,16 +429,26 @@ fz_pixmap *fz_load_jpx(fz_context *ctx, const unsigned char *data, size_t size, 
 /**
 	Exposed for CBZ.
 */
+
 #if FZ_ENABLE_TIFF 
+
 int fz_load_tiff_subimage_count(fz_context *ctx, const unsigned char *buf, size_t len);
 fz_pixmap *fz_load_tiff_subimage(fz_context *ctx, const unsigned char *buf, size_t len, int subimage);
+void fz_load_tiff_info_subimage(fz_context *ctx, const unsigned char *buf, size_t len, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, uint8_t *orientationp, int subimage);
+
 #endif
+
 int fz_load_pnm_subimage_count(fz_context *ctx, const unsigned char *buf, size_t len);
 fz_pixmap *fz_load_pnm_subimage(fz_context *ctx, const unsigned char *buf, size_t len, int subimage);
+void fz_load_pnm_info_subimage(fz_context *ctx, const unsigned char *buf, size_t len, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, uint8_t *orientationp, int subimage);
+
 int fz_load_jbig2_subimage_count(fz_context *ctx, const unsigned char *buf, size_t len);
 fz_pixmap *fz_load_jbig2_subimage(fz_context *ctx, const unsigned char *buf, size_t len, int subimage);
+void fz_load_jbig2_info_subimage(fz_context *ctx, const unsigned char *buf, size_t len, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, uint8_t *orientationp, int subimage);
+
 int fz_load_bmp_subimage_count(fz_context *ctx, const unsigned char *buf, size_t len);
 fz_pixmap *fz_load_bmp_subimage(fz_context *ctx, const unsigned char *buf, size_t len, int subimage);
+void fz_load_bmp_info_subimage(fz_context *ctx, const unsigned char *buf, size_t len, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, uint8_t *orientationp, int subimage);
 
 #ifdef __cplusplus
 }

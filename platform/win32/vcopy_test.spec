@@ -1,0 +1,5 @@
+
+also-ignore:
+	/src/
+	/tool/
+	

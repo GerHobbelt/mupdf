@@ -1,6 +1,6 @@
 # Template documentation
 
-Welcome to the MuPDF WASM documentation. This documentation relies on [Sphinx](https://www.sphinx-doc.org/en/master/) to publish HTML docs from markdown files written with [restructured text](https://en.wikipedia.org/wiki/ReStructuredText) (RST).
+Welcome to the MuPDF documentation. This documentation relies on [Sphinx](https://www.sphinx-doc.org/en/master/) to publish HTML docs from markdown files written with [restructured text](https://en.wikipedia.org/wiki/ReStructuredText) (RST).
 
 ## Sphinx version
 
@@ -25,6 +25,8 @@ Within the "docs" folder update the associated restructured text (`.rst`) files.
 
 `sphinx-build -b html src build`
 
+> To force build all the stuff in the `_static` folder (e.g. CSS), do:
+> `sphinx-build -a -b html src build`
 
 This then creates the HTML documentation within the folder "build" in the root of "docs".
 
@@ -32,16 +34,18 @@ This then creates the HTML documentation within the folder "build" in the root o
 ## Building PDF documentation
 
 
-- First ensure you have [rst2pdf](https://pypi.org/project/rst2pdf/) installed:
+- First ensure you have [rst2pdf](https://pypi.org/project/rst2pdf/) and
+[svglib](https://pypi.org/project/svglib/) installed:
 
 
 `python -m pip install rst2pdf`
+`python -m pip install svglib`
 
 
 - Then run:
 
 
-`sphinx-build -b pdf . build/pdf`
+`sphinx-build -b pdf src build/pdf`
 
 This will then generate a single PDF for all of the documentation within `build/pdf`.
 

@@ -56,9 +56,9 @@ def get_name_canonical( type_):
         #jlib.log( 'Not canonicalising {self.spelling=}')
         return type_
     ret = type_.get_canonical()
-    if 'struct (unnamed at ' in ret.spelling:
+    if 'struct (unnamed' in ret.spelling:
         jlib.log( 'Not canonicalising {type_.spelling=}')
-        ret = self
+        ret = type_
     return ret
 
 
@@ -111,19 +111,23 @@ class State:
                     or cursor.is_definition()  # Picks up static inline functions.
                     ):
                 if cursor.kind == clang.cindex.CursorKind.FUNCTION_DECL:
-                    fnname = cursor.mangled_name
+                    fnname = cursor.spelling
                     if self.show_details( fnname):
                         jlib.log( 'Looking at {fnname=}')
-                    if fnname not in omit_fns:
+                    if fnname in omit_fns:
+                        jlib.log('{fnname=} is in omit_fns')
+                    else:
                         fns[ fnname] = cursor
-                else:
-                    global_data[ cursor.mangled_name] = cursor
+            if (cursor.kind == clang.cindex.CursorKind.VAR_DECL
+                    and cursor.linkage == clang.cindex.LinkageKind.EXTERNAL
+                    ):
+                global_data[ cursor.spelling] = cursor
 
         self.functions_cache[ tu] = fns
         self.global_data[ tu] = global_data
         self.enums[ tu] = enums
         self.structs[ tu] = structs
-        jlib.log('Have populated fns and global_data. {len(enums)=} {len(self.structs)}')
+        jlib.log('Have populated fns and global_data. {len(enums)=} {len(self.structs)} {len(fns)=}')
 
     def find_functions_starting_with( self, tu, name_prefix, method):
         '''
@@ -136,10 +140,17 @@ class State:
         self.functions_cache_populate( tu)
         fn_to_cursor = self.functions_cache[ tu]
         for fnname, cursor in fn_to_cursor.items():
+            verbose = state_.show_details( fnname)
             if method and fnname in omit_methods:
+                if verbose:
+                    jlib.log('{fnname=} is in {omit_methods=}')
                 continue
             if not fnname.startswith( name_prefix):
+                if verbose:
+                    jlib.log('{fnname=} does not start with {name_prefix=}')
                 continue
+            if verbose:
+                jlib.log('{name_prefix=} yielding {fnname=}')
             yield fnname, cursor
 
     def find_global_data_starting_with( self, tu, prefix):
@@ -302,3 +313,12 @@ class BuildDirs:
             # Use Python we are running under.
             self.cpu = Cpu(cpu_name())
             self.python_version = python_version()
+
+    def windows_build_type(self):
+        dir_so_flags = os.path.basename( self.dir_so).split( '-')
+        if 'debug' in dir_so_flags:
+            return 'Debug'
+        elif 'release' in dir_so_flags:
+            return 'Release'
+        else:
+            assert 0, f'Expecting "-release-" or "-debug-" in build_dirs.dir_so={self.dir_so}'

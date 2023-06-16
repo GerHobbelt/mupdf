@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #ifndef MUPDF_PDF_CRYPT_H
 #define MUPDF_PDF_CRYPT_H
@@ -57,7 +57,9 @@ fz_stream *pdf_open_crypt_with_filter(fz_context *ctx, fz_stream *chain, pdf_cry
 
 int pdf_crypt_version(fz_context *ctx, pdf_crypt *crypt);
 int pdf_crypt_revision(fz_context *ctx, pdf_crypt *crypt);
-char *pdf_crypt_method(fz_context *ctx, pdf_crypt *crypt);
+const char *pdf_crypt_method(fz_context *ctx, pdf_crypt *crypt);
+const char *pdf_crypt_string_method(fz_context *ctx, pdf_crypt *crypt);
+const char *pdf_crypt_stream_method(fz_context *ctx, pdf_crypt *crypt);
 int pdf_crypt_length(fz_context *ctx, pdf_crypt *crypt);
 int pdf_crypt_permissions(fz_context *ctx, pdf_crypt *crypt);
 int pdf_crypt_encrypt_metadata(fz_context *ctx, pdf_crypt *crypt);
@@ -97,6 +99,7 @@ int pdf_signature_byte_range(fz_context *ctx, pdf_document *doc, pdf_obj *signat
 fz_stream *pdf_signature_hash_bytes(fz_context *ctx, pdf_document *doc, pdf_obj *signature);
 
 int pdf_signature_incremental_change_since_signing(fz_context *ctx, pdf_document *doc, pdf_obj *signature);
+int pdf_incremental_change_since_signing_widget(fz_context *ctx, pdf_annot *widget);
 
 /*
 	Retrieve the contents of a signature as a counted allocated

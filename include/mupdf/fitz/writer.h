@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #ifndef MUPDF_FITZ_WRITER_H
 #define MUPDF_FITZ_WRITER_H
@@ -125,6 +125,9 @@ fz_document_writer *fz_new_document_writer(fz_context *ctx, const char *path, co
 */
 fz_document_writer *
 fz_new_document_writer_with_output(fz_context *ctx, fz_output *out, const char *format, const char *options);
+
+fz_document_writer *
+fz_new_document_writer_with_buffer(fz_context *ctx, fz_buffer *buf, const char *format, const char *options);
 
 /**
 	Document writers for various possible output formats.

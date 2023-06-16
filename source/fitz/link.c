@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 
@@ -106,7 +106,7 @@ fz_is_external_link(fz_context *ctx, const char *uri)
 
 fz_link_dest fz_make_link_dest_none(void)
 {
-	fz_link_dest dest = { { -1, -1 }, FZ_LINK_DEST_XYZ, NAN, NAN, NAN, NAN, NAN };
+	fz_link_dest dest = { { -1, -1 }, FZ_LINK_DEST_UNKNOWN, NAN, NAN, NAN, NAN, NAN };
 	return dest;
 }
 

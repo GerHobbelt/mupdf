@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 
@@ -128,6 +128,11 @@ static void error_exit_dct(j_common_ptr cinfo)
 	fz_context* ctx = state->ctx;
 	cinfo->err->format_message(cinfo, msg);
 	fz_throw(ctx, FZ_ERROR_GENERIC, "jpeg error: %s", msg);
+}
+
+static void output_message_dct(j_common_ptr cinfo)
+{
+	/* swallow message */
 }
 
 static void init_source_dct(j_decompress_ptr cinfo)
@@ -376,6 +381,7 @@ fz_open_dctd(fz_context *ctx, fz_stream *chain, int color_transform, int l2facto
 	cinfo->src = NULL;
 	cinfo->err = &state->errmgr;
 	jpeg_std_error(cinfo->err);
+	cinfo->err->output_message = output_message_dct;
 	cinfo->err->error_exit = error_exit_dct;
 
 	return fz_new_stream(ctx, state, next_dctd, close_dctd);

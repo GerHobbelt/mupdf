@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 /* Image interface */
 
@@ -268,4 +268,21 @@ FUN(Image_getDecode)(JNIEnv *env, jobject self)
 
 	memcpy(decode, img->decode, 2 * img->n * sizeof(float));
 	return to_floatArray(ctx, env, decode, 2 * img->n);
+}
+
+JNIEXPORT jobject JNICALL
+FUN(Image_getImageData)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	fz_image *img = from_Image(env, self);
+	fz_compressed_buffer *cbuf = NULL;
+
+	if (!ctx || !img) return NULL;
+
+	fz_try(ctx)
+		cbuf = fz_compressed_image_buffer(ctx, img);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	return to_ImageData_safe_own(ctx, env, cbuf);
 }

@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{00811970-815B-4F64-BC9D-219078557D87}</ProjectGuid>
+    <RootNamespace>filecopyex3</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FILECOPYEX3;FILECOPYEX3_STATICLIB;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FILECOPYEX3;FILECOPYEX3_STATICLIB;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FILECOPYEX3;FILECOPYEX3_STATICLIB;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_FILECOPYEX3;FILECOPYEX3_STATICLIB;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/AsyncFramework/CriticalSection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/AsyncFramework/JobBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/AsyncFramework/JobScheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/AsyncFramework/Thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/AsyncFramework/WaitableEvent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/AsyncFramework/stdafx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/CopyProgress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/Engine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/EngineTools.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/FarMacro.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/FarMenu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/FarNode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/FarPayload.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/FarPlugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/FarProgress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/FarSettings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/FileCopyEx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/DescList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/FileNameStoreEnum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/FileUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/FrameworkUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/LocaleUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/Node.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/ObjString.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/ObjectManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/Payload.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/Properties.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/StrUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/StringParent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/taskbarIcon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/tools.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/ui.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/vc10.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/filecopyex3/src/vc10wrapper.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/AsyncFramework/AsyncCall.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/AsyncFramework/CriticalSection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/AsyncFramework/Future.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/AsyncFramework/IJob.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/AsyncFramework/JobBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/AsyncFramework/JobScheduler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/AsyncFramework/SchedulerSuspension.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/AsyncFramework/Thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/AsyncFramework/WaitableEvent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/AsyncFramework/stdafx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/Common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/CopyProgress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/Engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/EngineTools.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/FarMacro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/FarMenu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/FarNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/FarPayload.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/FarPlugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/FarProgress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/FarSettings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/CastNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/DescList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/FileNameStore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/FileNameStoreEnum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/FileUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/FrameworkUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/LocaleUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/Node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/ObjString.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/ObjectManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/Payload.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/Properties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/StdHdr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/StrUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/StringParent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/Framework/StringVector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/SDK/farcolor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/SDK/farversion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/SDK/plugin.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/guid.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/taskbarIcon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/tools.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/ui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/filecopyex3/src/version.hpp" />
+    <NASM Include="../../thirdparty/owemdjee/filecopyex3/src/vc10.asm" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/filecopyex3/FileCopyEx3.rc" />
+    <Text Include="../../thirdparty/owemdjee/filecopyex3/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/filecopyex3/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/filecopyex3/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/filecopyex3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/filecopyex3/TODO.md" />
+    <Text Include="../../thirdparty/owemdjee/filecopyex3/build_filecopyex3.cmd" />
+    <Text Include="../../thirdparty/owemdjee/filecopyex3/build_filecopyex3_release.cmd" />
+    <Text Include="../../thirdparty/owemdjee/filecopyex3/make_dist.cmd" />
+    <Text Include="../../thirdparty/owemdjee/filecopyex3/testDebug.cmd" />
+    <Text Include="../../thirdparty/owemdjee/filecopyex3/testRelease.cmd" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>

@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 
@@ -298,7 +298,7 @@ pnm_read_tupletype(fz_context *ctx, const unsigned char *p, const unsigned char 
 		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot parse tuple type in pnm image");
 
 	s = p;
-	while (!iswhiteeol(*p))
+	while (p < e && !iswhiteeol(*p))
 		p++;
 	len = p - s;
 
@@ -331,7 +331,7 @@ pnm_read_token(fz_context *ctx, const unsigned char *p, const unsigned char *e, 
 		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot parse header token in pnm image");
 
 	s = p;
-	while (!iswhiteeol(*p))
+	while (p < e && !iswhiteeol(*p))
 		p++;
 	len = p - s;
 
@@ -585,7 +585,7 @@ pnm_binary_read_image(fz_context *ctx, struct info *pnm, const unsigned char *p,
 				for (x = 0; x < w; x++)
 					for (k = 0; k < n; k++)
 					{
-						*dp++ = map_color(ctx, (p[1] << 8) | p[0], pnm->maxval, 255);
+						*dp++ = map_color(ctx, (p[0] << 8) | p[1], pnm->maxval, 255);
 						p += 2;
 					}
 		}
@@ -835,7 +835,7 @@ pam_binary_read_image(fz_context *ctx, struct info *pnm, const unsigned char *p,
 					for (x = 0; x < w; x++)
 						for (k = 0; k < n; k++)
 						{
-							*dp++ = map_color(ctx, (p[1] << 8) | p[0], pnm->maxval, 255);
+							*dp++ = map_color(ctx, (p[0] << 8) | p[1], pnm->maxval, 255);
 							p += 2;
 						}
 			}
@@ -1016,6 +1016,8 @@ pnm_read_image(fz_context *ctx, struct info *pnm, const unsigned char *p, size_t
 		else
 			fz_throw(ctx, FZ_ERROR_GENERIC, "unsupported portable anymap signature (0x%02x, 0x%02x)", signature[0], signature[1]);
 
+		p = pnm_read_whites_and_eols(ctx, p, e, 0);
+
 		if (onlymeta)
 			subimages++;
 		if (subimage >= 0)
@@ -1036,11 +1038,12 @@ fz_load_pnm(fz_context *ctx, const unsigned char *p, size_t total)
 }
 
 void
-fz_load_pnm_info(fz_context *ctx, const unsigned char *p, size_t total, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep)
+fz_load_pnm_info(fz_context *ctx, const unsigned char *p, size_t total, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, uint8_t *orientationp)
 {
 	struct info pnm = { 0 };
 	(void) pnm_read_image(ctx, &pnm, p, total, 1, 0);
 	*cspacep = fz_keep_colorspace(ctx, pnm.cs); /* pnm.cs is a borrowed device colorspace */
+	*orientationp = 1;
 	*wp = pnm.width;
 	*hp = pnm.height;
 	*xresp = 72;
@@ -1052,6 +1055,19 @@ fz_load_pnm_subimage(fz_context *ctx, const unsigned char *p, size_t total, int 
 {
 	struct info pnm = { 0 };
 	return pnm_read_image(ctx, &pnm, p, total, 0, subimage);
+}
+
+void
+fz_load_pnm_info_subimage(fz_context *ctx, const unsigned char *p, size_t total, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, uint8_t *orientationp, int subimage)
+{
+	struct info pnm = { 0 };
+	(void) pnm_read_image(ctx, &pnm, p, total, 1, subimage);
+	*cspacep = fz_keep_colorspace(ctx, pnm.cs); /* pnm.cs is a borrowed device colorspace */
+	*orientationp = 1;
+	*wp = pnm.width;
+	*hp = pnm.height;
+	*xresp = 72;
+	*yresp = 72;
 }
 
 int

@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 
@@ -318,7 +318,7 @@ fz_print_stext_block_as_html(fz_context *ctx, fz_output *out, fz_stext_block *bl
 		if (line->first_char)
 		{
 			h = line->first_char->size;
-			y = line->first_char->origin.y - h * 0.8;
+			y = line->first_char->origin.y - h * 0.8f;
 		}
 
 		fz_write_printf(ctx, out, "<p style=\"position:absolute;white-space:pre;margin:0;padding:0;top:%gpt;left:%gpt;line-height:%.1fpt\" data-mediabox=\"%R\">", y, x, h, &line->bbox);

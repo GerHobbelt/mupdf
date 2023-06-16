@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 
@@ -569,7 +569,10 @@ gif_read_image(fz_context *ctx, struct info *info, const unsigned char *p, size_
 					/* Read application extension */
 					p = gif_read_ae(ctx, info, p, end);
 				else
-					fz_throw(ctx, FZ_ERROR_GENERIC, "unsupported extension label %02x in gif image", p[1]);
+				{
+					fz_warn(ctx, "ignoring unsupported extension label %02x in gif image", p[1]);
+					p = gif_read_subblocks(ctx, info, p + 2, end, NULL);
+				}
 			}
 			/* Read image descriptor */
 			else if (p[0] == 0x2c)
@@ -632,12 +635,13 @@ fz_load_gif(fz_context *ctx, const unsigned char *p, size_t total)
 }
 
 void
-fz_load_gif_info(fz_context *ctx, const unsigned char *p, size_t total, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep)
+fz_load_gif_info(fz_context *ctx, const unsigned char *p, size_t total, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, uint8_t *orientationp)
 {
 	struct info gif;
 
 	gif_read_image(ctx, &gif, p, total, 1);
 	*cspacep = fz_keep_colorspace(ctx, fz_device_rgb(ctx));
+	*orientationp = 1;
 	*wp = gif.width;
 	*hp = gif.height;
 	*xresp = gif.xres;

@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 /*
  * PDF posteriser; split pages within a PDF file into smaller lumps.
@@ -39,6 +39,7 @@ static fz_context* ctx = NULL;
 
 static int x_factor = 0;
 static int y_factor = 0;
+static int x_dir = 1;
 static int offset = 0;
 
 static int usage(void)
@@ -48,7 +49,9 @@ static int usage(void)
 		"\t-p -\tpassword\n"
 		"\t-x\tx decimation factor\n"
 		"\t-y\ty decimation factor\n"
-		"\t-o\toffset\n");
+		"\t-r\tsplit right-to-left\n"
+		"\t-o\toffset\n"
+	);
 	return EXIT_FAILURE;
 }
 
@@ -155,7 +158,9 @@ static void decimatepages(fz_context *ctx, pdf_document *doc)
 
 		for (y = yf-1; y >= 0; y--)
 		{
-			for (x = 0; x < xf; x++)
+			int x0 = (x_dir > 0) ? 0 : xf-1;
+			int x1 = (x_dir > 0) ? xf : -1;
+			for (x = x0; x != x1; x += x_dir)
 			{
 				pdf_obj *newpageobj, *newpageref, *newmediabox;
 				fz_rect mb;
@@ -224,15 +229,19 @@ int pdfposter_main(int argc, const char** argv)
 
 	x_factor = 0;
 	y_factor = 0;
+	x_dir = 1;
+	offset = 0;
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "x:y:p:")) != -1)
+	while ((c = fz_getopt(argc, argv, "x:y:o:p:r")) != -1)
 	{
 		switch (c)
 		{
 		case 'p': password = fz_optarg; break;
 		case 'x': x_factor = atoi(fz_optarg); break;
 		case 'y': y_factor = atoi(fz_optarg); break;
+		case 'r': x_dir = -1; break;
+		case 'o': offset = atoi(fz_optarg); break;
 		default: return usage();
 		}
 	}
@@ -260,7 +269,7 @@ int pdfposter_main(int argc, const char** argv)
 		return EXIT_FAILURE;
 	}
 
-	// registeer a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
+	// register a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
 	fz_set_default_jpeg_sys_mem_mgr();
 
 	infile = argv[fz_optind++];
@@ -270,6 +279,8 @@ int pdfposter_main(int argc, const char** argv)
 	{
 		outfile = argv[fz_optind++];
 	}
+
+	fz_var(doc);
 
 	fz_try(ctx)
 	{
@@ -281,12 +292,14 @@ int pdfposter_main(int argc, const char** argv)
 		decimatepages(ctx, doc);
 
 		pdf_save_document(ctx, doc, outfile, &opts);
-
+	}
+	fz_always(ctx)
+	{
 		pdf_drop_document(ctx, doc);
 	}
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "%s", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
 		errored = EXIT_FAILURE;
 	}
 	fz_flush_warnings(ctx);

@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 
@@ -878,43 +878,63 @@ fz_tint_pixmap(fz_context *ctx, fz_pixmap *pix, int black, int white)
 	}
 }
 
-/* Invert luminance in RGB/BGR pixmap, but keep the colors as is. */
-static inline void invert_luminance(int type, unsigned char *s)
+/* Invert luminance in RGB/BGR pixmap, but keep chroma. */
+static inline void invert_yuv(fz_colorspace *cs, unsigned char *s)
 {
-	int r, g, b, y;
+	int r, g, b, c, d, e, y, u, v;
 
-	/* Convert to YUV */
-	if (type == FZ_COLORSPACE_RGB)
-	{
-		r = s[0];
-		g = s[1];
-		b = s[2];
-	}
-	else
-	{
-		r = s[2];
-		g = s[1];
-		b = s[0];
-	}
+	r = s[0];
+	g = s[1];
+	b = s[2];
 
-	y = (39336 * r + 76884 * g + 14900 * b + 32768)>>16;
-	y = 259-y;
-	r += y;
-	g += y;
-	b += y;
+#if FZ_ENABLE_GAMMA
+	r = cs->gamma->to_linear[r] >> 4;
+	g = cs->gamma->to_linear[g] >> 4;
+	b = cs->gamma->to_linear[b] >> 4;
+#endif
 
-	if (type == FZ_COLORSPACE_RGB)
-	{
-		s[0] = r > 255 ? 255 : r < 0 ? 0 : r;
-		s[1] = g > 255 ? 255 : g < 0 ? 0 : g;
-		s[2] = b > 255 ? 255 : b < 0 ? 0 : b;
-	}
-	else
-	{
-		s[2] = r > 255 ? 255 : r < 0 ? 0 : r;
-		s[1] = g > 255 ? 255 : g < 0 ? 0 : g;
-		s[0] = b > 255 ? 255 : b < 0 ? 0 : b;
-	}
+	y = ((66 * r + 129 * g + 25 * b + 128) >> 8) + 16;
+	u = ((-38 * r - 74 * g + 112 * b + 128) >> 8) + 128;
+	v = ((112 * r - 94 * g - 18 * b + 128) >> 8) + 128;
+
+	// Y is 16 .. 235
+	y = 251 - y;
+
+	c = y - 16;
+	d = u - 128;
+	e = v - 128;
+
+	r = (298 * c + 409 * e + 128) >> 8;
+	g = (298 * c - 100 * d - 208 * e + 128) >> 8;
+	b = (298 * c + 516 * d + 128) >> 8;
+
+	r = r > 255 ? 255 : r < 0 ? 0 : r;
+	g = g > 255 ? 255 : g < 0 ? 0 : g;
+	b = b > 255 ? 255 : b < 0 ? 0 : b;
+
+#if FZ_ENABLE_GAMMA
+	r = cs->gamma->from_linear[r << 4];
+	g = cs->gamma->from_linear[g << 4];
+	b = cs->gamma->from_linear[b << 4];
+#endif
+
+	s[0] = r;
+	s[1] = g;
+	s[2] = b;
+}
+
+static inline void invert_gray(fz_colorspace *cs, unsigned char *s)
+{
+	// Invert
+	int g = s[0];
+
+#if FZ_ENABLE_GAMMA
+	g = cs->gamma->from_linear[4095 - cs->gamma->to_linear[g]];
+#else
+	g = 255 - g;
+#endif
+
+	s[0] = g;
 }
 
 void
@@ -926,7 +946,15 @@ fz_invert_pixmap_luminance(fz_context *ctx, fz_pixmap *pix)
 
 	if (type == FZ_COLORSPACE_GRAY)
 	{
-		fz_invert_pixmap(ctx, pix);
+		for (y = 0; y < pix->h; y++)
+		{
+			for (x = 0; x < pix->w; x++)
+			{
+				invert_gray(pix->colorspace, s);
+				s += n;
+			}
+			s += pix->stride - pix->w * n;
+		}
 	}
 	else if (type == FZ_COLORSPACE_RGB || type == FZ_COLORSPACE_BGR)
 	{
@@ -934,7 +962,7 @@ fz_invert_pixmap_luminance(fz_context *ctx, fz_pixmap *pix)
 		{
 			for (x = 0; x < pix->w; x++)
 			{
-				invert_luminance(type, s);
+				invert_yuv(pix->colorspace, s);
 				s += n;
 			}
 			s += pix->stride - pix->w * n;
@@ -1132,7 +1160,7 @@ fz_gamma_pixmap(fz_context *ctx, fz_pixmap *pix, float gamma)
 	int k, x, y;
 
 	for (k = 0; k < 256; k++)
-		gamma_map[k] = pow(k / 255.0f, gamma) * 255 + 0.5f;
+		gamma_map[k] = powf(k / 255.0f, gamma) * 255 + 0.5f;
 
 	for (y = 0; y < pix->h; y++)
 	{

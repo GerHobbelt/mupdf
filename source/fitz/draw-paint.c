@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 
@@ -30,6 +30,16 @@
 
 #include <string.h>
 #include "mupdf/assertions.h"
+
+#if FZ_ENABLE_GAMMA
+
+const fz_gamma_table *
+fz_colorspace_gamma_tables(fz_colorspace *colorspace)
+{
+	return colorspace ? colorspace->gamma : NULL;
+}
+
+#endif
 
 /*
 
@@ -100,6 +110,58 @@ Sadly, this is not true in the general case, so we abandon this effort
 and stick to using the premultiplied form.
 
 */
+
+#if FZ_ENABLE_GAMMA
+
+static const int16_t unpremultiply[256] = {
+	0, 65280, 32640, 21760, 16320, 13056, 10880, 9325, 8160, 7253, 6528, 5934, 5440, 5021, 4662, 4352,
+	4080, 3840, 3626, 3435, 3264, 3108, 2967, 2838, 2720, 2611, 2510, 2417, 2331, 2251, 2176, 2105,
+	2040, 1978, 1920, 1865, 1813, 1764, 1717, 1673, 1632, 1592, 1554, 1518, 1483, 1450, 1419, 1388,
+	1360, 1332, 1305, 1280, 1255, 1231, 1208, 1186, 1165, 1145, 1125, 1106, 1088, 1070, 1052, 1036,
+	1020, 1004, 989, 974, 960, 946, 932, 919, 906, 894, 882, 870, 858, 847, 836, 826,
+	816, 805, 796, 786, 777, 768, 759, 750, 741, 733, 725, 717, 709, 701, 694, 687,
+	680, 672, 666, 659, 652, 646, 640, 633, 627, 621, 615, 610, 604, 598, 593, 588,
+	582, 577, 572, 567, 562, 557, 553, 548, 544, 539, 535, 530, 526, 522, 518, 514,
+	510, 506, 502, 498, 494, 490, 487, 483, 480, 476, 473, 469, 466, 462, 459, 456,
+	453, 450, 447, 444, 441, 438, 435, 432, 429, 426, 423, 421, 418, 415, 413, 410,
+	408, 405, 402, 400, 398, 395, 393, 390, 388, 386, 384, 381, 379, 377, 375, 373,
+	370, 368, 366, 364, 362, 360, 358, 356, 354, 352, 350, 349, 347, 345, 343, 341,
+	340, 338, 336, 334, 333, 331, 329, 328, 326, 324, 323, 321, 320, 318, 316, 315,
+	313, 312, 310, 309, 307, 306, 305, 303, 302, 300, 299, 298, 296, 295, 294, 292,
+	291, 290, 288, 287, 286, 285, 283, 282, 281, 280, 278, 277, 276, 275, 274, 273,
+	272, 270, 269, 268, 267, 266, 265, 264, 263, 262, 261, 260, 259, 258, 257, 256
+};
+
+static fz_forceinline int FZ_BLEND_GAMMA(int src_srgb, int dst_srgb, int alpha, const fz_gamma_table *gamma)
+{
+	// alpha is 0..256
+	// src_srgb, dst_srgb is 0..255
+	// src_lin, dst_lin is 0..X
+	int src_lin = gamma->to_linear[src_srgb];
+	int dst_lin = gamma->to_linear[dst_srgb];
+	int result = (((src_lin - dst_lin) * alpha) + (dst_lin << 8)) >> 8;
+	return gamma->from_linear[result];
+}
+
+static fz_forceinline int FZ_BLEND_GAMMA_DA(int src_srgb, int dst_srgb_a, int dst_alpha, int src_alpha, const fz_gamma_table *gamma)
+{
+	// over = asrc * src + adest * ddst + asrc * adst * src
+	// src_alpha is 0..256
+	// dst_alpha is 0..255
+	// out_alpha is 0..256
+	int dst_srgb = (dst_srgb_a * unpremultiply[dst_alpha]) >> 8;
+	int src_lin = gamma->to_linear[src_srgb];
+	int dst_lin = gamma->to_linear[dst_srgb];
+	// FIXME: THIS IS ALL WRONG!
+	int out_alpha = (dst_alpha * src_alpha) >> 8;
+	int out_lin = ((src_alpha * src_lin) + (dst_alpha * dst_lin) + (out_alpha * src_lin)) >> 8;
+	int out_srgb = gamma->from_linear[out_lin];
+	return (out_srgb * out_alpha) >> 8;
+}
+
+#endif /* FZ_ENABLE_GAMMA */
+
+typedef void (fz_span_color_gamma_painter_t)(unsigned char * FZ_RESTRICT dp, const unsigned char * FZ_RESTRICT mp, int n, int w, const unsigned char * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma);
 
 typedef unsigned char byte;
 
@@ -1166,6 +1228,547 @@ fz_get_span_color_painter(int n, int da, const byte * FZ_RESTRICT color, const f
 #endif /* FZ_PLOTTERS_N */
 	}
 }
+
+#if FZ_ENABLE_GAMMA
+static fz_forceinline void
+template_span_with_color_1_da_solid_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	int g = color[0];
+	do
+	{
+		int ma = *mp++;
+		ma = FZ_EXPAND(ma);
+		if (ma == 256)
+		{
+			dp[0] = g;
+			dp[1] = 255;
+		}
+		else if (ma != 0)
+		{
+			dp[0] = FZ_BLEND_GAMMA_DA(g, dp[0], dp[1], ma, gamma);
+			dp[1] = FZ_BLEND(255, dp[1], ma);
+		}
+		dp += 2;
+	}
+	while (--w);
+}
+
+static fz_forceinline void
+template_span_with_color_1_da_alpha_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	int sa = FZ_EXPAND(color[1]);
+	int g = color[0];
+	do
+	{
+		int ma = *mp++;
+		ma = FZ_EXPAND(ma);
+		if (ma != 0)
+		{
+			ma = FZ_COMBINE(ma, sa);
+			dp[0] = FZ_BLEND_GAMMA_DA(g, dp[0], dp[1], ma, gamma);
+			dp[1] = FZ_BLEND(255, dp[1], ma);
+		}
+		dp += 2;
+	}
+	while (--w);
+}
+
+static fz_forceinline void
+template_span_with_color_3_da_solid_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	int r = color[0];
+	int g = color[1];
+	int b = color[2];
+	TRACK_FN();
+	do
+	{
+		int ma = *mp++;
+		ma = FZ_EXPAND(ma);
+		if (ma == 256)
+		{
+			dp[0] = r;
+			dp[1] = g;
+			dp[2] = b;
+			dp[3] = 255;
+		}
+		else if (ma != 0)
+		{
+			dp[0] = FZ_BLEND_GAMMA_DA(r, dp[0], dp[3], ma, gamma);
+			dp[1] = FZ_BLEND_GAMMA_DA(g, dp[1], dp[3], ma, gamma);
+			dp[2] = FZ_BLEND_GAMMA_DA(b, dp[2], dp[3], ma, gamma);
+			dp[3] = FZ_BLEND(255, dp[3], ma);
+		}
+		dp += 4;
+	}
+	while (--w);
+}
+
+static fz_forceinline void
+template_span_with_color_3_da_alpha_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	int sa = FZ_EXPAND(color[3]);
+	int r = color[0];
+	int g = color[1];
+	int b = color[2];
+	TRACK_FN();
+	do
+	{
+		int ma = *mp++;
+		ma = FZ_EXPAND(ma);
+		if (ma != 0)
+		{
+			ma = FZ_COMBINE(ma, sa);
+			dp[0] = FZ_BLEND_GAMMA_DA(r, dp[0], dp[3], ma, gamma);
+			dp[1] = FZ_BLEND_GAMMA_DA(g, dp[1], dp[3], ma, gamma);
+			dp[2] = FZ_BLEND_GAMMA_DA(b, dp[2], dp[3], ma, gamma);
+			dp[3] = FZ_BLEND(255, dp[3], ma);
+		}
+		dp += 4;
+	}
+	while (--w);
+}
+
+static fz_forceinline void
+template_span_with_color_4_da_solid_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	int c = color[0];
+	int m = color[1];
+	int y = color[2];
+	int k = color[3];
+	TRACK_FN();
+	do
+	{
+		int ma = *mp++;
+		ma = FZ_EXPAND(ma);
+		if (ma == 256)
+		{
+			dp[0] = c;
+			dp[1] = m;
+			dp[2] = y;
+			dp[3] = k;
+			dp[4] = 255;
+		}
+		else if (ma != 0)
+		{
+			dp[0] = FZ_BLEND_GAMMA_DA(c, dp[0], dp[4], ma, gamma);
+			dp[1] = FZ_BLEND_GAMMA_DA(m, dp[1], dp[4], ma, gamma);
+			dp[2] = FZ_BLEND_GAMMA_DA(y, dp[2], dp[4], ma, gamma);
+			dp[3] = FZ_BLEND_GAMMA_DA(k, dp[3], dp[4], ma, gamma);
+			dp[4] = FZ_BLEND(255, dp[4], ma);
+		}
+		dp += 5;
+	}
+	while (--w);
+}
+
+static fz_forceinline void
+template_span_with_color_4_da_alpha_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	int sa = FZ_EXPAND(color[4]);
+	int c = color[0];
+	int m = color[1];
+	int y = color[2];
+	int k = color[3];
+	TRACK_FN();
+	do
+	{
+		int ma = *mp++;
+		ma = FZ_EXPAND(ma);
+		if (ma != 0)
+		{
+			ma = FZ_COMBINE(ma, sa);
+			dp[0] = FZ_BLEND_GAMMA_DA(c, dp[0], dp[4], ma, gamma);
+			dp[1] = FZ_BLEND_GAMMA_DA(m, dp[1], dp[4], ma, gamma);
+			dp[2] = FZ_BLEND_GAMMA_DA(y, dp[2], dp[4], ma, gamma);
+			dp[3] = FZ_BLEND_GAMMA_DA(k, dp[3], dp[4], ma, gamma);
+			dp[4] = FZ_BLEND(255, dp[4], ma);
+		}
+		dp += 5;
+	}
+	while (--w);
+}
+
+static fz_forceinline void
+template_span_with_color_N_general_solid_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	int k;
+	int n1 = n - da;
+	do
+	{
+		int ma = *mp++;
+		ma = FZ_EXPAND(ma);
+		if (ma == 256)
+		{
+			if (n1 > 0)
+				dp[0] = color[0];
+			if (n1 > 1)
+				dp[1] = color[1];
+			if (n1 > 2)
+				dp[2] = color[2];
+			for (k = 3; k < n1; k++)
+				dp[k] = color[k];
+			if (da)
+				dp[n1] = 255;
+		}
+		else if (ma != 0)
+		{
+			if (da)
+			{
+				if (n1 > 0)
+					dp[0] = FZ_BLEND_GAMMA_DA(color[0], dp[0], dp[n1], ma, gamma);
+				if (n1 > 1)
+					dp[1] = FZ_BLEND_GAMMA_DA(color[1], dp[1], dp[n1], ma, gamma);
+				if (n1 > 2)
+					dp[2] = FZ_BLEND_GAMMA_DA(color[2], dp[2], dp[n1], ma, gamma);
+				for (k = 3; k < n1; k++)
+					dp[k] = FZ_BLEND_GAMMA_DA(color[k], dp[k], dp[n1], ma, gamma);
+				dp[n1] = FZ_BLEND(255, dp[n1], ma);
+			}
+			else
+			{
+				if (n1 > 0)
+					dp[0] = FZ_BLEND_GAMMA(color[0], dp[0], ma, gamma);
+				if (n1 > 1)
+					dp[1] = FZ_BLEND_GAMMA(color[1], dp[1], ma, gamma);
+				if (n1 > 2)
+					dp[2] = FZ_BLEND_GAMMA(color[2], dp[2], ma, gamma);
+				for (k = 3; k < n1; k++)
+					dp[k] = FZ_BLEND_GAMMA(color[k], dp[k], ma, gamma);
+			}
+		}
+		dp += n;
+	}
+	while (--w);
+}
+
+static fz_forceinline void
+template_span_with_color_N_general_alpha_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	int k;
+	int n1 = n - da;
+	int sa = FZ_EXPAND(color[n1]);
+	do
+	{
+		int ma = *mp++;
+		ma = FZ_COMBINE(FZ_EXPAND(ma), sa);
+		if (da)
+		{
+			if (n1 > 0)
+				dp[0] = FZ_BLEND_GAMMA_DA(color[0], dp[0], dp[n1], ma, gamma);
+			if (n1 > 1)
+				dp[1] = FZ_BLEND_GAMMA_DA(color[1], dp[1], dp[n1], ma, gamma);
+			if (n1 > 2)
+				dp[2] = FZ_BLEND_GAMMA_DA(color[2], dp[2], dp[n1], ma, gamma);
+			for (k = 3; k < n1; k++)
+				dp[k] = FZ_BLEND_GAMMA_DA(color[k], dp[k], dp[n1], ma, gamma);
+			dp[n1] = FZ_BLEND(255, dp[n1], ma);
+		}
+		else
+		{
+			if (n1 > 0)
+				dp[0] = FZ_BLEND_GAMMA(color[0], dp[0], ma, gamma);
+			if (n1 > 1)
+				dp[1] = FZ_BLEND_GAMMA(color[1], dp[1], ma, gamma);
+			if (n1 > 2)
+				dp[2] = FZ_BLEND_GAMMA(color[2], dp[2], ma, gamma);
+			for (k = 3; k < n1; k++)
+				dp[k] = FZ_BLEND_GAMMA(color[k], dp[k], ma, gamma);
+		}
+		dp += n;
+	}
+	while (--w);
+}
+
+static fz_forceinline void
+template_span_with_color_N_general_op_solid_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	int k;
+	int n1 = n - da;
+	do
+	{
+		int ma = *mp++;
+		ma = FZ_EXPAND(ma);
+		if (ma == 256)
+		{
+			if (n1 > 0)
+				if (fz_overprint_component(eop, 0))
+					dp[0] = color[0];
+			if (n1 > 1)
+				if (fz_overprint_component(eop, 1))
+					dp[1] = color[1];
+			if (n1 > 2)
+				if (fz_overprint_component(eop, 2))
+					dp[2] = color[2];
+			for (k = 3; k < n1; k++)
+				if (fz_overprint_component(eop, k))
+					dp[k] = color[k];
+			if (da)
+				dp[n1] = 255;
+		}
+		else if (ma != 0)
+		{
+			if (da)
+			{
+				for (k = 0; k < n1; k++)
+					if (fz_overprint_component(eop, k))
+						dp[k] = FZ_BLEND_GAMMA_DA(color[k], dp[k], dp[n1], ma, gamma);
+				dp[n1] = FZ_BLEND(255, dp[n1], ma);
+			}
+			else
+			{
+				for (k = 0; k < n1; k++)
+					if (fz_overprint_component(eop, k))
+						dp[k] = FZ_BLEND_GAMMA(color[k], dp[k], ma, gamma);
+			}
+		}
+		dp += n;
+	}
+	while (--w);
+}
+
+static fz_forceinline void
+template_span_with_color_N_general_op_alpha_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	int k;
+	int n1 = n - da;
+	int sa = FZ_EXPAND(color[n1]);
+	do
+	{
+		int ma = *mp++;
+		ma = FZ_COMBINE(FZ_EXPAND(ma), sa);
+		if (da)
+		{
+			for (k = 0; k < n1; k++)
+				if (fz_overprint_component(eop, k))
+					dp[k] = FZ_BLEND_GAMMA_DA(color[k], dp[k], dp[n1], ma, gamma);
+			dp[n1] = FZ_BLEND(255, dp[n1], ma);
+		}
+		else
+		{
+			for (k = 0; k < n1; k++)
+				if (fz_overprint_component(eop, k))
+					dp[k] = FZ_BLEND_GAMMA(color[k], dp[k], ma, gamma);
+		}
+		dp += n;
+	}
+	while (--w);
+}
+
+static void
+paint_span_with_color_0_da_solid_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	TRACK_FN();
+	template_span_with_color_N_general_solid_gamma(dp, mp, 1, w, color, 1, gamma);
+}
+
+static void
+paint_span_with_color_0_da_alpha_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	TRACK_FN();
+	template_span_with_color_N_general_alpha_gamma(dp, mp, 1, w, color, 1, gamma);
+}
+
+static void
+paint_span_with_color_1_solid_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	TRACK_FN();
+	template_span_with_color_N_general_solid_gamma(dp, mp, 1, w, color, 0, gamma);
+}
+
+static void
+paint_span_with_color_1_alpha_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	TRACK_FN();
+	template_span_with_color_N_general_alpha_gamma(dp, mp, 1, w, color, 0, gamma);
+}
+
+static void
+paint_span_with_color_1_da_solid_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	TRACK_FN();
+	template_span_with_color_1_da_solid_gamma(dp, mp, 2, w, color, 1, gamma);
+}
+
+static void
+paint_span_with_color_1_da_alpha_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	TRACK_FN();
+	template_span_with_color_1_da_alpha_gamma(dp, mp, 2, w, color, 1, gamma);
+}
+
+#if FZ_PLOTTERS_RGB
+static void
+paint_span_with_color_3_solid_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	TRACK_FN();
+	template_span_with_color_N_general_solid_gamma(dp, mp, 3, w, color, 0, gamma);
+}
+
+static void
+paint_span_with_color_3_da_solid_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	TRACK_FN();
+	template_span_with_color_3_da_solid_gamma(dp, mp, 4, w, color, 1, gamma);
+}
+
+static void
+paint_span_with_color_3_alpha_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	TRACK_FN();
+	template_span_with_color_N_general_alpha_gamma(dp, mp, 3, w, color, 0, gamma);
+}
+
+static void
+paint_span_with_color_3_da_alpha_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	TRACK_FN();
+	template_span_with_color_3_da_alpha_gamma(dp, mp, 4, w, color, 1, gamma);
+}
+#endif /* FZ_PLOTTERS_RGB */
+
+#if FZ_PLOTTERS_CMYK
+static void
+paint_span_with_color_4_solid_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	TRACK_FN();
+	template_span_with_color_N_general_solid_gamma(dp, mp, 4, w, color, 0, gamma);
+}
+
+static void
+paint_span_with_color_4_alpha_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	TRACK_FN();
+	template_span_with_color_N_general_alpha_gamma(dp, mp, 4, w, color, 0, gamma);
+}
+
+static void
+paint_span_with_color_4_da_solid_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	TRACK_FN();
+	template_span_with_color_4_da_solid_gamma(dp, mp, 5, w, color, 1, gamma);
+}
+
+static void
+paint_span_with_color_4_da_alpha_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	TRACK_FN();
+	template_span_with_color_4_da_alpha_gamma(dp, mp, 5, w, color, 1, gamma);
+}
+#endif /* FZ_PLOTTERS_CMYK */
+
+#if FZ_PLOTTERS_N
+static void
+paint_span_with_color_N_solid_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	TRACK_FN();
+	template_span_with_color_N_general_solid_gamma(dp, mp, n, w, color, 0, gamma);
+}
+
+static void
+paint_span_with_color_N_alpha_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	TRACK_FN();
+	template_span_with_color_N_general_alpha_gamma(dp, mp, n, w, color, 0, gamma);
+}
+
+static void
+paint_span_with_color_N_da_solid_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	TRACK_FN();
+	template_span_with_color_N_general_solid_gamma(dp, mp, n, w, color, 1, gamma);
+}
+
+static void
+paint_span_with_color_N_da_alpha_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	TRACK_FN();
+	template_span_with_color_N_general_alpha_gamma(dp, mp, n, w, color, 1, gamma);
+}
+#endif /* FZ_PLOTTERS_N */
+
+#ifdef FZ_ENABLE_SPOT_RENDERING
+static void
+paint_span_with_color_N_op_solid_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	TRACK_FN();
+	template_span_with_color_N_general_op_solid_gamma(dp, mp, n, w, color, 0, eop, gamma);
+}
+
+static void
+paint_span_with_color_N_op_alpha_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	TRACK_FN();
+	template_span_with_color_N_general_op_alpha_gamma(dp, mp, n, w, color, 0, eop, gamma);
+}
+
+static void
+paint_span_with_color_N_da_op_solid_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	TRACK_FN();
+	template_span_with_color_N_general_op_solid_gamma(dp, mp, n, w, color, 1, eop, gamma);
+}
+
+static void
+paint_span_with_color_N_da_op_alpha_gamma(byte * FZ_RESTRICT dp, const byte * FZ_RESTRICT mp, int n, int w, const byte * FZ_RESTRICT color, int da, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table * FZ_RESTRICT gamma)
+{
+	TRACK_FN();
+	template_span_with_color_N_general_op_alpha_gamma(dp, mp, n, w, color, 1, eop, gamma);
+}
+#endif /* FZ_ENABLE_SPOT_RENDERING */
+
+fz_span_color_gamma_painter_t *
+fz_get_span_color_painter_gamma(int n, int da, const byte * FZ_RESTRICT color, const fz_overprint * FZ_RESTRICT eop)
+{
+	byte alpha = color[n-da];
+	if (alpha == 0)
+		return NULL;
+#if FZ_ENABLE_SPOT_RENDERING
+	if (fz_overprint_required(eop))
+	{
+		if (alpha == 255)
+			return da ? paint_span_with_color_N_da_op_solid_gamma : paint_span_with_color_N_op_solid_gamma;
+		else
+			return da ? paint_span_with_color_N_da_op_alpha_gamma : paint_span_with_color_N_op_alpha_gamma;
+	}
+#endif /* FZ_ENABLE_SPOT_RENDERING */
+	switch(n-da)
+	{
+	case 0:
+		if (alpha == 255)
+			return da ? paint_span_with_color_0_da_solid_gamma : NULL;
+		else
+			return da ? paint_span_with_color_0_da_alpha_gamma : NULL;
+	case 1:
+		if (alpha == 255)
+			return da ? paint_span_with_color_1_da_solid_gamma : paint_span_with_color_1_solid_gamma;
+		else
+			return da ? paint_span_with_color_1_da_alpha_gamma : paint_span_with_color_1_alpha_gamma;
+#if FZ_PLOTTERS_RGB
+	case 3:
+		if (alpha == 255)
+			return da ? paint_span_with_color_3_da_solid_gamma : paint_span_with_color_3_solid_gamma;
+		else
+			return da ? paint_span_with_color_3_da_alpha_gamma : paint_span_with_color_3_alpha_gamma;
+#endif/* FZ_PLOTTERS_RGB */
+#if FZ_PLOTTERS_CMYK
+	case 4:
+		if (alpha == 255)
+			return da ? paint_span_with_color_4_da_solid_gamma : paint_span_with_color_4_solid_gamma;
+		else
+			return da ? paint_span_with_color_4_da_alpha_gamma : paint_span_with_color_4_alpha_gamma;
+#endif/* FZ_PLOTTERS_CMYK */
+#if FZ_PLOTTERS_N
+	default:
+		if (alpha == 255)
+			return da ? paint_span_with_color_N_da_solid_gamma : paint_span_with_color_N_solid_gamma;
+		else
+			return da ? paint_span_with_color_N_da_alpha_gamma : paint_span_with_color_N_alpha_gamma;
+#else
+	default: return NULL;
+#endif /* FZ_PLOTTERS_N */
+	}
+}
+#endif /* FZ_GLYPH_GAMMA_BLEND */
 
 /* Blend source in mask over destination */
 
@@ -3007,13 +3610,254 @@ fallback:{}
 	}
 }
 
+
+#if FZ_ENABLE_GAMMA
+
+#define GAMMA
+#define N 1
+#include "paint-glyph.h"
+
+#define GAMMA
+#define ALPHA
+#define N 1
+#include "paint-glyph.h"
+
+#if FZ_PLOTTERS_G
+#define GAMMA
+#define DA
+#define N 1
+#include "paint-glyph.h"
+
+#define GAMMA
+#define DA
+#define ALPHA
+#define N 1
+#include "paint-glyph.h"
+#endif /* FZ_PLOTTERS_G */
+
+#if FZ_PLOTTERS_RGB
+#define GAMMA
+#define DA
+#define N 3
+#include "paint-glyph.h"
+
+#define GAMMA
+#define DA
+#define ALPHA
+#define N 3
+#include "paint-glyph.h"
+
+#define GAMMA
+#define N 3
+#include "paint-glyph.h"
+
+#define GAMMA
+#define ALPHA
+#define N 3
+#include "paint-glyph.h"
+#endif /* FZ_PLOTTERS_RGB */
+
+#if FZ_PLOTTERS_CMYK
+#define GAMMA
+#define DA
+#define N 4
+#include "paint-glyph.h"
+
+#define GAMMA
+#define DA
+#define ALPHA
+#define N 4
+#include "paint-glyph.h"
+
+#define GAMMA
+#define ALPHA
+#define N 4
+#include "paint-glyph.h"
+
+#define GAMMA
+#define N 4
+#include "paint-glyph.h"
+#endif /* FZ_PLOTTERS_CMYK */
+
+#if FZ_PLOTTERS_N
+#define GAMMA
+#define ALPHA
+#include "paint-glyph.h"
+
+#define GAMMA
+#define DA
+#include "paint-glyph.h"
+
+#define GAMMA
+#define DA
+#define ALPHA
+#include "paint-glyph.h"
+
+#define GAMMA
+#include "paint-glyph.h"
+#endif /* FZ_PLOTTERS_N */
+
+#if FZ_ENABLE_SPOT_RENDERING
+#define GAMMA
+#define ALPHA
+#define EOP
+#include "paint-glyph.h"
+
+#define GAMMA
+#define DA
+#define EOP
+#include "paint-glyph.h"
+
+#define GAMMA
+#define DA
+#define ALPHA
+#define EOP
+#include "paint-glyph.h"
+
+#define GAMMA
+#define EOP
+#include "paint-glyph.h"
+#endif /* FZ_ENABLE_SPOT_RENDERING */
+
+static void
+fz_paint_glyph_alpha_gamma(const unsigned char * FZ_RESTRICT colorbv, int n, int span, unsigned char * FZ_RESTRICT dp, int da, const fz_glyph *glyph, int w, int h, int skip_x, int skip_y, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table *gamma)
+{
+#if FZ_ENABLE_SPOT_RENDERING
+	if (fz_overprint_required(eop))
+	{
+		if (da)
+			fz_paint_glyph_alpha_N_da_op_gamma(colorbv, n, span, dp, glyph, w, h, skip_x, skip_y, eop, gamma);
+		else
+			fz_paint_glyph_alpha_N_op_gamma(colorbv, n, span, dp, glyph, w, h, skip_x, skip_y, eop, gamma);
+		return;
+	}
+#endif /* FZ_ENABLE_SPOT_RENDERING */
+	switch (n)
+	{
+	case 1:
+		if (da)
+#if FZ_PLOTTERS_G
+			fz_paint_glyph_alpha_1_da_gamma(colorbv, span, dp, glyph, w, h, skip_x, skip_y, gamma);
+#else
+			goto fallback;
+#endif /* FZ_PLOTTERS_G */
+		else
+			fz_paint_glyph_alpha_1_gamma(colorbv, span, dp, glyph, w, h, skip_x, skip_y, gamma);
+		break;
+#if FZ_PLOTTERS_RGB
+	case 3:
+		if (da)
+			fz_paint_glyph_alpha_3_da_gamma(colorbv, span, dp, glyph, w, h, skip_x, skip_y, gamma);
+		else
+			fz_paint_glyph_alpha_3_gamma(colorbv, span, dp, glyph, w, h, skip_x, skip_y, gamma);
+		break;
+#endif /* FZ_PLOTTERS_RGB */
+#if FZ_PLOTTERS_CMYK
+	case 4:
+		if (da)
+			fz_paint_glyph_alpha_4_da_gamma(colorbv, span, dp, glyph, w, h, skip_x, skip_y, gamma);
+		else
+			fz_paint_glyph_alpha_4_gamma(colorbv, span, dp, glyph, w, h, skip_x, skip_y, gamma);
+		break;
+#endif /* FZ_PLOTTERS_CMYK */
+	default:
+	{
+#if !FZ_PLOTTERS_G
+fallback:{}
+#endif /* !FZ_PLOTTERS_G */
+#if FZ_PLOTTERS_N
+		if (da)
+			fz_paint_glyph_alpha_N_da_gamma(colorbv, n, span, dp, glyph, w, h, skip_x, skip_y, gamma);
+		else
+			fz_paint_glyph_alpha_N_gamma(colorbv, n, span, dp, glyph, w, h, skip_x, skip_y, gamma);
+#endif /* FZ_PLOTTERS_N */
+		break;
+	}
+	}
+}
+
+static void
+fz_paint_glyph_solid_gamma(const unsigned char * FZ_RESTRICT colorbv, int n, int span, unsigned char * FZ_RESTRICT dp, int da, const fz_glyph * FZ_RESTRICT glyph, int w, int h, int skip_x, int skip_y, const fz_overprint * FZ_RESTRICT eop, const fz_gamma_table *gamma)
+{
+#if FZ_ENABLE_SPOT_RENDERING
+	if (fz_overprint_required(eop))
+	{
+		if (da)
+			fz_paint_glyph_solid_N_da_op_gamma(colorbv, n, span, dp, glyph, w, h, skip_x, skip_y, eop, gamma);
+		else
+			fz_paint_glyph_solid_N_op_gamma(colorbv, n, span, dp, glyph, w, h, skip_x, skip_y, eop, gamma);
+		return;
+	}
+#endif /* FZ_ENABLE_SPOT_RENDERING */
+	switch (n)
+	{
+	case 1:
+		if (da)
+#if FZ_PLOTTERS_G
+			fz_paint_glyph_solid_1_da_gamma(colorbv, span, dp, glyph, w, h, skip_x, skip_y, gamma);
+#else
+			goto fallback;
+#endif /* FZ_PLOTTERS_G */
+		else
+			fz_paint_glyph_solid_1_gamma(colorbv, span, dp, glyph, w, h, skip_x, skip_y, gamma);
+		break;
+#if FZ_PLOTTERS_RGB
+	case 3:
+		if (da)
+			fz_paint_glyph_solid_3_da_gamma(colorbv, span, dp, glyph, w, h, skip_x, skip_y, gamma);
+		else
+			fz_paint_glyph_solid_3_gamma(colorbv, span, dp, glyph, w, h, skip_x, skip_y, gamma);
+		break;
+#endif /* FZ_PLOTTERS_RGB */
+#if FZ_PLOTTERS_CMYK
+	case 4:
+		if (da)
+			fz_paint_glyph_solid_4_da_gamma(colorbv, span, dp, glyph, w, h, skip_x, skip_y, gamma);
+		else
+			fz_paint_glyph_solid_4_gamma(colorbv, span, dp, glyph, w, h, skip_x, skip_y, gamma);
+		break;
+#endif /* FZ_PLOTTERS_CMYK */
+	default:
+	{
+#if !FZ_PLOTTERS_G
+fallback:{}
+#endif /* FZ_PLOTTERS_G */
+#if FZ_PLOTTERS_N
+		if (da)
+			fz_paint_glyph_solid_N_da_gamma(colorbv, n, span, dp, glyph, w, h, skip_x, skip_y, gamma);
+		else
+			fz_paint_glyph_solid_N_gamma(colorbv, n, span, dp, glyph, w, h, skip_x, skip_y, gamma);
+		break;
+#endif /* FZ_PLOTTERS_N */
+	}
+	}
+}
+#endif /* FZ_GLYPH_GAMMA_BLEND */
+
 void
-fz_paint_glyph(const unsigned char * FZ_RESTRICT colorbv, fz_pixmap * FZ_RESTRICT dst, unsigned char * FZ_RESTRICT dp, const fz_glyph * FZ_RESTRICT glyph, int w, int h, int skip_x, int skip_y, const fz_overprint * FZ_RESTRICT eop)
+fz_paint_glyph(fz_context *ctx, const unsigned char * FZ_RESTRICT colorbv, fz_pixmap * FZ_RESTRICT dst, unsigned char * FZ_RESTRICT dp, const fz_glyph * FZ_RESTRICT glyph, int w, int h, int skip_x, int skip_y, const fz_overprint * FZ_RESTRICT eop)
 {
 	int n = dst->n - dst->alpha;
 	if (dst->colorspace)
 	{
+#if FZ_ENABLE_GAMMA
+		const fz_gamma_table *gamma;
+#endif /* FZ_ENABLE_GAMMA */
 		ASSERT0(n > 0);
+#if FZ_ENABLE_GAMMA
+		if (fz_get_gamma_blending(ctx))
+		{
+			gamma = fz_colorspace_gamma_tables(dst->colorspace);
+			if (gamma)
+			{
+				if (colorbv[n] == 255)
+					fz_paint_glyph_solid_gamma(colorbv, n, dst->stride, dp, dst->alpha, glyph, w, h, skip_x, skip_y, eop, gamma);
+				else if (colorbv[n] != 0)
+					fz_paint_glyph_alpha_gamma(colorbv, n, dst->stride, dp, dst->alpha, glyph, w, h, skip_x, skip_y, eop, gamma);
+				return;
+			}
+		}
+#endif /* FZ_ENABLE_GAMMA */
 		if (colorbv[n] == 255)
 			fz_paint_glyph_solid(colorbv, n, dst->stride, dp, dst->alpha, glyph, w, h, skip_x, skip_y, eop);
 		else if (colorbv[n] != 0)
@@ -3026,6 +3870,64 @@ fz_paint_glyph(const unsigned char * FZ_RESTRICT colorbv, fz_pixmap * FZ_RESTRIC
 			fz_paint_glyph_mask(dst->stride, dp, dst->alpha, glyph, w, h, skip_x, skip_y);
 		else
 			fz_paint_glyph_mask_alpha(dst->stride, dp, dst->alpha, glyph, w, h, skip_x, skip_y, colorbv[0]);
+	}
+}
+
+void
+fz_paint_glyph_pixmap(fz_context *ctx, const unsigned char * FZ_RESTRICT colorbv, fz_pixmap * FZ_RESTRICT dst, unsigned char * FZ_RESTRICT dp, const fz_pixmap * FZ_RESTRICT msk, int w, int h, int skip_x, int skip_y, const fz_overprint * FZ_RESTRICT eop)
+{
+	unsigned char *mp = msk->samples + skip_y * msk->stride + skip_x;
+	int da = dst->alpha;
+
+	if (dst->colorspace)
+	{
+#if FZ_ENABLE_GAMMA
+		if (fz_get_gamma_blending(ctx))
+		{
+			const fz_gamma_table *gamma = fz_colorspace_gamma_tables(dst->colorspace);
+			if (gamma)
+			{
+				fz_span_color_gamma_painter_t *fn;
+				fn = fz_get_span_color_painter_gamma(dst->n, da, colorbv, eop);
+				if (fn == NULL)
+					return;
+				while (h--)
+				{
+					(*fn)(dp, mp, dst->n, w, colorbv, da, eop, gamma);
+					dp += dst->stride;
+					mp += msk->stride;
+				}
+				return;
+			}
+		}
+#endif /* FZ_ENABLE_GAMMA */
+		{
+			fz_span_color_painter_t *fn;
+			fn = fz_get_span_color_painter(dst->n, da, colorbv, eop);
+			if (fn == NULL)
+				return;
+			while (h--)
+			{
+				(*fn)(dp, mp, dst->n, w, colorbv, da, eop);
+				dp += dst->stride;
+				mp += msk->stride;
+			}
+		}
+	}
+	else
+	{
+		fz_span_painter_t *fn;
+		int col = colorbv ? colorbv[0] : 255;
+
+		fn = fz_get_span_painter(da, 1, 0, col, eop);
+		if (fn == NULL)
+			return;
+		while (h--)
+		{
+			(*fn)(dp, da, mp, 1, 0, w, col, eop);
+			dp += dst->stride;
+			mp += msk->stride;
+		}
 	}
 }
 

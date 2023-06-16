@@ -1,0 +1,1801 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{00811970-815B-4F64-BC9D-219078B7099C}</ProjectGuid>
+    <RootNamespace>ogdf</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OGDF;OGDF_STATICLIB;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OGDF;OGDF_STATICLIB;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OGDF;OGDF_STATICLIB;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OGDF;OGDF_STATICLIB;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="cryptlib.vcxproj">
+      <Project>{424334e5-addf-490d-ba7b-46cf3686b48d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libarchive.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff18377f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libhighway.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff021a57}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpthread-win32.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8df2c2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite_tools.vcxproj">
+      <Project>{6e890463-3eeb-4cce-b8bd-5aa89148c35a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="MuPDFLib_static.vcxproj">
+      <Project>{a60d8644-5815-4d29-8970-7518ff518d62}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbase58x.vcxproj">
+      <Project>{0501bedf-3191-46a9-9997-288466675b82}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libBLAKE3.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc1880387f83}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfmt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffaf3a53}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreetype.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-a58957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgumbo-parser.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-358957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libharfbuzz.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-258957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjbig2dec.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-958957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-turbo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblcms2.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-158957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuhelpers.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce88099485a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmujs.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-858957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-6222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbrotli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7760d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcrow.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff84e35}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcurl.vcxproj">
+      <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libextract.vcxproj">
+      <Project>{da38ca0b-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreeglut.vcxproj">
+      <Project>{a1b75d29-9f5c-4a0f-b368-322a10477d0c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgif.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffddd6be}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-xl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa838c1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libleptonica.vcxproj">
+      <Project>{ca0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblz4.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff50b44d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf_default_handlers.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-1222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuthreads.vcxproj">
+      <Project>{de21fa8a-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmutool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libopenjpeg.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-758957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpkcs7.vcxproj">
+      <Project>{22462382-b30d-42a5-bf07-ee1a35e25d21}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpng.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-658957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libqiqqatool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc18808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libQuickJS.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0e57ba}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libresources.vcxproj">
+      <Project>{52dcab29-c8ee-4422-954c-29afa6b33e22}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite-amalgamation.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3a7bc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsvgcharter.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7fcf79}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtesseract.vcxproj">
+      <Project>{ac0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtiff.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-558957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtinyexpr.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff33b1b5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libupskirt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff789ba9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libwebp.vcxproj">
+      <Project>{105f884a-c170-4c30-a810-c7da2103002f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libxml2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa57a44}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzlib.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzopfli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff03e6ca}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzstd.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="lib_nas_lockfile.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0a15c6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="png-pmt-tools-lib.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1147a4}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/doc/examples/basic/gen-acyclic-graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/doc/examples/basic/manual.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/doc/examples/basic/subgraph-planarizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/doc/examples/layout/energybased.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/doc/examples/layout/hierarchical-ranking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/doc/examples/layout/hierarchical.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/doc/examples/layout/hypergraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/doc/examples/layout/multilevelmixer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/doc/examples/layout/orthogonal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/doc/examples/special/check-build-mode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/doc/examples/special/system-info.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/doc/template.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpCholeskyBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpCholeskyDense.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpCholeskyTaucs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpConstraint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpConstraintLinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpConstraintQuadratic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpDualRowDantzig.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpDualRowPivot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpDualRowSteepest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpDummyMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpDynamicExampleMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpDynamicMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpEventHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpFactorization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpGubDynamicMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpGubMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpHelperFunctions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpInterior.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpLinearObjective.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpLsqr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpMatrixBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpMessage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpNetworkBasis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpNetworkMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpNode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpNonLinearCost.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpObjective.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpPackedMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpPdco.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpPdcoBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpPlusMinusOneMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpPredictorCorrector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpPresolve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpPrimalColumnDantzig.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpPrimalColumnPivot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpPrimalColumnSteepest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpQuadraticObjective.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpSimplex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpSimplexDual.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpSimplexNonlinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpSimplexOther.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpSimplexPrimal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpSolve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/Clp_C_Interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/IdiSolve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/Idiot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/MyEventHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/MyMessageHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/unitTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinAlloc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinBuild.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinDenseFactorization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinDenseVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinError.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinFactorization1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinFactorization2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinFactorization3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinFactorization4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinFileIO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinFinite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinIndexedVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinLpIO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinMessage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinMessageHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinModelUseful.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinModelUseful2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinMpsIO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinOslFactorization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinOslFactorization2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinOslFactorization3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinPackedMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinPackedVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinPackedVectorBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinParam.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinParamUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinPostsolveMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinPrePostsolveMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinPresolveDoubleton.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinPresolveDual.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinPresolveDupcol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinPresolveEmpty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinPresolveFixed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinPresolveForcing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinPresolveHelperFunctions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinPresolveImpliedFree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinPresolveIsolated.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinPresolveMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinPresolvePsdebug.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinPresolveSingleton.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinPresolveSubst.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinPresolveTighten.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinPresolveTripleton.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinPresolveUseless.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinPresolveZeros.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinSearchTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinShallowPackedVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinSimpFactorization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinSnapshot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinStructuredModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinWarmStartBasis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinWarmStartDual.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinWarmStartPrimalDual.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/CoinUtils/CoinWarmStartVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Osi/OsiAuxInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Osi/OsiBranchingObject.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Osi/OsiChooseVariable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Osi/OsiColCut.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Osi/OsiCpxSolverInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Osi/OsiCut.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Osi/OsiCuts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Osi/OsiGrbSolverInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Osi/OsiNames.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Osi/OsiPresolve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Osi/OsiRowCut.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Osi/OsiRowCutDebugger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Osi/OsiSolverBranch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/Osi/OsiSolverInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/coin/OsiClp/OsiClpSolverInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/augmentation/DfsMakeBiconnected.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/augmentation/PlanarAugmentation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/augmentation/PlanarAugmentationFix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/AdjacencyOracle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/CombinatorialEmbedding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/EdgeComparer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/EdgeComparerSimple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/GF2Solver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/Graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/GraphAttributes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/GraphCopy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/GridLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/Hashing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/Layout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/LayoutStandards.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/LayoutStatistics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/LayoutStatistics_intersect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/Logger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/Math.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/Module.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/NearestRectangleFinder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/PreprocessorLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/STNumbering.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/Stopwatch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/System.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/basic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/extended_graph_alg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/geometry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/graph_generators/deterministic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/graph_generators/operations.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/graph_generators/randomHierarchy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/graph_generators/randomized.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/graphics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/internal/config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/memory/PoolMemoryAllocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/basic/simple_graph_alg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/clique/CliqueFinderHeuristic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/clique/CliqueFinderModule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/clique/CliqueFinderSPQR.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/CPlanarEdgeInserter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/CPlanarSubClusteredGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/CconnectClusterPlanar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/CconnectClusterPlanarEmbed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/ClusterAnalysis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/ClusterGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/ClusterGraphAttributes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/ClusterOrthoLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/ClusterOrthoShaper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/ClusterPlanRep.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/ClusterPlanarity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/ClusterPlanarizationLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/HananiTutteCPlanarity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/MaximumCPlanarSubgraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/internal/CP_MasterBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/internal/CPlanarSubClusteredST.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/internal/CPlanarityMaster.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/internal/CPlanaritySub.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/internal/ChunkConnection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/internal/ClusterKuratowskiConstraint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/internal/CutConstraint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/internal/EdgeVar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/internal/MaxCPlanarMaster.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/internal/MaxCPlanarSub.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/internal/MaxPlanarEdgesConstraint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/cluster/internal/MinimalClusterConnection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/decomposition/BCTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/decomposition/DynamicBCTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/decomposition/DynamicSPQRForest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/decomposition/DynamicSPQRTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/decomposition/PlanarSPQRTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/decomposition/StaticSPQRTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/DavidsonHarel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/DavidsonHarelLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/FMMMLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/FastMultipoleEmbedder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/GEMLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/MultilevelLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/NodeRespecterLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/PivotMDS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/SpringEmbedderFRExact.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/SpringEmbedderGridVariant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/SpringEmbedderKK.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/StressMinimization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/TutteLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/davidson_harel/Attraction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/davidson_harel/EnergyFunction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/davidson_harel/NodePairEnergy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/davidson_harel/Overlap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/davidson_harel/Planarity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/davidson_harel/PlanarityGrid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/davidson_harel/Repulsion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/davidson_harel/UniformGrid.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/dtree/GalaxyLevel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/fast_multipole_embedder/ArrayGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/fast_multipole_embedder/EdgeChain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/fast_multipole_embedder/FMEKernel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/fast_multipole_embedder/FMEMultipoleKernel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/fast_multipole_embedder/FMEThread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/fast_multipole_embedder/GalaxyMultilevel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/fast_multipole_embedder/LinearQuadtree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/fast_multipole_embedder/LinearQuadtreeBuilder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/fast_multipole_embedder/LinearQuadtreeExpansion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/fast_multipole_embedder/WSPD.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/fmmm/EdgeAttributes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/fmmm/FruchtermanReingold.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/fmmm/MAARPacking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/fmmm/Multilevel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/fmmm/NewMultipoleMethod.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/fmmm/NodeAttributes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/fmmm/Set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/fmmm/new_multipole_method/QuadTreeNM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/fmmm/new_multipole_method/QuadTreeNodeNM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/fmmm/numexcept.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/multilevel_mixer/BarycenterPlacer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/multilevel_mixer/CirclePlacer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/multilevel_mixer/EdgeCoverMerger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/multilevel_mixer/IndependentSetMerger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/multilevel_mixer/LocalBiconnectedMerger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/multilevel_mixer/MatchingMerger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/multilevel_mixer/MedianPlacer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/multilevel_mixer/ModularMultilevelMixer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/multilevel_mixer/MultilevelGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/multilevel_mixer/RandomMerger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/multilevel_mixer/RandomPlacer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/multilevel_mixer/ScalingLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/multilevel_mixer/SolarMerger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/multilevel_mixer/SolarPlacer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/multilevel_mixer/ZeroPlacer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/energybased/spring_embedder/SEGV_ForceModel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/external/Minisat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/external/backward.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/DLParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/DOT.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/DotLexer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/DotParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/GDF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/GEXF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/GML.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/GdfParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/GexfParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/GmlParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/GraphIO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/GraphIO_dl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/GraphIO_dot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/GraphIO_g6.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/GraphIO_gdf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/GraphIO_gexf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/GraphIO_gml.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/GraphIO_graphml.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/GraphIO_hyper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/GraphIO_leda.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/GraphIO_tlp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/GraphML.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/GraphMLParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/SvgPrinter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/Tlp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/TlpLexer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/TlpParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/TsplibXmlParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/fileformats/Utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/graphalg/Clusterer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/graphalg/ConnectivityTester.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/graphalg/ConvexHull.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/graphalg/EdgeIndependentSpanningTrees.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/graphalg/GraphReduction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/graphalg/Matching.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/graphalg/MaxAdjOrdering.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/graphalg/MinimumCut.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/graphalg/ModifiedNibbleClusterer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/graphalg/PageRank.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/graphalg/ShortestPathWithBFM.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/graphalg/Triconnectivity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/hypergraph/EdgeStandardRep.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/hypergraph/Hypergraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/hypergraph/HypergraphLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/labeling/ELabelPosSimple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/layered/AcyclicSubgraphModule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/layered/BarycenterHeuristic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/layered/BlockOrder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/layered/CoffmanGrahamRanking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/layered/CrossingMinInterfaces.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/layered/CrossingsMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/layered/DfsAcyclicSubgraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/layered/ExtendedNestingGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/layered/FastHierarchyLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/layered/FastSimpleHierarchyLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/layered/GreedyCycleRemoval.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/layered/GreedyInsertHeuristic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/layered/GreedySwitchHeuristic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/layered/HierarchyLayoutModule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/layered/LongestPathRanking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/layered/MedianHeuristic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/layered/OptimalHierarchyClusterLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/layered/OptimalHierarchyLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/layered/OptimalRanking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/layered/SiftingHeuristic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/layered/SplitHeuristic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/layered/SugiyamaLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/aba_constraint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/abacusroot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/branchrule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/column.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/conbranchrule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/conclass.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/convar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/csense.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/fixcand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/fsvarstat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/global.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/history.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/infeascon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/lp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/lpif.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/lpmasterosi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/lpsub.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/lpvarstat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/master.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/opensub.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/optsense.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/osiif.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/row.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/setbranchrule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/slackstat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/sparvec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/srowcon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/sub.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/tailoff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/valbranchrule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/variable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/abacus/vartype.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/minisat/core/Solver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/minisat/simp/SimpSolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/pugixml/pugixml.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lpsolver/LPSolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/misclayout/BalloonLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/misclayout/BertaultLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/misclayout/CircularLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/misclayout/LinearLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/misclayout/ProcrustesSubLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/orthogonal/CompactionConstraintGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/orthogonal/EdgeRouter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/orthogonal/FlowCompaction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/orthogonal/LongestPathCompaction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/orthogonal/OrthoLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/orthogonal/OrthoRep.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/orthogonal/OrthoShaper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/orthogonal/edge_router/NodeInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/orthogonal/internal/CommonCompactionConstraintGraphBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/packing/CCLayoutPackModule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/packing/ComponentSplitterLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/packing/SimpleCCPacker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/packing/TileToRowsCCPacker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/BoothLueker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/BoyerMyrvold.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/EmbedderMaxFace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/EmbedderMaxFaceLayers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/EmbedderMinDepth.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/EmbedderMinDepthMaxFace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/EmbedderMinDepthMaxFaceLayers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/EmbedderMinDepthPiTa.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/EmbedderOptimalFlexDraw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/ExtractKuratowskis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/FixedEmbeddingInserter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/MMCrossingMinimizationModule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/MMFixedEmbeddingInserter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/MMSubgraphPlanarizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/MMVariableEmbeddingInserter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/MultiEdgeApproxInserter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/PlanRep.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/PlanRepExpansion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/PlanRepInc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/PlanRepLight.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/PlanarSubgraphBoyerMyrvold.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/PlanarizationGridLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/PlanarizationLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/PlanarizerChordlessCycle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/PlanarizerMixedInsertion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/PlanarizerStarReinsertion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/SimpleEmbedder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/SimpleIncNodeInserter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/StarInserter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/SubgraphPlanarizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/TopologyModule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/VariableEmbeddingInserter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/VariableEmbeddingInserterDyn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/booth_lueker/EmbedPQTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/booth_lueker/PlanarPQTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/boyer_myrvold/BoyerMyrvoldInit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/boyer_myrvold/BoyerMyrvoldPlanar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/boyer_myrvold/FindKuratowskis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/embedder/CrossingStructure.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/embedding_inserter/FixEdgeInserterCore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/embedding_inserter/VarEdgeInserterCore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/embedding_inserter/VarEdgeInserterDynCore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/planar_subgraph_fast/PlanarSubgraphPQTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarity/planarization_layout/CliqueReplacer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarlayout/BiconnectedShellingOrder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarlayout/BitonicOrdering.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarlayout/FPPLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarlayout/GridLayoutModule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarlayout/LeftistOrdering.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarlayout/MMCBBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarlayout/MixedModelCrossingsBeautifierModule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarlayout/MixedModelLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarlayout/PlanarDrawLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarlayout/PlanarStraightLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarlayout/SchnyderLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarlayout/ShellingOrder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarlayout/ShellingOrderModule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarlayout/TriconnectedShellingOrder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarlayout/mixed_model_layout/IOPoints.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/planarlayout/mixed_model_layout/MixedModelBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/simultaneous/SimDraw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/simultaneous/SimDrawCaller.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/simultaneous/SimDrawColorizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/simultaneous/SimDrawCreator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/simultaneous/SimDrawCreatorSimple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/simultaneous/SimDrawManipulatorModule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/tree/LCA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/tree/RadialTreeLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/tree/TreeLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/uml/FixedEmbeddingInserterUML.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/uml/OrthoLayoutUML.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/uml/PlanRepUML.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/uml/PlanarizationLayoutUML.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/uml/PlanarizationLayoutUML_inc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/uml/SubgraphPlanarizerUML.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/uml/UMLCrossingMinimizationModule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/uml/UMLGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/uml/UmlDiagramGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/uml/UmlModelGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/uml/VariableEmbeddingInserterDynUML.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/uml/VariableEmbeddingInserterUML.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/upward/DominanceLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/upward/ExpansionGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/upward/FUPSSimple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/upward/FaceSinkGraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/upward/FixedEmbeddingUpwardEdgeInserter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/upward/LayerBasedUPRLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/upward/MaximalFUPS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/upward/SubgraphUpwardPlanarizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/upward/UpwardPlanRep.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/upward/UpwardPlanarSubgraphModule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/upward/UpwardPlanarSubgraphSimple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/upward/UpwardPlanarity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/upward/VisibilityLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/upward/internal/UpSAT.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/upward/internal/UpwardPlanarityEmbeddedDigraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/src/ogdf/upward/internal/UpwardPlanaritySingleSource.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/basic/adjacency-oracle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/basic/adjentryarray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/basic/assert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/basic/clustergraphattributes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/basic/combinatorialembedding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/basic/connectivity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/basic/disjointsets.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/basic/dualgraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/basic/edgearray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/basic/fileformats.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/basic/generators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/basic/geometry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/basic/graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/basic/graphattributes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/basic/graphcopy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/basic/heap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/basic/math.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/basic/memory-allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/basic/minisat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/basic/nodearray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/basic/operations.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/basic/skiplist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/basic/svg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/graphalg/a-star-search.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/graphalg/clique.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/graphalg/dijkstra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/graphalg/edge-independent-spanning-trees.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/graphalg/induced-subgraphs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/graphalg/lca.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/graphalg/matchings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/graphalg/max-adj-ordering.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/graphalg/maxflow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/graphalg/min-cost-flow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/graphalg/min-st-cut.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/graphalg/simple-graph-alg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/graphalg/st-numbering.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/graphalg/steiner-tree-auxiliary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/graphalg/steiner-tree-preprocessing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/graphalg/steiner-tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/layout/cluster.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/layout/energy-based.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/layout/layered.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/layout/misc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/layout/planar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/layout/planarization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/layout/sugiyama.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/layout/uml.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/pack-resources.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/planarity/crossing-minimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/planarity/embedder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/planarity/planar-subgraph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/planarity/planarity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/planarity/upward-crossing-minimizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ogdf/test/src/resources.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/doc/template.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpCholeskyBase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpCholeskyDense.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpCholeskyMumps.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpCholeskyTaucs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpCholeskyUfl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpCholeskyWssmp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpCholeskyWssmpKKT.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpConfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpConstraint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpConstraintLinear.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpConstraintQuadratic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpDualRowDantzig.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpDualRowPivot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpDualRowSteepest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpDummyMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpDynamicExampleMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpDynamicMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpEventHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpFactorization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpGubDynamicMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpGubMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpHelperFunctions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpInterior.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpLinearObjective.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpLsqr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpMatrixBase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpMessage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpModel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpNetworkBasis.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpNetworkMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpNode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpNonLinearCost.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpObjective.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpPackedMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpParameters.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpPdco.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpPdcoBase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpPlusMinusOneMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpPredictorCorrector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpPresolve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpPrimalColumnDantzig.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpPrimalColumnPivot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpPrimalColumnSteepest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpQuadraticObjective.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpSimplex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpSimplexDual.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpSimplexNonlinear.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpSimplexOther.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpSimplexPrimal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/ClpSolve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinAlloc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinBuild.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinDenseFactorization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinDenseVector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinDistance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinError.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinFactorization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinFileIO.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinFinite.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinFloatEqual.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinHelperFunctions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinIndexedVector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinLpIO.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinMessage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinMessageHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinModel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinModelUseful.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinMpsIO.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinOslC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinOslFactorization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinPackedMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinPackedVector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinPackedVectorBase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinParam.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinPragma.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinPresolveDoubleton.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinPresolveDual.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinPresolveDupcol.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinPresolveEmpty.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinPresolveFixed.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinPresolveForcing.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinPresolveImpliedFree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinPresolveIsolated.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinPresolveMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinPresolvePsdebug.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinPresolveSingleton.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinPresolveSubst.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinPresolveTighten.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinPresolveTripleton.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinPresolveUseless.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinPresolveZeros.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinSearchTree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinShallowPackedVector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinSignal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinSimpFactorization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinSnapshot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinSort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinStructuredModel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinTime.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinTypes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinUtilsConfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinWarmStart.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinWarmStartBasis.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinWarmStartDual.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinWarmStartPrimalDual.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/CoinWarmStartVector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/Coin_C_defines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/Idiot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/MyEventHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/MyMessageHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/OsiAuxInfo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/OsiBranchingObject.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/OsiChooseVariable.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/OsiClpSolverInterface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/OsiColCut.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/OsiCollections.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/OsiCpxSolverInterface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/OsiCut.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/OsiCuts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/OsiGrbSolverInterface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/OsiPresolve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/OsiRowCut.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/OsiRowCutDebugger.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/OsiSolverBranch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/OsiSolverInterface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/OsiSolverParameters.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/config_clp_default.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/config_coinutils_default.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/config_default.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/configall_system.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/coin/configall_system_msc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/augmentation/AugmentationModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/augmentation/DfsMakeBiconnected.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/augmentation/PlanarAugmentation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/augmentation/PlanarAugmentationFix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/augmentation/planar/PALabel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/AdjEntryArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/AdjacencyOracle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/Array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/Array2D.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/ArrayBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/Barrier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/BoundedQueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/CombinatorialEmbedding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/DisjointSets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/DualGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/EdgeArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/EdgeComparer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/EdgeComparerSimple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/EpsilonTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/FaceArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/FaceSet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/GF2Solver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/Graph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/GraphAttributes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/GraphCopy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/GraphList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/GraphObserver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/Graph_d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/GridLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/GridLayoutMapped.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/HashArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/HashArray2D.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/HashIterator2D.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/Hashing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/IncNodeInserter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/Layout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/LayoutModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/LayoutStandards.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/LayoutStatistics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/List.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/Logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/Math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/MinHeap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/Module.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/NearestRectangleFinder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/NodeArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/NodeSet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/PQTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/PreprocessorLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/PriorityQueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/Queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/Reverse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/SList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/STNumbering.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/Skiplist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/SortedSequence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/Stopwatch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/SubsetEnumerator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/System.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/Thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/Timeouter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/basic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/comparer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/exceptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/extended_graph_alg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/geometry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/graph_generators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/graph_generators/deterministic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/graph_generators/operations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/graph_generators/randomGeographicalThresholdGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/graph_generators/randomHierarchy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/graph_generators/randomized.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/graphics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/heap/BinaryHeap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/heap/BinomialHeap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/heap/FibonacciHeap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/heap/HeapBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/heap/HotQueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/heap/PairingHeap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/heap/RMHeap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/heap/RadixHeap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/internal/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/internal/graph_iterators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/internal/intrinsics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/internal/list_templates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/internal/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/memory/MallocMemoryAllocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/memory/PoolMemoryAllocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/pqtree/PQBasicKey.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/pqtree/PQBasicKeyRoot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/pqtree/PQInternalKey.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/pqtree/PQInternalNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/pqtree/PQLeaf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/pqtree/PQLeafKey.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/pqtree/PQNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/pqtree/PQNodeKey.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/pqtree/PQNodeRoot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/precondition.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/simple_graph_alg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/basic/tuples.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/clique/CliqueFinderHeuristic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/clique/CliqueFinderModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/clique/CliqueFinderSPQR.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/CPlanarEdgeInserter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/CPlanarSubClusteredGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/CPlanarSubgraphModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/CconnectClusterPlanar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/CconnectClusterPlanarEmbed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/ClusterAnalysis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/ClusterArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/ClusterGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/ClusterGraphAttributes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/ClusterGraphCopyAttributes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/ClusterGraphObserver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/ClusterOrthoLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/ClusterOrthoShaper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/ClusterPlanRep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/ClusterPlanarModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/ClusterPlanarity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/ClusterPlanarizationLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/ClusterSet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/HananiTutteCPlanarity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/LayoutClusterPlanRepModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/MaximumCPlanarSubgraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/internal/CP_MasterBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/internal/CPlanarEdgeVar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/internal/CPlanarSubClusteredST.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/internal/CPlanarityMaster.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/internal/CPlanaritySub.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/internal/ChunkConnection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/internal/ClusterKuratowskiConstraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/internal/ClusterPQContainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/internal/CutConstraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/internal/EdgeVar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/internal/MaxCPlanarMaster.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/internal/MaxCPlanarSub.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/internal/MaxPlanarEdgesConstraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/internal/MinimalClusterConnection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/cluster/internal/basics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/decomposition/BCTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/decomposition/DynamicBCTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/decomposition/DynamicPlanarSPQRTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/decomposition/DynamicSPQRForest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/decomposition/DynamicSPQRTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/decomposition/DynamicSkeleton.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/decomposition/PertinentGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/decomposition/PlanarSPQRTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/decomposition/SPQRTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/decomposition/Skeleton.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/decomposition/StaticPlanarSPQRTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/decomposition/StaticSPQRTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/decomposition/StaticSkeleton.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/DTreeMultilevelEmbedder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/DavidsonHarel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/DavidsonHarelLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/FMMMLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/FastMultipoleEmbedder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/ForceLayoutModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/GEMLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/MultilevelLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/NodeRespecterLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/PivotMDS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/SpringEmbedderFRExact.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/SpringEmbedderGridVariant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/SpringEmbedderKK.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/SpringForceModel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/StressMinimization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/TutteLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/davidson_harel/Attraction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/davidson_harel/EnergyFunction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/davidson_harel/NodePairEnergy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/davidson_harel/Overlap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/davidson_harel/Planarity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/davidson_harel/PlanarityGrid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/davidson_harel/Repulsion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/davidson_harel/UniformGrid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/dtree/DTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/dtree/DTreeEmbedder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/dtree/DTreeForce.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/dtree/DTreeForceTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/dtree/DTreeWSPD.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/dtree/GalaxyLevel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/dtree/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fast_multipole_embedder/ArrayGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fast_multipole_embedder/ComplexDouble.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fast_multipole_embedder/EdgeChain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fast_multipole_embedder/FMEFunc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fast_multipole_embedder/FMEFunctional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fast_multipole_embedder/FMEKernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fast_multipole_embedder/FMEMultipoleKernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fast_multipole_embedder/FMEThread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fast_multipole_embedder/FastUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fast_multipole_embedder/GalaxyMultilevel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fast_multipole_embedder/LinearQuadtree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fast_multipole_embedder/LinearQuadtreeBuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fast_multipole_embedder/LinearQuadtreeExpansion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fast_multipole_embedder/WSPD.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fmmm/EdgeAttributes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fmmm/FMMMOptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fmmm/FruchtermanReingold.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fmmm/MAARPacking.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fmmm/Multilevel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fmmm/NewMultipoleMethod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fmmm/NodeAttributes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fmmm/Set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fmmm/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fmmm/maar_packing/PackingRowInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fmmm/maar_packing/Rectangle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fmmm/multilevel/Edge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fmmm/multilevel/Node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fmmm/new_multipole_method/ParticleInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fmmm/new_multipole_method/QuadTreeNM.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fmmm/new_multipole_method/QuadTreeNodeNM.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/fmmm/numexcept.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/multilevel_mixer/BarycenterPlacer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/multilevel_mixer/CirclePlacer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/multilevel_mixer/EdgeCoverMerger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/multilevel_mixer/IndependentSetMerger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/multilevel_mixer/InitialPlacer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/multilevel_mixer/LocalBiconnectedMerger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/multilevel_mixer/MatchingMerger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/multilevel_mixer/MedianPlacer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/multilevel_mixer/ModularMultilevelMixer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/multilevel_mixer/MultilevelBuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/multilevel_mixer/MultilevelGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/multilevel_mixer/MultilevelLayoutModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/multilevel_mixer/RandomMerger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/multilevel_mixer/RandomPlacer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/multilevel_mixer/ScalingLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/multilevel_mixer/SolarMerger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/multilevel_mixer/SolarPlacer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/multilevel_mixer/ZeroPlacer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/spring_embedder/MasterBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/spring_embedder/SEGV_ForceModel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/spring_embedder/SpringEmbedderBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/spring_embedder/WorkerBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/energybased/spring_embedder/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/external/Minisat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/external/abacus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/external/coin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/fileformats/DLParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/fileformats/DOT.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/fileformats/DotLexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/fileformats/DotParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/fileformats/GDF.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/fileformats/GEXF.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/fileformats/GML.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/fileformats/GdfParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/fileformats/GexfParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/fileformats/GmlParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/fileformats/GraphIO.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/fileformats/GraphML.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/fileformats/GraphMLParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/fileformats/SvgPrinter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/fileformats/Tlp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/fileformats/TlpLexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/fileformats/TlpParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/fileformats/TsplibXmlParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/fileformats/Utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/AStarSearch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/Clusterer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/ClustererModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/ConnectivityTester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/ConvexHull.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/Dijkstra.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/EdgeIndependentSpanningTrees.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/GraphReduction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/Matching.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MaxAdjOrdering.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MaxFlowEdmondsKarp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MaxFlowGoldbergTarjan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MaxFlowModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MaxFlowSTPlanarDigraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MaxFlowSTPlanarItaiShiloach.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MinCostFlowModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MinCostFlowReinelt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MinSTCutBFS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MinSTCutDijkstra.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MinSTCutMaxFlow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MinSTCutModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MinSteinerTreeDirectedCut.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MinSteinerTreeDualAscent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MinSteinerTreeGoemans139.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MinSteinerTreeKou.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MinSteinerTreeMehlhorn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MinSteinerTreeModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MinSteinerTreePrimalDual.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MinSteinerTreeRZLoss.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MinSteinerTreeShore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MinSteinerTreeTakahashi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MinSteinerTreeZelikovsky.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/MinimumCut.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/ModifiedNibbleClusterer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/PageRank.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/ShortestPathAlgorithms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/ShortestPathModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/ShortestPathWithBFM.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/SteinerTreeLowerBoundDualAscent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/SteinerTreePreprocessing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/Triconnectivity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/Voronoi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/EdgeWeightedGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/EdgeWeightedGraphCopy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/Full2ComponentGenerator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/Full3ComponentGeneratorEnumeration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/Full3ComponentGeneratorModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/Full3ComponentGeneratorVoronoi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/FullComponentDecisions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/FullComponentGeneratorCaller.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/FullComponentGeneratorDreyfusWagner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/FullComponentGeneratorDreyfusWagnerWithoutMatrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/FullComponentStore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/HeavyPathDecomposition.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/LPRelaxationSER.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/Save.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/SaveDynamic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/SaveEnum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/SaveStatic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/Triple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/common_algorithms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/goemans/Approximation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/goemans/BlowupComponents.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/goemans/BlowupGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/goemans/CoreEdgeModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/graphalg/steiner_tree/goemans/CoreEdgeRandomSpanningTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/hypergraph/EdgeStandardRep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/hypergraph/Hypergraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/hypergraph/HypergraphArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/hypergraph/HypergraphAttributes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/hypergraph/HypergraphLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/hypergraph/HypergraphLayoutModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/hypergraph/HypergraphObserver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/labeling/ELabelInterface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/labeling/ELabelPosSimple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/AcyclicSubgraphModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/BarycenterHeuristic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/BlockOrder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/CoffmanGrahamRanking.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/CrossingMinInterfaces.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/CrossingsMatrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/DfsAcyclicSubgraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/ExtendedNestingGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/FastHierarchyLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/FastSimpleHierarchyLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/GreedyCycleRemoval.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/GreedyInsertHeuristic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/GreedySwitchHeuristic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/GridSifting.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/Hierarchy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/HierarchyClusterLayoutModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/HierarchyLayoutModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/HierarchyLevels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/LayerByLayerSweep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/LayeredCrossMinModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/Level.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/LongestPathRanking.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/MedianHeuristic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/OptimalHierarchyClusterLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/OptimalHierarchyLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/OptimalRanking.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/RankingModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/SiftingHeuristic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/SplitHeuristic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/layered/SugiyamaLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/abacusroot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/active.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/active.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/bheap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/bheap.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/boundbranchrule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/bprioqueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/bprioqueue.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/branchrule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/column.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/colvar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/conbranchrule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/conclass.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/constraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/convar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/csense.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/cutbuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/cutbuffer.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/fixcand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/fsvarstat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/global.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/hash.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/history.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/infeascon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/lp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/lpmaster.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/lpmasterosi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/lpsolution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/lpsolution.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/lpsub.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/lpsubosi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/lpvarstat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/master.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/nonduplpool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/nonduplpool.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/numcon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/numvar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/opensub.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/optsense.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/osiif.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/osiinclude.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/poolslot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/poolslot.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/poolslotref.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/poolslotref.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/ring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/ring.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/row.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/rowcon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/separator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/separator.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/setbranchrule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/slackstat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/sparvec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/srowcon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/standardpool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/standardpool.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/sub.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/tailoff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/valbranchrule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/variable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/abacus/vartype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/backward/backward.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/minisat/core/Solver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/minisat/core/SolverTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/minisat/mtl/Alg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/minisat/mtl/Alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/minisat/mtl/Heap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/minisat/mtl/IntTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/minisat/mtl/Map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/minisat/mtl/Queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/minisat/mtl/Sort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/minisat/mtl/Vec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/minisat/mtl/XAlloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/minisat/simp/SimpSolver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/minisat/utils/Options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/minisat/utils/ParseUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/pugixml/pugiconfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/pugixml/pugixml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lpsolver/LPSolver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/misclayout/BalloonLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/misclayout/BertaultLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/misclayout/CircularLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/misclayout/LinearLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/misclayout/ProcrustesSubLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/orthogonal/CompactionConstraintGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/orthogonal/EdgeRouter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/orthogonal/FlowCompaction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/orthogonal/LongestPathCompaction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/orthogonal/MinimumEdgeDistances.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/orthogonal/OrthoLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/orthogonal/OrthoRep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/orthogonal/OrthoShaper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/orthogonal/edge_router/NodeInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/orthogonal/internal/CommonCompactionConstraintGraphBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/orthogonal/internal/RoutingChannel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/packing/CCLayoutPackModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/packing/ComponentSplitterLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/packing/SimpleCCPacker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/packing/TileToRowsCCPacker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/BoothLueker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/BoyerMyrvold.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/CrossingMinimizationModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/EdgeInsertionModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/EdgeTypePatterns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/EmbedderMaxFace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/EmbedderMaxFaceLayers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/EmbedderMinDepth.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/EmbedderMinDepthMaxFace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/EmbedderMinDepthMaxFaceLayers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/EmbedderMinDepthPiTa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/EmbedderModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/EmbedderOptimalFlexDraw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/ExtractKuratowskis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/FixedEmbeddingInserter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/KuratowskiSubdivision.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/LayoutPlanRepModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/MMCrossingMinimizationModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/MMEdgeInsertionModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/MMFixedEmbeddingInserter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/MMSubgraphPlanarizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/MMVariableEmbeddingInserter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/MaximalPlanarSubgraphSimple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/MaximumPlanarSubgraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/MultiEdgeApproxInserter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/NodeTypePatterns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/NonPlanarCore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/PlanRep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/PlanRepExpansion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/PlanRepInc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/PlanRepLight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/PlanarSubgraphBoyerMyrvold.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/PlanarSubgraphCactus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/PlanarSubgraphEmpty.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/PlanarSubgraphFast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/PlanarSubgraphModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/PlanarSubgraphTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/PlanarSubgraphTriangles.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/PlanarityModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/PlanarizationGridLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/PlanarizationLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/PlanarizerChordlessCycle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/PlanarizerMixedInsertion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/PlanarizerStarReinsertion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/RemoveReinsertType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/SimpleEmbedder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/SimpleIncNodeInserter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/StarInserter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/SubgraphPlanarizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/TopologyModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/VariableEmbeddingInserter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/VariableEmbeddingInserterBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/VariableEmbeddingInserterDyn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/booth_lueker/EmbedIndicator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/booth_lueker/EmbedPQTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/booth_lueker/IndInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/booth_lueker/PlanarLeafKey.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/booth_lueker/PlanarPQTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/boyer_myrvold/BoyerMyrvoldInit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/boyer_myrvold/BoyerMyrvoldPlanar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/boyer_myrvold/FindKuratowskis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/embedder/ConnectedSubgraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/embedder/CrossingStructure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/embedder/EmbedderBCTreeBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/embedder/EmbedderMaxFaceBiconnectedGraphs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/embedder/EmbedderMaxFaceBiconnectedGraphsLayers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/embedder/LayersBlockEmbedder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/embedder/MDMFLengthAttribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/embedding_inserter/CrossingsBucket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/embedding_inserter/FixEdgeInserterCore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/embedding_inserter/VarEdgeInserterCore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/embedding_inserter/VarEdgeInserterDynCore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/planar_subgraph_fast/MaxSequencePQTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/planar_subgraph_fast/PlanarSubgraphPQTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/planar_subgraph_fast/whaInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarity/planarization_layout/CliqueReplacer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarlayout/BiconnectedShellingOrder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarlayout/BitonicOrdering.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarlayout/FPPLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarlayout/GridLayoutModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarlayout/LeftistOrdering.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarlayout/MMCBBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarlayout/MMCBDoubleGrid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarlayout/MMCBLocalStretch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarlayout/MixedModelCrossingsBeautifierModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarlayout/MixedModelLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarlayout/PlanarDrawLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarlayout/PlanarStraightLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarlayout/SchnyderLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarlayout/ShellingOrder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarlayout/ShellingOrderModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarlayout/TriconnectedShellingOrder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarlayout/mixed_model_layout/IOPoints.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarlayout/mixed_model_layout/MMOrder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/planarlayout/mixed_model_layout/MixedModelBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/simultaneous/SimDraw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/simultaneous/SimDrawCaller.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/simultaneous/SimDrawColorizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/simultaneous/SimDrawCreator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/simultaneous/SimDrawCreatorSimple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/simultaneous/SimDrawManipulatorModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/simultaneous/TwoLayerCrossMinSimDraw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/tree/LCA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/tree/RadialTreeLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/tree/TreeLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/uml/FixedEmbeddingInserterUML.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/uml/LayoutPlanRepUMLModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/uml/OrthoLayoutUML.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/uml/PlanRepUML.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/uml/PlanarizationLayoutUML.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/uml/SubgraphPlanarizerUML.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/uml/UMLCrossingMinimizationModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/uml/UMLEdgeInsertionModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/uml/UMLGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/uml/UMLLayoutModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/uml/UmlDiagramGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/uml/UmlModelGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/uml/VariableEmbeddingInserterDynUML.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/uml/VariableEmbeddingInserterUML.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/upward/DominanceLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/upward/ExpansionGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/upward/FUPSModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/upward/FUPSSimple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/upward/FaceSinkGraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/upward/FixedEmbeddingUpwardEdgeInserter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/upward/LayerBasedUPRLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/upward/MaximalFUPS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/upward/SubgraphUpwardPlanarizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/upward/UPRLayoutModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/upward/UpwardEdgeInserterModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/upward/UpwardPlanRep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/upward/UpwardPlanarSubgraphModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/upward/UpwardPlanarSubgraphSimple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/upward/UpwardPlanarity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/upward/UpwardPlanarizationLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/upward/UpwardPlanarizerModule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/upward/VisibilityLayout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/upward/internal/UpSAT.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/upward/internal/UpwardPlanarityEmbeddedDigraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/include/ogdf/upward/internal/UpwardPlanaritySingleSource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/ClpConfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/Clp_C_Interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/config_clp_default.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/src/coin/Clp/config_default.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/src/coin/Osi/OsiConfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/src/coin/Osi/config_default.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/src/coin/Osi/config_osi_default.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/adapters/adapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/adapters/adapters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/adapters/snowhouse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_exception.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/assertionexception.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/constraints/constraints.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/constraints/containsconstraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/constraints/endswithconstraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/constraints/equalsconstraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/constraints/equalscontainerconstraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/constraints/equalswithdeltaconstraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/constraints/expressions/andexpression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/constraints/expressions/expression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/constraints/expressions/expression_fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/constraints/expressions/notexpression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/constraints/expressions/orexpression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/constraints/fulfillsconstraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/constraints/haslengthconstraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/constraints/isemptyconstraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/constraints/isgreaterthanconstraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/constraints/isgreaterthanorequaltoconstraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/constraints/islessthanconstraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/constraints/islessthanorequaltoconstraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/constraints/startswithconstraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/exceptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/fluent/constraintadapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/fluent/constraintlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/fluent/expressionbuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/fluent/fluent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/fluent/operators/andoperator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/fluent/operators/collections/alloperator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/fluent/operators/collections/atleastoperator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/fluent/operators/collections/atmostoperator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/fluent/operators/collections/collectionconstraintevaluator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/fluent/operators/collections/collectionoperator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/fluent/operators/collections/exactlyoperator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/fluent/operators/collections/noneoperator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/fluent/operators/constraintoperator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/fluent/operators/invalidexpressionexception.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/fluent/operators/notoperator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/fluent/operators/oroperator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/snowhouse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/stringize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/snowhouse/stringizers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/bandit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/external/optionparser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/failure_formatters/default_failure_formatter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/failure_formatters/failure_formatter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/failure_formatters/failure_formatters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/failure_formatters/visual_studio_failure_formatter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/filter_chain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/grammar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/listener.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/registration/registrar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/registration/spec_registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/reporters/colored_reporter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/reporters/colorizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/reporters/crash_reporter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/reporters/dots_reporter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/reporters/info_reporter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/reporters/progress_reporter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/reporters/reporters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/reporters/single_line_reporter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/reporters/spec_reporter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/reporters/test_run_summary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/reporters/xunit_reporter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/run_policies/always_run_policy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/run_policies/bandit_run_policy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/run_policies/never_run_policy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/run_policies/run_policies.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/run_policies/run_policy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/runner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/test_run_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/graphs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/resources.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/testing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/include/tinydir.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/src/basic/array_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ogdf/test/src/layout/layout_helpers.h" />
+    <Image Include="../../thirdparty/owemdjee/ogdf/doc/images/insertEdgePathEmbedded.png" />
+    <Image Include="../../thirdparty/owemdjee/ogdf/doc/images/ogdf-logo.png" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/LICENSE_GPL_v2.txt" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/LICENSE_GPL_v3.txt" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/cmake/FindLibbfd.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/cmake/FindLibdw.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/cmake/FindLibunwind.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/cmake/check-cpu-macros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/cmake/check-mallinfo2.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/cmake/check-pretty-function.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/cmake/check-sse3.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/cmake/coin.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/cmake/compiler-specifics.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/cmake/config_autogen.h.in" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/cmake/doc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/cmake/examples.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/cmake/group-files.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/cmake/make-user-target.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/cmake/ogdf-config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/cmake/ogdf.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/cmake/tests.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/doc/build-ogdf-docs.bat" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/doc/build-ogdf-docs.sh" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/doc/build.md" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/doc/defines.md" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/doc/examples/special/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/doc/ogdf-doxygen.cfg" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/doc/porting.md" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/doc/porting/baobab.md" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/doc/porting/catalpa.md" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/doc/porting/dogwood.md" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/doc/relnotes.md" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/doc/relnotes/baobab.md" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/doc/relnotes/bubinga.md" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/doc/relnotes/catalpa.md" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/doc/relnotes/dogwood.md" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/doc/relnotes/jacaranda.md" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/doc/relnotes/madrona.md" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/doc/relnotes/sakura.md" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/doc/relnotes/sassafras.md" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/include/coin/Readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/minisat/doc/ReleaseNotes-2.2.0.txt" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/makeMakefile.sh" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/src/coin/Readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/minisat/doc/ReleaseNotes-2.2.0.txt" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/LICENSE_1_0.txt" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/assertion_frameworks/snowhouse/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/test/resources/minisat/satisfiable.txt" />
+    <Xml Include="../../thirdparty/owemdjee/ogdf/doc/ogdf-layout.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ogdf/test/resources/fileformats/tsplibxml/invalid/invalid_vertex.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ogdf/test/resources/fileformats/tsplibxml/invalid/no_cost.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ogdf/test/resources/fileformats/tsplibxml/invalid/no_graph_tag.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ogdf/test/resources/fileformats/tsplibxml/invalid/no_root_tag.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ogdf/test/resources/fileformats/tsplibxml/valid/4cycle_directed.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ogdf/test/resources/fileformats/tsplibxml/valid/4cycle_undirected.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ogdf/test/resources/fileformats/tsplibxml/valid/complete_directed.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ogdf/test/resources/fileformats/tsplibxml/valid/directed.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ogdf/test/resources/fileformats/tsplibxml/valid/empty.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ogdf/test/resources/fileformats/tsplibxml/valid/selfloop.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ogdf/test/resources/fileformats/tsplibxml/valid/undirected.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

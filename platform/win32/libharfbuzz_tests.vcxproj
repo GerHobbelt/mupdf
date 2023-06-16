@@ -104,6 +104,8 @@
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -216,6 +218,7 @@
     <ClCompile Include="../../thirdparty/harfbuzz/src/hb-ot-shaper-vowel-constraints.cc" />
     <ClCompile Include="../../thirdparty/harfbuzz/src/hb-ot-tag.cc" />
     <ClCompile Include="../../thirdparty/harfbuzz/src/hb-ot-var.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/src/hb-outline.cc" />
     <ClCompile Include="../../thirdparty/harfbuzz/src/hb-paint-extents.cc" />
     <ClCompile Include="../../thirdparty/harfbuzz/src/hb-paint.cc" />
     <ClCompile Include="../../thirdparty/harfbuzz/src/hb-set.cc" />
@@ -241,6 +244,7 @@
     <ClCompile Include="../../thirdparty/harfbuzz/src/test-bimap.cc" />
     <ClCompile Include="../../thirdparty/harfbuzz/src/test-buffer-serialize.cc" />
     <ClCompile Include="../../thirdparty/harfbuzz/src/test-gpos-size-params.cc" />
+    <ClCompile Include="../../thirdparty/harfbuzz/src/test-gsub-get-alternates.cc" />
     <ClCompile Include="../../thirdparty/harfbuzz/src/test-gsub-would-substitute.cc" />
     <ClCompile Include="../../thirdparty/harfbuzz/src/test-iter.cc" />
     <ClCompile Include="../../thirdparty/harfbuzz/src/test-machinery.cc" />
@@ -558,6 +562,7 @@
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-ot-tag-table.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-ot-var-avar-table.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-ot-var-common.hh" />
+    <ClInclude Include="../../thirdparty/harfbuzz/src/hb-ot-var-cvar-table.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-ot-var-fvar-table.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-ot-var-gvar-table.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-ot-var-hvar-table.hh" />
@@ -565,6 +570,7 @@
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-ot-var.h" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-ot-vorg-table.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-ot.h" />
+    <ClInclude Include="../../thirdparty/harfbuzz/src/hb-outline.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-paint-extents.hh" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-paint.h" />
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-paint.hh" />
@@ -1245,6 +1251,10 @@
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/32bit_var_store/32bit_var_store.notdef-outline.62.otf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/32bit_var_store/32bit_var_store.notdef-outline.63.otf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/32bit_var_store/32bit_var_store.notdef-outline.64.otf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/apply_cvar_delta/Comfortaa-Regular-new.default.retain-all-codepoint.wght=300.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/apply_cvar_delta/Comfortaa-Regular-new.default.retain-all-codepoint.wght=700.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/apply_cvar_delta/Muli-ABC.default.retain-all-codepoint.wght=300.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/apply_cvar_delta/Muli-ABC.default.retain-all-codepoint.wght=700.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/basics/Comfortaa-Regular-new.default.61,62,63.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/basics/Comfortaa-Regular-new.default.61,63.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/basics/Comfortaa-Regular-new.default.61.ttf" />
@@ -1801,6 +1811,7 @@
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/cmap14/cmap14_font2.notdef-outline.4E08,4E09.otf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/cmap14/cmap14_font2.notdef-outline.4E08.otf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/cmap14/cmap14_font2.notdef-outline.retain-all-codepoint.otf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/collect_name_ids/SourceSerif4Variable-Roman_subset.keep-all-layout-features.retain-all-codepoint.otf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/colr/TwemojiMozilla.subset.default.32,3297,3299.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/colr/TwemojiMozilla.subset.default.32,3297.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/colr/TwemojiMozilla.subset.default.32,3299.ttf" />
@@ -1959,10 +1970,13 @@
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/glyf_bug_3131/glyf_bug_3131.retain-gids.retain-all-codepoint.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/glyph_names/Ubuntu-Regular.glyph-names.0x0,0x8,0x9,0x1d,0x20,0xb7.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/glyph_names/Ubuntu-Regular.glyph-names.retain-all-codepoint.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/instance_comp_glyph_empty_child/RobotoMono.default.retain-all-codepoint.wght=700.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/instance_feature_variations/MPLUS1-Variable.default.30DD.wght=100.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/instance_feature_variations/MPLUS1-Variable.default.30DD.wght=400.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/instance_no_double_free/Handjet.default.retain-all-codepoint.wght=100,ELGR=1,ELSH=2.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/instance_no_double_free/Handjet.notdef-outline.retain-all-codepoint.wght=100,ELGR=1,ELSH=2.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/instantiate_cff2/AdobeVFPrototype.default.retain-all-codepoint.wght=650,CNTR=50.otf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/instantiate_colrv1/Foldit.default.retain-all-codepoint.wght=900.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/instantiate_glyf/Roboto-Variable.ABC.default.retain-all-codepoint.wght=200,wdth=90.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/instantiate_glyf/Roboto-Variable.ABC.default.retain-all-codepoint.wght=650,wdth=85.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/instantiate_glyf/Roboto-Variable.composite.default.retain-all-codepoint.wght=200,wdth=90.ttf" />
@@ -2383,6 +2397,8 @@
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/post/SreeKrushnadevaraya-Regular.notdef-outline.retain-all-codepoint.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/post/SreeKrushnadevaraya-Regular.retain-gids.c30,c36,c40,c4d.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/post/SreeKrushnadevaraya-Regular.retain-gids.retain-all-codepoint.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/post_apply_mvar_delta/Recursive-ABC.no-layout.retain-all-codepoint.wght=400,CASL=0,CRSV=0,MONO=0,slnt=0.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/preprocess/Roboto-Regular.gids.61,62,63,30D9.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/sbix/sbix.default.58,59.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/sbix/sbix.default.58.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/sbix/sbix.default.59.ttf" />
@@ -2416,6 +2432,7 @@
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/MPLUS1-Variable.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/Molengo-Regular.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/Mplus1p-Regular.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/Muli-ABC.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/NanumMyeongjo-Regular-subset.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/NotoColorEmoji.subset.gap.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/NotoColorEmoji.subset.index_format3.ttf" />
@@ -2429,6 +2446,7 @@
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/NotoSansDevanagari-Regular.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/NotoSansNewa-Regular.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/NotoSerifMyanmar-Regular.otf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/Recursive-ABC.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/Roboto-Regular.abc.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/Roboto-Regular.smallcaps.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/Roboto-Regular.ttf" />
@@ -2436,9 +2454,11 @@
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/Roboto-Variable.composite.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/Roboto-Variable.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/RobotoFlex-Variable.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/RobotoMono.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/STIXTwoMath-Regular.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/SourceHanSans-Regular_subset.otf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/SourceSansPro-Regular.otf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/SourceSerif4Variable-Roman_subset.otf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/SourceSerifVariable-Roman.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/SpectralSC-ExtraLightItalic.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/SreeKrushnadevaraya-Regular.ttf" />
@@ -2536,6 +2556,7 @@
     <Text Include="../../thirdparty/harfbuzz/src/harfbuzz.pc.in" />
     <Text Include="../../thirdparty/harfbuzz/src/hb-features.h.in" />
     <Text Include="../../thirdparty/harfbuzz/src/hb-version.h.in" />
+    <Text Include="../../thirdparty/harfbuzz/src/justify.py" />
     <Text Include="../../thirdparty/harfbuzz/src/ms-use/IndicPositionalCategory-Additional.txt" />
     <Text Include="../../thirdparty/harfbuzz/src/ms-use/IndicShapingInvalidCluster.txt" />
     <Text Include="../../thirdparty/harfbuzz/src/ms-use/IndicSyllabicCategory-Additional.txt" />

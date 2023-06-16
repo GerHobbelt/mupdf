@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "gl-app.h"
 
@@ -487,13 +487,14 @@ static void open_attachment_dialog(void)
 		ui.dialog = NULL;
 		if (attach_filename[0] != 0)
 		{
+			pdf_obj *fs = NULL;
 			pdf_begin_operation(ctx, pdf, "Embed file attachment");
+			fz_var(fs);
 			fz_try(ctx)
 			{
 				int64_t created, modified;
 				fz_buffer *contents;
 				const char *filename;
-				pdf_obj *fs;
 
 				filename = fz_basename(attach_filename);
 
@@ -509,6 +510,7 @@ static void open_attachment_dialog(void)
 			}
 			fz_always(ctx)
 			{
+				pdf_drop_obj(ctx, fs);
 				pdf_end_operation(ctx, pdf);
 			}
 			fz_catch(ctx)

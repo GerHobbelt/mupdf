@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 
@@ -758,8 +758,8 @@ compressed_image_get_pixmap(fz_context *ctx, const fz_image *image_, fz_irect *s
 	case FZ_IMAGE_BMP:
 		tile = fz_load_bmp(ctx, image->buffer->buffer->data, image->buffer->buffer->len);
 		break;
-#if FZ_ENABLE_TIFF
 	case FZ_IMAGE_TIFF:
+#if FZ_ENABLE_TIFF
 		tile = fz_load_tiff(ctx, image->buffer->buffer->data, image->buffer->buffer->len);
 		break;
 #else
@@ -771,27 +771,30 @@ compressed_image_get_pixmap(fz_context *ctx, const fz_image *image_, fz_irect *s
 	case FZ_IMAGE_JXR:
 		tile = fz_load_jxr(ctx, image->buffer->buffer->data, image->buffer->buffer->len);
 		break;
-#if FZ_ENABLE_JPX
 	case FZ_IMAGE_JPX:
+#if FZ_ENABLE_JPX
 		tile = fz_load_jpx(ctx, image->buffer->buffer->data, image->buffer->buffer->len, image->super.colorspace);
 		break;
 #else
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Jpeg2000 not supported in this build");
 #endif
-#if FZ_ENABLE_WEBP
 	case FZ_IMAGE_WEBP:
+#if FZ_ENABLE_WEBP
 		tile = fz_load_webp(ctx, image->buffer->buffer->data, image->buffer->buffer->len);
 		break;
 #else
 		fz_throw(ctx, FZ_ERROR_GENERIC, "WEBP not supported in this build");
 #endif
+	case FZ_IMAGE_PSD:
+		tile = fz_load_psd(ctx, image->buffer->buffer->data, image->buffer->buffer->len);
+		break;
 	case FZ_IMAGE_JPEG:
 		/* Scan JPEG stream and patch missing height values in header */
 		{
 			unsigned char *s = image->buffer->buffer->data;
 			unsigned char *e = s + image->buffer->buffer->len;
 			unsigned char *d;
-			for (d = s + 2; s < d && d < e - 9 && d[0] == 0xFF; d += (d[2] << 8 | d[3]) + 2)
+			for (d = s + 2; s < d && d + 9 < e && d[0] == 0xFF; d += (d[2] << 8 | d[3]) + 2)
 			{
 				if (d[1] < 0xC0 || (0xC3 < d[1] && d[1] < 0xC9) || 0xCB < d[1])
 					continue;
@@ -1245,6 +1248,7 @@ fz_image_type_name(int type)
 	case FZ_IMAGE_PNM: return "pnm";
 	case FZ_IMAGE_TIFF: return "tiff";
 	case FZ_IMAGE_WEBP: return "webp";
+	case FZ_IMAGE_PSD: return "psd";
 	}
 }
 
@@ -1267,6 +1271,7 @@ fz_lookup_image_type(const char *type)
 	if (!strcmp(type, "pnm")) return FZ_IMAGE_PNM;
 	if (!strcmp(type, "tiff")) return FZ_IMAGE_TIFF;
 	if (!strcmp(type, "webp")) return FZ_IMAGE_WEBP;
+	if (!strcmp(type, "psd")) return FZ_IMAGE_PSD;
 	return FZ_IMAGE_UNKNOWN;
 }
 
@@ -1315,7 +1320,64 @@ fz_recognize_image_format(fz_context *ctx, const unsigned char *p, int n)
 		return FZ_IMAGE_JPEGXL;
 	if (p[0] == 0xff && p[1] == 0x0a)
 		return FZ_IMAGE_JPEGXL;
+	if (p[0] == '8' && p[1] == 'B' && p[2] == 'P' && p[3] == 'S')
+		return FZ_IMAGE_PSD;
 	return FZ_IMAGE_UNKNOWN;
+}
+
+void
+fz_image_info_from_buffer(fz_context *ctx, fz_buffer *buffer, int *w, int *h, int *xres, int *yres, fz_colorspace **cspace, uint8_t *orientation)
+{
+	size_t len = buffer->len;
+	unsigned char *buf = buffer->data;
+	int type;
+
+	if (len < 8)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "unknown image file format");
+
+	*w = 0;
+	*h = 0;
+	*xres = 0;
+	*yres = 0;
+	*cspace = NULL;
+	*orientation = 0;
+
+	type = fz_recognize_image_format(ctx, buf, len);
+	switch (type)
+	{
+	case FZ_IMAGE_PNM:
+		fz_load_pnm_info(ctx, buf, len, w, h, xres, yres, cspace, orientation);
+		break;
+	case FZ_IMAGE_JPX:
+		fz_load_jpx_info(ctx, buf, len, w, h, xres, yres, cspace, orientation);
+		break;
+	case FZ_IMAGE_JPEG:
+		fz_load_jpeg_info(ctx, buf, len, w, h, xres, yres, cspace, orientation);
+		break;
+	case FZ_IMAGE_PNG:
+		fz_load_png_info(ctx, buf, len, w, h, xres, yres, cspace, orientation);
+		break;
+	case FZ_IMAGE_PSD:
+		fz_load_psd_info(ctx, buf, len, w, h, xres, yres, cspace, orientation);
+		break;
+	case FZ_IMAGE_JXR:
+		fz_load_jxr_info(ctx, buf, len, w, h, xres, yres, cspace, orientation);
+		break;
+	case FZ_IMAGE_TIFF:
+		fz_load_tiff_info(ctx, buf, len, w, h, xres, yres, cspace, orientation);
+		break;
+	case FZ_IMAGE_GIF:
+		fz_load_gif_info(ctx, buf, len, w, h, xres, yres, cspace, orientation);
+		break;
+	case FZ_IMAGE_BMP:
+		fz_load_bmp_info(ctx, buf, len, w, h, xres, yres, cspace, orientation);
+		break;
+	case FZ_IMAGE_JBIG2:
+		fz_load_jbig2_info(ctx, buf, len, w, h, xres, yres, cspace, orientation);
+		break;
+	default:
+		fz_throw(ctx, FZ_ERROR_GENERIC, "unknown image file format");
+	}
 }
 
 fz_image *
@@ -1336,11 +1398,11 @@ fz_new_image_from_buffer(fz_context *ctx, fz_buffer *buffer)
 	switch (type)
 	{
 	case FZ_IMAGE_PNM:
-		fz_load_pnm_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_pnm_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 #if FZ_ENABLE_JPX
 	case FZ_IMAGE_JPX:
-		fz_load_jpx_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_jpx_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 #else
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Jpeg2000 (JPX) not supported in this build");
@@ -1356,33 +1418,36 @@ fz_new_image_from_buffer(fz_context *ctx, fz_buffer *buffer)
 #endif
 		break;
 	case FZ_IMAGE_PNG:
-		fz_load_png_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_png_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
+		break;
+	case FZ_IMAGE_PSD:
+		fz_load_psd_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 	case FZ_IMAGE_JXR:
-		fz_load_jxr_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_jxr_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
-#if FZ_ENABLE_WEBP
 	case FZ_IMAGE_WEBP:
-		fz_load_webp_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+#if FZ_ENABLE_WEBP
+		fz_load_webp_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 #else
 		fz_throw(ctx, FZ_ERROR_GENERIC, "WEBP not supported in this build");
 #endif
-#if FZ_ENABLE_TIFF
 	case FZ_IMAGE_TIFF:
-		fz_load_tiff_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+#if FZ_ENABLE_TIFF
+		fz_load_tiff_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 #else
 		fz_throw(ctx, FZ_ERROR_GENERIC, "TIFF not supported in this build");
 #endif
 	case FZ_IMAGE_GIF:
-		fz_load_gif_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_gif_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 	case FZ_IMAGE_BMP:
-		fz_load_bmp_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_bmp_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 	case FZ_IMAGE_JBIG2:
-		fz_load_jbig2_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace);
+		fz_load_jbig2_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		bpc = 1;
 		break;
 	default:

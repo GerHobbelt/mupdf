@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 
@@ -41,6 +41,8 @@ typedef struct
 	const char *format;
 	int page_count;
 	fz_pixmap *(*load_subimage)(fz_context *ctx, const unsigned char *p, size_t total, int subimage);
+	void (*load_info_subimage)(fz_context *ctx, const unsigned char *p, size_t total, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, uint8_t *orientationp, int subimage);
+
 } img_document;
 
 static void
@@ -64,8 +66,12 @@ img_bound_page(fz_context *ctx, fz_page *page_)
 	fz_image *image = page->image;
 	int xres, yres;
 	fz_rect bbox;
-	uint8_t orientation = fz_image_orientation(ctx, page->image);
+	uint8_t orientation = 0;
 
+	if (!image)
+		return fz_empty_rect;
+
+	orientation = fz_image_orientation(ctx, page->image);
 	fz_image_resolution(image, &xres, &yres);
 	bbox.x0 = bbox.y0 = 0;
 	if (orientation == 0 || (orientation & 1) == 1)
@@ -78,6 +84,7 @@ img_bound_page(fz_context *ctx, fz_page *page_)
 		bbox.y1 = image->w * DPI / xres;
 		bbox.x1 = image->h * DPI / yres;
 	}
+
 	return bbox;
 }
 
@@ -88,9 +95,14 @@ img_run_page(fz_context *ctx, fz_page *page_, fz_device *dev, fz_matrix ctm)
 	fz_image *image = page->image;
 	int xres, yres;
 	float w, h;
-	uint8_t orientation = fz_image_orientation(ctx, page->image);
-	fz_matrix immat = fz_image_orientation_matrix(ctx, page->image);
+	uint8_t orientation;
+	fz_matrix immat;
 
+	if (!image)
+		return;
+
+	orientation = fz_image_orientation(ctx, page->image);
+	immat = fz_image_orientation_matrix(ctx, page->image);
 	fz_image_resolution(image, &xres, &yres);
 	if (orientation == 0 || (orientation & 1) == 1)
 	{
@@ -121,6 +133,9 @@ img_load_page(fz_context *ctx, fz_document *doc_, int chapter, int number)
 	fz_pixmap *pixmap = NULL;
 	fz_image *image = NULL;
 	img_page *page = NULL;
+	int w, h, xres, yres;
+	uint8_t orientation;
+	fz_colorspace *cs = NULL;
 
 	if (number < 0 || number >= doc->page_count)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot load page %d", number);
@@ -131,17 +146,29 @@ img_load_page(fz_context *ctx, fz_document *doc_, int chapter, int number)
 
 	fz_try(ctx)
 	{
-		if (doc->load_subimage)
+		if (doc->load_info_subimage && doc->load_subimage)
 		{
 			size_t len;
 			unsigned char *data;
+
 			len = fz_buffer_storage(ctx, doc->buffer, &data);
-			pixmap = doc->load_subimage(ctx, data, len, number);
-			image = fz_new_image_from_pixmap(ctx, pixmap, NULL);
+			doc->load_info_subimage(ctx, data, len, &w, &h, &xres, &yres, &cs, &orientation, number);
+
+			fz_try(ctx)
+			{
+				pixmap = doc->load_subimage(ctx, data, len, number);
+				image = fz_new_image_from_pixmap(ctx, pixmap, NULL);
+			}
+			fz_catch(ctx)
+				image = NULL;
 		}
 		else
 		{
-			image = fz_new_image_from_buffer(ctx, doc->buffer);
+			fz_image_info_from_buffer(ctx, doc->buffer, &w, &h, &xres, &yres, &cs, &orientation);
+			fz_try(ctx)
+				image = fz_new_image_from_buffer(ctx, doc->buffer);
+			fz_catch(ctx)
+				image = NULL;
 		}
 
 		page = fz_new_derived_page(ctx, img_page, doc_);
@@ -154,6 +181,7 @@ img_load_page(fz_context *ctx, fz_document *doc_, int chapter, int number)
 	{
 		fz_drop_image(ctx, image);
 		fz_drop_pixmap(ctx, pixmap);
+		fz_drop_colorspace(ctx, cs);
 	}
 	fz_catch(ctx)
 	{
@@ -165,7 +193,7 @@ img_load_page(fz_context *ctx, fz_document *doc_, int chapter, int number)
 }
 
 static int
-img_lookup_metadata(fz_context *ctx, fz_document *doc_, const char *key, char *buf, int size)
+img_lookup_metadata(fz_context *ctx, fz_document *doc_, const char *key, char *buf, size_t size)
 {
 	img_document *doc = (img_document*)doc_;
 	if (!strcmp(key, FZ_META_FORMAT))
@@ -200,6 +228,7 @@ img_open_document_with_stream(fz_context *ctx, fz_stream *file)
 #if FZ_ENABLE_TIFF 
 		case FZ_IMAGE_TIFF:
 			doc->page_count = fz_load_tiff_subimage_count(ctx, data, len);
+			doc->load_info_subimage = fz_load_tiff_info_subimage;
 			doc->load_subimage = fz_load_tiff_subimage;
 			doc->format = "TIFF";
 			break;
@@ -207,6 +236,7 @@ img_open_document_with_stream(fz_context *ctx, fz_stream *file)
 
 		case FZ_IMAGE_PNM:
 			doc->page_count = fz_load_pnm_subimage_count(ctx, data, len);
+			doc->load_info_subimage = fz_load_pnm_info_subimage;
 			doc->load_subimage = fz_load_pnm_subimage;
 			doc->format = "PNM";
 			break;
@@ -214,12 +244,16 @@ img_open_document_with_stream(fz_context *ctx, fz_stream *file)
 		case FZ_IMAGE_JBIG2:
 			doc->page_count = fz_load_jbig2_subimage_count(ctx, data, len);
 			if (doc->page_count > 1)
+			{
+				doc->load_info_subimage = fz_load_jbig2_info_subimage;
 				doc->load_subimage = fz_load_jbig2_subimage;
+			}
 			doc->format = "JBIG2";
 			break;
 		
 		case FZ_IMAGE_BMP:
 			doc->page_count = fz_load_bmp_subimage_count(ctx, data, len);
+			doc->load_info_subimage = fz_load_bmp_info_subimage;
 			doc->load_subimage = fz_load_bmp_subimage;
 			doc->format = "BMP";
 			break;
@@ -237,6 +271,23 @@ img_open_document_with_stream(fz_context *ctx, fz_stream *file)
 	}
 
 	return (fz_document*)doc;
+}
+
+static int
+img_recognize_content(fz_context *ctx, fz_stream *stream)
+{
+	unsigned char data[16];
+	size_t n = fz_read(ctx, stream, data, sizeof(data));
+	int fmt;
+
+	if (n != 8)
+		return 0;
+
+	fmt = fz_recognize_image_format(ctx, data, sizeof(data));
+	if (fmt != FZ_IMAGE_UNKNOWN)
+		return 100;
+
+	return 0;
 }
 
 static const char *img_extensions[] =
@@ -264,6 +315,7 @@ static const char *img_extensions[] =
 	"png",
 	"pnm",
 	"ppm",
+	"psd",
 	"tif",
 	"tiff",
 	"wdp",
@@ -284,6 +336,7 @@ static const char *img_mimetypes[] =
 	"image/tiff",
 	"image/vnd.ms-photo",
 	"image/webp",
+	"image/vnd.adobe.photoshop",
 	"image/x-jb2",
 	"image/x-jbig2",
 	"image/x-portable-anymap",
@@ -304,7 +357,8 @@ fz_document_handler img_document_handler =
 	img_extensions,
 	img_mimetypes,
 	NULL,
-	NULL
+	NULL,
+	img_recognize_content
 };
 
 #endif

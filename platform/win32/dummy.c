@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 /* We put the font object files in the 'AdditionalDependencies' list,
  * but we need at least one C file to link the library.
@@ -41,7 +41,7 @@
 //#include <winres.h>    //<-- don't even TRY to use this one as you'll get severe collisions with winver.h et al.!
 //#include <winresrc.h>  //<-- don't even TRY to use this one as you'll get severe collisions with winver.h et al.!
 
-#include <afxres.h>      // -- for MFC stuff; no collisions or b0rks with the (uncommented!) includes above. 
+#include "afxres.h"      // -- for MFC stuff; no collisions or b0rks with the (uncommented!) includes above. --> C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\***\atlmfc\include\afxres.h
 
 
 // ... and now in the repeat, testing the header include protections of those darned system files:

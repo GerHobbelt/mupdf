@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #ifndef MUPDF_FITZ_LINK_H
 #define MUPDF_FITZ_LINK_H
@@ -75,6 +75,7 @@ typedef struct fz_link
 
 typedef enum
 {
+	FZ_LINK_DEST_UNKNOWN,
 	FZ_LINK_DEST_FIT,
 	FZ_LINK_DEST_FIT_B,
 	FZ_LINK_DEST_FIT_H,

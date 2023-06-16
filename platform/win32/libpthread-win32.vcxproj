@@ -109,12 +109,14 @@
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;HAVE_CONFIG_H;__CLEANUP_SEH;PTW32_STATIC_LIB;PTHREAD_WIN32_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -123,15 +125,15 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>..\..\thirdparty\owemdjee\pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;HAVE_CONFIG_H;__CLEANUP_SEH;PTW32_STATIC_LIB;PTHREAD_WIN32_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;HAVE_CONFIG_H;__CLEANUP_SEH;PTW32_STATIC_LIB;PTHREAD_WIN32_STATICLIB;PTW32_RC_MSC;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\thirdparty\owemdjee\pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -142,7 +144,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;HAVE_CONFIG_H;__CLEANUP_SEH;PTW32_STATIC_LIB;PTHREAD_WIN32_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -150,15 +152,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\thirdparty\owemdjee\pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;HAVE_CONFIG_H;__CLEANUP_SEH;PTW32_STATIC_LIB;PTHREAD_WIN32_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;HAVE_CONFIG_H;__CLEANUP_SEH;PTW32_STATIC_LIB;PTHREAD_WIN32_STATICLIB;PTW32_RC_MSC;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\thirdparty\owemdjee\pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -169,7 +171,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;HAVE_CONFIG_H;__CLEANUP_SEH;PTW32_STATIC_LIB;PTHREAD_WIN32_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -179,14 +181,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\thirdparty\owemdjee\pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;HAVE_CONFIG_H;__CLEANUP_SEH;PTW32_STATIC_LIB;PTHREAD_WIN32_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;HAVE_CONFIG_H;__CLEANUP_SEH;PTW32_STATIC_LIB;PTHREAD_WIN32_STATICLIB;PTW32_RC_MSC;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\thirdparty\owemdjee\pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -197,7 +199,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;HAVE_CONFIG_H;__CLEANUP_SEH;PTW32_STATIC_LIB;PTHREAD_WIN32_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -205,15 +207,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\thirdparty\owemdjee\pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;MONOLITHIC_PTHREAD_TESTS;BUILDING_LIBPTHREAD_WIN32;HAVE_CONFIG_H;__CLEANUP_SEH;PTW32_STATIC_LIB;PTHREAD_WIN32_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;PTHREAD_WIN32_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPTHREAD_WIN32;HAVE_CONFIG_H;__CLEANUP_SEH;PTW32_STATIC_LIB;PTHREAD_WIN32_STATICLIB;PTW32_RC_MSC;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\thirdparty\owemdjee\pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -231,9 +233,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/dll.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/errno.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/global.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread-EH.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread-JMP.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_attr_destroy.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_attr_getaffinity_np.c" />
     <ClCompile Include="../../thirdparty/owemdjee/pthread-win32/pthread_attr_getdetachstate.c" />
@@ -552,11 +551,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/pthread-win32/semaphore.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pthread-win32/tests/benchtest.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pthread-win32/tests/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pthread-win32/windows/VS2010/resource.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pthread-win32/windows/VS2015/resource.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pthread-win32/windows/VS2017/resource.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pthread-win32/windows/VS2019/resource.h" />
     <ClInclude Include="../../thirdparty/owemdjee/pthread-win32/windows/VS2022/resource.h" />
-    <ResourceCompile Include="../../thirdparty/owemdjee/pthread-win32/version.rc" />
     <Text Include="../../thirdparty/owemdjee/pthread-win32/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/pthread-win32/ChangeLog.md" />
     <Text Include="../../thirdparty/owemdjee/pthread-win32/GNUmakefile.in" />
@@ -564,7 +563,6 @@
     <Text Include="../../thirdparty/owemdjee/pthread-win32/builddmc.bat" />
     <Text Include="../../thirdparty/owemdjee/pthread-win32/cmake/get_version.cmake" />
     <Text Include="../../thirdparty/owemdjee/pthread-win32/cmake/target_arch.cmake" />
-    <Text Include="../../thirdparty/owemdjee/pthread-win32/cmake/version.rc.in" />
     <Text Include="../../thirdparty/owemdjee/pthread-win32/configure.ac" />
     <Text Include="../../thirdparty/owemdjee/pthread-win32/docs/ANNOUNCE.md" />
     <Text Include="../../thirdparty/owemdjee/pthread-win32/docs/BUGS.md" />

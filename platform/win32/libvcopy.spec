@@ -1,0 +1,5 @@
+
+also-ignore:
+	/test/
+	/tool/
+	

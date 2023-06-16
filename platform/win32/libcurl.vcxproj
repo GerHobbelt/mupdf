@@ -109,6 +109,8 @@
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -234,9 +236,13 @@
     <ClCompile Include="../../thirdparty/curl/lib/asyn-ares.c" />
     <ClCompile Include="../../thirdparty/curl/lib/asyn-thread.c" />
     <ClCompile Include="../../thirdparty/curl/lib/base64.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/bufq.c" />
     <ClCompile Include="../../thirdparty/curl/lib/bufref.c" />
     <ClCompile Include="../../thirdparty/curl/lib/c-hyper.c" />
-    <ClCompile Include="../../thirdparty/curl/lib/cf-http.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/cf-h1-proxy.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/cf-h2-proxy.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/cf-haproxy.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/cf-https-connect.c" />
     <ClCompile Include="../../thirdparty/curl/lib/cf-socket.c" />
     <ClCompile Include="../../thirdparty/curl/lib/cfilters.c" />
     <ClCompile Include="../../thirdparty/curl/lib/conncache.c" />
@@ -264,6 +270,7 @@
     <ClCompile Include="../../thirdparty/curl/lib/dict.c" />
     <ClCompile Include="../../thirdparty/curl/lib/doh.c" />
     <ClCompile Include="../../thirdparty/curl/lib/dynbuf.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/dynhds.c" />
     <ClCompile Include="../../thirdparty/curl/lib/easy.c" />
     <ClCompile Include="../../thirdparty/curl/lib/easygetopt.c" />
     <ClCompile Include="../../thirdparty/curl/lib/easyoptions.c" />
@@ -277,7 +284,6 @@
     <ClCompile Include="../../thirdparty/curl/lib/getenv.c" />
     <ClCompile Include="../../thirdparty/curl/lib/getinfo.c" />
     <ClCompile Include="../../thirdparty/curl/lib/gopher.c" />
-    <ClCompile Include="../../thirdparty/curl/lib/h2h3.c" />
     <ClCompile Include="../../thirdparty/curl/lib/hash.c" />
     <ClCompile Include="../../thirdparty/curl/lib/headers.c" />
     <ClCompile Include="../../thirdparty/curl/lib/hmac.c" />
@@ -288,6 +294,7 @@
     <ClCompile Include="../../thirdparty/curl/lib/hostsyn.c" />
     <ClCompile Include="../../thirdparty/curl/lib/hsts.c" />
     <ClCompile Include="../../thirdparty/curl/lib/http.c" />
+    <ClCompile Include="../../thirdparty/curl/lib/http1.c" />
     <ClCompile Include="../../thirdparty/curl/lib/http2.c" />
     <ClCompile Include="../../thirdparty/curl/lib/http_aws_sigv4.c" />
     <ClCompile Include="../../thirdparty/curl/lib/http_chunks.c" />
@@ -389,7 +396,6 @@
     <ClCompile Include="../../thirdparty/curl/lib/vtls/wolfssl.c" />
     <ClCompile Include="../../thirdparty/curl/lib/vtls/x509asn1.c" />
     <ClCompile Include="../../thirdparty/curl/lib/warnless.c" />
-    <ClCompile Include="../../thirdparty/curl/lib/wildcard.c" />
     <ClCompile Include="../../thirdparty/curl/lib/ws.c" />
     <ClCompile Include="../../thirdparty/curl/src/slist_wc.c" />
     <ClCompile Include="../../thirdparty/curl/src/tool_binmode.c" />
@@ -423,6 +429,7 @@
     <ClCompile Include="../../thirdparty/curl/src/tool_progress.c" />
     <ClCompile Include="../../thirdparty/curl/src/tool_setopt.c" />
     <ClCompile Include="../../thirdparty/curl/src/tool_sleep.c" />
+    <ClCompile Include="../../thirdparty/curl/src/tool_stderr.c" />
     <ClCompile Include="../../thirdparty/curl/src/tool_strdup.c" />
     <ClCompile Include="../../thirdparty/curl/src/tool_urlglob.c" />
     <ClCompile Include="../../thirdparty/curl/src/tool_util.c" />
@@ -451,10 +458,14 @@
     <ClInclude Include="../../thirdparty/curl/lib/amigaos.h" />
     <ClInclude Include="../../thirdparty/curl/lib/arpa_telnet.h" />
     <ClInclude Include="../../thirdparty/curl/lib/asyn.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/bufq.h" />
     <ClInclude Include="../../thirdparty/curl/lib/bufref.h" />
     <ClInclude Include="../../thirdparty/curl/lib/c-hyper.h" />
     <ClInclude Include="../../thirdparty/curl/lib/cacert.h" />
-    <ClInclude Include="../../thirdparty/curl/lib/cf-http.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/cf-h1-proxy.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/cf-h2-proxy.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/cf-haproxy.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/cf-https-connect.h" />
     <ClInclude Include="../../thirdparty/curl/lib/cf-socket.h" />
     <ClInclude Include="../../thirdparty/curl/lib/cfilters.h" />
     <ClInclude Include="../../thirdparty/curl/lib/config-amigaos.h" />
@@ -505,6 +516,7 @@
     <ClInclude Include="../../thirdparty/curl/lib/dict.h" />
     <ClInclude Include="../../thirdparty/curl/lib/doh.h" />
     <ClInclude Include="../../thirdparty/curl/lib/dynbuf.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/dynhds.h" />
     <ClInclude Include="../../thirdparty/curl/lib/easy_lock.h" />
     <ClInclude Include="../../thirdparty/curl/lib/easyif.h" />
     <ClInclude Include="../../thirdparty/curl/lib/easyoptions.h" />
@@ -518,12 +530,12 @@
     <ClInclude Include="../../thirdparty/curl/lib/functypes.h" />
     <ClInclude Include="../../thirdparty/curl/lib/getinfo.h" />
     <ClInclude Include="../../thirdparty/curl/lib/gopher.h" />
-    <ClInclude Include="../../thirdparty/curl/lib/h2h3.h" />
     <ClInclude Include="../../thirdparty/curl/lib/hash.h" />
     <ClInclude Include="../../thirdparty/curl/lib/headers.h" />
     <ClInclude Include="../../thirdparty/curl/lib/hostip.h" />
     <ClInclude Include="../../thirdparty/curl/lib/hsts.h" />
     <ClInclude Include="../../thirdparty/curl/lib/http.h" />
+    <ClInclude Include="../../thirdparty/curl/lib/http1.h" />
     <ClInclude Include="../../thirdparty/curl/lib/http2.h" />
     <ClInclude Include="../../thirdparty/curl/lib/http_aws_sigv4.h" />
     <ClInclude Include="../../thirdparty/curl/lib/http_chunks.h" />
@@ -611,7 +623,6 @@
     <ClInclude Include="../../thirdparty/curl/lib/vtls/wolfssl.h" />
     <ClInclude Include="../../thirdparty/curl/lib/vtls/x509asn1.h" />
     <ClInclude Include="../../thirdparty/curl/lib/warnless.h" />
-    <ClInclude Include="../../thirdparty/curl/lib/wildcard.h" />
     <ClInclude Include="../../thirdparty/curl/lib/ws.h" />
     <ClInclude Include="../../thirdparty/curl/plan9/lib/mkfile.inc" />
     <ClInclude Include="../../thirdparty/curl/plan9/src/mkfile.inc" />
@@ -651,6 +662,7 @@
     <ClInclude Include="../../thirdparty/curl/src/tool_setopt.h" />
     <ClInclude Include="../../thirdparty/curl/src/tool_setup.h" />
     <ClInclude Include="../../thirdparty/curl/src/tool_sleep.h" />
+    <ClInclude Include="../../thirdparty/curl/src/tool_stderr.h" />
     <ClInclude Include="../../thirdparty/curl/src/tool_strdup.h" />
     <ClInclude Include="../../thirdparty/curl/src/tool_urlglob.h" />
     <ClInclude Include="../../thirdparty/curl/src/tool_util.h" />
@@ -676,6 +688,7 @@
     <Text Include="../../thirdparty/curl/curl-config.in" />
     <Text Include="../../thirdparty/curl/docs/ALTSVC.md" />
     <Text Include="../../thirdparty/curl/docs/BINDINGS.md" />
+    <Text Include="../../thirdparty/curl/docs/BUFQ.md" />
     <Text Include="../../thirdparty/curl/docs/BUFREF.md" />
     <Text Include="../../thirdparty/curl/docs/BUG-BOUNTY.md" />
     <Text Include="../../thirdparty/curl/docs/BUGS.md" />
@@ -714,6 +727,7 @@
     <Text Include="../../thirdparty/curl/docs/RELEASE-PROCEDURE.md" />
     <Text Include="../../thirdparty/curl/docs/ROADMAP.md" />
     <Text Include="../../thirdparty/curl/docs/RUSTLS.md" />
+    <Text Include="../../thirdparty/curl/docs/SECURITY-ADVISORY.md" />
     <Text Include="../../thirdparty/curl/docs/SECURITY-PROCESS.md" />
     <Text Include="../../thirdparty/curl/docs/SSL-PROBLEMS.md" />
     <Text Include="../../thirdparty/curl/docs/SSLCERTS.md" />
@@ -740,7 +754,6 @@
     <Text Include="../../thirdparty/curl/lib/libcurl.plist.in" />
     <Text Include="../../thirdparty/curl/lib/libcurl.vers.in" />
     <Text Include="../../thirdparty/curl/libcurl.pc.in" />
-    <Text Include="../../thirdparty/curl/mlc_config.json" />
     <Text Include="../../thirdparty/curl/plan9/README" />
     <Text Include="../../thirdparty/curl/projects/README.md" />
     <Text Include="../../thirdparty/curl/projects/build-openssl.bat" />

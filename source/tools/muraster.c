@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 /*
  * muraster -- Convert a document to a raster file.
@@ -1846,14 +1846,11 @@ static void mu_drop_context(void)
 int main(int argc, const char** argv)
 {
 	const char *password = "";
-	fz_document *doc = NULL;
 	int c;
 	fz_alloc_context trace_alloc_ctx = { &trace_info, trace_malloc, trace_realloc, trace_free };
 	fz_alloc_context *alloc_ctx = NULL;
 	fz_locks_context *locks = NULL;
 	size_t max_store = FZ_STORE_DEFAULT;
-
-	fz_var(doc);
 
 	// reset global vars: this tool MAY be re-invoked via bulktest or others and should RESET completely between runs:
 	//mudraw_is_toplevel_ctx = 0;
@@ -2044,7 +2041,7 @@ int main(int argc, const char** argv)
 		muraster_is_toplevel_ctx = 1;
 	}
 
-	// registeer a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
+	// register a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
 	fz_set_default_jpeg_sys_mem_mgr();
 
 	atexit(mu_drop_context);
@@ -2237,6 +2234,9 @@ int main(int argc, const char** argv)
 			while (fz_optind < argc)
 			{
 				int layouttime;
+				fz_document* doc = NULL;
+
+				fz_var(doc);
 
 				fz_try(ctx)
 				{
@@ -2297,8 +2297,8 @@ int main(int argc, const char** argv)
 		}
 		fz_catch(ctx)
 		{
-			fz_drop_document(ctx, doc);
-			fz_error(ctx, "cannot draw '%s': %s", filename, fz_caught_message(ctx));
+			fz_log_error(ctx, fz_caught_message(ctx));
+			fz_log_error_printf(ctx, "cannot draw '%s'", filename);
 			errored = 1;
 		}
 	}
@@ -2377,9 +2377,9 @@ int main(int argc, const char** argv)
 	}
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "%s", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
 		if (!errored) {
-			fz_error(ctx, "Rendering failed");
+			fz_error(ctx, "Rendering failed.");
 			errored = 1;
 		}
 	}

@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #ifndef FZ_CONFIG_H
 #define FZ_CONFIG_H
@@ -57,6 +57,13 @@
 /* #define FZ_PLOTTERS_RGB 1 */
 /* #define FZ_PLOTTERS_CMYK 1 */
 /* #define FZ_PLOTTERS_N 1 */
+
+/**
+	Choose to enable/disable the option for Gamma blending.
+
+	To disable, define FZ_ENABLE_GAMMA to 0.
+*/
+/* #define FZ_ENABLE_GAMMA 0 */
 
 /**
 	Choose which document agents to include.
@@ -207,6 +214,10 @@
 #if FZ_PLOTTERS_G == 0 && FZ_PLOTTERS_RGB == 0 && FZ_PLOTTERS_CMYK == 0
 #undef FZ_PLOTTERS_N
 #define FZ_PLOTTERS_N 1
+#endif
+
+#ifndef FZ_ENABLE_GAMMA
+#define FZ_ENABLE_GAMMA 1
 #endif
 
 #ifndef FZ_ENABLE_PDF

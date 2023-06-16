@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 /*
  * PDF signature tool: verify and sign digital signatures in PDF files.
@@ -286,10 +286,9 @@ static void process_acro_form(fz_context *ctx, pdf_document *doc)
 
 int pdfsign_main(int argc, const char** argv)
 {
-	pdf_document *doc;
+	pdf_document *doc = NULL;
 	const char *password = "";
 	int c;
-	pdf_page *page = NULL;
 
 	ctx = NULL;
 	infile = NULL;
@@ -339,7 +338,7 @@ int pdfsign_main(int argc, const char** argv)
 		return EXIT_FAILURE;
 	}
 
-	// registeer a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
+	// register a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
 	fz_set_default_jpeg_sys_mem_mgr();
 
 	infile = argv[fz_optind++];
@@ -350,11 +349,11 @@ int pdfsign_main(int argc, const char** argv)
 		verify = 1;
 	}
 
-	fz_var(page);
+	fz_var(doc);
 
-	doc = pdf_open_document(ctx, infile);
 	fz_try(ctx)
 	{
+		doc = pdf_open_document(ctx, infile);
 		if (pdf_needs_password(ctx, doc))
 			if (!pdf_authenticate_password(ctx, doc, password))
 				fz_warn(ctx, "cannot authenticate password: %s", infile);
@@ -385,8 +384,8 @@ int pdfsign_main(int argc, const char** argv)
 		pdf_drop_document(ctx, doc);
 	fz_catch(ctx)
 	{
-		fz_drop_page(ctx, (fz_page*)page);
-		fz_error(ctx, "error processing signatures: %s", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_log_error(ctx, "error processing signatures");
 	}
 
 	fz_flush_warnings(ctx);

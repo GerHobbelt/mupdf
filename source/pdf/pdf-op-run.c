@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
@@ -77,6 +77,9 @@ struct pdf_gstate
 	/* materials */
 	pdf_material stroke;
 	pdf_material fill;
+
+	/* pattern paint type 2 */
+	int ismask;
 
 	/* text state */
 	pdf_text_state text;
@@ -505,6 +508,8 @@ pdf_show_pattern(fz_context *ctx, pdf_run_processor *pr, pdf_pattern *pat, int p
 
 	if (pat->ismask)
 	{
+		/* Inhibit any changes to the color since we're drawing an uncolored pattern. */
+		gstate->ismask = 1;
 		pdf_unset_pattern(ctx, pr, PDF_FILL);
 		pdf_unset_pattern(ctx, pr, PDF_STROKE);
 		if (what == PDF_FILL)
@@ -1046,7 +1051,7 @@ pdf_show_char(fz_context *ctx, pdf_run_processor *pr, int cid, fz_text_language 
 	pdf_font_desc *fontdesc = gstate->text.font;
 	fz_matrix trm;
 	int gid;
-	int ucsbuf[8];
+	int ucsbuf[PDF_MRANGE_CAP];
 	int ucslen;
 	int i;
 	int render_direct;
@@ -1069,7 +1074,12 @@ pdf_show_char(fz_context *ctx, pdf_run_processor *pr, int cid, fz_text_language 
 		 * type3 glyphs that seem to inherit current graphics
 		 * attributes, or type 3 glyphs within type3 glyphs). */
 		fz_matrix composed = fz_concat(trm, gstate->ctm);
+		pdf_gsave(ctx, pr);
+		gstate = pr->gstate + pr->gtop;
+		pdf_drop_font(ctx, gstate->text.font);
+		gstate->text.font = NULL; /* don't inherit the current font... */
 		fz_render_t3_glyph_direct(ctx, pr->dev, fontdesc->font, gid, composed, gstate, pr->default_cs);
+		pdf_grestore(ctx, pr);
 		/* Render text invisibly so that it can still be extracted. */
 		pr->tos.text_mode = 3;
 	}
@@ -1077,6 +1087,11 @@ pdf_show_char(fz_context *ctx, pdf_run_processor *pr, int cid, fz_text_language 
 	ucslen = 0;
 	if (fontdesc->to_unicode)
 		ucslen = pdf_lookup_cmap_full(fontdesc->to_unicode, cid, ucsbuf);
+
+	/* ignore obviously bad values in ToUnicode, fall back to the cid_to_ucs table */
+	if (ucslen == 1 && (ucsbuf[0] < 32 || (ucsbuf[0] >= 127 && ucsbuf[0] < 160)))
+		ucslen = 0;
+
 	if (ucslen == 0 && (size_t)cid < fontdesc->cid_to_ucs_len)
 	{
 		ucsbuf[0] = fontdesc->cid_to_ucs[cid];
@@ -1302,6 +1317,8 @@ pdf_init_gstate(fz_context *ctx, pdf_gstate *gs, fz_matrix ctm)
 
 	gs->fill.color_params = fz_default_color_params;
 	gs->stroke.color_params = fz_default_color_params;
+
+	gs->ismask = 0;
 }
 
 static void
@@ -1324,6 +1341,10 @@ pdf_set_colorspace(fz_context *ctx, pdf_run_processor *pr, int what, fz_colorspa
 	int n = fz_colorspace_n(ctx, colorspace);
 
 	gstate = pdf_flush_text(ctx, pr);
+
+	/* Don't change color if we're drawing an uncolored pattern tile! */
+	if (gstate->ismask)
+		return;
 
 	mat = what == PDF_FILL ? &gstate->fill : &gstate->stroke;
 
@@ -1352,6 +1373,10 @@ pdf_set_color(fz_context *ctx, pdf_run_processor *pr, int what, float *v)
 	pdf_material *mat;
 
 	gstate = pdf_flush_text(ctx, pr);
+
+	/* Don't change color if we're drawing an uncolored pattern tile! */
+	if (gstate->ismask)
+		return;
 
 	mat = what == PDF_FILL ? &gstate->fill : &gstate->stroke;
 
@@ -1590,17 +1615,29 @@ end_metatext(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val, pdf_obj *mc
 }
 
 static void
-begin_oc(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val)
+begin_oc(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val, pdf_cycle_list *cycle_up)
 {
 	/* val has been resolved to a dict for us by the originally specified name
 	 * having been looked up in Properties already for us. Either there will
 	 * be a Name entry, or there will be an OCGs and it'll be a group one. */
+	pdf_cycle_list cycle;
+	pdf_obj *obj;
 	int i, n;
-	pdf_obj *obj = pdf_dict_get(ctx, val, PDF_NAME(Name));
+
+	if (pdf_cycle(ctx, &cycle, cycle_up, val))
+		return;
+
+	obj = pdf_dict_get(ctx, val, PDF_NAME(Name));
 	if (obj)
 	{
+		const char *name = "";
 		pdf_flush_text(ctx, proc);
-		push_begin_layer(ctx, proc, pdf_to_name(ctx, obj));
+		if (pdf_is_name(ctx, obj))
+			name = pdf_to_name(ctx, obj);
+		else if (pdf_is_string(ctx, obj))
+			name = pdf_to_text_string(ctx, obj);
+
+		push_begin_layer(ctx, proc, name);
 		return;
 	}
 
@@ -1608,18 +1645,24 @@ begin_oc(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val)
 	n = pdf_array_len(ctx, obj);
 	for (i = 0; i < n; i++)
 	{
-		begin_oc(ctx, proc, pdf_array_get(ctx, obj, i));
+		begin_oc(ctx, proc, pdf_array_get(ctx, obj, i), &cycle);
 	}
 }
 
 static void
-end_oc(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val)
+end_oc(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val, pdf_cycle_list *cycle_up)
 {
 	/* val has been resolved to a dict for us by the originally specified name
 	 * having been looked up in Properties already for us. Either there will
 	 * be a Name entry, or there will be an OCGs and it'll be a group one. */
+	pdf_cycle_list cycle;
+	pdf_obj *obj;
 	int i, n;
-	pdf_obj *obj = pdf_dict_get(ctx, val, PDF_NAME(Name));
+
+	if (pdf_cycle(ctx, &cycle, cycle_up, val))
+		return;
+
+	obj = pdf_dict_get(ctx, val, PDF_NAME(Name));
 	if (obj)
 	{
 		flush_begin_layer(ctx, proc);
@@ -1631,7 +1674,7 @@ end_oc(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val)
 	n = pdf_array_len(ctx, obj);
 	for (i = n-1; i >= 0; i--)
 	{
-		end_oc(ctx, proc, pdf_array_get(ctx, obj, i));
+		end_oc(ctx, proc, pdf_array_get(ctx, obj, i), &cycle);
 	}
 }
 
@@ -1742,6 +1785,9 @@ push_marked_content(fz_context *ctx, pdf_run_processor *proc, const char *tagstr
 	fz_structure standard;
 	pdf_obj *mc_dict = NULL;
 
+	/* Flush any pending text so it's not in the wrong layer. */
+	pdf_flush_text(ctx, proc);
+
 	if (!tagstr)
 		tagstr = "Untitled";
 	tag = pdf_new_name(ctx, tagstr);
@@ -1763,7 +1809,7 @@ push_marked_content(fz_context *ctx, pdf_run_processor *proc, const char *tagstr
 
 		/* Start any optional content layers. */
 		if (pdf_name_eq(ctx, tag, PDF_NAME(OC)))
-			begin_oc(ctx, proc, val);
+			begin_oc(ctx, proc, val, NULL);
 
 		/* Special handling for common non-spec extension. */
 		if (pdf_name_eq(ctx, tag, PDF_NAME(Layer)))
@@ -1829,6 +1875,9 @@ pop_marked_content(fz_context *ctx, pdf_run_processor *proc, int neat)
 		return;
 	}
 
+	/* Make sure that any pending text is written into the correct layer. */
+	pdf_flush_text(ctx, proc);
+
 	/* Close structure/layers here, in reverse order to how we opened them. */
 	fz_try(ctx)
 	{
@@ -1868,7 +1917,7 @@ pop_marked_content(fz_context *ctx, pdf_run_processor *proc, int neat)
 			end_layer(ctx, proc, val);
 
 		if (pdf_name_eq(ctx, tag, PDF_NAME(OC)))
-			end_oc(ctx, proc, val);
+			end_oc(ctx, proc, val, NULL);
 	}
 	fz_always(ctx)
 	{
@@ -2858,9 +2907,12 @@ pdf_run_pop_resources(fz_context *ctx, pdf_processor *proc)
 	pdf_run_processor *pr = (pdf_run_processor *)proc;
 	resources_stack *stk = pr->rstack;
 
-	pr->rstack = stk->next;
-	pdf_drop_obj(ctx, stk->resources);
-	fz_free(ctx, stk);
+	if (stk)
+	{
+		pr->rstack = stk->next;
+		pdf_drop_obj(ctx, stk->resources);
+		fz_free(ctx, stk);
+	}
 
 	return NULL;
 }

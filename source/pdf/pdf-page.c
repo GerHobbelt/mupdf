@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
@@ -67,7 +67,7 @@ pdf_load_page_tree_imp(fz_context *ctx, pdf_document *doc, pdf_obj *node, int id
 			fz_throw(ctx, FZ_ERROR_GENERIC, "too many kids in page tree");
 		doc->rev_page_map[idx].page = idx;
 		doc->rev_page_map[idx].object = pdf_to_num(ctx, node);
-		doc->fwd_page_map[idx] = doc->rev_page_map[idx].object;
+		doc->fwd_page_map[idx] = pdf_keep_obj(ctx, node);
 		++idx;
 	}
 	else if (type == NULL)
@@ -95,6 +95,20 @@ pdf_load_page_tree(fz_context *ctx, pdf_document *doc)
 	/* Noop now. */
 }
 
+void
+pdf_drop_page_tree_internal(fz_context *ctx, pdf_document *doc)
+{
+	int i;
+	fz_free(ctx, doc->rev_page_map);
+	doc->rev_page_map = NULL;
+	if (doc->fwd_page_map)
+		for (i = 0; i < doc->map_page_count; i++)
+			pdf_drop_obj(ctx, doc->fwd_page_map[i]);
+	fz_free(ctx, doc->fwd_page_map);
+	doc->fwd_page_map = NULL;
+	doc->map_page_count = 0;
+}
+
 static void
 pdf_load_page_tree_internal(fz_context *ctx, pdf_document *doc)
 {
@@ -107,8 +121,8 @@ pdf_load_page_tree_internal(fz_context *ctx, pdf_document *doc)
 	fz_try(ctx)
 	{
 		doc->map_page_count = pdf_count_pages(ctx, doc);
-		doc->rev_page_map = Memento_label(fz_malloc_array(ctx, doc->map_page_count, pdf_rev_page_map), "pdf_rev_page_map");
-		doc->fwd_page_map = Memento_label(fz_malloc_array(ctx, doc->map_page_count, int), "pdf_fwd_page_map");
+		doc->rev_page_map = Memento_label(fz_calloc(ctx, doc->map_page_count, sizeof(pdf_rev_page_map)), "pdf_rev_page_map");
+		doc->fwd_page_map = Memento_label(fz_calloc(ctx, doc->map_page_count, sizeof(pdf_obj *)), "pdf_fwd_page_map");
 		int idx = pdf_load_page_tree_imp(ctx, doc, pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/Pages"), 0, NULL);
 		if (idx < doc->map_page_count)
 		{
@@ -126,10 +140,7 @@ pdf_load_page_tree_internal(fz_context *ctx, pdf_document *doc)
 	}
 	fz_catch(ctx)
 	{
-		fz_free(ctx, doc->rev_page_map);
-		doc->rev_page_map = NULL;
-		fz_free(ctx, doc->fwd_page_map);
-		doc->fwd_page_map = NULL;
+		pdf_drop_page_tree_internal(ctx, doc);
 		fz_rethrow(ctx);
 	}
 }
@@ -138,18 +149,6 @@ void
 pdf_drop_page_tree(fz_context *ctx, pdf_document *doc)
 {
 	/* Historical entry point. Now does nothing. We drop 'just in time'. */
-}
-
-void
-pdf_drop_page_tree_internal(fz_context *ctx, pdf_document *doc)
-{
-	/* At this point we're trusting that only 1 thread should be doing
-	 * stuff that hits the document at a time. */
-	fz_free(ctx, doc->rev_page_map);
-	doc->rev_page_map = NULL;
-	fz_free(ctx, doc->fwd_page_map);
-	doc->fwd_page_map = NULL;
-	doc->map_page_count = 0;
 }
 
 static pdf_obj *
@@ -361,20 +360,15 @@ pdf_lookup_page_obj(fz_context *ctx, pdf_document *doc, int needle)
 		}
 	}
 
-	/* If we have a fwd_page_map then look it up. If the index in that map is 0 then
-	 * maybe it was direct page object rather than a reference. This is illegal, but
-	 * we've seen it in tests_private/pdf/sumatra/page_no_indirect_reference.pdf so
-	 * we might as well cope. */
-	if (doc->fwd_page_map && doc->fwd_page_map[needle] != 0)
+	if (doc->fwd_page_map)
 	{
-		pdf_obj *pageobj;
 		if (needle < 0 || needle >= doc->map_page_count)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot find page %d in page tree", needle+1);
-		pageobj = pdf_load_object(ctx, doc, doc->fwd_page_map[needle]);
-		pdf_drop_obj(ctx, pageobj);
-		return pageobj;
-	} else
-		return pdf_lookup_page_loc(ctx, doc, needle, NULL, NULL);
+		if (doc->fwd_page_map[needle] != NULL)
+			return doc->fwd_page_map[needle];
+	}
+
+	return pdf_lookup_page_loc(ctx, doc, needle, NULL, NULL);
 }
 
 static int
@@ -1080,8 +1074,25 @@ static void
 pdf_drop_page_imp(fz_context *ctx, fz_page *_page)
 {
 	pdf_page* page = (pdf_page*)_page;
+	pdf_annot *annot;
+	pdf_link *link;
+
+	link = (pdf_link *) page->links;
+	while (link)
+	{
+		link->page = NULL;
+		link = (pdf_link *) link->super.next;
+	}
 	fz_drop_link(ctx, page->links);
+
+	annot = page->annots;
+	while (annot)
+	{
+		annot->page = NULL;
+		annot = annot->next;
+	}
 	pdf_drop_annots(ctx, page->annots);
+
 	pdf_drop_obj(ctx, page->obj);
 }
 
@@ -1395,11 +1406,13 @@ pdf_delete_page(fz_context *ctx, pdf_document *doc, int at)
 
 		/* Adjust page labels */
 		pdf_adjust_page_labels(ctx, doc, at, -1);
-	}
-	fz_always(ctx)
 		pdf_end_operation(ctx, doc);
+	}
 	fz_catch(ctx)
+	{
+		pdf_abandon_operation(ctx, doc);
 		fz_rethrow(ctx);
+	}
 }
 
 void
@@ -1447,13 +1460,11 @@ pdf_add_page(fz_context *ctx, pdf_document *doc, fz_rect mediabox, int rotate, p
 		if (contents && contents->len > 0)
 			pdf_dict_put_drop(ctx, page_obj, PDF_NAME(Contents), pdf_add_stream(ctx, doc, contents, NULL, 0));
 		page_ref = pdf_add_object_drop(ctx, doc, page_obj);
-	}
-	fz_always(ctx)
-	{
 		pdf_end_operation(ctx, doc);
 	}
 	fz_catch(ctx)
 	{
+		pdf_abandon_operation(ctx, doc);
 		pdf_drop_obj(ctx, page_obj);
 		fz_rethrow(ctx);
 	}
@@ -1516,11 +1527,13 @@ pdf_insert_page(fz_context *ctx, pdf_document *doc, int at, pdf_obj *page_ref)
 
 		/* Adjust page labels */
 		pdf_adjust_page_labels(ctx, doc, at, 1);
-	}
-	fz_always(ctx)
 		pdf_end_operation(ctx, doc);
+	}
 	fz_catch(ctx)
+	{
+		pdf_abandon_operation(ctx, doc);
 		fz_rethrow(ctx);
+	}
 }
 
 /*
@@ -1769,11 +1782,13 @@ pdf_set_page_labels(fz_context *ctx, pdf_document *doc,
 				pdf_create_page_label(ctx, doc, style, prefix, start),
 				range.nums_ix + 3);
 		}
-	}
-	fz_always(ctx)
 		pdf_end_operation(ctx, doc);
+	}
 	fz_catch(ctx)
+	{
+		pdf_abandon_operation(ctx, doc);
 		fz_rethrow(ctx);
+	}
 }
 
 void
@@ -1801,11 +1816,13 @@ pdf_delete_page_labels(fz_context *ctx, pdf_document *doc, int index)
 			pdf_array_delete(ctx, range.nums, range.nums_ix);
 			pdf_array_delete(ctx, range.nums, range.nums_ix);
 		}
-	}
-	fz_always(ctx)
 		pdf_end_operation(ctx, doc);
+	}
 	fz_catch(ctx)
+	{
+		pdf_abandon_operation(ctx, doc);
 		fz_rethrow(ctx);
+	}
 }
 
 static const char *roman_uc[3][10] = {
@@ -1845,12 +1862,12 @@ static void pdf_format_alpha_page_label(char *buf, int size, int n, int alpha)
 }
 
 static void
-pdf_format_page_label(fz_context *ctx, int index, pdf_obj *dict, char *buf, int size)
+pdf_format_page_label(fz_context *ctx, int index, pdf_obj *dict, char *buf, size_t size)
 {
 	pdf_obj *style = pdf_dict_get(ctx, dict, PDF_NAME(S));
 	const char *prefix = pdf_dict_get_text_string(ctx, dict, PDF_NAME(P));
 	int start = pdf_dict_get_int(ctx, dict, PDF_NAME(St));
-	int n;
+	size_t n;
 
 	// St must be >= 1; default is 1.
 	if (start < 1)
@@ -1876,17 +1893,17 @@ pdf_format_page_label(fz_context *ctx, int index, pdf_obj *dict, char *buf, int 
 }
 
 void
-pdf_page_label(fz_context *ctx, pdf_document *doc, int index, char *buf, int size)
+pdf_page_label(fz_context *ctx, pdf_document *doc, int index, char *buf, size_t size)
 {
 	struct page_label_range range = pdf_lookup_page_label(ctx, doc, index);
 	if (range.label)
 		pdf_format_page_label(ctx, index - range.offset, range.label, buf, size);
 	else
-		fz_snprintf(buf, size, "%d", index + 1);
+		fz_snprintf(buf, size, "%z", index + 1);
 }
 
 void
-pdf_page_label_imp(fz_context *ctx, fz_document *doc, int chapter, int page, char *buf, int size)
+pdf_page_label_imp(fz_context *ctx, fz_document *doc, int chapter, int page, char *buf, size_t size)
 {
 	pdf_page_label(ctx, pdf_document_from_fz_document(ctx, doc), page, buf, size);
 }

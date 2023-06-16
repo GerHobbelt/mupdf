@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{00811970-815B-4F64-BC9D-219078A73C33}</ProjectGuid>
+    <RootNamespace>libfann</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFANN;FANN_STATICLIB;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFANN;FANN_STATICLIB;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFANN;FANN_STATICLIB;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFANN;FANN_STATICLIB;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/examples/cascade_train.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/examples/momentums.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/examples/mushroom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/examples/parallel_train.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/examples/robot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/examples/scaling_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/examples/scaling_train.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/examples/simple_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/examples/simple_train.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/examples/steepness_train.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/examples/xor_sample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/examples/xor_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/examples/xor_train.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/src/gmock-all.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/src/gmock-cardinalities.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/src/gmock-internal-utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/src/gmock-matchers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/src/gmock-spec-builders.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/src/gmock.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/src/gmock_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock-actions_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock-cardinalities_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock-function-mocker_nc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock-function-mocker_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock-generated-actions_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock-generated-function-mockers_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock-generated-matchers_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock-internal-utils_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock-matchers_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock-more-actions_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock-nice-strict_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock-port_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock-pp-string_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock-pp_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock-spec-builders_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock_all_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock_ex_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock_leak_test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock_link2_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock_link_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock_output_test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock_stress_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/samples/sample1.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/samples/sample10_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/samples/sample1_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/samples/sample2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/samples/sample2_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/samples/sample3_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/samples/sample4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/samples/sample4_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/samples/sample5_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/samples/sample6_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/samples/sample7_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/samples/sample8_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/samples/sample9_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/src/gtest-all.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/src/gtest-death-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/src/gtest-filepath.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/src/gtest-matchers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/src/gtest-port.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/src/gtest-printers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/src/gtest-test-part.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/src/gtest-typed-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/src/gtest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/src/gtest_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-break-on-failure-unittest_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-catch-exceptions-test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-color-test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-death-test-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-death-test_ex_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-env-var-test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-filepath-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-filter-unittest_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-list-tests-unittest_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-listener-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-message-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-options-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-output-test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-param-test-invalid-name1-test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-param-test-invalid-name2-test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-param-test-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-param-test2-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-port-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-printers-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-shuffle-test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-test-part-test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-test2_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-throw-on-failure-test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-uninitialized-test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest-typed-test2_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest-typed-test_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest-unittest-api_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_all_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_assert_by_exception_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_environment_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_help_test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_list_output_unittest_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_main_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_no_test_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_pred_impl_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_premature_exit_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_prod_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_repeat_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_skip_in_environment_setup_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_skip_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_sole_header_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_stress_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_test_macro_stack_footprint_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_testbridge_test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_throw_on_failure_ex_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_xml_outfile1_test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_xml_outfile2_test_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_xml_output_unittest_.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/production.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/src/doublefann.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/src/fann.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/src/fann_cascade.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/src/fann_error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/src/fann_io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/src/fann_train.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/src/fann_train_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/src/fixedfann.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/src/floatfann.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/src/parallel_doublefann_cpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/src/parallel_fann.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/src/parallel_fann_cpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/src/parallel_floatfann_cpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/tests/fann_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/tests/fann_test_data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/tests/fann_test_train.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libfann/tests/main.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/include/gmock/gmock-actions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/include/gmock/gmock-cardinalities.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/include/gmock/gmock-function-mocker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/include/gmock/gmock-generated-actions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/include/gmock/gmock-generated-function-mockers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/include/gmock/gmock-generated-matchers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/include/gmock/gmock-matchers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/include/gmock/gmock-more-actions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/include/gmock/gmock-more-matchers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/include/gmock/gmock-nice-strict.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/include/gmock/gmock-spec-builders.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/include/gmock/gmock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/include/gmock/internal/custom/gmock-generated-actions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/include/gmock/internal/custom/gmock-matchers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/include/gmock/internal/custom/gmock-port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/include/gmock/internal/gmock-internal-utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/include/gmock/internal/gmock-port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/include/gmock/internal/gmock-pp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock_link_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/include/gtest/gtest-death-test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/include/gtest/gtest-matchers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/include/gtest/gtest-message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/include/gtest/gtest-param-test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/include/gtest/gtest-printers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/include/gtest/gtest-spi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/include/gtest/gtest-test-part.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/include/gtest/gtest-typed-test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/include/gtest/gtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/include/gtest/gtest_pred_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/include/gtest/gtest_prod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/include/gtest/internal/custom/gtest-port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/include/gtest/internal/custom/gtest-printers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/include/gtest/internal/custom/gtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/include/gtest/internal/gtest-death-test-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/include/gtest/internal/gtest-filepath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/include/gtest/internal/gtest-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/include/gtest/internal/gtest-param-util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/include/gtest/internal/gtest-port-arch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/include/gtest/internal/gtest-port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/include/gtest/internal/gtest-string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/include/gtest/internal/gtest-type-util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/samples/prime_tables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/samples/sample1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/samples/sample2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/samples/sample3-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/samples/sample4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/src/gtest-internal-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-param-test-test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest-typed-test_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/production.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/src/include/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/src/include/doublefann.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/src/include/fann.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/src/include/fann_activation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/src/include/fann_cascade.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/src/include/fann_cpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/src/include/fann_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/src/include/fann_data_cpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/src/include/fann_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/src/include/fann_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/src/include/fann_io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/src/include/fann_train.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/src/include/fann_training_data_cpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/src/include/fixedfann.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/src/include/floatfann.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/src/include/parallel_fann.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/src/include/parallel_fann.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/tests/fann_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/tests/fann_test_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libfann/tests/fann_test_train.h" />
+    <Image Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Help/images/header/background.png" />
+    <Image Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Help/images/header/leftside.png" />
+    <Image Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Help/images/header/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Help/images/header/overbody.png" />
+    <Image Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Help/images/header/overbodybg.png" />
+    <Image Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Help/images/header/overleftmargin.png" />
+    <Image Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Help/images/header/overmenu.png" />
+    <Image Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Help/images/header/overmenubg.png" />
+    <Image Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Help/images/header/rightside.png" />
+    <Image Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Help/images/menu/about.png" />
+    <Image Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Help/images/menu/background.png" />
+    <Image Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Help/images/menu/bottomleft.png" />
+    <Image Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Help/images/menu/bottomright.png" />
+    <Image Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Help/images/menu/community.png" />
+    <Image Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Help/images/menu/customizing.png" />
+    <Image Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Help/images/menu/using.png" />
+    <Image Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Info/images/Logo.png" />
+    <Text Include="../../thirdparty/owemdjee/libfann/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfann/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/libfann/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libfann/biicode.conf" />
+    <Text Include="../../thirdparty/owemdjee/libfann/cmake/Modules/DefineInstallationPaths.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libfann/cmake/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libfann/cmake/fann-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libfann/cmake/fann-use.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libfann/cmake/fann.pc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Config/Languages.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Config/Topics.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Help/example/NaturalDocs.js" />
+    <Text Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Help/javascript/BrowserStyles.js" />
+    <Text Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Help/javascript/PNGHandling.js" />
+    <Text Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Info/CSSGuide.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Info/File Parsing.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Info/Languages.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Info/NDMarkup.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/Info/Symbol Management.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/JavaScript/GooglePrettify.js" />
+    <Text Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/JavaScript/NaturalDocs.js" />
+    <Text Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/License.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfann/docs/NaturalDocs-1.52/NaturalDocs.bat" />
+    <Text Include="../../thirdparty/owemdjee/libfann/docs/generate_docs.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfann/docs/prj/Languages.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfann/docs/prj/Menu.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfann/docs/prj/Topics.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfann/docs/publish_docs.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfann/format.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/ci/build-linux-bazel.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/ci/build-platformio.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/ci/env-linux.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/ci/env-osx.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/ci/get-nprocessors.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/ci/install-linux.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/ci/install-osx.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/ci/install-platformio.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/ci/log-config.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/ci/travis.sh" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/cmake/gmock.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/cmake/gmock_main.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/docs/cheat_sheet.md" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/docs/cook_book.md" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/docs/for_dummies.md" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/docs/gmock_faq.md" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/include/gmock/internal/custom/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/scripts/fuse_gmock_files.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/scripts/generator/README" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/scripts/generator/README.cppclean" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/scripts/generator/cpp/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/scripts/generator/cpp/ast.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/scripts/generator/cpp/gmock_class.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/scripts/generator/cpp/gmock_class_test.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/scripts/generator/cpp/keywords.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/scripts/generator/cpp/tokenize.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/scripts/generator/cpp/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/scripts/generator/gmock_gen.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/scripts/gmock-config.in" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/scripts/gmock_doctor.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/scripts/upload.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/scripts/upload_gmock.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock-function-mocker_nc_test.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock_leak_test.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock_output_test.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock_output_test_golden.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googlemock/test/gmock_test_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/cmake/Config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/cmake/gtest.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/cmake/gtest_main.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/cmake/internal_utils.cmake" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/cmake/libgtest.la.in" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/docs/advanced.md" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/docs/faq.md" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/docs/pkgconfig.md" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/docs/primer.md" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/docs/pump_manual.md" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/docs/samples.md" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/include/gtest/internal/custom/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/scripts/common.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/scripts/fuse_gtest_files.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/scripts/gen_gtest_pred_impl.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/scripts/gtest-config.in" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/scripts/pump.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/scripts/release_docs.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/scripts/upload.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/scripts/upload_gtest.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-break-on-failure-unittest.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-catch-exceptions-test.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-color-test.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-env-var-test.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-filter-unittest.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-json-outfiles-test.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-json-output-unittest.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-list-tests-unittest.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-output-test-golden-lin.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-output-test.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-param-test-invalid-name1-test.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-param-test-invalid-name2-test.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-shuffle-test.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-throw-on-failure-test.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/googletest-uninitialized-test.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_help_test.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_json_test_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_list_output_unittest.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_skip_environment_check_output_test.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_test_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_testbridge_test.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_xml_outfiles_test.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_xml_output_unittest.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/googletest/test/gtest_xml_test_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/libfann/lib/googletest/library.json" />
+    <Text Include="../../thirdparty/owemdjee/libfann/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfann/src/include/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libfann/tests/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

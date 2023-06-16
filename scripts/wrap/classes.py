@@ -341,10 +341,10 @@ class ClassExtras:
         We return None if <name> is a known enum.
         '''
         verbose = state.state_.show_details( name)
-        if verbose:
+        if 0 and verbose:
             jlib.log( 'ClassExtras.get(): {=name}')
         name = util.clip( name, ('const ', 'struct '))
-        if verbose:
+        if 0 and verbose:
             jlib.log( 'ClassExtras.get(): {=name}')
         if not name.startswith( ('fz_', 'pdf_')):
             return
@@ -513,6 +513,23 @@ classextras = ClassExtras(
                             Fixed_LAB,
                         };
                         ''',
+                ),
+
+        fz_compressed_buffer = ClassExtra(
+                methods_extra = [
+                    ExtraMethod(
+                        rename.class_('fz_buffer'),
+                        'get_buffer()',
+                        textwrap.dedent(f'''
+                            {{
+                                return {rename.class_('fz_buffer')}(
+                                        {rename.ll_fn('fz_keep_buffer')}(m_internal->buffer)
+                                        );
+                            }}
+                            '''),
+                        '/* Returns wrapper class for fz_buffer *m_internal.buffer. */',
+                        ),
+                    ],
                 ),
 
         fz_context = ClassExtra(
@@ -1388,8 +1405,8 @@ classextras = ClassExtras(
                         '''
                         :
                         x0(rhs.x0),
-                        x1(rhs.x1),
                         y0(rhs.y0),
+                        x1(rhs.x1),
                         y1(rhs.y1)
                         {
                         }
@@ -1863,13 +1880,13 @@ classextras = ClassExtras(
                         ),
                     ExtraMethod(
                         f'std::string',
-                        f'{rename.method( "pdf_obj", "pdf_field_name2")}()',
+                        f'{rename.method( "pdf_obj", "pdf_load_field_name2")}()',
                         f'''
                         {{
-                            return {rename.namespace_fn('pdf_field_name2')}( *this);
+                            return {rename.namespace_fn('pdf_load_field_name2')}( *this);
                         }}
                         ''',
-                        comment = f'/* Alternative to `{rename.fn("pdf_field_name")}()` that returns a std::string. */',
+                        comment = f'/* Alternative to `{rename.fn("pdf_load_field_name")}()` that returns a std::string. */',
                         ),
                     ]
                 ),

@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2022 Artifex Software, Inc.
+// Copyright (C) 2004-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #ifndef MUPDF_PDF_FORM_H
 #define MUPDF_PDF_FORM_H
@@ -162,7 +162,7 @@ int pdf_field_flags(fz_context *ctx, pdf_obj *field);
 	Retrieve the name for a field as a C string that
 	must be freed by the caller.
 */
-char *pdf_field_name(fz_context *ctx, pdf_obj *field);
+char *pdf_load_field_name(fz_context *ctx, pdf_obj *field);
 const char *pdf_field_value(fz_context *ctx, pdf_obj *field);
 void pdf_create_field_name(fz_context *ctx, pdf_document *doc, const char *prefix, char *buf, size_t len);
 
@@ -206,7 +206,8 @@ typedef enum
 	PDF_SIGNATURE_ERROR_SELF_SIGNED,
 	PDF_SIGNATURE_ERROR_SELF_SIGNED_IN_CHAIN,
 	PDF_SIGNATURE_ERROR_NOT_TRUSTED,
-	PDF_SIGNATURE_ERROR_UNKNOWN
+	PDF_SIGNATURE_ERROR_NOT_SIGNED,
+	PDF_SIGNATURE_ERROR_UNKNOWN,
 } pdf_signature_error;
 
 /* Increment the reference count for a signer object */

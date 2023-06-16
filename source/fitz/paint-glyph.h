@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 /*
 	This file is #included by draw-paint.c multiple times to
@@ -43,8 +43,14 @@
 #define NAME3
 #endif
 
-#define FUNCTION_NAMER(NAME,N,NAME2,NAME3) fz_paint_glyph_##NAME##_##N##NAME2##NAME3
-#define FUNCTION_NAME(NAME,N,NAME2,NAME3) FUNCTION_NAMER(NAME,N,NAME2,NAME3)
+#ifdef GAMMA
+#define NAME4 _gamma
+#else
+#define NAME4
+#endif
+
+#define FUNCTION_NAMER(NAME,N,NAME2,NAME3,NAME4) fz_paint_glyph_##NAME##_##N##NAME2##NAME3##NAME4
+#define FUNCTION_NAME(NAME,N,NAME2,NAME3,NAME4) FUNCTION_NAMER(NAME,N,NAME2,NAME3,NAME4)
 
 #ifdef EOP
 #define IF_OVERPRINT_COMPONENT(k) if (fz_overprint_component(eop, k))
@@ -52,14 +58,23 @@
 #define IF_OVERPRINT_COMPONENT(k) if (1)
 #endif
 
+#ifdef GAMMA
+#define BLEND(A,B,C,G) FZ_BLEND_GAMMA(A,B,C,G)
+#else
+#define BLEND(A,B,C,G) FZ_BLEND(A,B,C)
+#endif
+
 static fz_forceinline void
-FUNCTION_NAME(NAME,N,NAME2,NAME3)(const unsigned char * FZ_RESTRICT colorbv,
+FUNCTION_NAME(NAME,N,NAME2,NAME3,NAME4)(const unsigned char * FZ_RESTRICT colorbv,
 #ifndef N
 				const int n1,
 #endif
 				int span, unsigned char * FZ_RESTRICT dp, const fz_glyph *glyph, int w, int h, int skip_x, int skip_y
 #ifdef EOP
 				, const fz_overprint *eop
+#endif
+#ifdef GAMMA
+				, const fz_gamma_table *gamma
 #endif
 				)
 {
@@ -175,7 +190,7 @@ solid_run:
 #ifdef ALPHA
 #if defined(N) && N == 1
 						IF_OVERPRINT_COMPONENT(0)
-							ddp[0] = FZ_BLEND(colorbv[0], ddp[0], sa);
+							ddp[0] = BLEND(colorbv[0], ddp[0], sa, gamma);
 #ifdef DA
 						ddp[1] = FZ_BLEND(0xFF, ddp[1], sa);
 						ddp += 2;
@@ -184,11 +199,11 @@ solid_run:
 #endif
 #elif defined(N) && N == 3
 						IF_OVERPRINT_COMPONENT(0)
-							ddp[0] = FZ_BLEND(colorbv[0], ddp[0], sa);
+							ddp[0] = BLEND(colorbv[0], ddp[0], sa, gamma);
 						IF_OVERPRINT_COMPONENT(1)
-							ddp[1] = FZ_BLEND(colorbv[1], ddp[1], sa);
+							ddp[1] = BLEND(colorbv[1], ddp[1], sa, gamma);
 						IF_OVERPRINT_COMPONENT(2)
-							ddp[2] = FZ_BLEND(colorbv[2], ddp[2], sa);
+							ddp[2] = BLEND(colorbv[2], ddp[2], sa, gamma);
 #ifdef DA
 						ddp[3] = FZ_BLEND(0xFF, ddp[3], sa);
 						ddp += 4;
@@ -197,13 +212,13 @@ solid_run:
 #endif
 #elif defined(N) && N == 4
 						IF_OVERPRINT_COMPONENT(0)
-							ddp[0] = FZ_BLEND(colorbv[0], ddp[0], sa);
+							ddp[0] = BLEND(colorbv[0], ddp[0], sa, gamma);
 						IF_OVERPRINT_COMPONENT(1)
-							ddp[1] = FZ_BLEND(colorbv[1], ddp[1], sa);
+							ddp[1] = BLEND(colorbv[1], ddp[1], sa, gamma);
 						IF_OVERPRINT_COMPONENT(2)
-							ddp[2] = FZ_BLEND(colorbv[2], ddp[2], sa);
+							ddp[2] = BLEND(colorbv[2], ddp[2], sa, gamma);
 						IF_OVERPRINT_COMPONENT(3)
-							ddp[3] = FZ_BLEND(colorbv[3], ddp[3], sa);
+							ddp[3] = BLEND(colorbv[3], ddp[3], sa, gamma);
 #ifdef DA
 						ddp[4] = FZ_BLEND(0xFF, ddp[4], sa);
 						ddp += 5;
@@ -215,7 +230,7 @@ solid_run:
 						do
 						{
 							IF_OVERPRINT_COMPONENT(k)
-								*ddp = FZ_BLEND(colorbv[k], *ddp, sa);
+								*ddp = BLEND(colorbv[k], *ddp, sa, gamma);
 							k++;
 							ddp++;
 						}
@@ -324,7 +339,7 @@ intermediate_run:
 						(void)k;
 #if defined(N) && N == 1
 						IF_OVERPRINT_COMPONENT(0)
-							ddp[0] = FZ_BLEND(colorbv[0], ddp[0], a);
+							ddp[0] = BLEND(colorbv[0], ddp[0], a, gamma);
 #ifdef DA
 						ddp[1] = FZ_BLEND(0xFF, ddp[1], a);
 						ddp += 2;
@@ -333,11 +348,11 @@ intermediate_run:
 #endif
 #elif defined(N) && N == 3
 						IF_OVERPRINT_COMPONENT(0)
-							ddp[0] = FZ_BLEND(colorbv[0], ddp[0], a);
+							ddp[0] = BLEND(colorbv[0], ddp[0], a, gamma);
 						IF_OVERPRINT_COMPONENT(1)
-							ddp[1] = FZ_BLEND(colorbv[1], ddp[1], a);
+							ddp[1] = BLEND(colorbv[1], ddp[1], a, gamma);
 						IF_OVERPRINT_COMPONENT(2)
-							ddp[2] = FZ_BLEND(colorbv[2], ddp[2], a);
+							ddp[2] = BLEND(colorbv[2], ddp[2], a, gamma);
 #ifdef DA
 						ddp[3] = FZ_BLEND(0xFF, ddp[3], a);
 						ddp += 4;
@@ -346,13 +361,13 @@ intermediate_run:
 #endif
 #elif defined(N) && N == 4
 						IF_OVERPRINT_COMPONENT(0)
-							ddp[0] = FZ_BLEND(colorbv[0], ddp[0], a);
+							ddp[0] = BLEND(colorbv[0], ddp[0], a, gamma);
 						IF_OVERPRINT_COMPONENT(1)
-							ddp[1] = FZ_BLEND(colorbv[1], ddp[1], a);
+							ddp[1] = BLEND(colorbv[1], ddp[1], a, gamma);
 						IF_OVERPRINT_COMPONENT(2)
-							ddp[2] = FZ_BLEND(colorbv[2], ddp[2], a);
+							ddp[2] = BLEND(colorbv[2], ddp[2], a, gamma);
 						IF_OVERPRINT_COMPONENT(3)
-							ddp[3] = FZ_BLEND(colorbv[3], ddp[3], a);
+							ddp[3] = BLEND(colorbv[3], ddp[3], a, gamma);
 #ifdef DA
 						ddp[4] = FZ_BLEND(0xFF, ddp[4], a);
 						ddp += 5;
@@ -363,7 +378,7 @@ intermediate_run:
 						do
 						{
 							IF_OVERPRINT_COMPONENT(k)
-								*ddp = FZ_BLEND(colorbv[k], *ddp, a);
+								*ddp = BLEND(colorbv[k], *ddp, a, gamma);
 							k++;
 							ddp++;
 						}
@@ -385,10 +400,13 @@ intermediate_run:
 	}
 }
 
+#undef GAMMA
+#undef BLEND
 #undef NAME
 #undef ALPHA
 #undef NAME2
 #undef NAME3
+#undef NAME4
 #undef EOP
 #undef DA
 #undef N

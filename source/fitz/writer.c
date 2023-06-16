@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 
@@ -309,6 +309,20 @@ fz_new_document_writer_with_output(fz_context *ctx, fz_output *out, const char *
 #endif
 
 	fz_throw(ctx, FZ_ERROR_GENERIC, "unknown output document format: %s", format);
+}
+
+fz_document_writer *
+fz_new_document_writer_with_buffer(fz_context *ctx, fz_buffer *buffer, const char *format, const char *options)
+{
+	fz_document_writer *wri;
+	fz_output *out = fz_new_output_with_buffer(ctx, buffer);
+	fz_try(ctx)
+		wri = fz_new_document_writer_with_output(ctx, out, format, options);
+	fz_always(ctx)
+		fz_drop_output(ctx, out);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+	return wri;
 }
 
 void

@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 #include "html-imp.h"
@@ -1402,6 +1402,53 @@ fz_apply_css_style(fz_context *ctx, fz_html_font_set *set, fz_css_style *style, 
 		if (!style->font)
 			style->font = fz_load_html_font(ctx, set, "serif", is_bold, is_italic, style->small_caps);
 	}
+}
+
+static void
+fz_debug_css_number(fz_context *ctx, char *name, fz_css_number number)
+{
+	printf("\t%s: %g%c\n", name, number.value, number.unit);
+}
+
+void
+fz_debug_css_style(fz_context *ctx, const fz_css_style *style)
+{
+	printf("style {\n");
+	fz_debug_css_number(ctx, "font-size", style->font_size);
+	fz_debug_css_number(ctx, "width", style->width);
+	fz_debug_css_number(ctx, "height", style->height);
+	fz_debug_css_number(ctx, "margin-top", style->margin[0]);
+	fz_debug_css_number(ctx, "margin-right", style->margin[1]);
+	fz_debug_css_number(ctx, "margin-bottom", style->margin[2]);
+	fz_debug_css_number(ctx, "margin-left", style->margin[3]);
+	fz_debug_css_number(ctx, "padding-top", style->padding[0]);
+	fz_debug_css_number(ctx, "padding-right", style->padding[1]);
+	fz_debug_css_number(ctx, "padding-bottom", style->padding[2]);
+	fz_debug_css_number(ctx, "padding-left", style->padding[3]);
+	fz_debug_css_number(ctx, "border-width-top", style->border_width[0]);
+	fz_debug_css_number(ctx, "border-width-right", style->border_width[1]);
+	fz_debug_css_number(ctx, "border-width-bottom", style->border_width[2]);
+	fz_debug_css_number(ctx, "border-width-left", style->border_width[3]);
+	fz_debug_css_number(ctx, "border-spacing", style->border_spacing);
+	fz_debug_css_number(ctx, "text-indent", style->text_indent);
+	fz_debug_css_number(ctx, "line-height", style->line_height);
+	fz_debug_css_number(ctx, "-mupdf-leading", style->leading);
+
+	printf("\tvisibility: %d\n", style->visibility);
+	printf("\twhite-space: %d\n", style->white_space);
+	printf("\ttext-align: %d\n", style->text_align);
+	printf("\tlist-style-type: %d\n", style->list_style_type);
+	printf("\tpage-break-before: %d\n", style->page_break_before);
+	printf("\tpage-break-after: %d\n", style->page_break_after);
+	printf("\tborder-style-top: %d\n", style->border_style_0);
+	printf("\tborder-style-right: %d\n", style->border_style_1);
+	printf("\tborder-style-bottom: %d\n", style->border_style_2);
+	printf("\tborder-style-left: %d\n", style->border_style_3);
+	printf("\tsmall-caps: %d\n", style->text_decoration);
+	printf("\toverflow-wrap: %d\n", style->overflow_wrap);
+
+	// TODO: colors
+	printf("}\n");
 }
 
 #ifdef DEBUG_CSS_SPLAY

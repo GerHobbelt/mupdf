@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libsquash</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF93B35A}</ProjectGuid>
+    <RootNamespace>libsquash</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUASH;SQUASH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUASH;SQUASH_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUASH;SQUASH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUASH;SQUASH_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUASH;SQUASH_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUASH;SQUASH_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUASH;SQUASH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUASH;SQUASH_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUASH;SQUASH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUASH;SQUASH_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUASH;SQUASH_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQUASH;SQUASH_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/squash/examples/simple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/examples/stream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/brieflz/squash-brieflz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/brotli/squash-brotli.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/bsc/squash-bsc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/bzip2/squash-bzip2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/copy/squash-copy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/crush/crush.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/crush/squash-crush.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/csc/squash-csc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/density/squash-density.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/doboz/squash-doboz.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/fari/squash-fari.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/fastlz/squash-fastlz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/gipfeli/squash-gipfeli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/heatshrink/squash-heatshrink.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/libdeflate/squash-libdeflate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/lz4/squash-lz4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/lz4/squash-lz4f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/lzf/squash-lzf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/lzfse/squash-lzfse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/lzg/squash-lzg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/lzham/squash-lzham.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/lzjb/squash-lzjb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/lzma/squash-lzma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/lzo/squash-lzo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/miniz/squash-miniz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/ms-compress/squash-ms-compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/ncompress/compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/ncompress/squash-ncompress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/quicklz/quicklz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/quicklz/squash-quicklz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/snappy/crc32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/snappy/squash-snappy-framed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/snappy/squash-snappy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/wflz/squash-wflz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/yalz77/squash-yalz77.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/zlib-ng/squash-zlib-ng.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/zlib/squash-zlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/zling/squash-zling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/zpaq/squash-zpaq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/plugins/zstd/squash-zstd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/squash/squash-buffer-stream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/squash/squash-buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/squash/squash-charset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/squash/squash-codec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/squash/squash-context.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/squash/squash-file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/squash/squash-ini.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/squash/squash-license.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/squash/squash-mapped-file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/squash/squash-memory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/squash/squash-object.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/squash/squash-options.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/squash/squash-plugin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/squash/squash-splice.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/squash/squash-status.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/squash/squash-stream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/squash/squash-util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/squash/squash-version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/tests/bounds.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/tests/buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/tests/file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/tests/flush.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/tests/interop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/tests/random-data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/tests/splice.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/tests/stream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/tests/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/tests/threads.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/tests/version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/squash/utils/squash.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/plugins/crush/crush.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/plugins/ncompress/compress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/plugins/quicklz/quicklz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/plugins/snappy/crc32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/plugins/zpaq/zpaq-config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-buffer-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-buffer-stream-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-charset-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-codec-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-codec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-context-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-ini-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-license.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-mapped-file-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-memory-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-mtx-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-object.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-plugin-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-slist-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-splice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-stream-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-tree-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-types-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash-util-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/squash/squash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/squash/tests/test-squash.h" />
+    <Text Include="../../thirdparty/owemdjee/squash/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/squash/README" />
+    <Text Include="../../thirdparty/owemdjee/squash/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/squash/bindings/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/bindings/vala/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/bindings/vala/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/cmake/AddCompilerFlags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/squash/cmake/CheckPrototypeExists.cmake" />
+    <Text Include="../../thirdparty/owemdjee/squash/cmake/CodeCoverage.cmake" />
+    <Text Include="../../thirdparty/owemdjee/squash/cmake/ExtraWarningFlags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/squash/cmake/FindClockGettime.cmake" />
+    <Text Include="../../thirdparty/owemdjee/squash/cmake/FindCppCheck.cmake" />
+    <Text Include="../../thirdparty/owemdjee/squash/cmake/FindIPPDC.cmake" />
+    <Text Include="../../thirdparty/owemdjee/squash/cmake/FindIconv.cmake" />
+    <Text Include="../../thirdparty/owemdjee/squash/cmake/FindLZMA.cmake" />
+    <Text Include="../../thirdparty/owemdjee/squash/cmake/FindLZO.cmake" />
+    <Text Include="../../thirdparty/owemdjee/squash/cmake/FindRAGEL.cmake" />
+    <Text Include="../../thirdparty/owemdjee/squash/cmake/FindSnappy.cmake" />
+    <Text Include="../../thirdparty/owemdjee/squash/cmake/FindVala.cmake" />
+    <Text Include="../../thirdparty/owemdjee/squash/cmake/FindZPAQ.cmake" />
+    <Text Include="../../thirdparty/owemdjee/squash/cmake/GenPkgConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/squash/cmake/RequireStandard.cmake" />
+    <Text Include="../../thirdparty/owemdjee/squash/cmake/SquashPlugin.cmake" />
+    <Text Include="../../thirdparty/owemdjee/squash/cmake/UseVala.cmake" />
+    <Text Include="../../thirdparty/owemdjee/squash/docs/CLA/CLA.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/docs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/docs/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/squash/docs/building.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/docs/index.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/docs/internals.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/docs/plugin-guide.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/docs/user-guide.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/packaging/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/packaging/rpm/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/packaging/rpm/squash.spec.in" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/brieflz/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/brieflz/brieflz.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/brotli/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/brotli/brotli.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/bsc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/bsc/bsc.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/bzip2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/bzip2/bzip2.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/copy/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/copy/copy.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/crush/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/crush/crush.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/csc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/csc/csc.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/density/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/density/density.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/doboz/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/doboz/doboz.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/fari/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/fari/fari.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/fastlz/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/fastlz/fastlz.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/gipfeli/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/gipfeli/gipfeli.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/heatshrink/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/heatshrink/heatshrink.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/libdeflate/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/libdeflate/libdeflate.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/lz4/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/lz4/lz4.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/lzf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/lzf/lzf.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/lzfse/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/lzfse/lzfse.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/lzg/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/lzg/lzg.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/lzham/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/lzham/lzham.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/lzjb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/lzjb/lzjb.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/lzma/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/lzma/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/lzma/lzma.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/lzo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/lzo/lzo.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/miniz/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/miniz/miniz.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/ms-compress/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/ms-compress/ms-compress.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/ncompress/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/ncompress/ncompress.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/plugins.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/quicklz/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/quicklz/quicklz.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/snappy/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/snappy/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/snappy/snappy-stubs-public.h.in" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/snappy/snappy.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/wflz/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/wflz/wflz.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/yalz77/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/yalz77/yalz77.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/zlib-ng/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/zlib-ng/zlib-ng.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/zlib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/zlib/zlib.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/zling/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/zling/zling.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/zpaq/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/zpaq/zpaq.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/zstd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/plugins/zstd/zstd.md" />
+    <Text Include="../../thirdparty/owemdjee/squash/squash/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/squash/SquashConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/squash/squash/squash-config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/squash/squash/squash-version.h.in" />
+    <Text Include="../../thirdparty/owemdjee/squash/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/squash/utils/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

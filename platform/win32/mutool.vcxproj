@@ -104,6 +104,8 @@
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -209,20 +211,23 @@
     <ClCompile Include="..\..\source\tools\mutool.c" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="cryptlib.vcxproj">
+      <Project>{424334e5-addf-490d-ba7b-46cf3686b48d}</Project>
+    </ProjectReference>
     <ProjectReference Include="libarchive.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff18377f}</Project>
     </ProjectReference>
     <ProjectReference Include="libhighway.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff021a57}</Project>
     </ProjectReference>
+    <ProjectReference Include="libpthread-win32.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8df2c2}</Project>
+    </ProjectReference>
     <ProjectReference Include="libsqlite_tools.vcxproj">
       <Project>{6e890463-3eeb-4cce-b8bd-5aa89148c35a}</Project>
     </ProjectReference>
     <ProjectReference Include="MuPDFLib_static.vcxproj">
       <Project>{a60d8644-5815-4d29-8970-7518ff518d62}</Project>
-    </ProjectReference>
-    <ProjectReference Include="cryptlib.vcxproj">
-      <Project>{c39f4b46-6e89-4074-902e-ca57073044d2}</Project>
     </ProjectReference>
     <ProjectReference Include="libbase58x.vcxproj">
       <Project>{0501bedf-3191-46a9-9997-288466675b82}</Project>
@@ -352,9 +357,6 @@
     </ProjectReference>
     <ProjectReference Include="png-pmt-tools-lib.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff1147a4}</Project>
-    </ProjectReference>
-    <ProjectReference Include="pthread_lib.2019.vcxproj">
-      <Project>{C431B5C5-FF25-4450-A13C-EA3123456789}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

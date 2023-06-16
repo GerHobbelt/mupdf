@@ -65,7 +65,6 @@ endif
 LINK_CMD = $(QUIET_LINK) $(MKTGTDIR) ; $(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 TAGS_CMD = $(QUIET_TAGS) ctags -R --c-kinds=+p --exclude=platform/python --exclude=platform/c++
 WINDRES_CMD = $(QUIET_WINDRES) $(MKTGTDIR) ; $(WINDRES) $< $@
-OBJCOPY_CMD = $(QUIET_OBJCOPY) $(MKTGTDIR) ; $(LD) -r -b binary -z noexecstack -o $@ $<
 GENDEF_CMD = $(QUIET_GENDEF) gendef - $< > $@
 DLLTOOL_CMD = $(QUIET_DLLTOOL) dlltool -d $< -D $(notdir $(^:%.def=%.dll)) -l $@
 
@@ -223,13 +222,24 @@ generated/%.ttf.c : %.ttf $(HEXDUMP_SH) ; $(QUIET_GEN) $(MKTGTDIR) ; bash $(HEXD
 generated/%.ttc.c : %.ttc $(HEXDUMP_SH) ; $(QUIET_GEN) $(MKTGTDIR) ; bash $(HEXDUMP_SH) > $@ $<
 
 ifeq ($(HAVE_OBJCOPY),yes)
+  OBJCOPY_CMD = $(QUIET_OBJCOPY) $(MKTGTDIR) ; $(LD) -r -b binary -z noexecstack -o $@ $<
+else
+  ifneq ($(PYODIDE_ROOT),)
+    # Pyodide build; pyodide's replacement `ld` does not support `-b binary`
+    # so we use scripts/bin2obj.py instead. This generates _binary_foo[] and
+    # _binary_foo_size symbols.
+    OBJCOPY_CMD = $(QUIET_OBJCOPY) $(MKTGTDIR) ; ./scripts/bin2obj.py -i $< -o $@
+  endif
+endif
+
+ifeq ($(OBJCOPY_CMD),)
+  MUPDF_OBJ += $(FONT_GEN:%.c=$(OUT)/%.o)
+else
   MUPDF_OBJ += $(FONT_BIN:%=$(OUT)/%.o)
   $(OUT)/%.cff.o : %.cff ; $(OBJCOPY_CMD)
   $(OUT)/%.otf.o : %.otf ; $(OBJCOPY_CMD)
   $(OUT)/%.ttf.o : %.ttf ; $(OBJCOPY_CMD)
   $(OUT)/%.ttc.o : %.ttc ; $(OBJCOPY_CMD)
-else
-  MUPDF_OBJ += $(FONT_GEN:%.c=$(OUT)/%.o)
 endif
 
 generate: $(FONT_GEN)
@@ -462,10 +472,30 @@ install-docs:
 	install -d $(DESTDIR)$(docdir)
 	install -d $(DESTDIR)$(docdir)/examples
 	install -m 644 README COPYING CHANGES $(DESTDIR)$(docdir)
-	install -m 644 docs/*.html docs/*.css docs/*.png $(DESTDIR)$(docdir)
 	install -m 644 docs/examples/* $(DESTDIR)$(docdir)/examples
 
 install: install-libs install-apps install-docs
+
+install-docs-html:
+	python3 scripts/build-docs.py
+	install -d $(DESTDIR)$(docdir)
+	install -d $(DESTDIR)$(docdir)/_images
+	install -d $(DESTDIR)$(docdir)/_static
+	install -d $(DESTDIR)$(docdir)/_static/js
+	install -d $(DESTDIR)$(docdir)/_static/css
+	install -d $(DESTDIR)$(docdir)/_static/css/fonts
+	install -m 644 build/docs/html/*.html $(DESTDIR)$(docdir)
+	install -m 644 build/docs/html/*.inv $(DESTDIR)$(docdir)
+	install -m 644 build/docs/html/*.js $(DESTDIR)$(docdir)
+	install -m 644 build/docs/html/_images/* $(DESTDIR)$(docdir)/_images
+	install -m 644 build/docs/html/_static/*.css $(DESTDIR)$(docdir)/_static
+	install -m 644 build/docs/html/_static/*.ico $(DESTDIR)$(docdir)/_static
+	install -m 644 build/docs/html/_static/*.js $(DESTDIR)$(docdir)/_static
+	install -m 644 build/docs/html/_static/*.png $(DESTDIR)$(docdir)/_static
+	install -m 644 build/docs/html/_static/*.svg $(DESTDIR)$(docdir)/_static
+	install -m 644 build/docs/html/_static/js/* $(DESTDIR)$(docdir)/_static/js
+	install -m 644 build/docs/html/_static/css/*.css $(DESTDIR)$(docdir)/_static/css
+	install -m 644 build/docs/html/_static/css/fonts/* $(DESTDIR)$(docdir)/_static/css/fonts
 
 tarball:
 	bash scripts/archive.sh
@@ -479,6 +509,9 @@ watch:
 watch-recompile:
 	@ while ! inotifywait -q -e modify $(WATCH_SRCS) ; do time -p $(MAKE) ; done
 
+wasm:
+	$(MAKE) -C platform/wasm
+
 java:
 	$(MAKE) -C platform/java build=$(build)
 
@@ -491,6 +524,9 @@ extract-test:
 
 tags:
 	$(TAGS_CMD)
+
+find-try-return:
+	@ bash scripts/find-try-return.sh
 
 cscope.files: $(shell find include source platform -name '*.[ch]')
 	@ echo $^ | tr ' ' '\n' > $@

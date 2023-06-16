@@ -17,14 +17,15 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 
 #include "color-imp.h"
 
 #include <string.h>
+#include <math.h>
 
 #if FZ_ENABLE_ICC
 
@@ -35,6 +36,7 @@
 #ifdef HAVE_LCMS2MT
 #define GLOINIT() cmsContext glo = (cmsContext)ctx->colorspace->icc_instance
 #define GLO glo,
+#define GLO_ glo
 #include "lcms2mt.h"
 #include "lcms2mt_plugin.h"
 #else
@@ -498,6 +500,20 @@ fz_icc_transform_pixmap(fz_context *ctx, fz_icc_link *link, const fz_pixmap *src
 			else
 			{
 				cmsDoTransform(GLO link->handle, buffer, outputpos, sw);
+				if (!copy_spots)
+				{
+					/* Copy the alpha by steam */
+					unsigned char *d = outputpos + dn - 1;
+					const unsigned char *s = inputpos + sn -1;
+					int w = sw;
+
+					while (w--)
+					{
+						*d = *s;
+						d += dn;
+						s += sn;
+					}
+				}
 				if (mult == 1)
 					fz_premultiply_row_0or1(ctx, dn, dc, dw, outputpos);
 				else if (mult == 2)
@@ -515,6 +531,129 @@ fz_icc_transform_pixmap(fz_context *ctx, fz_icc_link *link, const fz_pixmap *src
 			cmsDoTransform(GLO link->handle, inputpos, outputpos, sw);
 			inputpos += ss;
 			outputpos += ds;
+		}
+	}
+}
+
+#endif
+
+#if FZ_ENABLE_GAMMA
+
+void
+fz_measure_colorspace_linearity(fz_context *ctx, fz_colorspace *colorspace)
+{
+	fz_gamma_table *gamma;
+
+	if (colorspace->type == FZ_COLORSPACE_LAB)
+		return;
+	if (colorspace->type == FZ_COLORSPACE_CMYK)
+		return;
+	if (colorspace->type == FZ_COLORSPACE_INDEXED)
+		return;
+	if (colorspace->type == FZ_COLORSPACE_SEPARATION)
+		return;
+
+	gamma = colorspace->gamma = fz_malloc_struct(ctx, fz_gamma_table);
+
+#if FZ_ENABLE_ICC
+	if (colorspace->flags & FZ_COLORSPACE_IS_ICC)
+	{
+		cmsContext glo = ctx->colorspace->icc_instance;
+		cmsHPROFILE input_pro;
+		cmsUInt32Number input_fmt;
+		cmsHPROFILE xyz_pro;
+		cmsHTRANSFORM xform;
+		float xyz[3];
+		cmsUInt8Number color[4];
+		int i;
+
+		switch (colorspace->type)
+		{
+		default:
+			/* should never happen */
+			goto fallback;
+		case FZ_COLORSPACE_GRAY:
+			input_fmt = TYPE_GRAY_8;
+			break;
+		case FZ_COLORSPACE_RGB:
+			input_fmt = TYPE_RGB_8;
+			break;
+		case FZ_COLORSPACE_BGR:
+			input_fmt = TYPE_BGR_8;
+			break;
+		}
+
+		input_pro = colorspace->u.icc.profile;
+		xyz_pro = cmsCreateXYZProfile(GLO_);
+		xform = cmsCreateTransform(GLO
+			input_pro,
+			input_fmt,
+			xyz_pro,
+			TYPE_XYZ_FLT,
+			INTENT_RELATIVE_COLORIMETRIC,
+			cmsFLAGS_NOOPTIMIZE);
+
+		for (i = 0; i < 256; ++i)
+		{
+			color[0] = color[1] = color[2] = i;
+
+			cmsDoTransform(GLO xform, color, xyz, 1);
+
+			gamma->to_linear[i] = xyz[1] * 4095.0f + 0.5f;
+		}
+
+		cmsDeleteTransform(GLO xform);
+
+		xform = cmsCreateTransform(GLO
+			xyz_pro,
+			TYPE_XYZ_FLT,
+			input_pro,
+			input_fmt,
+			INTENT_RELATIVE_COLORIMETRIC,
+			cmsFLAGS_NOOPTIMIZE);
+
+		for (i = 0; i < 4096; ++i)
+		{
+			// D50 illuminant
+			xyz[0] = (i * 0.964212f) / 4095.0f;
+			xyz[1] = (i * 1.000000f) / 4095.0f;
+			xyz[2] = (i * 0.825188f) / 4095.0f;
+
+			cmsDoTransform(GLO xform, xyz, color, 1);
+
+			gamma->from_linear[i] = color[0];
+		}
+
+		cmsDeleteTransform(GLO xform);
+
+		cmsCloseProfile(GLO xyz_pro);
+	}
+	else
+#endif
+
+	/* Use the sRGB gamma curve if color management is not available. */
+	{
+		float c, y;
+		int i;
+
+		fallback:
+
+		for (i = 0; i < 256; ++i) {
+			c = i / 255.0f;
+			if (c <= 0.04045f)
+				y = c / 12.92f;
+			else
+				y = powf((c + 0.055f) / 1.055f, 2.4f);
+			gamma->to_linear[i] = y * 4095.0f + 0.5f;
+		}
+
+		for (i = 0; i < 4096; ++i) {
+			y = i / 4095.0f;
+			if (y < 0.0031308f)
+				c = 12.92f * y;
+			else
+				c = 1.055f * powf(y, 0.41666f) - 0.055f;
+			gamma->from_linear[i] = c * 255.0f + 0.5f;
 		}
 	}
 }

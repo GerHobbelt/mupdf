@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
@@ -318,7 +318,7 @@ pdf_open_raw_filter(fz_context *ctx, fz_stream *file_stm, pdf_document *doc, pdf
 	pdf_xref_entry *x = NULL;
 	fz_stream *null_stm, *crypt_stm;
 	int hasexplicitcrypt;
-	int len;
+	int64_t len;
 
 	if (num > 0 && num < pdf_xref_len(ctx, doc))
 	{
@@ -348,10 +348,10 @@ pdf_open_raw_filter(fz_context *ctx, fz_stream *file_stm, pdf_document *doc, pdf
 	}
 
 	hasexplicitcrypt = pdf_stream_has_crypt(ctx, stmobj);
-	len = pdf_dict_get_int(ctx, stmobj, PDF_NAME(Length));
+	len = pdf_dict_get_int64(ctx, stmobj, PDF_NAME(Length));
 	if (len < 0)
 		len = 0;
-	null_stm = fz_open_endstream_filter(ctx, file_stm, len, offset);
+	null_stm = fz_open_endstream_filter(ctx, file_stm, (uint64_t)len, offset);
 	if (doc->crypt && !hasexplicitcrypt)
 	{
 		fz_try(ctx)
@@ -496,7 +496,7 @@ pdf_load_raw_stream_number(fz_context *ctx, pdf_document *doc, int num)
 {
 	fz_stream *stm;
 	pdf_obj *dict;
-	int len;
+	int64_t len;
 	fz_buffer *buf = NULL;
 	pdf_xref_entry *x;
 
@@ -510,7 +510,7 @@ pdf_load_raw_stream_number(fz_context *ctx, pdf_document *doc, int num)
 	dict = pdf_load_object(ctx, doc, num);
 
 	fz_try(ctx)
-		len = pdf_dict_get_int(ctx, dict, PDF_NAME(Length));
+		len = pdf_dict_get_int64(ctx, dict, PDF_NAME(Length));
 	fz_always(ctx)
 		pdf_drop_obj(ctx, dict);
 	fz_catch(ctx)
@@ -518,8 +518,11 @@ pdf_load_raw_stream_number(fz_context *ctx, pdf_document *doc, int num)
 
 	stm = pdf_open_raw_stream_number(ctx, doc, num);
 
+	if (len < 0)
+		len = 1024;
+
 	fz_try(ctx)
-		buf = fz_read_all(ctx, stm, len);
+		buf = fz_read_all(ctx, stm, (size_t)len);
 	fz_always(ctx)
 		fz_drop_stream(ctx, stm);
 	fz_catch(ctx)
@@ -528,22 +531,30 @@ pdf_load_raw_stream_number(fz_context *ctx, pdf_document *doc, int num)
 	return buf;
 }
 
-static int
-pdf_guess_filter_length(int len, const char *filter)
+static size_t
+pdf_guess_filter_length(size_t len, const char *filter)
 {
-	if (len < 0)
-		len = 0;
+	size_t nlen = len;
+
+	/* First ones get smaller, no overflow check required. */
 	if (!strcmp(filter, "ASCIIHexDecode"))
 		return len / 2;
-	if (!strcmp(filter, "ASCII85Decode"))
+	else if (!strcmp(filter, "ASCII85Decode"))
 		return len * 4 / 5;
+
 	if (!strcmp(filter, "FlateDecode"))
-		return len * 3;
-	if (!strcmp(filter, "RunLengthDecode"))
-		return len * 3;
-	if (!strcmp(filter, "LZWDecode"))
-		return len * 2;
-	return len;
+		nlen = len * 3;
+	else if (!strcmp(filter, "RunLengthDecode"))
+		nlen = len * 3;
+	else if (!strcmp(filter, "LZWDecode"))
+		nlen = len * 2;
+
+	/* Live with a bad estimate - we'll malloc up as we go, but
+	 * it's probably destined to fail anyway. */
+	if (nlen < len)
+		return len;
+
+	return nlen;
 }
 
 /* Check if an entry has a cached stream and return whether it is directly
@@ -603,7 +614,8 @@ pdf_load_image_stream(fz_context *ctx, pdf_document *doc, int num, fz_compressio
 {
 	fz_stream *stm = NULL;
 	pdf_obj *dict, *obj;
-	int i, len, n;
+	int i, n;
+	size_t len;
 	fz_buffer *buf;
 
 	fz_var(buf);
@@ -620,7 +632,14 @@ pdf_load_image_stream(fz_context *ctx, pdf_document *doc, int num, fz_compressio
 	dict = pdf_load_object(ctx, doc, num);
 	fz_try(ctx)
 	{
-		len = pdf_dict_get_int(ctx, dict, PDF_NAME(Length));
+		int64_t ilen = pdf_dict_get_int64(ctx, dict, PDF_NAME(Length));
+		if (ilen < 0)
+			ilen = 0;
+		len = (size_t)ilen;
+		/* In 32 bit builds, we might find a length being too
+		 * large for a size_t. */
+		if ((int64_t)len != ilen)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "Stream too large");
 		obj = pdf_dict_get(ctx, dict, PDF_NAME(Filter));
 		len = pdf_guess_filter_length(len, pdf_to_name(ctx, obj));
 		n = pdf_array_len(ctx, obj);

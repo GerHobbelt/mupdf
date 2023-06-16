@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 
@@ -48,6 +48,50 @@ typedef struct
 	unsigned char buffer[4096];
 } fz_jbig2d;
 
+static void *fz_jbig2_alloc(Jbig2Allocator *allocator, size_t size)
+{
+	fz_context *ctx = ((fz_jbig2_allocators *) allocator)->alloc.user_context;
+	return Memento_label(fz_malloc_no_throw(ctx, size), "jbig2_alloc");
+}
+
+static void fz_jbig2_free(Jbig2Allocator *allocator, void *p)
+{
+	fz_context *ctx = ((fz_jbig2_allocators *) allocator)->alloc.user_context;
+	fz_free(ctx, p);
+}
+
+static void *fz_jbig2_realloc(Jbig2Allocator *allocator, void *p, size_t size)
+{
+	fz_context *ctx = ((fz_jbig2_allocators *) allocator)->alloc.user_context;
+	if (size == 0)
+	{
+		fz_free(ctx, p);
+		return NULL;
+	}
+	if (p == NULL)
+		return Memento_label(fz_malloc(ctx, size), "jbig2_realloc");
+	return Memento_label(fz_realloc_no_throw(ctx, p, size), "jbig2_realloc");
+}
+
+static void
+error_callback(void* data, const char* msg, Jbig2Severity severity, uint32_t seg_idx)
+{
+	fz_context* ctx = data;
+	char idxbuf[50] = "";
+
+	if (seg_idx != JBIG2_UNKNOWN_SEGMENT_NUMBER)
+		fz_snprintf(idxbuf, sizeof idxbuf, " (segment 0x%02x)", seg_idx);
+
+	if (severity == JBIG2_SEVERITY_FATAL)
+		fz_error(ctx, "jbig2dec error: %s%s", msg, idxbuf);
+	else if (severity == JBIG2_SEVERITY_WARNING)
+		fz_warn(ctx, "jbig2dec warning: %s%s", msg, idxbuf);
+	else if (severity == JBIG2_SEVERITY_INFO)
+		fz_info(ctx, "jbig2dec info: %s%s", msg, idxbuf);
+	else
+		fz_info(ctx, "jbig2dec debug: %s%s", msg, idxbuf);
+}
+
 static inline void fz_lock_jbig2(fz_context* ctx)
 {
 	//fz_lock(ctx, FZ_LOCK_JBIG2);
@@ -72,6 +116,78 @@ fz_drop_jbig2_globals(fz_context *ctx, fz_jbig2_globals *globals)
 	if (!globals)
 		return;
 	fz_drop_storable(ctx, &globals->storable);
+}
+
+void
+fz_drop_jbig2_globals_imp(fz_context* ctx, fz_storable* globals_)
+{
+	fz_try(ctx)
+	{
+		fz_lock_jbig2(ctx);
+
+		fz_jbig2_globals* globals = (fz_jbig2_globals*)globals_;
+		globals->alloc.alloc.user_context = ctx;
+		jbig2_global_ctx_free(globals->gctx);
+		fz_drop_buffer(ctx, globals->data);
+		fz_free(ctx, globals);
+	}
+	fz_always(ctx)
+	{
+		fz_unlock_jbig2(ctx);
+	}
+	fz_catch(ctx)
+	{
+		fz_rethrow(ctx);
+	}
+}
+
+
+fz_jbig2_globals *
+fz_load_jbig2_globals(fz_context *ctx, fz_buffer *buf)
+{
+	fz_jbig2_globals *globals = fz_malloc_struct(ctx, fz_jbig2_globals);
+	Jbig2Ctx *jctx;
+
+	globals->alloc.alloc.user_context = ctx;
+	globals->alloc.alloc.alloc_ = fz_jbig2_alloc;
+	globals->alloc.alloc.free_ = fz_jbig2_free;
+	globals->alloc.alloc.realloc_ = fz_jbig2_realloc;
+
+	fz_try(ctx)
+	{
+		fz_lock_jbig2(ctx);
+
+		jctx = jbig2_ctx_new((Jbig2Allocator*)&globals->alloc, JBIG2_OPTIONS_EMBEDDED, NULL, error_callback, ctx);
+		if (!jctx)
+		{
+			fz_free(ctx, globals);
+			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot allocate jbig2 globals context");
+		}
+
+		/* Decode the encoded jbig2 segments into a globals context that can be used
+		 * by jbig2dec later when decoding images. */
+		if (jbig2_data_in(jctx, buf->data, buf->len) < 0)
+		{
+			jbig2_global_ctx_free(jbig2_make_global_ctx(jctx));
+			fz_free(ctx, globals);
+			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot decode jbig2 globals");
+		}
+
+		FZ_INIT_STORABLE(globals, 1, fz_drop_jbig2_globals_imp);
+		globals->gctx = jbig2_make_global_ctx(jctx);
+
+		globals->data = fz_keep_buffer(ctx, buf);
+	}
+	fz_always(ctx)
+	{
+		fz_unlock_jbig2(ctx);
+	}
+	fz_catch(ctx)
+	{
+		fz_rethrow(ctx);
+	}
+
+	return globals;
 }
 
 static void
@@ -164,119 +280,6 @@ next_jbig2d(fz_context *ctx, fz_stream *stm, size_t len)
 		return EOF;
 	stm->pos += p - buf;
 	return *stm->rp++;
-}
-
-static void
-error_callback(void* data, const char* msg, Jbig2Severity severity, uint32_t seg_idx)
-{
-	fz_context* ctx = data;
-	char idxbuf[50] = "";
-
-	if (seg_idx != JBIG2_UNKNOWN_SEGMENT_NUMBER)
-		fz_snprintf(idxbuf, sizeof idxbuf, " (segment 0x%02x)", seg_idx);
-
-	if (severity == JBIG2_SEVERITY_FATAL)
-		fz_error(ctx, "jbig2dec error: %s%s", msg, idxbuf);
-	else if (severity == JBIG2_SEVERITY_WARNING)
-		fz_warn(ctx, "jbig2dec warning: %s%s", msg, idxbuf);
-	else if (severity == JBIG2_SEVERITY_INFO)
-		fz_info(ctx, "jbig2dec info: %s%s", msg, idxbuf);
-	else
-		fz_info(ctx, "jbig2dec debug: %s%s", msg, idxbuf);
-}
-
-static void *fz_jbig2_alloc(Jbig2Allocator *allocator, size_t size)
-{
-	fz_context *ctx = ((fz_jbig2_allocators *) allocator)->alloc.user_context;
-	return Memento_label(fz_malloc_no_throw(ctx, size), "jbig2_alloc");
-}
-
-static void fz_jbig2_free(Jbig2Allocator *allocator, void *p)
-{
-	fz_context *ctx = ((fz_jbig2_allocators *) allocator)->alloc.user_context;
-	fz_free(ctx, p);
-}
-
-static void *fz_jbig2_realloc(Jbig2Allocator *allocator, void *p, size_t size)
-{
-	fz_context *ctx = ((fz_jbig2_allocators *) allocator)->alloc.user_context;
-	if (size == 0)
-	{
-		fz_free(ctx, p);
-		return NULL;
-	}
-	if (p == NULL)
-		return Memento_label(fz_malloc(ctx, size), "jbig2_realloc");
-	return Memento_label(fz_realloc_no_throw(ctx, p, size), "jbig2_realloc");
-}
-
-fz_jbig2_globals *
-fz_load_jbig2_globals(fz_context *ctx, fz_buffer *buf)
-{
-	fz_jbig2_globals *globals = fz_malloc_struct(ctx, fz_jbig2_globals);
-	Jbig2Ctx *jctx;
-
-	globals->alloc.alloc.user_context = ctx;
-	globals->alloc.alloc.alloc_ = fz_jbig2_alloc;
-	globals->alloc.alloc.free_ = fz_jbig2_free;
-	globals->alloc.alloc.realloc_ = fz_jbig2_realloc;
-
-	fz_try(ctx)
-	{
-		fz_lock_jbig2(ctx);
-
-		jctx = jbig2_ctx_new((Jbig2Allocator*)&globals->alloc, JBIG2_OPTIONS_EMBEDDED, NULL, error_callback, ctx);
-		if (!jctx)
-		{
-			fz_free(ctx, globals);
-			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot allocate jbig2 globals context");
-		}
-
-		if (jbig2_data_in(jctx, buf->data, buf->len) < 0)
-		{
-			jbig2_global_ctx_free(jbig2_make_global_ctx(jctx));
-			fz_free(ctx, globals);
-			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot decode jbig2 globals");
-		}
-
-		FZ_INIT_STORABLE(globals, 1, fz_drop_jbig2_globals_imp);
-		globals->gctx = jbig2_make_global_ctx(jctx);
-
-		globals->data = fz_keep_buffer(ctx, buf);
-	}
-	fz_always(ctx)
-	{
-		fz_unlock_jbig2(ctx);
-	}
-	fz_catch(ctx)
-	{
-		fz_rethrow(ctx);
-	}
-
-	return globals;
-}
-
-void
-fz_drop_jbig2_globals_imp(fz_context* ctx, fz_storable* globals_)
-{
-	fz_try(ctx)
-	{
-		fz_lock_jbig2(ctx);
-
-		fz_jbig2_globals* globals = (fz_jbig2_globals*)globals_;
-		globals->alloc.alloc.user_context = ctx;
-		jbig2_global_ctx_free(globals->gctx);
-		fz_drop_buffer(ctx, globals->data);
-		fz_free(ctx, globals);
-	}
-	fz_always(ctx)
-	{
-		fz_unlock_jbig2(ctx);
-	}
-	fz_catch(ctx)
-	{
-		fz_rethrow(ctx);
-	}
 }
 
 fz_stream *

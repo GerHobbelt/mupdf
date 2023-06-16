@@ -200,7 +200,7 @@ void *ocr_init(fz_context *ctx, const char *language, const char *datadir)
 	}
 
 	if (language == NULL || language[0] == 0)
-		language = "eng";
+		language = "eng";  // "eng+rus+chi_sim+chi_tra+deu+fra+por+jpn+hin+urd+vie+osd"
 
 	// Initialize tesseract-ocr with English, without specifying tessdata path
 	if (api->InitFullWithReader(datadir, 0, /* data, data_size */

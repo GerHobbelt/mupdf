@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
@@ -119,7 +119,7 @@ typedef struct
 	int64_t first_xref_entry_offset;
 	int64_t file_len;
 	int hints_shared_offset;
-	int hintstream_len;
+	int64_t hintstream_len;
 	pdf_obj *linear_l;
 	pdf_obj *linear_h0;
 	pdf_obj *linear_h1;
@@ -1637,13 +1637,31 @@ static void preloadobjstms(fz_context *ctx, pdf_document *doc)
 	pdf_obj *obj;
 	int num;
 
+	/* If we have attempted a repair, then everything will have been
+	 * loaded already. */
+	if (doc->repair_attempted)
+		return;
+
+	fz_var(num);
+
 	/* xref_len may change due to repair, so check it every iteration */
 	for (num = 0; num < pdf_xref_len(ctx, doc); num++)
 	{
-		if (pdf_get_xref_entry_no_null(ctx, doc, num)->type == 'o')
+		fz_try(ctx)
 		{
-			obj = pdf_load_object(ctx, doc, num);
-			pdf_drop_obj(ctx, obj);
+			for (; num < pdf_xref_len(ctx, doc); num++)
+			{
+				if (pdf_get_xref_entry_no_null(ctx, doc, num)->type == 'o')
+				{
+					obj = pdf_load_object(ctx, doc, num);
+					pdf_drop_obj(ctx, obj);
+				}
+			}
+		}
+		fz_catch(ctx)
+		{
+			/* Ignore the error, so we can carry on trying to load. */
+			fz_warn(ctx, "(ignored) %s", fz_caught_message(ctx));
 		}
 	}
 }
@@ -2250,12 +2268,10 @@ static void writexref(fz_context *ctx, pdf_document *doc, pdf_write_state *opts,
 
 			if (opts->crypt_obj)
 			{
-				pdf_obj *encrypt;
 				if (pdf_is_indirect(ctx, opts->crypt_obj))
-					encrypt = pdf_new_indirect(ctx, doc, opts->crypt_object_number, 0);
+					pdf_dict_put_drop(ctx, trailer, PDF_NAME(Encrypt), pdf_new_indirect(ctx, doc, opts->crypt_object_number, 0));
 				else
-					encrypt = opts->crypt_obj;
-				pdf_dict_put(ctx, trailer, PDF_NAME(Encrypt), encrypt);
+					pdf_dict_put(ctx, trailer, PDF_NAME(Encrypt), opts->crypt_obj);
 			}
 
 			if (opts->metadata)
@@ -2839,7 +2855,7 @@ make_hint_stream(fz_context *ctx, pdf_document *doc, pdf_write_state *opts)
 		make_page_offset_hints(ctx, doc, opts, buf);
 		obj = pdf_load_object(ctx, doc, pdf_xref_len(ctx, doc)-1);
 		pdf_update_stream(ctx, doc, obj, buf, 0);
-		opts->hintstream_len = (int)fz_buffer_storage(ctx, buf, NULL);
+		opts->hintstream_len = (int64_t)fz_buffer_storage(ctx, buf, NULL);
 	}
 	fz_always(ctx)
 	{
@@ -3289,11 +3305,15 @@ prepare_for_save(fz_context *ctx, pdf_document *doc, const pdf_write_options *in
 	{
 		pdf_begin_operation(ctx, doc, "Clean content streams");
 		fz_try(ctx)
+		{
 			clean_content_streams(ctx, doc, in_opts->do_sanitize, in_opts->do_ascii);
-		fz_always(ctx)
 			pdf_end_operation(ctx, doc);
+		}
 		fz_catch(ctx)
+		{
+			pdf_abandon_operation(ctx, doc);
 			fz_rethrow(ctx);
+		}
 	}
 
 	/* When saving a PDF with signatures the file will

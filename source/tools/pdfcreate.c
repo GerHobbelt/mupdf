@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 /*
  * PDF creation tool: Tool for creating pdf content.
@@ -299,7 +299,7 @@ int pdfcreate_main(int argc, const char** argv)
 		return EXIT_FAILURE;
 	}
 
-	// registeer a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
+	// register a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
 	fz_set_default_jpeg_sys_mem_mgr();
 
 	fz_var(doc);
@@ -321,7 +321,7 @@ int pdfcreate_main(int argc, const char** argv)
 	}
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "%s", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
 		error = EXIT_FAILURE;
 	}
 

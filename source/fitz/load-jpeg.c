@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 
@@ -98,6 +98,11 @@ int fz_jpeg_sys_mem_register(j_common_ptr cinfo)
 	return 0;
 }
 
+
+static void output_message(j_common_ptr cinfo)
+{
+	/* swallow message */
+}
 
 static void error_exit(j_common_ptr cinfo)
 {
@@ -384,6 +389,7 @@ fz_load_jpeg(fz_context *ctx, const unsigned char *rbuf, size_t rlen)
 	cinfo.mem = NULL;
 	cinfo.global_state = 0;
 	cinfo.err = jpeg_std_error(&err);
+	err.output_message = output_message;
 	err.error_exit = error_exit;
 
 	cinfo.client_data_ref = (void *)ctx;
@@ -404,6 +410,7 @@ fz_load_jpeg(fz_context *ctx, const unsigned char *rbuf, size_t rlen)
 
 		jpeg_save_markers(&cinfo, JPEG_APP0+1, 0xffff);
 		jpeg_save_markers(&cinfo, JPEG_APP0+13, 0xffff);
+		jpeg_save_markers(&cinfo, JPEG_APP0+2, 0xffff);
 
 		jpeg_read_header(&cinfo, 1);
 

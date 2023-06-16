@@ -105,13 +105,15 @@
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;../../thirdparty/owemdjee/plf_nanotimer;..\..\scripts\tesseract;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;../../thirdparty/owemdjee/plf_nanotimer;..\..\scripts\tesseract;../../scripts/leptonica/include/leptonica;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -127,7 +129,7 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>.;..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;../../thirdparty/owemdjee/plf_nanotimer;..\..\scripts\tesseract;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;../../thirdparty/owemdjee/plf_nanotimer;..\..\scripts\tesseract;../../scripts/leptonica/include/leptonica;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -136,7 +138,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;../../thirdparty/owemdjee/plf_nanotimer;..\..\scripts\tesseract;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;../../thirdparty/owemdjee/plf_nanotimer;..\..\scripts\tesseract;../../scripts/leptonica/include/leptonica;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -152,14 +154,14 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>.;..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;../../thirdparty/owemdjee/plf_nanotimer;..\..\scripts\tesseract;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;../../thirdparty/owemdjee/plf_nanotimer;..\..\scripts\tesseract;../../scripts/leptonica/include/leptonica;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>.;..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;../../thirdparty/owemdjee/plf_nanotimer;..\..\scripts\tesseract;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;../../thirdparty/owemdjee/plf_nanotimer;..\..\scripts\tesseract;../../scripts/leptonica/include/leptonica;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -174,7 +176,7 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>.;..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;../../thirdparty/owemdjee/plf_nanotimer;..\..\scripts\tesseract;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;../../thirdparty/owemdjee/plf_nanotimer;..\..\scripts\tesseract;../../scripts/leptonica/include/leptonica;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -184,7 +186,7 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>.;..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;../../thirdparty/owemdjee/plf_nanotimer;..\..\scripts\tesseract;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;../../thirdparty/owemdjee/plf_nanotimer;..\..\scripts\tesseract;../../scripts/leptonica/include/leptonica;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -199,7 +201,7 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>.;..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;../../thirdparty/owemdjee/plf_nanotimer;..\..\scripts\tesseract;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;../../thirdparty/owemdjee/plf_nanotimer;..\..\scripts\tesseract;../../scripts/leptonica/include/leptonica;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

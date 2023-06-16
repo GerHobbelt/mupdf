@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 package com.artifex.mupdf.fitz;
 
@@ -40,6 +40,7 @@ public class Image
 	private native long newNativeFromFile(String filename);
 	private native long newNativeFromBytes(byte[] bytes);
 	private native long newNativeFromBuffer(Buffer buffer);
+	private native long newNativeFromImageData(ImageData imageData, int width, int height, int bitsPerComponent, ColorSpace cs, int xres, int yres, int orientation, boolean interpolate, boolean imagemask, float[] decode, int[] colorkey, Image mask);
 
 	protected Image(long p) {
 		pointer = p;
@@ -61,6 +62,10 @@ public class Image
 		pointer = newNativeFromBuffer(buffer);
 	}
 
+	public Image(ImageData imageData, int width, int height, int bitsPerComponent, ColorSpace cs, int xres, int yres, int orientation, boolean interpolate, boolean imagemask, float[] decode, int[] colorkey, Image mask) {
+		pointer = newNativeFromImageData(imageData, width, height, bitsPerComponent, cs, xres, yres, orientation, interpolate, imagemask, decode, colorkey, mask);
+	}
+
 	public native int getWidth();
 	public native int getHeight();
 	public native int getXResolution();
@@ -78,4 +83,5 @@ public class Image
 	public native void setOrientation(int orientation);
 
 	public native Pixmap toPixmap();
+	public native ImageData getImageData();
 }

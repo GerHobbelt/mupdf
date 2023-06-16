@@ -161,6 +161,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/associated_executor.hpp">
       <Filter>Header Files\asio\include\asio</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/associated_immediate_executor.hpp">
+      <Filter>Header Files\asio\include\asio</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/associator.hpp">
       <Filter>Header Files\asio\include\asio</Filter>
     </ClInclude>
@@ -237,6 +240,9 @@
       <Filter>Header Files\asio\include\asio</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/bind_executor.hpp">
+      <Filter>Header Files\asio\include\asio</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/bind_immediate_executor.hpp">
       <Filter>Header Files\asio\include\asio</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/buffer.hpp">
@@ -496,6 +502,15 @@
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/impl/winrt_timer_scheduler.hpp">
       <Filter>Header Files\asio\include\asio\detail\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/initiate_defer.hpp">
+      <Filter>Header Files\asio\include\asio\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/initiate_dispatch.hpp">
+      <Filter>Header Files\asio\include\asio\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/initiate_post.hpp">
+      <Filter>Header Files\asio\include\asio\detail</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/detail/io_control.hpp">
       <Filter>Header Files\asio\include\asio\detail</Filter>
@@ -1328,16 +1343,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/consign.hpp">
       <Filter>Header Files\asio\include\asio\impl</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/defer.hpp">
-      <Filter>Header Files\asio\include\asio\impl</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/deferred.hpp">
       <Filter>Header Files\asio\include\asio\impl</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/detached.hpp">
-      <Filter>Header Files\asio\include\asio\impl</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/dispatch.hpp">
       <Filter>Header Files\asio\include\asio\impl</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/execution_context.hpp">
@@ -1347,9 +1356,6 @@
       <Filter>Header Files\asio\include\asio\impl</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/io_context.hpp">
-      <Filter>Header Files\asio\include\asio\impl</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/post.hpp">
       <Filter>Header Files\asio\include\asio\impl</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/impl/prepend.hpp">
@@ -1535,6 +1541,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/local/detail/endpoint.hpp">
       <Filter>Header Files\asio\include\asio\local\detail</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/local/seq_packet_protocol.hpp">
+      <Filter>Header Files\asio\include\asio\local</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/local/stream_protocol.hpp">
       <Filter>Header Files\asio\include\asio\local</Filter>
     </ClInclude>
@@ -1611,6 +1620,9 @@
       <Filter>Header Files\asio\include\asio</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/signal_set.hpp">
+      <Filter>Header Files\asio\include\asio</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/signal_set_base.hpp">
       <Filter>Header Files\asio\include\asio</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/asio/asio/include/asio/socket_base.hpp">
@@ -1955,6 +1967,9 @@
     <Text Include="../../thirdparty/owemdjee/asio/asio/Makefile.am">
       <Filter>Misc Files\asio</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/asio/asio/Makefile.in">
+      <Filter>Misc Files\asio</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/asio/asio/README">
       <Filter>Misc Files\asio</Filter>
     </Text>
@@ -1970,13 +1985,22 @@
     <Text Include="../../thirdparty/owemdjee/asio/asio/include/Makefile.am">
       <Filter>Misc Files\asio\include</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/asio/asio/include/Makefile.in">
+      <Filter>Misc Files\asio\include</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/asio/asio/src/Makefile.am">
+      <Filter>Misc Files\asio\src</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/asio/asio/src/Makefile.in">
       <Filter>Misc Files\asio\src</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/asio/asio/src/Makefile.msc">
       <Filter>Misc Files\asio\src</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/asio/asio/src/doc/boost_bind_dox.txt">
+      <Filter>Misc Files\asio\src\doc</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/asio/asio/src/doc/model_dox.txt">
       <Filter>Misc Files\asio\src\doc</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/asio/asio/src/doc/noncopyable_dox.txt">

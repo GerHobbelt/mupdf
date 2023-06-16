@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 #include "mupdf/ucdn.h"
@@ -215,6 +215,8 @@ search_by_family(int *size, const char *family, int attr)
 
 	for (e = inbuilt_fonts; e->script != END_OF_DATA; e++)
 	{
+		if (e->family[0] == '\0')
+			continue;
 		if (attr != e->attr)
 			continue;
 		if (!fz_strcasecmp(e->family, family))

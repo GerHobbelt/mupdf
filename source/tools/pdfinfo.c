@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 /*
  * Information tool.
@@ -743,7 +743,7 @@ gatherresourceinfo(fz_context *ctx, pdf_mark_list *mark_list, globals *glo, int 
 		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot retrieve info from page %d", page);
 
 	font = pdf_dict_get(ctx, rsrc, PDF_NAME(Font));
-	if (show & FONTS && font)
+	if (show & FONTS && font && !pdf_mark_list_push(ctx, mark_list, font))
 	{
 		int n;
 
@@ -756,7 +756,7 @@ gatherresourceinfo(fz_context *ctx, pdf_mark_list *mark_list, globals *glo, int 
 	}
 
 	xobj = pdf_dict_get(ctx, rsrc, PDF_NAME(XObject));
-	if (show & (IMAGES|XOBJS) && xobj)
+	if (show & (IMAGES|XOBJS) && xobj && !pdf_mark_list_push(ctx, mark_list, xobj))
 	{
 		int n;
 
@@ -775,11 +775,11 @@ gatherresourceinfo(fz_context *ctx, pdf_mark_list *mark_list, globals *glo, int 
 	}
 
 	shade = pdf_dict_get(ctx, rsrc, PDF_NAME(Shading));
-	if (show & SHADINGS && shade)
+	if (show & SHADINGS && shade && !pdf_mark_list_push(ctx, mark_list, shade))
 		gathershadings(ctx, glo, page, pageref, shade);
 
 	pattern = pdf_dict_get(ctx, rsrc, PDF_NAME(Pattern));
-	if (show & PATTERNS && pattern)
+	if (show & PATTERNS && pattern && !pdf_mark_list_push(ctx, mark_list, pattern))
 	{
 		int n;
 		gatherpatterns(ctx, glo, page, pageref, pattern);
@@ -1200,7 +1200,7 @@ int pdfinfo_main(int argc, const char** argv)
 		return EXIT_FAILURE;
 	}
 
-	// registeer a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
+	// register a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
 	fz_set_default_jpeg_sys_mem_mgr();
 
 
@@ -1243,7 +1243,7 @@ int pdfinfo_main(int argc, const char** argv)
 	}
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "%s", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
 		ret = EXIT_FAILURE;
 	}
 	fz_drop_output(ctx, out);

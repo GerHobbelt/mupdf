@@ -2,8 +2,9 @@
 Multi-threaded rendering of all pages in a document to PNG images.
 
 First look at docs/example.c and make sure you understand it.
-Then read the multi-threading section in docs/coding-overview.html.
-before coming back here to see an example of multi-threading.
+Then, before coming back here to see an example of multi-threading,
+please read the multi-threading section in:
+https://mupdf.readthedocs.io/en/latest/using-mupdf.html#multi-threading
 
 This example will create one main thread for reading pages from the
 document, and one thread per page for rendering. After rendering
@@ -216,7 +217,6 @@ int main(int argc, const char** argv)
 			fz_rect bbox;
 			fz_display_list *list;
 			fz_device *dev = NULL;
-			fz_pixmap *pix;
 			struct thread_data *data;
 
 			fz_var(dev);

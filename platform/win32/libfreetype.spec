@@ -9,4 +9,5 @@ also-ignore:
 	/src/tools/
 	/src/gzip/
 	/tests/
+	/subprojects/
 	

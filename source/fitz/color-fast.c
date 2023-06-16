@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 
@@ -263,7 +263,25 @@ static void fast_gray_to_rgb(fz_context *ctx, const fz_pixmap *src, fz_pixmap *d
 		/* Common, no spots case */
 		if (da)
 		{
-			if (sa)
+			if (sa && sn == 1)
+			{
+				while (h--)
+				{
+					size_t ww = w;
+					while (ww--)
+					{
+						d[0] = 0;
+						d[1] = 0;
+						d[2] = 0;
+						d[3] = s[0];
+						s += 1;
+						d += 4;
+					}
+					d += d_line_inc;
+					s += s_line_inc;
+				}
+			}
+			else if (sa)
 			{
 				while (h--)
 				{

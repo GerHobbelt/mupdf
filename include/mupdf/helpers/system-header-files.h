@@ -99,6 +99,7 @@
 
 #ifndef NEW_CBDBG // new operator: debug clientblock:
 #define NEW_CBDBG new (_CLIENT_BLOCK, __FILE__, __LINE__)
+#undef new
 #define new NEW_CBDBG
 #endif
 #endif

@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libvmem</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF7A9025}</ProjectGuid>
+    <RootNamespace>libvmem</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVMEM;VMEM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVMEM;VMEM_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVMEM;VMEM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVMEM;VMEM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVMEM;VMEM_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVMEM;VMEM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVMEM;VMEM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVMEM;VMEM_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVMEM;VMEM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVMEM;VMEM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVMEM;VMEM_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBVMEM;VMEM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/common/alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/common/ctl_fallocate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/common/file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/common/file_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/common/file_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/common/mmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/common/mmap_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/common/mmap_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/common/os_auto_flush_none.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/common/os_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/common/os_thread_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/common/os_thread_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/common/os_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/common/out.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/common/pool_hdr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/common/rand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/common/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/common/util_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/common/util_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/examples/libvmem/libart/art.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/examples/libvmem/libart/arttree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/examples/libvmem/manpage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/arena.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/atomic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/base.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/bitmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/chunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/chunk_dss.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/chunk_mmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/ckh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/ctl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/extent.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/huge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/jemalloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/mb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/mutex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/pool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/prof.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/quarantine.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/rtree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/stats.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/tcache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/tsd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/valgrind.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/vector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/src/zone.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/integration/MALLOCX_ARENA.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/integration/aligned_alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/integration/allocated.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/integration/allocm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/integration/chunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/integration/mallocx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/integration/mremap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/integration/posix_memalign.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/integration/rallocm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/integration/rallocx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/integration/thread_arena.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/integration/thread_tcache_enabled.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/integration/xallocx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/src/SFMT.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/src/math.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/src/mtx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/src/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/src/thd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/SFMT.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/bitmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/ckh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/junk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/mallctl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/math.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/mq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/mtx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/pool_base_alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/pool_custom_alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/pool_custom_alloc_internal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/prof_accum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/prof_accum_a.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/prof_accum_b.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/prof_gdump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/prof_idump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/ql.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/qr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/quarantine.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/rb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/rtree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/stats.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/tsd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/zero.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/libvmem/libvmem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/libvmem/libvmem_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/libvmem/vmem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/libvmmalloc/libvmmalloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/out_err/out_err.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/out_err_mt/out_err_mt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/out_err_mt_win/out_err_mt_win.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/out_err_win/out_err_win.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/set_funcs/set_funcs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/signal_handle/signal_handle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/tools/anonymous_mmap/anonymous_mmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/tools/dllview/dllview.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/tools/fallocate_detect/fallocate_detect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/tools/sparsefile/sparsefile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/tools/usc_permission_check/usc_permission_check.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/traces/traces.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/traces_custom_function/traces_custom_function.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/unittest/ut.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/unittest/ut_alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/unittest/ut_backtrace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/unittest/ut_file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/unittest/ut_pthread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/unittest/ut_signal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/util_file_create/util_file_create.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/util_file_open/util_file_open.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/util_is_absolute/util_is_absolute.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/util_is_zeroed/util_is_zeroed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/util_map_proc/util_map_proc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/util_parse_size/util_parse_size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmem_aligned_alloc/vmem_aligned_alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmem_calloc/vmem_calloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmem_check/vmem_check.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmem_check_allocations/vmem_check_allocations.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmem_check_version/vmem_check_version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmem_create/vmem_create.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmem_create_error/vmem_create_error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmem_create_in_region/vmem_create_in_region.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmem_create_win/vmem_create_win.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmem_custom_alloc/vmem_custom_alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmem_malloc/vmem_malloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmem_malloc_usable_size/vmem_malloc_usable_size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmem_mix_allocations/vmem_mix_allocations.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmem_multiple_pools/vmem_multiple_pools.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmem_out_of_memory/vmem_out_of_memory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmem_pages_purging/vmem_pages_purging.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmem_realloc/vmem_realloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmem_realloc_inplace/vmem_realloc_inplace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmem_stats/vmem_stats.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmem_strdup/vmem_strdup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmem_valgrind/vmem_valgrind.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmem_valgrind_region/vmem_valgrind_region.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmmalloc_calloc/vmmalloc_calloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmmalloc_check_allocations/vmmalloc_check_allocations.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmmalloc_dummy_funcs/vmmalloc_dummy_funcs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmmalloc_fork/vmmalloc_fork.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmmalloc_init/libtest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmmalloc_init/vmmalloc_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmmalloc_malloc/vmmalloc_malloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmmalloc_malloc_hooks/vmmalloc_malloc_hooks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmmalloc_malloc_usable_size/vmmalloc_malloc_usable_size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmmalloc_memalign/vmmalloc_memalign.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmmalloc_out_of_memory/vmmalloc_out_of_memory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmmalloc_realloc/vmmalloc_realloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmmalloc_valgrind/vmmalloc_valgrind.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/vmmalloc_valloc/vmmalloc_valloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/win_common/win_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/win_lists/win_lists.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/win_mmap_dtor/win_mmap_dtor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/test/win_signal/win_signal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/windows/getopt/getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/src/windows/win_mmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/vmem/utils/check_license/check-license.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/dlsym.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/errno_freebsd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/fault_injection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/mmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/os_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/out.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/pmemcommon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/pmemcommon.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/pmemcompat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/pool_hdr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/rand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/sys_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/util_pmem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/uuid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/valgrind/drd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/valgrind/helgrind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/valgrind/memcheck.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/valgrind/pmemcheck.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/valgrind/valgrind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/common/valgrind_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/examples/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/examples/ex_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/examples/libvmem/libart/art.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/examples/libvmem/libart/arttree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/freebsd/include/endian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/freebsd/include/features.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/freebsd/include/linux/kdev_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/freebsd/include/linux/limits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/freebsd/include/sys/sysmacros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/include/libvmem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/include/libvmmalloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/arena.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/bitmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/chunk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/chunk_dss.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/chunk_mmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/ckh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/ctl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/extent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/huge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/jemalloc_internal_decls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/jemalloc_internal_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/mb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/prng.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/prof.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/ql.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/qr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/quarantine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/rb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/rtree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/tcache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/tsd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/valgrind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/msvc_compat/C99/inttypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/msvc_compat/C99/stdbool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/msvc_compat/C99/stdint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/msvc_compat/inttypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/msvc_compat/stdint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/msvc_compat/strings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/msvc_compat/windows_extra.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/include/test/SFMT-alti.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/include/test/SFMT-params.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/include/test/SFMT-params11213.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/include/test/SFMT-params1279.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/include/test/SFMT-params132049.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/include/test/SFMT-params19937.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/include/test/SFMT-params216091.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/include/test/SFMT-params2281.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/include/test/SFMT-params4253.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/include/test/SFMT-params44497.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/include/test/SFMT-params607.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/include/test/SFMT-params86243.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/include/test/SFMT-sse2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/include/test/SFMT.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/include/test/math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/include/test/mq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/include/test/mtx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/include/test/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/include/test/thd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/unit/prof_accum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/libvmem/vmem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/libvmmalloc/vmmalloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/test/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/test/unittest/unittest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/test/vmmalloc_dummy_funcs/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/test/vmmalloc_dummy_funcs/vmmalloc_dummy_funcs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/test/vmmalloc_init/libtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/tools/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/getopt/getopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/include/dirent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/include/endian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/include/err.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/include/features.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/include/libgen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/include/linux/limits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/include/platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/include/sched.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/include/strings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/include/sys/file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/include/sys/mman.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/include/sys/mount.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/include/sys/param.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/include/sys/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/include/sys/statvfs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/include/sys/uio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/include/sys/wait.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/include/unistd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/include/win_mmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/jemalloc_gen/include/jemalloc/internal/jemalloc_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/jemalloc_gen/include/jemalloc/internal/jemalloc_internal_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/jemalloc_gen/include/jemalloc/internal/private_namespace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/jemalloc_gen/include/jemalloc/internal/private_unnamespace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/jemalloc_gen/include/jemalloc/internal/public_namespace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/jemalloc_gen/include/jemalloc/internal/public_unnamespace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/jemalloc_gen/include/jemalloc/internal/size_classes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/jemalloc_gen/include/jemalloc/jemalloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/jemalloc_gen/include/jemalloc/jemalloc_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/jemalloc_gen/include/jemalloc/jemalloc_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/jemalloc_gen/include/jemalloc/jemalloc_mangle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/jemalloc_gen/include/jemalloc/jemalloc_mangle_jet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/jemalloc_gen/include/jemalloc/jemalloc_protos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/jemalloc_gen/include/jemalloc/jemalloc_protos_jet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/jemalloc_gen/include/jemalloc/jemalloc_rename.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/vmem/src/windows/jemalloc_gen/include/jemalloc/jemalloc_typedefs.h" />
+    <Image Include="../../thirdparty/owemdjee/vmem/res/PMDK.ico" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/vmem/src/common/common.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/vmem/src/libvmem/libvmem.rc" />
+    <Text Include="../../thirdparty/owemdjee/vmem/CODING_STYLE.md" />
+    <Text Include="../../thirdparty/owemdjee/vmem/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/vmem/ChangeLog.pmdk" />
+    <Text Include="../../thirdparty/owemdjee/vmem/README.md" />
+    <Text Include="../../thirdparty/owemdjee/vmem/doc/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/doc/libvmem/libvmem.7.md" />
+    <Text Include="../../thirdparty/owemdjee/vmem/doc/libvmem/vmem_create.3.md" />
+    <Text Include="../../thirdparty/owemdjee/vmem/doc/libvmem/vmem_malloc.3.md" />
+    <Text Include="../../thirdparty/owemdjee/vmem/doc/libvmmalloc/libvmmalloc.7.md" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/common/valgrind/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/examples/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/examples/libvmem/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/freebsd/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/include/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/README.libvmem" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/bin/jemalloc.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/config.stamp.in" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/coverage.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/doc/html.xsl.in" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/doc/jemalloc.xml.in" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/doc/manpages.xsl.in" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/jemalloc_internal.h.in" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/jemalloc_internal_defs.h.in" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/private_namespace.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/private_symbols.txt" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/private_unnamespace.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/public_namespace.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/public_unnamespace.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/internal/size_classes.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/jemalloc.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/jemalloc_defs.h.in" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/jemalloc_macros.h.in" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/jemalloc_mangle.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/jemalloc_protos.h.in" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/jemalloc_rename.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/include/jemalloc/jemalloc_typedefs.h.in" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/jemalloc.cfg" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/include/test/jemalloc_test.h.in" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/include/test/jemalloc_test_defs.h.in" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/test/test.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/jemalloc/win_autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/libvmem/libvmem.link.in" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/libvmmalloc/libvmmalloc.link.in" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/RUNTESTLIB.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/RUNTESTS.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/out_err/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/out_err_mt/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/out_err_mt_win/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/out_err_win/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/scope/TEST0w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/scope/TEST5w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/set_funcs/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/signal_handle/TEST0w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/tools/anonymous_mmap/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/tools/anonymous_mmap/check_max_mmap.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/tools/dllview/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/tools/sparsefile/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/tools/sparsefile/TEST_SPARSE.ps1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/traces/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/traces/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/traces/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/traces/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/traces/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/traces/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/traces/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/traces_custom_function/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/traces_custom_function/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/unicode_api/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/unicode_match_script/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/unittest/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/unittest/unittest.ps1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/unittest/unittest.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/util_file_create/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/util_file_create/TEST0w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/util_file_create/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/util_file_create/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/util_file_open/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/util_file_open/TEST0w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/util_file_open/TEST1w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/util_is_absolute/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/util_is_zeroed/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/util_map_proc/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/util_parse_size/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_aligned_alloc/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_aligned_alloc/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_calloc/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_calloc/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_check/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_check/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_check_allocations/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_check_version/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_create/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_create_error/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_create_in_region/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_create_win/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_custom_alloc/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_custom_alloc/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_custom_alloc/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_custom_alloc/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_custom_alloc/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_custom_alloc/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_malloc/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_malloc/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_malloc_usable_size/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_malloc_usable_size/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_mix_allocations/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_mix_allocations/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_multiple_pools/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_multiple_pools/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_out_of_memory/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_out_of_memory/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_pages_purging/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_pages_purging/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_realloc/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_realloc/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_realloc_inplace/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_realloc_inplace/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_stats/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_stats/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_stats/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_stats/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_stats/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_stats/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_stats/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_stats/TEST7.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_stats/TEST8.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_stats/TEST9.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_strdup/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmem_strdup/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmmalloc_fork/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmmalloc_init/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/vmmalloc_malloc_hooks/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/win_common/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/win_common/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/win_lists/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/win_lists/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/win_lists/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/win_mmap_dtor/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/test/win_signal/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/windows/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/windows/getopt/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/vmem/src/windows/getopt/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/CHECK_WHITESPACE.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/CREATE-ZIP.PS1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/CSTYLE.ps1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/SRCVERSION.ps1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/build-dpkg.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/build-rpm.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/check-commit.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/check-commits.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/check-doc.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/check-os.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/check-shebang.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/check_license/check-headers.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/check_license/file-exceptions.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/check_sdk_version.py" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/copy-source.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/docker/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/docker/build-local.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/docker/build-travis.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/docker/configure-tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/docker/images/README" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/docker/images/build-image.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/docker/images/install-valgrind.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/docker/images/push-image.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/docker/prepare-for-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/docker/pull-or-rebuild-image.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/docker/run-build-package.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/docker/run-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/docker/run-coverage.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/docker/run-coverity.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/docker/run-doc-update.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/docker/valid-branches.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/get_aliases.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/libvmem.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/libvmmalloc.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/md2man.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/pkg-common.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/pkg-config.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/ps_analyze.ps1" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/style_check.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/version.sh" />
+    <Text Include="../../thirdparty/owemdjee/vmem/utils/vmem.spec.in" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

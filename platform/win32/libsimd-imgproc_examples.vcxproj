@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libsimd-imgproc_examples</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-897A-7518FF573BD4}</ProjectGuid>
+    <RootNamespace>libsimd-imgproc_examples</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;4310;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/simd-imgproc/src;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/core/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/simd-imgproc/src;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/core/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/simd-imgproc/src;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/core/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/simd-imgproc/src;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/core/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/simd-imgproc/src;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/core/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/simd-imgproc/src;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/core/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/simd-imgproc/src;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/core/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMD_IMGPROC;SIMD_IMGPROC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/simd-imgproc/src;../../thirdparty/owemdjee/opencv/include;../../scripts/OpenCV;../../thirdparty/owemdjee/opencv/modules/core/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Use/Use.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Use/UseFaceDetection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simd-imgproc/src/Use/UseMotionDetector.cpp" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/city.jpg" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/forest.jpg" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/freckles.jpg" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi0g01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi0g02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi0g08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi0g16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi2c16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi4a08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi4a16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi6a08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basi6a16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn0g01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn0g02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn0g08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn0g16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn2c16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn4a08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn4a16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn6a08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/basn6a16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/bgai4a08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/bgai4a16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/bgan6a08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/bgan6a16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/bgbn4a08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/bggn4a16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/bgwn6a08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/bgyn6a16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s01i3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s01n3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s02i3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s02n3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s03i3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s03n3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s04i3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s04n3p01.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s05i3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s05n3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s06i3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s06n3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s07i3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s07n3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s08i3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s08n3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s09i3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s09n3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s32i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s32n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s33i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s33n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s34i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s34n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s35i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s35n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s36i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s36n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s37i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s37n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s38i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s38n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s39i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s39n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s40i3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/s40n3p04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tbbn0g04.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tbbn2c16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tbbn3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tbgn2c16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tbgn3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tbrn2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tbwn0g16.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tbwn3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tbyn3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tm3n3p02.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tp0n0g08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tp0n2c08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tp0n3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/png/tp1n3p08.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/data/image/text.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/bc_s.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/bdwn.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/class_simd_1_1_neural_1_1_average_pooling_layer.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/class_simd_1_1_neural_1_1_convolutional_layer.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/class_simd_1_1_neural_1_1_dropout_layer.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/class_simd_1_1_neural_1_1_fully_connected_layer.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/class_simd_1_1_neural_1_1_input_layer.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/class_simd_1_1_neural_1_1_layer.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/class_simd_1_1_neural_1_1_max_pooling_layer.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/class_simd_1_1_neural_1_1_pooling_layer.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/closed.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/doc.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/folderclosed.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/folderopen.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/nav_f.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/nav_g.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/nav_h.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/open.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/splitbar.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/sync_off.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/sync_on.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/tab_a.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/tab_b.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/tab_h.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/tab_s.png" />
+    <Image Include="../../thirdparty/owemdjee/simd-imgproc/docs/logo.png" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/data/network/digit.txt" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/dynsections.js" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/jquery.js" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/menu.js" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/docs/help/menudata.js" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/cmake/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/cmake/arm.cmake" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/cmake/ppc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/cmake/x86.cmake" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/cmd/BuildAll.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/cmd/CreateRelease.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/cmd/FindAndReplace.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/cmd/GenerateHelp.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/cmd/GetThreadCount.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/cmd/GetVersion.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/cmd/TestAll.cmd" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/conan/conanfile.py" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/sh/GetVersion.sh" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/sh/UpdateCopyrights.sh" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/txt/DoxygenConfig.txt" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/txt/DoxygenData.txt" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/txt/DoxygenFooter.txt" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/txt/DoxygenHeader.txt" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/txt/FullVersion.txt" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/txt/SimdVersion.h.txt" />
+    <Text Include="../../thirdparty/owemdjee/simd-imgproc/prj/txt/UserVersion.txt" />
+    <Xml Include="../../thirdparty/owemdjee/simd-imgproc/data/cascade/haar_face_0.xml" />
+    <Xml Include="../../thirdparty/owemdjee/simd-imgproc/data/cascade/haar_face_1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/simd-imgproc/data/cascade/lbp_face.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -1,0 +1,2192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libpmdk</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFE8121A}</ProjectGuid>
+    <RootNamespace>libpmdk</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMDK;PMDK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMDK;PMDK_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMDK;PMDK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMDK;PMDK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMDK;PMDK_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMDK;PMDK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMDK;PMDK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMDK;PMDK_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMDK;PMDK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMDK;PMDK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMDK;PMDK_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPMDK;PMDK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/benchmark_empty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/benchmark_time.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/benchmark_worker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/blk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/clo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/clo_vec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/config_reader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/config_reader_win.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/map_bench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/obj_lanes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/obj_locks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/obj_pmalloc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/pmem_flush.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/pmem_memcpy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/pmem_memset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/pmembench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/pmemobj_atomic_lists.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/pmemobj_gen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/pmemobj_persist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/pmemobj_tx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/pmemobj_tx_add_range.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/poolset_util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/scenario.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/common/bad_blocks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/common/ctl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/common/ctl_cow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/common/ctl_fallocate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/common/ctl_prefault.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/common/ctl_sds.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/common/file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/common/file_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/common/file_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/common/mmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/common/mmap_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/common/mmap_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/common/os_deep_linux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/common/os_deep_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/common/pool_hdr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/common/rand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/common/set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/common/set_badblocks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/common/shutdown_state.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/common/uuid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/common/uuid_freebsd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/common/uuid_linux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/common/uuid_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/core/alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/core/fs_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/core/fs_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/core/membuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/core/os_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/core/os_thread_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/core/os_thread_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/core/os_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/core/out.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/core/ravl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/core/ravl_interval.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/core/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/core/util_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/core/util_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/examples/basic-async/basic-async.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/examples/basic/basic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/examples/hashmap/hashmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/extras/dml/data_mover_dml.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/extras/dml/utils/check_movdir64b.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/extras/dml/utils/util_dml.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/cpu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/membuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/os_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/os_thread_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/os_thread_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/os_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/out.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/ringbuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/util_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/util_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/data_mover_sync.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/data_mover_threads.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/runtime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/data_mover_dml_flush/data_mover_dml_flush.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/data_mover_dml_memcpy/data_mover_dml_memcpy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/data_mover_dml_memmove/data_mover_dml_memmove.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/data_mover_dml_memset/data_mover_dml_memset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/dummy/dummy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/dummy_negative/dummy_negative.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/future/test_future.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/future_properties/future_property_async.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/membuf/membuf_simple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/memcpy_threads/memcpy_threads.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/memmove_sync/memmove_sync.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/memmove_threads/memmove_threads.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/memset_sync/memset_sync.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/memset_threads/memset_threads.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/runtime_test/runtime_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/vdm/test_vdm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/vdm_operation_future_poll/vdm_operation_future_poll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmem/full_copy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmem/manpage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmem/simple_copy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmem2/advanced/advanced.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmem2/basic/basic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmem2/log/log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmem2/map_multiple_files/map_multiple_files.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmem2/redo/redo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmem2/ringbuf/ringbuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmem2/unsafe_shutdown/unsafe_shutdown.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemblk/assetdb/asset_checkin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemblk/assetdb/asset_checkout.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemblk/assetdb/asset_list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemblk/assetdb/asset_load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemblk/manpage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemlog/logfile/addlog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemlog/logfile/printlog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemlog/manpage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/btree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/buffons_needle_problem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/hashmap/hashmap_atomic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/hashmap/hashmap_rp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/hashmap/hashmap_tx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/libart/art.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/libart/arttree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/libart/arttree_examine.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/libart/arttree_search.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/libart/arttree_structures.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/linkedlist/fifo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/list_map/skiplist_map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/lists.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/manpage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/data_store.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/kv_server.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/map_btree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/map_ctree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/map_hashmap_atomic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/map_hashmap_rp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/map_hashmap_tx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/map_rbtree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/map_rtree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/map_skiplist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/mapcli.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/pi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/pmemblk/obj_pmemblk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/pmemlog/obj_pmemlog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/pmemlog/obj_pmemlog_macros.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/pmemlog/obj_pmemlog_minimal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/pmemlog/obj_pmemlog_simple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/pmemobjfs/pmemobjfs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/pminvaders/pminvaders.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/pminvaders/pminvaders2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/queue/queue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/setjmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/slab_allocator/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/slab_allocator/slab_allocator.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/string_store/reader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/string_store/writer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/string_store_tx/reader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/string_store_tx/writer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/string_store_tx_type/reader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/string_store_tx_type/writer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/tree_map/btree_map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/tree_map/ctree_map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/tree_map/rbtree_map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/tree_map/rtree_map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmempool/manpage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/examples/pmreorder/pmreorder_list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem/libpmem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem/libpmem_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem/pmem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem/pmem_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem/pmem_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/aarch64/init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/auto_flush_linux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/auto_flush_none.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/auto_flush_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/badblocks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/badblocks_ndctl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/badblocks_none.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/deep_flush.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/deep_flush_linux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/deep_flush_other.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/deep_flush_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/errormsg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/extent_linux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/extent_none.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/libpmem2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/libpmem2_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/loongarch64/init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/map_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/map_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/mcsafe_ops_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/mcsafe_ops_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/memops_generic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/mover.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/numa_ndctl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/numa_none.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/persist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/persist_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/persist_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/pmem2_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/pmem2_utils_linux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/pmem2_utils_ndctl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/pmem2_utils_none.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/pmem2_utils_other.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/ppc64/init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/region_namespace_ndctl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/region_namespace_none.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/riscv64/init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/source.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/source_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/source_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/usc_ndctl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/usc_none.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/usc_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/vm_reservation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/vm_reservation_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/vm_reservation_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/cpu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/memcpy/memcpy_nt_avx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/memcpy/memcpy_nt_avx512f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/memcpy/memcpy_nt_movdir64b.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/memcpy/memcpy_nt_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/memcpy/memcpy_t_avx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/memcpy/memcpy_t_avx512f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/memcpy/memcpy_t_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/memset/memset_nt_avx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/memset/memset_nt_avx512f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/memset/memset_nt_movdir64b.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/memset/memset_nt_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/memset/memset_t_avx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/memset/memset_t_avx512f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/memset/memset_t_sse2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemblk/blk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemblk/btt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemblk/libpmemblk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemblk/libpmemblk_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemlog/libpmemlog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemlog/libpmemlog_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemlog/log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/alloc_class.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/bucket.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/container_ravl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/container_seglists.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/critnib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/ctl_debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/heap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/libpmemobj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/libpmemobj_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/memblock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/memops.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/obj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/palloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/pmalloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/recycler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/stats.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/sync.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/tx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/ulog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/check.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/check_backup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/check_bad_blocks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/check_blk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/check_btt_info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/check_btt_map_flog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/check_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/check_pool_hdr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/check_sds.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/check_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/check_write.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/feature.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/libpmempool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/libpmempool_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/pool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/replica.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/rm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/sync.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/transform.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/arch_flags/arch_flags.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/blk_include/blk_include.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/blk_nblock/blk_nblock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/blk_non_zero/blk_non_zero.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/blk_pool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool_lock/blk_pool_lock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool_win/blk_pool_win.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/blk_recovery/blk_recovery.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/blk_rw/blk_rw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/blk_rw_mt/blk_rw_mt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/checksum/checksum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/compat_incompat_features/pool_open.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/ctl_cow/ctl_cow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/ctl_prefault/ctl_prefault.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/ex_linkedlist/ex_linkedlist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/getopt/getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_api/libpmempool_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_api_win/libpmempool_test_win.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_check_version/libpmempool_check_version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_feature/libpmempool_feature.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_include/libpmempool_include.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_rm/libpmempool_rm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_rm_win/libpmempool_rm_win.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_sync/libpmempool_sync.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_sync_win/libpmempool_sync_win.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_transform/libpmempool_transform.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_transform_win/libpmempool_transform_win.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/log_basic/log_basic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/log_include/log_include.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/log_pool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool_lock/log_pool_lock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool_win/log_pool_win.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/log_recovery/log_recovery.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/log_walker/log_walker.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/mmap/mmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/mmap_fixed/mmap_fixed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_action/obj_action.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_alloc/obj_alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_badblock/obj_badblock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_basic_integration/obj_basic_integration.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_bucket/obj_bucket.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_check/obj_check.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_constructor/obj_constructor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_critnib/obj_critnib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_critnib_mt/obj_critnib_mt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_alignment/obj_ctl_alignment.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_alloc_class/obj_ctl_alloc_class.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_alloc_class_config/obj_ctl_alloc_class_config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_arenas/obj_ctl_arenas.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_config/obj_ctl_config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_debug/obj_ctl_debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_heap_size/obj_ctl_heap_size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_stats/obj_ctl_stats.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_debug/obj_debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_defrag/obj_defrag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_defrag_advanced/obj_defrag_advanced.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_defrag_advanced/pgraph.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_defrag_advanced/vgraph.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_direct/obj_direct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_direct/obj_direct_inline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_direct/obj_direct_non_inline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_direct_volatile/obj_direct_volatile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_extend/obj_extend.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_first_next/obj_first_next.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_fragmentation/obj_fragmentation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_fragmentation2/obj_fragmentation2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_heap/obj_heap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_heap_interrupt/obj_heap_interrupt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_heap_reopen/obj_heap_reopen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_heap_state/obj_heap_state.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_include/obj_atomic_base_include.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_include/obj_atomic_include.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_include/obj_base_include.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_include/obj_iterator_base_include.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_include/obj_iterator_include.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_include/obj_lists_atomic_base_include.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_include/obj_lists_atomic_include.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_include/obj_pool_base_include.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_include/obj_pool_include.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_include/obj_thread_include.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_include/obj_tx_base_include.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_include/obj_tx_include.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_include/obj_types_include.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_lane/obj_lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_layout/obj_layout.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list/obj_list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list/obj_list_mocks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list/obj_list_mocks_palloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_macro/obj_list_macro.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_locks/obj_locks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_many_size_allocs/obj_many_size_allocs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_mem/obj_mem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_memblock/obj_memblock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_memcheck/obj_memcheck.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_memcheck_register/obj_memcheck_register.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_memops/obj_memops.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_oid_thread/obj_oid_thread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_out_of_memory/obj_out_of_memory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_persist_count/obj_persist_count.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pmalloc_basic/obj_pmalloc_basic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pmalloc_mt/obj_pmalloc_mt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pmalloc_oom_mt/obj_pmalloc_oom_mt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pmalloc_rand_mt/obj_pmalloc_rand_mt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pmemcheck/obj_pmemcheck.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/obj_pool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool_lock/obj_pool_lock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool_lookup/obj_pool_lookup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool_open_mt/obj_pool_open_mt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool_win/obj_pool_win.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_realloc/obj_realloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_recovery/obj_recovery.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_recreate/obj_recreate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_reorder_basic/obj_reorder_basic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_root/obj_root.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_sds/obj_sds.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_strdup/obj_strdup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_sync/mocks_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_sync/mocks_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_sync/obj_sync.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_toid/obj_toid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_add_range/obj_tx_add_range.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_add_range_direct/obj_tx_add_range_direct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_alloc/obj_tx_alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_callbacks/obj_tx_callbacks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_flow/obj_tx_flow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_free/obj_tx_free.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_invalid/obj_tx_invalid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_lock/obj_tx_lock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_locks/obj_tx_locks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_locks_abort/obj_tx_locks_abort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_mt/obj_tx_mt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_realloc/obj_tx_realloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_strdup/obj_tx_strdup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_user_data/obj_tx_user_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ulog_size/obj_ulog_size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/obj_zones/obj_zones.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/out_err/out_err.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/out_err_mt/out_err_mt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/out_err_mt_win/out_err_mt_win.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/out_err_win/out_err_win.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_api/pmem2_api.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_badblock/pmem2_badblock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_badblock_mocks/mocks_ndctl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_badblock_mocks/mocks_other.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_badblock_mocks/mocks_pmem2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_badblock_mocks/pmem2_badblock_mocks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_compat/pmem2_compat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_config/pmem2_config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_deep_flush/pmem2_deep_flush.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_future/pmem2_future.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_granularity/mocks_dax_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_granularity/mocks_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_granularity/pmem2_granularity.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_include/pmem2_include.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_integration/pmem2_integration.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_map/pmem2_map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_map_from_existing/pmem2_map_from_existing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_map_prot/pmem2_map_prot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_mem_ext/pmem2_mem_ext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_memcpy/memcpy_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_memcpy/pmem2_memcpy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_memmove/memmove_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_memmove/pmem2_memmove.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_memset/memset_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_memset/pmem2_memset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_mover/pmem2_mover.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_movnt/pmem2_movnt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_movnt_align/movnt_align_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_movnt_align/pmem2_movnt_align.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_perror/pmem2_perror.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_persist/pmem2_persist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_persist_valgrind/pmem2_persist_valgrind.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_source/pmem2_source.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_source_alignment/pmem2_source_alignment.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_source_numa/pmem2_source_numa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_source_size/pmem2_source_size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_usc/pmem2_usc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_vm_reservation/pmem2_vm_reservation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_deep_persist/mocks_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_deep_persist/pmem_deep_persist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_eADR_functions/pmem_eADR_functions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_has_auto_flush/mocks_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_has_auto_flush/pmem_has_auto_flush.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_has_auto_flush_win/mocks_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_has_auto_flush_win/pmem_has_auto_flush_win.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_include/pmem_include.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_is_pmem/pmem_is_pmem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_is_pmem_posix/pmem_is_pmem_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_is_pmem_windows/pmem_is_pmem_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_map_file/mocks_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_map_file/mocks_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_map_file/pmem_map_file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_map_file_trunc/pmem_map_file_trunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_map_file_win/mocks_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_map_file_win/pmem_map_file_win.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_memcpy/pmem_memcpy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_memmove/pmem_memmove.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_memset/pmem_memset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_movnt/pmem_movnt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_movnt_align/pmem_movnt_align.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_unmap/pmem_unmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_valgr_simple/pmem_valgr_simple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmreorder_flushes/pmreorder_flushes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmreorder_simple/pmreorder_simple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/pmreorder_stack/pmreorder_stack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/set_funcs/set_funcs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/signal_handle/signal_handle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/tools/anonymous_mmap/anonymous_mmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/tools/bttcreate/bttcreate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/tools/cmpmap/cmpmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/tools/cpufd/cpufd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/tools/ddmap/ddmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/tools/dllview/dllview.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/tools/extents/extents.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/tools/fallocate_detect/fallocate_detect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/tools/gran_detecto/gran_detecto.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/tools/mapexec/mapexec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/tools/obj_verify/obj_verify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/tools/pmemalloc/pmemalloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/tools/pmemdetect/pmemdetect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/tools/pmemobjcli/pmemobjcli.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/tools/pmemspoil/spoil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/tools/pmemwrite/write.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/tools/sparsefile/sparsefile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/tools/usc_permission_check/usc_permission_check.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/traces/traces.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/traces_custom_function/traces_custom_function.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/traces_pmem/traces_pmem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/ut.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/ut_alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/ut_backtrace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/ut_fh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/ut_file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/ut_pmem2_config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/ut_pmem2_map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/ut_pmem2_setup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/ut_pmem2_setup_integration.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/ut_pmem2_source.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/ut_pmem2_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/ut_pthread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/ut_signal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/util_badblock/util_badblock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/util_cpuid/util_cpuid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/util_ctl/util_ctl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/util_extent/util_extent.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/util_file_create/util_file_create.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/util_file_open/util_file_open.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/util_is_absolute/util_is_absolute.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/util_is_poolset/util_is_poolset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/util_is_zeroed/util_is_zeroed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/util_map_proc/util_map_proc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/util_parse_size/util_parse_size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/util_pool_hdr/util_pool_hdr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/util_poolset/mocks_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/util_poolset/mocks_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/util_poolset/util_poolset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/util_poolset_foreach/util_poolset_foreach.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/util_poolset_parse/util_poolset_parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/util_poolset_size/util_poolset_size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/util_ravl/util_ravl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/util_sds/util_sds.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/util_uuid_generate/util_uuid_generate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/util_vec/util_vec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/util_vecq/util_vecq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/win_common/win_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/win_lists/win_lists.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/win_mmap_dtor/win_mmap_dtor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/win_poolset_unmap/win_poolset_unmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/test/win_signal/win_signal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/tools/daxio/daxio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/check.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/convert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/create.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/dump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/feature.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/info_blk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/info_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/info_obj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/output.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/pmempool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/rm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/synchronize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/transform.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/windows/getopt/getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/src/windows/win_mmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/pmdk/utils/docker/test_package/test_package.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/benchmark.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/benchmark_time.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/benchmark_worker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/clo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/clo_vec.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/config_reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/poolset_util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/scenario.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/common.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/common/badblocks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/common/ctl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/common/ctl_global.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/common/dlsym.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/common/file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/common/mmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/common/os_deep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/common/pmemcommon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/common/pmemcommon.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/common/pool_hdr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/common/queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/common/rand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/common/set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/common/set_badblocks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/common/shutdown_state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/common/util_pmem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/common/uuid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/common/vec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/common/vecq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/core/alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/core/errno_freebsd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/core/fault_injection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/core/fs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/core/membuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/core/os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/core/os_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/core/out.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/core/page_size.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/core/pmemcore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/core/pmemcore.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/core/ravl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/core/ravl_interval.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/core/sys_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/core/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/core/valgrind/drd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/core/valgrind/helgrind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/core/valgrind/memcheck.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/core/valgrind/pmemcheck.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/core/valgrind/valgrind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/core/valgrind_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/extras/dml/include/libminiasync-vdm-dml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/extras/dml/include/libminiasync-vdm-dml/data_mover_dml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/extras/dml/utils/util_dml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/cpu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/errno_freebsd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/membuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/os_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/out.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/pmemcompat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/ringbuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/sys_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/valgrind/drd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/valgrind/helgrind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/valgrind/memcheck.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/valgrind/pmemcheck.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/valgrind/valgrind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/valgrind_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/include/libminiasync.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/include/libminiasync/data_mover_sync.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/include/libminiasync/data_mover_threads.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/include/libminiasync/future.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/include/libminiasync/runtime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/include/libminiasync/vdm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/windows/include/endian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/windows/include/platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/windows/include/sys/param.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/windows/include/unistd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/test_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/ex_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemblk/assetdb/asset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemlog/logfile/logentry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/hashmap/hashmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/hashmap/hashmap_atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/hashmap/hashmap_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/hashmap/hashmap_rp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/hashmap/hashmap_tx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/libart/art.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/libart/arttree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/libart/arttree_structures.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/linkedlist/pmemobj_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/list_map/skiplist_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/kv_protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/map_btree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/map_ctree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/map_hashmap_atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/map_hashmap_rp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/map_hashmap_tx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/map_rbtree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/map_rtree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/map_skiplist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/slab_allocator/slab_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/string_store/layout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/string_store_tx/layout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/string_store_tx_type/layout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/tree_map/btree_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/tree_map/ctree_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/tree_map/rbtree_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/tree_map/rtree_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/freebsd/include/endian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/freebsd/include/features.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/freebsd/include/linux/kdev_t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/freebsd/include/linux/limits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/freebsd/include/sys/sysmacros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmem2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmem2/async.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmem2/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmemblk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmemlog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmemobj.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmemobj/action.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmemobj/action_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmemobj/atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmemobj/atomic_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmemobj/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmemobj/ctl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmemobj/iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmemobj/iterator_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmemobj/lists_atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmemobj/lists_atomic_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmemobj/pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmemobj/pool_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmemobj/thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmemobj/tx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmemobj/tx_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmemobj/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/libpmempool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/include/pmemcompat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem/pmem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/aarch64/arm_cacheops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/aarch64/flags.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/aarch64/flush.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/aarch64/sources.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/auto_flush.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/auto_flush_windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/deep_flush.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/extent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/loongarch64/flags.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/loongarch64/loongarch_cacheops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/loongarch64/sources.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/mover.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/persist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/pmem2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/pmem2_arch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/pmem2_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/ppc64/flags.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/ppc64/sources.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/region_namespace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/region_namespace_ndctl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/riscv64/flags.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/riscv64/rv_cacheops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/riscv64/sources.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/source.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/vm_reservation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/avx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/cpu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/flags.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/flush.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/memcpy/memcpy_avx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/memcpy/memcpy_avx512f.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/memcpy/memcpy_movdir64b.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/memcpy/memcpy_sse2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/memcpy_memset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/memset/memset_avx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/memset/memset_avx512f.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/memset/memset_movdir64b.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/memset/memset_sse2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/x86_64/sources.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemblk/blk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemblk/btt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemblk/btt_layout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemlog/log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/alloc_class.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/bucket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/container.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/container_ravl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/container_seglists.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/critnib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/ctl_debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/heap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/heap_layout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/lane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/memblock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/memops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/obj.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/palloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/pmalloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/pmemops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/recycler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/sync.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/tx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/ulog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/check_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/pmempool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/replica.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_api/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_rm/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/obj_basic_integration/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/obj_defrag_advanced/pgraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/obj_defrag_advanced/vgraph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/obj_direct/obj_direct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/obj_heap_interrupt/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/obj_heap_interrupt/mocks_windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/obj_heap_state/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list/mocks_windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list/obj_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/obj_memblock/mocks_windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/obj_persist_count/mocks_windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/obj_sds/mocks_windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/obj_sync/mocks_windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_badblock_mocks/pmem2_badblock_mocks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_granularity/mocks_dax_windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_granularity/pmem2_granularity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_memcpy/memcpy_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_memmove/memmove_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_memset/memset_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_movnt_align/movnt_align_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_has_auto_flush_win/mocks_windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_has_auto_flush_win/pmem_has_auto_flush_win.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_map_file/mocks_windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_map_file_win/mocks_windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/unittest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/ut_fh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/ut_pmem2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/ut_pmem2_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/ut_pmem2_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/ut_pmem2_setup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/ut_pmem2_setup_integration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/ut_pmem2_source.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/ut_pmem2_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/util_poolset/mocks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/util_poolset/mocks_windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/test/util_sds/mocks_windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/tools/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/convert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/create.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/dump.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/feature.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/output.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/rm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/synchronize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/transform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/windows/getopt/getopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/windows/include/dirent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/windows/include/endian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/windows/include/err.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/windows/include/features.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/windows/include/libgen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/windows/include/linux/limits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/windows/include/platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/windows/include/sched.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/windows/include/strings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/windows/include/sys/file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/windows/include/sys/mman.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/windows/include/sys/mount.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/windows/include/sys/param.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/windows/include/sys/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/windows/include/sys/statvfs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/windows/include/sys/uio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/windows/include/sys/wait.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/windows/include/unistd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/pmdk/src/windows/include/win_mmap.h" />
+    <Image Include="../../thirdparty/owemdjee/pmdk/res/PMDK.ico" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/pmdk/src/common/common.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/pylint.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem/libpmem.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/libpmem2.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemblk/libpmemblk.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemlog/libpmemlog.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/libpmemobj.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/libpmempool.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/pmempool.rc" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/CODING_STYLE.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/RELEASE_STEPS.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/daxio/daxio.1.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem/libpmem.7.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem/pmem_flush.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem/pmem_is_pmem.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem/pmem_memmove_persist.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/libpmem2.7.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/libpmem2_unsafe_shutdown.7.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_async.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_badblock_clear.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_badblock_context_new.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_badblock_next.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_config_new.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_config_set_length.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_config_set_offset.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_config_set_protection.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_config_set_required_store_granularity.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_config_set_sharing.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_config_set_vm_reservation.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_deep_flush.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_errormsg.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_get_drain_fn.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_get_flush_fn.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_get_memmove_fn.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_get_persist_fn.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_map_delete.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_map_from_existing.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_map_get_address.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_map_get_size.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_map_get_store_granularity.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_map_new.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_perror.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_source_alignment.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_source_device_id.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_source_device_usc.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_source_from_anon.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_source_from_fd.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_source_get_fd.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_source_get_handle.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_source_numa_node.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_source_pread_mcsafe.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_source_size.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_vm_reservation_extend.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_vm_reservation_get_address.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_vm_reservation_get_size.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_vm_reservation_map_find.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmem2/pmem2_vm_reservation_new.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemblk/libpmemblk.7.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemblk/pmemblk_bsize.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemblk/pmemblk_create.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemblk/pmemblk_ctl_get.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemblk/pmemblk_read.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemblk/pmemblk_set_zero.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemlog/libpmemlog.7.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemlog/pmemlog_append.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemlog/pmemlog_create.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemlog/pmemlog_ctl_get.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemlog/pmemlog_nbyte.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemlog/pmemlog_tell.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemobj/libpmemobj.7.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemobj/oid_is_null.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemobj/pmemobj_action.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemobj/pmemobj_alloc.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemobj/pmemobj_ctl_get.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemobj/pmemobj_first.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemobj/pmemobj_list_insert.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemobj/pmemobj_memcpy_persist.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemobj/pmemobj_mutex_zero.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemobj/pmemobj_open.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemobj/pmemobj_root.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemobj/pmemobj_tx_add_range.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemobj/pmemobj_tx_alloc.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemobj/pmemobj_tx_begin.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemobj/pobj_layout_begin.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemobj/pobj_list_head.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemobj/toid_declare.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmempool/libpmempool.7.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmempool/pmempool_check_init.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmempool/pmempool_feature_query.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmempool/pmempool_rm.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmempool/pmempool_sync.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libpmemset/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/librpmem/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libvmem/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/libvmmalloc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/pmem_ctl/pmem_ctl.5.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/pmempool/pmempool-check.1.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/pmempool/pmempool-convert.1.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/pmempool/pmempool-create.1.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/pmempool/pmempool-dump.1.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/pmempool/pmempool-feature.1.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/pmempool/pmempool-info.1.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/pmempool/pmempool-rm.1.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/pmempool/pmempool-sync.1.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/pmempool/pmempool-transform.1.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/pmempool/pmempool.1.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/pmreorder/pmreorder.1.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/poolset/poolset.5.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/doc/rpmemd/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/perf.cfg" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/pmembench_atomic_lists.cfg" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/pmembench_blk.cfg" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/pmembench_flush.cfg" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/pmembench_log.cfg" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/pmembench_map.cfg" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/pmembench_memcpy.cfg" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/pmembench_memset.cfg" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/pmembench_obj_gen.cfg" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/pmembench_obj_lanes.cfg" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/pmembench_obj_locks.cfg" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/pmembench_obj_persist.cfg" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/pmembench_obj_pmalloc.cfg" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/pmembench_tx.cfg" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/benchmarks/pmembench_tx_add_range.cfg" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/core/valgrind/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/cmake/cmake_uninstall.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/cmake/functions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/cmake/libminiasync-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/cmake/libminiasync.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/cmake/packages.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/data_mover_dml_get_vdm.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/data_mover_dml_new.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/data_mover_sync_get_vdm.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/data_mover_sync_new.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/data_mover_threads_get_vdm.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/data_mover_threads_new.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/future_context_get_data.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/future_context_get_output.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/future_context_get_size.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/future_poll.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/manuals.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/miniasync.7.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/miniasync_future.7.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/miniasync_runtime.7.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/miniasync_vdm.7.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/miniasync_vdm_dml.7.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/miniasync_vdm_synchronous.7.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/miniasync_vdm_threads.7.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/runtime_new.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/runtime_wait.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/vdm_flush.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/vdm_is_supported.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/vdm_memcpy.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/vdm_memmove.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/doc/vdm_memset.3.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/extras/dml/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/extras/dml/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/src/core/valgrind/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/cmake/ctest_helpers.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/cmake/test_helpers.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/data_mover_dml_flush/test_data_mover_dml_flush.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/data_mover_dml_memcpy/test_data_mover_dml_memcpy.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/data_mover_dml_memmove/test_data_mover_dml_memmove.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/data_mover_dml_memset/test_data_mover_dml_memset.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/dummy/test_dummy.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/dummy_negative/test_dummy_negative.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/ex_basic/test_ex_basic.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/ex_basic_async/test_ex_basic_async.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/ex_hashmap/test_ex_hashmap.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/future/test_future.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/future_properties/test_future_properties.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/membuf/test_membuf.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/memcpy_threads/test_memcpy_threads.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/memmove_sync/test_memmove_sync.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/memmove_threads/test_memmove_threads.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/memset_sync/test_memset_sync.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/memset_threads/test_memset_threads.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/runtime_test/test_runtime.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/vdm/test_vdm.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/tests/vdm_operation_future_poll/test_vdm_operation_future_poll.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/check-area.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/check-commit.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/check-commits.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/check_license/check-headers.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/check_license/file-exceptions.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/docker/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/docker/images/build-image.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/docker/images/download-scripts.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/docker/images/install-dml.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/docker/images/install-txt2man.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/docker/images/install-valgrind.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/docker/images/push-image.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/docker/images/set-images-version.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/docker/prepare-for-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/docker/pull-or-rebuild-image.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/docker/run-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/docker/run-coverity.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/docker/run-doc-update.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/docker/set-ci-vars.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/docker/set-vars.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/docker/valid-branches.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/mans_header.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/md2man/md2man.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/deps/miniasync/utils/src2mans.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/examples/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmem/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmem2/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemblk/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemblk/assetdb/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemlog/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemlog/logfile/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj++/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/hashmap/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/linkedlist/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/map/kv_server_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/pmemblk/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/pmemlog/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/pmemobjfs/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/pminvaders/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmemobj/queue/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/examples/libpmempool/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/examples/pmreorder/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/freebsd/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/include/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/include/libpmemobj++/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/include/libpmemobj++/detail/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/libpmem/libpmem.link.in" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/libpmem2/libpmem2.link.in" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/libpmemblk/libpmemblk.link.in" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/libpmemlog/libpmemlog.link.in" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/libpmemobj/libpmemobj.link.in" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/libpmempool/libpmempool.link.in" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/libvmem/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/libvmmalloc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/RUNTESTLIB.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/RUNTESTS.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/RUNTESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/arch_flags/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/arch_flags/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_nblock/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_nblock/TEST0w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_nblock/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_nblock/TEST2w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_non_zero/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_non_zero/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_non_zero/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_non_zero/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_non_zero/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_non_zero/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_non_zero/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_non_zero/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_non_zero/TEST7.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_non_zero/TEST8.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_non_zero/TEST9.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST10.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST11.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST12.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST13.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST14.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST15w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST16.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST20.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST21.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST22.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST23.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST24.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST25.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST26.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST27.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST28.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST29.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST30w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST31w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST7.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST8.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool/TEST9.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool_lock/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool_win/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_pool_win/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_recovery/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_recovery/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_rw/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_rw/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_rw/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_rw/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_rw/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_rw/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_rw/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_rw/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_rw/TEST8w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_rw/TEST9w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_rw_mt/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_rw_mt/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_rw_mt/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_rw_mt/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/blk_rw_mt/config.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/bttdevice/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/bttdevice/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/bttdevice/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/checksum/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/common_badblock.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/compat_incompat_features/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/compat_incompat_features/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/compat_incompat_features/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/compat_incompat_features/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/compat_incompat_features/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/compat_incompat_features/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/compat_incompat_features/common.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/compat_incompat_features/common.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ctl_cow/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/daxio/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/env.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmem/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmem/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmem/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmem2/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmem2/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemblk/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemblk/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemblk/asset_list.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemlog/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemlog/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TEST10w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TEST11.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TEST12.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TEST13.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TEST14.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TEST17.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TEST18.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TEST19.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TEST21.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TEST22.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TEST23.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TEST24.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TEST25.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TEST7.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TEST8.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TEST9.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_libpmemobj/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_linkedlist/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_linkedlist/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/ex_pmreorder/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/getopt/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/getopt/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_api/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_api/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_api/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_api/TEST10.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_api/TEST13.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_api/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_api/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_api/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_api/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_api/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_api/TEST7.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_api/TEST8.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_api/TEST9.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_api_win/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_backup/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_backup/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_backup/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_backup/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_backup/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_backup/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_backup/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_backup/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_backup/TEST7.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_backup/common.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_backup/common.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_backup/config.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_bttdev/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_bttdev/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_bttdev/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_bttdev/TEST10.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_bttdev/TEST11.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_bttdev/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_bttdev/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_bttdev/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_bttdev/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_bttdev/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_bttdev/TEST7.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_bttdev/TEST8.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_bttdev/TEST9.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_check_version/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_feature/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_feature/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_feature/TEST2w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_feature/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_feature/common.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_feature/common.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_map_flog/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_map_flog/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_map_flog/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_map_flog/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_map_flog/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_rm/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_rm/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_rm/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_rm/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_rm/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_rm/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_rm_win/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_rm_win/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_rm_win/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_rm_win/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_rm_win/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_rm_win/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_sync/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_sync/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_sync/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_sync/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_sync_win/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_sync_win/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_sync_win/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_sync_win/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_transform/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_transform/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_transform/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_transform/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_transform_win/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_transform_win/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/libpmempool_transform_win/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_basic/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_basic/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_basic/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_basic/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_basic/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_basic/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_basic/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_basic/TEST6w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/TEST10.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/TEST11w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/TEST12.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/TEST20.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/TEST21.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/TEST22.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/TEST23.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/TEST24.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/TEST25.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/TEST26.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/TEST27.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/TEST28.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/TEST7.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/TEST8.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool/TEST9.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool_lock/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool_win/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_pool_win/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_recovery/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_recovery/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_recovery/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_walker/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/log_walker/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/magic/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/mmap/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/mmap_fixed/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_action/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_alloc/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_alloc/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_basic_integration/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_basic_integration/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_basic_integration/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_basic_integration/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_basic_integration/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_basic_integration/config.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_bucket/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_check/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_check/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_check/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_check/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_check/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_check/TEST7.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_check/TEST8.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_constructor/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_critnib/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_critnib_mt/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_alignment/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_alloc_class/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_alloc_class_config/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_arenas/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_arenas/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_arenas/TEST10.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_arenas/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_arenas/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_arenas/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_arenas/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_arenas/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_arenas/TEST7.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_arenas/TEST8.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_arenas/TEST9.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_config/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_config/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_debug/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_heap_size/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_heap_size/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ctl_stats/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_debug/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_debug/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_debug/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_debug/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_debug/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_debug/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_debug/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_defrag/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_defrag_advanced/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_direct/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_direct_volatile/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_extend/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_extend/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_extend/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_extend/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_extend/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_extend/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_extend/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_extend/TEST7.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_extend/TEST8.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_first_next/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_first_next/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_first_next/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_fragmentation/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_fragmentation/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_fragmentation/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_fragmentation2/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_heap/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_heap_interrupt/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_heap_reopen/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_heap_state/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_heap_state/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_heap_state/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_lane/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_lane/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_layout/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_insert/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_insert/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_insert/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_insert/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_insert/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_insert/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_macro/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_macro/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_macro/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_macro/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_macro/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_macro/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_macro/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_macro/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_macro/TEST7.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_move/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_move/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_move/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_move/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_recovery/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_recovery/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_recovery/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_recovery/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_remove/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_remove/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_remove/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_remove/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_list_valgrind/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_locks/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_many_size_allocs/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_many_size_allocs/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_many_size_allocs/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_mem/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_memblock/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_memops/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_oid_thread/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_out_of_memory/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_out_of_memory/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_out_of_memory/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_persist_count/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_persist_count/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_persist_count/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pmalloc_basic/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pmalloc_mt/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pmalloc_oom_mt/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pmalloc_rand_mt/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST10.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST11.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST12.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST13.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST14.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST15.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST16.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST17.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST20.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST21.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST22.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST23.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST24.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST25.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST26.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST27.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST28.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST29.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST30w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST31.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST34.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST35.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST7.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST8.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool/TEST9.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool_lock/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool_lookup/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool_open_mt/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool_win/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_pool_win/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_realloc/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_recovery/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_recovery/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_recovery/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_recovery/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_recovery/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_recovery/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_recovery/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_recovery/TEST7.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_recovery/TEST8.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_recreate/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_recreate/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_reorder_basic/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_root/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_root/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_root/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_sds/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_sds/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_sds/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_sds/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_sds/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_sds/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_sds/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_sds/TEST7.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_strdup/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_sync/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_sync/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_sync/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_sync/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_sync/TEST7.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_toid/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_add_range/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_add_range/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_add_range/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_add_range/config.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_add_range_direct/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_add_range_direct/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_alloc/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_callbacks/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_flow/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_free/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_invalid/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_lock/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_locks/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_locks/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_locks/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_locks_abort/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_locks_abort/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_mt/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_mt/config.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_realloc/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_strdup/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_tx_user_data/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_ulog_size/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/obj_zones/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/out_err/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/out_err_mt/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/out_err_mt_win/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/out_err_win/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_api/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_badblock/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_badblock_mocks/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_config/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_deep_flush/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_future/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_granularity/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_granularity_detection/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_integration/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_map/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_map_from_existing/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_map_prot/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_mem_ext/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_memcpy/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_memmove/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_memset/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_mover/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_movnt/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_movnt_align/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_perror/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_persist/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_persist_valgrind/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_source/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_source_alignment/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_source_numa/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_source_size/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_usc/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem2_vm_reservation/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_deep_persist/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_deep_persist/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_deep_persist/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_deep_persist/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_deep_persist/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_deep_persist/TEST7.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_eADR_functions/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_has_auto_flush_win/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_has_auto_flush_win/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_has_auto_flush_win/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_has_auto_flush_win/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_has_auto_flush_win/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_has_auto_flush_win/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_is_pmem/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_is_pmem/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_is_pmem/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_is_pmem/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_is_pmem/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_is_pmem/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_is_pmem/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_is_pmem_posix/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_is_pmem_windows/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_is_pmem_windows/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_is_pmem_windows/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_is_pmem_windows/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_is_pmem_windows/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_is_pmem_windows/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_is_pmem_windows/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_is_pmem_windows/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_map_file/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_map_file/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_map_file/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_map_file/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_map_file_trunc/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_map_file_win/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_map_file_win/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_map_file_win/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_memcpy/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_memcpy/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_memmove/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_memmove/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_memset/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_memset/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_movnt/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_movnt/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_movnt_align/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_movnt_align/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_unmap/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_unmap/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmem_valgr_simple/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmemobjcli/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmemobjcli/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmemobjcli/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_check/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_check/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_check/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_check/TEST10.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_check/TEST15.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_check/TEST16.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_check/TEST17.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_check/TEST18.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_check/TEST19.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_check/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_check/TEST20.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_check/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_check/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_check/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_check/TEST7.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_check/TEST8.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_check/TEST9.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_check/common.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_check/config.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_create/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_create/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_create/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_create/TEST13.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_create/TEST14.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_create/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_create/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_create/TEST4w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_create/TEST5w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_create/TEST6w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_create/TEST8w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_dump/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_dump/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_dump/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_dump/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_dump/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_dump/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_dump/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_dump/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_feature/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_feature/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_feature/TEST13.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_feature/TEST14.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_feature/TEST15.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_feature/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_feature/common.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_feature/common.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_help/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_help/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_help/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/TEST10.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/TEST11.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/TEST12.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/TEST13.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/TEST14.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/TEST15.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/TEST16w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/TEST17.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/TEST18w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/TEST19w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/TEST20.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/TEST26.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/TEST27.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/TEST7.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/TEST8.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_info/TEST9.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_rm/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_rm/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_rm/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_rm/TEST10.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_rm/TEST12.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_rm/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_rm/TEST7.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_sync/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_sync/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_sync/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_sync/TEST10w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_sync/TEST11w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_sync/TEST12.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_sync/TEST26.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_sync/TEST2w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_sync/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_sync/TEST4w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_sync/TEST5w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_sync/TEST8w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_sync/TEST9w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_sync/setup.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_transform/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_transform/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_transform/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_transform/TEST10w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_transform/TEST2w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_transform/TEST3w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_transform/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_transform/TEST5w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmempool_transform/TEST6w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmemspoil/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmreorder_simple/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmreorder_simple/pmreorder0.conf" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmreorder_simple/pmreorder2.conf" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmreorder_simple/pmreorder3.conf" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmreorder_simple/pmreorder4.conf" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmreorder_simple/pmreorder5.conf" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmreorder_stack/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/pmreorder_stack/pmreorder0.conf" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/scope/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/set_funcs/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/signal_handle/TEST0w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/testframework.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/tools/anonymous_mmap/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/tools/anonymous_mmap/check_max_mmap.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/tools/bttcreate/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/tools/cmpmap/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/tools/cpufd/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/tools/ddmap/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/tools/dllview/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/tools/extents/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/tools/gran_detecto/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/tools/mapexec/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/tools/obj_verify/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/tools/pmemalloc/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/tools/pmemdetect/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/tools/pmemobjcli/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/tools/pmemspoil/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/tools/pmemwrite/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/tools/sparsefile/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/tools/sparsefile/TEST_SPARSE.ps1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/traces/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/traces/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/traces/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/traces/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/traces/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/traces/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/traces/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/traces_custom_function/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/traces_custom_function/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/traces_pmem/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/unicode_api/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/unicode_match_script/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/badblock.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/basetest.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/builds.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/configurator.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/consts.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/context.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/ctx_filter.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/devdax.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/futils.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/granularity.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/poolset.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/python_gdb.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/requirements.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/test_types.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/tools.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/unittest.ps1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/unittest.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/unsafe_shutdown.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/unittest/valgrind.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_cpuid/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_ctl/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_file_create/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_file_create/TEST0w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_file_create/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_file_create/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_file_open/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_file_open/TEST0w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_file_open/TEST1w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_is_absolute/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_is_poolset/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_is_poolset/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_is_zeroed/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_map_proc/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_parse_size/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_poolset/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_poolset/TEST0w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_poolset/TEST1w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_poolset/TEST2w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_poolset/TEST3w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_poolset/TEST4w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_poolset/TEST5w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_poolset/TEST6w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_poolset_foreach/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_poolset_foreach/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_poolset_parse/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_poolset_parse/TEST0w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_poolset_size/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_poolset_size/TEST0w.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_ravl/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_sds/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_sds/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_sds/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_sds/TEST3.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_sds/TEST4.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_sds/TEST5.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_sds/TEST6.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_sds/TEST7.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_sds/TEST8.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_uuid_generate/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_uuid_generate/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_uuid_generate/TEST2.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_vec/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/util_vecq/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/win_common/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/win_common/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/win_common/TESTS.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/win_lists/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/win_lists/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/win_lists/TEST1.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/win_mmap_dtor/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/win_poolset_unmap/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/test/win_signal/TEST0.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/tools/daxio/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/tools/pmempool/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/tools/pmreorder/binaryoutputhandler.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/tools/pmreorder/consistencycheckwrap.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/tools/pmreorder/loggingfacility.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/tools/pmreorder/markerparser.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/tools/pmreorder/memoryoperations.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/tools/pmreorder/operationfactory.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/tools/pmreorder/opscontext.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/tools/pmreorder/pmreorder.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/tools/pmreorder/reorderengines.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/tools/pmreorder/reorderexceptions.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/tools/pmreorder/statemachine.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/tools/pmreorder/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/windows/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/windows/getopt/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/src/windows/getopt/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/CHECK_WHITESPACE.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/CREATE-ZIP.PS1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/CSTYLE.ps1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/SRCVERSION.ps1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/build-dpkg.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/build-rpm.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/check-area.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/check-commit.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/check-commits.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/check-os.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/check-shebang.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/check_docs/exceptions.txt" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/check_docs/split_manpage_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/check_license/check-headers.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/check_license/file-exceptions.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/check_sdk_version.py" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/copy-source.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/build-CI.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/build-local.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/configure-tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/images/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/images/build-image.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/images/download-scripts.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/images/install-libndctl.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/images/install-valgrind.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/images/push-image.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/images/set-images-version.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/prepare-for-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/pull-or-rebuild-image.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/run-bandit.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/run-build-package.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/run-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/run-coverage.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/run-coverity.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/run-doc-update.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/set-ci-vars.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/set-vars.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/docker/test_package/README" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/get_aliases.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/gha-runners/build-pmdk-documentation.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/gha-runners/build-pmdk.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/gha-runners/create-testconfig.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/gha-runners/get-system-info.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/libpmem.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/libpmem2.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/libpmemblk.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/libpmemlog.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/libpmemobj.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/libpmempool.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/magic-install.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/magic-uninstall.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/md2man.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/pkg-common.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/pkg-config.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/pmdk.spec.in" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/ps_analyze.ps1" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/style_check.sh" />
+    <Text Include="../../thirdparty/owemdjee/pmdk/utils/version.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

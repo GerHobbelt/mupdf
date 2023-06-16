@@ -53,7 +53,7 @@ fz_load_webp(fz_context *ctx, const unsigned char *rbuf, size_t rlen)
 
 void
 fz_load_webp_info(fz_context *ctx, const unsigned char *rbuf, size_t rlen,
-		int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep)
+		int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, uint8_t* orientation)
 {
 	WebPBitstreamFeatures feat;
 	int error;
@@ -66,6 +66,7 @@ fz_load_webp_info(fz_context *ctx, const unsigned char *rbuf, size_t rlen,
 	if (hp) *hp = feat.height;
 	if (xresp) *xresp = 96;
 	if (yresp) *yresp = 96;
+	if (orientation) *orientation = 1;
 	if (cspacep) *cspacep = fz_keep_colorspace(ctx, fz_device_rgb(ctx));
 }
 
@@ -79,7 +80,7 @@ fz_load_webp(fz_context *ctx, const unsigned char *rbuf, size_t rlen)
 
 void
 fz_load_webp_info(fz_context *ctx, const unsigned char *rbuf, size_t rlen,
-		int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep)
+		int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep, uint8_t* orientation)
 {
 	fz_throw(ctx, FZ_ERROR_GENERIC, "WebP codec not available");
 }

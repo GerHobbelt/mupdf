@@ -1,0 +1,990 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{00811970-815B-4F64-BC9D-2190788B74AB}</ProjectGuid>
+    <RootNamespace>grok-jpeg2000</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GROK_JPEG2000;GROK_JPEG2000_STATICLIB;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GROK_JPEG2000;GROK_JPEG2000_STATICLIB;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GROK_JPEG2000;GROK_JPEG2000_STATICLIB;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GROK_JPEG2000;GROK_JPEG2000_STATICLIB;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="cryptlib.vcxproj">
+      <Project>{424334e5-addf-490d-ba7b-46cf3686b48d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libarchive.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff18377f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libhighway.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff021a57}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpthread-win32.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8df2c2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite_tools.vcxproj">
+      <Project>{6e890463-3eeb-4cce-b8bd-5aa89148c35a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="MuPDFLib_static.vcxproj">
+      <Project>{a60d8644-5815-4d29-8970-7518ff518d62}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbase58x.vcxproj">
+      <Project>{0501bedf-3191-46a9-9997-288466675b82}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libBLAKE3.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc1880387f83}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfmt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffaf3a53}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreetype.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-a58957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgumbo-parser.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-358957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libharfbuzz.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-258957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjbig2dec.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-958957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-turbo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblcms2.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-158957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuhelpers.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce88099485a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmujs.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-858957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-6222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbrotli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7760d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcrow.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff84e35}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcurl.vcxproj">
+      <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libextract.vcxproj">
+      <Project>{da38ca0b-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreeglut.vcxproj">
+      <Project>{a1b75d29-9f5c-4a0f-b368-322a10477d0c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgif.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffddd6be}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-xl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa838c1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libleptonica.vcxproj">
+      <Project>{ca0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblz4.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff50b44d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf_default_handlers.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-1222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuthreads.vcxproj">
+      <Project>{de21fa8a-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmutool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libopenjpeg.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-758957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpkcs7.vcxproj">
+      <Project>{22462382-b30d-42a5-bf07-ee1a35e25d21}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpng.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-658957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libqiqqatool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc18808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libQuickJS.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0e57ba}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libresources.vcxproj">
+      <Project>{52dcab29-c8ee-4422-954c-29afa6b33e22}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite-amalgamation.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3a7bc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsvgcharter.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7fcf79}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtesseract.vcxproj">
+      <Project>{ac0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtiff.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-558957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtinyexpr.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff33b1b5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libupskirt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff789ba9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libwebp.vcxproj">
+      <Project>{105f884a-c170-4c30-a810-c7da2103002f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libxml2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa57a44}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzlib.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzopfli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff03e6ca}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzstd.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="lib_nas_lockfile.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0a15c6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="png-pmt-tools-lib.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1147a4}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/cmake/TestFileOffsetBits.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/examples/codec/codec_compress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/examples/codec/codec_decompress_from_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/examples/core/core_compress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/examples/core/core_decompress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/bin/codec/grk_compress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/bin/codec/grk_decompress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/bin/codec/grk_dump.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/common/codec_common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/common/common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/common/convert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/common/exif.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/common/spdlog/async.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/common/spdlog/cfg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/common/spdlog/color_sinks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/common/spdlog/file_sinks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/common/spdlog/fmt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/common/spdlog/spdlog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/common/spdlog/stdout_sinks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/grok_codec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/BMPFormat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/BufferPool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/FileStreamIO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/FileUringIO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/ImageFormat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/JPEGFormat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/MemManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/PGXFormat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/PNGFormat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/PNMFormat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/RAWFormat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/Serializer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/TIFFFormat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/iccjpeg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/jp2/GrkCompareImages.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/jp2/GrkCompress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/jp2/GrkDecompress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/jp2/GrkDump.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/jp2/grok_codec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/cache/LengthCache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/cache/MemManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/cache/PLCache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/cache/PLMarkerMgr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/cache/StripCache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/cache/TileCache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/CodeStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/CodeStreamCompress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/CodeStreamDecompress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/CodeStreamDecompress_Markers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/CodingParams.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/FileFormat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/FileFormatCompress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/FileFormatDecompress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/Profile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/TileSet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/markers/PPMMarker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/markers/SIZMarker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/markers/SOTMarker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/grok.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/aligned_allocator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/aligned_allocator_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/base_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/algo/copy_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/algo/find_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/algo/transform_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/bit_pack/bit_pack_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/dot/dot_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/image/image.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/image/image_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/math/math_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/bench_parallel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/bench_sort.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/print_network.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/sort_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort_128a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort_128d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort_f32a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort_f32d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort_f64a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort_f64d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort_i16a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort_i16d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort_i32a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort_i32d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort_i64a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort_i64d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort_kv128a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort_kv128d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort_kv64a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort_kv64d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort_u16a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort_u16d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort_u32a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort_u32d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort_u64a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort_u64d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/examples/benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/examples/skeleton.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/examples/skeleton_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/highway_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/nanobenchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/nanobenchmark_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/per_target.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/print.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/targets.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/targets_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/arithmetic_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/blockwise_shift_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/blockwise_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/combine_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/compare_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/compress_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/convert_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/crypto_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/demote_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/float_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/if_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/interleaved_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/list_targets.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/logical_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/mask_mem_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/mask_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/memory_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/mul_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/reduction_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/reverse_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/shift_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/swizzle_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/test_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/plugin/minpf_dynamic_library.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/plugin/minpf_plugin_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/plugin/plugin_bridge.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/point_transform/mct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/scheduling/CompressScheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/scheduling/DecompressScheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/scheduling/ImageComponentFlow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/scheduling/Scheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/OJPH/QuantizerOJPH.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/OJPH/T1OJPH.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/OJPH/coding/ojph_block_common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/OJPH/coding/ojph_block_decoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/OJPH/coding/ojph_block_decoder_ssse3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/OJPH/coding/ojph_block_decoder_wasm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/OJPH/coding/ojph_block_encoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/OJPH/others/ojph_mem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/Precinct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/Resolution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/Subband.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/T1Factory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/part1/Quantizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/part1/T1Part1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/part1/impl/T1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/part1/impl/mqc_dec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/part1/impl/mqc_enc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/part1/impl/t1_generate_luts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t2/BitIO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t2/PacketIter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t2/PacketManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t2/PacketParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t2/RateControl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t2/RateInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t2/T2Compress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t2/T2Decompress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/tile/TileComponent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/tile/TileProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/BufferedStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/GrkImage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/GrkImage_Conversion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/GrkMappedFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/GrkMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/GrkObjectWrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/MemStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/SparseBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/grk_intmath.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/logger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/wavelet/WaveletFwd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/wavelet/WaveletReverse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/plugin/Plugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/tests/GrkCompareDumpFiles.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/tests/GrkCompareRawFiles.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/tests/GrkRandomTileAccess.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/tests/compare_dump_files.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/tests/compare_images.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/tests/compare_raw_files.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/tests/j2k_random_tile_access.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/grok-jpeg2000/tests/pdf2jp2.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/async.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/async_logger-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/async_logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/cfg/argv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/cfg/env.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/cfg/helpers-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/cfg/helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/common-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/backtracer-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/backtracer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/circular_q.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/console_globals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/file_helper-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/file_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/fmt_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/log_msg-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/log_msg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/log_msg_buffer-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/log_msg_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/mpmc_blocking_q.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/null_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/os-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/periodic_worker-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/periodic_worker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/registry-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/synchronous_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/tcp_client-windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/tcp_client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/thread_pool-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/thread_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/udp_client-windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/udp_client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/details/windows_include.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/fmt/bin_to_hex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/fmt/bundled/args.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/fmt/bundled/chrono.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/fmt/bundled/color.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/fmt/bundled/compile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/fmt/bundled/core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/fmt/bundled/format-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/fmt/bundled/format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/fmt/bundled/locale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/fmt/bundled/os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/fmt/bundled/ostream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/fmt/bundled/printf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/fmt/bundled/ranges.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/fmt/bundled/xchar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/fmt/chrono.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/fmt/compile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/fmt/fmt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/fmt/ostr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/fmt/ranges.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/fmt/xchar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/formatter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/logger-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/pattern_formatter-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/pattern_formatter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/android_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/ansicolor_sink-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/ansicolor_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/base_sink-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/base_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/basic_file_sink-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/basic_file_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/daily_file_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/dist_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/dup_filter_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/hourly_file_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/mongo_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/msvc_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/null_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/ostream_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/qt_sinks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/ringbuffer_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/rotating_file_sink-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/rotating_file_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/sink-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/stdout_color_sinks-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/stdout_color_sinks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/stdout_sinks-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/stdout_sinks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/syslog_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/systemd_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/tcp_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/udp_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/win_eventlog_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/wincolor_sink-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/sinks/wincolor_sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/spdlog-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/spdlog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/stopwatch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/tweakme.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/algorithm/critical.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/algorithm/for_each.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/algorithm/pipeline.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/algorithm/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/algorithm/sort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/algorithm/transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/core/declarations.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/core/environment.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/core/error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/core/executor-module-opt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/core/executor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/core/flow_builder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/core/graph.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/core/notifier.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/core/observer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/core/semaphore.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/core/task.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/core/taskflow.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/core/topology.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/core/tsq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/core/worker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/cuda/algorithm/find.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/cuda/algorithm/for_each.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/cuda/algorithm/matmul.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/cuda/algorithm/merge.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/cuda/algorithm/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/cuda/algorithm/scan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/cuda/algorithm/sort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/cuda/algorithm/transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/cuda/algorithm/transpose.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/cuda/cuda_capturer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/cuda/cuda_device.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/cuda/cuda_error.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/cuda/cuda_execution_policy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/cuda/cuda_graph.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/cuda/cuda_memory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/cuda/cuda_meta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/cuda/cuda_optimizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/cuda/cuda_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/cuda/cuda_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/cuda/cuda_task.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/cuda/cudaflow.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/dsl/connection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/dsl/dsl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/dsl/meta_macro.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/dsl/task_analyzer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/dsl/task_dsl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/dsl/task_trait.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/dsl/tuple_utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/dsl/type_list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/sycl/algorithm/reduce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/sycl/algorithm/sycl_for_each.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/sycl/algorithm/sycl_transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/sycl/sycl_execution_policy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/sycl/sycl_graph.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/sycl/sycl_meta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/sycl/sycl_task.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/sycl/syclflow.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/taskflow.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/utility/iterator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/utility/math.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/utility/object_pool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/utility/os.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/utility/singleton.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/utility/small_vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/utility/stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/utility/traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/taskflow/utility/uuid.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/Arg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/ArgContainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/ArgException.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/ArgGroup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/ArgTraits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/CmdLine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/CmdLineInterface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/CmdLineOutput.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/Constraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/DeferDelete.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/DocBookOutput.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/HelpVisitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/IgnoreRestVisitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/MultiArg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/MultiSwitchArg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/OptionalUnlabeledTracker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/StandardTraits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/StdOutput.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/SwitchArg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/UnlabeledMultiArg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/UnlabeledValueArg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/ValueArg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/ValuesConstraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/VersionVisitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/Visitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/sstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/common/codec_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/common/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/common/convert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/common/exif.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/common/grk_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/common/packer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/common/test_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/grok_codec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/BMPFormat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/BufferPool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/FileStreamIO.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/FileUringIO.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/IFileIO.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/IImageFormat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/ImageFormat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/JPEGFormat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/MemManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/PGXFormat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/PNGFormat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/PNMFormat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/RAWFormat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/Serializer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/TIFFFormat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/image_format/iccjpeg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/jp2/GrkCompareImages.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/jp2/GrkCompress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/jp2/GrkDecompress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/jp2/GrkDump.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/cache/ICacheable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/cache/LengthCache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/cache/MemManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/cache/PLCache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/cache/PLMarkerMgr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/cache/SequentialCache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/cache/SparseCache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/cache/StripCache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/cache/TileCache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/CodeStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/CodeStreamCompress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/CodeStreamDecompress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/CodeStreamLimits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/CodingParams.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/FileFormat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/FileFormatCompress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/FileFormatDecompress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/Profile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/TileSet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/markers/PPMMarker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/markers/SIZMarker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/codestream/markers/SOTMarker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/grk_includes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/grok.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/grok_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/aligned_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/cache_control.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/algo/copy-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/algo/find-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/algo/transform-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/bit_pack/bit_pack-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/dot/dot-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/image/image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/math/math-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/algo-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/result-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/shared-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/sorting_networks-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/traits-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/traits128-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/vqsort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/detect_compiler_arch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/detect_targets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/examples/skeleton-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/examples/skeleton.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/foreach_target.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/highway.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/highway_export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/nanobenchmark.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/ops/arm_neon-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/ops/arm_sve-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/ops/emu128-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/ops/generic_ops-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/ops/rvv-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/ops/scalar-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/ops/set_macros-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/ops/shared-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/ops/wasm_128-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/ops/wasm_256-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/ops/x86_128-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/ops/x86_256-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/ops/x86_512-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/per_target.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/print-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/print.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/targets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/hwy_gtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/test_util-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/tests/test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/plugin/minpf_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/plugin/minpf_dynamic_library.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/plugin/minpf_plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/plugin/minpf_plugin_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/plugin/plugin_bridge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/plugin/plugin_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/point_transform/mct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/scheduling/CompressScheduler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/scheduling/DecompressScheduler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/scheduling/FlowComponent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/scheduling/ImageComponentFlow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/scheduling/Scheduler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/scheduling/ThreadPool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/BlockExec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/Codeblock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/OJPH/PostT1DecompressFiltersOJPH.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/OJPH/QuantizerOJPH.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/OJPH/T1OJPH.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/OJPH/coding/ojph_block_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/OJPH/coding/ojph_block_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/OJPH/coding/ojph_block_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/OJPH/coding/table0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/OJPH/coding/table1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/OJPH/common/ojph_arch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/OJPH/common/ojph_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/OJPH/common/ojph_mem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/OJPH/common/ojph_message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/OJPH/common/ojph_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/Precinct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/Resolution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/Subband.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/T1Factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/T1Interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/htconfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/part1/PostT1DecompressFilters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/part1/Quantizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/part1/T1Part1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/part1/impl/T1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/part1/impl/mqc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/part1/impl/mqc_dec_inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/part1/impl/mqc_enc_inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/part1/impl/mqc_inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/part1/impl/t1_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t1/part1/impl/t1_luts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t2/BitIO.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t2/IBitIO.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t2/PacketIter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t2/PacketManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t2/PacketParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t2/RateControl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t2/RateInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t2/T2Compress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t2/T2Decompress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/t2/TagTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/tile/ResSimple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/tile/ResWindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/tile/SparseCanvas.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/tile/TileComponent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/tile/TileComponentWindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/tile/TileProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/BufferedStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/ChronoTimer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/GrkImage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/GrkMappedFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/GrkMatrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/GrkObjectWrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/MemStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/MinHeap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/SparseBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/geometry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/grk_exceptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/grk_intmath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/simd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/util/testing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/wavelet/WaveletCommon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/wavelet/WaveletFwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/wavelet/WaveletReverse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/plugin/Plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/tests/GrkCompareDumpFiles.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/tests/GrkCompareRawFiles.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/tests/GrkRandomTileAccess.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/grok-jpeg2000/tests/test_common.h" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/INSTALL.md" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/README.md" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/cmake/BundleStatic.cmake" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/cmake/FindKAKADU.cmake" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/cmake/FindLCMS2.cmake" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/cmake/FindValgrind.cmake" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/cmake/Findliburing.cmake" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/cmake/GrokCPack.cmake" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/cmake/ucm.cmake" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/doc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/doc/Doxyfile.dox.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/doc/mainpage.dox.in" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/doc/man/README.md" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/doc/man/md/man1/grk_compress.1.md" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/doc/man/md/man1/grk_decompress.1.md" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/doc/man/md/man1/grk_dump.1.md" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/examples/codec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/examples/core/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/examples/grk_examples_config.h.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/scripts/format.sh" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/bin/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/bin/codec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/bin/grk_apps_config.h.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/spdlog/fmt/bundled/fmt.license.rst" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/include/tclap/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/codec/libgrokj2kcodec.pc.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/grk_config.h.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/grk_config_private.h.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/CMakeLists.txt.in" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/FindHWY.cmake" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/README.md" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/cmake/FindAtomics.cmake" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/debian/changelog" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/g3doc/design_philosophy.md" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/g3doc/faq.md" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/g3doc/impl_details.md" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/g3doc/quick_reference.md" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/g3doc/release_testing_process.md" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/hwy/contrib/sort/README.md" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/libhwy-contrib.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/libhwy-test.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/libhwy.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/run_tests.bat" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/highway/run_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/core/libgrokj2k.pc.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/src/lib/plugin/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/tests/conformance/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/tests/nonregression/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/tests/nonregression/checkmd5refs.cmake" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/tests/nonregression/md5refs.txt" />
+    <Text Include="../../thirdparty/owemdjee/grok-jpeg2000/tests/nonregression/test_suite.ctest.in" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

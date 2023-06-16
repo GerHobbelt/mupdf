@@ -37,7 +37,9 @@ See also: https://github.com/jimmejardine/qiqqa-open-source/blob/master/DEVELOPE
 
 When you intend to check this out in relation to Qiqqa, then please grab the Qiqqa repository as everything in *this* `mupdf` repository is included there as a git **submodule** and keeping the relative paths' relationships intact will ease your use of the entire sourcecode tree.
 
-If you are, however, interested in this augmented mupdf material *per sé*, then do fork this repository itself and load the *submodules* we use in here to build the pdf/document tools.
+> If you are, however, interested in this augmented mupdf material *per sé*, then do fork this repository itself and load the *submodules* we use in here to build the pdf/document tools.
+>
+> When you don't want to be bothered with the (slightly bothersome) `git submodule` management part then, [**there's also a _snapshot repository_ of this codebase plus all relevant submodules' sources available here**](https://github.com/GerHobbelt/qiqqa_tooling_devtree_snapshots): check that one out when you don't plan to edit this C/C++ code collection, but want to compile from source with minimum preparation / hassle.
 
 To fetch the repository find `Git Bash` from Windows' start menu and run:
 
@@ -102,13 +104,17 @@ Please file an issue in this repository (or [over at the Qiqqa repository](https
 MuPDF is a lightweight open source software framework for viewing and converting
 PDF, XPS, and E-book documents.
 
-See the documentation in docs/index.html for an overview.
+See the documentation in:
 
-Build instructions can be found in docs/building.html.
+	https://mupdf.readthedocs.io/en/latest/
+
+Build instructions can be found in:
+
+	https://mupdf.readthedocs.io/en/latest/quick-start-guide.html
 
 # LICENSE
 
-MuPDF is Copyright (c) 2006-2022 Artifex Software, Inc.
+MuPDF is Copyright (c) 2006-2023 Artifex Software, Inc.
 
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU Affero General Public License as published by the Free
@@ -127,9 +133,11 @@ please contact sales@artifex.com.
 
 # REPORTING BUGS AND PROBLEMS
 
-The MuPDF developers hang out on IRC in the #mupdf channel on Libera.Chat.
+The MuPDF developers hang out on Discord here:
 
-Report bugs on the ghostscript bugzilla, with MuPDF as the selected component.
+	https://discord.gg/taPnFQp5gb
+
+Report bugs on the ghostscript bugzilla, with MuPDF as the selected component:
 
 	http://bugs.ghostscript.com/
 

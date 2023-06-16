@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 
@@ -462,6 +462,7 @@ fz_load_jxr_info(fz_context *ctx, const unsigned char *data, size_t size, int *w
 
 	jxr_read_image(ctx, data, size, &info, 1);
 	*cspacep = fz_keep_colorspace(ctx, info.cspace); /* info.cspace is a borrowed device colorspace */
+	*orientationp = 1;
 	*wp = info.width;
 	*hp = info.height;
 	*xresp = info.xres;

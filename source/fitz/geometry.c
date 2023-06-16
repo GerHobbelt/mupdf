@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 
@@ -644,6 +644,18 @@ int fz_contains_rect(fz_rect a, fz_rect b)
 		(a.y0 <= b.y0) &&
 		(a.x1 >= b.x1) &&
 		(a.y1 >= b.y1));
+}
+
+int fz_rects_overlap(fz_rect a, fz_rect b)
+{
+	if (0
+			|| a.x0 >= b.x1
+			|| a.y0 >= b.y1
+			|| a.x1 <= b.x0
+			|| a.y1 <= b.y0
+			)
+		return 0;
+	return 1;
 }
 
 fz_rect

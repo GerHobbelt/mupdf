@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 #include "xps-imp.h"
@@ -158,7 +158,9 @@ clean_path(char *name)
 		}
 	}
 
-	if (q == start) /* empty string is really "." */
+	/* Protect against 'blah:' input, where start = q = the terminator.
+	 * We must not overrun it. */
+	if (q == start && *q != 0) /* empty string is really "." */
 		*q++ = '.';
 	*q = '\0';
 

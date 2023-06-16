@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 
@@ -599,7 +599,7 @@ fz_bitmap *fz_new_bitmap_from_pixmap_band(fz_context *ctx, const fz_pixmap *pix,
 
 	fz_try(ctx)
 	{
-		ht_line = fz_malloc(ctx, lcm * n);
+		ht_line = fz_malloc(ctx, lcm * (size_t)n);
 		out = fz_new_bitmap(ctx, pix->w, pix->h, n, pix->xres, pix->yres);
 		o = out->samples;
 		p = pix->samples;

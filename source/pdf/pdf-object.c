@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
@@ -174,6 +174,8 @@ struct pdf_journal
 	pdf_journal_entry *head;
 	pdf_journal_entry *current;
 	int nesting;
+	pdf_journal_entry *pending;
+	pdf_journal_entry *pending_tail;
 };
 
 #define NAME(obj) ((pdf_obj_name *)(obj))
@@ -519,6 +521,9 @@ int pdf_to_gen(fz_context *ctx, pdf_obj *obj)
 	return 0;
 }
 
+/*
+	DEPRECATED: Do not use in new code.
+*/
 pdf_document *pdf_get_indirect_document(fz_context *ctx, pdf_obj *obj)
 {
 	if (OBJ_IS_INDIRECT(obj))
@@ -526,6 +531,21 @@ pdf_document *pdf_get_indirect_document(fz_context *ctx, pdf_obj *obj)
 	return NULL;
 }
 
+void pdf_unbind_obj_document(fz_context *ctx, pdf_obj *obj, pdf_document *doc)
+{
+	if (obj < PDF_LIMIT)
+		return;
+	else if (obj->kind == PDF_INDIRECT)
+		REF(obj)->doc = doc;
+	else if (obj->kind == PDF_ARRAY)
+		ARRAY(obj)->doc = doc;
+	else if (obj->kind == PDF_DICT)
+		DICT(obj)->doc = doc;
+}
+
+/*
+	DEPRECATED: Do not use in new code.
+*/
 pdf_document *pdf_get_bound_document(fz_context *ctx, pdf_obj *obj)
 {
 	if (obj < PDF_LIMIT)
@@ -537,6 +557,16 @@ pdf_document *pdf_get_bound_document(fz_context *ctx, pdf_obj *obj)
 	if (obj->kind == PDF_DICT)
 		return DICT(obj)->doc;
 	return NULL;
+}
+
+/*
+	This implementation will do to provide the required
+	API change in advance of the rewrite to use weak references
+	in the next version.
+*/
+pdf_document *pdf_pin_document(fz_context *ctx, pdf_obj *obj)
+{
+	return pdf_keep_document(ctx, pdf_get_bound_document(ctx, obj));
 }
 
 int pdf_objcmp_resolve(fz_context *ctx, pdf_obj *a, pdf_obj *b)
@@ -784,6 +814,9 @@ pdf_new_array(fz_context *ctx, pdf_document *doc, int initialcap)
 	pdf_obj_array *obj;
 	int i;
 
+	if (doc == NULL)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot create array without a document");
+
 	obj = Memento_label(fz_malloc(ctx, sizeof(pdf_obj_array)), "pdf_obj(array)");
 	obj->super.refs = 1;
 	obj->super.kind = PDF_ARRAY;
@@ -917,7 +950,7 @@ discard_journal_entries(fz_context *ctx, pdf_journal_entry **journal_entry)
 }
 
 static void
-new_entry(fz_context *ctx, pdf_document *doc, char *operation, int nest)
+new_entry(fz_context *ctx, pdf_document *doc, char *operation)
 {
 	fz_try(ctx)
 	{
@@ -949,7 +982,6 @@ new_entry(fz_context *ctx, pdf_document *doc, char *operation, int nest)
 	}
 	fz_catch(ctx)
 	{
-		doc->journal->nesting -= nest;
 		fz_free(ctx, operation);
 		fz_rethrow(ctx);
 	}
@@ -959,7 +991,8 @@ new_entry(fz_context *ctx, pdf_document *doc, char *operation, int nest)
  * granularity. Nested operations are all counted within the outermost
  * operation. Any modification performed on a journalled PDF without an
  * operation having been started will throw an error. */
-void pdf_begin_operation(fz_context *ctx, pdf_document *doc, const char *operation_)
+static void
+do_begin_operation(fz_context *ctx, pdf_document *doc, const char *operation_)
 {
 	char *operation;
 
@@ -967,34 +1000,62 @@ void pdf_begin_operation(fz_context *ctx, pdf_document *doc, const char *operati
 	if (ctx == NULL || doc == NULL || doc->journal == NULL)
 		return;
 
-	/* Always increment nesting. If we are already in an operation,
-	 * exit. */
-	if (doc->journal->nesting++ > 0)
-		return;
+	/* Always increment nesting. */
+	doc->journal->nesting++;
 
-	operation = fz_strdup(ctx, operation_);
+	operation = operation_ ? fz_strdup(ctx, operation_) : NULL;
 
 #ifdef PDF_DEBUG_JOURNAL
-	fz_write_printf(ctx, fz_stddbg(ctx), "Beginning: %s\n", operation);
+	fz_write_printf(ctx, fz_stddbg(ctx), "Beginning: (->%d) %s\n", doc->journal->nesting, operation ? operation : "<implicit>");
 #endif
 
-	new_entry(ctx, doc, operation, 1);
+	fz_try(ctx)
+	{
+		pdf_journal_entry *entry;
+
+		/* We create a new entry, and link it into the middle of
+		 * the chain. If we actually come to put anything into
+		 * it later, then the call to pdf_add_journal_fragment
+		 * during that addition will discard everything in the
+		 * history that follows it. */
+		entry = fz_malloc_struct(ctx, pdf_journal_entry);
+
+		if (doc->journal->pending_tail == NULL)
+		{
+			entry->prev = NULL;
+			entry->next = doc->journal->pending;
+			doc->journal->pending = entry;
+		}
+		else
+		{
+			entry->prev = doc->journal->pending_tail;
+			entry->next = doc->journal->pending_tail->next;
+			if (doc->journal->pending_tail->next)
+				doc->journal->pending_tail->next->prev = entry;
+			doc->journal->pending_tail->next = entry;
+		}
+		doc->journal->pending_tail = entry;
+		entry->title = operation;
+	}
+	fz_catch(ctx)
+	{
+		doc->journal->nesting--;
+		fz_free(ctx, operation);
+		fz_rethrow(ctx);
+	}
+}
+
+void pdf_begin_operation(fz_context *ctx, pdf_document *doc, const char *operation)
+{
+	if (operation == NULL)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "All operations must be named");
+
+	do_begin_operation(ctx, doc, operation);
 }
 
 void pdf_begin_implicit_operation(fz_context *ctx, pdf_document *doc)
 {
-	/* If we aren't journalling this doc, just give up now. */
-	if (ctx == NULL || doc == NULL || doc->journal == NULL)
-		return;
-
-	/* Always increment nesting. If we are already in an operation,
-	 * exit. */
-	if (doc->journal->nesting++ > 0)
-		return;
-
-#ifdef PDF_DEBUG_JOURNAL
-	fz_write_printf(ctx, fz_stddbg(ctx), "Beginning: <implicit>\n");
-#endif
+	do_begin_operation(ctx, doc, NULL);
 }
 
 void pdf_drop_journal(fz_context *ctx, pdf_journal *journal)
@@ -1003,6 +1064,8 @@ void pdf_drop_journal(fz_context *ctx, pdf_journal *journal)
 		return;
 
 	discard_journal_entries(ctx, &journal->head);
+	/* Shouldn't be any pending ones, but be safe. */
+	discard_journal_entries(ctx, &journal->pending);
 
 	fz_free(ctx, journal);
 }
@@ -1039,43 +1102,119 @@ void pdf_end_operation(fz_context *ctx, pdf_document *doc)
 	if (ctx == NULL || doc == NULL || doc->journal == NULL)
 		return;
 
-	/* Decrement the operation nesting count. Only actually have
-	 * anything to do if this reaches zero. */
+	/* Decrement the operation nesting count. */
 	if (--doc->journal->nesting > 0)
-		return;
-
-	/* Now, check to see whether we have actually stored any changes
-	 * (fragments) into our entry. If we have, just exit here. */
-	entry = doc->journal->current;
-	if (entry == NULL || entry->head != NULL)
 	{
+		/* We need to move the contents of doc->pending_tail down to
+		 * be on doc->pending_tail->prev. i.e. we combine fragments
+		 * as these operations become one. */
+		entry = doc->journal->pending_tail;
+
+		/* An implicit operation before we start the file can result in us getting here
+		 * with no entry at all! */
+		if (entry && entry->prev)
+		{
+			if (entry->tail == NULL)
+			{
+				/* Nothing to move. */
+			}
+			else if (entry->prev->tail == NULL)
+			{
+				/* Nothing where we want to move it. */
+				entry->prev->head = entry->head;
+				entry->prev->tail = entry->tail;
+			}
+			else
+			{
+				/* Append one list to the other. */
+				entry->prev->tail->next = entry->head;
+				entry->head->prev = entry->prev->tail;
+				entry->prev->tail = entry->tail;
+			}
 #ifdef PDF_DEBUG_JOURNAL
-		fz_write_printf(ctx, fz_stddbg(ctx), "Ending!\n");
-		dump_changes(ctx, doc, entry);
+			fz_write_printf(ctx, fz_stddbg(ctx), "Ending! (->%d) \"%s\" <= \"%s\"\n", doc->journal->nesting,
+					entry->prev->title ? entry->prev->title : "<implicit>",
+					entry->title ? entry->title : "<implicit>");
 #endif
+			doc->journal->pending_tail = entry->prev;
+			entry->prev->next = NULL;
+			fz_free(ctx, entry->title);
+			fz_free(ctx, entry);
+		}
+		else
+		{
+#ifdef PDF_DEBUG_JOURNAL
+			fz_write_printf(ctx, fz_stddbg(ctx), "Ending! (->%d) no entry\n", doc->journal->nesting);
+#endif
+		}
 		return;
 	}
 
-	/* Didn't actually change anything! Remove the empty entry. */
-#ifdef PDF_DEBUG_JOURNAL
-	fz_write_printf(ctx, fz_stddbg(ctx), "Ending Empty!\n");
-#endif
-	if (doc->journal->head == entry)
+	/* Now, check to see whether we have actually stored any changes
+	 * (fragments) into our entry. If we have, we need to move these
+	 * changes from pending onto current. */
+	entry = doc->journal->pending;
+	assert(entry);
+
+	/* We really ought to have just a single pending entry at this point,
+	 * but implicit operations when we've just loaded a file can mean
+	 * that we don't have an entry at all. */
+	if (entry == NULL)
 	{
-		doc->journal->head = entry->next;
-		if (entry->next)
-			entry->next->prev = NULL;
+		/* Never happens! */
+	}
+	else if (entry->head == NULL)
+	{
+		/* Didn't actually change anything! Remove the empty entry. */
+#ifdef PDF_DEBUG_JOURNAL
+		fz_write_printf(ctx, fz_stddbg(ctx), "Ending Empty!\n");
+#endif
+		discard_journal_entries(ctx, &doc->journal->pending);
+	}
+	else if (entry->title != NULL)
+	{
+		/* Explicit operation. Move the entry off the pending list. */
+		assert(entry->next == NULL);
+		if (doc->journal->current)
+		{
+			doc->journal->current->next = entry;
+			entry->prev = doc->journal->current;
+			doc->journal->current = entry;
+		}
+		else
+		{
+			doc->journal->head = entry;
+			doc->journal->current = entry;
+		}
+#ifdef PDF_DEBUG_JOURNAL
+		fz_write_printf(ctx, fz_stddbg(ctx), "Ending!\n");
+#endif
+	}
+	else if (doc->journal->current == NULL)
+	{
+		/* Implicit operation, with no previous one. */
+#ifdef PDF_DEBUG_JOURNAL
+		fz_write_printf(ctx, fz_stddbg(ctx), "Ending implicit with no previous!\n");
+#endif
+		/* Just drop the record of the changes. */
+		discard_journal_entries(ctx, &doc->journal->pending);
 	}
 	else
 	{
-		entry->prev->next = entry->next;
-		if (entry->next)
-			entry->next->prev = entry->prev;
+		/* Implicit operation. Roll these changes into the previous one.*/
+#ifdef PDF_DEBUG_JOURNAL
+		fz_write_printf(ctx, fz_stddbg(ctx), "Ending implicit!\n");
+#endif
+		doc->journal->current->tail->next = entry->head;
+		entry->head->prev = doc->journal->current->tail;
+		doc->journal->current->tail = entry->tail;
+		entry->head = NULL;
+		entry->tail = NULL;
+		fz_free(ctx, entry->title);
+		fz_free(ctx, entry);
 	}
-	doc->journal->current = entry->prev;
-
-	fz_free(ctx, entry->title);
-	fz_free(ctx, entry);
+	doc->journal->pending = NULL;
+	doc->journal->pending_tail = NULL;
 }
 
 /* Call this to find out how many undo/redo steps there are, and the
@@ -1092,6 +1231,9 @@ int pdf_undoredo_state(fz_context *ctx, pdf_document *doc, int *steps)
 			*steps = 0;
 		return 0;
 	}
+
+	if (doc->journal->pending != NULL || doc->journal->nesting > 0)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Can't undo/redo during an operation");
 
 	i = 0;
 	c = 0;
@@ -1134,6 +1276,9 @@ const char *pdf_undoredo_step(fz_context *ctx, pdf_document *doc, int step)
 	if (ctx == NULL || doc == NULL || doc->journal == NULL)
 		return NULL;
 
+	if (doc->journal->pending != NULL || doc->journal->nesting > 0)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Can't undo/redo during an operation");
+
 	for (entry = doc->journal->head; step > 0 && entry != NULL; step--, entry = entry->next);
 
 	if (step != 0 || entry == NULL)
@@ -1172,6 +1317,43 @@ swap_fragments(fz_context *ctx, pdf_document *doc, pdf_journal_entry *entry)
 		frag->inactive = old;
 		frag->stream = obuf;
 	}
+}
+
+/* Abandon an operation - unwind back to the previous begin. */
+void pdf_abandon_operation(fz_context *ctx, pdf_document *doc)
+{
+	pdf_journal_entry *entry;
+
+	if (ctx == NULL || doc == NULL || doc->journal == NULL)
+		return;
+
+	if (doc->journal->nesting == 0)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Can't abandon a non-existent operation!");
+
+	doc->journal->nesting--;
+
+	entry = doc->journal->pending_tail;
+	assert(entry);
+
+	/* Undo the changes we are about the discard. */
+	swap_fragments(ctx, doc, entry);
+
+	/* And discard entry. */
+	if (entry->prev == NULL)
+	{
+		doc->journal->pending = NULL;
+		doc->journal->pending_tail = NULL;
+	}
+	else
+	{
+		doc->journal->pending_tail = entry->prev;
+		entry->prev->next = NULL;
+		entry->prev = NULL;
+	}
+#ifdef PDF_DEBUG_JOURNAL
+	fz_write_printf(ctx, fz_stddbg(ctx), "Abandoning!\n");
+#endif
+	discard_journal_entries(ctx, &entry);
 }
 
 /* Move backwards in the undo history. Throws an error if we are at the
@@ -1247,8 +1429,12 @@ void pdf_discard_journal(fz_context *ctx, pdf_journal *journal)
 		return;
 
 	discard_journal_entries(ctx, &journal->head);
+	/* Should be NULL, but belt and braces. */
+	discard_journal_entries(ctx, &journal->pending);
 	journal->head = NULL;
 	journal->current = NULL;
+	journal->pending = NULL;
+	journal->pending_tail = NULL;
 }
 
 static void
@@ -1339,11 +1525,19 @@ pdf_add_journal_fragment(fz_context *ctx, pdf_document *doc, int parent, pdf_obj
 	if (doc->journal == NULL)
 		return;
 
-	entry = doc->journal->current;
+	entry = doc->journal->pending_tail;
+	/* We must be in an operation. */
+	assert(entry != NULL);
+	if (entry == NULL)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "Can't add a journal fragment absent an operation");
 
+	/* This should never happen, as we should always be appending to the end of
+	 * the pending list. */
+	assert(entry->next == NULL);
 	if (entry->next)
 	{
 		discard_journal_entries(ctx, &entry->next);
+		doc->journal->pending_tail = NULL;
 	}
 
 #ifdef PDF_DEBUG_JOURNAL
@@ -1465,7 +1659,7 @@ void pdf_deserialise_journal(fz_context *ctx, pdf_document *doc, fz_stream *stm)
 			memcpy(title, doc->lexbuf.base.buffer, doc->lexbuf.base.len);
 			title[doc->lexbuf.base.len] = 0;
 
-			new_entry(ctx, doc, title, 0);
+			new_entry(ctx, doc, title);
 			continue;
 		}
 		if (fz_skip_string(ctx, stm, /*en*/"djournal") == 0)
@@ -1542,8 +1736,10 @@ static void prepare_object_for_alteration(fz_context *ctx, pdf_obj *obj, pdf_obj
 		return;
 	}
 
+	assert(doc != NULL);
+
 	/* Do we need to drop the page & reverse page maps? */
-	if (doc && (doc->rev_page_map || doc->fwd_page_map))
+	if (doc->rev_page_map || doc->fwd_page_map)
 	{
 		if (doc->non_structural_change)
 		{
@@ -1866,6 +2062,9 @@ pdf_new_dict(fz_context *ctx, pdf_document *doc, int initialcap)
 {
 	pdf_obj_dict *obj;
 	int i;
+
+	if (doc == NULL)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot create dictionary without a document");
 
 	obj = Memento_label(fz_malloc(ctx, sizeof(pdf_obj_dict)), "pdf_obj(dict)");
 	obj->super.refs = 1;
@@ -2725,6 +2924,8 @@ pdf_mark_list_push(fz_context *ctx, pdf_mark_list *marks, pdf_obj *obj)
 	int num = pdf_to_num(ctx, obj);
 	int i;
 
+	/* If object is not an indirection, then no record to check.
+	 * We must still push it to allow pops to stay in sync. */
 	if (num > 0)
 	{
 		/* Note: this is slow, if the mark list is expected to be big use pdf_mark_bits instead! */
@@ -2737,7 +2938,10 @@ pdf_mark_list_push(fz_context *ctx, pdf_mark_list *marks, pdf_obj *obj)
 	{
 		int newsize = marks->max << 1;
 		if (marks->list == marks->local_list)
+		{
 			marks->list = fz_malloc_array(ctx, newsize, int);
+			memcpy(marks->list, marks->local_list, sizeof(marks->local_list));
+		}
 		else
 			marks->list = fz_realloc_array(ctx, marks->list, newsize, int);
 		marks->max = newsize;
@@ -2875,6 +3079,42 @@ pdf_drop_obj(fz_context *ctx, pdf_obj *obj)
 				fz_free(ctx, obj);
 		}
 	}
+}
+
+pdf_obj *
+pdf_drop_singleton_obj(fz_context *ctx, pdf_obj *obj)
+{
+	int drop;
+
+	/* If an object is < PDF_LIMIT, then it's a 'common' name or
+	 * true or false. No point in dropping these as it
+	 * won't save any memory. */
+	if (obj < PDF_LIMIT)
+		return obj;
+
+	/* See if it's a singleton object. We can only drop if
+	 * it's a singleton object. If not, just exit leaving
+	 * everything unchanged. */
+	fz_lock(ctx, FZ_LOCK_ALLOC);
+	drop = (obj->refs == 1);
+	fz_unlock(ctx, FZ_LOCK_ALLOC);
+	if (!drop)
+		return obj;
+
+	/* So drop the object! */
+	if (obj->kind == PDF_ARRAY)
+		pdf_drop_array(ctx, obj);
+	else if (obj->kind == PDF_DICT)
+		pdf_drop_dict(ctx, obj);
+	else if (obj->kind == PDF_STRING)
+	{
+		fz_free(ctx, STRING(obj)->text);
+		fz_free(ctx, obj);
+	}
+	else
+		fz_free(ctx, obj);
+
+	return NULL;
 }
 
 /**
@@ -4591,56 +4831,33 @@ void pdf_print_obj_to_json(fz_context* ctx, fz_output* out, pdf_obj* obj, int fl
 
 /* Convenience functions */
 
-static pdf_obj *
-pdf_dict_get_inheritable_imp(fz_context *ctx, pdf_obj *node, pdf_obj *key)
-{
-	pdf_cycle_list cycle[PDF_SANE_MAX_TREE_DEPTH];
-	pdf_cycle_list* cycle_up = NULL;
-	int depth;
 
-	for (depth = 0; node && depth < PDF_SANE_MAX_TREE_DEPTH; depth++)
-	{
-		pdf_obj* val = pdf_dict_get(ctx, node, key);
-		if (val)
-			return val;
-		if (pdf_cycle(ctx, &cycle[depth], cycle_up, node))
-			fz_throw(ctx, FZ_ERROR_GENERIC, "cycle in tree (parents)");
-		cycle_up = &cycle[depth];
-		node = pdf_dict_get(ctx, node, PDF_NAME(Parent));
-	}
+/*
+	Uses Floyd's cycle finding algorithm, modified to avoid starting
+	the 'slow' pointer for a while.
 
-	if (depth >= PDF_SANE_MAX_TREE_DEPTH)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "too much recursion in tree (parents)");
-
-	return NULL;
-}
-
+	https://www.geeksforgeeks.org/floyds-cycle-finding-algorithm/
+*/
 pdf_obj *
 pdf_dict_get_inheritable(fz_context *ctx, pdf_obj *node, pdf_obj *key)
 {
-	return pdf_dict_get_inheritable_imp(ctx, node, key);
-}
+	pdf_obj *slow = node;
+	int halfbeat = 11; /* Don't start moving slow pointer for a while. */
 
-static pdf_obj *
-pdf_dict_getp_inheritable_imp(fz_context *ctx, pdf_obj *node, const char *path)
-{
-	pdf_cycle_list cycle[PDF_SANE_MAX_TREE_DEPTH];
-	pdf_cycle_list* cycle_up = NULL;
-	int depth;
-
-	for (depth = 0; node && depth < PDF_SANE_MAX_TREE_DEPTH; depth++)
+	while (node)
 	{
-		pdf_obj* val = pdf_dict_getp(ctx, node, path);
+		pdf_obj *val = pdf_dict_get(ctx, node, key);
 		if (val)
 			return val;
-		if (pdf_cycle(ctx, &cycle[depth], cycle_up, node))
-			fz_throw(ctx, FZ_ERROR_GENERIC, "cycle in tree (parents)");
-		cycle_up = &cycle[depth];
 		node = pdf_dict_get(ctx, node, PDF_NAME(Parent));
+		if (node == slow)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "cycle in resources");
+		if (--halfbeat == 0)
+		{
+			slow = pdf_dict_get(ctx, slow, PDF_NAME(Parent));
+			halfbeat = 2;
+		}
 	}
-
-	if (depth >= PDF_SANE_MAX_TREE_DEPTH)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "too much recursion in tree (parents)");
 
 	return NULL;
 }
@@ -4648,8 +4865,51 @@ pdf_dict_getp_inheritable_imp(fz_context *ctx, pdf_obj *node, const char *path)
 pdf_obj *
 pdf_dict_getp_inheritable(fz_context *ctx, pdf_obj *node, const char *path)
 {
-	return pdf_dict_getp_inheritable_imp(ctx, node, path);
+	pdf_obj *slow = node;
+	int halfbeat = 11; /* Don't start moving slow pointer for a while. */
+
+	while (node)
+	{
+		pdf_obj *val = pdf_dict_getp(ctx, node, path);
+		if (val)
+			return val;
+		node = pdf_dict_get(ctx, node, PDF_NAME(Parent));
+		if (node == slow)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "cycle in resources");
+		if (--halfbeat == 0)
+		{
+			slow = pdf_dict_get(ctx, slow, PDF_NAME(Parent));
+			halfbeat = 2;
+		}
+	}
+
+	return NULL;
 }
+
+pdf_obj *
+pdf_dict_gets_inheritable(fz_context *ctx, pdf_obj *node, const char *key)
+{
+	pdf_obj *slow = node;
+	int halfbeat = 11; /* Don't start moving slow pointer for a while. */
+
+	while (node)
+	{
+		pdf_obj *val = pdf_dict_gets(ctx, node, key);
+		if (val)
+			return val;
+		node = pdf_dict_get(ctx, node, PDF_NAME(Parent));
+		if (node == slow)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "cycle in resources");
+		if (--halfbeat == 0)
+		{
+			slow = pdf_dict_get(ctx, slow, PDF_NAME(Parent));
+			halfbeat = 2;
+		}
+	}
+
+	return NULL;
+}
+
 
 void pdf_dict_put_bool(fz_context *ctx, pdf_obj *dict, pdf_obj *key, int x)
 {
@@ -4683,17 +4943,17 @@ void pdf_dict_put_text_string(fz_context *ctx, pdf_obj *dict, pdf_obj *key, cons
 
 void pdf_dict_put_rect(fz_context *ctx, pdf_obj *dict, pdf_obj *key, fz_rect x)
 {
-	pdf_dict_put_drop(ctx, dict, key, pdf_new_rect(ctx, NULL, x));
+	pdf_dict_put_drop(ctx, dict, key, pdf_new_rect(ctx, pdf_get_bound_document(ctx, dict), x));
 }
 
 void pdf_dict_put_matrix(fz_context *ctx, pdf_obj *dict, pdf_obj *key, fz_matrix x)
 {
-	pdf_dict_put_drop(ctx, dict, key, pdf_new_matrix(ctx, NULL, x));
+	pdf_dict_put_drop(ctx, dict, key, pdf_new_matrix(ctx, pdf_get_bound_document(ctx, dict), x));
 }
 
 void pdf_dict_put_date(fz_context *ctx, pdf_obj *dict, pdf_obj *key, int64_t time)
 {
-	pdf_dict_put_drop(ctx, dict, key, pdf_new_date(ctx, NULL, time));
+	pdf_dict_put_drop(ctx, dict, key, pdf_new_date(ctx, pdf_get_bound_document(ctx, dict), time));
 }
 
 pdf_obj *pdf_dict_put_array(fz_context *ctx, pdf_obj *dict, pdf_obj *key, int initial)
@@ -4769,6 +5029,11 @@ int pdf_dict_get_bool(fz_context *ctx, pdf_obj *dict, pdf_obj *key)
 int pdf_dict_get_int(fz_context *ctx, pdf_obj *dict, pdf_obj *key)
 {
 	return pdf_to_int(ctx, pdf_dict_get(ctx, dict, key));
+}
+
+int64_t pdf_dict_get_int64(fz_context *ctx, pdf_obj *dict, pdf_obj *key)
+{
+	return pdf_to_int64(ctx, pdf_dict_get(ctx, dict, key));
 }
 
 float pdf_dict_get_real(fz_context *ctx, pdf_obj *dict, pdf_obj *key)

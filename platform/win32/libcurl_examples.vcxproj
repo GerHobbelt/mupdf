@@ -109,6 +109,8 @@
       <ConformanceMode>true</ConformanceMode>
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -316,6 +318,7 @@
     <ClCompile Include="../../thirdparty/curl/docs/examples/postit2-formadd.c" />
     <ClCompile Include="../../thirdparty/curl/docs/examples/postit2.c" />
     <ClCompile Include="../../thirdparty/curl/docs/examples/progressfunc.c" />
+    <ClCompile Include="../../thirdparty/curl/docs/examples/protofeats.c" />
     <ClCompile Include="../../thirdparty/curl/docs/examples/resolve_demo.c" />
     <ClCompile Include="../../thirdparty/curl/docs/examples/rtsp_demo.c" />
     <ClCompile Include="../../thirdparty/curl/docs/examples/sendrecv.c" />
@@ -375,6 +378,7 @@
     <ClCompile Include="../../thirdparty/curl/src/tool_progress.c" />
     <ClCompile Include="../../thirdparty/curl/src/tool_setopt.c" />
     <ClCompile Include="../../thirdparty/curl/src/tool_sleep.c" />
+    <ClCompile Include="../../thirdparty/curl/src/tool_stderr.c" />
     <ClCompile Include="../../thirdparty/curl/src/tool_strdup.c" />
     <ClCompile Include="../../thirdparty/curl/src/tool_urlglob.c" />
     <ClCompile Include="../../thirdparty/curl/src/tool_util.c" />
@@ -382,7 +386,11 @@
     <ClCompile Include="../../thirdparty/curl/src/tool_writeout.c" />
     <ClCompile Include="../../thirdparty/curl/src/tool_writeout_json.c" />
     <ClCompile Include="../../thirdparty/curl/src/tool_xattr.c" />
-    <ClCompile Include="../../thirdparty/curl/tests/libtest/chkdecimalpoint.c" />
+    <ClCompile Include="../../thirdparty/curl/tests/http/clients/h2-download.c" />
+    <ClCompile Include="../../thirdparty/curl/tests/http/clients/h2-serverpush.c" />
+    <ClCompile Include="../../thirdparty/curl/tests/http/clients/ws-data.c" />
+    <ClCompile Include="../../thirdparty/curl/tests/http/clients/ws-pingpong.c" />
+    <ClCompile Include="../../thirdparty/curl/tests/http/testenv/mod_curltest/mod_curltest.c" />
     <ClCompile Include="../../thirdparty/curl/tests/libtest/chkhostname.c" />
     <ClCompile Include="../../thirdparty/curl/tests/libtest/first.c" />
     <ClCompile Include="../../thirdparty/curl/tests/libtest/lib1156.c" />
@@ -446,6 +454,7 @@
     <ClCompile Include="../../thirdparty/curl/tests/libtest/lib1597.c" />
     <ClCompile Include="../../thirdparty/curl/tests/libtest/lib1662.c" />
     <ClCompile Include="../../thirdparty/curl/tests/libtest/lib1900.c" />
+    <ClCompile Include="../../thirdparty/curl/tests/libtest/lib1903.c" />
     <ClCompile Include="../../thirdparty/curl/tests/libtest/lib1905.c" />
     <ClCompile Include="../../thirdparty/curl/tests/libtest/lib1906.c" />
     <ClCompile Include="../../thirdparty/curl/tests/libtest/lib1907.c" />
@@ -474,10 +483,18 @@
     <ClCompile Include="../../thirdparty/curl/tests/libtest/lib1957.c" />
     <ClCompile Include="../../thirdparty/curl/tests/libtest/lib1958.c" />
     <ClCompile Include="../../thirdparty/curl/tests/libtest/lib1959.c" />
+    <ClCompile Include="../../thirdparty/curl/tests/libtest/lib1960.c" />
+    <ClCompile Include="../../thirdparty/curl/tests/libtest/lib1970.c" />
+    <ClCompile Include="../../thirdparty/curl/tests/libtest/lib1971.c" />
+    <ClCompile Include="../../thirdparty/curl/tests/libtest/lib1972.c" />
+    <ClCompile Include="../../thirdparty/curl/tests/libtest/lib1973.c" />
+    <ClCompile Include="../../thirdparty/curl/tests/libtest/lib1974.c" />
+    <ClCompile Include="../../thirdparty/curl/tests/libtest/lib1975.c" />
     <ClCompile Include="../../thirdparty/curl/tests/libtest/lib2301.c" />
     <ClCompile Include="../../thirdparty/curl/tests/libtest/lib2302.c" />
     <ClCompile Include="../../thirdparty/curl/tests/libtest/lib2304.c" />
     <ClCompile Include="../../thirdparty/curl/tests/libtest/lib2305.c" />
+    <ClCompile Include="../../thirdparty/curl/tests/libtest/lib2306.c" />
     <ClCompile Include="../../thirdparty/curl/tests/libtest/lib2402.c" />
     <ClCompile Include="../../thirdparty/curl/tests/libtest/lib2502.c" />
     <ClCompile Include="../../thirdparty/curl/tests/libtest/lib3010.c" />
@@ -635,6 +652,9 @@
     <ClCompile Include="../../thirdparty/curl/tests/unit/unit1660.c" />
     <ClCompile Include="../../thirdparty/curl/tests/unit/unit1661.c" />
     <ClCompile Include="../../thirdparty/curl/tests/unit/unit2600.c" />
+    <ClCompile Include="../../thirdparty/curl/tests/unit/unit2601.c" />
+    <ClCompile Include="../../thirdparty/curl/tests/unit/unit2602.c" />
+    <ClCompile Include="../../thirdparty/curl/tests/unit/unit2603.c" />
     <ClCompile Include="../../thirdparty/curl/tests/unit/unit3200.c" />
     <ClInclude Include="../../thirdparty/curl/docs/cmdline-opts/Makefile.inc" />
     <ClInclude Include="../../thirdparty/curl/docs/examples/Makefile.inc" />
@@ -691,6 +711,7 @@
     <ClInclude Include="../../thirdparty/curl/src/tool_setopt.h" />
     <ClInclude Include="../../thirdparty/curl/src/tool_setup.h" />
     <ClInclude Include="../../thirdparty/curl/src/tool_sleep.h" />
+    <ClInclude Include="../../thirdparty/curl/src/tool_stderr.h" />
     <ClInclude Include="../../thirdparty/curl/src/tool_strdup.h" />
     <ClInclude Include="../../thirdparty/curl/src/tool_urlglob.h" />
     <ClInclude Include="../../thirdparty/curl/src/tool_util.h" />
@@ -700,6 +721,7 @@
     <ClInclude Include="../../thirdparty/curl/src/tool_writeout_json.h" />
     <ClInclude Include="../../thirdparty/curl/src/tool_xattr.h" />
     <ClInclude Include="../../thirdparty/curl/tests/data/Makefile.inc" />
+    <ClInclude Include="../../thirdparty/curl/tests/http/clients/Makefile.inc" />
     <ClInclude Include="../../thirdparty/curl/tests/libtest/Makefile.inc" />
     <ClInclude Include="../../thirdparty/curl/tests/libtest/sethostname.h" />
     <ClInclude Include="../../thirdparty/curl/tests/libtest/stub_gssapi.h" />
@@ -730,6 +752,7 @@
     <Text Include="../../thirdparty/curl/curl-config.in" />
     <Text Include="../../thirdparty/curl/docs/ALTSVC.md" />
     <Text Include="../../thirdparty/curl/docs/BINDINGS.md" />
+    <Text Include="../../thirdparty/curl/docs/BUFQ.md" />
     <Text Include="../../thirdparty/curl/docs/BUFREF.md" />
     <Text Include="../../thirdparty/curl/docs/BUG-BOUNTY.md" />
     <Text Include="../../thirdparty/curl/docs/BUGS.md" />
@@ -768,6 +791,7 @@
     <Text Include="../../thirdparty/curl/docs/RELEASE-PROCEDURE.md" />
     <Text Include="../../thirdparty/curl/docs/ROADMAP.md" />
     <Text Include="../../thirdparty/curl/docs/RUSTLS.md" />
+    <Text Include="../../thirdparty/curl/docs/SECURITY-ADVISORY.md" />
     <Text Include="../../thirdparty/curl/docs/SECURITY-PROCESS.md" />
     <Text Include="../../thirdparty/curl/docs/SSL-PROBLEMS.md" />
     <Text Include="../../thirdparty/curl/docs/SSLCERTS.md" />
@@ -791,7 +815,6 @@
     <Text Include="../../thirdparty/curl/include/README.md" />
     <Text Include="../../thirdparty/curl/include/curl/Makefile.am" />
     <Text Include="../../thirdparty/curl/libcurl.pc.in" />
-    <Text Include="../../thirdparty/curl/mlc_config.json" />
     <Text Include="../../thirdparty/curl/plan9/README" />
     <Text Include="../../thirdparty/curl/projects/README.md" />
     <Text Include="../../thirdparty/curl/projects/build-openssl.bat" />
@@ -816,38 +839,50 @@
     <Text Include="../../thirdparty/curl/tests/certs/scripts/genroot.sh" />
     <Text Include="../../thirdparty/curl/tests/certs/scripts/genserv.sh" />
     <Text Include="../../thirdparty/curl/tests/config.in" />
+    <Text Include="../../thirdparty/curl/tests/conftest.py" />
     <Text Include="../../thirdparty/curl/tests/data/CMakeLists.txt" />
     <Text Include="../../thirdparty/curl/tests/data/Makefile.am" />
     <Text Include="../../thirdparty/curl/tests/dictserver.py" />
+    <Text Include="../../thirdparty/curl/tests/http/Makefile.am" />
+    <Text Include="../../thirdparty/curl/tests/http/README.md" />
+    <Text Include="../../thirdparty/curl/tests/http/clients/Makefile.am" />
+    <Text Include="../../thirdparty/curl/tests/http/config.ini.in" />
+    <Text Include="../../thirdparty/curl/tests/http/conftest.py" />
+    <Text Include="../../thirdparty/curl/tests/http/requirements.txt" />
+    <Text Include="../../thirdparty/curl/tests/http/scorecard.py" />
+    <Text Include="../../thirdparty/curl/tests/http/test_01_basic.py" />
+    <Text Include="../../thirdparty/curl/tests/http/test_02_download.py" />
+    <Text Include="../../thirdparty/curl/tests/http/test_03_goaway.py" />
+    <Text Include="../../thirdparty/curl/tests/http/test_04_stuttered.py" />
+    <Text Include="../../thirdparty/curl/tests/http/test_05_errors.py" />
+    <Text Include="../../thirdparty/curl/tests/http/test_06_eyeballs.py" />
+    <Text Include="../../thirdparty/curl/tests/http/test_07_upload.py" />
+    <Text Include="../../thirdparty/curl/tests/http/test_08_caddy.py" />
+    <Text Include="../../thirdparty/curl/tests/http/test_09_push.py" />
+    <Text Include="../../thirdparty/curl/tests/http/test_10_proxy.py" />
+    <Text Include="../../thirdparty/curl/tests/http/test_11_unix.py" />
+    <Text Include="../../thirdparty/curl/tests/http/test_12_reuse.py" />
+    <Text Include="../../thirdparty/curl/tests/http/test_13_proxy_auth.py" />
+    <Text Include="../../thirdparty/curl/tests/http/test_14_auth.py" />
+    <Text Include="../../thirdparty/curl/tests/http/test_20_websockets.py" />
+    <Text Include="../../thirdparty/curl/tests/http/testenv/__init__.py" />
+    <Text Include="../../thirdparty/curl/tests/http/testenv/caddy.py" />
+    <Text Include="../../thirdparty/curl/tests/http/testenv/certs.py" />
+    <Text Include="../../thirdparty/curl/tests/http/testenv/client.py" />
+    <Text Include="../../thirdparty/curl/tests/http/testenv/curl.py" />
+    <Text Include="../../thirdparty/curl/tests/http/testenv/env.py" />
+    <Text Include="../../thirdparty/curl/tests/http/testenv/httpd.py" />
+    <Text Include="../../thirdparty/curl/tests/http/testenv/nghttpx.py" />
+    <Text Include="../../thirdparty/curl/tests/http/testenv/ports.py" />
+    <Text Include="../../thirdparty/curl/tests/http/testenv/ws_echo_server.py" />
     <Text Include="../../thirdparty/curl/tests/libtest/CMakeLists.txt" />
     <Text Include="../../thirdparty/curl/tests/libtest/Makefile.am" />
     <Text Include="../../thirdparty/curl/tests/negtelnetserver.py" />
     <Text Include="../../thirdparty/curl/tests/nghttpx.conf" />
+    <Text Include="../../thirdparty/curl/tests/requirements.txt" />
     <Text Include="../../thirdparty/curl/tests/server/CMakeLists.txt" />
     <Text Include="../../thirdparty/curl/tests/server/Makefile.am" />
     <Text Include="../../thirdparty/curl/tests/smbserver.py" />
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/Makefile.am" />
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/README.md" />
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/config.ini.in" />
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/conftest.py" />
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/scorecard.py" />
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_01_basic.py" />
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_02_download.py" />
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_03_goaway.py" />
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_04_stuttered.py" />
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_05_errors.py" />
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_06_eyeballs.py" />
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_07_upload.py" />
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_08_caddy.py" />
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_09_push.py" />
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/test_10_proxy.py" />
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/__init__.py" />
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/caddy.py" />
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/certs.py" />
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/curl.py" />
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/env.py" />
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/httpd.py" />
-    <Text Include="../../thirdparty/curl/tests/tests-httpd/testenv/nghttpx.py" />
     <Text Include="../../thirdparty/curl/tests/unit/CMakeLists.txt" />
     <Text Include="../../thirdparty/curl/tests/unit/Makefile.am" />
     <Text Include="../../thirdparty/curl/tests/unit/README.md" />

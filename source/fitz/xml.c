@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "xml-imp.h"
 
@@ -267,7 +267,7 @@ char *fz_xml_tag(fz_xml *item)
 {
 	/* DOC items can never have MAGIC_TEXT as their down value,
 	 * so this is safe. */
-	return item && !FZ_TEXT_ITEM(item) && item->u.node.u.d.name[0] ? item->u.node.u.d.name : NULL;
+	return item && !FZ_TEXT_ITEM(item) ? item->u.node.u.d.name : NULL;
 }
 
 int fz_xml_is_tag(fz_xml *item, const char *name)
@@ -821,6 +821,8 @@ parse_closing_element:
 	p = jump_past_white(p);
 	mark = p;
 	p = jump_past_name(p);
+	if (!isname(*mark))
+		return "syntax error in closing element";
 	if (close_tag(ctx, parser, mark, p))
 		return "opening and closing tag mismatch";
 	p = jump_past_white(p);
@@ -1055,6 +1057,60 @@ static char *convert_to_utf8(fz_context *ctx, unsigned char *s, size_t n, int *d
 		return (char*)s+3;
 
 	return (char*)s;
+}
+
+fz_xml *
+fz_parse_xml_stream(fz_context *ctx, fz_stream *stm, int preserve_white)
+{
+	fz_buffer *buf = fz_read_all(ctx, stm, 128);
+	fz_xml *xml = NULL;
+
+	fz_var(xml);
+
+	fz_try(ctx)
+		xml = fz_parse_xml(ctx, buf, preserve_white);
+	fz_always(ctx)
+		fz_drop_buffer(ctx, buf);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+
+	return xml;
+}
+
+static fz_xml *
+parse_and_drop_buffer(fz_context *ctx, fz_buffer *buf, int preserve_white)
+{
+	fz_xml *xml = NULL;
+
+	fz_var(xml);
+
+	fz_try(ctx)
+		xml = fz_parse_xml(ctx, buf, preserve_white);
+	fz_always(ctx)
+		fz_drop_buffer(ctx, buf);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+
+	return xml;
+}
+
+fz_xml *
+fz_parse_xml_archive_entry(fz_context *ctx, fz_archive *arch, const char *filename, int preserve_white)
+{
+	fz_buffer *buf = fz_read_archive_entry(ctx, arch, filename);
+
+	return parse_and_drop_buffer(ctx, buf, preserve_white);
+}
+
+fz_xml *
+fz_try_parse_xml_archive_entry(fz_context *ctx, fz_archive *arch, const char *filename, int preserve_white)
+{
+	fz_buffer *buf = fz_try_read_archive_entry(ctx, arch, filename);
+
+	if (buf == NULL)
+		return NULL;
+
+	return parse_and_drop_buffer(ctx, buf, preserve_white);
 }
 
 fz_xml *
@@ -1309,6 +1365,11 @@ fz_parse_xml_from_html5(fz_context *ctx, fz_buffer *buf, int dont_throw_on_error
 
 fz_xml *fz_xml_find_dfs(fz_xml *item, const char *tag, const char *att, const char *match)
 {
+	return fz_xml_find_dfs_top(item, tag, att, match, NULL);
+}
+
+fz_xml *fz_xml_find_dfs_top(fz_xml *item, const char *tag, const char *att, const char *match, fz_xml *top)
+{
 	/* Skip over any DOC object. */
 	if (item && FZ_DOCUMENT_ITEM(item))
 		item = item->down;
@@ -1328,6 +1389,9 @@ fz_xml *fz_xml_find_dfs(fz_xml *item, const char *tag, const char *att, const ch
 		else
 			while (1) {
 				item = item->up;
+				/* Stop searching if we hit our declared 'top' item. */
+				if (item == top)
+					return NULL;
 				/* We should never reach item == NULL, but just in case. */
 				if (item == NULL)
 					return NULL;
@@ -1347,6 +1411,11 @@ fz_xml *fz_xml_find_dfs(fz_xml *item, const char *tag, const char *att, const ch
 
 fz_xml *fz_xml_find_next_dfs(fz_xml *item, const char *tag, const char *att, const char *match)
 {
+	return fz_xml_find_next_dfs_top(item, tag, att, match, NULL);
+}
+
+fz_xml *fz_xml_find_next_dfs_top(fz_xml *item, const char *tag, const char *att, const char *match, fz_xml *top)
+{
 	/* Skip over any DOC object. */
 	if (item && FZ_DOCUMENT_ITEM(item))
 		item = item->down;
@@ -1361,6 +1430,9 @@ fz_xml *fz_xml_find_next_dfs(fz_xml *item, const char *tag, const char *att, con
 	else
 		while (1) {
 			item = item->up;
+			/* Stop searching if we hit our declared 'top' item. */
+			if (item == top)
+				return NULL;
 			/* We should never reach item == NULL, but just in case. */
 			if (item == NULL)
 				return NULL;
@@ -1374,7 +1446,7 @@ fz_xml *fz_xml_find_next_dfs(fz_xml *item, const char *tag, const char *att, con
 			}
 		}
 
-	return fz_xml_find_dfs(item, tag, att, match);
+	return fz_xml_find_dfs_top(item, tag, att, match, top);
 }
 
 fz_xml *fz_keep_xml(fz_context *ctx, fz_xml *xml)

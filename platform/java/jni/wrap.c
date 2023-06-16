@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 /* Conversion functions: C to Java. These all throw fitz exceptions. */
 
@@ -713,6 +713,19 @@ static inline jobject to_DisplayList_safe_own(fz_context *ctx, JNIEnv *env, fz_d
 	return jlist;
 }
 
+static inline jobject to_ImageData_safe_own(fz_context *ctx, JNIEnv *env, fz_compressed_buffer *image_data)
+{
+	jobject jobj;
+
+	if (!ctx || !image_data) return NULL;
+
+	jobj = (*env)->NewObject(env, cls_ImageData, mid_ImageData_init, jlong_cast(image_data));
+	if (!jobj)
+		fz_drop_compressed_buffer(ctx, image_data);
+
+	return jobj;
+}
+
 static inline jobject to_NativeDevice_safe_own(fz_context *ctx, JNIEnv *env, fz_device *device)
 {
 	jobject jdev;
@@ -1252,6 +1265,12 @@ static inline fz_image *from_Image_safe(JNIEnv *env, jobject jobj)
 {
 	if (!jobj) return NULL;
 	return CAST(fz_image *, (*env)->GetLongField(env, jobj, fid_Image_pointer));
+}
+
+static inline fz_compressed_buffer *from_ImageData_safe(JNIEnv *env, jobject jobj)
+{
+	if (!jobj) return NULL;
+	return CAST(fz_compressed_buffer *, (*env)->GetLongField(env, jobj, fid_ImageData_pointer));
 }
 
 static inline fz_link *from_Link_safe(JNIEnv *env, jobject jobj)

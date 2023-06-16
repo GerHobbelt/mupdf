@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
@@ -337,6 +337,17 @@ pdf_parse_crypt_filter(fz_context *ctx, pdf_crypt_filter *cf, pdf_crypt *crypt, 
 	else if (!is_identity)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot parse crypt filter (%d 0 R)", pdf_to_num(ctx, crypt->cf));
 
+	if (cf->method != PDF_CRYPT_NONE)
+	{
+		if (crypt->r == 4 && cf->method != PDF_CRYPT_RC4 && cf->method != PDF_CRYPT_AESV2)
+			fz_warn(ctx, "unexpected encryption method for revision 4 crypto: %s", pdf_crypt_method(ctx, crypt));
+		else if (crypt->r >= 5 && cf->method != PDF_CRYPT_AESV3)
+		{
+			fz_warn(ctx, "illegal encryption method for revision 5/6, assuming AESV3");
+			cf->method = PDF_CRYPT_AESV3;
+		}
+	}
+
 	/* the length for crypt filters is supposed to be in bytes not bits */
 	if (cf->length < 40)
 		cf->length = cf->length * 8;
@@ -348,7 +359,10 @@ pdf_parse_crypt_filter(fz_context *ctx, pdf_crypt_filter *cf, pdf_crypt *crypt, 
 		(cf->length < 40 || cf->length > 128))
 		fz_throw(ctx, FZ_ERROR_GENERIC, "invalid key length: %d", cf->length);
 	if ((crypt->r == 5 || crypt->r == 6) && cf->length != 256)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "invalid key length: %d", cf->length);
+	{
+		fz_warn(ctx, "illegal key length for revision 5/6, assuming 256 bits");
+		cf->length = 256;
+	}
 }
 
 /*
@@ -837,9 +851,13 @@ pdf_has_permission(fz_context *ctx, pdf_document *doc, fz_permission p)
 	switch (p)
 	{
 	case FZ_PERMISSION_PRINT: return doc->crypt->p & PDF_PERM_PRINT;
-	case FZ_PERMISSION_COPY: return doc->crypt->p & PDF_PERM_COPY;
 	case FZ_PERMISSION_EDIT: return doc->crypt->p & PDF_PERM_MODIFY;
+	case FZ_PERMISSION_COPY: return doc->crypt->p & PDF_PERM_COPY;
 	case FZ_PERMISSION_ANNOTATE: return doc->crypt->p & PDF_PERM_ANNOTATE;
+	case FZ_PERMISSION_FORM: return doc->crypt->p & PDF_PERM_FORM;
+	case FZ_PERMISSION_ACCESSIBILITY: return doc->crypt->p & PDF_PERM_ACCESSIBILITY;
+	case FZ_PERMISSION_ASSEMBLE: return doc->crypt->p & PDF_PERM_ASSEMBLE;
+	case FZ_PERMISSION_PRINT_HQ: return doc->crypt->p & PDF_PERM_PRINT_HQ;
 	}
 	return 1;
 }
@@ -947,21 +965,40 @@ int pdf_crypt_revision(fz_context *ctx, pdf_crypt *crypt)
 	return 0;
 }
 
-char *
-pdf_crypt_method(fz_context *ctx, pdf_crypt *crypt)
+static char *
+crypt_method(fz_context *ctx, int method)
+{
+	switch (method)
+	{
+	default:
+	case PDF_CRYPT_UNKNOWN: return "Unknown";
+	case PDF_CRYPT_NONE: return "None";
+	case PDF_CRYPT_RC4: return "RC4";
+	case PDF_CRYPT_AESV2: return "AES";
+	case PDF_CRYPT_AESV3: return "AES";
+	}
+}
+
+const char *
+pdf_crypt_string_method(fz_context *ctx, pdf_crypt *crypt)
 {
 	if (crypt)
-	{
-		switch (crypt->strf.method)
-		{
-		case PDF_CRYPT_NONE: return "None";
-		case PDF_CRYPT_RC4: return "RC4";
-		case PDF_CRYPT_AESV2: return "AES";
-		case PDF_CRYPT_AESV3: return "AES";
-		case PDF_CRYPT_UNKNOWN: return "Unknown";
-		}
-	}
+		return crypt_method(ctx, crypt->strf.method);
 	return "None";
+}
+
+const char *
+pdf_crypt_stream_method(fz_context *ctx, pdf_crypt *crypt)
+{
+	if (crypt)
+		return crypt_method(ctx, crypt->stmf.method);
+	return "None";
+}
+
+const char *
+pdf_crypt_method(fz_context *ctx, pdf_crypt *crypt)
+{
+	return pdf_crypt_string_method(ctx, crypt);
 }
 
 int
@@ -1162,7 +1199,7 @@ pdf_crypt_obj_imp(fz_context *ctx, pdf_crypt *crypt, pdf_obj *obj, unsigned char
 void
 pdf_crypt_obj(fz_context *ctx, pdf_crypt *crypt, pdf_obj *obj, int num, int gen)
 {
-	unsigned char key[32];
+	unsigned char key[32] = { 0 };
 	int len;
 
 	len = pdf_compute_object_key(crypt, &crypt->strf, num, gen, key, 32);

@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 /*
  * mudraw -- command line tool for drawing and converting documents
@@ -56,6 +56,7 @@
 #include <fcntl.h>
 #include <direct.h> /* for getcwd */
 #else
+#include <sys/stat.h> /* for mkdir */
 #include <unistd.h> /* for getcwd */
 #endif
 
@@ -363,6 +364,7 @@ static int out_cs = CS_UNSET;
 static const char *proof_filename = NULL;
 fz_colorspace *proof_cs = NULL;
 static const char *icc_filename = NULL;
+static int use_gamma = 0;
 static float gamma_value = 1;
 static int invert = 0;
 static int kill = 0;
@@ -530,6 +532,11 @@ static int usage(void)
 		"        filename of ICC profile)\n"
 		"  -e -  proof icc profile (filename of ICC profile)\n"
 		"  -G -  apply gamma correction\n"
+#if FZ_ENABLE_GAMMA
+		"\t-g -\tuse gamma blending\n"
+#else
+		"\t-g -\tuse gamma blending (disabled in this build)\n"
+#endif
 		"  -I    invert colors\n"
 		"\n"
 		"  -A -  number of bits of anti-aliasing (0 to 8)\n"
@@ -2274,18 +2281,72 @@ static void mudraw_process_stext_referenced_image(fz_context* ctx, fz_output* ou
 }
 
 
-static int convert_to_accel_path(fz_context *ctx, char outname[], char *absname, size_t len)
+static int
+fz_mkdir(char *path)
+{
+#ifdef _WIN32
+	int ret;
+	wchar_t *wpath = fz_wchar_from_utf8(path);
+
+	if (wpath == NULL)
+		return -1;
+
+	ret = _wmkdir(wpath);
+
+	free(wpath);
+
+	return ret;
+#else
+	return mkdir(path, S_IRWXU | S_IRWXG | S_IRWXO);
+#endif
+}
+
+static int create_accel_path(fz_context *ctx, char outname[], size_t len, int create, const char *absname, ...)
+{
+	va_list args;
+	char *s = outname;
+	size_t z, remain = len;
+	char *arg;
+
+	va_start(args, absname);
+
+	while ((arg = va_arg(args, char *)) != NULL)
+	{
+		z = fz_snprintf(s, remain, "%s", arg);
+		if (z+1 > remain)
+			goto fail; /* won't fit */
+
+		if (create)
+			(void) fz_mkdir(outname);
+		if (!fz_is_directory(ctx, outname))
+			goto fail; /* directory creation failed, or that dir doesn't exist! */
+#ifdef _WIN32
+		s[z] = '\\';
+#else
+		s[z] = '/';
+#endif
+		s[z+1] = 0;
+		s += z+1;
+		remain -= z+1;
+	}
+
+	if (fz_snprintf(s, remain, "%s.accel", absname) >= remain)
+		goto fail; /* won't fit */
+
+	va_end(args);
+
+	return 1;
+
+fail:
+	va_end(args);
+
+	return 0;
+}
+
+static int convert_to_accel_path(fz_context *ctx, char outname[], char *absname, size_t len, int create)
 {
 	char *tmpdir;
 	char *s;
-
-	tmpdir = getenv("TEMP");
-	if (!tmpdir)
-		tmpdir = getenv("TMP");
-	if (!tmpdir)
-		tmpdir = "/var/tmp";
-	if (!fz_is_directory(ctx, tmpdir))
-		tmpdir = "/tmp";
 
 	// strip off absolute path & UNC / path prefixes '//./' and '//?/':
 	while (absname[0] == '/' || absname[0] == '\\' || absname[0] == '?' || absname[0] == '?')
@@ -2298,17 +2359,34 @@ static int convert_to_accel_path(fz_context *ctx, char outname[], char *absname,
 		++s;
 	}
 
-	if (fz_snprintf(outname, len, "%s/%s.accel", tmpdir, absname) >= len)
-		return 0;
-	return 1;
+#ifdef _WIN32
+	tmpdir = getenv("USERPROFILE");
+	if (tmpdir && create_accel_path(ctx, outname, len, create, absname, tmpdir, ".config", "mupdf", NULL))
+		return 1; /* OK! */
+	/* TEMP and TMP are user-specific on modern windows. */
+	tmpdir = getenv("TEMP");
+	if (tmpdir && create_accel_path(ctx, outname, len, create, absname, tmpdir, "mupdf", NULL))
+		return 1; /* OK! */
+	tmpdir = getenv("TMP");
+	if (tmpdir && create_accel_path(ctx, outname, len, create, absname, tmpdir, "mupdf", NULL))
+		return 1; /* OK! */
+#else
+	tmpdir = getenv("XDG_CACHE_HOME");
+	if (tmpdir && create_accel_path(ctx, outname, len, create, absname, tmpdir, "mupdf", NULL))
+		return 1; /* OK! */
+	tmpdir = getenv("HOME");
+	if (tmpdir && create_accel_path(ctx, outname, len, create, absname, tmpdir, ".cache", "mupdf", NULL))
+		return 1; /* OK! */
+#endif
+	return 0; /* Fail */
 }
 
-static int get_accelerator_filename(fz_context *ctx, char outname[], size_t len, const char *fname)
+static int get_accelerator_filename(fz_context *ctx, char outname[], size_t len, const char *filename, int create)
 {
 	char absname[PATH_MAX];
-	if (!fz_realpath(fname, absname))
+	if (!fz_realpath(filename, absname))
 		return 0;
-	if (!convert_to_accel_path(ctx, outname, absname, len))
+	if (!convert_to_accel_path(ctx, outname, absname, len, create))
 		return 0;
 	return 1;
 }
@@ -2321,7 +2399,7 @@ static void save_accelerator(fz_context *ctx, fz_document *doc, const char *fnam
 		return;
 	if (!fz_document_supports_accelerator(ctx, doc))
 		return;
-	if (!get_accelerator_filename(ctx, absname, sizeof(absname), fname))
+	if (!get_accelerator_filename(ctx, absname, sizeof(absname), fname, 1))
 		return;
 
 	fz_save_accelerator(ctx, doc, absname);
@@ -2621,6 +2699,7 @@ int main(int argc, const char** argv)
 	proof_filename = NULL;
 	proof_cs = NULL;
 	icc_filename = NULL;
+	use_gamma = 0;
 	gamma_value = 1;
 	invert = 0;
 	band_height = 0;
@@ -2700,13 +2779,13 @@ int main(int argc, const char** argv)
 		ctx = fz_get_global_context();
 	}
 
-	// registeer a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
+	// register a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
 	fz_set_default_jpeg_sys_mem_mgr();
 
 	atexit(mu_drop_context);
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:d:U:XLvVPl:y:Yz:Z:NO:am:x:hj:J:K")) != -1)
+	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:gG:Is:A:DiW:H:S:T:t:d:U:XLvVPl:y:Yz:Z:NO:am:x:hj:J:K")) != -1)
 	{
 		switch (c)
 		{
@@ -2730,6 +2809,13 @@ int main(int argc, const char** argv)
 		case 'c': out_cs = parse_colorspace(fz_optarg); break;
 		case 'e': proof_filename = fz_optarg; break;
 		case 'G': gamma_value = fz_atof(fz_optarg); break;
+		case 'g':
+#if FZ_ENABLE_GAMMA
+			use_gamma = 1;
+#else
+			fz_warn(ctx, "Gamma blending not supported in this build");
+#endif
+			break;
 		case 'I': invert++; break;
 		case 'j': parse_render_options(ctx, &master_cookie, fz_optarg); break;
 		case 'J': fz_default_png_compression_level(fz_atoi(fz_optarg)); break;
@@ -2902,6 +2988,9 @@ int main(int argc, const char** argv)
 	}
 
 	fz_attach_cookie_to_context(ctx, &master_cookie);
+
+	if (use_gamma)
+		fz_set_gamma_blending(ctx, 1);
 
 	fz_try(ctx)
 	{
@@ -3345,7 +3434,7 @@ int main(int argc, const char** argv)
 					if (!useaccel)
 						accel = NULL;
 					/* If there was an accelerator to load, what would it be called? */
-					else if (get_accelerator_filename(ctx, accelpath, sizeof(accelpath), filename))
+					else if (get_accelerator_filename(ctx, accelpath, sizeof(accelpath), filename, 0))
 					{
 						/* Check whether that file exists, and isn't older than
 						 * the document. */
@@ -3470,7 +3559,8 @@ int main(int argc, const char** argv)
 		{
 			bgprint_flush();
 			fz_drop_document(ctx, doc);
-			fz_error(ctx, "cannot draw '%s': %s", filename, fz_caught_message(ctx));
+			fz_log_error(ctx, fz_caught_message(ctx));
+			fz_log_error_printf(ctx, "cannot draw '%s'", filename);
 			errored = 1;
 		}
 
@@ -3579,9 +3669,9 @@ int main(int argc, const char** argv)
 	}
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "%s", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
 		if (!errored) {
-			fz_error(ctx, "Rendering failed");
+			fz_error(ctx, "Rendering failed.");
 			errored = 1;
 		}
 	}

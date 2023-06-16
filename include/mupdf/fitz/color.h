@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #ifndef MUPDF_FITZ_COLOR_H
 #define MUPDF_FITZ_COLOR_H
@@ -259,6 +259,18 @@ int fz_colorspace_is_lab_icc(fz_context *ctx, fz_colorspace *cs);
 int fz_is_valid_blend_colorspace(fz_context *ctx, fz_colorspace *cs);
 
 /**
+	Get the 'base' colorspace for a colorspace.
+
+	For indexed colorspaces, this is the colorspace the index
+	decodes into. For all other colorspaces, it is the colorspace
+	itself.
+
+	The returned colorspace is 'borrowed' (i.e. no additional
+	references are taken or dropped).
+*/
+fz_colorspace *fz_base_colorspace(fz_context *ctx, fz_colorspace *cs);
+
+/**
 	Retrieve global default colorspaces.
 
 	These return borrowed references that should not be dropped,
@@ -269,6 +281,18 @@ fz_colorspace *fz_device_rgb(fz_context *ctx);
 fz_colorspace *fz_device_bgr(fz_context *ctx);
 fz_colorspace *fz_device_cmyk(fz_context *ctx);
 fz_colorspace *fz_device_lab(fz_context *ctx);
+
+/**
+	Tell MuPDF whether to adjust for gamma in certain color blending operations,
+	so that the blending math is computed in a linear color space.
+*/
+void fz_set_gamma_blending(fz_context *ctx, int gamma_blending);
+
+/**
+	Check whether MuPDF has been told to take note of gamma
+	during blending operations.
+*/
+int fz_get_gamma_blending(fz_context *ctx);
 
 /**
 	Assign a name for a given colorant in a colorspace.
@@ -384,6 +408,18 @@ void fz_set_default_output_intent(fz_context *ctx, fz_default_colorspaces *defau
 
 /* Implementation details: subject to change. */
 
+#if FZ_ENABLE_GAMMA
+
+typedef struct
+{
+	uint16_t to_linear[256];
+	uint8_t from_linear[4096];
+} fz_gamma_table;
+
+const fz_gamma_table *fz_colorspace_gamma_tables(fz_colorspace *colorspace);
+
+#endif
+
 struct fz_colorspace
 {
 	fz_key_storable key_storable;
@@ -391,6 +427,9 @@ struct fz_colorspace
 	int flags;
 	int n;
 	char *name;
+#if FZ_ENABLE_GAMMA
+	fz_gamma_table *gamma;
+#endif
 	union {
 #if FZ_ENABLE_ICC
 		struct {

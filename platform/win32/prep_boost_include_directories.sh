@@ -9,7 +9,7 @@ cd ../../scripts
 
 echo "Ditching the old collective: some files might have been removed or renamed (moved!) in the meantime!"
 
-# rm -rf boost/include
+rm -rf boost/include
 
 echo "And now go and set it all up..."
 

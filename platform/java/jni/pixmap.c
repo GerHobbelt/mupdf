@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 /* Pixmap interface */
 
@@ -455,4 +455,28 @@ FUN(Pixmap_convertToColorSpace)(JNIEnv *env, jobject self, jobject jcs, jobject 
 		jni_rethrow(env, ctx);
 
 	return to_Pixmap_safe_own(ctx, env, dst);
+}
+
+JNIEXPORT jbyteArray JNICALL
+FUN(Pixmap_getMD5)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	fz_pixmap *pixmap = from_Pixmap(env, self);
+	jbyte digest[16];
+	jbyteArray jdigest;
+
+	if (!ctx || !pixmap) return NULL;
+
+	fz_try(ctx)
+		fz_md5_pixmap(ctx, pixmap, (unsigned char *) digest);
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	jdigest = (*env)->NewByteArray(env, 16);
+	if (!jdigest || (*env)->ExceptionCheck(env)) return NULL;
+
+	(*env)->SetByteArrayRegion(env, jdigest, 0, 16, &digest[0]);
+	if ((*env)->ExceptionCheck(env)) return NULL;
+
+	return jdigest;
 }

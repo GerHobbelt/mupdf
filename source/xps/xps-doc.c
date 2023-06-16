@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #include "mupdf/fitz.h"
 #include "xps-imp.h"
@@ -529,6 +529,31 @@ static const char *xps_mimetypes[] =
 	NULL
 };
 
+static int
+xps_recognize_doc_content(fz_context *ctx, fz_stream *stream)
+{
+	fz_archive *arch = NULL;
+	int ret = 0;
+
+	fz_var(arch);
+	fz_var(ret);
+
+	fz_try(ctx)
+	{
+		arch = fz_try_open_archive_with_stream(ctx, stream);
+
+		if (fz_has_archive_entry(ctx, arch, "/_rels/.rels") ||
+			fz_has_archive_entry(ctx, arch, "\\_rels\\.rels"))
+			ret = 100;
+	}
+	fz_always(ctx)
+		fz_drop_archive(ctx, arch);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+
+	return ret;
+}
+
 fz_document_handler xps_document_handler =
 {
 	xps_recognize,
@@ -537,7 +562,8 @@ fz_document_handler xps_document_handler =
 	xps_extensions,
 	xps_mimetypes,
 	NULL,
-	NULL
+	NULL,
+	xps_recognize_doc_content
 };
 
 #endif

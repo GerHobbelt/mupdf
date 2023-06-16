@@ -31,6 +31,7 @@ function checkDirAndReportPlusExitOnSuccess(p) {
 	}
 }
 
+let testpath;
 
 if (projname.startsWith("libboost-")) {
 	let tst_projname = projname.replace(/^libboost-/, '');
@@ -98,6 +99,7 @@ const projectMap = {
 	"libXMP-Toolkit": "XMP-Toolkit-SDK",
 	"qrencode-test": "libqrencode",
 	"libicu": "unicode-icu",
+	"libicu_tools": "unicode-icu",
 	"libicu_tests": "unicode-icu",
 	"liblcms2_tests": "lcms2",
 	"libleptonica_tools": "leptonica",
@@ -252,11 +254,13 @@ const projectMap = {
 	"libdlfcn-win32-testdll2": "dlfcn-win32",
 	"libdlfcn-win32-testdll3": "dlfcn-win32",
 	"libdlfcn-win32-test-dladdr": "dlfcn-win32",
+
+	//"libpthread-win32-jumbo": "pthread-win32",
+	//"libpthread-win32-EH": "pthread-win32",
+	//"libpthread-win32-JMP": "pthread-win32",
 	
 	"sqlite_tools": "sqlite-amalgamation",
 };
-
-let testpath;
 
 for (const key in projectMap) {
 	let value = projectMap[key];

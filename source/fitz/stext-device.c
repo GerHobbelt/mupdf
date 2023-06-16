@@ -17,8 +17,8 @@
 //
 // Alternative licensing terms are available from the licensor.
 // For commercial licensing, see <https://www.artifex.com/> or contact
-// Artifex Software, Inc., 1305 Grant Avenue - Suite 200, Novato,
-// CA 94945, U.S.A., +1(415)492-9861, for further information.
+// Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
+// CA 94129, USA, for further information.
 
 #if defined(_MSC_VER)
 #pragma execution_character_set("utf-8")
@@ -93,6 +93,7 @@ void fz_add_layout_char(fz_context *ctx, fz_layout_block *block, float x, float 
 #define PARAGRAPH_DIST 1.5f
 #define SPACE_DIST 0.15f
 #define SPACE_MAX_DIST 0.8f
+#define BASE_MAX_DIST 0.8f
 
 typedef struct
 {
@@ -300,7 +301,9 @@ remove_last_char(fz_context *ctx, fz_stext_line *line)
 		}
 		if (prev)
 		{
-			/* the characters are pool allocated, so we don't actually leak the removed node */
+			/* The characters are pool allocated, so we don't actually leak the removed node. */
+			/* We do need to drop the char's font reference though. */
+			fz_drop_font(ctx, prev->font);
 			line->last_char = prev;
 			line->last_char->next = NULL;
 		}
@@ -353,15 +356,15 @@ vec_dot(const fz_point *a, const fz_point *b)
 }
 
 static void
-prepend_line_if_possible(fz_context *ctx, fz_stext_block *cur_block, fz_point q)
+prepend_line_if_possible(fz_context *ctx, fz_stext_device* dev, fz_stext_page *page, fz_stext_block *cur_block, fz_matrix trm, fz_font *font, float size, int c, fz_point *pen, int color)
 {
 	fz_stext_line *cur_line;
 	fz_stext_line *line;
 	fz_point ndir;
-	float size;
+	float cur_size;
 	fz_point p;
 	fz_point delta;
-	float spacing;
+	float spacing, perp;
 
 	if (cur_block == NULL || cur_block->type != FZ_STEXT_BLOCK_TEXT)
 		return;
@@ -378,15 +381,31 @@ prepend_line_if_possible(fz_context *ctx, fz_stext_block *cur_block, fz_point q)
 		return;
 
 	ndir = cur_line->dir;
-	size = cur_line->last_char->size;
+	cur_size = cur_line->last_char->size;
 	p = line->first_char->origin;
-	delta.x = p.x - q.x;
-	delta.y = p.y - q.y;
+	delta.x = p.x - pen->x;
+	delta.y = p.y - pen->y;
 
 	spacing = ndir.x * delta.x + ndir.y * delta.y;
+	perp = ndir.x * delta.y - ndir.y * delta.x;
 
-	if (fabsf(spacing) >= size * SPACE_MAX_DIST)
+	/* If cur_line overlaps line by more than a small amount, can't prepend it. */
+	if (spacing < -size * SPACE_DIST)
 		return;
+	/* If cur_line is a long way behind line, can't prepend it. */
+	if (spacing >= size * SPACE_MAX_DIST)
+		return;
+	/* If cur_line is not pretty much in line with line, can't prepend it. */
+	if (fabsf(perp) >= size * BASE_MAX_DIST)
+		return;
+
+	/* So we can prepend. Do we need to add a space? Match the sizing logic
+	 * that would happend with normal character addition. */
+	if (spacing >= cur_size * SPACE_DIST && cur_line->last_char->c != ' ' && cur_line->wmode == 0 && !(dev->opts.flags & FZ_STEXT_INHIBIT_SPACES))
+	{
+		/* We need to add a space onto the end of the prepended line. */
+		add_char_to_line(ctx, dev, page, cur_line, trm, font, size, ' ', -1, pen, &p, color);
+	}
 
 	/* cur_line plausibly finishes at the start of line. */
 	/* Move all the chars from cur_line onto the start of line */
@@ -510,7 +529,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		base_offset = -ndir.y * delta.x + ndir.x * delta.y;
 
 		/* Only a small amount off the baseline - we'll take this */
-		if (fabsf(base_offset) < size * 0.8f)
+		if (fabsf(base_offset) < size * BASE_MAX_DIST)
 		{
 			/* LTR or neutral character */
 			if (dev->curdir >= 0)
@@ -588,7 +607,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 		/* We are about to start a new line. This means we've finished with this
 		 * one. Can this be prepended to a previous line in this block? */
 		/* dev->pen records the previous stopping point - so where cur_line ends. */
-		prepend_line_if_possible(ctx, cur_block, dev->pen);
+		prepend_line_if_possible(ctx, dev, page, cur_block, trm, font, size, ' ', &dev->pen, dev->color);
 	}
 
 	/* Start a new line */
@@ -767,8 +786,11 @@ flush_text(fz_context *ctx, fz_stext_device *dev)
 {
 	fz_stext_page *page = dev->page;
 
+	float size = fz_matrix_expansion(dev->trm);
+
 	/* Find current position to enter new text. */
-	prepend_line_if_possible(ctx, page->last_block, dev->pen);
+	if (dev->lasttext && dev->lasttext->tail)
+		prepend_line_if_possible(ctx, dev, page, page->last_block, dev->trm, dev->lasttext->tail->font, size, ' ', &dev->pen, dev->color);
 }
 
 static void

@@ -4,5 +4,8 @@
 
 ignore:
 	/src/
+	/prog/fuzzing/
+	
 	sw.cpp
+	/prog/xtractprotos.c
 	
