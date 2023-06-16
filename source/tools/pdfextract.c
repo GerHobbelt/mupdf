@@ -340,6 +340,8 @@ int pdfextract_main(int argc, const char** argv)
 
 	infile = argv[fz_optind++];
 
+	fz_var(doc);
+
 	fz_try(ctx)
 	{
         fz_format_output_path(ctx, file_tpl_buf, sizeof file_tpl_buf, output_template_path, 0);
@@ -372,12 +374,14 @@ int pdfextract_main(int argc, const char** argv)
 				fz_optind++;
 			}
 		}
-
+	}
+	fz_always(ctx)
+	{
 		pdf_drop_document(ctx, doc);
 	}
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "%s", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
 		errored = 1;
 	}
 	fz_flush_warnings(ctx);

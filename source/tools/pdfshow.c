@@ -725,7 +725,7 @@ int pdfshow_main(int argc, const char** argv)
 				int code = fz_caught(ctx);
 				if (code == FZ_ERROR_ABORT || code == FZ_ERROR_TRYLATER)
 				{
-					fz_error(ctx, "%s", fz_caught_message(ctx));
+					fz_log_error(ctx, fz_caught_message(ctx));
 				}
 				fz_write_printf(ctx, out, "\n\n**ERROR**: %s: %s\n", name, fz_caught_message(ctx));
 				errored = EXIT_FAILURE;
@@ -736,20 +736,23 @@ int pdfshow_main(int argc, const char** argv)
 		if (print_header)
 			fz_write_printf(ctx, out, "===============================================================================\n");
 	}
+	fz_always(ctx)
+	{
+		fz_close_output(ctx, out);
+		fz_drop_output(ctx, out);
+		pdf_drop_document(ctx, doc);
+	}
 	fz_catch(ctx)
 	{
 		// only log any type of exception which hasn't logged itself yet: prevent duplicate error log entries
 		int code = fz_caught(ctx);
 		if (code == FZ_ERROR_ABORT || code == FZ_ERROR_TRYLATER)
 		{
-			fz_error(ctx, "%s", fz_caught_message(ctx));
+			fz_log_error(ctx, fz_caught_message(ctx));
 		}
 		errored = EXIT_FAILURE;
 	}
 
-	fz_close_output(ctx, out);
-	fz_drop_output(ctx, out);
-	pdf_drop_document(ctx, doc);
 	fz_flush_warnings(ctx);
 	fz_drop_context(ctx);
 	return errored;

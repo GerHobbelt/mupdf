@@ -2,6 +2,9 @@
 // Create a non-zero *positive* 64-bit document id suitable for Manticore and other uses.
 // The source is assumed to be a Qiqqa v2 fingerprint hash for a given input file (PDF)
 //
+// See also:
+// - http://jakegoulding.com/blog/2011/02/06/sqlite-64-bit-integers/
+// - https://manual.manticoresearch.com/Installation/Migration_from_Sphinx#Document-IDs-in-Manticore-3.x
 
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
@@ -42,41 +45,25 @@ inline static int64_t fold_hash_to_documentid62_aligned64(const uint64_t* hash, 
 		^ hash[1]
 		^ hash[2]
 		^ hash[3];
+	uint64_t folded_topbits = folded;
 
-	// now compensate for the "positive values only" requirement by masking off the top 2 bits:
+	// As we aim for a output range equal to or within the range {1..2^63-1}, we take the easy way out
+	// and reduce to {0..2^62-1} range and then add 1 to "shift" the range to {1..2^62}, which is within
+	// those limits (non-zero, positive, 64-bit two's complement value) and thus is suitable.
+	// This is the fastest way to "fold" the hash into the given output range; we do (almost) loose an extra bit
+	// of range using this construct, but we will be using this "folded hash" for purposes where a range
+	// of 2^62 is considered *quite* sufficient.
 	folded &= ~(3ULL << 62);
 
-	// and prep an additional value to fold into the mix later: this value will carry those chopped-off bits.
-	// make it easier on the CPU and ourselves by addressing the hash as bytes: that way, our corrective
-	// right-shift operations will be small -- if the CPU has a barrel-shifter, it will do this very swiftly.
-	const uint8_t* h8 = (const uint8_t*)hash;
+	// this value will carry those chopped-off bits.
+	folded_topbits >>= 62;
 
-#if BYTE_ORDER == LITTLE_ENDIAN
-	// this assumes LITTLE ENDIAN memory layout: goes for most hardware these days
-	uint64_t v = h8[3] >> 6                   // unsigned int8 hence a *logical shift right* injecting zeroes at left
-		| (h8[4 + 3] >> (6 - 2)) & 0x000C     // have this one occupy the next 2 bits in the `v` value
-		| (h8[8 + 3] >> (6 - 4)) & 0x0030     // and so on...
-		| (h8[12 + 3] & 0x00C0);
-#elif BYTE_ORDER == BIG_ENDIAN
-	uint64_t v = h8[0] >> 6                   // unsigned int8 hence a *logical shift right* injecting zeroes at left
-		| (h8[4] >> (6 - 2)) & 0x000C         // have this one occupy the next 2 bits in the `v` value
-		| (h8[8] >> (6 - 4)) & 0x0030         // and so on...
-		| (h8[12] & 0x00C0);
-#else
-#error "Whoopsky! You need to set up the target system's Endianess for this to fly!"
-#endif
-
-	// do we distribute these bits across the folded value? No. We would come 6 bits short (or 2 surplus) anyway,
-	// and it isn't expected to make an impact, knowing that we started with a thoroughly shuffled hash already,
+	// do we distribute these bits across the folded value? No. 
+	// It isn't expected to make an impact, knowing that we started with a thoroughly shuffled hash already,
 	// so we do our best **not to nuke that one** but that's it!
-#if 0
-	uint64_t spread = v + (v << 8) + (v << 16) + (v << 24);
-	spread &= ~(3ULL << 62);
-	v = spread;
-#endif
-
+	//
 	// mix it into the folded value using another XOR:
-	folded ^= v;
+	folded ^= folded_topbits;
 
 	// we now have a guaranteed-in-the-range {0..2^62-1} non-negative 64-bit integer range.
 	// The last bit to do is take care of that "cannot be zero" requirement. That's easy as we're safe to do just this:

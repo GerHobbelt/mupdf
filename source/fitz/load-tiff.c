@@ -1024,6 +1024,8 @@ tiff_read_tag(fz_context *ctx, struct tiff *tiff, unsigned offset, unsigned last
 		/* fz_warn(ctx, "unknown tag: %d t=%d n=%d", tag, type, count); */
 		break;
 	}
+
+	return tag;
 }
 
 static void
@@ -1062,7 +1064,7 @@ tiff_read_tag_array(fz_context *ctx, struct tiff *tiff, unsigned offset)
 		break;
 
 	case Orientation:
-		tiff_read_tag_value(&tiff->orientation, tiff, type, value, 1);
+		tiff_read_tag_value(ctx, &tiff->orientation, tiff, type, value, 1);
 		break;
 
 	case StripByteCounts:
@@ -1141,8 +1143,6 @@ tiff_read_tag_array(fz_context *ctx, struct tiff *tiff, unsigned offset)
 		/* fz_warn(ctx, "unknown tag: %d t=%d n=%d", tag, type, count); */
 		break;
 	}
-
-	return tag;
 }
 
 static void

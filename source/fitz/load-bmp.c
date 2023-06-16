@@ -941,15 +941,18 @@ static const unsigned char *
 bmp_read_palette(fz_context *ctx, struct info *info, const unsigned char *begin, const unsigned char *end, const unsigned char *p)
 {
 	int i, expected, present, entry_size;
-	const unsigned char *bitmap;
 
 	entry_size = palette_entry_size(info);
-	bitmap = begin + info->bitmapoffset;
 
-	expected = fz_mini(info->colors, 1 << info->bitcount);
-	if (expected == 0)
-		expected = 1 << info->bitcount;
-	present = fz_mini(expected, (bitmap - p) / entry_size);
+	if (info->colors == 0)
+		expected = info->colors = 1 << info->bitcount;
+	else
+		expected = fz_mini(info->colors, 1 << info->bitcount);
+
+	if (info->bitmapoffset == 0)
+		present = fz_mini(expected, (end - p) / entry_size);
+	else
+		present = fz_mini(expected, (begin + info->bitmapoffset - p) / entry_size);
 
 	for (i = 0; i < present; i++)
 	{
@@ -1108,15 +1111,17 @@ bmp_read_image(fz_context *ctx, struct info *info, const unsigned char *begin, c
 
 	p = bmp_read_info_header(ctx, info, begin, end, p);
 
+	/* clamp bitmap offset to buffer size */
+	if (info->bitmapoffset < (uint32_t)(p - begin))
+		info->bitmapoffset = 0;
+	if ((uint32_t)(end - begin) < info->bitmapoffset)
+		info->bitmapoffset = end - begin;
+
 	if (has_palette(info))
 		p = bmp_read_palette(ctx, info, begin, end, p);
 
 	if (has_color_masks(info))
 		p = bmp_read_color_masks(ctx, info, begin, end, p);
-
-	/* clamp bitmap offset to buffer size */
-	if ((uint32_t)(end - begin) < info->bitmapoffset)
-		info->bitmapoffset = end - begin;
 
 	info->xres = DPM_TO_DPI(info->xres);
 	info->yres = DPM_TO_DPI(info->yres);
@@ -1386,8 +1391,8 @@ fz_load_bmp_subimage_count(fz_context *ctx, const unsigned char *buf, size_t len
 			fz_warn(ctx, "treating invalid next subimage offset as end of file");
 			nextoffset = 0;
 		}
-
-		count++;
+		else
+			count++;
 
 	} while (nextoffset > 0);
 

@@ -1,7 +1,6 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
-
 .. include:: header.rst
 
 .. meta::
@@ -1190,80 +1189,6 @@ Wrappers for a MuPDF function `fz_foo()` are available in multiple forms:
 
 Constructors using MuPDF functions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Wrapper class constructors are created for each MuPDF function that returns an
-instance of a MuPDF struct.
-
-Sometimes two such functions do not have different arg types so C++
-overloading cannot distinguish between them as constructors (because C++
-constructors do not have names).
-
-We cope with this in two ways:
-
-* Create a static method that returns a new instance of the wrapper class
-  by value.
-
-  * This is not possible if the underlying MuPDF struct is not copyable - i.e.
-    not reference counted and not POD.
-
-* Define an enum within the wrapper class, and provide a constructor that takes
-  an instance of this enum to specify which MuPDF function to use.
-
-
-Default constructors
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-All wrapper classes have a default constructor.
-
-* For POD classes each member is set to a default value with `this->foo =
-  {};`. Arrays are initialised by setting all bytes to zero using
-  `memset()`.
-* For non-POD classes, class member `m_internal` is set to `nullptr`.
-* Some classes' default constructors are customized, for example:
-
-  * The default constructor for `fz_color_params` wrapper
-    `mupdf::FzColorParams` sets state to a copy of
-    `fz_default_color_params`.
-  * The default constructor for `fz_md5` wrapper `mupdf::FzMd5` sets
-    state using `fz_md5_init()`.
-  * These are described in class definition comments in
-    `platform/c++/include/mupdf/classes.h`.
-
-
-Raw constructors
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Many wrapper classes have constructors that take a pointer to the underlying
-MuPDF C struct. These are usually for internal use only. They do not call
-`fz_keep_*()` - it is expected that any supplied MuPDF struct is already
-owned.
-
-
-POD wrapper classes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Class wrappers for MuPDF structs default to having a `m_internal` member which
-points to an instance of the wrapped struct. This works well for MuPDF structs
-which support reference counting, because we can automatically create copy
-constructors, `operator=` functions and destructors that call the associated
-`fz_keep_*()` and `fz_drop_*()` functions.
-
-However where a MuPDF struct does not support reference counting and contains
-simple data, it is not safe to copy a pointer to the struct, so the class
-wrapper will be a POD class. This is done in one of two ways:
-
-* `m_internal` is an instance of the MuPDF struct, not a pointer.
-
-  * Sometimes we provide members that give direct access to fields in
-    `m_internal`.
-
-* An 'inline' POD - there is no `m_internal` member; instead the wrapper class
-  contains the same members as the MuPDF struct. This can be a little more
-  convenient to use.
-
-
-Constructors using MuPDF functions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Wrapper class constructors are created for each MuPDF function that returns an
 instance of a MuPDF struct.

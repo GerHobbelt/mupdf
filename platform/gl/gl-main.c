@@ -210,6 +210,7 @@ static int oldtint = 0, currenttint = 0;
 static int oldinvert = 0, currentinvert = 0;
 static int oldicc = 1, currenticc = 1;
 static int oldaa = 8, currentaa = 8;
+static int oldgamma = 0, currentgamma = 0;
 static int oldseparations = 1, currentseparations = 1;
 static fz_location oldpage = {0,0}, currentpage = {0,0};
 static float oldzoom = DEFRES, currentzoom = DEFRES;
@@ -530,7 +531,7 @@ static int create_accel_path(char outname[], size_t len, int create, const char 
 			goto fail; /* won't fit */
 
 		if (create)
-			fz_mkdir(outname);
+			(void) fz_mkdir(outname);
 		if (!fz_is_directory(ctx, outname))
 			goto fail; /* directory creation failed, or that dir doesn't exist! */
 #ifdef _WIN32
@@ -724,6 +725,8 @@ static void info_dialog(void)
 	ui_dialog_end();
 }
 
+static void cleanup_destruction(void);
+
 static char error_message[256];
 static void error_dialog(void)
 {
@@ -732,7 +735,10 @@ static void error_dialog(void)
 	ui_label("%C %s", 0x1f4a3, error_message); /* BOMB */
 	ui_layout(B, NONE, S, ui.padsize, ui.padsize);
 	if (ui_button("Quit") || ui.key == KEY_ENTER || ui.key == KEY_ESCAPE || ui.key == 'q')
+	{
+		cleanup_destruction();
 		glutLeaveMainLoop();
+	}
 	ui_dialog_end();
 }
 void ui_show_error_dialog(const char *fmt, ...)
@@ -796,7 +802,10 @@ static void quit_dialog(void)
 			do_save_pdf_file();
 		ui_spacer();
 		if (ui_button("Discard") || ui.key == 'q')
+		{
+			cleanup_destruction();
 			glutLeaveMainLoop();
+		}
 		ui_layout(L, NONE, S, 0, 0);
 		if (ui_button("Cancel") || ui.key == KEY_ESCAPE)
 			ui.dialog = NULL;
@@ -1063,6 +1072,7 @@ void render_page(void)
 	transform_page();
 
 	fz_set_aa_level(ctx, currentaa);
+	fz_set_gamma_blending(ctx, currentgamma);
 
 	if (page_contents_changed)
 	{
@@ -1103,7 +1113,6 @@ void render_page(void)
 	if (currentinvert)
 	{
 		fz_invert_pixmap_luminance(ctx, pix);
-		fz_gamma_pixmap(ctx, pix, 1 / 1.4f);
 	}
 	if (currenttint)
 	{
@@ -1136,7 +1145,8 @@ void render_page_if_changed(void)
 		oldtint != currenttint ||
 		oldicc != currenticc ||
 		oldseparations != currentseparations ||
-		oldaa != currentaa)
+		oldaa != currentaa ||
+		oldgamma != currentgamma)
 	{
 		page_contents_changed = 1;
 	}
@@ -1152,6 +1162,7 @@ void render_page_if_changed(void)
 		oldicc = currenticc;
 		oldseparations = currentseparations;
 		oldaa = currentaa;
+		oldgamma = currentgamma;
 		page_contents_changed = 0;
 		page_annots_changed = 0;
 	}
@@ -2417,6 +2428,10 @@ static void do_app(void)
 				currentpage = fz_next_page(ctx, doc, currentpage);
 			break;
 
+		case 'B':
+			currentgamma = !currentgamma;
+			break;
+
 		case 'A':
 			if (number == 0)
 				currentaa = (currentaa == 8 ? 0 : 8);
@@ -3095,6 +3110,12 @@ static void cleanup(void)
 
 	ui_finish();
 
+	cleanup_destruction();
+}
+
+static void
+cleanup_destruction(void)
+{
 	fz_drop_pixmap(ctx, page_contents);
 	page_contents = NULL;
 #ifndef NDEBUG
@@ -3106,8 +3127,14 @@ static void cleanup(void)
 
 	fz_flush_warnings(ctx);
 
-	fz_drop_output(ctx, trace_file);
 	fz_drop_stext_page(ctx, page_text);
+	page_text = NULL;
+	if (search_needle)
+	{
+		fz_free(ctx, search_needle);
+		search_needle = NULL;
+	}
+	fz_drop_output(ctx, trace_file);
 	fz_drop_separations(ctx, seps);
 	fz_drop_link(ctx, links);
 	fz_drop_page(ctx, fzpage);
@@ -3154,7 +3181,7 @@ int main(int argc, const char** argv)
 	glutInit(&argc, argv);
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "p:r:IW:H:S:U:XJA:B:C:T:Y:R:c:")) != -1)
+	while ((c = fz_getopt(argc, argv, "gp:r:IW:H:S:U:XJA:B:C:T:Y:R:c:")) != -1)
 	{
 		switch (c)
 		{
@@ -3169,6 +3196,7 @@ int main(int argc, const char** argv)
 		case 'U': layout_css = fz_optarg; break;
 		case 'X': layout_use_doc_css = 0; break;
 		case 'J': enable_js = !enable_js; break;
+		case 'g': currentgamma = !currentgamma; break;
 		case 'A': currentaa = fz_atoi(fz_optarg); break;
 		case 'C': currenttint = 1; tint_white = strtol(fz_optarg, NULL, 16); break;
 		case 'B': currenttint = 1; tint_black = strtol(fz_optarg, NULL, 16); break;

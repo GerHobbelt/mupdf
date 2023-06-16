@@ -210,7 +210,8 @@ int muconvert_main(int argc, const char** argv)
 		fz_register_document_handlers(ctx);
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "cannot register document handlers: %s", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_log_error(ctx, "cannot register document handlers.");
 		fz_drop_context(ctx);
 		return EXIT_FAILURE;
 	}
@@ -244,43 +245,49 @@ int muconvert_main(int argc, const char** argv)
     }
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "cannot create document: %s", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_log_error_printf(ctx, "cannot create document: %s", output);
 		fz_drop_context(ctx);
 		return EXIT_FAILURE;
 	}
 
 	assert(retval == EXIT_SUCCESS);
-	fz_try(ctx)
 	{
-		for (i = fz_optind; i < argc; ++i)
+		const char *infname = NULL;
+
+		fz_try(ctx)
 		{
-			doc = fz_open_document(ctx, argv[i]);
-			if (fz_needs_password(ctx, doc))
-				if (!fz_authenticate_password(ctx, doc, password))
-					fz_throw(ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", argv[i]);
-			fz_layout_document(ctx, doc, layout_w, layout_h, layout_em);
-			count = fz_count_pages(ctx, doc);
+			for (i = fz_optind; i < argc; ++i)
+			{
+				infname = argv[i];
+				doc = fz_open_document(ctx, infname);
+				if (fz_needs_password(ctx, doc))
+					if (!fz_authenticate_password(ctx, doc, password))
+						fz_throw(ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", infname);
+				fz_layout_document(ctx, doc, layout_w, layout_h, layout_em);
+				count = fz_count_pages(ctx, doc);
 
-			if (i + 1 < argc && fz_is_page_range(ctx, argv[i + 1]))
-				runrange(argv[++i]);
-			else
-				runrange("1-N");
+				if (i + 1 < argc && fz_is_page_range(ctx, argv[i + 1]))
+					runrange(argv[++i]);
+				else
+					runrange("1-N");
 
+				fz_drop_document(ctx, doc);
+				doc = NULL;
+	    	}
+	        fz_close_document_writer(ctx, out);
+		}
+		fz_always(ctx)
+		{
 			fz_drop_document(ctx, doc);
-			doc = NULL;
-    	}
-        fz_close_document_writer(ctx, out);
-
-	}
-	fz_always(ctx)
-	{
-		fz_drop_document(ctx, doc);
-		fz_drop_document_writer(ctx, out);
-	}
-	fz_catch(ctx)
-	{
-		fz_error(ctx, "cannot load document: %s", fz_caught_message(ctx));
-		retval = EXIT_FAILURE;
+			fz_drop_document_writer(ctx, out);
+		}
+		fz_catch(ctx)
+		{
+			fz_log_error(ctx, fz_caught_message(ctx));
+			fz_log_error_printf(ctx, "cannot load document: %s", infname);
+			retval = EXIT_FAILURE;
+		}
 	}
 
 	fz_drop_context(ctx);

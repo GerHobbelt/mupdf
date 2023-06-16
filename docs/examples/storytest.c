@@ -441,7 +441,8 @@ int main(int argc, const char **argv)
 	}
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "Failed with %s", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_log_error(ctx, "Failed to render story.");
 	}
 
 	/* First one made with precooked content. */
@@ -486,7 +487,8 @@ int main(int argc, const char **argv)
 	}
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "Failed with %s", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_log_error(ctx, "Failed to render story to PDF.");
 	}
 
 	/* Now one made with programmatic content. */
@@ -543,7 +545,8 @@ int main(int argc, const char **argv)
 	}
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "Failed with %s", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_log_error(ctx, "Failed to render story.");
 	}
 
 	/* Now a combination of the two. */
@@ -627,7 +630,8 @@ int main(int argc, const char **argv)
 	}
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "Failed with %s", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_log_error(ctx, "Failed to render story to PDF.");
 	}
 
 	test_write_stabilized_story(ctx);

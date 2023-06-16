@@ -352,6 +352,14 @@ JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_Context_emptyStore
 
 /*
  * Class:     com_artifex_mupdf_fitz_Context
+ * Method:    shrinkStore
+ * Signature: (I)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_Context_shrinkStore
+  (JNIEnv *, jclass, jint);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_Context
  * Method:    enableICC
  * Signature: ()V
  */
@@ -4637,10 +4645,10 @@ JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_PDFObject_getArray
 /*
  * Class:     com_artifex_mupdf_fitz_PDFObject
  * Method:    getDictionary
- * Signature: (Ljava/lang/String;)Lcom/artifex/mupdf/fitz/PDFObject;
+ * Signature: (Ljava/lang/String;Z)Lcom/artifex/mupdf/fitz/PDFObject;
  */
 JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_PDFObject_getDictionary
-  (JNIEnv *, jobject, jstring);
+  (JNIEnv *, jobject, jstring, jboolean);
 
 /*
  * Class:     com_artifex_mupdf_fitz_PDFObject
@@ -4885,6 +4893,14 @@ extern "C" {
 #define com_artifex_mupdf_fitz_PDFPage_REDACT_IMAGE_REMOVE 1L
 #undef com_artifex_mupdf_fitz_PDFPage_REDACT_IMAGE_PIXELS
 #define com_artifex_mupdf_fitz_PDFPage_REDACT_IMAGE_PIXELS 2L
+/*
+ * Class:     com_artifex_mupdf_fitz_PDFPage
+ * Method:    getObject
+ * Signature: ()Lcom/artifex/mupdf/fitz/PDFObject;
+ */
+JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_PDFPage_getObject
+  (JNIEnv *, jobject);
+
 /*
  * Class:     com_artifex_mupdf_fitz_PDFPage
  * Method:    getAnnotations
@@ -6073,10 +6089,10 @@ JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_StrokeState_finalize
 
 /*
  * Class:     com_artifex_mupdf_fitz_StrokeState
- * Method:    newNative
+ * Method:    newNativeStrokeState
  * Signature: (IIIIFFF[F)J
  */
-JNIEXPORT jlong JNICALL Java_com_artifex_mupdf_fitz_StrokeState_newNative
+JNIEXPORT jlong JNICALL Java_com_artifex_mupdf_fitz_StrokeState_newNativeStrokeState
   (JNIEnv *, jobject, jint, jint, jint, jint, jfloat, jfloat, jfloat, jfloatArray);
 
 /*

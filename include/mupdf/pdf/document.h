@@ -705,8 +705,8 @@ void pdf_delete_page_range(fz_context *ctx, pdf_document *doc, int start, int en
 /*
 	Get page label (string) from a page number (index).
 */
-void pdf_page_label(fz_context *ctx, pdf_document *doc, int page, char *buf, int size);
-void pdf_page_label_imp(fz_context *ctx, fz_document *doc, int chapter, int page, char *buf, int size);
+void pdf_page_label(fz_context *ctx, pdf_document *doc, int page, char *buf, size_t size);
+void pdf_page_label_imp(fz_context *ctx, fz_document *doc, int chapter, int page, char *buf, size_t size);
 
 typedef enum {
 	PDF_PAGE_LABEL_NONE = 0,
@@ -826,6 +826,18 @@ void pdf_load_journal(fz_context *ctx, pdf_document *doc, const char *filename);
     does not match. Will throw on a corrupted journal.
 */
 void pdf_read_journal(fz_context *ctx, pdf_document *doc, fz_stream *stm);
+
+/*
+	Minimize the memory used by a document.
+
+	We walk the in memory xref tables, evicting the PDF objects
+	therein that aren't in use.
+
+	This reduces the current memory use, but any subsequent use
+	of these objects will load them back into memory again.
+*/
+void pdf_minimize_document(fz_context *ctx, pdf_document *doc);
+
 
 #ifdef __cplusplus
 }

@@ -814,6 +814,9 @@ pdf_new_array(fz_context *ctx, pdf_document *doc, int initialcap)
 	pdf_obj_array *obj;
 	int i;
 
+	if (doc == NULL)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot create array without a document");
+
 	obj = Memento_label(fz_malloc(ctx, sizeof(pdf_obj_array)), "pdf_obj(array)");
 	obj->super.refs = 1;
 	obj->super.kind = PDF_ARRAY;
@@ -1733,8 +1736,10 @@ static void prepare_object_for_alteration(fz_context *ctx, pdf_obj *obj, pdf_obj
 		return;
 	}
 
+	assert(doc != NULL);
+
 	/* Do we need to drop the page & reverse page maps? */
-	if (doc && (doc->rev_page_map || doc->fwd_page_map))
+	if (doc->rev_page_map || doc->fwd_page_map)
 	{
 		if (doc->non_structural_change)
 		{
@@ -2057,6 +2062,9 @@ pdf_new_dict(fz_context *ctx, pdf_document *doc, int initialcap)
 {
 	pdf_obj_dict *obj;
 	int i;
+
+	if (doc == NULL)
+		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot create dictionary without a document");
 
 	obj = Memento_label(fz_malloc(ctx, sizeof(pdf_obj_dict)), "pdf_obj(dict)");
 	obj->super.refs = 1;
@@ -3071,6 +3079,42 @@ pdf_drop_obj(fz_context *ctx, pdf_obj *obj)
 				fz_free(ctx, obj);
 		}
 	}
+}
+
+pdf_obj *
+pdf_drop_singleton_obj(fz_context *ctx, pdf_obj *obj)
+{
+	int drop;
+
+	/* If an object is < PDF_LIMIT, then it's a 'common' name or
+	 * true or false. No point in dropping these as it
+	 * won't save any memory. */
+	if (obj < PDF_LIMIT)
+		return obj;
+
+	/* See if it's a singleton object. We can only drop if
+	 * it's a singleton object. If not, just exit leaving
+	 * everything unchanged. */
+	fz_lock(ctx, FZ_LOCK_ALLOC);
+	drop = (obj->refs == 1);
+	fz_unlock(ctx, FZ_LOCK_ALLOC);
+	if (!drop)
+		return obj;
+
+	/* So drop the object! */
+	if (obj->kind == PDF_ARRAY)
+		pdf_drop_array(ctx, obj);
+	else if (obj->kind == PDF_DICT)
+		pdf_drop_dict(ctx, obj);
+	else if (obj->kind == PDF_STRING)
+	{
+		fz_free(ctx, STRING(obj)->text);
+		fz_free(ctx, obj);
+	}
+	else
+		fz_free(ctx, obj);
+
+	return NULL;
 }
 
 /**
@@ -4842,6 +4886,31 @@ pdf_dict_getp_inheritable(fz_context *ctx, pdf_obj *node, const char *path)
 	return NULL;
 }
 
+pdf_obj *
+pdf_dict_gets_inheritable(fz_context *ctx, pdf_obj *node, const char *key)
+{
+	pdf_obj *slow = node;
+	int halfbeat = 11; /* Don't start moving slow pointer for a while. */
+
+	while (node)
+	{
+		pdf_obj *val = pdf_dict_gets(ctx, node, key);
+		if (val)
+			return val;
+		node = pdf_dict_get(ctx, node, PDF_NAME(Parent));
+		if (node == slow)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "cycle in resources");
+		if (--halfbeat == 0)
+		{
+			slow = pdf_dict_get(ctx, slow, PDF_NAME(Parent));
+			halfbeat = 2;
+		}
+	}
+
+	return NULL;
+}
+
+
 void pdf_dict_put_bool(fz_context *ctx, pdf_obj *dict, pdf_obj *key, int x)
 {
 	pdf_dict_put(ctx, dict, key, x ? PDF_TRUE : PDF_FALSE);
@@ -4874,17 +4943,17 @@ void pdf_dict_put_text_string(fz_context *ctx, pdf_obj *dict, pdf_obj *key, cons
 
 void pdf_dict_put_rect(fz_context *ctx, pdf_obj *dict, pdf_obj *key, fz_rect x)
 {
-	pdf_dict_put_drop(ctx, dict, key, pdf_new_rect(ctx, NULL, x));
+	pdf_dict_put_drop(ctx, dict, key, pdf_new_rect(ctx, pdf_get_bound_document(ctx, dict), x));
 }
 
 void pdf_dict_put_matrix(fz_context *ctx, pdf_obj *dict, pdf_obj *key, fz_matrix x)
 {
-	pdf_dict_put_drop(ctx, dict, key, pdf_new_matrix(ctx, NULL, x));
+	pdf_dict_put_drop(ctx, dict, key, pdf_new_matrix(ctx, pdf_get_bound_document(ctx, dict), x));
 }
 
 void pdf_dict_put_date(fz_context *ctx, pdf_obj *dict, pdf_obj *key, int64_t time)
 {
-	pdf_dict_put_drop(ctx, dict, key, pdf_new_date(ctx, NULL, time));
+	pdf_dict_put_drop(ctx, dict, key, pdf_new_date(ctx, pdf_get_bound_document(ctx, dict), time));
 }
 
 pdf_obj *pdf_dict_put_array(fz_context *ctx, pdf_obj *dict, pdf_obj *key, int initial)

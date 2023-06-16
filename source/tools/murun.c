@@ -1423,8 +1423,6 @@ static fz_buffer *ffi_tobuffer(js_State *J, int idx)
 	return buf;
 }
 
-#endif /* FZ_ENABLE_PDF */
-
 static void ffi_pushimage_own(js_State *J, fz_image *image)
 {
 	js_getregistry(J, "fz_image");
@@ -1435,6 +1433,9 @@ static int ffi_imagedata_has(js_State *J, void *image_data_, const char *key)
 {
 	fz_context *ctx = js_getcontext(J);
 	fz_compressed_buffer *image_data = image_data_;
+
+	if (image_data == NULL)
+		return 0;
 
 	if (!strcmp(key, "buffer"))
 	{
@@ -1494,7 +1495,7 @@ static int ffi_imagedata_has(js_State *J, void *image_data_, const char *key)
 			js_pushnumber(J, image_data->params.u.jbig2.embedded);
 			js_setproperty(J, -2, "embedded");
 			if (image_data->params.u.jbig2.globals)
-				ffi_pushbuffer(J, fz_keep_buffer(ctx, image_data->params.u.jbig2.globals->encoded));
+				ffi_pushbuffer(J, fz_keep_buffer(ctx, image_data->params.u.jbig2.globals));
 			else
 				js_pushnull(J);
 			js_setproperty(J, -2, "globals");
@@ -1912,7 +1913,7 @@ js_dev_set_default_colorspaces(fz_context *ctx, fz_device *dev, fz_default_color
 		rethrow_as_fz(J);
 	if (js_hasproperty(J, -1, "setDefaultColorSpaces")) {
 		js_copy(J, -2);
-		ffi_pushdefaultcolorspaces(J, default_cs);
+		ffi_pushdefaultcolorspaces(J, fz_keep_default_colorspaces(ctx, default_cs));
 		js_call(J, 1);
 		js_pop(J, 1);
 	}
@@ -4414,14 +4415,11 @@ static void ffi_Pixmap_warp(js_State *J)
 	fz_point points[4];
 	int i;
 
-	if (w < 0 || h < 0 || !js_isarray(J, 1) || js_getlength(J, 1) != 8)
-		js_throw(J);
-
 	for (i = 0; i < 8; i++)
 	{
 		float *f = i&1 ? &points[i>>1].y : &points[i>>1].x;
 		js_getindex(J, 1, i);
-		*f = js_tonumber(J, -1);
+		*f = js_isdefined(J, -1) ? js_tonumber(J, -1) : 0;
 		js_pop(J, 1);
 	}
 
@@ -4760,7 +4758,7 @@ static void ffi_new_Image(js_State *J)
 		fz_catch(ctx)
 			rethrow(J);
 	}
-	else if (js_isuserdata(J, 1, "fz_compressed_buffer"))
+	else if (js_isuserdata(J, 1, "fz_compressed_buffer") && js_touserdata(J, 1, "fz_compressed_buffer"))
 	{
 		fz_compressed_buffer *copy, *image_data = js_touserdata(J, 1, "fz_compressed_buffer");
 		int w = js_tointeger(J, 3);
@@ -4976,7 +4974,7 @@ static void ffi_new_ImageData(js_State *J)
 		case FZ_IMAGE_UNKNOWN:
 			if (buffer->len < 8)
 				fz_throw(ctx, FZ_ERROR_GENERIC, "unknown image file format");
-			image_data->params.type = fz_recognize_image_format(ctx, buffer->data);
+			image_data->params.type = fz_recognize_image_format(ctx, buffer->data, buffer->len);
 			if (image_data->params.type == FZ_IMAGE_JPEG)
 				image_data->params.u.jpeg.color_transform = -1;
 			break;
@@ -5006,7 +5004,7 @@ static void ffi_new_ImageData(js_State *J)
 		case FZ_IMAGE_JBIG2:
 			image_data->params.u.jbig2.embedded = embedded;
 			if (globals)
-				image_data->params.u.jbig2.globals = fz_new_jbig2_globals(ctx, globals);
+				image_data->params.u.jbig2.globals = fz_keep_jbig2_globals(ctx, globals);
 			break;
 		case FZ_IMAGE_JPEG:
 			image_data->params.u.jpeg.color_transform = color_transform;
@@ -5165,7 +5163,7 @@ static void ffi_Image_getImageData(js_State *J)
 				break;
 			case FZ_IMAGE_JBIG2:
 				image_data->params.u.jbig2.embedded = original->params.u.jbig2.embedded;
-				image_data->params.u.jbig2.globals = fz_new_jbig2_globals(ctx, original->params.u.jbig2.globals->encoded);
+				image_data->params.u.jbig2.globals = fz_keep_jbig2_globals(ctx, original->params.u.jbig2.globals);
 				break;
 			case FZ_IMAGE_JPEG:
 				image_data->params.u.jpeg.color_transform = original->params.u.jpeg.color_transform;
@@ -7554,7 +7552,7 @@ static void ffi_PDFGraftMap_graftPage(js_State *J)
 		rethrow(J);
 }
 
-static pdf_obj *ffi_PDFObject_get_imp(js_State *J)
+static pdf_obj *ffi_PDFObject_get_imp(js_State *J, int inheritable)
 {
 	fz_context *ctx = js_getcontext(J);
 	pdf_obj *obj = js_touserdata(J, 0, "pdf_obj");
@@ -7565,7 +7563,16 @@ static pdf_obj *ffi_PDFObject_get_imp(js_State *J)
 		if (js_isuserdata(J, i, "pdf_obj")) {
 			pdf_obj *key = js_touserdata(J, i, "pdf_obj");
 			fz_try(ctx)
-				obj = val = pdf_dict_get(ctx, obj, key);
+				if (inheritable)
+					obj = val = pdf_dict_get_inheritable(ctx, obj, key);
+				else
+					obj = val = pdf_dict_get(ctx, obj, key);
+			fz_catch(ctx)
+				rethrow(J);
+		} else if (inheritable) {
+			const char *key = js_tostring(J, i);
+			fz_try(ctx)
+				obj = val = pdf_dict_gets_inheritable(ctx, obj, key);
 			fz_catch(ctx)
 				rethrow(J);
 		} else {
@@ -7583,7 +7590,17 @@ static pdf_obj *ffi_PDFObject_get_imp(js_State *J)
 static void ffi_PDFObject_get(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	pdf_obj *val = ffi_PDFObject_get_imp(J);
+	pdf_obj *val = ffi_PDFObject_get_imp(J, 0);
+	if (val)
+		ffi_pushobj(J, pdf_keep_obj(ctx, val));
+	else
+		js_pushnull(J);
+}
+
+static void ffi_PDFObject_getInheritable(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_obj *val = ffi_PDFObject_get_imp(J, 1);
 	if (val)
 		ffi_pushobj(J, pdf_keep_obj(ctx, val));
 	else
@@ -7593,7 +7610,7 @@ static void ffi_PDFObject_get(js_State *J)
 static void ffi_PDFObject_getNumber(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	pdf_obj *obj = ffi_PDFObject_get_imp(J);
+	pdf_obj *obj = ffi_PDFObject_get_imp(J, 0);
 	float num = 0;
 	fz_try(ctx)
 		if (pdf_is_int(ctx, obj))
@@ -7608,7 +7625,7 @@ static void ffi_PDFObject_getNumber(js_State *J)
 static void ffi_PDFObject_getName(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	pdf_obj *obj = ffi_PDFObject_get_imp(J);
+	pdf_obj *obj = ffi_PDFObject_get_imp(J, 0);
 	const char *name = NULL;
 	fz_try(ctx)
 		name = pdf_to_name(ctx, obj);
@@ -7620,10 +7637,10 @@ static void ffi_PDFObject_getName(js_State *J)
 static void ffi_PDFObject_getString(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	pdf_obj *obj = ffi_PDFObject_get_imp(J);
+	pdf_obj *obj = ffi_PDFObject_get_imp(J, 0);
 	const char *string = NULL;
 	fz_try(ctx)
-		string = pdf_to_text_string(ctx, obj);
+		string = pdf_to_text_string(ctx, obj, NULL);
 	fz_catch(ctx)
 		rethrow(J);
 	js_pushstring(J, string);
@@ -9398,15 +9415,7 @@ static void ffi_PDFAnnotation_setAppearance(js_State *J)
 	const char *state = js_iscoercible(J, 2) ? js_tostring(J, 2) : NULL;
 	fz_matrix ctm = ffi_tomatrix(J, 3);
 
-	if (js_isuserdata(J, 4, "fz_display_list"))
-	{
-		fz_display_list *list = js_touserdata(J, 4, "fz_display_list");
-		fz_try(ctx)
-			pdf_set_annot_appearance_from_display_list(ctx, annot, appearance, state, ctm, list);
-		fz_catch(ctx)
-			rethrow(J);
-	}
-	else if (js_isarray(J, 4))
+	if (js_isarray(J, 4))
 	{
 		const char *contents;
 		pdf_document *pdf;
@@ -9439,7 +9448,13 @@ static void ffi_PDFAnnotation_setAppearance(js_State *J)
 			rethrow(J);
 	}
 	else
-		js_throw(J);
+	{
+		fz_display_list *list = js_touserdata(J, 4, "fz_display_list");
+		fz_try(ctx)
+			pdf_set_annot_appearance_from_display_list(ctx, annot, appearance, state, ctm, list);
+		fz_catch(ctx)
+			rethrow(J);
+	}
 }
 
 static void ffi_PDFAnnotation_hasFilespec(js_State *J)
@@ -10691,6 +10706,9 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "Pixmap.saveAsPNM", ffi_Pixmap_saveAsPNM, 1);
 		jsB_propfun(J, "Pixmap.saveAsPBM", ffi_Pixmap_saveAsPBM, 1);
 		jsB_propfun(J, "Pixmap.saveAsPKM", ffi_Pixmap_saveAsPKM, 1);
+		// Pixmap.saveAsPCL?, PCLM?, PDFOCR?, PSD?, PWG?
+
+		// Pixmap.halftone() -> Bitmap
 		jsB_propfun(J, "Pixmap.md5", ffi_Pixmap_md5, 0);
 	}
 	js_setregistry(J, "fz_pixmap");
@@ -10966,6 +10984,7 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "PDFObject.getNumber", ffi_PDFObject_getNumber, 1);
 		jsB_propfun(J, "PDFObject.getName", ffi_PDFObject_getName, 1);
 		jsB_propfun(J, "PDFObject.getString", ffi_PDFObject_getString, 1);
+		jsB_propfun(J, "PDFObject.getInheritable", ffi_PDFObject_getInheritable, 1);
 		jsB_propfun(J, "PDFObject.get", ffi_PDFObject_get, 1);
 		jsB_propfun(J, "PDFObject.put", ffi_PDFObject_put, 2);
 		jsB_propfun(J, "PDFObject.push", ffi_PDFObject_push, 1);

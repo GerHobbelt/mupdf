@@ -316,6 +316,8 @@ pdf_xref_entry *pdf_get_populating_xref_entry(fz_context *ctx, pdf_document *doc
 	return &sub->table[num-sub->start];
 }
 
+/* It is vital that pdf_get_xref_entry_aux called with !solidify_if_needed
+ * and a value object number, does NOT try/catch or throw. */
 static
 pdf_xref_entry *pdf_get_xref_entry_aux(fz_context *ctx, pdf_document *doc, int i, int solidify_if_needed)
 {
@@ -468,6 +470,7 @@ pdf_xref_entry *pdf_get_xref_entry_no_null(fz_context *ctx, pdf_document *doc, i
 
 void pdf_xref_entry_map(fz_context *ctx, pdf_document *doc, void (*fn)(fz_context *, pdf_xref_entry *, int, pdf_document *, void *), void *arg)
 {
+	int xref_len = pdf_xref_len(ctx, doc);
 	int i, j;
 	pdf_xref_subsec *sub;
 	int xref_base = doc->xref_base;
@@ -2055,6 +2058,10 @@ pdf_keep_document(fz_context *ctx, pdf_document *doc)
  * compressed object streams
  */
 
+/*
+	Do not hold pdf_xref_entry's over call to this function as they
+	may be invalidated!
+*/
 static pdf_xref_entry *
 pdf_load_obj_stm(fz_context *ctx, pdf_document *doc, int num, pdf_lexbuf *buf, int target)
 {
@@ -2069,6 +2076,7 @@ pdf_load_obj_stm(fz_context *ctx, pdf_document *doc, int num, pdf_lexbuf *buf, i
 	int i;
 	pdf_token tok;
 	pdf_xref_entry *ret_entry = NULL;
+	int ret_idx;
 	int xref_len;
 	int found;
 	fz_stream *sub = NULL;
@@ -2127,6 +2135,7 @@ pdf_load_obj_stm(fz_context *ctx, pdf_document *doc, int num, pdf_lexbuf *buf, i
 				found++;
 		}
 
+		ret_idx = -1;
 		for (i = 0; i < found; i++)
 		{
 			pdf_xref_entry *entry;
@@ -2171,13 +2180,19 @@ pdf_load_obj_stm(fz_context *ctx, pdf_document *doc, int num, pdf_lexbuf *buf, i
 					entry->stm_buf = NULL;
 				}
 				if (numbuf[i] == target)
-					ret_entry = entry;
+					ret_idx = i;
 			}
 			else
 			{
 				pdf_drop_obj(ctx, obj);
 			}
 		}
+		/* Parsing our way through the stream can cause the xref to be
+		 * solidified, which will move an entry. We therefore can't
+		 * read the entry for returning until no more parsing is to be
+		 * done. Thus we end up reading this entry twice. */
+		if (ret_idx >= 0)
+			ret_entry = pdf_get_xref_entry_no_null(ctx, doc, numbuf[ret_idx]);
 	}
 	fz_always(ctx)
 	{
@@ -2532,11 +2547,20 @@ perform_repair:
 		if (!x->obj)
 		{
 			pdf_xref_entry *orig_x = x;
+			pdf_xref_entry *ox = x; /* This init is unused, but it shuts warnings up. */
 			orig_x->type = 'O'; /* Mark this node so we know we're recursing. */
 			fz_try(ctx)
 				x = pdf_load_obj_stm(ctx, doc, x->ofs, &doc->lexbuf.base, num);
 			fz_always(ctx)
-				orig_x->type = 'o'; /* Not recursing any more. */
+			{
+				/* Most of the time ox == orig_x, but if pdf_load_obj_stm performed a
+				 * repair, it may not be. It is safe to call pdf_get_xref_entry_no_change
+				 * here, as it does not try/catch. */
+				ox = pdf_get_xref_entry_no_change(ctx, doc, num);
+				/* Bug 706762: ox can be NULL if the object went away during a repair. */
+				if (ox && ox->type == 'O')
+					ox->type = 'o'; /* Not recursing any more. */
+			}
 			fz_catch(ctx)
 				fz_rethrow(ctx);
 			if (x == NULL)
@@ -2544,7 +2568,7 @@ perform_repair:
 			if (!x->obj)
 			{
 				x->type = 'f';
-				orig_x->type = 'f';
+				ox->type = 'f';
 				if (doc->repair_attempted)
 					fz_throw(ctx, FZ_ERROR_GENERIC, "object (%d 0 R) was not found in its object stream", num);
 				goto perform_repair;
@@ -3123,7 +3147,9 @@ pdf_open_document_with_stream(fz_context *ctx, fz_stream *file)
 		char message[sizeof(ctx->error.message)];
 		int caught = fz_caught(ctx);
 		fz_strncpy_s(ctx, message, fz_caught_message(ctx), sizeof message);
+
 		fz_drop_document(ctx, &doc->super);
+
 		fz_throw(ctx, caught, "%s", message);
 	}
 	return doc;
@@ -5196,6 +5222,38 @@ pdf_metadata(fz_context *ctx, pdf_document *doc)
 		fz_rethrow(ctx);
 
 	return obj;
+}
+
+void pdf_minimize_document(fz_context *ctx, pdf_document *doc)
+{
+	int i;
+
+	/* Don't throw anything away if we've done a repair! */
+	if (doc == NULL || doc->repair_attempted)
+		return;
+
+	/* Don't throw anything away in the incremental section, as that's where
+	 * all our changes will be. */
+	for (i = doc->num_incremental_sections; i < doc->num_xref_sections; i++)
+	{
+		pdf_xref *xref = &doc->xref_sections[i];
+		pdf_xref_subsec *sub;
+
+		for (sub = xref->subsec; sub; sub = sub->next)
+		{
+			int len = sub->len;
+			int j;
+			for (j = 0; j < len; j++)
+			{
+				pdf_xref_entry *e = &sub->table[j];
+				if (e->obj == NULL)
+					continue;
+				if (e->type != 'o')
+					continue;
+				e->obj = pdf_drop_singleton_obj(ctx, e->obj);
+			}
+		}
+	}
 }
 
 #endif

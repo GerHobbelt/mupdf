@@ -93,6 +93,7 @@ struct fz_colorspace_context
 {
 	int ctx_refs;
 	fz_colorspace *gray, *rgb, *bgr, *cmyk, *lab;
+	int gamma_blending;
 #if FZ_ENABLE_ICC
 	void *icc_instance;
 #endif
@@ -116,6 +117,11 @@ void fz_convert_pixmap_samples(fz_context *ctx, const fz_pixmap *src, fz_pixmap 
 void fz_fast_any_to_alpha(fz_context *ctx, const fz_pixmap *src, fz_pixmap *dst, int copy_spots);
 void fz_convert_fast_pixmap_samples(fz_context *ctx, const fz_pixmap *src, fz_pixmap *dst, int copy_spots);
 void fz_convert_slow_pixmap_samples(fz_context *ctx, const fz_pixmap *src, fz_pixmap *dst, fz_colorspace *prf, fz_color_params params, int copy_spots);
+
+#if FZ_ENABLE_GAMMA
+/* Create gamma tables for linear color blending. */
+void fz_measure_colorspace_linearity(fz_context *ctx, fz_colorspace *colorspace);
+#endif
 
 #endif
 

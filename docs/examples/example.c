@@ -67,7 +67,8 @@ int main(int argc, const char** argv)
 		fz_register_document_handlers(ctx);
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "cannot register document handlers: %s\n", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_log_error(ctx, "cannot register document handlers.");
 		fz_drop_context(ctx);
 		return EXIT_FAILURE;
 	}
@@ -77,7 +78,8 @@ int main(int argc, const char** argv)
 		doc = fz_open_document(ctx, input);
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "cannot open document: %s\n", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_log_error_printf(ctx, "cannot open document: %s", input);
 		fz_drop_context(ctx);
 		return EXIT_FAILURE;
 	}
@@ -87,7 +89,8 @@ int main(int argc, const char** argv)
 		page_count = fz_count_pages(ctx, doc);
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "cannot count number of pages: %s\n", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_log_error(ctx, "cannot count number of pages.");
 		fz_drop_document(ctx, doc);
 		fz_drop_context(ctx);
 		return EXIT_FAILURE;
@@ -95,7 +98,7 @@ int main(int argc, const char** argv)
 
 	if (page_number < 0 || page_number >= page_count)
 	{
-		fprintf(stderr, "page number out of range: %d (page count %d)\n", page_number + 1, page_count);
+		fz_log_error_printf(ctx, "page number out of range: %d (page count %d)", page_number + 1, page_count);
 		fz_drop_document(ctx, doc);
 		fz_drop_context(ctx);
 		return EXIT_FAILURE;
@@ -111,7 +114,8 @@ int main(int argc, const char** argv)
 		pix = fz_new_pixmap_from_page_number(ctx, doc, page_number, ctm, fz_device_rgb(ctx), 0);
 	fz_catch(ctx)
 	{
-		fprintf(stderr, "cannot render page: %s\n", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_log_error_printf(ctx, "cannot render page #%d.", page_number);
 		fz_drop_document(ctx, doc);
 		fz_drop_context(ctx);
 		return EXIT_FAILURE;

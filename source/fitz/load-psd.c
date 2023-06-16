@@ -22,7 +22,12 @@
 
 #include "mupdf/fitz.h"
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
+#include "color-imp.h"
 #include "pixmap-imp.h"
+
+#include "mupdf/assertions.h"
 
 #include <limits.h>
 #include <string.h>
@@ -209,7 +214,9 @@ psd_read_image(fz_context *ctx, struct info *info, const unsigned char *p, size_
 		c = get16be(&source);
 		if (c == 4) /* CMYK (+ Spots?) */
 		{
-			if (n < 4)
+			if (n == 5)
+				alpha = 1;
+			else if (n != 4)
 				fz_throw(ctx, FZ_ERROR_GENERIC, "CMYK PSD with %d chans not supported!", n);
 			info->cs = fz_keep_colorspace(ctx, fz_device_cmyk(ctx));
 		}
@@ -262,8 +269,8 @@ psd_read_image(fz_context *ctx, struct info *info, const unsigned char *p, size_
 					char text[32];
 
 					v = get16be(&source);
-					if (v == 0 && alpha && alpha_found == 0)
-						alpha_found = 1;
+					if (v == 0 && alpha_found == 0)
+						alpha_found = 1, alpha = 1;
 					else if (v != 2)
 						fz_throw(ctx, FZ_ERROR_GENERIC, "Non CMYK spot found in PSD");
 
@@ -300,6 +307,10 @@ psd_read_image(fz_context *ctx, struct info *info, const unsigned char *p, size_
 			while (data_len--)
 				get8(&source);
 		}
+		if (fz_count_separations(ctx, seps) + info->cs->n + 1 == n && alpha == 0)
+			alpha = 1;
+		if (fz_count_separations(ctx, seps) + info->cs->n + alpha != n)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "PSD contains mismatching spot/alpha data");
 
 		/* Skip over the Layer data. */
 		v = get32be(&source);
@@ -370,14 +381,27 @@ psd_read_image(fz_context *ctx, struct info *info, const unsigned char *p, size_
 			}
 			else
 			{
-				int N = n;
+				int N = n - alpha;
 
+				/* CMYK is inverted */
 				while (N--)
 				{
 					size_t M = m;
 					while (M--)
 					{
 						*q = 255 - unpack8(&source);
+						q += n;
+					}
+					q -= m*n - 1;
+				}
+
+				/* But alpha is not */
+				if (alpha)
+				{
+					size_t M = m;
+					while (M--)
+					{
+						*q = unpack8(&source);
 						q += n;
 					}
 					q -= m*n - 1;
@@ -413,8 +437,9 @@ psd_read_image(fz_context *ctx, struct info *info, const unsigned char *p, size_
 			}
 			else
 			{
-				int N = n;
+				int N = n - alpha;
 
+				/* CMYK is inverted */
 				while (N--)
 				{
 					size_t M = m;
@@ -427,8 +452,39 @@ psd_read_image(fz_context *ctx, struct info *info, const unsigned char *p, size_
 					}
 					q -= m*n - 1;
 				}
+
+				/* But alpha is not */
+				if (alpha)
+				{
+					size_t M = m;
+
+					while (M--)
+					{
+						*q = unpack8(&source);
+						(void)unpack8(&source);
+						q += n;
+					}
+					q -= m*n - 1;
+				}
+
+				/* But alpha is not */
+				if (alpha)
+				{
+					size_t M = m;
+
+					while (M--)
+					{
+						*q = unpack8(&source);
+						(void)unpack8(&source);
+						q += n;
+					}
+					q -= m*n - 1;
+				}
 			}
 		}
+
+		if (alpha)
+			fz_premultiply_pixmap(ctx, image);
 	}
 	fz_always(ctx)
 	{
@@ -470,3 +526,5 @@ fz_load_psd_info(fz_context *ctx, const unsigned char *p, size_t total, int *wp,
 	*xresp = psd.xres;
 	*yresp = psd.xres;
 }
+
+#endif

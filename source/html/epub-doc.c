@@ -116,7 +116,7 @@ static fz_stream *open_encrypted_entry(fz_context *ctx, fz_archive *arch_, const
 {
 	struct encrypted *arch = (struct encrypted *)arch_;
 	if (fz_tree_lookup(ctx, arch->info, name))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open encrypted data");
+		return NULL;
 	return fz_open_archive_entry(ctx, arch->chain, name);
 }
 
@@ -124,7 +124,7 @@ static fz_buffer *read_encrypted_entry(fz_context *ctx, fz_archive *arch_, const
 {
 	struct encrypted *arch = (struct encrypted *)arch_;
 	if (fz_tree_lookup(ctx, arch->info, name))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot read encrypted data");
+		return NULL;
 	return fz_read_archive_entry(ctx, arch->chain, name);
 }
 
@@ -611,7 +611,7 @@ epub_load_page(fz_context *ctx, fz_document *doc_, int chapter, int number)
 }
 
 static void
-epub_page_label(fz_context *ctx, fz_document *doc_, int chapter, int number, char *buf, int size)
+epub_page_label(fz_context *ctx, fz_document *doc_, int chapter, int number, char *buf, size_t size)
 {
 	fz_snprintf(buf, size, "ch. %d, p. %d", chapter+1, number+1);
 }
@@ -958,7 +958,7 @@ epub_load_outline(fz_context *ctx, fz_document *doc_)
 }
 
 static int
-epub_lookup_metadata(fz_context *ctx, fz_document *doc_, const char *key, char *buf, int size)
+epub_lookup_metadata(fz_context *ctx, fz_document *doc_, const char *key, char *buf, size_t size)
 {
 	epub_document *doc = (epub_document*)doc_;
 	if (!strcmp(key, FZ_META_FORMAT))

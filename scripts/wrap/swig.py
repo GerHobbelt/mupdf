@@ -773,6 +773,7 @@ def build_swig(
             'fz_vthrow',
             'fz_vwarn',
             'fz_write_vprintf',
+            'fz_vlog_error_printf',
 
             'fz_utf8_from_wchar',
             'fz_wchar_from_utf8',
@@ -799,12 +800,7 @@ def build_swig(
             %ignore {rename.ll_fn('fz_vthrow')};
             %ignore {rename.ll_fn('fz_vwarn')};
             %ignore {rename.ll_fn('fz_write_vprintf')};
-            %ignore {rename.ll_fn('fz_vsnprintf')};
-            %ignore {rename.ll_fn('fz_vthrow')};
-            %ignore {rename.ll_fn('fz_vwarn')};
-            %ignore {rename.ll_fn('fz_append_vprintf')};
-            %ignore {rename.ll_fn('fz_write_vprintf')};
-            %ignore {rename.ll_fn('fz_format_string')};
+            %ignore {rename.ll_fn('fz_vlog_error_printf')};
             %ignore {rename.ll_fn('fz_open_file_w')};
 
             // Ignore custom C++ variadic fns.
@@ -1575,7 +1571,7 @@ def build_swig(
             name_table_h = f.read()
         oo = o.replace( '#include "mupdf/pdf/name-table.h"\n', name_table_h)
         assert oo != o
-        jlib.update_file( oo, f'{build_dirs.dir_mupdf}/platform/python/include/mupdf/pdf/object.h')
+        jlib.fs_update( oo, f'{build_dirs.dir_mupdf}/platform/python/include/mupdf/pdf/object.h')
 
     swig_i      = f'{build_dirs.dir_mupdf}/platform/{language}/mupdfcpp_swig.i'
     include1    = f'{build_dirs.dir_mupdf}/include/'
@@ -1593,7 +1589,7 @@ def build_swig(
     if text2:
         util.update_file_regress( text2, swig2_i, check_regress)
     else:
-        jlib.update_file( '', swig2_i)
+        jlib.fs_update( '', swig2_i)
 
     # Disable some unhelpful SWIG warnings. Must not use -Wall as it overrides
     # all warning disables.
@@ -1625,7 +1621,7 @@ def build_swig(
     swig_cpp_old = None
     if 0 and os.path.exists( swig_cpp):
         swig_cpp_old = f'{swig_cpp}-old'
-        jlib.copy( swig_cpp, swig_cpp_old)
+        jlib.fs_copy( swig_cpp, swig_cpp_old)
 
     if language == 'python':
         # Maybe use '^' on windows as equivalent to unix '\\' for multiline
@@ -1663,7 +1659,7 @@ def build_swig(
             assert swig_py_leaf.endswith( '.py')
             so = f'_{swig_py_leaf[:-3]}.so'
             swig_py_tmp = f'{swig_py}-'
-            jlib.remove( swig_py_tmp)
+            jlib.fs_remove( swig_py_tmp)
             os.rename( swig_py, swig_py_tmp)
             with open( swig_py_tmp) as f:
                 swig_py_content = f.read()
@@ -1701,8 +1697,8 @@ def build_swig(
                     )
             modify_py( rebuilt, swig2_py, do_enums=False)
         else:
-            jlib.update_file( '', swig2_cpp)
-            jlib.remove( swig2_py)
+            jlib.fs_update( '', swig2_cpp)
+            jlib.fs_remove( swig2_py)
 
         # Make main mupdf .so.
         command = make_command( 'mupdf', swig_cpp, swig_i)
@@ -1779,8 +1775,8 @@ def build_swig(
         assert len(generated.swig_csharp)
         cs2 += generated.swig_csharp
         jlib.log( 'Updating cs2 => {build_dirs.dir_so}/mupdf.cs')
-        jlib.update_file(cs2, f'{build_dirs.dir_so}/mupdf.cs')
-        #jlib.copy(f'{outdir}/mupdf.cs', f'{build_dirs.dir_so}/mupdf.cs')
+        jlib.fs_update(cs2, f'{build_dirs.dir_so}/mupdf.cs')
+        #jlib.fs_copy(f'{outdir}/mupdf.cs', f'{build_dirs.dir_so}/mupdf.cs')
         jlib.log('{rebuilt=}')
 
     else:
@@ -1795,7 +1791,7 @@ def build_swig(
             # File <swig_cpp> unchanged, so restore the mtime to avoid
             # unnecessary recompilation.
             jlib.log( 'File contents unchanged, copying {swig_cpp_old=} => {swig_cpp=}')
-            jlib.rename( swig_cpp_old, swig_cpp)
+            jlib.fs_rename( swig_cpp_old, swig_cpp)
 
 
 def test_swig():
@@ -1827,7 +1823,7 @@ def test_swig():
             void ppdf_clean_file3(char *infile, char *outfile, char *password, pdf_write_options *opts, const char *retainlist[], int retainlen);
 
             ''')
-    jlib.update_file( test_i, 'test.i')
+    jlib.fs_update( test_i, 'test.i')
 
     jlib.system( textwrap.dedent(
             '''

@@ -50,8 +50,8 @@ static int usage(void)
 		"\t-x\tx decimation factor\n"
 		"\t-y\ty decimation factor\n"
 		"\t-r\tsplit right-to-left\n"
-		"\t-o\toffset\n");
-		);
+		"\t-o\toffset\n"
+	);
 	return EXIT_FAILURE;
 }
 
@@ -280,6 +280,8 @@ int pdfposter_main(int argc, const char** argv)
 		outfile = argv[fz_optind++];
 	}
 
+	fz_var(doc);
+
 	fz_try(ctx)
 	{
 		doc = pdf_open_document(ctx, infile);
@@ -290,12 +292,14 @@ int pdfposter_main(int argc, const char** argv)
 		decimatepages(ctx, doc);
 
 		pdf_save_document(ctx, doc, outfile, &opts);
-
+	}
+	fz_always(ctx)
+	{
 		pdf_drop_document(ctx, doc);
 	}
 	fz_catch(ctx)
 	{
-		fz_error(ctx, "%s", fz_caught_message(ctx));
+		fz_log_error(ctx, fz_caught_message(ctx));
 		errored = EXIT_FAILURE;
 	}
 	fz_flush_warnings(ctx);

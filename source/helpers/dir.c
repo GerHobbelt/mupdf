@@ -170,6 +170,224 @@ void fz_normalize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, c
 	}
 }
 
+
+static uint64_t calchash(const char* s) {
+	uint64_t x = 0x33333333CCCCCCCCULL;
+	const uint8_t *p = (const uint8_t *)s;
+
+	// hash/reduction inspired by Xorshift64
+	for ( ; *p; p++) {
+		uint64_t c = *p;
+		x ^= c << 26;
+		x += c;
+
+		x ^= x << 13;
+		x ^= x >> 7;
+		x ^= x << 17;
+	}
+
+	x ^= x << 13;
+	x ^= x >> 7;
+	x ^= x << 17;
+
+	return x;
+}
+
+
+#include "../../scripts/legal_codepoints_bitmask.inc"
+
+
+static int has_prefix(const char *s, const char *prefix)
+{
+	size_t len = strlen(prefix);
+	return fz_strncasecmp(s, prefix, len) == 0;
+}
+
+static int has_postfix(const char *s, const char *postfix)
+{
+	size_t len = strlen(postfix);
+	size_t slen = strlen(s);
+	if (slen < len)
+		return 0;
+	return fz_strcasecmp(s + slen - len, postfix) == 0;
+}
+
+static int has_basename(const char *s, const char *prefix)
+{
+	size_t len = strlen(prefix);
+	return (fz_strncasecmp(s, prefix, len) == 0) &&
+		   (!s[len] || s[len] == '.');
+}
+
+static int has_infix(const char *s, const char *infix)
+{
+	size_t len = strlen(infix);
+	size_t slen = strlen(s);
+	if (slen < len)
+		return 0;
+	for (size_t i = 0; i < slen - len; i++)
+	{
+		if (has_prefix(s + i, infix))
+			return 1;
+	}
+	return 0;
+}
+
+
+
+// Detect 'reserved' and other 'dangerous' file/directory names.
+//
+// DO NOT accept any of these file / directory *basenames*: 
+//
+// - CON, PRN, AUX, NUL, COM0, COM1, COM2, COM3, COM4, COM5, COM6, COM7, COM8, COM9, 
+//   LPT0, LPT1, LPT2, LPT3, LPT4, LPT5, LPT6, LPT7, LPT8, and LPT9
+//
+// - while on UNIXes a directory named `dev` might be ill-advised. 
+//   (Writing to a **device** such as `/dev/null` is perfectly okay there; we're interested 
+//   and focusing on *regular files and directories* here though, so giving them names such 
+//   as `dev`, `stdout`, `stdin`, `stderr` or `null` might be somewhat... *ill-advised*. 😉
+//
+// - of course, Mac/OSX has it's own set of reserved names and aliases, e.g. all filenames 
+//   starting with `._` are "extended attributes": when you have filename `"xyz"`, OSX will 
+//   create an additional file named `"._xyz"` when you set any *extended attributes*. 
+//   There's also the `__MACOSX` directory that you never see -- unless you look at the same 
+//   store by way of a MSWindows or Linux box.
+//
+// - it's ill-advised to start (or end!) any file or directory name with `"."` or `"~"`: 
+//   the former is used to declare the file/directory "hidden" in UNIX, while the latter 
+//   MAY be treated as a shorthand for the user home directory or signal the file is a 
+//   "backup/temporary file" when appended at the end.
+//
+// - NTFS has a set of reserved names of its own, all of which start with `"$"`, while antique 
+//   MSDOS reserved filenames *end* with a `"$"`, so you'ld do well to forego `"$"` anywhere 
+//   it shows up in your naming. 
+//   To put the scare into you, there's a MSWindows hack which will *crash and corrupt* the system 
+//   by simply *addressing* a (non-existing) reserved filename `"$i30:$bitmap"` on any NTFS drive 
+//   (CVE-2021-28312): https://www.bleepingcomputer.com/news/security/microsoft-fixes-windows-10-bug-that-can-corrupt-ntfs-drives/
+//
+// - OneDrive also [mentions several reserved filenames](https://support.microsoft.com/en-us/office/restrictions-and-limitations-in-onedrive-and-sharepoint-64883a5d-228e-48f5-b3d2-eb39e07630fa#invalidcharacters): 
+//   "*These names aren't allowed for files or folders: `.lock`, `CON`, `PRN`, `AUX`, `NUL`, 
+//   `COM0` - `COM9`, `LPT0` - `LPT9`, `_vti_`, `desktop.ini`, any filename starting with `~$`.*" 
+//   It also rejects `".ds_store"`, which is a hidden file on Mac/OSX. 
+//   [Elsewhere](https://support.microsoft.com/en-us/office/onedrive-can-rename-files-with-invalid-characters-99333564-c2ed-4e78-8936-7c773e958881) 
+//   it mentions these again, but with a broader scope: 
+//   "*These other characters have special meanings when used in file names in OneDrive, SharePoint, 
+//   Windows and macOS, such as `"*"` for wildcards, `"\"` in file name paths, **and names containing** 
+//   `.lock`, `CON`, or `_vti_`.*" They also strongly discourage the use of `#%&` characters in filenames.
+//
+// - Furthermore it's a **bad idea** to start any filename with `"-"` or `"--"` as this clashes 
+//   very badly with standard UNIX commandline options; only a few tools "fix" this by allowing 
+//   a special `"--"` commandline option.
+//
+// - [GoogleDrive](https://developers.google.com/style/filenames) doesn't mention any explicit 
+//   restrictions, but the published *guidelines* rather suggest limiting oneself to plain ASCII only, 
+//   with all the other restrictions mentioned in this larger list. 
+//   Google is (as usual for those buggers) *extremely vague* on this subject, but [some hints](https://www.googlecloudcommunity.com/gc/Workspace-Q-A/File-and-restrictions-for-Google-Drive/td-p/509595) 
+//   have been discovered: path length *probably* limited to 32767, directory depth max @ 21 is 
+//   mentioned (probably gleaned from [here](https://support.google.com/a/users/answer/7338880?hl=en#shared_drives_file_folder_limits), 
+//   however I tested it on my own GoogleDrive account and at the time of this writing (May 2023) 
+//   Google didn't object to creating a tree depth >= 32, nor a filename <= 500 characters.)
+//
+static int is_reserved_filename(const char *s)
+{
+	if (has_infix(s, "_vti_"))
+		return 1;
+	if (has_postfix(s, "$"))
+		return 1;
+	if (has_postfix(s, "~"))
+		return 1;
+		
+	switch (tolower(s[0]))
+	{
+	case 'a':
+		return has_basename(s, "aux");
+		
+	case 'd':
+		return has_basename(s, "dev") ||
+		       has_prefix(s, "desktop.ini");
+		
+	case 'c':
+		return has_basename(s, "con") ||
+			(has_prefix(s, "com") && isdigit(s[3]));
+
+	case 'l':
+		return has_prefix(s, "lpt") && isdigit(s[3]);
+		
+	case 'n':
+		return has_basename(s, "nul") ||
+		       has_basename(s, "null");
+		
+	case 'p':
+		return has_basename(s, "prn");
+		
+	case 's':
+		return has_basename(s, "stdin") ||
+		       has_basename(s, "stdout") ||
+		       has_basename(s, "stderr");
+		
+	case '_':
+		return has_basename(s, "__macosx");
+		
+	case '~':
+		return 1;
+		
+	case '.':
+		return has_basename(s + 1, "lock");
+		       has_basename(s + 1, "ds_store");
+		
+	case '$':
+		return 1;
+		
+	case '-':
+		return 1;
+	}
+	
+	return 0;
+}
+
+const char *rigorously_clean_fname(char *s)
+{
+	// - keep up to two 'extension' dots.
+	// - nuke anything that's not an ASCII alphanumeric
+	// - modify in place
+	char *d = s;
+	while (*s)
+	{
+		char c = *s;
+		if (isalnum(c))
+		{
+			*d++ = c;
+		}
+		else if (c == '.' && d > s)
+		{
+			*d++ = c;
+		}
+		// else: discard!
+	}
+
+	// trim off trailing dots:
+	while (d > s && d[1] == '.')
+		d--;
+
+	*d = 0;
+
+	// now nuke all but the last two dots:
+	int dot_count = 0;	
+	while (d > s)
+	{
+		char c = *--d;
+		if (c == '.')
+		{
+			dot_count++;
+			if (dot_count > 2)
+				*d = '_';
+		}
+	}
+	
+	return d;
+}
+
+
 /**
  * Sanitize a given path, i.e. replace any "illegal" characters in the path, using generic
  * OS/filesystem heuristics. "Illegal" characters are replaced with an _ underscore.
@@ -179,13 +397,28 @@ void fz_normalize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, c
  *
  * The path is assumed to have been normalized already, hence little intermezzos like '/./'
  * shall not exist in the input. IFF they do, they will be sanitized to '/_/'.
+ *
+ * Path elements (filename, directory names) are restricted to a maximum length of 255 characters
+ * *each* (Linux FS limit).
+ *
+ * The entire path will be reduced to the given `dstpath_bufsize`;
+ * reductions are done by first reducing the filename length, until it is less
+ * or equal to 13 characters, after which directory elements are reduced, one after the other,
+ * until we've reached the desired total path length.
+ *
+ * Returns 0 when no sanitization has taken place. Returns 1 when only the filename part
+ * of the path has been sanitized. Returns 2 or higher when any of the directory parts have
+ * been sanitized: this is useful when calling code wishes to speed up their FS I/O by
+ * selectively executing `mkdirp` only when the directory elements are sanitized and thus
+ * "may be new".
  */
-void fz_sanitize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, const char* path)
+int fz_sanitize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, const char* path)
 {
 	// as we normalize a path, it can only become *shorter* (or equal in length).
 	// Thus we copy the source path to the buffer verbatim first.
 	if (!dstpath)
 		fz_throw(ctx, FZ_ERROR_GENERIC, "fz_sanitize_path: dstpath cannot be NULL.");
+
 	// copy source path, if it isn't already in the work buffer:
 	size_t len;
 	if (path) {
@@ -199,93 +432,7 @@ void fz_sanitize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, co
 		len = strlen(dstpath);
 	}
 
-	// unixify MSDOS/MSWIN/UNC path:
-	char* e = strchr(dstpath, '\\');
-	while (e)
-	{
-		*e = '/';
-		e = strchr(e, '\\');
-	}
-
-	int can_have_mswin_drive_letter = 1;
-
-	// Sanitize the *entire* path, including the Windows Drive/Share part:
-	e = dstpath;
-	if (e[0] == '/' && e[1] == '/' && strchr(".?", e[2]) != NULL && e[3] == '/')
-	{
-		// skip //?/ and //./ UNC leaders
-		e += 4;
-	}
-	else if (e[0] == '/' && e[1] == '/')
-	{
-		// skip //<server>... UNC path starter (which cannot contain Windows drive letters as-is)
-		e += 2;
-		can_have_mswin_drive_letter = 0;
-	}
-	else if (e[0] == '.' && e[1] == '/')
-	{
-		// skip ./ relative path at start, replace it by NIL: './' is superfluous!
-		len = strlen(e);
-		memmove(e, e + 2, len + 1);
-		can_have_mswin_drive_letter = 0;
-	}
-	else if (e[0] == '.' && e[1] == '.' && e[2] == '/')
-	{
-		// skip any chain of ../ relative path elements at start, as this may be a valid relative path
-		e += 3;
-		can_have_mswin_drive_letter = 0;
-
-		while (e[0] == '.' && e[1] == '.' && e[2] == '/')
-		{
-			e += 3;
-		}
-	}
-
-	if (can_have_mswin_drive_letter)
-	{
-		// See if we have a Windows drive as part of the path: keep that one intact!
-		if (isalpha(e[0]) && e[1] == ':')
-		{
-			*e = toupper(e[0]);
-			e += 2;
-		}
-	}
-
-	for ( ; *e; e++) {
-		int c = *e;
-		if (c > 0x7F || c < 0) {
-			// 0x80 and higher character codes: UTF8
-			int u;
-			int l = fz_chartorune_unsafe(&u, e);
-			e += l - 1;
-			if (l == 1 && u == Runeerror) {
-				// bad UTF8 is to be discarded!
-				*e = '_';
-			}
-		}
-		else if (c < 32) {
-			// control characters are generally not accepted in path or file names!
-			*e = '_';
-		}
-		else if (c == '?' || c == '*') {
-			// wildcard characters are generally not accepted in path or file names!
-			*e = '_';
-		}
-		else if (c == ':') {
-			// Windows drive delimiter is not allowed anywhere in the path (except at the start, which we checked already before)
-			*e = '_';
-		}
-		else if (c == '.') {
-			// a dot at the END of a path element is not accepted; neither do we tolerate ./ and ../ as we have
-			// skipped any legal ones already before.
-			//
-			// we assume the path has been normalized (relative or absolute) before it was sent here, hence
-			// we'll accept UNIX dotfiles (one leading '.' dot for an otherwise sane filename/dirname), but
-			// otherwise dots can only sit right smack in the middle of an otherwise legal filename/dirname:
-			if (!e[1] || e[1] == '.' || e[1] == '/')
-				*e = '_';
-		}
-	}
+	return fz_sanitize_path_ex(dstpath, NULL, NULL, 0, dstpath_bufsize);
 }
 
 
@@ -302,8 +449,7 @@ void fz_sanitize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, co
 	wish to replace/'nuke' the leading `%` in each such format specifier. Use `f` to strip out all `printf`-like
 	format parts from a filename/path to make it generically safe to use.
 
-	These additional arguments, `set` and `replace_single` and `replace_sequence`, may be NULL
-	or NUL(0), in which case they are not active.
+	These additional arguments, `set` and `replace_single`, may be NULL	or NUL(0), in which case they are not active.
 
 	The `replacement_single` string is used as a map: each character in the `set` is replaced by its corresponding
 	character in `replacement_single`. When `replacement_single` is shorter than `set`, any of the later `set` members
@@ -313,13 +459,19 @@ void fz_sanitize_path(fz_context* ctx, char* dstpath, size_t dstpath_bufsize, co
 	`start_at_offset` position is sanitized. It is assumed that the non-zero offset ALWAYS points past any critical
 	UNC or MSWindows Drive designation parts of the path.
 
-	Overwrites the `path` string in place.
+	Modifies the `path` string in place.
+ 
+    Returns 0 when no sanitization has taken place. Returns 1 when only the filename part
+    of the path has been sanitized. Returns 2 or higher when any of the directory parts have
+    been sanitized: this is useful when calling code wishes to speed up their FS I/O by
+    selectively executing `mkdirp` only when the directory elements are sanitized and thus
+    "may be new".
 */
-char*
-fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, char replace_sequence, size_t start_at_offset)
+int
+fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, size_t start_at_offset, size_t maximum_path_length)
 {
 	if (!path)
-		return NULL;
+		return 0;
 	if (!replace_single || !*replace_single)
 		replace_single = "_";
 	if (!set)
@@ -343,95 +495,214 @@ fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, cha
 		}
 	}
 
-	char* rv_path = path;
-
 	if (start_at_offset)
 	{
 		size_t l = strlen(path);
 		if (l <= start_at_offset)
 		{
 			// nothing to process!
-			return path;
+			return 0;
 		}
 
 		path += start_at_offset;
 	}
 
-	// UNIXify:
+	// unixify MSDOS/MSWIN/UNC path:
 	char* e = strchr(path, '\\');
 	while (e)
 	{
 		*e = '/';
-		e = strchr(e, '\\');
+		e = strchr(e + 1, '\\');
 	}
 
-	char* p;
-	char* d;
+	e = path;
 
-	d = p = path;
-
-	// check if path is a UNC path. It may legally start with `\\.\` or `\\?\` before a Windows drive/share+COLON:
 	if (start_at_offset == 0)
 	{
-		if (*p == '/' && p[1] == '/')
+		int can_have_mswin_drive_letter = 1;
+
+		// Sanitize the *entire* path, including the Windows Drive/Share part:
+		//
+		// check if path is a UNC path. It may legally start with `\\.\` or `\\?\` before a Windows drive/share+COLON:
+		if (e[0] == '/' && e[1] == '/')
 		{
-			p += 2;
-			// scan legal domain name:
-			if (strchr(".?", *p) && p[1] == '/' && p[2] != '/')
+			if (strchr(".?", e[2]) != NULL && e[3] == '/')
 			{
-				p += 2;    // skip the legal UNC `//./` or `//?/` path starter.
+				// skip //?/ and //./ UNC path leaders
+				e += 4;
+				can_have_mswin_drive_letter = -1;
 			}
 			else
 			{
-				d = p;
+				// skip //<server>... UNC path starter (which cannot contain Windows drive letters as-is)
+				char *p = e + 2;
 				while (isalnum(*p) || strchr("_-$", *p))
 					p++;
-				if (p > d && *p == '/' && p[1] != '/')
+				if (p > e && *p == '/' && p[1] != '/')
 					p++;
 				else
 				{
-					// no legal UNC domain name, hence no UNC at all:
-					p = path;
+					// no legal UNC domain name, hence no UNC at all: assume it's a simple UNIX '/' root directory
+					p = e + 1;
+				}
+				e = p;
+				can_have_mswin_drive_letter = 0;
+			}
+		}
+		else if (e[0] == '.') 
+		{
+			can_have_mswin_drive_letter = 0;
+			
+			if (e[1] == '/')
+			{
+				// skip ./ relative path at start, replace it by NIL: './' is superfluous!
+				size_t len = strlen(e + 2);
+				memmove(e, e + 2, len + 1);
+			}
+			else if (e[1] == '.' && e[2] == '/')
+			{
+				// skip any chain of ../ relative path elements at start, as this may be a valid relative path
+				e += 3;
+
+				while (e[0] == '.' && e[1] == '.' && e[2] == '/')
+				{
+					e += 3;
 				}
 			}
 		}
-		// check if path is a (possibly UNC'd) Windows Drive/Share designator: letter(s)+COLON:
-		d = p;
-		while (isalnum(*p))
-			p++;
-		if (p > d && *p == ':')
+		else if (e[0] == '/')
 		{
-			p++;
-			// while users can specify relative paths within drives, e.g. `C:path`, they CANNOT do so when this is a UNC path.
-			if (*p != '/' && d > path)
+			// basic UNIX '/' root path:
+			e++;
+		}
+
+		if (can_have_mswin_drive_letter)
+		{
+			// See if we have a Windows drive as part of the path: keep that one intact!
+			if (isalpha(e[0]) && e[1] == ':')
 			{
-				// not a legal UNC path after all
-				p = path;
+				// while users can specify relative paths within drives, e.g. `C:path`, they CANNOT do so when this is a UNC path.
+				if (e[2] != '/' && can_have_mswin_drive_letter < 0)
+				{
+					// not a legal UNC path after all
+				}
+				else
+				{
+					e[0] = toupper(e[0]);
+					e += 2;
+				}
+			}
+		}
+		
+		// when we get here, `e` will point PAST the previous '/', so we can ditch any leading '/' below, before we sanitize the remainder.
+	}
+	else
+	{
+		// when the caller specified an OFFSET, we assume we're pointing PAST the previous '/', but we better make sure
+		// as we MAY have been pointed AT the separating '/' instead...
+		if (e[0] == '/')
+		{
+			if (e[-1] != '/') 
+			{
+				// skip this '/' directory separator before we start for real:
+				e++;
 			}
 		}
 	}
 
+	char *e_start = e;
+	char *cur_segment_start = e;
+	char *d = e;
+
+	// skip leading surplus '/'
+	while (e[0] == '/')
+		e++;
+
+	// calculate a simple & fast hash of the remaining path:
+	uint32_t hash = calchash(e);
+
+	char *p = e;
+
 	// now go and scan/clean the rest of the path spec:
 	int repl_seq_count = 0;
-	for (d = p; *p; p++)
+	
+	while (*p)
 	{
-		if (replace_sequence && repl_seq_count > 1)
+		while (repl_seq_count > 1)
 		{
-			// replace series of replacements with `replace_sequence` char:
-			d -= repl_seq_count;
-			*d++ = replace_sequence;
-			repl_seq_count = 1;
-			// ^^^ note that we do this step-by-step this way, slowly eating the
-			// replacement series. The benefit of this approach, however, is that
-			// we don't have to bother the rest of the code/loop with this,
-			// making the code easier to review. Performance is still good enough.
+			if (d[-1] != d[-2])
+				break;
+			d--;
+			repl_seq_count--;
 		}
+		// ^^^ note that we do this step-by-step this way, slowly eating the
+		// replacement series. The benefit of this approach, however, is that
+		// we don't have to bother the rest of the code/loop with this,
+		// making the code easier to review. Performance is still good enough.
 
-		char c = *p;
+		char c = *p++;
 		if (c == '/')
 		{
+			*d = 0;
+			if (is_reserved_filename(cur_segment_start))
+			{
+				// previous part of the path isn't allowed: replace by a hash-based name instead.
+				char buf[32];
+				size_t max_width = p - cur_segment_start - 1;
+				
+				const char *old_cleaned_fname = rigorously_clean_fname(cur_segment_start);
+				size_t fnlen = strlen(old_cleaned_fname);
+				
+				int rslen = max_width;
+				rslen -= 4 + 8;
+				if (rslen > fnlen)
+					rslen = fnlen;
+				
+				if (rslen >= 0)
+				{
+					snprintf(buf, sizeof(buf), "_H%08X_%s", (unsigned int)hash, old_cleaned_fname + fnlen - rslen);
+					buf[sizeof(buf) - 1] = 0;
+				}
+				else
+				{
+					snprintf(buf, sizeof(buf), "H%08X", (unsigned int)hash);
+					buf[max_width] = 0;
+				}
+				strcpy(cur_segment_start, buf);
+				d = cur_segment_start + strlen(cur_segment_start);
+			}
+			else
+			{
+				size_t sslen = strlen(cur_segment_start);
+				
+				// limit to UNIX fname length limit:
+				if (sslen > 255) 
+				{
+					char buf[256];
+				
+					const char *old_cleaned_fname = rigorously_clean_fname(cur_segment_start);
+					size_t fnlen = strlen(old_cleaned_fname);
+				
+					int rslen = 255 - 10;
+					if (rslen > fnlen)
+						rslen = fnlen;
+					
+					snprintf(buf, sizeof(buf), "_H%08X_%s", (unsigned int)hash, old_cleaned_fname + fnlen - rslen);
+					buf[sizeof(buf) - 1] = 0;
+					strcpy(cur_segment_start, buf);
+					d = cur_segment_start + strlen(cur_segment_start);
+				}
+			}
+			
 			// keep path separators intact at all times.
 			*d++ = c;
+
+			cur_segment_start = d;
+			
+			// skip superfluous addititional '/' separators:
+			while (*p == '/')
+				p++;
+		
 			repl_seq_count = 0;
 			continue;
 		}
@@ -440,14 +711,12 @@ fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, cha
 		if (has_printf_format_repl_idx1 && c == '%')
 		{
 			// replace any %[+/-/ ][0-9.*][dlfgespuizxc] with a single replacement character
-			p++;
 			while (*p && strchr("+- .0123456789*", *p))
 				p++;
 			if (*p && strchr("lz", *p))
 				p++;
 			if (*p && strchr("dlfgespuizxc", *p))
 				p++;
-			p--;
 
 			// custom 1:1 replacement: set -> replace_single.
 			*d++ = replace_single[has_printf_format_repl_idx1 - 1];
@@ -463,29 +732,17 @@ fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, cha
 			if (c == '#')
 			{
 				// replace ream of '#'s with a single replacement character
-				p++;
 				while (*p == '#')
 					p++;
-				p--;
+			}
 
-				// custom 1:1 replacement: set -> replace_single.
-				int idx = m - set;
-				// pick last in map when we're out-of-bounds:
-				if (idx >= repl_map_len)
-					idx = repl_map_len - 1;
-				*d++ = replace_single[idx];
-				repl_seq_count++;
-			}
-			else
-			{
-				// custom 1:1 replacement: set -> replace_single.
-				int idx = m - set;
-				// pick last in map when we're out-of-bounds:
-				if (idx >= repl_map_len)
-					idx = repl_map_len - 1;
-				*d++ = replace_single[idx];
-				repl_seq_count++;
-			}
+			// custom 1:1 replacement: set -> replace_single.
+			int idx = m - set;
+			// pick last in map when we're out-of-bounds:
+			if (idx >= repl_map_len)
+				idx = repl_map_len - 1;
+			*d++ = replace_single[idx];
+			repl_seq_count++;
 			continue;
 		}
 
@@ -498,23 +755,43 @@ fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, cha
 		if (c > 0x7F || c < 0) {
 			// 0x80 and higher character codes: UTF8
 			int u;
-			int l = fz_chartorune_unsafe(&u, p);
-			if (l == 1 && u == Runeerror) {
+			int l = fz_chartorune_unsafe(&u, p - 1);
+			if (u == Runeerror) {
 				// bad UTF8 is to be discarded!
 				*d++ = '_';
 				repl_seq_count++;
 				continue;
 			}
-			// otherwise keep Unicode UTF8 codepoint:
-			for (; l > 0; l--)
-				*d++ = *p++;
-			p--;
-			repl_seq_count = 0;
+			
+			// Only accept Letters and Numbers in the BMP:
+			if (u <= 65535)
+			{
+				int pos = u / 32;
+				int bit = u % 32;
+				uint32_t mask = 1U << bit;
+				if (legal_codepoints_bitmask[pos] & mask) 
+				{
+					// Unicode BMP: L (Letter) or N (Number)
+					// --> keep Unicode UTF8 codepoint:
+					p--;
+					for (; l > 0; l--)
+						*d++ = *p++;
+					repl_seq_count = 0;
+					continue;
+				}
+			}
+
+			// undesirable UTF8 codepoint is to be discarded!
+			*d++ = '_';
+			p += l - 1;
+			repl_seq_count++;
+			continue;
 		}
 		else if (c < ' ' || c == 0x7F /* DEL */)
 		{
 			*d++ = '_';
 			repl_seq_count++;
+			continue;
 		}
 		else if (strchr("`\"*@=|;?:", c))
 		{
@@ -523,6 +800,7 @@ fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, cha
 			// replace the usual *wildcards* as well.
 			*d++ = '_';
 			repl_seq_count++;
+			continue;
 		}
 		else
 		{
@@ -535,12 +813,95 @@ fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, cha
 				int idx = b - braces;
 				*d++ = "()"[idx % 2];
 				repl_seq_count++;
+				continue;
 			}
-			else
+			else if (c == '.') 
+			{
+				// a dot at the END of a path element is not accepted; neither do we tolerate ./ and ../ as we have
+				// skipped any legal ones already before.
+				//
+				// we assume the path has been normalized (relative or absolute) before it was sent here, hence
+				// we'll accept UNIX dotfiles (one leading '.' dot for an otherwise sane filename/dirname), but
+				// otherwise dots can only sit right smack in the middle of an otherwise legal filename/dirname:
+				if (!p[0] || p[0] == '.' || p[0] == '/') 
+				{
+					*d++ = '_';
+					repl_seq_count++;
+					continue;
+				}
+				// we're looking at a plain-as-Jim vanilla '.' dot here: pass as-is:
+				*d++ = c;
+				repl_seq_count = 0;
+				continue;
+			}
+			else if (c == '$') 
+			{
+				// a dollar is only accepted in the middle of an element in order to prevent NTFS special filename attacks.
+				if (!p[0] || p[0] == '/') 
+				{
+					*d++ = '_';
+					repl_seq_count++;
+					continue;
+				}
+				else if (d == e_start || strchr(":/", d[-1])) 
+				{
+					*d++ = '_';
+					repl_seq_count++;
+					continue;
+				}
+				
+				// we're looking at a plain-as-Jim vanilla '$' dollar here: pass as-is:
+				*d++ = c;
+				repl_seq_count = 0;
+				continue;
+			}
+			else if (isalnum(c))
 			{
 				// we're looking at a plain-as-Jim vanilla character here: pass as-is:
 				*d++ = c;
 				repl_seq_count = 0;
+				continue;
+			}
+			else if (c == '-')
+			{
+				// Furthermore it's a **bad idea** to start any filename with `"-"` or `"--"` 
+				// as this clashes very badly with standard UNIX commandline options; 
+				// only a few tools "fix" this by allowing a special `"--"` commandline option.
+				//
+				// We also don't like filenames which end with '-', but that's more an aesthetical thing...
+				//
+				// Hence we nuke such filenames:
+				if (!p[0] || p[0] == '/') 
+				{
+					*d++ = '_';
+					repl_seq_count++;
+					continue;
+				}
+				else if (d == cur_segment_start)
+				{
+					*d++ = '_';
+					repl_seq_count++;
+					continue;
+				}
+
+				// we're looking at a plain-as-Jim vanilla '-' dash character here: pass as-is:
+				*d++ = c;
+				repl_seq_count = 0;
+				continue;
+			}
+			else if (strchr("_()", c))
+			{
+				// we're looking at a plain-as-Jim vanilla character here: pass as-is:
+				*d++ = c;
+				repl_seq_count = 0;
+				continue;
+			}
+			else 
+			{
+				// anything else is considered illegal / bad for our FS health:
+				*d++ = '_';
+				repl_seq_count++;
+				continue;
 			}
 		}
 	}
@@ -548,7 +909,7 @@ fz_sanitize_path_ex(char* path, const char* set, const char* replace_single, cha
 	// and print the sentinel
 	*d = 0;
 
-	return rv_path;
+	return 0;
 }
 
 // Note:

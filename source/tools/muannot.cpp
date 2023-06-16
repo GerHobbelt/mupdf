@@ -2,6 +2,8 @@
 // PDF Annotations tool for Qiqqa: Extract / Inject annotations
 //
 
+#pragma message("TODO: implement this tool")
+
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/dir.h"

@@ -63,6 +63,7 @@ pdf_obj *pdf_deep_copy_obj(fz_context *ctx, pdf_obj *obj);
 
 pdf_obj *pdf_keep_obj(fz_context *ctx, pdf_obj *obj);
 void pdf_drop_obj(fz_context *ctx, pdf_obj *obj);
+pdf_obj *pdf_drop_singleton_obj(fz_context *ctx, pdf_obj *obj);
 
 int pdf_is_null(fz_context *ctx, pdf_obj *obj);
 int pdf_is_bool(fz_context *ctx, pdf_obj *obj);
@@ -237,6 +238,7 @@ pdf_obj *pdf_dict_gets(fz_context *ctx, pdf_obj *dict, const char *key);
 pdf_obj *pdf_dict_getsa(fz_context *ctx, pdf_obj *dict, const char *key, const char *abbrev);
 pdf_obj *pdf_dict_get_inheritable(fz_context *ctx, pdf_obj *dict, pdf_obj *key);
 pdf_obj *pdf_dict_getp_inheritable(fz_context *ctx, pdf_obj *dict, const char *path);
+pdf_obj *pdf_dict_gets_inheritable(fz_context *ctx, pdf_obj *dict, const char *key);
 void pdf_dict_put(fz_context *ctx, pdf_obj *dict, pdf_obj *key, pdf_obj *val);
 void pdf_dict_put_drop(fz_context *ctx, pdf_obj *dict, pdf_obj *key, pdf_obj *val);
 void pdf_dict_get_put_drop(fz_context *ctx, pdf_obj *dict, pdf_obj *key, pdf_obj *val, pdf_obj **old_val);
