@@ -1,6 +1,8 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+----
+
 
 .. default-domain:: js
 
@@ -30,16 +32,16 @@
     :return: `Document`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
         var document = new mupdf.Document.openDocument("my_pdf.pdf", "application/pdf");
 
 
-----
 
-**Instance methods**
+
+|instance_methods|
 
 .. method:: needsPassword()
 
@@ -47,7 +49,7 @@
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -61,7 +63,7 @@
     :arg password: The password to attempt authentication with.
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -75,7 +77,7 @@
     :arg permission: `String` The permission to seek for, e.g. "edit".
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -89,7 +91,7 @@
     :arg key: `String`.
     :return: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -103,7 +105,7 @@
     :arg key: `String`.
     :arg value: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -116,7 +118,7 @@
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -135,7 +137,7 @@
     :arg pageHeight: `Int`.
     :arg fontSize: `Int`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -148,7 +150,7 @@
 
     :return: `Int`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -161,7 +163,7 @@
 
     :return: `Page` or `PDFPage`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -171,15 +173,17 @@
 
     Returns an array with the outline (also known as "table of contents" or "bookmarks"). In the array is an object for each heading with the property 'title', and a property 'page' containing the page number. If the object has a 'down' property, it contains an array with all the sub-headings for that entry.
 
-    :return: `[]`.
+    :return: `[...]`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
         var outline = document.loadOutline();
 
+
+.. _mutool_run_js_api_document_outlineIterator:
 
 .. method:: outlineIterator()
 
@@ -189,7 +193,7 @@
 
     :return: `OutlineIterator`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -206,7 +210,7 @@
     :arg uri: `String`.
     :return: :ref:`Link destination<mutool_run_js_api_link_dest>`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -220,7 +224,7 @@
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -237,7 +241,7 @@
     :return: `String`.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

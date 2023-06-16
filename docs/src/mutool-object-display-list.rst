@@ -1,6 +1,8 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+----
+
 .. default-domain:: js
 
 
@@ -31,14 +33,15 @@ A display list records all the device calls for playback later. If you want to r
 
     :return: `DisplayList`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
         var displayList = new mupdf.DisplayList([0,0,100,100]);
 
 
-**Instance methods**
+
+|instance_methods|
 
 
 .. method:: run(device, transform)
@@ -48,12 +51,28 @@ A display list records all the device calls for playback later. If you want to r
     :arg device: `Device`.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
+    |example_tag|
 
-.. method:: bound()
+    .. code-block:: javascript
+
+        displayList.run(device, mupdf.Matrix.identity);
+
+
+
+.. method:: getBounds()
 
     Returns a rectangle containing the dimensions of the display list contents.
 
     :return: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var bounds = displayList.getBounds();
+
+
 
 
 .. method:: toPixmap(transform, colorspace, alpha)
@@ -62,8 +81,16 @@ A display list records all the device calls for playback later. If you want to r
 
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg colorspace: `ColorSpace`.
-    :arg alpha: `Boolean`. If alpha is *true*, the annotation will be drawn on a transparent background, otherwise white.
+    :arg alpha: `Boolean`. If alpha is *true*, a transparent background, otherwise white.
 
+    :return: `Pixmap`.
+
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var pixmap = displayList.toPixmap(mupdf.Matrix.identity, mupdf.ColorSpace.DeviceRGB, false);
 
 
 .. method:: toStructuredText(options)
@@ -74,10 +101,31 @@ A display list records all the device calls for playback later. If you want to r
     :arg options: `String`.
     :return: `StructuredText`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var sText = displayList.toStructuredText("preserve-whitespace");
+
+
 
 .. method:: search(needle)
 
-    Search the display list text for all instances of 'needle', and return an array with :ref:`rectangles<mutool_run_js_api_rectangle>` of all matches found.
+    Search the display list text for all instances of the `needle` value, and return an array with :ref:`rectangles<mutool_run_js_api_rectangle>` of all matches found.
 
     :arg needle: `String`.
-    :return: `[]`.
+    :return: `[...]`.
+
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var results = displayList.search("hello");
+
+
+    |tor_todo| In WASM, TypeError: displayList.search is not a function
+
+
+
+

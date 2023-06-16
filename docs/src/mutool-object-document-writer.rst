@@ -1,6 +1,8 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+----
+
 .. default-domain:: js
 
 .. include:: html_tags.rst
@@ -13,7 +15,6 @@
 
 
 
-
 `DocumentWriter`
 ---------------------
 
@@ -21,6 +22,8 @@
 
 
 .. method:: new DocumentWriter(filename, format, options)
+
+    |mutool_tag|
 
     *Constructor method*.
 
@@ -34,12 +37,43 @@
     :arg options: The options as key-value pairs.
     :return: `DocumentWriter`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
-        var writer = new DocumentWriter("out.pdf", "PDF", "");
+        var writer = new mupdf.DocumentWriter("out.pdf", "PDF", "");
 
+
+
+.. method:: new DocumentWriter(buffer, format, options)
+
+    |wasm_tag|
+
+    *Constructor method*.
+
+    Create a new document writer to create a document with the specified format and output options. The `options` argument is a comma separated list of flags and key-value pairs.
+
+    The output `format` & `options` are the same as in the :ref:`mutool convert<mutool_convert>` command.
+
+
+    :arg buffer: The buffer to output to.
+    :arg format: The file format.
+    :arg options: The options as key-value pairs.
+    :return: `DocumentWriter`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var writer = new mupdf.DocumentWriter(buffer, "PDF", "");
+
+
+    |tor_todo| WASM: TypeError: libmupdf._wasm_new_document_writer_with_buffer is not a function.
+
+
+
+
+|instance_methods|
 
 
 .. method:: beginPage(mediabox)
@@ -50,13 +84,36 @@
 
     :return: `Device`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var device = writer.beginPage([0,0,100,100]);
+
 
 .. method:: endPage(device)
 
     Finish the page rendering. The argument must be the same `Device` object that was returned by the `beginPage` method.
 
-    :arg mediabox: `Device`.
+    :arg device: `Device`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        writer.endPage(device);
+
 
 .. method:: close()
 
     Finish the document and flush any pending output.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        writer.close();
+
+
+
+

@@ -1,6 +1,8 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+----
+
 .. default-domain:: js
 
 .. include:: html_tags.rst
@@ -16,6 +18,7 @@
 `Archive`
 ------------------------
 
+|mutool_tag|
 
 .. method:: new Archive(path)
 
@@ -27,11 +30,14 @@
 
     :return: `Archive`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
-        var archive = new Archive(<path>);
+        var archive = new mupdf.Archive(<path>);
+
+
+|instance_methods|
 
 .. method:: getFormat()
 
@@ -39,11 +45,23 @@
 
     :return: `String`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var format = archive.getFormat();
+
 .. method:: countEntries()
 
     Returns the number of entries in the archive.
 
     :return: `Integer`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var numEntries = archive.countEntries();
 
 .. method:: listEntry(idx)
 
@@ -53,6 +71,13 @@
 
     :return: `String`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var entry = archive.listEntry(0);
+
+
 .. method:: hasEntry(name)
 
     Returns :title:`true` if an entry of the given name exists in the archive.
@@ -60,6 +85,13 @@
     :arg name: `String`.
 
     :return: `Boolean`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var hasEntry = archive.hasEntry("Hello");
+
 
 .. method:: readEntry(name)
 
@@ -69,10 +101,17 @@
 
     :return: `String`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var value = archive.readEntry("Hello");
+
 
 `MultiArchive`
 ------------------------
 
+|mutool_tag|
 
 .. method:: new MultiArchive()
 
@@ -82,11 +121,13 @@
 
     :return: `MultiArchive`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
-        var multiArchive = new MultiArchive();
+        var multiArchive = new mupdf.MultiArchive();
+
+|instance_methods|
 
 
 .. method:: mountArchive(subArchive, path)
@@ -96,10 +137,18 @@
     :arg subArchive: `Archive`.
     :arg path: `String`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        archive.mountArchive(subArchive, null);
+
 
 
 `TreeArchive`
 ------------------------
+
+|mutool_tag|
 
 .. method:: new TreeArchive()
 
@@ -109,11 +158,13 @@
 
     :return: `TreeArchive`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
-        var treeArchive = new TreeArchive();
+        var treeArchive = new mupdf.TreeArchive();
+
+|instance_methods|
 
 
 .. method:: add(name, buffer)
@@ -122,3 +173,11 @@
 
     :arg name: `String`.
     :arg buffer: `Buffer`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        archive.add("name", buffer);
+
+

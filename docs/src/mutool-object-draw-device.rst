@@ -2,6 +2,7 @@
 .. All Rights Reserved.
 
 
+----
 
 .. default-domain:: js
 
@@ -30,8 +31,8 @@ The `DrawDevice` can be used to render to a :ref:`Pixmap<mutool_run_js_api_pixma
 
     :return: `DrawDevice`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
-        var drawDevice = new mupdf.DrawDevice(Matrix.identity, pixmap);
+        var drawDevice = new mupdf.DrawDevice(mupdf.Matrix.identity, pixmap);

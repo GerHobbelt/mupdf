@@ -1,6 +1,7 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+----
 
 .. default-domain:: js
 
@@ -17,12 +18,16 @@
 `OutlineIterator`
 ------------------------
 
-An outline iterator is can be used to walk over all the items in an :title:`Outline` and query their properties. To be able to insert items at the end of a list of sibling items, it can also walk one item past the end of the list.
+
+|mutool_tag|
+
+An outline iterator is can be used to walk over all the items in an :title:`Outline` and query their properties. To be able to insert items at the end of a list of sibling items, it can also walk one item past the end of the list. To get an instance of `OutlineIterator` use :ref:`Document outlineIterator<mutool_run_js_api_document_outlineIterator>`.
 
 .. note::
 
     In the context of a :title:`PDF` file, the document's :title:`Outline` is also known as :title:`Table of Contents` or :title:`Bookmarks`.
 
+|instance_methods|
 
 .. method:: item()
 
@@ -30,11 +35,23 @@ An outline iterator is can be used to walk over all the items in an :title:`Outl
 
     :return: `Object`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var obj = outlineIterator.item();
+
 .. method:: next()
 
     Move the iterator position to "next".
 
     :return: `Int`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var next = outlineIterator.next();
 
 .. method:: prev()
 
@@ -42,11 +59,23 @@ An outline iterator is can be used to walk over all the items in an :title:`Outl
 
     :return: `Int`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var next = outlineIterator.prev();
+
 .. method:: up()
 
     Move the iterator position "up".
 
     :return: `Int`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var next = outlineIterator.up();
 
 
 .. method:: down()
@@ -54,6 +83,12 @@ An outline iterator is can be used to walk over all the items in an :title:`Outl
     Move the iterator position "down".
 
     :return: `Int`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var next = outlineIterator.down();
 
 
 .. note::
@@ -70,14 +105,37 @@ An outline iterator is can be used to walk over all the items in an :title:`Outl
 
     :return: `Int`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var valid = outlineIterator.insert(item);
+
+
 .. method:: delete()
 
     Delete the current item. This implicitly moves to the next item. Returns 0 if the new position has a valid item, or 1 if the position contains no valid item, but one may be inserted at this position.
 
     :return: `Int`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        outlineIterator.delete();
+
 .. method:: update(item)
 
-    Updates the current item with the properties of the supplied item.
+    Updates with the properties of the supplied item.
 
     :arg item: `Object` which conforms to the :ref:`Outline Iterator Object<mutool_run_js_api_outline_iterator_object>`.
+
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        outlineIterator.update(item);
+
+
+

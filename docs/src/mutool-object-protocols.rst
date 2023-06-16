@@ -1,6 +1,7 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+----
 
 .. default-domain:: js
 
@@ -138,7 +139,7 @@ The stroking state is a dictionary with keys for:
         Array of on/off dash lengths.
 
 
-**Example**
+|example_tag|
 
     `{dashes:[5,10], lineWidth:3, lineCap:'Round'}`
 

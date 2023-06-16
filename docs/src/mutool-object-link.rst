@@ -1,6 +1,7 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+----
 
 .. default-domain:: js
 
@@ -27,7 +28,7 @@
 
     :return: `[ulx,uly,lrx,lry]`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -40,7 +41,7 @@
 
     :return: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -56,7 +57,7 @@
 
     :return: `Boolean`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

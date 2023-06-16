@@ -1,6 +1,8 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+----
+
 .. default-domain:: js
 
 .. include:: html_tags.rst
@@ -25,7 +27,7 @@
 
     :return: `Buffer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -42,7 +44,7 @@
 
     :return: `Buffer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -61,15 +63,15 @@
 
     :return: `Buffer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
         var buffer = mupdf.readFile("my_file.pdf");
 
-----
 
-**Instance properties**
+
+|instance_props|
 
 
 
@@ -87,7 +89,7 @@
     Read/write the byte at index 'n'. Will throw exceptions on out of bounds accesses.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -96,9 +98,7 @@
 
 
 
-----
-
-**Instance methods**
+|instance_methods|
 
 .. method:: getLength()
 
@@ -108,7 +108,7 @@
 
     :return: `Integer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -121,7 +121,7 @@
 
     :arg b: The byte value.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -136,7 +136,7 @@
 
     :arg at: `Integer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -151,7 +151,7 @@
 
     :arg c: The character value.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -164,7 +164,7 @@
 
     :arg ...: List of arguments.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -177,7 +177,7 @@
 
     :arg ...: List of arguments.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -190,7 +190,7 @@
 
     :arg data: Data buffer.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -208,7 +208,7 @@
 
     :return: `Buffer`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -223,7 +223,7 @@
 
     :arg fileName: Filename to save to.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -238,7 +238,7 @@
 
     :return: `Uint8Array`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
@@ -253,7 +253,7 @@
 
     :return: `String`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 

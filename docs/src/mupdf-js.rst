@@ -4,6 +4,8 @@
 
 .. default-domain:: js
 
+.. include:: html_tags.rst
+
 
 .. title:: MuPDF & JavaScript
 
@@ -34,10 +36,45 @@ API's generally work for both environments, however if an API is specific to onl
 
 
 
-
 .. note::
 
-   In the code examples, if you are developing for `mutool run` then the `mupdf` prefix is optional.
+   - In the code examples, if you are developing for `mutool run` then the `mupdf` prefix is optional.
+
+   - `mutool run` supports :title:`ECMAScript 5` syntax in strict mode, but not :title:`ECMAScript 6` and above.
+
+
+
+Class A-Z Index
+------------------
+
+- :ref:`Archive<mutool_run_js_api_object_archive>`
+- :ref:`Buffer<mutool_run_js_api_buffer>`
+- :ref:`ColorSpace<mutool_run_js_api_colorspace>`
+- :ref:`Device<mutool_run_js_api_device>`
+- :ref:`Document<mutool_run_js_api_document>`
+- :ref:`DocumentWriter<mutool_run_js_api_document_writer>`
+- :ref:`DisplayList<mutool_run_js_api_display_list>`
+- :ref:`DisplayListDevice<mutool_run_js_api_display_list_device>`
+- :ref:`DrawDevice<mutool_run_js_api_draw_device>`
+- :ref:`Image<mutool_run_js_api_image>`
+- :ref:`Font<mutool_run_js_api_font>`
+- :ref:`Link<mutool_run_js_api_link>`
+- :ref:`OutlineIterator<mutool_run_js_api_object_outline_iterator>`
+- :ref:`Page<mutool_run_js_api_page>`
+- :ref:`Path<mutool_run_js_api_path>`
+- :ref:`PDFAnnotation<mutool_run_js_api_pdf_annotation>`
+- :ref:`PDFDocument<mutool_run_js_api_pdf_document>`
+- :ref:`PDFGraftMap<mutool_run_js_api_pdf_graft_map>`
+- :ref:`PDFObject<mutool_run_js_api_pdf_object>`
+- :ref:`PDFPage<mutool_run_js_api_pdf_page>`
+- :ref:`PDFWidget<mutool_run_js_api_object_pdf_widget>`
+- :ref:`Pixmap<mutool_run_js_api_pixmap>`
+- :ref:`Story<mutool_run_js_api_object_story>`
+- :ref:`StructuredText<mutool_run_js_api_structured_text>`
+- :ref:`Text<mutool_run_js_api_text>`
+- :ref:`XML<mutool_run_js_api_object_xml>`
+
+
 
 
 
@@ -77,7 +114,7 @@ This matrix is represented in :title:`JavaScript` as `[a,b,c,d,e,f]`.
 
    The identity matrix, short hand for `[1,0,0,1,0,0]`.
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 
@@ -94,7 +131,7 @@ This matrix is represented in :title:`JavaScript` as `[a,b,c,d,e,f]`.
 
    :return: `[a,b,c,d,e,f]`.
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 
@@ -110,7 +147,7 @@ This matrix is represented in :title:`JavaScript` as `[a,b,c,d,e,f]`.
 
    :return: `[a,b,c,d,e,f]`.
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 
@@ -124,7 +161,7 @@ This matrix is represented in :title:`JavaScript` as `[a,b,c,d,e,f]`.
 
    :return: `[a,b,c,d,e,f]`.
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 
@@ -139,7 +176,7 @@ This matrix is represented in :title:`JavaScript` as `[a,b,c,d,e,f]`.
 
    :return: `[a,b,c,d,e,f]`.
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 
@@ -154,7 +191,7 @@ This matrix is represented in :title:`JavaScript` as `[a,b,c,d,e,f]`.
 
    :return: `[a,b,c,d,e,f]`.
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 
@@ -184,7 +221,7 @@ If the minimum x coordinate is bigger than the maximum x coordinate, :title:`MuP
 
    :return: `Boolean`.
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 
@@ -201,7 +238,7 @@ If the minimum x coordinate is bigger than the maximum x coordinate, :title:`MuP
 
    :return: `Boolean`.
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 
@@ -217,7 +254,7 @@ If the minimum x coordinate is bigger than the maximum x coordinate, :title:`MuP
 
    :return: `Boolean`.
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 
@@ -235,7 +272,7 @@ If the minimum x coordinate is bigger than the maximum x coordinate, :title:`MuP
 
    :return: `[a,b,c,d,e,f]`.
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 
@@ -362,7 +399,7 @@ Global :title:`MuPDF` methods
 
    :arg ...: Arguments to print.
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 
@@ -392,7 +429,7 @@ Global :title:`MuPDF` methods
    :arg object: Object to format.
 
 
-   **Example**
+   |example_tag|
 
    .. code-block:: javascript
 

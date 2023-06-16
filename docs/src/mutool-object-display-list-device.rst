@@ -1,6 +1,7 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+----
 
 .. default-domain:: js
 
@@ -27,8 +28,23 @@
 
     :return: `DisplayListDevice`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
-        var displayListDevice = new DisplayListDevice(my_display_list);
+        var displayListDevice = new mupdf.DisplayListDevice(my_display_list);
+
+
+
+    |tor_todo| In mutool - `TypeError: not a fz_display_list` , I ran this code:
+
+    .. code-block:: javascript
+
+        var my_display_list = new mupdf.DisplayList([0,0,100,100]);
+        console.log("my_display_list="+my_display_list);
+        var displayListDevice = new mupdf.DisplayListDevice(my_display_list);
+
+
+
+
+    |tor_todo| In WASM - `TypeError: libmupdf._wasm_new_list_device` is not a function

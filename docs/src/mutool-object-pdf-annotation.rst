@@ -1,6 +1,7 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+----
 
 .. default-domain:: js
 
@@ -15,14 +16,25 @@
 `PDFAnnotation`
 ----------------------
 
-:title:`PDF` Annotations belong to a specific `PDFPage` and may be created/changed/removed. Because annotation appearances may change (for several reasons) it is possible to scan through the annotations on a page and query them whether a re-render is necessary. Finally redaction annotations can be applied to a `PDFPage`, destructively removing content from the page.
+:title:`PDF` Annotations belong to a specific `PDFPage` and may be created/changed/removed. Because annotation appearances may change (for several reasons) it is possible to scan through the annotations on a page and query them to see whether a re-render is necessary. Finally redaction annotations can be applied to a `PDFPage`, destructively removing content from the page.
+
+To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_js_api_pdf_page>`, to create an annotation see: :ref:`PDFPage createAnnotation()<mutool_run_js_api_pdf_page_createAnnotation>`.
 
 
-.. method:: bound()
+|instance_methods|
+
+.. method:: getBounds()
 
     Returns a rectangle containing the location and dimension of the annotation.
 
     :return: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var bounds = annotation.getBounds();
 
 
 .. method:: run(device, transform)
@@ -31,6 +43,12 @@
 
     :arg device: `Device`.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.run(device, mupdf.Matrix.identity);
 
 
 .. method:: toPixmap(transform, colorspace, alpha)
@@ -41,12 +59,29 @@
     :arg colorspace: `ColorSpace`.
     :arg alpha: `Boolean`.
 
+    :return: `Pixmap`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var pixmap = annotation.toPixmap(mupdf.Matrix.identity, mupdf.ColorSpace.DeviceRGB, true);
+
+
+
 
 .. method:: toDisplayList()
 
     Record the contents of the annotation into a `DisplayList`.
 
     :return: `DisplayList`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var displayList = annotation.toDisplayList();
+
 
 
 .. method:: getObject()
@@ -55,12 +90,26 @@
 
     :return: `PDFObject`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var obj = annotation.getObject();
+
 
 .. method:: process(processor)
 
     Run through the annotation appearance stream and call methods on the supplied :ref:`PDF processor<mutool_run_js_api_pdf_processor>`.
 
     :arg processor: User defined function.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.process(processor);
+
+    |tor_todo| WASM process is not a function
 
 
 .. method:: setAppearance(appearance, state, transform, displayList)
@@ -71,6 +120,14 @@
     :arg state: `String` "On" or "Off".
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg displayList: `DisplayList`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setAppearance("N", "String", mupdf.Matrix.identity, displayList);
+
+    |tor_todo| WASM setAppearance is not a function
 
 .. method:: setAppearance(appearance, state, transform, bbox, resources, contents)
 
@@ -83,6 +140,14 @@
     :arg resources: Resources object.
     :arg contents: Contents string.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setAppearance("N", "String", mupdf.Matrix.identity, [0,0,100,100], resources, contents);
+
+
+    |tor_todo| WASM setAppearance is not a function
 
 **Appearance stream values**
 
@@ -104,36 +169,72 @@
 
     Update the appearance stream to account for changes in the annotation.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.update();
+
 
 .. method:: getHot()
+
+    |mutool_tag|
 
     Get the annotation as being hot, *i.e.* that the pointer is hovering over the annotation.
 
     :return: `Boolean`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.getHot();
+
+
 .. method:: setHot(hot)
+
+    |mutool_tag|
 
     Set the annotation as being hot, *i.e.* that the pointer is hovering over the annotation.
 
     :arg hot: `Boolean`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setHot(true);
+
+
 
 .. method:: getHiddenForEditing()
+
+    |mutool_tag|
 
     Get a special annotation hidden flag for editing. This flag prevents the annotation from being rendered.
 
     :return: `Boolean`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var hidden = annotation.getHiddenForEditing();
 
 .. method:: setHiddenForEditing(hidden)
+
+    |mutool_tag|
 
     Set a special annotation hidden flag for editing. This flag prevents the annotation from being rendered.
 
     :arg hidden: `Boolean`.
 
-----
+    |example_tag|
 
-These properties are available for all annotation types.
+    .. code-block:: javascript
+
+        annotation.setHiddenForEditing(true);
+
 
 .. method:: getType()
 
@@ -141,17 +242,38 @@ These properties are available for all annotation types.
 
     :return: `String` :ref:`Annotation type<mutool_run_js_api_annotation_types>`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var type = annotation.getType();
+
+
 .. method:: getFlags()
 
     Get the annotation flags.
 
     :return: `Integer` which determines the bit-field value.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var flags = annotation.getFlags();
+
+
 .. method:: setFlags(flags)
 
     Set the annotation flags.
 
     :arg flags: `Integer` which determines the bit-field value.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setFlags(8);
+
 
 
 **Annotation flags**
@@ -193,25 +315,53 @@ These properties are available for all annotation types.
 
     :return: `String`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var contents = annotation.getContents();
+
 .. method:: setContents(text)
 
     Set the annotation contents.
 
     :arg text: `String`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setContents("Hello World");
+
 
 .. method:: getBorder()
+
+    |mutool_tag|
 
     Get the annotation border line width in points.
 
     :return: `Float`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var border = annotation.getBorder();
+
+
 .. method:: setBorder(width)
+
+    |mutool_tag|
 
     Set the annotation border line width in points. Use `setBorderWidth()` to avoid removing the border effect.
 
     :arg width: `Float` Border width.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setBorder(1.0);
 
 .. method:: getColor()
 
@@ -219,11 +369,28 @@ These properties are available for all annotation types.
 
     :return: The :ref:`color value<mutool_run_js_api_colors>`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var color = annotation.getColor();
+
+    |tor_todo| WASM, TypeError: annotation.getColor is not a function
+
+
 .. method:: setColor(color)
 
     Set the annotation color, represented as an array of up to 4 component values.
 
     :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setColor([0,1,0]);
+
+    |tor_todo| WASM, TypeError: annotation.setColor is not a function
 
 .. method:: getOpacity()
 
@@ -231,11 +398,26 @@ These properties are available for all annotation types.
 
     :return: The :ref:`opacity<mutool_run_js_api_alpha>` value.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var opacity = annotation.getOpacity();
+
+
+
 .. method:: setOpacity(opacity)
 
     Set the annotation opacity.
 
     :arg opacity: The :ref:`opacity<mutool_run_js_api_alpha>` value.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setOpacity(0.5);
+
 
 .. method:: getCreationDate()
 
@@ -243,12 +425,27 @@ These properties are available for all annotation types.
 
     :return: `Date`.
 
-.. method:: setCreationDate(milliseconds)
+    |example_tag|
 
-    Set the creation date to the number of milliseconds since the epoch.
+    .. code-block:: javascript
 
-    :arg milliseconds: `Integer` Milliseconds value.
+        var date = annotation.getCreationDate();
 
+
+
+.. method:: setCreationDate(date)
+
+    Set the creation date.
+
+    :arg date: `Date`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setCreationDate(new Date());
+
+    |tor_todo| In mutool this is milliseconds we need to change it to Date
 
 
 .. method:: getModificationDate()
@@ -257,12 +454,29 @@ These properties are available for all annotation types.
 
     :return: `Date`.
 
+    |example_tag|
 
-.. method:: setModificationDate(milliseconds)
+    .. code-block:: javascript
 
-    Set the annotation modification date to the number of milliseconds since the epoch.
+        var date = annotation.getModificationDate();
 
-    :arg milliseconds: `Integer` Milliseconds value.
+
+.. method:: setModificationDate(date)
+
+    Set the modification date.
+
+    :arg date: `Date`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setModificationDate(new Date());
+
+    |tor_todo| In mutool this is milliseconds we need to change it to Date
+
+
+
 
 
 .. method:: getQuadding()
@@ -271,6 +485,12 @@ These properties are available for all annotation types.
 
     :return: Quadding value, `0` for left-justified, `1` for centered, `2` for right-justified.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var quadding = annotation.getQuadding();
+
 
 .. method:: setQuadding(value)
 
@@ -278,12 +498,25 @@ These properties are available for all annotation types.
 
     :arg value: Quadding value, `0` for left-justified, `1` for centered, `2` for right-justified.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setQuadding(1);
+
+
 
 .. method:: getLanguage()
 
-    Get the annotation language (or the get the inherited document language).
+    Get the annotation language (or get the inherited document language).
 
     :return: `String`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var language = annotation.getLanguage();
 
 
 .. method:: setLanguage(language)
@@ -291,6 +524,12 @@ These properties are available for all annotation types.
     Set the annotation language.
 
     :arg language: `String`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setLanguage("en");
 
 
 
@@ -305,11 +544,25 @@ These properties are only present for some annotation types, so support for them
 
     :return: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var rect = annotation.getRect();
+
+
+
 .. method:: setRect(rect)
 
     Set the annotation bounding box.
 
     :arg rect: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setRect([0,0,100,100]);
 
 
 .. method:: getDefaultAppearance()
@@ -317,6 +570,14 @@ These properties are only present for some annotation types, so support for them
     Get the default text appearance used for free text annotations.
 
     :return: `{font:String, size:Integer, color:[r,g,b]}` Returns an object with the key/value pairs.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var appearance = annotation.getDefaultAppearance();
+
+    |tor_todo| WASM TypeError: annotation.getDefaultAppearance is not a function
 
 
 .. method:: setDefaultAppearance(font, size, color)
@@ -327,6 +588,12 @@ These properties are only present for some annotation types, so support for them
     :arg size: `Integer`.
     :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setDefaultAppearance("Times-Roman", 16, [0,0,0]);
+
 
 .. method:: hasInteriorColor()
 
@@ -334,17 +601,45 @@ These properties are only present for some annotation types, so support for them
 
     :return: `Boolean`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var hasInteriorColor = annotation.hasInteriorColor();
+
+    |tor_todo| WASM TypeError: annotation.hasInteriorColor is not a function
+
+
 .. method:: getInteriorColor()
 
     Gets the annotation interior color.
 
     :return: The :ref:`color value<mutool_run_js_api_colors>`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var interiorColor = annotation.getInteriorColor();
+
+
+    |tor_todo| WASM TypeError: annotation.getInteriorColor is not a function
+
 .. method:: setInteriorColor(color)
 
     Sets the annotation interior color.
 
     :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setInteriorColor([0,1,1]);
+
+
+
+    |tor_todo| WASM TypeError: annotation.setInteriorColor is not a function
 
 
 
@@ -354,11 +649,25 @@ These properties are only present for some annotation types, so support for them
 
     :return: `Boolean`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var hasAuthor = annotation.hasAuthor();
+
+    |tor_todo| WASM TypeError: annotation.hasAuthor is not a function
+
 .. method:: getAuthor()
 
     Gets the annotation author.
 
     :return: `String`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var author = annotation.getAuthor();
 
 
 .. method:: setAuthor(author)
@@ -367,28 +676,60 @@ These properties are only present for some annotation types, so support for them
 
     :arg author: `String`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setAuthor("Jane Doe");
+
 
 .. method:: hasLineEndingStyles()
 
-    Checks the support for line ending styles.
+    Checks the support for :ref:`line ending styles<mutool_pdf_annotation_line_ending_styles>`.
 
     :return: `Boolean`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var hasLineEndingStyles = annotation.hasLineEndingStyles();
+
+    |tor_todo| WASM TypeError: annotation.hasLineEndingStyles is not a function
 
 
 .. method:: getLineEndingStyles()
 
-    Gets the line ending styles object.
+    Gets the :ref:`line ending styles<mutool_pdf_annotation_line_ending_styles>` object.
 
     :return: `{start:String, end:String}` Returns an object with the key/value pairs.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var lineEndingStyles = annotation.getLineEndingStyles();
+
+    |tor_todo| WASM TypeError: annotation.getLineEndingStyles is not a function
 
 
 .. method:: setLineEndingStyles(start, end)
 
-    Sets the line ending styles object.
+    Sets the :ref:`line ending styles<mutool_pdf_annotation_line_ending_styles>` object.
 
     :arg start: `String`.
     :arg end: `String`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setLineEndingStyles({start:"Square", end:"OpenArrow"});
+
+    |tor_todo| WASM TypeError: annotation.setLineEndingStyles is not a function
+
+
+.. _mutool_pdf_annotation_line_ending_styles:
 
 .. list-table::
    :header-rows: 1
@@ -414,11 +755,26 @@ These properties are only present for some annotation types, so support for them
 
     :return: `Boolean`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var hasIcon = annotation.hasIcon();
+
+    |tor_todo| WASM TypeError: annotation.hasIcon is not a function
+
+
 .. method:: getIcon()
 
     Gets the annotation icon.
 
     :return: `String`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var icon = annotation.getIcon();
 
 
 .. method:: setIcon(name)
@@ -426,6 +782,12 @@ These properties are only present for some annotation types, so support for them
     Sets the annotation icon.
 
     :arg name: `String`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setIcon("Note");
 
 
 .. list-table::
@@ -492,10 +854,17 @@ These properties are only present for some annotation types, so support for them
 
 .. method:: hasLine()
 
-
     Checks the support for annotation line.
 
     :return: `Boolean`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var hasLine = annotation.hasLine();
+
+    |tor_todo| WASM TypeError: annotation.hasLine is not a function
 
 
 .. method:: getLine()
@@ -503,6 +872,14 @@ These properties are only present for some annotation types, so support for them
     Get line end points, represented by an array of two points, each represented as an `[x, y]` array.
 
     :return: `[[x,y],...]`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var line = annotation.getLine();
+
+    |tor_todo| WASM TypeError: annotation.getLine is not a function
 
 
 .. method:: setLine(endpoints)
@@ -512,12 +889,28 @@ These properties are only present for some annotation types, so support for them
 
     :arg endpoints: `[[x,y],...]`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setLine([0,0], [100,100], [150, 175]);
+
+    |tor_todo| WASM TypeError: annotation.setLine is not a function
+
 
 .. method:: hasOpen()
 
     Checks the support for annotation open state.
 
     :return: `Boolean`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var hasOpen = annotation.hasOpen();
+
+    |tor_todo| WASM TypeError: annotation.hasOpen is not a function
 
 
 .. method:: isOpen()
@@ -526,29 +919,64 @@ These properties are only present for some annotation types, so support for them
 
     :return: `Boolean`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var isOpen = annotation.isOpen();
+
 .. method:: setIsOpen(state)
 
     Set annotation open state.
 
     :arg state: `Boolean`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setIsOpen(true);
+
+    |tor_todo| WASM TypeError: libmupdf._wasm_pdf_annot_set_is_open is not a function
+
 
 .. note::
 
-    "Open" refers to whether the annotation has an open state or is opened - e.g. A note icon is considered "Open" if the user has clicked on it to view its contents.
+    "Open" refers to whether the annotation has an open state or is opened - e.g. A Text Note annotation is considered "Open" if the user has clicked on it to view its contents.
 
 
 .. method:: hasFilespec()
+
+    |mutool_tag|
 
     Checks support for the annotation file specification.
 
     :return: `Boolean`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var hasFileSpec = annotation.hasFilespec();
+
+
+
+
+
 .. method:: getFilespec()
+
+    |mutool_tag|
 
     Gets the file specification object.
 
     :return: `Object` :ref:`File Specification Object<mutool_run_js_api_file_spec_object>`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var fileSpec = annotation.getFilespec(true);
+
 
 
 
@@ -557,12 +985,29 @@ These properties are only present for some annotation types, so support for them
 
 .. method:: setFilespec(fileSpecObject)
 
+    |mutool_tag|
+
     Sets the file specification object.
 
     :arg fileSpecObject: `Object` :ref:`File Specification object<mutool_run_js_api_file_spec_object>`.
 
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var fileSpec = annotation.setFilespec({filename:"my_file.pdf",
+                                               mimetype:"application/pdf",
+                                               size:1000,
+                                               creationDate:date,
+                                               modificationDate:date});
+
+
+
+
+
 ----
+
 
 The border drawn around some annotations can be controlled by:
 
@@ -572,11 +1017,28 @@ The border drawn around some annotations can be controlled by:
 
     :return: `Boolean`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var hasBorder = annotation.hasBorder();
+
+    |tor_todo| WASM, TypeError: annotation.hasBorder is not a function
+
+
 .. method:: getBorderStyle()
 
     Get the annotation border style, either of "Solid" or "Dashed".
 
     :return: `String`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var borderStyle = annotation.getBorderStyle();
+
+    |tor_todo| WASM, TypeError: annotation.getBorderStyle is not a function
 
 
 .. method:: setBorderStyle(style)
@@ -585,6 +1047,14 @@ The border drawn around some annotations can be controlled by:
 
     :arg: `String`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setBorderStyle("Dashed");
+
+    |tor_todo| WASM, TypeError: annotation.getBorderStyle is not a function
+
 
 .. method:: getBorderWidth()
 
@@ -592,11 +1062,29 @@ The border drawn around some annotations can be controlled by:
 
     :return: `Float`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var w = annotation.getBorderWidth();
+
+    |tor_todo| WASM, TypeError: annotation.getBorderWidth is not a function
+
+
 .. method:: setBorderWidth(width)
 
     Set the border width in points. Retain any existing border effects.
 
-    :arg width: `Float`
+    :arg width: `Float`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setBorderWidth(1.5);
+
+
+    |tor_todo| WASM, TypeError: annotation.setBorderWidth is not a function
 
 
 .. method:: getBorderDashCount()
@@ -605,6 +1093,14 @@ The border drawn around some annotations can be controlled by:
 
     :return: `Integer`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var dashCount = annotation.getBorderDashCount();
+
+    |tor_todo| WASM, TypeError:
+
 .. method:: getBorderDashItem(i)
 
     Returns the length of dash pattern item i.
@@ -612,22 +1108,55 @@ The border drawn around some annotations can be controlled by:
     :arg i: `Integer` Item index.
     :return: `Integer`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var length = annotation.getBorderDashItem(0);
+
+    |tor_todo| WASM, TypeError:
+
 
 .. method:: setBorderDashPattern(dashPattern)
 
     Set the annotation border dash pattern to the given array of dash item lengths. The supplied array represents the respective line stroke and gap lengths, e.g. `[1,1]` sets a small dash and small gap, `[2,1,4,1]` would set a medium dash, a small gap, a longer dash and then another small gap.
 
-    :arg dashpattern: [Integer, Integer, ....]
+    :arg dashpattern: [Integer, Integer, ....].
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setBorderDashPattern([2,1,4,1]);
+
+    |tor_todo| WASM, TypeError:
 
 .. method:: clearBorderDash()
 
     Clear the entire border dash pattern for an annotation.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.clearBorderDash();
+
+    |tor_todo| WASM, TypeError:
+
 
 .. method:: addBorderDashItem(length)
 
     Append an item (of the given length) to the end of the border dash pattern.
 
     :arg length: `Integer`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.addBorderDashItem(10);
+
+    |tor_todo| WASM, TypeError:
 
 
 Annotations that have a border effect allows the effect to be controlled by:
@@ -638,11 +1167,30 @@ Annotations that have a border effect allows the effect to be controlled by:
 
     :return: `Boolean`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var hasEffect = annotation.hasBorderEffect();
+
+
+    |tor_todo| WASM, TypeError:
+
+
 .. method:: getBorderEffect()
 
     Get the annotation border effect, either of "None" or "Cloudy".
 
     :return: `String`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var effect = annotation.getBorderEffect();
+
+    |tor_todo| WASM, TypeError:
+
 
 .. method:: setBorderEffect(effect)
 
@@ -650,17 +1198,45 @@ Annotations that have a border effect allows the effect to be controlled by:
 
     :arg: `String`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setBorderEffect("None");
+
+    |tor_todo| WASM, TypeError:
+
+
 .. method:: getBorderEffectIntensity()
 
     Get the annotation border effect intensity.
 
     :return: `Integer`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var intensity = annotation.getBorderEffectIntensity();
+
+
+    |tor_todo| WASM, TypeError:
+
+
 .. method:: setBorderEffectIntensity(intensity)
 
     Set the annotation border effect intensity. Recommended values are between `0` and `2` inclusive.
 
     :arg: `Integer`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setBorderEffectIntensity(2);
+
+
+    |tor_todo| WASM, TypeError:
 
 ----
 
@@ -672,21 +1248,59 @@ Ink annotations consist of a number of strokes, each consisting of a sequence of
 
     :return: `Boolean`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var hasInkList = annotation.hasInkList();
+
+
 .. method:: getInkList()
 
     Get the annotation ink list, represented as an array of strokes, each an array of points each an array of its X/Y coordinates.
 
-    :return: `[]`.
+    :return: `[...]`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var inkList = annotation.getInkList();
 
 .. method:: setInkList(inkList)
 
     Set the annotation ink list, represented as an array of strokes, each an array of points each an array of its X/Y coordinates.
 
-    :arg: `[]`.
+    :arg: `[...]`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var inkList = annotation.setInkList([
+                                                [
+                                                    [0,0]
+                                                ],
+                                                [
+                                                    [10,10], [20,20], [30,30]
+                                                ]
+                                            ]);
+
+
+    |tor_todo| WASM TypeError: libmupdf._wasm_pdf_annot_clear_ink_list is not a function
 
 .. method:: clearInkList()
 
     Clear the list of ink strokes for the annotation.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.clearInkList();
+
+    |tor_todo| WASM, TypeError: libmupdf._wasm_pdf_annot_clear_ink_list is not a function
+
 
 .. method:: addInkList(stroke)
 
@@ -694,15 +1308,48 @@ Ink annotations consist of a number of strokes, each consisting of a sequence of
 
     :arg stroke: `[]`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.addInkList(
+                                [
+                                    [0,0]
+                                ],
+                                [
+                                    [10,10], [20,20], [30,30]
+                                ]
+                             );
+
+    |tor_todo| WASM, TypeError: annotation.addInkList is not a function
+
+
 .. method:: addInkListStroke()
 
     Add a new empty stroke to the ink annotation.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.addInkListStroke();
+
+    |tor_todo| WASM, TypeError: libmupdf._wasm_pdf_annot_add_ink_list_stroke is not a function
+
 
 .. method:: addInkListStrokeVertex(vertex)
 
     Append a vertex to end of the last stroke in the ink annotation. The vertex is an array of its X/Y coordinates.
 
-    :arg vertex: `[]`.
+    :arg vertex: `[...]`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.addInkListStrokeVertex([0,0]);
+
+    |tor_todo| WASM, TypeError: libmupdf._wasm_pdf_annot_add_ink_list_stroke_vertex is not a function
 
 
 Text markup and redaction annotations consist of a set of quadadrilaterals controlled by:
@@ -713,27 +1360,65 @@ Text markup and redaction annotations consist of a set of quadadrilaterals contr
 
     :return: `Boolean`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var hasQuadPoints = annotation.hasQuadPoints();
+
+    |tor_todo| WASM, TypeError: annotation.hasQuadPoints is not a function
+
 .. method:: getQuadPoints()
 
     Get the annotation quadpoints, describing the areas affected by text markup annotations and link annotations.
 
-    :return: `[]`.
+    :return: `[...]`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var quadPoints = annotation.getQuadPoints();
 
 .. method:: setQuadPoints(quadPoints)
 
     Set the annotation quadpoints, describing the areas affected by text markup annotations and link annotations.
 
-    :arg quadPoints: `[]`.
+    :arg quadPoints: `[...]`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setQuadPoints([
+                                    [1,2,3,4,5,6,7,8],
+                                    [1,2,3,4,5,6,7,8],
+                                    [1,2,3,4,5,6,7,8]
+
+                                ]);
 
 .. method:: clearQuadPoints()
 
     Clear the list of quad points for the annotation.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.clearQuadPoints();
+
 
 .. method:: addQuadPoint(quadpoint)
 
     Append a single quad point as an array of 8 elements, where each pair are the X/Y coordinates of a corner of the quad.
 
     :arg quadpoint: `[]`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setQuadPoints([1,2,3,4,5,6,7,8]);
 
 
 Polygon and polyline annotations consist of a sequence of vertices with a straight line between them. Those can be controlled by:
@@ -744,28 +1429,68 @@ Polygon and polyline annotations consist of a sequence of vertices with a straig
 
     :return: `Boolean`.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var hasVertices = annotation.hasVertices();
+
+    |tor_todo| WASM, TypeError: annotation.hasVertices is not a function
+
+
 .. method:: getVertices()
 
     Get the annotation vertices, represented as an array of vertices each an array of its X/Y coordinates.
 
-    :return: `[]`.
+    :return: `[...]`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        var vertices = annotation.getVertices();
+
 
 .. method:: setVertices(vertices)
 
     Set the annotation vertices, represented as an array of vertices each an array of its X/Y coordinates.
 
-    :arg vertices: `[]`.
+    :arg vertices: `[...]`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setVertices([
+                                [0,0],
+                                [10,10],
+                                [20,20]
+                              ]);
 
 .. method:: clearVertices()
 
     Clear the list of vertices for the annotation.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.clearVertices();
 
 
 .. method:: addVertex(vertex)
 
     Append a single vertex as an array of its X/Y coordinates.
 
-    :arg vertex: `[]`.
+    :arg vertex: `[...]`.
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.addVertex([0,0]);
+
+    |tor_todo| WASM, TypeError: libmupdf._wasm_pdf_annot_add_vertex is not a function
 
 
 Stamp annotations have the option to set a custom image as its appearance.
@@ -775,3 +1500,14 @@ Stamp annotations have the option to set a custom image as its appearance.
     Set a custom image appearance for a stamp annotation.
 
     :arg image: `Image`.
+
+
+    |example_tag|
+
+    .. code-block:: javascript
+
+        annotation.setStampImage(image);
+
+    |tor_todo| WASM, TypeError: annotation.setStampImage is not a function
+
+

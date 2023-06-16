@@ -1,6 +1,7 @@
 .. Copyright (C) 2001-2023 Artifex Software, Inc.
 .. All Rights Reserved.
 
+----
 
 .. default-domain:: js
 
@@ -29,13 +30,19 @@ A `Text` object contains text.
 
     :return: `Text`.
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
-        var text = new Text();
+        var text = new mupdf.Text();
 
 
+    |tor_todo| TypeError: libmupdf._wasm_new_text is not a function
+
+
+
+
+|instance_methods|
 
 .. method:: showGlyph(font, transform, glyph, unicode, wmode)
 
@@ -47,10 +54,15 @@ A `Text` object contains text.
 
     :arg font: `Font` object.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
-    :arg glyph:
-    :arg unicode:
+    :arg glyph: `Integer`.
+    :arg unicode: `Integer`.
     :arg wmode: `0` for horizontal writing, and `1` for vertical writing.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        text.showGlyph(new mupdf.Font("Times-Roman"), mupdf.Matrix.identity, -1, -1, 0);
 
 .. method:: showString(font, transform, string)
 
@@ -60,6 +72,13 @@ A `Text` object contains text.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg string: String content for `Text` object.
 
+    |example_tag|
+
+    .. code-block:: javascript
+
+        text.showString(new mupdf.Font("Times-Roman"), mupdf.Matrix.identity, "Hello");
+
+
 .. method:: walk(textWalker)
 
     Call the `showGlyph` method on the `textWalker` object for each glyph in the text object.
@@ -67,7 +86,7 @@ A `Text` object contains text.
     :arg textWalker: The text walker object. A user definable :title:`JavaScript` object which can be used to trigger your own functions on the text methods.
 
 
-    **Example**
+    |example_tag|
 
     .. code-block:: javascript
 
