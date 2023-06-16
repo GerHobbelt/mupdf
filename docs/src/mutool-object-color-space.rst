@@ -5,7 +5,6 @@
 
 .. default-domain:: js
 
-
 .. include:: html_tags.rst
 
 .. _mutool_object_color_space:
@@ -105,7 +104,7 @@
 
         var bool = colorSpace.isGray();
 
-    |tor_todo| Make wasm method to match this.
+    .. |tor_todo| Make wasm method to match this.
 
 
 .. method:: isRGB()
@@ -120,7 +119,7 @@
 
         var bool = colorSpace.isRGB();
 
-    |tor_todo| Make wasm method to match this.
+    .. |tor_todo| Make wasm method to match this.
 
 
 .. method:: isCMYK()
@@ -135,7 +134,7 @@
 
         var bool = colorSpace.isCMYK();
 
-    |tor_todo| Make wasm method to match this.
+    .. |tor_todo| Make wasm method to match this.
 
 .. method:: isIndexed()
 
@@ -149,7 +148,7 @@
 
         var bool = colorSpace.isIndexed();
 
-    |tor_todo| Make wasm method to match this.
+    .. |tor_todo| Make wasm method to match this.
 
 .. method:: isLab()
 
@@ -163,7 +162,7 @@
 
         var bool = colorSpace.isLab();
 
-    |tor_todo| Make wasm method to match this.
+    .. |tor_todo| Make wasm method to match this.
 
 .. method:: isDeviceN()
 
@@ -178,7 +177,7 @@
         var bool = colorSpace.isDeviceN();
 
 
-    |tor_todo| Make wasm method to match this.
+    .. |tor_todo| Make wasm method to match this.
 
 
 .. method:: isSubtractive()
@@ -194,7 +193,7 @@
         var bool = colorSpace.isSubtractive();
 
 
-    |tor_todo| Make wasm method to match this.
+    .. |tor_todo| Make wasm method to match this.
 
 
 .. method:: getType()
@@ -206,7 +205,7 @@
     :return: `String` One of "None", "Gray", "RGB", "BGR", "CMYK", "Lab", "Indexed", "Separation".
 
 
-    |tor_todo| Make mutool run method match this.
+    .. |tor_todo| Make mutool run method match this.
 
 
 
@@ -216,7 +215,7 @@
 ------------------------------
 
 
-|tor_todo| I couldn't get any of this "DefaultColorSpaces" stuff to run in mutool - I guess it is redundant?
+.. |tor_todo| I couldn't get any of this "DefaultColorSpaces" stuff to run in mutool - I guess it is redundant?
 
 
 `DefaultColorSpaces` is an object with keys for:

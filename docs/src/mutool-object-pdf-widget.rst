@@ -31,6 +31,8 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
 .. method:: getFieldType()
 
+    |mutool_tag_wasm_soon|
+
     Return `String` indicating type of widget: "button", "checkbox", "combobox", "listbox", "radiobutton", "signature" or "text".
 
     :return: `String`.
@@ -41,7 +43,7 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
         var type = widget.getFieldType();
 
-    |tor_todo| WASM: TypeError: PDFWidget.TYPES is not a function
+    .. |tor_todo| WASM: TypeError: PDFWidget.TYPES is not a function
 
 
 .. method:: getFieldFlags()
@@ -159,10 +161,12 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
         var options = widget.getOptions();
 
-    |tor_todo| In both WASM & mutool this always returned undefined?, I tried checkboxes & radio buttons
+    .. |tor_todo| In both WASM & mutool this always returned undefined?, I tried checkboxes & radio buttons
 
 
 .. method:: layoutTextWidget()
+
+    |mutool_tag_wasm_soon|
 
     Layout the value of a text widget. Returns a :ref:`Text Layout Object<mutool_run_js_api_pdf_widget_text_layout_object>`.
 
@@ -174,7 +178,7 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
         var layout = widget.layoutTextWidget();
 
-    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+    .. |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 
 .. method:: isReadOnly()
@@ -207,6 +211,8 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
 .. method:: getEditingState()
 
+    |mutool_tag_wasm_soon|
+
     Gets whether the widget is in editing state.
 
     :return: `Boolean`.
@@ -217,10 +223,12 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
         var state = widget.getEditingState();
 
-    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+    .. |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 
 .. method:: setEditingState(state)
+
+    |mutool_tag_wasm_soon|
 
     Set whether the widget is in editing state.
 
@@ -233,7 +241,7 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
         widget.getEditingState(false);
 
 
-    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+    .. |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 .. note::
 
@@ -249,7 +257,13 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
         widget.update();
 
+
+Signature Methods
+~~~~~~~~~~~~~~~~~~~~~~
+
 .. method:: isSigned()
+
+    |mutool_tag_wasm_soon|
 
     Returns :title:`true` if the signature is signed.
 
@@ -261,10 +275,12 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
         var isSigned = widget.isSigned();
 
-    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+    .. |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 
 .. method:: validateSignature()
+
+    |mutool_tag_wasm_soon|
 
     Returns number of updates ago when signature became invalid. Returns `0` is signature is still valid, `1` if it became invalid during the last save, etc.
 
@@ -277,9 +293,11 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
         var validNum = widget.validateSignature();
 
 
-    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+    .. |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 .. method:: checkCertificate()
+
+    |mutool_tag_wasm_soon|
 
     Returns "OK" if signature checked out OK, otherwise a text string containing an error message, e.g. "Self-signed certificate." or "Signature invalidated by change to document.", etc.
 
@@ -292,10 +310,12 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
         var result = widget.checkCertificate();
 
 
-    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+    .. |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 
 .. method:: getSignatory()
+
+    |mutool_tag_wasm_soon|
 
     Returns a text string with the distinguished name from a signed signature, or a text string with an error message.
 
@@ -307,9 +327,11 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 
         var signatory = widget.getSignatory();
 
-    |tor_todo| Source file has a todo for "getSignature", should this be getSignatory ?
+    .. |tor_todo| Source file has a todo for "getSignature", should this be getSignatory ?
 
 .. method:: previewSignature(signer, signatureConfig, image, reason, location)
+
+    |mutool_tag_wasm_soon|
 
     Return a :ref:`Pixmap<mutool_object_pixmap>` preview of what the signature would look like if signed with the given configuration. Reason and location may be `undefined`, in which case they are not shown.
 
@@ -328,13 +350,15 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
         var pixmap = widget.previewSignature(signer, {showLabels:true, showDate:true}, image, "", "");
 
 
-    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+    .. |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 
 
 .. _mutool_object_pdf_widget_sign:
 
 .. method:: sign(signer, signatureConfig, image, reason, location)
+
+    |mutool_tag_wasm_soon|
 
     Sign the signature with the given configuration. Reason and location may be `undefined`, in which case they are not shown.
 
@@ -352,10 +376,12 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
         widget.sign(signer, {showLabels:true, showDate:true}, image, "", "");
 
 
-    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+    .. |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 
 .. method:: clearSignature()
+
+    |mutool_tag_wasm_soon|
 
     Clear a signed signature, making it unsigned again.
 
@@ -366,10 +392,16 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
         widget.clearSignature();
 
 
-    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+    .. |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+
+
+Widget Events
+~~~~~~~~~~~~~~~~~~~~~
 
 
 .. method:: eventEnter()
+
+    |mutool_tag_wasm_soon|
 
     Trigger the event when the pointing device enters a widget's active area.
 
@@ -380,10 +412,12 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
         widget.eventEnter();
 
 
-    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+    .. |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 
 .. method:: eventExit()
+
+    |mutool_tag_wasm_soon|
 
     Trigger the event when the pointing device exits a widget's active area.
 
@@ -394,9 +428,11 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
         widget.eventExit();
 
 
-    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+    .. |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 .. method:: eventDown()
+
+    |mutool_tag_wasm_soon|
 
     Trigger the event when the pointing device's button is depressed within a widget's active area.
 
@@ -407,9 +443,11 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
         widget.eventDown();
 
 
-    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+    .. |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 .. method:: eventUp()
+
+    |mutool_tag_wasm_soon|
 
     Trigger the event when the pointing device's button is released within a widget's active area.
 
@@ -420,9 +458,11 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
         widget.eventUp();
 
 
-    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+    .. |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 .. method:: eventFocus()
+
+    |mutool_tag_wasm_soon|
 
     Trigger the event when the a widget gains input focus.
 
@@ -433,9 +473,11 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
         widget.eventFocus();
 
 
-    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+    .. |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 .. method:: eventBlur()
+
+    |mutool_tag_wasm_soon|
 
     Trigger the event when the a widget loses input focus.
 
@@ -446,7 +488,7 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
         widget.eventBlur();
 
 
-    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+    .. |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 
 
@@ -460,6 +502,8 @@ To get the widgets on a page see: :ref:`PDFPage getWidgets()<mutool_run_js_api_p
 To create a signer object an instance of `PDFPKCS7Signer` is required.
 
 .. method:: new (filename, password)
+
+    |mutool_tag_wasm_soon|
 
     Read a certificate and private key from a :title:`pfx` file and create a :title:`signer` to hold this information. Used with :ref:`PDFWidget.sign()<mutool_object_pdf_widget_sign>`.
 
@@ -476,5 +520,5 @@ To create a signer object an instance of `PDFPKCS7Signer` is required.
         var signer = new PDFPKCS7Signer(<file_name>, <password>);
 
 
-    |tor_todo| WASM - no such class.
+    .. |tor_todo| WASM - no such class.
 

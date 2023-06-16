@@ -9,7 +9,6 @@
 
 .. _mutool_object_pixmap:
 
-
 .. _mutool_run_js_api_pixmap:
 
 `Pixmap`
@@ -101,6 +100,8 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
 .. method:: getAlpha()
 
+    |mutool_tag_wasm_soon|
+
     *True* if alpha channel is present.
 
     :return: `Boolean`.
@@ -112,7 +113,7 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
         var alpha = pixmap.getAlpha();
 
 
-    |tor_todo| In WASM, TypeError: pixmap.getAlpha is not a function
+    .. |tor_todo| In WASM, TypeError: pixmap.getAlpha is not a function
 
 .. method:: getStride()
 
@@ -372,7 +373,7 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
     :return: `Pixmap`.
 
 
-    |tor_todo| Can't get any joy out of this one because of `DefaultColorSpaces` not working for me.
+    .. |tor_todo| Can't get any joy out of this one because of `DefaultColorSpaces` not working for me.
 
 
 .. method:: getPixels()
@@ -406,7 +407,7 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
         var buffer = pixmap.asPNG();
 
-    |tor_todo| TypeError: buffer.readByte is not a function
+    .. |tor_todo| TypeError: buffer.readByte is not a function
 
 
 .. method:: asPSD()
@@ -424,7 +425,7 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
         var buffer = pixmap.asPSD();
 
-    |tor_todo| TypeError: libmupdf._wasm_new_buffer_from_pixmap_as_psd is not a function
+    .. |tor_todo| TypeError: libmupdf._wasm_new_buffer_from_pixmap_as_psd is not a function
 
 
 .. method:: asPAM()
@@ -442,7 +443,7 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
         var buffer = pixmap.asPAM();
 
-    |tor_todo| TypeError: buffer.readByte is not a function
+    .. |tor_todo| TypeError: buffer.readByte is not a function
 
 
 .. method:: asJPEG(quality)
@@ -460,7 +461,7 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
         var buffer = pixmap.asJPEG(80);
 
-    |tor_todo| TypeError: buffer.readByte is not a function
+    .. |tor_todo| TypeError: buffer.readByte is not a function
 
 
 .. method:: md5()

@@ -50,7 +50,7 @@ The base class for a :ref:`PDF Page<mutool_run_js_api_pdf_page>`.
 
         var rect = page.run(obj, mupdf.Matrix.identity);
 
-    |tor_todo| Make mutool run method match this.
+    .. |tor_todo| Make mutool run method match this.
 
 
 .. method:: runPageContents(device, matrix)
@@ -68,7 +68,7 @@ The base class for a :ref:`PDF Page<mutool_run_js_api_pdf_page>`.
 
         var rect = page.runPageContents(obj, mupdf.Matrix.identity);
 
-    |tor_todo| Make mutool run method match this.
+    .. |tor_todo| Make mutool run method match this.
 
 
 .. method:: runPageAnnots(device, matrix)
@@ -86,7 +86,7 @@ The base class for a :ref:`PDF Page<mutool_run_js_api_pdf_page>`.
 
         var rect = page.runPageAnnots(obj, mupdf.Matrix.identity);
 
-    |tor_todo| Make mutool run method match this.
+    .. |tor_todo| Make mutool run method match this.
 
 
 .. method:: runPageWidgets(device, matrix)
@@ -104,7 +104,7 @@ The base class for a :ref:`PDF Page<mutool_run_js_api_pdf_page>`.
 
         var rect = page.runPageWidgets(obj, mupdf.Matrix.identity);
 
-    |tor_todo| Make mutool run method match this.
+    .. |tor_todo| Make mutool run method match this.
 
 .. method:: toPixmap(matrix, colorspace, alpha, showExtras)
 
@@ -166,6 +166,8 @@ The base class for a :ref:`PDF Page<mutool_run_js_api_pdf_page>`.
 
 .. method:: search(needle, max_hits)
 
+    |mutool_tag_wasm_soon|
+
     Search for `needle` text on the page, and return an array with :ref:`rectangles<mutool_run_js_api_rectangle>` of all matches found.
 
     :arg needle: `String`.
@@ -179,7 +181,7 @@ The base class for a :ref:`PDF Page<mutool_run_js_api_pdf_page>`.
         var results = page.search("my phrase");
 
 
-    |tor_todo| TypeError: libmupdf._wasm_search_page is not a function.
+    .. |tor_todo| TypeError: libmupdf._wasm_search_page is not a function.
 
 
 
@@ -226,6 +228,8 @@ The base class for a :ref:`PDF Page<mutool_run_js_api_pdf_page>`.
 
 .. method:: deleteLink(link)
 
+    |mutool_tag_wasm_soon|
+
     Delete the link from the page.
 
     :arg link: :ref:`Link<mutool_object_link>`.
@@ -236,7 +240,7 @@ The base class for a :ref:`PDF Page<mutool_run_js_api_pdf_page>`.
 
         page.deleteLink(link_obj);
 
-    |tor_todo| WASM TypeError: page.deleteLink is not a function
+    .. |tor_todo| WASM TypeError: page.deleteLink is not a function
 
 
 .. method:: getLabel()

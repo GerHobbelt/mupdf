@@ -68,7 +68,7 @@ All functions that take `PDFObjects`, do automatic translation between :title:`J
 
 
 
-    |tor_todo| WASM TypeError: doc.newNull is not a function
+    .. |tor_todo| WASM TypeError: doc.newNull is not a function
 
 
 .. method:: delete(ref)
@@ -158,7 +158,7 @@ All functions that take `PDFObjects`, do automatic translation between :title:`J
 
         pdfObj.push("item");
 
-    |tor_todo| WASM TypeError: doc.newNull is not a function
+    .. |tor_todo| WASM TypeError: doc.newNull is not a function
 
 
 .. method:: toString()

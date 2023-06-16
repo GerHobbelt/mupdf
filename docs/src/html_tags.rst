@@ -17,6 +17,10 @@
 
    <span class="mutool_tag">mutool only</span>
 
+.. |mutool_tag_wasm_soon| raw:: html
+
+   <span class="mutool_tag">mutool only</span>
+
 
 .. |wasm_tag| raw:: html
 

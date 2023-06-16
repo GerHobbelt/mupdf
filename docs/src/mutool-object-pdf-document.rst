@@ -24,6 +24,8 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
 .. method:: new PDFDocument()
 
+    |mutool_tag_wasm_soon|
+
     *Constructor method*.
 
     Create a new empty :title:`PDF` document.
@@ -36,7 +38,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
         var pdfDocument = new mupdf.PDFDocument();
 
-    |tor_todo| WASM: TypeError: libmupdf._wasm_pdf_create_document is not a function
+    .. |tor_todo| WASM: TypeError: libmupdf._wasm_pdf_create_document is not a function
 
 
 .. method:: new PDFDocument(fileName)
@@ -140,6 +142,8 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
 .. method:: canBeSavedIncrementally()
 
+    |mutool_tag_wasm_soon|
+
     Returns *true* if the document can be saved incrementally, e.g. repaired documents or applying redactions prevents incremental saves.
 
     :return: `Boolean`.
@@ -150,7 +154,7 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
         var canBeSavedIncrementally = pdfDocument.canBeSavedIncrementally();
 
-    |tor_todo| WASM: TypeError: libmupdf._wasm_pdf_can_be_saved_incrementally is not a function
+    .. |tor_todo| WASM: TypeError: libmupdf._wasm_pdf_can_be_saved_incrementally is not a function
 
 
 .. method:: countVersions()
@@ -257,24 +261,6 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
     .. code-block:: javascript
 
         pdfDocument.deletePageLabels(0);
-
-
-
-.. method:: setPageLabels(index, style, prefix, start)
-
-    Sets the page label numbering for the page and all pages following it, until the next page with an attached label.
-
-    :arg index: `Integer`.
-    :arg style: `String` Can be one of the following strings: "", "D", "R", "r", "A", or "a".
-    :arg prefix: `String`.
-    :arg start: `Integer` The ordinal with which to start numbering.
-
-
-.. method:: deletePageLabels(index)
-
-    Removes any associated page label from the page.
-
-    :arg index: `Integer`.
 
 
 .. method:: getTrailer()
@@ -853,6 +839,8 @@ All page objects are structured into a page tree, which defines the order the pa
 
 .. method:: addPage(mediabox, rotate, resources, contents)
 
+    |mutool_tag_wasm_soon|
+
     Create a new `PDFPage` object. Note: this function does NOT add it to the page tree, use :ref:`insertPage<mutool_insertPage>` to do that.
 
     :arg mediabox: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
@@ -872,7 +860,7 @@ All page objects are structured into a page tree, which defines the order the pa
         var blankPage = pdfDocument.addPage([0,0,300,350], 0, resources, "");
 
 
-    |tor_todo| WASM: //TypeError: doc.newNull is not a function
+    .. |tor_todo| WASM: //TypeError: doc.newNull is not a function
 
 
     |example_tag|
@@ -885,6 +873,8 @@ All page objects are structured into a page tree, which defines the order the pa
 
 
 .. method:: addSimpleFont(font, encoding)
+
+    |mutool_tag_wasm_soon|
 
     Create a `PDFObject` from the `Font` object as a simple font.
 
@@ -899,10 +889,12 @@ All page objects are structured into a page tree, which defines the order the pa
 
         var obj = pdfDocument.addSimpleFont(new mupdf.Font("Times-Roman"), "Latin");
 
-    |tor_todo| WASM: ReferenceError: name is not defined
+    .. |tor_todo| WASM: ReferenceError: name is not defined
 
 
 .. method:: addCJKFont(font, language, wmode, style)
+
+    |mutool_tag_wasm_soon|
 
     Create a `PDFObject` from the Font object as a UTF-16 encoded CID font for the given language ("zh-Hant", "zh-Hans", "ko", or "ja"), writing mode ("H" or "V"), and style ("serif" or "sans-serif").
 
@@ -919,10 +911,12 @@ All page objects are structured into a page tree, which defines the order the pa
 
         var obj = pdfDocument.addCJKFont(new mupdf.Font("Times-Roman"), "ja", "V", "serif");
 
-    |tor_todo| WASM: ReferenceError: name is not defined
+    .. |tor_todo| WASM: ReferenceError: name is not defined
 
 
 .. method:: addFont(font)
+
+    |mutool_tag_wasm_soon|
 
     Create a `PDFObject` from the `Font` object as an Identity-H encoded CID font.
 
@@ -936,10 +930,12 @@ All page objects are structured into a page tree, which defines the order the pa
 
         var obj = pdfDocument.addFont(new mupdf.Font("Times-Roman"));
 
-    |tor_todo| WASM: ReferenceError: name is not defined
+    .. |tor_todo| WASM: ReferenceError: name is not defined
 
 
 .. method:: addImage(image)
+
+    |mutool_tag_wasm_soon|
 
     Create a `PDFObject` from the `Image` object.
 
@@ -954,7 +950,7 @@ All page objects are structured into a page tree, which defines the order the pa
 
         var obj = pdfDocument.addImage(new mupdf.Image(pixmap));
 
-    |tor_todo| WASM: // TypeError: libmupdf._wasm_new_from_pixmap is not a function
+    .. |tor_todo| WASM: // TypeError: libmupdf._wasm_new_from_pixmap is not a function
 
 
 .. method:: loadImage(obj)
@@ -1071,7 +1067,7 @@ Embedded files in :title:`PDFs`
                                                          false);
 
 
-    |tor_todo| MUTOOL - the `creationDate` & `modificationDate` are in milliseconds since 1970, not a JS Date object.
+    .. |tor_todo| MUTOOL - the `creationDate` & `modificationDate` are in milliseconds since 1970, not a JS Date object.
 
 
 .. method:: getEmbeddedFileParams(fileSpecObject)
@@ -1091,6 +1087,8 @@ Embedded files in :title:`PDFs`
 
 .. method:: getEmbeddedFileContents(fileSpecObject)
 
+    |mutool_tag_wasm_soon|
+
     Returns a `Buffer` with the contents of the embedded file referenced by the `fileSpecObject`.
 
     :arg fileSpecObject: `Object` :ref:`File Specification Object<mutool_run_js_api_file_spec_object>`.
@@ -1103,7 +1101,7 @@ Embedded files in :title:`PDFs`
 
         var buffer = pdfDocument.getEmbeddedFileContents(fileSpecObject);
 
-    |tor_todo| WASM, TypeError: libmupdf._wasm_pdf_load_embedded_file_contents is not a function
+    .. |tor_todo| WASM, TypeError: libmupdf._wasm_pdf_load_embedded_file_contents is not a function
 
 
 .. method:: verifyEmbeddedFileChecksum(fileSpecObject)

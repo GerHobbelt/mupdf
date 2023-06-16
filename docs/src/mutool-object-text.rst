@@ -9,12 +9,7 @@
 
 .. _mutool_object_text:
 
-
-
 .. _mutool_run_js_api_text:
-
-
-
 
 `Text`
 --------------
@@ -23,6 +18,8 @@ A `Text` object contains text.
 
 
 .. method:: new Text()
+
+    |mutool_tag_wasm_soon|
 
     *Constructor method*.
 
@@ -37,7 +34,7 @@ A `Text` object contains text.
         var text = new mupdf.Text();
 
 
-    |tor_todo| TypeError: libmupdf._wasm_new_text is not a function
+    .. |tor_todo| TypeError: libmupdf._wasm_new_text is not a function
 
 
 

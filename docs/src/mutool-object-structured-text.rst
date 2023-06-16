@@ -9,11 +9,7 @@
 
 .. _mutool_object_structured_text:
 
-
-
-
 .. _mutool_run_js_api_structured_text:
-
 
 `StructuredText`
 ----------------------------
@@ -24,6 +20,8 @@
 |instance_methods|
 
 .. method:: search(needle)
+
+    |mutool_tag_wasm_soon|
 
     Search the text for all instances of `needle`, and return an array with :ref:`rectangles<mutool_run_js_api_rectangle>` of all matches found.
 
@@ -36,7 +34,7 @@
 
         var result = sText.search("Hello World!");
 
-    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+    .. |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 
 
@@ -55,7 +53,7 @@
 
         var result = sText.highlight({100:100}, {200:100});
 
-    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+    .. |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 
 .. method:: copy(p, q)
@@ -75,16 +73,16 @@
         var result = sText.highlight({100:100}, {200:100});
 
 
-    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+    .. |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
 
 
 
+..
+    .. method:: walk(walker)
 
-.. method:: walk(walker)
+        |wasm_tag|
 
-    |wasm_tag|
-
-    |tor_todo| I don't know if this is an internal function, in any case I don't know what the `walker` parameter is
+        |tor_todo| I don't know if this is an internal function, in any case I don't know what the `walker` parameter is
 
 
 .. method:: asJSON()

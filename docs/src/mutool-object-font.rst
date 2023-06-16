@@ -19,6 +19,8 @@
 `Font`
 ---------------
 
+|mutool_tag_wasm_soon|
+
 `Font` objects can be created from :title:`TrueType`, :title:`OpenType`, :title:`Type1` or :title:`CFF` fonts. In :title:`PDF` there are also special :title:`Type3` fonts.
 
 
@@ -58,7 +60,7 @@
         var font = new mupdf.Font("Times-Roman");
 
 
-    |tor_todo| WASM: ReferenceError: name is not defined
+    .. |tor_todo| WASM: ReferenceError: name is not defined
 
 
 |instance_methods|
