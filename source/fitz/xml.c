@@ -821,6 +821,8 @@ parse_closing_element:
 	p = jump_past_white(p);
 	mark = p;
 	p = jump_past_name(p);
+	if (!isname(*mark))
+		return "syntax error in closing element";
 	if (close_tag(ctx, parser, mark, p))
 		return "opening and closing tag mismatch";
 	p = jump_past_white(p);
