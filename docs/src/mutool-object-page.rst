@@ -272,6 +272,6 @@ The base class for a :ref:`PDF Page<mutool_run_js_api_pdf_page>`.
 
     .. note::
 
-        As `PDFPage` extends `Page` this method will return **false**. It is only if we actually have an instance of a `PDFPage` when this method is overriden to return **true**.
+        As `PDFPage` extends `Page` this method will return **false**. It is only if we actually have an instance of a `PDFPage` when this method is overridden to return **true**.
 
 

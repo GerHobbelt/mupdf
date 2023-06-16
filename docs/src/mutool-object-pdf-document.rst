@@ -971,7 +971,7 @@ All page objects are structured into a page tree, which defines the order the pa
 ----
 
 
-Copying objects accross :title:`PDFs`
+Copying objects across :title:`PDFs`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following functions can be used to copy objects from one :title:`PDF` document to another:
