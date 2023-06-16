@@ -65,11 +65,12 @@ Trying the Viewer
 --------------------------
 
 
-From the previous installation step you should have a folder called `node_modules`. In here copy the contents of the `mupdf/lib` folder and paste it into `platform/wasm/lib` on your local checkout of `mupdf.git`_. Then you can open `platform/wasm/viewer/mupdf-view.html` to try it out.
+From the previous installation step you should have a folder called `node_modules`. From `node_modules/mupdf/lib` copy the 3 files `mupdf-wasm.js`, `mupdf-wasm.wasm` & `mupdf.js` into `platform/wasm/lib` in your local checkout of `mupdf.git`_. Then you can open `platform/wasm/viewer/mupdf-view.html` to try it out.
 
 .. note::
 
-   You need to run this HTML viewer page within a suitable `Development Environment`_ in order to load and view :title:`PDFs`.
+   You need to run this HTML viewer page within a suitable `Development Environment`_ in order to load and view :title:`PDFs`,
+   if you see the error message "TypeError: this.mupdfWorker.openDocumentFromBuffer is not a function", please read that section.
 
    If running locally you can append `?file=my_file.pdf` to the browser URL to automatically load the :title:`PDF` you need without using the "Open File" option from the GUI.
 
@@ -85,6 +86,8 @@ If you developing a :title:`WASM` webpage it is important to note the following 
 
 - You should run the webpage in a localhost environment, or:
 - Run the webpage locally in a browser which allows for a less strict origin policy allowing for local file loads - see below for how to do this in :title:`Firefox`.
+
+:title:`Artifex` recommends :title:`Firefox` as the browser of choice for local development due to its feature set of highly configurable developer options.
 
 
 :title:`Firefox` - enabling local files loads
@@ -104,6 +107,7 @@ You can enable local file loads in :title:`Firefox` by setting ``security.fileur
 Steps to do this:
 
 - Type ``about:config`` into a :title:`Firefox` tab.
+- Click "Accept the Risk and Continue".
 - Search for ``security.fileuri.strict_origin_policy``.
 - Click on the value to toggle it to ``false``.
 
@@ -117,13 +121,13 @@ Steps to do this:
 JavaScript methodology
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Due to the asynchronous nature of a :title:`WASM` web application :title:`Web Workers` and :title:`Promises` should be used within your application to handle the lifecycle and document events.
+Due to the asynchronous nature of a :title:`WASM` web application :title:`Web Workers` and :title:`Promises` should be used within your application to handle the life-cycle and document events.
 
 
 :title:`Web Workers`
 """"""""""""""""""""""""""
 
-By utilizing :title:`Web Workers` your webpage will be able to run scripts on background threads which will not interfere with the user interface. As there may be a fair amount of file I/O and page rendering occuring the :title:`Web Worker` solution will allow for this whilst not hanging or slowing down (or seemingly crashing) your webpage.
+By utilizing :title:`Web Workers` your webpage will be able to run scripts on background threads which will not interfere with the user interface. As there may be a fair amount of file I/O and page rendering occurring the :title:`Web Worker` solution will allow for this whilst not hanging or slowing down (or seemingly crashing) your webpage.
 
 See :title:`Mozilla's` page on `Using Web Workers`_ for more.
 
