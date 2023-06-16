@@ -3081,6 +3081,42 @@ pdf_drop_obj(fz_context *ctx, pdf_obj *obj)
 	}
 }
 
+pdf_obj *
+pdf_drop_singleton_obj(fz_context *ctx, pdf_obj *obj)
+{
+	int drop;
+
+	/* If an object is < PDF_LIMIT, then it's a 'common' name or
+	 * true or false. No point in dropping these as it
+	 * won't save any memory. */
+	if (obj < PDF_LIMIT)
+		return obj;
+
+	/* See if it's a singleton object. We can only drop if
+	 * it's a singleton object. If not, just exit leaving
+	 * everything unchanged. */
+	fz_lock(ctx, FZ_LOCK_ALLOC);
+	drop = (obj->refs == 1);
+	fz_unlock(ctx, FZ_LOCK_ALLOC);
+	if (!drop)
+		return obj;
+
+	/* So drop the object! */
+	if (obj->kind == PDF_ARRAY)
+		pdf_drop_array(ctx, obj);
+	else if (obj->kind == PDF_DICT)
+		pdf_drop_dict(ctx, obj);
+	else if (obj->kind == PDF_STRING)
+	{
+		fz_free(ctx, STRING(obj)->text);
+		fz_free(ctx, obj);
+	}
+	else
+		fz_free(ctx, obj);
+
+	return NULL;
+}
+
 /**
 	Recurse through the object structure setting the node's parent_num to num.
 	parent_num is used when a subobject is to be changed during a document edit.
@@ -4849,6 +4885,31 @@ pdf_dict_getp_inheritable(fz_context *ctx, pdf_obj *node, const char *path)
 
 	return NULL;
 }
+
+pdf_obj *
+pdf_dict_gets_inheritable(fz_context *ctx, pdf_obj *node, const char *key)
+{
+	pdf_obj *slow = node;
+	int halfbeat = 11; /* Don't start moving slow pointer for a while. */
+
+	while (node)
+	{
+		pdf_obj *val = pdf_dict_gets(ctx, node, key);
+		if (val)
+			return val;
+		node = pdf_dict_get(ctx, node, PDF_NAME(Parent));
+		if (node == slow)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "cycle in resources");
+		if (--halfbeat == 0)
+		{
+			slow = pdf_dict_get(ctx, slow, PDF_NAME(Parent));
+			halfbeat = 2;
+		}
+	}
+
+	return NULL;
+}
+
 
 void pdf_dict_put_bool(fz_context *ctx, pdf_obj *dict, pdf_obj *key, int x)
 {
