@@ -195,6 +195,11 @@ citation-styles
 citeproc-js
 civetweb
 clBLAS
+cld1-language-detect
+cld3-language-detect
+guetzli
+termcolor
+tinydir
 cld2-language-detect
 cli11
 clipp
