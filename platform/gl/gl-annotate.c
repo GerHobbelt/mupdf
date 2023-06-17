@@ -412,7 +412,7 @@ static void do_save_pdf_dialog(int for_signing)
 					pdf_save_document(ctx, pdf, save_filename, &save_opts);
 					fz_strncpy_s(ctx, filename, save_filename, PATH_MAX);
 					fz_strlcat(save_filename, ".journal", PATH_MAX);
-					fz_remove_utf8(ctx, save_filename);
+					(void)fz_remove_utf8(ctx, save_filename);
 					reload_document();
 				}
 			}

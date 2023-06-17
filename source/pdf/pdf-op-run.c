@@ -1635,7 +1635,7 @@ begin_oc(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val, pdf_cycle_list 
 		if (pdf_is_name(ctx, obj))
 			name = pdf_to_name(ctx, obj);
 		else if (pdf_is_string(ctx, obj))
-			name = pdf_to_text_string(ctx, obj);
+			name = pdf_to_text_string(ctx, obj, NULL);
 
 		push_begin_layer(ctx, proc, name);
 		return;

@@ -221,11 +221,7 @@ fz_stream *
 fz_try_open_file(fz_context *ctx, const char *name)
 {
 	FILE *file;
-#ifdef _WIN32
-	file = fz_fopen_utf8(name, "rb");
-#else
-	file = fopen(name, "rb");
-#endif
+	file = fz_fopen_utf8(ctx, name, "rb");
 	if (file == NULL)
 		return NULL;
 	return fz_open_file_ptr(ctx, file);

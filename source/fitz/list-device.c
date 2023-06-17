@@ -608,7 +608,7 @@ fz_append_display_node(
 	if (path_off)
 	{
 		my_path = (void *)(&node_ptr[path_off]);
-		(void)fz_pack_path(ctx, (uint8_t *)my_path, path_size * sizeof(fz_display_node), path);
+		(void)fz_pack_path(ctx, (uint8_t *)my_path, path);
 	}
 
 	if (stroke_off)

@@ -862,7 +862,7 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 	/* Ensure we create a brand new file. We don't want to clobber our old file. */
 	if (!append)
 	{
-		if (fz_remove_utf8(ctx, filename) < 0)
+		if (fz_remove_utf8(ctx, filename))
 		{
 			int ec = fz_ctx_get_rtl_errno(ctx);
 			if (ec != ENOENT)

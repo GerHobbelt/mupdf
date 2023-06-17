@@ -1489,6 +1489,7 @@ fz_remove_utf8(fz_context* ctx, const char* name)
 	{
 		fz_copy_ephemeral_errno(ctx);
 		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		n = -1;
 	}
 
 	return n;

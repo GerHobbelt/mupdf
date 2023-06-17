@@ -1854,7 +1854,7 @@ static void load_document(void)
 		else
 		{
 			/* Accelerator data is out of date */
-			fz_remove_utf8(ctx, accelpath);
+			(void)fz_remove_utf8(ctx, accelpath);
 			accel = NULL; /* In case we have jumped up from below */
 		}
 	}

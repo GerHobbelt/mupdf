@@ -395,6 +395,12 @@ static void ffi_gc_fz_image(js_State *J, void *image)
 	fz_drop_image(ctx, image);
 }
 
+static void ffi_gc_fz_jbig2globals(js_State* J, void* image)
+{
+	fz_context* ctx = js_getcontext(J);
+	fz_drop_jbig2_globals(ctx, image);
+}
+
 static void ffi_gc_fz_image_data(js_State *J, void *image_data)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -1355,6 +1361,23 @@ static void ffi_pushtreearchive(js_State *J, fz_archive *arch)
 	js_newuserdata(J, "fz_tree_archive", arch, ffi_gc_fz_archive);
 }
 
+static void ffi_pushjbig2globals(js_State* J, fz_compressed_buffer* image_data)
+{
+	fz_context* ctx = js_getcontext(J);
+	js_getregistry(J, "fz_jbig2_globals");
+	if (image_data->params.u.jbig2.globals)
+		js_newuserdata(J, "fz_jbig2_globals", fz_keep_jbig2_globals(ctx, image_data->params.u.jbig2.globals), ffi_gc_fz_jbig2globals);
+	else
+		js_pushnull(J);
+}
+
+static fz_jbig2_globals* ffi_tojbig2globals(js_State* J, int idx)
+{
+	if (js_isuserdata(J, idx, "fz_jbig2_globals"))
+		return js_touserdata(J, idx, "fz_jbig2_globals");
+	return NULL;
+}
+
 static int ffi_buffer_has(js_State *J, void *buf_, const char *key)
 {
 	fz_buffer *buf = buf_;
@@ -1494,10 +1517,7 @@ static int ffi_imagedata_has(js_State *J, void *image_data_, const char *key)
 		case FZ_IMAGE_JBIG2:
 			js_pushnumber(J, image_data->params.u.jbig2.embedded);
 			js_setproperty(J, -2, "embedded");
-			if (image_data->params.u.jbig2.globals)
-				ffi_pushbuffer(J, fz_keep_buffer(ctx, image_data->params.u.jbig2.globals));
-			else
-				js_pushnull(J);
+			ffi_pushjbig2globals(J, image_data);
 			js_setproperty(J, -2, "globals");
 			break;
 		case FZ_IMAGE_JPEG:
@@ -4858,7 +4878,7 @@ static void ffi_new_ImageData(js_State *J)
 	fz_compressed_buffer *image_data = NULL;
 	int type = FZ_IMAGE_UNKNOWN;
 	fz_buffer *buffer = NULL;
-	fz_buffer *globals = NULL;
+	fz_jbig2_globals *globals = NULL;
 	int encoded_byte_align = 0, color_transform = 0, smask_in_data = 0;
 	int end_of_block = 0, early_change = 0, end_of_line = 0, black_is_1 = 1;
 	int predictor = 0, embedded = 0, columns = 0, colors = 0, rows = 0;
@@ -4866,7 +4886,7 @@ static void ffi_new_ImageData(js_State *J)
 
 	if (js_try(J))
 	{
-		fz_drop_buffer(ctx, globals);
+		fz_drop_jbig2_globals(ctx, globals);
 		fz_drop_buffer(ctx, buffer);
 		js_throw(J);
 	}
@@ -4944,7 +4964,7 @@ static void ffi_new_ImageData(js_State *J)
 			js_pop(J, 1);
 			js_getproperty(J, 2, "globals");
 			if (js_iscoercible(J, -1))
-				globals = ffi_tobuffer(J, -1);
+				globals = ffi_tojbig2globals(J, -1);
 			js_pop(J, 1);
 			break;
 		case FZ_IMAGE_JPEG:
@@ -5018,7 +5038,7 @@ static void ffi_new_ImageData(js_State *J)
 	}
 	fz_always(ctx)
 	{
-		fz_drop_buffer(ctx, globals);
+		fz_drop_jbig2_globals(ctx, globals);
 		fz_drop_buffer(ctx, buffer);
 	}
 	fz_catch(ctx)
