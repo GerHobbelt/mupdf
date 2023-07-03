@@ -51,6 +51,7 @@
 #include "../../thirdparty/owemdjee/BLAKE3/c/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libarchive/contrib/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/tesslinesplit/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/uchardet/src/tools/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/tvision/include/tvision/monolithic_examples.h"
 #include "../../thirdparty/jbig2dec/monolithic_examples.h"
 #include "../../thirdparty/leptonica/prog/monolithic_examples.h"
@@ -681,6 +682,10 @@ static struct tool_spec {
 #if defined(MUTOOL_EX)
 	{ {.f = BLAKE3_example_main }, "BLAKE3_example", "BLAKE3_example tool" },
 	{ {.fa = BLAKE3_demo_main }, "BLAKE3_demo", "BLAKE3_demo tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = uchardet_tool_main }, "uchardet", "uchardet tool" },
 #endif
 
 #if defined(MUTOOL_EX)
