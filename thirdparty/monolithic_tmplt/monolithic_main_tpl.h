@@ -121,7 +121,9 @@ static char* readline(const char* prompt)
 {
 	static char line[500], * p;
 	size_t n;
+	fflush(stderr);
 	fputs(prompt, stdout);
+	fflush(stdout);
 	p = fgets(line, sizeof line, stdin);
 	if (p) {
 		n = strlen(line);
@@ -138,9 +140,9 @@ static char* readline(const char* prompt)
 #define PS1 "> "
 
 
-static int parse(const char* source)
+static int parse_one_command_from_set(const char* source, const struct cmd_info *commands, size_t command_count)
 {
-	for (int i = 0; i < sizeof(commands) / sizeof(commands[0]); i++)
+	for (int i = 0; i < command_count; i++)
 	{
 		struct cmd_info el = commands[i];
 		size_t cmd_len = strlen(el.cmd);
@@ -174,37 +176,55 @@ static int parse(const char* source)
 			free((void *)argv_list);
 			free(argv_strbuf);
 			fprintf(stderr, "\n--> exit code: %d\n", rv);
+			if (rv == -4242)
+				rv = 666;
 			return rv;
 		}
 	}
 
-	// Check if thee user typed 'q' or 'x' to quit (as long as the dispatch table doesn't define those commands already):
-	static const char *quit_commands[] ={"q", "x" };
-	for (int i = 0; i < sizeof(quit_commands) / sizeof(quit_commands[0]); i++)
-	{
-		const char *cmd = quit_commands[i];
-		size_t cmd_len = strlen(cmd);
-		char sentinel = 0;
-
-		if (strlen(source) >= cmd_len)
-			sentinel = source[cmd_len];
-
-		if (strncmp(source, cmd, cmd_len) == 0 && (sentinel == 0 || isspace(sentinel)))
-		{
-			return quit();
-		}
-	}
-
-	fprintf(stderr, "Unknown command '%s'.\n\nUse 'h' or 'help' command to get a list of supported commands.\n", source);
-	return 6;
+	return -4242;
 }
 
-static char* read_stdin(void)
+
+static int parse(const char* source)
+{
+	size_t count = sizeof(commands) / sizeof(commands[0]);
+	int rv = parse_one_command_from_set(source, commands, count);
+	if (rv == -4242)
+	{
+		// Check if thee user typed 'q' or 'x' to quit (as long as the dispatch table doesn't define those commands already):
+		static const struct cmd_info dflt_commands[] ={
+			{"q", {.f = quit }},
+			{"x", {.f = quit }},
+			{"?", {.f = usage }},
+			{"h", {.f = usage }},
+			{"help", {.f = usage }},
+			{"-?", {.f = usage }},
+			{"-h", {.f = usage }},
+			{"--help", {.f = usage }},
+		};
+		count = sizeof(dflt_commands) / sizeof(dflt_commands[0]);
+		rv = parse_one_command_from_set(source, dflt_commands, count);
+
+		if (rv == -4242)
+		{
+			fprintf(stderr, "Unknown command '%s'.\n\nUse 'h' or 'help' command to get a list of supported commands.\n", source);
+			rv = 6;
+		}
+	}
+	return rv;
+}
+
+
+static char* read_stdin(const char *prompt)
 {
 	size_t n = 0;
 	size_t t = 512;
 	char* s = NULL;
 
+	fflush(stderr);
+	fputs(prompt, stdout);
+	fflush(stdout);
 	for (;;) {
 		char* ss = (char *)realloc(s, t);
 		if (!ss) {
@@ -213,9 +233,15 @@ static char* read_stdin(void)
 			return NULL;
 		}
 		s = ss;
-		n += fread(s + n, 1, t - n - 1, stdin);
-		if (n < t - 1)
+		s[n] = 0;
+		fgets(s + n, t - n - 1, stdin);
+		if (feof(stdin) || ferror(stdin))
 			break;
+		n += strlen(s + n);
+		if (n == 0 || s[n - 1] == '\r' || s[n - 1] == '\n') {
+			break;
+		}
+
 		t *= 2;
 	}
 
@@ -248,8 +274,8 @@ static void trim(char* s)
 	{
 		size_t l = e - s + 1;
 		if (s > d)
-			memmove(s, d, l);
-		s[l] = 0;
+			memmove(d, s, l);
+		d[l] = 0;
 	}
 	else
 	{
@@ -257,33 +283,26 @@ static void trim(char* s)
 	}
 }
 
-static int help(void)
+static int display_cmd_help(int mode)
 {
-	int has_q_command = 0;
-	int has_x_command = 0;
-
-	fprintf(stderr, "Commands:\n");
-	for (int i = 0; i < sizeof(commands) / sizeof(commands[0]); i++)
+	if (mode < 2)
 	{
-		struct cmd_info el = commands[i];
-		fprintf(stderr, "  %s\n", el.cmd);
-
-		if (strcmp(el.cmd, "q") == 0)
-			has_q_command = 1;
-		if (strcmp(el.cmd, "x") == 0)
-			has_x_command = 1;
+		fprintf(stderr, "Commands:\n");
+		for (int i = 0; i < sizeof(commands) / sizeof(commands[0]); i++)
+		{
+			struct cmd_info el = commands[i];
+			fprintf(stderr, "  %s\n", el.cmd);
+		}
 	}
 
-	const char *extra_quit_msg = "";
-	if (!has_q_command)
+	if (mode > 0)
 	{
-		extra_quit_msg = "or 'q' ";
-		if (!has_x_command)
-			extra_quit_msg = "or 'q' or 'x' ";
+		fprintf(stderr, "\n\nType 'q', 'x' or Ctrl-C at the prompt to quit.\n");
 	}
-	else if (!has_x_command)
-		extra_quit_msg = "or 'x' ";
-	fprintf(stderr, "\n\nOr type Ctrl-C %sto quit.\n", extra_quit_msg);
+	else
+	{
+		fprintf(stderr, "\n\n");
+	}
 
 	return 0;
 }
@@ -297,14 +316,25 @@ static int quit(void)
 }
 
 
-static int usage(void)
+static int display_cmd_usage(int mode)
 {
-	fprintf(stderr, "Usage: %s [options] [command]\n", USAGE_NAME);
-	fprintf(stderr, "\t-i: Enter interactive prompt after running code.\n\n");
+	if (mode < 2)
+	{
+		fprintf(stderr, "Usage: %s [options] [command]\n", USAGE_NAME);
+		fprintf(stderr, "\t-i: Enter interactive prompt after running code.\n\n");
+	}
 
-	help();
+	display_cmd_help(mode);
 	return 1;
 }
+
+
+static int usage(void)
+{
+	return display_cmd_usage(1);
+}
+
+
 
 int main(int argc, const char** argv)
 {
@@ -341,15 +371,24 @@ int main(int argc, const char** argv)
 	int interactive = 0;
 	int c;
 
-	while ((c = xgetopt(argc, argv, "i")) != -1) {
+	while ((c = xgetopt(argc, argv, "ih")) != -1)
+	{
 		switch (c) {
-		default: usage(); break;
-		case 'i': interactive = 1; break;
+		case 'h':
+		default:
+			status = display_cmd_usage(0);
+			interactive = -1;
+			break;
+		case 'i':
+			interactive = 1;
+			break;
 		}
 	}
 
 	if (xoptind == argc) {
-		interactive = 1;
+		if (interactive == 0) {
+			interactive = 1;
+		}
 	}
 	else {
 		int si = xoptind;
@@ -366,22 +405,31 @@ int main(int argc, const char** argv)
 			snprintf(input + strlen(input), l - strlen(input), "%s ", argv[i]);
 		}
 		trim(input);
-		if (!input || !*input)
+		if (!input || !*input) {
 			status = 1;
-		else
+		}
+		else {
 			status = parse(input);
+		}
 	}
 
-	if (interactive) {
+	if (interactive > 0) {
+		display_cmd_usage(2);
 		if (_isatty(0)) {
 			using_history();
 			rl_bind_key('\t', rl_insert);
 			input = readline(PS1);
 			while (input) {
 				trim(input);
-				status = parse(input);
-				if (status == 999)
-					break;
+				if (!*input)
+					status = 1;
+				else {
+					status = parse(input);
+					if (status == 999) {
+						free(input);
+						break;
+					}
+				}
 				if (*input)
 					add_history(input);
 				free(input);
@@ -390,13 +438,20 @@ int main(int argc, const char** argv)
 			putchar('\n');
 		}
 		else {
-			input = read_stdin();
-			trim(input);
-			if (!input || !*input)
-				status = 1;
-			else
-				status = parse(input);
-			free(input);
+			input = read_stdin("> ");
+			while (input) {
+				trim(input);
+				if (!*input)
+					status = 1;
+				else {
+					status = parse(input);
+				}
+				free(input);
+				if (status == 999)
+					break;
+				input = read_stdin("> ");
+			}
+			putchar('\n');
 		}
 	}
 

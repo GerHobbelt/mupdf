@@ -41,17 +41,11 @@ struct cmd_info
 	} f;
 };
 
-#define MONOLITHIC_CMD_TABLE_START()	\
-static struct cmd_info commands[] = 	\
+#define MONOLITHIC_CMD_TABLE_START()	    \
+static const struct cmd_info commands[] = 	\
 {
 
-#define MONOLITHIC_CMD_TABLE_END()	\
-    { "?", {.f = usage } },			\
-    { "h", {.f = usage } },			\
-    { "help", {.f = usage } },		\
-    { "-?", {.f = usage } },		\
-    { "-h", {.f = usage } },		\
-    { "--help", {.f = usage } },	\
+#define MONOLITHIC_CMD_TABLE_END()	        \
 }
 
 
