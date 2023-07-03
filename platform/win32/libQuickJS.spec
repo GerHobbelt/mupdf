@@ -9,4 +9,5 @@ ignore:
 	/sample_app
 	run-test262.c
 	/thirdparty/uint128_t
+	getopt.c
 	
