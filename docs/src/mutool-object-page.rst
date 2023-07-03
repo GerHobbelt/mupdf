@@ -182,7 +182,9 @@ The base class for a :ref:`PDF Page<mutool_run_js_api_pdf_page>`.
         var results = page.search("my search phrase");
 
 
-    .. |tor_todo| TypeError: libmupdf._wasm_search_page is not a function.
+    .. note::
+
+        The numbers are `[ulx, uly, urx, ury, llx, lly, lrx, lry]` for each rectangle against each result. These type of rectangles are know as "Quads" or "QuadPoints" in the :title:`PDF` specification.
 
 
 

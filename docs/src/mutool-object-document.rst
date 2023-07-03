@@ -58,10 +58,30 @@
 
 .. method:: authenticatePassword(password)
 
-    Returns *true* if the password matches.
+    Returns a bitfield value against the password authentication result.
 
     :arg password: The password to attempt authentication with.
-    :return: `Boolean`.
+    :return: `Integer`.
+
+
+
+    .. list-table::
+        :header-rows: 1
+
+        * - **Bitfield value**
+          - **Description**
+        * - `0`
+          - Failed
+        * - `1`
+          - No password needed
+        * - `2`
+          - Is User password and is okay
+        * - `4`
+          - Is Owner password and is okay
+        * - `6`
+          - Is both User & Owner password and is okay
+
+
 
     |example_tag|
 
@@ -70,12 +90,38 @@
         var auth = document.authenticatePassword("abracadabra");
 
 
+
+
 .. method:: hasPermission(permission)
 
-    Returns *true* if the document has permission for "print", "annotate", "edit", "copy", "form", "accessbility", "assemble" or "print-hq".
+    Returns *true* if the document has permission for the supplied permission `String` parameter.
 
     :arg permission: `String` The permission to seek for, e.g. "edit".
     :return: `Boolean`.
+
+
+    .. list-table::
+        :header-rows: 1
+
+        * - **String**
+          - **Description**
+        * - `print`
+          - Can print
+        * - `edit`
+          - Can edit
+        * - `copy`
+          - Can copy
+        * - `annotate`
+          - Can annotate
+        * - `form`
+          - Can fill out forms
+        * - `accessibility`
+          - Can copy for accessibility
+        * - `assemble`
+          - Can manage document pages
+        * - `print-hq`
+          - Can print high-quality
+
 
     |example_tag|
 
@@ -95,7 +141,9 @@
 
     .. code-block:: javascript
 
-        var metaData = document.getMetaData("format");
+        var format = document.getMetaData("format");
+        var modificationDate = doc.getMetaData("info:ModDate");
+        var author = doc.getMetaData("info:Author");
 
 
 .. method:: setMetaData(key, value)
