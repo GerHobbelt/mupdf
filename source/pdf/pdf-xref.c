@@ -3081,7 +3081,7 @@ static fz_outline_iterator* __pdf_new_outline_iterator(fz_context* ctx, fz_docum
 {
 	return pdf_new_outline_iterator(ctx, pdf_document_from_fz_document(ctx, doc));
 }
-static int __pdf_lookup_metadata(fz_context* ctx, fz_document* doc, const char* key, char* buf, int size)
+static int __pdf_lookup_metadata(fz_context* ctx, fz_document* doc, const char* key, char* buf, size_t size)
 {
 	return pdf_lookup_metadata(ctx, pdf_document_from_fz_document(ctx, doc), key, buf, size);
 }

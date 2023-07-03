@@ -213,7 +213,7 @@ reflow_load_page(fz_context *ctx, fz_document *_doc, int chapter, int pagenum)
 	return &page->base;
 }
 
-static int reflow_lookup_metadata(fz_context *ctx, fz_document *_doc, const char *key, char *buf, int size)
+static int reflow_lookup_metadata(fz_context *ctx, fz_document *_doc, const char *key, char *buf, size_t size)
 {
 	reflow_document* doc = (reflow_document*)_doc;
 	return fz_lookup_metadata(ctx, doc->underdoc, key, buf, size);
