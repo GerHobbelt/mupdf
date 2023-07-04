@@ -118,7 +118,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
 .. method:: fillText(text, transform, colorspace, color, alpha, colorParams)
 
-    |mutool_tag_wasm_soon|
 
     Fill a text object.
 
@@ -135,11 +134,9 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
         device.fillText(text, mupdf.Matrix.identity, mupdf.ColorSpace.DeviceRGB, [1,0,0], 1);
 
-    |tor_todo| WASM: ReferenceError: pointer is not defined
 
 .. method:: strokeText(text, stroke, transform, colorspace, color, alpha, colorParams)
 
-    |mutool_tag_wasm_soon|
 
     Stroke a text object.
 
@@ -162,7 +159,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
                           1);
 
 
-    |tor_todo| WASM: ReferenceError: pointer is not defined
 
 .. method:: clipText(text, transform)
 
@@ -180,7 +176,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.clipText(text, mupdf.Matrix.identity);
 
 
-    |tor_todo| WASM: ReferenceError: pointer is not defined
+    |tor_todo| WASM: Error: items left on stack in draw device: 1
 
 .. method:: clipStrokeText(text, stroke, transform)
 
@@ -199,12 +195,11 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.clipStrokeText(text, stroke,  mupdf.Matrix.identity);
 
 
-    |tor_todo| WASM: ReferenceError: pointer is not defined
+    |tor_todo| WASM: Error: items left on stack in draw device: 1
 
 
 .. method:: ignoreText(text, transform)
 
-    |mutool_tag_wasm_soon|
 
     Invisible text that can be searched but should not be visible, such as for overlaying a scanned OCR image.
 
@@ -218,7 +213,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.ignoreText(text, mupdf.Matrix.identity);
 
 
-    |tor_todo| WASM: ReferenceError: pointer is not defined
 
 
 .. method:: fillShade(shade, transform, alpha, colorParams)

@@ -184,8 +184,12 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
     .. code-block:: javascript
 
         var myPathWalker = {
-            moveTo: function (x, y) { ... do whatever ... },
-            lineTo: function (x, y) { ... do whatever ... },
+            moveTo: function (x, y) {
+                //... do whatever ...
+            },
+            lineTo: function (x, y) {
+                //... do whatever ...
+            },
         }
 
         path.walk(myPathWalker);
