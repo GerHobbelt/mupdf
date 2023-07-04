@@ -30,8 +30,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
 .. method:: fillPath(path, evenOdd, transform, colorspace, color, alpha, colorParams)
 
-    |mutool_tag_wasm_soon|
-
     Fill a path.
 
     :arg path: `Path` object.
@@ -47,19 +45,18 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
     .. code-block:: javascript
 
-        device.fillPath(path, false, mupdf.Matrix.identity, mupdf.ColorSpace.DeviceRGB, [1,0,0], true);
+        device.fillPath(path, false, mupdf.Matrix.identity, mupdf.ColorSpace.DeviceRGB, [1,0,0], 1.0);
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_path is not a function
+
 
 
 .. method:: strokePath(path, stroke, transform, colorspace, color, alpha, colorParams)
 
-    |mutool_tag_wasm_soon|
 
     Stroke a path.
 
     :arg path: `Path` object.
-    :arg stroke: The :ref:`stroke dictionary<mutool_run_js_api_stroke_dictionary>`.
+    :arg stroke: `StrokeState` The :ref:`stroke state object<mutool_object_stroke_state>`.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg colorspace: The :ref:`ColorSpace<mutool_run_javascript_api_colorspace>`.
     :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
@@ -71,14 +68,13 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     .. code-block:: javascript
 
         device.strokePath(path,
-                          {dashes:[5,10], lineWidth:3, lineCap:'Round'},
+                          stroke,
                           mupdf.Matrix.identity,
                           mupdf.ColorSpace.DeviceRGB,
                           [0,1,0],
                           0.5);
 
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_path is not a function
 
 
 .. method:: clipPath(path, evenOdd, transform)
@@ -99,7 +95,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.clipPath(path, true, mupdf.Matrix.identity);
 
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_path is not a function
 
 
 .. method:: clipStrokePath(path, stroke, transform)
@@ -109,17 +104,15 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     Clip & stroke a path.
 
     :arg path: `Path` object.
-    :arg stroke: The :ref:`stroke dictionary<mutool_run_js_api_stroke_dictionary>`.
+    :arg stroke: `StrokeState` The :ref:`stroke state object<mutool_object_stroke_state>`.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
     |example_tag|
 
     .. code-block:: javascript
 
-        device.clipStrokePath(path, true, mupdf.Matrix.identity);
+        device.clipStrokePath(path, stroke, mupdf.Matrix.identity);
 
-
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_path is not a function
 
 
 
@@ -151,7 +144,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     Stroke a text object.
 
     :arg text: `Text` object.
-    :arg stroke: The :ref:`stroke dictionary<mutool_run_js_api_stroke_dictionary>`.
+    :arg stroke: `StrokeState` The :ref:`stroke state object<mutool_object_stroke_state>`.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg colorspace: The :ref:`ColorSpace<mutool_run_javascript_api_colorspace>`.
     :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
@@ -163,7 +156,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     .. code-block:: javascript
 
         device.strokeText(text,
-                          {dashes:[5,10], lineWidth:3, lineCap:'Round'},
+                          stroke,
                           mupdf.Matrix.identity, mupdf.ColorSpace.DeviceRGB,
                           [1,0,0],
                           1);
@@ -196,14 +189,14 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     Clip & stroke a text object.
 
     :arg text: `Text` object.
-    :arg stroke: The :ref:`stroke dictionary<mutool_run_js_api_stroke_dictionary>`.
+    :arg stroke: `StrokeState` The :ref:`stroke state object<mutool_object_stroke_state>`.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
     |example_tag|
 
     .. code-block:: javascript
 
-        device.clipStrokeText(text, {dashes:[5,10], lineWidth:3, lineCap:'Round'},  mupdf.Matrix.identity);
+        device.clipStrokeText(text, stroke,  mupdf.Matrix.identity);
 
 
     .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_text is not a function

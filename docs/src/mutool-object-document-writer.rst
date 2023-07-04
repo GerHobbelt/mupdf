@@ -68,7 +68,7 @@
         var writer = new mupdf.DocumentWriter(buffer, "PDF", "");
 
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_document_writer_with_buffer is not a function.
+    |tor_todo| WASM: Error: unknown output document format:
 
 
 

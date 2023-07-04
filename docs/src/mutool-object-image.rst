@@ -35,7 +35,7 @@
         var imageFromBuffer = new mupdf.Image(buffer);
 
 
-    .. |tor_todo| WASM, // TypeError: libmupdf._wasm_new_from_pixmap is not a function , TypeError: libmupdf._wasm_new_image_from_buffer is not a function
+    |tor_todo| WASM, // TypeError: libmupdf._wasm_new_from_pixmap is not a function , TypeError: libmupdf._wasm_new_image_from_buffer is not a function
 
 |instance_methods|
 

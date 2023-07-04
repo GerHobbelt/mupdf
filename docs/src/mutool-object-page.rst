@@ -219,7 +219,7 @@ The base class for a :ref:`PDF Page<mutool_run_js_api_pdf_page>`.
 
         var link = page.createLink([0,0,100,100], "https://example.com");
 
-    .. |tor_todo| WASM add Document.formatLinkURI() if we need to create links.
+    |tor_todo| WASM add Document.formatLinkURI() if we need to create links.
 
 
 
@@ -237,7 +237,7 @@ The base class for a :ref:`PDF Page<mutool_run_js_api_pdf_page>`.
 
         page.deleteLink(link_obj);
 
-    .. |tor_todo| add to WASM?
+    |tor_todo| TypeError: page.deleteLink is not a function
 
 
 .. method:: getLabel()

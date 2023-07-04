@@ -60,7 +60,7 @@
         var font = new mupdf.Font("Times-Roman");
 
 
-    .. |tor_todo| WASM: ReferenceError: name is not defined
+    |tor_todo| WASM: TypeError: libmupdf._wasm_new_base14_font is not a function
 
 
 |instance_methods|

@@ -36,7 +36,3 @@
         console.log("my_display_list="+my_display_list);
         var displayListDevice = new mupdf.DisplayListDevice(my_display_list);
 
-
-
-
-    .. |tor_todo| In WASM - `TypeError: libmupdf._wasm_new_list_device` is not a function

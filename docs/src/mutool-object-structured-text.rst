@@ -48,7 +48,7 @@
 
         var result = sText.highlight([100,100], [200,100]);
 
-    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+    |tor_todo| WASM, TODO
 
 
 .. method:: copy(p, q)
@@ -68,7 +68,7 @@
         var result = sText.copy([100,100], [200,100]);
 
 
-    |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+    |tor_todo| WASM, TODO
 
 
 

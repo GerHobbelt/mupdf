@@ -24,8 +24,6 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
 
 .. method:: new PDFDocument()
 
-    |mutool_tag_wasm_soon|
-
     *Constructor method*.
 
     Create a new empty :title:`PDF` document.
@@ -37,8 +35,6 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
     .. code-block:: javascript
 
         var pdfDocument = new mupdf.PDFDocument();
-
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_pdf_create_document is not a function
 
 
 .. method:: new PDFDocument(fileName)
@@ -153,8 +149,6 @@ With :title:`MuPDF` it is also possible to create, edit and manipulate :title:`P
     .. code-block:: javascript
 
         var canBeSavedIncrementally = pdfDocument.canBeSavedIncrementally();
-
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_pdf_can_be_saved_incrementally is not a function
 
 
 .. method:: countVersions()
@@ -879,7 +873,7 @@ All page objects are structured into a page tree, which defines the order the pa
         var blankPage = pdfDocument.addPage([0,0,300,350], 0, resources, "BT /Helv 12 Tf 100 100 Td (MuPDF!)Tj ET");
 
 
-    .. |tor_todo| WASM: //TypeError: doc.newNull is not a function
+    |tor_todo| WASM: TypeError: expected Buffer
 
 
     |example_tag|
@@ -908,7 +902,7 @@ All page objects are structured into a page tree, which defines the order the pa
 
         var obj = pdfDocument.addSimpleFont(new mupdf.Font("Times-Roman"), "Latin");
 
-    .. |tor_todo| WASM: ReferenceError: name is not defined
+    |tor_todo| WASM: TypeError: libmupdf._wasm_new_base14_font is not a function
 
 
 .. method:: addCJKFont(font, language, wmode, style)
@@ -930,7 +924,7 @@ All page objects are structured into a page tree, which defines the order the pa
 
         var obj = pdfDocument.addCJKFont(new mupdf.Font("ja"), "ja", 0, "serif");
 
-    .. |tor_todo| WASM: ReferenceError: name is not defined
+    |tor_todo| WASM: TypeError: libmupdf._wasm_new_base14_font is not a function
 
 
 .. method:: addFont(font)
@@ -949,7 +943,7 @@ All page objects are structured into a page tree, which defines the order the pa
 
         var obj = pdfDocument.addFont(new mupdf.Font("Times-Roman"));
 
-    .. |tor_todo| WASM: ReferenceError: name is not defined
+    |tor_todo| WASM: TypeError: libmupdf._wasm_new_base14_font is not a function
 
 
 .. method:: addImage(image)
@@ -969,7 +963,7 @@ All page objects are structured into a page tree, which defines the order the pa
 
         var obj = pdfDocument.addImage(new mupdf.Image(pixmap));
 
-    .. |tor_todo| WASM: // TypeError: libmupdf._wasm_new_from_pixmap is not a function
+    |tor_todo| WASM: // TypeError: libmupdf._wasm_new_from_pixmap is not a function
 
 
 .. method:: loadImage(obj)
@@ -1105,7 +1099,6 @@ Embedded files in :title:`PDFs`
 
 .. method:: getEmbeddedFileContents(fileSpecObject)
 
-    |mutool_tag_wasm_soon|
 
     Returns a `Buffer` with the contents of the embedded file referenced by the `fileSpecObject`.
 
@@ -1118,8 +1111,6 @@ Embedded files in :title:`PDFs`
     .. code-block:: javascript
 
         var buffer = pdfDocument.getEmbeddedFileContents(fileSpecObject);
-
-    .. |tor_todo| WASM, TypeError: libmupdf._wasm_pdf_load_embedded_file_contents is not a function
 
 
 .. method:: verifyEmbeddedFileChecksum(fileSpecObject)

@@ -22,7 +22,6 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
 
 .. method:: new Path()
 
-    |mutool_tag_wasm_soon|
 
     *Constructor method*.
 
@@ -36,8 +35,6 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
 
         var path = new mupdf.Path();
 
-
-    .. |tor_todo|  WASM, TypeError: libmupdf._wasm_new_path is not a function
 
 
 
