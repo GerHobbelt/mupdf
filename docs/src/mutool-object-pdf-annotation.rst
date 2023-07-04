@@ -587,7 +587,7 @@ These properties are only present for some annotation types, so support for them
 
         var appearance = annotation.getDefaultAppearance();
 
-    .. |tor_todo| WASM TypeError: annotation.getDefaultAppearance is not a function
+    |tor_todo| WASM TypeError: annotation.getDefaultAppearance is not a function
     .. |jamie_todo| how about describing the DefaultApperance as a separate object similar to the link destination?
 
 
@@ -603,7 +603,12 @@ These properties are only present for some annotation types, so support for them
 
     .. code-block:: javascript
 
-        annotation.setDefaultAppearance("Times-Roman", 16, [0,0,0]);
+        annotation.setDefaultAppearance("Helv", 16, [0,0,0]);
+
+
+.. note::
+
+    Recommended to use the Adobe abbreviated names "Cour", "Helv", and "TiRo" although :title:`MuPDF` will also accept any of the full Base 14 font names.
 
 
 .. method:: hasInteriorColor()
