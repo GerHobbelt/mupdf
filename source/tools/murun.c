@@ -10954,8 +10954,6 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "PDFAnnotation.eventFocus", ffi_PDFAnnotation_eventFocus, 0);
 		jsB_propfun(J, "PDFAnnotation.eventBlur", ffi_PDFAnnotation_eventBlur, 0);
 	}
-	js_dup(J);
-	js_setglobal(J, "PDFAnnotation");
 	js_setregistry(J, "pdf_annot");
 
 	js_getregistry(J, "pdf_annot");
@@ -10993,16 +10991,9 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "PDFWidget.getLabel", ffi_PDFWidget_getLabel, 0);
 		jsB_propfun(J, "PDFWidget.getName", ffi_PDFWidget_getName, 0);
 	}
-	js_dup(J);
-	js_setglobal(J, "PDFWidget");
-	js_setregistry(J, "pdf_annot");
 
 	js_getregistry(J, "Userdata");
 	js_newobjectx(J);
-	{
-	}
-	js_dup(J);
-	js_setglobal(J, "PDFPKCS7Signer");
 	js_setregistry(J, "pdf_pkcs7_signer");
 
 	js_getregistry(J, "Userdata");
