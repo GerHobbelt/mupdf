@@ -135,7 +135,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
         device.fillText(text, mupdf.Matrix.identity, mupdf.ColorSpace.DeviceRGB, [1,0,0], 1);
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_text is not a function
+    |tor_todo| WASM: ReferenceError: pointer is not defined
 
 .. method:: strokeText(text, stroke, transform, colorspace, color, alpha, colorParams)
 
@@ -162,7 +162,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
                           1);
 
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_text is not a function
+    |tor_todo| WASM: ReferenceError: pointer is not defined
 
 .. method:: clipText(text, transform)
 
@@ -180,7 +180,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.clipText(text, mupdf.Matrix.identity);
 
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_text is not a function
+    |tor_todo| WASM: ReferenceError: pointer is not defined
 
 .. method:: clipStrokeText(text, stroke, transform)
 
@@ -199,7 +199,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.clipStrokeText(text, stroke,  mupdf.Matrix.identity);
 
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_text is not a function
+    |tor_todo| WASM: ReferenceError: pointer is not defined
 
 
 .. method:: ignoreText(text, transform)
@@ -218,7 +218,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.ignoreText(text, mupdf.Matrix.identity);
 
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_text is not a function
+    |tor_todo| WASM: ReferenceError: pointer is not defined
 
 
 .. method:: fillShade(shade, transform, alpha, colorParams)
@@ -263,7 +263,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.fillImage(image, mupdf.Matrix.identity, false, {overPrinting:true});
 
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_from_pixmap is not a function
+    |tor_todo| WASM: TypeError: libmupdf._wasm_new_from_pixmap is not a function
 
 
 .. method:: fillImageMask(image, transform, colorspace, color, alpha, colorParams)
@@ -287,7 +287,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.fillImageMask(image, mupdf.Matrix.identity, mupdf.ColorSpace.DeviceRGB, 0xff00ff, true, {});
 
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_from_pixmap is not a function
+    |tor_todo| WASM: TypeError: libmupdf._wasm_new_from_pixmap is not a function
 
 
 .. method:: clipImageMask(image, transform)
@@ -307,7 +307,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.clipImageMask(image, mupdf.Matrix.identity);
 
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_from_pixmap is not a function
+    |tor_todo| WASM: TypeError: libmupdf._wasm_new_from_pixmap is not a function
 
 .. method:: popClip()
 
@@ -322,7 +322,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
 .. method:: beginMask(area, luminosity, backdropColorspace, backdropColor, backdropAlpha, colorParams)
 
-    |mutool_tag_wasm_soon|
 
     Create a soft mask. Any drawing commands between `beginMask` and `endMask` are grouped and used as a clip mask.
 
@@ -341,9 +340,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.beginMask(path, true, mupdf.ColorSpace.DeviceRGB, 0xff00ff, false, {});
 
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_path is not a function
-
-
 .. method:: endMask()
 
     Ends the mask.
@@ -356,13 +352,13 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
 
 
-.. method:: beginGroup(area, isolated, knockout, blendmode, alpha)
+.. method:: beginGroup(area, colorspace, isolated, knockout, blendmode, alpha)
 
-    |mutool_tag_wasm_soon|
 
     Push/pop a transparency blending group. See the PDF reference for details on `isolated` and `knockout`.
 
-    :arg area: `Path` Blend area.
+    :arg area: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`. The blend area.
+    :arg colorspace: :ref:`ColorSpace<mutool_run_javascript_api_colorspace>`.
     :arg isolated: `Boolean`.
     :arg knockout: `Boolean`.
     :arg blendmode: Blendmode is one of the standard :title:`PDF` blend modes: "Normal", "Multiply", "Screen", etc.
@@ -378,10 +374,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
     .. code-block:: javascript
 
-        device.beginGroup(path, true, true, "Multiply", 0.5);
-
-
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_path is not a function
+        device.beginGroup([0,0,100,100], mupdf.ColorSpace.DeviceRGB, true, true, "Multiply", 0.5);
 
 
 .. method:: endGroup()
@@ -468,7 +461,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
         device.renderFlags(["mask","startcap-undefined"], []);
 
-    .. |tor_todo| TypeError: device.renderFlags is not a function
+    |tor_todo| TypeError: device.renderFlags is not a function
 
 
 .. method:: setDefaultColorSpaces(defaults)
@@ -483,7 +476,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     .. code-block:: javascript
 
 
-    .. |tor_todo| Ask Tor, how to create a default color space object.
+    |jamie_todo| Ask Tor, how to create a default color space object.
 
 
 .. method:: beginStructure(standard, raw, uid)
@@ -502,7 +495,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
         device.beginStructure("Document", "my_tag_name", 123);
 
-    .. |tor_todo| TypeError: device.beginStructure is not a function
+    |tor_todo| TypeError: device.beginStructure is not a function
 
 
 .. method:: endStructure()
@@ -518,7 +511,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.endStructure();
 
 
-    .. |tor_todo| TypeError: device.endStructure is not a function
+    |tor_todo| TypeError: device.endStructure is not a function
 
 
 .. method:: beginMetatext(type, text)
@@ -538,7 +531,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.beginMetatext("Title", "My title");
 
 
-    .. |tor_todo| WASM: TypeError: device.beginMetatext is not a function
+    |tor_todo| WASM: TypeError: device.beginMetatext is not a function
 
 
 .. method:: endMetatext()
@@ -554,7 +547,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.endMetatext();
 
 
-    .. |tor_todo| WASM: TypeError: device.endMetatext is not a function
+    |tor_todo| WASM: TypeError: device.endMetatext is not a function
 
 
 .. method:: close()
