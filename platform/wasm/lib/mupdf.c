@@ -286,6 +286,18 @@ fz_pixmap * wasm_new_pixmap_from_page(fz_page *page, fz_matrix *ctm, fz_colorspa
 }
 
 EXPORT
+fz_pixmap * wasm_pdf_new_pixmap_from_page_with_usage(pdf_page *page, fz_matrix *ctm, fz_colorspace *colorspace, int alpha, char *usage, fz_box_type box)
+{
+	POINTER(pdf_new_pixmap_from_page_with_usage, page, *ctm, colorspace, alpha, usage, box)
+}
+
+EXPORT
+fz_pixmap * wasm_pdf_new_pixmap_from_page_contents_with_usage(pdf_page *page, fz_matrix *ctm, fz_colorspace *colorspace, int alpha, char *usage, fz_box_type box)
+{
+	POINTER(pdf_new_pixmap_from_page_contents_with_usage, page, *ctm, colorspace, alpha, usage, box)
+}
+
+EXPORT
 fz_pixmap * wasm_new_pixmap_with_bbox(fz_colorspace *colorspace, fz_rect *bbox, int alpha)
 {
 	POINTER(fz_new_pixmap_with_bbox, colorspace, fz_irect_from_rect(*bbox), NULL, alpha)

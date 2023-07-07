@@ -335,6 +335,7 @@ static int res_specified = 0;
 static int width = 0;
 static int height = 0;
 static int fit = 0;
+static int page_box = FZ_MEDIA_BOX;
 
 static float layout_w = FZ_DEFAULT_LAYOUT_W;
 static float layout_h = FZ_DEFAULT_LAYOUT_H;
@@ -497,6 +498,7 @@ static int usage(void)
 		"  -h -  page height (in pixels) (maximum height if -r is specified)\n"
 		"  -f    fit file to page if too large: fit width and/or height exactly;\n"
 		"        ignore original aspect ratio\n"
+		"  -b -  use named page box (MediaBox, CropBox, BleedBox, TrimBox, or ArtBox)\n"
 		"  -B -  maximum band height (pXm, pcl, pclm, ocr.pdf, ps, psd, muraw and png output\n"
 		"        only)\n"
 #ifndef DISABLE_MUTHREADS
@@ -893,7 +895,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 	if (list)
 		mediabox = fz_bound_display_list(ctx, list);
 	else
-		mediabox = fz_bound_page(ctx, page);
+		mediabox = fz_bound_page_box(ctx, page, page_box);
 
 	/* Calculate Page resolution & rotation */
 	calc_page_render_details(ctx, page, mediabox);
@@ -1620,7 +1622,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 	{
 		fz_try(ctx)
 		{
-			list = fz_new_display_list(ctx, fz_bound_page(ctx, page));
+			list = fz_new_display_list(ctx, fz_bound_page_box(ctx, page, page_box));
 			dev = fz_new_list_device(ctx, list);
 			if (lowmemory)
 				fz_enable_device_hints(ctx, dev, FZ_NO_CACHE);
@@ -2668,6 +2670,7 @@ int main(int argc, const char** argv)
 	width = 0;
 	height = 0;
 	fit = 0;
+	page_box = FZ_MEDIA_BOX;
 
 	layout_w = FZ_DEFAULT_LAYOUT_W;
 	layout_h = FZ_DEFAULT_LAYOUT_H;
@@ -2785,7 +2788,7 @@ int main(int argc, const char** argv)
 	atexit(mu_drop_context);
 
 	fz_getopt_reset();
-	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:gG:Is:A:DiW:H:S:T:t:d:U:XLvVPl:y:Yz:Z:NO:am:x:hj:J:K")) != -1)
+	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:gG:Is:A:DiW:H:S:T:t:d:U:XLvVPl:y:Yz:Z:NO:am:x:hj:J:Kb")) != -1)
 	{
 		switch (c)
 		{
@@ -2805,6 +2808,14 @@ int main(int argc, const char** argv)
 		case 'h': height = fz_atof(fz_optarg); break;
 		case 'f': fit = 1; break;
 		case 'B': band_height = atoi(fz_optarg); break;
+		case 'b':
+			page_box = fz_box_type_from_string(fz_optarg);
+			if (page_box == FZ_UNKNOWN_BOX)
+			{
+				fprintf(stderr, "Invalid box type: %s\n", fz_optarg);
+				return 1;
+			}
+			break;
 
 		case 'c': out_cs = parse_colorspace(fz_optarg); break;
 		case 'e': proof_filename = fz_optarg; break;
