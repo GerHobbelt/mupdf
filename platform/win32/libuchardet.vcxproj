@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -113,8 +113,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBUCHARDET;UCHARDET_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -569,9 +569,47 @@
     <Text Include="../../thirdparty/owemdjee/uchardet/test/zh/utf-8.txt" />
     <Text Include="../../thirdparty/owemdjee/uchardet/uchardet-config.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/uchardet/uchardet.pc.in" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangArabicModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangBelarusianModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangBulgarianModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangCatalanModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangCroatianModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangCzechModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangDanishModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangEnglishModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangEsperantoModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangEstonianModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangFinnishModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangFrenchModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangGeorgianModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangGermanModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangGreekModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangHebrewModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangHindiModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangHungarianModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangIrishModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangItalianModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangKoreanModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangLatvianModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangLithuanianModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangMacedonianModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangMalteseModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangNorwegianModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangPolishModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangPortugueseModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangRomanianModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangRussianModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangSerbianModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangSlovakModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangSloveneModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangSpanishModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangSwedishModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangThaiModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangTurkishModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangUkrainianModel.log" />
+    <Text Include="..\..\thirdparty\owemdjee\uchardet\script\BuildLangModelLogs\LangVietnameseModel.log" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  

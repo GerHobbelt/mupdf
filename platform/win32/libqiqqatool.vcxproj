@@ -47,20 +47,20 @@
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
@@ -75,7 +75,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -109,11 +109,11 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;..\..\thirdparty\curl\include;..\..\thirdparty\owemdjee;..\..\thirdparty\zlib;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;..\..\thirdparty\curl\include;..\..\thirdparty\owemdjee;..\..\thirdparty\zlib;..\..\thirdparty\monolithic_tmplt;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRTDBG_MAP_ALLOC;HAVE_TESSERACT;HAVE_LEPTONICA;WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -131,7 +131,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;..\..\thirdparty\curl\include;..\..\thirdparty\owemdjee;..\..\thirdparty\zlib;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;..\..\thirdparty\curl\include;..\..\thirdparty\owemdjee;..\..\thirdparty\zlib;..\..\thirdparty\monolithic_tmplt;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRTDBG_MAP_ALLOC;HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;_DEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -145,7 +145,7 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;..\..\thirdparty\curl\include;..\..\thirdparty\owemdjee;..\..\thirdparty\zlib;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;..\..\thirdparty\curl\include;..\..\thirdparty\owemdjee;..\..\thirdparty\zlib;..\..\thirdparty\monolithic_tmplt;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>HAVE_TESSERACT;HAVE_LEPTONICA;WIN32;NDEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -161,7 +161,7 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;..\..\thirdparty\curl\include;..\..\thirdparty\owemdjee;..\..\thirdparty\zlib;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\thirdparty\owemdjee\BLAKE3\c;..\..\thirdparty\curl\include;..\..\thirdparty\owemdjee;..\..\thirdparty\zlib;..\..\thirdparty\monolithic_tmplt;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;NDEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -177,23 +177,36 @@
     <ClCompile Include="..\..\source\tools\pdffingerprint0.cpp" />
     <ClCompile Include="..\..\source\tools\pdffingerprint1.c" />
     <ClCompile Include="..\..\source\tools\pdf_documentid.c" />
+    <ClCompile Include="..\..\source\tools\qiqqa_chop_shop.cpp" />
     <ClCompile Include="..\..\source\tools\qiqqa_content_importer.cpp" />
     <ClCompile Include="..\..\source\tools\qiqqa_content_processor.cpp" />
     <ClCompile Include="..\..\source\tools\qiqqa_db_exporter.cpp" />
+    <ClCompile Include="..\..\source\tools\qiqqa_db_fts_indexer.cpp" />
+    <ClCompile Include="..\..\source\tools\qiqqa_db_fts_search.cpp" />
     <ClCompile Include="..\..\source\tools\qiqqa_db_importer.cpp" />
+    <ClCompile Include="..\..\source\tools\qiqqa_db_pappy.cpp" />
+    <ClCompile Include="..\..\source\tools\qiqqa_doc_scrutinizer.cpp" />
+    <ClCompile Include="..\..\source\tools\qiqqa_examples_main.cpp" />
+    <ClCompile Include="..\..\source\tools\qiqqa_ingest.cpp" />
+    <ClCompile Include="..\..\source\tools\qiqqa_meta_exporter.cpp" />
     <ClCompile Include="..\..\source\tools\qiqqa_meta_importer.cpp" />
+    <ClCompile Include="..\..\source\tools\qiqqa_ocr_bezoar.cpp" />
+    <ClCompile Include="..\..\source\tools\qiqqa_pdf_hound.cpp" />
+    <ClCompile Include="..\..\source\tools\qiqqa_snarfl.cpp" />
     <ClCompile Include="..\..\source\tools\safe_file_copier.cpp" />
     <ClCompile Include="..\..\source\tools\qiqqa_convert_legacy_annot_blobs_to_json.cpp" />
     <ClCompile Include="..\..\source\tools\qiqqa_convert_legacy_autotags_to_json.cpp" />
     <ClCompile Include="..\..\source\tools\qiqqa_convert_legacy_configuration_to_json.cpp" />
     <ClCompile Include="..\..\source\tools\qiqqa_convert_legacy_expedition_to_json.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\source\tools\qiqqa_monolithic_examples.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
