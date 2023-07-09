@@ -2457,14 +2457,14 @@ static void js_proc_Tstar(fz_context *ctx, pdf_processor *proc)
 	PROC_END(0);
 }
 
-static void push_byte_string(js_State *J, unsigned char *str, size_t len)
+static void push_byte_string(js_State *J, const unsigned char *str, size_t len)
 {
 	size_t i, is_ascii = 1;
 	for (i = 0; i < len; ++i)
 		if (str[i] == 0 || str[i] >= 127)
 			is_ascii = 0;
 	if (is_ascii)
-		js_pushstring(J, (char*)str);
+		js_pushstring(J, (const char*)str);
 	else
 	{
 		js_newarray(J);
@@ -2499,26 +2499,26 @@ static void js_proc_TJ(fz_context *ctx, pdf_processor *proc, pdf_obj *array)
 	PROC_END(1);
 }
 
-static void js_proc_Tj(fz_context *ctx, pdf_processor *proc, char *str, size_t len)
+static void js_proc_Tj(fz_context *ctx, pdf_processor *proc, const char *str, size_t len)
 {
 	PROC_BEGIN("op_Tj");
-	push_byte_string(J, (unsigned char *)str, len);
+	push_byte_string(J, (const unsigned char *)str, len);
 	PROC_END(1);
 }
 
-static void js_proc_squote(fz_context *ctx, pdf_processor *proc, char *str, size_t len)
+static void js_proc_squote(fz_context *ctx, pdf_processor *proc, const char *str, size_t len)
 {
 	PROC_BEGIN("op_squote");
-	push_byte_string(J, (unsigned char *)str, len);
+	push_byte_string(J, (const unsigned char *)str, len);
 	PROC_END(1);
 }
 
-static void js_proc_dquote(fz_context *ctx, pdf_processor *proc, float aw, float ac, char *str, size_t len)
+static void js_proc_dquote(fz_context *ctx, pdf_processor *proc, float aw, float ac, const char *str, size_t len)
 {
 	PROC_BEGIN("op_dquote");
 	js_pushnumber(J, aw);
 	js_pushnumber(J, ac);
-	push_byte_string(J, (unsigned char *)str, len);
+	push_byte_string(J, (const unsigned char *)str, len);
 	PROC_END(1);
 }
 

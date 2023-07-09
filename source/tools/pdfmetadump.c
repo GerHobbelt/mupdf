@@ -2004,7 +2004,7 @@ printtail(fz_context* ctx, globals* glo, const fz_gathered_statistics* stats)
 		write_item(ctx, out, "UpdatesStatus", buf);
 	}
 
-	// This is one of the last things to write/report, as several activitiees of our COULD have triggered
+	// This is one of the last things to write/report, as several activitiees of ours COULD have triggered
 	// SOME repair behaviour. Hence we only are assured we'll get a *final* value returned here if we
 	// call this API *after* we've done all our other PDF metadata scan&report work.
 	write_item_bool(ctx, out, "WasRepaired", pdf_was_repaired(ctx, glo->doc));

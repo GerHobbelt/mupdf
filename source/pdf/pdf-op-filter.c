@@ -786,11 +786,11 @@ update_mcid(fz_context *ctx, pdf_sanitize_processor *p)
  * we hit the end).
  */
 static void
-filter_string_to_segment(fz_context *ctx, pdf_sanitize_processor *p, unsigned char *buf, size_t len, size_t *pos, int *inc, int *removed_space)
+filter_string_to_segment(fz_context *ctx, pdf_sanitize_processor *p, const unsigned char *buf, size_t len, size_t *pos, int *inc, int *removed_space)
 {
 	filter_gstate *gstate = p->gstate;
 	pdf_font_desc *fontdesc = gstate->pending.text.font;
-	unsigned char *end = buf + len;
+	const unsigned char *end = buf + len;
 	unsigned int cpt;
 	int cid;
 	int remove;
@@ -890,7 +890,7 @@ push_adjustment_to_array(fz_context *ctx, pdf_sanitize_processor *p, pdf_obj *ar
 }
 
 static void
-filter_show_string(fz_context *ctx, pdf_sanitize_processor *p, unsigned char *buf, size_t len)
+filter_show_string(fz_context *ctx, pdf_sanitize_processor *p, const unsigned char *buf, size_t len)
 {
 	filter_gstate *gstate = p->gstate;
 	pdf_font_desc *fontdesc = gstate->pending.text.font;
@@ -912,7 +912,7 @@ filter_show_string(fz_context *ctx, pdf_sanitize_processor *p, unsigned char *bu
 			filter_flush(ctx, p, FLUSH_ALL);
 			flush_adjustment(ctx, p);
 			if (p->chain->op_Tj)
-				p->chain->op_Tj(ctx, p->chain, (char *)buf+start, i-start);
+				p->chain->op_Tj(ctx, p->chain, (const char *)buf+start, i-start);
 		}
 		if (i != len)
 		{
@@ -2067,18 +2067,18 @@ pdf_filter_TJ(fz_context *ctx, pdf_processor *proc, pdf_obj *array)
 }
 
 static void
-pdf_filter_Tj(fz_context *ctx, pdf_processor *proc, char *str, size_t len)
+pdf_filter_Tj(fz_context *ctx, pdf_processor *proc, const char *str, size_t len)
 {
 	pdf_sanitize_processor *p = (pdf_sanitize_processor*)proc;
 
 	if (p->gstate->empty_clip_region)
 		return;
 
-	filter_show_string(ctx, p, (unsigned char *)str, len);
+	filter_show_string(ctx, p, (const unsigned char *)str, len);
 }
 
 static void
-pdf_filter_squote(fz_context *ctx, pdf_processor *proc, char *str, size_t len)
+pdf_filter_squote(fz_context *ctx, pdf_processor *proc, const char *str, size_t len)
 {
 	/* Note, we convert all T' operators to (maybe) a T* and a Tj */
 	pdf_sanitize_processor *p = (pdf_sanitize_processor*)proc;
@@ -2096,11 +2096,11 @@ pdf_filter_squote(fz_context *ctx, pdf_processor *proc, char *str, size_t len)
 	 * need to do it manually. */
 	if (!p->Tm_pending && p->chain->op_Tstar)
 		p->chain->op_Tstar(ctx, p->chain);
-	filter_show_string(ctx, p, (unsigned char *)str, len);
+	filter_show_string(ctx, p, (const unsigned char *)str, len);
 }
 
 static void
-pdf_filter_dquote(fz_context *ctx, pdf_processor *proc, float aw, float ac, char *str, size_t len)
+pdf_filter_dquote(fz_context *ctx, pdf_processor *proc, float aw, float ac, const char *str, size_t len)
 {
 	/* Note, we convert all T" operators to (maybe) a T*,
 	 * (maybe) Tc, (maybe) Tw and a Tj. */
@@ -2121,7 +2121,7 @@ pdf_filter_dquote(fz_context *ctx, pdf_processor *proc, float aw, float ac, char
 	 * need to do it manually. */
 	if (!p->Tm_pending && p->chain->op_Tstar)
 		p->chain->op_Tstar(ctx, p->chain);
-	filter_show_string(ctx, p, (unsigned char*)str, len);
+	filter_show_string(ctx, p, (const unsigned char*)str, len);
 }
 
 /* type 3 fonts */

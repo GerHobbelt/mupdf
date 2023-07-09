@@ -935,7 +935,7 @@ pdf_lookup_cmap_full(pdf_cmap *cmap, unsigned int cpt, int *out)
 }
 
 int
-pdf_decode_cmap(pdf_cmap *cmap, unsigned char *buf, unsigned char *end, unsigned int *cpt)
+pdf_decode_cmap(pdf_cmap *cmap, const unsigned char *buf, const unsigned char *end, unsigned int *cpt)
 {
 	unsigned int c;
 	int k, n;

@@ -427,7 +427,7 @@ pdf_out_TJ(fz_context *ctx, pdf_processor *proc, pdf_obj *array)
 }
 
 static void
-pdf_out_Tj(fz_context *ctx, pdf_processor *proc, char *str, size_t len)
+pdf_out_Tj(fz_context *ctx, pdf_processor *proc, const char *str, size_t len)
 {
 	fz_output *out = ((pdf_output_processor*)proc)->out;
 	fz_write_pdf_string(ctx, out, (const unsigned char *)str, len);
@@ -435,7 +435,7 @@ pdf_out_Tj(fz_context *ctx, pdf_processor *proc, char *str, size_t len)
 }
 
 static void
-pdf_out_squote(fz_context *ctx, pdf_processor *proc, char *str, size_t len)
+pdf_out_squote(fz_context *ctx, pdf_processor *proc, const char *str, size_t len)
 {
 	fz_output *out = ((pdf_output_processor*)proc)->out;
 	fz_write_pdf_string(ctx, out, (const unsigned char *)str, len);
@@ -443,7 +443,7 @@ pdf_out_squote(fz_context *ctx, pdf_processor *proc, char *str, size_t len)
 }
 
 static void
-pdf_out_dquote(fz_context *ctx, pdf_processor *proc, float aw, float ac, char *str, size_t len)
+pdf_out_dquote(fz_context *ctx, pdf_processor *proc, float aw, float ac, const char *str, size_t len)
 {
 	fz_output *out = ((pdf_output_processor*)proc)->out;
 	fz_write_printf(ctx, out, "%g %g ", aw, ac);

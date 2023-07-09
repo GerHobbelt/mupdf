@@ -117,7 +117,7 @@ int pdf_lookup_cmap_full(pdf_cmap *cmap, unsigned int cpt, int *out);
 	Use the codespace ranges to extract a codepoint from a
 	multi-byte encoded string.
 */
-int pdf_decode_cmap(pdf_cmap *cmap, unsigned char *s, unsigned char *e, unsigned int *cpt);
+int pdf_decode_cmap(pdf_cmap *cmap, const unsigned char *s, const unsigned char *e, unsigned int *cpt);
 
 /*
 	Create an Identity-* CMap (for both 1 and 2-byte encodings)

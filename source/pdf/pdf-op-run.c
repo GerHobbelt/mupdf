@@ -1195,11 +1195,11 @@ find_lang_from_mc(fz_context *ctx, pdf_run_processor *pr)
 }
 
 static void
-show_string(fz_context *ctx, pdf_run_processor *pr, unsigned char *buf, size_t len)
+show_string(fz_context *ctx, pdf_run_processor *pr, const unsigned char *buf, size_t len)
 {
 	pdf_gstate *gstate = pr->gstate + pr->gtop;
 	pdf_font_desc *fontdesc = gstate->text.font;
-	unsigned char *end = buf + len;
+	const unsigned char *end = buf + len;
 	unsigned int cpt;
 	int cid;
 	fz_text_language lang = find_lang_from_mc(ctx, pr);
@@ -1226,7 +1226,7 @@ show_string(fz_context *ctx, pdf_run_processor *pr, unsigned char *buf, size_t l
 }
 
 static void
-pdf_show_string(fz_context *ctx, pdf_run_processor *pr, unsigned char *buf, size_t len)
+pdf_show_string(fz_context *ctx, pdf_run_processor *pr, const unsigned char *buf, size_t len)
 {
 	pdf_gstate *gstate = pr->gstate + pr->gtop;
 	pdf_font_desc *fontdesc = gstate->text.font;
@@ -2578,25 +2578,25 @@ static void pdf_run_TJ(fz_context *ctx, pdf_processor *proc, pdf_obj *obj)
 	pdf_show_text(ctx, pr, obj);
 }
 
-static void pdf_run_Tj(fz_context *ctx, pdf_processor *proc, char *string, size_t string_len)
+static void pdf_run_Tj(fz_context *ctx, pdf_processor *proc, const char *string, size_t string_len)
 {
 	pdf_run_processor *pr = (pdf_run_processor *)proc;
 
 	pdf_jit_push_tk(ctx, pr);
 
-	pdf_show_string(ctx, pr, (unsigned char *)string, string_len);
+	pdf_show_string(ctx, pr, (const unsigned char *)string, string_len);
 }
 
-static void pdf_run_squote(fz_context *ctx, pdf_processor *proc, char *string, size_t string_len)
+static void pdf_run_squote(fz_context *ctx, pdf_processor *proc, const char *string, size_t string_len)
 {
 	pdf_run_processor *pr = (pdf_run_processor *)proc;
 	pdf_gstate *gstate = pdf_jit_push_tk(ctx, pr);
 
 	pdf_tos_newline(&pr->tos, gstate->text.leading);
-	pdf_show_string(ctx, pr, (unsigned char*)string, string_len);
+	pdf_show_string(ctx, pr, (const unsigned char*)string, string_len);
 }
 
-static void pdf_run_dquote(fz_context *ctx, pdf_processor *proc, float aw, float ac, char *string, size_t string_len)
+static void pdf_run_dquote(fz_context *ctx, pdf_processor *proc, float aw, float ac, const char *string, size_t string_len)
 {
 	pdf_run_processor *pr = (pdf_run_processor *)proc;
 	pdf_gstate *gstate = pdf_jit_push_tk(ctx, pr);
@@ -2604,7 +2604,7 @@ static void pdf_run_dquote(fz_context *ctx, pdf_processor *proc, float aw, float
 	gstate->text.word_space = aw;
 	gstate->text.char_space = ac;
 	pdf_tos_newline(&pr->tos, gstate->text.leading);
-	pdf_show_string(ctx, pr, (unsigned char*)string, string_len);
+	pdf_show_string(ctx, pr, (const unsigned char*)string, string_len);
 }
 
 /* type 3 fonts */

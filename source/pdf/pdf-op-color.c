@@ -994,7 +994,7 @@ pdf_color_TJ(fz_context *ctx, pdf_processor *proc, pdf_obj *array)
 }
 
 static void
-pdf_color_Tj(fz_context *ctx, pdf_processor *proc, char *str, size_t len)
+pdf_color_Tj(fz_context *ctx, pdf_processor *proc, const char *str, size_t len)
 {
 	pdf_color_processor *p = (pdf_color_processor*)proc;
 
@@ -1009,7 +1009,7 @@ pdf_color_Tj(fz_context *ctx, pdf_processor *proc, char *str, size_t len)
 }
 
 static void
-pdf_color_squote(fz_context *ctx, pdf_processor *proc, char *str, size_t len)
+pdf_color_squote(fz_context *ctx, pdf_processor *proc, const char *str, size_t len)
 {
 	pdf_color_processor *p = (pdf_color_processor*)proc;
 
@@ -1024,7 +1024,7 @@ pdf_color_squote(fz_context *ctx, pdf_processor *proc, char *str, size_t len)
 }
 
 static void
-pdf_color_dquote(fz_context *ctx, pdf_processor *proc, float aw, float ac, char *str, size_t len)
+pdf_color_dquote(fz_context *ctx, pdf_processor *proc, float aw, float ac, const char *str, size_t len)
 {
 	pdf_color_processor *p = (pdf_color_processor*)proc;
 

@@ -99,10 +99,10 @@ mcid_show_char(fz_context *ctx, pdf_mcid_processor *p, int cid)
 }
 
 static void
-mcid_show_string(fz_context *ctx, pdf_mcid_processor *p, unsigned char *buf, size_t len)
+mcid_show_string(fz_context *ctx, pdf_mcid_processor *p, const unsigned char *buf, size_t len)
 {
 	pdf_font_desc *fontdesc = p->font;
-	unsigned char *end = buf + len;
+	const unsigned char *end = buf + len;
 	unsigned int cpt;
 	int cid;
 
@@ -193,26 +193,26 @@ pdf_mcid_TJ(fz_context *ctx, pdf_processor *proc, pdf_obj *array)
 }
 
 static void
-pdf_mcid_Tj(fz_context *ctx, pdf_processor *proc, char *str, size_t len)
+pdf_mcid_Tj(fz_context *ctx, pdf_processor *proc, const char *str, size_t len)
 {
 	pdf_mcid_processor *p = (pdf_mcid_processor*)proc;
-	mcid_show_string(ctx, p, (unsigned char *)str, len);
+	mcid_show_string(ctx, p, (const unsigned char *)str, len);
 }
 
 static void
-pdf_mcid_squote(fz_context *ctx, pdf_processor *proc, char *str, size_t len)
+pdf_mcid_squote(fz_context *ctx, pdf_processor *proc, const char *str, size_t len)
 {
 	pdf_mcid_processor *p = (pdf_mcid_processor*)proc;
 	mcid_show_newline(ctx, p);
-	mcid_show_string(ctx, p, (unsigned char *)str, len);
+	mcid_show_string(ctx, p, (const unsigned char *)str, len);
 }
 
 static void
-pdf_mcid_dquote(fz_context *ctx, pdf_processor *proc, float aw, float ac, char *str, size_t len)
+pdf_mcid_dquote(fz_context *ctx, pdf_processor *proc, float aw, float ac, const char *str, size_t len)
 {
 	pdf_mcid_processor *p = (pdf_mcid_processor*)proc;
 	mcid_show_newline(ctx, p);
-	mcid_show_string(ctx, p, (unsigned char*)str, len);
+	mcid_show_string(ctx, p, (const unsigned char*)str, len);
 }
 
 /* shadings, images, xobjects */
