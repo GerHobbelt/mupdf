@@ -1,11 +1,5 @@
 ﻿//
-// Local "web server" for use as Qiqqa backend & generic (scripted?) access
-//
-// This server should ultimately host the Qiqqa libraries' databases, OCR cache, etc.
-//
-// The 'web interface' is intended to be used by both the Qiqqa user apps, import/export apps
-// and arbitrary custom user scripts: the core intent is opening up *all* content
-// managed by Qiqqa: the PDFs (documents) and all metadata both.
+// 
 //
 
 #pragma message("TODO: implement this tool")

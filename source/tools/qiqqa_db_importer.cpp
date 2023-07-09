@@ -4,6 +4,8 @@
 // Can parse b0rked database dumps, which list PDF files and their associated bibtex records.
 //
 
+#pragma message("TODO: implement this tool")
+
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/dir.h"
