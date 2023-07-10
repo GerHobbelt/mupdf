@@ -2200,6 +2200,10 @@ class PDFAnnotation extends Userdata {
 		checkColor(color)
 		libmupdf._wasm_pdf_set_annot_default_appearance(STRING(fontName), size, color.length, COLOR(color))
 	}
+
+	applyRedaction(black_boxes = 1, image_method = 2) {
+		libmupdf._wasm_pdf_apply_redaction(this, black_boxes, image_method)
+	}
 }
 
 class PDFWidget extends PDFAnnotation {
