@@ -9,12 +9,12 @@ del /Q src\com\artifex\mupdf\fitz\*.class
 "%JAVA_HOME%\bin\javac.exe" -version
 
 @echo Building Viewer
-"%JAVA_HOME%\bin\javac.exe" -Xlint:deprecation -classpath src -sourcepath src example/Viewer.java example/ViewerCore.js example/PageCanvas.java example/Worker.java
+"%JAVA_HOME%\bin\javac.exe" -Xlint:deprecation -classpath src -sourcepath src example/Viewer.java example/ViewerCore.java example/PageCanvas.java example/Worker.java
 
 @echo Building JNI classes
 "%JAVA_HOME%\bin\javac.exe" -Xlint:deprecation -sourcepath src src/com/artifex/mupdf/fitz/*.java
 
-@echo Importing DLL (built using VS solution)
+@echo Importing DLL (%1) (built using VS solution)
 if exist ..\win32\%1\javaviewerlib.dll ( @copy ..\win32\%1\javaviewerlib.dll mupdf_java.dll /y ) else ( @echo "Cannot find ..\win32\%1\javaviewerlib.dll" )
 
 @echo Packaging into jar (incomplete as missing manifest)
