@@ -2677,7 +2677,7 @@ pdf_dict_putp(fz_context *ctx, pdf_obj *obj, const char *keys, pdf_obj *val)
 		{
 			/* Not the last key in the key path. Create subdict if not already there. */
 			cobj = pdf_dict_gets(ctx, obj, k);
-			if (pdf_is_null(ctx, cobj))
+			if (cobj == NULL)
 			{
 				cobj = pdf_new_dict(ctx, doc, 1);
 				fz_try(ctx)
