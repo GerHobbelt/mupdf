@@ -161,7 +161,7 @@ static int strip_outline(fz_context *ctx, pdf_document *doc, pdf_obj *outlines, 
 				/* Outline with invalid dest and no children. Drop it by
 				 * pulling the next one in here. */
 				pdf_obj *next = pdf_dict_get(ctx, current, PDF_NAME(Next));
-				if (!pdf_is_dict(ctx, next))
+				if (next == NULL)
 				{
 					/* There is no next one to pull in */
 					if (prev != NULL)
@@ -213,7 +213,7 @@ static int strip_outlines(fz_context *ctx, pdf_document *doc, pdf_obj *outlines,
 		return 0;
 
 	first = pdf_dict_get(ctx, outlines, PDF_NAME(First));
-	if (!pdf_is_dict(ctx, first))
+	if (first == NULL)
 		nc = 0;
 	else
 		nc = strip_outline(ctx, doc, first, page_count, page_object_nums, names_list, &first, &last);
