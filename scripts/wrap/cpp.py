@@ -949,28 +949,47 @@ g_extra_declarations = textwrap.dedent(f'''
         #include "mupdf/fitz.h"
         #include "mupdf/pdf.h"
 
-        /** C++-specific alternative to `fz_lookup_metadata()` that returns a
-        `std::string` or calls `fz_throw()` if not found.
+        /**
+        C++ alternative to `fz_lookup_metadata()` that returns a `std::string`
+        or calls `fz_throw()` if not found.
         */
-        FZ_FUNCTION std::string fz_lookup_metadata2( fz_context* ctx, fz_document* doc, const char *key);
+        FZ_FUNCTION std::string fz_lookup_metadata2(fz_context* ctx, fz_document* doc, const char* key);
 
-        /** C++-specific alternative to `pdf_lookup_metadata()` that returns a
-        `std::string` or calls `fz_throw()` if not found.
+        /**
+        C++ alternative to `pdf_lookup_metadata()` that returns a `std::string`
+        or calls `fz_throw()` if not found.
         */
-        FZ_FUNCTION std::string pdf_lookup_metadata2( fz_context* ctx, pdf_document* doc, const char *key);
+        FZ_FUNCTION std::string pdf_lookup_metadata2(fz_context* ctx, pdf_document* doc, const char* key);
 
-        /** Convenience wrapper for `fz_md5_pixmap()`. */
-        FZ_FUNCTION std::vector<unsigned char> fz_md5_pixmap2(fz_context *ctx, fz_pixmap *pixmap);
+        /**
+        C++ alternative to `fz_md5_pixmap()` that returns the digest by value.
+        */
+        FZ_FUNCTION std::vector<unsigned char> fz_md5_pixmap2(fz_context* ctx, fz_pixmap* pixmap);
 
-        /** Mainly for use by Python/C# test code. */
-        FZ_FUNCTION long long fz_pixmap_samples_int(fz_context *ctx, fz_pixmap *pixmap);
-
-        FZ_FUNCTION int fz_samples_get(fz_pixmap *pixmap, int offset);
-
-        FZ_FUNCTION void fz_samples_set(fz_pixmap *pixmap, int offset, int value);
-
-        /** Wrapper for fz_md5_final() that returns the digest by value. */
+        /**
+        C++ alternative to fz_md5_final() that returns the digest by value.
+        */
         FZ_FUNCTION std::vector<unsigned char> fz_md5_final2(fz_md5* md5);
+
+        /** */
+        FZ_FUNCTION long long fz_pixmap_samples_int(fz_context* ctx, fz_pixmap* pixmap);
+
+        /**
+        Provides simple (but slow) access to pixmap data from Python and C#.
+        */
+        FZ_FUNCTION int fz_samples_get(fz_pixmap* pixmap, int offset);
+
+        /**
+        Provides simple (but slow) write access to pixmap data from Python and
+        C#.
+        */
+        FZ_FUNCTION void fz_samples_set(fz_pixmap* pixmap, int offset, int value);
+
+        /**
+        C++ alternative to fz_highlight_selection() that returns quads in a
+        std::vector.
+        */
+        FZ_FUNCTION std::vector<fz_quad> fz_highlight_selection2(fz_context* ctx, fz_stext_page* page, fz_point a, fz_point b, int max_quads);
         ''')
 
 g_extra_definitions = textwrap.dedent(f'''
@@ -1036,6 +1055,30 @@ g_extra_definitions = textwrap.dedent(f'''
             std::vector<unsigned char>  ret(16);
             fz_md5_final( md5, &ret[0]);
             return ret;
+        }}
+
+        FZ_FUNCTION std::vector<fz_quad> fz_highlight_selection2(fz_context *ctx, fz_stext_page *page, fz_point a, fz_point b, int max_quads)
+        {{
+            {{
+                std::vector<fz_quad>    ret(max_quads);
+                int n;
+                fz_try(ctx)
+                {{
+                    n = fz_highlight_selection(ctx, page, a, b, &ret[0], max_quads);
+                }}
+                fz_catch(ctx)
+                {{
+                    n = -1;
+                }}
+                if (n >= 0)
+                {{
+                    ret.resize(n);
+                    return ret;
+                }}
+            }}
+            /* We are careful to only call `fz_throw()` after `ret`'s
+            destructor has been called. */
+            fz_throw(ctx, FZ_ERROR_GENERIC, "fz_highlight_selection() failed");
         }}
         ''')
 
@@ -4888,6 +4931,7 @@ def cpp_source(
                 'fz_samples_set',
                 'pdf_lookup_metadata2',
                 'fz_md5_final2',
+                'fz_highlight_selection2',
                 ):
             # These are excluded from windows_def because are C++ so
             # we'd need to use the mangled name in. Instead we mark them
