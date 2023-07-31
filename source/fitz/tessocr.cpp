@@ -443,7 +443,8 @@ static void lept_stderr_print(const char *msg)
 {
 	fz_context *ctx = fz_get_global_context();
 
-	fz_write_string(ctx, fz_stderr(ctx), msg);
+	//fz_write_string(ctx, fz_stderr(ctx), msg);
+	fz_error(ctx, "ERROR: %s", msg);
 }
 
 
