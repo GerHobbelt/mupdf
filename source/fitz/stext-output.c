@@ -399,6 +399,7 @@ fz_print_stext_header_as_html(fz_context *ctx, fz_output *out)
 	fz_write_string(ctx, out, "<!DOCTYPE html>\n");
 	fz_write_string(ctx, out, "<html>\n");
 	fz_write_string(ctx, out, "<head>\n");
+	fz_write_string(ctx, out, "<meta charset=\"utf-8\">\n");
 	fz_write_string(ctx, out, "<style>\n");
 	fz_write_string(ctx, out, "body{background-color:slategray}\n");
 	fz_write_string(ctx, out, "div{position:relative;background-color:white;margin:1em auto;box-shadow:1px 1px 8px -2px black}\n");
@@ -602,6 +603,8 @@ fz_print_stext_header_as_xhtml(fz_context *ctx, fz_output *out)
 	fz_write_string(ctx, out, " \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n");
 	fz_write_string(ctx, out, "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n");
 	fz_write_string(ctx, out, "<head>\n");
+	fz_write_string(ctx, out, "<meta charset=\"utf-8\">\n");
+	fz_write_string(ctx, out, "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
 	fz_write_string(ctx, out, "<style>\n");
 	fz_write_string(ctx, out, "p{white-space:pre-wrap}\n");
 	fz_write_string(ctx, out, "</style>\n");

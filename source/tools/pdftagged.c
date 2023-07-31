@@ -206,13 +206,13 @@ void pdf_tagged_pdf(fz_context *ctx, fz_output *out, pdf_document *doc, pdf_mcid
 	pdf_obj *k = pdf_dict_get(ctx, stroot, PDF_NAME(K));
 	fz_write_string(ctx, out, "<!DOCTYPE html><html>");
 	fz_write_string(ctx, out, "<head>");
+	fz_write_string(ctx, out, "<meta charset=\"UTF-8\">");
 	fz_write_string(ctx, out, "<style>");
 	if (use_style)
 		fz_write_string(ctx, out, "p{margin:0}");
 	fz_write_string(ctx, out, "table{border-collapse:collapse}");
 	fz_write_string(ctx, out, "th,td{border:1px solid black;padding:3px}");
 	fz_write_string(ctx, out, "</style>");
-	fz_write_string(ctx, out, "<meta charset=\"UTF-8\">");
 	fz_write_string(ctx, out, "</head>");
 	pdf_tagged_st(ctx, out, doc, ptable, role_map, class_map, NULL, k, use_style);
 	fz_write_string(ctx, out, "</html>\n");

@@ -192,7 +192,7 @@ mobi_read_data(fz_context *ctx, fz_buffer *out, fz_stream *stm, uint32_t *offset
 		size_t i, n = fz_buffer_extract(ctx, out, &p);
 		fz_resize_buffer(ctx, out, 0);
 		if (format == FORMAT_TEXT)
-			fz_append_string(ctx, out, "<html><head><style>body{white-space:pre-wrap}</style></head><body>");
+			fz_append_string(ctx, out, "<html><head><meta charset=\"utf-8\"><style>body{white-space:pre-wrap}</style></head><body>");
 		for (i = 0; i < n; ++i)
 		{
 			int c = p[i];
