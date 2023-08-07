@@ -276,8 +276,13 @@ endif
 
 ifeq "$(OS)" "wasm"
   build_prefix += wasm/
-  CC = emcc
-  CXX = em++
+  ifeq ($(PYODIDE_ROOT),)
+    CC = emcc
+    CXX = em++
+  else
+    # Need to use $CC, not emcc.
+    CC := $(CC) --enable-bulk-memory
+  endif
   AR = emar
   HAVE_GLUT=no
   HAVE_X11=no
@@ -287,8 +292,13 @@ endif
 
 ifeq "$(OS)" "wasm-mt"
   build_prefix += wasm-mt/
-  CC = emcc
-  CXX = em++
+  ifeq ($(PYODIDE_ROOT),)
+    CC = emcc
+    CXX = em++
+  else
+    # Need to use $CC, not emcc.
+    CC := $(CC) --enable-bulk-memory
+  endif
   AR = emar
   HAVE_GLUT=no
   HAVE_X11=no
