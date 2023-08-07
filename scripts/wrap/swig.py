@@ -820,6 +820,12 @@ def build_swig(
             %ignore {rename.ll_fn('Memento_vasprintf')};
             %ignore {rename.fn('Memento_vasprintf')};
 
+            // These appear to be not present in Windows debug builds.
+            %ignore fz_assert_lock_held;
+            %ignore fz_assert_lock_not_held;
+            %ignore fz_lock_debug_lock;
+            %ignore fz_lock_debug_unlock;
+
             %ignore Memento_cpp_new;
             %ignore Memento_cpp_delete;
             %ignore Memento_cpp_new_array;

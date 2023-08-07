@@ -1363,6 +1363,7 @@ def build_0(
             check_regress,
             clang_info_verbose,
             refcheck_if,
+            'debug' in build_dirs.dir_so,
             )
 
     generated.save(f'{build_dirs.dir_mupdf}/platform/c++')

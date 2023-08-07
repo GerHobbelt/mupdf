@@ -4425,6 +4425,7 @@ def cpp_source(
         check_regress,
         clang_info_version,
         refcheck_if,
+        debug,
         ):
     '''
     Generates all .h and .cpp files.
@@ -4449,6 +4450,8 @@ def cpp_source(
             `#if ... ' text for enabling reference-checking code. For example
             `#if 1` to always enable, `#ifndef NDEBUG` to only enable in debug
             builds, `#if 0` to always disable.
+        debug:
+            True if debug build.
 
     Updates <generated> and returns <tu> from clang..
     '''
@@ -4951,6 +4954,12 @@ def cpp_source(
             'fz_write_pixmap_as_jpeg',
             ):
         windows_def += f'    {fnname}\n'
+
+    if debug:
+        # In debug builds these are real fns, not macros, and we need to
+        # make them exported.
+        windows_def += f'    fz_lock_debug_lock\n'
+        windows_def += f'    fz_lock_debug_unlock\n'
 
     jlib.fs_update( windows_def, f'{base}/windows_mupdf.def')
 
