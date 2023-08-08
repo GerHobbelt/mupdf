@@ -325,7 +325,7 @@ Python wrapping:
             internal copy of the data.
 
             New function `fz_buffer_extract_copy` and new method
-            `FzBuffer.fz_buffer_extract_copy()` are like `fz_buffer_extract()`
+            `FzBuffer.buffer_extract_copy()` are like `fz_buffer_extract()`
             except that they don't clear the buffer. They have no direct
             analogy in the C API.
 
@@ -634,7 +634,9 @@ Usage:
                 -f
                     Force rebuilds.
                 -j <N>
-                    Set -j arg used when action 'm' calls make (not Windows).
+                    Set -j arg used when action 'm' calls make (not
+                    Windows). If <N> is 0 we use the number of CPUs
+                    (from Python's multiprocessing.cpu_count()).
                 --regress
                     Checks for regressions in generated C++ code and SWIG .i
                     file (actions 0 and 2 below). If a generated file already
@@ -854,11 +856,6 @@ Usage:
             Runs mupdfwrap.py in a venv containing libclang and swig,
             passing remaining args.
 
-            if `-0` is specified, we assume the venv is already created and do
-            not create or install packages in it.
-
-                --venv -b all
-
         --vs-upgrade 0 | 1
             If 1, we use a copy of the Windows build file tree
             `platform/win32/` called `platform/win32-vs-upgrade`, modifying the
@@ -896,6 +893,7 @@ Usage:
 '''
 
 import glob
+import multiprocessing
 import os
 import pickle
 import re
@@ -1180,7 +1178,10 @@ def _get_m_command( build_dirs, j=None):
         #
         make = 'CXX=clang++ gmake'
 
-    if j:
+    if j is not None:
+        if j == '0':
+            j = multiprocessing.cpu_count()
+            jlib.log('Setting -j to  multiprocessing.cpu_count()={j}')
         make += f' -j {j}'
     flags = os.path.basename( build_dirs.dir_so).split('-')
     actual_build_dir = f'{build_dirs.dir_mupdf}/build/'
@@ -1428,6 +1429,7 @@ def build( build_dirs, swig_command, args, vs_upgrade):
             f'{build_dirs.dir_mupdf}/platform/c++/implementation/exceptions.cpp',
             f'{build_dirs.dir_mupdf}/platform/c++/implementation/functions.cpp',
             f'{build_dirs.dir_mupdf}/platform/c++/implementation/internal.cpp',
+            f'{build_dirs.dir_mupdf}/platform/c++/implementation/extra.cpp',
             ]
     h_files = [
             f'{build_dirs.dir_mupdf}/platform/c++/include/mupdf/classes.h',
@@ -1435,6 +1437,7 @@ def build( build_dirs, swig_command, args, vs_upgrade):
             f'{build_dirs.dir_mupdf}/platform/c++/include/mupdf/exceptions.h',
             f'{build_dirs.dir_mupdf}/platform/c++/include/mupdf/functions.h',
             f'{build_dirs.dir_mupdf}/platform/c++/include/mupdf/internal.h',
+            f'{build_dirs.dir_mupdf}/platform/c++/include/mupdf/extra.h',
             ]
     build_python = True
     build_csharp = False
@@ -1520,21 +1523,24 @@ def build( build_dirs, swig_command, args, vs_upgrade):
 
             elif action == 'm':
                 # Build libmupdf.so.
-                jlib.log( 'Building libmupdf.so ...')
-                command, actual_build_dir, suffix = _get_m_command( build_dirs, j)
-                jlib.system( command, prefix=jlib.log_text(), out='log', verbose=1)
+                if state.state_.windows:
+                    jlib.log( 'Ignoring `-b m` on Windows as not required.')
+                else:
+                    jlib.log( 'Building libmupdf.so ...')
+                    command, actual_build_dir, suffix = _get_m_command( build_dirs, j)
+                    jlib.system( command, prefix=jlib.log_text(), out='log', verbose=1)
 
-                if actual_build_dir != build_dirs.dir_so:
-                    # This happens when we are being run by
-                    # setup.py - it it might specify '-d
-                    # build/shared-release-x64-py3.8' (which
-                    # will be put into build_dirs.dir_so) but
-                    # the above 'make' command will create
-                    # build/shared-release/libmupdf.so, so we need
-                    # to copy into build/shared-release-x64-py3.8/.
-                    #
-                    suffix2 = '.dylib' if state.state_.macos else '.so'
-                    jlib.fs_copy( f'{actual_build_dir}/libmupdf{suffix2}', f'{build_dirs.dir_so}/libmupdf{suffix2}', verbose=1)
+                    if actual_build_dir != build_dirs.dir_so:
+                        # This happens when we are being run by
+                        # setup.py - it it might specify '-d
+                        # build/shared-release-x64-py3.8' (which
+                        # will be put into build_dirs.dir_so) but
+                        # the above 'make' command will create
+                        # build/shared-release/libmupdf.so, so we need
+                        # to copy into build/shared-release-x64-py3.8/.
+                        #
+                        suffix2 = '.dylib' if state.state_.macos else '.so'
+                        jlib.fs_copy( f'{actual_build_dir}/libmupdf{suffix2}', f'{build_dirs.dir_so}/libmupdf{suffix2}', verbose=1)
 
             elif action == '0':
                 build_0(
@@ -2566,7 +2572,7 @@ def main2():
                 if state.state_.windows:
                     win32_infix = _windows_vs_upgrade( vs_upgrade, build_dirs, devenv=None)
                     windows_build_type = build_dirs.windows_build_type()
-                    lib = f'mupdf-master/platform/{win32_infix}/{build_dirs.cpu.windows_subdir}{windows_build_type}/mupdfcpp{build_dirs.cpu.windows_suffix}.lib'
+                    lib = f'{build_dirs.dir_mupdf}/platform/{win32_infix}/{build_dirs.cpu.windows_subdir}{windows_build_type}/mupdfcpp{build_dirs.cpu.windows_suffix}.lib'
                     vs = wdev.WindowsVS()
                     command = textwrap.dedent(f'''
                             "{vs.vcvars}"&&"{vs.cl}"
@@ -2605,7 +2611,6 @@ def main2():
                     jlib.system(command, verbose=1)
                     jlib.system( 'pwd', verbose=1)
                     if state.state_.macos:
-                        #env_extra=dict(DYLD_LIBRARY_PATH=build_dirs.dir_so)
                         jlib.system( f'DYLD_LIBRARY_PATH={build_dirs.dir_so} ./test.cpp.exe', verbose=1)
                     else:
                         jlib.system( './test.cpp.exe', verbose=1, env_extra=dict(LD_LIBRARY_PATH=build_dirs.dir_so))
@@ -2668,77 +2673,9 @@ def main2():
 
                 if 1:
                     # Build and run simple test.
-                    jlib.fs_update(
-                            textwrap.dedent('''
-                                    public class HelloWorld
-                                    {
-                                        public static void Main(string[] args)
-                                        {
-                                            System.Console.WriteLine("MuPDF C# test starting.");
-
-                                            // Check we can load a document.
-                                            mupdf.FzDocument document = new mupdf.FzDocument("zlib.3.pdf");
-                                            System.Console.WriteLine("document: " + document);
-                                            System.Console.WriteLine("num chapters: " + document.fz_count_chapters());
-                                            mupdf.FzPage page = document.fz_load_page(0);
-                                            mupdf.FzRect rect = page.fz_bound_page();
-                                            System.Console.WriteLine("rect: " + rect);
-                                            if ("" + rect != rect.to_string())
-                                            {
-                                                throw new System.Exception("rect ToString() is broken: '" + rect + "' != '" + rect.to_string() + "'");
-                                            }
-
-                                            // Test conversion to html using docx device.
-                                            var buffer = page.fz_new_buffer_from_page_with_format(
-                                                    "docx",
-                                                    "html",
-                                                    new mupdf.FzMatrix(1, 0, 0, 1, 0, 0),
-                                                    new mupdf.FzCookie()
-                                                    );
-                                            var data = buffer.fz_buffer_extract();
-                                            var s = System.Text.Encoding.UTF8.GetString(data, 0, data.Length);
-                                            if (s.Length < 100) {
-                                                throw new System.Exception("HTML text is too short");
-                                            }
-                                            System.Console.WriteLine("s=" + s);
-
-                                            // Check that previous buffer.buffer_extract() cleared the buffer.
-                                            data = buffer.fz_buffer_extract();
-                                            s = System.Text.Encoding.UTF8.GetString(data, 0, data.Length);
-                                            if (s.Length > 0) {
-                                                throw new System.Exception("Buffer was not cleared.");
-                                            }
-
-                                            // Check we can create pixmap from page.
-                                            var pixmap = page.fz_new_pixmap_from_page_contents(
-                                                    new mupdf.FzMatrix(1, 0, 0, 1, 0, 0),
-                                                    new mupdf.FzColorspace(mupdf.FzColorspace.Fixed.Fixed_RGB),
-                                                    0 /*alpha*/
-                                                    );
-
-                                            // Check returned tuple from bitmap.fz_bitmap_details().
-                                            var w = 100;
-                                            var h = 200;
-                                            var n = 4;
-                                            var xres = 300;
-                                            var yres = 300;
-                                            var bitmap = new mupdf.FzBitmap(w, h, n, xres, yres);
-                                            (var w2, var h2, var n2, var stride) = bitmap.fz_bitmap_details();
-                                            System.Console.WriteLine("bitmap.fz_bitmap_details() returned:"
-                                                    + " " + w2 + " " + h2 + " " + n2 + " " + stride);
-                                            if (w2 != w || h2 != h) {
-                                                throw new System.Exception("Unexpected tuple values from bitmap.fz_bitmap_details().");
-                                            }
-                                            System.Console.WriteLine("MuPDF C# test finished.");
-                                        }
-                                    }
-                                    '''),
-                            'test-csharp.cs',
-                            )
-
                     out = 'test-csharp.exe'
                     jlib.build(
-                            ('test-csharp.cs', mupdf_cs),
+                            (f'{build_dirs.dir_mupdf}/scripts/mupdfwrap_test.cs', mupdf_cs),
                             out,
                             f'"{csc}" -out:{{OUT}} {{IN}}',
                             )
