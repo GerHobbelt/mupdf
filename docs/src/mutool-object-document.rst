@@ -245,6 +245,8 @@
 
     .. code-block:: javascript
 
-        var str = document.formatLinkURI(linkDestination);
+        var uri = document.formatLinkURI({chapter:0, page:42,
+                type:"FitV", x:0, y:0, width:100, height:50, zoom:1});
+        document.createLink([0,0,100,100], uri);
 
-
+    .. |tor_todo| add to WASM? needed by Page.createLink()

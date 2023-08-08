@@ -120,6 +120,7 @@ The base class for a :ref:`PDF Page<mutool_run_js_api_pdf_page>`.
     .. note::
 
         In :title:`MuPDF WASM` `alpha` & `showExtras` default to *true* unless otherwise specified.
+        In :title:`mutool run` `alpha` defaults to *false* and `showExtras` defaults to *true* unless otherwise specified.
 
     |example_tag|
 
@@ -138,7 +139,7 @@ The base class for a :ref:`PDF Page<mutool_run_js_api_pdf_page>`.
 
     .. note::
 
-        In :title:`MuPDF WASM` `showExtras` defaults to *true* unless otherwise specified.
+        In both :title:`MuPDF WASM` and :title`mutool run` `showExtras` defaults to *true* unless otherwise specified.
 
     |example_tag|
 
@@ -168,7 +169,7 @@ The base class for a :ref:`PDF Page<mutool_run_js_api_pdf_page>`.
 
     |mutool_tag_wasm_soon|
 
-    Search for `needle` text on the page, and return an array with :ref:`rectangles<mutool_run_js_api_rectangle>` of all matches found.
+    Search the page text for all instances of the `needle` value, and return an array of search hits. Each search hit is an array of :ref:`rectangles<mutool_run_js_api_quad>` corresponding to all characters in the search hit.
 
     :arg needle: `String`.
     :arg max_hits: `Integer` Defaults to 500 unless otherwise specified.
@@ -178,7 +179,7 @@ The base class for a :ref:`PDF Page<mutool_run_js_api_pdf_page>`.
 
     .. code-block:: javascript
 
-        var results = page.search("my phrase");
+        var results = page.search("my search phrase");
 
 
     .. |tor_todo| TypeError: libmupdf._wasm_search_page is not a function.
@@ -207,22 +208,16 @@ The base class for a :ref:`PDF Page<mutool_run_js_api_pdf_page>`.
     Create a new link within the rectangle on the page, linking to the destination URI string.
 
     :arg rect: :ref:`Rectangle<mutool_run_js_api_rectangle>` for the link.
-    :arg destinationUri: :ref:`link destination object<mutool_run_js_api_link_dest>` \| `String`.
+    :arg destinationUri: `String` containing URI.
     :return: :ref:`Link<mutool_object_link>`.
 
     |example_tag|
 
     .. code-block:: javascript
 
-        var link = page.createLink([0,0,100,100], {chapter:0,
-                                                   page:0,
-                                                   type:"FitV",
-                                                   x:0,
-                                                   y:0,
-                                                   width:100,
-                                                   height:50,
-                                                   zoom:1});
+        var link = page.createLink([0,0,100,100], "https://example.com");
 
+    .. |tor_todo| WASM add Document.formatLinkURI() if we need to create links.
 
 
 
@@ -240,7 +235,7 @@ The base class for a :ref:`PDF Page<mutool_run_js_api_pdf_page>`.
 
         page.deleteLink(link_obj);
 
-    .. |tor_todo| WASM TypeError: page.deleteLink is not a function
+    .. |tor_todo| add to WASM?
 
 
 .. method:: getLabel()

@@ -55,7 +55,7 @@
 
     Create a new `ColorSpace`.
 
-    :arg from: As used by users (and not internally) should be a buffer containing an ICC profile.
+    :arg from: A buffer containing an ICC profile.
     :arg name: A user descriptive name.
 
     :return: `ColorSpace`.
@@ -77,7 +77,7 @@
     .. code-block:: javascript
 
         var cs = mupdf.ColorSpace.DeviceRGB;
-        var num = cs.getNumberOfComponents(); //3
+        var num = cs.getNumberOfComponents(); // 3
 
 
 .. method:: toString()
@@ -89,7 +89,7 @@
     .. code-block:: javascript
 
         var cs = mupdf.ColorSpace.DeviceRGB;
-        var num = cs.toString(); //DeviceRGB
+        var num = cs.toString(); // "DeviceRGB"
 
 
 .. method:: isGray()
@@ -215,7 +215,7 @@
 ------------------------------
 
 
-.. |tor_todo| I couldn't get any of this "DefaultColorSpaces" stuff to run in mutool - I guess it is redundant?
+.. |jamie_todo| Look into the Device interfaces and see how DefaultColorSpaces is used there.
 
 
 `DefaultColorSpaces` is an object with keys for:

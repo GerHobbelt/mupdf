@@ -119,13 +119,13 @@
 
     Append a single byte to the end of the buffer.
 
-    :arg b: The byte value.
+    :arg b: The byte value. Only the least significant 8 bits of the value are appended to the buffer.
 
     |example_tag|
 
     .. code-block:: javascript
 
-        buffer.writeByte("byte_value");
+        buffer.writeByte(0x2a);
 
 
 .. method:: readByte(at)
@@ -149,14 +149,15 @@
 
     Encode a unicode character as UTF-8 and append to the end of the buffer.
 
-    :arg c: The character value.
+    :arg c: The character unicode codepoint.
 
     |example_tag|
 
     .. code-block:: javascript
 
-        buffer.writeRune("a");
-
+        buffer.writeRune(0x4f60); // To append U+4f60
+        buffer.writeRune(0x597d); // To append U+597d
+        buffer.writeRune(0xff01); // To append U+ff01
 
 .. method:: writeLine(...)
 
@@ -181,7 +182,7 @@
 
     .. code-block:: javascript
 
-        buffer.write("hello");
+        buffer.write("hello", "world");
 
 
 .. method:: writeBuffer(data)
@@ -212,7 +213,9 @@
 
     .. code-block:: javascript
 
-        var newBuffer = buffer.slice(0,10);
+        var buffer = new Buffer();
+        buffer.write("hello", "world"); // buffer contains "hello world"
+        var newBuffer = buffer.slice(1, -1); // newBuffer contains "ello worl"
 
 
 .. method:: save(fileName)

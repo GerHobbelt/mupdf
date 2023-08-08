@@ -50,7 +50,10 @@ All functions that take `PDFObjects`, do automatic translation between :title:`J
 
     .. code-block:: javascript
 
-        var value = pdfObj.get("my_key");
+        var dict = pdfDocument.newDictionary();
+        var value = dict.get("my_key");
+        var arr = pdfDocument.newArray();
+        var value = arr.get(1);
 
 
 .. method:: put(ref, value)
@@ -64,7 +67,10 @@ All functions that take `PDFObjects`, do automatic translation between :title:`J
 
     .. code-block:: javascript
 
-        pdfObj.put("my_key", "my value");
+        var dict = pdfDocument.newDictionary();
+        dict.put("my_key", "my_value");
+        var arr = pdfDocument.newArray();
+        arr.put(0, 42);
 
 
 
@@ -82,6 +88,12 @@ All functions that take `PDFObjects`, do automatic translation between :title:`J
     .. code-block:: javascript
 
         pdfObj.delete("my_key");
+        var dict = pdfDocument.newDictionary();
+        dict.put("my_key", "my_value");
+        dict.delete("my_key");
+        var arr = pdfDocument.newArray();
+        arr.put(1, 42);
+        arr.delete(1);
 
 
 .. method:: resolve()
@@ -148,7 +160,7 @@ All functions that take `PDFObjects`, do automatic translation between :title:`J
 
 .. method:: push(item)
 
-    Append `item` to the end of the array.
+    Append `item` to the end of an array.
 
     :arg item: Item to add.
 
@@ -189,14 +201,6 @@ All functions that take `PDFObjects`, do automatic translation between :title:`J
         var val = pdfObj.valueOf();
 
 
-
-
-:title:`PDF` streams
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The only way to access a stream is via an indirect object, since all streams are numbered objects.
-
-
 .. method:: isIndirect()
 
     Is the object an indirect reference.
@@ -223,6 +227,14 @@ The only way to access a stream is via an indirect object, since all streams are
     .. code-block:: javascript
 
         var val = pdfObj.asIndirect();
+
+
+
+
+:title:`PDF` streams
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The only way to access a stream is via an indirect object, since all streams are numbered objects.
 
 
 .. method:: isStream()

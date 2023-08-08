@@ -154,7 +154,7 @@
 
     .. code-block:: javascript
 
-        var interpolate = image.getInterpolate();
+        var result = image.getColorKey();
 
 .. method:: getDecode()
 
@@ -261,7 +261,7 @@
     .. code-block:: javascript
 
         var pixmap = image.toPixmap();
-
+        var scaledPixmap = image.toPixmap(100, 100);
 
 .. method:: getImageData()
 

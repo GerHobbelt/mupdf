@@ -203,7 +203,7 @@ This matrix is represented in :title:`JavaScript` as `[a,b,c,d,e,f]`.
 Rectangles
 ~~~~~~~~~~~~
 
-Rectangles are 4-element arrays, specifying the minimum and maximum corners (typically upper left and lower right, in a coordinate space with the origin at the top left with descending y): `[ulx,uly,lrx,lry]`.
+Rectangles are 4-element arrays, specifying the minimum and maximum corners (typically upper left and lower right, in a coordinate space with the origin at the top left with descending y): `[ulx,uly,lrx,lry]`. Rectangles are always X- and Y-axis aligned.
 
 If the minimum x coordinate is bigger than the maximum x coordinate, :title:`MuPDF` treats the rectangle as infinite in size.
 

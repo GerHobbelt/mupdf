@@ -143,7 +143,7 @@ See Mozilla's page on `Using Promises`_ for more.
 
 
 
-
+.. include:: footer.rst
 
 ..   External links
 

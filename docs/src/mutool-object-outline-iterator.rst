@@ -21,7 +21,7 @@
 
 |mutool_tag|
 
-An outline iterator is can be used to walk over all the items in an :title:`Outline` and query their properties. To be able to insert items at the end of a list of sibling items, it can also walk one item past the end of the list. To get an instance of `OutlineIterator` use :ref:`Document outlineIterator<mutool_run_js_api_document_outlineIterator>`.
+An outline iterator can be used to walk over all the items in an :title:`Outline` and query their properties. To be able to insert items at the end of a list of sibling items, it can also walk one item past the end of the list. To get an instance of `OutlineIterator` use :ref:`Document outlineIterator<mutool_run_js_api_document_outlineIterator>`.
 
 .. note::
 
@@ -45,65 +45,60 @@ An outline iterator is can be used to walk over all the items in an :title:`Outl
 
     Move the iterator position to "next".
 
-    :return: `Int`.
+    :return: `Int` which is negative if this movement is not possible, `0` if the new position has a valid item, or `1` if the new position has no item but one can be inserted here.
 
     |example_tag|
 
     .. code-block:: javascript
 
-        var next = outlineIterator.next();
+        var result = outlineIterator.next();
 
 .. method:: prev()
 
     Move the iterator position to "previous".
 
-    :return: `Int`.
+    :return: `Int` which is negative if this movement is not possible, `0` if the new position has a valid item, or `1` if the new position has no item but one can be inserted here.
 
     |example_tag|
 
     .. code-block:: javascript
 
-        var next = outlineIterator.prev();
+        var result = outlineIterator.prev();
 
 .. method:: up()
 
     Move the iterator position "up".
 
-    :return: `Int`.
+    :return: `Int` which is negative if this movement is not possible, `0` if the new position has a valid item, or `1` if the new position has no item but one can be inserted here.
 
     |example_tag|
 
     .. code-block:: javascript
 
-        var next = outlineIterator.up();
+        var result = outlineIterator.up();
 
 
 .. method:: down()
 
     Move the iterator position "down".
 
-    :return: `Int`.
+    :return: `Int` which is negative if this movement is not possible, `0` if the new position has a valid item, or `1` if the new position has no item but one can be inserted here.
 
     |example_tag|
 
     .. code-block:: javascript
 
-        var next = outlineIterator.down();
-
-
-.. note::
-
-    The `next()`, `prev()`, `up()`, `down()` methods returns `0` if the new position has a valid item, or `1` if the position contains no valid item, but one may be inserted at the position. If neither of these conditions are met then `-1` is returned.
+        var result = outlineIterator.down();
 
 
 
 .. method:: insert(item)
 
-    Insert item before the current item. The position does not change. Returns `0` if the position has a valid item, or `1` if the position has no valid item.
+    Insert item before the current item. The position does not change.
 
     :arg item: `Object` which conforms to the :ref:`Outline Iterator Object<mutool_run_js_api_outline_iterator_object>`.
 
-    :return: `Int`.
+    :return: `Int` which is `0` if the current position has a valid item, or `1` if the position has no valid item.
 
     |example_tag|
 
@@ -114,9 +109,9 @@ An outline iterator is can be used to walk over all the items in an :title:`Outl
 
 .. method:: delete()
 
-    Delete the current item. This implicitly moves to the next item. Returns 0 if the new position has a valid item, or 1 if the position contains no valid item, but one may be inserted at this position.
+    Delete the current item. This implicitly moves to the next item.
 
-    :return: `Int`.
+    :return: `Int` which is `0` if the new position has a valid item, or `1` if the position contains no valid item, but one may be inserted at this position.
 
     |example_tag|
 
@@ -126,7 +121,7 @@ An outline iterator is can be used to walk over all the items in an :title:`Outl
 
 .. method:: update(item)
 
-    Updates with the properties of the supplied item.
+    Updates the current item properties with values from the supplied item's properties.
 
     :arg item: `Object` which conforms to the :ref:`Outline Iterator Object<mutool_run_js_api_outline_iterator_object>`.
 

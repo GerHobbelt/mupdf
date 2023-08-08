@@ -47,7 +47,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
     .. code-block:: javascript
 
-        device.fillPath(path, false, mupdf.Matrix.identity, mupdf.ColorSpace.DeviceRGB, [1,0,0], 1);
+        device.fillPath(path, false, mupdf.Matrix.identity, mupdf.ColorSpace.DeviceRGB, [1,0,0], true);
 
     .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_path is not a function
 
@@ -499,15 +499,15 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
     Begin a standard structure element, the raw tag name and a unique identifier.
 
-    :arg standard: `String`. The element name.
+    :arg standard: `String`. One of the standard :title:`PDF` structure names: "Document", "Part", "BlockQuote", etc.
     :arg raw: `String`. The tag name.
-    :arg uid: `String`. The unique identifier.
+    :arg uid: `Integer`. A unique identifier.
 
     |example_tag|
 
     .. code-block:: javascript
 
-        device.beginStructure("standard", "my_tag_name", "uid");
+        device.beginStructure("Document", "my_tag_name", 123);
 
     .. |tor_todo| TypeError: device.beginStructure is not a function
 

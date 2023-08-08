@@ -34,7 +34,8 @@
 
     .. code-block:: javascript
 
-        var archive = new mupdf.Archive(<path>);
+        var archive = new mupdf.Archive("example1.zip");
+        var archive2 = new mupdf.Archive("example2.tar");
 
 
 |instance_methods|
@@ -49,7 +50,8 @@
 
     .. code-block:: javascript
 
-        var format = archive.getFormat();
+        var archive = new mupdf.Archive("example1.zip");
+        print(archive.getFormat());
 
 .. method:: countEntries()
 
@@ -61,6 +63,7 @@
 
     .. code-block:: javascript
 
+        var archive = new mupdf.Archive("example1.zip");
         var numEntries = archive.countEntries();
 
 .. method:: listEntry(idx)
@@ -75,6 +78,7 @@
 
     .. code-block:: javascript
 
+        var archive = new mupdf.Archive("example1.zip");
         var entry = archive.listEntry(0);
 
 
@@ -90,7 +94,8 @@
 
     .. code-block:: javascript
 
-        var hasEntry = archive.hasEntry("Hello");
+        var archive = new mupdf.Archive("example1.zip");
+        var hasEntry = archive.hasEntry("file1.txt");
 
 
 .. method:: readEntry(name)
@@ -105,7 +110,8 @@
 
     .. code-block:: javascript
 
-        var value = archive.readEntry("Hello");
+        var archive = new mupdf.Archive("example1.zip");
+        var contents = archive.readEntry("file1.txt");
 
 
 `MultiArchive`
@@ -141,7 +147,13 @@
 
     .. code-block:: javascript
 
-        archive.mountArchive(subArchive, null);
+        var archive = new mupdf.MultiArchive();
+        archive.mountArchive(new mupdf.Archive("example1.zip"), null);
+        archive.mountArchive(new mupdf.Archive("example2.tar"), "subpath");
+        print(archive.hasEntry("file1.txt"));
+        print(archive.hasEntry("subpath/file2.txt"));
+
+    Assuming that `example1.zip` contains a `file1.txt` and `example2.tar` contains `file2.txt`, the multiarchive now allows access to "file1.txt" and "subpath/file2.txt".
 
 
 
@@ -178,6 +190,8 @@
 
     .. code-block:: javascript
 
-        archive.add("name", buffer);
-
-
+        var buf = new mupdf.Buffer();
+        buf.writeLine("hellorld!");
+        var archive = new mupdf.TreeArchive();
+        archive.add("file2.txt", buf);
+        print(archive.hasEntry("file2.txt"));

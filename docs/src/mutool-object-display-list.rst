@@ -113,17 +113,19 @@ A display list records all the device calls for playback later. If you want to r
 
     |mutool_tag_wasm_soon|
 
-    Search the display list text for all instances of the `needle` value, and return an array with :ref:`rectangles<mutool_run_js_api_rectangle>` of all matches found.
+    Search the display list text for all instances of the `needle` value, and return an array of search hits. Each search hit is an array of :ref:`rectangles<mutool_run_js_api_quad>` corresponding to all characters in the search hit.
 
     :arg needle: `String`.
-    :return: `[...]`.
+    :return: `[ [ Quad, Quad, ... ], [ Quad, Quad, ...], ... ]`.
+
+    |mutool_tag|
 
 
     |example_tag|
 
     .. code-block:: javascript
 
-        var results = displayList.search("hello");
+        var results = displayList.search("my search phrase");
 
 
     .. |tor_todo| In WASM, TypeError: displayList.search is not a function

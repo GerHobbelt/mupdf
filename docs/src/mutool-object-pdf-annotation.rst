@@ -110,7 +110,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
         annotation.process(processor);
 
-    .. |tor_todo| WASM process is not a function
+    .. |tor_todo| WASM process is not a function and no processor interface exists.
 
 
 .. method:: setAppearance(appearance, state, transform, displayList)
@@ -120,7 +120,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
     Set the annotation appearance stream for the given appearance. The desired appearance is given as a transform along with a display list.
 
     :arg appearance: `String` Appearance stream ("N", "R" or "D").
-    :arg state: `String` "On" or "Off".
+    :arg state: `String` The annotation state to set the appearance for or null for the current state. Only widget annotations of pushbutton, check box, or radio button type have states, which are "Off" or "Yes". For other types of annotations pass null.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg displayList: `DisplayList`.
 
@@ -128,7 +128,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     .. code-block:: javascript
 
-        annotation.setAppearance("N", "String", mupdf.Matrix.identity, displayList);
+        annotation.setAppearance("N", null, mupdf.Matrix.identity, displayList);
 
     .. |tor_todo| WASM setAppearance is not a function
 
@@ -139,7 +139,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
     Set the annotation appearance stream for the given appearance. The desired appearance is given as a transform along with a bounding box, a :title:`PDF` dictionary of resources and a content stream.
 
     :arg appearance: `String` Appearance stream ("N", "R" or "D").
-    :arg state: `String` "On" or "Off".
+    :arg state: `String` The annotation state to set the appearance for or null for the current state. Only widget annotations of pushbutton, check box, or radio button type have states, which are "Off" or "Yes". For other types of annotations pass null.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg bbox: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`.
     :arg resources: Resources object.
@@ -149,8 +149,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     .. code-block:: javascript
 
-        annotation.setAppearance("N", "String", mupdf.Matrix.identity, [0,0,100,100], resources, contents);
-
+        annotation.setAppearance("N", null, mupdf.Matrix.identity, [0,0,100,100], resources, contents);
 
     .. |tor_todo| WASM setAppearance is not a function
 
@@ -258,7 +257,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     Get the annotation flags.
 
-    :return: `Integer` which determines the bit-field value.
+    :return: `Integer` representaton of a bit-field of flags specified below.
 
     |example_tag|
 
@@ -271,13 +270,13 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     Set the annotation flags.
 
-    :arg flags: `Integer` which determines the bit-field value.
+    :arg flags: `Integer` representaton of a bit-field of flags specified below.
 
     |example_tag|
 
     .. code-block:: javascript
 
-        annotation.setFlags(8);
+        annotation.setFlags(8); // Clears all other flags and sets NoZoom.
 
 
 
@@ -372,7 +371,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     |mutool_tag_wasm_soon|
 
-    Get the annotation color, represented as an array of up to 4 component values.
+    Get the annotation color, represented as an array of 1, 3, or 4 component values.
 
     :return: The :ref:`color value<mutool_run_js_api_colors>`.
 
@@ -389,7 +388,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
     |mutool_tag_wasm_soon|
 
-    Set the annotation color, represented as an array of up to 4 component values.
+    Set the annotation color, represented as an array of 1, 3, or 4 component values.
 
     :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
 
@@ -589,6 +588,7 @@ These properties are only present for some annotation types, so support for them
         var appearance = annotation.getDefaultAppearance();
 
     .. |tor_todo| WASM TypeError: annotation.getDefaultAppearance is not a function
+    .. |jamie_todo| how about describing the DefaultApperance as a separate object similar to the link destination?
 
 
 .. method:: setDefaultAppearance(font, size, color)
@@ -791,7 +791,7 @@ These properties are only present for some annotation types, so support for them
 
 .. method:: getIcon()
 
-    Gets the annotation icon.
+    Gets the annotation icon name, either one of the standard :ref:`icon names<mutool_pdf_annotation_icon_names>`, or something custom.
 
     :return: `String`.
 
@@ -804,7 +804,7 @@ These properties are only present for some annotation types, so support for them
 
 .. method:: setIcon(name)
 
-    Sets the annotation icon.
+    Sets the annotation icon name, either one of the standard :ref:`icon names<mutool_pdf_annotation_icon_names>`, or something custom. Note that standard icon names can be used to resynthesize the annotation apperance, but custom names cannot.
 
     :arg name: `String`.
 
@@ -814,6 +814,7 @@ These properties are only present for some annotation types, so support for them
 
         annotation.setIcon("Note");
 
+.. _mutool_pdf_annotation_icon_names:
 
 .. list-table::
    :header-rows: 1
@@ -916,15 +917,16 @@ These properties are only present for some annotation types, so support for them
     |mutool_tag_wasm_soon|
 
 
-    Set line end points, represented by an array of two points, each represented as an `[x, y]` array.
+    Set the two line end points, represented by an array of two points, each represented as an `[x, y]` array.
 
-    :arg endpoints: `[[x,y],...]`.
+    :arg endpoint1: `[x,y]`.
+    :arg endpoint2: `[x,y]`.
 
     |example_tag|
 
     .. code-block:: javascript
 
-        annotation.setLine([0,0], [100,100], [150, 175]);
+        annotation.setLine([100,100], [150, 175]);
 
     .. |tor_todo| WASM TypeError: annotation.setLine is not a function
 
@@ -977,7 +979,7 @@ These properties are only present for some annotation types, so support for them
 
 .. note::
 
-    "Open" refers to whether the annotation has an open state or is opened - e.g. A Text Note annotation is considered "Open" if the user has clicked on it to view its contents.
+    "Open" refers to whether the annotation is display in an open state when the page is loaded. A Text Note annotation is considered "Open" if the user has clicked on it to view its contents.
 
 
 .. method:: hasFilespec()
@@ -1031,11 +1033,11 @@ These properties are only present for some annotation types, so support for them
 
     .. code-block:: javascript
 
-        var fileSpec = annotation.setFilespec({filename:"my_file.pdf",
-                                               mimetype:"application/pdf",
-                                               size:1000,
-                                               creationDate:date,
-                                               modificationDate:date});
+        annotation.setFilespec({filename:"my_file.pdf",
+                                mimetype:"application/pdf",
+                                size:1000,
+                                creationDate:date,
+                                modificationDate:date});
 
 
 
@@ -1155,7 +1157,7 @@ The border drawn around some annotations can be controlled by:
     Returns the length of dash pattern item `i`.
 
     :arg i: `Integer` Item index.
-    :return: `Integer`.
+    :return: `Float`.
 
     |example_tag|
 
@@ -1172,13 +1174,13 @@ The border drawn around some annotations can be controlled by:
 
     Set the annotation border dash pattern to the given array of dash item lengths. The supplied array represents the respective line stroke and gap lengths, e.g. `[1,1]` sets a small dash and small gap, `[2,1,4,1]` would set a medium dash, a small gap, a longer dash and then another small gap.
 
-    :arg dashpattern: [Integer, Integer, ....].
+    :arg dashpattern: [Float, Float, ....].
 
     |example_tag|
 
     .. code-block:: javascript
 
-        annotation.setBorderDashPattern([2,1,4,1]);
+        annotation.setBorderDashPattern([2.0, 1.0, 4.0, 1.0]);
 
     .. |tor_todo| WASM, TypeError:
 
@@ -1203,13 +1205,13 @@ The border drawn around some annotations can be controlled by:
 
     Append an item (of the given length) to the end of the border dash pattern.
 
-    :arg length: `Integer`.
+    :arg length: `Float`.
 
     |example_tag|
 
     .. code-block:: javascript
 
-        annotation.addBorderDashItem(10);
+        annotation.addBorderDashItem(10.0);
 
     .. |tor_todo| WASM, TypeError:
 
@@ -1274,7 +1276,7 @@ Annotations that have a border effect allows the effect to be controlled by:
 
     Get the annotation border effect intensity.
 
-    :return: `Integer`.
+    :return: `Float`.
 
     |example_tag|
 
@@ -1292,13 +1294,13 @@ Annotations that have a border effect allows the effect to be controlled by:
 
     Set the annotation border effect intensity. Recommended values are between `0` and `2` inclusive.
 
-    :arg: `Integer`.
+    :arg: `Float`.
 
     |example_tag|
 
     .. code-block:: javascript
 
-        annotation.setBorderEffectIntensity(2);
+        annotation.setBorderEffectIntensity(1.5);
 
 
     .. |tor_todo| WASM, TypeError:
@@ -1344,14 +1346,14 @@ Ink annotations consist of a number of strokes, each consisting of a sequence of
 
     .. code-block:: javascript
 
-        var inkList = annotation.setInkList([
-                                                [
-                                                    [0,0]
-                                                ],
-                                                [
-                                                    [10,10], [20,20], [30,30]
-                                                ]
-                                            ]);
+        annotation.setInkList([
+                                  [
+                                      [0,0]
+                                  ],
+                                  [
+                                      [10,10], [20,20], [30,30]
+                                  ]
+                              ]);
 
 
     .. |tor_todo| WASM TypeError: libmupdf._wasm_pdf_annot_clear_ink_list is not a function

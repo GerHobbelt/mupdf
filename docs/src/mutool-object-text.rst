@@ -59,7 +59,8 @@ A `Text` object contains text.
 
     .. code-block:: javascript
 
-        text.showGlyph(new mupdf.Font("Times-Roman"), mupdf.Matrix.identity, -1, -1, 0);
+        text.showGlyph(new mupdf.Font("Times-Roman"), mupdf.Matrix.identity, 21, 0x66, 0);
+        text.showGlyph(new mupdf.Font("Times-Roman"), mupdf.Matrix.identity, -1, 0x69, 0);
 
 .. method:: showString(font, transform, string)
 
@@ -87,8 +88,14 @@ A `Text` object contains text.
 
     .. code-block:: javascript
 
-        var myTextWalker = {
-            showGlyph: function (font, transform, glyph, unicode, wmode) { ... do whatever ... },
-        }
-
-        text.walk(myTextWalker);
+        text.walk({
+            beginSpan: function (font, transform, wmode, bidilevel, markupdirection, language) {
+                // ... do whatever ...
+            },
+            showGlyph: function (font, transform, glyph, unicode, wmode, bidilevel) {
+                // ... do whatever ...
+            },
+            endSpan: function () {
+                // ... do whatever ...
+            },
+        });

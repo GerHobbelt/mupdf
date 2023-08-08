@@ -22,6 +22,3 @@
     a.setAttribute("href", "https://artifex.com/contributor/feedback.php?utm_source=rtd-mupdf&utm_medium=rtd&utm_content=header-link&="+url_string);
 
     </script>
-
-
-

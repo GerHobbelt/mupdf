@@ -42,7 +42,7 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
 .. method:: clear(value)
 
-    Clear the pixels to the specified value. Pass `255` for white, or "undefined" for transparent.
+    Clear the pixels to the specified value. Pass `255` for white, or omit for transparent.
 
     :arg value: Pixel value.
 
@@ -50,7 +50,8 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
     .. code-block:: javascript
 
-        pixmap.clear("undefined");
+        pixmap.clear(255);
+        pixmap.clear();
 
 
 .. method:: getBounds()
@@ -184,7 +185,7 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
     |mutool_tag|
 
-    Get the value of component `index` at position `x`, `y` (relative to the image origin: 0, 0 is the top left pixel).
+    Get the value of component ``index`` at position `x`, `y` (relative to the image origin: 0, 0 is the top left pixel).
 
     :arg x: X co-ordinate.
     :arg y: Y co-ordinate.
@@ -229,7 +230,7 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
     .. code-block:: javascript
 
-        pixmap.saveAsPNG("fileName.jpg", 80);
+        pixmap.saveAsJPEG("fileName.jpg", 80);
 
 
 .. method:: saveAsPAM(fileName)
