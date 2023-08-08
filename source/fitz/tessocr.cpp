@@ -18,7 +18,7 @@
 
 extern "C" {
 
-#include "allheaders.h"
+#include "leptonica/allheaders.h"
 
 #include "tessocr.h"
 
