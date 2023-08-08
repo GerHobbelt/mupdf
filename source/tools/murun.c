@@ -1333,6 +1333,12 @@ static void ffi_pushimage(js_State *J, fz_image *image)
 	js_newuserdata(J, "fz_image", fz_keep_image(ctx, image), ffi_gc_fz_image);
 }
 
+static void ffi_pushimage_own(js_State *J, fz_image *image)
+{
+	js_getregistry(J, "fz_image");
+	js_newuserdata(J, "fz_image", image, ffi_gc_fz_image);
+}
+
 static int is_number(const char *key, int *idx)
 {
 	char *end;
@@ -1450,12 +1456,6 @@ static fz_buffer *ffi_tobuffer(js_State *J, int idx)
 	}
 
 	return buf;
-}
-
-static void ffi_pushimage_own(js_State *J, fz_image *image)
-{
-	js_getregistry(J, "fz_image");
-	js_newuserdata(J, "fz_image", image, ffi_gc_fz_image);
 }
 
 static int ffi_imagedata_has(js_State *J, void *image_data_, const char *key)
@@ -10874,7 +10874,6 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "PDFDocument.addFont", ffi_PDFDocument_addFont, 1);
 		jsB_propfun(J, "PDFDocument.addImage", ffi_PDFDocument_addImage, 1);
 		jsB_propfun(J, "PDFDocument.loadImage", ffi_PDFDocument_loadImage, 1);
-		jsB_propfun(J, "PDFDocument.formatRemoteLinkURI", ffi_PDFDocument_formatRemoteLinkURI, 1);
 
 		jsB_propfun(J, "PDFDocument.addEmbeddedFile", ffi_PDFDocument_addEmbeddedFile, 6);
 		jsB_propfun(J, "PDFDocument.getEmbeddedFileParams", ffi_PDFDocument_getEmbeddedFileParams, 1);
