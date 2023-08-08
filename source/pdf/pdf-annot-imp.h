@@ -65,13 +65,13 @@ void pdf_set_annot_has_changed(fz_context *ctx, pdf_annot *annot);
 /*
 	Create a destination object given an internal link URI.
 */
-pdf_obj *pdf_new_destination_from_link(fz_context *ctx, pdf_document *doc, const char *uri);
+pdf_obj *pdf_new_destination_from_link(fz_context *ctx, pdf_document *doc, const char *uri, char **file);
 
 /*
 	Parse an internal link URI that uses the Adobe specification
 	"parameters for opening PDF files".
 */
-fz_link_dest pdf_parse_link_uri(fz_context *ctx, const char *uri);
+fz_link_dest pdf_parse_link_uri(fz_context *ctx, const char *uri, char **file, char **name);
 
 char *pdf_parse_link_dest(fz_context *ctx, pdf_document *doc, pdf_obj *obj);
 char *pdf_parse_link_action(fz_context *ctx, pdf_document *doc, pdf_obj *obj, int pagenum);

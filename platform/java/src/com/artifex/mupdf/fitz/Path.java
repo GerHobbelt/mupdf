@@ -87,9 +87,9 @@ public class Path implements PathWalker
 
 	public native void walk(PathWalker walker);
 
-	public String toString(String operator) {
+	public String toString(String separator) {
 		StringBuffer s = new StringBuffer();
-		this.walk(new ToStringWalker(s, operator));
+		this.walk(new ToStringWalker(s, separator));
 		return s.toString();
 	}
 

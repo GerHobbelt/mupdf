@@ -157,6 +157,25 @@ void *fz_memmem(const void *haystack, size_t haystacklen, const void *needle, si
 void fz_dirname(char *dir, const char *path, size_t dirsize);
 
 /**
+    Skip directory/(Windows)drive separators.
+
+    Returns pointer to basename part in the input string.
+*/
+const char* fz_basename(const char* path);
+
+/**
+	Returns pointer to the filename extension, *including the leading '.' dot*, in the input string.
+
+	Returns the empty string (reference to the *end* of the input string, in fact) when
+	the filename does not have a file name extension.
+
+	Note: this routine handles 'dotfiles', a.k.a. 'hidden files' for UNIX systems, across
+	all platforms: those files won't report a file extension -- unless they have one, e.g.
+	'.dotfile.org' --> extension = '.org'.
+*/
+const char* fz_name_extension(const char* path);
+
+/**
 	Like fz_decode_uri_component but in-place.
 */
 char *fz_urldecode(char *url);
@@ -275,25 +294,6 @@ void fz_format_output_path(fz_context *ctx, char *path, size_t size, const char 
 	    <TEMPLATEFILENAME>-<CHAPTER>-<PAGE>-<SEQUENCENUMBER>-<LABEL>.<EXTENSION>
 */
 void fz_format_output_path_ex(fz_context* ctx, char* path, size_t size, const char* fmt, int chapter, int page, int sequence_number, const char *label, const char *extension);
-
-/**
-    Skip directory/(Windows)drive separators.
-
-    Returns pointer to basename part in the input string.
-*/
-const char* fz_basename(const char* path);
-
-/**
-	Returns pointer to the filename extension, *including the leading '.' dot*, in the input string.
-
-	Returns the empty string (reference to the *end* of the input string, in fact) when
-	the filename does not have a file name extension.
-
-	Note: this routine handles 'dotfiles', a.k.a. 'hidden files' for UNIX systems, across
-	all platforms: those files won't report a file extension -- unless they have one, e.g.
-	'.dotfile.org' --> extension = '.org'.
-*/
-const char* fz_name_extension(const char* path);
 
 /**
 	rewrite path to the shortest string that names the same path.
