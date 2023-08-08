@@ -3456,10 +3456,10 @@ JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_hasOpen
 
 /*
  * Class:     com_artifex_mupdf_fitz_PDFAnnotation
- * Method:    isOpen
+ * Method:    getIsOpen
  * Signature: ()Z
  */
-JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_isOpen
+JNIEXPORT jboolean JNICALL Java_com_artifex_mupdf_fitz_PDFAnnotation_getIsOpen
   (JNIEnv *, jobject);
 
 /*
