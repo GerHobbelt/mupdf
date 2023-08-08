@@ -1271,7 +1271,15 @@ fz_load_bmp_info_subimage(fz_context *ctx, const unsigned char *buf, size_t len,
 	{
 		p = begin + nextoffset;
 
-		if (is_bitmap_array(p))
+		if (end - p < 14)
+			fz_throw(ctx, FZ_ERROR_GENERIC, "not enough data for bitmap array (%02x%02x) in bmp image", p[0], p[1]);
+
+		if (!is_bitmap_array(p))
+		{
+			fz_warn(ctx, "treating invalid subimage as end of file");
+			nextoffset = 0;
+		}
+		else
 		{
 			/* read16(p+0) == type */
 			/* read32(p+2) == size of this header in bytes */
@@ -1280,16 +1288,14 @@ fz_load_bmp_info_subimage(fz_context *ctx, const unsigned char *buf, size_t len,
 			/* read16(p+12) == suitable pely dimensions */
 			p += 14;
 		}
-		else if (nextoffset > 0)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "unexpected bitmap array magic (%02x%02x) in bmp image", p[0], p[1]);
 
 		if (end - begin < nextoffset)
 		{
 			fz_warn(ctx, "treating invalid next subimage offset as end of file");
 			nextoffset = 0;
 		}
-
-		subimage--;
+		else
+			subimage--;
 
 	} while (subimage >= 0 && nextoffset > 0);
 
