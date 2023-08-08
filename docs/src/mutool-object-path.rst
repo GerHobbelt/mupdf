@@ -192,6 +192,8 @@ A `Path` object represents vector graphics as drawn by a pen. A path can be eith
             },
         }
 
+        path.walk(myPathWalker);
+
     .. |tor_todo|  WASM, throws 'TODO'
 
 
