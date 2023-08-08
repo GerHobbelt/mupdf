@@ -30,8 +30,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
 .. method:: fillPath(path, evenOdd, transform, colorspace, color, alpha, colorParams)
 
-    |mutool_tag_wasm_soon|
-
     Fill a path.
 
     :arg path: `Path` object.
@@ -47,19 +45,18 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
     .. code-block:: javascript
 
-        device.fillPath(path, false, mupdf.Matrix.identity, mupdf.ColorSpace.DeviceRGB, [1,0,0], true);
+        device.fillPath(path, false, mupdf.Matrix.identity, mupdf.ColorSpace.DeviceRGB, [1,0,0], 1.0);
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_path is not a function
+
 
 
 .. method:: strokePath(path, stroke, transform, colorspace, color, alpha, colorParams)
 
-    |mutool_tag_wasm_soon|
 
     Stroke a path.
 
     :arg path: `Path` object.
-    :arg stroke: The :ref:`stroke dictionary<mutool_run_js_api_stroke_dictionary>`.
+    :arg stroke: `StrokeState` The :ref:`stroke state object<mutool_object_stroke_state>`.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg colorspace: The :ref:`ColorSpace<mutool_run_javascript_api_colorspace>`.
     :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
@@ -71,14 +68,13 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     .. code-block:: javascript
 
         device.strokePath(path,
-                          {dashes:[5,10], lineWidth:3, lineCap:'Round'},
+                          stroke,
                           mupdf.Matrix.identity,
                           mupdf.ColorSpace.DeviceRGB,
                           [0,1,0],
                           0.5);
 
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_path is not a function
 
 
 .. method:: clipPath(path, evenOdd, transform)
@@ -99,7 +95,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.clipPath(path, true, mupdf.Matrix.identity);
 
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_path is not a function
 
 
 .. method:: clipStrokePath(path, stroke, transform)
@@ -109,23 +104,20 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     Clip & stroke a path.
 
     :arg path: `Path` object.
-    :arg stroke: The :ref:`stroke dictionary<mutool_run_js_api_stroke_dictionary>`.
+    :arg stroke: `StrokeState` The :ref:`stroke state object<mutool_object_stroke_state>`.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
     |example_tag|
 
     .. code-block:: javascript
 
-        device.clipStrokePath(path, true, mupdf.Matrix.identity);
+        device.clipStrokePath(path, stroke, mupdf.Matrix.identity);
 
-
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_path is not a function
 
 
 
 .. method:: fillText(text, transform, colorspace, color, alpha, colorParams)
 
-    |mutool_tag_wasm_soon|
 
     Fill a text object.
 
@@ -142,16 +134,14 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
         device.fillText(text, mupdf.Matrix.identity, mupdf.ColorSpace.DeviceRGB, [1,0,0], 1);
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_text is not a function
 
 .. method:: strokeText(text, stroke, transform, colorspace, color, alpha, colorParams)
 
-    |mutool_tag_wasm_soon|
 
     Stroke a text object.
 
     :arg text: `Text` object.
-    :arg stroke: The :ref:`stroke dictionary<mutool_run_js_api_stroke_dictionary>`.
+    :arg stroke: `StrokeState` The :ref:`stroke state object<mutool_object_stroke_state>`.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
     :arg colorspace: The :ref:`ColorSpace<mutool_run_javascript_api_colorspace>`.
     :arg color: The :ref:`color value<mutool_run_js_api_colors>`.
@@ -163,13 +153,12 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     .. code-block:: javascript
 
         device.strokeText(text,
-                          {dashes:[5,10], lineWidth:3, lineCap:'Round'},
+                          stroke,
                           mupdf.Matrix.identity, mupdf.ColorSpace.DeviceRGB,
                           [1,0,0],
                           1);
 
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_text is not a function
 
 .. method:: clipText(text, transform)
 
@@ -187,7 +176,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.clipText(text, mupdf.Matrix.identity);
 
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_text is not a function
+    |tor_todo| WASM: Error: items left on stack in draw device: 1
 
 .. method:: clipStrokeText(text, stroke, transform)
 
@@ -196,22 +185,21 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     Clip & stroke a text object.
 
     :arg text: `Text` object.
-    :arg stroke: The :ref:`stroke dictionary<mutool_run_js_api_stroke_dictionary>`.
+    :arg stroke: `StrokeState` The :ref:`stroke state object<mutool_object_stroke_state>`.
     :arg transform: `[a,b,c,d,e,f]`. The transform :ref:`matrix<mutool_run_js_api_matrix>`.
 
     |example_tag|
 
     .. code-block:: javascript
 
-        device.clipStrokeText(text, {dashes:[5,10], lineWidth:3, lineCap:'Round'},  mupdf.Matrix.identity);
+        device.clipStrokeText(text, stroke,  mupdf.Matrix.identity);
 
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_text is not a function
+    |tor_todo| WASM: Error: items left on stack in draw device: 1
 
 
 .. method:: ignoreText(text, transform)
 
-    |mutool_tag_wasm_soon|
 
     Invisible text that can be searched but should not be visible, such as for overlaying a scanned OCR image.
 
@@ -225,7 +213,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.ignoreText(text, mupdf.Matrix.identity);
 
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_text is not a function
 
 
 .. method:: fillShade(shade, transform, alpha, colorParams)
@@ -270,7 +257,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.fillImage(image, mupdf.Matrix.identity, false, {overPrinting:true});
 
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_from_pixmap is not a function
+    |tor_todo| WASM: TypeError: libmupdf._wasm_new_from_pixmap is not a function
 
 
 .. method:: fillImageMask(image, transform, colorspace, color, alpha, colorParams)
@@ -294,7 +281,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.fillImageMask(image, mupdf.Matrix.identity, mupdf.ColorSpace.DeviceRGB, 0xff00ff, true, {});
 
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_from_pixmap is not a function
+    |tor_todo| WASM: TypeError: libmupdf._wasm_new_from_pixmap is not a function
 
 
 .. method:: clipImageMask(image, transform)
@@ -314,7 +301,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.clipImageMask(image, mupdf.Matrix.identity);
 
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_from_pixmap is not a function
+    |tor_todo| WASM: TypeError: libmupdf._wasm_new_from_pixmap is not a function
 
 .. method:: popClip()
 
@@ -329,7 +316,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
 .. method:: beginMask(area, luminosity, backdropColorspace, backdropColor, backdropAlpha, colorParams)
 
-    |mutool_tag_wasm_soon|
 
     Create a soft mask. Any drawing commands between `beginMask` and `endMask` are grouped and used as a clip mask.
 
@@ -348,9 +334,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.beginMask(path, true, mupdf.ColorSpace.DeviceRGB, 0xff00ff, false, {});
 
 
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_path is not a function
-
-
 .. method:: endMask()
 
     Ends the mask.
@@ -363,13 +346,13 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
 
 
-.. method:: beginGroup(area, isolated, knockout, blendmode, alpha)
+.. method:: beginGroup(area, colorspace, isolated, knockout, blendmode, alpha)
 
-    |mutool_tag_wasm_soon|
 
     Push/pop a transparency blending group. See the PDF reference for details on `isolated` and `knockout`.
 
-    :arg area: `Path` Blend area.
+    :arg area: `[ulx,uly,lrx,lry]` :ref:`Rectangle<mutool_run_js_api_rectangle>`. The blend area.
+    :arg colorspace: :ref:`ColorSpace<mutool_run_javascript_api_colorspace>`.
     :arg isolated: `Boolean`.
     :arg knockout: `Boolean`.
     :arg blendmode: Blendmode is one of the standard :title:`PDF` blend modes: "Normal", "Multiply", "Screen", etc.
@@ -385,10 +368,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
     .. code-block:: javascript
 
-        device.beginGroup(path, true, true, "Multiply", 0.5);
-
-
-    .. |tor_todo| WASM: TypeError: libmupdf._wasm_new_path is not a function
+        device.beginGroup([0,0,100,100], mupdf.ColorSpace.DeviceRGB, true, true, "Multiply", 0.5);
 
 
 .. method:: endGroup()
@@ -475,7 +455,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
         device.renderFlags(["mask","startcap-undefined"], []);
 
-    .. |tor_todo| TypeError: device.renderFlags is not a function
+    |tor_todo| TypeError: device.renderFlags is not a function
 
 
 .. method:: setDefaultColorSpaces(defaults)
@@ -490,7 +470,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     .. code-block:: javascript
 
 
-    .. |tor_todo| Ask Tor, how to create a default color space object.
+    |jamie_todo| Ask Tor, how to create a default color space object.
 
 
 .. method:: beginStructure(standard, raw, uid)
@@ -509,7 +489,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
         device.beginStructure("Document", "my_tag_name", 123);
 
-    .. |tor_todo| TypeError: device.beginStructure is not a function
+    |tor_todo| TypeError: device.beginStructure is not a function
 
 
 .. method:: endStructure()
@@ -525,7 +505,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.endStructure();
 
 
-    .. |tor_todo| TypeError: device.endStructure is not a function
+    |tor_todo| TypeError: device.endStructure is not a function
 
 
 .. method:: beginMetatext(type, text)
@@ -545,7 +525,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.beginMetatext("Title", "My title");
 
 
-    .. |tor_todo| WASM: TypeError: device.beginMetatext is not a function
+    |tor_todo| WASM: TypeError: device.beginMetatext is not a function
 
 
 .. method:: endMetatext()
@@ -561,7 +541,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.endMetatext();
 
 
-    .. |tor_todo| WASM: TypeError: device.endMetatext is not a function
+    |tor_todo| WASM: TypeError: device.endMetatext is not a function
 
 
 .. method:: close()

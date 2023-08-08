@@ -110,7 +110,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
         annotation.process(processor);
 
-    .. |tor_todo| WASM process is not a function and no processor interface exists.
+    |tor_todo| WASM process is not a function and no processor interface exists.
 
 
 .. method:: setAppearance(appearance, state, transform, displayList)
@@ -130,7 +130,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
         annotation.setAppearance("N", null, mupdf.Matrix.identity, displayList);
 
-    .. |tor_todo| WASM setAppearance is not a function
+    |tor_todo| WASM setAppearance is not a function
 
 .. method:: setAppearance(appearance, state, transform, bbox, resources, contents)
 
@@ -381,7 +381,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
         var color = annotation.getColor();
 
-    .. |tor_todo| WASM, TypeError: annotation.getColor is not a function
+    |tor_todo| WASM, TypeError: annotation.getColor is not a function
 
 
 .. method:: setColor(color)
@@ -398,7 +398,7 @@ To get the annotations on a page see: :ref:`PDFPage getAnnotations()<mutool_run_
 
         annotation.setColor([0,1,0]);
 
-    .. |tor_todo| WASM, TypeError: annotation.setColor is not a function
+    |tor_todo| WASM, TypeError: annotation.setColor is not a function
 
 .. method:: getOpacity()
 
@@ -587,8 +587,8 @@ These properties are only present for some annotation types, so support for them
 
         var appearance = annotation.getDefaultAppearance();
 
-    .. |tor_todo| WASM TypeError: annotation.getDefaultAppearance is not a function
-    .. |jamie_todo| how about describing the DefaultApperance as a separate object similar to the link destination?
+    |tor_todo| WASM TypeError: annotation.getDefaultAppearance is not a function
+    |jamie_todo| how about describing the DefaultApperance as a separate object similar to the link destination?
 
 
 .. method:: setDefaultAppearance(font, size, color)
@@ -603,7 +603,12 @@ These properties are only present for some annotation types, so support for them
 
     .. code-block:: javascript
 
-        annotation.setDefaultAppearance("Times-Roman", 16, [0,0,0]);
+        annotation.setDefaultAppearance("Helv", 16, [0,0,0]);
+
+
+.. note::
+
+    Recommended to use the Adobe abbreviated names "Cour", "Helv", and "TiRo" although :title:`MuPDF` will also accept any of the full Base 14 font names.
 
 
 .. method:: hasInteriorColor()
@@ -620,7 +625,7 @@ These properties are only present for some annotation types, so support for them
 
         var hasInteriorColor = annotation.hasInteriorColor();
 
-    .. |tor_todo| WASM TypeError: annotation.hasInteriorColor is not a function
+    |tor_todo| WASM TypeError: annotation.hasInteriorColor is not a function
 
 
 .. method:: getInteriorColor()
@@ -638,7 +643,7 @@ These properties are only present for some annotation types, so support for them
         var interiorColor = annotation.getInteriorColor();
 
 
-    .. |tor_todo| WASM TypeError: annotation.getInteriorColor is not a function
+    |tor_todo| WASM TypeError: annotation.getInteriorColor is not a function
 
 .. method:: setInteriorColor(color)
 
@@ -656,7 +661,7 @@ These properties are only present for some annotation types, so support for them
 
 
 
-    .. |tor_todo| WASM TypeError: annotation.setInteriorColor is not a function
+    |tor_todo| WASM TypeError: annotation.setInteriorColor is not a function
 
 
 
@@ -674,7 +679,7 @@ These properties are only present for some annotation types, so support for them
 
         var hasAuthor = annotation.hasAuthor();
 
-    .. |tor_todo| WASM TypeError: annotation.hasAuthor is not a function
+    |tor_todo| WASM TypeError: annotation.hasAuthor is not a function
 
 .. method:: getAuthor()
 
@@ -716,7 +721,7 @@ These properties are only present for some annotation types, so support for them
 
         var hasLineEndingStyles = annotation.hasLineEndingStyles();
 
-    .. |tor_todo| WASM TypeError: annotation.hasLineEndingStyles is not a function
+    |tor_todo| WASM TypeError: annotation.hasLineEndingStyles is not a function
 
 
 .. method:: getLineEndingStyles()
@@ -733,7 +738,7 @@ These properties are only present for some annotation types, so support for them
 
         var lineEndingStyles = annotation.getLineEndingStyles();
 
-    .. |tor_todo| WASM TypeError: annotation.getLineEndingStyles is not a function
+    |tor_todo| WASM TypeError: annotation.getLineEndingStyles is not a function
 
 
 .. method:: setLineEndingStyles(start, end)
@@ -751,7 +756,7 @@ These properties are only present for some annotation types, so support for them
 
         annotation.setLineEndingStyles({start:"Square", end:"OpenArrow"});
 
-    .. |tor_todo| WASM TypeError: annotation.setLineEndingStyles is not a function
+    |tor_todo| WASM TypeError: annotation.setLineEndingStyles is not a function
 
 
 .. _mutool_pdf_annotation_line_ending_styles:
@@ -786,7 +791,7 @@ These properties are only present for some annotation types, so support for them
 
         var hasIcon = annotation.hasIcon();
 
-    .. |tor_todo| WASM TypeError: annotation.hasIcon is not a function
+    |tor_todo| WASM TypeError: annotation.hasIcon is not a function
 
 
 .. method:: getIcon()
@@ -892,7 +897,7 @@ These properties are only present for some annotation types, so support for them
 
         var hasLine = annotation.hasLine();
 
-    .. |tor_todo| WASM TypeError: annotation.hasLine is not a function
+    |tor_todo| WASM TypeError: annotation.hasLine is not a function
 
 
 .. method:: getLine()
@@ -909,7 +914,7 @@ These properties are only present for some annotation types, so support for them
 
         var line = annotation.getLine();
 
-    .. |tor_todo| WASM TypeError: annotation.getLine is not a function
+    |tor_todo| WASM TypeError: annotation.getLine is not a function
 
 
 .. method:: setLine(endpoints)
@@ -928,7 +933,7 @@ These properties are only present for some annotation types, so support for them
 
         annotation.setLine([100,100], [150, 175]);
 
-    .. |tor_todo| WASM TypeError: annotation.setLine is not a function
+    |tor_todo| WASM TypeError: annotation.setLine is not a function
 
 
 .. method:: hasOpen()
@@ -945,7 +950,7 @@ These properties are only present for some annotation types, so support for them
 
         var hasOpen = annotation.hasOpen();
 
-    .. |tor_todo| WASM TypeError: annotation.hasOpen is not a function
+    |tor_todo| WASM TypeError: annotation.hasOpen is not a function
 
 
 .. method:: isOpen()
@@ -962,7 +967,6 @@ These properties are only present for some annotation types, so support for them
 
 .. method:: setIsOpen(state)
 
-    |mutool_tag_wasm_soon|
 
     Set annotation open state.
 
@@ -974,7 +978,6 @@ These properties are only present for some annotation types, so support for them
 
         annotation.setIsOpen(true);
 
-    .. |tor_todo| WASM TypeError: libmupdf._wasm_pdf_annot_set_is_open is not a function
 
 
 .. note::
@@ -1062,7 +1065,7 @@ The border drawn around some annotations can be controlled by:
 
         var hasBorder = annotation.hasBorder();
 
-    .. |tor_todo| WASM, TypeError: annotation.hasBorder is not a function
+    |tor_todo| WASM, TypeError: annotation.hasBorder is not a function
 
 
 .. method:: getBorderStyle()
@@ -1079,7 +1082,7 @@ The border drawn around some annotations can be controlled by:
 
         var borderStyle = annotation.getBorderStyle();
 
-    .. |tor_todo| WASM, TypeError: annotation.getBorderStyle is not a function
+    |tor_todo| WASM, TypeError: annotation.getBorderStyle is not a function
 
 
 .. method:: setBorderStyle(style)
@@ -1096,7 +1099,7 @@ The border drawn around some annotations can be controlled by:
 
         annotation.setBorderStyle("Dashed");
 
-    .. |tor_todo| WASM, TypeError: annotation.getBorderStyle is not a function
+    |tor_todo| WASM, TypeError: annotation.getBorderStyle is not a function
 
 
 .. method:: getBorderWidth()
@@ -1113,7 +1116,7 @@ The border drawn around some annotations can be controlled by:
 
         var w = annotation.getBorderWidth();
 
-    .. |tor_todo| WASM, TypeError: annotation.getBorderWidth is not a function
+    |tor_todo| WASM, TypeError: annotation.getBorderWidth is not a function
 
 
 .. method:: setBorderWidth(width)
@@ -1131,7 +1134,7 @@ The border drawn around some annotations can be controlled by:
         annotation.setBorderWidth(1.5);
 
 
-    .. |tor_todo| WASM, TypeError: annotation.setBorderWidth is not a function
+    |tor_todo| WASM, TypeError: annotation.setBorderWidth is not a function
 
 
 .. method:: getBorderDashCount()
@@ -1148,7 +1151,7 @@ The border drawn around some annotations can be controlled by:
 
         var dashCount = annotation.getBorderDashCount();
 
-    .. |tor_todo| WASM, TypeError:
+    |tor_todo| WASM, TypeError:
 
 .. method:: getBorderDashItem(i)
 
@@ -1165,7 +1168,7 @@ The border drawn around some annotations can be controlled by:
 
         var length = annotation.getBorderDashItem(0);
 
-    .. |tor_todo| WASM, TypeError:
+    |tor_todo| WASM, TypeError:
 
 
 .. method:: setBorderDashPattern(dashPattern)
@@ -1182,7 +1185,7 @@ The border drawn around some annotations can be controlled by:
 
         annotation.setBorderDashPattern([2.0, 1.0, 4.0, 1.0]);
 
-    .. |tor_todo| WASM, TypeError:
+    |tor_todo| WASM, TypeError:
 
 .. method:: clearBorderDash()
 
@@ -1196,7 +1199,7 @@ The border drawn around some annotations can be controlled by:
 
         annotation.clearBorderDash();
 
-    .. |tor_todo| WASM, TypeError:
+    |tor_todo| WASM, TypeError:
 
 
 .. method:: addBorderDashItem(length)
@@ -1213,7 +1216,7 @@ The border drawn around some annotations can be controlled by:
 
         annotation.addBorderDashItem(10.0);
 
-    .. |tor_todo| WASM, TypeError:
+    |tor_todo| WASM, TypeError:
 
 
 Annotations that have a border effect allows the effect to be controlled by:
@@ -1233,7 +1236,7 @@ Annotations that have a border effect allows the effect to be controlled by:
         var hasEffect = annotation.hasBorderEffect();
 
 
-    .. |tor_todo| WASM, TypeError:
+    |tor_todo| WASM, TypeError:
 
 
 .. method:: getBorderEffect()
@@ -1250,7 +1253,7 @@ Annotations that have a border effect allows the effect to be controlled by:
 
         var effect = annotation.getBorderEffect();
 
-    .. |tor_todo| WASM, TypeError:
+    |tor_todo| WASM, TypeError:
 
 
 .. method:: setBorderEffect(effect)
@@ -1267,7 +1270,7 @@ Annotations that have a border effect allows the effect to be controlled by:
 
         annotation.setBorderEffect("None");
 
-    .. |tor_todo| WASM, TypeError:
+    |tor_todo| WASM, TypeError:
 
 
 .. method:: getBorderEffectIntensity()
@@ -1285,7 +1288,7 @@ Annotations that have a border effect allows the effect to be controlled by:
         var intensity = annotation.getBorderEffectIntensity();
 
 
-    .. |tor_todo| WASM, TypeError:
+    |tor_todo| WASM, TypeError:
 
 
 .. method:: setBorderEffectIntensity(intensity)
@@ -1303,7 +1306,7 @@ Annotations that have a border effect allows the effect to be controlled by:
         annotation.setBorderEffectIntensity(1.5);
 
 
-    .. |tor_todo| WASM, TypeError:
+    |tor_todo| WASM, TypeError:
 
 ----
 
@@ -1370,7 +1373,7 @@ Ink annotations consist of a number of strokes, each consisting of a sequence of
 
         annotation.clearInkList();
 
-    .. |tor_todo| WASM, TypeError: libmupdf._wasm_pdf_annot_clear_ink_list is not a function
+    |tor_todo| WASM, TypeError: libmupdf._wasm_pdf_annot_clear_ink_list is not a function
 
 
 .. method:: addInkList(stroke)
@@ -1394,7 +1397,7 @@ Ink annotations consist of a number of strokes, each consisting of a sequence of
                                 ]
                              );
 
-    .. |tor_todo| WASM, TypeError: annotation.addInkList is not a function
+    |tor_todo| WASM, TypeError: annotation.addInkList is not a function
 
 
 .. method:: addInkListStroke()
@@ -1409,7 +1412,7 @@ Ink annotations consist of a number of strokes, each consisting of a sequence of
 
         annotation.addInkListStroke();
 
-    .. |tor_todo| WASM, TypeError: libmupdf._wasm_pdf_annot_add_ink_list_stroke is not a function
+    |tor_todo| WASM, TypeError: libmupdf._wasm_pdf_annot_add_ink_list_stroke is not a function
 
 
 .. method:: addInkListStrokeVertex(vertex)
@@ -1426,7 +1429,7 @@ Ink annotations consist of a number of strokes, each consisting of a sequence of
 
         annotation.addInkListStrokeVertex([0,0]);
 
-    .. |tor_todo| WASM, TypeError: libmupdf._wasm_pdf_annot_add_ink_list_stroke_vertex is not a function
+    |tor_todo| WASM, TypeError: libmupdf._wasm_pdf_annot_add_ink_list_stroke_vertex is not a function
 
 
 Text markup and redaction annotations consist of a set of quadadrilaterals controlled by:
@@ -1445,7 +1448,7 @@ Text markup and redaction annotations consist of a set of quadadrilaterals contr
 
         var hasQuadPoints = annotation.hasQuadPoints();
 
-    .. |tor_todo| WASM, TypeError: annotation.hasQuadPoints is not a function
+    |tor_todo| WASM, TypeError: annotation.hasQuadPoints is not a function
 
 .. method:: getQuadPoints()
 
@@ -1515,7 +1518,7 @@ Polygon and polyline annotations consist of a sequence of vertices with a straig
 
         var hasVertices = annotation.hasVertices();
 
-    .. |tor_todo| WASM, TypeError: annotation.hasVertices is not a function
+    |tor_todo| WASM, TypeError: annotation.hasVertices is not a function
 
 
 .. method:: getVertices()
@@ -1572,7 +1575,7 @@ Polygon and polyline annotations consist of a sequence of vertices with a straig
 
         annotation.addVertex([0,0]);
 
-    .. |tor_todo| WASM, TypeError: libmupdf._wasm_pdf_annot_add_vertex is not a function
+    |tor_todo| WASM, TypeError: libmupdf._wasm_pdf_annot_add_vertex is not a function
 
 
 Stamp annotations have the option to set a custom image as its appearance.

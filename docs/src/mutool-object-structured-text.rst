@@ -21,8 +21,6 @@
 
 .. method:: search(needle)
 
-    |mutool_tag_wasm_soon|
-
     Search the text for all instances of `needle`, and return an array with :ref:`rectangles<mutool_run_js_api_rectangle>` of all matches found.
 
     :arg needle: `String`.
@@ -33,9 +31,6 @@
     .. code-block:: javascript
 
         var result = sText.search("Hello World!");
-
-    .. |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
-
 
 
 .. method:: highlight(p, q)
@@ -53,7 +48,7 @@
 
         var result = sText.highlight([100,100], [200,100]);
 
-    .. |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+    |tor_todo| WASM, TODO
 
 
 .. method:: copy(p, q)
@@ -70,10 +65,10 @@
 
     .. code-block:: javascript
 
-        var result = sText.highlight([100,100], [200,100]);
+        var result = sText.copy([100,100], [200,100]);
 
 
-    .. |tor_todo| WASM, Even says "TODO" in the mupdf.js source file :)
+    |tor_todo| WASM, TODO
 
 
 
@@ -90,24 +85,29 @@
         var stext = pdfPage.toStructuredText();
         stext.walk({
             beginLine: function (bbox, wmode, direction) {
-                print("beginLine", bbox, wmode, direction);
+                console.log("beginLine", bbox, wmode, direction);
             },
             beginTextBlock: function (bbox) {
-                print("beginTextBlock", bbox);
+                console.log("beginTextBlock", bbox);
             },
             endLine: function () {
-                print("endLine");
+                console.log("endLine");
             },
             endTextBlock: function () {
-                print("endTextBlock");
+                console.log("endTextBlock");
             },
             onChar: function (utf, origin, font, size, quad, color) {
-                print("onChar", utf, origin, font, size, quad, color);
+                console.log("onChar", utf, origin, font, size, quad, color);
             },
             onImageBlock: function (bbox, transform, image) {
-                print("onImageBlock", bbox, transform, image);
+                console.log("onImageBlock", bbox, transform, image);
             },
         });
+
+
+    .. note::
+
+        On `beginLine` the direction parameter is a vector (e.g. `[0, 1]`) and can you can calculate the rotation as an angle with some trigonometry on the vector.
 
 
 
