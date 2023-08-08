@@ -285,6 +285,11 @@ pdf_parse_link_dest_to_file_with_path(fz_context *ctx, pdf_document *doc, const 
 		const char *name = pdf_to_text_string(ctx, dest, NULL);
 		return pdf_new_uri_from_path_and_named_dest(ctx, path, name);
 	}
+	else if (path)
+	{
+		fz_link_dest destination = fz_make_link_dest_none();
+		return pdf_new_uri_from_path_and_explicit_dest(ctx, path, destination);
+	}
 	else
 	{
 		fz_warn(ctx, "invalid link destination");
@@ -1246,8 +1251,14 @@ pdf_add_filespec_from_link(fz_context *ctx, pdf_document *doc, const char *uri)
 	fz_try(ctx)
 	{
 		if (is_file_uri(ctx, uri))
+		{
 			file = parse_file_uri_path(ctx, uri);
-		filespec = pdf_add_filespec(ctx, doc, file, NULL);
+			filespec = pdf_add_filespec(ctx, doc, file, NULL);
+		}
+		else if (fz_is_external_link(ctx, uri))
+			filespec = pdf_add_url_filespec(ctx, doc, uri);
+		else
+			fz_throw(ctx, FZ_ERROR_GENERIC, "can not add non-uri as file specification");
 	}
 	fz_always(ctx)
 		fz_free(ctx, file);
@@ -1346,22 +1357,21 @@ pdf_obj *pdf_add_filespec(fz_context *ctx, pdf_document *doc, const char *filena
 	return filespec;
 }
 
-pdf_obj *
-pdf_new_destination_name_from_link(fz_context *ctx, pdf_document *doc, const char *uri)
+pdf_obj *pdf_add_url_filespec(fz_context *ctx, pdf_document *doc, const char *url)
 {
-	char *name = NULL;
-	pdf_obj *dest = NULL;
+	pdf_obj *filespec = pdf_add_new_dict(ctx, doc, 3);
 	fz_try(ctx)
 	{
-		if (has_named_dest(ctx, uri))
-			name = parse_uri_named_dest(ctx, uri);
-		dest = pdf_new_name(ctx, name);
+		pdf_dict_put(ctx, filespec, PDF_NAME(Type), PDF_NAME(Filespec));
+		pdf_dict_put(ctx, filespec, PDF_NAME(FS), PDF_NAME(URL));
+		pdf_dict_put_text_string(ctx, filespec, PDF_NAME(F), url);
 	}
-	fz_always(ctx)
-		fz_free(ctx, name);
 	fz_catch(ctx)
+	{
+		pdf_drop_obj(ctx, filespec);
 		fz_rethrow(ctx);
-	return dest;
+	}
+	return filespec;
 }
 
 pdf_obj *
