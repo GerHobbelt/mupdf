@@ -128,6 +128,10 @@ public class PDFObject implements Iterable<PDFObject>
 		return get(name, false);
 	}
 
+	public PDFObject getInheritable(PDFObject name) {
+		return getDictionary(name != null ? name.asName() : null, false);
+	}
+
 	public PDFObject getInheritable(String name) {
 		return getDictionary(name, true);
 	}
