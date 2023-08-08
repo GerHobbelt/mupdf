@@ -4322,14 +4322,6 @@ JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_deletePageLabels
 
 /*
  * Class:     com_artifex_mupdf_fitz_PDFDocument
- * Method:    formatRemoteLinkURI
- * Signature: (Lcom/artifex/mupdf/fitz/LinkDestination;Ljava/lang/String;Ljava/lang/String;Z)Ljava/lang/String;
- */
-JNIEXPORT jstring JNICALL Java_com_artifex_mupdf_fitz_PDFDocument_formatRemoteLinkURI
-  (JNIEnv *, jobject, jobject, jstring, jstring, jboolean);
-
-/*
- * Class:     com_artifex_mupdf_fitz_PDFDocument
  * Method:    formatURIFromPathAndNamedDest
  * Signature: (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
  */

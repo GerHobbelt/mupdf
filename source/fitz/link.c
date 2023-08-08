@@ -91,6 +91,9 @@ fz_is_external_link(fz_context *ctx, const char *uri)
 	 if (!uri)
 		 return 0;
 
+	 if (!uri)
+		 return 0;
+
 	/* All schemes must start with a letter; exit if we don't. */
 	if ((*uri < 'a' || *uri > 'z') && (*uri < 'A' || *uri > 'Z'))
 		return 0;
