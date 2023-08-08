@@ -9,7 +9,7 @@ del /Q src\com\artifex\mupdf\fitz\*.class
 "%JAVA_HOME%\bin\javac.exe" -version
 
 @echo Building Viewer
-"%JAVA_HOME%\bin\javac.exe" -Xlint:deprecation -classpath src -sourcepath src example/Viewer.java
+"%JAVA_HOME%\bin\javac.exe" -Xlint:deprecation -classpath src -sourcepath src example/Viewer.java example/ViewerCore.js example/PageCanvas.java example/Worker.java
 
 @echo Building JNI classes
 "%JAVA_HOME%\bin\javac.exe" -Xlint:deprecation -sourcepath src src/com/artifex/mupdf/fitz/*.java
