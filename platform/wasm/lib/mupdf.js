@@ -555,15 +555,15 @@ class Font extends Userdata {
 		"ko": 3,
 	}
 
-	constructor(arg1, arg2, arg3) {
+	constructor(name_or_pointer, buffer=null, subfont=0) {
 		let pointer = 0
-		if (typeof arg1 === "number") {
-			pointer = libmupdf._wasm_keep_font(arg1)
+		if (typeof name_or_pointer === "number") {
+			pointer = libmupdf._wasm_keep_font(name_or_pointer)
 		} else {
-			if (arg2 === undefined)
-				pointer = libmupdf._wasm_new_base14_font(STRING(arg1))
+			if (buffer)
+				pointer = libmupdf._wasm_new_font_from_buffer(STRING(name_or_pointer), toBuffer(buffer), subfont)
 			else
-				pointer = libmupdf._wasm_new_font_from_buffer(STRING(arg1), toBuffer(arg2), arg3 | 0)
+				pointer = libmupdf._wasm_new_base14_font(STRING(name_or_pointer))
 		}
 		super(pointer)
 	}
@@ -1850,22 +1850,25 @@ class PDFPage extends Page {
 		return true
 	}
 
-	toPixmap(matrix, colorspace, alpha = false, showExtras = true, usage = "View") {
+	toPixmap(matrix, colorspace, alpha = false, showExtras = true, usage = "View", box = "MediaBox") {
 		checkType(colorspace, ColorSpace)
 		checkMatrix(matrix)
+		box = toEnum(box, PDFPage.BOXES)
 		let result
 		if (showExtras)
 			result = libmupdf._wasm_pdf_new_pixmap_from_page_with_usage(this,
 				MATRIX(matrix),
 				colorspace,
 				alpha,
-				STRING(usage))
+				STRING(usage),
+				box)
 		else
 			result = libmupdf._wasm_pdf_new_pixmap_from_page_contents_with_usage(this,
 				MATRIX(matrix),
 				colorspace,
 				alpha,
-				STRING(usage))
+				STRING(usage),
+				box)
 		return new Pixmap(result)
 	}
 
@@ -2531,6 +2534,10 @@ class PDFAnnotation extends Userdata {
 			PDFOBJ(this._doc, resources),
 			toBuffer(contents)
 		)
+	}
+
+	applyRedaction(black_boxes = 1, image_method = 2) {
+		libmupdf._wasm_pdf_apply_redaction(this, black_boxes, image_method)
 	}
 }
 
