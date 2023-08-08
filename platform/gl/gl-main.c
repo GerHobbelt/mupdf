@@ -655,6 +655,7 @@ static char *help_dialog_text =
 	"C - toggle tinted color mode\n"
 	"E - toggle ICC color management\n"
 	"e - toggle spot color emulation\n"
+	"! - toggle gamma blending mode\n"
 	"\n"
 	"f - fullscreen window\n"
 	"w - shrink wrap window\n"
@@ -2427,7 +2428,7 @@ static void do_app(void)
 				currentpage = fz_next_page(ctx, doc, currentpage);
 			break;
 
-		case 'B':
+		case '!':
 			currentgamma = !currentgamma;
 			break;
 

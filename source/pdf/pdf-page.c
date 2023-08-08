@@ -1132,10 +1132,10 @@ fz_separations *pdf_page_separations_imp(fz_context* ctx, fz_page* _page)
 	return pdf_page_separations(ctx, page);
 }
 
-fz_rect pdf_bound_page_imp(fz_context* ctx, fz_page* _page)
+fz_rect pdf_bound_page_imp(fz_context* ctx, fz_page* _page, fz_box_type box)
 {
 	pdf_page* page = (pdf_page*)_page;
-	return pdf_bound_page(ctx, page);
+	return pdf_bound_page(ctx, page, box);
 }
 
 static
