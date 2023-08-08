@@ -157,9 +157,39 @@ void *fz_memmem(const void *haystack, size_t haystacklen, const void *needle, si
 void fz_dirname(char *dir, const char *path, size_t dirsize);
 
 /**
-	decode url escapes.
+	Like fz_decode_uri_component but in-place.
 */
 char *fz_urldecode(char *url);
+
+/**
+ * Return a new string representing the unencoded version of the given URI.
+ * This decodes all escape sequences except those that would result in a reserved
+ * character that are part of the URI syntax (; / ? : @ & = + $ , #).
+ */
+char *fz_decode_uri(fz_context *ctx, const char *s);
+
+/**
+ * Return a new string representing the unencoded version of the given URI component.
+ * This decodes all escape sequences!
+ */
+char *fz_decode_uri_component(fz_context *ctx, const char *s);
+
+/**
+ * Return a new string representing the provided string encoded as a URI.
+ */
+char *fz_encode_uri(fz_context *ctx, const char *s);
+
+/**
+ * Return a new string representing the provided string encoded as an URI component.
+ * This also encodes the special reserved characters (; / ? : @ & = + $ , #).
+ */
+char *fz_encode_uri_component(fz_context *ctx, const char *s);
+
+/**
+ * Return a new string representing the provided string encoded as an URI path name.
+ * This also encodes the special reserved characters except /.
+ */
+char *fz_encode_uri_pathname(fz_context *ctx, const char *s);
 
 /**
 	create output file name using a template.
