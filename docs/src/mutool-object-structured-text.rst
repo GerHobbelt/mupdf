@@ -21,7 +21,6 @@
 
 .. method:: search(needle)
 
-    |mutool_tag_wasm_soon|
 
     Search the text for all instances of `needle`, and return an array with all matches found on the page.
 
@@ -52,7 +51,7 @@
 
         var result = sText.highlight([100,100], [200,100]);
 
-    |tor_todo| WASM, TODO
+    .. |tor_todo| WASM, "TODO"
 
 
 .. method:: copy(p, q)
@@ -72,7 +71,7 @@
         var result = sText.copy([100,100], [200,100]);
 
 
-    |tor_todo| WASM, TODO
+    .. |tor_todo| WASM, "TODO"
 
 
 
@@ -108,12 +107,9 @@
             },
         });
 
-
     .. note::
 
         On `beginLine` the direction parameter is a vector (e.g. `[0, 1]`) and can you can calculate the rotation as an angle with some trigonometry on the vector.
-
-
 
 
 .. method:: asJSON()

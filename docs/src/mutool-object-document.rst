@@ -132,7 +132,7 @@
 
 .. method:: getMetaData(key)
 
-    Return various meta data information. The common keys are: `format`, `encryption`, `info:Author`, and `info:Title`.
+    Return various meta data information. The common keys are: `format`, `encryption`, `info:ModDate`, and `info:Title`.
 
     :arg key: `String`.
     :return: `String`.
@@ -280,8 +280,6 @@
 
 
 .. method:: formatLinkURI(linkDestination)
-
-    |mutool_tag|
 
     Format a document internal link destination object to a :title:`URI` string suitable for :ref:`createLink()<mutool_run_js_api_page_create_link>`.
 

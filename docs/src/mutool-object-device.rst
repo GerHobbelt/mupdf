@@ -76,7 +76,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
 .. method:: clipPath(path, evenOdd, transform)
 
-    |mutool_tag_wasm_soon|
 
     Clip a path.
 
@@ -95,7 +94,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
 .. method:: clipStrokePath(path, stroke, transform)
 
-    |mutool_tag_wasm_soon|
 
     Clip & stroke a path.
 
@@ -155,7 +153,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
 .. method:: clipText(text, transform)
 
-    |mutool_tag_wasm_soon|
 
     Clip a text object.
 
@@ -171,7 +168,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
 .. method:: clipStrokeText(text, stroke, transform)
 
-    |mutool_tag_wasm_soon|
 
     Clip & stroke a text object.
 
@@ -228,7 +224,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
 .. method:: fillImage(image, transform, alpha, colorParams)
 
-    |mutool_tag_wasm_soon|
 
     Draw an image. An image always fills a unit rectangle `[0,0,1,1]`, so must be transformed to be placed and drawn at the appropriate size.
 
@@ -248,7 +243,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
 .. method:: fillImageMask(image, transform, colorspace, color, alpha, colorParams)
 
-    |mutool_tag_wasm_soon|
 
     An image mask is an image without color. Fill with the color where the image is opaque.
 
@@ -270,7 +264,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
 .. method:: clipImageMask(image, transform)
 
-    |mutool_tag_wasm_soon|
 
     Clip graphics using the image to mask the areas to be drawn.
 
