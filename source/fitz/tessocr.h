@@ -58,6 +58,11 @@ void ocr_set_leptonica_stderr_handler(fz_context *ctx);
 
 #if defined(BUILD_MONOLITHIC)
 int tesseract_tool_main(int argc, const char** argv);
+int tesseract_get_page_gradient_main(int argc, const char** argv);
+int tesseract_svpaint_main(int argc, const char** argv);
+
+#include "../../thirdparty/tesseract/include/tesseract/capi_training_tools.h"
+
 #endif
 
 #ifdef __cplusplus

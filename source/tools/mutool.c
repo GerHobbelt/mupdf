@@ -129,7 +129,22 @@ static struct tool_spec {
 #if defined(MUTOOL_EX)
 	// DO NOT use tesseract_main() for this as that one does not set up the mupdf/fitz+leptonica+jpeg environments the way we need & expect in monolithic build mode.
 	{ {.fa = tesseract_tool_main }, "tesseract", "OCR given image or PDF" },
-	//{ {.fa = tesseract_main }, "tesseract", "OCR given image or PDF" },
+	{ {.fa = tesseract_get_page_gradient_main }, "tess_get_page_gradient", "tesseract::get_page_gradient tool" },
+	{ {.fa = tesseract_svpaint_main }, "tess_svpaint_demo", "tesseract SVPaint demo app" },
+	{ {.fa = tesseract_mf_training_main }, "tess_mf_training", "tesseract mf_training app" },
+	{ {.fa = tesseract_shape_clustering_main }, "tess_shape_clustering", "tesseract shape_clustering app" },
+	{ {.fa = tesseract_classifier_tester_main }, "tess_classifier_tester", "tesseract classifier_tester app" },
+	{ {.fa = tesseract_cn_training_main }, "tess_cn_training", "tesseract cn_training app" },
+	{ {.fa = tesseract_combine_lang_model_main }, "tess_combine_lang_model", "tesseract combine_lang_model app" },
+	{ {.fa = tesseract_combine_tessdata_main }, "tess_combine_tessdata", "tesseract combine_tessdata app" },
+	{ {.fa = tesseract_dawg2wordlist_main }, "tess_dawg2wordlist", "tesseract dawg2wordlist app" },
+	{ {.fa = tesseract_merge_unicharsets_main }, "tess_merge_unicharsets", "tesseract merge_unicharsets app" },
+	{ {.fa = tesseract_set_unicharset_properties_main }, "tess_set_unicharset_properties", "tesseract set_unicharset_properties app" },
+	{ {.fa = tesseract_text2image_main }, "tess_text2image", "tesseract tess_text2image app" },
+	{ {.fa = tesseract_unicharset_extractor_main }, "tess_unicharset_extractor", "tesseract unicharset_extractor app" },
+	{ {.fa = tesseract_lstm_eval_main }, "tess_lstm_eval", "tesseract tess_lstm_eval app" },
+	{ {.fa = tesseract_lstm_training_main }, "tess_lstm_training", "tesseract lstm_training app" },
+	{ {.fa = tesseract_wordlist2dawg_main }, "tess_wordlist2dawg", "tesseract wordlist2dawg app" },
 #endif
 
 #if defined(MUTOOL_EX)
