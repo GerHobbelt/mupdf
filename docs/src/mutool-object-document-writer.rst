@@ -68,9 +68,6 @@
         var writer = new mupdf.DocumentWriter(buffer, "PDF", "");
 
 
-    |tor_todo| WASM: Error: unknown output document format:
-
-
 
 
 |instance_methods|

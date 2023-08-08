@@ -123,4 +123,3 @@ A display list records all the device calls for playback later. If you want to r
     .. code-block:: javascript
 
         var results = displayList.search("my search phrase");
-

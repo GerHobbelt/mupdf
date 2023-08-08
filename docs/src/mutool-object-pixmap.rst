@@ -113,7 +113,6 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
         var alpha = pixmap.getAlpha();
 
-
 .. method:: getStride()
 
     Number of bytes per row.
@@ -422,8 +421,6 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
 
         var buffer = pixmap.asPSD();
 
-    |tor_todo| Error: cannot seek in buffer: No error information
-
 
 .. method:: asPAM()
 
@@ -456,7 +453,6 @@ A `Pixmap` object contains a color raster image (short for pixel map). The compo
     .. code-block:: javascript
 
         var buffer = pixmap.asJPEG(80);
-
 
 
 .. method:: md5()

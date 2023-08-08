@@ -45,9 +45,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
     .. code-block:: javascript
 
-        device.fillPath(path, false, mupdf.Matrix.identity, mupdf.ColorSpace.DeviceRGB, [1,0,0], 1.0);
-
-
+        device.fillPath(path, false, mupdf.Matrix.identity, mupdf.ColorSpace.DeviceRGB, [1,0,0], true);
 
 
 .. method:: strokePath(path, stroke, transform, colorspace, color, alpha, colorParams)
@@ -76,7 +74,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
 
 
-
 .. method:: clipPath(path, evenOdd, transform)
 
     |mutool_tag_wasm_soon|
@@ -96,7 +93,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
 
 
-
 .. method:: clipStrokePath(path, stroke, transform)
 
     |mutool_tag_wasm_soon|
@@ -111,8 +107,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
     .. code-block:: javascript
 
-        device.clipStrokePath(path, stroke, mupdf.Matrix.identity);
-
+        device.clipStrokePath(path, true, mupdf.Matrix.identity);
 
 
 
@@ -133,7 +128,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     .. code-block:: javascript
 
         device.fillText(text, mupdf.Matrix.identity, mupdf.ColorSpace.DeviceRGB, [1,0,0], 1);
-
 
 .. method:: strokeText(text, stroke, transform, colorspace, color, alpha, colorParams)
 
@@ -159,7 +153,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
                           1);
 
 
-
 .. method:: clipText(text, transform)
 
     |mutool_tag_wasm_soon|
@@ -175,8 +168,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
         device.clipText(text, mupdf.Matrix.identity);
 
-
-    |tor_todo| WASM: Error: items left on stack in draw device: 1
 
 .. method:: clipStrokeText(text, stroke, transform)
 
@@ -195,8 +186,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.clipStrokeText(text, stroke,  mupdf.Matrix.identity);
 
 
-    |tor_todo| WASM: Error: items left on stack in draw device: 1
-
 
 .. method:: ignoreText(text, transform)
 
@@ -211,7 +200,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     .. code-block:: javascript
 
         device.ignoreText(text, mupdf.Matrix.identity);
-
 
 
 
@@ -257,8 +245,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.fillImage(image, mupdf.Matrix.identity, false, {overPrinting:true});
 
 
-    |tor_todo| WASM: TypeError: libmupdf._wasm_new_from_pixmap is not a function
-
 
 .. method:: fillImageMask(image, transform, colorspace, color, alpha, colorParams)
 
@@ -281,8 +267,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
         device.fillImageMask(image, mupdf.Matrix.identity, mupdf.ColorSpace.DeviceRGB, 0xff00ff, true, {});
 
 
-    |tor_todo| WASM: TypeError: libmupdf._wasm_new_from_pixmap is not a function
-
 
 .. method:: clipImageMask(image, transform)
 
@@ -300,8 +284,6 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
 
         device.clipImageMask(image, mupdf.Matrix.identity);
 
-
-    |tor_todo| WASM: TypeError: libmupdf._wasm_new_from_pixmap is not a function
 
 .. method:: popClip()
 
@@ -332,6 +314,7 @@ The methods that clip graphics must be balanced with a corresponding `popClip`.
     .. code-block:: javascript
 
         device.beginMask(path, true, mupdf.ColorSpace.DeviceRGB, 0xff00ff, false, {});
+
 
 
 .. method:: endMask()

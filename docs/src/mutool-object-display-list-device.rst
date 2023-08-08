@@ -35,4 +35,3 @@
         var my_display_list = new mupdf.DisplayList([0,0,100,100]);
         console.log("my_display_list="+my_display_list);
         var displayListDevice = new mupdf.DisplayListDevice(my_display_list);
-

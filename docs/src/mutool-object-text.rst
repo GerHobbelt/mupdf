@@ -34,8 +34,6 @@ A `Text` object contains text.
         var text = new mupdf.Text();
 
 
-    |tor_todo| ReferenceError: pointer is not defined
-
 
 
 
