@@ -1719,20 +1719,18 @@ FUN(PDFDocument_getVersion)(JNIEnv *env, jobject self)
 }
 
 JNIEXPORT jstring JNICALL
-FUN(PDFDocument_formatRemoteLinkURI)(JNIEnv *env, jobject self, jobject jdest, jstring jfile, jstring jname, jboolean isURL)
+FUN(PDFDocument_formatURIFromPathAndNamedDest)(JNIEnv *env, jclass cls, jstring jpath, jstring jname)
 {
 	fz_context *ctx = get_context(env);
-	pdf_document *pdf = from_PDFDocument(env, self);
-	fz_link_dest dest = from_LinkDestination(env, jdest);
 	char *uri = NULL;
 	jobject juri;
-	const char *file = NULL;
+	const char *path = NULL;
 	const char *name = NULL;
 
-	if (jfile)
+	if (jpath)
 	{
-		file = (*env)->GetStringUTFChars(env, jfile, NULL);
-		if (!file) return NULL;
+		path = (*env)->GetStringUTFChars(env, jpath, NULL);
+		if (!path) return NULL;
 	}
 	if (jname)
 	{
@@ -1741,21 +1739,115 @@ FUN(PDFDocument_formatRemoteLinkURI)(JNIEnv *env, jobject self, jobject jdest, j
 	}
 
 	fz_try(ctx)
-		uri = pdf_format_remote_link_uri(ctx, pdf, file, isURL, name, dest);
+		uri = pdf_new_uri_from_path_and_named_dest(ctx, path, name);
 	fz_always(ctx)
 	{
 		if (jname)
 			(*env)->ReleaseStringUTFChars(env, jname, name);
-		if (jfile)
-			(*env)->ReleaseStringUTFChars(env, jfile, file);
+		if (jpath)
+			(*env)->ReleaseStringUTFChars(env, jpath, path);
 	}
 	fz_catch(ctx)
 		jni_rethrow(env, ctx);
 
 	juri = (*env)->NewStringUTF(env, uri);
 	fz_free(ctx, uri);
-	if (juri == NULL || (*env)->ExceptionCheck(env))
-		return NULL;
+	return juri;
+}
 
+JNIEXPORT jstring JNICALL
+FUN(PDFDocument_formatURIFromPathAndExplicitDest)(JNIEnv *env, jclass cls, jstring jpath, jobject jdest)
+{
+	fz_context *ctx = get_context(env);
+	fz_link_dest dest = from_LinkDestination(env, jdest);
+	char *uri = NULL;
+	jobject juri;
+	const char *path = NULL;
+
+	if (jpath)
+	{
+		path = (*env)->GetStringUTFChars(env, jpath, NULL);
+		if (!path) return NULL;
+	}
+
+	fz_try(ctx)
+		uri = pdf_new_uri_from_path_and_explicit_dest(ctx, path, dest);
+	fz_always(ctx)
+	{
+		if (jpath)
+			(*env)->ReleaseStringUTFChars(env, jpath, path);
+	}
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	juri = (*env)->NewStringUTF(env, uri);
+	fz_free(ctx, uri);
+	return juri;
+}
+
+JNIEXPORT jstring JNICALL
+FUN(PDFDocument_appendNamedDestToURI)(JNIEnv *env, jclass cls, jstring jurl, jstring jname)
+{
+	fz_context *ctx = get_context(env);
+	char *uri = NULL;
+	jobject juri;
+	const char *url = NULL;
+	const char *name = NULL;
+
+	if (jurl)
+	{
+		url = (*env)->GetStringUTFChars(env, jurl, NULL);
+		if (!url) return NULL;
+	}
+	if (jname)
+	{
+		name = (*env)->GetStringUTFChars(env, jname, NULL);
+		if (!name) return NULL;
+	}
+
+	fz_try(ctx)
+		uri = pdf_append_named_dest_to_uri(ctx, url, name);
+	fz_always(ctx)
+	{
+		if (jname)
+			(*env)->ReleaseStringUTFChars(env, jname, name);
+		if (jurl)
+			(*env)->ReleaseStringUTFChars(env, jurl, url);
+	}
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	juri = (*env)->NewStringUTF(env, uri);
+	fz_free(ctx, uri);
+	return juri;
+}
+
+JNIEXPORT jstring JNICALL
+FUN(PDFDocument_appendExplicitDestToURI)(JNIEnv *env, jclass cls, jstring jurl, jobject jdest)
+{
+	fz_context *ctx = get_context(env);
+	fz_link_dest dest = from_LinkDestination(env, jdest);
+	char *uri = NULL;
+	jobject juri;
+	const char *url = NULL;
+
+	if (jurl)
+	{
+		url = (*env)->GetStringUTFChars(env, jurl, NULL);
+		if (!url) return NULL;
+	}
+
+	fz_try(ctx)
+		uri = pdf_append_explicit_dest_to_uri(ctx, url, dest);
+	fz_always(ctx)
+	{
+		if (jurl)
+			(*env)->ReleaseStringUTFChars(env, jurl, url);
+	}
+	fz_catch(ctx)
+		jni_rethrow(env, ctx);
+
+	juri = (*env)->NewStringUTF(env, uri);
+	fz_free(ctx, uri);
 	return juri;
 }

@@ -82,15 +82,21 @@ fz_drop_link(fz_context *ctx, fz_link *link)
 int
 fz_is_external_link(fz_context *ctx, const char *uri)
 {
+	const char *mark;
 	/* Basically, this function returns true, if the URI starts with
 	 * a valid 'scheme' followed by ':'. */
 	if (!uri)
 		return 0;
 
+	 if (!uri)
+		 return 0;
+
 	/* All schemes must start with a letter; exit if we don't. */
 	if ((*uri < 'a' || *uri > 'z') && (*uri < 'A' || *uri > 'Z'))
 		return 0;
 	uri++;
+
+	mark = uri;
 
 	/* Subsequent characters can be letters, digits, +, -, or . */
 	while ((*uri >= 'a' && *uri <= 'z') ||
@@ -101,7 +107,7 @@ fz_is_external_link(fz_context *ctx, const char *uri)
 		(*uri == '.'))
 		++uri;
 
-	return uri[0] == ':';
+	return uri[0] == ':' && (uri - mark) > 1;
 }
 
 fz_link_dest fz_make_link_dest_none(void)

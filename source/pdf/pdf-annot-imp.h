@@ -73,7 +73,8 @@ pdf_obj *pdf_new_destination_from_link(fz_context *ctx, pdf_document *doc, const
 */
 fz_link_dest pdf_parse_link_uri(fz_context *ctx, const char *uri, char **file, char **name);
 
-char *pdf_parse_link_dest(fz_context *ctx, pdf_document *doc, pdf_obj *obj);
+pdf_obj *pdf_add_filespec(fz_context *ctx, pdf_document *doc, const char *file, pdf_obj *embedded_file);
+char *pdf_parse_link_dest(fz_context *ctx, pdf_document *doc, pdf_obj *dest);
 char *pdf_parse_link_action(fz_context *ctx, pdf_document *doc, pdf_obj *obj, int pagenum);
 
 int pdf_set_field_value(fz_context *ctx, pdf_document *doc, pdf_obj *field, const char *text, int is_being_edited);

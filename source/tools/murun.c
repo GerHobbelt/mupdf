@@ -37,6 +37,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 #define PS1 "> "
 
@@ -4232,6 +4233,20 @@ static void ffi_Link_setURI(js_State *J)
 		rethrow(J);
 }
 
+static void ffi_Link_isExternal(js_State *J)
+{
+	fz_link *link = js_touserdata(J, 0, "fz_link");
+	fz_context *ctx = js_getcontext(J);
+	int external = 0;
+
+	fz_try(ctx)
+		external = fz_is_external_link(ctx, link->uri);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+
+	js_pushboolean(J, external);
+}
+
 static void ffi_ColorSpace_getNumberOfComponents(js_State *J)
 {
 	fz_colorspace *colorspace = js_touserdata(J, 0, "fz_colorspace");
@@ -7528,26 +7543,92 @@ static void ffi_PDFDocument_deletePageLabels(js_State *J)
 		rethrow(J);
 }
 
-static void ffi_PDFDocument_formatRemoteLinkURI(js_State *J)
+static void ffi_appendDestToURI(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
-	pdf_document *pdf = js_touserdata(J, 0, "pdf_document");
-	fz_link_dest dest = ffi_tolinkdest(J, 1);
-	const char *file = js_iscoercible(J, 2) ? js_tostring(J, 2) : NULL;
-	const char *name = js_iscoercible(J, 3) ? js_tostring(J, 3) : NULL;
-	int is_url = js_isdefined(J, 4) ? js_toboolean(J, 4) : 0;
+	const char *url = js_iscoercible(J, 1) ? js_tostring(J, 1) : NULL;
+	const char *name = NULL;
+	fz_link_dest dest = { 0 };
 	char *uri = NULL;
 
-	fz_try(ctx)
-		uri = pdf_format_remote_link_uri(ctx, pdf, file, is_url, name, dest);
-	fz_catch(ctx)
-		rethrow(J);
+	if (js_isobject(J, 2))
+	{
+		dest = ffi_tolinkdest(J, 2);
+		fz_try(ctx)
+			uri = pdf_append_explicit_dest_to_uri(ctx, url, dest);
+		fz_catch(ctx)
+			rethrow(J);
+	}
+	else if (js_isnumber(J, 2))
+	{
+		dest = fz_make_link_dest_xyz(0, js_tonumber(J, 2) - 1, NAN, NAN, NAN);
+		fz_try(ctx)
+			uri = pdf_append_explicit_dest_to_uri(ctx, url, dest);
+		fz_catch(ctx)
+			rethrow(J);
+	}
+	else
+	{
+		name = js_tostring(J, 2);
+		fz_try(ctx)
+			uri = pdf_append_named_dest_to_uri(ctx, url, name);
+		fz_catch(ctx)
+			rethrow(J);
+	}
 
 	if (js_try(J)) {
 		fz_free(ctx, uri);
 		js_throw(J);
 	}
-	js_pushstring(J, uri);
+	if (uri)
+		js_pushstring(J, uri);
+	else
+		js_pushnull(J);
+	js_endtry(J);
+	fz_free(ctx, uri);
+}
+
+static void ffi_formatURIFromPathAndDest(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	const char *path = js_iscoercible(J, 1) ? js_tostring(J, 1) : NULL;
+	const char *name = NULL;
+	fz_link_dest dest = { 0 };
+	char *uri = NULL;
+
+	if (js_isobject(J, 2))
+	{
+		dest = ffi_tolinkdest(J, 2);
+		fz_try(ctx)
+			uri = pdf_new_uri_from_path_and_explicit_dest(ctx, path, dest);
+		fz_catch(ctx)
+			rethrow(J);
+	}
+	else if (js_isnumber(J, 2))
+	{
+		dest = fz_make_link_dest_xyz(0, js_tonumber(J, 2) - 1, NAN, NAN, NAN);
+		fz_try(ctx)
+			uri = pdf_new_uri_from_path_and_explicit_dest(ctx, path, dest);
+		fz_catch(ctx)
+			rethrow(J);
+	}
+	else
+	{
+		name = js_tostring(J, 2);
+		fz_try(ctx)
+			uri = pdf_new_uri_from_path_and_named_dest(ctx, path, name);
+		fz_catch(ctx)
+			rethrow(J);
+	}
+
+	if (js_try(J)) {
+		fz_free(ctx, uri);
+		js_throw(J);
+	}
+	if (uri)
+		js_pushstring(J, uri);
+	else
+		js_pushnull(J);
 	js_endtry(J);
 	fz_free(ctx, uri);
 }
@@ -10514,6 +10595,7 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "Link.setBounds", ffi_Link_setBounds, 1);
 		jsB_propfun(J, "Link.getURI", ffi_Link_getURI, 0);
 		jsB_propfun(J, "Link.setURI", ffi_Link_setURI, 1);
+		jsB_propfun(J, "isExternal", ffi_Link_isExternal, 0);
 	}
 	js_setregistry(J, "fz_link");
 
@@ -11077,6 +11159,12 @@ int murun_main(int argc, const char** argv)
 	{
 #if FZ_ENABLE_PDF
 		jsB_propcon(J, "pdf_document", "PDFDocument", ffi_new_PDFDocument, 1);
+		js_getglobal(J, "PDFDocument");
+		{
+			jsB_propfun(J, "formatURIWithPathAndDest", ffi_formatURIFromPathAndDest, 2);
+			jsB_propfun(J, "appendDestToURI", ffi_appendDestToURI, 2);
+		}
+		js_pop(J, 1);
 #endif
 
 		jsB_propcon(J, "fz_archive", "Archive", ffi_new_Archive, 1);
