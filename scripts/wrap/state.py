@@ -276,12 +276,7 @@ class BuildDirs:
         self.ref_dir = abspath( f'{self.dir_mupdf}/mupdfwrap_ref')
         assert not self.ref_dir.endswith( '/')
 
-        if state_.windows:
-            # Default build depends on the Python that we are running under.
-            #
-            self.set_dir_so( f'{self.dir_mupdf}/build/shared-release-{cpu_name()}-py{python_version()}')
-        else:
-            self.set_dir_so( f'{self.dir_mupdf}/build/shared-release')
+        self.set_dir_so( f'{self.dir_mupdf}/build/shared-release')
 
     def set_dir_so( self, dir_so):
         '''
@@ -296,18 +291,50 @@ class BuildDirs:
         dir_so = abspath( dir_so)
         self.dir_so = dir_so
 
-        if 0: pass  # lgtm [py/unreachable-statement]
-        elif '-debug' in dir_so:    self.cpp_flags = '-g'
-        elif '-release' in dir_so:  self.cpp_flags = '-O2 -DNDEBUG'
-        elif '-memento' in dir_so:  self.cpp_flags = '-g -DMEMENTO'
+        if state_.windows:
+            # debug builds have:
+            # /Od
+            # /D _DEBUG
+            # /RTC1
+            # /MDd
+            #
+            if 0: pass  # lgtm [py/unreachable-statement]
+            elif '-release' in dir_so:
+                self.cpp_flags = '/O2 /DNDEBUG'
+            elif '-debug' in dir_so:
+                # `/MDd` forces use of debug runtime and (i think via
+                # it setting `/D _DEBUG`) debug versions of things like
+                # `std::string` (incompatible with release builds). We also set
+                # `/Od` (no optimisation) and `/RTC1` (extra runtime checks)
+                # because these seem to be conventionally set in VS.
+                #
+                self.cpp_flags = '/MDd /Od /RTC1'
+            elif '-memento' in dir_so:
+                self.cpp_flags = '/MDd /Od /RTC1 /DMEMENTO'
+            else:
+                self.cpp_flags = None
+                jlib.log( 'Warning: unrecognised {dir_so=}, so cannot determine cpp_flags')
         else:
-            self.cpp_flags = None
-            jlib.log( 'Warning: unrecognised {dir_so=}, so cannot determine cpp_flags')
+            if 0: pass  # lgtm [py/unreachable-statement]
+            elif '-debug' in dir_so:    self.cpp_flags = '-g'
+            elif '-release' in dir_so:  self.cpp_flags = '-O2 -DNDEBUG'
+            elif '-memento' in dir_so:  self.cpp_flags = '-g -DMEMENTO'
+            else:
+                self.cpp_flags = None
+                jlib.log( 'Warning: unrecognised {dir_so=}, so cannot determine cpp_flags')
 
         # Set self.cpu and self.python_version.
         if state_.windows:
-            # Infer from self.dir_so.
-            m = re.match( 'shared-([a-z]+)(-(x[0-9]+))?(-py([0-9.]+))?$', os.path.basename(self.dir_so))
+            # Infer cpu and python version from self.dir_so. And append current
+            # cpu and python version if not already present.
+            leaf = os.path.basename(self.dir_so)
+            m = re.match( 'shared-([a-z]+)$', leaf)
+            if m:
+                suffix = f'-{Cpu(cpu_name())}-py{python_version()}'
+                jlib.log('Adding suffix to {leaf!r}: {suffix!r}')
+                self.dir_so += suffix
+                leaf = os.path.basename(self.dir_so)
+            m = re.match( 'shared-([a-z]+)(-(x[0-9]+))?(-py([0-9.]+))?$', leaf)
             #log(f'self.dir_so={self.dir_so} {os.path.basename(self.dir_so)} m={m}')
             assert m, f'Failed to parse dir_so={self.dir_so!r} - should be *-x32|x64-pyA.B'
             assert m.group(3), f'No cpu in self.dir_so: {self.dir_so}'
