@@ -10476,6 +10476,12 @@ int murun_main(int argc, const char** argv)
 	fz_register_document_handlers(ctx);
 
 	J = js_newstate(alloc, ctx, JS_STRICT);
+	if (!J)
+	{
+		fz_error(ctx, "cannot initialize mujs state\n");
+		fz_drop_context(ctx);
+		return EXIT_FAILURE;
+	}
 	js_setcontext(J, ctx);
 
 	/* standard command line javascript functions */
