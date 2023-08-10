@@ -957,22 +957,22 @@ pdf_delete_annot(fz_context *ctx, pdf_page *page, pdf_annot *annot)
 	if (flags & PDF_ANNOT_IS_LOCKED)
 		return;
 
-	is_widget = (pdf_annot_type(ctx, annot) == PDF_ANNOT_WIDGET);
-
-	/* Remove annot from page's list */
-	*annotptr = annot->next;
-
-	/* Annot may no longer borrow page pointer, since they are separated */
-	annot->page = NULL;
-
-	/* If the removed annotation was the last in the list adjust the end pointer */
-	if (*annotptr == NULL)
-		page->annot_tailp = annotptr;
-
 	pdf_begin_operation(ctx, page->doc, "Delete Annotation");
 
 	fz_try(ctx)
 	{
+		is_widget = (pdf_annot_type(ctx, annot) == PDF_ANNOT_WIDGET);
+
+		/* Remove annot from page's list */
+		*annotptr = annot->next;
+
+		/* Annot may no longer borrow page pointer, since they are separated */
+		annot->page = NULL;
+
+		/* If the removed annotation was the last in the list adjust the end pointer */
+		if (*annotptr == NULL)
+			page->annot_tailp = annotptr;
+
 		/* Remove the annot from the "Annots" array. */
 		annot_arr = pdf_dict_get(ctx, page->obj, PDF_NAME(Annots));
 		i = pdf_array_find(ctx, annot_arr, annot->obj);
