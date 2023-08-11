@@ -1363,6 +1363,7 @@ def build_0(
             check_regress,
             clang_info_verbose,
             refcheck_if,
+            'debug' in build_dirs.dir_so,
             )
 
     generated.save(f'{build_dirs.dir_mupdf}/platform/c++')
@@ -1458,6 +1459,12 @@ def build( build_dirs, swig_command, args, vs_upgrade):
         compiler = 'em++'
     elif state.state_.macos:
         compiler = 'c++ -std=c++14'
+        # Add extra flags for MacOS cross-compilation, where ARCHFLAGS can be
+        # '-arch arm64'.
+        #
+        archflags = os.environ.get( 'ARCHFLAGS')
+        if archflags:
+            compiler += f' {archflags}'
     else:
         compiler = 'c++'
 
@@ -2593,6 +2600,17 @@ def main2():
                             printf("v=%s\\n", v.c_str());
                             fz_rect r = fz_unit_rect;
                             printf("r.x0=%f\\n", r.x0);
+
+                            mupdf::FzStextOptions   options;
+                            mupdf::FzStextPage stp( document, 0, options);
+                            std::vector<fz_quad>    quads = mupdf::fz_highlight_selection2(
+                                    stp,
+                                    mupdf::FzPoint(20, 20),
+                                    mupdf::FzPoint(120, 220),
+                                    100
+                                    );
+                            printf("quads.size()=%zi\\n", quads.size());
+                            assert(quads.size() == 13);
                             return 0;
                         }}
                         ''')
@@ -2601,6 +2619,8 @@ def main2():
                         f' -I {build_dirs.dir_mupdf}/include'
                         f' -I {build_dirs.dir_mupdf}/platform/c++/include'
                         )
+                # Enable asserts in this test.
+                cpp_flags = build_dirs.cpp_flags.replace( '-DNDEBUG', '')
                 if state.state_.windows:
                     win32_infix = _windows_vs_upgrade( vs_upgrade, build_dirs, devenv=None)
                     windows_build_type = build_dirs.windows_build_type()
@@ -2611,7 +2631,7 @@ def main2():
                                 /Tptest.cpp
                                 {includes}
                                 -D FZ_DLL_CLIENT
-                                {build_dirs.cpp_flags}
+                                {cpp_flags}
                                 /link
                                 {lib}
                                 /out:test.cpp.exe
@@ -2635,7 +2655,7 @@ def main2():
                     command = textwrap.dedent(f'''
                             c++
                                 -o test.cpp.exe
-                                {build_dirs.cpp_flags}
+                                {cpp_flags}
                                 {includes}
                                 test.cpp
                                 {link_l_flags( [libmupdf, libmupdfcpp])}

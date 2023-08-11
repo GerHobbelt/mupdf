@@ -203,7 +203,10 @@ else ifeq ($(OS),MACOS)
   LD = xcrun ld
   RANLIB = xcrun ranlib
 
-  ifeq (, $(shell which pkg-config))
+  ifneq ($(ARCHFLAGS),)
+    $(warning "MacOS with ARCHFLAGS set. Assuming we are building for arm64, and setting HAVE_LIBCRYPTO to no.")
+    HAVE_LIBCRYPTO := no
+  else ifeq (, $(shell which pkg-config))
     $(warning "No pkg-config found, install it for proper integration of libcrypto")
   else
     HAVE_LIBCRYPTO := $(shell pkg-config --exists 'libcrypto >= 1.1.0' && echo yes)
@@ -315,8 +318,13 @@ endif
 
 ifeq "$(OS)" "wasm"
   build_prefix += wasm/
-  CC = emcc
-  CXX = em++
+  ifeq ($(PYODIDE_ROOT),)
+    CC = emcc
+    CXX = em++
+  else
+    # Need to use $CC, not emcc.
+    CC := $(CC) --enable-bulk-memory
+  endif
   AR = emar
   HAVE_GLUT=no
   HAVE_X11=no
@@ -326,8 +334,13 @@ endif
 
 ifeq "$(OS)" "wasm-mt"
   build_prefix += wasm-mt/
-  CC = emcc
-  CXX = em++
+  ifeq ($(PYODIDE_ROOT),)
+    CC = emcc
+    CXX = em++
+  else
+    # Need to use $CC, not emcc.
+    CC := $(CC) --enable-bulk-memory
+  endif
   AR = emar
   HAVE_GLUT=no
   HAVE_X11=no
