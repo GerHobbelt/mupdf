@@ -990,6 +990,17 @@ g_extra_declarations = textwrap.dedent(f'''
         std::vector.
         */
         FZ_FUNCTION std::vector<fz_quad> fz_highlight_selection2(fz_context* ctx, fz_stext_page* page, fz_point a, fz_point b, int max_quads);
+
+        struct fz_search_page2_hit
+        {{
+            fz_quad quad;
+            int mark;
+        }};
+
+        /**
+        C++ alternative to fz_search_page() that returns information in a std::vector.
+        */
+        FZ_FUNCTION std::vector<fz_search_page2_hit> fz_search_page2(fz_context* ctx, fz_document *doc, int number, const char *needle, int hit_max);
         ''')
 
 g_extra_definitions = textwrap.dedent(f'''
@@ -1079,6 +1090,20 @@ g_extra_definitions = textwrap.dedent(f'''
             /* We are careful to only call `fz_throw()` after `ret`'s
             destructor has been called. */
             fz_throw(ctx, FZ_ERROR_GENERIC, "fz_highlight_selection() failed");
+        }}
+
+        FZ_FUNCTION std::vector<fz_search_page2_hit> fz_search_page2(fz_context *ctx, fz_document *doc, int number, const char *needle, int hit_max)
+        {{
+            std::vector<fz_quad>    quads(hit_max);
+            std::vector<int>        marks(hit_max);
+            int n = fz_search_page_number(ctx, doc, number, needle, &marks[0], &quads[0], hit_max);
+            std::vector<fz_search_page2_hit>    ret(n);
+            for (int i=0; i<n; ++i)
+            {{
+                ret[i].quad = quads[i];
+                ret[i].mark = marks[i];
+            }}
+            return ret;
         }}
         ''')
 
@@ -4719,6 +4744,8 @@ def cpp_source(
 
     out_hs.functions.write( textwrap.dedent(
             '''
+            #include "mupdf/extra.h"
+
             #include "mupdf/fitz.h"
             #include "mupdf/pdf.h"
 
