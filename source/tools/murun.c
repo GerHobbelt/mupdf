@@ -11278,6 +11278,14 @@ int murun_main(int argc, const char** argv)
 	{
 		const char* filename = argv[fz_optind++];
 		int extra_fcounter = 0;
+
+		if (js_try(J))
+		{
+			fz_error(ctx, "cannot initialize scriptArgs/scriptPath\n");
+			js_freestate(J);
+			fz_drop_context(ctx);
+			return EXIT_FAILURE;
+		}
 		js_pushstring(J, filename);
 		js_setglobal(J, "scriptPath");
 		js_newarray(J);
@@ -11289,6 +11297,8 @@ int murun_main(int argc, const char** argv)
 			extra_fcounter++;
 		}
 		js_setglobal(J, "scriptArgs");
+		js_endtry(J);
+
 		if (js_dofile(J, filename))
 		{
 			js_freestate(J);
