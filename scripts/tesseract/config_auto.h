@@ -3,10 +3,10 @@
 
 // undef: use double (64bit),
 // defined: use float (32bit) for matrix and dot product calculations
-#define FAST_FLOAT   1
+#define FAST_FLOAT                      1
 
 // defined: support image sizes > 32K*32K pixels.
-#undef LARGE_IMAGES 
+#undef LARGE_IMAGES                    
 
 
 // https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros?redirectedfrom=MSDN&view=msvc-160
