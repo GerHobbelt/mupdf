@@ -16,54 +16,126 @@
 #include <stdio.h>
 #include <string.h>
 
-#define getopt fz_getopt
-#define optarg fz_optarg
-#define optind fz_optind
+#include "mupdf/fitz/getopt.h"
+#include "mupdf/fitz/string-util.h"
 
-const char *optarg; /* Global argument pointer. */
-int optind = 0; /* Global argv index. */
+const char *fz_optarg = NULL;    /* Global argument pointer. */
+int fz_optind = 0;               /* Global argv index. */
+static int fz_optlen = 0;        /* Option length. */
 
-static const char *scan = NULL; /* Private scan pointer. */
-
-int
-getopt(int argc, const char * const *argv, const char *optstring)
+static const char *
+find_short_option(const char *str, char c)
 {
-	char c;
-	const char *place;
+	char d;
 
-	optarg = NULL;
-
-	if (!scan || *scan == '\0') {
-		if (optind == 0)
-			optind++;
-
-		if (optind >= argc || argv[optind][0] != '-' || argv[optind][1] == '\0')
-			return EOF;
-		if (argv[optind][1] == '-' && argv[optind][2] == '\0') {
-			optind++;
-			return EOF;
+	while ((d = *str++) != 0)
+	{
+		if (d == c)
+		{
+			fz_optlen = 1;
+			return str;
 		}
-
-		scan = argv[optind]+1;
-		optind++;
+		/* Are we on a long option? */
+		if (d == '-')
+		{
+			/* Skip to the next one. */
+			while ((d = *str++) != 0 && d != ',');
+		}
 	}
 
-	c = *scan++;
-	place = strchr(optstring, c);
+	return NULL;
+}
+
+static const char *
+find_long_option(const char **strp, const char *opt)
+{
+	char d;
+	const char *str = *strp;
+
+	while ((d = *str++) != 0)
+	{
+		/* Nothing more to do for a short option. For a long option, try to match. */
+		if (d == '-')
+		{
+			/* Long option */
+			const char *o = opt;
+			const char *s = str;
+			while (*o && *s == *o && *s != ',' && *s != ':')
+				s++, o++;
+			if ((*o == 0 || *o == '=') && (*s == 0 || *s == ',' || *s == ':'))
+			{
+				/* Matched */
+				fz_optlen = o - opt;
+				*strp = str;
+				return s;
+			}
+			/* Skip to the end of the long option that we failed to match */
+			while (*s != 0) {
+				d = *s++;
+				if (d == ',' || d == ':')
+					break;
+			}
+			str = s;
+		}
+	}
+
+	*strp = NULL;
+	return NULL;
+}
+
+static const char *scan = NULL; /* Private scan pointer. */
+static const char *longopt = NULL;
+
+int
+fz_getopt(int argc, const char * const *argv, const char *optstring)
+{
+	int c;
+	const char *place;
+	int long_option = 0;
+
+	fz_optarg = NULL;
+
+	if (!scan || *scan == '\0') {
+		if (fz_optind == 0)
+			fz_optind++;
+
+		if (fz_optind >= argc || argv[fz_optind][0] != '-' || argv[fz_optind][1] == '\0')
+			return EOF;
+		if (argv[fz_optind][1] == '-' && argv[fz_optind][2] == '\0') {
+			fz_optind++;
+			return EOF;
+		}
+		if (argv[fz_optind][1] == '-')
+			long_option = 1;
+
+		scan = argv[fz_optind]+1+long_option;
+		fz_optind++;
+	}
+
+	if (long_option) {
+		c = FZ_LONGOPT;
+		longopt = optstring;
+		place = find_long_option(&longopt, scan);
+		scan += fz_optlen;
+		if (*scan == '=')
+			scan++;
+	} else {
+		c = *scan++;
+		place = find_short_option(optstring, c);
+	}
 
 	if (!place || c == ':') {
 		fz_error(NULL, "%s: unknown option -%c", fz_basename(argv[0]), c);
 		return '?';
 	}
 
-	place++;
 	if (*place == ':') {
 		if (*scan != '\0') {
-			optarg = scan;
+			fz_optarg = scan;
 			scan = NULL;
-		} else if( optind < argc ) {
-			optarg = argv[optind];
-			optind++;
+		} else if( fz_optind < argc ) {
+			fz_optarg = argv[fz_optind];
+			fz_optind++;
 		} else {
 			fz_error(NULL, "%s: option requires argument -%c", fz_basename(argv[0]), c);
 			return ':';
@@ -75,8 +147,42 @@ getopt(int argc, const char * const *argv, const char *optstring)
 
 void fz_getopt_reset(void)
 {
-	optind = 0;
-	optarg = NULL;
+	fz_optind = 0;
+	fz_optarg = NULL;
+	fz_optlen = 0;
 
 	scan = NULL;
 }
+
+int fz_longopt_is(const char *opt)
+{
+	if (longopt && !strncmp(opt, longopt, fz_optlen))
+		return 1;
+	return 0;
+}
+
+int
+fz_opt_from_list(const char *opt, const char *optlist)
+{
+	int n = 0;
+
+	while (*optlist)
+	{
+		const char *optend = optlist;
+
+		while (*optend != 0 && *optend != '|')
+			optend++;
+
+		if (!fz_strncasecmp(optlist, opt, optend-optlist) && (opt[optend-optlist] == 0 || opt[optend-optlist] == ','))
+			return n;
+
+		n++;
+		if (*optend == '|')
+			optend++;
+		optlist = optend;
+	}
+
+	fz_error(NULL, "Unrecognised option: %s", opt);
+	return -1;
+}
+
