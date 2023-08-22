@@ -248,7 +248,7 @@ fz_new_buffer_from_image_as_jpeg(fz_context *ctx, const fz_image *image, fz_colo
 fz_buffer *
 fz_new_buffer_from_pixmap_as_jpeg(fz_context *ctx, const fz_pixmap *pix, fz_color_params color_params, int quality)
 {
-	return jpeg_from_pixmap(ctx, (fz_pixmap*)pix, color_params, quality, 0);
+	return jpeg_from_pixmap(ctx, (fz_pixmap *)pix, color_params, quality, 0);
 }
 
 #endif
