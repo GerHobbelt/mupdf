@@ -871,6 +871,7 @@ def build_swig(
                 %template(vectori) vector<int>;
                 %template(vectors) vector<std::string>;
                 %template(vectorq) vector<{rename.namespace_class("fz_quad")}>;
+                %template(vector_search_page2_hit) vector<fz_search_page2_hit>;
             }};
 
             // Make sure that operator++() gets converted to __next__().
