@@ -19,6 +19,7 @@
 extern "C" {
 
 #include "leptonica/allheaders.h"
+#include "../../thirdparty/leptonica/src/environ.h"  // <-- leptonica_free() + leptonica_malloc() prototypes
 
 #include "tessocr.h"
 
@@ -39,7 +40,7 @@ void *leptonica_malloc(size_t size)
 	return ret;
 }
 
-void leptonica_free(void *ptr)
+void leptonica_free(const void *ptr)
 {
 #if DEBUG_ALLOCS
 	fz_info(leptonica_mem, "dbg: %d LEPTONICA_FREE(%p) %p\n", event++, leptonica_mem, ptr);
@@ -182,6 +183,16 @@ ocr_clear_leptonica_mem(fz_context *ctx)
 
 #if FZ_ENABLE_OCR 
 
+static void *dflt_ocr_malloc(size_t size) { 
+	fz_context *ctx = fz_get_global_context();
+	return fz_malloc(ctx, size); 
+}
+
+static void dflt_ocr_free(const void *ptr) { 
+	fz_context *ctx = fz_get_global_context();
+    fz_free(ctx, ptr);
+}
+
 void *ocr_init(fz_context *ctx, const char *language, const char *datadir)
 {
 	tesseract::TessBaseAPI *api;
@@ -195,7 +206,7 @@ void *ocr_init(fz_context *ctx, const char *language, const char *datadir)
 	if (api == NULL)
 	{
 		ocr_clear_leptonica_mem(ctx);
-		setPixMemoryManager(malloc, free);
+		setPixMemoryManager(dflt_ocr_malloc, dflt_ocr_free);
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Tesseract initialisation failed");
 	}
 
@@ -213,7 +224,7 @@ void *ocr_init(fz_context *ctx, const char *language, const char *datadir)
 	{
 		delete api;
 		ocr_clear_leptonica_mem(ctx);
-		setPixMemoryManager(malloc, free);
+		setPixMemoryManager(dflt_ocr_malloc, dflt_ocr_free);
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Tesseract initialisation failed");
 	}
 
@@ -230,7 +241,7 @@ void ocr_fin(fz_context *ctx, void *api_)
 	api->End();
 	delete api;
 	ocr_clear_leptonica_mem(ctx);
-	setPixMemoryManager(malloc, free);
+	setPixMemoryManager(dflt_ocr_malloc, dflt_ocr_free);
 }
 
 static inline int isbigendian(void)
