@@ -3423,8 +3423,8 @@ static void
 ensure_initial_incremental_contents(fz_context *ctx, fz_stream *in, fz_output *out, int64_t len)
 {
 	fz_stream *verify;
-	unsigned char buf0[256];
-	unsigned char buf1[256];
+	unsigned char buf0[4096];
+	unsigned char buf1[4096];
 	size_t n0, n1;
 	int64_t off = 0;
 	int same;
@@ -3433,40 +3433,38 @@ ensure_initial_incremental_contents(fz_context *ctx, fz_stream *in, fz_output *o
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Can't copy contents for incremental write");
 
 	verify = fz_stream_from_output(ctx, out);
-	if (!verify)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Can't incrementally write pdf to this type of output");
-
-	fz_var(verify);
 
 	fz_try(ctx)
 	{
-		do
+		/* Compare current contents of output file (in case we append) */
+		if (verify)
 		{
-			int64_t read = sizeof(buf0);
-			if (off + read > len)
-				read = len - off;
-			fz_seek(ctx, in, off, SEEK_SET);
-			n0 = fz_read(ctx, in, buf0, read);
-			fz_seek(ctx, verify, off, SEEK_SET);
-			n1 = fz_read(ctx, verify, buf1, read);
-			same = (n0 == n1 && !memcmp(buf0, buf1, n0));
-			off += (int64_t)n0;
-		}
-		while (same && n0 > 0 && off < len);
+			do
+			{
+				int64_t read = sizeof(buf0);
+				if (off + read > len)
+					read = len - off;
+				fz_seek(ctx, in, off, SEEK_SET);
+				n0 = fz_read(ctx, in, buf0, read);
+				fz_seek(ctx, verify, off, SEEK_SET);
+				n1 = fz_read(ctx, verify, buf1, read);
+				same = (n0 == n1 && !memcmp(buf0, buf1, n0));
+				off += (int64_t)n0;
+			}
+			while (same && n0 > 0 && off < len);
 
-		fz_drop_stream(ctx, verify);
-		verify = NULL;
+			if (same)
+			{
+				fz_seek_output(ctx, out, len, SEEK_SET);
+				fz_truncate_output(ctx, out);
+				break; /* return from try */
+			}
 
-		if (same)
-		{
-			fz_seek_output(ctx, out, len, SEEK_SET);
-			fz_truncate_output(ctx, out);
-			break;
+			fz_seek_output(ctx, out, 0, SEEK_SET);
 		}
 
 		/* Copy old contents into new file */
 		fz_seek(ctx, in, 0, SEEK_SET);
-		fz_seek_output(ctx, out, 0, SEEK_SET);
 		off = 0;
 		do
 		{
@@ -3479,7 +3477,12 @@ ensure_initial_incremental_contents(fz_context *ctx, fz_stream *in, fz_output *o
 			off += n0;
 		}
 		while (n0 > 0 && off < len);
-		fz_truncate_output(ctx, out);
+
+		if (verify)
+		{
+			fz_truncate_output(ctx, out);
+			fz_seek_output(ctx, out, 0, SEEK_END);
+		}
 	}
 	fz_always(ctx)
 		fz_drop_stream(ctx, verify);
@@ -3506,7 +3509,6 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 			return;
 		}
 
-		fz_seek_output(ctx, opts->out, 0, SEEK_END);
 		fz_write_string(ctx, opts->out, "\n");
 	}
 
