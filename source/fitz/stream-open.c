@@ -201,18 +201,9 @@ static void dont_drop_file(fz_context* ctx, fz_stream* stm)
 
 fz_stream *fz_open_file_ptr_no_close(fz_context *ctx, FILE *file)
 {
-#if 0    // vanilla code:
-	fz_file_stream *state = fz_malloc_struct(ctx, fz_file_stream);
-	state->file = file;
-
-	/* We don't own the file ptr. Ensure we don't close it */
-	fz_stream *stm = fz_new_stream(ctx, state, next_file, fz_free);
-	stm->seek = seek_file;
-#else     // our approach instead:
 	fz_stream *stm = fz_open_file_ptr(ctx, file);
 	/* We don't own the file ptr. Ensure we don't close it */
 	stm->drop = dont_drop_file;
-#endif
 	return stm;
 }
 
