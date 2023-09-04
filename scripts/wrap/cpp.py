@@ -3664,6 +3664,14 @@ def class_wrapper_virtual_fnptrs(
         out_h.write(f'    FZ_FUNCTION void use_virtual_{cursor.spelling}( bool use=true);\n')
         out_cpp.write(f'FZ_FUNCTION void {classname}2::use_virtual_{cursor.spelling}( bool use)\n')
         out_cpp.write( '{\n')
+
+        out_cpp.write(f'    {refcheck_if}\n')
+        out_cpp.write(f'    if (s_trace_director)\n')
+        out_cpp.write( '    {\n')
+        out_cpp.write(f'        std::cerr << __FILE__ << ":" << __LINE__ << ":" << __FUNCTION__ << ": {classname}2::use_virtual_{cursor.spelling}(): this=" << this << " use=" << use << "\\n";\n')
+        out_cpp.write( '    }\n')
+        out_cpp.write( '    #endif\n')
+
         if extras.pod == 'inline':
             # Fnptr (in {classname}2) and virtual function (in {classname})
             # have same name, so we need qualify the fnptr with {classname} to
@@ -3703,8 +3711,8 @@ def class_wrapper_virtual_fnptrs(
         out_h.write( ');\n')
         out_cpp.write( ')\n')
         out_cpp.write( '{\n')
-        out_cpp.write(f'    std::cerr << "Unexpected call of unimplemented virtual_fnptrs fn {classname}2::{cursor.spelling}().\\n";\n')
-        out_cpp.write(f'    throw std::runtime_error( "Unexpected call of unimplemented virtual_fnptrs fn {classname}2::{cursor.spelling}().");\n')
+        out_cpp.write(f'    std::cerr << "Unexpected call of unimplemented virtual_fnptrs fn {classname}2::{cursor.spelling}(): this=" << this << ".\\n";\n')
+        out_cpp.write(f'    throw std::runtime_error( "Unexpected call of unimplemented virtual_fnptrs fn {classname}2::{cursor.spelling}()");\n')
         out_cpp.write( '}\n')
 
     out_h.write(  '};\n')
