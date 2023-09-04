@@ -907,7 +907,7 @@ def build_swig(
                                 #ifndef _WIN32
                                 << __PRETTY_FUNCTION__ << ": "
                                 #endif
-                                << "Converting C++ std::exception into Python exception: " << e.what()
+                                << "Converting C++ std::exception into {language} exception: " << e.what()
                                 << "\\n";
                     }}
                     SWIG_exception( SWIG_RuntimeError, e.what());
@@ -920,7 +920,7 @@ def build_swig(
                                 #ifndef _WIN32
                                 << __PRETTY_FUNCTION__ << ": "
                                 #endif
-                                << "Converting unknown C++ exception into Python exception."
+                                << "Converting unknown C++ exception into {language} exception."
                                 << "\\n";
                     }}
                     SWIG_exception( SWIG_RuntimeError, "Unknown exception");
