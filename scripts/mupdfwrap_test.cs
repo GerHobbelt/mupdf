@@ -15,15 +15,19 @@ public class HelloWorld
 
         public FzStream3()
         {
+            System.Console.WriteLine("## FzStream3().");
             //m_buffer0 = new Buffer();
             //m_buffer_length = 32;
             //m_buffer = new byte[ m_buffer_length];
+
             m_i = 0;
             use_virtual_next();
+            System.Console.WriteLine("## FzStream3() have called use_virtual_next().");
         }
 
-        public int next(mupdf.fz_context ctx, int max)
+        public override int next(mupdf.fz_context ctx, uint max)
         {
+            System.Console.WriteLine("## next(): max={0}", max);
             unsafe
             {
                 m_buffer.buffer[0] = (byte) (65 + m_i);
