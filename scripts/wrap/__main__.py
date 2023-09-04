@@ -2735,7 +2735,7 @@ def main2():
                     jlib.build(
                             (f'{build_dirs.dir_mupdf}/scripts/mupdfwrap_test.cs', mupdf_cs),
                             out,
-                            f'"{csc}" -out:{{OUT}} {{IN}}',
+                            f'"{csc}" -unsafe -out:{{OUT}} {{IN}}',
                             )
                     if state.state_.windows:
                         out_rel = os.path.relpath( out, build_dirs.dir_so)
