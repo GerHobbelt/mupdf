@@ -224,7 +224,7 @@ flush_strip(fz_context *ctx, pclm_band_writer *writer, int fill)
 	if (writer->options.compress)
 	{
 		size_t destLen = writer->complen;
-		result = zng_compress(writer->compbuf, &destLen, data, len);
+		result = zng_compress2(writer->compbuf, &destLen, data, len, Z_BEST_COMPRESSION);
 		if (result != Z_OK)
 			fz_throw(ctx, FZ_ERROR_GENERIC, "zlib error when compressing strip");
 		len = destLen;

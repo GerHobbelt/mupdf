@@ -359,7 +359,7 @@ flush_strip(fz_context *ctx, pdfocr_band_writer *writer, int fill)
 	if (writer->options.compress)
 	{
 		size_t destLen = writer->complen;
-		zng_compress(writer->compbuf, &destLen, data, len);
+		zng_compress2(writer->compbuf, &destLen, data, len, Z_BEST_COMPRESSION);
 		len = destLen;
 		data = writer->compbuf;
 	}

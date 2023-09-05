@@ -38,7 +38,7 @@ fz_buffer *fz_deflate(fz_context *ctx, fz_buffer *input)
 
 	output_n = zng_compressBound(input_n);
 	output_p = (unsigned char *)Memento_label(fz_malloc(ctx, output_n), "fz_deflate");
-	result = zng_compress(output_p, &output_n, input_p, input_n);
+	result = zng_compress2(output_p, &output_n, input_p, input_n, Z_BEST_COMPRESSION);
 	if (result != Z_OK)
 	{
 		fz_free(ctx, output_p);
