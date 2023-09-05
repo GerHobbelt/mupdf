@@ -432,6 +432,7 @@ libdir ?= $(prefix)/lib
 incdir ?= $(prefix)/include
 mandir ?= $(prefix)/share/man
 docdir ?= $(prefix)/share/doc/mupdf
+pydir ?= $(shell python3 -c "import sysconfig; print(sysconfig.get_path('platlib'))")
 
 third: $(THIRD_LIB)
 extra-libs: $(THIRD_GLUT_LIB)
@@ -542,6 +543,30 @@ debug:
 sanitize:
 	$(MAKE) build=sanitize
 
+install-shared-c: shared
+	install -d $(DESTDIR)$(incdir)/mupdf
+	install -d $(DESTDIR)$(incdir)/mupdf/fitz
+	install -d $(DESTDIR)$(incdir)/mupdf/pdf
+	install -d $(DESTDIR)$(incdir)/mupdf/thirdparty/freetype/freetype/config
+	install -d $(DESTDIR)$(libdir)
+	install -m 644 build/shared-$(build)/libmupdf.so $(DESTDIR)$(libdir)
+	install -m 644 include/mupdf/*.h $(DESTDIR)$(incdir)/mupdf
+	install -m 644 include/mupdf/fitz/*.h $(DESTDIR)$(incdir)/mupdf/fitz
+	install -m 644 include/mupdf/pdf/*.h $(DESTDIR)$(incdir)/mupdf/pdf
+	install -m 644 thirdparty/freetype/include/*.h $(DESTDIR)$(incdir)/mupdf/thirdparty/freetype
+	install -m 644 thirdparty/freetype/include/freetype/*.h $(DESTDIR)$(incdir)/mupdf/thirdparty/freetype/freetype
+	install -m 644 thirdparty/freetype/include/freetype/config/*.h $(DESTDIR)$(incdir)/mupdf/thirdparty/freetype/freetype/config
+
+install-shared-c++: install-shared-c c++
+	install -m 644 build/shared-$(build)/libmupdfcpp.so $(DESTDIR)$(libdir)
+	install -m 644 platform/c++/include/mupdf/*.h $(DESTDIR)$(incdir)/mupdf
+
+install-shared-python: install-shared-c++ python
+	install -d $(DESTDIR)$(pydir)/mupdf
+	install -m 644 build/shared-$(build)/_mupdf.so $(DESTDIR)$(pydir)/mupdf
+	install -m 644 build/shared-$(build)/mupdf.py $(DESTDIR)$(pydir)/mupdf/__init__.py
+
+
 shared: shared-$(build)
 
 shared-release:
@@ -560,6 +585,9 @@ android: generate
 
 c++: c++-$(build)
 
+# Note that `scripts/mupdfwrap.py --venv` will create a Python venv and install
+# libclang and swig.
+#
 c++-release: shared-release
 	./scripts/mupdfwrap.py --venv -d build/shared-release$(build_suffix) -b 01
 
@@ -572,10 +600,10 @@ c++-clean:
 python: python-$(build)
 
 python-release: c++-release
-	./scripts/mupdfwrap.py -d build/shared-release$(build_suffix) -b 23
+	./scripts/mupdfwrap.py --venv -d build/shared-release$(build_suffix) -b 23
 
 python-debug: c++-debug
-	./scripts/mupdfwrap.py -d build/shared-debug$(build_suffix) -b 23
+	./scripts/mupdfwrap.py --venv -d build/shared-debug$(build_suffix) -b 23
 
 python-clean:
 	rm -rf platform/python
