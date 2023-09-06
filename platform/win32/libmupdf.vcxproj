@@ -517,6 +517,7 @@
     <ClCompile Include="..\..\source\fitz\draw-unpack.c" />
     <ClCompile Include="..\..\source\fitz\encode-basic.c" />
     <ClCompile Include="..\..\source\fitz\encode-fax.c" />
+    <ClCompile Include="..\..\source\fitz\encode-jbig2.c" />
     <ClCompile Include="..\..\source\fitz\encode-jpx.c" />
     <ClCompile Include="..\..\source\fitz\encodings.c" />
     <ClCompile Include="..\..\source\fitz\error.c" />
@@ -708,6 +709,7 @@
     <ClInclude Include="..\..\include\mupdf\fitz\device.h" />
     <ClInclude Include="..\..\include\mupdf\fitz\display-list.h" />
     <ClInclude Include="..\..\include\mupdf\fitz\document.h" />
+    <ClInclude Include="..\..\include\mupdf\fitz\encode-jbig2.h" />
     <ClInclude Include="..\..\include\mupdf\fitz\filter.h" />
     <ClInclude Include="..\..\include\mupdf\fitz\font.h" />
     <ClInclude Include="..\..\include\mupdf\fitz\geometry.h" />
@@ -718,6 +720,7 @@
     <ClInclude Include="..\..\include\mupdf\fitz\heap-imp.h" />
     <ClInclude Include="..\..\include\mupdf\fitz\heap.h" />
     <ClInclude Include="..\..\include\mupdf\fitz\image.h" />
+    <ClInclude Include="..\..\include\mupdf\fitz\jbig2-encoder.h" />
     <ClInclude Include="..\..\include\mupdf\fitz\link.h" />
     <ClInclude Include="..\..\include\mupdf\fitz\log.h" />
     <ClInclude Include="..\..\include\mupdf\fitz\outline.h" />
@@ -806,6 +809,10 @@
     </ProjectReference>
     <ProjectReference Include="libharfbuzz.vcxproj">
       <Project>{66778899-0291-4FB9-8D96-D58957CA5E3C}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="libjbig2enc.vcxproj">
+      <Project>{83AC0BDA-89B9-4703-A77D-8049AC3A0D04}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
   </ItemGroup>

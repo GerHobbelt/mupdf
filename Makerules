@@ -20,6 +20,11 @@ ifeq ($(tesseract),yes)
   USE_TESSERACT := yes
 endif
 
+ifeq ($(jbig2enc),yes)
+  build_suffix := $(build_suffix)-jbig2enc
+  USE_JBIG2ENC := yes
+endif
+
 ifeq ($(tofu),yes)
   build_suffix := $(build_suffix)-tofu
   XCFLAGS += -DTOFU

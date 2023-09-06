@@ -259,6 +259,10 @@ int pdfclean_main(int argc, char **argv)
 		exit(1);
 	}
 
+#ifdef HAVE_JBIG2ENC
+	fz_register_jbig2_encoder(ctx, fz_jbig2enc_encoder(ctx));
+#endif
+
 	fz_try(ctx)
 	{
 		pdf_clean_file(ctx, infile, outfile, password, &opts, argc - fz_optind, &argv[fz_optind]);
