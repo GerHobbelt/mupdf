@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{3644E12D-D934-41FD-BF7E-83745AC7DDF6}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+  <ItemGroup>
+    <Text Include="../../thirdparty/langdata_LSTM/afr/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/amh/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/ara/ara.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/ara/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/asm/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/aze/aze.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/aze/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/aze_cyrl/aze_cyrl.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/aze_cyrl/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/bel/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/ben/ben.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/ben/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/bod/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/bos/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/bre/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/bul/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/cat/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/ceb/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/ces/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/chi_sim/chi_sim.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/chi_sim/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/chi_sim_vert/chi_sim_vert.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/chi_sim_vert/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/chi_tra/chi_tra.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/chi_tra/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/chi_tra_vert/chi_tra_vert.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/chi_tra_vert/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/chr/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/cos/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/cym/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/dan/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/desired_bigrams.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/deu/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/dzo/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/ell/ell.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/ell/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/eng/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/enm/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/epo/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/est/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/eus/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/fao/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/fas/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/fil/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/fin/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/fra/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/frk/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/frm/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/fry/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/gla/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/gle/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/glg/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/grc/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/guj/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/hat/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/heb/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/hin/hin.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/hin/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/hrv/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/hun/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/hye/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/iku/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/ind/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/isl/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/ita/ita.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/ita/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/ita_old/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/jav/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/jpn/jpn.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/jpn/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/jpn_vert/jpn_vert.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/jpn_vert/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/kan/kan.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/kan/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/kat/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/kat_old/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/kaz/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/khm/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/kir/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/kmr/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/kor/kor.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/kor/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/kor_vert/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/kur/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/lao/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/lat/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/lav/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/lit/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/ltz/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/mal/mal.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/mal/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/mar/mar.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/mar/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/mkd/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/mlt/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/mon/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/mri/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/msa/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/mya/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/nep/nep.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/nep/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/nld/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/nor/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/oci/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/ori/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/pan/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/pol/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/por/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/pus/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/que/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/radical-stroke.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/ron/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/rus/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/san/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/san/san.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Arabic.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Armenian.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Bengali.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Canadian_Aboriginal.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Cherokee.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Cyrillic.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Devanagari.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Ethiopic.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Fraktur.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Georgian.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Greek.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Gujarati.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Gurmukhi.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/HanS.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/HanS_vert.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/HanT.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/HanT_vert.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Hangul.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Hangul_vert.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Hebrew.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Japanese.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Japanese_vert.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Kannada.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Khmer.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Lao.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Latin.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Malayalam.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Myanmar.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Oriya.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Sinhala.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Syriac.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Tamil.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Telugu.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Thaana.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Thai.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Tibetan.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/script/Vietnamese.langs.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/sin/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/slk/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/slv/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/snd/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/spa/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/spa_old/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/sqi/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/srp/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/srp/srp.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/srp_latn/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/srp_latn/srp_latn.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/sun/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/swa/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/swe/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/syr/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/tam/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/tam/tam.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/tat/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/tel/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/tel/tel.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/tgk/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/tha/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/tha/tha.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/tir/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/ton/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/tur/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/uig/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/ukr/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/urd/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/uzb/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/uzb/uzb.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/uzb_cyrl/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/uzb_cyrl/uzb_cyrl.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/vie/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/vie/vie.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/vocr/vocr.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/vocr_url/vocr_url.config" />
+    <Text Include="../../thirdparty/langdata_LSTM/yid/okfonts.txt" />
+    <Text Include="../../thirdparty/langdata_LSTM/yor/okfonts.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -81,14 +81,38 @@
     <Filter Include="Resource Files\docs">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0023}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0024}</UniqueIdentifier>
+    <Filter Include="Resource Files\src">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0027}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src\graph">
+    <Filter Include="Resource Files\src\wasm">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\src\wasm\sample">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0025}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\src\wasm\sample\c">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0024}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0028}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\graph">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0029}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\wasm">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0031}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\wasm\graphite">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0030}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\wasm\sample">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0033}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\wasm\sample\c">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0032}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\util">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0026}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0034}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -320,8 +344,23 @@
     <ClCompile Include="../../thirdparty/harfbuzz/src/hb-uniscribe.cc">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/harfbuzz/src/hb-wasm-api.cc">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/harfbuzz/src/hb-wasm-shape.cc">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/harfbuzz/src/main.cc">
       <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/harfbuzz/src/wasm/graphite/shape.cc">
+      <Filter>Source Files\src\wasm\graphite</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/harfbuzz/src/wasm/sample/c/shape-fallback.cc">
+      <Filter>Source Files\src\wasm\sample\c</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/harfbuzz/src/wasm/sample/c/shape-ot.cc">
+      <Filter>Source Files\src\wasm\sample\c</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/harfbuzz/util/hb-fc-list.c">
       <Filter>Source Files\util</Filter>
@@ -1118,13 +1157,13 @@
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-subset-cff-common.hh">
       <Filter>Header Files\src</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/harfbuzz/src/hb-subset-cff1.hh">
-      <Filter>Header Files\src</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/harfbuzz/src/hb-subset-cff2.hh">
-      <Filter>Header Files\src</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-subset-input.hh">
+      <Filter>Header Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/harfbuzz/src/hb-subset-instancer-solver.hh">
+      <Filter>Header Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/harfbuzz/src/hb-subset-plan-member-list.hh">
       <Filter>Header Files\src</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-subset-plan.hh">
@@ -1161,6 +1200,33 @@
       <Filter>Header Files\src</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb-version.h">
+      <Filter>Header Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/harfbuzz/src/hb-wasm-api-blob.hh">
+      <Filter>Header Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/harfbuzz/src/hb-wasm-api-buffer.hh">
+      <Filter>Header Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/harfbuzz/src/hb-wasm-api-common.hh">
+      <Filter>Header Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/harfbuzz/src/hb-wasm-api-face.hh">
+      <Filter>Header Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/harfbuzz/src/hb-wasm-api-font.hh">
+      <Filter>Header Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/harfbuzz/src/hb-wasm-api-list.hh">
+      <Filter>Header Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/harfbuzz/src/hb-wasm-api-shape.hh">
+      <Filter>Header Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/harfbuzz/src/hb-wasm-api.h">
+      <Filter>Header Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/harfbuzz/src/hb-wasm-api.hh">
       <Filter>Header Files\src</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/harfbuzz/src/hb.h">
@@ -1223,6 +1289,9 @@
     <ClInclude Include="../../thirdparty/harfbuzz/util/view-options.hh">
       <Filter>Header Files\util</Filter>
     </ClInclude>
+    <Font Include="../../thirdparty/harfbuzz/src/wasm/sample/c/test.ttf">
+      <Filter>Resource Files\src\wasm\sample\c</Filter>
+    </Font>
     <Image Include="../../thirdparty/harfbuzz/docs/HarfBuzz.png">
       <Filter>Resource Files\docs</Filter>
     </Image>
@@ -1251,6 +1320,9 @@
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/harfbuzz/RELEASING.md">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/harfbuzz/SECURITY.md">
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/harfbuzz/TESTING.md">
@@ -1283,6 +1355,9 @@
     <Text Include="../../thirdparty/harfbuzz/docs/version.xml.in">
       <Filter>Misc Files\docs</Filter>
     </Text>
+    <Text Include="../../thirdparty/harfbuzz/docs/wasm-shaper.md">
+      <Filter>Misc Files\docs</Filter>
+    </Text>
     <Text Include="../../thirdparty/harfbuzz/meson_options.txt">
       <Filter>Misc Files</Filter>
     </Text>
@@ -1299,6 +1374,9 @@
       <Filter>Misc Files\src</Filter>
     </Text>
     <Text Include="../../thirdparty/harfbuzz/src/Makefile.am">
+      <Filter>Misc Files\src</Filter>
+    </Text>
+    <Text Include="../../thirdparty/harfbuzz/src/addTable.py">
       <Filter>Misc Files\src</Filter>
     </Text>
     <Text Include="../../thirdparty/harfbuzz/src/check-c-linkage-decls.py">

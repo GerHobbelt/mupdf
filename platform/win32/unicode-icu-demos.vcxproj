@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{3644E12D-D934-41FD-BF7E-83745A2DE134}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/XMLConverter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/apputil/demoutil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/apputil/tmplutil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/convexp/convexp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/convexp/params.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/convexp/printcp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/datacustom/gendatadep/gendatadep.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/datacustom/gendatadep/listmod.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/dumpdat/dumpdat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/escapeabundle/escapeABundle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/genjp/genjp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/icudemos/icudemos.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/icusegments/icusegments.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/icusegments/json.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/icusegments/ulibrk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/idnbrowser/idnbrwsr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/idnbrowser/parseqs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/hellomsg/hellomsg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/s09_test/s09_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/s09a_test/s09a_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/s13_hello/s13_hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/s13a_hello/s13a_hello.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/s14_hola/s14_hola.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/s23_brki/s23_brki.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/s24_brkw/s24_brkw.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/s27_brkl/s27_brkl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/s33_res/s33_res.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/s33_res_c/s33_res_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/s34_coll/s34_coll.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/s40_pen/s40_pen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/s41_msg/s41_msg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/s42_msg/s42_msg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/s43_named/s43_named.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/s45_plural/s45_plural.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/s88_units/s88_units.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/s99_compact/s99_compact.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/calexp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/cgimain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/fcgimain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/locexp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/lxbrk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/lxcgi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/lxconv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/lxdate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/lxicir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/lxlocale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/lxnum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/lxprint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/lxregion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/lxrun.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/lxshow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/lxshowloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/lxsort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/escapeABundle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/unescapeABundle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/srchexp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/test/treetest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/test/urltest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/tools/escapeForBundle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/tools/findSame.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/cgiutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/collectcb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/decompcb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/devanagari.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/fontedcb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/inscript.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/kangxi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/kannada.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/lx_cpputils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/lx_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/repubcal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/syriac.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/syrinput.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/translitcb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/unumsys.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/ures_additions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/utimzone.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/wfobject.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp2/ItmlParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp2/cgiutils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp2/itml2cpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp2/itmplhandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp2/lxmain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp2/lxuser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp2/lxutils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp2/ufcgi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp2/webhandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/nbrowser/nbrowser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/obsolete/bidi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/obsolete/convert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/obsolete/uchar_ob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/obsolete/ucol_ob.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/obsolete/unicode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/obsolete/unistrob.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/rbbiperf/rbbiperf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/redemo/redemo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/regressionTest/CollRegressionTest/c/collationRegressionTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/regressionTest/StrsrchRegressionTest/c/strsrchRegressionTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/roundmode/roundmode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/rtfcvrt/rtficu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/scompare/scompare.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/test/obstest/biditst.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/test/obstest/cppcnvt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/test/obstest/intltest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/test/obstest/itconv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/test/obstest/itmajor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/test/obstest/itutil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/test/obstest/ucdtest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/translitdemo/TemplateCGI.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/translitdemo/TextCache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/translitdemo/TransliteratorCGI.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/translitdemo/getcgi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/translitdemo/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/translitdemo/textcachetool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/translitdemo/util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/ubrowse/icons.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/ubrowse/ubrowse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/ucd/ucd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/ufortune/StdAfx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/ufortune/ufortune.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/ufortune/ufortuneDlg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/ufortunecgi/parseqs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/ufortunecgi/ufortune.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/unescapeabundle/unescapeABundle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/usort/client/usort_main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/usort/lib/usort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/webdemo/collation/available.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/webdemo/collation/sortcgi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/xlitomatic/dsource.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/xlitomatic/filesource.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/xlitomatic/urlsource.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/xlitomatic/xlitomatic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/xlitomatic/xlitsource.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/XMLConverter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/apputil/demo_settings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/apputil/demoutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/apputil/tmplutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/convexp/params.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/convexp/printcp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/datacustom/gendatadep/listmod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/genjp/genjp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/icu-kube/icuheaders/cmemory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/icu-kube/icuheaders/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/icu-kube/icuheaders/uassert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/icu-kube/icuheaders/uelement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/icu-kube/icuheaders/uhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/icu-kube/icuheaders/uvectr64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/icusegments/json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/icusegments/json.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/icusegments/llrb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/icusegments/ulibrk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/idnbrowser/idnbrwsr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/idnbrowser/parseqs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/iucsamples.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/locexp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/lx_hook.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/root.txt.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/unicode/cgiutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/unicode/collectcb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/unicode/decompcb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/unicode/devtables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/unicode/fonted_imp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/unicode/fontedcb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/unicode/kangxi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/unicode/kantables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/unicode/lx_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/unicode/repubcal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/unicode/syrinput.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/unicode/syrtables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/unicode/translitcb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/unicode/unumsys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/unicode/ures_additions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/unicode/utimzone.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp2/ItmlParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp2/cgiutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp2/itmplhandler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp2/lxmain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp2/lxuser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp2/lxutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp2/ufcgi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp2/webhandler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/obsolete/unicode/bidi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/obsolete/unicode/convert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/obsolete/unicode/obsolete.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/obsolete/unicode/uchar_ob.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/obsolete/unicode/ucol_ob.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/obsolete/unicode/unicode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/obsolete/unicode/unistrob.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/obsolete/unicode/unorm_ob.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/test/obstest/biditst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/test/obstest/cppcnvt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/test/obstest/intltest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/test/obstest/itconv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/test/obstest/itmajor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/test/obstest/itutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/test/obstest/ucdtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/translitdemo/TemplateCGI.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/translitdemo/TextCache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/translitdemo/TransliteratorCGI.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/translitdemo/cmemory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/translitdemo/cstring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/translitdemo/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/ubrowse/icons.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/ucd/ucd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/ufortune/Resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/ufortune/StdAfx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/ufortune/ufortune.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/ufortune/ufortuneDlg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/ufortunecgi/parseqs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/ufortunecgi/ufortune.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/usort/lib/unicode/usort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/xlitomatic/dsource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/xlitomatic/filesource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/xlitomatic/urlsource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu-demos/xlitomatic/xlitsource.h" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/CSharp/conversion/App.ico" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/apputil/data/1x1.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/apputil/data/lines-gradient.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/apputil/data/lines.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/icu4jweb/images/GCloudIcu4jDeployedImage.png" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/icu4jweb/images/GCloudIcu4jWebDeploy.png" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/icu4jweb/images/GCloudIcu4jWebUI.png" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/icu4jweb/images/GcloudIcu4jWebSelectImage.png" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/icu4jweb/src/main/webapp/c.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/icu4jweb/src/main/webapp/favicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/icu4jweb/src/main/webapp/gr100.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/icu4jweb/src/main/webapp/hlines.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/icu4jweb/src/main/webapp/patina.jpg" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/fr/displayproblems.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/fr/explore.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/fr/lx.jpg" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/lx.jpg" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/root/c.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/root/closed.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/root/displayproblems.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/root/explore.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/root/help.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/root/incorrect.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/root/lx.jpg" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/root/lxbar_dev.jpg" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/root/lxbar_g.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/root/lxbar_ibm.jpg" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/root/lxbar_icu.jpg" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/root/opened.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/root/tab_aleft.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/root/tab_aright.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/root/tab_bot.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/sr/lx.jpg" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/zh_SG/displayproblems.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/zh_SG/dp.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/zh_SG/explore.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/ubrowse/icons/all-x.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/ubrowse/icons/all.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/ubrowse/icons/block-x.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/ubrowse/icons/block.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/ubrowse/icons/ch-x.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/ubrowse/icons/ch.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/ubrowse/icons/column-x.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/ubrowse/icons/column.gif" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu-demos/ufortune/res/ComboList.ico" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/unicode-icu-demos/ufortune/ufortune.rc" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/CSharp/PerformanceTest/Readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/CSharp/genicuwrapper/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/README.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/README" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/apputil/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/apputil/demo_config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/convexp/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/datacustom/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/datacustom/README" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/datacustom/gendatadep/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/datacustom/gendatadep/resources/pkgdatain.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/datacustom/gendatadep/resources/root.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/dumpdat/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/dumpdat/README" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/escapeabundle/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/genjp/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/icu-kube/README.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/icu-kube/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/icu-kube/icuheaders/README.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/icu-kube/lighttpd.conf" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/icu4j-applets/README.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/icu4jweb/README.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/icu4jweb/build-deploy.sh" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/icu4jweb/build-docker.sh" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/icu4jweb/push-deploy.sh" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/icu4jweb/push.sh" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/icu4jweb/src/main/webapp/dojo.js" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/icuapps.mk.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/icudemos/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/icudemos/root.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/icusegments/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/icusegments/data/icusegments-dojo.js" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/icusegments/data/icusegments.js" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/icusegments/readme_libjson.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/idnbrowser/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/all.sh" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/check.sh" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/clean.sh" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/data/es.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/data/pkgdatain.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/data/root.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/env.sh" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/c/s23_brki/test.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/jle/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/jle/src/com/ibm/icu/dev/tools/languagetag/2007_UNLOCODE_CodeList.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/jle/src/com/ibm/icu/dev/tools/languagetag/ISO-639-2_utf-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/jle/src/com/ibm/icu/dev/tools/languagetag/language-subtag-registry-rfc4645bis09.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/jle/src/com/ibm/icu/dev/tools/languagetag/language-subtag-registry.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/README" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/READMEWin32" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/README" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/da.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/de.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/detectEncodings.sh" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/en.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/es.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/fr.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/hi.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/it.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/ja.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/mt.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/res.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/root/locexp.js" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/root_SAMPLE.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/ru.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/sr.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/ta.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/th.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/zh.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/zh_SG.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/resource/zh_TW.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/tools/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/tools/README" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/tools/emitResourceFromFile.sh" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/tools/extractStrings.sh" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/tools/genIndex.sh" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/tools/testVars.sh" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/tools/testvars.bat" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp/util/README" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp2/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/locexp2/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/nbrowser/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/obsolete/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/rbbiperf/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/rbbiperf/readme" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/redemo/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/redemo/readme" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/regressionTest/CollRegressionTest/README" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/regressionTest/CollRegressionTest/c/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/regressionTest/CollRegressionTest/collRegData.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/regressionTest/StrsrchRegressionTest/README" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/regressionTest/StrsrchRegressionTest/c/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/richedit/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/roundmode/dcfmtest_round.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/rtfcvrt/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/rtfcvrt/README" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/rtfcvrt/test.rtf" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/scompare/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/test/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/test/obstest/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/test/testdata/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/test/testdata/README.TXT" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/translitdemo/README" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/translitdemo/data/README" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/translitdemo/data/js/samples.js" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/translitdemo/data/js/util.js" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/ubrowse/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/ubrowse/README" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/ubrowse/READMEWin32" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/ubrowse/extractStringsUltra.sh" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/ucd/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/ucd/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/ufortune/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/ufortune/Resources/res-list.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/ufortunecgi/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/ufortunecgi/Resources/res-list.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/unescapeabundle/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/usort/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/usort/README" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/usort/client/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/usort/lib/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/webdemo/collation/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/webdemo/collation/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/xlitomatic/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/xlitomatic/README" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/xlitomatic/testVars.sh" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/xtradata/README" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/xtradata/translit/cyrLatinSR/README" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/xtradata/translit/cyrLatinSR/t_Cyrl_Latn_SR.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/xtradata/translit/htmlent.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/xtradata/translit/kanjieng.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/xtradata/translit/kanjion.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/xtradata/translit/lmaltese.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/xtradata/translit/pinyin.txt" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu-demos/xtradata/translit/tamilkb.txt" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/a-ebc-ascii.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/a-eucjp-ascii.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/a-utf8.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/animal.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/as-utf8.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/created/animal.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/created/smalljis.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/created/utf8.animal.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-1004.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-1038.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-1089.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-1112.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-1123.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-1250.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-1251.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-1252.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-1253.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-1254.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-1255.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-1256.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-1257.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-1275.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-1276.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-1277.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-1280.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-1281.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-1282.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-1283.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-37.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-437.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-813.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-819.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-834.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-852.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-855.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-856.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-857.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-860.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-861.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-863.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-864.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-865.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-866.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-868.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-869.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-874.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-878.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-912.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-913.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-914.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-915.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-916.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-920.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-921.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-922.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-942.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-943.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-949.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/ibm-950.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/manifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/p.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/p81.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/pa.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/pa1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/personal.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/personalj.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/pj.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/pj1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/pr-eucjp.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/pr-latin.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/pr-xml-euc-jp.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/pr-xml-iso-2022-jp.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/pr-xml-little-endian.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/pr-xml-shift_jis.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/pr-xml-utf-16.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/pr-xml-utf-8.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/sh_jis-as.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/sh_jis.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/sm_jis-utf8.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/smalljis.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/test.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/testit.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/utf8-sm_jis.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/XMLConverter/samples/x.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/datacustom/build.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/datacustom/data/datacustom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/icu4jweb/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/icu4jweb/src/main/webapp/WEB-INF/web.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/iucsamples/j/icu2work/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/unicode-icu-demos/richedit/build.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

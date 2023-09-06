@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libreckless</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFAC1572}</ProjectGuid>
+    <RootNamespace>libreckless</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRECKLESS;RECKLESS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRECKLESS;RECKLESS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRECKLESS;RECKLESS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRECKLESS;RECKLESS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRECKLESS;RECKLESS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRECKLESS;RECKLESS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRECKLESS;RECKLESS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRECKLESS;RECKLESS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRECKLESS;RECKLESS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRECKLESS;RECKLESS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRECKLESS;RECKLESS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRECKLESS;RECKLESS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/benchmarks/benchmark_mandelbrot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/benchmarks/call_burst.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/benchmarks/find_mandelbrot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/benchmarks/mandelbrot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/benchmarks/nanolog_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/benchmarks/periodic_calls.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/benchmarks/write_files.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/examples/crash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/examples/custom_formatter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/examples/severity_log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/examples/stderr_log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/examples/ucs2_log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/performance_log/src/performance_log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/reckless/src/basic_log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/reckless/src/crash_handler_unix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/reckless/src/crash_handler_win32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/reckless/src/fd_writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/reckless/src/file_writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/reckless/src/lockless_cv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/reckless/src/mpsc_ring_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/reckless/src/ntoa.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/reckless/src/output_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/reckless/src/platform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/reckless/src/policy_log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/reckless/src/spsc_event_win32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/reckless/src/template_formatter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/reckless/src/trace_log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/reckless/src/writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/tests/consistent_address.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/tests/crash_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/tests/error_code.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/tests/flush.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/tests/format_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/tests/frame_construction_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/tests/panic_flush.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/tests/temporary_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/reckless/tests/unique_ptr.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/benchmarks/boost_log.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/benchmarks/fstream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/benchmarks/mandelbrot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/benchmarks/nop.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/benchmarks/one_thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/benchmarks/reckless.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/benchmarks/spdlog.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/benchmarks/stdio.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/performance_log/include/performance_log/performance_log.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/performance_log/include/performance_log/trace_log.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/reckless/include/reckless/basic_log.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/reckless/include/reckless/crash_handler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/reckless/include/reckless/detail/fd_writer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/reckless/include/reckless/detail/lockless_cv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/reckless/include/reckless/detail/mpsc_ring_buffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/reckless/include/reckless/detail/platform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/reckless/include/reckless/detail/spsc_event.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/reckless/include/reckless/detail/trace_log.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/reckless/include/reckless/detail/utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/reckless/include/reckless/file_writer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/reckless/include/reckless/ntoa.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/reckless/include/reckless/output_buffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/reckless/include/reckless/policy_log.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/reckless/include/reckless/severity_log.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/reckless/include/reckless/stdout_writer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/reckless/include/reckless/template_formatter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/reckless/include/reckless/writer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/reckless/src/unit_test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/tests/eol.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/tests/memory_writer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/reckless/tests/unreliable_writer.hpp" />
+    <Image Include="../../thirdparty/owemdjee/reckless/doc/images/performance_call_burst_1.png" />
+    <Image Include="../../thirdparty/owemdjee/reckless/doc/images/performance_call_burst_1_ma.png" />
+    <Image Include="../../thirdparty/owemdjee/reckless/doc/images/performance_mandelbrot.png" />
+    <Image Include="../../thirdparty/owemdjee/reckless/doc/images/performance_mandelbrot_difference.png" />
+    <Image Include="../../thirdparty/owemdjee/reckless/doc/images/performance_periodic_calls_all.png" />
+    <Image Include="../../thirdparty/owemdjee/reckless/doc/images/performance_periodic_calls_all_old_spdlog.png" />
+    <Image Include="../../thirdparty/owemdjee/reckless/doc/images/performance_periodic_calls_reckless.png" />
+    <Image Include="../../thirdparty/owemdjee/reckless/doc/images/performance_write_files.png" />
+    <Text Include="../../thirdparty/owemdjee/reckless/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/reckless/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/reckless/README.md" />
+    <Text Include="../../thirdparty/owemdjee/reckless/Tuprules.lua" />
+    <Text Include="../../thirdparty/owemdjee/reckless/benchmarks/Tupfile.lua" />
+    <Text Include="../../thirdparty/owemdjee/reckless/benchmarks/plot.py" />
+    <Text Include="../../thirdparty/owemdjee/reckless/benchmarks/plot_mandelbrot.py" />
+    <Text Include="../../thirdparty/owemdjee/reckless/benchmarks/run_benchmark.py" />
+    <Text Include="../../thirdparty/owemdjee/reckless/benchmarks/statistics.py" />
+    <Text Include="../../thirdparty/owemdjee/reckless/conanfile.py" />
+    <Text Include="../../thirdparty/owemdjee/reckless/doc/manual.md" />
+    <Text Include="../../thirdparty/owemdjee/reckless/doc/performance.md" />
+    <Text Include="../../thirdparty/owemdjee/reckless/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/reckless/examples/Tupfile.lua" />
+    <Text Include="../../thirdparty/owemdjee/reckless/performance_log/lib/Tupfile.lua" />
+    <Text Include="../../thirdparty/owemdjee/reckless/performance_log/src/Tupfile.lua" />
+    <Text Include="../../thirdparty/owemdjee/reckless/reckless/Tuprules.lua" />
+    <Text Include="../../thirdparty/owemdjee/reckless/reckless/lib/Tupfile.lua" />
+    <Text Include="../../thirdparty/owemdjee/reckless/reckless/src/Tupfile.lua" />
+    <Text Include="../../thirdparty/owemdjee/reckless/scripts/clean.py" />
+    <Text Include="../../thirdparty/owemdjee/reckless/scripts/license_header.txt" />
+    <Text Include="../../thirdparty/owemdjee/reckless/scripts/update_license_header.py" />
+    <Text Include="../../thirdparty/owemdjee/reckless/tests/Tupfile.lua" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

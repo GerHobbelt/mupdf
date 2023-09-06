@@ -1,0 +1,1136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libpylene</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFFC701B}</ProjectGuid>
+    <RootNamespace>libpylene</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPYLENE;PYLENE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPYLENE;PYLENE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPYLENE;PYLENE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPYLENE;PYLENE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPYLENE;PYLENE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPYLENE;PYLENE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPYLENE;PYLENE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPYLENE;PYLENE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPYLENE;PYLENE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPYLENE;PYLENE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPYLENE;PYLENE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPYLENE;PYLENE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/attributes/MSER-cli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/attributes/MSERArgparser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/attributes/attributes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/attributes/circularity-cli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/attributes/circularity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/attributes/curvature.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/attributes/gradient_magnitude-cli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/attributes/gradient_magnitude-patternspec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/attributes/meaningfullness-cli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/attributes/meaningfullnessArgparser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/attributes/stat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/clattice/clattice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/distancebased/grainfilter_distancebased.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/g2/compute_ctos-cli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/g2/compute_ctos-demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/g2/compute_ctos.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/g2/compute_g2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/g2/g2-maxdepth.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/g2/g2-maxtree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/g2/g2-no-overlap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/g2/g2-no-overlap2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/g2/g2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/g2/routines.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/g2/satmaxtree-cli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/g2/satmaxtree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/hierachical_seg-gui/brush.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/hierachical_seg-gui/hierachical_seg-cli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/hierachical_seg-gui/hierachical_seg-gui.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/hierachical_seg-gui/supervised-cli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/hyperspec/profiles_from_marginal_tos.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/hyperspec/profiles_from_tos.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/bench_parallel_hqueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/bench_parallel_pqueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/bench_parallel_pqueue_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/bench_parallel_ufind.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/bench_parallel_ufind_line.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/bench_parallel_ufindrank.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/bench_serial_hqueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/bench_serial_najman.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/bench_serial_pqueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/bench_serial_ufind.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/bench_serial_ufindrank.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/filter-cli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/maxtree-cli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/misc/compute_depth.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/misc/grain_filter_color.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/misc/ppm_grain_filter_marginal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/misc/print_tos_stat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/misc/psnr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/misc/reconstruct_from_tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/mumford_shah_on_tree/mumford_shah_on_tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/mumford_shah_on_tree/mumford_shah_on_tree_full.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/mumford_shah_on_tree/mumford_shah_on_tree_saliency.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/pygui/filtertree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/pygui/loadtree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/pygui/tosgui.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/saliency/dispsaliency.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/saliency/saliency.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/simplification/simplify_cluminance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/simplification/simplify_color.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/simplification/simplify_gray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tests/attributes/meaningfullness.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tests/tos/mumford_shah.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/theo/ctos_grainfilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/colorToSGrad.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/curvature.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/dijkstra.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/display_tos.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/distances.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/gradient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/grainfilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/k12k0.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/lexico_grainfilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/libtos.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/marginal_cf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/marginalfilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/objdetection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/objdetection_gray.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/pgm_objdetection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/pgm_objdetection_mser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/ppm_objdetection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/ppm_objdetection_mser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/rgbgrainfilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/routines.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/simplify.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/testLSH.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/thicken.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tos/tos.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tosgui/attribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tosgui/dispatcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tosgui/plotwindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tosgui/qattribute.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tosgui/toscgui.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/apps/tosgui/tosgui.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/bench/BMAlgorithms.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/bench/BMAlgorithms_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/bench/BMAlphaTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/bench/BMBufferPrimitives.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/bench/BMMorphers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/bench/BMMorphers_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/bench/BMMorphoBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/bench/BMMorphoMaxtree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/bench/BMMorphoTos.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/bench/BMReference_Linear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/bench/BMReference_Linear_Reversed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/bench/BMReference_Linear_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/bench/BMReference_Neighborhood_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/bench/BMWatershedHierarchy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/bench/src/neighborhood.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/bench/tests/neighborhood.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/doc/source/snippets/alphatree_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/doc/source/snippets/area_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/doc/source/snippets/blobs_watershed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/doc/source/snippets/cdt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/doc/source/snippets/component_tree_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/doc/source/snippets/erosion-cli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/doc/source/snippets/first_start_1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/doc/source/snippets/hough_lines.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/doc/source/snippets/intro-1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/doc/source/snippets/lut.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/doc/source/snippets/mtos_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/doc/source/snippets/reconstruction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/doc/source/snippets/saliency_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/doc/source/snippets/segdet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/doc/source/snippets/staff_lines.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/doc/source/snippets/waterfall.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/doc/source/snippets/watershed_from_markers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/doc/source/snippets/watershed_hierarchy_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/fixtures/ImageCompare/src/image_compare.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene-python/src/core/image_cast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene-python/src/core/numpy_format.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene-python/src/module.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene-python/src/scribo/scribo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene-python/src/scribo/segdet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/accu/cvxhull.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/bp/alloc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/bp/swap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/bp/transpose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/core/image_format.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/core/init_list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/core/ndbuffer_image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/core/ndbuffer_image_data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/core/padding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/core/parallel_local.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/core/parallel_pointwise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/core/se/disc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/core/se/mask2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/core/se/periodic_line2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/core/se/rect2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/core/trace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/core/traverse2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/io/cfitsio_plugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/io/freeimage_plugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/io/imprint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/io/imread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/io/io.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/morpho/block_running_max.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/morpho/component_tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/morpho/filters2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/morpho/hvector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/morpho/hvector_unbounded.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/morpho/immersion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/morpho/maxtree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/morpho/mtos.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/morpho/satmaxtree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/morpho/trees_fusion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/morpho/unionfind.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/morpho/waterfall.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/descriptor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/detect_line.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/parameters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/postprocess/postprocess.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/preprocess/preprocess.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/process/bucket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/process/extractors/extract_observation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/process/linearregression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/process/process.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/process/tracker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/process/tracker_impl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/process/trackers/double_exponential.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/process/trackers/exponential_moving_average.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/process/trackers/kalman.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/process/trackers/last_integration.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/process/trackers/one_euro.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/process/trackers/simple_moving_average.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/segdet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/segdet_private.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/segment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/segment_to_X.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/pylene/src/transforms/hough_lines.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/test_package/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/test_package/pylene_extension.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/accu/composite_accumulator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/accu/count.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/accu/cvxhull.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/accu/infsup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/accu/max_elements.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/accu/mean.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/accu/min_elements.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/accu/moment_of_inertia.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/accu/rank.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/accu/sum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/bp/transpose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/colors/lsh.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/contrib/meanshift/meanshift.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/algorithm/accumulate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/algorithm/accumulate_local.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/algorithm/all_any_none_of.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/algorithm/clone.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/algorithm/copy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/algorithm/count.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/algorithm/count_if.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/algorithm/equal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/algorithm/fill.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/algorithm/for_each.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/algorithm/generate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/algorithm/iota.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/algorithm/paste.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/algorithm/sort.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/algorithm/transform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/box.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/canvas/traverse2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/concept/domains.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/concept/images.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/concept/indexes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/concept/neighborhood.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/concept/pixels.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/concept/points.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/concept/se.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/concept/values.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/extension/clamp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/extension/fill.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/extension/mirror.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/extension/padding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/extension/periodize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/image/ndbuffer_image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/image/ndimage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/image/view/adaptor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/image/view/cast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/image/view/channel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/image/view/clamp_extended.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/image/view/clip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/image/view/extended.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/image/view/filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/image/view/image_extended.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/image/view/mask.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/image/view/maths_components.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/image/view/maths_distances.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/image/view/maths_norms.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/image/view/maths_reductions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/image/view/mirror_extended.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/image/view/none_extended.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/image/view/operators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/image/view/periodize_extended.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/image/view/rgb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/image/view/transform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/image/view/value_extended.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/image/view/zip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/neighborhood/c26.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/neighborhood/c4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/neighborhood/c6.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/neighborhood/c8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/neighborhood/dyn_nbh_2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/point.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/range/filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/range/foreach.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/range/mdindex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/range/mdspan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/range/multi_indices.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/range/multi_span.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/range/reverse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/range/transform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/range/transform_if.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/range/zip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/se/disc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/se/mask2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/se/periodic_line2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/se/rect2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/core/vec/vec_math_ops.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/io/cfitsio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/io/freeimage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/io/imprint.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/labeling/accumulate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/labeling/blobs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/labeling/chamfer_distance_transform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/labeling/local_extrema.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/labeling/rag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/alphatree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/area_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/block_running_max.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/component_tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/depthfirst.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/dilate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/directional_hqueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/dynamic_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/erode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/extinction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/fill_hole.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/gradient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/hit_or_miss.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/maxtree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/median_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/mtos.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/opening.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/rank_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/reconstruction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/running_max_1d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/tos.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/tos_tests_helper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/waterfall.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/watershed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/morpho/watershed_hierarchy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/python/extension_pylena_numpy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/python/pylena_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/scribo/any.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/scribo/extraction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/scribo/lin_regress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/scribo/line_detection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/scribo/segdet_tests_helper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pylene/tests/transforms/hough_lines.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/attributes/MSER.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/attributes/MSERArgparser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/attributes/argparser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/attributes/attributes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/attributes/cMSER.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/attributes/cMeaningFullNess.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/attributes/circularity.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/attributes/curvature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/attributes/gradient_magnitude.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/attributes/meaningfullness.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/attributes/meaningfullnessArgparser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/clattice/cuts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/clattice/export.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/clattice/make_graph.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/clattice/relation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/clattice/shape.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/distancebased/compute_tree_distance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/g2/accu/lca.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/g2/compute_ctos.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/g2/compute_ctos.hxx" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/g2/compute_g2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/g2/reconstruct.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/g2/remove_parent_relation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/g2/routines.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/g2/satmaxtree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/g2/types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/hierachical_seg-gui/brush.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/hyperspec/profiles.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/bench_maxtree_algorithm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/canonize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/maxtree1d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/maxtree_hqueue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/maxtree_hqueue_parallel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/maxtree_najman.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/maxtree_node.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/maxtree_pqueue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/maxtree_pqueue_2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/maxtree_pqueue_parallel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/maxtree_routines.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/maxtree_ufind.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/maxtree_ufind_parallel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/maxtree_ufindrank.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/maxtree_ufindrank_parallel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/merge_tree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/mumford_shah_on_tree/mumford_shah_on_tree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/pygui/loadtree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/pygui/tosgui.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/saliency/closure.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/saliency/dispsaliency.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/saliency/extinction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/saliency/saliency.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/simplification/simplify.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tos/Kinterpolate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tos/addborder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tos/colorToSGrad.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tos/compute_attribute.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tos/croutines.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tos/curvature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tos/gradient.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tos/libtos.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tos/mumford_shah.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tos/objdetection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tos/routines.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tos/set_mean_on_nodes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tos/shape_similarity.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tos/thicken.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tos/topology.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tos/utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tosgui/attribute.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tosgui/attributes/area.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tosgui/attributes/gray.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tosgui/attributes/meaningfullness.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tosgui/attributes/mser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tosgui/dispatcher.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tosgui/plotwindow.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/apps/tosgui/qattribute.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/bench/include/bench/neighborhood.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/doc/source/snippets/lut.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/fixtures/ImageCompare/include/fixtures/ImageCompare/image_compare.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/fixtures/ImagePath/include/fixtures/ImagePath/image_path.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene-python/include/pln/core/image_cast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene-python/src/core/numpy_format.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene-python/src/scribo/scribo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene-python/src/scribo/segdet.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/accu/accumulator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/accu/accumulator_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/accu/accumulators/accu_as_it.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/accu/accumulators/accu_if.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/accu/accumulators/count.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/accu/accumulators/covariance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/accu/accumulators/cvxhull.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/accu/accumulators/cvxhull_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/accu/accumulators/h_infsup.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/accu/accumulators/h_rank.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/accu/accumulators/infsup.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/accu/accumulators/max.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/accu/accumulators/max_elements.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/accu/accumulators/mean.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/accu/accumulators/min.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/accu/accumulators/min_elements.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/accu/accumulators/minmax.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/accu/accumulators/moment_of_inertia.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/accu/accumulators/sum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/accu/accumulators/variance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/accu/composite_accumulator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/accu/concept/accumulator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/accu/feature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/bp/alloc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/bp/copy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/bp/fill.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/bp/functional.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/bp/swap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/bp/tile.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/bp/transpose.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/bp/utils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/colors/lab.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/colors/literal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/colors/lsh.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/colors/rgba.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/colors/xyz.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/colors/ycbcr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/contrib/meanshift/meanshift.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/algorithm/accumulate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/algorithm/accumulate_local.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/algorithm/all_of.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/algorithm/any_of.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/algorithm/clone.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/algorithm/copy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/algorithm/count.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/algorithm/count_if.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/algorithm/equal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/algorithm/fill.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/algorithm/for_each.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/algorithm/generate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/algorithm/iota.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/algorithm/none_of.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/algorithm/paste.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/algorithm/sort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/algorithm/transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/assert.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/box.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/canvas/local_accumulation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/canvas/local_algorithm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/canvas/parallel_local.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/canvas/parallel_pointwise.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/canvas/private/traverse2d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/colors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/concepts/archetype/domain.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/concepts/archetype/image.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/concepts/archetype/index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/concepts/archetype/neighborhood.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/concepts/archetype/pixel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/concepts/archetype/point.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/concepts/archetype/structuring_element.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/concepts/archetype/value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/concepts/domain.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/concepts/extension.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/concepts/image.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/concepts/index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/concepts/neighborhood.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/concepts/object.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/concepts/pixel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/concepts/point.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/concepts/range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/concepts/structuring_element.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/concepts/value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/domain/where.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/extension/border_management.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/extension/extension.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/extension/fill.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/extension/mirror.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/extension/padding.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/extension/private/by_clamp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/extension/private/by_image.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/extension/private/by_mirror.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/extension/private/by_periodize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/extension/private/by_value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/extension/private/none.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/functional_ops.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/image.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/ndbuffer_image.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/ndimage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/ndimage_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/private/def_gen_code_macros.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/private/image_builder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/private/ndbuffer_image.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/private/ndbuffer_image_data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/private/ndbuffer_image_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/private/ndbuffer_image_pixel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/private/ndimage_extension.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/private/undef_gen_code_macros.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/view/adaptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/view/cast.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/view/channel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/view/clamp_extended.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/view/clip.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/view/extend_by_projection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/view/extended.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/view/filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/view/image_extended.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/view/mask.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/view/maths.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/view/mirror_extended.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/view/none_extended.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/view/operators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/view/periodize_extended.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/view/rgb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/view/transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/view/value_extended.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/view/zip.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image/views.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/image_format.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/literal/vectorial.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/neighborhood/c26.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/neighborhood/c2_h.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/neighborhood/c4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/neighborhood/c6.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/neighborhood/c8.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/neighborhood/dyn_nbh_2d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/neighborhood/neighborhood.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/neighborhood/private/neighborhood_facade.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/neighborhood/private/sliding_pixel_range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/ops.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/point.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/private/categories/image.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/private/def_functional_ops_gen_code_macros.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/private/def_maths_ops_gen_code_macros.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/private/init_list.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/private/maths_ops.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/private/traits/extension.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/private/traits/image.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/private/traits/neighborhood.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/private/traits/pixel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/private/traits/range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/private/undef_functional_ops_gen_code_macros.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/private/undef_maths_ops_gen_code_macros.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/private/weighted_pixel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/private/weighted_point.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/algorithm/equal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/algorithm/for_each.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/foreach.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/mdindex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/mdspan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/mdspan_fwd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/multi_indices.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/multi_span.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/private/mdcursor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/private/mdcursor_facade.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/private/mdrange_facade.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/private/multi_view_facade.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/private/multidimensional_range_facade.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/private/ndrange_facade.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/range.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/rows.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/type_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/view/filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/view/ravel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/view/remove_if.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/view/reverse.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/view/transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/view/transform_if.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/view/zip.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/view/zip_with.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/range/views.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/se/custom_se.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/se/disc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/se/mask2d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/se/periodic_line2d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/se/private/se_facade.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/se/rect2d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/se/view/adaptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/se/view/filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/trace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/utils/dontcare.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/utils/ptroffset.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/value/index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/value/indexer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/value/value_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/vec.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/vec/compare.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/vec/private/def_gen_code_macros.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/vec/private/undef_gen_code_macros.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/vec/vec_maths_ops.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/vec/vec_ops.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/core/vec_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/data/histogram.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/data/stretch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/filters/nms.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/io/fits/imread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/io/imprint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/io/imread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/io/imsave.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/io/internal/demangle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/io/private/cfitsio_plugin.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/io/private/freeimage_plugin.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/io/private/io.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/io/private/plugin.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/labeling/accumulate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/labeling/blobs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/labeling/chamfer_distance_transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/labeling/local_extrema.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/labeling/rag.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/alphatree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/area_filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/canvas/depthfirst.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/canvas/kruskal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/canvas/unionfind.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/closing.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/component_tree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/dilation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/dynamic_filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/erosion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/extinction_transform.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/fill_hole.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/gradient.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/hit_or_miss.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/maxtree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/median_filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/mtos.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/opening.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/private/block_algorithm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/private/block_running_max.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/private/dilation.2d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/private/dilation_by_periodic_line.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/private/directional_hqueue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/private/hlinked_lists.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/private/hpqueue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/private/hsimple_linked_lists.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/private/hvector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/private/hvector_unbounded.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/private/immersion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/private/immersion.spe.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/private/localmax.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/private/pqueue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/private/pqueue_hqueue_fifo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/private/propagation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/private/pset.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/private/running_max_1d.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/private/satmaxtree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/private/trees_fusion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/private/trie.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/rank_filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/reconstruction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/tos.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/waterfall.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/watershed.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/morpho/watershed_hierarchy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/mln/transforms/hough_lines.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/scribo/private/segdet_internal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/scribo/private/span.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/include/scribo/segdet.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/descriptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/detect_line.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/process/bucket.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/process/extractors/extract_observation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/process/linearregression.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/process/tracker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/process/tracker_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/process/trackers/double_exponential.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/process/trackers/exponential_moving_average.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/process/trackers/kalman.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/process/trackers/last_integration.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/process/trackers/one_euro.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/process/trackers/simple_moving_average.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/segment.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/pylene/src/scribo/segdet/segment_to_X.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/tests/morpho/tos_tests_helper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pylene/tests/scribo/segdet_tests_helper.hpp" />
+    <Image Include="../../thirdparty/owemdjee/pylene/doc/source/core/se/disc_approximated.gif" />
+    <Image Include="../../thirdparty/owemdjee/pylene/doc/source/core/se/disc_error.png" />
+    <Image Include="../../thirdparty/owemdjee/pylene/doc/source/core/se/disc_euclidean.gif" />
+    <Image Include="../../thirdparty/owemdjee/pylene/doc/source/core/se/disc_matlab.gif" />
+    <Image Include="../../thirdparty/owemdjee/pylene/doc/source/figures/core/tiling.png" />
+    <Image Include="../../thirdparty/owemdjee/pylene/doc/source/images/F.png" />
+    <Image Include="../../thirdparty/owemdjee/pylene/doc/source/images/Olena-bunny-holefilled-pinv-curv-segm.png" />
+    <Image Include="../../thirdparty/owemdjee/pylene/doc/source/images/Olena-bunny-holefilled.png" />
+    <Image Include="../../thirdparty/owemdjee/pylene/doc/source/images/Olena-c6gradi-neg.png" />
+    <Image Include="../../thirdparty/owemdjee/pylene/doc/source/images/Olena-c6gradi.png" />
+    <Image Include="../../thirdparty/owemdjee/pylene/doc/source/images/Olena-classgradi.png" />
+    <Image Include="../../thirdparty/owemdjee/pylene/doc/source/images/Olena-classwst2b.png" />
+    <Image Include="../../thirdparty/owemdjee/pylene/doc/source/images/blobs2_binary.png" />
+    <Image Include="../../thirdparty/owemdjee/pylene/doc/source/images/blobs_binary.png" />
+    <Image Include="../../thirdparty/owemdjee/pylene/doc/source/images/lena_gray.jpg" />
+    <Image Include="../../thirdparty/owemdjee/pylene/doc/source/images/staff_lines.png" />
+    <Image Include="../../thirdparty/owemdjee/pylene/doc/source/snippets/images/roadsigns-square-2.png" />
+    <Image Include="../../thirdparty/owemdjee/pylene/doc/source/snippets/images/roadsigns-square.png" />
+    <Image Include="../../thirdparty/owemdjee/pylene/doc/source/snippets/images/roadsigns.png" />
+    <Image Include="../../thirdparty/owemdjee/pylene/img/lena.png" />
+    <Image Include="../../thirdparty/owemdjee/pylene/img/medium.png" />
+    <Text Include="../../thirdparty/owemdjee/pylene/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/pylene/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/Platform/Linux-gcc-i386.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pylene/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pylene/apps/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/apps/attributes/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/apps/clattice/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/apps/g2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/apps/hierachical_seg-gui/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/apps/hyperspec/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/bench.py" />
+    <Text Include="../../thirdparty/owemdjee/pylene/apps/maxtree_comparison/bench.sh" />
+    <Text Include="../../thirdparty/owemdjee/pylene/apps/misc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/apps/mumford_shah_on_tree/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/apps/pygui/gui.py" />
+    <Text Include="../../thirdparty/owemdjee/pylene/apps/pygui/tosGUI/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pylene/apps/pygui/tosGUI/eventHandler.py" />
+    <Text Include="../../thirdparty/owemdjee/pylene/apps/pygui/tosGUI/plotImage.py" />
+    <Text Include="../../thirdparty/owemdjee/pylene/apps/saliency/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/apps/simplification/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/apps/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/apps/tests/attributes/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/apps/tests/tos/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/apps/theo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/apps/tosgui/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/bench/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/bench/Readme.md" />
+    <Text Include="../../thirdparty/owemdjee/pylene/bench/cmake/BenchmarkMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pylene/bench/plotbench.py" />
+    <Text Include="../../thirdparty/owemdjee/pylene/bench/plotbench2.py" />
+    <Text Include="../../thirdparty/owemdjee/pylene/bench/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/bench/tools/compare.py" />
+    <Text Include="../../thirdparty/owemdjee/pylene/bench/tools/gbench/Inputs/test1_run1.json" />
+    <Text Include="../../thirdparty/owemdjee/pylene/bench/tools/gbench/Inputs/test1_run2.json" />
+    <Text Include="../../thirdparty/owemdjee/pylene/bench/tools/gbench/Inputs/test2_run.json" />
+    <Text Include="../../thirdparty/owemdjee/pylene/bench/tools/gbench/Inputs/test3_run0.json" />
+    <Text Include="../../thirdparty/owemdjee/pylene/bench/tools/gbench/Inputs/test3_run1.json" />
+    <Text Include="../../thirdparty/owemdjee/pylene/bench/tools/gbench/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pylene/bench/tools/gbench/report.py" />
+    <Text Include="../../thirdparty/owemdjee/pylene/bench/tools/gbench/util.py" />
+    <Text Include="../../thirdparty/owemdjee/pylene/bench/tools/strip_asm.py" />
+    <Text Include="../../thirdparty/owemdjee/pylene/ci/conan/global.conf" />
+    <Text Include="../../thirdparty/owemdjee/pylene/ci/conan/remotes.json" />
+    <Text Include="../../thirdparty/owemdjee/pylene/cmake/FindQwt.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pylene/cmake/FindSphinx.cmake" />
+    <Text Include="../../thirdparty/owemdjee/pylene/conanfile.py" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/community.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/concept.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/concept/extension.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/algorithm/accumulate.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/algorithm/all_any_none_of.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/algorithm/clone.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/algorithm/copy.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/algorithm/count.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/algorithm/count_if.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/algorithm/equal.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/algorithm/fill.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/algorithm/foreach.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/algorithm/generate.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/algorithm/iota.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/algorithm/paste.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/algorithm/sort.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/algorithm/transform.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/box.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/concepts/ranges.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/concepts/stl.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/core_types.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/functional.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/image_builder.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/images.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/images/ndimage.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/neighborhood.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/neighborhood/c26.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/neighborhood/c4.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/neighborhood/c6.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/neighborhood/c8.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/pad.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/point.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/ranges.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/ranges/filter.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/ranges/reverse.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/ranges/transform.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/ranges/zip.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/ranges/zip_with.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/se/disc.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/se/disc_dilation.json" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/se/mask2d.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/se/periodic_lines.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/se/rectangle.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/stl.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/view/cast.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/view/channel.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/view/clip.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/view/filter.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/view/mask.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/view/maths.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/view/operators.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/view/rgb.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/view/transform.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/core/view/zip.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/intro.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/io.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/labeling.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/labeling/accumulate.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/labeling/blobs.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/labeling/cdt.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/labeling/local_extrema.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/labeling/rag.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/morpho.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/morpho/alphatree.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/morpho/area_filter.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/morpho/closing.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/morpho/component_tree.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/morpho/dilation.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/morpho/dynamic_filter.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/morpho/erosion.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/morpho/extinction_transform.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/morpho/fill_hole.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/morpho/gradient.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/morpho/hit_or_miss.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/morpho/maxtree.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/morpho/median_filter.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/morpho/multivariate_component_tree.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/morpho/opening.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/morpho/opening_by_reconstruction.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/morpho/rank_filter.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/morpho/tos.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/morpho/waterfall.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/morpho/watershed.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/morpho/watershed_hierarchy.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/pylene_lexer.py" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/pyplots/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/python.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/python/extension.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/python/first_step.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/reference.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/ruminations.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/ruminations/border_management.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/ruminations/iterators.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/ruminations/neighborhood.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/scribo.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/scribo/segdet.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/snippets/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/tiling.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/transforms.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/transforms/hough_lines.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/tutorial.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/tutorial/ctos.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/tutorial/extension.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/tutorial/first_start.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/tutorial/installation.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/tutorial/using_algorithms.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/tutorial/views.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/doc/source/tutorial/writing_algorithms.rst" />
+    <Text Include="../../thirdparty/owemdjee/pylene/fixtures/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/fixtures/ImageCompare/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/fixtures/ImagePath/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/fixtures/ImagePath/src/image_path.cpp.in" />
+    <Text Include="../../thirdparty/owemdjee/pylene/pylene-python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/pylene/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/pylene/PyleneConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/pylene/test_package/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/test_package/conanfile.py" />
+    <Text Include="../../thirdparty/owemdjee/pylene/test_package/main.py" />
+    <Text Include="../../thirdparty/owemdjee/pylene/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/tests/accu/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/tests/bp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/tests/colors/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/tests/contrib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/tests/core/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/tests/io/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/tests/labeling/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/tests/morpho/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/tests/python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/tests/python/test_pylena_numpy.py" />
+    <Text Include="../../thirdparty/owemdjee/pylene/tests/scribo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/tests/transforms/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pylene/utils/clang-format-all.sh" />
+    <Text Include="../../thirdparty/owemdjee/pylene/utils/copy-dlls.py" />
+    <Text Include="../../thirdparty/owemdjee/pylene/utils/coverage/llvm-gcov-6.0.sh" />
+    <Text Include="../../thirdparty/owemdjee/pylene/utils/coverage/llvm-gcov-7.sh" />
+    <Text Include="../../thirdparty/owemdjee/pylene/utils/gdb-prettyprint.py" />
+    <Text Include="../../thirdparty/owemdjee/pylene/utils/retrieve-artifacts.sh" />
+    <Text Include="../../thirdparty/owemdjee/pylene/utils/write-index.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

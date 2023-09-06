@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libgmic</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFFC4A99}</ProjectGuid>
+    <RootNamespace>libgmic</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC;GMIC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC;GMIC_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC;GMIC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC;GMIC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC;GMIC_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC;GMIC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC;GMIC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC;GMIC_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC;GMIC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC;GMIC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC;GMIC_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC;GMIC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/gmic/src/gmic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gmic/src/gmic_cli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gmic/src/use_libgmic.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/gmic/src/gmic.h" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/anisotropic_smoothing_zonder/images/clean_disc.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/anisotropic_smoothing_zonder/images/default_structure_tensor.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/anisotropic_smoothing_zonder/images/disc.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/anisotropic_smoothing_zonder/images/fixed_disc.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/anisotropic_smoothing_zonder/images/high_anisotropy_disc.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/anisotropic_smoothing_zonder/images/personalized_structure_tensor.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/anisotropic_smoothing_zonder/images/raw_structure_tensor.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/favicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/favicon.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/highslide/graphics/close.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/highslide/graphics/closeX.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/highslide/graphics/controlbar-black-border.gif" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/highslide/graphics/controlbar-text-buttons.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/highslide/graphics/controlbar-white-small.gif" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/highslide/graphics/controlbar-white.gif" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/highslide/graphics/controlbar2.gif" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/highslide/graphics/controlbar3.gif" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/highslide/graphics/controlbar4-hover.gif" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/highslide/graphics/controlbar4.gif" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/highslide/graphics/fullexpand.gif" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/highslide/graphics/geckodimmer.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/highslide/graphics/icon.gif" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/highslide/graphics/loader.gif" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/highslide/graphics/loader.white.gif" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/highslide/graphics/outlines/beveled.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/highslide/graphics/outlines/drop-shadow.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/highslide/graphics/outlines/glossy-dark.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/highslide/graphics/outlines/outer-glow.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/highslide/graphics/outlines/rounded-black.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/highslide/graphics/outlines/rounded-white.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/highslide/graphics/resize.gif" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/highslide/graphics/scrollarrows.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/10years.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/11years.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/13years.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/15years.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/back_top.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/color_presets_sample1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/color_presets_sample10.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/color_presets_sample11.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/color_presets_sample12.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/color_presets_sample2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/color_presets_sample3.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/color_presets_sample4.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/color_presets_sample5.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/color_presets_sample6.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/color_presets_sample7.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/color_presets_sample8.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/color_presets_sample9.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/don_10eur.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/don_10usd.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/don_2eur.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/don_2usd.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/don_5eur.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/don_5usd.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/don_moreeur.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/don_moreusd.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/download_affinity.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/download_browse.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/download_debian64.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/download_gimp.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/download_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/download_krita.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/download_ofx.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/download_paintdotnet.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/download_paintshoppro.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/download_photoline.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/download_photoshop.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/download_prerelease.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/download_python.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/download_source.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/download_ubuntu64.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/download_win64.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/download_xnview.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/example_camera.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/example_elevation3d.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/example_isosurface3d.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/example_logo.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/example_plot.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/example_torii.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/example_vase.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/gallery_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/gmic_banner.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/gmic_flyer.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/gmic_flyer.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/gmic_flyer_s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/gmic_marmot.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/gmic_marmot_small.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/gmic_slides.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/gmicky.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/gmicky_deevad220.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/gmicky_deevad600.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/gmicky_explorer.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/gmicky_large.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/gmicky_logo.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/gmicky_small.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/gmicky_wilber.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/gmicky_wilber_large.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/gmicky_wilber_small.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/hatching.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/icon_coin.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/icon_info.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/icon_link.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/icon_magnifier.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/libgmic_sample.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/libgmic_sample1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/libgmic_sample1_thumb.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/libgmic_sample2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/libgmic_sample2_thumb.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/libgmic_sample3.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/libgmic_sample3_thumb.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/libgmic_sample4.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/libgmic_sample4_thumb.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/libgmic_sample_thumb.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/logo_header.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/logo_instit.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/mandelbrot.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/menu_community.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/menu_download.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/menu_forum.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/menu_gallery.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/menu_gimpchat.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/menu_home.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/menu_info.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/menu_irc.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/menu_mastodon.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/menu_news.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/menu_online.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/menu_paypal.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/menu_presets.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/menu_question.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/menu_reddit.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/menu_report.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/menu_resources.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/menu_supportus.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/menu_tools.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/menu_video.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/menu_wiki.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/ref_image.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/roddy.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/roddy_large.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/roddy_small.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_apples.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_balloons.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_barbara.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_boats.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_bottles.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_butterfly.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_cameraman.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_car.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_cat.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_chick.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_cliff.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_colorful.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_david.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_dog.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_duck.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_eagle.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_earth.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_elephant.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_flower.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_fruits.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_gmicky.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_gmicky_mahvin.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_gmicky_wilber.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_greece.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_gummy.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_house.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_inside.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_landscape.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_leaf.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_lena.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_leno.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_lion.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_mandrill.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_monalisa.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_monkey.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_parrots.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_pencils.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_peppers.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_portrait0.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_portrait1.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_portrait2.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_portrait3.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_portrait4.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_portrait5.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_portrait6.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_portrait7.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_portrait8.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_portrait9.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_roddy.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_rooster.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_rose.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_square.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_swan.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_teddy.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_tiger.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_tulips.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_wall.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_waterfall.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/sample_zelda.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/section_bottom.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/section_bottom_mirrored.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/section_middle.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/section_top.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/ss_anim3d.gif" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/ss_brain3d.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/ss_caesar.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/ss_colors3d.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/ss_cubism.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/ss_ellipses.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/ss_lena_denoise.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/ss_lenacube3d.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/ss_mandelbrot.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/ss_morph.gif" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/ss_object3d.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/ss_plot.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/ss_surface.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/ss_tiger.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/ss_xlife.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/ss_xspline.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_almondblossom.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_blackcolourpencil.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_colourpencilsepia.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_compositionredyellowblue.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_convergence.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_darkcolouredpencil.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_deathandfire.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_graytree.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_greatwave.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_inthestyleofkairouan.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_irises.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_landscapenearantwerp.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_lesdemoisellesdavignon.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_leviaducalestaque.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_littlebayatlaciotat.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_orientalpleasuregardenanagoria.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_pencil.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_polyphony2.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_portraitdemetzinger.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_redtree.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_redwaistcoat.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_reservoirhortadeebro.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_sangiorgiomaggioreatdusk.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_scream.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_seatedwoman.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_sketchingpastel.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_squareswithconcentriccircles.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_starrynight.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_summertime9a.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_thekiss.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_themandola.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_udnie.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_waterlilypond.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_wheatfieldwithcrows.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_wheatstacksendofsummer.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_willowcharcoal.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_windowsopensimultaneously.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/style_yellowredblue.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/supportus_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/t_ui_cli.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/t_ui_gmicol.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/t_ui_gmicqt.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/t_ui_libgmic.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/t_ui_zart.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/ui_cli.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/ui_gmicol.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/ui_gmicqt.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/ui_libgmic.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/ui_zart.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic/html/img/x_blobs.jpg" />
+    <Text Include="../../thirdparty/owemdjee/gmic/README" />
+    <Text Include="../../thirdparty/owemdjee/gmic/README.md" />
+    <Text Include="../../thirdparty/owemdjee/gmic/html/highslide.js" />
+    <Text Include="../../thirdparty/owemdjee/gmic/html/highslide/highslide-full.js" />
+    <Text Include="../../thirdparty/owemdjee/gmic/html/highslide/highslide-full.min.js" />
+    <Text Include="../../thirdparty/owemdjee/gmic/html/highslide/highslide-full.packed.js" />
+    <Text Include="../../thirdparty/owemdjee/gmic/html/highslide/highslide-with-gallery.js" />
+    <Text Include="../../thirdparty/owemdjee/gmic/html/highslide/highslide-with-gallery.min.js" />
+    <Text Include="../../thirdparty/owemdjee/gmic/html/highslide/highslide-with-gallery.packed.js" />
+    <Text Include="../../thirdparty/owemdjee/gmic/html/highslide/highslide-with-html.js" />
+    <Text Include="../../thirdparty/owemdjee/gmic/html/highslide/highslide-with-html.min.js" />
+    <Text Include="../../thirdparty/owemdjee/gmic/html/highslide/highslide-with-html.packed.js" />
+    <Text Include="../../thirdparty/owemdjee/gmic/html/highslide/highslide.js" />
+    <Text Include="../../thirdparty/owemdjee/gmic/html/highslide/highslide.min.js" />
+    <Text Include="../../thirdparty/owemdjee/gmic/html/highslide/highslide.packed.js" />
+    <Text Include="../../thirdparty/owemdjee/gmic/html/jquery-3.5.1.min.js" />
+    <Text Include="../../thirdparty/owemdjee/gmic/resources/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/gmic/resources/CeCILL.rtf" />
+    <Text Include="../../thirdparty/owemdjee/gmic/resources/cmake/FindCImg.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gmic/resources/cmake/FindFftw.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gmic/resources/cmake/FindGMicStdlib.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gmic/resources/cmake/FindGraphicsMagick.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gmic/resources/cmake/FindOpenCV.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gmic/resources/cmake/FindOpenEXR.cmake" />
+    <Text Include="../../thirdparty/owemdjee/gmic/resources/debian/changelog" />
+    <Xml Include="../../thirdparty/owemdjee/gmic/resources/gmic_dark_theme_notepadplus.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

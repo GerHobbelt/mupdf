@@ -1,0 +1,714 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libsimdjson</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFE45084}</ProjectGuid>
+    <RootNamespace>libsimdjson</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDJSON;SIMDJSON_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDJSON;SIMDJSON_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDJSON;SIMDJSON_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDJSON;SIMDJSON_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDJSON;SIMDJSON_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDJSON;SIMDJSON_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDJSON;SIMDJSON_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDJSON;SIMDJSON_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDJSON;SIMDJSON_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDJSON;SIMDJSON_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDJSON;SIMDJSON_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIMDJSON;SIMDJSON_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/benchmark/bench_dom_api.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/benchmark/bench_ondemand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/benchmark/bench_parse_call.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/benchmark/benchfeatures.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/benchmark/dom/parse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/benchmark/dom/parse_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/benchmark/dom/perfdiff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/benchmark/dom/statisticalmodel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/benchmark/get_corpus_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/dependencies/jsoncppdist/jsoncpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/examples/quickstart/quickstart.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/examples/quickstart/quickstart2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/examples/quickstart/quickstart2_noexceptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/examples/quickstart/quickstart_noexceptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/examples/quickstart/quickstart_ondemand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/examples/quickstart/quickstart_ondemand_noexceptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/scripts/transitions/generatetransitions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/singleheader/amalgamate_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/singleheader/simdjson.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/src/arm64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/src/fallback.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/src/from_chars.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/src/haswell.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/src/icelake.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/src/implementation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/src/internal/error_tables.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/src/internal/jsoncharutils_tables.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/src/internal/numberparsing_tables.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/src/internal/simdprune_tables.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/src/ppc64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/src/simdjson.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/src/to_chars.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/src/westmere.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/checkimplementation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/compilation_failure_tests/bad_array_count.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/compilation_failure_tests/dangling_parser_load.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/compilation_failure_tests/dangling_parser_parse_padstring.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/compilation_failure_tests/dangling_parser_parse_stdstring.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/compilation_failure_tests/dangling_parser_parse_uchar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/compilation_failure_tests/dangling_parser_parse_uint8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/compilation_failure_tests/example_compiletest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/compilation_failure_tests/unsafe_parse_many.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/allparserscheckfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/basictests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/document_stream_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/document_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/errortests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/extracting_values_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/integer_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/jsoncheck.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/minefieldcheck.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/numberparsingcheck.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/parse_many_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/pointercheck.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/random_string_number_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/readme_examples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/readme_examples_noexceptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/singleheadertest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/stringparsingcheck.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/dom/trivially_copyable_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/minify_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/compilation_failure_tests/first_second_access.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/compilation_failure_tests/iterate_char_star.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/compilation_failure_tests/iterate_string_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/compilation_failure_tests/iterate_temporary_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_active_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_array_error_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_array_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_assert_out_of_order_values.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_compilation_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_document_stream_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_error_location_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_error_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_iterate_many_csv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_json_pointer_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_key_string_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_log_error_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_log_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_misc_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_number_in_string_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_number_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_object_error_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_object_find_field_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_object_index_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_object_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_ordering_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_parse_api_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_readme_examples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_scalar_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_tostring_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_twitter_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/ondemand_wrong_type_error_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/padded_string_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/prettify_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/staticchecks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tests/unicode_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tools/json2json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tools/jsonpointer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tools/jsonstats.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/simdjson/tools/minify.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/amazon_cellphones/amazon_cellphones.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/amazon_cellphones/simdjson_dom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/amazon_cellphones/simdjson_ondemand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/apple/apple_arm_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/benchmark.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/benchmarker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/distinct_user_id/distinct_user_id.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/distinct_user_id/nlohmann_json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/distinct_user_id/nlohmann_json_sax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/distinct_user_id/rapidjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/distinct_user_id/rapidjson_sax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/distinct_user_id/sajson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/distinct_user_id/simdjson_dom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/distinct_user_id/simdjson_dom_json_pointer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/distinct_user_id/simdjson_ondemand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/distinct_user_id/simdjson_ondemand_json_pointer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/distinct_user_id/yyjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/event_counter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/find_tweet/find_tweet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/find_tweet/nlohmann_json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/find_tweet/nlohmann_json_sax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/find_tweet/rapidjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/find_tweet/rapidjson_sax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/find_tweet/sajson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/find_tweet/simdjson_dom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/find_tweet/simdjson_ondemand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/find_tweet/yyjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/json2msgpack/json2msgpack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/json2msgpack/nlohmann_json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/json2msgpack/rapidjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/json2msgpack/sajson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/json2msgpack/simdjson_dom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/json2msgpack/simdjson_ondemand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/json2msgpack/yyjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/json_benchmark/constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/json_benchmark/diff_results.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/json_benchmark/file_runner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/json_benchmark/point.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/json_benchmark/run_json_benchmark.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/json_benchmark/runner_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/json_benchmark/string_runner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/kostya/kostya.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/kostya/nlohmann_json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/kostya/nlohmann_json_sax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/kostya/rapidjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/kostya/rapidjson_sax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/kostya/sajson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/kostya/simdjson_dom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/kostya/simdjson_ondemand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/kostya/yyjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/large_amazon_cellphones/large_amazon_cellphones.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/large_amazon_cellphones/simdjson_dom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/large_amazon_cellphones/simdjson_ondemand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/large_random/large_random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/large_random/nlohmann_json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/large_random/nlohmann_json_sax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/large_random/rapidjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/large_random/rapidjson_sax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/large_random/sajson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/large_random/simdjson_dom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/large_random/simdjson_ondemand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/large_random/simdjson_ondemand_unordered.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/large_random/yyjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/largerandom/iter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/largerandom/ondemand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/largerandom/sax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/linux/linux-perf-events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/partial_tweets/nlohmann_json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/partial_tweets/nlohmann_json_sax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/partial_tweets/ondemand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/partial_tweets/partial_tweets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/partial_tweets/rapidjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/partial_tweets/rapidjson_sax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/partial_tweets/sajson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/partial_tweets/simdjson_dom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/partial_tweets/simdjson_ondemand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/partial_tweets/tweet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/partial_tweets/twitter_user.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/partial_tweets/yyjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/top_tweet/nlohmann_json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/top_tweet/nlohmann_json_sax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/top_tweet/rapidjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/top_tweet/rapidjson_sax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/top_tweet/sajson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/top_tweet/simdjson_dom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/top_tweet/simdjson_ondemand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/top_tweet/top_tweet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/benchmark/top_tweet/yyjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/dependencies/jsoncppdist/json/json-forwards.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/dependencies/jsoncppdist/json/json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/extra/dumpbits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/arm64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/arm64/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/arm64/begin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/arm64/bitmanipulation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/arm64/bitmask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/arm64/end.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/arm64/implementation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/arm64/intrinsics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/arm64/numberparsing_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/arm64/ondemand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/arm64/simd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/arm64/stringparsing_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/builtin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/builtin/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/builtin/implementation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/builtin/ondemand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/common_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/compiler_check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/dom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/dom/array-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/dom/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/dom/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/dom/document-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/dom/document.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/dom/document_stream-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/dom/document_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/dom/element-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/dom/element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/dom/jsonparser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/dom/object-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/dom/object.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/dom/parsedjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/dom/parsedjson_iterator-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/dom/parsedjson_iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/dom/parser-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/dom/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/dom/serialization-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/dom/serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/error-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/fallback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/fallback/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/fallback/begin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/fallback/bitmanipulation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/fallback/end.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/fallback/implementation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/fallback/numberparsing_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/fallback/ondemand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/fallback/stringparsing_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/amalgamated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/atomparsing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/dependencies.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/dom_parser_implementation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/implementation_simdjson_result_base-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/implementation_simdjson_result_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/jsoncharutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/numberparsing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/amalgamated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/array-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/array_iterator-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/array_iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/dependencies.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/document-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/document.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/document_stream-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/document_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/field-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/json_iterator-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/json_iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/json_type-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/json_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/logger-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/object-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/object.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/object_iterator-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/object_iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/parser-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/raw_json_string-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/raw_json_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/serialization-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/token_iterator-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/token_iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/value-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/value_iterator-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/generic/ondemand/value_iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/haswell.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/haswell/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/haswell/begin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/haswell/bitmanipulation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/haswell/bitmask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/haswell/end.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/haswell/implementation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/haswell/intrinsics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/haswell/numberparsing_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/haswell/ondemand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/haswell/simd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/haswell/stringparsing_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/icelake.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/icelake/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/icelake/begin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/icelake/bitmanipulation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/icelake/bitmask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/icelake/end.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/icelake/implementation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/icelake/intrinsics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/icelake/numberparsing_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/icelake/ondemand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/icelake/simd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/icelake/stringparsing_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/implementation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/implementation_detection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/internal/atomic_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/internal/dom_parser_implementation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/internal/instruction_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/internal/jsoncharutils_tables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/internal/jsonformatutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/internal/numberparsing_tables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/internal/simdprune_tables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/internal/tape_ref-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/internal/tape_ref.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/internal/tape_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/jsonioutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/minify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/nonstd/string_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/ondemand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/padded_string-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/padded_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/padded_string_view-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/padded_string_view.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/portability.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/ppc64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/ppc64/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/ppc64/begin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/ppc64/bitmanipulation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/ppc64/bitmask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/ppc64/end.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/ppc64/implementation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/ppc64/intrinsics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/ppc64/numberparsing_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/ppc64/ondemand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/ppc64/simd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/ppc64/stringparsing_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/simdjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/simdjson_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/westmere.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/westmere/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/westmere/begin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/westmere/bitmanipulation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/westmere/bitmask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/westmere/end.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/westmere/implementation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/westmere/intrinsics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/westmere/numberparsing_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/westmere/ondemand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/westmere/simd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/include/simdjson/westmere/stringparsing_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/singleheader/simdjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/amalgamated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/dependencies.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/dom_parser_implementation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/json_character_block.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/stage1/amalgamated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/stage1/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/stage1/buf_block_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/stage1/dependencies.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/stage1/find_next_document_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/stage1/json_escape_scanner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/stage1/json_minifier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/stage1/json_scanner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/stage1/json_string_scanner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/stage1/json_structural_indexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/stage1/utf8_lookup4_algorithm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/stage1/utf8_validator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/stage2/amalgamated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/stage2/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/stage2/dependencies.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/stage2/json_iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/stage2/logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/stage2/stringparsing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/stage2/structural_iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/stage2/tape_builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/generic/stage2/tape_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/src/internal/isadetection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/tests/cast_tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/test_ondemand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/tests/test_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/windows/dirent_portable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/windows/getopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/windows/toni_ronnko_dirent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/simdjson/windows/unistd.h" />
+    <Image Include="../../thirdparty/owemdjee/simdjson/doc/Multiline_JSON_Parse_Competition.png" />
+    <Image Include="../../thirdparty/owemdjee/simdjson/doc/apache_builds.jsonparseandstat.png" />
+    <Image Include="../../thirdparty/owemdjee/simdjson/doc/gbps.png" />
+    <Image Include="../../thirdparty/owemdjee/simdjson/doc/github_events.jsonparseandstat.png" />
+    <Image Include="../../thirdparty/owemdjee/simdjson/doc/growing.png" />
+    <Image Include="../../thirdparty/owemdjee/simdjson/doc/rome.png" />
+    <Image Include="../../thirdparty/owemdjee/simdjson/doc/twitter.jsonparseandstat.png" />
+    <Image Include="../../thirdparty/owemdjee/simdjson/doc/update-center.jsonparseandstat.png" />
+    <Image Include="../../thirdparty/owemdjee/simdjson/images/halvarflake.png" />
+    <Image Include="../../thirdparty/owemdjee/simdjson/images/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/simdjson/images/logotiny.png" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/HACKING.md" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/README.md" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/benchmark/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/benchmark/dom/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/benchmark/dom/checkperf.cmake" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/benchmark/top_tweet/README.md" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/cmake/JoinPaths.cmake" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/cmake/add_compile_only_test.cmake" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/cmake/add_cpp_test.cmake" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/cmake/developer-options.cmake" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/cmake/exception-flags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/cmake/handle-deprecations.cmake" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/cmake/implementation-flags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/cmake/simdjson-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/cmake/simdjson-props.cmake" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/cmake/simdjson-user-cmakecache.cmake" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/dependencies/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/dependencies/import.cmake" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/doc/basics.md" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/doc/basics_doxygen.md" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/doc/dom.md" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/doc/implementation-selection.md" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/doc/iterate_many.md" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/doc/ondemand_design.md" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/doc/parse_many.md" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/doc/performance.md" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/doc/tape.md" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/examples/quickstart/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/examples/quickstart/add_quickstart_test.cmake" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/jsonexamples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/jsonexamples/twitter.json" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/scripts/addcmakeppa.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/scripts/detect_nonascii_sourcefiles.py" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/scripts/dumpsimplestats.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/scripts/javascript/README.md" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/scripts/javascript/generatelargejson.js" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/scripts/javascript/package-lock.json" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/scripts/javascript/package.json" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/scripts/minifier.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/scripts/parseandstat.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/scripts/parser.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/scripts/parsingcompdata.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/scripts/plotparse.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/scripts/remove_trailing_whitespace.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/scripts/selectparser.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/scripts/setupfortesting/disablehyperthreading.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/scripts/setupfortesting/powerpolicy.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/scripts/setupfortesting/setupfortesting.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/scripts/setupfortesting/turboboost.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/scripts/shootout.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/simdjson.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/singleheader/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/singleheader/README.md" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/singleheader/amalgamate.py" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/style/clang-format-check.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/style/clang-format.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/style/run-clang-format.py" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/tests/compilation_failure_tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/tests/dom/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/tests/dom/issue150.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/tests/dom/testjson2json.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/tests/installation_tests/README.md" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/tests/installation_tests/find/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/tests/ondemand/compilation_failure_tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/tools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/tools/prepare_doxygen.sh" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/tools/release.py" />
+    <Text Include="../../thirdparty/owemdjee/simdjson/windows/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

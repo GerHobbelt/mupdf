@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -113,8 +113,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBICU;ICU_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -228,6 +228,8 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/docs/design/struct/tries/bytestrie/bytetriedemo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/docs/design/struct/tries/bytestrie/genpname.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/common/appendable.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/common/bmpset.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/common/brkeng.cpp" />
@@ -686,6 +688,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/io/uscanf_p.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/io/ustdio.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/io/ustream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/layoutex/LXUtilities.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/layoutex/ParagraphLayout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/layoutex/RunArrays.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/layoutex/playout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/layoutex/plruns.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/stubdata/stubdata.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/vendor/double-conversion/upstream/double-conversion/bignum-dtoa.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/vendor/double-conversion/upstream/double-conversion/bignum.cc" />
@@ -695,6 +702,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/vendor/double-conversion/upstream/double-conversion/fixed-dtoa.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/vendor/double-conversion/upstream/double-conversion/string-to-double.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/vendor/double-conversion/upstream/double-conversion/strtod.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu/docs/design/struct/tries/bytestrie/bytetrie.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu/docs/design/struct/tries/bytestrie/bytetriebuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu/docs/design/struct/tries/bytestrie/bytetrieiterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu/docs/design/struct/tries/bytestrie/denseranges.h" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/common/bmpset.h" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/common/brkeng.h" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/common/bytesinkutil.h" />
@@ -1211,6 +1222,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/unicode-icu/vendor/double-conversion/upstream/double-conversion/string-to-double.h" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-icu/vendor/double-conversion/upstream/double-conversion/strtod.h" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-icu/vendor/double-conversion/upstream/double-conversion/utils.h" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/callgrind/kcache-cumulative.png" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/callgrind/kcache-flat.png" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/callgrind/kcache-source.png" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/java/ant/Capture.png" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/java/eclipse-setup-for-java-developers/Capture.png" />
     <Image Include="../../thirdparty/owemdjee/unicode-icu/docs/favicon.ico" />
     <Image Include="../../thirdparty/owemdjee/unicode-icu/docs/processes/release/tasks/NexusRepoMan.png" />
     <Image Include="../../thirdparty/owemdjee/unicode-icu/docs/processes/release/tasks/publish/azure-ci-builds-artifacts-download.png" />
@@ -1224,11 +1240,31 @@
     <ResourceCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/layoutex/layoutex.rc" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/CONTRIBUTING.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/README.md" />
-    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/ide4c/vscode/README.md" />
-    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/ide4c/vscode/c_cpp_properties.json" />
-    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/ide4c/vscode/launch.json" />
-    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/ide4c/vscode/tasks.json" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/demos/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/design/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/design/props/ppucd.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/design/struct/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/design/struct/tries/bytestrie/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/design/struct/tries/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/design/struct/tries/ucharstrie.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/design/struct/utrie.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/callgrind/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/cpp/c_cpp_properties.json" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/cpp/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/cpp/launch.json" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/cpp/linux.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/cpp/tasks.json" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/cpp/vscode.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/java/ant/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/java/eclipse-setup-for-java-developers/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/java/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/java/java-profiling-and-monitoring-tools.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/source/gittooling.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/source/index.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/processes/release/maintenance-releases.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/processes/release/tasks/announce.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/processes/release/tasks/build.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/processes/release/tasks/copy-shared-tests.md" />
@@ -1243,7 +1279,6 @@
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/processes/release/tasks/standards.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/processes/release/tasks/updating-measure-unit.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/processes/release/tasks/versions.md" />
-    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/processes/rules_update.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/processes/unicode-update.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/boundaryanalysis/break-rules.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/boundaryanalysis/index.md" />
@@ -1268,9 +1303,11 @@
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/datetime/timezone/index.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/datetime/universaltimescale.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/dev/codingguidelines.md" />
-    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/dev/contributions.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/dev/editing.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/dev/gitdev.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/dev/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/dev/logknownissue.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/dev/rules_update.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/dev/sync/custom.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/dev/sync/index.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/format_parse/datetime/examples.md" />
@@ -1303,6 +1340,7 @@
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/icu4j/faq.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/icu4j/index.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/icu4j/locale-service-provider.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/icu4j/why-use-icu4j.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/icu_data/buildtool.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/icu_data/index.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/icu_data/tracing.md" />
@@ -5619,6 +5657,7 @@
     <Text Include="../../thirdparty/owemdjee/unicode-icu/icu4j/perf-tests/data/udhr/udhr_spa.txt" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/icu4j/perf-tests/data/udhr/udhr_tha.txt" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/icu4j/readme.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/util/register_git_remotes_recursive.sh" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/vendor/double-conversion/UPDATING.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/vendor/double-conversion/pull-from-upstream.sh" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/vendor/double-conversion/upstream/CMakeLists.txt" />
@@ -5713,7 +5752,8 @@
     <Xml Include="../../thirdparty/owemdjee/unicode-icu/icu4j/maven/icu4j/pom.xml" />
     <Xml Include="../../thirdparty/owemdjee/unicode-icu/icu4j/perf-tests/build.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

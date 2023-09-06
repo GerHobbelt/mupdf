@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libpillowfight</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFEECD60}</ProjectGuid>
+    <RootNamespace>libpillowfight</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPILLOWFIGHT;PILLOWFIGHT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPILLOWFIGHT;PILLOWFIGHT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPILLOWFIGHT;PILLOWFIGHT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPILLOWFIGHT;PILLOWFIGHT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPILLOWFIGHT;PILLOWFIGHT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPILLOWFIGHT;PILLOWFIGHT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPILLOWFIGHT;PILLOWFIGHT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPILLOWFIGHT;PILLOWFIGHT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPILLOWFIGHT;PILLOWFIGHT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPILLOWFIGHT;PILLOWFIGHT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPILLOWFIGHT;PILLOWFIGHT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPILLOWFIGHT;PILLOWFIGHT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libpillowfight/src/pillowfight/_ace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpillowfight/src/pillowfight/_blackfilter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpillowfight/src/pillowfight/_blurfilter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpillowfight/src/pillowfight/_border.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpillowfight/src/pillowfight/_canny.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpillowfight/src/pillowfight/_compare.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpillowfight/src/pillowfight/_gaussian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpillowfight/src/pillowfight/_grayfilter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpillowfight/src/pillowfight/_masks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpillowfight/src/pillowfight/_noisefilter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpillowfight/src/pillowfight/_pymod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpillowfight/src/pillowfight/_scanborders.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpillowfight/src/pillowfight/_sobel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpillowfight/src/pillowfight/_swt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpillowfight/src/pillowfight/_version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libpillowfight/src/pillowfight/util.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpillowfight/include/pillowfight/pillowfight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpillowfight/include/pillowfight/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libpillowfight/src/pillowfight/_pymod.h" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/black_border_problem.png" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/black_border_problem2.png" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/black_border_problem2_masks.png" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/black_border_problem3.png" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/black_border_problem3_border.png" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/black_border_problem_all.png" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/black_border_problem_blackfilter.png" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/black_border_problem_blurfilter.png" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/black_border_problem_diff.png" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/black_border_problem_grayfilter.png" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/black_border_problem_noisefilter.png" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/black_border_problem_swt.png" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/brightness_problem.png" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/brightness_problem_ace.png" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/brightness_problem_all.png" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/brother_ds620.png" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/brother_mfc7360.png" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/crappy_background.png" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/crappy_background2.png" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/crappy_background_canny.png" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/crappy_background_gaussian.png" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/crappy_background_sobel.png" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/crappy_background_swt.png" />
+    <Image Include="../../thirdparty/owemdjee/libpillowfight/tests/data/epson_xp425.png" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/doc/doxygen.conf" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/doc/source/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/doc/source/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/scanborder.py" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/setup.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/src/pillowfight/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/tests/big_scan_borders_test.py" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/tests/scrap_report_imgs.py" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/tests/tests_ace.py" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/tests/tests_all.py" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/tests/tests_blackfilter.py" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/tests/tests_blurfilter.py" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/tests/tests_border.py" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/tests/tests_canny.py" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/tests/tests_compare.py" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/tests/tests_gaussian.py" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/tests/tests_grayfilter.py" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/tests/tests_masks.py" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/tests/tests_noisefilter.py" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/tests/tests_scan_borders.py" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/tests/tests_sobel.py" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/tests/tests_swt.py" />
+    <Text Include="../../thirdparty/owemdjee/libpillowfight/upd_diffs.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

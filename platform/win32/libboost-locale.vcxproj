@@ -287,12 +287,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/locale/test/cmake_test/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/locale/test/show_config.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/locale/test/test_boundary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/locale/test/test_catalog.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/locale/test/test_codecvt.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/locale/test/test_codepage.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/locale/test/test_codepage_converter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/locale/test/test_collate.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/locale/test/test_convert.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/locale/test/test_date_time.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/locale/test/test_encoding.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/locale/test/test_formatting.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/locale/test/test_generator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/locale/test/test_helpers.cpp" />
@@ -306,6 +307,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/locale/test/test_std_collate.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/locale/test/test_std_convert.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/locale/test/test_std_formatting.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/boost/libs/locale/test/test_stream_io.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/locale/test/test_utf.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/locale/test/test_util.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/boost/libs/locale/test/test_winapi_collate.cpp" />
@@ -323,6 +325,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/include/boost/locale/conversion.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/include/boost/locale/date_time.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/include/boost/locale/date_time_facet.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/include/boost/locale/detail/encoding.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/include/boost/locale/detail/facet_id.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/include/boost/locale/detail/is_supported_char.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/include/boost/locale/encoding.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/include/boost/locale/encoding_errors.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/include/boost/locale/encoding_utf.hpp" />
@@ -341,7 +346,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/include/boost/locale/util.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/include/boost/locale/util/locale_data.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/include/boost/locale/util/string.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/src/boost/locale/encoding/conv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/src/boost/locale/encoding/iconv_converter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/src/boost/locale/encoding/uconv_converter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/src/boost/locale/encoding/wconv_converter.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/src/boost/locale/icu/all_generator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/src/boost/locale/icu/cdata.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/src/boost/locale/icu/codecvt.hpp" />
@@ -360,8 +367,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/src/boost/locale/std/all_generator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/src/boost/locale/std/std_backend.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/src/boost/locale/util/encoding.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/src/boost/locale/util/foreach_char.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/src/boost/locale/util/gregorian.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/src/boost/locale/util/iconv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/src/boost/locale/util/make_std_unique.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/src/boost/locale/util/numeric.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/src/boost/locale/util/timezone.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/src/boost/locale/util/win_codepages.hpp" />
@@ -373,6 +382,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/test/boostLocale/test/test_helpers.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/test/boostLocale/test/tools.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/test/boostLocale/test/unit_test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/boost/libs/locale/test/case_convert_test.hpp" />
     <Image Include="../../thirdparty/owemdjee/boost/libs/locale/doc/boost-small.png" />
     <Image Include="../../thirdparty/owemdjee/boost/libs/locale/doc/style/boost_small.png" />
     <Image Include="../../thirdparty/owemdjee/boost/libs/locale/doc/style/header-bg.png" />

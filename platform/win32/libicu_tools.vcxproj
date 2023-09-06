@@ -228,6 +228,8 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/docs/design/struct/tries/bytestrie/bytetriedemo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/docs/design/struct/tries/bytestrie/genpname.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/as_is/os400/cxxfilt.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/as_is/os400/iculd.c" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/common/appendable.cpp" />
@@ -1014,6 +1016,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/test/intltest/tztest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/test/intltest/ucaconf.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/test/intltest/ucdtest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/test/intltest/uchar_type_build_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/test/intltest/ucharstrietest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/test/intltest/unifiedcachetest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/test/intltest/units_data_test.cpp" />
@@ -1223,6 +1226,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/vendor/double-conversion/upstream/test/cctest/test-fixed-dtoa.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/vendor/double-conversion/upstream/test/cctest/test-ieee.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/unicode-icu/vendor/double-conversion/upstream/test/cctest/test-strtod.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu/docs/design/struct/tries/bytestrie/bytetrie.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu/docs/design/struct/tries/bytestrie/bytetriebuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu/docs/design/struct/tries/bytestrie/bytetrieiterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/unicode-icu/docs/design/struct/tries/bytestrie/denseranges.h" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/common/bmpset.h" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/common/brkeng.h" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/common/bytesinkutil.h" />
@@ -2053,6 +2060,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/unicode-icu/vendor/double-conversion/upstream/test/cctest/gay-shortest-single.h" />
     <ClInclude Include="../../thirdparty/owemdjee/unicode-icu/vendor/double-conversion/upstream/test/cctest/gay-shortest.h" />
     <Font Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/test/testdata/TestFont1.otf" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/callgrind/kcache-cumulative.png" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/callgrind/kcache-flat.png" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/callgrind/kcache-source.png" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/java/ant/Capture.png" />
+    <Image Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/java/eclipse-setup-for-java-developers/Capture.png" />
     <Image Include="../../thirdparty/owemdjee/unicode-icu/docs/favicon.ico" />
     <Image Include="../../thirdparty/owemdjee/unicode-icu/docs/processes/release/tasks/NexusRepoMan.png" />
     <Image Include="../../thirdparty/owemdjee/unicode-icu/docs/processes/release/tasks/publish/azure-ci-builds-artifacts-download.png" />
@@ -2121,11 +2133,31 @@
     <ResourceCompile Include="../../thirdparty/owemdjee/unicode-icu/icu4c/source/samples/layout/LayoutSample.rc" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/CONTRIBUTING.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/README.md" />
-    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/ide4c/vscode/README.md" />
-    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/ide4c/vscode/c_cpp_properties.json" />
-    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/ide4c/vscode/launch.json" />
-    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/ide4c/vscode/tasks.json" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/demos/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/design/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/design/props/ppucd.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/design/struct/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/design/struct/tries/bytestrie/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/design/struct/tries/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/design/struct/tries/ucharstrie.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/design/struct/utrie.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/callgrind/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/cpp/c_cpp_properties.json" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/cpp/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/cpp/launch.json" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/cpp/linux.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/cpp/tasks.json" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/cpp/vscode.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/java/ant/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/java/eclipse-setup-for-java-developers/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/java/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/java/java-profiling-and-monitoring-tools.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/source/gittooling.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/devsetup/source/index.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/processes/release/maintenance-releases.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/processes/release/tasks/announce.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/processes/release/tasks/build.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/processes/release/tasks/copy-shared-tests.md" />
@@ -2140,7 +2172,6 @@
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/processes/release/tasks/standards.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/processes/release/tasks/updating-measure-unit.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/processes/release/tasks/versions.md" />
-    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/processes/rules_update.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/processes/unicode-update.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/boundaryanalysis/break-rules.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/boundaryanalysis/index.md" />
@@ -2165,9 +2196,11 @@
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/datetime/timezone/index.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/datetime/universaltimescale.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/dev/codingguidelines.md" />
-    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/dev/contributions.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/dev/editing.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/dev/gitdev.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/dev/index.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/dev/logknownissue.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/dev/rules_update.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/dev/sync/custom.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/dev/sync/index.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/format_parse/datetime/examples.md" />
@@ -2200,6 +2233,7 @@
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/icu4j/faq.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/icu4j/index.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/icu4j/locale-service-provider.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/icu4j/why-use-icu4j.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/icu_data/buildtool.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/icu_data/index.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/docs/userguide/icu_data/tracing.md" />
@@ -6823,6 +6857,7 @@
     <Text Include="../../thirdparty/owemdjee/unicode-icu/icu4j/tools/misc/src/com/ibm/icu/dev/tool/translit/rbtTemplate.txt" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/icu4j/tools/misc/src/com/ibm/icu/dev/tool/translit/varsub.bat" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/tools/cldr/README.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/tools/cldr/cldr-to-icu/README.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/tools/cldr/cldr-to-icu/README.txt" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/tools/cldr/cldr-to-icu/src/main/resources/ldml2icu_header.txt" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/tools/cldr/cldr-to-icu/src/main/resources/ldml2icu_locale.txt" />
@@ -6834,6 +6869,7 @@
     <Text Include="../../thirdparty/owemdjee/unicode-icu/tools/colprobe/locale.txt" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/tools/colprobe/readme.txt" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/tools/commit-checker/README.md" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/tools/commit-checker/REPORT.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/tools/commit-checker/TEST_COMMIT_METADATA.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/tools/commit-checker/check.py" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/tools/commit-checker/commit_metadata.py" />
@@ -6894,6 +6930,7 @@
     <Text Include="../../thirdparty/owemdjee/unicode-icu/tools/unicodetools/com/ibm/rbm/install.bat" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/tools/unicodetools/com/ibm/rbm/readme.txt" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/tools/unicodetools/readme.html" />
+    <Text Include="../../thirdparty/owemdjee/unicode-icu/util/register_git_remotes_recursive.sh" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/vendor/double-conversion/UPDATING.md" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/vendor/double-conversion/pull-from-upstream.sh" />
     <Text Include="../../thirdparty/owemdjee/unicode-icu/vendor/double-conversion/upstream/CMakeLists.txt" />

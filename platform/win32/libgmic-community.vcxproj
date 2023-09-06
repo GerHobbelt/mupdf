@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libgmic-community</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF19E850}</ProjectGuid>
+    <RootNamespace>libgmic-community</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC_COMMUNITY;GMIC_COMMUNITY_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC_COMMUNITY;GMIC_COMMUNITY_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC_COMMUNITY;GMIC_COMMUNITY_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC_COMMUNITY;GMIC_COMMUNITY_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC_COMMUNITY;GMIC_COMMUNITY_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC_COMMUNITY;GMIC_COMMUNITY_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC_COMMUNITY;GMIC_COMMUNITY_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC_COMMUNITY;GMIC_COMMUNITY_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC_COMMUNITY;GMIC_COMMUNITY_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC_COMMUNITY;GMIC_COMMUNITY_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC_COMMUNITY;GMIC_COMMUNITY_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGMIC_COMMUNITY;GMIC_COMMUNITY_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/gmic-community/gmic_plugin/src/GMIC_AE/gmic_ae_tool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gmic-community/gmic_plugin/src/gmic_plugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gmic-community/libcgmic/gmic_libc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gmic-community/libcgmic/use_libcgmic.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/gmic-community/gmic_plugin/Helpers/RFX_AE_Utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gmic-community/gmic_plugin/Helpers/RFX_FileUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gmic-community/gmic_plugin/Helpers/RFX_OFX_Utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gmic-community/gmic_plugin/Helpers/RFX_Parameter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gmic-community/gmic_plugin/Helpers/RFX_StringUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gmic-community/gmic_plugin/Helpers/RFX_Utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gmic-community/gmic_plugin/Helpers/gmic_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gmic-community/libcgmic/gmic_libc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gmic-community/libcgmic/gmic_stdlib_gmic.h" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/gmic_plugin/src/GMIC_OFX/GMIC_OFX.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/favicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/favicon.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/img/dcraw-1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/img/dcraw-2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/img/dcraw-3.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/img/enlarged.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/img/logo4.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/img/logos.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/img/nativehistogram.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/img/normalizationexample-cut15-85-hist.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/img/normalizationexample-cut15-85-normalize-15%-115%-hist.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/img/normalizationexample-cut15-85-normalize-15%-115%.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/img/normalizationexample-cut15-85.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/img/normalizationexample-hist.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/img/normalizationexample-normalize-15%-115%-hist.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/img/normalizationexample-normalize-15%-115%.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/img/normalizationexample-normalize15%-85%-hist.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/img/normalizationexample-normalize15%-85%.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/img/normalizationexample.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/img/resized-image-1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/img/resized-image-2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/img/rss.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/img/thumb.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/img/toc_buttons.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/img/toc_void.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/reference/images/3d_from_scratch.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/reference/images/install/affinity-photo/DefaultPluginFolder.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/reference/images/install/affinity-photo/MenuLocation.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/reference/images/install/affinity-photo/PluginFolderAfterInstall.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/reference/images/install/affinity-photo/UnknownPluginSetting.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/reference/images/install/common/plugin-unzipped.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/reference/images/install/photoshop/MenuLocation.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/reference/images/install/photoshop/installed-CC.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/reference/images/install/xnview/8bfPluginsMenuItem.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/reference/images/install/xnview/BrowseForPluginFolders.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/reference/images/install/xnview/ConfigurePluginLocations.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/reference/images/install/xnview/MenuLocation.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/reference/images/install/xnview/PluginLocationAdded.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/reference/images/wiki_3dobjects0.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/reference/images/wiki_3dobjects1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/reference/images/wiki_3dobjects2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/AboutImages/images/gmic_image.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/AboutImages/images/image_edge.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/AboutImages/images/images-as-datasets_example_graphic.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/Kleine_Houtstraat.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-01.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-02.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-03.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-04.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-05.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-06.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-07.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-13.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-14.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-15.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-16.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-17.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-18.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-19.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-20.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-21.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-22.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-23.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-24.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-25.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-26.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-27.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-28.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-29.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-30.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-31.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-32.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-33.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-34.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-35.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-36.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-37.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-38.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-39.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-40.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-41.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-42.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-43.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/dyid-44.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/eigenone_cross.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/ellipse.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/init-00.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/init-01.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/init-02.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/init-03.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/DYIDiffusion/images/tensor_gradient.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/cauld_0.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/cauld_1.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/cauld_2.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/cauld_3.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/cauldron_title.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/cauldron_wnb.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/fpnt-000.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/fpnt-001.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/fpnt-002.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/fpnt-003.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/fpnt-004.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/fpnt-005.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/fpnt-006.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/fpnt-007.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/fpnt-008.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/fpnt-009.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/fpnt-010.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/fpnt-011.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/fpnt-012.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/fpnt-014.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/fpnt-015.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/fpnt-016.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/fpnt-017.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/imgstack.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/init.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/init_002.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/stroke.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/tigercook.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/title_0.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/title_1.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/images/title_2.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Bouncing_Balls/images/bouncingball.gif" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Bouncing_Balls/images/content_step3.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Bouncing_Balls/images/display3d.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Bouncing_Balls/images/everything_in_place.gif" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Bouncing_Balls/images/final_result.gif" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Bouncing_Balls/images/quantic3dsheet.gif" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Bouncing_Balls/images/rotating_checkerboard.gif" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Bouncing_Balls/images/teaser.gif" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Bouncing_Balls/images/window.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Math/images/forestflowers.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/Math/images/sheepandhills.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/cheats/images/amp.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/cheats/images/coarseamper.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/cheats/images/digitizedpath.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/cheats/images/dne_face.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/cheats/images/e_letter.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/colors/images/loudman.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/controlf/images/Brown_STS-95.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/controlf/images/do_elecamp.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/controlf/images/do_routing.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/controlf/images/ifeif_kid.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/controlf/images/local.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/images/ampstamp.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/images/auntmay_oldphoto.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/images/cellsroads.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/images/example.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/images/gmic_front.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/images/ramp_colr.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/images/select.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/images/testpattern.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/inout/images/Lullwater_south_from_Binnen-Bridge_Prospect_Park.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/inout/images/fish.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/inout/images/hollerith.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/inout/images/sharedkid.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/inout/images/usdoj_1892.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/listmanip/images/ampersand.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/listmanip/images/hello.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/valuesmanip/images/basin_index_map.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/valuesmanip/images/ccube.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/valuesmanip/images/face-times-four.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/valuesmanip/images/face.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/valuesmanip/images/fill_newraplrg.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/valuesmanip/images/funny.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/valuesmanip/images/gmicpitfall.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/valuesmanip/images/hocuspocus.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/valuesmanip/images/map_julia.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/valuesmanip/images/map_palette_31y.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/valuesmanip/images/sidopera.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/valuesmanip/images/theatre_moliere.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/valuesmanip/images/threshold_graph.jpg" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/valuesmanip/images/turb.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/valuesmanip/images/usphere.png" />
+    <Image Include="../../thirdparty/owemdjee/gmic-community/tutorial/valuesmanip/images/windmill.jpg" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/gmic-community/gmic_plugin/src/GMIC_AE/Win/EffectPiPL.rc" />
+    <Text Include="../../thirdparty/owemdjee/gmic-community/README" />
+    <Text Include="../../thirdparty/owemdjee/gmic-community/README.md" />
+    <Text Include="../../thirdparty/owemdjee/gmic-community/gmic_plugin/Licence_CeCILL-C_V1-en.txt" />
+    <Text Include="../../thirdparty/owemdjee/gmic-community/gmic_plugin/Licence_CeCILL_V2-en.txt" />
+    <Text Include="../../thirdparty/owemdjee/gmic-community/gmic_plugin/README" />
+    <Text Include="../../thirdparty/owemdjee/gmic-community/news/" />
+    <Text Include="../../thirdparty/owemdjee/gmic-community/news/gmic300_en.md" />
+    <Text Include="../../thirdparty/owemdjee/gmic-community/news/gmic325_en.md" />
+    <Text Include="../../thirdparty/owemdjee/gmic-community/old_tutorial/jquery-1.11.0.min.js" />
+    <Text Include="../../thirdparty/owemdjee/gmic-community/translations/gmic_qt_fr.csv" />
+    <Text Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/Arabesques/images/goudyampersand.csv" />
+    <Text Include="../../thirdparty/owemdjee/gmic-community/tutorial/Beginner_s_Cookbook/Arabesques/images/unknownarabesque.csv" />
+    <Text Include="../../thirdparty/owemdjee/gmic-community/tutorial/cheats/scripts/svghelper.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

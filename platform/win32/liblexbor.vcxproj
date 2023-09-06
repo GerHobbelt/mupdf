@@ -1,0 +1,1065 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>liblexbor</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF50579E}</ProjectGuid>
+    <RootNamespace>liblexbor</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEXBOR;LEXBOR_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEXBOR;LEXBOR_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEXBOR;LEXBOR_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEXBOR;LEXBOR_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEXBOR;LEXBOR_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEXBOR;LEXBOR_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEXBOR;LEXBOR_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEXBOR;LEXBOR_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEXBOR;LEXBOR_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEXBOR;LEXBOR_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEXBOR;LEXBOR_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEXBOR;LEXBOR_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/css/StyleSheet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/css/selectors/list_easy_way.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/css/selectors/list_fast_way.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/css/syntax/simple_colorize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/css/syntax/structure_parse_file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/css/syntax/tokenizer/chunks_stdin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/css/syntax/tokenizer/from_file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/css/syntax/tokenizer/print_raw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/encoding/buffer/decode/decode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/encoding/buffer/decode/decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/encoding/buffer/decode/validate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/encoding/buffer/encode/encode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/encoding/buffer/encode/encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/encoding/buffer/encode/validate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/encoding/buffer/from_to.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/encoding/data_by_name.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/encoding/single/decode/decode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/encoding/single/decode/decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/encoding/single/decode/validate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/encoding/single/encode/encode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/encoding/single/encode/encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/encoding/single/encode/validate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/encoding/single/from_to.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/html/document_parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/html/document_parse_chunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/html/document_title.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/html/element_attributes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/html/element_create.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/html/element_innerHTML.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/html/elements_by_attr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/html/elements_by_class_name.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/html/elements_by_tag_name.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/html/encoding.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/html/html2sexpr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/html/parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/html/parse_chunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/html/tokenizer/callback.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/html/tokenizer/simple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/html/tokenizer/tag_attributes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/html/tokenizer/text.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/punycode/decode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/punycode/encode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/selectors/easy_way.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/selectors/normal_way.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/selectors/unique_nodes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/styles/attribute_style.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/styles/events_insert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/styles/stylesheet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/styles/walk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/unicode/idna_to_ascii.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/unicode/normalization_form.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/unicode/normalization_form_stdin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/url/parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/url/relative.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/array_obj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/avl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/bst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/bst_map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/conv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/diyfp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/dobject.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/dtoa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/in.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/mem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/mraw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/plog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/serialize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/shs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/str.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/strtod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/at_rule.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/at_rule/state.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/css.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/declaration.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/property.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/property/state.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/rule.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/selectors/pseudo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/selectors/pseudo_state.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/selectors/selector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/selectors/selectors.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/selectors/state.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/state.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/stylesheet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/syntax/anb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/syntax/parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/syntax/state.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/syntax/syntax.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/syntax/token.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/syntax/tokenizer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/syntax/tokenizer/error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/unit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/value.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/collection.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/exception.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interface.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/attr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/cdata_section.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/character_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/comment.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/document.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/document_fragment.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/document_type.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/event_target.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/node.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/processing_instruction.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/shadow_root.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/text.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/encoding/big5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/encoding/decode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/encoding/encode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/encoding/encoding.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/encoding/euc_kr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/encoding/gb18030.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/encoding/iso_2022_jp_katakana.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/encoding/jis0208.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/encoding/jis0212.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/encoding/range.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/encoding/res.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/encoding/single.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/encoding.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interface.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/anchor_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/area_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/audio_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/base_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/body_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/br_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/button_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/canvas_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/d_list_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/data_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/data_list_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/details_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/dialog_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/directory_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/div_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/document.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/embed_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/field_set_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/font_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/form_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/frame_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/frame_set_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/head_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/heading_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/hr_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/html_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/iframe_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/image_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/input_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/label_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/legend_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/li_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/link_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/map_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/marquee_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/media_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/menu_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/meta_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/meter_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/mod_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/o_list_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/object_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/opt_group_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/option_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/output_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/paragraph_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/param_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/picture_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/pre_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/progress_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/quote_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/script_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/select_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/slot_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/source_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/span_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/style_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/table_caption_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/table_cell_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/table_col_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/table_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/table_row_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/table_section_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/template_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/text_area_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/time_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/title_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/track_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/u_list_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/unknown_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/video_element.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/window.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/node.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/serialize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/style.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/token.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/token_attr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tokenizer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tokenizer/error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tokenizer/state.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tokenizer/state_comment.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tokenizer/state_doctype.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tokenizer/state_rawtext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tokenizer/state_rcdata.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tokenizer/state_script.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/active_formatting.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/after_after_body.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/after_after_frameset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/after_body.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/after_frameset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/after_head.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/before_head.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/before_html.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/foreign_content.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/in_body.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/in_caption.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/in_cell.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/in_column_group.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/in_frameset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/in_head.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/in_head_noscript.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/in_row.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/in_select.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/in_select_in_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/in_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/in_table_body.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/in_table_text.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/in_template.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/initial.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode/text.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/open_elements.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/template_insertion.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/ns/ns.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/ports/posix/lexbor/core/fs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/ports/posix/lexbor/core/memory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/ports/posix/lexbor/core/perf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/ports/windows_nt/lexbor/core/fs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/ports/windows_nt/lexbor/core/memory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/ports/windows_nt/lexbor/core/perf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/punycode/punycode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/selectors/selectors.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/tag/tag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/idna.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/unicode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/url/url.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/utils/http.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/source/lexbor/utils/warc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/core/array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/core/array_obj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/core/avl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/core/bst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/core/bst_map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/core/dobject.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/core/hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/core/in.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/core/mem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/core/mraw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/core/str.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/css/declarations.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/css/selectors/selectors.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/css/selectors/specificity.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/css/stylesheet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/css/syntax/an_plus_b.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/css/syntax/parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/css/syntax/parser_offsets.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/css/syntax/style.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/css/syntax/tokenizer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/css/syntax/tokenizer_queue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/big5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/euc_jp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/euc_kr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/gb18030.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/ibm866.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/iso_2022_jp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/iso_8859_10.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/iso_8859_13.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/iso_8859_14.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/iso_8859_15.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/iso_8859_16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/iso_8859_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/iso_8859_3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/iso_8859_4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/iso_8859_5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/iso_8859_6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/iso_8859_7.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/iso_8859_8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/koi8_r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/koi8_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/macintosh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/shift_jis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/utf-16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/utf-8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/windows_1250.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/windows_1251.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/windows_1252.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/windows_1253.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/windows_1254.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/windows_1255.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/windows_1256.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/windows_1257.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/windows_1258.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/windows_874.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/x_mac_cyrillic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/big5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/euc_jp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/euc_kr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/gb18030.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/ibm866.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/iso_2022_jp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/iso_8859_10.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/iso_8859_13.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/iso_8859_14.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/iso_8859_15.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/iso_8859_16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/iso_8859_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/iso_8859_3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/iso_8859_4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/iso_8859_5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/iso_8859_6.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/iso_8859_7.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/iso_8859_8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/koi8_r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/koi8_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/macintosh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/shift_jis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/utf-16.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/utf-8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/windows_1250.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/windows_1251.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/windows_1252.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/windows_1253.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/windows_1254.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/windows_1255.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/windows_1256.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/windows_1257.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/windows_1258.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/windows_874.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/x_mac_cyrillic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/html/attributes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/html/build-cpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/html/clone.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/html/element_by.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/html/encoding.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/html/other.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/html/parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/html/serialize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/html/tags.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/html/tokenizer_tokens.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/html/tree/open_elements.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/html/tree_builder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/ns/res.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/punycode/base.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/selectors/selectors.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/style/element_events.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/style/not_html_namespace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/style/style_tag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/tag/res.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/unicode/edges_normalization_forms.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/unicode/idna.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/unicode/idna_codepoints.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/unicode/idna_type.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/unicode/normalization_forms.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/unicode/normalization_forms_code_points.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/lexbor/url/parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/unit/kv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/unit/kv_rules.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/unit/kv_state.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/test/unit/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/big5_map_decode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/euc_jp_map_decode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/euc_kr_map_decode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/gb18030_map_decode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/iso_2022_jp_map_decode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/shift_jis_map_decode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/tmp/buffer_single_byte_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/tmp/multi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/tmp/range.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/tmp/res.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/tmp/single.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/tmp/single_byte_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/grammar/grammar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/grammar/json.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/grammar/node.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/grammar/parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/grammar/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/grammar/token.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/grammar/tokenizer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/html/tmp/insertion_mode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/tag_ns/tmp/interface.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/tag_ns/tmp/test/ns_res.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/tag_ns/tmp/test/tag_res.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/css/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/html/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/styles/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/array_obj.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/avl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/bst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/bst_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/conv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/def.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/diyfp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/dobject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/dtoa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/fs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/lexbor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/mem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/mraw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/perf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/plog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/print.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/sbst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/serialize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/shs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/str.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/str_res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/strtod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/at_rule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/at_rule/const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/at_rule/res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/at_rule/state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/css.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/declaration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/property.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/property/const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/property/res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/property/state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/rule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/selectors/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/selectors/pseudo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/selectors/pseudo_const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/selectors/pseudo_res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/selectors/pseudo_state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/selectors/selector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/selectors/selectors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/selectors/state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/stylesheet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/syntax/anb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/syntax/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/syntax/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/syntax/res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/syntax/state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/syntax/state_res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/syntax/syntax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/syntax/token.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/syntax/token_res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/syntax/tokenizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/syntax/tokenizer/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/unit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/unit/const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/unit/res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/value/const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/value/res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/collection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/dom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/exception.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/attr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/attr_const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/attr_res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/cdata_section.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/character_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/comment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/document.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/document_fragment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/document_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/event_target.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/processing_instruction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/shadow_root.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/interfaces/text.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/encoding/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/encoding/const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/encoding/decode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/encoding/encode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/encoding/encoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/encoding/multi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/encoding/range.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/encoding/res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/encoding/single.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/encoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/html.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interface_res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/anchor_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/area_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/audio_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/base_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/body_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/br_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/button_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/canvas_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/d_list_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/data_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/data_list_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/details_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/dialog_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/directory_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/div_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/document.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/embed_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/field_set_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/font_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/form_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/frame_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/frame_set_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/head_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/heading_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/hr_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/html_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/iframe_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/image_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/input_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/label_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/legend_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/li_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/link_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/map_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/marquee_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/media_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/menu_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/meta_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/meter_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/mod_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/o_list_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/object_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/opt_group_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/option_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/output_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/paragraph_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/param_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/picture_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/pre_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/progress_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/quote_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/script_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/select_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/slot_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/source_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/span_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/style_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/table_caption_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/table_cell_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/table_col_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/table_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/table_row_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/table_section_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/template_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/text_area_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/time_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/title_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/track_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/u_list_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/unknown_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/video_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/interfaces/window.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/serialize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/style.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tag_res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/token.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/token_attr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tokenizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tokenizer/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tokenizer/res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tokenizer/state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tokenizer/state_comment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tokenizer/state_doctype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tokenizer/state_rawtext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tokenizer/state_rcdata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tokenizer/state_script.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/active_formatting.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/insertion_mode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/open_elements.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree/template_insertion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/tree_res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/ns/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/ns/const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/ns/ns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/ns/res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/punycode/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/punycode/punycode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/selectors/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/selectors/selectors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/tag/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/tag/const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/tag/res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/tag/tag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/idna.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_0.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_10.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_11.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_12.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_13.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_14.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_15.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_17.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_18.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_19.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_20.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_21.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_22.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_23.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_24.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_25.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_26.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_27.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_28.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_29.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_30.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_31.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_33.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_34.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_35.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_36.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_37.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_38.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_39.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_6.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_7.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_9.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_compose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/table_idna_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/unicode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/url/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/url/url.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/utils/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/utils/http.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/utils/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/source/lexbor/utils/warc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/buffer/encoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/single/encoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/test/lexbor/html/tokenizer_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/test/lexbor/unicode/unicode_idna_test_res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/test/lexbor/unicode/unicode_test_res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/test/unit/kv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/test/unit/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/css/selectors/tmp/const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/css/selectors/tmp/res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/css/tmp/const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/css/tmp/res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/css/tmp/value_const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/css/tmp/value_res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/dom/tmp/const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/dom/tmp/res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/tmp/const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/tmp/multi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/tmp/range.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/tmp/res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/tmp/single.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/grammar/base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/grammar/document.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/grammar/json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/grammar/node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/grammar/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/grammar/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/grammar/token.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/grammar/tokenizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/html/tmp/insertion_mode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/html/tmp/tokenizer_res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/tag_ns/tmp/html_interface_res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/tag_ns/tmp/html_tag_res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/tag_ns/tmp/interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/tag_ns/tmp/ns_const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/tag_ns/tmp/ns_res.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/tag_ns/tmp/tag_const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/tag_ns/tmp/tag_res.h" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/INSTALL.md" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/css/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/encoding/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/html/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/punycode/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/selectors/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/styles/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/unicode/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/examples/lexbor/url/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/feature.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/packaging/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/packaging/deb/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/packaging/deb/Makefile.module.in" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/packaging/deb/debian_in/changelog" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/packaging/deb/debian_main_in/changelog" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/packaging/rpm/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/packaging/rpm/liblexbor-module.spec.in" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/packaging/rpm/liblexbor.spec.in" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/pvs_studio.sh" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/source/lexbor/core/config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/source/lexbor/css/config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/source/lexbor/dom/config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/source/lexbor/encoding/config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/source/lexbor/html/config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/source/lexbor/ns/config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/source/lexbor/ports/posix/config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/source/lexbor/ports/windows_nt/config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/source/lexbor/punycode/config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/source/lexbor/selectors/config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/source/lexbor/tag/config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/source/lexbor/unicode/config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/source/lexbor/url/config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/source/lexbor/utils/config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/test/external/commoncrawl.py" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/test/files/lexbor/encoding/big5_map_decode.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/test/files/lexbor/encoding/euc_jp_map_decode.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/test/files/lexbor/encoding/euc_kr_map_decode.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/test/files/lexbor/encoding/gb18030_map_decode.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/test/files/lexbor/encoding/iso_2022_jp_map_decode.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/test/files/lexbor/encoding/shift_jis_map_decode.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/test/files/lexbor/html/html5_test/README.md" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/test/lexbor/core/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/test/lexbor/css/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/test/lexbor/encoding/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/test/lexbor/html/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/test/lexbor/ns/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/test/lexbor/punycode/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/test/lexbor/selectors/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/test/lexbor/style/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/test/lexbor/tag/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/test/lexbor/unicode/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/test/lexbor/url/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/test/unit/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/css/grammar.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/css/names.py" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/css/selectors/pseudo.py" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/css/syntax/definitions.py" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/css/syntax/token_res.py" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/css/syntax/tokenizer_code_map.py" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/dom/attr.py" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/buffer-single-byte.py" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/encodings.json" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/multi-byte.py" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/multi-byte/index-big5.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/multi-byte/index-euc-kr.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/multi-byte/index-gb18030.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/multi-byte/index-iso-2022-jp-katakana.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/multi-byte/index-jis0208.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/multi-byte/index-jis0212.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/range-byte.py" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/ranges/index-gb18030-ranges.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/res.py" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte.py" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-ibm866.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-iso-8859-10.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-iso-8859-13.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-iso-8859-14.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-iso-8859-15.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-iso-8859-16.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-iso-8859-2.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-iso-8859-3.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-iso-8859-4.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-iso-8859-5.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-iso-8859-6.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-iso-8859-7.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-iso-8859-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-koi8-r.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-koi8-u.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-macintosh.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-windows-1250.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-windows-1251.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-windows-1252.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-windows-1253.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-windows-1254.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-windows-1255.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-windows-1256.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-windows-1257.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-windows-1258.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-windows-874.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/encoding/single-byte/index-x-mac-cyrillic.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/grammar/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/html/convert_html5_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/html/data/entities.json" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/html/insertion_mode.py" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/html/tokenizer_entities_bst.py" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/html/tokenizer_entities_switch.py" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/lexbor/LXB.py" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/lexbor/res.py" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/tag_ns/data/interfaces.json" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/tag_ns/data/tags.json" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/tag_ns/interfaces.py" />
+    <Text Include="../../thirdparty/owemdjee/lexbor/utils/lexbor/tag_ns/tags.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -268,6 +268,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/random.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/strscpy.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/strtok.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/thread-common.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/threadpool.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/timer.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/aix-common.c" />
@@ -280,7 +281,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/darwin-proctitle.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/darwin.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/dl.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/epoll.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/freebsd.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/fs.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/fsevents.c" />
@@ -290,9 +290,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/hurd.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/ibmi.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/kqueue.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/linux-core.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/linux-inotify.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/linux-syscalls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/linux.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/loop.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/netbsd.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/no-fsevents.c" />
@@ -308,7 +306,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/process.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/procfs-exepath.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/proctitle.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/pthread-fixes.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/qnx.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/random-devurandom.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/random-getentropy.c" />
@@ -504,6 +501,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/test/test-tcp-unexpected-read.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/test/test-tcp-write-after-connect.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/test/test-tcp-write-fail.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/test/test-tcp-write-in-a-row.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/test/test-tcp-write-queue-order.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/test/test-tcp-write-to-half-open-connection.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/test/test-tcp-writealot.c" />
@@ -535,6 +533,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/test/test-udp-multicast-ttl.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/test/test-udp-open.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/test/test-udp-options.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/test/test-udp-recv-in-a-row.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/test/test-udp-send-and-recv.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/test/test-udp-send-hang-loop.c" />
     <ClCompile Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/test/test-udp-send-immediate.c" />
@@ -650,12 +649,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/queue.h" />
     <ClInclude Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/strscpy.h" />
     <ClInclude Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/strtok.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/atomic-ops.h" />
     <ClInclude Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/darwin-stub.h" />
     <ClInclude Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/internal.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/linux-syscalls.h" />
     <ClInclude Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/os390-syscalls.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/unix/spinlock.h" />
     <ClInclude Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/uv-common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/win/atomicops-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/src/win/fs-fd-hash-inl.h" />
@@ -788,6 +784,7 @@
     <Text Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/README.md" />
     <Text Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/SUPPORTED_PLATFORMS.md" />
     <Text Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/cmake-toolchains/cross-mingw32.cmake" />
     <Text Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/configure.ac" />
     <Text Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/docs/code/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/docs/code/multi-echo-server/hammer.js" />
@@ -843,6 +840,7 @@
     <Text Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/test/fixtures/lorem_ipsum.txt" />
     <Text Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/tools/make_dist_html.py" />
     <Text Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/tools/vswhere_usability_wrapper.cmd" />
+    <Text Include="../../thirdparty/owemdjee/txiki.js/deps/libuv/tsansupp.txt" />
     <Text Include="../../thirdparty/owemdjee/txiki.js/deps/quickjs/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/txiki.js/deps/wasm3/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/txiki.js/deps/wasm3/README.md" />

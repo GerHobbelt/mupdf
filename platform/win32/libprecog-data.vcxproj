@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{3644E12D-D934-41FD-BF7E-83745A0AF60D}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+  <ItemGroup>
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/HolePunch/doccleandemo.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/auto_crop/6.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/auto_crop/Blank_book_on_a_table.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/auto_crop/IMG_8135.JPG" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/auto_crop/Paper_450x450.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/auto_crop/Photography_001.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/auto_crop/YTD2K2g.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/auto_crop/jbareham_161117_1286_0076_02.0.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/auto_crop/paper-on-table1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/auto_crop/photo_2017-10-03_20-29-18.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/auto_crop/photo_2017-10-03_23-31-11-1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/auto_crop/photo_2017-10-03_23-31-11-2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/auto_crop/photo_2017-10-03_23-31-12-1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/auto_crop/photo_2017-10-03_23-31-12-2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/auto_crop/photo_2017-10-03_23-31-13-1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/auto_crop/photo_2017-10-03_23-31-13-2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/auto_crop/photo_2017-10-03_23-31-14.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0001.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0004.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0009.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0010.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0011.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0013.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0016.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0017.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0019.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0020.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0021.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0022.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0024.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0025.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0027.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0028.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0029.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0031.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0032.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0034.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0035.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0041.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0042.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0043.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0044.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0045.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0046.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0047.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0048.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0049.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0050.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0054.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0055.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0056.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0057.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0058.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0065.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0068.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0069.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0071.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0073.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0075.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0077.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0079.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0081.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0083.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0085.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0086.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0087.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0088.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0089.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0090.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0091.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0092.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0093.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0097.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0099.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0101.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0102.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0103.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0106.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0113.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0114.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0118.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0120.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0122.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0127.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0131.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0138.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0145.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0150.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0155.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0158.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0160.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0161.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0163.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0165.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0167.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0169.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0171.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0172.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0175.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0176.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0177.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0180.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0183.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0190.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0195.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0196.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0197.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0198.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0200.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0203.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0206.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/0207.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/txt-50pct-reduced-size-70pct-quality-jpeg-artifacts-show-as-grey-noise.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/txt-50pct-reduced-size.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/binarize/txt-original-scan.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/blurred/62.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/blurred/66.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/blurred/68.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/blurred/69.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/blurred/70.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/blurred/71.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/blurred/72.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/blurred/73.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/blurred/74.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/blurred/blur1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/blurred/blur2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/blurred/blur3.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/blurred/blur4.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/blurred/blur5.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/blurred/blur6.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/blurred/blur7.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/blurred/blurred.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/blurred/endless.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/denoise/salt_pepper/105053.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/denoise/salt_pepper/Figure-14_lightbox.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/denoise/salt_pepper/WithSaltAndPepper.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/denoise/salt_pepper/butterfly_sp.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/denoise/salt_pepper/lone-banana-noise.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/denoise/salt_pepper/zJRl7.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/deskew/IMG_20171020_122633.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/dot_removal/1.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/19776.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/1D4bB.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/36134414-aa4d0bd4-10bf-11e8-9dca-c2776b2b6b8b.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/36264351-81d8210a-1292-11e8-8bc5-04b71afc6551.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/8MBi7.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/8vlN2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/CeptK.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/CeptK2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/CosfU.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/Deutsches Textarchiv – Boltzmann, Ludwig_ Vorlesungen über Gastheorie. Bd. 1. Leipzig, 1896._files/BBAW_Logo_KLEIN_sw.gif" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/Deutsches Textarchiv – Boltzmann, Ludwig_ Vorlesungen über Gastheorie. Bd. 1. Leipzig, 1896._files/Mimetypes-gnome-mime-text-xml-icon.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/Deutsches Textarchiv – Boltzmann, Ludwig_ Vorlesungen über Gastheorie. Bd. 1. Leipzig, 1896._files/Mimetypes-text-html-icon.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/Deutsches Textarchiv – Boltzmann, Ludwig_ Vorlesungen über Gastheorie. Bd. 1. Leipzig, 1896._files/Mimetypes-txt-icon.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/Deutsches Textarchiv – Boltzmann, Ludwig_ Vorlesungen über Gastheorie. Bd. 1. Leipzig, 1896._files/boltzmann_gastheorie01_1896_0009_400px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/Deutsches Textarchiv – Boltzmann, Ludwig_ Vorlesungen über Gastheorie. Bd. 1. Leipzig, 1896._files/boltzmann_gastheorie01_1896_0027_800px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/Deutsches Textarchiv – Boltzmann, Ludwig_ Vorlesungen über Gastheorie. Bd. 1. Leipzig, 1896._files/dfg_logo_schwarz.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/Deutsches Textarchiv – Boltzmann, Ludwig_ Vorlesungen über Gastheorie. Bd. 1. Leipzig, 1896._files/down.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/Deutsches Textarchiv – Boltzmann, Ludwig_ Vorlesungen über Gastheorie. Bd. 1. Leipzig, 1896._files/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/Deutsches Textarchiv – Boltzmann, Ludwig_ Vorlesungen über Gastheorie. Bd. 1. Leipzig, 1896._files/normalized-view-icon.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/Deutsches Textarchiv – Boltzmann, Ludwig_ Vorlesungen über Gastheorie. Bd. 1. Leipzig, 1896._files/taxi-icon2.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/Deutsches Textarchiv – Boltzmann, Ludwig_ Vorlesungen über Gastheorie. Bd. 1. Leipzig, 1896._files/voyant-tools-icon.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/Deutsches Textarchiv – Der Digitalisierungsworkflow im DTA_files/BBAW_Logo_KLEIN_sw.gif" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/Deutsches Textarchiv – Der Digitalisierungsworkflow im DTA_files/dfg_logo_schwarz.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/Deutsches Textarchiv – Der Digitalisierungsworkflow im DTA_files/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/Dn59g.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/FJrUs.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/FyjeI.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/HnrO4.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/Kipling_-_Song_of_the_English,_1914_-_3492116_F.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/MnIoK.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/UEWHj.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896_0001_1600px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896_0004_1600px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896_0007_1600px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896_0008_1600px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896_0009_1600px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896_0010_1600px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896_0011_1600px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896_0012_1600px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896_0013_1600px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896_0014_1600px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896_0015_1600px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896_0016_1600px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896_0017_1600px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896_0018_1600px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896_0019_1600px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896_0020_1600px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896_0021_1600px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896_0022_1600px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896_0023_1600px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896_0024_1600px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896_0025_1600px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896_0026_1600px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896_0027_1600px.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/eR2ls.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/hdtzg.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/j9tTQ.png" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/jCBJG.jpg" />
+    <Image Include="../../thirdparty/owemdjee/libprecog-data/images/extra/xrMjk.png" />
+    <Text Include="../../thirdparty/owemdjee/libprecog-data/README.md" />
+    <Xml Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896.TEI-P5.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896.tcf (1).xml" />
+    <Xml Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896.tcf.xml" />
+    <Xml Include="../../thirdparty/owemdjee/libprecog-data/images/extra/boltzmann_gastheorie01_1896.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

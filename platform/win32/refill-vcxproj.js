@@ -83,6 +83,7 @@ const projectMap = {
 	"libmarl": "google-marl",
 	"libmarl_tests": "google-marl",
 	"libmegamime": "mime-mega",
+	"libOpenImageIO": "oiio",
 	"libprocess": "subprocess",
 	"libpromise": "promise-cpp",
 	"libQuickJSpp": "QuickJS-C++-Wrapper",

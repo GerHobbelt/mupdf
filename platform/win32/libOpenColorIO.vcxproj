@@ -1,0 +1,1801 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libOpenColorIO</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF97358E}</ProjectGuid>
+    <RootNamespace>libOpenColorIO</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCOLORIO;OPENCOLORIO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCOLORIO;OPENCOLORIO_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCOLORIO;OPENCOLORIO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCOLORIO;OPENCOLORIO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCOLORIO;OPENCOLORIO_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCOLORIO;OPENCOLORIO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCOLORIO;OPENCOLORIO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCOLORIO;OPENCOLORIO_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCOLORIO;OPENCOLORIO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCOLORIO;OPENCOLORIO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCOLORIO;OPENCOLORIO_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCOLORIO;OPENCOLORIO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/Baker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/BakingUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/BitDepthUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/CPUInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/CPUProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/Caching.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ColorSpace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ColorSpaceSet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/Config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ConfigUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/Context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ContextVariableUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/Display.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/DynamicProperty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/Exception.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/FileRules.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/GPUProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/GpuShader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/GpuShaderClassWrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/GpuShaderDesc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/GpuShaderUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/HashUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ImageDesc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ImagePacking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/Logging.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/Look.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/LookParse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/MathUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/NamedTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/OCIOYaml.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/OCIOZArchive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/Op.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/OpOptimizers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ParseUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/PathUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/Platform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/Processor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ScanlineHelper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/SystemMonitor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/SystemMonitor_macos.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/SystemMonitor_windows.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/Transform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ViewTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ViewingRules.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/apphelpers/CategoryHelpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/apphelpers/ColorSpaceHelpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/apphelpers/DisplayViewHelpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/apphelpers/LegacyViewingPipeline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/apphelpers/MixingHelpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/builtinconfigs/BuiltinConfigRegistry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/builtinconfigs/CGConfig.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/builtinconfigs/StudioConfig.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FileFormat3DL.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FileFormatCC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FileFormatCCC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FileFormatCDL.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FileFormatCSP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FileFormatCTF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FileFormatDiscreet1DL.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FileFormatHDL.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FileFormatICC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FileFormatIridasCube.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FileFormatIridasItx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FileFormatIridasLook.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FileFormatPandora.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FileFormatResolveCube.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FileFormatSpi1D.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FileFormatSpi3D.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FileFormatSpiMtx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FileFormatTruelight.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FileFormatUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FileFormatVF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FormatMetadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/cdl/CDLParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/cdl/CDLReaderHelper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/cdl/CDLWriter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/ctf/CTFReaderHelper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/ctf/CTFReaderUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/ctf/CTFTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/ctf/IndexMapping.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/xmlutils/XMLReaderHelper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/xmlutils/XMLReaderUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/xmlutils/XMLWriterUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/OpTools.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/allocation/AllocationOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/cdl/CDLOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/cdl/CDLOpCPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/cdl/CDLOpData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/cdl/CDLOpGPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/exponent/ExponentOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/exposurecontrast/ExposureContrastOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/exposurecontrast/ExposureContrastOpCPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/exposurecontrast/ExposureContrastOpData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/exposurecontrast/ExposureContrastOpGPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/fixedfunction/FixedFunctionOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/fixedfunction/FixedFunctionOpCPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/fixedfunction/FixedFunctionOpData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/fixedfunction/FixedFunctionOpGPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gamma/GammaOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gamma/GammaOpCPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gamma/GammaOpData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gamma/GammaOpGPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gamma/GammaOpUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingprimary/GradingPrimary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingprimary/GradingPrimaryOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingprimary/GradingPrimaryOpCPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingprimary/GradingPrimaryOpData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingprimary/GradingPrimaryOpGPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingrgbcurve/GradingBSplineCurve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingrgbcurve/GradingRGBCurve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingrgbcurve/GradingRGBCurveOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingrgbcurve/GradingRGBCurveOpCPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingrgbcurve/GradingRGBCurveOpData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingrgbcurve/GradingRGBCurveOpGPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingtone/GradingTone.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingtone/GradingToneOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingtone/GradingToneOpCPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingtone/GradingToneOpData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingtone/GradingToneOpGPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/log/LogOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/log/LogOpCPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/log/LogOpData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/log/LogOpGPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/log/LogUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut1d/Lut1DOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut1d/Lut1DOpCPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut1d/Lut1DOpCPU_AVX.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut1d/Lut1DOpCPU_AVX2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut1d/Lut1DOpCPU_SSE2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut1d/Lut1DOpData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut1d/Lut1DOpGPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut3d/Lut3DOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut3d/Lut3DOpCPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut3d/Lut3DOpCPU_AVX.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut3d/Lut3DOpCPU_AVX2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut3d/Lut3DOpCPU_SSE2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut3d/Lut3DOpData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut3d/Lut3DOpGPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/matrix/MatrixOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/matrix/MatrixOpCPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/matrix/MatrixOpData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/matrix/MatrixOpGPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/noop/NoOps.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/range/RangeOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/range/RangeOpCPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/range/RangeOpData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/range/RangeOpGPU.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/reference/ReferenceOpData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/AllocationTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/BuiltinTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/CDLTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/ColorSpaceTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/DisplayViewTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/ExponentTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/ExponentWithLinearTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/ExposureContrastTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/FileTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/FixedFunctionTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/GradingPrimaryTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/GradingRGBCurveTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/GradingToneTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/GroupTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/LogAffineTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/LogCameraTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/LogTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/LookTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/Lut1DTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/Lut3DTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/MatrixTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/RangeTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/builtins/ACES.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/builtins/ArriCameras.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/builtins/BuiltinTransformRegistry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/builtins/CanonCameras.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/builtins/ColorMatrixHelpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/builtins/Displays.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/builtins/OpHelpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/builtins/PanasonicCameras.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/builtins/RedCameras.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/builtins/SonyCameras.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioarchive/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociobakelut/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociobakelut/ocioicc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociocheck/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociochecklut/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioconvert/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociodisplay/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociolutimage/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociomakeclf/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioperf/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociowrite/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/apputils/argparse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/apputils/logGuard.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/apputils/strutil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/java/JNIBaker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/java/JNIColorSpace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/java/JNIConfig.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/java/JNIContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/java/JNIGlobals.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/java/JNIGpuShaderDesc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/java/JNIImageDesc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/java/JNILook.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/java/JNIProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/java/JNITransforms.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/java/JNIUtil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyBaker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyBuiltinConfigRegistry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyBuiltinTransformRegistry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyCPUProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyColorSpace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyColorSpaceSet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyConfig.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyConfigIOProxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyDynamicProperty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyFileRules.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyFormatMetadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyGPUProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyGpuShaderCreator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyGpuShaderDesc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyGradingData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyImageDesc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyLook.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyNamedTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyOpenColorIO.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyPackedImageDesc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyPlanarImageDesc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyProcessorMetadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PySystemMonitors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyTypes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyViewTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyViewingRules.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/apphelpers/PyColorSpaceHelpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/apphelpers/PyDisplayViewHelpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/apphelpers/PyLegacyViewingPipeline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/apphelpers/PyMixingHelpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/transforms/PyAllocationTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/transforms/PyBuiltinTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/transforms/PyCDLTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/transforms/PyColorSpaceTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/transforms/PyDisplayViewTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/transforms/PyExponentTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/transforms/PyExponentWithLinearTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/transforms/PyExposureContrastTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/transforms/PyFileTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/transforms/PyFixedFunctionTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/transforms/PyGradingPrimaryTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/transforms/PyGradingRGBCurveTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/transforms/PyGradingToneTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/transforms/PyGroupTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/transforms/PyLogAffineTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/transforms/PyLogCameraTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/transforms/PyLogTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/transforms/PyLookTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/transforms/PyLut1DTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/transforms/PyLut3DTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/transforms/PyMatrixTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/transforms/PyRangeTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/imageioapphelpers/imageio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/imageioapphelpers/imageio_exr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/imageioapphelpers/imageio_oiio.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/glsl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/oglapp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cmake-consumer/consumer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/AVX2_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/AVX_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/Baker_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/BitDepthUtils_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/CPUProcessor_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/Caching_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ColorSpaceSet_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ColorSpace_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/Config_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ContextVariableUtils_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/Context_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/Display_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/DynamicProperty_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/Exception_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/FileRules_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/GpuShaderUtils_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/GpuShader_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/Logging_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/LookParse_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/MathUtils_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/NamedTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/OCIOZArchive_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/OpOptimizers_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/Op_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ParseUtils_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/PathUtils_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/Platform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/Processor_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/SIMD_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/SSE2_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/SSE_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/UnitTestLogUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/UnitTestMain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/UnitTestOptimFlags.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/UnitTestUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ViewTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ViewingRules_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/apphelpers/CategoryHelpers_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/apphelpers/ColorSpaceHelpers_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/apphelpers/DisplayViewHelpers_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/apphelpers/LegacyViewingPipeline_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/apphelpers/MixingHelpers_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/builtinconfigs/BuiltinConfig_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/fileformats/FileFormat3DL_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/fileformats/FileFormatCCC_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/fileformats/FileFormatCC_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/fileformats/FileFormatCDL_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/fileformats/FileFormatCSP_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/fileformats/FileFormatCTF_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/fileformats/FileFormatDiscreet1DL_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/fileformats/FileFormatHDL_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/fileformats/FileFormatICC_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/fileformats/FileFormatIridasCube_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/fileformats/FileFormatIridasItx_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/fileformats/FileFormatIridasLook_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/fileformats/FileFormatPandora_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/fileformats/FileFormatResolveCube_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/fileformats/FileFormatSpi1D_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/fileformats/FileFormatSpi3D_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/fileformats/FileFormatSpiMtx_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/fileformats/FileFormatTruelight_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/fileformats/FileFormatVF_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/fileformats/FormatMetadata_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/fileformats/ctf/CTFTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/fileformats/ctf/IndexMapping_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/fileformats/xmlutils/XMLReaderUtils_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/allocation/AllocationOp_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/cdl/CDLOpData_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/cdl/CDLOp_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/exponent/ExponentOp_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/exposurecontrast/ExposureContrastOpCPU_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/exposurecontrast/ExposureContrastOpData_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/exposurecontrast/ExposureContrastOp_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/fixedfunction/FixedFunctionOpCPU_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/fixedfunction/FixedFunctionOpData_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/fixedfunction/FixedFunctionOp_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/gamma/GammaOpCPU_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/gamma/GammaOpData_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/gamma/GammaOpUtils_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/gamma/GammaOp_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/gradingprimary/GradingPrimaryOpCPU_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/gradingprimary/GradingPrimaryOpData_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/gradingprimary/GradingPrimaryOp_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/gradingprimary/GradingPrimary_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/gradingrgbcurve/GradingBSplineCurve_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/gradingrgbcurve/GradingRGBCurveOpCPU_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/gradingrgbcurve/GradingRGBCurveOpData_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/gradingrgbcurve/GradingRGBCurveOp_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/gradingrgbcurve/GradingRGBCurve_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/gradingtone/GradingToneOpCPU_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/gradingtone/GradingToneOpData_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/gradingtone/GradingToneOp_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/gradingtone/GradingTone_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/log/LogOpCPU_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/log/LogOpData_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/log/LogOp_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/log/LogUtils_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/lut1d/Lut1DOpCPU_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/lut1d/Lut1DOpData_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/lut1d/Lut1DOpGPU_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/lut1d/Lut1DOp_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/lut3d/Lut3DOpCPU_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/lut3d/Lut3DOpData_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/lut3d/Lut3DOp_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/matrix/MatrixOpCPU_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/matrix/MatrixOpData_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/matrix/MatrixOp_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/noop/NoOps_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/range/RangeOpCPU_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/range/RangeOpData_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/range/RangeOp_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/ops/reference/ReferenceOpData_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/transforms/AllocationTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/transforms/BuiltinTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/transforms/CDLTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/transforms/ColorSpaceTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/transforms/DisplayViewTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/transforms/ExponentTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/transforms/ExponentWithLinearTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/transforms/ExposureContrastTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/transforms/FileTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/transforms/FixedFunctionTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/transforms/GradingPrimaryTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/transforms/GradingRGBCurveTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/transforms/GradingToneTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/transforms/GroupTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/transforms/LogAffineTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/transforms/LogCameraTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/transforms/LogTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/transforms/LookTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/transforms/Lut1DTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/transforms/Lut3DTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/transforms/MatrixTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/transforms/RangeTransform_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/transforms/builtins/BuiltinTransformRegistry_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/data/files/cdl_test1.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/data/files/cdl_test2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/data/files/cdl_test_ASC_SAT.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/data/files/cdl_test_ASC_SOP.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/data/files/cdl_test_SATNode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/gpu/CDLOp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/gpu/Config_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/gpu/ECOp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/gpu/FixedFunctionOp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/gpu/GPUHelpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/gpu/GPUUnitTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/gpu/GammaOp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/gpu/GradingPrimaryOp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/gpu/GradingRGBCurveOp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/gpu/GradingToneOp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/gpu/LogOp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/gpu/Lut1DOp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/gpu/Lut3DOp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/gpu/MatrixOp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/gpu/RangeOp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/java/org/OpenColorIO/test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/osl/CDLOp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/osl/ECOp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/osl/FixedFunctionOp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/osl/GammaOp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/osl/GradingPrimaryOp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/osl/GradingRGBCurveOp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/osl/GradingToneOp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/osl/LogOp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/osl/MatrixOp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/osl/RangeOp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/osl/UnitTestMain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/osl/UnitTestOSL.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/testutils/UnitTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/utils/StringUtils_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/tests/utils/UnitTestMain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/DrawbotBot.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/OpenColorIO_AE.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/OpenColorIO_AE_ArbData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/OpenColorIO_AE_Context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/OpenColorIO_AE_UI.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/win/OpenColorIO_AE_Dialogs_Win.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/win/OpenColorIO_AE_GL_Win.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/nuke/OCIOCDLTransform/OCIOCDLTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/nuke/OCIOColorSpace/OCIOColorSpace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/nuke/OCIODisplay/OCIODisplay.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/nuke/OCIOFileTransform/OCIOFileTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/nuke/OCIOLogConvert/OCIOLogConvert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/nuke/OCIOLookTransform/OCIOLookTransform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/OCIOColorSpace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/OCIODisplayView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/OCIOMain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/OCIOProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/OCIOUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/Support/Library/ofxsCore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/Support/Library/ofxsImageEffect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/Support/Library/ofxsInteract.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/Support/Library/ofxsLog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/Support/Library/ofxsMultiThread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/Support/Library/ofxsParams.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/Support/Library/ofxsProperty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/Support/Library/ofxsPropertyValidation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/photoshop/OpenColorIO_PS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/photoshop/OpenColorIO_PS_Context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/photoshop/win/OpenColorIO_PS_Dialogs_Win.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/ext/sampleicc/src/include/icProfileHeader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/ext/sampleicc/src/include/iccProfileReader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/ext/xxHash/src/include/xxhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/include/OpenColorIO/OpenColorAppHelpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/include/OpenColorIO/OpenColorIO.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/include/OpenColorIO/OpenColorTransforms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/include/OpenColorIO/OpenColorTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/share/docs/docstrings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/AVX.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/AVX2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/BakingUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/BitDepthUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/CPUInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/CPUProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/Caching.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ConfigUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ContextVariableUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/CustomKeys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/Display.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/DynamicProperty.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/FileRules.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/GPUProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/GpuShader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/GpuShaderClassWrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/GpuShaderUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/HashUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ImagePacking.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/Logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/LookParse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/MathUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/Mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/NamedTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/OCIOYaml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/OCIOZArchive.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/Op.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/OpBuilders.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ParseUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/PathUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/Platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/PrivateTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/Processor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/SSE.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/SSE2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ScanlineHelper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/SystemMonitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/TokensManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/TransformBuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ViewingRules.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/apphelpers/CategoryHelpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/apphelpers/ColorSpaceHelpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/apphelpers/LegacyViewingPipeline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/apphelpers/MixingHelpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/builtinconfigs/BuiltinConfigRegistry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/builtinconfigs/CGConfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/builtinconfigs/StudioConfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FileFormatICC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FileFormatUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/FormatMetadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/cdl/CDLParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/cdl/CDLReaderHelper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/cdl/CDLWriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/ctf/CTFReaderHelper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/ctf/CTFReaderUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/ctf/CTFTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/ctf/IndexMapping.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/xmlutils/XMLReaderHelper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/xmlutils/XMLReaderUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/fileformats/xmlutils/XMLWriterUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/OpArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/OpTools.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/allocation/AllocationOp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/cdl/CDLOp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/cdl/CDLOpCPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/cdl/CDLOpData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/cdl/CDLOpGPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/exponent/ExponentOp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/exposurecontrast/ExposureContrastOp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/exposurecontrast/ExposureContrastOpCPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/exposurecontrast/ExposureContrastOpData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/exposurecontrast/ExposureContrastOpGPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/fixedfunction/FixedFunctionOp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/fixedfunction/FixedFunctionOpCPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/fixedfunction/FixedFunctionOpData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/fixedfunction/FixedFunctionOpGPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gamma/GammaOp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gamma/GammaOpCPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gamma/GammaOpData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gamma/GammaOpGPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gamma/GammaOpUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingprimary/GradingPrimary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingprimary/GradingPrimaryOp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingprimary/GradingPrimaryOpCPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingprimary/GradingPrimaryOpData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingprimary/GradingPrimaryOpGPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingrgbcurve/GradingBSplineCurve.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingrgbcurve/GradingRGBCurve.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingrgbcurve/GradingRGBCurveOp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingrgbcurve/GradingRGBCurveOpCPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingrgbcurve/GradingRGBCurveOpData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingrgbcurve/GradingRGBCurveOpGPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingtone/GradingTone.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingtone/GradingToneOp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingtone/GradingToneOpCPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingtone/GradingToneOpData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/gradingtone/GradingToneOpGPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/log/LogOp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/log/LogOpCPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/log/LogOpData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/log/LogOpGPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/log/LogUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut1d/Lut1DOp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut1d/Lut1DOpCPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut1d/Lut1DOpCPU_AVX.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut1d/Lut1DOpCPU_AVX2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut1d/Lut1DOpCPU_SSE2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut1d/Lut1DOpData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut1d/Lut1DOpGPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut3d/Lut3DOp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut3d/Lut3DOpCPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut3d/Lut3DOpCPU_AVX.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut3d/Lut3DOpCPU_AVX2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut3d/Lut3DOpCPU_SSE2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut3d/Lut3DOpData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/lut3d/Lut3DOpGPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/matrix/MatrixOp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/matrix/MatrixOpCPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/matrix/MatrixOpData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/matrix/MatrixOpGPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/noop/NoOps.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/range/RangeOp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/range/RangeOpCPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/range/RangeOpData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/range/RangeOpGPU.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/ops/reference/ReferenceOpData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/BuiltinTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/CDLTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/ExponentTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/ExponentWithLinearTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/ExposureContrastTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/FileTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/FixedFunctionTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/GradingPrimaryTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/GradingRGBCurveTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/GradingToneTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/GroupTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/LogAffineTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/LogCameraTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/LogTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/Lut1DTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/Lut3DTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/MatrixTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/RangeTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/builtins/ACES.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/builtins/ArriCameras.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/builtins/BuiltinTransformRegistry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/builtins/CanonCameras.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/builtins/ColorMatrixHelpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/builtins/Displays.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/builtins/OpHelpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/builtins/PanasonicCameras.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/builtins/RedCameras.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/transforms/builtins/SonyCameras.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociobakelut/ocioicc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/apputils/argparse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/apputils/logGuard.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/apputils/measure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/apputils/strutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/java/JNIUtil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyBuiltinConfigRegistry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyBuiltinTransformRegistry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyDynamicProperty.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyGpuShaderCreator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyImageDesc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyOpenColorIO.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PySystemMonitors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/PyUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/imageioapphelpers/imageio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/glsl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/metalapp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/msl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/mtltexture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/oglapp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/utils/NumberUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/src/utils/StringUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/UnitTestLogUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/UnitTestOptimFlags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/UnitTestUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/tests/data/files/icc-test-1.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/tests/data/files/icc-test-pc1.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/tests/data/files/icc-test-pc2.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/tests/data/files/icc-test-pc3.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/tests/data/files/icc-test-pc4.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/tests/gpu/GPUHelpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/tests/gpu/GPUUnitTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/tests/osl/UnitTestMain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/tests/osl/UnitTestOSL.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/tests/osl/UnitTestTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/tests/testutils/UnitTest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/DrawbotBot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/OpenColorIO_AE.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/OpenColorIO_AE_Context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/OpenColorIO_AE_Dialogs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/OpenColorIO_AE_GL.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/mac/OpenColorIO_AE_Menu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/mac/OpenColorIO_AE_MonitorProfileChooser_Controller.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/vc/vc15/OpenColorABI.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/vc/vc15/utils/Half.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/win/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/xcode/xcode12/OpenColorABI.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/xcode/xcode12/ext/expat_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/xcode/xcode12/utils/Half.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/xcode/xcode9/OpenColorABI.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/xcode/xcode9/ext/expat_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/xcode/xcode9/utils/Half.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/nuke/OCIOCDLTransform/OCIOCDLTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/nuke/OCIOColorSpace/OCIOColorSpace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/nuke/OCIODisplay/OCIODisplay.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/nuke/OCIOFileTransform/OCIOFileTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/nuke/OCIOLogConvert/OCIOLogConvert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/nuke/OCIOLookTransform/OCIOLookTransform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/OCIOColorSpace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/OCIODisplayView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/OCIOProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/OCIOUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/Support/Library/ofxsSupportPrivate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/Support/include/ofxsCore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/Support/include/ofxsImageBlender.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/Support/include/ofxsImageEffect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/Support/include/ofxsInteract.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/Support/include/ofxsLog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/Support/include/ofxsMemory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/Support/include/ofxsMessage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/Support/include/ofxsMultiThread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/Support/include/ofxsParam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/Support/include/ofxsProcessing.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/photoshop/OpenColorIO_PS.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/photoshop/OpenColorIO_PS_Context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/photoshop/OpenColorIO_PS_Dialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/photoshop/OpenColorIO_PS_Terminology.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/photoshop/OpenColorIO_PS_Version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/photoshop/mac/OpenColorIO_PS_Dialog_Controller.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/OpenColorIO/vendor/photoshop/win/resource1.h" />
+    <Font Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/static/plugins/slick/fonts/slick.ttf" />
+    <Font Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/static/plugins/themify-icons/fonts/themify.ttf" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/SpiderVerse_pmm014.1014_lm_v1_opt.jpg" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/aswf_aqua.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/blog/blog-post-1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/blog/blog-post-2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/blog/blog-post-3.jpg" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/blog/meghna.jpg" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/favicon.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/ocio_full_w4x.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/ocio_m2x.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/3ds_max.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/ae.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/anchorpoint.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/arnold.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/blender.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/cinesync.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/clarisse.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/cryengine.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/djv.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/gaffer.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/guerilla.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/hiero.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/houdini.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/katana.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/krita.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/mari.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/maya.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/mocha.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/modo.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/mrviewer.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/nuke.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/oiio.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/photoflow.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/ps.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/rv.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/silhouette.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/substance.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/unreal.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/unreallogo.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/vegaspro.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/static/images/supported_apps/vray.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/static/plugins/slick/ajax-loader.gif" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/tutorials/_images/psicc_itworks.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/tutorials/_images/psicc_open_current_profile.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/tutorials/_images/psicc_proof_setup.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/tutorials/_images/psicc_reveal_profile.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/docs/tutorials/_images/psicc_select_profile.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/share/nuke/ocio_icon.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/share/openfx/resources/OpenColorIO.OCIOColorSpace.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/share/openfx/resources/OpenColorIO.OCIODisplayView.png" />
+    <Image Include="../../thirdparty/owemdjee/OpenColorIO/tests/data/files/rgb-cmy.jpg" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/aftereffects/win/OpenColorIO.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/OpenColorIO/vendor/photoshop/win/OpenColorIO_PS_Dialog.rc" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/CLA-corporate.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/CLA-individual.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/Charter.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/DCO.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/gsoc_2021_README.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-02-04.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-02-11.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-02-25.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-03-04.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-03-11.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-03-18.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-03-25.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-04-01.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-04-08.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-04-15.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-04-29.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-05-06.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-05-13.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-05-27.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-06-03.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-06-10.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-06-17.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-07-08.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-07-22.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-07-31.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-08-05.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-08-12.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-08-19.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-09-09.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-09-16.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-09-23.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-09-30.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-10-07.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-10-21.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-10-28.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-11-04.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-11-18.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-11-25.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-12-09.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2019-12-16.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-01-06.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-01-13.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-01-20.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-01-27.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-02-03.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-02-10.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-02-24.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-03-02.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-03-09.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-03-16.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-03-23.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-03-30.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-04-06.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-04-20.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-04-27.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-05-04.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-05-11.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-05-18.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-06-01.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-06-08.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-06-22.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-06-29.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-07-06.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-07-13.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-07-20.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-07-27.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-08-03.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-08-10.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-08-17.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-08-31.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-09-14.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-09-21.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-09-28.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-10-05.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-10-12.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-10-19.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-10-26.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-11-02.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-11-09.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-11-16.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-11-23.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-11-30.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-12-07.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2020-12-14.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2021-01-04.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2021-01-18.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/2021-02-08.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/tsc/template.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/configs/2020-06-16.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/configs/2020-06-30.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/configs/2020-07-28.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/configs/2020-08-25.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/configs/2020-09-08.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/configs/2020-09-25.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/configs/2020-11-03.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/configs/2020-11-17.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/configs/2020-12-01.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/configs/2020-12-15.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/configs/2021-01-19.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/documentation/2020-06-12.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/documentation/2020-06-19.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/documentation/2020-07-24.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/documentation/2020-09-11.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/ocio_v2/2018-11-27.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/ocio_v2/2019-01-23.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/ocio_v2/2019-02-28.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/ocio_v2/2019-03-28.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/ocio_v2/2019-04-30.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/ocio_v2/2019-06-26.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/ocio_v2/2019-07-31.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/ocio_v2/2019-11-20.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/ocio_v2/2020-01-23.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/ocio_v2/2020-02-27.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/ocio_v2/2020-06-18.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ASWF/meetings/working_groups/ocio_v2/2020-08-06.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/COMMITTERS.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/GOVERNANCE.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/INSTALL.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/PROCESS.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/README.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/THIRD-PARTY.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/_index.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/apphelpers.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/baker.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/colorspace.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/config.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/constants.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/context.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/dynamicproperty.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/enums.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/exceptions.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/formatmetadata.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/global.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/grading_transforms.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/imagedesc.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/look.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/namedtransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/processors.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_allocation.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_allocationfromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_allocationtostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_allocationtransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_baker.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_bitdepth.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_bitdepthfromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_bitdepthisfloat.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_bitdepthtoint.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_bitdepthtostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_boolfromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_booltostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_builtintransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_builtintransformregistry.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_cdlstyle.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_cdlstylefromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_cdlstyletostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_cdltransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_channelordering.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_clearallcaches.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_colorspace.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_colorspacedirection.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_colorspacehelpers.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_colorspacemenuhelper.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_colorspacemenuparameters.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_colorspaceset.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_colorspacetransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_colorspacevisibility.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_combinetransformdirections.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_config.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_context.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_cpuprocessor.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_displayviewhelpers.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_displayviewtransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_dynamicproperty.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_dynamicpropertytype.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_environmentmode.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_environmentmodefromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_environmentmodetostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_exception.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_exceptionmissingfile.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_exponenttransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_exponentwithlineartransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_exposurecontraststyle.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_exposurecontraststylefromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_exposurecontraststyletostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_exposurecontrasttransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_filerules.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_filetransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_fixedfunctionstyle.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_fixedfunctionstylefromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_fixedfunctionstyletostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_fixedfunctiontransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_formatmetadata.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_getenvvariable.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_getinversetransformdirection.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_getlogginglevel.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_getversion.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_getversionhex.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_gpulanguage.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_gpulanguagefromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_gpulanguagetostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_gpuprocessor.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_gpushadercreator.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_gpushaderdesc.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_gradingbsplinecurve.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_gradingcontrolpoint.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_gradingprimary.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_gradingprimarytransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_gradingrgbcurve.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_gradingrgbcurvetransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_gradingrgbm.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_gradingrgbmsw.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_gradingstyle.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_gradingstylefromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_gradingstyletostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_gradingtone.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_gradingtonetransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_grouptransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_imagedesc.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_interpolation.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_interpolationfromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_interpolationtostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_isenvvariablepresent.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_legacyviewingpipeline.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_logaffinetransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_logcameratransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_logginglevel.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_logginglevelfromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_loggingleveltostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_logmessage.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_logtransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_look.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_looktransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_lut1dhueadjust.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_lut1dtransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_lut3dtransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_matrixtransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_mixingcolorspacemanager.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_mixingslider.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_namedtransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_namedtransformvisibility.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_negativestyle.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_negativestylefromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_negativestyletostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_optimizationflags.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_packedimagedesc.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_planarimagedesc.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_processor.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_processorcacheflags.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_processormetadata.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_rangestyle.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_rangestylefromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_rangestyletostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_rangetransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_referencespacetype.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_resetcomputehashfunction.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_resettodefaultloggingfunction.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_rgbcurvetype.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_searchreferencespacetype.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_setcomputehashfunction.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_setenvvariable.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_setloggingfunction.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_setlogginglevel.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_systemmonitors.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_transform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_transformdirection.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_transformdirectionfromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_transformdirectiontostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_transformtype.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_uniformdatatype.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_unsetenvvariable.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_viewingrules.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_viewtransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_viewtransformdirection.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/frozen/pyopencolorio_viewtype.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_allocation.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_allocationfromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_allocationtostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_allocationtransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_baker.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_bitdepth.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_bitdepthfromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_bitdepthisfloat.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_bitdepthtoint.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_bitdepthtostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_boolfromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_booltostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_builtintransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_builtintransformregistry.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_cdlstyle.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_cdlstylefromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_cdlstyletostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_cdltransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_channelordering.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_clearallcaches.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_colorspace.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_colorspacedirection.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_colorspacehelpers.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_colorspaceset.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_colorspacetransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_colorspacevisibility.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_combinetransformdirections.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_config.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_context.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_cpuprocessor.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_displayviewhelpers.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_displayviewtransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_dynamicproperty.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_dynamicpropertytype.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_environmentmode.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_environmentmodefromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_environmentmodetostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_exception.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_exceptionmissingfile.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_exponenttransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_exponentwithlineartransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_exposurecontraststyle.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_exposurecontraststylefromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_exposurecontraststyletostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_exposurecontrasttransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_filerules.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_filetransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_fixedfunctionstyle.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_fixedfunctionstylefromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_fixedfunctionstyletostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_fixedfunctiontransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_formatmetadata.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_getenvvariable.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_getinversetransformdirection.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_getlogginglevel.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_getversion.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_getversionhex.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_gpulanguage.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_gpulanguagefromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_gpulanguagetostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_gpuprocessor.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_gpushadercreator.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_gpushaderdesc.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_gradingbsplinecurve.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_gradingcontrolpoint.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_gradingprimary.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_gradingprimarytransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_gradingrgbcurve.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_gradingrgbcurvetransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_gradingrgbm.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_gradingrgbmsw.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_gradingstyle.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_gradingstylefromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_gradingstyletostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_gradingtone.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_gradingtonetransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_grouptransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_imagedesc.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_interpolation.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_interpolationfromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_interpolationtostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_isenvvariablepresent.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_legacyviewingpipeline.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_logaffinetransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_logcameratransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_logginglevel.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_logginglevelfromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_loggingleveltostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_logmessage.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_logtransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_look.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_looktransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_lut1dhueadjust.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_lut1dtransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_lut3dtransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_matrixtransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_mixinghelpers.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_namedtransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_namedtransformvisibility.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_negativestyle.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_negativestylefromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_negativestyletostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_optimizationflags.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_packedimagedesc.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_planarimagedesc.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_processor.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_processorcacheflags.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_processormetadata.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_rangestyle.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_rangestylefromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_rangestyletostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_rangetransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_referencespacetype.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_resetcomputehashfunction.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_resettodefaultloggingfunction.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_rgbcurvetype.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_searchreferencespacetype.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_setcomputehashfunction.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_setenvvariable.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_setloggingfunction.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_setlogginglevel.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_systemmonitors.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_transform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_transformdirection.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_transformdirectionfromstring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_transformdirectiontostring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_transformtype.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_uniformdatatype.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_unsetenvvariable.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_viewingrules.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_viewtransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_viewtransformdirection.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/python/src/pyopencolorio_viewtype.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/rules.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/shaders.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/systemmonitors.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/transforms.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/api/viewtransform.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/aswf/_index.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/aswf/aswf_docker.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/aswf/charter.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/aswf/cla_dco.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/aswf/license.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/concepts/_index.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/concepts/overview/configuration_files.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/concepts/overview/glossary.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/concepts/overview/internal_architecture.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/concepts/overview/introduction.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/concepts/overview/overview.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/concepts/publications/publications.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/configurations/_index.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/configurations/aces_1.0.3.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/configurations/aces_cg.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/configurations/aces_studio.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/configurations/nuke_default.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/configurations/ocio_v2_demo.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/configurations/spi_anim.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/configurations/spi_vfx.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/_index.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/authoring/allocation_vars.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/authoring/authoring.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/authoring/colorspaces.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/authoring/contexts.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/authoring/displays_views.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/authoring/looks.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/authoring/looks_example.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/authoring/overview.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/authoring/rules.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/authoring/transforms.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/contributing/architectural_notes.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/contributing/coding_style_guide.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/contributing/contributing.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/contributing/documentation_guidelines.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/contributing/doxygen_style_guide.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/contributing/getting_started.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/contributing/issues.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/contributing/repository_structure.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/contributing/submitting_changes.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/contributing/unit_tests.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/developing/app_helpers.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/developing/developing.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/developing/usage_examples.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/using_ocio/compatible_software.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/using_ocio/faq.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/using_ocio/tool_overview.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/guides/using_ocio/using_ocio.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/quick_start/_index.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/quick_start/downloads.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/quick_start/for_artists.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/quick_start/for_config_authors.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/quick_start/for_contributors.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/quick_start/for_devs.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/quick_start/installation.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/releases/_index.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/releases/ocio_2_0.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/releases/ocio_2_1.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/releases/ocio_2_2.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/releases/ocio_2_3.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/README.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/README_theme.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/archetypes/default.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/assets/js/script.js" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/content/english/author/john-doe.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/content/english/author/mark-dinn.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/content/english/blog/installation.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/content/english/blog/simple-blog-post-1.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/content/english/blog/simple-blog-post-2.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/content/english/blog/simple-blog-post-3.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/content/english/blog/simple-blog-post-4.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/content/english/blog/simple-blog-post-5.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/content/english/blog/simple-blog-post-6.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/content/english/blog/simple-blog-post-7.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/homepage/content/english/blog/simple-blog-post-8.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/static/plugins/bootstrap/bootstrap.min.js" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/static/plugins/google-map/map.js" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/static/plugins/jquery/jquery.min.js" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/static/plugins/lazy-load/lozad.min.js" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/static/plugins/magnific-popup/jquery.magnific-popup.min.js" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/static/plugins/shuffle/shuffle.min.js" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/site/static/plugins/slick/slick.min.js" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/toc_redirect.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/tutorials/_index.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/tutorials/baking_luts.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/docs/tutorials/contributing.rst" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ext/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ext/sampleicc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ext/sampleicc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/ext/xxHash/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/include/OpenColorIO/OpenColorABI.h.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/setup.cfg" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/linux/apt/install_docs_env.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/linux/apt/install_doxygen.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/linux/apt/install_tests_env.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/linux/install_numpy.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/linux/run_gcov.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/linux/yum/install_docs_env.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/linux/yum/install_doxygen.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/linux/yum/install_tests_env.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/macos/install_bison.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/macos/install_boost.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/macos/install_docs_env.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/macos/install_doxygen.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/macos/install_oiio.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/macos/install_tests_env.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/multi/install_expat.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/multi/install_imath.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/multi/install_lcms2.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/multi/install_minizip-ng.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/multi/install_oiio.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/multi/install_openexr.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/multi/install_openfx.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/multi/install_osl.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/multi/install_pugixml.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/multi/install_pybind11.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/multi/install_pystring.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/multi/install_yaml-cpp.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/multi/install_zlib.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/windows/install_docs_env.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/windows/install_doxygen.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ci/scripts/windows/install_tests_env.sh" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/clf/README.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/clf/compare_clf_test_frames.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/clf/process_clf_test_frames.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/macros/CheckForOpenEXRCompatibility.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/macros/FindPythonPackage.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/macros/GetPythonPreCommand.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/macros/PackageUtils.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/macros/ParseArguments.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/macros/StripUtils.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/macros/VariableUtils.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/macros/VersionUtils.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/macros/ocio_handle_dependency.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/macros/ocio_install_dependency.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/projects/Buildlcms2.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/projects/Buildpystring.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/toolchains/android-toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/toolchains/iPhone-armv6-toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/toolchains/iPhone-toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/toolchains/iPhoneSimulator-toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/utils/CheckSupportARMNeon.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/utils/CheckSupportAVX.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/utils/CheckSupportAVX2.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/utils/CheckSupportAVX512.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/utils/CheckSupportF16C.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/utils/CheckSupportGL.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/utils/CheckSupportSSE2.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/utils/CheckSupportSSE3.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/utils/CheckSupportSSE4.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/utils/CheckSupportSSE42.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/utils/CheckSupportSSEUsingSSE2NEON.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/utils/CheckSupportSSSE3.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/utils/CheckSupportX86SIMD.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/utils/Colors.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/utils/CompilerFlags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/utils/Compilers.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/cmake/utils/CppVersion.cmake" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/dev/windows/README.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/dev/windows/ocio.bat" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/dev/windows/ocio_deps.bat" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/docker/README.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/docs/configure_file.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/docs/expandvars.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/docs/extract_docstrings.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/docs/frozendoc.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/docs/prettymethods.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/nuke/examples/colorlookup_to_spi1d.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/nuke/examples/ocio_to_colorlookup_all.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/nuke/examples/ocio_to_colorlookup_rgb.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/nuke/init.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/nuke/menu.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/nuke/ocionuke/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/nuke/ocionuke/cdl.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/nuke/ocionuke/viewer.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ocio/setup_ocio.bat.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/ocio/setup_ocio.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/share/troubleshooting/print_system_monitors.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/CPUInfoConfig.h.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/builtinconfigs/CG.cpp.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/builtinconfigs/Studio.cpp.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/res/OpenColorIO.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/OpenColorIO/res/version.rc.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioarchive/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociobakelut/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociocheck/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociochecklut/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioconvert/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociodisplay/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociolutimage/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociomakeclf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioperf/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/main.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/README.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/config_cache.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/config_dock.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/constants.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/inspect/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/inspect/code_inspector.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/inspect/curve_inspector.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/inspect/log_inspector.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/inspect_dock.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/active_display_view_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/active_display_view_model.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/color_space_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/color_space_model.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/config_item_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/config_item_model.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/config_properties_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/config_properties_model.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/delegates.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/display_model.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/display_view_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/file_rule_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/file_rule_model.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/look_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/look_model.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/named_transform_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/named_transform_model.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/role_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/role_model.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/rule_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/shared_view_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/shared_view_model.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/view_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/view_model.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/view_transform_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/view_transform_model.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/viewing_rule_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/items/viewing_rule_model.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/log_handlers.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/main_window.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/message_router.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/ref_space_manager.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/settings.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/style.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transform_manager.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transforms/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transforms/allocation_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transforms/builtin_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transforms/cdl_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transforms/color_space_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transforms/display_view_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transforms/exponent_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transforms/exponent_with_linear_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transforms/exposure_contrast_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transforms/file_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transforms/fixed_function_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transforms/log_affine_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transforms/log_camera_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transforms/log_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transforms/look_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transforms/matrix_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transforms/range_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transforms/transform_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transforms/transform_edit_factory.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transforms/transform_edit_stack.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/transforms/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/undo.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/viewer/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/viewer/image_plane.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/viewer/image_viewer.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/viewer_dock.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/widgets/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/widgets/check_box.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/widgets/combo_box.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/widgets/item_view.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/widgets/layout.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/widgets/line_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/widgets/list_widget.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/widgets/log_view.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/widgets/structure.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/widgets/table_widget.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/ocioview/widgets/text_edit.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ocioview/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/ociowrite/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/pyocioamf/README.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/pyocioamf/pyocioamf.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/pyociodisplay/README.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/pyociodisplay/pyociodisplay.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apps/pyociodisplay/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/apputils/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/java/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/java/LoadLibrary.java.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/java/Manifest.txt.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/package/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/bindings/python/package/command_line.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/cmake/Config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/imageioapphelpers/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/libutils/oglapphelpers/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/src/utils/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/cmake-consumer/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/cmake-consumer/CMakeLists.txt.in" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/cpu/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/data/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/data/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/data/README.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/data/files/error_unknown_format.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/gpu/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/java/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/osl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/AllocationTransformTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/BakerTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/BuiltinConfigRegistryTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/BuiltinTransformRegistryTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/BuiltinTransformTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/CDLTransformTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/CPUProcessorTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/ColorSpaceHelpersTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/ColorSpaceTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/ColorSpaceTransformTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/ConfigTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/ConstantsTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/ContextTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/DisplayViewHelpersTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/DisplayViewTransformTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/ExponentTransformTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/ExponentWithLinearTransformTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/ExposureContrastTransformTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/FileRulesTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/FileTransformTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/FixedFunctionTransformTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/FormatMetadataTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/GpuShaderDescTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/GradingDataTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/GradingPrimaryTransformTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/GradingRGBCurveTransformTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/GradingToneTransformTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/GroupTransformTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/LegacyViewingPipelineTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/LogCameraTransformTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/LogTransformTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/LookTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/LookTransformTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/Lut1DTransformTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/Lut3DTransformTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/MatrixTransformTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/MixingHelpersTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/NamedTransformTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/OCIOZArchiveTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/OpenColorIOTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/OpenColorIOTestSuite.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/ProcessorCacheTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/ProcessorTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/RangeTransformTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/TransformsBaseTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/TransformsTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/UnitTestUtils.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/ViewTransformTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/ViewingRulesTest.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/python/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/testutils/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/tests/utils/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/vendor/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/vendor/mari/1.4v1/README" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/vendor/mari/1.4v1/_ocio_filter.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/vendor/mari/1.4v1/_ocio_toolbar.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/vendor/mari/1.4v1/ocio.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/vendor/mari/prototype/README" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/vendor/mari/prototype/ociodisplay.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/vendor/mari/prototype/ociofiletransform.py" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/vendor/nuke/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/vendor/openfx/Support/README.md" />
+    <Text Include="../../thirdparty/owemdjee/OpenColorIO/vendor/rv/Python/ociorv.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

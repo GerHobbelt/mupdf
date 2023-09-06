@@ -64,6 +64,8 @@ delnewproj2() {
 }
 
 
+# Anything that would, should or could (partly) serve as a library from our monolithic build perspective:
+
 mylist=$(
 grep -v '#' <<EOT
 
@@ -189,10 +191,6 @@ cef-pdf
 cereal
 ceres-solver
 circlehash
-citation-abbreviations
-citation-journals
-citation-styles
-citeproc-js
 civetweb
 clBLAS
 cld1-language-detect
@@ -303,12 +301,10 @@ hocr-spec
 hocr-tools
 honggfuzz
 hopscotch-map
-horsejs
 ##############.NET########html2openxml
 htmlstreamparser
 http-parser
 hunspell
-hunspell-dictionaries
 hunspell-hyphen
 hyperscan
 hypertextcpp
@@ -318,7 +314,6 @@ id3-tagparser
 indicators
 infoware
 ion-c
-ipa-dict
 iresearch
 jasper
 jemalloc
@@ -369,6 +364,7 @@ libde265
 libdeflate
 libdi-dependency-injection
 libdist
+libdjvu
 libdivsufsort
 libeigen
 libeternaltimestamp
@@ -404,7 +400,6 @@ libpopcnt
 libpsl
 libq
 libqrencode
-libquill
 libraqm
 librs232
 librsync
@@ -454,7 +449,6 @@ mammut
 manticore-columnar
 manticore-plugins
 manticoresearch
-many-stop-words
 marian
 math-atlas
 mcmc
@@ -498,7 +492,7 @@ nsis-stdutils
 nsync
 nuspell
 ocreval
-oiio
+OpenImageIO
 oneTBB
 onnxruntime
 opencv
@@ -541,7 +535,6 @@ poppler
 portable-memory-mapping
 portable-snippets
 portable_concurrency-std-future
-preprocess-corpuses
 prio_queue
 probminhash
 promise-cpp
@@ -615,7 +608,6 @@ stan-math
 stateline
 statsite
 stdext-path
-stopwords
 stringi
 stx-error-handling
 subprocess
@@ -721,22 +713,6 @@ yara-pattern-matcher
 you-token-to-me
 yyjson
 zfp-compressed-arrays
-zotero
-zotero-better-bibtex
-zotero-bib
-zotero-build
-zotero-connectors
-zotero-google-docs-integration
-zotero-libreoffice-integration
-zotero-scholar-citations
-zotero-shortdoi
-zotero-standalone-build
-zotero-translate
-zotero-translation-server
-zotero-translators
-zotero-web-library
-zotero-word-for-windows-integration
-zotero-zotfile
 zpp_bits
 zstd
 zsv
@@ -789,8 +765,66 @@ vmemcache
 vtm
 xor-and-binary-fuse-filter
 
+ADE-graph-management
+BitFunnel
+OpenColorIO
+RE-flex
+b2xtranslator
+bloom
+curl
+easyexif
+exprtk
+extract
+farver-OKlab
+freeglut
+freetype
+g3log
+gmic
+gmic-community
+graph-coloring
+groonga
+gumbo-parser
+harfbuzz
+ivf-hnsw
+jbig2dec
+jpeg
+jpeginfo
+lcms2
+leptonica
+lexbor
+########.NET#######libWebP.Net
+libbloomfilters
+libpillowfight
+libpng
+libtiff
+libusb
+libwebp
+loguru
+minifb
+mujs
+n2-kNN
+oidn-OpenImageDenoise
+online-hnsw
+opencv_extra
+openjpeg
+pdiff
+pecos
+pylene
+quill-logging
+reckless
+scws-chinese-word-segmentation
+simdjson
+spdlog_sqlite_sink
+strtk
+tesseract
+waifu2x-ncnn-vulkan
+win-iconv
+zlibxtensor
+
 EOT
 )
+
+# Anything that'll be an application, even when regarded from our monolithic buil perspective
 
 myapplist=$(
 grep -v '#' <<EOT
@@ -826,8 +860,12 @@ p7zip
 qpdf
 vcopy
 
+horsejs
+
 EOT
 )
+
+# Anything else, that's not really code we'll be incorporating in the form of a library or application. Data, documentation, etc.:
 
 misclist=$(
 grep -v '#' <<EOT
@@ -851,6 +889,53 @@ archive-hocr-tools
 
 LeptonicaDocsSite
 UnofficialLeptDocs
+
+libprecog-data
+libprecog-manuals
+
+mupdf_explored
+
+langdata_LSTM
+tessconfigs
+tessdata
+tessdata_best
+tessdata_contrib
+tessdata_fast
+tessdoc
+tesseract_api_docs
+tesseract_docs
+tesseract_langdata
+tesseract_ocr_test
+tesstrain
+unicode-cldr-data
+unicode-icu-data
+unicode-icu-demos
+
+citation-abbreviations
+citation-journals
+citation-styles
+citeproc-js
+hunspell-dictionaries
+ipa-dict
+many-stop-words
+preprocess-corpuses
+stopwords
+zotero
+zotero-better-bibtex
+zotero-bib
+zotero-build
+zotero-connectors
+zotero-google-docs-integration
+zotero-libreoffice-integration
+zotero-scholar-citations
+zotero-shortdoi
+zotero-standalone-build
+zotero-translate
+zotero-translation-server
+zotero-translators
+zotero-web-library
+zotero-word-for-windows-integration
+zotero-zotfile
 
 EOT
 )
@@ -895,6 +980,8 @@ uberlog
 pmt-png-tools
 libchm_io
 gperf-hash
+
+liboiio
 
 EOT
 )
