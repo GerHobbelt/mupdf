@@ -1,0 +1,1035 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{3644E12D-D934-41FD-BF7E-83745AAF1CB8}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+  <ItemGroup>
+    <Image Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js-logo.png" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/CHANGES-1.0.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/CHANGES-1.1.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/CHANGES.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/ANALYZE_DATES.py" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/APPLY_LICENSE.py" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/BENCHMARKS.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/CHECKTITLE.py" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/CITATIONS.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/CONVERT_LOCALES.py" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/COUNT_ENTITIES_ACROSS_ALL_STYLES.py" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/FIXCORESTYLES.py" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/FIXLOCALE.py" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/MAKETESTS.sh" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/MODULAR_LAW.rst" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/MULTI-LINGUAL.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/OLD_coding_and_deployment.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/Unicode-Transpiler.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/academic-productivity.rst" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/all_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/bluebook_BookWithUnSalesNumber.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/buildOLD.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/bundle.sh" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/cache.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-doc.rst" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/ambigconfig.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/bibpaging.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/blob.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/build.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/conditions.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/datemonthconfig.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/datenumericconfig.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/dateparse.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/dateparsetoarray.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/emptybib.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/emptycite.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/flipflopper.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/formats.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/formatters.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/fun.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/localesniff.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/makecitationcluster.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/opt.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/output.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/preview.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/queue.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/rebuild.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/rebuildnumbered.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/registry.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/render.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/restore.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/romanizer.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/slug.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/stack.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/suffixator.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/sys_rhino_load.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/sys_rhino_locale.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/sys_stdrhino_load.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/sys_stdrhino_locale.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/sys_stdspidermonkey_load.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/tmp.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/urlwrapper.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/citeproc-js.legacy/util_names.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/condition_PlusMinus.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/configure.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/core.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/csl-field-description.rst" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/display_LineBreaksWithMixedNesting.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/flipflop_SquigglyBraceCase.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/from-docs-substitutions.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/gender_ItemType.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/grind.py" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/group_Oops.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/language-condition-spec.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/libmozjs.conf" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/load_all_styles.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/load_styles.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/locale_TitleCaseWeirdLangEmptyLocale.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/mail_andreas_disambiguation_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/mail_andreas_disambiguation_2.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/name_MarkupBug.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/name_ParsedCommaDelimitedDroppingParticleNormalOrderingWithAffixes.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/name_ParsedCommaDelimitedDroppingParticleNormalOrderingWithoutAffixes.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/names_nesting.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/node_datepart.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/position.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/position_IbidIgnoresCommentNotes.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/position_NearNoteOptionMakesFalse.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/registryOLD.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/retrieval.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/run-rhino.bat" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/run-rhino.sh" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/run-spidermonkey.py" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/run-tracemonkey.sh" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/scrape_dutch_particles.py" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/speed.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/speed.sh" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/unused_tests/namespaces_Nada.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/unused_tests/namespaces_Nada2.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/unused_tests/namespaces_Nada3.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/unused_tests/namespaces_Nada4.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/unused_tests/namespaces_NonNada.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/unused_tests/namespaces_NonNada2.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/unused_tests/namespaces_NonNada4.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/unused_tests/sort_NumberOfAuthorsAsKeyCountMinMax.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/unused_tests/terms_EmptyOverload.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/unused_tests/terms_Missing.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/util_condition.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/xml.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/xmle4x.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/xmle4xLoad.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/attic/xmljsonMakeXml.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/citeproc.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/citeproc_commonjs.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/demo/README.md" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/demo/citations-1.json" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/demo/citations-2.json" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/demo/citations-3.json" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/demo/citations-4.json" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/demo/citations-5.json" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/demo/citations-6.json" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/demo/citations-7.json" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/demo/citations.json" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/demo/citeproc.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/demo/demo.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/demo/items-1.json" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/demo/items-2.json" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/demo/items-3.json" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/demo/items-4.json" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/demo/items-5.json" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/demo/items-6.json" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/demo/items-7.json" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/demo/package-lock.json" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/demo/package.json" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/demo/regenerate.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/abbrevs_Archive.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/abbrevs_ArchivePlace.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/abbrevs_CiteFormFlag.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/abbrevs_CiteFormFlagDisambig.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/abbrevs_Classic.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/abbrevs_ClassicBib.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/abbrevs_Event.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/abbrevs_JournalExistsInList.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/abbrevs_JournalMissingFromListAndJournalAbbreviationFieldAlsoMissing.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/abbrevs_JournalMissingFromListButHasJournalAbbreviationField.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/abbrevs_JournalSuppressesPublisher.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/abbrevs_Jurisdiction.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/abbrevs_LongAndShortCaseNames.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/abbrevs_MissingSegment.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/abbrevs_SeriesExistsInList.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/abbrevs_SimpleInstitutionPart.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/abbrevs_SuppressMonitor.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/abbrevs_SuppressOrdinaryField.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/abbrevs_TitleAbbrevFallback.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/abbrevs_TitleMainTitleSub.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/affix_CitationAffixes.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/affix_CommaAfterQuoteCompactPrefix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/affix_FlipflopParens.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/affix_FlipflopParensLayoutInText.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/affix_FlipflopParensNote.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/affix_FlipflopParensNumeric.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/affix_PrefixFullCitationTextOnlyCompactPrefix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/affix_PrefixWithDecorationsCompactPrefix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/affix_SpaceWithQuotesCompactSuffix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/affix_SuppressDelimiterCharsWhenFullStopInSuffix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/affix_WithCommasCompactPrefix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/affix_WordProcessorAffixNoSpaceCompactPrefix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/affix_WordProcessorAffixNoSpaceCompactSuffix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/api_SuppressAuthor.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/api_UpdateItemsDelete.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/api_UpdateItemsDeleteDecrementsByCiteDisambiguation.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/api_UpdateItemsReshuffle.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bibheader_EntryspacingDefaultValueOne.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bibheader_EntryspacingExplicitValueZero.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bibheader_SecondFieldAlign.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bibheader_SecondFieldAlignWithAuthor.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bibheader_SecondFieldAlignWithNumber.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bibsection_Exclude.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bibsection_Include.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bibsection_Quash.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bibsection_Select.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bibsection_StyleControl.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_AffiliationSpoofingBrokenInstitutionalName.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_AffiliationSpoofingDemoPageFullCiteCruftOnSubsequent.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_AffiliationSpoofingNoFormattingOnInstitution.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_AffiliationSpoofingTwoBareInstitutionalAuthors.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_AffiliationSpoofingWantedTermJoin.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_AllDecorCrash.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_ArabicApostropheCrash.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_ArabicLevelMismatch.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_AuthorOnlyFail.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_BadKanjiDateParse.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_BibCrossTalk.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_BillLocator.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_BillLocator2.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_BillLocator3.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_BillLocator4.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_BrokenDisambiguation.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_BrokenInstitutionalName.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_CapsAfterOneWordPrefixCompactPrefix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_CitationsUndefined.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_Comments.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_CountryPlaces.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_CseNameSort.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_CslReverseLookup.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_DelimiterBug.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_DisambigQuery.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_DisambiguateByCiteGlitchXXX.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_EditorAsAuthorOops.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_EmptyInput.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_FailWithNoAuthor.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_FailingIssuedDate.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_FlipflopFail1.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_IllustratorInExtra.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_IsNumericCrash.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_JapaneseCaseCites.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_LabelFail.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_MendeleyApostrophe.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_MissingItemInJoinCompactSuffix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_NameInputBreakage.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_NoFormattingOnInstitution.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_NoFormattingOnInstitution2.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_NoTransliterationWithBookSection.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_NonBreakingSpaceJoinFail.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_NumericLocatorAffixes.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_NumericStyleFirstRefMultipleCiteFailure.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_Places.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_PluralIssue.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_RandomItalics.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_ShortFormOfTitleFails.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_TitleCaseFail.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_TitleCaseFail2.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_TitleCaseFail3.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_TurkishDateCorruption.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_TwoBareInstitutionalAuthors.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_TwoCitesPlusOneBackref.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_TwoFullStops.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_UnderscoreDateRangeDelimiter.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_UriWrapping.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_VancouverNestingFail.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_VichetArticles.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_YearLastBadOutput.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_dailDebates.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_lotOfAuthors.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_mendeleyNameCrash.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/bugreports_wanted_term-join.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/citeprocjs_AffiliationSpoofingSubsequentSliceTwoNamesInstitution.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/citeprocjs_AuthorListing.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/citeprocjs_ExtraFieldRecognition.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/citeprocjs_NoByzantineInitialsMisstep.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/citeprocjs_ParseDroppingParticleSortOrder.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/citeprocjs_ParseNonDroppingParticleSortOrder.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/citeprocjs_ParseParticleAsName.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/citeprocjs_ParseSuffixAllCapsForceCommaNormalOrder.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/citeprocjs_ParseSuffixAllCapsForceCommaSortOrder.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/citeprocjs_ParseSuffixAllCapsSimpleNormalOrder.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/citeprocjs_ParseSuffixAllCapsSimpleSortOrder.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/citeprocjs_ParseSuffixMixedCaseForceCommaNormalOrder.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/citeprocjs_ParseSuffixMixedCaseForceCommaSortOrder.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/citeprocjs_ParseSuffixMixedCaseSimpleNormalOrder.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/citeprocjs_ParseSuffixMixedCaseSimpleSortOrder.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/citeprocjs_SecondaryOnShort.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/citeprocjs_SubsequentSliceTwoNamesInstitution.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/condition_IsNumeric.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/condition_IsNumericStrictPages.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/condition_Locale.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/condition_Locale2.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/condition_PlusMinus.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/condition_SlashDelimitedNumbers.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/consolidation_ChapterItemBibliographySubsequent.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/consolidation_ChapterItemConsolidation.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/consolidation_ChapterItemCount.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/consolidation_LegalItemConsolidation.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/consolidation_TwoStageChapterSubsequent.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/consolidation_TwoStateFirstRef.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/date_CheaterDateRange.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/date_DateBCraw.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/date_LoneJapaneseMonth.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/date_MonthDay.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/date_RawParseSimpleDate.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/date_RawSeasonRange1.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/date_RawSeasonRange2.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/date_RawSeasonRange3.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/dateparser_CheaterSyntax.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/decor_BreakingQuotes.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/disambiguate_AddNamesDisambiguatePriority.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/disambiguate_BasedOnSubsequentFormWithBackref.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/disambiguate_BasedOnSubsequentFormWithBackref3.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/disambiguate_BasedOnSubsequentFormWithLocator.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/disambiguate_ByCiteDisambiguateConditionOffSpec.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/disambiguate_DisambiguateTrueAndYearSuffixOffSpec.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/disambiguate_DisambiguateTrueAndYearSuffixOneOffSpec.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/disambiguate_DisambiguateTrueInBibliographyOnly.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/disambiguate_PreferSingleName.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/disambiguate_WithConsolidation.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_AuthorDateAuthorOnlyThenSuppressAuthor.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_AuthorDateAuthorOnlyThenSuppressAuthorNoteStyle.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_AuthorOnly.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_AuthorOnlySuppressLocator.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_CitationNumberAuthorOnlyThenSuppressAuthor.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_CitationNumberAuthorOnlyThenSuppressAuthorWithIntext.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_CitationNumberSuppressAuthor.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_ExampleMake.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_ExampleMultiple.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_ExampleProcess.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_ExampleSeveralAuthorsWithIntext.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_ExampleUnauthored.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_FirstReferenceNumberWithIntext.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_FirstReferenceNumberWithoutIntext.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_IbidInAuthorDateStyleWithIntext.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_IbidInAuthorDateStyleWithoutIntext.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_IbidInNoteStyleWithIntext.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_IbidInNoteStyleWithoutIntext.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_NoteAuthorOnlyNoAuthorWithoutIntext.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_RemovalOfStubCiteBibliographyWithIntext.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_RemovalOfStubCiteBibliographyWithoutIntext.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_RemovalOfStubCiteCitationWithIntext.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_RemovalOfStubCiteCitationWithoutIntext.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_SimpleName.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_SingleNarrativeCitation.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_SuppressAuthor.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_SuppressAuthorSolo.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_SuppressEditorSolo.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/discretionary_SuppressMultipleAuthors.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/eclac_BookFromImf.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/eclac_BookWithUnSalesNumber.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/eclac_BookWithUnSalesNumberSpanishStyle.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/flipflop_CompleteCiteInPrefixCompactPrefix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/flipflop_ItalicsSimplePlus.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/flipflop_LeadingMarkupWithApostropheCompactPrefix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/flipflop_LongComplexPrefixCompactPrefix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/form_ContainerTitleShortWithTitleSubSupport.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/form_ContainerTitleShortWithTitleSubSupportFrench.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/form_ShortTitleOnly.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/form_TitleShortForLegalCase.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/form_TitleShortWithTitleSubSupport.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/form_UppercaseSubtitleWithNumber.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/group_PrefixParensOnGroupNoCommaSafe.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/group_PrefixParensOnNumberNoCommaSafe.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/group_RejectAlphaLabel.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/group_RejectAndRequireAlphaText.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/group_RejectAndRequireAlphaValue.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/group_RejectCommaSafeBeginning.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/group_RejectCommaSafeNumbersOnly.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/group_RejectCommaSafeNumbersOnlyAfterDate.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/group_RejectCommaSafeNumbersOnlyBeginning.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/group_RejectCommaSafeNumbersOnlyDateInTextMacroWithAffix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/group_RejectCommaSafeNumbersOnlyDateWithAffix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/group_RejectCommaSafeNumbersOnlyDateWithAffixInNestedTextMacros.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/group_RejectCommaSafeNumbersOnlyMixedLocator.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/group_RejectCommaSafeNumbersOnlyTwice.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/group_RejectCommaSafeNumbersOnlyWithLabel.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/group_RejectCommaSafeOnAffixes.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/group_RejectWithMacro.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/group_RequireAlphaLabel.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/group_RequireCommaOnSymbolAfterNumber.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/group_RequireCommaOnSymbolAlways.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/group_RequireWithMacro.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/initials_CorrectSpacingWithNameAsSortOrder.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/initials_InitializeFalseToSpace.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/initials_NonByzantineDisambiguated.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/initials_NonByzantineSimple.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/institutions_AffiliationSpoofingItalicInstitutionHarvard.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/institutions_AffiliationSpoofingItalicInstitutionHarvardBib.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/institutions_AffiliationSpoofingMixedPeopleAndOrganizationsAlwaysUseFirst.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/institutions_AffiliationSpoofingMixedPeopleAndOrganizationsInTextImplicitChop.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/institutions_AffiliationSpoofingMixedPeopleAndOrganizationsMaybeUseFirst.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/institutions_AffiliationSpoofingQuotesSuppressCommaSplit.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/institutions_AffiliationSpoofingSimplePersonalInstitution.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/institutions_AffiliationSpoofingTwoThreeOrFourInstitutions.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/institutions_FirstAndLast.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/institutions_FirstOnly.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/institutions_FirstOnlyOnShort.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/institutions_FormFromInstitutionOnly.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/institutions_ItalicInstitutionHarvard.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/institutions_ItalicInstitutionHarvardBib.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/institutions_MixedPeopleAndOrganizationsAlwaysUseFirst.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/institutions_MixedPeopleAndOrganizationsInTextImplicitChop.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/institutions_MixedPeopleAndOrganizationsMaybeUseFirst.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/institutions_QuotesSuppressCommaSplit.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/institutions_SimplePersonalInstitution.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/institutions_SimpleShortLong.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/institutions_SubcommitteeCommittee.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/institutions_TwoThreeOrFourInstitutions.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/itemtypes_CambodiaCases.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/jasoc_example07.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/juris_EarlyBabyBlue.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/juris_EarlyOSCOLA.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/juris_SimpleJurisdiction.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/label_EmbeddedNumberLabel.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/label_FormOverride.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/label_FromLocator.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/label_NonNumericIssue.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/label_NonNumericLabelAsSingular.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/label_NonNumericNumber.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/label_NonNumericNumberFallbackToIssue.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/label_PageLabel.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/label_PageLabel2.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/label_PageWithEmbeddedLabel.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/label_SectionFormPageOverride.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/label_TestSmartEdition.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/label_TestSmartLocator.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/label_TestSmartTrimmer.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/language_BaseLocale.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/language_Condition.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/language_ConditionSimple.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/language_InterCiteJoins.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/layout_MultipleAccessedUsesDefault.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/layout_MultipleStraySpace.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/layout_MultipleWithItemLocator.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/layout_SimpleMultiple.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/layout_UndefinedNew.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/locale_AbbrevLangAndJurisModule.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/locale_EffectOfStyleDefinition.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/locale_LoadTwoJurisPrefs.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/locale_RescueBadLocales.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/locale_SelectAbbrevs.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/locale_TitleCaseEnglishLangUpperEmptyLocale.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/locale_abbrevEntireToPartFallback.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/locator_BillWithBarePage.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/locator_EnDashes.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/locator_EnDashes2.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/locator_LocatorExtraIbid.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/locator_LocatorExtraIbid2.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/locator_LocatorExtraIbid3.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/locator_PageRangeDelimiter.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/locator_ParseDate.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/locator_PassThroughEnDash.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/locator_QuashAffixesWithLocator.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/locator_Sections.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/locator_TranslationLocators.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/magic_CourtClassSort.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/magic_ImplicitShortTitle.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/magic_SameAuthorNoCollapseNoImplicitComma.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/magic_SectionVariable.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/magic_StripPeriodsOnDottedTitle.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/magic_StripPeriodsWithTextCase.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/magic_SuppressExtraTerminalPunctuationAfterTerm.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/magic_SuppressLayoutDelimiterIfPrefixCommaCompactPrefix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/magic_SuppressYearIfMatchesCollectionNumber.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/magic_SuppressYearIfMatchesCollectionNumberDisabled.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/magic_TermCapitalizationWithPrefixCompactPrefix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/magic_TitleLeadingNoiseWords.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/magic_TypeFieldHack.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/magic_WrapDOI.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/magic_WrapDOI2.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/magic_WrapDOI3.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/magic_WrapDOI4.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/magic_cslReverseLookupOnSys.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/multilingual_AffiliationSpoofingLocalisedNameDelimiters.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/multilingual_DisableItalic.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/multilingual_InstitutionalAuthors.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/multilingual_ItalicOnTitleOnly.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/multilingual_LocalisedNameDelimiters.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/multilingual_MultipleLocalesNoLanguageField.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/multilingual_NameFormatOverride.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/multilingual_NameSort.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/multilingual_NameTransliteration.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/multilingual_RightToLeft.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/multilingual_ShortFormTitleVariant.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/multilingual_ShortTitleVariant.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/multilingual_SuffixSelection.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/multilingual_TextCaseSuppressOnNonEnglishVariants.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/multilingual_TextCaseSuppressOnNonEnglishVariants2.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/multilingual_TextCaseSuppressOnNonEnglishVariants3.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/multilingual_TextPrimaryExists.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/multilingual_TextPrimaryNonexistent.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/multilingual_TextSecondaryExists.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/multilingual_TextSecondaryNonexistent.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/multilingual_TextSortMacroExists.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/multilingual_TextSortVariableExists.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/multilingual_TitleWithAffixes.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_AffiliationSpoofingEditorTranslatorWithTranslatorOnly.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_AffiliationSpoofingImplicitInstitution.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_AffiliationSpoofingSortOrderOnFirstOnly.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_AffiliationSpoofingSuppressInstitutions.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_AffiliationSpoofingSuppressPersons.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_Asian.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_AsianEtAl.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_CheaterNames.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_CountAuthors.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_CourtCollapse.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_EditorTranslatorRequireMatch.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_EditorTranslatorWithTranslatorOnly.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_EtAlAsSuffix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_EtAlAsSuffixInCitationShort.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_ImplicitInstitution.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_InheritDelimiter.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_ItalicDelimiter.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_MixedFormatsInitialSortOrderAllWithDecorationsEtAl.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_MixedFormatsInitialSortOrderFirstWithDecorationsEtAl.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_MixedFormatsInitialsWithDecorationsEtAl.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_MixedFormatsPrimaryDecorations.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_MixedFormatsWithDecorationsEtAl.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_MixedFormatsWithDecorationsPlusAlternateEtAlDecorations.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_MixedFormatsWithDecorationsPlusEtAlDecorations.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_NbspJoinEN.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_NbspJoinFR.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_SimpleVietnamese.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_SingleFieldZotero.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_SortOrderOnFirstOnly.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_StartAndAtOrMoreThanMax.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_StartAndJustOneMoreThanEtAlUseFirst.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_StartAndLessThanMax.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_SubsequentAuthorSubstituteCompleteAll.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_SubsequentAuthorSubstituteCompleteEach.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_SubsequentAuthorSubstituteCompleteEachEtAl.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_SubsequentAuthorSubstitutePartialEach.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_SubsequentAuthorSubstitutePartialFirst.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_SubstituteCondition.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_SuppressInstitutions.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_SuppressPersons.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_TranslatorInMultiLayout.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_VietnameseHungarianSimple.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_YearCollapseWithYearSuffix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_ZwnbspJoinEN.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/name_ZwnbspJoinFR.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/nameattr_EtAlSubsequentMinOnCitationInCitation.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/nameattr_EtAlSubsequentMinOnStyleInCitation.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/nameattr_EtAlSubsequentUseFirstOnCitationInCitation.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/nameattr_EtAlSubsequentUseFirstOnStyleInCitation.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_AffixesOnAdjacentNumbers.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_AffixesWithMultiple.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_AmpersandQA.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_CollapseWithEnDash.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_ConditionalAndLabel.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_DateOrdinalMasculine.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_DocketNumberHyphenOK.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_EditionOrdinalMasculine.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_EditionOrdinalWithMultiple.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_EditionOrdinalWithMultipleBraced.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_EditionOrdinalWithMultipleBracedL14.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_EditionOrdinalWithMultipleBracedL21.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_EditionOrdinalWithMultipleL2.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_EditionOrdinalWithMultipleL20.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_EditionOrdinalWithMultipleL23.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_EditionSort.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_EmbeddedOnlyDefaultsToShort.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_ExplicitLeafNumber.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_ForceGender.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_HyphenatedStrings.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_LargeNumber.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_NewOrdinals.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_NumericDelimiterWithAlphaSuffix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_ParsedLabels.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RangeDelimiters.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideEmbeddedbracesLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideEmbeddedbracesOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideEmbeddedbracesPlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideEmbeddedbracesRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideEmbeddedpluralLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideEmbeddedpluralOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideEmbeddedpluralPlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideEmbeddedpluralRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideEmbeddedslugLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideEmbeddedslugOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideEmbeddedslugPlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideEmbeddedslugRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideEmbeddedundefLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideEmbeddedundefOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideEmbeddedundefPlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideEmbeddedundefRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideMultipleLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideMultipleOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideMultiplePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideMultipleRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideRangeLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideRangeOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideRangePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideRangeRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideSingleLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideSingleOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideSinglePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorChapteroverrideSingleRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelEmbeddedbracesLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelEmbeddedbracesOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelEmbeddedbracesPlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelEmbeddedbracesRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelEmbeddedpluralLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelEmbeddedpluralOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelEmbeddedpluralPlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelEmbeddedpluralRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelEmbeddedslugLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelEmbeddedslugOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelEmbeddedslugPlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelEmbeddedslugRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelEmbeddedundefLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelEmbeddedundefOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelEmbeddedundefPlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelEmbeddedundefRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelMultipleLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelMultipleOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelMultiplePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelMultipleRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelRangeLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelRangeOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelRangePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelRangeRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelSingleLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelSingleOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelSinglePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorNolabelSingleRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelEmbeddedbracesLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelEmbeddedbracesOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelEmbeddedbracesPlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelEmbeddedbracesRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelEmbeddedpluralLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelEmbeddedpluralOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelEmbeddedpluralPlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelEmbeddedpluralRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelEmbeddedslugLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelEmbeddedslugOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelEmbeddedslugPlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelEmbeddedslugRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelEmbeddedundefLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelEmbeddedundefOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelEmbeddedundefPlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelEmbeddedundefRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelMultipleLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelMultipleOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelMultiplePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelMultipleRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelRangeLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelRangeOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelRangePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelRangeRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelSingleLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelSingleOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelSinglePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevLocatorPagelabelSingleRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberChapteroverrideEmbeddedpluralLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberChapteroverrideEmbeddedpluralOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberChapteroverrideEmbeddedpluralPlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberChapteroverrideEmbeddedpluralRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberChapteroverrideMultipleLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberChapteroverrideMultipleOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberChapteroverrideMultiplePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberChapteroverrideMultipleRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberChapteroverrideRangeLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberChapteroverrideRangeOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberChapteroverrideRangePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberChapteroverrideRangeRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberChapteroverrideSingleLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberChapteroverrideSingleOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberChapteroverrideSinglePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberChapteroverrideSingleRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNolabelEmbeddedpluralLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNolabelEmbeddedpluralOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNolabelEmbeddedpluralPlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNolabelEmbeddedpluralRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNolabelMultipleLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNolabelMultipleOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNolabelMultiplePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNolabelMultipleRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNolabelRangeLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNolabelRangeOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNolabelRangePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNolabelRangeRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNolabelSingleLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNolabelSingleOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNolabelSinglePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNolabelSingleRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabeldefEmbeddedpluralLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabeldefEmbeddedpluralOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabeldefEmbeddedpluralPlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabeldefEmbeddedpluralRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabeldefMultipleLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabeldefMultipleOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabeldefMultiplePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabeldefMultipleRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabeldefRangeLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabeldefRangeOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabeldefRangePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabeldefRangeRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabeldefSingleLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabeldefSingleOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabeldefSinglePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabeldefSingleRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabelundefEmbeddedpluralLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabelundefEmbeddedpluralOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabelundefEmbeddedpluralPlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabelundefEmbeddedpluralRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabelundefMultipleLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabelundefMultipleOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabelundefMultiplePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabelundefMultipleRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabelundefRangeLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabelundefRangeOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabelundefRangePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabelundefRangeRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabelundefSingleLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabelundefSingleOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabelundefSinglePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberNumberlabelundefSingleRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberPagelabelEmbeddedpluralLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberPagelabelEmbeddedpluralOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberPagelabelEmbeddedpluralPlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberPagelabelEmbeddedpluralRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberPagelabelMultipleLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberPagelabelMultipleOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberPagelabelMultiplePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberPagelabelMultipleRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberPagelabelRangeLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberPagelabelRangeOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberPagelabelRangePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberPagelabelRangeRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberPagelabelSingleLongordinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberPagelabelSingleOrdinal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberPagelabelSinglePlain.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RevNumberPagelabelSingleRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_RomanUpperCase.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_Substring.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_SuppressLabelOnFirst.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/number_WithDelimiter.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/parallel_Bibliography.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/parallel_BrokenParallel.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/parallel_CrossCitationIbidOnInsert.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/parallel_FrenchCaseAndComments.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/parallel_HackedChicago.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/parallel_JournalArticleReverse.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/parallel_JournalArticleSimple.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/parallel_LastToFirstOverride.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/parallel_LongParallel.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/parallel_MatchAll.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/parallel_MultiTough.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/parallel_NewZealand.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/parallel_NoRepeat.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/parallel_ProceduralHistory.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/parallel_SubsequentDiffers.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/parallel_SuppressYearIfSuppressedInFirstCite.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/parallel_TrailingIbid.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/parallel_TreatiesMcGill.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/parallel_VendorNeutralSuppression.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/plural_AffiliationSpoofingIsPluralWithNames.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/plural_IsPluralWithNames.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/position_IbidSeparateCiteSameNoteCompactPrefix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/position_IbidWithPrefixFullStopCompactPrefix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/position_NearNoteOnly.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/position_NearNoteTrue.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/position_SubsequentInTextWithNote1.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/position_SubsequentInTextWithNote2.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/position_SubsequentInTextWithNote3.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/position_SubsequentInTextWithNote4.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/position_SubsequentInTextWithNote5.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/position_SubsequentInTextWithNote6.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/quotes_PunctuationMacro.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/range_PageMinimal.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/sort_BibliographyNosortOption.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/sort_CitationEdit.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/sort_CitationNumberSecondaryDescendingViaMacroBibliography.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/sort_CitationNumberSecondaryDescendingViaMacroCitation.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/sort_CitationNumberSecondaryDescendingViaVariableBibliography.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/sort_CitationNumberSecondaryDescendingViaVariableCitation.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/sort_CitationUnsorted.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/sort_LosAngelesPoliceDepartment1.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/sort_LosAngelesPoliceDepartment2.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/sort_LosAngelesPoliceDepartment3.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/sort_NumericVariables.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/sort_WithMacro.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/spaces_Doubles.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/spaces_ExplicitDoubleSpaceDelimiter.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/spaces_ExplicitDoubleSpacePrefix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/spaces_ExplicitDoubleSpaceSuffix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/spaces_ParentalDelimiterPrefix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/spaces_ParentalDelimiterPrefixPrefix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/spaces_ParentalPrefixPrefix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/spaces_ParentalSuffixDelimiter.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/spaces_ParentalSuffixPrefixDownhill.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/spaces_ParentalSuffixPrefixOverTheHill.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/spaces_ParentalSuffixPrefixUphill.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/spaces_ParentalSuffixSuffix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/spaces_ParentalSuffixSuffixDelimiter.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/spaces_Prefix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/spaces_SiblingDelimiterPrefix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/spaces_SiblingSuffixDelimiter.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/spaces_SiblingSuffixPrefix.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/statute_Backref.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/style-hhkk_Style.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/style_CmsFull1.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/sys_VariableWrapper.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/test_cms.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/textcase_AllUpper.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/textcase_AllVanilla.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/textcase_LocaleUnicodeWithVariant.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/textcase_NonEnglish.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/variables_CollectionTitleShort.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/variables_CollectionTitleShort2.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/variables_ShortForm.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/variables_TitleShortOnAbbrevWithTitle.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/variables_TitleShortOnAbbrevWithTitleCondition.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/variables_TitleShortOnAbbrevWithTitleGroup.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/wrappers_DOI.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/local/wrappers_URL.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/fixtures/processor/bibliographyTest.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/package-lock.json" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/package.json" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/api_bibliography.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/api_cite.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/api_control.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/api_update.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/attributes.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/build.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/disambig_citations.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/disambig_cites.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/disambig_names.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/formats.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/formatters.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/load.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_alternative.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_alternativetext.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_bibliography.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_choose.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_citation.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_comment.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_condition.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_conditions.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_date.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_datepart.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_else.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_elseif.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_etal.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_group.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_if.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_info.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_institution.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_institutionpart.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_intext.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_key.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_label.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_layout.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_macro.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_name.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_namepart.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_names.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_number.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_sort.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_substitute.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/node_text.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/obj_ambigconfig.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/obj_blob.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/obj_number.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/obj_token.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/print.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/print_zotero.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/queue.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/registry.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/sort.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/stack.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/state.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/system.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/test_runner.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_citationlabel.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_conditions.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_date.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_datenode.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_dateparser.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_dates.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_disambig.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_flipflop.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_integration.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_label.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_locale.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_locale_sniff.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_modules.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_name_particles.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_names.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_names_common.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_names_constraints.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_names_disambig.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_names_divide.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_names_etal.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_names_etalconfig.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_names_join.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_names_output.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_names_render.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_names_tests.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_names_truncate.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_nodes.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_number.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_page.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_parallel.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_processor.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_publishers.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_sort.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_static_locator.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_substitute.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/util_transform.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/xmldom.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/src/xmljson.js" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/tools/CHARS.py" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/tools/CONV.py" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/tools/LOCALE_INSERT.sh" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/tools/REPLACE.sh" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/tools/absorb-styles.py" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/tools/dates.txt" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/tools/getIANA.sh" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/tools/makedatetests.py" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/tools/makejson.py" />
+    <Text Include="../../thirdparty/owemdjee/citeproc-js/tools/populate.sh" />
+    <Xml Include="../../thirdparty/owemdjee/citeproc-js/demo/locales-en-US.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

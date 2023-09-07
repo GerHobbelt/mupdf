@@ -52,9 +52,9 @@ mknewMISCproj() {
 delnewproj() {
 	libname=$1
 	echo "delnewproj: $libname"
-	rm ${libname}.vcxproj*   ${libname}_tests.vcxproj*   ${libname}_examples.vcxproj*   2> /dev/null
+	rm ${libname}.vcxproj*   ${libname}_tests.vcxproj*   ${libname}_examples.vcxproj*   ${libname}_demos.vcxproj*   2> /dev/null
 	libname=$( echo lib$1 | sed -e 's/^liblib/lib/' -e 's/-?lib$//i' )
-	rm ${libname}.vcxproj*   ${libname}_tests.vcxproj*   ${libname}_examples.vcxproj*   2> /dev/null
+	rm ${libname}.vcxproj*   ${libname}_tests.vcxproj*   ${libname}_examples.vcxproj*   ${libname}_demos.vcxproj*   2> /dev/null
 }
 
 delnewproj2() {
@@ -165,7 +165,7 @@ arrayfire
 asio
 asyncplusplus
 asynqro
-##############b2xtranslator
+############## b2xtranslator
 basez
 bhtsne--Barnes-Hut-t-SNE
 bibtex-robust-decoder
@@ -301,7 +301,7 @@ hocr-spec
 hocr-tools
 honggfuzz
 hopscotch-map
-##############.NET########html2openxml
+##############.NET######## html2openxml
 htmlstreamparser
 http-parser
 hunspell
@@ -792,7 +792,7 @@ jpeginfo
 lcms2
 leptonica
 lexbor
-########.NET#######libWebP.Net
+########.NET####### libWebP.Net
 libbloomfilters
 libpillowfight
 libpng
@@ -821,10 +821,31 @@ waifu2x-ncnn-vulkan
 win-iconv
 zlibxtensor
 
+libsl3
+yasl
+
+libboost-context
+libboost-coroutine
+libboost-fiber
+libboost-filesystem
+libboost-iostreams
+libboost-locale
+libboost-log
+libboost-math
+libboost-mpi
+libboost-mpl
+libboost-program_options
+libboost-serialization
+libboost-stacktrace
+libboost-thread
+libboost-wave
+libboost_examples
+libboost_tools
+
 EOT
 )
 
-# Anything that'll be an application, even when regarded from our monolithic buil perspective
+# Anything that will end up as an application, even when regarded from our monolithic buil perspective
 
 myapplist=$(
 grep -v '#' <<EOT
@@ -937,6 +958,8 @@ zotero-web-library
 zotero-word-for-windows-integration
 zotero-zotfile
 
+doxygen-awesome-css
+
 EOT
 )
 
@@ -952,17 +975,15 @@ cpp-btree
 CHM-lib
 libdjvulibre
 libdjvu_io
-dtl-diff-template-library
+libdtldiff
 enkiTS-TaskScheduler
 lda-Familia
-google-diff-match-patch
 parallel-hashmap
-HDiffPatch
 google-marl
 mime-mega
 promise-cpp
-QuickJS-C++-Wrapper
-QuickJS-C++-Wrapper2
+libQuickJSpp
+libQuickJSpp2
 bibtex-robust-decoder
 svg-charter
 oneTBB
@@ -982,6 +1003,9 @@ libchm_io
 gperf-hash
 
 liboiio
+libquill
+libhdiff
+libgdiff
 
 EOT
 )
@@ -997,6 +1021,20 @@ libCacheLib
 
 EOT
 )
+
+if false ; then
+	echo "--------------------------------------------------"
+	echo "mylist=$mylist"
+	echo "--------------------------------------------------"
+	echo "myapplist=$myapplist"
+	echo "--------------------------------------------------"
+	echo "misclist=$misclist"
+	echo "--------------------------------------------------"
+	echo "deletelist=$deletelist"
+	echo "--------------------------------------------------"
+	echo "deletelist=$deletelist2"
+	echo "--------------------------------------------------"
+fi
 
 
 if [[ "$ARG" =~ [1] ]] ; then
