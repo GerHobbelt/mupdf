@@ -9,18 +9,30 @@
 
 "use strict"
 
-function flatten_document(doc) {
-	var i, n, page
+function request_synthesis(list) {
+	if (list)
+		for (var i = 0; i < list.length; ++i)
+			list[i].requestSynthesis()
+}
+
+function flatten_document(doc, do_flatten_annots, do_flatten_widgets) {
+	var i, n, page, list
 	n = doc.countPages()
 	for (i = 0; i < n; ++i) {
 		page = doc.loadPage(i)
-		flatten_page(doc, page.getObject())
+		if (do_flatten_annots)
+			request_synthesis(page.getAnnotations())
+		if (do_flatten_widgets)
+			request_synthesis(page.getWidgets())
+		page.update()
+		flatten_page(doc, page.getObject(), do_flatten_annots, do_flatten_widgets)
 	}
-	delete doc.getTrailer().Root.AcroForm
+	if (do_flatten_widgets)
+		delete doc.getTrailer().Root.AcroForm
 }
 
-function flatten_page(doc, page) {
-	var i, n, list, links, buf
+function flatten_page(doc, page, do_flatten_annots, do_flatten_widgets) {
+	var i, n, list, keep, buf
 	list = page.Annots
 	if (list) {
 		if (!page.Resources)
@@ -30,17 +42,26 @@ function flatten_page(doc, page) {
 		if (!page.Contents.isArray())
 			page.Contents = [ page.Contents ]
 
-		links = []
-
+		keep = []
 		buf = ""
 		for (i = 0; i < list.length; ++i) {
-			if (list[i].type == "Link")
-				links.push(list[i])
-			buf += flatten_annot(doc, page, list[i])
+			if (list[i].Subtype == "Link") {
+				keep.push(list[i])
+			} else if (list[i].Subtype == "Widget") {
+				if (do_flatten_widgets)
+					buf += flatten_annot(doc, page, list[i])
+				else
+					keep.push(list[i])
+			} else {
+				if (do_flatten_annots)
+					buf += flatten_annot(doc, page, list[i])
+				else
+					keep.push(list[i])
+			}
 		}
 
-		if (links.length > 0)
-			page.Annots = links
+		if (keep.length > 0)
+			page.Annots = keep
 		else
 			delete page.Annots
 
@@ -48,7 +69,20 @@ function flatten_page(doc, page) {
 	}
 }
 
-function calc_annot_transform(rect, bbox, transform) {
+function get_annot_ap(annot) {
+	var ap = annot.AP
+	if (ap) {
+		ap = ap.N
+		if (ap.isStream())
+			return ap
+		ap = ap[annot.AS]
+		if (ap.isStream())
+			return ap
+	}
+	return null
+}
+
+function get_annot_transform(rect, bbox, transform) {
 	var w, h, x, y
 	if (!transform)
 		transform = [ 1, 0, 0, 1, 0, 0 ]
@@ -56,28 +90,26 @@ function calc_annot_transform(rect, bbox, transform) {
 	w = (rect[2] - rect[0]) / (bbox[2] - bbox[0])
 	h = (rect[3] - rect[1]) / (bbox[3] - bbox[1])
 	x = rect[0] - bbox[0] * w
-	y = rect[1] - bbox[1] * w
+	y = rect[1] - bbox[1] * h
 	return [ w, 0, 0, h, x, y ]
 }
 
 function flatten_annot(doc, page, annot) {
 	var name = "Annot" + annot.asIndirect()
-	var rect = annot.Rect
-	var ap = annot.AP
-	var transform
+	var ap = get_annot_ap(annot)
 	if (ap) {
-		var ap_n = ap.N
-		if (ap_n) {
-			ap_n.Type = "XObject"
-			ap_n.Subtype = "Form"
-			page.Resources.XObject[name] = ap_n
-			transform = calc_annot_transform(rect, ap_n.BBox, ap_n.Matrix)
-			return "q\n" + transform.join(" ") + " cm\n/" + name + " Do\nQ\n"
-		}
+		var transform = get_annot_transform(annot.Rect, ap.BBox, ap.Matrix)
+		page.Resources.XObject[name] = ap
+		ap.Type = "XObject"
+		ap.Subtype = "Form"
+		return "q\n" + transform.join(" ") + " cm\n/" + name + " Do\nQ\n"
 	}
 	return ""
 }
 
 var doc = mupdf.Document.openDocument(scriptArgs[0])
-flatten_document(doc)
+doc.enableJournal()
+doc.beginOperation("flat")
+flatten_document(doc, true, true)
+doc.endOperation()
 doc.save(scriptArgs[1], "garbage,compress")
