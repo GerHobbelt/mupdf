@@ -654,6 +654,68 @@ fz_recompress_image_as_fax(fz_context *ctx, fz_pixmap *pix)
 	return cbuf;
 }
 
+static fz_compressed_buffer *
+fz_recompress_image_as_jbig2(fz_context *ctx, fz_pixmap *pix)
+{
+	/* FIXME: Should get default colorspaces from the doc! */
+	fz_default_colorspaces *defcs = fz_new_default_colorspaces(ctx);
+	fz_compressed_buffer *cbuf = NULL;
+	fz_halftone *ht = NULL;
+	fz_bitmap *bmp = NULL;
+	fz_jbig2e *jbig2e = NULL;
+	fz_buffer *globals = NULL;
+
+	fz_var(ht);
+	fz_var(bmp);
+	fz_var(cbuf);
+	fz_var(globals);
+	fz_var(jbig2e);
+
+	fz_keep_pixmap(ctx, pix);
+	fz_try(ctx)
+	{
+
+		/* Convert to alphaless grey */
+		if (pix->n != 1)
+		{
+			fz_pixmap *pix2 = fz_convert_pixmap(ctx, pix, fz_device_gray(ctx), NULL, defcs, fz_default_color_params, 0);
+
+			fz_drop_pixmap(ctx, pix);
+			pix = pix2;
+		}
+
+		/* Convert to a bitmap */
+		ht = fz_default_halftone(ctx, 1);
+
+		bmp = fz_new_bitmap_from_pixmap(ctx, pix, ht);
+
+		cbuf = fz_new_compressed_buffer(ctx);
+		jbig2e = fz_new_jbig2e(ctx);
+		fz_jbig2e_feed_bitmap(ctx, jbig2e, bmp);
+		globals = fz_jbig2e_pages_complete(ctx, jbig2e);
+		cbuf->params.u.jbig2.globals = fz_load_jbig2_globals(ctx, globals);
+		cbuf->buffer = fz_jbig2e_get_page(ctx, jbig2e);
+		cbuf->params.type = FZ_IMAGE_JBIG2;
+		cbuf->params.u.jbig2.embedded = 1;
+	}
+	fz_always(ctx)
+	{
+		fz_drop_bitmap(ctx, bmp);
+		fz_drop_halftone(ctx, ht);
+		fz_drop_pixmap(ctx, pix);
+		fz_drop_jbig2e(ctx, jbig2e);
+		fz_drop_buffer(ctx, globals);
+		fz_drop_default_colorspaces(ctx, defcs);
+	}
+	fz_catch(ctx)
+	{
+		fz_drop_compressed_buffer(ctx, cbuf);
+		fz_rethrow(ctx);
+	}
+
+	return cbuf;
+}
+
 static int method_from_fmt(int fmt)
 {
 	switch (fmt)
@@ -664,6 +726,8 @@ static int method_from_fmt(int fmt)
 		return FZ_RECOMPRESS_J2K;
 	case FZ_IMAGE_FAX:
 		return FZ_RECOMPRESS_FAX;
+	case FZ_IMAGE_JBIG2:
+		return FZ_RECOMPRESS_JBIG2;
 	}
 	return FZ_RECOMPRESS_LOSSLESS;
 }
@@ -686,6 +750,20 @@ recompress_image(fz_context *ctx, fz_pixmap *pix, int type, int fmt, int method,
 		cbuf = fz_recompress_image_as_j2k(ctx, pix, quality);
 	if (method == FZ_RECOMPRESS_JPEG)
 		cbuf = fz_recompress_image_as_jpeg(ctx, pix, quality, &cs);
+	if (method == FZ_RECOMPRESS_JBIG2)
+	{
+		if (fz_jbig2e_enabled(ctx))
+		{
+			cbuf = fz_recompress_image_as_jbig2(ctx, pix);
+			if (cbuf)
+			{
+				bpc = 1;
+				cs = fz_device_gray(ctx);
+			}
+		}
+		else
+			method = FZ_RECOMPRESS_FAX;
+	}
 	if (method == FZ_RECOMPRESS_FAX)
 	{
 		cbuf = fz_recompress_image_as_fax(ctx, pix);
