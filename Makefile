@@ -574,10 +574,10 @@ android: generate
 c++: c++-$(build)
 
 c++-release: shared-release
-	./scripts/mupdfwrap.py --venv -d build/shared-release -b 01
+	./scripts/mupdfwrap.py --venv -d build/shared-release$(build_suffix) -b 01
 
 c++-debug: shared-debug
-	./scripts/mupdfwrap.py --venv -d build/shared-debug -b 01
+	./scripts/mupdfwrap.py --venv -d build/shared-debug$(build_suffix) -b 01
 
 c++-clean:
 	rm -rf platform/c++
@@ -585,10 +585,10 @@ c++-clean:
 python: python-$(build)
 
 python-release: c++-release
-	./scripts/mupdfwrap.py -d build/shared-release -b 23
+	./scripts/mupdfwrap.py -d build/shared-release$(build_suffix) -b 23
 
 python-debug: c++-debug
-	./scripts/mupdfwrap.py -d build/shared-debug -b 23
+	./scripts/mupdfwrap.py -d build/shared-debug$(build_suffix) -b 23
 
 python-clean:
 	rm -rf platform/python
@@ -596,10 +596,10 @@ python-clean:
 csharp: csharp-$(build)
 
 csharp-release: c++-release
-	./scripts/mupdfwrap.py -d build/shared-release -b --csharp 23
+	./scripts/mupdfwrap.py -d build/shared-release$(build_suffix) -b --csharp 23
 
 csharp-debug: c++-debug
-	./scripts/mupdfwrap.py -d build/shared-debug -b --csharp 23
+	./scripts/mupdfwrap.py -d build/shared-debug$(build_suffix) -b --csharp 23
 
 csharp-clean:
 	rm -rf platform/csharp
