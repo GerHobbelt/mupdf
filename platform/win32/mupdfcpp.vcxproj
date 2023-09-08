@@ -104,6 +104,8 @@
     <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
     <LinkIncremental>false</LinkIncremental>
+    <CustomBuildBeforeTargets>
+    </CustomBuildBeforeTargets>
   </PropertyGroup>
 <ItemDefinitionGroup>
     <ClCompile>
@@ -160,6 +162,12 @@
     <ResourceCompile>
       <AdditionalIncludeDirectories>../../include;../../platform/c++/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <CustomBuildStep>
+      <Command>cd $(SolutionDir)..\..\
+python scripts\mupdfwrap.py --venv -b 0</Command>
+      <Message>Generating C++ bindings</Message>
+      <Outputs>$(SolutionDir)..\c++\implementation\classes.cpp</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -184,6 +192,14 @@
     <ResourceCompile>
       <AdditionalIncludeDirectories>../../include;../../platform/c++/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <CustomBuildStep>
+      <Command>cd $(SolutionDir)..\..\
+python scripts\mupdfwrap.py --venv -b 0</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>Generating C++ bindings</Message>
+      <Outputs>$(SolutionDir)..\c++\implementation\classes.cpp</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -207,6 +223,12 @@
     <ResourceCompile>
       <AdditionalIncludeDirectories>../../include;../../platform/c++/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <CustomBuildStep>
+      <Command>cd $(SolutionDir)..\..\
+python scripts\mupdfwrap.py --venv -b 0</Command>
+      <Message>Generating C++ bindings</Message>
+      <Outputs>$(SolutionDir)..\c++\implementation\classes.cpp</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -232,6 +254,14 @@
     <ResourceCompile>
       <AdditionalIncludeDirectories>../../include;../../platform/c++/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <CustomBuildStep>
+      <Command>cd $(SolutionDir)..\..\
+python scripts\mupdfwrap.py --venv -b 0</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(SolutionDir)..\c++\implementation\classes.cpp</Outputs>
+      <Message>Generating C++ bindings</Message>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\c++\implementation\classes.cpp" />
