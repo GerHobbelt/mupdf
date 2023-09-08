@@ -81,7 +81,7 @@ static void term_destination(j_compress_ptr cinfo)
 }
 
 void
-fz_write_pixmap_as_jpeg(fz_context *ctx, fz_output *out, const fz_pixmap *pix, int quality)
+fz_write_pixmap_as_jpeg(fz_context *ctx, fz_output *out, const fz_pixmap *pix, int quality, int invert_cmyk)
 {
 	struct jpeg_compress_struct cinfo = { 0 };
 	struct jpeg_error_mgr err = { 0 };
@@ -157,7 +157,7 @@ fz_write_pixmap_as_jpeg(fz_context *ctx, fz_output *out, const fz_pixmap *pix, i
 
 		jpeg_start_compress(&cinfo, TRUE);
 
-		if (fz_colorspace_is_subtractive(ctx, pix->colorspace))
+		if (fz_colorspace_is_cmyk(ctx, pix->colorspace) && invert_cmyk)
 		{
 			// treat `fz_pixmap *pix` as mutable:
 			fz_invert_pixmap_raw(ctx, (fz_pixmap *)pix);
@@ -168,7 +168,7 @@ fz_write_pixmap_as_jpeg(fz_context *ctx, fz_output *out, const fz_pixmap *pix, i
 			(void) jpeg_write_scanlines(&cinfo, row_pointer, 1);
 		}
 
-		if (fz_colorspace_is_subtractive(ctx, pix->colorspace))
+		if (fz_colorspace_is_cmyk(ctx, pix->colorspace) && invert_cmyk)
 		{
 			// treat `fz_pixmap *pix` as mutable: reverse the invert op now.
 			fz_invert_pixmap_raw(ctx, (fz_pixmap*)pix);
@@ -195,7 +195,7 @@ fz_save_pixmap_as_jpeg(fz_context *ctx, const fz_pixmap *pixmap, const char *fil
 	fz_output *out = fz_new_output_with_path(ctx, filename, 0);
 	fz_try(ctx)
 	{
-		fz_write_pixmap_as_jpeg(ctx, out, pixmap, quality);
+		fz_write_pixmap_as_jpeg(ctx, out, pixmap, quality, 1);
 		fz_close_output(ctx, out);
 	}
 	fz_always(ctx)
@@ -209,7 +209,7 @@ fz_save_pixmap_as_jpeg(fz_context *ctx, const fz_pixmap *pixmap, const char *fil
 }
 
 static fz_buffer *
-jpeg_from_pixmap(fz_context *ctx, fz_pixmap *pix, fz_color_params color_params, int quality, int drop)
+jpeg_from_pixmap(fz_context *ctx, fz_pixmap *pix, fz_color_params color_params, int quality, int invert_cmyk, int drop)
 {
 	fz_buffer *buf = NULL;
 	fz_output *out = NULL;
@@ -221,7 +221,7 @@ jpeg_from_pixmap(fz_context *ctx, fz_pixmap *pix, fz_color_params color_params, 
 	{
 		buf = fz_new_buffer(ctx, 1024);
 		out = fz_new_output_with_buffer(ctx, buf);
-		fz_write_pixmap_as_jpeg(ctx, out, pix, quality);
+		fz_write_pixmap_as_jpeg(ctx, out, pix, quality, invert_cmyk);
 		fz_close_output(ctx, out);
 	}
 	fz_always(ctx)
@@ -239,16 +239,16 @@ jpeg_from_pixmap(fz_context *ctx, fz_pixmap *pix, fz_color_params color_params, 
 }
 
 fz_buffer *
-fz_new_buffer_from_image_as_jpeg(fz_context *ctx, const fz_image *image, fz_color_params color_params, int quality)
+fz_new_buffer_from_image_as_jpeg(fz_context *ctx, const fz_image *image, fz_color_params color_params, int quality, int invert_cmyk)
 {
 	fz_pixmap *pix = fz_get_pixmap_from_image(ctx, image, NULL, NULL, NULL, NULL);
-	return jpeg_from_pixmap(ctx, pix, color_params, quality, 1);
+	return jpeg_from_pixmap(ctx, pix, color_params, quality, 1, invert_cmyk);
 }
 
 fz_buffer *
-fz_new_buffer_from_pixmap_as_jpeg(fz_context *ctx, const fz_pixmap *pix, fz_color_params color_params, int quality)
+fz_new_buffer_from_pixmap_as_jpeg(fz_context *ctx, const fz_pixmap *pix, fz_color_params color_params, int quality, int invert_cmyk)
 {
-	return jpeg_from_pixmap(ctx, (fz_pixmap *)pix, color_params, quality, 0);
+	return jpeg_from_pixmap(ctx, (fz_pixmap *)pix, color_params, quality, 0, invert_cmyk);
 }
 
 #endif

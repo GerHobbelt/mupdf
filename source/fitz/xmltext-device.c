@@ -290,6 +290,8 @@ static void fz_xmltext_fill_image(fz_context *ctx, fz_device *dev_, fz_image *im
 				type = "jpeg";
 				s_write_attribute_string(ctx, dev->out, "type", type);
 				s_write_attribute_int(ctx, dev->out, "color_transform", compressed->params.u.jpeg.color_transform);
+				if (compressed->params.u.jpeg.invert_cmyk)
+					s_write_attribute_int(ctx, dev->out, "invert_cmyk", 1);
 				break;
 			
 			case FZ_IMAGE_JPX:
