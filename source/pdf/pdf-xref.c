@@ -1963,7 +1963,7 @@ void pdf_repair_trailer(fz_context *ctx, pdf_document *doc)
 			/* ensure that Encryption dictionary and ID are cached without decryption,
 			   otherwise a decrypted Encryption dictionary and ID may be used when saving
 			   the PDF causing it to be inconsistent (since strings/streams are encrypted
-			   with the actual encryption key, not the decrypted encryption key. */
+			   with the actual encryption key, not the decrypted encryption key). */
 			tmp = doc->crypt;
 			doc->crypt = NULL;
 			fz_try(ctx)
