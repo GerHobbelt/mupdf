@@ -442,16 +442,16 @@ int fz_default_cookie_callback_handler(fz_context* ctx, enum fz_progress_state s
 	communication is unsynchronized without locking.
 
 	abort: The application should set this field to 0 before
-	calling fz_run_page to render a page. At any point when the
+	calling fz_run_page() to render a page. At any point when the
 	page is being rendered the application my set this field to 1
 	which will cause the rendering to finish soon. This field is
 	checked periodically when the page is rendered, but exactly
 	when is not known, therefore there is no upper bound on
 	exactly when the rendering will abort. If the application
 	did not provide a set of locks to fz_new_context, it must also
-	await the completion of fz_run_page before issuing another
-	call to fz_run_page. Note that once the application has set
-	this field to 1 after it called fz_run_page it may not change
+	await the completion of fz_run_page() before issuing another
+	call to fz_run_page(). Note that once the application has set
+	this field to 1 after it called fz_run_page() it may not change
 	the value again.
 
 	progress: Communicates rendering progress back to the
@@ -475,7 +475,7 @@ int fz_default_cookie_callback_handler(fz_context* ctx, enum fz_progress_state s
 
 	run_mode: a bit set signaling which type of content to render.
 	For backwards compatibility of the code, the ZERO(0) value
-	signals to run everything (FZ_RUN_EVERYTHING).
+	signals to run everything (\ref FZ_RUN_EVERYTHING).
 
 	run_annotations_reject_mask: a boolean array set signaling which
 	annotation types to ignore/skip when rendering (and the run_mode
@@ -492,13 +492,13 @@ struct fz_cookie
 		volatile int abort;
 
 		size_t progress;
-		size_t progress_max; /* (size_t)-1 for unknown */
+		size_t progress_max;               /* (size_t)-1 for unknown */
 		int errors;
 		int incomplete;
 		enum fz_run_flags run_mode;
 		int render_rough_approx;
 		int ignore_minor_errors;
-		char run_annotations_reject_mask[32 /* PDF_ANNOT_UNKNOWN + 2 */];   // char acts as boolean value carrier: 0 = false, !0 = true
+		char run_annotations_reject_mask[32 /* PDF_ANNOT_UNKNOWN + 2 */];   // each `char` element acts as boolean value carrier: 0 = false, !0 = true
 
 		size_t max_nodes_per_page_render;		// 0: doesn't matter; > 0: abort page render when there's more nodes than this
 		float max_msecs_per_page_render;		// 0: doesn't matter; > 0: abort page render when time spent is more than this
