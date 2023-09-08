@@ -3124,7 +3124,10 @@ retry_after_repair:
 		/* Never update Popup and Link annotations */
 		subtype = pdf_dict_get(ctx, annot->obj, PDF_NAME(Subtype));
 		if (subtype == PDF_NAME(Popup) || subtype == PDF_NAME(Link))
+		{
+			pdf_end_operation(ctx, annot->page->doc);
 			break;
+		}
 
 		/* Never update signed Signature widgets */
 		if (subtype == PDF_NAME(Widget))
@@ -3134,7 +3137,10 @@ retry_after_repair:
 			{
 				/* We cannot synthesise an appearance for a signed Sig, so don't even try. */
 				if (pdf_signature_is_signed(ctx, annot->page->doc, annot->obj))
+				{
+					pdf_end_operation(ctx, annot->page->doc);
 					break;
+				}
 			}
 		}
 
