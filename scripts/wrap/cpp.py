@@ -925,6 +925,10 @@ def make_namespace_close( namespace, out):
 # and `std::vector<>` that work well enough for the generation of the
 # C++ API.
 #
+# We also define extra raw functions to aid SWIG-generated code. These
+# are implemented in C++, and should be excluded from the generated
+# windows_def file later on, otherwise we get link errors on Windows.
+#
 g_extra_declarations = textwrap.dedent(f'''
 
         #ifdef MUPDF_WRAP_LIBCLANG
@@ -1106,30 +1110,6 @@ g_extra_definitions = textwrap.dedent(f'''
                 ret[i].mark = marks[i];
             }}
             return ret;
-        }}
-
-        FZ_FUNCTION std::vector<fz_quad> fz_highlight_selection2(fz_context *ctx, fz_stext_page *page, fz_point a, fz_point b, int max_quads)
-        {{
-            {{
-                std::vector<fz_quad>    ret(max_quads);
-                int n;
-                fz_try(ctx)
-                {{
-                    n = fz_highlight_selection(ctx, page, a, b, &ret[0], max_quads);
-                }}
-                fz_catch(ctx)
-                {{
-                    n = -1;
-                }}
-                if (n >= 0)
-                {{
-                    ret.resize(n);
-                    return ret;
-                }}
-            }}
-            /* We are careful to only call `fz_throw()` after `ret`'s
-            destructor has been called. */
-            fz_throw(ctx, FZ_ERROR_GENERIC, "fz_highlight_selection() failed");
         }}
         ''')
 
@@ -3581,11 +3561,16 @@ def get_struct_fnptrs( cursor_struct, shallow_typedef_expansion=False, verbose=F
                     tt = state.get_name_canonical( t)
                     if verbose:
                         jlib.log('{tt.spelling=}')
-                    if not 'struct (unnamed at ' in tt.spelling:
+                    if (0
+                            or 'struct (unnamed at ' in tt.spelling
+                            or 'unnamed struct at ' in tt.spelling
+                            ):
+
                         # This is clang giving an unhelpful name to an
                         # anonymous struct.
                         if verbose:
-                            jlib.log( 'Avoiding clang struct (unnamed at ...) anonymous struct: {tt.spelling=}')
+                            jlib.log( 'Avoiding clang anonymous struct placeholder: {tt.spelling=}')
+                    else:
                         t = tt
                 if verbose:
                     jlib.log('Yielding: {cursor.spelling=} {t.spelling=}')
@@ -4685,7 +4670,10 @@ def cpp_source(
 
     # Now parse.
     #
-    index = state.clang.cindex.Index.create()
+    try:
+        index = state.clang.cindex.Index.create()
+    except Exception as e:
+        raise Exception(f'libclang does not appear to be installed') from e
 
     header = f'{dir_mupdf}/include/mupdf/fitz.h'
     assert os.path.isfile( header), f'header={header}'
@@ -5015,6 +5003,7 @@ def cpp_source(
                 'pdf_lookup_metadata2',
                 'fz_md5_final2',
                 'fz_highlight_selection2',
+                'fz_search_page2',
                 ):
             # These are excluded from windows_def because are C++ so
             # we'd need to use the mangled name in. Instead we mark them

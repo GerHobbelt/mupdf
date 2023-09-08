@@ -74,7 +74,7 @@ def build_swig(
     m = re.search( 'SWIG Version ([0-9]+)[.]([0-9]+)[.]([0-9]+)', t)
     assert m
     swig_major = int( m.group(1))
-    jlib.system( f'which "{swig_command}"')
+    jlib.system( f'which "{swig_command}"', raise_errors=0)
 
     # Create a .i file for SWIG.
     #

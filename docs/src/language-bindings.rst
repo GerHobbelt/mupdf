@@ -1482,6 +1482,17 @@ functions and class methods.]
     */
     FZ_FUNCTION std::vector<fz_quad> fz_highlight_selection2(fz_context* ctx, fz_stext_page* page, fz_point a, fz_point b, int max_quads);
 
+    struct fz_search_page2_hit
+    {{
+        fz_quad quad;
+        int mark;
+    }};
+
+    /**
+    C++ alternative to fz_search_page() that returns information in a std::vector.
+    */
+    FZ_FUNCTION std::vector<fz_search_page2_hit> fz_search_page2(fz_context* ctx, fz_document *doc, int number, const char *needle, int hit_max);
+
 
 Python/C# bindings details
 ---------------------------------------------------------------

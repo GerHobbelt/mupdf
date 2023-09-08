@@ -62,7 +62,7 @@ typedef int (fz_output_write_fn)(fz_context *ctx, fz_output *out, const void *da
 
 	out: a reference to the output stream.
 
-	offset, whence: as defined for fs_seek_output.
+	offset, whence: as defined for fz_seek().
 
 	Returns TRUE(!0) on error, 0 on success.
 */

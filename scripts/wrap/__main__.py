@@ -2594,48 +2594,10 @@ def main2():
                 jlib.system( f'rsync -aiRz {build_dirs.dir_mupdf}/docs/generated/./ {destination}', verbose=1, out='log')
 
             elif arg == '--test-cpp':
-                path = os.path.abspath( f'{__file__}/../../../thirdparty/zlib/zlib.3.pdf')
-                path = path.replace('\\', '/')
-                code = textwrap.dedent(f'''
-                        #include <assert.h>
-                        #include "mupdf/fitz.h"
-                        #include "mupdf/classes.h"
-                        #include "mupdf/classes2.h"
-                        int main()
-                        {{
-                            mupdf::FzDocument document("{path}");
-                            std::string v;
-                            v = mupdf::fz_lookup_metadata2(document, "format");
-                            printf("v=%s\\n", v.c_str());
-                            bool raised = false;
-                            try
-                            {{
-                                v = mupdf::fz_lookup_metadata2(document, "format___");
-                            }}
-                            catch (std::exception& e)
-                            {{
-                                raised = true;
-                                printf("exception: %s\\n", e.what());
-                            }}
-                            if (!raised) exit(1);
-                            printf("v=%s\\n", v.c_str());
-                            fz_rect r = fz_unit_rect;
-                            printf("r.x0=%f\\n", r.x0);
-
-                            mupdf::FzStextOptions   options;
-                            mupdf::FzStextPage stp( document, 0, options);
-                            std::vector<fz_quad>    quads = mupdf::fz_highlight_selection2(
-                                    stp,
-                                    mupdf::FzPoint(20, 20),
-                                    mupdf::FzPoint(120, 220),
-                                    100
-                                    );
-                            printf("quads.size()=%zi\\n", quads.size());
-                            assert(quads.size() == 13);
-                            return 0;
-                        }}
-                        ''')
-                jlib.fs_write( 'test.cpp', code)
+                testfile = os.path.abspath( f'{__file__}/../../../thirdparty/zlib/zlib.3.pdf')
+                testfile = testfile.replace('\\', '/')
+                src = f'{build_dirs.dir_mupdf}/scripts/mupdfwrap_test.cpp'
+                exe = f'{build_dirs.dir_mupdf}/scripts/mupdfwrap_test.cpp.exe'
                 includes = (
                         f' -I {build_dirs.dir_mupdf}/include'
                         f' -I {build_dirs.dir_mupdf}/platform/c++/include'
@@ -2649,18 +2611,18 @@ def main2():
                     vs = wdev.WindowsVS()
                     command = textwrap.dedent(f'''
                             "{vs.vcvars}"&&"{vs.cl}"
-                                /Tptest.cpp
+                                /Tp{src}
                                 {includes}
                                 -D FZ_DLL_CLIENT
                                 {cpp_flags}
                                 /link
                                 {lib}
-                                /out:test.cpp.exe
+                                /out:{exe}
                             ''').replace('\n', ' ')
                     jlib.system(command, verbose=1)
                     path = os.environ.get('PATH')
                     env_extra = dict(PATH = f'{build_dirs.dir_so}{os.pathsep}{path}' if path else build_dirs.dir_so)
-                    jlib.system('test.cpp.exe', verbose=1, env_extra=env_extra)
+                    jlib.system(f'{exe} {testfile}', verbose=1, env_extra=env_extra)
                 else:
                     dir_so_flags = os.path.basename( build_dirs.dir_so).split( '-')
                     if 'shared' in dir_so_flags:
@@ -2675,18 +2637,18 @@ def main2():
                         assert 0, f'Leaf must start with "shared-" or "fpic-": build_dirs.dir_so={build_dirs.dir_so}'
                     command = textwrap.dedent(f'''
                             c++
-                                -o test.cpp.exe
+                                -o {exe}
                                 {cpp_flags}
                                 {includes}
-                                test.cpp
+                                {src}
                                 {link_l_flags( [libmupdf, libmupdfcpp])}
                             ''').replace('\n', '\\\n')
                     jlib.system(command, verbose=1)
                     jlib.system( 'pwd', verbose=1)
                     if state.state_.macos:
-                        jlib.system( f'DYLD_LIBRARY_PATH={build_dirs.dir_so} ./test.cpp.exe', verbose=1)
+                        jlib.system( f'DYLD_LIBRARY_PATH={build_dirs.dir_so} {exe}', verbose=1)
                     else:
-                        jlib.system( './test.cpp.exe', verbose=1, env_extra=dict(LD_LIBRARY_PATH=build_dirs.dir_so))
+                        jlib.system( f'{exe} {testfile}', verbose=1, env_extra=dict(LD_LIBRARY_PATH=build_dirs.dir_so))
 
             elif arg == '--test-internal':
                 _test_get_m_command()
@@ -2779,7 +2741,7 @@ def main2():
                 references = '-r:System.Drawing -r:System.Windows.Forms' if state.state_.linux else ''
                 out = 'mupdfwrap_gui.cs.exe'
                 jlib.build(
-                        ('scripts/mupdfwrap_gui.cs', mupdf_cs),
+                        (f'{build_dirs.dir_mupdf}/scripts/mupdfwrap_gui.cs', mupdf_cs),
                         out,
                         f'"{csc}" -unsafe {references}  -out:{{OUT}} {{IN}}'
                         )
@@ -2789,7 +2751,8 @@ def main2():
                     # libraries.
                     jlib.fs_copy(f'{build_dirs.dir_mupdf}/thirdparty/zlib/zlib.3.pdf', f'{build_dirs.dir_so}/zlib.3.pdf')
                     # Note that this doesn't work remotely.
-                    jlib.system(f'cd {build_dirs.dir_so} && {mono} ../../{out}', verbose=1)
+                    out_rel = os.path.relpath( out, build_dirs.dir_so)
+                    jlib.system(f'cd {build_dirs.dir_so} && {mono} {out_rel}', verbose=1)
                 else:
                     jlib.fs_copy(f'{build_dirs.dir_mupdf}/thirdparty/zlib/zlib.3.pdf', f'zlib.3.pdf')
                     jlib.system(f'LD_LIBRARY_PATH={build_dirs.dir_so} {mono} ./{out}', verbose=1)
