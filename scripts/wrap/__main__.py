@@ -2750,7 +2750,7 @@ def main2():
                     jlib.build(
                             (f'{build_dirs.dir_mupdf}/scripts/mupdfwrap_test.cs', mupdf_cs),
                             out,
-                            f'"{csc}" -out:{{OUT}} {{IN}}',
+                            f'"{csc}" -unsafe -out:{{OUT}} {{IN}}',
                             )
                     if state.state_.windows:
                         out_rel = os.path.relpath( out, build_dirs.dir_so)
@@ -2878,14 +2878,18 @@ def main2():
                 # inside single quotes, doesn't work - we get error `The
                 # filename, directory name, or volume label syntax is
                 # incorrect.`.
-                jlib.system(f'"{sys.executable}" -m venv {venv}', out='log', verbose=1)
+                if state.state_.openbsd:
+                    # Need system py3-llvm.
+                    jlib.system(f'"{sys.executable}" -m venv --system-site-packages {venv}', out='log', verbose=1)
+                else:
+                    jlib.system(f'"{sys.executable}" -m venv {venv}', out='log', verbose=1)
                 if state.state_.windows:
                     command = f'{venv}\\Scripts\\activate.bat'
                 else:
                     command = f'. {venv}/bin/activate'
                 command += f' && python -m pip install --upgrade pip'
                 if state.state_.openbsd:
-                    jlib.log( 'Not installing libclang on openbsd; we assume py3-llvm is installed')
+                    jlib.log( 'Not installing libclang on openbsd; we assume py3-llvm is installed.')
                     command += f' && python -m pip install --upgrade swig'
                 else:
                     command += f' && python -m pip install{force_reinstall} --upgrade libclang swig'

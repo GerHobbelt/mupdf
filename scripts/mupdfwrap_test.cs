@@ -1,8 +1,50 @@
 public class HelloWorld
 {
+    struct Buffer
+    {
+        unsafe public fixed byte buffer[32];
+    }
+
+    unsafe public class FzStream3 : mupdf.FzStream2
+    {
+        unsafe Buffer m_buffer;
+        //public fixed byte buffer[32];
+        //unsafe public byte* m_buffer;
+        int m_buffer_length;
+        public int m_i;
+
+        public FzStream3()
+        {
+            System.Console.WriteLine("## FzStream3().");
+            //m_buffer0 = new Buffer();
+            //m_buffer_length = 32;
+            //m_buffer = new byte[ m_buffer_length];
+
+            m_i = 0;
+            use_virtual_next();
+            System.Console.WriteLine("## FzStream3() have called use_virtual_next().");
+        }
+
+        public override int next(mupdf.fz_context ctx, uint max)
+        {
+            System.Console.WriteLine("## next(): max={0}", max);
+            unsafe
+            {
+                m_buffer.buffer[0] = (byte) (65 + m_i);
+                m_i += 1;
+                //m_internal.rp = buffer;
+                //m_internal.wp = buffer + 1;
+            }
+            return 1;
+        }
+    }
     public static void Main(string[] args)
     {
         System.Console.WriteLine("MuPDF C# test starting.");
+
+        // Test FzStream2
+        var stream = new FzStream3();
+        mupdf.FzDocument document0 = new mupdf.FzDocument("pdf", stream);
 
         // Check we can load a document.
         mupdf.FzDocument document = new mupdf.FzDocument("zlib.3.pdf");
@@ -57,6 +99,7 @@ public class HelloWorld
         if (w2 != w || h2 != h) {
             throw new System.Exception("Unexpected tuple values from bitmap.fz_bitmap_details().");
         }
+
         System.Console.WriteLine("MuPDF C# test finished.");
     }
 }

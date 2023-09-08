@@ -236,20 +236,26 @@ class ClassExtra:
                     ctx, void*, ...).
                 alloc:
                     Code for embedding in the virtual_fnptrs wrapper class's
-                    constructor that creates a new instances of the MuPDF
-                    struct and virtual_fnptrs wrapper class, and sets
-                    m_internal to point to the MuPDF struct. It should also
-                    ensure that <self> can convert m_internal to the instance
-                    of the virtual_fnptrs wrapper class.
+                    constructor that sets m_internal to a new instances of the
+                    MuPDF struct. It should also ensure that <self> can convert
+                    m_internal to the instance of the virtual_fnptrs wrapper
+                    class; for example we could make m_internal point to the
+                    MuPDF struct followed by an extra word that we set to point
+                    to the virtual_fnptrs wrapper, and then `self_` could be:
+                        lambda name: f'(*(FzFoo2**) ({name} + 1))'
+                    [If our wrapper class is marked as POD, we don't need to
+                    allocate anything, and `self_` can simply cast `name` to
+                    the virtual_fnptrs wrapper class.]
                 free:
                     Optional code for freeing the virtual_fnptrs wrapper class.
 
-            We generate a virtual_fnptrs wrapper class, derived from the main
-            wrapper class, where the main wrapper class's function pointers end
-            up calling the virtual_fnptrs wrapper class's virtual methods. We
-            then use SWIG's 'Director' support to allow these virtual methods
-            to be overridden in Python/C#. Thus one can make MuPDF function
-            pointers call Python/C# code.
+            We generate a virtual_fnptrs wrapper class, derived from the
+            main wrapper class (but not adding any data members), where
+            the main wrapper class's function pointers end up calling the
+            virtual_fnptrs wrapper class's virtual methods. We then use SWIG's
+            'Director' support to allow these virtual methods to be overridden
+            in Python/C#. Thus one can make MuPDF function pointers call
+            Python/C# code.
         '''
         if accessors is None and pod is True:
             accessors = True
@@ -1171,8 +1177,8 @@ classextras = ClassExtras(
                     self_ = lambda name: f'*({rename.class_("fz_path_walker")}2**) ((fz_path_walker*) {name} + 1)',
                     alloc = textwrap.dedent( f'''
                         m_internal = (::fz_path_walker*) {rename.ll_fn("fz_calloc")}(
-                                1, sizeof(*m_internal)
-                                + sizeof({rename.class_("fz_path_walker")}2*)
+                                1,
+                                sizeof(*m_internal) + sizeof({rename.class_("fz_path_walker")}2*)
                                 );
                         *({rename.class_("fz_path_walker")}2**) (m_internal + 1) = this;
                         '''),
@@ -1609,7 +1615,27 @@ classextras = ClassExtras(
                     comment = '/* Construct using fz_open_file(). */',
                     )
                     ],
+                virtual_fnptrs = dict(
+                    # We need to cast `name` to `fz_stream` because it is
+                    # passed as a `void*` to `drop()`.
+                    self_ = lambda name: f'({rename.class_("fz_stream")}2*) ((fz_stream*) {name})->state',
+                    self_n = 1,
+                    alloc = textwrap.dedent( f'''
+                        m_internal = {rename.ll_fn("fz_new_stream")}(this, nullptr, nullptr);
+                        '''),
+                    ),
                 ),
+
+        #fz_stream_with_buffer = ClassExtra(
+        #        virtual_fnptrs = dict(
+        #            self_ = lambda name: f'({rename.class_("fz_stream_with_buffer")}2*) {name}->state',
+        #            self_n = 1,
+        #            alloc = textwrap.dedent( f'''
+        #                m_internal = {rename.ll_fn("fz_new_stream_with_buffer")}(4096);
+        #                m_internal->state = this;
+        #                '''),
+        #            ),
+        #        ),
 
         fz_story_element_position = ClassExtra(
                 pod='inline',
