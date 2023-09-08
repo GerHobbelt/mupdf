@@ -49,14 +49,14 @@ fz_buffer *fz_deflate(fz_context *ctx, fz_buffer *input);
 	Creates a stream assuming the default PDF parameters,
 	except the number of columns.
 */
-fz_buffer *fz_compress_ccitt_fax_g3(fz_context *ctx, const unsigned char *data, int columns, int rows);
+fz_buffer *fz_compress_ccitt_fax_g3(fz_context *ctx, const unsigned char *data, int columns, int rows, ptrdiff_t stride);
 
 /**
 	Compress bitmap data as CCITT Group 4 2D fax image.
 	Creates a stream assuming the default PDF parameters, except
 	K=-1 and the number of columns.
 */
-fz_buffer *fz_compress_ccitt_fax_g4(fz_context *ctx, const unsigned char *data, int columns, int rows);
+fz_buffer *fz_compress_ccitt_fax_g4(fz_context *ctx, const unsigned char *data, int columns, int rows, ptrdiff_t stride);
 
 #ifdef __cplusplus
 }

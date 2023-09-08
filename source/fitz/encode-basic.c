@@ -377,9 +377,9 @@ static int deflate_write(fz_context *ctx, void *opaque, const void *data, size_t
 			err = zng_deflate(&state->z, Z_NO_FLUSH);
 			if (err != Z_OK)
 				fz_throw(ctx, FZ_ERROR_GENERIC, "zlib compression failed: %d", err);
-			if (state->z.avail_out > 0)
-				fz_write_data(ctx, state->chain, state->z.next_out, state->z.avail_out);
-		} while (state->z.avail_out > 0);
+			if (state->z.avail_out < state->bufsize)
+				fz_write_data(ctx, state->chain, state->buf, state->bufsize - state->z.avail_out);
+		} while (state->z.avail_in > 0);
 	}
 	return 0;
 }
@@ -396,8 +396,8 @@ static void deflate_close(fz_context *ctx, void *opaque)
 		state->z.next_out = state->buf;
 		state->z.avail_out = state->bufsize;
 		err = zng_deflate(&state->z, Z_FINISH);
-		if (state->z.avail_out > 0)
-			fz_write_data(ctx, state->chain, state->z.next_out, state->z.avail_out);
+		if (state->z.avail_out < state->bufsize)
+			fz_write_data(ctx, state->chain, state->buf, state->bufsize - state->z.avail_out);
 	} while (err == Z_OK);
 	// making sure that the local `buffer[]` reference doesn't make it outside this scope.
 	state->z.next_out = NULL;
