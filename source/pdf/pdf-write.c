@@ -104,6 +104,7 @@ typedef struct
 	int dont_regenerate_id;
 	int do_snapshot;
 	int do_preserve_metadata;
+	int do_use_objstms;
 
 	int list_len;
 	int *use_list;
@@ -1651,10 +1652,16 @@ static void preloadobjstms(fz_context *ctx, pdf_document *doc)
 		{
 			for (; num < pdf_xref_len(ctx, doc); num++)
 			{
-				if (pdf_get_xref_entry_no_null(ctx, doc, num)->type == 'o')
+				pdf_xref_entry *x = pdf_get_xref_entry_no_null(ctx, doc, num);
+				if (x->type == 'o')
 				{
 					obj = pdf_load_object(ctx, doc, num);
 					pdf_drop_obj(ctx, obj);
+					/* The object is no longer an objstm one. It's a regular object
+					 * held in memory. Previously we used gen to hold the index of
+					 * the obj in the objstm, so reset this to 0. */
+					x->type = 'n';
+					x->gen = 0;
 				}
 			}
 		}
@@ -2130,7 +2137,7 @@ static void writeobject(fz_context *ctx, pdf_document *doc, pdf_write_state *opt
 		if (pdf_is_dict(ctx, obj))
 		{
 			pdf_obj *type = pdf_dict_get(ctx, obj, PDF_NAME(Type));
-			if (type == PDF_NAME(ObjStm))
+			if (type == PDF_NAME(ObjStm) && !opts->do_use_objstms)
 			{
 				if (opts->use_list)
 					opts->use_list[num] = 0;
@@ -2313,12 +2320,32 @@ static void writexrefstreamsubsect(fz_context *ctx, pdf_document *doc, pdf_write
 	pdf_array_push_int(ctx, index, to - from);
 	for (num = from; num < to; num++)
 	{
-		fz_append_byte(ctx, fzbuf, opts->use_list[num] ? 1 : 0);
-		fz_append_byte(ctx, fzbuf, opts->ofs_list[num]>>24);
-		fz_append_byte(ctx, fzbuf, opts->ofs_list[num]>>16);
-		fz_append_byte(ctx, fzbuf, opts->ofs_list[num]>>8);
-		fz_append_byte(ctx, fzbuf, opts->ofs_list[num]);
-		fz_append_byte(ctx, fzbuf, opts->gen_list[num]);
+		int f1, f2, f3;
+		pdf_xref_entry *x = pdf_get_xref_entry_no_null(ctx, doc, num);
+		if (opts->use_list[num] == 0)
+		{
+			f1 = 0; /* Free */
+			f2 = opts->ofs_list[num];
+			f3 = opts->gen_list[num];
+		}
+		else if (x->type == 'o')
+		{
+			f1 = 2; /* Object Stream */
+			f2 = opts->ofs_list[num];
+			f3 = opts->gen_list[num];
+		}
+		else
+		{
+			f1 = 1; /* Object */
+			f2 = opts->ofs_list[num];
+			f3 = opts->gen_list[num];
+		}
+		fz_append_byte(ctx, fzbuf, f1);
+		fz_append_byte(ctx, fzbuf, f2>>24);
+		fz_append_byte(ctx, fzbuf, f2>>16);
+		fz_append_byte(ctx, fzbuf, f2>>8);
+		fz_append_byte(ctx, fzbuf, f2);
+		fz_append_byte(ctx, fzbuf, f3);
 	}
 }
 
@@ -2468,8 +2495,6 @@ dowriteobject(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, int num
 		gen = entry->gen;
 	if (entry->type == 'n')
 		gen = entry->gen;
-	if (entry->type == 'o')
-		gen = 0;
 
 	/* If we are renumbering, then make sure all generation numbers are
 	 * zero (except object 0 which must be free, and have a gen number of
@@ -2479,13 +2504,25 @@ dowriteobject(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, int num
 	if (opts->do_garbage >= 2)
 		gen = (num == 0 ? 65535 : 0);
 
+	/* For objects in object streams, the gen number gives us the index of
+	 * the object within the stream. */
+	if (entry->type == 'o')
+		gen = entry->gen;
+
 	if (opts->gen_list)
 		opts->gen_list[num] = gen;
 
 	if (opts->do_garbage && !opts->use_list[num])
 		return;
 
-	if (entry->type == 'n' || entry->type == 'o')
+	if (entry->type == 'o')
+	{
+		assert(opts->do_use_objstms);
+		opts->ofs_list[num] = entry->ofs;
+		return;
+	}
+
+	if (entry->type == 'n')
 	{
 		if (pass > 0)
 			padto(ctx, opts->out, opts->ofs_list[num]);
@@ -3110,6 +3147,7 @@ static void initialise_write_state(fz_context *ctx, pdf_document *doc, const pdf
 	opts->do_encrypt = in_opts->do_encrypt;
 	opts->dont_regenerate_id = in_opts->dont_regenerate_id;
 	opts->do_preserve_metadata = in_opts->do_preserve_metadata;
+	opts->do_use_objstms = in_opts->do_use_objstms;
 	opts->start = 0;
 	opts->main_xref_offset = INT_MIN;
 
@@ -3499,6 +3537,164 @@ ensure_initial_incremental_contents(fz_context *ctx, fz_stream *in, fz_output *o
 		fz_rethrow(ctx);
 }
 
+#define OBJSTM_MAXOBJS 256
+#define OBJSTM_MAXLEN 1<<24
+
+typedef struct
+{
+	pdf_write_state *opts;
+	int n;
+	int objnum[OBJSTM_MAXOBJS];
+	size_t len[OBJSTM_MAXOBJS];
+	fz_buffer *content_buf;
+	fz_output *content_out;
+	int root_num;
+	int info_num;
+} objstm_gather_data;
+
+static void
+flush_gathered(fz_context *ctx, pdf_document *doc, objstm_gather_data *data)
+{
+	pdf_obj *obj;
+	pdf_obj *ref = NULL;
+	fz_buffer *newbuf = NULL;
+	fz_output *out = NULL;
+	int i;
+
+	if (data->n == 0)
+		return;
+
+	obj = pdf_new_dict(ctx, doc, 4);
+
+	fz_var(ref);
+	fz_var(newbuf);
+	fz_var(out);
+
+	fz_try(ctx)
+	{
+		size_t pos = 0, first;
+		int num;
+		newbuf = fz_new_buffer(ctx, 128);
+
+		out = fz_new_output_with_buffer(ctx, newbuf);
+
+		for (i = 0; i < data->n; i++)
+		{
+			fz_write_printf(ctx, out, "%d %d ", data->objnum[i], pos);
+			pos += data->len[i];
+		}
+
+		fz_close_output(ctx, out);
+		first = fz_tell_output(ctx, out);
+		fz_drop_output(ctx, out);
+		out = NULL;
+
+		pdf_dict_put_drop(ctx, obj, PDF_NAME(First), pdf_new_int(ctx, first));
+		pdf_dict_put_drop(ctx, obj, PDF_NAME(N), pdf_new_int(ctx, data->n));
+		pdf_dict_put(ctx, obj, PDF_NAME(Type), PDF_NAME(ObjStm));
+
+		fz_close_output(ctx, data->content_out);
+		fz_append_buffer(ctx, newbuf, data->content_buf);
+
+		doc->xref_base = 0; /* Might have been reset by our caller */
+		ref = pdf_add_object(ctx, doc, obj);
+		pdf_update_stream(ctx, doc, ref, newbuf, 0);
+
+		num = pdf_to_num(ctx, ref);
+		expand_lists(ctx, data->opts, num);
+		data->opts->use_list[num] = 1;
+
+		/* Update all the xref entries for the objects to point into this stream. */
+		for (i = 0; i < data->n; i++)
+		{
+			pdf_xref_entry *x = pdf_get_xref_entry_no_null(ctx, doc, data->objnum[i]);
+			x->ofs = num; /* ofs = which objstm is this in */
+			x->gen = i; /* gen = nth entry in the objstm */
+			data->opts->ofs_list[data->objnum[i]] = i;
+			data->opts->gen_list[data->objnum[i]] = i;
+		}
+
+		data->n = 0;
+	}
+	fz_always(ctx)
+	{
+		fz_drop_output(ctx, data->content_out);
+		data->content_out = NULL;
+		fz_drop_buffer(ctx, data->content_buf);
+		data->content_buf = NULL;
+		pdf_drop_obj(ctx, obj);
+		pdf_drop_obj(ctx, ref);
+		fz_drop_buffer(ctx, newbuf);
+		fz_drop_output(ctx, out);
+	}
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+}
+
+static void
+objstm_gather(fz_context *ctx, pdf_xref_entry *x, int i, pdf_document *doc, void *arg)
+{
+	size_t olen, len;
+	objstm_gather_data *data = (objstm_gather_data *)arg;
+
+	/* If we are writing incrementally, then only the last one can be gathered. */
+	if (data->opts->do_incremental && doc->xref_base != 0)
+		return;
+
+	if (i == data->root_num || i == data->info_num)
+		return;
+
+	/* Ensure the object is loaded! */
+	if (i == 0)
+		return; /* pdf_cache_object does not like being called for i == 0 which should be free. */
+	pdf_cache_object(ctx, doc, i);
+
+	if (x->type != 'n' || x->stm_buf != NULL || x->stm_ofs != 0 || x->gen != 0)
+		return; /* Ineligible for using an objstm */
+
+	/* FIXME: Can we do a pass through to check for such objects more exactly? */
+	if (pdf_is_int(ctx, x->obj))
+		return; /* In case it's a Length value. */
+	if (pdf_is_indirect(ctx, x->obj))
+		return; /* Bare indirect references are not allowed. */
+	if (data->opts->do_linear && pdf_is_dict(ctx, x->obj))
+	{
+		pdf_obj *type = pdf_dict_get(ctx, x->obj, PDF_NAME(Type));
+		if (pdf_name_eq(ctx, type, PDF_NAME(Pages)) ||
+			pdf_name_eq(ctx, type, PDF_NAME(Page)))
+			return;
+	}
+
+	if (data->content_buf == NULL)
+		data->content_buf = fz_new_buffer(ctx, 128);
+	if (data->content_out == NULL)
+		data->content_out = fz_new_output_with_buffer(ctx, data->content_buf);
+
+	olen = data->content_buf->len;
+	pdf_print_encrypted_obj(ctx, data->content_out, x->obj, 1, 0, NULL, 0, 0);
+	data->objnum[data->n] = i;
+	len = data->content_buf->len;
+	data->len[data->n] = len - olen;
+	x->type = 'o';
+	x->gen = data->n;
+	data->n++;
+	if (data->n == OBJSTM_MAXOBJS || len > OBJSTM_MAXLEN)
+		flush_gathered(ctx, doc, data);
+}
+
+static void
+gather_to_objstms(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, int xref_len)
+{
+	objstm_gather_data data = { 0 };
+
+	data.opts = opts;
+	data.root_num = pdf_to_num(ctx, pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root)));
+	data.info_num = pdf_to_num(ctx, pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Info)));
+
+	pdf_xref_entry_map(ctx, doc, objstm_gather, &data);
+	flush_gathered(ctx, doc, &data);
+}
+
 static void
 do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, const pdf_write_options *in_opts)
 {
@@ -3575,6 +3771,18 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 			preloadobjstms(ctx, doc);
 		}
 
+		/* If we're using objstms, then the version must be at least 1.5 */
+		if (opts->do_use_objstms && pdf_version(ctx, doc) < 15)
+		{
+			pdf_obj *root = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root));
+			pdf_obj *version = pdf_dict_get(ctx, root, PDF_NAME(Version));
+			doc->version = 15;
+			if (opts->do_incremental || version != NULL)
+			{
+				pdf_dict_put(ctx, root, PDF_NAME(Version), PDF_NAME(1_5));
+			}
+		}
+
 		if (opts->do_preserve_metadata)
 			opts->metadata = pdf_keep_obj(ctx, pdf_metadata(ctx, doc));
 
@@ -3607,6 +3815,9 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 		/* Make renumbering affect all indirect references and update xref */
 		if (opts->do_garbage >= 2 || opts->do_linear)
 			renumberobjs(ctx, doc, opts);
+
+		if (opts->do_use_objstms)
+			gather_to_objstms(ctx, doc, opts, xref_len);
 
 		xref_len = pdf_xref_len(ctx, doc); /* May have changed due to repair */
 		expand_lists(ctx, opts, xref_len);
@@ -3650,7 +3861,7 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 				}
 
 				opts->first_xref_offset = fz_tell_output(ctx, opts->out);
-				if (!doc->last_xref_was_old_style)
+				if (!doc->last_xref_was_old_style || opts->do_use_objstms)
 					writexrefstream(ctx, doc, opts, 0, xref_len, 1, 0, opts->first_xref_offset);
 				else
 					writexref(ctx, doc, opts, 0, xref_len, 1, 0, opts->first_xref_offset);
@@ -3700,12 +3911,18 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 				writeobjects(ctx, doc, opts, 1);
 
 				padto(ctx, opts->out, opts->main_xref_offset);
-				writexref(ctx, doc, opts, 0, opts->start, 0, 0, opts->first_xref_offset);
+				if (opts->do_use_objstms)
+					writexrefstream(ctx, doc, opts, 0, xref_len, 1, 0, opts->first_xref_offset);
+				else
+					writexref(ctx, doc, opts, 0, opts->start, 0, 0, opts->first_xref_offset);
 			}
 			else
 			{
 				opts->first_xref_offset = fz_tell_output(ctx, opts->out);
-				writexref(ctx, doc, opts, 0, xref_len, 1, 0, opts->first_xref_offset);
+				if (opts->do_use_objstms)
+					writexrefstream(ctx, doc, opts, 0, xref_len, 1, 0, opts->first_xref_offset);
+				else
+					writexref(ctx, doc, opts, 0, xref_len, 1, 0, opts->first_xref_offset);
 			}
 
 			doc->xref_sections[0].end_ofs = fz_tell_output(ctx, opts->out);
