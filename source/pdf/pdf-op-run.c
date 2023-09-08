@@ -1965,6 +1965,7 @@ pdf_run_xobject(fz_context *ctx, pdf_run_processor *pr, pdf_obj *xobj, pdf_obj *
 	marked_content_stack *save_marked_content = NULL;
 	int save_struct_parent;
 	pdf_obj *struct_parent;
+	pdf_obj *oc;
 	fz_cookie* cookie = ctx->cookie;
 
 	/* Avoid infinite recursion */
@@ -1994,6 +1995,10 @@ pdf_run_xobject(fz_context *ctx, pdf_run_processor *pr, pdf_obj *xobj, pdf_obj *
 		struct_parent = pdf_dict_get(ctx, xobj, PDF_NAME(StructParent));
 		if (pdf_is_number(ctx, struct_parent))
 			pr->struct_parent = pdf_to_int(ctx, struct_parent);
+
+		oc = pdf_dict_get(ctx, xobj, PDF_NAME(OC));
+		if (oc)
+			begin_oc(ctx, pr, oc, NULL);
 
 		pdf_gsave(ctx, pr);
 
@@ -2096,6 +2101,9 @@ pdf_run_xobject(fz_context *ctx, pdf_run_processor *pr, pdf_obj *xobj, pdf_obj *
 
 		while (oldtop < pr->gtop)
 			pdf_grestore(ctx, pr);
+
+		if (oc)
+			end_oc(ctx, pr, oc, NULL);
 
 		if (xobj_default_cs != save_default_cs)
 		{
