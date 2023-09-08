@@ -4,3 +4,4 @@ also-ignore:
 	/test/
 	[/]test-.*
 	test.cc
+	/src/wasm/

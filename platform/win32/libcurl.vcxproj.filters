@@ -208,6 +208,9 @@
     <ClCompile Include="../../thirdparty/curl/lib/curl_gssapi.c">
       <Filter>Source Files\lib</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/curl/lib/curl_log.c">
+      <Filter>Source Files\lib</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/curl/lib/curl_memrchr.c">
       <Filter>Source Files\lib</Filter>
     </ClCompile>
@@ -236,9 +239,6 @@
       <Filter>Source Files\lib</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/curl/lib/curl_threads.c">
-      <Filter>Source Files\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/curl/lib/curl_trc.c">
       <Filter>Source Files\lib</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/curl/lib/dict.c">
@@ -368,9 +368,6 @@
       <Filter>Source Files\lib</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/curl/lib/llist.c">
-      <Filter>Source Files\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/curl/lib/macos.c">
       <Filter>Source Files\lib</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/curl/lib/md4.c">
@@ -583,6 +580,9 @@
     <ClCompile Include="../../thirdparty/curl/lib/vtls/bearssl.c">
       <Filter>Source Files\lib\vtls</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/curl/lib/vtls/gskit.c">
+      <Filter>Source Files\lib\vtls</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/curl/lib/vtls/gtls.c">
       <Filter>Source Files\lib\vtls</Filter>
     </ClCompile>
@@ -596,6 +596,9 @@
       <Filter>Source Files\lib\vtls</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/curl/lib/vtls/mbedtls_threadlock.c">
+      <Filter>Source Files\lib\vtls</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/curl/lib/vtls/nss.c">
       <Filter>Source Files\lib\vtls</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/curl/lib/vtls/openssl.c">
@@ -746,9 +749,6 @@
       <Filter>Source Files\src</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/curl/src/tool_xattr.c">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
-    <ClCompile Include="../../thirdparty/curl/src/var.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
     <ClInclude Include="../../thirdparty/curl/docs/cmdline-opts/Makefile.inc">
@@ -922,6 +922,9 @@
     <ClInclude Include="../../thirdparty/curl/lib/curl_ldap.h">
       <Filter>Header Files\lib</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/curl/lib/curl_log.h">
+      <Filter>Header Files\lib</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/curl/lib/curl_md4.h">
       <Filter>Header Files\lib</Filter>
     </ClInclude>
@@ -971,9 +974,6 @@
       <Filter>Header Files\lib</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/curl/lib/curl_threads.h">
-      <Filter>Header Files\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/curl/lib/curl_trc.h">
       <Filter>Header Files\lib</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/curl/lib/curlx.h">
@@ -1085,9 +1085,6 @@
       <Filter>Header Files\lib</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/curl/lib/llist.h">
-      <Filter>Header Files\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/curl/lib/macos.h">
       <Filter>Header Files\lib</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/curl/lib/memdebug.h">
@@ -1264,6 +1261,9 @@
     <ClInclude Include="../../thirdparty/curl/lib/vtls/bearssl.h">
       <Filter>Header Files\lib\vtls</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/curl/lib/vtls/gskit.h">
+      <Filter>Header Files\lib\vtls</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/curl/lib/vtls/gtls.h">
       <Filter>Header Files\lib\vtls</Filter>
     </ClInclude>
@@ -1279,6 +1279,9 @@
     <ClInclude Include="../../thirdparty/curl/lib/vtls/mbedtls_threadlock.h">
       <Filter>Header Files\lib\vtls</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/curl/lib/vtls/nssg.h">
+      <Filter>Header Files\lib\vtls</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/curl/lib/vtls/openssl.h">
       <Filter>Header Files\lib\vtls</Filter>
     </ClInclude>
@@ -1286,9 +1289,6 @@
       <Filter>Header Files\lib\vtls</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/curl/lib/vtls/schannel.h">
-      <Filter>Header Files\lib\vtls</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/curl/lib/vtls/schannel_int.h">
       <Filter>Header Files\lib\vtls</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/curl/lib/vtls/sectransp.h">
@@ -1451,9 +1451,6 @@
       <Filter>Header Files\src</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/curl/src/tool_xattr.h">
-      <Filter>Header Files\src</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/curl/src/var.h">
       <Filter>Header Files\src</Filter>
     </ClInclude>
     <ResourceCompile Include="../../thirdparty/curl/lib/libcurl.rc">
