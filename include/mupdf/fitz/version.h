@@ -26,9 +26,9 @@
 
 #define FZ_VERSION_MAJOR 1
 #define FZ_VERSION_MINOR 23
-#define FZ_VERSION_PATCH 0
+#define FZ_VERSION_PATCH 1
 // build number: YYYY MM DD NNN, where NN is the sequence number within the given day / date
-#define FZ_VERSION_BUILD "GHO2023052901"
+#define FZ_VERSION_BUILD "GHO2023090801"
 
 // construct the version number:
 
