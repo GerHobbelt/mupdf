@@ -823,6 +823,20 @@ zlibxtensor
 
 libsl3
 yasl
+mozjpeg
+libdiagnostics
+LLhttp-parser
+URL-Detector
+qs_parse
+URI-Encode-C
+faup
+url-parser
+libnop
+FFmpeg
+Pillow
+libinsane
+OpenEXR
+Imath
 
 libboost-context
 libboost-coroutine
@@ -882,6 +896,8 @@ qpdf
 vcopy
 
 horsejs
+visible-url-detector
+omaha
 
 EOT
 )

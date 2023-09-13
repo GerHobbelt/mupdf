@@ -1,0 +1,1482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{00811970-815B-4F64-BC9D-2190785E1CE0}</ProjectGuid>
+    <RootNamespace>omaha</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OMAHA;OMAHA_STATICLIB;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OMAHA;OMAHA_STATICLIB;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OMAHA;OMAHA_STATICLIB;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OMAHA;OMAHA_STATICLIB;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="cryptlib.vcxproj">
+      <Project>{424334e5-addf-490d-ba7b-46cf3686b48d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libarchive.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff18377f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libhighway.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff021a57}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpthread-win32.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8df2c2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite_tools.vcxproj">
+      <Project>{6e890463-3eeb-4cce-b8bd-5aa89148c35a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="MuPDFLib_static.vcxproj">
+      <Project>{a60d8644-5815-4d29-8970-7518ff518d62}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbase58x.vcxproj">
+      <Project>{0501bedf-3191-46a9-9997-288466675b82}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libBLAKE3.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc1880387f83}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfmt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffaf3a53}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreetype.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-a58957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgumbo-parser.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-358957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libharfbuzz.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-258957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjbig2dec.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-958957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-turbo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblcms2.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-158957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuhelpers.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce88099485a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmujs.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-858957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-6222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbrotli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7760d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcrow.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff84e35}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcurl.vcxproj">
+      <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libextract.vcxproj">
+      <Project>{da38ca0b-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreeglut.vcxproj">
+      <Project>{a1b75d29-9f5c-4a0f-b368-322a10477d0c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgif.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffddd6be}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-xl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa838c1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libleptonica.vcxproj">
+      <Project>{ca0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblz4.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff50b44d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf_default_handlers.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-1222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuthreads.vcxproj">
+      <Project>{de21fa8a-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmutool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libopenjpeg.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-758957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpkcs7.vcxproj">
+      <Project>{22462382-b30d-42a5-bf07-ee1a35e25d21}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpng.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-658957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libqiqqatool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc18808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libQuickJS.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0e57ba}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libresources.vcxproj">
+      <Project>{52dcab29-c8ee-4422-954c-29afa6b33e22}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite-amalgamation.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3a7bc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsvgcharter.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7fcf79}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtesseract.vcxproj">
+      <Project>{ac0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtiff.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-558957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtinyexpr.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff33b1b5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libupskirt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff789ba9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libwebp.vcxproj">
+      <Project>{105f884a-c170-4c30-a810-c7da2103002f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libxml2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa57a44}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzlib.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzopfli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff03e6ca}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzstd.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="lib_nas_lockfile.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0a15c6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="png-pmt-tools-lib.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1147a4}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/app_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/app_util_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/apply_tag.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/browser_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/browser_utils_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/cgi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/cgi_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/clipboard.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/command_line_parser.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/command_line_parser_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/command_line_validator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/command_line_validator_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/commands.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/commands_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/crash_if_specific_error.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/debug.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/debug_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/disk.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/disk_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/dynamic_link_kernel32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/dynamic_link_kernel32_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/encrypt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/encrypt_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/environment_block_modifier.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/environment_block_modifier_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/environment_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/environment_utils_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/error.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/error_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/etw_log_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/etw_log_writer_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/event_trace_consumer_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/event_trace_controller.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/event_trace_controller_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/event_trace_provider.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/event_trace_provider_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/extractor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/extractor_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/file.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/file_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/file_reader_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/file_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/file_ver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/firewall_product_detection.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/firewall_product_detection_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/highres_timer-win32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/highres_timer_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/libzip/zip_err_str.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/logging.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/logging/logging.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/logging_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/object_factory_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/omaha_version.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/omaha_version_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/path.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/path_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/proc_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/proc_utils_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/process.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/process_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/program_instance.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/queue_timer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/queue_timer_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/reactor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/reactor_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/reg_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/reg_key_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/registry_monitor_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/registry_monitor_manager_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/safe_format.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/safe_format_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/scoped_impersonation_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/scoped_ptr_cotask_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/security/hmac.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/security/hmac_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/security/p256.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/security/p256_ec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/security/p256_ecdsa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/security/p256_ecdsa_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/security/p256_prng.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/security/p256_prng_unittest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/security/p256_prng_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/security/p256_unittest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/security/p256_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/security/sha256.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/security/sha256_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/security/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/service_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/service_utils_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/shell.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/shell_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/shutdown_handler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/signatures.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/signatures_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/signaturevalidator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/signaturevalidator_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/string.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/string_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/synchronized.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/synchronized_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/system.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/system_info.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/system_info_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/system_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/thread.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/thread_pool.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/thread_pool_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/time.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/time_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/timer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/timer_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/user_info.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/user_info_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/user_rights.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/user_rights_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/utils_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/vista_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/vista_utils_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/vistautil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/vistautil_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/window_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/wmi_query.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/wmi_query_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/xml_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/xml_utils_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/client/bundle_creator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/client/bundle_creator_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/client/bundle_installer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/client/bundle_installer_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/client/client_metrics.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/client/client_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/client/client_utils_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/client/help_url_builder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/client/help_url_builder_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/client/install.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/client/install_apps.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/client/install_apps_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/client/install_self.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/client/install_self_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/client/install_self_unittest_no_xml_parser.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/client/install_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/client/shutdown_events.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/client/ua.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/client/ua_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/app_registry_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/app_registry_utils_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/command_line.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/command_line_builder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/command_line_builder_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/command_line_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/config_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/config_manager_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/crash_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/crash_utils_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/event_logger.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/event_logger_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/exception_handler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/exception_handler_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/experiment_labels.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/experiment_labels_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/extra_args_parser.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/extra_args_parser_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/google_signaturevalidator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/google_signaturevalidator_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/goopdate_command_line_validator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/goopdate_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/goopdate_utils_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/lang.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/lang_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/oem_install_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/oem_install_utils_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/omaha_customization_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/ping.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/ping_event.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/ping_event_download_metrics.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/ping_event_download_metrics_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/ping_event_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/ping_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/protocol_definition_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/scheduled_task_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/scheduled_task_utils_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/stats_uploader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/stats_uploader_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/update3_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/update_request.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/update_request_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/update_response.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/url_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/url_utils_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/web_services_client.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/web_services_client_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/xml_const.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/xml_parser.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/common/xml_parser_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/core/core.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/core/core_launcher.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/core/core_metrics.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/core/core_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/core/google_update_core.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/core/google_update_core_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/core/scheduler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/core/scheduler_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/core/system_monitor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/core/system_monitor_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/core/winmain.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/crashhandler/crash_analyzer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/crashhandler/crash_analyzer_checks.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/crashhandler/crash_analyzer_debugee_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/crashhandler/crash_analyzer_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/crashhandler/crash_dump_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/crashhandler/crash_dump_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/crashhandler/crash_handler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/crashhandler/crash_worker.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/crashhandler/crashhandler_metrics.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/crashhandler/winmain.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/enterprise/installer/custom_actions/extract_tag_action.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/enterprise/installer/custom_actions/msi_custom_action.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/enterprise/installer/custom_actions/msi_tag_extractor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/enterprise/installer/custom_actions/msi_tag_extractor_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/enterprise/installer/custom_actions/show_error_action.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/enterprise/installer/test/test_setup.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/google_update_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/winmain.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_bundle.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_bundle_state.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_bundle_state_busy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_bundle_state_init.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_bundle_state_initialized.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_bundle_state_paused.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_bundle_state_ready.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_bundle_state_stopped.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_bundle_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_command.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_command_completion_observer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_command_configuration.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_command_configuration_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_command_formatter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_command_formatter_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_command_model.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_command_model_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_command_ping_delegate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_command_test_base.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_command_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_manager_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_checking_for_update.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_download_complete.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_downloading.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_error.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_init.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_install_complete.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_installing.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_no_update.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_ready_to_install.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_update_available.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_waiting_to_check_for_update.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_waiting_to_download.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_waiting_to_install.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_version.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_version_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/application_usage_data.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/application_usage_data_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/broker_idl_datax.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/cocreate_async.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/code_red_check.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/com_forwarder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/com_register_shell.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/crash.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/crash_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/cred_dialog.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/cred_dialog_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/current_state.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/dm_client.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/dm_client_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/dm_messages.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/dm_messages_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/dm_storage.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/dm_storage_test_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/dm_storage_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/download_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/download_manager_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/google_app_command_verifier.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/google_update.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/google_update_ps.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/goopdate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/goopdate_metrics.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/goopdate_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/install_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/install_manager_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/installer_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/installer_wrapper_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/job_observer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/main_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/model.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/model_object.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/model_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/offline_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/offline_utils_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/omaha3_idl_datax.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/omaha_customization_goopdate_apis_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/ondemand.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/package.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/package_cache.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/package_cache_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/ping_event_cancel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/ping_event_cancel_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/policy_status.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/policy_status_value.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/process_launcher.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resource_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resource_manager_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/resdll_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/string_formatter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/string_formatter_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/test_omaha_exe_installer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/update3web.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/update_request_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/update_request_utils_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/update_response_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/update_response_utils_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/worker.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/worker_metrics.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/worker_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/worker_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/worker_utils_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/internal/chrome_recovery_improved/command_line.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/internal/chrome_recovery_improved/command_line_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/internal/chrome_recovery_improved/recovery.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/internal/chrome_recovery_improved/winmain.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/process.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/tar.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/x86_encoder/bcj.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/x86_encoder/bcj2.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/x86_encoder/bcj2_encoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/x86_encoder/bcj2_encoder_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/x86_encoder/range_encoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/bits_job_callback.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/bits_request.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/bits_request_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/bits_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/bits_utils_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/cup_ecdsa_metrics.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/cup_ecdsa_request.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/cup_ecdsa_request_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/cup_ecdsa_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/cup_ecdsa_utils_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/detector.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/detector_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/http_client.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/http_client_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/net_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/net_utils_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/network_config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/network_config_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/network_request.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/network_request_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/network_request_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/proxy_auth.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/simple_request.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/simple_request_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/winhttp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/winhttp_adapter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/winhttp_adapter_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/winhttp_vtable.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/net/winhttp_vtable_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/recovery/client/google_update_recovery.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/recovery/client/google_update_recovery_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/recovery/recovery_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/service/service_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/setup/setup.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/setup/setup_files.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/setup/setup_files_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/setup/setup_google_update.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/setup/setup_google_update_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/setup/setup_metrics.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/setup/setup_service_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/setup/setup_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/statsreport/aggregator-win32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/statsreport/aggregator-win32_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/statsreport/aggregator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/statsreport/aggregator_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/statsreport/const-win32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/statsreport/formatter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/statsreport/formatter_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/statsreport/metrics.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/statsreport/metrics_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/statsreport/persistent_iterator-win32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/statsreport/persistent_iterator-win32_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/testing/omaha_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/testing/omaha_unittest_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/testing/omaha_unittest_main_small_tests.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/testing/omaha_unittest_main_small_tests_with_resources.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/testing/omaha_unittest_network.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/testing/ondemandsystem_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/testing/save_arguments.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/testing/test_foo.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/testing/ui/ui_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/testing/unit_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/testing/unit_test_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/testing/unittest_debug_helper_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/ApplyTag/apply_tag_tool.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/CrashHandlerClient/crash_handler_client_tool.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/CrashProcess/crash_process.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/MsiTagger/msi_tag_tool.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/ReadTag/read_tag.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/SetShutDownEvent/signal_shutdown.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/eckeytool/eckeytool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/data_dumper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/data_dumper_app_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/data_dumper_goopdate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/data_dumper_network.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/data_dumper_osdata.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/dump_log.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/goopdump.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/goopdump_cmd_line_parser.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/goopdump_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/process_commandline.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/process_commandline_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/process_monitor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/process_monitor_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/longrunning/long_running.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/performondemand/performondemand.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/runupdate3web/runupdate3web.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/ui/complete_wnd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/ui/owner_draw_title_bar.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/ui/progress_wnd.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/ui/progress_wnd_unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/ui/splash_screen.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/ui/splash_screen_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/ui/ui.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/ui/ui_displayed_event.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/ui/ui_metrics.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/ui/yes_no_dialog.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/omaha/omaha/ui/yes_no_dialog_unittest.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/ATLRegMapEx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/app_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/apply_tag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/atlconvfix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/browser_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/cgi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/clipboard.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/command_line_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/command_line_parser_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/command_line_validator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/commands.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/commontypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/const_addresses.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/const_code_signing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/const_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/const_debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/const_object_names.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/const_timeouts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/const_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/crash_if_specific_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/disk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/dynamic_link_kernel32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/encrypt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/environment_block_modifier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/environment_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/etw_log_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/event_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/event_trace_consumer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/event_trace_controller.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/event_trace_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/extractor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/file_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/file_ver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/firewall_product_detection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/highres_timer-win32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/libzip/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/libzip/zipconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/logging/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/marshal_by_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/object_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/omaha_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/preprocessor_fun.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/proc_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/process.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/program_instance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/queue_timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/reactor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/reg_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/registry_monitor_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/safe_format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/scope_guard.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/scoped_current_directory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/scoped_impersonation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/scoped_ptr_cotask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/security/hash-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/security/hmac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/security/p256.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/security/p256_ecdsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/security/p256_prng.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/security/sha256.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/security/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/service_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/shell.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/shutdown_callback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/shutdown_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/signatures.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/signaturevalidator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/smart_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/static_assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/store_watcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/synchronized.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/system.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/system_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/thread_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/thread_pool_callback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/user_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/user_rights.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/vista_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/vistautil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/window_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/wmi_query.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/wtl_atlapp_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/base/xml_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/client/bundle_creator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/client/bundle_installer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/client/client_metrics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/client/client_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/client/help_url_builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/client/install.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/client/install_apps.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/client/install_apps_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/client/install_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/client/install_progress_observer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/client/install_self.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/client/install_self_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/client/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/client/shutdown_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/client/ua.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/app_registry_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/command_line.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/command_line_builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/config_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/const_cmd_line.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/const_goopdate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/const_group_policy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/crash_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/event_logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/exception_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/experiment_labels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/extra_args_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/google_signaturevalidator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/goopdate_command_line_validator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/goopdate_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/install_manifest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/lang.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/oem_install_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/ping.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/ping_event.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/ping_event_download_metrics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/progress_sampler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/protocol_definition.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/scheduled_task_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/scheduled_task_utils_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/stats_uploader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/update3_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/update_request.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/update_response.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/url_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/web_services_client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/xml_const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/common/xml_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/core/core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/core/core_launcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/core/core_metrics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/core/google_update_core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/core/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/core/scheduler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/core/system_monitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/crashhandler/crash_analyzer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/crashhandler/crash_analyzer_checks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/crashhandler/crash_dump_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/crashhandler/crash_dump_util_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/crashhandler/crash_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/crashhandler/crash_worker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/crashhandler/crashhandler_metrics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/crashhandler/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/enterprise/installer/custom_actions/msi_custom_action.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/enterprise/installer/custom_actions/msi_tag_extractor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/google_update/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_bundle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_bundle_state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_bundle_state_busy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_bundle_state_init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_bundle_state_initialized.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_bundle_state_paused.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_bundle_state_ready.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_bundle_state_stopped.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_command.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_command_completion_observer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_command_configuration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_command_delegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_command_formatter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_command_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_command_ping_delegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_command_test_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_command_verifier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_checking_for_update.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_download_complete.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_downloading.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_install_complete.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_installing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_no_update.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_ready_to_install.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_update_available.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_waiting_to_check_for_update.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_waiting_to_download.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_state_waiting_to_install.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_unittest_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/app_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/application_usage_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/broker_class_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/cocreate_async.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/code_red_check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/com_proxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/com_wrapper_creator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/crash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/cred_dialog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/current_state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/dm_client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/dm_messages.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/dm_storage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/dm_storage_test_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/download_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/elevation_moniker_resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/google_app_command_verifier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/google_update.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/google_update3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/google_update_ps_resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/goopdate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/goopdate_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/goopdate_metrics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/install_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/installer_result_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/installer_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/job_observer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/main.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/model_object.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/non_localized_resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/offline_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/omaha3_idl_datax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/ondemand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/package.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/package_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/package_cache_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/ping_event_cancel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/policy_status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/policy_status_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/process_launcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resource_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/server_resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/string_formatter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/update3web.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/update_request_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/update_response_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/worker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/worker_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/worker_metrics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/worker_mock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/worker_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/installers/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/internal/chrome_recovery_improved/command_line.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/internal/chrome_recovery_improved/recovery.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/process.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/tar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/x86_encoder/bcj2_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/x86_encoder/range_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/bits_job_callback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/bits_request.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/bits_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/cup_ecdsa_metrics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/cup_ecdsa_pubkey.10.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/cup_ecdsa_pubkey.11.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/cup_ecdsa_pubkey.12.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/cup_ecdsa_pubkey.13.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/cup_ecdsa_pubkey.3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/cup_ecdsa_pubkey.5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/cup_ecdsa_pubkey.6.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/cup_ecdsa_pubkey.7.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/cup_ecdsa_pubkey.8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/cup_ecdsa_pubkey.9.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/cup_ecdsa_request.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/cup_ecdsa_request_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/cup_ecdsa_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/detector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/http_client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/http_request.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/net_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/network_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/network_request.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/network_request_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/proxy_auth.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/simple_request.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/winhttp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/winhttp_adapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/net/winhttp_vtable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/recovery/client/google_update_recovery.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/recovery/lib/google_update_recovery.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/service/service_main.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/setup/setup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/setup/setup_files.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/setup/setup_google_update.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/setup/setup_metrics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/setup/setup_service.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/statsreport/aggregator-win32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/statsreport/aggregator-win32_unittest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/statsreport/aggregator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/statsreport/aggregator_unittest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/statsreport/const-win32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/statsreport/formatter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/statsreport/metrics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/statsreport/persistent_iterator-win32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/statsreport/util-win32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/testing/omaha_customization_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/testing/omaha_unittest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/testing/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/testing/test_foo_resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/testing/unit_test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/testing/unittest_debug_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/data_dumper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/data_dumper_app_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/data_dumper_goopdate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/data_dumper_network.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/data_dumper_oneclick.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/data_dumper_osdata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/dump_log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/goopdump.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/goopdump_cmd_line_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/process_commandline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/process_monitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/tools/performondemand/performondemand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/ui/complete_wnd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/ui/owner_draw_title_bar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/ui/progress_wnd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/ui/scoped_gdi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/ui/splash_screen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/ui/ui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/ui/ui_ctls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/ui/ui_displayed_event.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/ui/ui_metrics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/omaha/omaha/ui/yes_no_dialog.h" />
+    <Image Include="../../thirdparty/owemdjee/omaha/doc/big-picture.jpg" />
+    <Image Include="../../thirdparty/owemdjee/omaha/doc/install-update-overview.png" />
+    <Image Include="../../thirdparty/owemdjee/omaha/omaha/core/google_update_core.ico" />
+    <Image Include="../../thirdparty/owemdjee/omaha/omaha/crashhandler/google_crash_handler.ico" />
+    <Image Include="../../thirdparty/owemdjee/omaha/omaha/google_update/google_update.ico" />
+    <Image Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/error_illustration.bmp" />
+    <Image Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/success.ico" />
+    <Image Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi.ico" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/base/run_as_invoker.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/core/resource.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/crashhandler/resource.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/enterprise/installer/custom_actions/msi_custom_action.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_am.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_ar.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_bg.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_bn.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_ca.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_cs.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_da.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_de.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_el.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_en-GB.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_en.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_es-419.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_es.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_et.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_fa.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_fi.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_fil.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_fr.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_gu.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_hi.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_hr.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_hu.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_id.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_is.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_it.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_iw.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_ja.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_kn.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_ko.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_lt.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_lv.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_ml.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_mr.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_ms.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_nl.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_no.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_or.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_pl.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_pt-BR.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_pt-PT.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_ro.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_ru.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_sk.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_sl.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_sr.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_sv.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_sw.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_ta.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_te.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_th.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_tr.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_uk.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_ur.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_userdefault.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_vi.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_zh-CN.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_zh-HK.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/generated_resources_zh-TW.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/google_update/resource.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/google_update_ps_resource.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/goopdate.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/goopdate_version.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_am.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_ar.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_bg.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_bn.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_ca.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_cs.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_da.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_de.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_el.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_en-GB.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_en.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_es-419.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_es.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_et.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_fa.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_fi.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_fil.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_fr.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_gu.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_hi.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_hr.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_hu.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_id.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_is.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_it.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_iw.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_ja.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_kn.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_ko.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_lt.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_lv.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_ml.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_mr.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_ms.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_nl.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_no.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_or.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_pl.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_pt-BR.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_pt-PT.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_ro.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_ru.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_sk.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_sl.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_sr.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_sv.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_sw.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_ta.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_te.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_th.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_tr.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_uk.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_ur.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_userdefault.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_vi.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_zh-CN.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_zh-HK.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdate_dll/generated_resources_zh-TW.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_am.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_ar.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_bg.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_bn.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_ca.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_cs.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_da.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_de.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_el.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_en-GB.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_en.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_es-419.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_es.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_et.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_fa.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_fi.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_fil.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_fr.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_gu.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_hi.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_hr.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_hu.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_id.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_is.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_it.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_iw.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_ja.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_kn.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_ko.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_lt.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_lv.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_ml.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_mr.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_ms.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_nl.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_no.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_pl.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_pt-BR.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_pt-PT.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_ro.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_ru.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_sk.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_sl.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_sr.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_sv.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_sw.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_ta.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_te.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_th.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_tr.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_uk.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_ur.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_vi.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_zh-CN.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/goopdate/resources/goopdateres/generated_resources_zh-TW.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/internal/chrome_recovery_improved/resource.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_am.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_ar.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_bg.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_bn.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_ca.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_cs.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_da.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_de.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_el.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_en-GB.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_en.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_es-419.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_es.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_et.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_fa.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_fi.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_fil.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_fr.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_gu.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_hi.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_hr.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_hu.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_id.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_is.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_it.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_iw.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_ja.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_kn.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_ko.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_lt.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_lv.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_ml.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_mr.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_ms.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_nl.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_no.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_pl.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_pt-BR.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_pt-PT.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_ro.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_ru.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_sk.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_sl.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_sr.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_sv.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_sw.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_ta.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_te.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_th.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_tr.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_uk.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_ur.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_vi.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_zh-CN.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/mi_generated_resources_zh-TW.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/recovery/recovery_markup.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/testing/omaha_unittest.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/testing/omaha_unittest_version.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/testing/save_arguments_version.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/testing/test_foo.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/testing/ui/ui_unittest.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/omaha/omaha/tools/goopdump/resource.rc" />
+    <Text Include="../../thirdparty/owemdjee/omaha/CHANGELOG.txt" />
+    <Text Include="../../thirdparty/owemdjee/omaha/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/omaha/README.md" />
+    <Text Include="../../thirdparty/owemdjee/omaha/common/certificate_tag/README" />
+    <Text Include="../../thirdparty/owemdjee/omaha/doc/ClientLog.md" />
+    <Text Include="../../thirdparty/owemdjee/omaha/doc/ClientUpdateProtocol.md" />
+    <Text Include="../../thirdparty/owemdjee/omaha/doc/ClientUpdateProtocolEcdsa.md" />
+    <Text Include="../../thirdparty/owemdjee/omaha/doc/CustomizingOmaha.md" />
+    <Text Include="../../thirdparty/owemdjee/omaha/doc/DeveloperSetupGuide.md" />
+    <Text Include="../../thirdparty/owemdjee/omaha/doc/GoogleUpdateOnAScheduleOverview.md" />
+    <Text Include="../../thirdparty/owemdjee/omaha/doc/HammerOptions.md" />
+    <Text Include="../../thirdparty/owemdjee/omaha/doc/Omaha3SourceOrganization.md" />
+    <Text Include="../../thirdparty/owemdjee/omaha/doc/Omaha3Walkthrough.md" />
+    <Text Include="../../thirdparty/owemdjee/omaha/doc/OmahaOverview.md" />
+    <Text Include="../../thirdparty/owemdjee/omaha/doc/ProjectHome.md" />
+    <Text Include="../../thirdparty/owemdjee/omaha/doc/ServerProtocol.md" />
+    <Text Include="../../thirdparty/owemdjee/omaha/doc/ServerProtocolV2.md" />
+    <Text Include="../../thirdparty/owemdjee/omaha/doc/ServerProtocolV3.md" />
+    <Text Include="../../thirdparty/owemdjee/omaha/doc/TaggedMetainstallers.md" />
+    <Text Include="../../thirdparty/owemdjee/omaha/doc/UpdateControls.md" />
+    <Text Include="../../thirdparty/owemdjee/omaha/doc/UsingOmaha.md" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/base/security/README" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/enterprise/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/enterprise/build_group_policy_template.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/enterprise/generate_group_policy_template.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/enterprise/generate_group_policy_template_admx.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/enterprise/installer/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/enterprise/installer/build_enterprise_installer.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/enterprise/installer/test/standalone_installers.txt" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/enterprise/installer/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/hammer.bat" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/installers/SampleApp_installers.txt" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/installers/UserTestFoo_installers.txt" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/installers/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/installers/build_metainstaller.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/installers/generate_resource_script.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/installers/generate_tarball.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/installers/resource.rc.in" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/installers/tag_meta_installers.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/installers/tagged_installer.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/internal/chrome_recovery_improved/README.md" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/internal/grit/README.md" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/internal/tools/update3web_demo.js" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/mi_exe_stub/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/omaha_version_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/recovery/lib/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/run_unit_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/site_scons/site_init.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/site_scons/site_tools/atlmfc_vc12_0.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/site_scons/site_tools/atlmfc_vc14_0.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/site_scons/site_tools/atlmfc_vc15_0.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/site_scons/site_tools/atlmfc_vc15_amd64.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/site_scons/site_tools/atlmfc_vc16_0.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/site_scons/site_tools/atlmfc_vc16_amd64.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/site_scons/site_tools/code_signing.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/site_scons/site_tools/omaha_builders.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/site_scons/site_tools/windows_vc.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/site_scons/site_tools/windows_vc12_0.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/site_scons/site_tools/windows_vc14_0.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/site_scons/site_tools/windows_vc15_0_host64_x64.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/site_scons/site_tools/windows_vc15_0_host64_x86.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/site_scons/site_tools/windows_vc15_0_host86_x64.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/site_scons/site_tools/windows_vc15_0_host86_x86.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/site_scons/site_tools/windows_vc16_0_host64_x64.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/site_scons/site_tools/windows_vc16_0_host64_x86.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/site_scons/site_tools/windows_vc16_0_host86_x64.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/site_scons/site_tools/windows_vc16_0_host86_x86.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/site_scons/site_tools/wix.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/standalone/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/standalone/standalone_installer.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/standalone/standalone_installers.txt" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/standalone/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/testing/unittest_support/Readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/testing/unittest_support/declaration.txt" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/testing/unittest_support/minidump.txt" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/tools/eckeytool/README.md" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/tools/generate_omaha3_idl.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/tools/performondemand/update3web_demo.js" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/tools/proxy_clsid_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/omaha/omaha/tools/retry.py" />
+    <Xml Include="../../thirdparty/owemdjee/omaha/omaha/data/seed_manifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/omaha/omaha/data/seed_manifest_v1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/omaha/omaha/data/seed_manifest_v9.xml" />
+    <Xml Include="../../thirdparty/owemdjee/omaha/omaha/data/seed_manifest_with_args.xml" />
+    <Xml Include="../../thirdparty/owemdjee/omaha/omaha/data/server_manifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/omaha/omaha/data/server_manifest_components.xml" />
+    <Xml Include="../../thirdparty/owemdjee/omaha/omaha/data/server_manifest_one_app.xml" />
+    <Xml Include="../../thirdparty/owemdjee/omaha/omaha/data/server_manifest_with_unsupported_tags.xml" />
+    <Xml Include="../../thirdparty/owemdjee/omaha/omaha/enterprise/installer/enterprise_installer.wxs.xml" />
+    <Xml Include="../../thirdparty/owemdjee/omaha/omaha/enterprise/installer/enterprise_standalone_installer.wxs.xml" />
+    <Xml Include="../../thirdparty/owemdjee/omaha/omaha/enterprise/installer/google_update_installer_fragment.wxs.xml" />
+    <Xml Include="../../thirdparty/owemdjee/omaha/omaha/testing/test_foo.wxs.xml" />
+    <Xml Include="../../thirdparty/owemdjee/omaha/omaha/testing/unittest_support/manifest.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

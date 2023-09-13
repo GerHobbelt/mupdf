@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libmozjpeg</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF0C24D5}</ProjectGuid>
+    <RootNamespace>libmozjpeg</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOZJPEG;MOZJPEG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOZJPEG;MOZJPEG_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOZJPEG;MOZJPEG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOZJPEG;MOZJPEG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOZJPEG;MOZJPEG_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOZJPEG;MOZJPEG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOZJPEG;MOZJPEG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOZJPEG;MOZJPEG_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOZJPEG;MOZJPEG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOZJPEG;MOZJPEG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOZJPEG;MOZJPEG_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOZJPEG;MOZJPEG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/cdjpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/cjpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/djpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jaricom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jcapimin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jcapistd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jcarith.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jccoefct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jccolext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jccolor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jcdctmgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jcext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jchuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jcicc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jcinit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jcmainct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jcmarker.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jcmaster.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jcomapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jcparam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jcphuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jcprepct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jcsample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jcstest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jctrans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdapimin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdapistd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdarith.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdatadst-tj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdatadst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdatasrc-tj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdatasrc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdcoefct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdcol565.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdcolext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdcolor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jddctmgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdhuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdicc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdinput.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdmainct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdmarker.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdmaster.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdmerge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdmrg565.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdmrgext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdphuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdpostct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdsample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jdtrans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jerror.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jfdctflt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jfdctfst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jfdctint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jidctflt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jidctfst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jidctint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jidctred.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jmemmgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jmemnobs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jpegtran.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jpegyuv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jquant1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jquant2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jsimd_none.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jstdhuff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/jutils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/md5/md5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/md5/md5cmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/md5/md5hl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/rdbmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/rdcolmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/rdgif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/rdjpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/rdjpgcom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/rdpng.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/rdppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/rdswitch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/rdtarga.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/aarch32/jccolext-neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/aarch32/jchuff-neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/aarch32/jsimd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/aarch64/jccolext-neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/aarch64/jchuff-neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/aarch64/jsimd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/jccolor-neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/jcgray-neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/jcgryext-neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/jcphuff-neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/jcsample-neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/jdcolext-neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/jdcolor-neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/jdmerge-neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/jdmrgext-neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/jdsample-neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/jfdctfst-neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/jfdctint-neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/jidctfst-neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/jidctint-neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/jidctred-neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/jquanti-neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jsimd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/mips/jsimd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/mips64/jccolext-mmi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/mips64/jccolor-mmi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/mips64/jcgray-mmi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/mips64/jcgryext-mmi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/mips64/jcsample-mmi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/mips64/jdcolext-mmi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/mips64/jdcolor-mmi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/mips64/jdmerge-mmi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/mips64/jdmrgext-mmi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/mips64/jdsample-mmi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/mips64/jfdctfst-mmi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/mips64/jfdctint-mmi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/mips64/jidctfst-mmi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/mips64/jidctint-mmi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/mips64/jquanti-mmi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/mips64/jsimd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/powerpc/jccolext-altivec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/powerpc/jccolor-altivec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/powerpc/jcgray-altivec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/powerpc/jcgryext-altivec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/powerpc/jcsample-altivec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/powerpc/jdcolext-altivec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/powerpc/jdcolor-altivec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/powerpc/jdmerge-altivec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/powerpc/jdmrgext-altivec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/powerpc/jdsample-altivec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/powerpc/jfdctfst-altivec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/powerpc/jfdctint-altivec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/powerpc/jidctfst-altivec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/powerpc/jidctint-altivec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/powerpc/jquanti-altivec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/powerpc/jsimd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jsimd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/strtest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/tjbench.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/tjexample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/tjunittest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/tjutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/transupp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/turbojpeg-jni.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/turbojpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/wrbmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/wrgif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/wrjpgcom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/wrppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/wrtarga.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mozjpeg/yuvjpeg.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/cderror.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/cdjpeg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/cmyk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/java/org_libjpegturbo_turbojpeg_TJ.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/java/org_libjpegturbo_turbojpeg_TJCompressor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/java/org_libjpegturbo_turbojpeg_TJDecompressor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/java/org_libjpegturbo_turbojpeg_TJTransformer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/jchuff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/jcmaster.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/jdcoefct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/jdct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/jdhuff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/jdmainct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/jdmaster.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/jdmerge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/jdsample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/jerror.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/jinclude.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/jmemsys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/jmorecfg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/jpeg_nbits_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/jpegcomp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/jpegint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/jpeglib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/jsimd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/jsimddct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/md5/md5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/align.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/jchuff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/simd/jsimd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/simd/mips/jsimd_dspr2_asm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/simd/mips64/jcsample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/simd/mips64/jsimd_mmi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/simd/mips64/loongson-mmintrin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/simd/nasm/jcolsamp.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/simd/nasm/jdct.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/simd/nasm/jsimdcfg.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/simd/nasm/jsimdcfg.inc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/simd/nasm/jsimdext.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/simd/powerpc/jcsample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/simd/powerpc/jsimd_altivec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/testimages/test1.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/testimages/test2.icc" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/tjutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/transupp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mozjpeg/turbojpeg.h" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/doc/html/bc_s.png" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/doc/html/bdwn.png" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/doc/html/closed.png" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/doc/html/doc.png" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/doc/html/folderclosed.png" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/doc/html/folderopen.png" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/doc/html/nav_f.png" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/doc/html/nav_g.png" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/doc/html/nav_h.png" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/doc/html/open.png" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/search_l.png" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/search_m.png" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/search_r.png" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/doc/html/splitbar.png" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/doc/html/sync_off.png" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/doc/html/sync_on.png" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/doc/html/tab_a.png" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/doc/html/tab_b.png" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/doc/html/tab_h.png" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/doc/html/tab_s.png" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/java/doc/resources/background.gif" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/java/doc/resources/tab.gif" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/java/doc/resources/titlebar.gif" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/java/doc/resources/titlebar_end.gif" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/testimages/nightshot_iso_100.bmp" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/testimages/testimgari.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/testimages/testimgint.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/testimages/testorig.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/testimages/testorig12.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/testimages/vgl_5674_0098.bmp" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/testimages/vgl_6434_0018a.bmp" />
+    <Image Include="../../thirdparty/owemdjee/mozjpeg/testimages/vgl_6548_0026a.bmp" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jccolext-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jccolext-mmx.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jccolext-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jccolor-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jccolor-mmx.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jccolor-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jcgray-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jcgray-mmx.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jcgray-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jcgryext-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jcgryext-mmx.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jcgryext-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jchuff-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jcphuff-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jcsample-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jcsample-mmx.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jcsample-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jdcolext-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jdcolext-mmx.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jdcolext-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jdcolor-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jdcolor-mmx.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jdcolor-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jdmerge-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jdmerge-mmx.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jdmerge-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jdmrgext-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jdmrgext-mmx.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jdmrgext-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jdsample-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jdsample-mmx.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jdsample-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jfdctflt-3dn.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jfdctflt-sse.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jfdctfst-mmx.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jfdctfst-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jfdctint-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jfdctint-mmx.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jfdctint-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jidctflt-3dn.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jidctflt-sse.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jidctflt-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jidctfst-mmx.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jidctfst-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jidctint-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jidctint-mmx.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jidctint-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jidctred-mmx.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jidctred-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jquant-3dn.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jquant-mmx.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jquant-sse.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jquantf-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jquanti-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jquanti-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/i386/jsimdcpu.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jccolext-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jccolext-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jccolor-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jccolor-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jcgray-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jcgray-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jcgryext-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jcgryext-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jchuff-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jcphuff-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jcsample-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jcsample-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jdcolext-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jdcolext-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jdcolor-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jdcolor-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jdmerge-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jdmerge-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jdmrgext-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jdmrgext-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jdsample-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jdsample-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jfdctflt-sse.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jfdctfst-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jfdctint-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jfdctint-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jidctflt-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jidctfst-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jidctint-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jidctint-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jidctred-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jquantf-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jquanti-avx2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jquanti-sse2.asm" />
+    <NASM Include="../../thirdparty/owemdjee/mozjpeg/simd/x86_64/jsimdcpu.asm" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/BUILDING.md" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/BUILDING.txt" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/ChangeLog.md" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/README-mozilla.txt" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/README-turbo.txt" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/README.ijg" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/cmakescripts/BuildPackages.cmake" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/cmakescripts/GNUInstallDirs.cmake" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/cmakescripts/PackageInfo.cmake" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/cmakescripts/cmake_uninstall.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/cmakescripts/testclean.cmake" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/coderules.txt" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/croptest.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/dynsections.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/jquery.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/menu.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/menudata.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/all_0.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/all_1.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/all_2.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/all_3.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/all_4.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/all_5.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/all_6.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/all_7.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/all_8.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/all_9.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/classes_0.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/enums_0.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/enumvalues_0.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/functions_0.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/groups_0.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/search.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/searchdata.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/typedefs_0.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/variables_0.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/variables_1.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/variables_2.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/variables_3.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/variables_4.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/variables_5.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/variables_6.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/variables_7.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/variables_8.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doc/html/search/variables_9.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/doxygen.config" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/example.txt" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/java/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/java/README" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/java/doc/script.js" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/java/org/libjpegturbo/turbojpeg/TJLoader-unix.java.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/java/org/libjpegturbo/turbojpeg/TJLoader-win.java.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/jconfig.h.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/jconfig.txt" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/jconfigint.h.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/jversion.h.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/libjpeg.map.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/libjpeg.txt" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/md5/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/rd_average.sh" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/rd_collect.sh" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/rd_collect_sub.sh" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/rd_plot.sh" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/release/Config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/release/Distribution.xml.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/release/License.rtf" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/release/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/release/Welcome.rtf.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/release/deb-control.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/release/installer.nsi.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/release/libjpeg.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/release/libturbojpeg.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/release/makedpkg.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/release/makemacpkg.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/release/makerpm.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/release/makesrpm.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/release/maketarball.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/release/rpm.spec.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/release/uninstall.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/sharedlib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/simd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/aarch32/jsimd_neon.S" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/aarch64/jsimd_neon.S" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/simd/arm/neon-compat.h.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/simd/mips/jsimd_dspr2.S" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/structure.txt" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/testimages/nightshot_iso_100.txt" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/testimages/test1.icc.txt" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/testimages/test2.icc.txt" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/tjbenchtest.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/tjbenchtest.java.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/tjexampletest.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/tjexampletest.java.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/usage.txt" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/win/gcc/projectTargets-release.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/win/jconfig.h.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/win/jpeg.rc.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/win/projectTargets.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/win/turbojpeg.rc.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/win/vc/projectTargets-release.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/mozjpeg/wizard.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
