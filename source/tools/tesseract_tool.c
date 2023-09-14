@@ -69,14 +69,8 @@ int main(int argc, const char** argv)
 
 #if !defined(BUILD_MONOLITHIC) && defined(_MSC_VER)
 
-static void blub(void) {
-  fprintf(stderr, "I blew my brains out!\n");
-  getchar();
-}
-
 int wmain(int argc, const wchar_t *wargv[])
 {
-	atexit(blub);
 	const char **argv = fz_argv_from_wargv(argc, wargv);
 	if (!argv)
 		return EXIT_FAILURE;
