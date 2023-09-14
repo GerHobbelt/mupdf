@@ -49,7 +49,6 @@ extern "C" {
 #include "mupdf/pdf/clean.h"
 #include "mupdf/pdf/image-rewriter.h"
 
-
 #ifdef __cplusplus
 }
 #endif

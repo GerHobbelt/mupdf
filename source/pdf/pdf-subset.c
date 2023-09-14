@@ -24,6 +24,8 @@
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
 
+#if FZ_ENABLE_RENDER_CORE 
+
 typedef struct gstate
 {
 	struct gstate *next;
@@ -233,7 +235,7 @@ show_char(fz_context *ctx, font_usage_t *font, int cid, int gid)
 }
 
 static void
-show_string(fz_context *ctx, pdf_font_analysis_processor *p, unsigned char *buf, size_t len)
+show_string(fz_context *ctx, pdf_font_analysis_processor *p, const unsigned char *buf, size_t len)
 {
 	gstate *gs = p->gs;
 	pdf_font_desc *fontdesc = gs->font;
@@ -271,7 +273,7 @@ show_text(fz_context *ctx, pdf_font_analysis_processor *p, pdf_obj *text)
 
 	if (pdf_is_string(ctx, text))
 	{
-		show_string(ctx, p, (unsigned char *)pdf_to_str_buf(ctx, text), pdf_to_str_len(ctx, text));
+		show_string(ctx, p, (const unsigned char *)pdf_to_str_buf(ctx, text), pdf_to_str_len(ctx, text));
 	}
 	else if (pdf_is_array(ctx, text))
 	{
@@ -281,7 +283,7 @@ show_text(fz_context *ctx, pdf_font_analysis_processor *p, pdf_obj *text)
 			pdf_obj *item = pdf_array_get(ctx, text, i);
 			if (pdf_is_string(ctx, item))
 			{
-				show_string(ctx, p, (unsigned char *)pdf_to_str_buf(ctx, item), pdf_to_str_len(ctx, item));
+				show_string(ctx, p, (const unsigned char *)pdf_to_str_buf(ctx, item), pdf_to_str_len(ctx, item));
 			}
 		}
 	}
@@ -296,30 +298,30 @@ font_analysis_TJ(fz_context *ctx, pdf_processor *proc, pdf_obj *array)
 }
 
 static void
-font_analysis_Tj(fz_context *ctx, pdf_processor *proc, char *str, size_t len)
+font_analysis_Tj(fz_context *ctx, pdf_processor *proc, const char *str, size_t len)
 {
 	pdf_font_analysis_processor *p = (pdf_font_analysis_processor*)proc;
 
-	show_string(ctx, p, (unsigned char *)str, len);
+	show_string(ctx, p, (const unsigned char *)str, len);
 }
 
 static void
-font_analysis_squote(fz_context *ctx, pdf_processor *proc, char *str, size_t len)
+font_analysis_squote(fz_context *ctx, pdf_processor *proc, const char *str, size_t len)
 {
 	/* Note, we convert all T' operators to (maybe) a T* and a Tj */
 	pdf_font_analysis_processor *p = (pdf_font_analysis_processor*)proc;
 
-	show_string(ctx, p, (unsigned char *)str, len);
+	show_string(ctx, p, (const unsigned char *)str, len);
 }
 
 static void
-font_analysis_dquote(fz_context *ctx, pdf_processor *proc, float aw, float ac, char *str, size_t len)
+font_analysis_dquote(fz_context *ctx, pdf_processor *proc, float aw, float ac, const char *str, size_t len)
 {
 	/* Note, we convert all T" operators to (maybe) a T*,
 	 * (maybe) Tc, (maybe) Tw and a Tj. */
 	pdf_font_analysis_processor *p = (pdf_font_analysis_processor*)proc;
 
-	show_string(ctx, p, (unsigned char*)str, len);
+	show_string(ctx, p, (const unsigned char*)str, len);
 }
 
 static void
@@ -332,7 +334,7 @@ font_analysis_Do_form(fz_context *ctx, pdf_processor *proc, const char *name, pd
 	if (!resources)
 		resources = pr->rstack->res;
 
-	pdf_process_contents(ctx, (pdf_processor*)pr, doc, resources, xobj, NULL, NULL);
+	pdf_process_contents(ctx, (pdf_processor*)pr, doc, resources, xobj, NULL);
 }
 
 static pdf_processor *
@@ -378,10 +380,10 @@ examine_page(fz_context *ctx, pdf_document *doc, pdf_page *page, fonts_usage_t *
 
 	fz_try(ctx)
 	{
-		pdf_process_contents(ctx, proc, doc, resources, contents, NULL, NULL);
+		pdf_process_contents(ctx, proc, doc, resources, contents, NULL);
 
 		for (annot = pdf_first_annot(ctx, page); annot; annot = pdf_next_annot(ctx, annot))
-			pdf_process_annot(ctx, proc, annot, NULL);
+			pdf_process_annot(ctx, proc, annot);
 	}
 	fz_always(ctx)
 	{
@@ -392,8 +394,109 @@ examine_page(fz_context *ctx, pdf_document *doc, pdf_page *page, fonts_usage_t *
 }
 
 static void
-subset_ttf(fz_context *ctx, pdf_document *doc, font_usage_t *font, pdf_obj *fontfile)
+subset_ttf(fz_context *ctx, pdf_document *doc, font_usage_t *font, pdf_obj *fontfile, int symbolic, int cidfont)
 {
+	fz_buffer *buf = pdf_load_stream(ctx, fontfile);
+	fz_buffer *newbuf = NULL;
+
+	if (buf->len == 0)
+	{
+		fz_drop_buffer(ctx, buf);
+		return;
+	}
+
+	fz_var(newbuf);
+
+	fz_try(ctx)
+	{
+		newbuf = fz_subset_ttf_for_gids(ctx, buf, font->gids.heap, font->gids.len, symbolic, cidfont);
+
+		pdf_update_stream(ctx, doc, fontfile, newbuf, 0);
+		pdf_dict_put_int(ctx, fontfile, PDF_NAME(Length1), newbuf->len);
+	}
+	fz_always(ctx)
+	{
+		fz_drop_buffer(ctx, newbuf);
+		fz_drop_buffer(ctx, buf);
+	}
+	fz_catch(ctx)
+	{
+		fz_rethrow(ctx);
+	}
+}
+
+static void
+adjust_simple_font(fz_context *ctx, pdf_document *doc, font_usage_t *font)
+{
+	pdf_obj *obj = font->obj;
+	int old_firstchar = pdf_dict_get_int(ctx, obj, PDF_NAME(FirstChar));
+	pdf_obj *old_widths = pdf_dict_get(ctx, obj, PDF_NAME(Widths));
+	int new_firstchar = font->cids.heap[0];
+	int new_lastchar = font->cids.heap[font->cids.len-1];
+	pdf_obj *widths;
+	int i;
+
+	pdf_dict_put_int(ctx, obj, PDF_NAME(FirstChar), new_firstchar);
+	pdf_dict_put_int(ctx, obj, PDF_NAME(LastChar), new_lastchar);
+	if (old_widths)
+	{
+		int j = 0;
+		widths = pdf_new_array(ctx, doc, new_lastchar - new_firstchar + 1);
+		for (i = new_firstchar; i <= new_lastchar; i++)
+		{
+			if (font->cids.heap[j] == i)
+			{
+				pdf_array_push_int(ctx, widths, pdf_array_get_int(ctx, old_widths, i - old_firstchar));
+				j++;
+			}
+			else
+				pdf_array_push_int(ctx, widths, 0);
+		}
+		pdf_dict_put_drop(ctx, obj, PDF_NAME(Widths), widths);
+	}
+}
+
+static void
+prefix_font_name(fz_context *ctx, pdf_document *doc, pdf_obj *fontdesc, pdf_obj *file)
+{
+	fz_buffer *buf;
+	uint32_t digest[4], v;
+	const char *name = pdf_dict_get_name(ctx, fontdesc, PDF_NAME(FontName));
+	char new_name[256];
+	size_t len;
+
+	/* If there is no name, just exit. Possibly should throw here. */
+	if (name == NULL)
+		return;
+
+	len = strlen(name);
+	if (len > 6 && name[6] == '+')
+		return; /* Already a subset name */
+
+	buf = pdf_load_stream(ctx, file);
+	fz_md5_buffer(ctx, buf, (uint8_t *)digest);
+	fz_drop_buffer(ctx, buf);
+
+	v = digest[0] ^ digest[1] ^ digest[2] ^ digest[3];
+
+	v = digest[0];
+	new_name[0] = 'A' + (v % 26);
+	v /= 26;
+	new_name[1] = 'A' + (v % 26);
+	v /= 26;
+	new_name[2] = 'A' + (v % 26);
+	v /= 26;
+	new_name[3] = 'A' + (v % 26);
+	v /= 26;
+	new_name[4] = 'A' + (v % 26);
+	v /= 26;
+	new_name[5] = 'A' + (v % 26);
+	new_name[6] = '+';
+
+	memcpy(new_name+7, name, len > sizeof(new_name)-8 ? sizeof(new_name)-8 : len+1);
+	new_name[sizeof(new_name)-1] = 0;
+
+	pdf_dict_put_name(ctx, fontdesc, PDF_NAME(FontName), new_name);
 }
 
 void
@@ -434,13 +537,42 @@ pdf_subset_fonts(fz_context *ctx, pdf_document *doc)
 		for (i = 0; i < usage.len; i++)
 		{
 			font_usage_t *font = &usage.font[i];
-			pdf_obj *fontdesc = pdf_dict_get(ctx, font->obj, PDF_NAME(FontDescriptor));
-			pdf_obj *fontfile = pdf_dict_get(ctx, fontdesc, PDF_NAME(FontFile2));
+			pdf_obj *subtype = pdf_dict_get(ctx, font->obj, PDF_NAME(Subtype));
 
-			pdf_debug_obj(ctx, font->obj);
-			pdf_debug_obj(ctx, fontfile);
-			if (fontfile)
-				subset_ttf(ctx, doc, font, fontfile);
+			/* Not sure this can ever happen, and if it does this is not a great
+			 * way to handle it, but it'll do for now. */
+			if (font->gids.len == 0 || font->cids.len == 0)
+				continue;
+
+			if (pdf_name_eq(ctx, subtype, PDF_NAME(TrueType)))
+			{
+				pdf_obj *fontdesc = pdf_dict_get(ctx, font->obj, PDF_NAME(FontDescriptor));
+				pdf_obj *fontfile = pdf_dict_get(ctx, fontdesc, PDF_NAME(FontFile2));
+				int flags = pdf_dict_get_int(ctx, fontdesc, PDF_NAME(Flags));
+				int symbolic = (!!(flags & 4)) | ((flags & 32) == 0);
+				if (fontfile)
+				{
+					subset_ttf(ctx, doc, font, fontfile, symbolic, 0);
+					adjust_simple_font(ctx, doc, font);
+					prefix_font_name(ctx, doc, fontdesc, fontfile);
+					continue;
+				}
+			}
+			else if (pdf_name_eq(ctx, subtype, PDF_NAME(Type0)))
+			{
+				pdf_obj *cidfont = pdf_array_get(ctx, pdf_dict_get(ctx, font->obj, PDF_NAME(DescendantFonts)), 0);
+				pdf_obj *fontdesc = pdf_dict_get(ctx, cidfont, PDF_NAME(FontDescriptor));
+				pdf_obj *fontfile = pdf_dict_get(ctx, fontdesc, PDF_NAME(FontFile2));
+				int flags = pdf_dict_get_int(ctx, fontdesc, PDF_NAME(Flags));
+				int symbolic = (!!(flags & 4)) | ((flags & 32) == 0);
+				pdf_debug_obj(ctx, fontdesc);
+				if (fontfile)
+				{
+					subset_ttf(ctx, doc, font, fontfile, symbolic, 1);
+					prefix_font_name(ctx, doc, fontdesc, fontfile);
+					continue;
+				}
+			}
 		}
 
 	}
@@ -459,3 +591,5 @@ pdf_subset_fonts(fz_context *ctx, pdf_document *doc)
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 }
+
+#endif
