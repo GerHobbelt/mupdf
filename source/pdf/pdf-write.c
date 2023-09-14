@@ -1637,6 +1637,7 @@ static void preloadobjstms(fz_context *ctx, pdf_document *doc)
 {
 	pdf_obj *obj;
 	int num;
+	pdf_xref_entry *x = NULL;
 
 	/* If we have attempted a repair, then everything will have been
 	 * loaded already. */
@@ -1644,6 +1645,7 @@ static void preloadobjstms(fz_context *ctx, pdf_document *doc)
 		return;
 
 	fz_var(num);
+	fz_var(x);
 
 	/* xref_len may change due to repair, so check it every iteration */
 	for (num = 0; num < pdf_xref_len(ctx, doc); num++)
@@ -1652,7 +1654,7 @@ static void preloadobjstms(fz_context *ctx, pdf_document *doc)
 		{
 			for (; num < pdf_xref_len(ctx, doc); num++)
 			{
-				pdf_xref_entry *x = pdf_get_xref_entry_no_null(ctx, doc, num);
+				x = pdf_get_xref_entry_no_null(ctx, doc, num);
 				if (x->type == 'o')
 				{
 					obj = pdf_load_object(ctx, doc, num);
@@ -1663,10 +1665,18 @@ static void preloadobjstms(fz_context *ctx, pdf_document *doc)
 					x->type = 'n';
 					x->gen = 0;
 				}
+				x = NULL;
 			}
 		}
 		fz_catch(ctx)
 		{
+			/* We need to clear the type even in the event of an error, lest we
+			 * hit an assert later. Bug 707110. */
+			if (x && x->type == 'o')
+			{
+				x->type = 'f';
+				x->gen = 0;
+			}
 			/* Ignore the error, so we can carry on trying to load. */
 			fz_warn(ctx, "(ignored) %s", fz_caught_message(ctx));
 		}
