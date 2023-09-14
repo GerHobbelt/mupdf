@@ -837,6 +837,7 @@ Pillow
 libinsane
 OpenEXR
 Imath
+LSWMS
 
 libboost-context
 libboost-coroutine

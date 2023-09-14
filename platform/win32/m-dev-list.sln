@@ -43,7 +43,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "win32-tooling", "win32-tool
 		bin2coff.targets = bin2coff.targets
 		bin2coff.xml = bin2coff.xml
 		clean-vcxproj-filters.js = clean-vcxproj-filters.js
+		config_tesseract_git_for_windows.sh = config_tesseract_git_for_windows.sh
 		ignoreBoostTestfiles.spec = ignoreBoostTestfiles.spec
+		inject-and-number-logbook-raw-notes-in-obsidian.sh = inject-and-number-logbook-raw-notes-in-obsidian.sh
+		inject-and-number-processor.js = inject-and-number-processor.js
 		mknew.sh = mknew.sh
 		mk_jumbo_source_files.js = mk_jumbo_source_files.js
 		mk_project_line_for_sln.js = mk_project_line_for_sln.js
@@ -54,10 +57,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "win32-tooling", "win32-tool
 		nuke-all-npm-package-node_modules-directories.sh = nuke-all-npm-package-node_modules-directories.sh
 		patch-all-library-version-numbers.js = patch-all-library-version-numbers.js
 		patch-vcxproj.js = patch-vcxproj.js
+		prep_boost_include_directories.sh = prep_boost_include_directories.sh
 		README.txt = README.txt
 		refill-vcxproj.js = refill-vcxproj.js
 		refill-vcxproj.sh = refill-vcxproj.sh
 		rename-unsafe-source-files.js = rename-unsafe-source-files.js
+		run_image_ocr_tests_4_tesseract.sh = run_image_ocr_tests_4_tesseract.sh
 		sort-sln-file.js = sort-sln-file.js
 		update-vcxproj.js = update-vcxproj.js
 		update-vcxproj.sh = update-vcxproj.sh
@@ -2789,6 +2794,14 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "__build_target_experimental", "__build_target_experimental.vcxproj", "{B88BFA7D-1964-41D9-AE63-C91997FE2C7A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libfmtlog_tests", "libfmtlog_tests.vcxproj", "{AE677E56-4860-478A-9BFA-CB27B8E64386}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libFFmpeg", "libFFmpeg.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FFC0B445}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libPillow", "libPillow.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FF723CE6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libOpenEXR", "libOpenEXR.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FF4A0867}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libImath", "libImath.vcxproj", "{A60D8644-5A1C-4D29-8970-7518FFBBA437}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13462,6 +13475,38 @@ Global
 		{AE677E56-4860-478A-9BFA-CB27B8E64386}.Release|x64.Build.0 = Release|x64
 		{AE677E56-4860-478A-9BFA-CB27B8E64386}.Release|x86.ActiveCfg = Release|Win32
 		{AE677E56-4860-478A-9BFA-CB27B8E64386}.Release|x86.Build.0 = Release|Win32
+		{A60D8644-5A1C-4D29-8970-7518FFC0B445}.Debug|x64.ActiveCfg = Debug|x64
+		{A60D8644-5A1C-4D29-8970-7518FFC0B445}.Debug|x64.Build.0 = Debug|x64
+		{A60D8644-5A1C-4D29-8970-7518FFC0B445}.Debug|x86.ActiveCfg = Debug|Win32
+		{A60D8644-5A1C-4D29-8970-7518FFC0B445}.Debug|x86.Build.0 = Debug|Win32
+		{A60D8644-5A1C-4D29-8970-7518FFC0B445}.Release|x64.ActiveCfg = Release|x64
+		{A60D8644-5A1C-4D29-8970-7518FFC0B445}.Release|x64.Build.0 = Release|x64
+		{A60D8644-5A1C-4D29-8970-7518FFC0B445}.Release|x86.ActiveCfg = Release|Win32
+		{A60D8644-5A1C-4D29-8970-7518FFC0B445}.Release|x86.Build.0 = Release|Win32
+		{A60D8644-5A1C-4D29-8970-7518FF723CE6}.Debug|x64.ActiveCfg = Debug|x64
+		{A60D8644-5A1C-4D29-8970-7518FF723CE6}.Debug|x64.Build.0 = Debug|x64
+		{A60D8644-5A1C-4D29-8970-7518FF723CE6}.Debug|x86.ActiveCfg = Debug|Win32
+		{A60D8644-5A1C-4D29-8970-7518FF723CE6}.Debug|x86.Build.0 = Debug|Win32
+		{A60D8644-5A1C-4D29-8970-7518FF723CE6}.Release|x64.ActiveCfg = Release|x64
+		{A60D8644-5A1C-4D29-8970-7518FF723CE6}.Release|x64.Build.0 = Release|x64
+		{A60D8644-5A1C-4D29-8970-7518FF723CE6}.Release|x86.ActiveCfg = Release|Win32
+		{A60D8644-5A1C-4D29-8970-7518FF723CE6}.Release|x86.Build.0 = Release|Win32
+		{A60D8644-5A1C-4D29-8970-7518FF4A0867}.Debug|x64.ActiveCfg = Debug|x64
+		{A60D8644-5A1C-4D29-8970-7518FF4A0867}.Debug|x64.Build.0 = Debug|x64
+		{A60D8644-5A1C-4D29-8970-7518FF4A0867}.Debug|x86.ActiveCfg = Debug|Win32
+		{A60D8644-5A1C-4D29-8970-7518FF4A0867}.Debug|x86.Build.0 = Debug|Win32
+		{A60D8644-5A1C-4D29-8970-7518FF4A0867}.Release|x64.ActiveCfg = Release|x64
+		{A60D8644-5A1C-4D29-8970-7518FF4A0867}.Release|x64.Build.0 = Release|x64
+		{A60D8644-5A1C-4D29-8970-7518FF4A0867}.Release|x86.ActiveCfg = Release|Win32
+		{A60D8644-5A1C-4D29-8970-7518FF4A0867}.Release|x86.Build.0 = Release|Win32
+		{A60D8644-5A1C-4D29-8970-7518FFBBA437}.Debug|x64.ActiveCfg = Debug|x64
+		{A60D8644-5A1C-4D29-8970-7518FFBBA437}.Debug|x64.Build.0 = Debug|x64
+		{A60D8644-5A1C-4D29-8970-7518FFBBA437}.Debug|x86.ActiveCfg = Debug|Win32
+		{A60D8644-5A1C-4D29-8970-7518FFBBA437}.Debug|x86.Build.0 = Debug|Win32
+		{A60D8644-5A1C-4D29-8970-7518FFBBA437}.Release|x64.ActiveCfg = Release|x64
+		{A60D8644-5A1C-4D29-8970-7518FFBBA437}.Release|x64.Build.0 = Release|x64
+		{A60D8644-5A1C-4D29-8970-7518FFBBA437}.Release|x86.ActiveCfg = Release|Win32
+		{A60D8644-5A1C-4D29-8970-7518FFBBA437}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -13492,19 +13537,7 @@ Global
 	EndGlobalSection
 EndGlobal
 
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libnop", "libnop.vcxproj", "{A60D8644-5A1C-4D29-8970-101000000001}"
-EndProject
-    
-
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libFFmpeg", "libFFmpeg.vcxproj", "{A60D8644-5A1C-4D29-8970-101000000001}"
-EndProject
-    
-
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libPillow", "libPillow.vcxproj", "{A60D8644-5A1C-4D29-8970-101000000001}"
-EndProject
-    
-
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libpillowfight", "libpillowfight.vcxproj", "{A60D8644-5A1C-4D29-8970-101000000001}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libLSWMS", "libLSWMS.vcxproj", "{A60D8644-5A1C-4D29-8970-101000000001}"
 EndProject
     
 
@@ -13557,25 +13590,5 @@ EndProject
     
 
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "liboidn-OpenImageDenoise", "liboidn-OpenImageDenoise.vcxproj", "{A60D8644-5A1C-4D29-8970-101000000001}"
-EndProject
-    
-
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libImath", "libImath.vcxproj", "{A60D8644-5A1C-4D29-8970-101000000001}"
-EndProject
-    
-
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libboost-math", "libboost-math.vcxproj", "{A60D8644-5A1C-4D29-8970-101000000001}"
-EndProject
-    
-
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libstan-math", "libstan-math.vcxproj", "{A60D8644-5A1C-4D29-8970-101000000001}"
-EndProject
-    
-
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wxCharts-sample-math2d", "wxCharts-sample-math2d.vcxproj", "{A60D8644-5A1C-4D29-8970-101000000001}"
-EndProject
-    
-
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wxCharts-sample-math2dinteractive", "wxCharts-sample-math2dinteractive.vcxproj", "{A60D8644-5A1C-4D29-8970-101000000001}"
 EndProject
     
