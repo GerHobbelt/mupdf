@@ -56,6 +56,7 @@
 #include "../../thirdparty/jbig2dec/monolithic_examples.h"
 #include "../../thirdparty/leptonica/prog/monolithic_examples.h"
 #include "../../source/fitz/tessocr.h"
+#include "../../thirdparty/gumbo-parser/src/gumbo.h"
 #undef BUILD_MONOLITHIC
 
 #include "../../scripts/MuPDFLib/versions-api.h"
@@ -153,6 +154,9 @@ static struct tool_spec {
 
 	{ {.fa = tesslinesplit_kraken_main }, "tesslinesplit_kraken", "OCR tesseract linesplit (Kraken) helper utility" },
 	{ {.fa = tesslinesplit_ocular_main }, "tesslinesplit_ocular", "OCR tesseract line split (Ocular) helper utility" },
+
+	{ {.fa = tesseract_test_issue_845_main }, "tess_test_issue_845", "tesseract test issue #845 utility" },
+	{ {.fa = tesseract_test_issue_ML_1bba6c_main }, "tess_test_issue_ML_1", "tesseract test issue ML-1bba6c utility" },
 #endif
 
 	{ {.fa = curl_main }, "curl", "access/fetch a given URI" },
@@ -739,6 +743,17 @@ static struct tool_spec {
 	{ {.fa = tvision_tvhc_main }, "tv_tvhc", "Turbo Vision tvhc demo/test/tool" },
 	{ {.f = tvision_hello_main }, "tv_hello", "Turbo Vision hello demo/test/tool" },
 	{ {.f = tvision_geninc_main }, "tv_geninc", "Turbo Vision geninc demo/test/tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = gumbo_benchmark_main }, "gumbo_benchmark", "gumbo benchmark demo/test/tool" },
+	{ {.fa = gumbo_clean_text_main }, "gumbo_clean_text", "gumbo clean_text demo/test/tool" },
+	{ {.fa = gumbo_find_links_main }, "gumbo_find_links", "gumbo find_links demo/test/tool" },
+	{ {.fa = gumbo_get_title_main }, "gumbo_get_title", "gumbo get_title demo/test/tool" },
+	{ {.fa = gumbo_positions_of_class_main }, "gumbo_positions_of_class", "gumbo positions_of_class demo/test/tool" },
+	{ {.fa = gumbo_prettyprint_main }, "gumbo_prettyprint", "gumbo prettyprint demo/test/tool" },
+	{ {.fa = gumbo_serialize_main }, "gumbo_serialize", "gumbo serialize demo/test/tool" },
+	{ {.fa = gumbo_print_main }, "gumbo_print", "gumbo print demo/test/tool" },
 #endif
 
 	{ {.fa = report_version }, "version", "report version of this build / tools" },

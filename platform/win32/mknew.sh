@@ -838,6 +838,7 @@ libinsane
 OpenEXR
 Imath
 LSWMS
+getopt
 
 libboost-context
 libboost-coroutine
@@ -899,6 +900,7 @@ vcopy
 horsejs
 visible-url-detector
 omaha
+bbe
 
 EOT
 )
