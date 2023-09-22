@@ -178,10 +178,10 @@ pdf_run_page_contents_with_usage_imp(fz_context *ctx, pdf_document *doc, pdf_pag
 		{
 			pdf_obj *group = pdf_page_group(ctx, page);
 
-			if (group)
+			if (pdf_is_dict(ctx, group))
 			{
 				pdf_obj *cs = pdf_dict_get(ctx, group, PDF_NAME(CS));
-				if (cs)
+				if (pdf_is_name(ctx, cs) || pdf_is_array(ctx, cs) || pdf_is_dict(ctx, cs))
 				{
 					fz_try(ctx)
 						colorspace = pdf_load_colorspace(ctx, cs);

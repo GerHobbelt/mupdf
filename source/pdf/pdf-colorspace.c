@@ -45,7 +45,7 @@ load_icc_based(fz_context *ctx, pdf_obj *dict, int allow_alt, pdf_cycle_list *cy
 	if (allow_alt)
 	{
 		obj = pdf_dict_get(ctx, dict, PDF_NAME(Alternate));
-		if (obj)
+		if (pdf_is_name(ctx, obj) || pdf_is_array(ctx, obj) || pdf_is_dict(ctx, obj))
 		{
 			fz_try(ctx)
 				alt = pdf_load_colorspace_imp(ctx, obj, cycle_up);
@@ -331,7 +331,7 @@ pdf_load_cal_gray(fz_context *ctx, pdf_obj *dict)
 	float bp[3] = { 0, 0, 0 };
 	float gamma[3] = { 1, 1, 1 };
 
-	if (dict == NULL)
+	if (!pdf_is_dict(ctx, dict))
 		return fz_keep_colorspace(ctx, fz_device_gray(ctx));
 
 	fz_try(ctx)
@@ -351,7 +351,7 @@ pdf_load_cal_rgb(fz_context *ctx, pdf_obj *dict)
 	float gamma[3] = { 1, 1, 1 };
 	int i;
 
-	if (dict == NULL)
+	if (!pdf_is_dict(ctx, dict))
 		return fz_keep_colorspace(ctx, fz_device_rgb(ctx));
 
 	fz_try(ctx)
@@ -451,7 +451,7 @@ pdf_load_colorspace_imp(fz_context *ctx, pdf_obj *obj, pdf_cycle_list *cycle_up)
 				else if (pdf_name_eq(ctx, name, PDF_NAME(Pattern)))
 				{
 					pdf_obj *pobj = pdf_array_get(ctx, obj, 1);
-					if (!pobj)
+					if (!pdf_is_name(ctx, pobj) && !pdf_is_array(ctx, pobj) && !pdf_is_dict(ctx, pobj))
 						return fz_keep_colorspace(ctx, fz_device_gray(ctx));
 					cs = pdf_load_colorspace_imp(ctx, pobj, &cycle);
 				}
@@ -499,16 +499,16 @@ pdf_load_output_intent(fz_context *ctx, pdf_document *doc)
 	fz_colorspace *cs = NULL;
 
 	/* An array of intents */
-	if (!intents)
+	if (!pdf_is_array(ctx, intents))
 		return NULL;
 
 	/* For now, always just use the first intent. I have never even seen a file
 	 * with multiple intents but it could happen */
 	intent_dict = pdf_array_get(ctx, intents, 0);
-	if (!intent_dict)
+	if (!pdf_is_dict(ctx, intent_dict))
 		return NULL;
 	dest_profile = pdf_dict_get(ctx, intent_dict, PDF_NAME(DestOutputProfile));
-	if (!dest_profile)
+	if (!pdf_is_stream(ctx, dest_profile))
 		return NULL;
 
 	fz_var(cs);

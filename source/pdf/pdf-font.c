@@ -820,7 +820,7 @@ pdf_load_simple_font(fz_context *ctx, pdf_document *doc, pdf_obj *dict)
 		basefont = pdf_dict_get_name(ctx, dict, PDF_NAME(BaseFont));
 
 		descriptor = pdf_dict_get(ctx, dict, PDF_NAME(FontDescriptor));
-		if (descriptor)
+		if (pdf_is_dict(ctx, descriptor))
 			pdf_load_font_descriptor(ctx, doc, fontdesc, descriptor, NULL, basefont, 0);
 		else
 			pdf_load_builtin_font(ctx, fontdesc, basefont, 0);
@@ -1066,7 +1066,7 @@ pdf_load_simple_font(fz_context *ctx, pdf_document *doc, pdf_obj *dict)
 		pdf_set_default_hmtx(ctx, fontdesc, fontdesc->missing_width);
 
 		widths = pdf_dict_get(ctx, dict, PDF_NAME(Widths));
-		if (widths)
+		if (pdf_is_array(ctx, widths))
 		{
 			int first, last;
 
@@ -1205,7 +1205,7 @@ load_cid_font(fz_context *ctx, pdf_document *doc, pdf_obj *dict, pdf_obj *encodi
 			const char *reg, *ord;
 
 			cidinfo = pdf_dict_get(ctx, dict, PDF_NAME(CIDSystemInfo));
-			if (cidinfo)
+			if (pdf_is_dict(ctx, cidinfo))
 			{
 				reg = pdf_dict_get_string(ctx, cidinfo, PDF_NAME(Registry), NULL);
 				ord = pdf_dict_get_string(ctx, cidinfo, PDF_NAME(Ordering), NULL);
@@ -1243,7 +1243,7 @@ load_cid_font(fz_context *ctx, pdf_document *doc, pdf_obj *dict, pdf_obj *encodi
 		pdf_set_font_wmode(ctx, fontdesc, pdf_cmap_wmode(ctx, fontdesc->encoding));
 
 		descriptor = pdf_dict_get(ctx, dict, PDF_NAME(FontDescriptor));
-		if (!descriptor)
+		if (!pdf_is_dict(ctx, descriptor))
 			fz_throw(ctx, FZ_ERROR_SYNTAX, "missing font descriptor");
 		pdf_load_font_descriptor(ctx, doc, fontdesc, descriptor, collection, basefont, 1);
 
@@ -1266,7 +1266,7 @@ load_cid_font(fz_context *ctx, pdf_document *doc, pdf_obj *dict, pdf_obj *encodi
 			for (z = 0; z < fontdesc->cid_to_gid_len; z++)
 				fontdesc->cid_to_gid[z] = (data[z * 2] << 8) + data[z * 2 + 1];
 		}
-		else if (cidtogidmap && !pdf_name_eq(ctx, PDF_NAME(Identity), cidtogidmap))
+		else if (pdf_is_name(ctx, cidtogidmap) && !pdf_name_eq(ctx, PDF_NAME(Identity), cidtogidmap))
 		{
 			fz_warn(ctx, "ignoring unknown CIDToGIDMap entry");
 		}
@@ -1336,7 +1336,7 @@ load_cid_font(fz_context *ctx, pdf_document *doc, pdf_obj *dict, pdf_obj *encodi
 		pdf_set_default_hmtx(ctx, fontdesc, dw);
 
 		widths = pdf_dict_get(ctx, dict, PDF_NAME(W));
-		if (widths)
+		if (pdf_is_array(ctx, widths))
 		{
 			int c0, c1, w, n, m;
 
@@ -1375,7 +1375,7 @@ load_cid_font(fz_context *ctx, pdf_document *doc, pdf_obj *dict, pdf_obj *encodi
 			int dw2w = -1000;
 
 			obj = pdf_dict_get(ctx, dict, PDF_NAME(DW2));
-			if (obj)
+			if (pdf_is_array(ctx, obj))
 			{
 				dw2y = pdf_array_get_int(ctx, obj, 0);
 				dw2w = pdf_array_get_int(ctx, obj, 1);
@@ -1384,7 +1384,7 @@ load_cid_font(fz_context *ctx, pdf_document *doc, pdf_obj *dict, pdf_obj *encodi
 			pdf_set_default_vmtx(ctx, fontdesc, dw2y, dw2w);
 
 			widths = pdf_dict_get(ctx, dict, PDF_NAME(W2));
-			if (widths)
+			if (pdf_is_array(ctx, widths))
 			{
 				int c0, c1, w, x, y, n;
 
@@ -1441,7 +1441,7 @@ pdf_load_type0_font(fz_context *ctx, pdf_document *doc, pdf_obj *dict)
 	pdf_obj *to_unicode;
 
 	dfonts = pdf_dict_get(ctx, dict, PDF_NAME(DescendantFonts));
-	if (!dfonts)
+	if (!pdf_is_array(ctx, dfonts))
 		fz_throw(ctx, FZ_ERROR_SYNTAX, "cid font is missing descendant fonts");
 
 	dfont = pdf_array_get(ctx, dfonts, 0);
@@ -1483,7 +1483,7 @@ pdf_load_font_descriptor(fz_context *ctx, pdf_document *doc, pdf_font_desc *font
 	obj1 = pdf_dict_get(ctx, dict, PDF_NAME(FontFile));
 	obj2 = pdf_dict_get(ctx, dict, PDF_NAME(FontFile2));
 	obj3 = pdf_dict_get(ctx, dict, PDF_NAME(FontFile3));
-	obj = obj1 ? obj1 : obj2 ? obj2 : obj3;
+	obj = pdf_is_stream(ctx, obj1) ? obj1 : pdf_is_stream(ctx, obj2) ? obj2 : pdf_is_stream(ctx, obj3) ? obj3 : NULL;
 
 	if (pdf_is_indirect(ctx, obj))
 	{
@@ -1605,13 +1605,13 @@ pdf_load_font(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *dict)
 		fontdesc = pdf_load_type3_font(ctx, doc, rdb, dict);
 		type3 = 1;
 	}
-	else if (charprocs)
+	else if (pdf_is_dict(ctx, charprocs))
 	{
 		fz_warn(ctx, "unknown font format, guessing type3.");
 		fontdesc = pdf_load_type3_font(ctx, doc, rdb, dict);
 		type3 = 1;
 	}
-	else if (dfonts)
+	else if (pdf_is_array(ctx, dfonts))
 	{
 		fz_warn(ctx, "unknown font format, guessing type0.");
 		fontdesc = pdf_load_type0_font(ctx, doc, dict);

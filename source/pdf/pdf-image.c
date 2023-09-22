@@ -114,13 +114,13 @@ pdf_load_image_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *di
 	fz_try(ctx)
 	{
 		cs = pdf_dict_geta(ctx, dict, PDF_NAME(ColorSpace), PDF_NAME(CS));
-		if (cs && !imagemask && !forcemask)
+		if ((pdf_is_name(ctx, cs) || pdf_is_array(ctx, cs) || pdf_is_dict(ctx, cs)) && !imagemask && !forcemask)
 		{
 			/* colorspace resource lookup is only done for inline images */
 			if (pdf_is_name(ctx, cs))
 			{
 				res = pdf_dict_get(ctx, pdf_dict_get(ctx, rdb, PDF_NAME(ColorSpace)), cs);
-				if (res)
+				if (pdf_is_name(ctx, res) || pdf_is_array(ctx, res) || pdf_is_dict(ctx, res))
 					cs = res;
 			}
 
@@ -138,7 +138,7 @@ pdf_load_image_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *di
 			fz_throw(ctx, FZ_ERROR_SYNTAX, "image is too large (max. single dimension for square image: %1.0lf px)", floor(sqrt((SIZE_MAX * 8.0) / (n * (bpc+7.0)))));
 
 		obj = pdf_dict_geta(ctx, dict, PDF_NAME(Decode), PDF_NAME(D));
-		if (obj)
+		if (pdf_is_array(ctx, obj))
 		{
 			for (i = 0; i < n * 2; i++)
 				decode[i] = pdf_array_get_real(ctx, obj, i);
@@ -284,7 +284,7 @@ pdf_load_jpx(fz_context *ctx, pdf_document *doc, pdf_obj *dict, int forcemask)
 		size_t len;
 
 		obj = pdf_dict_get(ctx, dict, PDF_NAME(ColorSpace));
-		if (obj)
+		if (pdf_is_name(ctx, obj) || pdf_is_array(ctx, obj) || pdf_is_dict(ctx, obj))
 			colorspace = pdf_load_colorspace(ctx, obj);
 
 		len = fz_buffer_storage(ctx, buf, &data);
@@ -300,7 +300,7 @@ pdf_load_jpx(fz_context *ctx, pdf_document *doc, pdf_obj *dict, int forcemask)
 		}
 
 		obj = pdf_dict_geta(ctx, dict, PDF_NAME(Decode), PDF_NAME(D));
-		if (obj && !fz_colorspace_is_indexed(ctx, colorspace))
+		if (pdf_is_array(ctx, obj) && !fz_colorspace_is_indexed(ctx, colorspace))
 		{
 			float decode[FZ_MAX_COLORS * 2];
 			int i;

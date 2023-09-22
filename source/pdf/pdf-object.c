@@ -2519,7 +2519,7 @@ pdf_dict_getsa(fz_context *ctx, pdf_obj *obj, const char *key, const char *abbre
 {
 	pdf_obj *v;
 	v = pdf_dict_gets(ctx, obj, key);
-	if (v)
+	if (!pdf_is_null(ctx, v))
 		return v;
 	return pdf_dict_gets(ctx, obj, abbrev);
 }
@@ -2537,7 +2537,7 @@ pdf_dict_geta(fz_context *ctx, pdf_obj *obj, pdf_obj *key, pdf_obj *abbrev)
 	pdf_obj *v;
 	/* ISO 32000-2:2020 (PDF 2.0) - abbreviated names take precendence. */
 	v = pdf_dict_get(ctx, obj, abbrev);
-	if (v)
+	if (!pdf_is_null(ctx, v))
 		return v;
 	return pdf_dict_get(ctx, obj, key);
 }
@@ -2756,7 +2756,7 @@ pdf_dict_vputl(fz_context *ctx, pdf_obj *obj, pdf_obj *val, va_list keys)
 	while ((next_key = va_arg(keys, pdf_obj *)) != NULL)
 	{
 		next_obj = pdf_dict_get(ctx, obj, key);
-		if (next_obj == NULL)
+		if (pdf_is_null(ctx, next_obj))
 			goto new_obj;
 		obj = next_obj;
 		key = next_key;

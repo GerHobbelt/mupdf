@@ -93,15 +93,9 @@ pdf_load_type3_font(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *d
 			estrings[i] = NULL;
 
 		encoding = pdf_dict_get(ctx, dict, PDF_NAME(Encoding));
-		if (!encoding)
-		{
-			fz_throw(ctx, FZ_ERROR_SYNTAX, "Type3 font missing Encoding");
-		}
-
 		if (pdf_is_name(ctx, encoding))
 			pdf_load_encoding(estrings, pdf_to_name(ctx, encoding));
-
-		if (pdf_is_dict(ctx, encoding))
+		else if (pdf_is_dict(ctx, encoding))
 		{
 			pdf_obj *base, *diff, *item;
 
@@ -124,6 +118,8 @@ pdf_load_type3_font(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *d
 				}
 			}
 		}
+		else
+			fz_throw(ctx, FZ_ERROR_SYNTAX, "Type3 font missing Encoding");
 
 		fontdesc->encoding = pdf_new_identity_cmap(ctx, 0, 1);
 		fontdesc->size += pdf_cmap_size(ctx, fontdesc->encoding);
@@ -149,7 +145,7 @@ pdf_load_type3_font(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *d
 			first = last = 0;
 
 		widths = pdf_dict_get(ctx, dict, PDF_NAME(Widths));
-		if (!widths)
+		if (!pdf_is_array(ctx, widths))
 		{
 			fz_throw(ctx, FZ_ERROR_SYNTAX, "Type3 font missing Widths");
 		}
@@ -168,7 +164,7 @@ pdf_load_type3_font(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *d
 
 		font->t3freeres = pdf_t3_free_resources;
 		font->t3resources = pdf_dict_get(ctx, dict, PDF_NAME(Resources));
-		if (!font->t3resources)
+		if (!pdf_is_dict(ctx, font->t3resources))
 			font->t3resources = rdb;
 		if (font->t3resources)
 			pdf_keep_obj(ctx, font->t3resources);
@@ -182,7 +178,7 @@ pdf_load_type3_font(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *d
 		/* CharProcs */
 
 		charprocs = pdf_dict_get(ctx, dict, PDF_NAME(CharProcs));
-		if (!charprocs)
+		if (!pdf_is_dict(ctx, charprocs))
 		{
 			fz_throw(ctx, FZ_ERROR_SYNTAX, "Type3 font missing CharProcs");
 		}

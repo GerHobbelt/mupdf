@@ -1425,13 +1425,13 @@ pdf_read_new_xref(fz_context *ctx, pdf_document *doc)
 		pdf_xref_entry *entry;
 
 		obj = pdf_dict_get(ctx, trailer, PDF_NAME(Size));
-		if (!obj)
+		if (!pdf_is_int(ctx, obj))
 			fz_throw(ctx, FZ_ERROR_FORMAT, "xref stream missing Size entry (%d 0 R)", num);
 
 		size = pdf_to_int(ctx, obj);
 
 		obj = pdf_dict_get(ctx, trailer, PDF_NAME(W));
-		if (!obj)
+		if (!pdf_is_array(ctx, obj))
 			fz_throw(ctx, FZ_ERROR_FORMAT, "xref stream missing W entry (%d  R)", num);
 
 		if (pdf_is_indirect(ctx, pdf_array_get(ctx, obj, 0)))
@@ -1463,7 +1463,7 @@ pdf_read_new_xref(fz_context *ctx, pdf_document *doc)
 
 		stm = pdf_open_stream_with_offset(ctx, doc, num, trailer, stm_ofs);
 
-		if (!index)
+		if (!pdf_is_array(ctx, index))
 		{
 			pdf_read_new_xref_section(ctx, doc, stm, 0, size, w0, w1, w2);
 		}
@@ -1526,7 +1526,6 @@ static int64_t
 read_xref_section(fz_context *ctx, pdf_document *doc, int64_t ofs)
 {
 	pdf_obj *trailer = NULL;
-	pdf_obj *prevobj;
 	int64_t xrefstmofs = 0;
 	int64_t prevofs = 0;
 
@@ -1538,7 +1537,7 @@ read_xref_section(fz_context *ctx, pdf_document *doc, int64_t ofs)
 
 		/* FIXME: do we overwrite free entries properly? */
 		/* FIXME: Does this work properly with progression? */
-		xrefstmofs = pdf_to_int64(ctx, pdf_dict_get(ctx, trailer, PDF_NAME(XRefStm)));
+		xrefstmofs = pdf_dict_get_int64(ctx, trailer, PDF_NAME(XRefStm));
 		if (xrefstmofs)
 		{
 			if (xrefstmofs < 0)
@@ -1552,13 +1551,9 @@ read_xref_section(fz_context *ctx, pdf_document *doc, int64_t ofs)
 			pdf_drop_obj(ctx, pdf_read_xref(ctx, doc, xrefstmofs));
 		}
 
-		prevobj = pdf_dict_get(ctx, trailer, PDF_NAME(Prev));
-		if (pdf_is_int(ctx, prevobj))
-		{
-			prevofs = pdf_to_int64(ctx, prevobj);
-			if (prevofs <= 0)
-				fz_throw(ctx, FZ_ERROR_FORMAT, "invalid offset for previous xref section");
-		}
+		prevofs = pdf_dict_get_int64(ctx, trailer, PDF_NAME(Prev));
+		if (prevofs < 0)
+			fz_throw(ctx, FZ_ERROR_FORMAT, "invalid offset for previous xref section");
 	}
 	fz_always(ctx)
 		pdf_drop_obj(ctx, trailer);
@@ -1752,7 +1747,7 @@ pdf_check_linear(fz_context *ctx, pdf_document *doc)
 		if (!pdf_is_dict(ctx, dict))
 			break;
 		o = pdf_dict_get(ctx, dict, PDF_NAME(Linearized));
-		if (o == NULL)
+		if (!pdf_is_int(ctx, o))
 			break;
 		if (pdf_to_int(ctx, o) != 1)
 			break;
@@ -1794,7 +1789,7 @@ pdf_load_linear(fz_context *ctx, pdf_document *doc)
 		if (!pdf_is_dict(ctx, dict))
 			fz_throw(ctx, FZ_ERROR_FORMAT, "Failed to read linearized dictionary");
 		o = pdf_dict_get(ctx, dict, PDF_NAME(Linearized));
-		if (o == NULL)
+		if (!pdf_is_int(ctx, o))
 			fz_throw(ctx, FZ_ERROR_FORMAT, "Failed to read linearized dictionary");
 		lin = pdf_to_int(ctx, o);
 		if (lin != 1)
@@ -1975,7 +1970,7 @@ void pdf_repair_trailer(fz_context *ctx, pdf_document *doc)
 
 			if (!hasinfo)
 			{
-				if (pdf_dict_get(ctx, dict, PDF_NAME(Creator)) || pdf_dict_get(ctx, dict, PDF_NAME(Producer)))
+				if (pdf_is_string(ctx, pdf_dict_get(ctx, dict, PDF_NAME(Creator))) || pdf_is_string(ctx, pdf_dict_get(ctx, dict, PDF_NAME(Producer))))
 				{
 					pdf_dict_put_indirect(ctx, pdf_trailer(ctx, doc), PDF_NAME(Info), i, 0);
 					hasinfo = 1;

@@ -325,7 +325,7 @@ pdf_annot_request_synthesis(fz_context *ctx, pdf_annot *annot)
 {
 	if (annot == NULL)
 		return;
-	if (!pdf_annot_ap(ctx, annot))
+	if (!pdf_is_dict(ctx, pdf_annot_ap(ctx, annot)))
 		pdf_annot_request_resynthesis(ctx, annot);
 }
 
@@ -693,11 +693,11 @@ pdf_add_popup_annot(fz_context *ctx, pdf_annot *annot)
 	pdf_obj *annots, *popup;
 
 	popup = pdf_dict_get(ctx, annot->obj, PDF_NAME(Popup));
-	if (popup)
+	if (pdf_is_dict(ctx, popup))
 		return popup;
 
 	annots = pdf_dict_get(ctx, annot->page->obj, PDF_NAME(Annots));
-	if (!annots)
+	if (!pdf_is_array(ctx, annots))
 		return NULL;
 
 	popup = pdf_add_new_dict(ctx, annot->page->doc, 4);
@@ -919,6 +919,11 @@ remove_from_tree(fz_context *ctx, pdf_obj *arr, pdf_obj *item, pdf_cycle_list *c
 		fz_throw(ctx, FZ_ERROR_GENERIC, "Cycle detected while removing (annotation) item from tree. Cannot remove recursively self-referencing element.");
 		return 0;
 	}
+	if (!pdf_is_array(ctx, arr))
+	{
+		fz_throw(ctx, FZ_ERROR_GENERIC, "PDF file format: expected array type while removing (annotation) item from tree. Cannot remove element.");
+		return 0;
+	}
 
 	n = pdf_array_len(ctx, arr);
 	for (i = 0; i < n; ++i)
@@ -994,7 +999,7 @@ pdf_delete_annot(fz_context *ctx, pdf_page *page, pdf_annot *annot)
 
 		/* Remove the associated Popup annotation from the Annots array */
 		popup = pdf_dict_get(ctx, annot->obj, PDF_NAME(Popup));
-		if (popup)
+		if (pdf_is_array(ctx, popup))
 		{
 			i = pdf_array_find(ctx, annot_arr, popup);
 			if (i >= 0)
@@ -1219,7 +1224,7 @@ pdf_annot_has_open(fz_context *ctx, pdf_annot *annot)
 	{
 		pdf_obj *subtype = pdf_dict_get(ctx, annot->obj, PDF_NAME(Subtype));
 		pdf_obj *popup = pdf_dict_get(ctx, annot->obj, PDF_NAME(Popup));
-		ret = (subtype == PDF_NAME(Text) || popup);
+		ret = (subtype == PDF_NAME(Text) || pdf_is_dict(ctx, popup));
 	}
 	fz_always(ctx)
 		pdf_annot_pop_local_xref(ctx, annot);
@@ -1240,7 +1245,7 @@ pdf_annot_is_open(fz_context *ctx, pdf_annot *annot)
 	{
 		pdf_obj *subtype = pdf_dict_get(ctx, annot->obj, PDF_NAME(Subtype));
 		pdf_obj *popup = pdf_dict_get(ctx, annot->obj, PDF_NAME(Popup));
-		if (popup)
+		if (pdf_is_dict(ctx, popup))
 			ret = pdf_dict_get_bool(ctx, popup, PDF_NAME(Open));
 		else if (subtype == PDF_NAME(Text))
 			ret = pdf_dict_get_bool(ctx, annot->obj, PDF_NAME(Open));
@@ -1262,7 +1267,7 @@ pdf_set_annot_is_open(fz_context *ctx, pdf_annot *annot, int is_open)
 	{
 		pdf_obj *subtype = pdf_dict_get(ctx, annot->obj, PDF_NAME(Subtype));
 		pdf_obj *popup = pdf_dict_get(ctx, annot->obj, PDF_NAME(Popup));
-		if (popup)
+		if (pdf_is_dict(ctx, popup))
 		{
 			pdf_dict_put_bool(ctx, popup, PDF_NAME(Open), is_open);
 			pdf_dirty_annot(ctx, annot);
@@ -1307,7 +1312,7 @@ pdf_annot_icon_name(fz_context *ctx, pdf_annot *annot)
 	{
 		check_allowed_subtypes(ctx, annot, PDF_NAME(Name), icon_name_subtypes);
 		name = pdf_dict_get(ctx, annot->obj, PDF_NAME(Name));
-		if (!name)
+		if (!pdf_is_name(ctx, name))
 		{
 			pdf_obj *subtype = pdf_dict_get(ctx, annot->obj, PDF_NAME(Subtype));
 			if (pdf_name_eq(ctx, subtype, PDF_NAME(Text)))
@@ -3573,7 +3578,7 @@ pdf_set_annot_appearance(fz_context *ctx, pdf_annot *annot, const char *appearan
 	fz_try(ctx)
 	{
 		ap = pdf_dict_get(ctx, annot->obj, PDF_NAME(AP));
-		if (!ap)
+		if (!pdf_is_dict(ctx, ap))
 			ap = pdf_dict_put_dict(ctx, annot->obj, PDF_NAME(AP), 1);
 
 		if (!state)
@@ -3585,7 +3590,7 @@ pdf_set_annot_appearance(fz_context *ctx, pdf_annot *annot, const char *appearan
 
 			app_name = pdf_new_name(ctx, appearance);
 			app = pdf_dict_get(ctx, ap, app_name);
-			if (!app)
+			if (!pdf_is_dict(ctx, app))
 				app = pdf_dict_put_dict(ctx, ap, app_name, 2);
 			form = pdf_keep_obj(ctx, pdf_dict_gets(ctx, ap, appearance));
 		}

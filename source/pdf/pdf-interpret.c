@@ -358,7 +358,7 @@ pdf_process_extgstate(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, pdf_ob
 				luminosity = 0;
 
 			tr = pdf_dict_get(ctx, obj, PDF_NAME(TR));
-			if (tr && pdf_name_eq(ctx, tr, PDF_NAME(Identity)))
+			if (!pdf_is_null(ctx, tr) && !pdf_name_eq(ctx, tr, PDF_NAME(Identity)))
 				tr = NULL;
 
 			proc->op_gs_SMask(ctx, proc, xobj, softmask_bc, luminosity, tr);
@@ -377,13 +377,13 @@ pdf_process_Do(fz_context *ctx, pdf_processor *proc, pdf_csi *csi)
 
 	xres = pdf_dict_get(ctx, csi->rdb, PDF_NAME(XObject));
 	xobj = pdf_dict_gets(ctx, xres, csi->name);
-	if (!xobj)
+	if (!pdf_is_dict(ctx, xobj))
 		fz_throw(ctx, FZ_ERROR_SYNTAX, "cannot find XObject resource '%s'", csi->name);
 	subtype = pdf_dict_get(ctx, xobj, PDF_NAME(Subtype));
 	if (pdf_name_eq(ctx, subtype, PDF_NAME(Form)))
 	{
 		pdf_obj *st = pdf_dict_get(ctx, xobj, PDF_NAME(Subtype2));
-		if (st)
+		if (pdf_is_name(ctx, st))
 			subtype = st;
 	}
 	if (!pdf_is_name(ctx, subtype))
@@ -1139,7 +1139,7 @@ pdf_process_raw_contents(fz_context *ctx, pdf_processor *proc, pdf_document *doc
 	pdf_lexbuf buf;
 	fz_stream *stm = NULL;
 
-	if (!stmobj)
+	if (!pdf_is_stream(ctx, stmobj) && !pdf_is_array(ctx, stmobj))
 		return;
 
 	fz_var(stm);

@@ -240,11 +240,11 @@ load_ui(fz_context *ctx, pdf_ocg_descriptor *desc, pdf_obj *ocprops, pdf_obj *oc
 
 	/* Count the number of entries */
 	order = pdf_dict_get(ctx, occg, PDF_NAME(Order));
-	if (!order)
+	if (!pdf_is_array(ctx, order))
 		order = pdf_dict_getp(ctx, ocprops, "D/Order");
 	count = count_entries(ctx, order, NULL);
 	rbgroups = pdf_dict_get(ctx, occg, PDF_NAME(RBGroups));
-	if (!rbgroups)
+	if (!pdf_is_array(ctx, rbgroups))
 		rbgroups = pdf_dict_getp(ctx, ocprops, "D/RBGroups");
 	locked = pdf_dict_get(ctx, occg, PDF_NAME(Locked));
 
@@ -275,7 +275,7 @@ pdf_select_layer_config(fz_context *ctx, pdf_document *doc, int config)
 	desc = pdf_read_ocg(ctx, doc);
 
 	obj = pdf_dict_get(ctx, pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root)), PDF_NAME(OCProperties));
-	if (!obj)
+	if (!pdf_is_dict(ctx, obj))
 	{
 		if (config == 0)
 			return;
@@ -284,12 +284,12 @@ pdf_select_layer_config(fz_context *ctx, pdf_document *doc, int config)
 	}
 
 	cobj = pdf_array_get(ctx, pdf_dict_get(ctx, obj, PDF_NAME(Configs)), config);
-	if (!cobj)
+	if (!pdf_is_dict(ctx, cobj))
 	{
 		if (config != 0)
 			fz_throw(ctx, FZ_ERROR_ARGUMENT, "Illegal Layer config");
 		cobj = pdf_dict_get(ctx, obj, PDF_NAME(D));
-		if (!cobj)
+		if (!pdf_is_dict(ctx, cobj))
 			fz_throw(ctx, FZ_ERROR_FORMAT, "No default Layer config");
 	}
 
@@ -372,7 +372,7 @@ pdf_layer_config_info(fz_context *ctx, pdf_document *doc, int config_num, pdf_la
 		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Invalid layer config number");
 
 	ocprops = pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/OCProperties");
-	if (!ocprops)
+	if (!pdf_is_dict(ctx, ocprops))
 		return;
 
 	obj = pdf_dict_get(ctx, ocprops, PDF_NAME(Configs));
@@ -652,7 +652,7 @@ pdf_is_ocg_hidden_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, const ch
 		ocg = pdf_dict_get(ctx, pdf_dict_get(ctx, rdb, PDF_NAME(Properties)), ocg);
 	}
 	/* If we haven't been given an ocg at all, then we're visible */
-	if (!ocg)
+	if (!pdf_is_dict(ctx, ocg))
 		return 0;
 
 	/* Avoid infinite recursions */
@@ -861,12 +861,12 @@ pdf_set_layer_config_as_default(fz_context *ctx, pdf_document *doc)
 	int k;
 
 	ocprops = pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/OCProperties");
-	if (!ocprops)
+	if (!pdf_is_dict(ctx, ocprops))
 		return;
 
 	/* All files with OCGs are required to have a D entry */
 	d = pdf_dict_get(ctx, ocprops, PDF_NAME(D));
-	if (d == NULL)
+	if (!pdf_is_dict(ctx, d))
 		return;
 
 	pdf_dict_put(ctx, d, PDF_NAME(BaseState), PDF_NAME(OFF));
@@ -878,16 +878,16 @@ pdf_set_layer_config_as_default(fz_context *ctx, pdf_document *doc)
 	order = pdf_dict_get(ctx, d, PDF_NAME(Order));
 	rbgroups = pdf_dict_get(ctx, d, PDF_NAME(RBGroups));
 	configs = pdf_dict_get(ctx, ocprops, PDF_NAME(Configs));
-	if (configs)
+	if (pdf_is_array(ctx, configs))
 	{
 		int len = pdf_array_len(ctx, configs);
 		for (k=0; k < len; k++)
 		{
 			pdf_obj *config = pdf_array_get(ctx, configs, k);
 
-			if (order && !pdf_dict_get(ctx, config, PDF_NAME(Order)))
+			if (pdf_is_array(ctx, order) && !pdf_dict_get(ctx, config, PDF_NAME(Order)))
 				pdf_dict_put(ctx, config, PDF_NAME(Order), order);
-			if (rbgroups && !pdf_dict_get(ctx, config, PDF_NAME(RBGroups)))
+			if (pdf_is_array(ctx, rbgroups) && !pdf_dict_get(ctx, config, PDF_NAME(RBGroups)))
 				pdf_dict_put(ctx, config, PDF_NAME(RBGroups), rbgroups);
 		}
 	}

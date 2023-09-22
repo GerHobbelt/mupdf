@@ -138,7 +138,7 @@ pdf_lookup_dest(fz_context *ctx, pdf_document *doc, pdf_obj *needle)
 	pdf_obj *names = pdf_dict_get(ctx, root, PDF_NAME(Names));
 
 	/* PDF 1.1 has destinations in a dictionary */
-	if (dests)
+	if (pdf_is_dict(ctx, dests))
 	{
 		if (pdf_is_name(ctx, needle))
 			return pdf_dict_get(ctx, dests, needle);
@@ -147,7 +147,7 @@ pdf_lookup_dest(fz_context *ctx, pdf_document *doc, pdf_obj *needle)
 	}
 
 	/* PDF 1.2 has destinations in a name tree */
-	if (names)
+	if (pdf_is_dict(ctx, names))
 	{
 		pdf_obj *tree = pdf_dict_get(ctx, names, PDF_NAME(Dests));
 		return pdf_lookup_name_imp(ctx, tree, pdf_to_text_string(ctx, needle, NULL), NULL);
@@ -164,14 +164,14 @@ pdf_load_name_tree_imp(fz_context *ctx, pdf_obj *dict, pdf_document *doc, pdf_ob
 	pdf_obj *names = pdf_dict_get(ctx, node, PDF_NAME(Names));
 	int i;
 
-	if (kids && !pdf_cycle(ctx, &cycle, cycle_up, node))
+	if (pdf_is_array(ctx, kids) && !pdf_cycle(ctx, &cycle, cycle_up, node))
 	{
 		int len = pdf_array_len(ctx, kids);
 		for (i = 0; i < len; i++)
 			pdf_load_name_tree_imp(ctx, dict, doc, pdf_array_get(ctx, kids, i), &cycle);
 	}
 
-	if (names)
+	if (pdf_is_array(ctx, names))
 	{
 		int len = pdf_array_len(ctx, names);
 		for (i = 0; i + 1 < len; i += 2)
@@ -302,7 +302,7 @@ pdf_walk_tree_kid(fz_context *ctx,
 	pdf_cycle_list cycle;
 	pdf_obj **new_vals = NULL;
 
-	if (obj == NULL || pdf_cycle(ctx, &cycle, cycle_up, obj))
+	if (!pdf_is_dict(ctx, obj) || pdf_cycle(ctx, &cycle, cycle_up, obj))
 		return;
 
 	fz_var(new_vals);
@@ -320,7 +320,7 @@ pdf_walk_tree_kid(fz_context *ctx,
 			for (i = 0; i < n; i++)
 			{
 				pdf_obj *v = pdf_dict_get(ctx, obj, inherit_names[i]);
-				if (v != NULL)
+				if (!pdf_is_null(ctx, v))
 				{
 					if (new_vals == NULL)
 					{

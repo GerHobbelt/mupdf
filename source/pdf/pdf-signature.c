@@ -153,7 +153,7 @@ check_field_locking(fz_context *ctx, pdf_obj *obj, void *data_, pdf_obj **ff)
 		pdf_obj *t;
 
 		t = pdf_dict_get(ctx, obj, PDF_NAME(T));
-		if (t != NULL)
+		if (pdf_is_string(ctx, t))
 		{
 			name = pdf_to_text_string(ctx, t, NULL);
 			n += strlen(name);
@@ -260,13 +260,13 @@ pdf_sign_signature_with_appearance(fz_context *ctx, pdf_annot *widget, pdf_pkcs7
 
 		/* Update the SigFlags for the document if required */
 		form = pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/AcroForm");
-		if (!form)
+		if (!pdf_is_dict(ctx, form))
 		{
 			pdf_obj *root = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root));
 			form = pdf_dict_put_dict(ctx, root, PDF_NAME(AcroForm), 1);
 		}
 
-		sf = pdf_to_int(ctx, pdf_dict_get(ctx, form, PDF_NAME(SigFlags)));
+		sf = pdf_dict_get_int(ctx, form, PDF_NAME(SigFlags));
 		if ((sf & (PDF_SIGFLAGS_SIGSEXIST | PDF_SIGFLAGS_APPENDONLY)) != (PDF_SIGFLAGS_SIGSEXIST | PDF_SIGFLAGS_APPENDONLY))
 			pdf_dict_put_int(ctx, form, PDF_NAME(SigFlags), sf | PDF_SIGFLAGS_SIGSEXIST | PDF_SIGFLAGS_APPENDONLY);
 
