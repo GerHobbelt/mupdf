@@ -1814,7 +1814,7 @@ static int striphexfilter(fz_context *ctx, pdf_document *doc, pdf_obj *dict)
 		{
 			f = pdf_array_get(ctx, f, 0);
 			pdf_dict_put(ctx, dict, PDF_NAME(Filter), f);
-			if (dp)
+			if (pdf_is_array(ctx, dp))
 			{
 				dp = pdf_array_get(ctx, dp, 0);
 				pdf_dict_put(ctx, dict, PDF_NAME(DecodeParms), dp);
@@ -2417,8 +2417,7 @@ static void writexrefstream(fz_context *ctx, pdf_document *doc, pdf_write_state 
 		pdf_array_push_int(ctx, w, 4);
 		pdf_array_push_int(ctx, w, 1);
 
-		index = pdf_new_array(ctx, doc, 2);
-		pdf_dict_put_drop(ctx, dict, PDF_NAME(Index), index);
+		index = pdf_dict_put_array(ctx, dict, PDF_NAME(Index), 2);
 
 		/* opts->gen_list[num] is already initialized by fz_calloc. */
 		opts->use_list[num] = 1;
@@ -3785,7 +3784,7 @@ do_pdf_save_document(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, 
 			pdf_obj *root = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root));
 			pdf_obj *version = pdf_dict_get(ctx, root, PDF_NAME(Version));
 			doc->version = 15;
-			if (opts->do_incremental || version != NULL)
+			if (opts->do_incremental || pdf_is_name(ctx, version))
 			{
 				pdf_dict_put(ctx, root, PDF_NAME(Version), PDF_NAME(1_5));
 			}

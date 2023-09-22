@@ -147,7 +147,7 @@ pdf_write_opacity_blend_mode(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, 
 
 	/* /Resources << /ExtGState << /H << /Type/ExtGState /BM/Multiply /CA %g /ca %g >> >> >> */
 
-	if (!*res)
+	if (!pdf_is_dict(ctx, *res))
 		*res = pdf_new_dict(ctx, annot->page->doc, 1);
 
 	res_egs = pdf_dict_put_dict(ctx, *res, PDF_NAME(ExtGState), 1);
@@ -1356,7 +1356,7 @@ pdf_write_stamp_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, fz
 	fz_matrix rotate;
 
 	name = pdf_dict_get(ctx, annot->obj, PDF_NAME(Name));
-	if (!name)
+	if (!pdf_is_name(ctx, name))
 		name = PDF_NAME(Draft);
 
 	h = rect->y1 - rect->y0;
@@ -1368,7 +1368,7 @@ pdf_write_stamp_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, fz
 	fz_try(ctx)
 	{
 		/* /Resources << /Font << /Times %d 0 R >> >> */
-		if (!*res)
+		if (!pdf_is_dict(ctx, *res))
 			*res = pdf_new_dict(ctx, annot->page->doc, 1);
 		res_font = pdf_dict_put_dict(ctx, *res, PDF_NAME(Font), 1);
 		pdf_dict_put_drop(ctx, res_font, PDF_NAME(Times), pdf_add_simple_font(ctx, annot->page->doc, font, 0));
@@ -1500,46 +1500,46 @@ add_required_fonts(fz_context *ctx, pdf_document *doc, pdf_obj *res_font,
 
 	if (add_latin)
 	{
-		if (!pdf_dict_gets(ctx, res_font, fontname))
+		if (!pdf_is_dict(ctx, pdf_dict_gets(ctx, res_font, fontname)))
 			pdf_dict_puts_drop(ctx, res_font, fontname,
 				pdf_add_simple_font(ctx, doc, font, PDF_SIMPLE_ENCODING_LATIN));
 	}
 	if (add_greek)
 	{
 		fz_snprintf(buf, sizeof buf, "%sGRK", fontname);
-		if (!pdf_dict_gets(ctx, res_font, buf))
+		if (!pdf_is_dict(ctx, pdf_dict_gets(ctx, res_font, buf)))
 			pdf_dict_puts_drop(ctx, res_font, buf,
 				pdf_add_simple_font(ctx, doc, font, PDF_SIMPLE_ENCODING_GREEK));
 	}
 	if (add_cyrillic)
 	{
 		fz_snprintf(buf, sizeof buf, "%sCYR", fontname);
-		if (!pdf_dict_gets(ctx, res_font, buf))
+		if (!pdf_is_dict(ctx, pdf_dict_gets(ctx, res_font, buf)))
 			pdf_dict_puts_drop(ctx, res_font, buf,
 				pdf_add_simple_font(ctx, doc, font, PDF_SIMPLE_ENCODING_CYRILLIC));
 	}
-	if (add_korean && !pdf_dict_gets(ctx, res_font, "Batang"))
+	if (add_korean && !pdf_is_dict(ctx, pdf_dict_gets(ctx, res_font, "Batang")))
 	{
 		cjk_font = fz_new_cjk_font(ctx, FZ_ADOBE_KOREA);
 		pdf_dict_puts_drop(ctx, res_font, "Batang",
 			pdf_add_cjk_font(ctx, doc, font, FZ_ADOBE_KOREA, 0, 1));
 		fz_drop_font(ctx, cjk_font);
 	}
-	if (add_japanese && !pdf_dict_gets(ctx, res_font, "Mincho"))
+	if (add_japanese && !pdf_is_dict(ctx, pdf_dict_gets(ctx, res_font, "Mincho")))
 	{
 		cjk_font = fz_new_cjk_font(ctx, FZ_ADOBE_JAPAN);
 		pdf_dict_puts_drop(ctx, res_font, "Mincho",
 			pdf_add_cjk_font(ctx, doc, font, FZ_ADOBE_JAPAN, 0, 1));
 		fz_drop_font(ctx, cjk_font);
 	}
-	if (add_hant && !pdf_dict_gets(ctx, res_font, "Ming"))
+	if (add_hant && !pdf_is_dict(ctx, pdf_dict_gets(ctx, res_font, "Ming")))
 	{
 		cjk_font = fz_new_cjk_font(ctx, FZ_ADOBE_CNS);
 		pdf_dict_puts_drop(ctx, res_font, "Ming",
 			pdf_add_cjk_font(ctx, doc, font, FZ_ADOBE_CNS, 0, 1));
 		fz_drop_font(ctx, cjk_font);
 	}
-	if (add_hans && !pdf_dict_gets(ctx, res_font, "Song"))
+	if (add_hans && !pdf_is_dict(ctx, pdf_dict_gets(ctx, res_font, "Song")))
 	{
 		cjk_font = fz_new_cjk_font(ctx, FZ_ADOBE_GB);
 		pdf_dict_puts_drop(ctx, res_font, "Song",
@@ -1961,7 +1961,7 @@ write_variable_text(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, pdf_obj *
 	font = fz_new_base14_font(ctx, full_font_name(&fontname));
 	fz_try(ctx)
 	{
-		if (!*res)
+		if (!pdf_is_dict(ctx, *res))
 			*res = pdf_new_dict(ctx, annot->page->doc, 1);
 		res_font = pdf_dict_put_dict(ctx, *res, PDF_NAME(Font), 1);
 		add_required_fonts(ctx, annot->page->doc, res_font, lang, font, fontname, text);
@@ -2701,7 +2701,7 @@ static void pdf_update_button_appearance(fz_context *ctx, pdf_annot *annot)
 			}
 
 			as = pdf_dict_get(ctx, annot->obj, PDF_NAME(AS));
-			if (!as)
+			if (!pdf_is_name(ctx, as))
 			{
 				pdf_dict_put(ctx, annot->obj, PDF_NAME(AS), PDF_NAME(Off));
 				as = PDF_NAME(Off);

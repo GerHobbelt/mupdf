@@ -80,7 +80,7 @@ pdf_load_function_based_shading(fz_context *ctx, pdf_document *doc, fz_shade *sh
 	x0 = y0 = 0;
 	x1 = y1 = 1;
 	obj = pdf_dict_get(ctx, dict, PDF_NAME(Domain));
-	if (obj)
+	if (pdf_is_array(ctx, obj))
 	{
 		x0 = pdf_array_get_real(ctx, obj, 0);
 		x1 = pdf_array_get_real(ctx, obj, 1);
@@ -152,7 +152,7 @@ pdf_load_linear_shading(fz_context *ctx, pdf_document *doc, fz_shade *shade, pdf
 	d0 = 0;
 	d1 = 1;
 	obj = pdf_dict_get(ctx, dict, PDF_NAME(Domain));
-	if (obj)
+	if (pdf_is_array(ctx, obj))
 	{
 		d0 = pdf_array_get_real(ctx, obj, 0);
 		d1 = pdf_array_get_real(ctx, obj, 1);
@@ -160,7 +160,7 @@ pdf_load_linear_shading(fz_context *ctx, pdf_document *doc, fz_shade *shade, pdf
 
 	e0 = e1 = 0;
 	obj = pdf_dict_get(ctx, dict, PDF_NAME(Extend));
-	if (obj)
+	if (pdf_is_array(ctx, obj))
 	{
 		e0 = pdf_array_get_bool(ctx, obj, 0);
 		e1 = pdf_array_get_bool(ctx, obj, 1);
@@ -191,7 +191,7 @@ pdf_load_radial_shading(fz_context *ctx, pdf_document *doc, fz_shade *shade, pdf
 	d0 = 0;
 	d1 = 1;
 	obj = pdf_dict_get(ctx, dict, PDF_NAME(Domain));
-	if (obj)
+	if (pdf_is_array(ctx, obj))
 	{
 		d0 = pdf_array_get_real(ctx, obj, 0);
 		d1 = pdf_array_get_real(ctx, obj, 1);
@@ -199,7 +199,7 @@ pdf_load_radial_shading(fz_context *ctx, pdf_document *doc, fz_shade *shade, pdf
 
 	e0 = e1 = 0;
 	obj = pdf_dict_get(ctx, dict, PDF_NAME(Extend));
-	if (obj)
+	if (pdf_is_array(ctx, obj))
 	{
 		e0 = pdf_array_get_bool(ctx, obj, 0);
 		e1 = pdf_array_get_bool(ctx, obj, 1);
@@ -378,17 +378,16 @@ pdf_load_shading_dict(fz_context *ctx, pdf_document *doc, pdf_obj *dict, fz_matr
 
 		funcs = 0;
 
-		obj = pdf_dict_get(ctx, dict, PDF_NAME(ShadingType));
-		type = pdf_to_int(ctx, obj);
+		type = pdf_dict_get_int(ctx, dict, PDF_NAME(ShadingType));
 
 		obj = pdf_dict_get(ctx, dict, PDF_NAME(ColorSpace));
-		if (!obj)
+		if (!pdf_is_name(ctx, obj) && !pdf_is_array(ctx, obj) && !pdf_is_dict(ctx, obj))
 			fz_throw(ctx, FZ_ERROR_SYNTAX, "shading colorspace is missing");
 		shade->colorspace = pdf_load_colorspace(ctx, obj);
 		n = fz_colorspace_n(ctx, shade->colorspace);
 
 		obj = pdf_dict_get(ctx, dict, PDF_NAME(Background));
-		if (obj)
+		if (pdf_is_array(ctx, obj))
 		{
 			shade->use_background = 1;
 			for (i = 0; i < n; i++)
@@ -497,21 +496,21 @@ pdf_load_shading(fz_context *ctx, pdf_document *doc, pdf_obj *dict)
 	}
 
 	/* Type 2 pattern dictionary */
-	if (pdf_dict_get(ctx, dict, PDF_NAME(PatternType)))
+	if (pdf_is_int(ctx, pdf_dict_get(ctx, dict, PDF_NAME(PatternType))))
 	{
 		mat = pdf_dict_get_matrix(ctx, dict, PDF_NAME(Matrix));
 
 		obj = pdf_dict_get(ctx, dict, PDF_NAME(ExtGState));
-		if (obj)
+		if (pdf_is_dict(ctx, obj))
 		{
-			if (pdf_dict_get(ctx, obj, PDF_NAME(CA)) || pdf_dict_get(ctx, obj, PDF_NAME(ca)))
+			if (pdf_is_number(ctx, pdf_dict_get(ctx, obj, PDF_NAME(CA))) || pdf_is_number(ctx, pdf_dict_get(ctx, obj, PDF_NAME(ca))))
 			{
 				fz_warn(ctx, "shading with alpha not supported");
 			}
 		}
 
 		obj = pdf_dict_get(ctx, dict, PDF_NAME(Shading));
-		if (!obj)
+		if (!pdf_is_dict(ctx, obj) && !pdf_is_stream(ctx, obj))
 			fz_throw(ctx, FZ_ERROR_SYNTAX, "missing shading dictionary");
 
 		shade = pdf_load_shading_dict(ctx, doc, obj, mat);

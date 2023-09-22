@@ -223,13 +223,13 @@ pdf_parse_file_spec(fz_context *ctx, pdf_document *doc, pdf_obj *file_spec, pdf_
 		str = file_spec;
 	else if (pdf_is_dict(ctx, file_spec)) {
 		str = pdf_dict_get(ctx, file_spec, PDF_NAME(UF));
-		if (!str)
+		if (!pdf_is_string(ctx, str))
 			str = pdf_dict_get(ctx, file_spec, PDF_NAME(F));
-		if (!str)
+		if (!pdf_is_string(ctx, str))
 			str = pdf_dict_get(ctx, file_spec, PDF_NAME(Unix));
-		if (!str)
+		if (!pdf_is_string(ctx, str))
 			str = pdf_dict_get(ctx, file_spec, PDF_NAME(DOS));
-		if (!str)
+		if (!pdf_is_string(ctx, str))
 			str = pdf_dict_get(ctx, file_spec, PDF_NAME(Mac));
 	}
 
@@ -252,10 +252,10 @@ pdf_embedded_file_stream(fz_context *ctx, pdf_obj *fs)
 {
 	pdf_obj *ef = pdf_dict_get(ctx, fs, PDF_NAME(EF));
 	pdf_obj *file = pdf_dict_get(ctx, ef, PDF_NAME(UF));
-	if (!file) file = pdf_dict_get(ctx, ef, PDF_NAME(F));
-	if (!file) file = pdf_dict_get(ctx, ef, PDF_NAME(Unix));
-	if (!file) file = pdf_dict_get(ctx, ef, PDF_NAME(DOS));
-	if (!file) file = pdf_dict_get(ctx, ef, PDF_NAME(Mac));
+	if (!pdf_is_stream(ctx, file)) file = pdf_dict_get(ctx, ef, PDF_NAME(F));
+	if (!pdf_is_stream(ctx, file)) file = pdf_dict_get(ctx, ef, PDF_NAME(Unix));
+	if (!pdf_is_stream(ctx, file)) file = pdf_dict_get(ctx, ef, PDF_NAME(DOS));
+	if (!pdf_is_stream(ctx, file)) file = pdf_dict_get(ctx, ef, PDF_NAME(Mac));
 	return file;
 }
 
@@ -277,14 +277,14 @@ pdf_get_embedded_file_params(fz_context *ctx, pdf_obj *fs, pdf_embedded_file_par
 	params = pdf_dict_get(ctx, file, PDF_NAME(Params));
 
 	filename = pdf_dict_get(ctx, fs, PDF_NAME(UF));
-	if (!filename) filename = pdf_dict_get(ctx, fs, PDF_NAME(F));
-	if (!filename) filename = pdf_dict_get(ctx, fs, PDF_NAME(Unix));
-	if (!filename) filename = pdf_dict_get(ctx, fs, PDF_NAME(DOS));
-	if (!filename) filename = pdf_dict_get(ctx, fs, PDF_NAME(Mac));
+	if (!pdf_is_string(ctx, filename)) filename = pdf_dict_get(ctx, fs, PDF_NAME(F));
+	if (!pdf_is_string(ctx, filename)) filename = pdf_dict_get(ctx, fs, PDF_NAME(Unix));
+	if (!pdf_is_string(ctx, filename)) filename = pdf_dict_get(ctx, fs, PDF_NAME(DOS));
+	if (!pdf_is_string(ctx, filename)) filename = pdf_dict_get(ctx, fs, PDF_NAME(Mac));
 	out->filename = pdf_to_text_string(ctx, filename);
 
 	subtype = pdf_dict_get(ctx, file, PDF_NAME(Subtype));
-	if (!subtype)
+	if (!pdf_is_name(ctx, subtype))
 		out->mimetype = "application/octet-stream";
 	else
 		out->mimetype = pdf_to_name(ctx, subtype);
@@ -448,7 +448,7 @@ pdf_parse_link_action(fz_context *ctx, pdf_document *doc, pdf_obj *action, int p
 {
 	pdf_obj *obj, *dest, *file_spec;
 
-	if (!action)
+	if (!pdf_is_dict(ctx, action))
 		return NULL;
 
 	obj = pdf_dict_get(ctx, action, PDF_NAME(S));
@@ -464,7 +464,7 @@ pdf_parse_link_action(fz_context *ctx, pdf_document *doc, pdf_obj *action, int p
 		if (!fz_is_external_link(ctx, uri))
 		{
 			pdf_obj *uri_base_obj = pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/URI/Base");
-			const char *uri_base = uri_base_obj ? pdf_to_text_string(ctx, uri_base_obj) : "file://";
+			const char *uri_base = pdf_is_string(ctx, uri_base_obj) ? pdf_to_text_string(ctx, uri_base_obj) : "file://";
 			char *new_uri = Memento_label(fz_malloc(ctx, strlen(uri_base) + strlen(uri) + 1), "link_action");
 			strcpy(new_uri, uri_base);
 			strcat(new_uri, uri);
@@ -591,13 +591,13 @@ pdf_load_link(fz_context *ctx, pdf_document *doc, pdf_page *page, pdf_obj *dict,
 	bbox = fz_transform_rect(bbox, page_ctm);
 
 	obj = pdf_dict_get(ctx, dict, PDF_NAME(Dest));
-	if (obj)
+	if (pdf_is_array(ctx, obj))
 		uri = pdf_parse_link_dest(ctx, doc, obj);
 	else
 	{
 		action = pdf_dict_get(ctx, dict, PDF_NAME(A));
 		/* fall back to additional action button's down/up action */
-		if (!action)
+		if (!pdf_is_dict(ctx, action))
 			action = pdf_dict_geta(ctx, pdf_dict_get(ctx, dict, PDF_NAME(AA)), PDF_NAME(U), PDF_NAME(D));
 		uri = pdf_parse_link_action(ctx, doc, action, pagenum);
 	}

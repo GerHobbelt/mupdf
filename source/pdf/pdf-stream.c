@@ -168,13 +168,10 @@ build_compression_params(fz_context *ctx, pdf_obj *f, pdf_obj *p, fz_compression
 		params->type = FZ_IMAGE_JBIG2;
 		params->u.jbig2.globals = NULL;
 		params->u.jbig2.embedded = 1; /* jbig2 streams are always embedded without file headers */
-		if (g)
-		{
-			if (!pdf_is_stream(ctx, g))
-				fz_warn(ctx, "jbig2 globals is not a stream, skipping globals");
-			else
-				params->u.jbig2.globals = pdf_load_jbig2_globals(ctx, g);
-		}
+		if (pdf_is_stream(ctx, g))
+			params->u.jbig2.globals = pdf_load_jbig2_globals(ctx, g);
+		else if (!pdf_is_null(ctx, g))
+			fz_warn(ctx, "jbig2 globals is not a stream, skipping globals");
 	}
 }
 

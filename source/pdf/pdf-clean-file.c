@@ -102,7 +102,7 @@ static int strip_stale_annot_refs(fz_context *ctx, pdf_obj *field, int page_coun
 	int len = pdf_array_len(ctx, kids);
 	int j;
 
-	if (kids)
+	if (pdf_is_array(ctx, kids))
 	{
 		for (j = 0; j < len; j++)
 		{
@@ -156,10 +156,10 @@ static int strip_outline(fz_context *ctx, pdf_document *doc, pdf_obj *outlines, 
 				if (!pdf_is_dict(ctx, next))
 				{
 					/* There is no next one to pull in */
-					if (prev != NULL)
+					if (pdf_is_dict(ctx, prev))
 						pdf_dict_del(ctx, prev, PDF_NAME(Next));
 				}
-				else if (prev != NULL)
+				else if (pdf_is_dict(ctx, prev))
 				{
 					pdf_dict_put(ctx, prev, PDF_NAME(Next), next);
 					pdf_dict_put(ctx, next, PDF_NAME(Prev), prev);
@@ -271,9 +271,9 @@ static void pdf_rearrange_pages_imp(fz_context *ctx, pdf_document *doc, int coun
 		root = pdf_new_dict(ctx, doc, 3);
 		pdf_dict_put(ctx, root, PDF_NAME(Type), pdf_dict_get(ctx, oldroot, PDF_NAME(Type)));
 		pdf_dict_put(ctx, root, PDF_NAME(Pages), pdf_dict_get(ctx, oldroot, PDF_NAME(Pages)));
-		if (outlines)
+		if (pdf_is_dict(ctx, outlines))
 			pdf_dict_put(ctx, root, PDF_NAME(Outlines), outlines);
-		if (ocproperties)
+		if (pdf_is_dict(ctx, ocproperties))
 			pdf_dict_put(ctx, root, PDF_NAME(OCProperties), ocproperties);
 
 		pdf_update_object(ctx, doc, pdf_to_num(ctx, oldroot), root);
@@ -316,7 +316,7 @@ static void pdf_rearrange_pages_imp(fz_context *ctx, pdf_document *doc, int coun
 				pdf_obj *val = pdf_dict_get_val(ctx, olddests, i);
 				pdf_obj *dest = pdf_dict_get(ctx, val, PDF_NAME(D));
 
-				dest = pdf_array_get(ctx, dest ? dest : val, 0);
+				dest = pdf_array_get(ctx, pdf_is_array(ctx, dest) ? dest : val, 0);
 				if (dest_is_valid_page(ctx, dest, page_object_nums, pagecount))
 				{
 					pdf_array_push_string(ctx, names_list, pdf_to_name(ctx, key), strlen(pdf_to_name(ctx, key)));
@@ -380,7 +380,7 @@ static void pdf_rearrange_pages_imp(fz_context *ctx, pdf_document *doc, int coun
 		{
 			pdf_obj *f = pdf_array_get(ctx, allfields, i);
 
-			while (pdf_dict_get(ctx, f, PDF_NAME(Parent)))
+			while (pdf_is_dict(ctx, pdf_dict_get(ctx, f, PDF_NAME(Parent))))
 				f = pdf_dict_get(ctx, f, PDF_NAME(Parent));
 
 			strip_stale_annot_refs(ctx, f, pagecount, page_object_nums);
