@@ -1638,11 +1638,15 @@ static void preloadobjstms(fz_context *ctx, pdf_document *doc)
 	pdf_obj *obj;
 	int num;
 	pdf_xref_entry *x = NULL;
+	int load = 1;
 
 	/* If we have attempted a repair, then everything will have been
 	 * loaded already. */
 	if (doc->repair_attempted)
-		return;
+	{
+		/* Bug 707112: But we do need to mark all our 'o' objects as being something else. */
+		load = 0;
+	}
 
 	fz_var(num);
 	fz_var(x);
@@ -1657,8 +1661,11 @@ static void preloadobjstms(fz_context *ctx, pdf_document *doc)
 				x = pdf_get_xref_entry_no_null(ctx, doc, num);
 				if (x->type == 'o')
 				{
-					obj = pdf_load_object(ctx, doc, num);
-					pdf_drop_obj(ctx, obj);
+					if (load)
+					{
+						obj = pdf_load_object(ctx, doc, num);
+						pdf_drop_obj(ctx, obj);
+					}
 					/* The object is no longer an objstm one. It's a regular object
 					 * held in memory. Previously we used gen to hold the index of
 					 * the obj in the objstm, so reset this to 0. */
@@ -2525,7 +2532,7 @@ dowriteobject(fz_context *ctx, pdf_document *doc, pdf_write_state *opts, int num
 	if (opts->do_garbage && !opts->use_list[num])
 		return;
 
-	if (entry->type == 'o')
+	if (entry->type == 'o' && (!opts->do_incremental || pdf_xref_is_incremental(ctx, doc, num)))
 	{
 		assert(opts->do_use_objstms);
 		opts->ofs_list[num] = entry->ofs;
