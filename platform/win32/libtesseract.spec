@@ -11,4 +11,7 @@ also-ignore:
 	/test/testing/
 	/unittest/
 	googletest/
-	
+
+
+directories:
+	../../scripts/tesseract/

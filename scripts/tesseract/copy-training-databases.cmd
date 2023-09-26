@@ -28,7 +28,7 @@ rem robocopy /S /XO /XJF /R:0 /NP %1\..\..\thirdparty\tessdata_best\ %2\tessdata
 mklink /H tessdata_best    %1\..\..\thirdparty\tessdata_best\ 
 mklink /H tessdata_fast    %1\..\..\thirdparty\tessdata_fast\ 
 mklink /H tessdata_regular %1\..\..\thirdparty\tessdata\ 
-mklink /H tessdata         %1\..\..\thirdparty\tessdata_fast\ 
+mklink /H tessdata         %1\..\..\thirdparty\tessdata\ 
 
 IF EXIST "tessdata" IF EXIST "tessdata_regular" IF EXIST "tessdata_fast" IF EXIST "tessdata_best" goto ende
 
@@ -36,7 +36,7 @@ echo "Create Junctions instead (hardlinking apparently failed)..."
 mklink /J tessdata_best    %1\..\..\thirdparty\tessdata_best\ 
 mklink /J tessdata_fast    %1\..\..\thirdparty\tessdata_fast\ 
 mklink /J tessdata_regular %1\..\..\thirdparty\tessdata\ 
-mklink /J tessdata         %1\..\..\thirdparty\tessdata_fast\ 
+mklink /J tessdata         %1\..\..\thirdparty\tessdata\ 
 
 goto ende
 

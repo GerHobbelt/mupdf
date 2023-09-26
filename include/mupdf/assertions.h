@@ -106,7 +106,7 @@ int fz_report_failed_assertion(fz_context *ctx, const char *expression, const ch
 int fz_report_failed_assertion_and_continue(fz_context *ctx, const char *expression, const char *srcfile, int srcline);
 void fz_check_and_report_failed_assertion_and_continue(fz_context *ctx, int expr1, int expr2, const char *expr1_str, const char *expr2_str, const char *srcfile, int srcline, int contin);
 
-#else
+#else    // NO_ASSERTIONS
 
 #pragma message("You are compiling a binary with assertions removed. Be aware that this MAY only be a good thing for high quality, previously tested, production binaries that must produce the highest possible throughput. Cave canem!")
 
@@ -151,7 +151,7 @@ void fz_check_and_report_failed_assertion_and_continue(fz_context *ctx, int expr
 #define ASSERT_EQ0(expr1, expr2) 															\
             ((void)0)
 
-#endif
+#endif     // NO_ASSERTIONS
 
 #ifdef __cplusplus
 }

@@ -171,6 +171,17 @@ if (fs.existsSync(specPath)) {
     .filter((line) => line.trim().length > 0);
   }
 
+  if (/^extra-sources:/m.test(rawSpec)) {
+    if (DEBUG > 0) console.log("SPEC include [extra-sources] section...");
+    let a = rawSpec.replace(/^.*\nextra-sources:(.*?)\n(?:[^\s].*)?$/s, '$1')
+    .replace(/\\/g, '/')
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line.trim().length > 0);
+    
+    spec.sources = spec.sources.concat(a);
+  }
+
   if (/^directories:/m.test(rawSpec)) {
     if (DEBUG > 0) console.log("SPEC include [directories] section...");
     let a = rawSpec.replace(/^.*\ndirectories:(.*?)\n(?:[^\s].*)?$/s, '$1')
