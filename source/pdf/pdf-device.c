@@ -469,7 +469,7 @@ pdf_dev_font(fz_context *ctx, pdf_device *pdev, fz_font *font, fz_matrix trm)
 
 	if (font->flags.is_base14)
 		gs->font = pdf_dev_add_base14_font_res(ctx, pdev, font);
-	else if (fz_font_flags(font)->ft_substitute || !pdf_font_writing_supported(font))
+	else if (fz_font_flags(font)->ft_substitute || !pdf_font_writing_supported(ctx, font))
 		gs->font = pdf_dev_add_substitute_font_res(ctx, pdev, font);
 	else
 		gs->font = pdf_dev_add_embedded_font_res(ctx, pdev, font);

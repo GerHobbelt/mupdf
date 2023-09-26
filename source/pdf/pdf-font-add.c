@@ -38,13 +38,16 @@
 #define FT_SFNT_HEAD ft_sfnt_head
 #endif
 
-static int ft_font_file_kind(FT_Face face)
+static int ft_font_file_kind(fz_context *ctx, FT_Face face)
 {
+	const char *kind;
+	fz_ft_lock(ctx);
 #ifdef FT_FONT_FORMATS_H
-	const char *kind = FT_Get_Font_Format(face);
+	kind = FT_Get_Font_Format(face);
 #else
-	const char *kind = FT_Get_X11_Font_Format(face);
+	kind = FT_Get_X11_Font_Format(face);
 #endif
+	fz_ft_unlock(ctx);
 	if (!strcmp(kind, "TrueType")) return 2;
 	if (!strcmp(kind, "Type 1")) return 1;
 	if (!strcmp(kind, "CFF")) return 3;
@@ -59,14 +62,14 @@ static int is_ttc(fz_font *font)
 	return !memcmp(font->buffer->data, "ttcf", 4);
 }
 
-static int is_truetype(FT_Face face)
+static int is_truetype(fz_context *ctx, FT_Face face)
 {
-	return ft_font_file_kind(face) == 2;
+	return ft_font_file_kind(ctx, face) == 2;
 }
 
-static int is_postscript(FT_Face face)
+static int is_postscript(fz_context *ctx, FT_Face face)
 {
-	int kind = ft_font_file_kind(face);
+	int kind = ft_font_file_kind(ctx, face);
 	return (kind == 1 || kind == 3);
 }
 
@@ -105,9 +108,10 @@ pdf_add_font_file(fz_context *ctx, pdf_document *doc, fz_font *font)
 	fz_try(ctx)
 	{
 		size_t len = fz_buffer_storage(ctx, buf, NULL);
+		int is_opentype;
 		obj = pdf_new_dict(ctx, doc, 3);
 		pdf_dict_put_int(ctx, obj, PDF_NAME(Length1), (int)len);
-		switch (ft_font_file_kind(font->ft_face))
+		switch (ft_font_file_kind(ctx, font->ft_face))
 		{
 		case 1:
 			/* TODO: these may not be the correct values, but I doubt it matters */
@@ -117,7 +121,10 @@ pdf_add_font_file(fz_context *ctx, pdf_document *doc, fz_font *font)
 		case 2:
 			break;
 		case 3:
-			if (FT_Get_Sfnt_Table(font->ft_face, FT_SFNT_HEAD))
+			fz_ft_lock(ctx);
+			is_opentype = !!FT_Get_Sfnt_Table(font->ft_face, FT_SFNT_HEAD);
+			fz_ft_unlock(ctx);
+			if (is_opentype)
 				pdf_dict_put(ctx, obj, PDF_NAME(Subtype), PDF_NAME(OpenType));
 			else
 				pdf_dict_put(ctx, obj, PDF_NAME(Subtype), PDF_NAME(CIDFontType0C));
@@ -169,7 +176,7 @@ pdf_add_font_descriptor(fz_context *ctx, pdf_document *doc, pdf_obj *fobj, fz_fo
 		fileref = pdf_add_font_file(ctx, doc, font);
 		if (fileref)
 		{
-			switch (ft_font_file_kind(face))
+			switch (ft_font_file_kind(ctx, face))
 			{
 			default:
 			case 1: pdf_dict_put_drop(ctx, fdobj, PDF_NAME(FontFile), fileref); break;
@@ -376,14 +383,16 @@ pdf_add_descendant_cid_font(fz_context *ctx, pdf_document *doc, fz_font *font)
 	fz_try(ctx)
 	{
 		pdf_dict_put(ctx, fobj, PDF_NAME(Type), PDF_NAME(Font));
-		if (is_truetype(face))
+		if (is_truetype(ctx, face))
 			pdf_dict_put(ctx, fobj, PDF_NAME(Subtype), PDF_NAME(CIDFontType2));
 		else
 			pdf_dict_put(ctx, fobj, PDF_NAME(Subtype), PDF_NAME(CIDFontType0));
 
 		pdf_add_cid_system_info(ctx, doc, fobj, "Adobe", "Identity", 0);
 
+		fz_ft_lock(ctx);
 		ps_name = FT_Get_Postscript_Name(face);
+		fz_ft_unlock(ctx);
 		if (ps_name)
 			pdf_dict_put_name(ctx, fobj, PDF_NAME(BaseFont), ps_name);
 		else
@@ -434,7 +443,7 @@ pdf_add_to_unicode(fz_context *ctx, pdf_document *doc, pdf_obj *fobj, fz_font *f
 		FT_UInt gid;
 
 		table = fz_calloc(ctx, face->num_glyphs, sizeof *table);
-		fz_lock(ctx, FZ_LOCK_FREETYPE);
+		fz_ft_lock(ctx);
 		ucs = FT_Get_First_Char(face, &gid);
 		while (gid > 0)
 		{
@@ -442,7 +451,7 @@ pdf_add_to_unicode(fz_context *ctx, pdf_document *doc, pdf_obj *fobj, fz_font *f
 				table[gid] = ucs;
 			ucs = FT_Get_Next_Char(face, ucs, &gid);
 		}
-		fz_unlock(ctx, FZ_LOCK_FREETYPE);
+		fz_ft_unlock(ctx);
 	}
 
 	for (k = 0; k < face->num_glyphs; k += n)
@@ -674,14 +683,17 @@ pdf_add_simple_font(fz_context *ctx, pdf_document *doc, fz_font *font, int encod
 	fz_try(ctx)
 	{
 		pdf_dict_put(ctx, fobj, PDF_NAME(Type), PDF_NAME(Font));
-		if (is_truetype(face))
+		if (is_truetype(ctx, face))
 			pdf_dict_put(ctx, fobj, PDF_NAME(Subtype), PDF_NAME(TrueType));
 		else
 			pdf_dict_put(ctx, fobj, PDF_NAME(Subtype), PDF_NAME(Type1));
 
 		if (!is_builtin_font(ctx, font))
 		{
-			const char *ps_name = FT_Get_Postscript_Name(face);
+			const char *ps_name;
+			fz_ft_lock(ctx);
+			ps_name = FT_Get_Postscript_Name(face);
+			fz_ft_unlock(ctx);
 			if (!ps_name)
 				ps_name = font->name;
 			pdf_dict_put_name(ctx, fobj, PDF_NAME(BaseFont), ps_name);
@@ -708,15 +720,15 @@ pdf_add_simple_font(fz_context *ctx, pdf_document *doc, fz_font *font, int encod
 }
 
 int
-pdf_font_writing_supported(fz_font *font)
+pdf_font_writing_supported(fz_context *ctx, fz_font *font)
 {
 	if (font->ft_face == NULL || font->buffer == NULL || font->buffer->len < 4 || !font->flags.embed || font->flags.never_embed)
 		return 0;
 	if (is_ttc(font))
 		return 1;
-	if (is_truetype(font->ft_face))
+	if (is_truetype(ctx, font->ft_face))
 		return 1;
-	if (is_postscript(font->ft_face))
+	if (is_postscript(ctx, font->ft_face))
 		return 1;
 	return 0;
 }
