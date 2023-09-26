@@ -9686,6 +9686,26 @@ static void ffi_PDFAnnotation_setStampImage(js_State *J)
 		rethrow(J);
 }
 
+static void ffi_PDFAnnotation_requestResynthesis(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_annot *annot = ffi_toannot(J, 0);
+	fz_try(ctx)
+		pdf_annot_request_resynthesis(ctx, annot);
+	fz_catch(ctx)
+		rethrow(J);
+}
+
+static void ffi_PDFAnnotation_requestSynthesis(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	pdf_annot *annot = ffi_toannot(J, 0);
+	fz_try(ctx)
+		pdf_annot_request_synthesis(ctx, annot);
+	fz_catch(ctx)
+		rethrow(J);
+}
+
 static void ffi_PDFAnnotation_update(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
@@ -11118,6 +11138,8 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "PDFAnnotation.clearVertices", ffi_PDFAnnotation_clearVertices, 0);
 		jsB_propfun(J, "PDFAnnotation.addVertex", ffi_PDFAnnotation_addVertex, 3);
 
+		jsB_propfun(J, "PDFAnnotation.requestSynthesis", ffi_PDFAnnotation_requestSynthesis, 0);
+		jsB_propfun(J, "PDFAnnotation.requestResynthesis", ffi_PDFAnnotation_requestResynthesis, 0);
 		jsB_propfun(J, "PDFAnnotation.update", ffi_PDFAnnotation_update, 0);
 
 		jsB_propfun(J, "PDFAnnotation.getHot", ffi_PDFAnnotation_getHot, 0);
