@@ -133,7 +133,7 @@ static fz_context *get_opj_context(void)
 
 void opj_lock(fz_context *ctx)
 {
-	fz_ft_lock(ctx);
+	fz_lock(ctx, FZ_LOCK_JPX);
 
 	set_opj_context(ctx);
 }
@@ -142,7 +142,7 @@ void opj_unlock(fz_context *ctx)
 {
 	set_opj_context(NULL);
 
-	fz_ft_unlock(ctx);
+	fz_unlock(ctx, FZ_LOCK_JPX);
 }
 
 void *opj_malloc(size_t size)
