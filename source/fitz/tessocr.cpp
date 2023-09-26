@@ -455,7 +455,20 @@ static void lept_stderr_print(const char *msg)
 	fz_context *ctx = fz_get_global_context();
 
 	//fz_write_string(ctx, fz_stderr(ctx), msg);
-	fz_error(ctx, "ERROR: %s", msg);
+
+	if (strncmp(msg, "Error in ", 9) == 0) {
+		fz_error(ctx, "ERROR: Leptonica::%s", msg + 9);
+		return;
+	}
+	if (strncmp(msg, "Warning in ", 11) == 0) {
+		fz_warn(ctx, "WARN: Leptonica::%s", msg + 11);
+		return;
+	}
+	if (strncmp(msg, "Info in ", 8) == 0) {
+		fz_info(ctx, "INFO: Leptonica::%s", msg + 8);
+		return;
+	}
+	fz_error(ctx, "Leptonica::%s", msg);
 }
 
 
