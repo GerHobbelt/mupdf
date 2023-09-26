@@ -220,8 +220,12 @@
 #define FZ_ENABLE_GAMMA 1
 #endif
 
+#ifndef FZ_ENABLE_RENDER_CORE 
+#define FZ_ENABLE_RENDER_CORE 1
+#endif
+
 #ifndef FZ_ENABLE_PDF
-#define FZ_ENABLE_PDF 1
+#define FZ_ENABLE_PDF FZ_ENABLE_RENDER_CORE
 #endif /* FZ_ENABLE_PDF */
 
 #ifndef FZ_ENABLE_XPS
@@ -290,10 +294,6 @@
 
 #ifndef FZ_ENABLE_OCR
 #define FZ_ENABLE_OCR 1
-#endif
-
-#ifndef FZ_ENABLE_RENDER_CORE 
-#define FZ_ENABLE_RENDER_CORE 1
 #endif
 
 /* If Epub and HTML are both disabled, disable SIL fonts */

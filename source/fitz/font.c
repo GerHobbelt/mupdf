@@ -360,24 +360,34 @@ static void *ft_realloc(FT_Memory memory, long cur_size, long new_size, void *bl
 	return fz_realloc_no_throw(ctx, block, new_size);
 }
 
+#endif // FZ_ENABLE_RENDER_CORE 
+
+
 void
 fz_ft_lock(fz_context *ctx)
 {
 	fz_lock(ctx, FZ_LOCK_FREETYPE);
+#if FZ_ENABLE_RENDER_CORE 
 	fz_lock(ctx, FZ_LOCK_ALLOC);
 	assert(ctx->font->ftmemory.user == NULL);
 	ctx->font->ftmemory.user = ctx;
 	fz_unlock(ctx, FZ_LOCK_ALLOC);
+#endif
 }
 
 void
 fz_ft_unlock(fz_context *ctx)
 {
+#if FZ_ENABLE_RENDER_CORE 
 	fz_lock(ctx, FZ_LOCK_ALLOC);
 	ctx->font->ftmemory.user = NULL;
 	fz_unlock(ctx, FZ_LOCK_ALLOC);
+#endif
 	fz_unlock(ctx, FZ_LOCK_FREETYPE);
 }
+
+
+#if FZ_ENABLE_RENDER_CORE 
 
 int
 fz_ft_lock_held(fz_context *ctx)
