@@ -104,6 +104,7 @@ static struct tool_spec {
 	{ {.fa = pdfrecolor_main }, "recolor", "change colorspace of pdf document" },
 	{ {.fa = pdfsign_main }, "sign", "manipulate PDF digital signatures" },
 	{ {.fa = pdftrim_main }, "trim", "trim PDF page contents" },
+	{ {.fa = pdfbake_main }, "bake", "bake PDF form into static content" },
 	{ {.fa = pdftagged_main }, "tagged", "extract Tagged PDF content" },
 #endif
 #endif

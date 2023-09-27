@@ -24,6 +24,7 @@
 
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
+#include "mupdf/mutool.h"
 
 #include <stdio.h>
 #include <stdlib.h>

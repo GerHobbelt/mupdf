@@ -6,7 +6,6 @@
  * Derived from the pdfinfo tool.
  */
 
-
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
