@@ -839,6 +839,7 @@ OpenEXR
 Imath
 LSWMS
 getopt
+itpp
 
 libboost-context
 libboost-coroutine
