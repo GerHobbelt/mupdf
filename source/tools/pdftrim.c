@@ -189,7 +189,7 @@ int pdftrim_main(int argc, const char** argv)
 	const char *colorspace = NULL;
 	int exclude = 0;
 	const char *boxname = NULL;
-	fz_box_type box = FZ_MEDIA_BOX;
+	fz_box_type box = FZ_CROP_BOX;
 	int fallback = 0;
 	float margins[4] = { 0 };
 	int c;
