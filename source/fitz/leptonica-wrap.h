@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2021 Artifex Software, Inc.
+// Copyright (C) 2020-2023 Artifex Software, Inc.
 //
 // This file is part of MuPDF.
 //
@@ -20,47 +20,20 @@
 // Artifex Software, Inc., 39 Mesa Street, Suite 108A, San Francisco,
 // CA 94129, USA, for further information.
 
-#ifndef TESSOCR_H
-#define TESSOCR_H
+#ifndef MUPDF_FITZ_LEPTONICA_WRAP_H
+#define MUPDF_FITZ_LEPTONICA_WRAP_H
 
-#include "mupdf/fitz.h"
+#include "mupdf/fitz/context.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void *ocr_init(fz_context *ctx, const char *language, const char *datadir);
+void fz_set_leptonica_mem(fz_context *ctx);
 
-void ocr_fin(fz_context *ctx, void *api);
+void fz_clear_leptonica_mem(fz_context *ctx);
 
-void ocr_recognise(fz_context *ctx,
-		void *api,
-		fz_pixmap *pix,
-		void (*callback)(fz_context *ctx,
-				void *arg,
-				int unicode,
-				const char *font_name,
-				const int *line_bbox,
-				const int *word_bbox,
-				const int *char_bbox,
-				int pointsize),
-		int (*progress)(fz_context *ctx,
-				void *arg,
-				int progress),
-		void *arg);
-
-// --------
-
-#if defined(BUILD_MONOLITHIC)
-int tesseract_tool_main(int argc, const char** argv);
-int tesseract_get_page_gradient_main(int argc, const char** argv);
-int tesseract_svpaint_main(int argc, const char** argv);
-int tesseract_test_issue_845_main(int argc, const char **argv);
-int tesseract_test_issue_ML_1bba6c_main(int argc, const char **argv);
-
-#include "../../thirdparty/tesseract/include/tesseract/capi_training_tools.h"
-
-#endif
+fz_context *get_leptonica_ctx(void);
 
 #ifdef __cplusplus
 }

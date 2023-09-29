@@ -27,9 +27,11 @@
 extern "C" {
 #endif
 
-#if !defined(NO_ASSERTIONS)
-
+// forward definition as we cannot include context.h in this header file: it would cause a loop and compiler havoc would ensue.
+struct fz_context;
 typedef struct fz_context fz_context;
+
+#if !defined(NO_ASSERTIONS)
 
 #ifndef CTX
 #define CTX   ctx

@@ -912,7 +912,7 @@ static void mu_drop_context(void)
         ASSERT_AND_CONTINUE(fz_has_global_context());
         ctx = fz_get_global_context();
 
-		ocr_clear_leptonica_mem(ctx);
+		fz_clear_leptonica_mem(ctx);
 
         fz_drop_context_locks(ctx);
     }
@@ -1059,9 +1059,7 @@ int mutool_main(int argc, const char** argv)
 		// register a mupdf-aligned default heap memory manager for jpeg/jpeg-turbo
 		fz_set_default_jpeg_sys_mem_mgr();
 
-		ocr_set_leptonica_mem(ctx);
-
-		ocr_set_leptonica_stderr_handler(ctx);
+		fz_set_leptonica_mem(ctx);
 	}
 
 	atexit(mu_drop_context);
