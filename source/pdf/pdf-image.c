@@ -604,7 +604,7 @@ pdf_add_image(fz_context *ctx, pdf_document *doc, fz_image *image)
 			case FZ_IMAGE_JBIG2:
 				if (cp->u.jbig2.globals)
 				{
-					pdf_obj *globals_ref = pdf_add_object_drop(ctx, doc, pdf_new_dict(ctx, doc, 1));
+					pdf_obj *globals_ref = pdf_add_new_dict(ctx, doc, 1);
 					pdf_update_stream(ctx, doc, globals_ref, fz_jbig2_globals_data(ctx, cp->u.jbig2.globals), 0);
 					pdf_dict_put(ctx, dp, PDF_NAME(JBIG2Globals), globals_ref);
 				}
