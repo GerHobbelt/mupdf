@@ -7,4 +7,6 @@ also-ignore:
 	/port/
 	/test/
 	/tools/
+	tif_win32_versioninfo.rc
+	test.c
 	
