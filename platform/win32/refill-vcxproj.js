@@ -258,6 +258,9 @@ const projectMap = {
 	//"libpthread-win32-JMP": "pthread-win32",
 	
 	"sqlite_tools": "sqlite-amalgamation",
+
+	"protobuf_compiler": "protobuf",
+	"libprotobuf_conformance": "protobuf",
 };
 
 for (const key in projectMap) {

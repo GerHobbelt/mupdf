@@ -182,6 +182,15 @@ if (fs.existsSync(specPath)) {
     spec.sources = spec.sources.concat(a);
   }
 
+  if (/^only-directories:/m.test(rawSpec)) {
+    if (DEBUG > 0) console.log("SPEC include [only-directories] section...");
+    spec.directories = rawSpec.replace(/^.*\nonly-directories:(.*?)\n(?:[^\s].*)?$/s, '$1')
+    .replace(/\\/g, '/')
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line.trim().length > 0);
+  }
+
   if (/^directories:/m.test(rawSpec)) {
     if (DEBUG > 0) console.log("SPEC include [directories] section...");
     let a = rawSpec.replace(/^.*\ndirectories:(.*?)\n(?:[^\s].*)?$/s, '$1')

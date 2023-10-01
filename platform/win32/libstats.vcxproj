@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libstats</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF4A35F4}</ProjectGuid>
+    <RootNamespace>libstats</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTATS;STATS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTATS;STATS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTATS;STATS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTATS;STATS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTATS;STATS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTATS;STATS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTATS;STATS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTATS;STATS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTATS;STATS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTATS;STATS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTATS;STATS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTATS;STATS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/dens/dbern.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/dens/dbeta.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/dens/dbinom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/dens/dcauchy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/dens/dchisq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/dens/dexp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/dens/df.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/dens/dgamma.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/dens/dinvgamma.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/dens/dinvgauss.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/dens/dinvwish.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/dens/dlaplace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/dens/dlnorm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/dens/dlogis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/dens/dmvnorm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/dens/dnorm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/dens/dpois.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/dens/dradem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/dens/dt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/dens/dunif.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/dens/dweibull.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/dens/dwish.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/dens/no_arma_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/prob/pbern.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/prob/pbeta.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/prob/pbinom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/prob/pcauchy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/prob/pchisq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/prob/pexp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/prob/pf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/prob/pgamma.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/prob/pinvgamma.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/prob/pinvgauss.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/prob/plaplace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/prob/plnorm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/prob/plogis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/prob/pnorm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/prob/ppois.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/prob/pradem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/prob/pt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/prob/punif.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/prob/pweibull.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/quant/qbern.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/quant/qbeta.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/quant/qbinom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/quant/qcauchy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/quant/qchisq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/quant/qexp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/quant/qf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/quant/qgamma.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/quant/qinvgamma.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/quant/qinvgauss.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/quant/qlaplace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/quant/qlnorm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/quant/qlogis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/quant/qnorm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/quant/qpois.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/quant/qradem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/quant/qt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/quant/qunif.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/quant/qweibull.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/rand/rbern.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/rand/rbeta.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/rand/rbinom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/rand/rcauchy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/rand/rchisq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/rand/rexp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/rand/rf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/rand/rgamma.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/rand/rinvgamma.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/rand/rinvgauss.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/rand/rinvwish.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/rand/rlaplace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/rand/rlnorm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/rand/rlogis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/rand/rmultinom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/rand/rmvnorm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/rand/rnorm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/rand/rpois.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/rand/rradem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/rand/rt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/rand/runif.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/rand/rweibull.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stats/tests/rand/rwish.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/dens/dbern.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/dens/dbeta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/dens/dbinom.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/dens/dcauchy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/dens/dchisq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/dens/dens.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/dens/dexp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/dens/df.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/dens/dgamma.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/dens/dinvgamma.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/dens/dinvgauss.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/dens/dinvwish.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/dens/dlaplace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/dens/dlnorm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/dens/dlogis.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/dens/dmvnorm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/dens/dnorm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/dens/dpois.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/dens/dradem.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/dens/dt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/dens/dunif.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/dens/dweibull.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/dens/dwish.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/internal_fns/exp_if.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/internal_fns/internal_fns.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/internal_fns/log_if.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/internal_fns/seed_values.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/internal_fns/statslib_defs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/accu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/cerr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/chol.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/cout.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/cumsum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/det.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/exp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/eye.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/fill.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/get_mem_ptr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/get_row.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/inv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/log.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/log_det.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/matrix_ops.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/mean.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/n_cols.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/n_elem.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/n_rows.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/quad_form.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/repmat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/resize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/solve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/spacing.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/sum_absdiff.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/trace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/trans.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/var.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/matrix_ops/zeros.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/misc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/sanity_checks/bern.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/sanity_checks/beta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/sanity_checks/binom.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/sanity_checks/cauchy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/sanity_checks/chisq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/sanity_checks/exp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/sanity_checks/f.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/sanity_checks/gamma.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/sanity_checks/invgamma.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/sanity_checks/invgauss.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/sanity_checks/laplace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/sanity_checks/lnorm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/sanity_checks/logis.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/sanity_checks/norm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/sanity_checks/pois.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/sanity_checks/prob_val.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/sanity_checks/radem.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/sanity_checks/sanity_checks.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/sanity_checks/t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/sanity_checks/unif.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/sanity_checks/weibull.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/misc/statslib_options.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/prob/pbern.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/prob/pbeta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/prob/pbinom.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/prob/pcauchy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/prob/pchisq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/prob/pexp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/prob/pf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/prob/pgamma.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/prob/pinvgamma.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/prob/pinvgauss.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/prob/plaplace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/prob/plnorm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/prob/plogis.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/prob/pnorm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/prob/ppois.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/prob/pradem.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/prob/prob.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/prob/pt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/prob/punif.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/prob/pweibull.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/quant/qbern.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/quant/qbeta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/quant/qbinom.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/quant/qcauchy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/quant/qchisq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/quant/qexp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/quant/qf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/quant/qgamma.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/quant/qinvgamma.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/quant/qinvgauss.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/quant/qlaplace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/quant/qlnorm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/quant/qlogis.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/quant/qnorm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/quant/qpois.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/quant/qradem.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/quant/qt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/quant/quant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/quant/qunif.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/quant/qweibull.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/rand.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/rbern.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/rbeta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/rbinom.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/rcauchy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/rchisq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/rexp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/rf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/rgamma.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/rinvgamma.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/rinvgauss.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/rinvwish.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/rlaplace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/rlnorm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/rlogis.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/rmultinom.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/rmvnorm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/rnorm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/rpois.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/rradem.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/rt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/runif.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/rweibull.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/include/stats_incl/rand/rwish.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stats/tests/stats_tests.hpp" />
+    <Text Include="../../thirdparty/owemdjee/stats/NOTICE.txt" />
+    <Text Include="../../thirdparty/owemdjee/stats/README.md" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/api/bernoulli.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/api/beta.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/api/binomial.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/api/cauchy.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/api/chi-squared.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/api/dist_index.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/api/exponential.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/api/f.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/api/gamma.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/api/inverse-gamma.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/api/inverse-gaussian.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/api/inverse-wishart.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/api/laplace.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/api/log-normal.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/api/logistic.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/api/multivariate-normal.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/api/normal.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/api/poisson.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/api/rademacher.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/api/t.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/api/uniform.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/api/weibull.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/api/wishart.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/compiler_options.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/constexpr_functionality.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/examples_and_tests.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/seeding.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/docs/source/syntax_notes.rst" />
+    <Text Include="../../thirdparty/owemdjee/stats/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/stats/tests/README.md" />
+    <Text Include="../../thirdparty/owemdjee/stats/tests/test_setup/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/stats/tests/test_setup/configure.in" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

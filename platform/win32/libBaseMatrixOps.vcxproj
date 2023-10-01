@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>libbloomfilters</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFD84E99}</ProjectGuid>
-    <RootNamespace>libbloomfilters</RootNamespace>
+    <ProjectName>libBaseMatrixOps</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF4B01AE}</ProjectGuid>
+    <RootNamespace>libBaseMatrixOps</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -116,7 +116,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBASEMATRIXOPS;BASEMATRIXOPS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -126,12 +126,12 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libbloomfilters;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/BaseMatrixOps/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBASEMATRIXOPS;BASEMATRIXOPS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBASEMATRIXOPS;BASEMATRIXOPS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -144,7 +144,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBASEMATRIXOPS;BASEMATRIXOPS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -152,13 +152,13 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libbloomfilters;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/BaseMatrixOps/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBASEMATRIXOPS;BASEMATRIXOPS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBASEMATRIXOPS;BASEMATRIXOPS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -171,7 +171,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBASEMATRIXOPS;BASEMATRIXOPS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -181,12 +181,12 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libbloomfilters;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/BaseMatrixOps/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBASEMATRIXOPS;BASEMATRIXOPS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBASEMATRIXOPS;BASEMATRIXOPS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -199,7 +199,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBASEMATRIXOPS;BASEMATRIXOPS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -207,13 +207,13 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libbloomfilters;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/BaseMatrixOps/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBASEMATRIXOPS;BASEMATRIXOPS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBASEMATRIXOPS;BASEMATRIXOPS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -228,51 +228,72 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/libbloomfilters/src/bitvector.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libbloomfilters/src/bloom_filter/a2.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libbloomfilters/src/bloom_filter/basic.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libbloomfilters/src/bloom_filter/bitwise.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libbloomfilters/src/bloom_filter/counting.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libbloomfilters/src/bloom_filter/stable.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libbloomfilters/src/counter_vector.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libbloomfilters/src/hash.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libbloomfilters/test/bf/bf.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libbloomfilters/test/bf/configuration.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libbloomfilters/test/tests.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/all.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/bitvector.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/bloom_filter.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/bloom_filter/a2.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/bloom_filter/basic.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/bloom_filter/bitwise.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/bloom_filter/counting.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/bloom_filter/stable.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/counter_vector.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/h3.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/hash.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/object.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/wrap.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/test/bf/configuration.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/test/bf/util/configuration.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/test/bf/util/error.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/test/bf/util/trial.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/test/test.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/test/unit_test.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/test/unit_test_impl.hpp" />
-    <Image Include="../../thirdparty/owemdjee/libbloomfilters/doc/figs/architecture.png" />
-    <Image Include="../../thirdparty/owemdjee/libbloomfilters/doc/figs/bf-basic-part.png" />
-    <Image Include="../../thirdparty/owemdjee/libbloomfilters/doc/figs/bf-basic.png" />
-    <Image Include="../../thirdparty/owemdjee/libbloomfilters/doc/figs/bf-bitwise.png" />
-    <Image Include="../../thirdparty/owemdjee/libbloomfilters/doc/figs/bf-counting.png" />
-    <Image Include="../../thirdparty/owemdjee/libbloomfilters/doc/figs/bf-scalable.png" />
-    <Image Include="../../thirdparty/owemdjee/libbloomfilters/doc/figs/shrinking.png" />
-    <Image Include="../../thirdparty/owemdjee/libbloomfilters/doc/figs/sliding-window.png" />
-    <Image Include="../../thirdparty/owemdjee/libbloomfilters/doc/figs/spectral-rm-bug.png" />
-    <Text Include="../../thirdparty/owemdjee/libbloomfilters/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libbloomfilters/README.md" />
-    <Text Include="../../thirdparty/owemdjee/libbloomfilters/cmake/cmake_uninstall.cmake.in" />
-    <Text Include="../../thirdparty/owemdjee/libbloomfilters/test/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libbloomfilters/test/bf/CMakeLists.txt" />
+    <ClCompile Include="../../thirdparty/owemdjee/BaseMatrixOps/tests/cube_type.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BaseMatrixOps/tests/log_vec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BaseMatrixOps/tests/rand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BaseMatrixOps/tests/sort_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/BaseMatrixOps/tests/tess_type.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/BaseMatrixOps.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/abs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/abs_max.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/access.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/accu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/array_add.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/array_div.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/array_mult.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/as_scalar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/bmo_core.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/cholesky.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/constant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/cos.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/cout.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/diagmat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/diagvec.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/dot.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/endl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/eval.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/exp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/eye.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/hadamard.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/inv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/is_finite.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/log.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/log_det.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/max.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/min.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/ncol.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/norm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/ones.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/pow.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/quad_form.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/randi.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/randn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/randu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/set_size.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/set_values.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/size.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/solve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/sort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/sqrt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/sum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/trace.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/transpose.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/core/zeros.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/extra/bmo_extra.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/extra/cube_type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/extra/get_sort_index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/extra/index_min.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/extra/reset_negative_values.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/extra/tesseract_type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/extra/unit_vec.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/misc/bmo_options.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/misc/misc_math.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/stats/bmo_stats.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/stats/rind.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/stats/rnorm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/include/stats/runif.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/BaseMatrixOps/tests/bmo_tests.hpp" />
+    <Text Include="../../thirdparty/owemdjee/BaseMatrixOps/README.md" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

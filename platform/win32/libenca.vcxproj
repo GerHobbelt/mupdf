@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libenca</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF8D4377}</ProjectGuid>
+    <RootNamespace>libenca</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENCA;ENCA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENCA;ENCA_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENCA;ENCA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENCA;ENCA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENCA;ENCA_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENCA;ENCA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENCA;ENCA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENCA;ENCA_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENCA;ENCA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENCA;ENCA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENCA;ENCA_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENCA;ENCA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/enca/data/basetoc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/data/countall.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/data/countpair.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/data/findletters.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/data/mystrings.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/data/pairtoc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/data/xlt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/iconvcap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/ctype.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/enca.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/encnames.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/filters.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/guess.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/lang.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/lang_be.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/lang_bg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/lang_cs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/lang_et.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/lang_hr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/lang_hu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/lang_lt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/lang_lv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/lang_pl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/lang_ru.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/lang_sk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/lang_sl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/lang_uk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/lang_zh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/multibyte.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/pair.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/unicodemap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/lib/utf8_double.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/src/convert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/src/convert_extern.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/src/convert_iconv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/src/convert_recode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/src/enca.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/src/filebuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/src/getopt_long.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/src/locale_detect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/src/options.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/test/simtable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/enca/tools/make_hash.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/enca/data/belarusian/belarusian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enca/data/bulgarian/bulgarian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enca/data/chinese/chinese.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enca/data/chinese/zh_weight_big5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enca/data/chinese/zh_weight_gbk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enca/data/croatian/croatian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enca/data/czech/czech.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enca/data/estonian/estonian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enca/data/hungarian/hungarian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enca/data/latvian/latvian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enca/data/lithuanian/lithuanian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enca/data/polish/polish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enca/data/russian/russian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enca/data/slovak/slovak.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enca/data/slovene/slovene.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enca/data/ukrainian/ukrainian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enca/lib/enca.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enca/lib/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enca/src/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/enca/src/getopt.h" />
+    <Image Include="../../thirdparty/owemdjee/enca/devel-docs/html/home.png" />
+    <Image Include="../../thirdparty/owemdjee/enca/devel-docs/html/left-insensitive.png" />
+    <Image Include="../../thirdparty/owemdjee/enca/devel-docs/html/left.png" />
+    <Image Include="../../thirdparty/owemdjee/enca/devel-docs/html/right-insensitive.png" />
+    <Image Include="../../thirdparty/owemdjee/enca/devel-docs/html/right.png" />
+    <Image Include="../../thirdparty/owemdjee/enca/devel-docs/html/up-insensitive.png" />
+    <Image Include="../../thirdparty/owemdjee/enca/devel-docs/html/up.png" />
+    <Text Include="../../thirdparty/owemdjee/enca/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/enca/ChangeLog.old" />
+    <Text Include="../../thirdparty/owemdjee/enca/ChangeLog.prelib" />
+    <Text Include="../../thirdparty/owemdjee/enca/DEVELOP.md" />
+    <Text Include="../../thirdparty/owemdjee/enca/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/enca/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/enca/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/enca/README" />
+    <Text Include="../../thirdparty/owemdjee/enca/README.md" />
+    <Text Include="../../thirdparty/owemdjee/enca/TODO" />
+    <Text Include="../../thirdparty/owemdjee/enca/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/enca/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/enca/data/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/enca/data/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/enca/data/README" />
+    <Text Include="../../thirdparty/owemdjee/enca/data/belarusian/doit.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/data/bulgarian/doit.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/data/chinese/zh_weight_big5.txt" />
+    <Text Include="../../thirdparty/owemdjee/enca/data/chinese/zh_weight_gb.txt" />
+    <Text Include="../../thirdparty/owemdjee/enca/data/clean.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/data/croatian/doit.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/data/czech/doit.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/data/doit.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/data/estonian/doit.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/data/hungarian/doit.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/data/latvian/doit.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/data/lithuanian/doit.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/data/makepaircounts.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/data/map2letters.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/data/polish/doit.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/data/russian/doit.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/data/slovak/doit.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/data/slovene/doit.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/data/ukrainian/doit.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/devel-docs/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/enca/devel-docs/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/enca/devel-docs/libenca-decl-list.txt" />
+    <Text Include="../../thirdparty/owemdjee/enca/devel-docs/libenca-decl.txt" />
+    <Text Include="../../thirdparty/owemdjee/enca/devel-docs/libenca-overrides.txt" />
+    <Text Include="../../thirdparty/owemdjee/enca/devel-docs/libenca-sections.txt" />
+    <Text Include="../../thirdparty/owemdjee/enca/devel-docs/libenca-undeclared.txt" />
+    <Text Include="../../thirdparty/owemdjee/enca/devel-docs/libenca-undocumented.txt" />
+    <Text Include="../../thirdparty/owemdjee/enca/devel-docs/libenca-unused.txt" />
+    <Text Include="../../thirdparty/owemdjee/enca/enca.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/enca/enca.spec.in" />
+    <Text Include="../../thirdparty/owemdjee/enca/lib/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/enca/lib/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/enca/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/script/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/enca/script/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/enca/script/b-cstocs.in" />
+    <Text Include="../../thirdparty/owemdjee/enca/script/b-map.in" />
+    <Text Include="../../thirdparty/owemdjee/enca/script/b-piconv.in" />
+    <Text Include="../../thirdparty/owemdjee/enca/script/b-umap.in" />
+    <Text Include="../../thirdparty/owemdjee/enca/src/HELP.in" />
+    <Text Include="../../thirdparty/owemdjee/enca/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/enca/src/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/enca/src/text2c.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/dummy-converter.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/failing-converter.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/failing-converter2.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/finish.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/setup.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/test-ENCAOPT.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/test-aliases.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/test-convert-64.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/test-convert-filter.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/test-convlist.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/test-default-cs.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/test-empty.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/test-errors.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/test-external.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/test-guess-short.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/test-guess-stdin.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/test-guess-unknown.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/test-guess-utf8.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/test-iconv.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/test-lists.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/test-locale.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/test-long-texts.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/test-pP.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/test-recode.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/test-simtable.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/test/test-tex.sh" />
+    <Text Include="../../thirdparty/owemdjee/enca/tools/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/enca/tools/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/enca/topline.sh" />
+    <Xml Include="../../thirdparty/owemdjee/enca/devel-docs/xml/analyser.xml" />
+    <Xml Include="../../thirdparty/owemdjee/enca/devel-docs/xml/api-index-1.3..xml" />
+    <Xml Include="../../thirdparty/owemdjee/enca/devel-docs/xml/api-index-deprecated.xml" />
+    <Xml Include="../../thirdparty/owemdjee/enca/devel-docs/xml/api-index-full.xml" />
+    <Xml Include="../../thirdparty/owemdjee/enca/devel-docs/xml/auxiliary.xml" />
+    <Xml Include="../../thirdparty/owemdjee/enca/devel-docs/xml/encodings.xml" />
+    <Xml Include="../../thirdparty/owemdjee/enca/devel-docs/xml/enums.xml" />
+    <Xml Include="../../thirdparty/owemdjee/enca/devel-docs/xml/internal.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

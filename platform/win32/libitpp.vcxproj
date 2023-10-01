@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libitpp</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFDEB955}</ProjectGuid>
+    <RootNamespace>libitpp</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBITPP;ITPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBITPP;ITPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBITPP;ITPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBITPP;ITPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBITPP;ITPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBITPP;ITPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBITPP;ITPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBITPP;ITPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBITPP;ITPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBITPP;ITPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBITPP;ITPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBITPP;ITPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/cmake/Modules/CheckFunctionExists.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/bpsk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/convcode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/dump_it_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/exit_pccc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/interleaver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/ldpc_bersim_awgn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/ldpc_gen_codes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/mimoconv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/mog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/pccc_bersim_awgn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/qpsk_simulation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/rayleigh.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/read_it_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/reedsolomon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/sccc_bersim_awgn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/spread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/stbicm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/turbo_equalizer_bersim_multipath.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/vector_and_matrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/write_it_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/extras/gen_test_itload.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/array_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/audiofile_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/bch_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/bessel_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/blas_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/channel_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/cholesky_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/circular_buffer_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/commfunc_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/convcode_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/converters_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/demapper_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/det_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/eigen_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/error_count_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/exit_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/fastica_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/fastmath_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/filter_design_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/filter_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/fix_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/freq_filt_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/g711_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/galois_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/gf2mat_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/histogram_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/integration_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/interleaver_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/inv_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/itfile_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/ldpc_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/linspace_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/llr_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/ls_solve_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/lu_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/mat_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/matfunc_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/modulator_nd_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/modulator_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/multilateration_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/newton_search_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/operators_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/parser_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/poly_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/pulse_shape_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/qr_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/rand_core_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/rand_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/rec_syst_conv_code_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/reedsolomon_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/schur_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/sigfun_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/siso_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/sort_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/source_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/sparse_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/specmat_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/stat_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/stc_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/svd_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/timer_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/transforms_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/turbo_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/vec_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/gtests/window_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/algebra/cholesky.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/algebra/det.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/algebra/eigen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/algebra/inv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/algebra/ls_solve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/algebra/lu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/algebra/qr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/algebra/schur.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/algebra/svd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/bessel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/bessel/airy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/bessel/chbevl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/bessel/gamma.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/bessel/hyperg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/bessel/i0.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/bessel/i1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/bessel/iv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/bessel/jv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/bessel/k0.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/bessel/k1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/bessel/kn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/bessel/polevl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/bessel/struve.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/binary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/binfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/converters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/copy_vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/fastmath.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/gf2mat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/help_functions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/itassert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/itcompat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/itfile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/mat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/matfunc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/math/elem_math.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/math/error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/math/integration.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/math/log_exp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/math/misc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/math/trig_hyp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/operators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/random.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/smat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/specmat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/svec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/timing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/base/vec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/bch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/channel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/commfunc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/convcode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/crc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/egolay.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/error_counters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/exit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/galois.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/hammcode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/interleave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/ldpc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/llr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/modulator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/modulator_nd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/multilateration.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/ofdm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/pulse_shape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/punct_convcode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/rec_syst_conv_code.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/reedsolomon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/sequence.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/siso_dem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/siso_eq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/siso_mud.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/siso_nsc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/siso_rsc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/spread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/stc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/comm/turbo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/fixed/cfix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/fixed/cfixed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/fixed/fix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/fixed/fix_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/fixed/fix_factory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/fixed/fix_functions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/fixed/fix_operators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/fixed/fixed.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/optim/newton_search.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/protocol/events.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/protocol/front_drop_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/protocol/packet_channel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/protocol/packet_generator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/protocol/selective_repeat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/protocol/tcp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/signal/fastica.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/signal/filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/signal/filter_design.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/signal/freq_filt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/signal/poly.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/signal/resampling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/signal/sigfun.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/signal/source.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/signal/transforms.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/signal/window.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/srccode/audiofile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/srccode/g711.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/srccode/gmm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/srccode/lpcfunc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/srccode/pnm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/srccode/vq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/srccode/vqtrain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/stat/misc_stat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/stat/mog_diag.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/stat/mog_diag_em.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/stat/mog_diag_kmeans.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/itpp/stat/mog_generic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/array_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/bch_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/bessel_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/blas_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/channel_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/cholesky_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/circular_buffer_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/commfunc_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/convcode_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/converters_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/demapper_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/det_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/eigen_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/error_count_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/exit_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/fastica_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/fastmath_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/filter_design_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/filter_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/fix_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/freq_filt_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/galois_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/gf2mat_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/histogram_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/integration_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/interleaver_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/inv_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/itfile_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/ldpc_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/linspace_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/llr_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/ls_solve_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/lu_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/mat_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/matfunc_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/modulator_nd_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/modulator_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/newton_search_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/operators_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/parser_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/poly_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/pulse_shape_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/qr_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/rand_core_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/rand_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/rec_syst_conv_code_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/reedsolomon_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/schur_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/sigfun_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/siso_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/sort_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/source_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/sparse_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/specmat_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/stat_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/stc_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/svd_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/timer_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/transforms_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/turbo_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/vec_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/itpp/tests/window_test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/algebra/cholesky.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/algebra/det.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/algebra/eigen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/algebra/inv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/algebra/lapack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/algebra/ls_solve.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/algebra/lu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/algebra/qr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/algebra/schur.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/algebra/svd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/base_exports.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/bessel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/bessel/bessel_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/binary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/binfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/blas.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/circular_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/converters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/copy_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/fastmath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/gf2mat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/help_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/itassert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/itcompat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/itfile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/ittypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/mat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/matfunc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/math/elem_math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/math/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/math/integration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/math/log_exp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/math/min_max.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/math/misc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/math/trig_hyp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/random_dsfmt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/smat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/sort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/specmat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/svec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/timing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/base/vec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/bch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/channel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/channel_code.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/commfunc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/convcode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/crc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/egolay.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/error_counters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/exit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/galois.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/hammcode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/interleave.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/ldpc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/llr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/modulator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/modulator_nd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/multilateration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/ofdm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/pulse_shape.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/punct_convcode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/rec_syst_conv_code.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/reedsolomon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/sequence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/siso.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/spread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/stc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/comm/turbo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/config_msvc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/fixed/cfix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/fixed/cfixed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/fixed/fix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/fixed/fix_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/fixed/fix_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/fixed/fix_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/fixed/fix_operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/fixed/fixed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/itbase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/itcomm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/itfixed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/itmex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/itoptim.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/itprotocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/itsignal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/itsrccode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/itstat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/optim/newton_search.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/protocol/events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/protocol/front_drop_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/protocol/packet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/protocol/packet_channel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/protocol/packet_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/protocol/selective_repeat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/protocol/signals_slots.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/protocol/tcp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/protocol/tcp_client_server.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/signal/fastica.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/signal/filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/signal/filter_design.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/signal/freq_filt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/signal/poly.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/signal/resampling.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/signal/sigfun.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/signal/source.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/signal/transforms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/signal/window.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/srccode/audiofile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/srccode/audiosample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/srccode/g711.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/srccode/gmm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/srccode/lpcfunc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/srccode/pnm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/srccode/vq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/srccode/vqtrain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/stat/histogram.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/stat/misc_stat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/stat/mog_diag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/stat/mog_diag_em.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/stat/mog_diag_kmeans.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/itpp/itpp/stat/mog_generic.h" />
+    <Image Include="../../thirdparty/owemdjee/itpp/doc/images/favicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/itpp/doc/images/itpp_logga.jpg" />
+    <Image Include="../../thirdparty/owemdjee/itpp/doc/images/itpp_logo.png" />
+    <Text Include="../../thirdparty/owemdjee/itpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/itpp/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/itpp/ChangeLog-2005" />
+    <Text Include="../../thirdparty/owemdjee/itpp/ChangeLog-2006" />
+    <Text Include="../../thirdparty/owemdjee/itpp/ChangeLog-2007" />
+    <Text Include="../../thirdparty/owemdjee/itpp/ChangeLog-2008" />
+    <Text Include="../../thirdparty/owemdjee/itpp/ChangeLog-2009" />
+    <Text Include="../../thirdparty/owemdjee/itpp/ChangeLog-2010" />
+    <Text Include="../../thirdparty/owemdjee/itpp/ChangeLog-2011" />
+    <Text Include="../../thirdparty/owemdjee/itpp/ChangeLog-2012" />
+    <Text Include="../../thirdparty/owemdjee/itpp/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/itpp/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/itpp/README" />
+    <Text Include="../../thirdparty/owemdjee/itpp/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/itpp/cmake/Modules/CheckCXXFunctionExists.cmake" />
+    <Text Include="../../thirdparty/owemdjee/itpp/cmake/Modules/FindBLAS.cmake" />
+    <Text Include="../../thirdparty/owemdjee/itpp/cmake/Modules/FindFFT.cmake" />
+    <Text Include="../../thirdparty/owemdjee/itpp/cmake/Modules/FindLAPACK.cmake" />
+    <Text Include="../../thirdparty/owemdjee/itpp/configure.ac.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/itpp/doc/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/doc/doxygen_html.cfg.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/doc/doxygen_html.cfg.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/doc/images/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/itpp/doc/images/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/doc/local/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/itpp/doc/local/index.doc.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/doc/tutorial/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/itpp/doc/tutorial/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/itpp/doc/tutorial/src/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/extras/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/itpp/extras/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/extras/check_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/itpp/extras/gen_vcproj_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/itpp/extras/html2text.sh" />
+    <Text Include="../../thirdparty/owemdjee/itpp/extras/pyitpp.py" />
+    <Text Include="../../thirdparty/owemdjee/itpp/extras/setenv.bat" />
+    <Text Include="../../thirdparty/owemdjee/itpp/extras/test_pyitpp.py" />
+    <Text Include="../../thirdparty/owemdjee/itpp/extras/txt2man.sh" />
+    <Text Include="../../thirdparty/owemdjee/itpp/gtests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/itpp/gtests/fastica_test_data.txt" />
+    <Text Include="../../thirdparty/owemdjee/itpp/gtests/parser_test_data.txt" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp-config.1.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp-config.1.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp-config.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp.pc.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp.spec.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/base/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/base/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/base/algebra/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/base/algebra/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/base/bessel/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/base/bessel/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/base/math/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/base/math/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/comm/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/comm/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/config.h.cmake" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/fixed/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/fixed/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/itexports.h.cmake" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/optim/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/optim/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/protocol/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/protocol/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/signal/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/signal/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/srccode/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/srccode/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/stat/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp/stat/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/itpp_debug.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/itpp/tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/itpp/tests/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/tests/fastica_test_data.txt" />
+    <Text Include="../../thirdparty/owemdjee/itpp/tests/parser_test_data.txt" />
+    <Text Include="../../thirdparty/owemdjee/itpp/win32/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/itpp/win32/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/win32/itpp_acml_tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/itpp/win32/itpp_acml_tests/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/itpp/win32/itpp_mkl_tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/itpp/win32/itpp_mkl_tests/Makefile.in" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

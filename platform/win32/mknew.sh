@@ -840,6 +840,19 @@ Imath
 LSWMS
 getopt
 itpp
+fontconfig
+protobuf
+fastapprox
+enca
+armadillo
+autodiff
+ensmallen
+gcem
+h5cpp
+kalman-cpp
+optim
+stats
+BaseMatrixOps
 
 libboost-context
 libboost-coroutine

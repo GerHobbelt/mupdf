@@ -1,0 +1,1034 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libprotobuf</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFF80D30}</ProjectGuid>
+    <RootNamespace>libprotobuf</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPROTOBUF;PROTOBUF_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/protobuf/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPROTOBUF;PROTOBUF_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPROTOBUF;PROTOBUF_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/protobuf/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPROTOBUF;PROTOBUF_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/protobuf/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPROTOBUF;PROTOBUF_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPROTOBUF;PROTOBUF_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/protobuf/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPROTOBUF;PROTOBUF_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/protobuf/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPROTOBUF;PROTOBUF_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPROTOBUF;PROTOBUF_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/protobuf/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPROTOBUF;PROTOBUF_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/protobuf/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPROTOBUF;PROTOBUF_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPROTOBUF;PROTOBUF_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/protobuf/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/any.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/any.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/any_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/api.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/arena.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/arenastring.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/descriptor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/descriptor.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/descriptor_database.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/duration.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/dynamic_message.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/empty.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/extension_set.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/extension_set_heavy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/field_mask.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/generated_enum_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/generated_message_bases.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/generated_message_reflection.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/generated_message_table_driven.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/generated_message_table_driven_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/generated_message_tctable_full.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/generated_message_tctable_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/generated_message_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/implicit_weak_message.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/inlined_string_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/io/coded_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/io/gzip_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/io/io_win32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/io/printer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/io/strtod.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/io/tokenizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/io/zero_copy_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/io/zero_copy_stream_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/io/zero_copy_stream_impl_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/map.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/map_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/message.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/message_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/parse_context.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/reflection_ops.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/repeated_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/repeated_ptr_field.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/service.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/source_context.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/struct.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/bytestream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/int128.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/status.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/statusor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/stringpiece.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/stringprintf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/structurally_valid.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/strutil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/substitute.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/time.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/text_format.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/timestamp.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/type.pb.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/unknown_field_set.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/delimited_message_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/field_comparator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/field_mask_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/datapiece.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/default_value_objectwriter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/error_listener.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/field_mask_utility.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/json_escaping.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/json_objectwriter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/json_stream_parser.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/object_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/proto_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/protostream_objectsource.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/protostream_objectwriter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/type_info.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/type_info_test_helper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/utility.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/json_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/message_differencer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/time_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/type_resolver_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/wire_format.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/wire_format_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/wrappers.pb.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBAny.pbobjc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBApi.pbobjc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBArray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBArray_PackagePrivate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBBootstrap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBCodedInputStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBCodedInputStream_PackagePrivate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBCodedOutputStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBCodedOutputStream_PackagePrivate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBDescriptor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBDescriptor_PackagePrivate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBDictionary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBDictionary_PackagePrivate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBDuration.pbobjc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBEmpty.pbobjc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBExtensionInternals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBExtensionRegistry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBFieldMask.pbobjc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBMessage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBMessage_PackagePrivate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBProtocolBuffers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBProtocolBuffers_RuntimeSupport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBRootObject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBRootObject_PackagePrivate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBRuntimeTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBSourceContext.pbobjc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBStruct.pbobjc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBTimestamp.pbobjc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBType.pbobjc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBUnknownField.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBUnknownFieldSet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBUnknownFieldSet_PackagePrivate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBUnknownField_PackagePrivate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBUtilities.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBUtilities_PackagePrivate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBWellKnownTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBWireFormat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/GPBWrappers.pbobjc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/Tests/CocoaPods/OSXCocoaPodsTester/OSXCocoaPodsTester/AppDelegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/Tests/CocoaPods/iOSCocoaPodsTester/iOSCocoaPodsTester/AppDelegate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/Tests/CocoaPods/iOSCocoaPodsTester/iOSCocoaPodsTester/ViewController.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/Tests/GPBTestUtilities.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/Tests/UnitTests-Bridging-Header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/google/protobuf/Any.pbobjc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/google/protobuf/Api.pbobjc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/google/protobuf/Duration.pbobjc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/google/protobuf/Empty.pbobjc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/google/protobuf/FieldMask.pbobjc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/google/protobuf/SourceContext.pbobjc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/google/protobuf/Struct.pbobjc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/google/protobuf/Timestamp.pbobjc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/google/protobuf/Type.pbobjc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/objectivec/google/protobuf/Wrappers.pbobjc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/any.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/any.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/api.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/arena.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/arena_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/arenastring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/descriptor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/descriptor.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/descriptor_database.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/duration.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/dynamic_message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/empty.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/explicitly_constructed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/extension_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/extension_set_inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/field_access_listener.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/field_mask.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/generated_enum_reflection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/generated_enum_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/generated_message_bases.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/generated_message_reflection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/generated_message_table_driven.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/generated_message_table_driven_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/generated_message_tctable_decl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/generated_message_tctable_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/generated_message_tctable_impl.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/generated_message_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/has_bits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/implicit_weak_message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/inlined_string_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/io/coded_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/io/gzip_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/io/io_win32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/io/package_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/io/printer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/io/strtod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/io/tokenizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/io/zero_copy_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/io/zero_copy_stream_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/io/zero_copy_stream_impl_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/map_entry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/map_entry_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/map_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/map_field_inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/map_field_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/map_test.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/map_type_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/message_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/metadata_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/package_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/parse_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/port_def.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/port_undef.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/reflection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/reflection_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/reflection_ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/reflection_tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/repeated_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/repeated_ptr_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/service.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/source_context.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/string_member_robber.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/struct.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/bytestream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/callback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/casts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/int128.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/map_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/mathutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/once.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/platform_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/status_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/statusor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/stl_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/stringpiece.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/stringprintf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/strutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/substitute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/template_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/stubs/time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/text_format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/timestamp.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/type.pb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/unknown_field_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/delimited_message_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/field_comparator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/field_mask_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/datapiece.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/default_value_objectwriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/error_listener.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/expecting_objectwriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/field_mask_utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/json_escaping.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/json_objectwriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/json_stream_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/location_tracker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/mock_error_listener.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/object_location_tracker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/object_source.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/object_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/proto_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/protostream_objectsource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/protostream_objectwriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/structured_objectwriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/type_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/type_info_test_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/internal/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/json_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/message_differencer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/package_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/time_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/type_resolver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/util/type_resolver_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/wire_format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/wire_format_lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/wrappers.pb.h" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/CHANGES.txt" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/CONTRIBUTORS.txt" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/README.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/appveyor.bat" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/cmake/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/cmake/README.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/cmake/conformance.cmake" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/cmake/examples.cmake" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/cmake/extract_includes.bat.in" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/cmake/install.cmake" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/cmake/libprotobuf-lite.cmake" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/cmake/libprotobuf.cmake" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/cmake/libprotoc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/cmake/protobuf-config-version.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/cmake/protobuf-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/cmake/protobuf-lite.pc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/cmake/protobuf-module.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/cmake/protobuf-options.cmake" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/cmake/protobuf.pc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/cmake/protoc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/cmake/tests.cmake" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/cmake/version.rc.in" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/composer.json" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/csharp/CHANGES.txt" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/csharp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/csharp/build_packages.bat" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/csharp/build_tools.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/csharp/buildall.bat" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/csharp/buildall.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/csharp/compatibility_tests/v3.0.0/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/csharp/generate_protos.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/csharp/install_dotnet_sdk.ps1" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/csharp/keys/README.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/csharp/protos/README.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/docs/csharp/proto2.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/docs/field_presence.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/docs/implementing_proto3_presence.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/docs/jvm_aot.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/docs/options.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/docs/performance.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/docs/third_party.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/editors/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/fix_permissions.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/generate_changelog.py" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/generate_descriptor_proto.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/global.json" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/java/README.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/java/lite.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/README.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/binary/arith.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/binary/arith_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/binary/constants.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/binary/decoder.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/binary/decoder_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/binary/encoder.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/binary/message_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/binary/proto_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/binary/reader.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/binary/reader_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/binary/utils.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/binary/utils_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/binary/writer.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/binary/writer_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/commonjs/export.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/commonjs/export_asserts.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/commonjs/export_testdeps.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/commonjs/import_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/commonjs/jasmine.json" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/commonjs/rewrite_tests_for_commonjs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/commonjs/strict_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.0.0/binary/arith_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.0.0/binary/decoder_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.0.0/binary/proto_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.0.0/binary/reader_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.0.0/binary/utils_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.0.0/binary/writer_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.0.0/commonjs/export_asserts.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.0.0/commonjs/export_testdeps.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.0.0/commonjs/import_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.0.0/commonjs/jasmine.json" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.0.0/commonjs/rewrite_tests_for_commonjs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.0.0/debug_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.0.0/jasmine1.json" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.0.0/jasmine2.json" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.0.0/jasmine3.json" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.0.0/message_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.0.0/proto3_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.0.0/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.1.0/binary/arith_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.1.0/binary/decoder_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.1.0/binary/proto_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.1.0/binary/reader_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.1.0/binary/utils_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.1.0/binary/writer_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.1.0/debug_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.1.0/maps_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.1.0/message_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/compatibility_tests/v3.1.0/proto3_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/debug.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/debug_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/bytestring.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/bytestring_internal.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/bytestring_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/int64.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/int64_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/internal/checks.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/internal/checks_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/binary_storage.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/binary_storage_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/bool_test_pairs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/buffer_decoder.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/buffer_decoder_helper.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/buffer_decoder_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/double_test_pairs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/field.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/fixed32_test_pairs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/float_test_pairs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/indexer.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/indexer_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/int32_test_pairs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/int64_test_pairs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/internal_message.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/kernel.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/kernel_compatibility_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/kernel_repeated_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/kernel_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/message_set.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/message_set_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/packed_bool_test_pairs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/packed_double_test_pairs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/packed_fixed32_test_pairs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/packed_float_test_pairs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/packed_int32_test_pairs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/packed_int64_test_pairs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/packed_sfixed32_test_pairs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/packed_sfixed64_test_pairs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/packed_sint32_test_pairs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/packed_sint64_test_pairs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/packed_uint32_test_pairs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/reader.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/reader_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/sfixed32_test_pairs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/sfixed64_test_pairs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/sint32_test_pairs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/sint64_test_pairs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/storage.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/tag.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/tag_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/textencoding.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/textencoding_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/typed_arrays.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/typed_arrays_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/uint32_test_pairs.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/uint8arrays.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/uint8arrays_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/wire_type.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/writer.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/experimental/runtime/kernel/writer_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/gulpfile.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/jasmine.json" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/map.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/maps_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/message.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/message_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/node_loader.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/package.json" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/proto3_test.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/js/test_bootstrap.js" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/README.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/docs/common.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/docs/publish-python.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/docs/python.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/docs/trampoline.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/32-bit/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/32-bit/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/32-bit/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/aarch64/cpp_crosscompile_and_run_tests_with_qemu_aarch64.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/aarch64/dockcross_helpers/run_dockcross_linux_aarch64.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/aarch64/dockcross_helpers/run_dockcross_manylinux2014_aarch64.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/aarch64/javascript_build_and_run_tests_with_qemu_aarch64.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/aarch64/php_build_and_run_tests_with_qemu_aarch64.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/aarch64/protoc_crosscompile_aarch64.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/aarch64/python_crosscompile_aarch64.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/aarch64/python_run_tests_with_qemu_aarch64.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/aarch64/qemu_helpers/prepare_qemu.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/aarch64/ruby_build_and_run_tests_with_qemu_aarch64.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/aarch64/test_cpp_aarch64.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/aarch64/test_csharp_aarch64.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/aarch64/test_java_aarch64.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/aarch64/test_javascript_aarch64.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/aarch64/test_php_aarch64.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/aarch64/test_python_aarch64.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/aarch64/test_ruby_aarch64.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/bazel/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/bazel/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/bazel/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/benchmark/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/benchmark/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/benchmark/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/build_and_run_docker.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/cpp_aarch64/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/cpp_aarch64/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/cpp_aarch64/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/cpp_distcheck/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/cpp_distcheck/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/cpp_distcheck/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/cpp_tcmalloc/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/cpp_tcmalloc/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/cpp_tcmalloc/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/csharp/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/csharp/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/csharp/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/csharp_aarch64/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/csharp_aarch64/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/csharp_aarch64/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/dist_install/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/dist_install/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/dist_install/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/dockerfile/push_testing_images.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/golang/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/golang/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/golang/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/java_aarch64/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/java_aarch64/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/java_aarch64/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/java_jdk7/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/java_jdk7/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/java_jdk7/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/java_linkage_monitor/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/java_linkage_monitor/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/java_linkage_monitor/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/java_oracle7/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/java_oracle7/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/java_oracle7/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/javascript/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/javascript/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/javascript/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/javascript_aarch64/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/javascript_aarch64/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/javascript_aarch64/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/jruby92/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/jruby92/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/jruby92/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/jruby93/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/jruby93/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/jruby93/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/make_test_output.py" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/php80/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/php80/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/php80/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/php_aarch64/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/php_aarch64/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/php_aarch64/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/php_all/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/php_all/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/php_all/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/pull_request_in_docker.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python27/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python27/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python27/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python27_cpp/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python27_cpp/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python27_cpp/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python310/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python310/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python310/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python310_cpp/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python310_cpp/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python310_cpp/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python35/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python35/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python35/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python35_cpp/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python35_cpp/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python35_cpp/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python36/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python36/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python36/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python36_cpp/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python36_cpp/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python36_cpp/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python37/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python37/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python37/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python37_cpp/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python37_cpp/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python37_cpp/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python38/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python38/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python38/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python38_cpp/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python38_cpp/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python38_cpp/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python39/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python39/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python39/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python39_cpp/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python39_cpp/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python39_cpp/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python_aarch64/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python_aarch64/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python_aarch64/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python_compatibility/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python_compatibility/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python_compatibility/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python_cpp/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python_cpp/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/python_cpp/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/ruby23/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/ruby23/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/ruby23/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/ruby24/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/ruby24/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/ruby24/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/ruby25/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/ruby25/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/ruby25/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/ruby26/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/ruby26/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/ruby26/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/ruby27/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/ruby27/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/ruby27/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/ruby30/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/ruby30/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/ruby30/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/ruby_aarch64/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/ruby_aarch64/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/linux/ruby_aarch64/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/cpp/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/cpp/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/cpp/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/cpp_distcheck/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/cpp_distcheck/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/cpp_distcheck/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/javascript/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/javascript/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/javascript/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/objectivec_cocoapods_integration/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/objectivec_cocoapods_integration/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/objectivec_cocoapods_integration/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/objectivec_ios_debug/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/objectivec_ios_debug/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/objectivec_ios_debug/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/objectivec_ios_release/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/objectivec_ios_release/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/objectivec_ios_release/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/objectivec_osx/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/objectivec_osx/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/objectivec_osx/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/php7.0_mac/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/php7.0_mac/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/php7.0_mac/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/php7.3_mac/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/php7.3_mac/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/php7.3_mac/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/python/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/python/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/python/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/python_cpp/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/python_cpp/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/python_cpp/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/ruby23/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/ruby23/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/ruby23/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/ruby24/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/ruby24/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/ruby24/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/ruby25/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/ruby25/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/ruby25/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/ruby26/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/ruby26/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/ruby26/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/ruby27/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/ruby27/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/ruby27/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/ruby30/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/ruby30/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/macos/ruby30/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/collect_all_artifacts.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/collect_all_artifacts.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/csharp/windows/build_nuget.bat" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/csharp/windows/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/csharp/windows/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/csharp/windows/release.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/protoc/linux/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/protoc/linux/release.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/protoc/macos/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/protoc/macos/release.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/protoc/windows/build.bat" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/protoc/windows/release.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/python/linux/build_artifacts.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/python/linux/config.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/python/linux/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/python/linux/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/python/linux/release.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/python/macos/build_artifacts.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/python/macos/config.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/python/macos/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/python/macos/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/python/macos/release.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/python/windows/build_artifacts.bat" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/python/windows/build_single_artifact.bat" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/python/windows/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/python/windows/install_python_interpreters.ps1" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/python/windows/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/python/windows/release.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/ruby/linux/build_artifacts.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/ruby/linux/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/ruby/linux/prepare_build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/ruby/linux/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/ruby/linux/release.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/ruby/linux/ruby/ruby_build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/ruby/linux/ruby/ruby_build_environment.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/ruby/macos/build_artifacts.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/ruby/macos/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/ruby/macos/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/ruby/macos/release.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/ruby/macos/ruby/ruby_build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/release/ruby/macos/ruby/ruby_build_environment.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/windows/csharp/build.bat" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/windows/csharp/continuous.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/kokoro/windows/csharp/presubmit.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/maven_install.json" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/objectivec/DevTools/check_version_stamps.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/objectivec/DevTools/compile_testing_protos.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/objectivec/DevTools/full_mac_build.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/objectivec/DevTools/pddm.py" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/objectivec/DevTools/pddm_tests.py" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/objectivec/README.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/objectivec/Tests/CocoaPods/OSXCocoaPodsTester/OSXCocoaPodsTester/Assets.xcassets/AppIcon.appiconset/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/objectivec/Tests/CocoaPods/README.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/objectivec/Tests/CocoaPods/iOSCocoaPodsTester/iOSCocoaPodsTester/Assets.xcassets/AppIcon.appiconset/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/objectivec/Tests/CocoaPods/run_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/objectivec/generate_well_known_types.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/php/README.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/php/REFCOUNTING.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/php/composer.json" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/php/generate_descriptor_protos.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/php/generate_test_protos.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/php/release.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/php/tests/compatibility_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/php/tests/compile_extension.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/php/tests/gdb_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/php/tests/memory_leak_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/php/tests/multirequest.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/post_process_dist.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/protobuf-lite.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/protobuf.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/protoc-artifacts/README.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/protoc-artifacts/build-protoc.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/protoc-artifacts/build-zip.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/protoc-artifacts/scl-enable-devtoolset.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/generate_docs.py" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf/any_pb2.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf/descriptor.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf/descriptor_database.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf/descriptor_pb2.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf/descriptor_pool.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf/duration_pb2.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf/empty_pb2.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf/field_mask_pb2.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf/internal/containers.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf/json_format.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf/message.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf/message_factory.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf/proto_builder.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf/reflection.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf/service.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf/service_reflection.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf/struct_pb2.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf/symbol_database.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf/text_encoding.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf/text_format.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf/timestamp_pb2.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf/type_pb2.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/google/protobuf/wrappers_pb2.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/docs/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/mox.py" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/protobuf_distutils/README.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/protobuf_distutils/protobuf_distutils/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/protobuf_distutils/protobuf_distutils/generate_py_protobufs.py" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/protobuf_distutils/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/release.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/setup.cfg" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/python/stubout.py" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/ruby/README.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/ruby/compatibility_tests/v3.0.0/README.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/ruby/compatibility_tests/v3.0.0/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/ruby/travis-test.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/src/README.md" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/src/google/protobuf/testdata/map_test_data.txt" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/update_compatibility_version.py" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/update_file_lists.sh" />
+    <Text Include="../../thirdparty/owemdjee/protobuf/update_version.py" />
+    <Xml Include="../../thirdparty/owemdjee/protobuf/java/bom/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/protobuf/java/core/generate-sources-build.xml" />
+    <Xml Include="../../thirdparty/owemdjee/protobuf/java/core/generate-test-sources-build.xml" />
+    <Xml Include="../../thirdparty/owemdjee/protobuf/java/core/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/protobuf/java/core/pom_template.xml" />
+    <Xml Include="../../thirdparty/owemdjee/protobuf/java/kotlin-lite/generate-sources-build.xml" />
+    <Xml Include="../../thirdparty/owemdjee/protobuf/java/kotlin-lite/generate-test-sources-build.xml" />
+    <Xml Include="../../thirdparty/owemdjee/protobuf/java/kotlin-lite/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/protobuf/java/kotlin-lite/process-lite-sources-build.xml" />
+    <Xml Include="../../thirdparty/owemdjee/protobuf/java/kotlin/generate-sources-build.xml" />
+    <Xml Include="../../thirdparty/owemdjee/protobuf/java/kotlin/generate-test-sources-build.xml" />
+    <Xml Include="../../thirdparty/owemdjee/protobuf/java/kotlin/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/protobuf/java/lite/generate-sources-build.xml" />
+    <Xml Include="../../thirdparty/owemdjee/protobuf/java/lite/generate-test-sources-build.xml" />
+    <Xml Include="../../thirdparty/owemdjee/protobuf/java/lite/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/protobuf/java/lite/pom_template.xml" />
+    <Xml Include="../../thirdparty/owemdjee/protobuf/java/lite/process-lite-sources-build.xml" />
+    <Xml Include="../../thirdparty/owemdjee/protobuf/java/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/protobuf/java/util/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/protobuf/java/util/pom_template.xml" />
+    <Xml Include="../../thirdparty/owemdjee/protobuf/php/src/phpdoc.dist.xml" />
+    <Xml Include="../../thirdparty/owemdjee/protobuf/protoc-artifacts/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/protobuf/ruby/pom.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

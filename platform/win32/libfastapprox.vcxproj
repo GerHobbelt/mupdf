@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>libbloomfilters</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFD84E99}</ProjectGuid>
-    <RootNamespace>libbloomfilters</RootNamespace>
+    <ProjectName>libfastapprox</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFA18033}</ProjectGuid>
+    <RootNamespace>libfastapprox</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -113,10 +113,10 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTAPPROX;FASTAPPROX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -126,12 +126,12 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libbloomfilters;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTAPPROX;FASTAPPROX_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTAPPROX;FASTAPPROX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -144,7 +144,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTAPPROX;FASTAPPROX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -152,13 +152,13 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libbloomfilters;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTAPPROX;FASTAPPROX_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTAPPROX;FASTAPPROX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -171,7 +171,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTAPPROX;FASTAPPROX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -181,12 +181,12 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libbloomfilters;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTAPPROX;FASTAPPROX_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTAPPROX;FASTAPPROX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -199,7 +199,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTAPPROX;FASTAPPROX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -207,13 +207,13 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/libbloomfilters;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTAPPROX;FASTAPPROX_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBLOOMFILTERS;BLOOMFILTERS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFASTAPPROX;FASTAPPROX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -228,53 +228,36 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/libbloomfilters/src/bitvector.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libbloomfilters/src/bloom_filter/a2.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libbloomfilters/src/bloom_filter/basic.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libbloomfilters/src/bloom_filter/bitwise.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libbloomfilters/src/bloom_filter/counting.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libbloomfilters/src/bloom_filter/stable.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libbloomfilters/src/counter_vector.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libbloomfilters/src/hash.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libbloomfilters/test/bf/bf.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libbloomfilters/test/bf/configuration.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/libbloomfilters/test/tests.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/all.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/bitvector.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/bloom_filter.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/bloom_filter/a2.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/bloom_filter/basic.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/bloom_filter/bitwise.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/bloom_filter/counting.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/bloom_filter/stable.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/counter_vector.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/h3.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/hash.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/object.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/bf/wrap.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/test/bf/configuration.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/test/bf/util/configuration.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/test/bf/util/error.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/test/bf/util/trial.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/test/test.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/test/unit_test.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/libbloomfilters/test/unit_test_impl.hpp" />
-    <Image Include="../../thirdparty/owemdjee/libbloomfilters/doc/figs/architecture.png" />
-    <Image Include="../../thirdparty/owemdjee/libbloomfilters/doc/figs/bf-basic-part.png" />
-    <Image Include="../../thirdparty/owemdjee/libbloomfilters/doc/figs/bf-basic.png" />
-    <Image Include="../../thirdparty/owemdjee/libbloomfilters/doc/figs/bf-bitwise.png" />
-    <Image Include="../../thirdparty/owemdjee/libbloomfilters/doc/figs/bf-counting.png" />
-    <Image Include="../../thirdparty/owemdjee/libbloomfilters/doc/figs/bf-scalable.png" />
-    <Image Include="../../thirdparty/owemdjee/libbloomfilters/doc/figs/shrinking.png" />
-    <Image Include="../../thirdparty/owemdjee/libbloomfilters/doc/figs/sliding-window.png" />
-    <Image Include="../../thirdparty/owemdjee/libbloomfilters/doc/figs/spectral-rm-bug.png" />
-    <Text Include="../../thirdparty/owemdjee/libbloomfilters/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libbloomfilters/README.md" />
-    <Text Include="../../thirdparty/owemdjee/libbloomfilters/cmake/cmake_uninstall.cmake.in" />
-    <Text Include="../../thirdparty/owemdjee/libbloomfilters/test/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/libbloomfilters/test/bf/CMakeLists.txt" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastapprox/fastapprox/tests/testfasterf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastapprox/fastapprox/tests/testfastexp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastapprox/fastapprox/tests/testfastgamma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastapprox/fastapprox/tests/testfasthyperbolic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastapprox/fastapprox/tests/testfastlambertw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastapprox/fastapprox/tests/testfastlog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastapprox/fastapprox/tests/testfastonebigheader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastapprox/fastapprox/tests/testfastpow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastapprox/fastapprox/tests/testfastsigmoid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fastapprox/fastapprox/tests/testfasttrig.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastapprox/fastapprox/src/cast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastapprox/fastapprox/src/fasterf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastapprox/fastapprox/src/fastexp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastapprox/fastapprox/src/fastgamma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastapprox/fastapprox/src/fasthyperbolic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastapprox/fastapprox/src/fastlambertw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastapprox/fastapprox/src/fastlog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastapprox/fastapprox/src/fastonebigheader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastapprox/fastapprox/src/fastpow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastapprox/fastapprox/src/fastsigmoid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastapprox/fastapprox/src/fasttrig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastapprox/fastapprox/src/sse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fastapprox/fastapprox/tests/testmacros.h" />
+    <Text Include="../../thirdparty/owemdjee/fastapprox/README.md" />
+    <Text Include="../../thirdparty/owemdjee/fastapprox/fastapprox/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/fastapprox/fastapprox/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/fastapprox/fastapprox/README" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libensmallen</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF59CF6B}</ProjectGuid>
+    <RootNamespace>libensmallen</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENSMALLEN;ENSMALLEN_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENSMALLEN;ENSMALLEN_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENSMALLEN;ENSMALLEN_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENSMALLEN;ENSMALLEN_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENSMALLEN;ENSMALLEN_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENSMALLEN;ENSMALLEN_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENSMALLEN;ENSMALLEN_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENSMALLEN;ENSMALLEN_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENSMALLEN;ENSMALLEN_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENSMALLEN;ENSMALLEN_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENSMALLEN;ENSMALLEN_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBENSMALLEN;ENSMALLEN_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/active_cmaes_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/ada_belief_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/ada_bound_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/ada_delta_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/ada_grad_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/ada_sqrt_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/adam_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/aug_lagrangian_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/bigbatch_sgd_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/callbacks_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/cd_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/cmaes_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/cne_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/de_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/demon_adam_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/demon_sgd_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/eve_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/frankwolfe_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/ftml_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/function_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/gradient_descent_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/grid_search_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/indicators_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/iqn_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/katyusha_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/lbfgs_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/line_search_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/lookahead_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/lrsdp_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/moead_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/momentum_sgd_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/nesterov_momentum_sgd_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/nsga2_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/parallel_sgd_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/proximal_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/pso_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/quasi_hyperbolic_momentum_sgd_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/rmsprop_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/sa_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/sarah_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/sdp_primal_dual_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/sgd_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/sgdr_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/smorms3_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/snapshot_ensembles.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/spalera_sgd_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/spsa_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/svrg_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/swats_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/wn_grad_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ensmallen/tests/yogi_test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ada_belief/ada_belief.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ada_belief/ada_belief_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ada_belief/ada_belief_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ada_bound/ada_bound.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ada_bound/ada_bound_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ada_bound/ada_bound_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ada_bound/ams_bound_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ada_delta/ada_delta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ada_delta/ada_delta_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ada_delta/ada_delta_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ada_grad/ada_grad.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ada_grad/ada_grad_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ada_grad/ada_grad_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ada_sqrt/ada_sqrt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ada_sqrt/ada_sqrt_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ada_sqrt/ada_sqrt_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/adam/adam.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/adam/adam_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/adam/adam_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/adam/adamax_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/adam/amsgrad_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/adam/nadam_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/adam/nadamax_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/adam/optimisticadam_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/aug_lagrangian/aug_lagrangian.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/aug_lagrangian/aug_lagrangian_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/aug_lagrangian/aug_lagrangian_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/aug_lagrangian/aug_lagrangian_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/bigbatch_sgd/adaptive_stepsize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/bigbatch_sgd/backtracking_line_search.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/bigbatch_sgd/bigbatch_sgd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/bigbatch_sgd/bigbatch_sgd_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/callbacks/callbacks.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/callbacks/early_stop_at_min_loss.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/callbacks/grad_clip_by_norm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/callbacks/grad_clip_by_value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/callbacks/print_loss.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/callbacks/progress_bar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/callbacks/query_front.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/callbacks/report.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/callbacks/store_best_coordinates.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/callbacks/timer_stop.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/callbacks/traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/cd/cd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/cd/cd_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/cd/descent_policies/cyclic_descent.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/cd/descent_policies/greedy_descent.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/cd/descent_policies/random_descent.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/cmaes/active_cmaes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/cmaes/active_cmaes_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/cmaes/cmaes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/cmaes/cmaes_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/cmaes/full_selection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/cmaes/not_empty_transformation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/cmaes/random_selection.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/cmaes/transformation_policies/boundary_box_constraint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/cmaes/transformation_policies/empty_transformation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/cne/cne.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/cne/cne_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/de/de.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/de/de_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/demon_adam/demon_adam.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/demon_adam/demon_adam_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/demon_sgd/demon_sgd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/demon_sgd/demon_sgd_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ens_version.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/eve/eve.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/eve/eve_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ftml/ftml.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ftml/ftml_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/ftml/ftml_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/function/add_evaluate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/function/add_evaluate_with_gradient.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/function/add_gradient.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/function/add_separable_evaluate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/function/add_separable_evaluate_with_gradient.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/function/add_separable_gradient.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/function/arma_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/function/sfinae_utility.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/function/static_checks.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/function/traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fw/atoms.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fw/constr_lpball.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fw/constr_structure_group.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fw/frank_wolfe.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fw/frank_wolfe_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fw/func_sq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fw/line_search/line_search.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fw/line_search/line_search_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fw/proximal/proximal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fw/proximal/proximal_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fw/update_classic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fw/update_full_correction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fw/update_linesearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/fw/update_span.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/gradient_descent/gradient_descent.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/gradient_descent/gradient_descent_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/grid_search/grid_search.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/grid_search/grid_search_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/iqn/iqn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/iqn/iqn_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/katyusha/katyusha.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/katyusha/katyusha_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/lbfgs/lbfgs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/lbfgs/lbfgs_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/log.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/lookahead/lookahead.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/lookahead/lookahead_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/moead/decomposition_policies/pbi_decomposition.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/moead/decomposition_policies/tchebycheff_decomposition.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/moead/decomposition_policies/weighted_decomposition.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/moead/moead.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/moead/moead_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/moead/weight_init_policies/bbs_init.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/moead/weight_init_policies/dirichlet_init.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/moead/weight_init_policies/uniform_init.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/nsga2/nsga2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/nsga2/nsga2_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/padam/padam.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/padam/padam_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/parallel_sgd/decay_policies/constant_step.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/parallel_sgd/decay_policies/exponential_backoff.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/parallel_sgd/parallel_sgd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/parallel_sgd/parallel_sgd_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/ackley_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/ackley_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/aug_lagrangian_test_functions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/aug_lagrangian_test_functions_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/beale_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/beale_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/booth_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/booth_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/bukin_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/bukin_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/colville_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/colville_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/cross_in_tray_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/cross_in_tray_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/drop_wave_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/drop_wave_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/easom_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/easom_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/eggholder_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/eggholder_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/fonseca_fleming_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/fw_test_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/generalized_rosenbrock_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/generalized_rosenbrock_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/goldstein_price_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/goldstein_price_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/gradient_descent_test_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/gradient_descent_test_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/himmelblau_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/himmelblau_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/holder_table_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/holder_table_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/levy_function_n13.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/levy_function_n13_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/logistic_regression_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/logistic_regression_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/matyas_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/matyas_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/mc_cormick_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/mc_cormick_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/problems.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/rastrigin_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/rastrigin_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/rosenbrock_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/rosenbrock_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/rosenbrock_wood_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/rosenbrock_wood_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/schaffer_function_n1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/schaffer_function_n2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/schaffer_function_n2_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/schaffer_function_n4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/schaffer_function_n4_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/schwefel_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/schwefel_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/sgd_test_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/sgd_test_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/softmax_regression_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/softmax_regression_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/sparse_test_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/sparse_test_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/sphere_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/sphere_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/styblinski_tang_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/styblinski_tang_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/three_hump_camel_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/three_hump_camel_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/wood_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/wood_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/zdt/zdt1_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/zdt/zdt2_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/zdt/zdt3_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/zdt/zdt4_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/problems/zdt/zdt6_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/pso/init_policies/default_init.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/pso/pso.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/pso/pso_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/pso/update_policies/lbest_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/qhadam/qhadam.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/qhadam/qhadam_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/qhadam/qhadam_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/rmsprop/rmsprop.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/rmsprop/rmsprop_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sa/exponential_schedule.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sa/sa.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sa/sa_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sarah/sarah.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sarah/sarah_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sarah/sarah_plus_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sarah/sarah_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sdp/lin_alg.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sdp/lrsdp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sdp/lrsdp_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sdp/lrsdp_function_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sdp/lrsdp_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sdp/primal_dual.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sdp/primal_dual_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sdp/sdp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sdp/sdp_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sgd/decay_policies/no_decay.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sgd/sgd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sgd/sgd_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sgd/update_policies/gradient_clipping.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sgd/update_policies/momentum_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sgd/update_policies/nesterov_momentum_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sgd/update_policies/quasi_hyperbolic_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sgd/update_policies/vanilla_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sgdr/cyclical_decay.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sgdr/sgdr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sgdr/sgdr_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sgdr/snapshot_ensembles.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sgdr/snapshot_sgdr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/sgdr/snapshot_sgdr_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/smorms3/smorms3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/smorms3/smorms3_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/smorms3/smorms3_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/spalera_sgd/spalera_sgd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/spalera_sgd/spalera_sgd_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/spalera_sgd/spalera_stepsize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/spsa/spsa.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/spsa/spsa_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/svrg/barzilai_borwein_decay.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/svrg/svrg.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/svrg/svrg_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/svrg/svrg_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/swats/swats.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/swats/swats_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/swats/swats_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/utility/any.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/utility/arma_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/utility/indicators/epsilon.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/utility/indicators/igd_plus.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/wn_grad/wn_grad.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/wn_grad/wn_grad_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/wn_grad/wn_grad_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/yogi/yogi.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/yogi/yogi_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/include/ensmallen_bits/yogi/yogi_update.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/tests/catch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ensmallen/tests/test_function_tools.hpp" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/ARMA_FindACML.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/ARMA_FindACMLMP.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/ARMA_FindARPACK.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/ARMA_FindBLAS.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/ARMA_FindCBLAS.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/ARMA_FindCLAPACK.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/ARMA_FindLAPACK.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/ARMA_FindMKL.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/ARMA_FindOpenBLAS.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/FindArmadillo.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/CMake/ensmallen-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/COPYRIGHT.txt" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/HISTORY.md" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/UPDATING.txt" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/doc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/doc/callbacks.md" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/doc/function_types.md" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/doc/optimizers.md" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/scripts/ensmallen-release.sh" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/scripts/history-update-check.sh" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/scripts/update-website-after-release.sh" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/tests/LICENSE_1_0.txt" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/tests/data/erdosrenyi-n100.csv" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/tests/data/johnson8-4-4.csv" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/tests/data/r10.txt" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/tests/data/sensing_A.csv" />
+    <Text Include="../../thirdparty/owemdjee/ensmallen/tests/data/sensing_X.csv" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

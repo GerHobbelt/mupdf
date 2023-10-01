@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -113,8 +113,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBITFUNNEL;BITFUNNEL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -126,14 +126,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/BitFunnel/inc;../../thirdparty/owemdjee/BitFunnel/NativeJIT/inc;../../thirdparty/owemdjee/BitFunnel/src/Common/CmdLineParser/inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBITFUNNEL;BITFUNNEL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBITFUNNEL;BITFUNNEL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/BitFunnel/NativeJIT/inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -152,7 +152,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/BitFunnel/inc;../../thirdparty/owemdjee/BitFunnel/NativeJIT/inc;../../thirdparty/owemdjee/BitFunnel/src/Common/CmdLineParser/inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBITFUNNEL;BITFUNNEL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -160,7 +160,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBITFUNNEL;BITFUNNEL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/BitFunnel/NativeJIT/inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -181,14 +181,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/BitFunnel/inc;../../thirdparty/owemdjee/BitFunnel/NativeJIT/inc;../../thirdparty/owemdjee/BitFunnel/src/Common/CmdLineParser/inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBITFUNNEL;BITFUNNEL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBITFUNNEL;BITFUNNEL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/BitFunnel/NativeJIT/inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -207,7 +207,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/BitFunnel/inc;../../thirdparty/owemdjee/BitFunnel/NativeJIT/inc;../../thirdparty/owemdjee/BitFunnel/src/Common/CmdLineParser/inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBITFUNNEL;BITFUNNEL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -215,7 +215,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBITFUNNEL;BITFUNNEL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/BitFunnel/NativeJIT/inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -230,102 +230,6 @@
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/Examples/AreaOfCircle/AreaOfCircle.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/Examples/Parser/Parser.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/src/gmock-all.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/src/gmock-cardinalities.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/src/gmock-internal-utils.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/src/gmock-matchers.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/src/gmock-spec-builders.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/src/gmock.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/src/gmock_main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock-actions_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock-cardinalities_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock-generated-actions_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock-generated-function-mockers_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock-generated-internal-utils_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock-generated-matchers_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock-internal-utils_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock-matchers_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock-more-actions_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock-nice-strict_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock-port_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock-spec-builders_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock_all_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock_ex_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock_leak_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock_link2_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock_link_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock_output_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock_stress_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/codegear/gtest_all.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/codegear/gtest_link.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/samples/sample1.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/samples/sample10_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/samples/sample1_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/samples/sample2.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/samples/sample2_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/samples/sample3_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/samples/sample4.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/samples/sample4_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/samples/sample5_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/samples/sample6_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/samples/sample7_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/samples/sample8_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/samples/sample9_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/src/gtest-all.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/src/gtest-death-test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/src/gtest-filepath.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/src/gtest-port.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/src/gtest-printers.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/src/gtest-test-part.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/src/gtest-typed-test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/src/gtest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/src/gtest_main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest-death-test_ex_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest-death-test_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest-filepath_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest-linked_ptr_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest-listener_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest-message_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest-options_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest-param-test2_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest-param-test_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest-port_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest-printers_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest-test-part_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest-tuple_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest-typed-test2_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest-typed-test_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest-unittest-api_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_all_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_break_on_failure_unittest_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_catch_exceptions_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_color_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_env_var_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_environment_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_filter_unittest_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_help_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_list_tests_unittest_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_main_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_no_test_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_output_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_pred_impl_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_premature_exit_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_prod_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_repeat_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_shuffle_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_sole_header_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_stress_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_throw_on_failure_ex_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_throw_on_failure_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_uninitialized_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_xml_outfile1_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_xml_outfile2_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_xml_output_unittest_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/production.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/xcode/Samples/FrameworkSample/widget.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/xcode/Samples/FrameworkSample/widget_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/src/CodeGen/Allocator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/src/CodeGen/Assert.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/src/CodeGen/CodeBuffer.cpp" />
@@ -341,120 +245,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/src/NativeJIT/ExpressionNodeFactory.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/src/NativeJIT/ExpressionTree.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/src/NativeJIT/Node.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/test/CodeGen/BitOperationsTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/test/CodeGen/CodeGenTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/test/CodeGen/FunctionBufferTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/test/CodeGen/InstructionEncodingTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/test/CodeGen/ML64Verifier.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/test/CodeGen/dllmain.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/test/NativeJIT/BitFunnelAcceptanceTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/test/NativeJIT/CastTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/test/NativeJIT/ConditionalAutoGenTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/test/NativeJIT/ConditionalTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/test/NativeJIT/ExpressionTreeTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/test/NativeJIT/FloatingPointTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/test/NativeJIT/FunctionTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/test/NativeJIT/PackedTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/test/NativeJIT/UnsignedTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/test/NativeJIT/dllmain.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/test/Shared/TestSetup.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/examples/QueryParser/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/src/gmock-all.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/src/gmock-cardinalities.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/src/gmock-internal-utils.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/src/gmock-matchers.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/src/gmock-spec-builders.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/src/gmock.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/src/gmock_main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock-actions_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock-cardinalities_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock-generated-actions_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock-generated-function-mockers_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock-generated-internal-utils_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock-generated-matchers_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock-internal-utils_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock-matchers_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock-more-actions_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock-nice-strict_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock-port_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock-spec-builders_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock_all_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock_ex_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock_leak_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock_link2_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock_link_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock_output_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock_stress_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/codegear/gtest_all.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/codegear/gtest_link.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/samples/sample1.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/samples/sample10_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/samples/sample1_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/samples/sample2.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/samples/sample2_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/samples/sample3_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/samples/sample4.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/samples/sample4_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/samples/sample5_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/samples/sample6_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/samples/sample7_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/samples/sample8_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/samples/sample9_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/src/gtest-all.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/src/gtest-death-test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/src/gtest-filepath.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/src/gtest-port.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/src/gtest-printers.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/src/gtest-test-part.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/src/gtest-typed-test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/src/gtest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/src/gtest_main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest-death-test_ex_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest-death-test_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest-filepath_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest-linked_ptr_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest-listener_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest-message_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest-options_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest-param-test2_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest-param-test_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest-port_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest-printers_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest-test-part_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest-tuple_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest-typed-test2_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest-typed-test_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest-unittest-api_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_all_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_break_on_failure_unittest_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_catch_exceptions_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_color_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_env_var_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_environment_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_filter_unittest_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_help_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_list_tests_unittest_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_main_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_no_test_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_output_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_pred_impl_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_premature_exit_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_prod_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_repeat_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_shuffle_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_sole_header_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_stress_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_throw_on_failure_ex_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_throw_on_failure_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_uninitialized_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_unittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_xml_outfile1_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_xml_outfile2_test_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_xml_output_unittest_.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/production.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/xcode/Samples/FrameworkSample/widget.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/xcode/Samples/FrameworkSample/widget_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Chunks/src/BuiltinChunkManifest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Chunks/src/ChunkEnumerator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Chunks/src/ChunkIngestor.cpp" />
@@ -464,32 +255,21 @@
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Chunks/src/Document.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Chunks/src/DocumentFilters.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Chunks/src/IngestChunks.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Chunks/test/ChunkReaderTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Chunks/test/DocumentTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CmdLineParser/src/CmdLineParser.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CmdLineParser/src/Constraint.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CmdLineParser/src/FormattingUtilities.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CmdLineParser/src/Parameter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CmdLineParser/test/AnswerResponseTestBase.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CmdLineParser/test/CmdLineParserCases.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CmdLineParser/test/CmdLineParserTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CmdLineParser/test/Main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Configuration/src/FileManager.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Configuration/src/FileSystem.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Configuration/src/ParameterizedFile.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Configuration/src/RAMFileSystem.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Configuration/src/ShardDefinition.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Configuration/src/StreamConfiguration.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Configuration/test/RAMFileSystemTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Configuration/test/ShardDefinitionTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Configuration/test/StreamConfigurationTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CsvTsv/src/Csv.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CsvTsv/src/DelimitedTable.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CsvTsv/src/ParseError.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CsvTsv/src/Table.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CsvTsv/src/Tsv.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CsvTsv/test/DelimitedTableTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CsvTsv/test/ReadWriteSingleColumnTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/src/AlignedBuffer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/src/Allocator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/src/BlockAllocator.cpp" />
@@ -522,29 +302,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/src/TokenManager.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/src/TokenTracker.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/src/Version.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/Array2DFixedTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/Array2DTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/Array3DFixedTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/BlockAllocatorTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/BlockingQueueTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/CheckTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/ConstructorDestructorCounter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/FileHeaderTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/FixedCapacityVectorTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/MurmurHashTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/PackedArrayTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/RandomTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/RoundingTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/SimpleHashSetTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/SimpleHashTableTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/StreamUtilitiesTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/StringBuilderTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/TaskDistributorTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/ThrowingLogger.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/TokenManagerTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/TokenTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/TokenTrackerTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/VersionTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Data/src/Sonnets.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Data/src/SyntheticChunks.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Index/src/Configuration.cpp" />
@@ -588,26 +345,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Index/src/TreatmentPrivateSharedRank0.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Index/src/TreatmentPrivateSharedRank0And3.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Index/src/TreatmentPrivateSharedRank0ToN.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Index/test/DocTableDescriptorTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Index/test/DocumentDataSchemaTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Index/test/DocumentFrequencyTableTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Index/test/DocumentHandleTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Index/test/DocumentLengthHistogramTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Index/test/IndexUtilsTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Index/test/IngestorTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Index/test/RowConfigurationTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Index/test/RowTableDescriptorTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Index/test/ShardTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Index/test/SliceTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Index/test/TermTableBuilderTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Index/test/TermTableTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Index/test/TermTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Index/test/TermToTextTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Index/test/TermTreatmentOptimalTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Index/test/TrackingSliceBufferAllocator.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Index/test/TreatmentOptimalOld.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Mocks/src/PrimeFactorsDocument.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Mocks/test/PrimeFactorsDocumentTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/src/AbstractRow.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/src/AbstractRowEnumerator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/src/ByteCodeInterpreter.cpp" />
@@ -640,25 +378,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/src/TermPlanConverter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/src/VerifyOneQuery.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/src/VerifyOneQuerySynthetic.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/test/AbstractRowTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/test/ByteCodeInterpreterTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/test/ByteCodeVerifier.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/test/CacheLineRecorderTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/test/CodeVerifierBase.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/test/CompileNodeTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/test/MatchTreeRewriterTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/test/NativeCodeTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/test/NativeCodeVerifier.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/test/PlainTextCodeGenerator.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/test/QueryParserTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/test/RankDownCompilerTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/test/RegisterAllocatorTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/test/RowPlanTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/test/TermMatchNodeTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/test/TermPlanConverterTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/src/Scripts/simulate.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/test/Shared/IndexUtils.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/test/Shared/SameExceptForWhitespace.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/tools/BitFunnel/src/AnalyzeCommand.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/tools/BitFunnel/src/BitFunnelTool.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/tools/BitFunnel/src/CacheLineCountCommand.cpp" />
@@ -690,63 +410,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/tools/BitFunnel/src/ThreadsCommand.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/tools/BitFunnel/src/VerifyCommand.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/tools/BitFunnel/src/main.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/tools/BitFunnel/test/BitFunnelToolTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/tools/BitFunnel/test/BitFunnelToolTestOld.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/tools/CsvExtract/CsvExtract.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/tools/CsvExtract/CsvExtractTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/BitFunnel/tools/CsvExtract/main.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/include/gmock/gmock-actions.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/include/gmock/gmock-cardinalities.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/include/gmock/gmock-generated-actions.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/include/gmock/gmock-generated-function-mockers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/include/gmock/gmock-generated-matchers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/include/gmock/gmock-generated-nice-strict.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/include/gmock/gmock-matchers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/include/gmock/gmock-more-actions.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/include/gmock/gmock-more-matchers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/include/gmock/gmock-spec-builders.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/include/gmock/gmock.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/include/gmock/internal/custom/gmock-generated-actions.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/include/gmock/internal/custom/gmock-matchers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/include/gmock/internal/custom/gmock-port.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/include/gmock/internal/gmock-generated-internal-utils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/include/gmock/internal/gmock-internal-utils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/include/gmock/internal/gmock-port.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock_link_test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/gtest-death-test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/gtest-message.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/gtest-param-test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/gtest-printers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/gtest-spi.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/gtest-test-part.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/gtest-typed-test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/gtest.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/gtest_pred_impl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/gtest_prod.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/internal/custom/gtest-port.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/internal/custom/gtest-printers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/internal/custom/gtest.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/internal/gtest-death-test-internal.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/internal/gtest-filepath.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/internal/gtest-internal.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/internal/gtest-linked_ptr.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/internal/gtest-param-util-generated.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/internal/gtest-param-util.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/internal/gtest-port-arch.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/internal/gtest-port.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/internal/gtest-string.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/internal/gtest-tuple.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/include/gtest/internal/gtest-type-util.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/samples/prime_tables.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/samples/sample1.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/samples/sample2.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/samples/sample3-inl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/samples/sample4.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/src/gtest-internal-inl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest-param-test_test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest-typed-test_test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/production.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/xcode/Samples/FrameworkSample/widget.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/inc/NativeJIT/AllocatorVector.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/inc/NativeJIT/BitOperations.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/inc/NativeJIT/CodeGen/CallingConvention.h" />
@@ -792,60 +458,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/inc/Temporary/NonCopyable.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/inc/Temporary/StlAllocator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/src/CodeGen/UnwindCode.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/test/CodeGen/ML64Verifier.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/test/Shared/TestSetup.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/include/gmock/gmock-actions.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/include/gmock/gmock-cardinalities.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/include/gmock/gmock-generated-actions.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/include/gmock/gmock-generated-function-mockers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/include/gmock/gmock-generated-matchers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/include/gmock/gmock-generated-nice-strict.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/include/gmock/gmock-matchers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/include/gmock/gmock-more-actions.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/include/gmock/gmock-more-matchers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/include/gmock/gmock-spec-builders.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/include/gmock/gmock.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/include/gmock/internal/custom/gmock-generated-actions.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/include/gmock/internal/custom/gmock-matchers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/include/gmock/internal/custom/gmock-port.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/include/gmock/internal/gmock-generated-internal-utils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/include/gmock/internal/gmock-internal-utils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/include/gmock/internal/gmock-port.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock_link_test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/gtest-death-test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/gtest-message.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/gtest-param-test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/gtest-printers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/gtest-spi.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/gtest-test-part.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/gtest-typed-test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/gtest.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/gtest_pred_impl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/gtest_prod.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/internal/custom/gtest-port.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/internal/custom/gtest-printers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/internal/custom/gtest.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/internal/gtest-death-test-internal.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/internal/gtest-filepath.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/internal/gtest-internal.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/internal/gtest-linked_ptr.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/internal/gtest-param-util-generated.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/internal/gtest-param-util.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/internal/gtest-port-arch.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/internal/gtest-port.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/internal/gtest-string.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/internal/gtest-tuple.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/include/gtest/internal/gtest-type-util.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/samples/prime_tables.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/samples/sample1.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/samples/sample2.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/samples/sample3-inl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/samples/sample4.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/src/gtest-internal-inl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest-param-test_test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest-typed-test_test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/production.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/xcode/Samples/FrameworkSample/widget.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/inc/BitFunnel/Allocators/IAllocator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/inc/BitFunnel/BitFunnelTypes.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/inc/BitFunnel/Chunks/DocumentFilters.h" />
@@ -951,14 +563,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Chunks/src/ChunkReader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Chunks/src/ChunkWriters.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Chunks/src/Document.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Chunks/test/ChunkEventTracer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CmdLineParser/inc/CmdLineParser/CmdLineParser.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CmdLineParser/inc/CmdLineParser/Constraint.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CmdLineParser/inc/CmdLineParser/FormattingUtilities.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CmdLineParser/inc/CmdLineParser/Parameter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CmdLineParser/inc/CmdLineParser/Validator.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CmdLineParser/test/AnswerResponseTestBase.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CmdLineParser/test/CmdLineParserTest.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Configuration/src/FileManager.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Configuration/src/FileSystem.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Configuration/src/ParameterizedFile.h" />
@@ -987,8 +596,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/src/ThreadManager.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/src/TokenManager.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/src/TokenTracker.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/ConstructorDestructorCounter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/ThrowingLogger.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Index/src/Configuration.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Index/src/Correlate.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Index/src/DocTableDescriptor.h" />
@@ -1024,9 +631,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Index/src/TreatmentPrivateSharedRank0.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Index/src/TreatmentPrivateSharedRank0And3.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Index/src/TreatmentPrivateSharedRank0ToN.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Index/test/IndexWrapper.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Index/test/TrackingSliceBufferAllocator.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Index/test/TreatmentOptimalOld.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/src/AbstractRow.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/src/AbstractRowEnumerator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/src/ByteCodeInterpreter.h" />
@@ -1058,13 +662,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/src/TermMatchTreeEvaluator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/src/TermPlan.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/src/TermPlanConverter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/test/ByteCodeVerifier.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/test/CodeVerifierBase.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/test/ICodeVerifier.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/test/NativeCodeVerifier.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/test/PlainTextCodeGenerator.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/test/Shared/IndexUtils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/test/Shared/SameExceptForWhitespace.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/tools/BitFunnel/src/AnalyzeCommand.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/tools/BitFunnel/src/BitFunnelTool.h" />
     <ClInclude Include="../../thirdparty/owemdjee/BitFunnel/tools/BitFunnel/src/CacheLineCountCommand.h" />
@@ -1120,119 +717,6 @@
     <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/Examples/README.md" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/LICENSE.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/README.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/README.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/CHANGES" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/CONTRIBUTORS" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/README.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/configure.ac" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/docs/CheatSheet.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/docs/CookBook.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/docs/DesignDoc.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/docs/DevGuide.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/docs/Documentation.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/docs/ForDummies.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/docs/FrequentlyAskedQuestions.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/docs/KnownIssues.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/docs/v1_5/CheatSheet.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/docs/v1_5/CookBook.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/docs/v1_5/Documentation.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/docs/v1_5/ForDummies.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/docs/v1_5/FrequentlyAskedQuestions.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/docs/v1_6/CheatSheet.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/docs/v1_6/CookBook.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/docs/v1_6/Documentation.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/docs/v1_6/ForDummies.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/docs/v1_6/FrequentlyAskedQuestions.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/docs/v1_7/CheatSheet.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/docs/v1_7/CookBook.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/docs/v1_7/Documentation.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/docs/v1_7/ForDummies.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/docs/v1_7/FrequentlyAskedQuestions.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/scripts/fuse_gmock_files.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/scripts/generator/README" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/scripts/generator/README.cppclean" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/scripts/generator/cpp/__init__.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/scripts/generator/cpp/ast.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/scripts/generator/cpp/gmock_class.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/scripts/generator/cpp/gmock_class_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/scripts/generator/cpp/keywords.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/scripts/generator/cpp/tokenize.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/scripts/generator/cpp/utils.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/scripts/generator/gmock_gen.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/scripts/gmock-config.in" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/scripts/gmock_doctor.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/scripts/upload.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/scripts/upload_gmock.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock_leak_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock_output_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock_output_test_golden.txt" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googlemock/test/gmock_test_utils.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/CHANGES" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/CONTRIBUTORS" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/README.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/cmake/internal_utils.cmake" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/configure.ac" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/AdvancedGuide.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/DevGuide.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/Documentation.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/FAQ.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/Primer.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/PumpManual.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/Samples.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/V1_5_AdvancedGuide.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/V1_5_Documentation.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/V1_5_FAQ.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/V1_5_Primer.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/V1_5_PumpManual.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/V1_5_XcodeGuide.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/V1_6_AdvancedGuide.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/V1_6_Documentation.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/V1_6_FAQ.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/V1_6_Primer.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/V1_6_PumpManual.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/V1_6_Samples.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/V1_6_XcodeGuide.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/V1_7_AdvancedGuide.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/V1_7_Documentation.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/V1_7_FAQ.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/V1_7_Primer.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/V1_7_PumpManual.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/V1_7_Samples.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/V1_7_XcodeGuide.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/docs/XcodeGuide.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/scripts/common.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/scripts/fuse_gtest_files.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/scripts/gen_gtest_pred_impl.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/scripts/gtest-config.in" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/scripts/pump.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/scripts/release_docs.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/scripts/upload.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/scripts/upload_gtest.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_break_on_failure_unittest.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_catch_exceptions_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_color_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_env_var_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_filter_unittest.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_help_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_list_tests_unittest.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_output_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_output_test_golden_lin.txt" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_shuffle_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_test_utils.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_throw_on_failure_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_uninitialized_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_xml_outfiles_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_xml_output_unittest.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/test/gtest_xml_test_utils.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/xcode/Samples/FrameworkSample/runtests.sh" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/xcode/Scripts/runtests.sh" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/googletest/xcode/Scripts/versiongenerate.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/googletest/travis.sh" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/inc/README.md" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/inc/Temporary/README.md" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/src/Assembler/GenerateModRMTest.ps1" />
@@ -1240,152 +724,28 @@
     <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/src/Assembler/asmAndFormat.ps1" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/src/CodeGen/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/src/NativeJIT/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/test/CodeGen/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/test/NativeJIT/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/NativeJIT/test/Shared/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/README.md" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/examples/QueryParser/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/README.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/CHANGES" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/CONTRIBUTORS" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/README.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/configure.ac" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/docs/CheatSheet.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/docs/CookBook.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/docs/DesignDoc.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/docs/DevGuide.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/docs/Documentation.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/docs/ForDummies.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/docs/FrequentlyAskedQuestions.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/docs/KnownIssues.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/docs/v1_5/CheatSheet.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/docs/v1_5/CookBook.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/docs/v1_5/Documentation.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/docs/v1_5/ForDummies.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/docs/v1_5/FrequentlyAskedQuestions.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/docs/v1_6/CheatSheet.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/docs/v1_6/CookBook.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/docs/v1_6/Documentation.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/docs/v1_6/ForDummies.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/docs/v1_6/FrequentlyAskedQuestions.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/docs/v1_7/CheatSheet.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/docs/v1_7/CookBook.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/docs/v1_7/Documentation.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/docs/v1_7/ForDummies.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/docs/v1_7/FrequentlyAskedQuestions.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/scripts/fuse_gmock_files.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/scripts/generator/README" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/scripts/generator/README.cppclean" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/scripts/generator/cpp/__init__.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/scripts/generator/cpp/ast.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/scripts/generator/cpp/gmock_class.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/scripts/generator/cpp/gmock_class_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/scripts/generator/cpp/keywords.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/scripts/generator/cpp/tokenize.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/scripts/generator/cpp/utils.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/scripts/generator/gmock_gen.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/scripts/gmock-config.in" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/scripts/gmock_doctor.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/scripts/upload.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/scripts/upload_gmock.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock_leak_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock_output_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock_output_test_golden.txt" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googlemock/test/gmock_test_utils.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/CHANGES" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/CONTRIBUTORS" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/README.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/cmake/internal_utils.cmake" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/configure.ac" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/AdvancedGuide.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/DevGuide.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/Documentation.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/FAQ.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/Primer.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/PumpManual.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/Samples.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/V1_5_AdvancedGuide.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/V1_5_Documentation.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/V1_5_FAQ.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/V1_5_Primer.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/V1_5_PumpManual.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/V1_5_XcodeGuide.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/V1_6_AdvancedGuide.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/V1_6_Documentation.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/V1_6_FAQ.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/V1_6_Primer.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/V1_6_PumpManual.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/V1_6_Samples.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/V1_6_XcodeGuide.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/V1_7_AdvancedGuide.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/V1_7_Documentation.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/V1_7_FAQ.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/V1_7_Primer.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/V1_7_PumpManual.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/V1_7_Samples.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/V1_7_XcodeGuide.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/docs/XcodeGuide.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/scripts/common.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/scripts/fuse_gtest_files.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/scripts/gen_gtest_pred_impl.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/scripts/gtest-config.in" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/scripts/pump.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/scripts/release_docs.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/scripts/upload.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/scripts/upload_gtest.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_break_on_failure_unittest.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_catch_exceptions_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_color_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_env_var_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_filter_unittest.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_help_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_list_tests_unittest.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_output_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_output_test_golden_lin.txt" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_shuffle_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_test_utils.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_throw_on_failure_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_uninitialized_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_xml_outfiles_test.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_xml_output_unittest.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/test/gtest_xml_test_utils.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/xcode/Samples/FrameworkSample/runtests.sh" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/xcode/Scripts/runtests.sh" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/googletest/xcode/Scripts/versiongenerate.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/googletest/travis.sh" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/loc.sh" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Chunks/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Chunks/src/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Chunks/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CmdLineParser/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CmdLineParser/src/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CmdLineParser/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Configuration/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Configuration/src/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Configuration/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CsvTsv/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CsvTsv/src/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Common/CsvTsv/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/src/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Common/Utilities/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Data/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Data/src/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Index/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Index/src/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Index/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Mocks/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Mocks/src/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Mocks/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/src/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Plan/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Scripts/README.md" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Scripts/cachelines.py" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Scripts/compare-docfreqs.py" />
@@ -1415,16 +775,12 @@
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Scripts/verify.py" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Scripts/wc-history.py" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/src/Scripts/zipf.py" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/test/Shared/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/test/Shared/README.md" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/tools/BitFunnel/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/tools/BitFunnel/src/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/tools/BitFunnel/src/StatisticsBuilderREADME.md" />
-    <Text Include="../../thirdparty/owemdjee/BitFunnel/tools/BitFunnel/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/BitFunnel/tools/CsvExtract/CMakeLists.txt" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
