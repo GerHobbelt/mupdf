@@ -927,7 +927,7 @@ pdf_load_version(fz_context *ctx, pdf_document *doc)
 
 	fz_seek(ctx, doc->file, 0, SEEK_SET);
 	fz_read_line(ctx, doc->file, buf, sizeof buf);
-	if (strlen(buf) < 5 || memcmp(buf, "%PDF-", 5) != 0)
+	if (strlen(buf) < 5 || (memcmp(buf, "%PDF-", 5) != 0 && memcmp(buf, "%FDF-", 5) != 0))
 	{
 		// is this PDF not a PDF but a HTML file? (probably a 404 page which got downloaded incorrectly)
 		int is_bad_download = !!(strstr(buf, "DOCTYPE") && strstr(buf, "html"));
@@ -936,6 +936,8 @@ pdf_load_version(fz_context *ctx, pdf_document *doc)
 		else
 			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot recognize version marker: expected '%%PDF-n.n', but reading '%s'", buf);
 	}
+	if (buf[1] == 'F')
+		doc->is_fdf = 1;
 
 	doc->version = 10 * (fz_atof(buf+5) + 0.05f);
 	if (doc->version < 10 || doc->version > 17)
@@ -1848,6 +1850,13 @@ pdf_init_document(fz_context *ctx, pdf_document *doc)
 		}
 
 		pdf_load_version(ctx, doc);
+
+		if (doc->is_fdf)
+		{
+			doc->file_reading_linearly = 0;
+			repaired = 1;
+			break; /* skip to end of try/catch */
+		}
 
 		/* Try to load the linearized file if we are in progressive
 		 * mode. */
