@@ -212,6 +212,7 @@ struct fz_stext_line
 struct fz_stext_char
 {
 	int c;
+	int bidi; /* even for LTR, odd for RTL */
 	int color; /* sRGB hex color */
 	fz_point origin;
 	fz_quad quad;

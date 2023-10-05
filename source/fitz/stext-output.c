@@ -665,16 +665,18 @@ fz_print_stext_page_as_xml(fz_context *ctx, fz_output *out, fz_stext_page *page,
 					if (fz_quad_is_axis_oriented(ch->quad))
 					{
 						fz_rect bb = fz_rect_from_quad(ch->quad);
-						fz_write_printf(ctx, out, "<char rect=\"%R\" x=\"%g\" y=\"%g\" color=\"#%06x\" c=\"",
+						fz_write_printf(ctx, out, "<char rect=\"%R\" x=\"%g\" y=\"%g\" bidi=\"%d\" color=\"#%06x\" c=\"",
 							&bb,
 							ch->origin.x, ch->origin.y,
+							ch->bidi,
 							ch->color);
 					}
 					else
 					{
-						fz_write_printf(ctx, out, "<char quad=\"%Z\" x=\"%g\" y=\"%g\" color=\"#%06x\" c=\"",
+						fz_write_printf(ctx, out, "<char quad=\"%Z\" x=\"%g\" y=\"%g\" bidi=\"%d\" color=\"#%06x\" c=\"",
 							&ch->quad,
 							ch->origin.x, ch->origin.y,
+							ch->bidi,
 							ch->color);
 					}
 					switch (ch->c)
