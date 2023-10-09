@@ -357,6 +357,32 @@ vec_dot(const fz_point *a, const fz_point *b)
 	return a->x * b->x + a->y * b->y;
 }
 
+static int may_add_space(int lastchar)
+{
+	if (lastchar != ' ')
+	{
+		/* basic latin, greek, cyrillic, hebrew, arabic unicode blocks */
+		if (lastchar < 0x700)
+			return 1;
+		switch (ucdn_get_script(lastchar))
+		{
+		case UCDN_SCRIPT_COMMON:
+		case UCDN_SCRIPT_LATIN:
+		case UCDN_SCRIPT_GREEK:
+		case UCDN_SCRIPT_CYRILLIC:
+		case UCDN_SCRIPT_HEBREW:
+		case UCDN_SCRIPT_ARABIC:
+		case UCDN_SCRIPT_HANGUL:
+		case UCDN_SCRIPT_HIRAGANA:
+		case UCDN_SCRIPT_KATAKANA:
+		case UCDN_SCRIPT_BOPOMOFO:
+		case UCDN_SCRIPT_HAN:
+			return 1;
+		}
+	}
+	return 0;
+}
+
 static void
 fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int c, int glyph, fz_matrix trm, float adv, int wmode, int bidi, int force_new_line)
 {
@@ -503,7 +529,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 				/* And any other small jump could be a missing space. */
 				else if (logical_spacing < 0 && logical_spacing > -SPACE_MAX_DIST)
 				{
-					if (dev->lastchar != ' ' && wmode == 0)
+					if (wmode == 0 && may_add_space(dev->lastchar))
 						add_space = 1;
 					new_line = 0;
 				}
@@ -511,7 +537,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 				else if (spacing > 0 && spacing < SPACE_MAX_DIST)
 				{
 					bidi = 3; /* mark line as visual */
-					if (dev->lastchar != ' ' && wmode == 0)
+					if (wmode == 0 && may_add_space(dev->lastchar))
 						add_space = 1;
 					new_line = 0;
 				}
@@ -534,7 +560,7 @@ fz_add_stext_char_imp(fz_context *ctx, fz_stext_device *dev, fz_font *font, int 
 				else if (spacing > 0 && spacing < SPACE_MAX_DIST)
 				{
 					/* Motion is forward in line and large enough to warrant us adding a space. */
-					if (dev->lastchar != ' ' && wmode == 0)
+					if (wmode == 0 && may_add_space(dev->lastchar))
 						add_space = 1;
 					new_line = 0;
 				}
