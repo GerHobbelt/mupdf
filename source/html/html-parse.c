@@ -2437,69 +2437,6 @@ detect_txt_encoding(fz_context *ctx, fz_buffer *buf)
 	return ENCODING_ASCII;
 }
 
-static int
-fz_read_utf8(fz_context *ctx, fz_stream *in)
-{
-	int c = fz_read_byte(ctx, in);
-
-	if ((c & 0xF8) == 0xF0)
-	{
-		uint8_t d = fz_read_byte(ctx, in);
-		c = (c & 7)<<18;
-		if ((d & 0xC0) == 0x80)
-		{
-			uint8_t e = fz_read_byte(ctx, in);
-			c += (d & 0x3f)<<12;
-			if ((e & 0xC0) == 0x80)
-			{
-				uint8_t f = fz_read_byte(ctx, in);
-				c += (e & 0x3f)<<6;
-				if ((f & 0xC0) == 0x80)
-				{
-					c += f & 0x3f;
-				}
-				else
-					fz_unread_byte(ctx, in);
-			}
-			else
-				fz_unread_byte(ctx, in);
-		}
-		else
-			fz_unread_byte(ctx, in);
-	}
-	else if ((c & 0xF0) == 0xE0)
-	{
-		uint8_t d = fz_read_byte(ctx, in);
-		c = (c & 15)<<12;
-		if ((d & 0xC0) == 0x80)
-		{
-			uint8_t e = fz_read_byte(ctx, in);
-			c += (d & 0x3f)<<6;
-			if ((e & 0xC0) == 0x80)
-			{
-				c += e & 0x3f;
-			}
-			else
-				fz_unread_byte(ctx, in);
-		}
-		else
-			fz_unread_byte(ctx, in);
-	}
-	else if ((c & 0xE0) == 0xC0)
-	{
-		uint8_t d = fz_read_byte(ctx, in);
-		c = (c & 31)<<6;
-		if ((d & 0xC0) == 0x80)
-		{
-			c += d & 0x3f;
-		}
-		else
-			fz_unread_byte(ctx, in);
-	}
-
-	return c;
-}
-
 static fz_buffer *
 fz_txt_buffer_to_html(fz_context *ctx, fz_buffer *in)
 {
