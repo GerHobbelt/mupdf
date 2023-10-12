@@ -65,7 +65,8 @@ PRAGMA main.user_version;
 
 --.quit
 
-
+-- https://www.sqlite.org/foreignkeys.html
+PRAGMA foreign_keys = ON;
 
 --------------------------------------------------------------
 
@@ -281,7 +282,7 @@ CREATE TABLE metadata_root(
 --
 CREATE TABLE metadata_record(
 	id INTEGER PRIMARY KEY,
-	root INTEGER REFERENCES metadata_root,					-- just a helper so we can filter extract the revision history subgraph for the given document
+	root INTEGER REFERENCES metadata_root,					-- just a helper so we can filter/extract the revision history subgraph for the given document
 
 	key TEXT,                       -- semi-unique key used as document identifier in paper references, e.g. "Knuth69A". Can and will be regenerated; MAY NOT be unique when records have been imported from external sources.
 	type TEXT,                      -- article, masterthesis,book,techreport,... - See also the Putnam bibutils for an exhaustive list as we'll be using those tools to straighten up these records when incoming.
@@ -300,8 +301,8 @@ CREATE TABLE metadata_record(
 	note TEXT,						-- Any additional information that can help the reader.
 	number TEXT,					-- The number of a journal, magazine, technical report, or of a work in a series.
 	organization TEXT,
-	pages TEXT,						-- One or more page numbers or range of numbers, such as 42-111 or 7,41,73-97 or 43+
-	page_count INTEGER,
+	pages TEXT,						-- One or more page numbers or range of numbers, such as 42-111 or 7,41,73-97 or 43+. Used when this is part of a larger publication.
+	page_count INTEGER,             -- the page count according to public info / consensus or the actual page count of the electronic docunment we have in store. These would be stored in separate records
 	publisher TEXT,
 	school TEXT,
 	series TEXT,
@@ -394,21 +395,42 @@ CREATE TABLE party(
 
 
 
+-- definition table for the `purpose` columns elsewhere. (An 'enum', in 'C' parlance.)
+CREATE TABLE purpose(
+	id INTEGER PRIMARY KEY,
+	category INTEGER,   -- so we encode for which relation this MAY be used: author, affiliation, revision/edit, ...
+	purpose TEXT
+						-- author, primary author, subsidiary author, sponsor, editor, conference editor, series editor, investigator, translator, ..., 
+						-- publisher, sponsor, conference organizer, *corporate author*, ...
+ 						-- employer, sponsor, ..., colleague, project lead, ...
+                        -- DB commit specific purposes: duplicate, (re)published, original, cleaned, decrypted, OCR-ed, edited, annotated, translated, sourced, ...
+);
+
+
+
+
 CREATE TABLE author4metarecord(
 	metarecord INTEGER REFERENCES metadata_record,
 	party INTEGER REFERENCES party,
-	purpose TEXT,			-- author, primary author, subsidiary author, sponsor, editor, conference editor, series editor, investigator, translator, ..., publisher, sponsor, conference organizer, *corporate author*, ...
+	purpose INTEGER NOT NULL REFERENCES purpose,			
+						-- author, primary author, subsidiary author, sponsor, editor, conference editor, series editor, investigator, translator, ..., 
+						-- publisher, sponsor, conference organizer, *corporate author*, ...
 
 	PRIMARY KEY(metarecord, party, purpose)
 )  WITHOUT ROWID;
 
+
+
 CREATE TABLE affiliation4author(
 	party INTEGER REFERENCES party,
 	affiliation INTEGER REFERENCES party,
-	purpose TEXT,				-- employer, sponsor, ..., colleague, project lead, ...
+	purpose INTEGER NOT NULL REFERENCES purpose,			
+ 						-- employer, sponsor, ..., colleague, project lead, ...
 
 	PRIMARY KEY(party, affiliation, purpose)
 )  WITHOUT ROWID;
+
+
 
 CREATE TABLE url4metarecord(
 	id INTEGER PRIMARY KEY,
@@ -418,6 +440,8 @@ CREATE TABLE url4metarecord(
 	function TEXT					-- original, preprint, ...
 );
 
+
+
 CREATE TABLE cited_ref4metarecord(
 	metarecord INTEGER REFERENCES metadata_record,
 	cited_metarecord INTEGER REFERENCES metadata_record,
@@ -425,6 +449,8 @@ CREATE TABLE cited_ref4metarecord(
 
 	PRIMARY KEY(metarecord, cited_metarecord, function)
 ) WITHOUT ROWID;
+
+
 
 CREATE TABLE grouping4metarecord(
 	child_metarecord INTEGER REFERENCES metadata_record,		-- child element, e.g. paper (a.k.a. article)
@@ -436,26 +462,43 @@ CREATE TABLE grouping4metarecord(
 ) WITHOUT ROWID;
 
 
+
 --
 -- used to track edit history and publication history both:
 --
 CREATE TABLE revision4metarecord(
 	revision INTEGER PRIMARY KEY,
-	root INTEGER REFERENCES metadata_root,					-- just a helper so we can filter extract the revision history subgraph for the given document
+	root INTEGER NOT NULL REFERENCES metadata_root,					-- just a helper so we can filter extract the revision history subgraph for the given document
 
-	current_metarecord INTEGER REFERENCES metadata_record,
+	current_metarecord INTEGER NOT NULL REFERENCES metadata_record,
 	prev_A_metarecord INTEGER REFERENCES metadata_record,
 	prev_B_metarecord INTEGER REFERENCES metadata_record,	-- NULL, unless this is a merge revision (merging A + B -> current)
 
-	mark REAL,						-- timestamp when observed / committed / TBD...
-	purpose TEXT,					-- duplicate, (re)published, original, cleaned, decrypted, OCR-ed, edited, annotated, translated, ...
-	notes TEXT
+	mark REAL,						 -- timestamp when observed / committed / TBD...
+	author INTEGER NOT NULL REFERENCES party, 
+	                                 -- the author of this revision record. MAY be an automaton, e.q. "Qiqqa Heuristics Robot #NNN", 
+	                                 -- where #NNN would identify the actual machine where this was inserted. 
+									 --
+									 -- Why a direct 1:1 link and not a simple entry in the author4metarecord table? Well, because:
+									 -- 1. there can only be ONE author of a "commit", i.e. a database edit like this. This is a technical action and has nothing to do 
+									 --    with the authors who will be mentioned in metadata or are otherwise related to the document by having them added to that relation table
+									 --    by the owner(s) of this database.
+									 -- 2. this author in particular is NOT NULL restricted as *every* edit to our revision set should be tracable to an editor, 
+									 --    whether man or machine.
+	purpose INTEGER NOT NULL REFERENCES purpose,			
+	                                 -- duplicate, (re)published, original, cleaned, decrypted, OCR-ed, edited, annotated, translated, sourced, ...
+	                                 --
+									 -- 'sourced' means this record revision carries information which has been imported from "external sources" (which can be *anything*).
+									 -- This is our way to collect and store public bibTeX records and such, as this way allows us to freely remix such "foreign" content
+									 -- with local user- or automation-driven "edits", which would be stored in additional metarecords. This also ensures we'll always
+									 -- be dig up where a particular bit of (meta)data originated from.
+	notes TEXT                       -- like a "git commit -m" message. Optional.
 );
 
 
 PRAGMA table_list;
 
-PRAGMA schema.user_version = 1 ;
+PRAGMA schema.user_version = 1;
 PRAGMA schema.user_version;
 
 .dbinfo
