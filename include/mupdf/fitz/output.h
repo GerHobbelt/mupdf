@@ -582,7 +582,7 @@ extern const char* fz_hex_digits;
 
 /**
 	Our customised 'printf'-like string formatter.
-	Takes `%c`, `%d`, `%i`, `%s`, `%u`, `%x` as usual and supports most POSIX printf()
+	Takes `%c`, `%d`, `%i`, `%s`, `%u`, `%x`, `%X` as usual and supports most POSIX printf()
 	features. Where it differs is with the extra formatters (e.g. `%H`), the extra
 	modifiers (e.g. `j`) and the handling of *negative* precision values.
 
@@ -619,7 +619,7 @@ extern const char* fz_hex_digits;
 
 	`%f` and `%e` output as usual.
 
-	`%x` prints an integer number as hexadecimal value, as usual.
+	`%x` and `%X` print an integer number as hexadecimal value, as usual. (lowercase and uppercase, resp.)
 
 	`%d` and `%i` print a signed integer number as decimal value, as usual.
 
@@ -712,18 +712,18 @@ extern const char* fz_hex_digits;
 	hex escapes.
 	The `j` modifier signals all commands (exceptions listed below) to print
 	quotes surrounding the output (thus producing a JSON-compliant
-	string). This includes the numeric and array types `%e`, `%f`, `%g`, `%d`, `%i`, `%u`, `%x`, `%B`, `%R`, `%Z`, `%P`, `%M`.
+	string). This includes the numeric and array types `%e`, `%f`, `%g`, `%d`, `%i`, `%u`, `%x`, `%X`, `%B`, `%R`, `%Z`, `%P`, `%M`.
 	E.g. `%jd` of `5` will produce the quoted string `"5"`, `%,jP` will produce the string value `"12, 42"` for value `{12, 42}`.
 	Exceptions to this rule are `%(`, which ignores the `j` modifier entirely, and `%s`, which only uses
 	the `j` modifier when printing non-`NULL`-input under *negative* precision conditions: see `%s` above.
 
-	`%l{d,i,u,x,B}` indicates that the values are `int64_t`.
-	`%ll{d,i,u,x,B}` is treated as synonymous to %l{d,i,u,x,B}.
-	`%t{d,i,u,x,B}` indicates that the value is a `ptrdiff_t`.
-	`%z{d,i,u,x,B}` indicates that the value is a `size_t`.
-	`%I64{d,i,u,x,B}` indicates that the value is a `uint64_t/int64_t`.
-	`%I32{d,i,u,x,B}` indicates that the value is a `uint32_t/int32_t`.
-	`%I16{d,i,u,x,B}` indicates that the value is a `uint16_t/int16_t`.
+	`%l{d,i,u,x,X,B}` indicates that the values are `int64_t`.
+	`%ll{d,i,u,x,X,B}` is treated as synonymous to %l{d,i,u,x,B}.
+	`%t{d,i,u,x,X,B}` indicates that the value is a `ptrdiff_t`.
+	`%z{d,i,u,x,X,B}` indicates that the value is a `size_t`.
+	`%I64{d,i,u,x,X,B}` indicates that the value is a `uint64_t/int64_t`.
+	`%I32{d,i,u,x,X,B}` indicates that the value is a `uint32_t/int32_t`.
+	`%I16{d,i,u,x,X,B}` indicates that the value is a `uint16_t/int16_t`.
 
 	The expected order of the modifiers is:
 	- any of the { '-', '+', ' ', '0' } modifiers, in any order and any number of occurrences

@@ -48,6 +48,7 @@ int snprintf(char *s, size_t n, const char *fmt, ...)
 #endif
 
 const char *fz_hex_digits = "0123456789ABCDEF";
+static const char *fz_hex_digits_UC = "0123456789ABCDEF";
 
 #define FMT_DEFAULT_FLOAT_PRECISION		6
 
@@ -138,12 +139,19 @@ static void fmtuint32(struct fmtbuf *out, unsigned int a, int s, int z, int w, i
 {
 	char buf[100];
 	int i;
+	const char *hex_digits = fz_hex_digits;
+
+	if (base < 0)
+	{
+		base = -base;
+		hex_digits = fz_hex_digits_UC;
+	}
 
 	i = 0;
 	if (a == 0)
 		buf[i++] = '0';
 	while (a) {
-		buf[i++] = fz_hex_digits[a % base];
+		buf[i++] = hex_digits[a % base];
 		a /= base;
 	}
 	if (s) {
@@ -162,12 +170,19 @@ static void fmtuint64(struct fmtbuf *out, uint64_t a, int s, int z, int w, int b
 {
 	char buf[100];
 	int i;
+	const char *hex_digits = fz_hex_digits;
+
+	if (base < 0)
+	{
+		base = -base;
+		hex_digits = fz_hex_digits_UC;
+	}
 
 	i = 0;
 	if (a == 0)
 		buf[i++] = '0';
 	while (a) {
-		buf[i++] = fz_hex_digits[a % base];
+		buf[i++] = hex_digits[a % base];
 		a /= base;
 	}
 	if (s) {
@@ -1182,11 +1197,10 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 					fmtputc(&out, '0');
 					fmtputc(&out, 'x');
 				}
-				// WARNING: non-standard behaviour: both %x and %X produce *UPPERCASE* hex!
 				if (bits == 64)
 				{
 					uint64_t i64 = va_arg(args, uint64_t);
-					fmtuint64(&out, i64, 0, z, w, 16);
+					fmtuint64(&out, i64, 0, z, w, c == 'X' ? -16 : 16);
 				}
 				else
 				{
@@ -1202,7 +1216,7 @@ fz_format_string(fz_context *ctx, void *user, void (*emit)(fz_context *ctx, void
 						iv = va_arg(args, unsigned int);
 					}
 
-					fmtuint32(&out, iv, 0, z, w, 16);
+					fmtuint32(&out, iv, 0, z, w, c == 'X' ? -16 : 16);
 				}
 				if (j)
 					fmtputc(&out, '"');
