@@ -32,6 +32,7 @@
 
 #define BUILD_MONOLITHIC 1
 #include "../../thirdparty/tesseract/include/tesseract/capi_training_tools.h"
+#include "../../thirdparty/tesseract_ocr_test/testing/monolithic_tests.h"
 #include "../../thirdparty/owemdjee/libwebp/extras/tools.h"
 #include "../../thirdparty/owemdjee/pmt-png-tools/pngtools-monolithic.h"
 #include "../../thirdparty/owemdjee/upskirt-markdown/bin/monolithic_examples.h"
@@ -158,6 +159,8 @@ static struct tool_spec {
 
 	{ {.fa = tesseract_test_issue_845_main }, "tess_test_issue_845", "tesseract test issue #845 utility" },
 	{ {.fa = tesseract_test_issue_ML_1bba6c_main }, "tess_test_issue_ML_1", "tesseract test issue ML-1bba6c utility" },
+
+	{ {.fa = tesseract_basicAPI_test_main }, "tess_test_basicAPI", "tesseract test basicAPI" },
 #endif
 
 	{ {.fa = curl_main }, "curl", "access/fetch a given URI" },
