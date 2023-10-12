@@ -49,34 +49,34 @@ function unixify(path) {
 }
 
 function xmlEncode(path) {
-	return path.replace(/["'<>&;?*]/g, function (m) {
-		switch (m) {
-			case '"':
-				return "&quot;";
+    return path.replace(/["'<>&;?*]/g, function (m) {
+        switch (m) {
+            case '"':
+                return "&quot;";
 
-			case "'":
-				return "&apos;";
+            case "'":
+                return "&apos;";
 
-			case "<":
-				return "&lt;";
+            case "<":
+                return "&lt;";
 
-			case ">":
-				return "&gt;";
+            case ">":
+                return "&gt;";
 
-			case "&":
-				return "&amp;";
+            case "&":
+                return "&amp;";
 
-			case ";":
-				console.warn("WARNING: Filename contains semicolon. Using Unicode homoglyph to appease MSVC, but you SHOULD rename the bugger to be safe!\n    File:", path);
-				return ";";  // use a Unicode homoglyph as MSVC20XX b0rks on projects including files which include a semicolon in their name -- even when you HTML-entity-encode the bugger!
+            case ";":
+                console.warn("WARNING: Filename contains semicolon. Using Unicode homoglyph to appease MSVC, but you SHOULD rename the bugger to be safe!\n    File:", path);
+                return ";";  // use a Unicode homoglyph as MSVC20XX b0rks on projects including files which include a semicolon in their name -- even when you HTML-entity-encode the bugger!
 
-			case "?":
-			case "*":
-				console.warn(`WARNING: Filename contains wildcard '${m}'. Using underscore to appease MSVC, but you MUST rename the bugger to be safe!\n    File:`, path);
-				return "_";
-		}
-		return m;
-	});
+            case "?":
+            case "*":
+                console.warn(`WARNING: Filename contains wildcard '${m}'. Using underscore to appease MSVC, but you MUST rename the bugger to be safe!\n    File:`, path);
+                return "_";
+        }
+        return m;
+    });
 }
 
 let filepath = process.argv[2];
@@ -87,37 +87,37 @@ if (!fs.existsSync(filepath)) {
 }
 
 let spec = {
-	nasm_or_masm: 0,   // 0: auto; -1: masm; +1: nasm
-	ignores: [
-		'thirdparty/',
-		'third_party/',
-		'3rd_party/',
-		'3rdparty/',
-		'owemdjee/',
-		'3rd/',
-		'/b/',             // our in-company default cmake build work directory. NOT '/build/' as many projects already have that one as part of their source tree!
-		'CMakeFiles/',
-		'CMakeModules/',
-		'cmake/modules/',
-		'cmake/checks/',
-		'fuzz.*',
-		'node_modules/',
-		'obj/Debug[^/]*',
-		'obj/Release[^/]*',
-	],
-	sources: [],
-	directories: [],
-	special_inject: null,
+    nasm_or_masm: 0,   // 0: auto; -1: masm; +1: nasm
+    ignores: [
+        'thirdparty/',
+        'third_party/',
+        '3rd_party/',
+        '3rdparty/',
+        'owemdjee/',
+        '3rd/',
+        '/b/',             // our in-company default cmake build work directory. NOT '/build/' as many projects already have that one as part of their source tree!
+        'CMakeFiles/',
+        'CMakeModules/',
+        'cmake/modules/',
+        'cmake/checks/',
+        'fuzz.*',
+        'node_modules/',
+        'obj/Debug[^/]*',
+        'obj/Release[^/]*',
+    ],
+    sources: [],
+    directories: [],
+    special_inject: null,
 };
 
 let rawSourcesPath = process.argv[3] || '';
 if (DEBUG > 2) console.error({argv: process.argv, rawSourcesPath})
 if (rawSourcesPath.trim() !== '') {
-	let pa = rawSourcesPath
-	.split(';')
-	.map((line) => line.trim());
+    let pa = rawSourcesPath
+    .split(';')
+    .map((line) => line.trim());
 
-	spec.directories.push(...pa);
+    spec.directories.push(...pa);
 }
 
 let specPath = filepath.replace(/\.vcxproj/, '.spec');
@@ -134,9 +134,9 @@ if (fs.existsSync(specPath)) {
   if (DEBUG > 1) console.error("RAW PREPROC'D SPEC [START]:", {rawSpec, spec});
   
   if (/^NASM/im.test(rawSpec))
-	  spec.nasm_or_masm = 1;
+      spec.nasm_or_masm = 1;
   else if (/^MASM/im.test(rawSpec))
-	  spec.nasm_or_masm = -1;
+      spec.nasm_or_masm = -1;
 
   if (/^ignore:/m.test(rawSpec)) {
     if (DEBUG > 0) console.log("SPEC include [ignore] section...");
@@ -269,6 +269,7 @@ const specialFilenames = [
   "SConscript"
 ];
 let specialFilenameRes = [];
+let specialFileExtensionRes = [];
 
 function isSpecialMiscFile(f) {
   let name = path.basename(f);
@@ -283,6 +284,32 @@ function isSpecialMiscFile(f) {
     if (re.test(name))
       return true;
   }
+
+  if (specialFileExtensionRes.length === 0) {
+  	// Parse the extra_accepted_file_extensions.lst file:
+	  let fname = "extra_accepted_file_extensions.filelist";
+    let extsPath = unixify(path.resolve(fname));
+    if (!fs.existsSync(extsPath)) {
+      console.error(`ERROR: cannot find file "${extsPath}".`);
+      process.exit(1);
+    }
+    let extlist = fs.readFileSync(extsPath, 'utf8').split('\n')
+	  .map((line) => line.trim())
+	  .filter((line) => line.length > 0 && !/^[#;]/.test(line));
+	
+	  //console.log("extlist", extlist);
+    for (let i = 0, len = extlist.length; i < len; i++) {
+      let mre = new RegExp(`${ extlist[i] }$`, 'i');
+      specialFileExtensionRes[i] = mre;
+    }
+  }
+
+  let ext = path.extname(f);
+  for (let re of specialFileExtensionRes) {
+    if (re.test(ext))
+      return true;
+  }
+
   return false;
 }
 
@@ -298,42 +325,42 @@ if (DEBUG > 2) console.error({spec})
 // turn all ignores[] into regexes:
 spec.ignores = spec.ignores
 .map(f => {
-	//
-	// we use the next heuristic to detect 'literal paths' instead of regexes: 
-	//
-	// 1. when the path does not contain any special regex char (except '.') 
-	//    then it's a literal filename (or directory/path); 
-	// 2. when it does not start with a '/' we assume it's an *entire* directory or file name, 
-	//    i.e. 'ger.c' would then not be meant to match 'bugger.c'...
-	// 3. anything else is a regex that can match ANY part of a filename/path.
-	//
-	// When these regexes are tested, the path-to-test has ALWAYS been prefixed with '/'
-	// so the obvious and easy way to write a regex which matches only whole file and
-	// directory names is to start it with a '/', e.g. regex '/[A-D]+' would match
-	// '/x/y/AAAA/z' but not '/x/yAAAA/z'.
-	//
-	if (!/[()\[\]?:*+{}]/.test(f)) {
-		// a literal path --> convert to regex format:
-		f = f.replace(/[.]/g, '[.]')
-		.replace(/\\/g, '/');
+    //
+    // we use the next heuristic to detect 'literal paths' instead of regexes: 
+    //
+    // 1. when the path does not contain any special regex char (except '.') 
+    //    then it's a literal filename (or directory/path); 
+    // 2. when it does not start with a '/' we assume it's an *entire* directory or file name, 
+    //    i.e. 'ger.c' would then not be meant to match 'bugger.c'...
+    // 3. anything else is a regex that can match ANY part of a filename/path.
+    //
+    // When these regexes are tested, the path-to-test has ALWAYS been prefixed with '/'
+    // so the obvious and easy way to write a regex which matches only whole file and
+    // directory names is to start it with a '/', e.g. regex '/[A-D]+' would match
+    // '/x/y/AAAA/z' but not '/x/yAAAA/z'.
+    //
+    if (!/[()\[\]?:*+{}]/.test(f)) {
+        // a literal path --> convert to regex format:
+        f = f.replace(/[.]/g, '[.]')
+        .replace(/\\/g, '/');
 
-		// when ignore path starts with '/' it means to match from start of (reduced) file path!
-		if (f.startsWith('/')) {
-			f = '^' + f;
-		}
-		else {
-			f = '/' + f;
-		}
-	}
-	else {
-		// a regex: no path \ -> / conversion applied as that mistake any regex escape character for a path separator!
-	}
+        // when ignore path starts with '/' it means to match from start of (reduced) file path!
+        if (f.startsWith('/')) {
+            f = '^' + f;
+        }
+        else {
+            f = '/' + f;
+        }
+    }
+    else {
+        // a regex: no path \ -> / conversion applied as that mistake any regex escape character for a path separator!
+    }
 
-	if (DEBUG > 1) console.error("'ignore' line half-way through conversion to regex:", {f})
-	
-	let re = new RegExp(f);
-	
-	return re;
+    if (DEBUG > 1) console.error("'ignore' line half-way through conversion to regex:", {f})
+    
+    let re = new RegExp(f);
+    
+    return re;
 });
 
 if (DEBUG > 1) console.error({spec})
@@ -350,7 +377,7 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
     return f.replace(sourcesPath + '/', '');
   })
   .filter((f) => {
-    let f4f = '/' + f;	  
+    let f4f = '/' + f;    
     if (spec.ignores.length > 0) {
       for (const sp of spec.ignores) {
         if (sp.test(f4f)) {
@@ -380,59 +407,6 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
         }
         if (base.length > 0) {
             base = 'Source Files/' + base;
-            filterDirs.add(base);
-        }
-        return true;
-
-    case '.ac':
-    case '.am':
-    case '.bkl':
-    case '.cmd':
-    case '.cppcode':
-    case '.csv':
-    case '.cmake':
-    case '.config':
-    case '.conf':
-    case '.cfg':
-    case '.bazel':
-    case '.gcc':
-    case '.gperf':
-    case '.htcpp':
-    case '.in':
-    case '.js':
-    case '.jscode':
-    case '.json':
-    case '.l':
-    case '.lua':
-    case '.luacode':
-    case '.md':
-    case '.msc':
-    case '.phpcode':
-    case '.p1':
-    case '.ps1':
-    case '.py':
-    case '.pythoncode':
-    case '.rst':
-    case '.rtf':
-    case '.s':
-    case '.sh':
-    case '.bat':
-    case '.cmd':
-    case '.ts':
-    case '.txt':
-    case '.unx':
-    case '.vc':
-    case '.xml':
-    case '.y':
-    case '.tcl':
-    case '.nsi':
-        filterDirs.add('Misc Files');
-        base = path.dirname(f);
-        if (base === '.') {
-          base = '';
-        }
-        if (base.length > 0) {
-            base = 'Misc Files/' + base;
             filterDirs.add(base);
         }
         return true;
@@ -759,19 +733,19 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
         base = base.replace(/\//g, '\\');
         if (DEBUG > 3) console.error("item -- re-construct the file:", {item, rawSourcesPath, is_dir})
         f = unixify(is_dir ? `${rawSourcesPath}/${item}` : `${rawSourcesPath}`).replace(/\/\//g, '/');
-	let do_nasm = spec.nasm_or_masm;
-	if (!do_nasm) {
-		do_nasm = /masm/.test(f) ? -1 : +1;
-	}
-	let asmexe =  do_nasm < 0 ? "MASM" : "NASM";
-        slot = `
+        let do_nasm = spec.nasm_or_masm;
+        if (!do_nasm) {
+            do_nasm = /masm/.test(f) ? -1 : +1;
+        }
+        let asmexe =  do_nasm < 0 ? "MASM" : "NASM";
+            slot = `
     <${ asmexe } Include="${xmlEncode(f)}">
       <Filter>${xmlEncode(base)}</Filter>
     </${ asmexe }>
-        `;
-        filesToAdd.push(slot);
+            `;
+            filesToAdd.push(slot);
 
-        slot = `
+            slot = `
     <${ asmexe } Include="${xmlEncode(f)}" />
         `;
         filesToAddToProj.push(slot);
@@ -863,47 +837,47 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
 
 
 function process_path(rawSourcesPath, is_dir) {
-	if (DEBUG > 1) console.error("process_path RAW:", {rawSourcesPath, is_dir});
-	while (/\/[^.\/][^\/]*\/\.\.\//.test(rawSourcesPath)) {
-		rawSourcesPath = rawSourcesPath.replace(/\/[^.\/][^\/]*\/\.\.\//, '/')
-	}
-	
-	let sourcesPath = unixify(path.resolve(rawSourcesPath.trim()));
-	if (DEBUG > 1) console.error("process_path NORMALIZED:", {rawSourcesPath, sourcesPath, is_dir});
-	if (!fs.existsSync(sourcesPath)) {
-	    console.error("Non-existing path specified:", sourcesPath);
-	    process.exit(1);
-	}
+    if (DEBUG > 1) console.error("process_path RAW:", {rawSourcesPath, is_dir});
+    while (/\/[^.\/][^\/]*\/\.\.\//.test(rawSourcesPath)) {
+        rawSourcesPath = rawSourcesPath.replace(/\/[^.\/][^\/]*\/\.\.\//, '/')
+    }
+    
+    let sourcesPath = unixify(path.resolve(rawSourcesPath.trim()));
+    if (DEBUG > 1) console.error("process_path NORMALIZED:", {rawSourcesPath, sourcesPath, is_dir});
+    if (!fs.existsSync(sourcesPath)) {
+        console.error("Non-existing path specified:", sourcesPath);
+        process.exit(1);
+    }
 
-	const globConfig = Object.assign({}, globDefaultOptions, {
-	  nodir: !is_dir,
-	  cwd: is_dir ? sourcesPath : path.dirname(sourcesPath)
-	});
+    const globConfig = Object.assign({}, globDefaultOptions, {
+      nodir: !is_dir,
+      cwd: is_dir ? sourcesPath : path.dirname(sourcesPath)
+    });
 
-	let pathWithWildCards = is_dir ? '*' : path.basename(sourcesPath);
-	if (DEBUG > 2) console.error("process_path GLOB:", {pathWithWildCards, globConfig, cwd: globConfig.cwd, is_dir});
+    let pathWithWildCards = is_dir ? '*' : path.basename(sourcesPath);
+    if (DEBUG > 2) console.error("process_path GLOB:", {pathWithWildCards, globConfig, cwd: globConfig.cwd, is_dir});
 
-	let files_rec = glob(pathWithWildCards, globConfig);
-	if (DEBUG > 2) console.error("process_path GLOB DONE:", {pathWithWildCards, globConfig, cwd: files_rec.cwd, is_dir, found: files_rec.found});
-	process_glob_list(files_rec.found, files_rec.cwd, is_dir, rawSourcesPath);
+    let files_rec = glob(pathWithWildCards, globConfig);
+    if (DEBUG > 2) console.error("process_path GLOB DONE:", {pathWithWildCards, globConfig, cwd: files_rec.cwd, is_dir, found: files_rec.found});
+    process_glob_list(files_rec.found, files_rec.cwd, is_dir, rawSourcesPath);
 }
 
 
 
 if (spec.special_inject != null) {
-	fsrc1_arr.push(spec.special_inject);
+    fsrc1_arr.push(spec.special_inject);
 }
 
 
 
 for (let f of spec.sources) {
-	process_path(f, false);
+    process_path(f, false);
 }
 for (let f of spec.directories) {
-	process_path(f, true);
+    process_path(f, true);
 }
 
-	
+    
 filterSrc = filterSrc.replace(/<\/Project>[\s\r\n]*$/, fsrc2_arr.join('\n') + `
 </Project>
 `)
