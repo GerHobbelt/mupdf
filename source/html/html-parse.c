@@ -2348,6 +2348,326 @@ fz_story_warnings(fz_context *ctx, fz_story *story)
 	return (const char *)data;
 }
 
+enum { ENCODING_ASCII, ENCODING_UTF8, ENCODING_UTF8_BOM, ENCODING_UTF16_LE, ENCODING_UTF16_BE };
+
+static int
+detect_txt_encoding(fz_context *ctx, fz_buffer *buf)
+{
+	const uint8_t *d = buf->data;
+	size_t len = buf->len;
+	const uint8_t *end = buf->data + len;
+	int count_tabs = 0;
+	int count_hi = 0;
+	int count_controls = 0;
+	int plausibly_utf8 = 1;
+
+	/* If we find a BOM, believe it. */
+	if (len >= 3 && d[0] == 0xef && d[1] == 0xbb && d[2] == 0xBF)
+		return ENCODING_UTF8_BOM;
+	else if (len >= 2 && d[0] == 0xff && d[1] == 0xfe)
+		return ENCODING_UTF16_LE;
+	else if (len >= 2 && d[0] == 0xfe && d[1] == 0xff)
+		return ENCODING_UTF16_BE;
+
+	while (d < end)
+	{
+		uint8_t c = *d++;
+		if (c == 9)
+			count_tabs++;
+		else if (c == 12)
+		{
+			/* Form feed. Ignore that. */
+		}
+		else if (c == 10)
+		{
+			if (d < end && d[0] == 13)
+				d++;
+		}
+		else if (c == 13)
+		{
+			if (d < end && d[0] == 10)
+				d++;
+		}
+		else if (c < 32 || c == 0x7f)
+			count_controls++;
+		else if (c < 0x7f)
+		{
+			/* Reasonable ASCII value */
+		}
+		else
+		{
+			count_hi++;
+			if ((c & 0xf8) == 0xF0)
+			{
+				/* Could be UTF8 with 3 following bytes */
+				if (d+2 >= end ||
+					(d[0] & 0xC0) != 0x80 ||
+					(d[1] & 0xC0) != 0x80 ||
+					(d[2] & 0xC0) != 0x80)
+					plausibly_utf8 = 0;
+				else
+					d += 3;
+			}
+			else if ((c & 0xf0) == 0xE0)
+			{
+				/* Could be UTF8 with 2 following bytes */
+				if (d+1 >= end ||
+					(d[0] & 0xC0) != 0x80 ||
+					(d[1] & 0xC0) != 0x80)
+					plausibly_utf8 = 0;
+				else
+					d += 2;
+			}
+			else if ((c & 0xE0) == 0xC0)
+			{
+				/* Could be UTF8 with 1 following bytes */
+				if (d+1 >= end ||
+					(d[0] & 0xC0) != 0x80)
+					plausibly_utf8 = 0;
+				else
+					d++;
+			}
+			else
+				plausibly_utf8 = 0;
+		}
+	}
+
+	if (plausibly_utf8)
+		return ENCODING_UTF8;
+	return ENCODING_ASCII;
+}
+
+static int
+fz_read_utf8(fz_context *ctx, fz_stream *in)
+{
+	int c = fz_read_byte(ctx, in);
+
+	if ((c & 0xF8) == 0xF0)
+	{
+		uint8_t d = fz_read_byte(ctx, in);
+		c = (c & 7)<<18;
+		if ((d & 0xC0) == 0x80)
+		{
+			uint8_t e = fz_read_byte(ctx, in);
+			c += (d & 0x3f)<<12;
+			if ((e & 0xC0) == 0x80)
+			{
+				uint8_t f = fz_read_byte(ctx, in);
+				c += (e & 0x3f)<<6;
+				if ((f & 0xC0) == 0x80)
+				{
+					c += f & 0x3f;
+				}
+				else
+					fz_unread_byte(ctx, in);
+			}
+			else
+				fz_unread_byte(ctx, in);
+		}
+		else
+			fz_unread_byte(ctx, in);
+	}
+	else if ((c & 0xF0) == 0xE0)
+	{
+		uint8_t d = fz_read_byte(ctx, in);
+		c = (c & 15)<<12;
+		if ((d & 0xC0) == 0x80)
+		{
+			uint8_t e = fz_read_byte(ctx, in);
+			c += (d & 0x3f)<<6;
+			if ((e & 0xC0) == 0x80)
+			{
+				c += e & 0x3f;
+			}
+			else
+				fz_unread_byte(ctx, in);
+		}
+		else
+			fz_unread_byte(ctx, in);
+	}
+	else if ((c & 0xE0) == 0xC0)
+	{
+		uint8_t d = fz_read_byte(ctx, in);
+		c = (c & 31)<<6;
+		if ((d & 0xC0) == 0x80)
+		{
+			c += d & 0x3f;
+		}
+		else
+			fz_unread_byte(ctx, in);
+	}
+
+	return c;
+}
+
+static fz_buffer *
+fz_txt_buffer_to_html(fz_context *ctx, fz_buffer *in)
+{
+	int encoding = detect_txt_encoding(ctx, in);
+	fz_stream *stream = fz_open_buffer(ctx, in);
+	fz_buffer *outbuf = NULL;
+	fz_output *out = NULL;
+	int in_para = 0;
+	int last_newline = 0;
+	int col = 0;
+
+	fz_var(outbuf);
+	fz_var(out);
+
+	fz_try(ctx)
+	{
+		outbuf = fz_new_buffer(ctx, 1024);
+		out = fz_new_output_with_buffer(ctx, outbuf);
+
+		fz_write_printf(ctx, out, "<HTML><HEAD><TITLE></TITLE></HEAD><BODY>");
+
+		if (encoding == ENCODING_UTF16_LE || encoding == ENCODING_UTF16_BE)
+		{
+			fz_read_byte(ctx, stream);
+			fz_read_byte(ctx, stream);
+		}
+		else if (encoding == ENCODING_UTF8_BOM)
+		{
+			fz_read_byte(ctx, stream);
+			fz_read_byte(ctx, stream);
+			fz_read_byte(ctx, stream);
+		}
+
+		while (!fz_is_eof(ctx, stream))
+		{
+			int c;
+			switch (encoding)
+			{
+			default:
+			case ENCODING_ASCII:
+				c = fz_read_byte(ctx, stream);
+				break;
+			case ENCODING_UTF8:
+			case ENCODING_UTF8_BOM:
+				c = fz_read_utf8(ctx, stream);
+				break;
+			case ENCODING_UTF16_LE:
+				c = fz_read_int16_le(ctx, stream);
+				break;
+			case ENCODING_UTF16_BE:
+				c = fz_read_int16(ctx, stream);
+			}
+
+			if (c == 10 || c == 13)
+			{
+				if (in_para)
+				{
+					fz_write_printf(ctx, out, "</p>");
+					in_para = 0;
+					last_newline = c;
+					continue;
+				}
+				else if (last_newline == c)
+				{
+					fz_write_printf(ctx, out, "<p><br/></p>");
+				}
+				else
+				{
+					/* We just had the other newline! This must be a DOSism. */
+					/* Skip this one. Leave last_newline the same in case we get
+					 * 10/13/10/13. */
+					continue;
+				}
+			}
+			else
+				last_newline = 0;
+			if (!in_para)
+			{
+				fz_write_printf(ctx, out, "<p>");
+				in_para = 1;
+				col = 0;
+			}
+			if (c == ' ')
+				fz_write_printf(ctx, out, "&ensp;");
+			else if (c == 9)
+			{
+				int n = (8 - col) & 7;
+				if (n == 0)
+					n = 8;
+				col += n-1;
+				while (n--)
+				{
+					fz_write_printf(ctx, out, "&ensp;");
+				}
+			}
+			else if (c == '<')
+				fz_write_printf(ctx, out, "&lt;");
+			else if (c == '>')
+				fz_write_printf(ctx, out, "&gt;");
+#if 0
+			else if (c >= 0x10000)
+			{
+				fz_write_byte(ctx, out, 0xF0 + (c>>18));
+				fz_write_byte(ctx, out, 0xC0 + ((c>>12) & 0x3F));
+				fz_write_byte(ctx, out, 0xC0 + ((c>>6) & 0x3F));
+				fz_write_byte(ctx, out, 0xC0 + (c & 0x3F));
+			}
+			else if (c >= 0x800)
+			{
+				fz_write_byte(ctx, out, 0xE0 + (c>>12));
+				fz_write_byte(ctx, out, 0xC0 + ((c>>6) & 0x3F));
+				fz_write_byte(ctx, out, 0xC0 + (c & 0x3F));
+			}
+			else if (c >= 0x80)
+			{
+				fz_write_byte(ctx, out, 0xE0 + (c>>6));
+				fz_write_byte(ctx, out, 0xC0 + (c & 0x3F));
+			}
+#else
+			else if (c >= 0x80)
+				fz_write_printf(ctx, out, "&#x%x;", c);
+#endif
+			else
+				fz_write_byte(ctx, out, c);
+			col++;
+		}
+
+		if (in_para)
+		{
+			fz_write_printf(ctx, out, "</p>");
+		}
+
+
+		fz_close_output(ctx, out);
+	}
+	fz_always(ctx)
+	{
+		fz_drop_stream(ctx, stream);
+		fz_drop_output(ctx, out);
+	}
+	fz_catch(ctx)
+	{
+		fz_drop_buffer(ctx, outbuf);
+		fz_rethrow(ctx);
+	}
+
+
+	return outbuf;
+}
+
+fz_html *
+fz_parse_txt(fz_context *ctx, fz_html_font_set *set, fz_archive *zip, const char *base_uri, fz_buffer *buf, const char *user_css)
+{
+	fz_buffer *htmlbuf = fz_txt_buffer_to_html(ctx, buf);
+	fz_html *html;
+
+	fz_try(ctx)
+	{
+		html = fz_parse_html_imp(ctx, set, zip, base_uri, htmlbuf, user_css, 1, 1, 1);
+	}
+	fz_always(ctx)
+		fz_drop_buffer(ctx, htmlbuf);
+	fz_catch(ctx)
+		fz_rethrow(ctx);
+
+	return html;
+}
+
 
 /* Copies fz_story_element_position and page number into a
 fz_story_tocwrite_item, using fz_strdup() for strings. */
