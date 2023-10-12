@@ -2519,7 +2519,7 @@ fz_txt_buffer_to_html(fz_context *ctx, fz_buffer *in)
 		outbuf = fz_new_buffer(ctx, 1024);
 		out = fz_new_output_with_buffer(ctx, outbuf);
 
-		fz_write_printf(ctx, out, "<HTML><HEAD><TITLE></TITLE></HEAD><BODY>");
+		fz_write_string(ctx, out, "<!doctype html><style>pre{white-space:pre-wrap}</style><pre>");
 
 		if (encoding == ENCODING_UTF16_LE || encoding == ENCODING_UTF16_BE)
 		{
@@ -2544,46 +2544,20 @@ fz_txt_buffer_to_html(fz_context *ctx, fz_buffer *in)
 				break;
 			case ENCODING_UTF8:
 			case ENCODING_UTF8_BOM:
-				c = fz_read_utf8(ctx, stream);
+				c = fz_read_rune(ctx, stream);
 				break;
 			case ENCODING_UTF16_LE:
-				c = fz_read_int16_le(ctx, stream);
+				c = fz_read_utf16_le(ctx, stream);
 				break;
 			case ENCODING_UTF16_BE:
-				c = fz_read_int16(ctx, stream);
+				c = fz_read_utf16_be(ctx, stream);
 			}
 
 			if (c == 10 || c == 13)
 			{
-				if (in_para)
-				{
-					fz_write_printf(ctx, out, "</p>");
-					in_para = 0;
-					last_newline = c;
-					continue;
-				}
-				else if (last_newline == c)
-				{
-					fz_write_printf(ctx, out, "<p><br/></p>");
-				}
-				else
-				{
-					/* We just had the other newline! This must be a DOSism. */
-					/* Skip this one. Leave last_newline the same in case we get
-					 * 10/13/10/13. */
-					continue;
-				}
+				col = -1;
+				fz_write_byte(ctx, out, c);
 			}
-			else
-				last_newline = 0;
-			if (!in_para)
-			{
-				fz_write_printf(ctx, out, "<p>");
-				in_para = 1;
-				col = 0;
-			}
-			if (c == ' ')
-				fz_write_printf(ctx, out, "&ensp;");
 			else if (c == 9)
 			{
 				int n = (8 - col) & 7;
@@ -2591,47 +2565,19 @@ fz_txt_buffer_to_html(fz_context *ctx, fz_buffer *in)
 					n = 8;
 				col += n-1;
 				while (n--)
-				{
-					fz_write_printf(ctx, out, "&ensp;");
-				}
+					fz_write_byte(ctx, out, ' ');
 			}
 			else if (c == '<')
-				fz_write_printf(ctx, out, "&lt;");
+				fz_write_string(ctx, out, "&lt;");
 			else if (c == '>')
-				fz_write_printf(ctx, out, "&gt;");
-#if 0
-			else if (c >= 0x10000)
-			{
-				fz_write_byte(ctx, out, 0xF0 + (c>>18));
-				fz_write_byte(ctx, out, 0xC0 + ((c>>12) & 0x3F));
-				fz_write_byte(ctx, out, 0xC0 + ((c>>6) & 0x3F));
-				fz_write_byte(ctx, out, 0xC0 + (c & 0x3F));
-			}
-			else if (c >= 0x800)
-			{
-				fz_write_byte(ctx, out, 0xE0 + (c>>12));
-				fz_write_byte(ctx, out, 0xC0 + ((c>>6) & 0x3F));
-				fz_write_byte(ctx, out, 0xC0 + (c & 0x3F));
-			}
-			else if (c >= 0x80)
-			{
-				fz_write_byte(ctx, out, 0xE0 + (c>>6));
-				fz_write_byte(ctx, out, 0xC0 + (c & 0x3F));
-			}
-#else
-			else if (c >= 0x80)
-				fz_write_printf(ctx, out, "&#x%x;", c);
-#endif
+				fz_write_string(ctx, out, "&gt;");
+			else if (c == '"')
+				fz_write_string(ctx, out, "&quot;");
 			else
-				fz_write_byte(ctx, out, c);
-			col++;
-		}
+				fz_write_rune(ctx, out, c);
 
-		if (in_para)
-		{
-			fz_write_printf(ctx, out, "</p>");
+			++col;
 		}
-
 
 		fz_close_output(ctx, out);
 	}
@@ -2658,7 +2604,7 @@ fz_parse_txt(fz_context *ctx, fz_html_font_set *set, fz_archive *zip, const char
 
 	fz_try(ctx)
 	{
-		html = fz_parse_html_imp(ctx, set, zip, base_uri, htmlbuf, user_css, 1, 1, 1);
+		html = fz_parse_html_imp(ctx, set, zip, base_uri, htmlbuf, user_css, 0, 1, 0);
 	}
 	fz_always(ctx)
 		fz_drop_buffer(ctx, htmlbuf);
