@@ -228,7 +228,7 @@ typedef void fz_process_stext_referenced_image_f(fz_context* ctx, fz_output* out
 typedef void fz_process_stext_styles_f(fz_context* ctx, fz_output* out, fz_stext_block* block, int pagenum, int object_index, const fz_stext_options* options);
 
 /**
-	Options for creating a pixmap and draw device.
+	Options for creating structured text.
 */
 struct fz_stext_options
 {
