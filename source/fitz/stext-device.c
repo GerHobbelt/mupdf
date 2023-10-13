@@ -768,7 +768,7 @@ flush_text(fz_context *ctx, fz_stext_device *dev)
 }
 
 static void
-fz_add_stext_char(fz_context *ctx, fz_stext_device *dev, fz_font *font, int c, int glyph, fz_matrix trm, float adv, int wmode, int force_new_line)
+fz_add_stext_char(fz_context *ctx, fz_stext_device *dev, fz_font *font, int c, int glyph, fz_matrix trm, float adv, int wmode, int bidi, int force_new_line)
 {
 	/* ignore when one unicode character maps to multiple glyphs */
 	if (c == -1)
@@ -780,10 +780,10 @@ fz_add_stext_char(fz_context *ctx, fz_stext_device *dev, fz_font *font, int c, i
 
 		if (replacement)
 		{
-			fz_add_stext_char_imp(ctx, dev, font, *replacement++, glyph, trm, adv, wmode, force_new_line);
+			fz_add_stext_char_imp(ctx, dev, font, *replacement++, glyph, trm, adv, wmode, bidi, force_new_line);
 			while (*replacement)
 			{
-				fz_add_stext_char_imp(ctx, dev, font, *replacement++, -1, trm, 0, wmode, 0);
+				fz_add_stext_char_imp(ctx, dev, font, *replacement++, -1, trm, 0, wmode, bidi, 0);
 			}
 			return;
 		}
