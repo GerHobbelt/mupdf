@@ -22,80 +22,98 @@
 const char *fz_optarg = NULL;    /* Global argument pointer. */
 int fz_optind = 0;               /* Global argv index. */
 static int fz_optlen = 0;        /* Option length. */
+const fz_getopt_long_options *fz_optlong = NULL;
+int fz_optitem = 0;              /* Which item in a long opt list is selected? */
 
-static const char *
-find_short_option(const char *str, char c)
+static int
+match_long_option(int argc, const char * const *argv, const fz_getopt_long_options *longopts, const char *opt)
 {
-	char d;
-
-	while ((d = *str++) != 0)
+	if (longopts == NULL)
 	{
-		if (d == c)
-		{
-			fz_optlen = 1;
-			return str;
-		}
-		/* Are we on a long option? */
-		if (d == '-')
-		{
-			/* Skip to the next one. */
-			while ((d = *str++) != 0 && d != ',');
-		}
+		fz_error(NULL, "%s: unknown option --%s\n", argv[0], opt);
+		return '?';
 	}
 
-	return NULL;
-}
-
-static const char *
-find_long_option(const char **strp, const char *opt)
-{
-	char d;
-	const char *str = *strp;
-
-	while ((d = *str++) != 0)
+	while (longopts->option)
 	{
-		/* Nothing more to do for a short option. For a long option, try to match. */
-		if (d == '-')
+		const char *s = longopts->option;
+		const char *eq = strchr(s, '=');
+		size_t z = eq ? (size_t)(eq-s) : strlen(s);
+		int arg = 0; /* No arg */
+
+		if (s[z] == '=')
+			arg = 1; /* arg = 1 => Arg list given */
+		else if (z && s[z-1] == ':')
+			arg = 2, z--; /* arg = 2 -> argument expected */
+
+		/* If we don't match, try the next one. */
+		/* If we aren't expecting an argument, and the given string is longer than expected, try the next one. */
+		/* If we are expecting an argument, and the given string doesn't either terminate or end in '=', try the next one. */
+		if (strncmp(s, opt, z) || (arg == 0 && opt[z] != 0) || (arg != 0 && opt[z] != 0 && opt[z] != '='))
 		{
-			/* Long option */
-			const char *o = opt;
-			const char *s = str;
-			while (*o && *s == *o && *s != ',' && *s != ':')
-				s++, o++;
-			if ((*o == 0 || *o == '=') && (*s == 0 || *s == ',' || *s == ':'))
+			longopts++;
+			continue;
+		}
+
+		/* So we have a match. */
+		fz_optind++;
+		if (opt[z])
+			fz_optarg = &opt[z+1];
+		else if (fz_optind < argc)
+			fz_optarg = argv[fz_optind++];
+		else
+		{
+			fz_error(NULL, "%s: option requires argument --%s\n", fz_basename(argv[0]), s);
+			return ':';
+		}
+
+		/* If there is an arg from a predefined list, try to match that here. */
+		if (arg == 1)
+		{
+			fz_optitem = fz_opt_from_list(&opt[z+1], &s[z+1]);
+			if (longopts->flag)
+				*longopts->flag = fz_optitem;
+			if (fz_optitem < 0)
+				return '?';
+		}
+		else if (arg == 2 && longopts->flag)
+		{
+			char *p = strchr(fz_optarg, ',');
+			if (*fz_optarg == 0)
 			{
-				/* Matched */
-				fz_optlen = o - opt;
-				*strp = str;
-				return s;
+				fz_error(NULL, "%s: option requires argument --%s\n", fz_basename(argv[0]), s);
+				return ':';
 			}
-			/* Skip to the end of the long option that we failed to match */
-			while (*s != 0) {
-				d = *s++;
-				if (d == ',' || d == ':')
-					break;
-			}
-			str = s;
+			else if (!fz_strcasecmp(fz_optarg, "yes") || !fz_strcasecmp(fz_optarg, "on") || !fz_strcasecmp(fz_optarg, "true"))
+				*longopts->flag = 1;
+			else if (!fz_strcasecmp(fz_optarg, "no") || !fz_strcasecmp(fz_optarg, "off") || !fz_strcasecmp(fz_optarg, "false"))
+				*longopts->flag = 0;
+			else
+				*longopts->flag = fz_atoi(fz_optarg);
+			fz_optarg = p ? p+1 : NULL;
 		}
+		fz_optlong = longopts;
+		return 0;
 	}
 
-	*strp = NULL;
-	return NULL;
+	fz_error(NULL, "%s: unknown option --%s\n", fz_basename(argv[0]), opt);
+	return '?';
 }
 
 static const char *scan = NULL; /* Private scan pointer. */
-static const char *longopt = NULL;
 
 int
-fz_getopt(int argc, const char * const *argv, const char *optstring)
+fz_getopt_long(int argc, const char * const *argv, const char *optstring, const fz_getopt_long_options *longopts)
 {
 	int c;
 	const char *place;
-	int long_option = 0;
 
 	fz_optarg = NULL;
+	fz_optlong = NULL;
+	fz_optitem = -1;
 
-	if (!scan || *scan == '\0') {
+	while (!scan || *scan == '\0')
+	{
 		if (fz_optind == 0)
 			fz_optind++;
 
@@ -106,29 +124,24 @@ fz_getopt(int argc, const char * const *argv, const char *optstring)
 			return EOF;
 		}
 		if (argv[fz_optind][1] == '-')
-			long_option = 1;
+		{
+			scan = NULL;
+			return match_long_option(argc, argv, longopts, &argv[fz_optind][2]);
+		}
 
-		scan = argv[fz_optind]+1+long_option;
+		scan = argv[fz_optind]+1;
 		fz_optind++;
 	}
 
-	if (long_option) {
-		c = FZ_LONGOPT;
-		longopt = optstring;
-		place = find_long_option(&longopt, scan);
-		scan += fz_optlen;
-		if (*scan == '=')
-			scan++;
-	} else {
-		c = *scan++;
-		place = find_short_option(optstring, c);
-	}
+	c = *scan++;
+	place = strchr(optstring, c);
 
 	if (!place || c == ':') {
 		fz_error(NULL, "%s: unknown option -%c", fz_basename(argv[0]), c);
 		return '?';
 	}
 
+	place++;
 	if (*place == ':') {
 		if (*scan != '\0') {
 			fz_optarg = scan;
@@ -150,15 +163,16 @@ void fz_getopt_reset(void)
 	fz_optind = 0;
 	fz_optarg = NULL;
 	fz_optlen = 0;
+	fz_optlong = NULL;
+	fz_optitem = 0;
 
 	scan = NULL;
 }
 
-int fz_longopt_is(const char *opt)
+int
+fz_getopt(int argc, const char *const *argv, const char *optstring)
 {
-	if (longopt && !strncmp(opt, longopt, fz_optlen))
-		return 1;
-	return 0;
+	return fz_getopt_long(argc, argv, optstring, NULL);
 }
 
 int
@@ -170,19 +184,50 @@ fz_opt_from_list(const char *opt, const char *optlist)
 	{
 		const char *optend = optlist;
 
-		while (*optend != 0 && *optend != '|')
+		if (*optend == '*')
+		{
+			fz_optarg = opt;
+			return n;
+		}
+
+		while (*optend != 0 && *optend != '|' && *optend != ':')
 			optend++;
 
-		if (!fz_strncasecmp(optlist, opt, optend-optlist) && (opt[optend-optlist] == 0 || opt[optend-optlist] == ','))
+		if (fz_strncasecmp(optlist, opt, optend-optlist))
+		{
+			/* We didn't match. Carry on. */
+		}
+		else if (opt[optend-optlist] == 0)
+		{
+			/* We matched, ending in NUL */
+			fz_optarg = NULL;
 			return n;
+		}
+		else if (*optend == ':' && opt[optend-optlist] == ':')
+		{
+			/* We matched, and we both have some arguments and expected some. */
+			fz_optarg = &opt[optend-optlist+1];
+			return n;
+		}
 
 		n++;
+		if (*optend == ':')
+		{
+			optend++;
+			if (*optend == '|')
+				optend++;
+			else if (*optend != 0)
+			{
+				fz_error(NULL, "Malformed options string");
+				return -1;
+			}
+		}
 		if (*optend == '|')
 			optend++;
 		optlist = optend;
 	}
 
-	fz_error(NULL, "Unrecognised option: %s", opt);
+	fz_error(NULL, "Unrecognised option argument: %s\n", opt);
 	return -1;
 }
 
