@@ -73,6 +73,12 @@
 /* Support LZMA2 compression */
 #undef LZMA_SUPPORT 
 
+#undef PACKAGE
+#undef PACKAGE_BUGREPORT 
+#undef PACKAGE_NAME 
+#undef PACKAGE_TARNAME 
+#undef PACKAGE_URL 
+
 /* Name of package */
 #define PACKAGE "tiff"
 
