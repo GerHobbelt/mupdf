@@ -994,6 +994,7 @@ static int run_tool(struct tool_spec *spec, int argc, const char **argv, int tim
 
 	fz_free(ctx, exe_path);
 	fz_free(ctx, argarr);
+	fz_ReleaseHeapSnapshot(snapshot);
 	return rv;
 }
 

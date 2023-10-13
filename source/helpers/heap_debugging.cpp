@@ -263,6 +263,11 @@ void *fz_TakeHeapSnapshot(void)
 	return data;
 }
 
+void fz_ReleaseHeapSnapshot(void *snapshot)
+{
+	free(snapshot);
+}
+
 void fz_ReportHeapLeakageAgainstSnapshot(void *snapshot_)
 {
 	_CrtMemState *snapshot = (_CrtMemState *)snapshot_;

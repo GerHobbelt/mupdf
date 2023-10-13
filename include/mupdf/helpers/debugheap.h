@@ -39,6 +39,7 @@ void fz_TurnHeapLeakReportingAtProgramExitOn(void);
 
 void *fz_TakeHeapSnapshot(void);
 void fz_ReportHeapLeakageAgainstSnapshot(void *snapshot_);
+void fz_ReleaseHeapSnapshot(void *snapshot);                  // counterpart of fz_TakeHeapSnapshot()
 
 #ifdef __cplusplus
 }
@@ -59,6 +60,7 @@ static int prefix ## HEAPDBG_SECTION_END = fzPopHeapDbgPurpose(prefix ## HEAPDBG
 
 #define fz_TakeHeapSnapshot()							 ((void *)0)
 #define fz_ReportHeapLeakageAgainstSnapshot(snap)		 ((void)0)
+#define fz_ReleaseHeapSnapshot(snapshot)			     ((void)0)
 
 #endif
 
