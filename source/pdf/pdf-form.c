@@ -1067,16 +1067,10 @@ pdf_create_signature_widget(fz_context *ctx, pdf_page *page, char *name)
 		pdf_obj *acroform = pdf_dict_get(ctx, root, PDF_NAME(AcroForm));
 		pdf_obj *fields, *lock;
 		if (!acroform)
-		{
-			acroform = pdf_new_dict(ctx, page->doc, 1);
-			pdf_dict_put_drop(ctx, root, PDF_NAME(AcroForm), acroform);
-		}
+			acroform = pdf_dict_put_dict(ctx, root, PDF_NAME(AcroForm), 1);
 		fields = pdf_dict_get(ctx, acroform, PDF_NAME(Fields));
 		if (!fields)
-		{
-			fields = pdf_new_array(ctx, page->doc, 1);
-			pdf_dict_put_drop(ctx, acroform, PDF_NAME(Fields), fields);
-		}
+			fields = pdf_dict_put_dict(ctx, acroform, PDF_NAME(Fields), 1);
 		pdf_set_annot_rect(ctx, annot, rect);
 		pdf_dict_put(ctx, obj, PDF_NAME(FT), PDF_NAME(Sig));
 		pdf_dict_put_int(ctx, obj, PDF_NAME(F), PDF_ANNOT_IS_PRINT);

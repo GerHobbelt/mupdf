@@ -1973,7 +1973,10 @@ write_variable_text(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, pdf_obj *
 	fz_try(ctx)
 	{
 		if (!*res)
+		{
+			pdf_drop_obj(ctx, *res);
 			*res = pdf_new_dict(ctx, annot->page->doc, 1);
+		}
 		res_font = pdf_dict_put_dict(ctx, *res, PDF_NAME(Font), 1);
 		add_required_fonts(ctx, annot->page->doc, res_font, lang, font, fontname, text);
 
