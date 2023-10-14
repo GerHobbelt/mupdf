@@ -150,11 +150,8 @@ copy_resource(fz_context *ctx, pdf_sanitize_processor *p, pdf_obj *key, const ch
 	if (obj)
 	{
 		res = pdf_dict_get(ctx, p->rstack->new_rdb, key);
-		if (!res)
-		{
-			res = pdf_new_dict(ctx, pdf_get_bound_document(ctx, p->rstack->new_rdb), 1);
-			pdf_dict_put_drop(ctx, p->rstack->new_rdb, key, res);
-		}
+		if (!pdf_is_dict(ctx, res))
+			res = pdf_dict_put_dict(ctx, p->rstack->new_rdb, key, 1);
 		pdf_dict_putp(ctx, res, name, obj);
 	}
 }
@@ -163,7 +160,7 @@ static void
 add_resource(fz_context *ctx, pdf_sanitize_processor *p, pdf_obj *key, const char *name, pdf_obj *val)
 {
 	pdf_obj *res = pdf_dict_get(ctx, p->rstack->new_rdb, key);
-	if (!res)
+	if (!pdf_is_dict(ctx, res))
 		res = pdf_dict_put_dict(ctx, p->rstack->new_rdb, key, 8);
 	pdf_dict_puts(ctx, res, name, val);
 }
@@ -173,7 +170,7 @@ create_resource_name(fz_context *ctx, pdf_sanitize_processor *p, pdf_obj *key, c
 {
 	int i;
 	pdf_obj *res = pdf_dict_get(ctx, p->rstack->new_rdb, key);
-	if (!res)
+	if (!pdf_is_dict(ctx, res))
 		res = pdf_dict_put_dict(ctx, p->rstack->new_rdb, key, 8);
 	for (i = 1; i < 65536; ++i)
 	{

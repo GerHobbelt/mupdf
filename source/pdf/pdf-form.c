@@ -1369,17 +1369,13 @@ void pdf_choice_widget_set_value(fz_context *ctx, pdf_annot *tw, int n, const ch
 
 	begin_annot_op(ctx, annot, "Set choice");
 
-	fz_var(optarr);
 	fz_try(ctx)
 	{
 		if (n != 1)
 		{
-			optarr = pdf_new_array(ctx, annot->page->doc, n);
-
+			optarr = pdf_dict_put_dict(ctx, annot->obj, PDF_NAME(V), n);
 			for (i = 0; i < n; i++)
 				pdf_array_push_text_string(ctx, optarr, opts[i]);
-
-			pdf_dict_put_drop(ctx, annot->obj, PDF_NAME(V), optarr);
 		}
 		else
 			pdf_dict_put_text_string(ctx, annot->obj, PDF_NAME(V), opts[0]);
@@ -1393,7 +1389,6 @@ void pdf_choice_widget_set_value(fz_context *ctx, pdf_annot *tw, int n, const ch
 	fz_catch(ctx)
 	{
 		abandon_annot_op(ctx, annot);
-		pdf_drop_obj(ctx, optarr);
 		fz_rethrow(ctx);
 	}
 }
@@ -1914,14 +1909,12 @@ void pdf_signature_set_value(fz_context *ctx, pdf_document *doc, pdf_obj *field,
 	pdf_obj *a = NULL;
 	pdf_obj *b = NULL;
 	pdf_obj *l = NULL;
-	pdf_obj *indv;
 	int vnum;
 	size_t max_digest_size;
 	char *buf = NULL;
 
 	vnum = pdf_create_object(ctx, doc);
-	indv = pdf_new_indirect(ctx, doc, vnum, 0);
-	pdf_dict_put_drop(ctx, field, PDF_NAME(V), indv);
+	pdf_dict_put_indirect(ctx, field, PDF_NAME(V), vnum, 0);
 
 	max_digest_size = signer->max_digest_size(ctx, signer);
 
@@ -1983,7 +1976,7 @@ void pdf_signature_set_value(fz_context *ctx, pdf_document *doc, pdf_obj *field,
 		if (pdf_name_eq(ctx, l, PDF_NAME(Include)) || pdf_name_eq(ctx, l, PDF_NAME(Exclude)))
 		{
 			/* For action Include and Exclude, we need to encode a Fields array */
-			if (!a)
+			if (!pdf_is_array(ctx, a))
 			{
 				/* If one wasn't defined or we chose to ignore it because no action
 				 * was defined then use an empty one. */

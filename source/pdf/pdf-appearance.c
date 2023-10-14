@@ -150,7 +150,7 @@ pdf_write_opacity_blend_mode(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, 
 
 	/* /Resources << /ExtGState << /H << /Type/ExtGState /BM/Multiply /CA %g /ca %g >> >> >> */
 
-	if (!*res)
+	if (!pdf_is_dict(ctx, *res))
 		*res = pdf_new_dict(ctx, annot->page->doc, 1);
 
 	res_egs = pdf_dict_put_dict(ctx, *res, PDF_NAME(ExtGState), 1);
@@ -1379,7 +1379,7 @@ pdf_write_stamp_appearance(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, fz
 	fz_try(ctx)
 	{
 		/* /Resources << /Font << /Times %d 0 R >> >> */
-		if (!*res)
+		if (!pdf_is_dict(ctx, *res))
 			*res = pdf_new_dict(ctx, annot->page->doc, 1);
 		res_font = pdf_dict_put_dict(ctx, *res, PDF_NAME(Font), 1);
 		pdf_dict_put_drop(ctx, res_font, PDF_NAME(Times), pdf_add_simple_font(ctx, annot->page->doc, font, PDF_SIMPLE_ENCODING_NONE));
@@ -1973,10 +1973,7 @@ write_variable_text(fz_context *ctx, pdf_annot *annot, fz_buffer *buf, pdf_obj *
 	fz_try(ctx)
 	{
 		if (!*res)
-		{
-			pdf_drop_obj(ctx, *res);
 			*res = pdf_new_dict(ctx, annot->page->doc, 1);
-		}
 		res_font = pdf_dict_put_dict(ctx, *res, PDF_NAME(Font), 1);
 		add_required_fonts(ctx, annot->page->doc, res_font, lang, font, fontname, text);
 

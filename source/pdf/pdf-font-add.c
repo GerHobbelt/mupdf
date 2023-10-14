@@ -221,8 +221,7 @@ pdf_add_simple_font_widths(fz_context *ctx, pdf_document *doc, pdf_obj *fobj, fz
 			width_table[i] = 0;
 	}
 
-	widths = pdf_new_array(ctx, doc, last - first + 1);
-	pdf_dict_put_drop(ctx, fobj, PDF_NAME(Widths), widths);
+	widths = pdf_dict_put_array(ctx, fobj, PDF_NAME(Widths), last - first + 1);
 	for (i = first; i <= last; ++i)
 		pdf_array_push_int(ctx, widths, width_table[i]);
 	pdf_dict_put_int(ctx, fobj, PDF_NAME(FirstChar), first);

@@ -259,6 +259,7 @@ void pdf_sort_dict(fz_context *ctx, pdf_obj *dict);
 void pdf_dict_put_bool(fz_context *ctx, pdf_obj *dict, pdf_obj *key, int x);
 void pdf_dict_put_int(fz_context *ctx, pdf_obj *dict, pdf_obj *key, int64_t x);
 void pdf_dict_put_real(fz_context *ctx, pdf_obj *dict, pdf_obj *key, double x);
+void pdf_dict_put_indirect(fz_context *ctx, pdf_obj *dict, pdf_obj *key, int num, int gen);
 void pdf_dict_put_name(fz_context *ctx, pdf_obj *dict, pdf_obj *key, const char *x);
 void pdf_dict_put_string(fz_context *ctx, pdf_obj *dict, pdf_obj *key, const char *x, size_t n);
 void pdf_dict_put_text_string(fz_context *ctx, pdf_obj *dict, pdf_obj *key, const char *x);

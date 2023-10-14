@@ -2750,13 +2750,10 @@ pdf_dict_vputl(fz_context *ctx, pdf_obj *obj, pdf_obj *val, va_list keys)
 	pdf_obj *key;
 	pdf_obj *next_key;
 	pdf_obj *next_obj;
-	pdf_document *doc;
 
 	RESOLVE(obj);
 	if (!OBJ_IS_DICT(obj))
 		fz_throw(ctx, FZ_ERROR_GENERIC, "not a dict (%s)", pdf_objkindstr(obj));
-
-	doc = DICT(obj)->doc;
 
 	key = va_arg(keys, pdf_obj *);
 	if (key == NULL)
@@ -2778,8 +2775,7 @@ new_obj:
 	/* We have to create entries */
 	do
 	{
-		next_obj = pdf_new_dict(ctx, doc, 1);
-		pdf_dict_put_drop(ctx, obj, key, next_obj);
+		next_obj = pdf_dict_put_dict(ctx, obj, key, 1);
 		obj = next_obj;
 		key = next_key;
 	}
@@ -5053,6 +5049,11 @@ void pdf_dict_put_int(fz_context *ctx, pdf_obj *dict, pdf_obj *key, int64_t x)
 void pdf_dict_put_real(fz_context *ctx, pdf_obj *dict, pdf_obj *key, double x)
 {
 	pdf_dict_put_drop(ctx, dict, key, pdf_new_real(ctx, x));
+}
+
+void pdf_dict_put_indirect(fz_context *ctx, pdf_obj *dict, pdf_obj *key, int num, int gen)
+{
+	pdf_dict_put_drop(ctx, dict, key, pdf_new_indirect(ctx, pdf_get_bound_document(ctx, dict), num, gen));
 }
 
 void pdf_dict_put_name(fz_context *ctx, pdf_obj *dict, pdf_obj *key, const char *x)

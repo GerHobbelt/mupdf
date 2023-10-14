@@ -59,10 +59,9 @@ static void
 intersect_box(fz_context *ctx, pdf_document *doc, pdf_obj *page, pdf_obj *box_name, fz_rect mb)
 {
 	pdf_obj *box = pdf_dict_get(ctx, page, box_name);
-	pdf_obj *newbox;
 	fz_rect old_rect;
 
-	if (box == NULL)
+	if (!pdf_is_array(ctx, box))
 		return;
 
 	old_rect.x0 = pdf_array_get_real(ctx, box, 0);
@@ -79,12 +78,7 @@ intersect_box(fz_context *ctx, pdf_document *doc, pdf_obj *page, pdf_obj *box_na
 	if (old_rect.y1 > mb.y1)
 		old_rect.y1 = mb.y1;
 
-	newbox = pdf_new_array(ctx, doc, 4);
-	pdf_array_push_real(ctx, newbox, old_rect.x0);
-	pdf_array_push_real(ctx, newbox, old_rect.y0);
-	pdf_array_push_real(ctx, newbox, old_rect.x1);
-	pdf_array_push_real(ctx, newbox, old_rect.y1);
-	pdf_dict_put_drop(ctx, page, box_name, newbox);
+	pdf_dict_put_rect(ctx, page, box_name, old_rect);
 }
 
 /*
@@ -162,14 +156,12 @@ static void decimatepages(fz_context *ctx, pdf_document *doc)
 			int x1 = (x_dir > 0) ? xf : -1;
 			for (x = x0; x != x1; x += x_dir)
 			{
-				pdf_obj *newpageobj, *newpageref, *newmediabox;
+				pdf_obj *newpageobj, *newpageref;
 				fz_rect mb;
 
 				newpageobj = pdf_copy_dict(ctx, pdf_lookup_page_obj(ctx, doc, page));
 				pdf_flatten_inheritable_page_items(ctx, newpageobj);
 				newpageref = pdf_add_object(ctx, doc, newpageobj);
-
-				newmediabox = pdf_new_array(ctx, doc, 4);
 
 				if (x == 0)
 					mb.x0 = mediabox.x0;
@@ -188,13 +180,8 @@ static void decimatepages(fz_context *ctx, pdf_document *doc)
 				else
 					mb.y1 = mediabox.y0 + (h/yf)*(y+1) + offset;
 
-				pdf_array_push_real(ctx, newmediabox, mb.x0);
-				pdf_array_push_real(ctx, newmediabox, mb.y0);
-				pdf_array_push_real(ctx, newmediabox, mb.x1);
-				pdf_array_push_real(ctx, newmediabox, mb.y1);
-
 				pdf_dict_put(ctx, newpageobj, PDF_NAME(Parent), pages);
-				pdf_dict_put_drop(ctx, newpageobj, PDF_NAME(MediaBox), newmediabox);
+				pdf_dict_put_rect(ctx, newpageobj, PDF_NAME(MediaBox), mb);
 
 				intersect_box(ctx, doc, newpageobj, PDF_NAME(CropBox), mb);
 				intersect_box(ctx, doc, newpageobj, PDF_NAME(BleedBox), mb);

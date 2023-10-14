@@ -1148,7 +1148,7 @@ pdf_color_SC_shade(fz_context *ctx, pdf_processor *proc, const char *name, fz_sh
 		pdf_obj *old_obj = pdf_dict_gets(ctx, pdf_dict_get(ctx, p->rstack->old_rdb, PDF_NAME(Shading)), name);
 		pdf_obj *new_shading_dict = pdf_dict_get(ctx, p->rstack->new_rdb, PDF_NAME(Shading));
 		if (new_shading_dict == NULL)
-			pdf_dict_put_drop(ctx, p->rstack->new_rdb, PDF_NAME(Shading), new_shading_dict = pdf_new_dict(ctx, p->doc, 4));
+			new_shading_dict = pdf_dict_put_dict(ctx, p->rstack->new_rdb, PDF_NAME(Shading), 4);
 		pdf_dict_puts(ctx, new_shading_dict, name, old_obj);
 
 		if (p->chain->op_SC_shade)
@@ -1166,7 +1166,7 @@ pdf_color_SC_shade(fz_context *ctx, pdf_processor *proc, const char *name, fz_sh
 		pdf_obj *old_obj = pdf_dict_gets(ctx, pdf_dict_get(ctx, p->rstack->old_rdb, PDF_NAME(Shading)), name);
 		pdf_obj *new_shading_dict = pdf_dict_get(ctx, p->rstack->new_rdb, PDF_NAME(Shading));
 		if (new_shading_dict == NULL)
-			pdf_dict_put_drop(ctx, p->rstack->new_rdb, PDF_NAME(Shading), new_shading_dict = pdf_new_dict(ctx, p->doc, 4));
+			new_shading_dict = pdf_dict_put_dict(ctx, p->rstack->new_rdb, PDF_NAME(Shading), 4);
 		pdf_dict_puts(ctx, new_shading_dict, name, old_obj);
 
 		if (p->chain->op_SC_shade)
@@ -1223,8 +1223,8 @@ pdf_color_sc_shade(fz_context *ctx, pdf_processor *proc, const char *name, fz_sh
 		/* Must copy shading over to new resources dict. */
 		pdf_obj *old_obj = pdf_dict_gets(ctx, pdf_dict_get(ctx, p->rstack->old_rdb, PDF_NAME(Shading)), name);
 		pdf_obj *new_shading_dict = pdf_dict_get(ctx, p->rstack->new_rdb, PDF_NAME(Shading));
-		if (new_shading_dict == NULL)
-			pdf_dict_put_drop(ctx, p->rstack->new_rdb, PDF_NAME(Shading), new_shading_dict = pdf_new_dict(ctx, p->doc, 4));
+		if (!pdf_is_dict(ctx, new_shading_dict))
+			new_shading_dict = pdf_dict_put_dict(ctx, p->rstack->new_rdb, PDF_NAME(Shading), 4);
 		pdf_dict_puts(ctx, new_shading_dict, name, old_obj);
 
 		if (p->chain->op_sc_shade)
@@ -1391,7 +1391,7 @@ pdf_color_sh(fz_context *ctx, pdf_processor *proc, const char *name, fz_shade *s
 		pdf_obj *old_obj = pdf_dict_gets(ctx, pdf_dict_get(ctx, p->rstack->old_rdb, PDF_NAME(Shading)), name);
 		pdf_obj *new_shading_dict = pdf_dict_get(ctx, p->rstack->new_rdb, PDF_NAME(Shading));
 		if (new_shading_dict == NULL)
-			pdf_dict_put_drop(ctx, p->rstack->new_rdb, PDF_NAME(Shading), new_shading_dict = pdf_new_dict(ctx, p->doc, 4));
+			new_shading_dict = pdf_dict_put_dict(ctx, p->rstack->new_rdb, PDF_NAME(Shading), 4);
 		pdf_dict_puts(ctx, new_shading_dict, name, old_obj);
 
 		if (p->chain->op_sh)

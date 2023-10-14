@@ -2429,8 +2429,7 @@ static void writexrefstream(fz_context *ctx, pdf_document *doc, pdf_write_state 
 		pdf_array_push_int(ctx, w, 4);
 		pdf_array_push_int(ctx, w, 1);
 
-		index = pdf_new_array(ctx, doc, 2);
-		pdf_dict_put_drop(ctx, dict, PDF_NAME(Index), index);
+		index = pdf_dict_put_array(ctx, dict, PDF_NAME(Index), 2);
 
 		/* opts->gen_list[num] is already initialized by fz_calloc. */
 		opts->use_list[num] = 1;
