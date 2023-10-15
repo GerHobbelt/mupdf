@@ -54,6 +54,7 @@
 #include "../../thirdparty/owemdjee/tesslinesplit/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/uchardet/src/tools/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/tvision/include/tvision/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/cpp-terminal/examples/monolithic_examples.h"
 #include "../../thirdparty/jbig2dec/monolithic_examples.h"
 #include "../../thirdparty/leptonica/prog/monolithic_examples.h"
 #include "../../source/fitz/tessocr.h"
@@ -758,6 +759,29 @@ static struct tool_spec {
 	{ {.fa = gumbo_prettyprint_main }, "gumbo_prettyprint", "gumbo prettyprint demo/test/tool" },
 	{ {.fa = gumbo_serialize_main }, "gumbo_serialize", "gumbo serialize demo/test/tool" },
 	{ {.fa = gumbo_print_main }, "gumbo_print", "gumbo print demo/test/tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.f = cppterminal_args_example_main }, "cppterm_args", "cpp-terminal args demo" },
+	{ {.f = cppterminal_attach_console_example_main }, "cppterm_attach_console", "cpp-terminal attach_console demo" },
+	{ {.f = cppterminal_attach_console_minimal_example_main }, "cppterm_attach_console_minimal", "cpp-terminal attach_console_minimal demo" },
+	{ {.f = cppterminal_cin_cooked_example_main }, "cppterm_cin_cooked", "cpp-terminal cin_cooked demo" },
+	{ {.f = cppterminal_cin_raw_example_main }, "cppterm_cin_raw", "cpp-terminal cin_raw demo" },
+	{ {.f = cppterminal_colors_example_main }, "cppterm_colors", "cpp-terminal colors demo" },
+	{ {.f = cppterminal_cout_example_main }, "cppterm_cout", "cpp-terminal cout demo" },
+	{ {.f = cppterminal_events_example_main }, "cppterm_events", "cpp-terminal events demo" },
+	{ {.f = cppterminal_keys_example_main }, "cppterm_keys", "cpp-terminal keys demo" },
+	{ {.fa = cppterminal_kilo_example_main }, "cppterm_kilo", "cpp-terminal kilo demo" },
+	{ {.f = cppterminal_menu_example_main }, "cppterm_menu", "cpp-terminal menu demo" },
+	{ {.f = cppterminal_menu_window_example_main }, "cppterm_menu_window", "cpp-terminal menu_window demo" },
+	{ {.f = cppterminal_minimal_example_main }, "cppterm_minimal", "cpp-terminal minimal demo" },
+	{ {.f = cppterminal_prompt_immediate_example_main }, "cppterm_prompt_immediate", "cpp-terminal prompt_immediate demo" },
+	{ {.f = cppterminal_prompt_multiline_example_main }, "cppterm_prompt_multiline", "cpp-terminal prompt_multiline demo" },
+	{ {.f = cppterminal_prompt_not_immediate_example_main }, "cppterm_prompt_not_immediate", "cpp-terminal prompt_not_immediate demo" },
+	{ {.f = cppterminal_prompt_simple_example_main }, "cppterm_prompt_simple", "cpp-terminal prompt_simple demo" },
+	{ {.f = cppterminal_slow_events_example_main }, "cppterm_slow_events", "cpp-terminal slow_events demo" },
+	{ {.f = cppterminal_styles_example_main }, "cppterm_styles", "cpp-terminal styles demo" },
+	{ {.f = cppterminal_utf8_example_main }, "cppterm_utf8", "cpp-terminal utf8 demo" },
 #endif
 
 	{ {.fa = report_version }, "version", "report version of this build / tools" },
