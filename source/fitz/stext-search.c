@@ -73,22 +73,11 @@ static float largest_size_in_line(fz_stext_line *line)
 	return size;
 }
 
-static float largest_size_in_line(fz_stext_line *line)
-{
-	fz_stext_char *ch;
-	float size = 0;
-	for (ch = line->first_char; ch; ch = ch->next)
-		if (ch->size > size)
-			size = ch->size;
-	return size;
-}
-
 static int find_closest_in_line(fz_stext_line *line, int idx, fz_point q)
 {
 	fz_stext_char *ch;
 	float closest_dist = 1e30f;
 	int closest_idx = idx;
-	int bidi = 0;
 	float d1, d2;
 
 	float hsize = largest_size_in_line(line) / 2;
@@ -110,17 +99,15 @@ static int find_closest_in_line(fz_stext_line *line, int idx, fz_point q)
 
 	for (ch = line->first_char; ch; ch = ch->next)
 	{
-		bidi = direction_from_bidi_class(ucdn_get_bidi_class(ch->c), bidi);
-
-		if (bidi >= 0)
-		{
-			d1 = fz_abs(linedist(ch->quad.ll, hdir, q));
-			d2 = fz_abs(linedist(ch->quad.lr, hdir, q));
-		}
-		else
+		if (ch->bidi & 1)
 		{
 			d1 = fz_abs(linedist(ch->quad.lr, hdir, q));
 			d2 = fz_abs(linedist(ch->quad.ll, hdir, q));
+		}
+		else
+		{
+			d1 = fz_abs(linedist(ch->quad.ll, hdir, q));
+			d2 = fz_abs(linedist(ch->quad.lr, hdir, q));
 		}
 
 		if (d1 < closest_dist)
