@@ -2,7 +2,7 @@
 sources:
 	..\..\scripts\googletest\googletest-demos-main.cpp
 	
-also-ignores:
+also-ignore:
 	/googlemock/
 	/googletest/samples/
 	/googletest/src/

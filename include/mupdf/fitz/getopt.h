@@ -36,8 +36,6 @@ typedef struct
 	void *opaque;
 } fz_getopt_long_options;
 
-extern const fz_getopt_long_options *fz_optlong;
-
 /**
 	Simple functions/variables for use in tools.
 
