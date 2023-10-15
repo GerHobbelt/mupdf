@@ -3,7 +3,7 @@
 #define BUILD_MONOLITHIC  1
 #include "../../thirdparty/owemdjee/glog/src/testing.h"
 
-#define BUILD_MONOLITHIC_SINGLE_INSTANCE_NOW   1
+//#define BUILD_MONOLITHIC_SINGLE_INSTANCE_NOW   1
 #include "../../thirdparty/owemdjee/glog/src/googletest.h"
 
 
