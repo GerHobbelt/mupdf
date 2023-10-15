@@ -1051,6 +1051,7 @@ initialise_banding(fz_context *ctx, render_details *render, int color)
 {
 	size_t min_band_mem;
 	int bpp, h, w, reps;
+	const int compression_effort = 0;
 
 	render->colorspace = output_format->cs;
 	render->format = output_format->format;
@@ -1138,17 +1139,17 @@ initialise_banding(fz_context *ctx, render_details *render, int color)
 	}
 	else if (output_format->format == OUT_PNG)
 	{
-		render->bander = fz_new_png_band_writer(ctx, out);
+		render->bander = fz_new_png_band_writer(ctx, out, compression_effort);
 		render->n = 3;
 	}
 	else if (output_format->format == OUT_WEBP)
 	{
-		render->bander = fz_new_webp_band_writer(ctx, out);
+		render->bander = fz_new_webp_band_writer(ctx, out, compression_effort);
 		render->n = 3;
 	}
 	else if (output_format->format == OUT_TIFF)
 	{
-		render->bander = fz_new_tiff_band_writer(ctx, out);
+		render->bander = fz_new_tiff_band_writer(ctx, out, compression_effort);
 		render->n = 3;
 	}
 	else

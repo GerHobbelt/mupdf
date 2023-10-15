@@ -24,13 +24,14 @@
 
 #include <zlib-ng.h> /* for compressBound() and compress() */
 
-fz_buffer *fz_deflate(fz_context *ctx, fz_buffer *input)
+fz_buffer *fz_deflate(fz_context *ctx, fz_buffer *input, int effort)
 {
 	unsigned char *input_p = input->data;
 	uLong input_n = (uLong) input->len;
 	unsigned char *output_p;
 	size_t output_n;
 	int result;
+	int mode;
 
 	/* check possible size_t / uLong precision mismatch */
 	if (input->len != (size_t)input_n)
@@ -38,7 +39,11 @@ fz_buffer *fz_deflate(fz_context *ctx, fz_buffer *input)
 
 	output_n = zng_compressBound(input_n);
 	output_p = (unsigned char *)Memento_label(fz_malloc(ctx, output_n), "fz_deflate");
-	result = zng_compress2(output_p, &output_n, input_p, input_n, Z_BEST_COMPRESSION);
+	if (effort == 0)
+		mode = Z_DEFAULT_COMPRESSION;
+	else
+		mode = effort * Z_BEST_COMPRESSION / 100;
+	result = zng_compress2(output_p, &output_n, input_p, input_n, mode);
 	if (result != Z_OK)
 	{
 		fz_free(ctx, output_p);

@@ -105,6 +105,7 @@ typedef struct
 	int do_snapshot;
 	int do_preserve_metadata;
 	int do_use_objstms;
+	int compression_effort; /* 0 for default. 100 = max, 1 = min. */
 
 	int list_len;
 	int *use_list;
@@ -1923,7 +1924,7 @@ static void copystream(fz_context *ctx, pdf_document *doc, pdf_write_state *opts
 			}
 			else
 			{
-				buf = tmp_comp = fz_deflate(ctx, buf);
+				buf = tmp_comp = fz_deflate(ctx, buf, opts->compression_effort);
 				pdf_dict_put(ctx, obj, PDF_NAME(Filter), PDF_NAME(FlateDecode));
 			}
 		}
@@ -1998,7 +1999,7 @@ static void expandstream(fz_context *ctx, pdf_document *doc, pdf_write_state *op
 			}
 			else
 			{
-				buf = tmp_comp = fz_deflate(ctx, buf);
+				buf = tmp_comp = fz_deflate(ctx, buf, opts->compression_effort);
 				pdf_dict_put(ctx, obj, PDF_NAME(Filter), PDF_NAME(FlateDecode));
 			}
 		}
@@ -3151,6 +3152,11 @@ static void initialise_write_state(fz_context *ctx, pdf_document *doc, const pdf
 	opts->do_compress_images = in_opts->do_compress_images;
 	opts->do_compress_fonts = in_opts->do_compress_fonts;
 	opts->do_snapshot = in_opts->do_snapshot;
+	opts->compression_effort = in_opts->compression_effort;
+	if (opts->compression_effort < 0)
+		opts->compression_effort = 0;
+	else if (opts->compression_effort > 100)
+		opts->compression_effort = 100;
 
 	opts->do_garbage = in_opts->do_garbage;
 	opts->do_linear = in_opts->do_linear;

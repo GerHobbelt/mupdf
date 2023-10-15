@@ -113,6 +113,7 @@ struct fz_band_writer
 	int yres;
 	int pagenum;
 	int line;
+	int compression_effort; /* 0 for default. 100 = max, 1 = min. */
 	fz_separations *seps;
 };
 

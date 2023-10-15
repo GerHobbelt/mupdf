@@ -206,7 +206,7 @@ webp_drop_band_writer(fz_context *ctx, fz_band_writer *writer_)
 	fz_free(ctx, writer->data);
 }
 
-fz_band_writer *fz_new_webp_band_writer(fz_context *ctx, fz_output *out)
+fz_band_writer *fz_new_webp_band_writer(fz_context *ctx, fz_output *out, int compression_effort)
 {
 	webp_band_writer *writer = fz_new_band_writer(ctx, webp_band_writer, out);
 
@@ -214,6 +214,8 @@ fz_band_writer *fz_new_webp_band_writer(fz_context *ctx, fz_output *out)
 	writer->super.band = webp_write_band;
 	writer->super.close = webp_close_band_writer;
 	writer->super.drop = webp_drop_band_writer;
+
+	writer->super.compression_effort = compression_effort;
 
 	return &writer->super;
 }

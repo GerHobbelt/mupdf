@@ -181,7 +181,8 @@ void fz_save_pixmap_as_pclm(fz_context *ctx, fz_pixmap *pixmap, char *filename, 
 */
 typedef struct
 {
-	int compress;
+	int compress;			/* mode: 0: none; 1 : deflate */
+	int compression_effort; /* percentage: 0 for default. 100 = max, 1 = min. */
 	int strip_height;
 	char language[256];
 	char datadir[PATH_MAX];
@@ -249,7 +250,7 @@ void fz_write_pixmap_as_png(fz_context *ctx, fz_output *out, const fz_pixmap *pi
 	Create a new png band writer (greyscale or RGB, with or without
 	alpha).
 */
-fz_band_writer *fz_new_png_band_writer(fz_context *ctx, fz_output *out);
+fz_band_writer *fz_new_png_band_writer(fz_context *ctx, fz_output *out, int compression_effort);
 
 /**
 	Re-encode a given image as a PNG into a buffer.
@@ -294,7 +295,7 @@ void fz_write_pixmap_as_webp(fz_context *ctx, fz_output *out, const fz_pixmap *p
 	Create a new webp band writer (greyscale or RGB, with or without
 	alpha).
 */
-fz_band_writer *fz_new_webp_band_writer(fz_context *ctx, fz_output *out);
+fz_band_writer *fz_new_webp_band_writer(fz_context *ctx, fz_output *out, int compression_effort);
 
 /**
 	Re-encode a given image as a webp into a buffer.
@@ -336,7 +337,7 @@ void fz_write_pixmap_as_tiff(fz_context *ctx, fz_output *out, const fz_pixmap *p
 	Create a new tiff band writer (greyscale or RGB, with or without
 	alpha).
 */
-fz_band_writer *fz_new_tiff_band_writer(fz_context *ctx, fz_output *out);
+fz_band_writer *fz_new_tiff_band_writer(fz_context *ctx, fz_output *out, int compression_effort);
 
 /**
 	Re-encode a given image as a tiff into a buffer.
@@ -398,7 +399,7 @@ void fz_write_pixmap_as_webp(fz_context *ctx, fz_output *out, const fz_pixmap *p
 	Create a new webp band writer (greyscale or RGB, with or without
 	alpha).
 */
-fz_band_writer *fz_new_webp_band_writer(fz_context *ctx, fz_output *out);
+fz_band_writer *fz_new_webp_band_writer(fz_context *ctx, fz_output *out, int compression_effort);
 
 /**
 	Save a pixmap as a pnm (greyscale or rgb, no alpha).

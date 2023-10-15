@@ -40,9 +40,12 @@ typedef enum
 
 /**
 	Compress input data using the Deflate/Zip algorithm.
+
+	The effort is a percentage number: 0..100
+
 	Returns a new buffer containing the compressed data.
  */
-fz_buffer *fz_deflate(fz_context *ctx, fz_buffer *input);
+fz_buffer *fz_deflate(fz_context *ctx, fz_buffer *input, int effort);
 
 /**
 	Compress bitmap data as CCITT Group 3 1D fax image.

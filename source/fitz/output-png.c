@@ -57,12 +57,13 @@ fz_save_pixmap_as_png(fz_context *ctx, const fz_pixmap *pixmap, const char *file
 {
 	fz_output *out = fz_new_output_with_path(ctx, filename, 0);
 	fz_band_writer *writer = NULL;
+	const int compression_effort = 0;
 
 	fz_var(writer);
 
 	fz_try(ctx)
 	{
-		writer = fz_new_png_band_writer(ctx, out);
+		writer = fz_new_png_band_writer(ctx, out, compression_effort);
 		fz_write_header(ctx, writer, pixmap->w, pixmap->h, pixmap->n, pixmap->alpha, pixmap->xres, pixmap->yres, 0, pixmap->colorspace, pixmap->seps);
 		fz_write_band(ctx, writer, pixmap->stride, pixmap->h, pixmap->samples);
 		fz_close_band_writer(ctx, writer);
@@ -83,11 +84,12 @@ void
 fz_write_pixmap_as_png(fz_context *ctx, fz_output *out, const fz_pixmap *pixmap)
 {
 	fz_band_writer *writer;
+	const int compression_effort = 0;
 
 	if (!out)
 		return;
 
-	writer = fz_new_png_band_writer(ctx, out);
+	writer = fz_new_png_band_writer(ctx, out, compression_effort);
 
 	fz_try(ctx)
 	{
@@ -132,7 +134,7 @@ png_write_icc(fz_context *ctx, png_band_writer *writer, fz_colorspace *cs)
 			return;
 
 		/* Deflate the profile */
-		cbuffer = fz_deflate(ctx, buffer);
+		cbuffer = fz_deflate(ctx, buffer, writer->super.compression_effort);
 
 		name = cs->name;
 		size = cbuffer->len + strlen(name) + 2;
@@ -372,7 +374,7 @@ png_drop_band_writer(fz_context *ctx, fz_band_writer *writer_)
 	fz_free(ctx, writer->udata);
 }
 
-fz_band_writer *fz_new_png_band_writer(fz_context *ctx, fz_output *out)
+fz_band_writer *fz_new_png_band_writer(fz_context *ctx, fz_output *out, int compression_effort)
 {
 	png_band_writer *writer = fz_new_band_writer(ctx, png_band_writer, out);
 
@@ -380,6 +382,8 @@ fz_band_writer *fz_new_png_band_writer(fz_context *ctx, fz_output *out)
 	writer->super.band = png_write_band;
 	writer->super.trailer = png_write_trailer;
 	writer->super.drop = png_drop_band_writer;
+
+	writer->super.compression_effort = compression_effort;
 
 	return &writer->super;
 }

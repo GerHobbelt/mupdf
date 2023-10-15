@@ -886,6 +886,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 {
 	fz_rect mediabox;
 	fz_device *dev = NULL;
+	const int compression_effort = 0;
 
 	fz_var(dev);
 
@@ -1303,7 +1304,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			else if (output_format->format == OUT_PAM)
 				bander = fz_new_pam_band_writer(ctx, out);
 			else if (output_format->format == OUT_PNG)
-				bander = fz_new_png_band_writer(ctx, out);
+				bander = fz_new_png_band_writer(ctx, out, compression_effort);
 			else if (output_format->format == OUT_MURAW)
 				bander = fz_new_muraw_band_writer(ctx, out);
 			else if (output_format->format == OUT_PBM)
@@ -1315,7 +1316,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			else if (output_format->format == OUT_PSD)
 				bander = fz_new_psd_band_writer(ctx, out);
 			else if (output_format->format == OUT_WEBP)
-				bander = fz_new_webp_band_writer(ctx, out);
+				bander = fz_new_webp_band_writer(ctx, out, compression_effort);
 			else if (output_format->format == OUT_PWG)
 			{
 				if (out_cs == CS_MONO)
