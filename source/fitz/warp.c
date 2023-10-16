@@ -1190,7 +1190,7 @@ clean(fz_context *ctx, fz_pixmap *src)
 }
 
 #ifndef M_PI
-#    define  M_PI  3.14159265358979323846
+#define M_PI    3.14159265358979323846264338327950
 #endif
 static void
 mark_hough(uint32_t *d, int x, int y, int maxlen, int reduce, int ang)
