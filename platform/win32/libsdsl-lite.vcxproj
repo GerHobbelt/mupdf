@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libsdsl-lite</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFE449BC}</ProjectGuid>
+    <RootNamespace>libsdsl-lite</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSDSL_LITE;SDSL_LITE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/sdsl-lite/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSDSL_LITE;SDSL_LITE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSDSL_LITE;SDSL_LITE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSDSL_LITE;SDSL_LITE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/sdsl-lite/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSDSL_LITE;SDSL_LITE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSDSL_LITE;SDSL_LITE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSDSL_LITE;SDSL_LITE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/sdsl-lite/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSDSL_LITE;SDSL_LITE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSDSL_LITE;SDSL_LITE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSDSL_LITE;SDSL_LITE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/sdsl-lite/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSDSL_LITE;SDSL_LITE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSDSL_LITE;SDSL_LITE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/document_retrieval/src/build_idx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/document_retrieval/src/gen_pattern.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/document_retrieval/src/query_idx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/document_retrieval/src/size_of_idx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/document_retrieval/src/word_pat2char_pat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_count/src/build_index_sdsl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_count/src/genpatterns.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_count/src/info.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_count/src/run_queries_sdsl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_extract/src/build_index_sdsl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_extract/src/genintervals.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_extract/src/info.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_extract/src/run_queries_sdsl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_locate/src/build_index_sdsl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_locate/src/info.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_locate/src/pattern_random.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_locate/src/run_queries_sdsl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/k2_trees/src/gen_k2t.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/k2_trees/src/k2_time_and_space.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/lcp/src/create_lcp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/lcp/src/create_sa_bwt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/rrr_vector/src/generate_rnd_bitvector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/rrr_vector/src/rrr_time_and_space.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/self_delimiting_codes/src/sdc_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/suffix_trees/src/build_cst.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/suffix_trees/src/depth_stats.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/suffix_trees/src/time_and_space_cst.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/wavelet_trees/src/gen_bwt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/wavelet_trees/src/wt_time_and_space.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/bit-vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/c++11-initializer-list.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/construct-in-memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/csa-alphabet-strategy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/cst-bfs-iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/cst-node-child-iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/fm-index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/fm-rmq-index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/hugepages.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/int-vector-buffer-iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/int-vector-buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/int-vector-entry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/int-vector-mapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/intersect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/isa_access.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/k2_treap_in_mem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/louds-tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/memory-visualization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/node_iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/print_wt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/range-minimum-queries.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/sa-construct-space-efficient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/sa-int-construct-from-file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/sd_vector_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/standalone_lcp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/storage-visualization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/store_to_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/text-statistics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/uint64-array2int_vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/write_structure.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/examples/wt_ap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/bits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/bp_support_algorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/coder_elias_delta.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/coder_elias_gamma.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/coder_fibonacci.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/construct_config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/construct_isa.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/construct_lcp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/construct_lcp_helper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/construct_sa.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/construct_sa_se.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/csa_alphabet_strategy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/io.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/lcp_support_tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/louds_tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/memory_management.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/nn_dict_dynamic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/ram_filebuf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/ram_fs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/rrr_vector_15.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/sd_vector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/sfstream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/uint128_t.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/uint256_t.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/lib/wt_helper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/bit_vector_generator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/bit_vector_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/bits_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/coder_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/csa_byte_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/csa_int_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/cst_byte_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/cst_int_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/dac_vector_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/int_vector_buffer_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/int_vector_generator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/int_vector_mapper_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/int_vector_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/inv_perm_support_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/k2_treap_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/k2_tree_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/lcp_construct_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/nn_dict_dynamic_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/rank_support_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/replace_int_vector_value.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/rmq_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/sa_construct_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/sd_vector_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/search_bidirectional_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/select_support_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/sorted_int_stack_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/sorted_stack_support_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/wt_byte_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/test/wt_int_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/cst-search.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/cst-traversal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/csx-printf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/document_listing/doc_list_index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-01.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-02.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-03.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-04.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-05.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-06.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-07.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-08.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-09.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-10.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-11.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-12.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-13.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-14.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-15.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-17.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-18.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-19.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-20.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-21.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-22.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-23.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-24.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-25.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/expl-26.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/int-vector-buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/rmq-example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/use-a-wavelet-tree.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/document_retrieval/src/doc_list_index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/document_retrieval/src/doc_list_index_greedy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/document_retrieval/src/doc_list_index_qprobing.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/document_retrieval/src/doc_list_index_sada.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/document_retrieval/src/doc_list_index_sort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_count/src/interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_extract/src/interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_locate/src/interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/bit_vector_il.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/bit_vectors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/bits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/bp_support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/bp_support_algorithm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/bp_support_g.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/bp_support_gg.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/bp_support_sada.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/coder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/coder_comma.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/coder_elias_delta.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/coder_elias_gamma.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/coder_fibonacci.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/construct.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/construct_bwt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/construct_config.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/construct_isa.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/construct_lcp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/construct_lcp_helper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/construct_sa.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/construct_sa_se.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/csa_alphabet_strategy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/csa_bitcompressed.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/csa_sada.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/csa_sampling_strategy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/csa_wt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/cst_fully.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/cst_iterators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/cst_sada.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/cst_sct3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/dac_vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/enc_vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/fast_cache.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/hyb_vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/int_vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/int_vector_buffer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/int_vector_io_wrappers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/int_vector_mapper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/inv_perm_support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/io.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/iterators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/k2_treap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/k2_treap_algorithm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/k2_treap_helper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/k2_tree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/k2_tree_helper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/lcp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/lcp_bitcompressed.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/lcp_byte.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/lcp_dac.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/lcp_support_sada.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/lcp_support_tree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/lcp_support_tree2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/lcp_vlc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/lcp_wt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/louds_tree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/memory_management.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/nearest_neighbour_dictionary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/nn_dict_dynamic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/qsufsort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/ram_filebuf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/ram_fs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/rank_support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/rank_support_scan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/rank_support_v.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/rank_support_v5.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/raster_img.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/rmq_succinct_sada.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/rmq_succinct_sct.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/rmq_support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/rmq_support_sparse_table.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/rrr_helper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/rrr_vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/rrr_vector_15.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/sd_vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/sdsl_concepts.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/select_support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/select_support_mcl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/select_support_scan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/sfstream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/sorted_int_stack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/sorted_multi_stack_support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/sorted_stack_support.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/structure_tree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/suffix_array_algorithm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/suffix_array_helper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/suffix_arrays.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/suffix_tree_algorithm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/suffix_tree_helper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/suffix_trees.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/uint128_t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/uint256_t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/uintx_t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/vectors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/vlc_vector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/wavelet_trees.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/wm_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/wt_algorithm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/wt_ap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/wt_blcd.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/wt_gmr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/wt_helper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/wt_huff.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/wt_hutu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/wt_int.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/wt_pc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/wt_rlmn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sdsl-lite/test/cst_helper.hpp" />
+    <Image Include="../../thirdparty/owemdjee/sdsl-lite/extras/resources/space-vis.png" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/Make.helper.cmake" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/README.md" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/README.md" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/document_retrieval/README.md" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/document_retrieval/dic.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/document_retrieval/index.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/document_retrieval/index_int.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/document_retrieval/pattern_length.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/document_retrieval/pattern_length_int.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/document_retrieval/test_case.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/document_retrieval/test_case_int.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/document_retrieval/visualize/doc_re_time.tex" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/document_retrieval/visualize/index-filter.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/document_retrieval/visualize/index-filter_int.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_count/README.md" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_count/compile_options.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_count/index.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_count/test_case.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_count/visualize/count-footer.tex" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_count/visualize/count-header.tex" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_count/visualize/index-filter.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_extract/README.md" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_extract/index.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_extract/sample.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_extract/test_case.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_extract/visualize/extract.tex" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_extract/visualize/index-filter.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_locate/README.md" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_locate/index.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_locate/sample.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_locate/test_case.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_locate/visualize/index-filter.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/indexing_locate/visualize/locate.tex" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/k2_trees/README.md" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/k2_trees/compile_options.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/k2_trees/k2tree.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/k2_trees/test_case.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/k2_trees/visualize/k2-footer.tex" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/k2_trees/visualize/k2-header.tex" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/lcp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/lcp/compile_options.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/lcp/lcp.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/lcp/test_case.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/lcp/visualize/lcp-footer.tex" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/lcp/visualize/lcp-header.tex" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/rrr_vector/README.md" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/rrr_vector/block_size.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/rrr_vector/compile_options.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/rrr_vector/test_case.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/rrr_vector/visualize/rrr-footer.tex" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/rrr_vector/visualize/rrr-header.tex" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/self_delimiting_codes/README.md" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/self_delimiting_codes/compile_options.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/self_delimiting_codes/test_case.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/self_delimiting_codes/vectors.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/self_delimiting_codes/visualize/self_delimiting_codes.tex" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/self_delimiting_codes/visualize/testcase.tex" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/suffix_trees/README.md" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/suffix_trees/compile_options.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/suffix_trees/index.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/suffix_trees/index_int.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/suffix_trees/test_case.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/suffix_trees/test_case_int.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/suffix_trees/visualize/suffix_trees.tex" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/wavelet_trees/README.md" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/wavelet_trees/compile_options.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/wavelet_trees/test_case.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/wavelet_trees/visualize/wt-footer.tex" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/wavelet_trees/visualize/wt-header.tex" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/benchmark/wavelet_trees/wt.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/build/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/build/clean.sh" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/external/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/external/d3/d3.min.js" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/extras/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/extras/README.md" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/extras/cheatsheet/hyperendnotes.sty" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/extras/cheatsheet/sdsl-cheatsheet.tex" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/extras/cheatsheet/viz.pdf" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/extras/sdsl.natvis" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/extras/sdsl_definitions.sty" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/include/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/include/sdsl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/install.bat" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/install.sh" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/lib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/lib/structure_tree.cpp.cmake" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/sdsl-lite.pc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/README.md" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/bit_vector_test.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/compile_test.cpp.cmake" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/coverage/README.md" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/coverage/clean.sh" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/coverage/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/csa_byte_test.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/csa_int_test.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/cst_byte_test.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/cst_int_test.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/download.cmake" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/download.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/k2_treap_test.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/lcp_construct_test.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/rank_support_test.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/rmq_test.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/sa_construct_test.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/search_bidirectional_test.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/select_support_test.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/test_cases/100a.txt" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/test_cases/README.md" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/test_cases/abc_abc_abc.txt" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/test_cases/abc_abc_abc2.txt" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/test_cases/all_symbols.txt" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/test_cases/empty.txt" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/test_cases/example01.txt" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/test_cases/one_byte.txt" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/wt_byte_test.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/test/wt_int_test.config" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/tutorial/document_listing/generate_collection.py" />
+    <Text Include="../../thirdparty/owemdjee/sdsl-lite/uninstall.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>

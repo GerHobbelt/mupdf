@@ -853,6 +853,9 @@ kalman-cpp
 optim
 stats
 BaseMatrixOps
+thrift
+libsiridb
+sdsl-lite
 
 libboost-context
 libboost-coroutine
@@ -910,6 +913,8 @@ lzbench
 p7zip
 qpdf
 vcopy
+siridb-server
+thrift
 
 horsejs
 visible-url-detector

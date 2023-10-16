@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{00811970-815B-4F64-BC9D-21907853C912}</ProjectGuid>
+    <RootNamespace>siridb-server</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SIRIDB_SERVER;SIRIDB_SERVER_STATICLIB;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SIRIDB_SERVER;SIRIDB_SERVER_STATICLIB;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SIRIDB_SERVER;SIRIDB_SERVER_STATICLIB;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SIRIDB_SERVER;SIRIDB_SERVER_STATICLIB;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="cryptlib.vcxproj">
+      <Project>{424334e5-addf-490d-ba7b-46cf3686b48d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libarchive.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff18377f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpp-terminal.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff2367fa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libhighway.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff021a57}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpthread-win32.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8df2c2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite_tools.vcxproj">
+      <Project>{6e890463-3eeb-4cce-b8bd-5aa89148c35a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="MuPDFLib_static.vcxproj">
+      <Project>{a60d8644-5815-4d29-8970-7518ff518d62}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbase58x.vcxproj">
+      <Project>{0501bedf-3191-46a9-9997-288466675b82}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libBLAKE3.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc1880387f83}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfmt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffaf3a53}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreetype.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-a58957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgumbo-parser.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-358957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libharfbuzz.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-258957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjbig2dec.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-958957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-turbo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblcms2.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-158957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuhelpers.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce88099485a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmujs.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-858957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-6222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbrotli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7760d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcrow.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff84e35}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcurl.vcxproj">
+      <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libextract.vcxproj">
+      <Project>{da38ca0b-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreeglut.vcxproj">
+      <Project>{a1b75d29-9f5c-4a0f-b368-322a10477d0c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgif.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffddd6be}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-xl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa838c1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libleptonica.vcxproj">
+      <Project>{ca0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblz4.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff50b44d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf_default_handlers.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-1222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuthreads.vcxproj">
+      <Project>{de21fa8a-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmutool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libopenjpeg.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-758957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpkcs7.vcxproj">
+      <Project>{22462382-b30d-42a5-bf07-ee1a35e25d21}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpng.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-658957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libqiqqatool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc18808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libQuickJS.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0e57ba}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libresources.vcxproj">
+      <Project>{52dcab29-c8ee-4422-954c-29afa6b33e22}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite-amalgamation.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3a7bc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsvgcharter.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7fcf79}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtesseract.vcxproj">
+      <Project>{ac0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtiff.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-558957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtinyexpr.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff33b1b5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libupskirt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff789ba9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libwebp.vcxproj">
+      <Project>{105f884a-c170-4c30-a810-c7da2103002f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libxml2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa57a44}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzlib.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzopfli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff03e6ca}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzstd.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="lib_nas_lockfile.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0a15c6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="png-pmt-tools-lib.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1147a4}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/argparse/argparse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/base64/base64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/cexpr/cexpr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/cfgparser/cfgparser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/ctree/ctree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/expr/expr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/imap/imap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/iso8601/iso8601.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/lib/http_parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/llist/llist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/lock/lock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/logger/logger.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/omap/omap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/owcrypt/owcrypt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/procinfo/procinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/qpack/qpack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/qpjson/qpjson.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/api.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/args/args.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/async.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/backup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/buffersync.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/cfg/cfg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/access.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/aggregate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/auth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/db.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/ffile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/fifo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/forward.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/group.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/groups.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/initsync.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/insert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/listener.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/lookup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/median.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/misc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/nodes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/pcache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/points.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/pool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/pools.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/presuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/props.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/queries.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/query.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/re.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/reindex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/replicate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/series.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/server.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/servers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/shard.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/shards.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/sset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/tag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/tags.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/tasks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/tee.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/time.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/user.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/users.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/variance.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/db/walker.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/err.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/evars.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/file/handler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/file/pointer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/grammar/grammar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/health.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/heartbeat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/help/help.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/net/bserver.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/net/clserver.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/net/pipe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/net/pkg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/net/promise.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/net/promises.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/net/protocol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/net/stream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/net/tcp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/optimize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/service/account.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/service/client.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/service/request.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/siri.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/siri/version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/timeit/timeit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/vec/vec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/xmath/xmath.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/xpath/xpath.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/src/xstr/xstr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/test/test_access/test_access.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/test/test_aggr/test_aggr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/test/test_ctree/test_ctree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/test/test_expr/test_expr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/test/test_grammar/test_grammar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/test/test_imap/test_imap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/test/test_iso8601/test_iso8601.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/test/test_lookup/test_lookup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/test/test_siridb/test_siridb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/test/test_vec/test_vec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/test/test_version/test_version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/test/test_xmath/test_xmath.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/test/test_xpath/test_xpath.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/siridb-server/test/test_xstr/test_xstr.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/argparse/argparse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/base64/base64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/cexpr/cexpr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/cfgparser/cfgparser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/ctree/ctree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/expr/expr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/imap/imap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/iso8601/iso8601.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/lib/http_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/llist/llist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/lock/lock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/logger/logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/omap/omap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/owcrypt/owcrypt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/procinfo/procinfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/qpack/qpack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/qpjson/qpjson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/args/args.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/async.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/backup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/buffersync.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/cfg/cfg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/access.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/aggregate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/auth.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/db.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/ffile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/fifo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/forward.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/group.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/groups.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/initsync.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/insert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/listener.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/lookup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/median.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/misc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/nodes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/pcache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/points.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/pools.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/presuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/props.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/queries.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/query.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/re.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/reindex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/replicate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/series.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/series.inline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/server.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/servers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/shard.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/shards.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/sset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/tag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/tags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/tasks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/tee.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/user.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/users.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/variance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/db/walker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/err.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/evars.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/file/handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/file/pointer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/grammar/grammar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/grammar/gramp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/health.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/heartbeat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/help/help.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/inc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/net/bserver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/net/clserver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/net/pipe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/net/pkg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/net/promise.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/net/promises.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/net/protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/net/stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/net/tcp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/optimize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/service/account.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/service/client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/service/request.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/siri.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/siri/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/timeit/timeit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/vec/vec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/xmath/xmath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/xpath/xpath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/include/xstr/xstr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/siridb-server/test/test.h" />
+    <Image Include="../../thirdparty/owemdjee/siridb-server/resources/siridb-wallpaper.png" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/README.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/debian/changelog" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/docs/Kubernetes/README.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/docs/Kubernetes/pdb.yaml" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/docs/Kubernetes/service.yaml" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/docs/Kubernetes/statefulset.yaml" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/grammar/export_grammar.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/grammar/grammar.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/grammar/siridbhelp.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_access.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_alter.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_alter_database.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_alter_group.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_alter_server.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_alter_servers.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_alter_user.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_count.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_count_groups.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_count_pools.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_count_series.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_count_servers.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_count_shards.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_count_users.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_create.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_create_group.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_create_user.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_drop.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_drop_group.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_drop_series.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_drop_server.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_drop_shards.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_drop_user.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_functions.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_grant.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_list.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_list_groups.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_list_pools.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_list_series.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_list_servers.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_list_shards.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_list_users.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_noaccess.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_revoke.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_select.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_show.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_timeit.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/help/help_timezones.md" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/data_google_finance.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/querygenerator/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/querygenerator/k_map.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/querygenerator/querygenerator.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/run_all.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/siridb-random-data.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/slow_connection_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/tee_server.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/test_auto_duration.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/test_buffer.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/test_cluster.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/test_compression.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/test_create_database.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/test_expiration.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/test_grammar.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/test_group.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/test_http_api.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/test_insert.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/test_integer_load.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/test_list.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/test_log.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/test_parentheses.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/test_pipe_support.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/test_pool.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/test_select.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/test_select_ns.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/test_series.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/test_server.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/test_syslog.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/test_tags.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/test_user.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/testing/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/testing/args.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/testing/client.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/testing/color.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/testing/constants.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/testing/helpers.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/testing/pipe_client.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/testing/pipe_server.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/testing/series.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/testing/server.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/testing/siridb.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/testing/spinner.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/testing/task.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/itest/testing/testbase.py" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/makefile.targets" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/siridb.conf" />
+    <Text Include="../../thirdparty/owemdjee/siridb-server/test/test.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

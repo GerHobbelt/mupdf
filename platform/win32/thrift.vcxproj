@@ -1,0 +1,1786 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{00811970-815B-4F64-BC9D-219078959EC1}</ProjectGuid>
+    <RootNamespace>thrift</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_THRIFT;THRIFT_STATICLIB;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_THRIFT;THRIFT_STATICLIB;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_THRIFT;THRIFT_STATICLIB;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_THRIFT;THRIFT_STATICLIB;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="cryptlib.vcxproj">
+      <Project>{424334e5-addf-490d-ba7b-46cf3686b48d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libarchive.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff18377f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpp-terminal.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff2367fa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libhighway.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff021a57}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpthread-win32.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8df2c2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite_tools.vcxproj">
+      <Project>{6e890463-3eeb-4cce-b8bd-5aa89148c35a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="MuPDFLib_static.vcxproj">
+      <Project>{a60d8644-5815-4d29-8970-7518ff518d62}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbase58x.vcxproj">
+      <Project>{0501bedf-3191-46a9-9997-288466675b82}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libBLAKE3.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc1880387f83}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfmt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffaf3a53}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreetype.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-a58957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgumbo-parser.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-358957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libharfbuzz.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-258957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjbig2dec.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-958957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-turbo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblcms2.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-158957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuhelpers.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce88099485a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmujs.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-858957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-6222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbrotli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7760d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcrow.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff84e35}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcurl.vcxproj">
+      <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libextract.vcxproj">
+      <Project>{da38ca0b-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreeglut.vcxproj">
+      <Project>{a1b75d29-9f5c-4a0f-b368-322a10477d0c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgif.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffddd6be}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-xl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa838c1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libleptonica.vcxproj">
+      <Project>{ca0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblz4.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff50b44d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf_default_handlers.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-1222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuthreads.vcxproj">
+      <Project>{de21fa8a-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmutool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libopenjpeg.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-758957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpkcs7.vcxproj">
+      <Project>{22462382-b30d-42a5-bf07-ee1a35e25d21}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpng.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-658957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libqiqqatool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc18808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libQuickJS.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0e57ba}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libresources.vcxproj">
+      <Project>{52dcab29-c8ee-4422-954c-29afa6b33e22}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite-amalgamation.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3a7bc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsvgcharter.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7fcf79}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtesseract.vcxproj">
+      <Project>{ac0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtiff.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-558957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtinyexpr.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff33b1b5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libupskirt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff789ba9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libwebp.vcxproj">
+      <Project>{105f884a-c170-4c30-a810-c7da2103002f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libxml2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa57a44}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzlib.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzopfli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff03e6ca}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzstd.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="lib_nas_lockfile.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0a15c6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="png-pmt-tools-lib.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1147a4}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/audit/t_audit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/go_validator_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_c_glib_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_cl_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_cpp_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_d_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_dart_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_delphi_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_erl_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_go_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_gv_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_haxe_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_html_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_java_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_javame_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_js_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_json_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_kotlin_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_lua_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_markdown_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_netstd_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_ocaml_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_perl_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_php_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_py_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_rb_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_rs_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_st_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_swift_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_xml_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_xsd_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/validator_parser.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/logging.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/parse/parse.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/parse/t_typedef.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/tests/netcore/t_netcore_generator_functional_tests.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/tests/netcore/t_netcore_generator_functional_tests_helpers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/tests/netcore/t_netcore_generator_helpers_tests.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/tests/netcore/t_netcore_generator_initialization_tests.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/tests/ocaml/snapshot_exception_types_i.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/tests/ocaml/snapshot_service_handle_ex.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/tests/ocaml/snapshot_typedefs.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/tests/ocaml/t_ocaml_generator_tests.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/compiler/cpp/tests/tests_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/contrib/async-test/test-server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/contrib/fb303/TClientInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/contrib/fb303/cpp/FacebookBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/contrib/fb303/cpp/ServiceTracker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/contrib/thrift_dump.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/ThriftCommon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/client/client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/client/stdafx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/server/server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/server/stdafx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/contrib/zeromq/TZmqClient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/contrib/zeromq/TZmqServer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/contrib/zeromq/test-client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/contrib/zeromq/test-receiver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/contrib/zeromq/test-sender.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/contrib/zeromq/test-server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/processor/thrift_dispatch_processor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/processor/thrift_multiplexed_processor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/processor/thrift_processor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/protocol/thrift_binary_protocol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/protocol/thrift_binary_protocol_factory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/protocol/thrift_compact_protocol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/protocol/thrift_compact_protocol_factory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/protocol/thrift_multiplexed_protocol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/protocol/thrift_protocol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/protocol/thrift_protocol_decorator.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/protocol/thrift_protocol_factory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/protocol/thrift_stored_message_protocol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/server/thrift_server.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/server/thrift_simple_server.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/thrift.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/thrift_application_exception.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/thrift_configuration.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/thrift_struct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_buffered_transport.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_buffered_transport_factory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_fd_transport.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_framed_transport.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_framed_transport_factory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_memory_buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_server_socket.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_server_transport.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_socket.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_ssl_socket.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_transport.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_transport_factory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_zlib_transport.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_zlib_transport_factory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testapplicationexception.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testbinaryprotocol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testbufferedtransport.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testcompactprotocol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testcontainertest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testdebugproto.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testfdtransport.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testframedtransport.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testmemorybuffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testoptionalrequired.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testserialization.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testsimpleserver.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/teststruct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testthriftbinaryreadcheck.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testthriftbufferedreadcheck.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testthriftcompactreadcheck.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testthriftfdreadcheck.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testthriftframedreadcheck.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testthriftmemorybufferreadcheck.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testthrifttest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testthrifttestclient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testthrifttestzlibclient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testtransportsocket.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testtransportsslsocket.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/testzlibtransport.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/TApplicationException.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/TOutput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/VirtualProfiling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/async/TAsyncChannel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/async/TAsyncProtocolProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/async/TConcurrentClientSyncInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/async/TEvhttpClientChannel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/async/TEvhttpServer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/concurrency/Monitor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/concurrency/Mutex.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/concurrency/Thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/concurrency/ThreadFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/concurrency/ThreadManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/concurrency/TimerManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/processor/PeekProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TBase64Utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TDebugProtocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/THeaderProtocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TJSONProtocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TMultiplexedProtocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TProtocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/qt/TQIODeviceTransport.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/qt/TQTcpServer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/server/TConnectedClient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/server/TNonblockingServer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/server/TServer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/server/TServerFramework.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/server/TSimpleServer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/server/TThreadPoolServer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/server/TThreadedServer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/SocketCommon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TBufferTransports.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TFDTransport.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TFileTransport.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/THeaderTransport.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/THttpClient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/THttpServer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/THttpTransport.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TNonblockingSSLServerSocket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TNonblockingServerSocket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TPipe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TPipeServer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TSSLServerSocket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TSSLSocket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TServerSocket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TSimpleFileTransport.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TSocket.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TSocketPool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TTransportException.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TTransportUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TWebSocketServer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TZlibTransport.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/windows/GetTimeOfDay.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/windows/OverlappedSubmissionThread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/windows/SocketPair.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/windows/TWinsockSingleton.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/windows/WinFcntl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/AllProtocolTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/AnnotationTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/Base64Test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/Benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/DebugProtoTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/DebugProtoTest_extras.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/EnumTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/JSONProtoTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/OneWayHTTPTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/OpenSSLManualInitTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/OptionalRequiredTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/RecursiveTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/RenderedDoubleConstantsTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/SecurityFromBufferTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/SecurityTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/SpecializationTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/TBufferBaseTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/TFDTransportTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/TFileTransportTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/TMemoryBufferTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/TNonblockingSSLServerTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/TNonblockingServerTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/TPipeInterruptTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/TPipedTransportTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/TSSLSocketInterruptTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/TServerIntegrationTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/TServerSocketTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/TServerTransportTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/TSocketInterruptTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/ThriftTest_extras.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/ThrifttReadCheckTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/ToStringTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/TransportTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/TypedefTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/UnitTestMain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/ZlibTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/concurrency/Tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/link/LinkTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/link/TemplatedService1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/link/TemplatedService2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/processor/EventLog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/processor/ProcessorTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/processor/ServerThread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/qt/TQTcpServerTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/lua/src/longnumberutils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/lua/src/luabitwise.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/lua/src/luabpack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/lua/src/lualongnumber.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/lua/src/luasocket.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/lua/src/usocket.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/php/src/ext/thrift_protocol/php_thrift_protocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/py/src/ext/binary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/py/src/ext/compact.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/py/src/ext/module.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/py/src/ext/types.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/rb/ext/binary_protocol_accelerated.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/rb/ext/bytes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/rb/ext/compact_protocol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/rb/ext/memory_buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/rb/ext/protocol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/rb/ext/strlcpy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/rb/ext/struct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/lib/rb/ext/thrift_native.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/test/c_glib/src/test_client.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/test/c_glib/src/test_server.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/test/c_glib/src/thrift_second_service_handler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/test/c_glib/src/thrift_test_handler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/test/cpp/src/SpecificNameTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/test/cpp/src/StressTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/test/cpp/src/StressTestNonBlocking.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/test/cpp/src/TestClient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/test/cpp/src/TestServer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/test/cpp/src/ThriftTest_extras.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/test/threads/ThreadsClient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/test/threads/ThreadsServer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/tutorial/c_glib/c_glib_client.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/tutorial/c_glib/c_glib_server.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/tutorial/cpp/CppClient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/thrift/tutorial/cpp/CppServer.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/audit/t_audit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/go_validator_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_generator_registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_go_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_html_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_netstd_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/t_oop_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/generate/validator_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/globals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/main.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/parse/t_base_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/parse/t_const.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/parse/t_const_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/parse/t_container.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/parse/t_doc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/parse/t_enum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/parse/t_enum_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/parse/t_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/parse/t_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/parse/t_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/parse/t_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/parse/t_program.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/parse/t_scope.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/parse/t_service.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/parse/t_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/parse/t_struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/parse/t_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/parse/t_typedef.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/windows/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/tests/catch/catch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/compiler/cpp/tests/netcore/t_netcore_generator_functional_tests_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/contrib/fb303/TClientInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/contrib/fb303/cpp/FacebookBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/contrib/fb303/cpp/ServiceTracker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/ThriftCommon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/client/stdafx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/client/targetver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/server/stdafx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/server/targetver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/contrib/zeromq/TZmqClient.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/contrib/zeromq/TZmqServer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/processor/thrift_dispatch_processor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/processor/thrift_multiplexed_processor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/processor/thrift_processor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/protocol/thrift_binary_protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/protocol/thrift_binary_protocol_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/protocol/thrift_compact_protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/protocol/thrift_compact_protocol_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/protocol/thrift_multiplexed_protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/protocol/thrift_protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/protocol/thrift_protocol_decorator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/protocol/thrift_protocol_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/protocol/thrift_stored_message_protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/server/thrift_server.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/server/thrift_simple_server.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/thrift.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/thrift_application_exception.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/thrift_configuration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/thrift_struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_buffered_transport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_buffered_transport_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_fd_transport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_framed_transport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_framed_transport_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_memory_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_platform_socket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_server_socket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_server_transport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_socket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_ssl_socket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_transport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_transport_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_zlib_transport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/c_glib/src/thrift/c_glib/transport/thrift_zlib_transport_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/TApplicationException.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/TBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/TConfiguration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/TDispatchProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/TLogging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/TNonCopyable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/TOutput.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/TProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/TToString.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/Thrift.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/async/TAsyncBufferProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/async/TAsyncChannel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/async/TAsyncDispatchProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/async/TAsyncProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/async/TAsyncProtocolProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/async/TConcurrentClientSyncInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/async/TEvhttpClientChannel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/async/TEvhttpServer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/concurrency/Exception.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/concurrency/FunctionRunner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/concurrency/Monitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/concurrency/Mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/concurrency/Thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/concurrency/ThreadFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/concurrency/ThreadManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/concurrency/TimerManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/numeric_cast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/processor/PeekProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/processor/StatsProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/processor/TMultiplexedProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TBase64Utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TBinaryProtocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TCompactProtocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TDebugProtocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TEnum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/THeaderProtocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TJSONProtocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TMap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TMultiplexedProtocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TProtocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TProtocolDecorator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TProtocolException.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TProtocolTap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TProtocolTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TSet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TVirtualProtocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/qt/TQIODeviceTransport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/qt/TQTcpServer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/server/TConnectedClient.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/server/TNonblockingServer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/server/TServer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/server/TServerFramework.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/server/TSimpleServer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/server/TThreadPoolServer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/server/TThreadedServer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/thrift-config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/thrift_export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/PlatformSocket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/SocketCommon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TBufferTransports.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TFDTransport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TFileTransport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/THeaderTransport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/THttpClient.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/THttpServer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/THttpTransport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TNonblockingSSLServerSocket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TNonblockingServerSocket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TNonblockingServerTransport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TPipe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TPipeServer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TSSLServerSocket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TSSLSocket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TServerSocket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TServerTransport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TShortReadTransport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TSimpleFileTransport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TSocket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TSocketPool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TSocketUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TTransport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TTransportException.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TTransportUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TVirtualTransport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TWebSocketServer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/transport/TZlibTransport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/windows/GetTimeOfDay.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/windows/Operators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/windows/OverlappedSubmissionThread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/windows/SocketPair.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/windows/Sync.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/windows/TWinsockSingleton.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/windows/WinFcntl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/windows/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/GenericHelpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/TTransportCheckThrow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/concurrency/ThreadFactoryTests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/concurrency/ThreadManagerTests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/concurrency/TimerManagerTests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/processor/EventLog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/processor/Handlers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/processor/ServerThread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/delphi/src/Thrift.Defines.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/lua/src/socket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/php/src/ext/thrift_protocol/php_thrift_protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/php/src/ext/thrift_protocol/php_thrift_protocol_arginfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/py/compat/win32/stdint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/py/src/ext/binary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/py/src/ext/compact.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/py/src/ext/endian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/py/src/ext/protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/py/src/ext/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/rb/ext/binary_protocol_accelerated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/rb/ext/bytes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/rb/ext/compact_protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/rb/ext/constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/rb/ext/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/rb/ext/memory_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/rb/ext/protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/rb/ext/strlcpy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/lib/rb/ext/struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/test/c_glib/src/thrift_second_service_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/thrift/test/c_glib/src/thrift_test_handler.h" />
+    <Image Include="../../thirdparty/owemdjee/thrift/doc/images/cgrn.png" />
+    <Image Include="../../thirdparty/owemdjee/thrift/doc/images/cred.png" />
+    <Image Include="../../thirdparty/owemdjee/thrift/doc/images/credfull.png" />
+    <Image Include="../../thirdparty/owemdjee/thrift/doc/images/cyel.png" />
+    <Image Include="../../thirdparty/owemdjee/thrift/doc/images/thrift-layers.png" />
+    <Text Include="../../thirdparty/owemdjee/thrift/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/LANGUAGES.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/bootstrap.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/bower.json" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/appveyor/CYGWIN-appveyor-full.bat" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/appveyor/MINGW-appveyor-full.bat" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/appveyor/MSVC-appveyor-full.bat" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/appveyor/MSYS-appveyor-full.bat" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/appveyor/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/appveyor/build-libevent.bat" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/appveyor/build-zlib.bat" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/appveyor/simulate-appveyor.bat" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/appveyor/win_showenv.bat" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/BoostMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/BuildType.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/CPackConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/ConfigureChecks.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/DefineCMakeDefaults.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/DefineInstallationPaths.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/DefineOptions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/DefinePlatformSpecifc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/FindAnt.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/FindClangTools.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/FindGLIB.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/FindGradle.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/FindInttypes.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/FindLibevent.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/GenerateConfigModule.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/NewPlatformDebug.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/README-MSYS2.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/StaticCodeAnalysis.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/ThriftConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/ThriftMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/android-toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/mingw32-toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/cmake/uninstall.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/docker/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/docker/msvc2017/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/docker/msvc2017/build-compiler.bat" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/docker/msvc2017/build.bat" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/docker/refresh.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/docker/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/docker/scripts/autotools.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/docker/scripts/cmake.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/docker/scripts/coverity.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/docker/scripts/covscan.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/docker/scripts/cross-test.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/docker/scripts/dpkg.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/docker/scripts/make-dist.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/docker/scripts/sca.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/docker/scripts/ubsan.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/fixchanges.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/build/veralign.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/compiler/cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/compiler/cpp/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/compiler/cpp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/compiler/cpp/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/compiler/cpp/compiler.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/thriftl.ll" />
+    <Text Include="../../thirdparty/owemdjee/thrift/compiler/cpp/src/thrift/thrifty.yy" />
+    <Text Include="../../thirdparty/owemdjee/thrift/compiler/cpp/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/compiler/cpp/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/compiler/cpp/test/compiler/staleness_check.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/compiler/cpp/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/compiler/cpp/tests/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/compiler/cpp/tests/ocaml/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/composer.json" />
+    <Text Include="../../thirdparty/owemdjee/thrift/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/Rebus/App.config" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/Rebus/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/Rebus/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/Rebus/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/Rebus/ServiceImpl/Both.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/Rebus/ServiceImpl/Client.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/Rebus/ServiceImpl/Server.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/Stomp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/Stomp/Thrift.Transport.STOMP.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/async-test/test-leaf.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/fb303/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/fb303/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/fb303/bootstrap.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/fb303/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/fb303/cpp/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/fb303/java/build.properties" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/fb303/py/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/fb303/py/fb303/FacebookBase.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/fb303/py/fb303_scripts/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/fb303/py/fb303_scripts/fb303_simple_mgmt.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/fb303/py/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/mingw-cross-compile.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/parse_profiling.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/thrift.el" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/client/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/client/client.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/server/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/server/server.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/thriftme.bat" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/transport-sample/thriftme.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/vagrant/centos-6.5/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/zeromq/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/zeromq/TZmqClient.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/zeromq/TZmqServer.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/zeromq/csharp/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/zeromq/csharp/Main.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/zeromq/csharp/TZmqClient.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/zeromq/csharp/TZmqServer.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/zeromq/test-client.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/contrib/zeromq/test-server.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/debian/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/debian/changelog" />
+    <Text Include="../../thirdparty/owemdjee/thrift/debian/libthrift-dev.install" />
+    <Text Include="../../thirdparty/owemdjee/thrift/debian/libthrift0.install" />
+    <Text Include="../../thirdparty/owemdjee/thrift/debian/php5-thrift.dirs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/debian/thrift-doc.docs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/debian/thrift-doc.install" />
+    <Text Include="../../thirdparty/owemdjee/thrift/doc/ReleaseManagement.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/doc/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/doc/committers.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/doc/install/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/doc/install/centos.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/doc/install/debian.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/doc/install/os_x.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/doc/install/windows.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/doc/licenses/lgpl-2.1.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/doc/licenses/otp-base-license.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/doc/specs/HeaderFormat.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/doc/specs/SequenceNumbers.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/doc/specs/idl.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/doc/specs/thrift-binary-protocol.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/doc/specs/thrift-compact-protocol.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/doc/specs/thrift-parameter-validation-proposal.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/doc/specs/thrift-protocol-spec.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/doc/specs/thrift-rpc.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/doc/specs/thrift-sasl-spec.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/doc/specs/thrift-tconfiguration.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/doc/specs/thrift.tex" />
+    <Text Include="../../thirdparty/owemdjee/thrift/dub.json" />
+    <Text Include="../../thirdparty/owemdjee/thrift/jitpack.yml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/c_glib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/c_glib/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/c_glib/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/c_glib/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/c_glib/test/glib.suppress" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/c_glib/thrift_c_glib.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/cl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/cl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/cl/READMES/" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/cl/READMES/readme-cassandra.lisp" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/cl/ensure-externals.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/3rdparty.props" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/libthrift.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/libthriftnb.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TBinaryProtocol.tcc" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/protocol/TCompactProtocol.tcc" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/src/thrift/qt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/AllProtocolTests.tcc" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/test/qt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/thrift-nb.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/thrift-qt5.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/thrift-z.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/cpp/thrift.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/d/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/d/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/d/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/d/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/d/test/async_test_runner.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/d/test/thrift_test_runner.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/dart/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/dart/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/dart/analysis_options.yaml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/dart/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/dart/pubspec.yaml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/src/Thrift.Collections.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/src/Thrift.Configuration.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/src/Thrift.Exception.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/src/Thrift.Processor.Multiplex.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/src/Thrift.Protocol.Compact.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/src/Thrift.Protocol.JSON.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/src/Thrift.Protocol.Multiplex.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/src/Thrift.Protocol.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/src/Thrift.Serializer.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/src/Thrift.Server.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/src/Thrift.Socket.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/src/Thrift.Stream.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/src/Thrift.Transport.MsxmlHTTP.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/src/Thrift.Transport.Pipes.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/src/Thrift.Transport.WinHTTP.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/src/Thrift.Transport.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/src/Thrift.TypeRegistry.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/src/Thrift.Utils.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/src/Thrift.WinHTTP.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/src/Thrift.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/ConsoleHelper.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/Performance/DataFactory.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/Performance/PerfTests.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/TestClient.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/TestConstants.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/TestServer.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/TestServerEvents.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/codegen/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/codegen/run-Pascal-Codegen-Tests.bat.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/maketest.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/multiplexed/Multiplex.Client.Main.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/multiplexed/Multiplex.Server.Main.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/multiplexed/Multiplex.Test.Common.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/serializer/SerializerData.res" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/serializer/TestSerializer.Data.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/serializer/TestSerializer.Tests.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/skip/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/typeregistry/Test.EnumToString.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/delphi/test/typeregistry/Test.TypeRegistry.pas" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/include/thrift_constants.hrl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/include/thrift_protocol.hrl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/rebar.config" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_base64_transport.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_binary_protocol.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_buffered_transport.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_client.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_client_util.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_compact_protocol.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_disk_log_transport.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_file_transport.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_framed_transport.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_http_transport.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_json_parser.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_json_protocol.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_membuffer_transport.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_memory_buffer.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_multiplexed_map_wrapper.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_multiplexed_protocol.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_processor.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_protocol.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_reconnecting_client.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_server.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_service.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_socket_server.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_socket_transport.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_sslsocket_transport.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_transport.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/src/thrift_transport_state_test.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/test/legacy_names_test.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/test/multiplexing_test.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/test/name_conflict_test.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/test/stress_server.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/test/test_const.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/test/test_disklog.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/test/test_omit.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/test/test_rendered_double_constants.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/test/test_thrift_1151.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/test/test_thrift_3214.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/test/test_thrift_buffered_transport.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/test/test_thrift_compact_protocol.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/test/test_thrift_file_transport.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/test/test_thrift_framed_transport.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/test/test_thrift_membuffer_transport.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/test/test_thrift_socket_transport.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/test/thrift_socket_server_test.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/erl/test/thrift_test_test.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/go/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/go/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/go/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/go/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/go/test/go.sum" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/go/thrift/staticcheck.conf" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/haxelib.json" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/AbstractMethodError.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/ArgumentError.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/Limits.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/TApplicationException.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/TBase.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/TConfiguration.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/TException.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/TFieldRequirementType.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/TProcessor.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/helper/BitConverter.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/helper/Int64Map.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/helper/IntSet.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/helper/ObjectSet.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/helper/StringSet.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/helper/UuidHelper.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/helper/ZigZag.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/protocol/TBinaryProtocol.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/protocol/TBinaryProtocolFactory.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/protocol/TCompactProtocol.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/protocol/TCompactProtocolFactory.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/protocol/TCompactTypes.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/protocol/TField.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/protocol/TJSONProtocol.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/protocol/TJSONProtocolFactory.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/protocol/TList.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/protocol/TMap.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/protocol/TMessage.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/protocol/TMessageType.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/protocol/TMultiplexedProcessor.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/protocol/TMultiplexedProtocol.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/protocol/TProtocol.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/protocol/TProtocolDecorator.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/protocol/TProtocolException.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/protocol/TProtocolFactory.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/protocol/TProtocolImplBase.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/protocol/TProtocolUtil.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/protocol/TSet.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/protocol/TStruct.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/protocol/TType.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/server/TServer.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/server/TServerEventHandler.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/server/TSimpleServer.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/TBufferedTransport.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/TBufferedTransportFactory.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/TEndpointTransport.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/TFileStream.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/TFramedTransport.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/TFramedTransportFactory.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/TFullDuplexHttpClient.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/THttpClient.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/TLayeredTransport.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/TServerSocket.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/TServerTransport.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/TSocket.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/TStream.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/TStreamTransport.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/TTransport.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/TTransportException.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/TTransportFactory.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/src/org/apache/thrift/transport/TWrappingServerTransport.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/cpp.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/csharp.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/flash.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/java.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/javascript.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/make_all.bat" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/make_all.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/neko.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/php.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/python.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/src/ConstantsTest.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/src/Main.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/src/MultiplexTest.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/src/StreamTest.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/haxe/test/src/TestBase.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/java/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/java/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/java/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/java/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/java/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/java/src/main/java/org/apache/thrift/partial/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/java/src/test/resources/log4j.properties" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/javame/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/Gruntfile.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/package-lock.json" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/package.json" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/src/thrift.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/build.properties" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/deep-constructor.test.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/jsTestDriver.conf" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/phantom-client.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/phantomjs-qunit.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/server_http.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/server_https.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/test-async.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/test-deep-constructor.html" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/test-double-rendering.html" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/test-double-rendering.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/test-es6.html" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/test-es6.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/test-int64.html" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/test-int64.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/test-jq.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/test-nojq.html" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/test-nojq.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/test.html" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/test.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/test_handler.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/js/test/testws.html" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/json/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/json/schema.json" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/json/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/json/test/build.properties" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/kotlin/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/kotlin/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/kotlin/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/kotlin/build.gradle.kts" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/kotlin/cross-test-client/build.gradle.kts" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/kotlin/cross-test-server/build.gradle.kts" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/kotlin/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/kotlin/settings.gradle.kts" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/lua/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/lua/TBinaryProtocol.lua" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/lua/TBufferedTransport.lua" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/lua/TCompactProtocol.lua" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/lua/TFramedTransport.lua" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/lua/THttpTransport.lua" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/lua/TJsonProtocol.lua" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/lua/TMemoryBuffer.lua" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/lua/TProtocol.lua" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/lua/TServer.lua" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/lua/TSocket.lua" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/lua/TTransport.lua" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/lua/Thrift.lua" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/lua/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Benchmarks/Thrift.Benchmarks/" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Benchmarks/Thrift.Benchmarks/CompactProtocolBenchmarks.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Benchmarks/Thrift.Benchmarks/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Directory.Build.props" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.IntegrationTests/" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.IntegrationTests/Protocols/ProtocolsOperationsTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.PublicInterfaces.Compile.Tests/" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.PublicInterfaces.Compile.Tests/GlobalSuppressions.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.PublicInterfaces.Compile.Tests/Impl/Thrift5253/MyService.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.PublicInterfaces.Compile.Tests/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Tests/" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Tests/Collections/TCollectionsTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Tests/Collections/THashSetTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Tests/DataModel/DeepCopy.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Tests/DataModel/NullValuesSet.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Tests/Protocols/TJsonProtocolHelperTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Tests/Protocols/TJsonProtocolTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Tests/Thrift.Tests/Transports/THttpTransportTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Collections/TCollections.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Collections/THashSet.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/GlobalSuppressions.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Processor/ITAsyncProcessor.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Processor/ITProcessorFactory.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Processor/TMultiplexedProcessor.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Processor/TSingletonProcessorFactory.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Protocol/Entities/TField.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Protocol/Entities/TList.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Protocol/Entities/TMap.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Protocol/Entities/TMessage.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Protocol/Entities/TMessageType.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Protocol/Entities/TSet.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Protocol/Entities/TStruct.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Protocol/Entities/TType.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Protocol/TBase.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Protocol/TBinaryProtocol.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Protocol/TCompactProtocol.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Protocol/TJSONProtocol.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Protocol/TMultiplexedProtocol.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Protocol/TProtocol.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Protocol/TProtocolDecorator.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Protocol/TProtocolException.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Protocol/TProtocolFactory.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Protocol/ToString.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Protocol/Utilities/TBase64Utils.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Protocol/Utilities/TGuidExtensions.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Protocol/Utilities/TJsonProtocolConstants.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Protocol/Utilities/TJsonProtocolHelper.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Protocol/Utilities/TProtocolUtil.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Server/TServer.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Server/TServerEventHandler.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Server/TSimpleAsyncServer.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Server/TThreadPoolAsyncServer.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/TApplicationException.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/TBaseClient.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/TConfiguration.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/TException.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Transport/Client/THttpTransport.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Transport/Client/TMemoryBufferTransport.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Transport/Client/TNamedPipeTransport.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Transport/Client/TSocketTransport.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Transport/Client/TStreamTransport.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Transport/Client/TTlsSocketTransport.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Transport/Layered/TBufferedTransport.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Transport/Layered/TFramedTransport.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Transport/Layered/TLayeredTransport.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Transport/Server/NullLogger.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Transport/Server/THttpServerTransport.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Transport/Server/TNamedPipeServerTransport.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Transport/Server/TServerSocketTransport.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Transport/Server/TServerTransport.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Transport/Server/TTlsServerSocketTransport.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Transport/TEndpointTransport.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Transport/TTransport.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Transport/TTransportException.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/Thrift/Transport/TTransportFactory.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/build.cmd" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/runtests.cmd" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/netstd/runtests.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/examples/client.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/examples/client_multitransport.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/examples/hello.html" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/examples/hello.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/examples/httpClient.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/examples/httpServer.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/examples/httpServer.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/examples/parse.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/examples/server.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/examples/server_http.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/examples/server_multitransport.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/binary.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/binary_protocol.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/browser.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/buffered_transport.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/compact_protocol.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/connection.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/create_client.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/framed_transport.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/header_protocol.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/header_transport.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/http_connection.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/index.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/input_buffer_underrun_error.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/int64_util.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/json_parse.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/json_protocol.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/log.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/multiplexed_processor.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/multiplexed_protocol.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/ohos_connection.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/protocol.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/server.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/thrift.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/transport.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/web_server.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/ws_connection.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/ws_transport.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/lib/thrift/xhr_connection.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/test/binary.test.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/test/certificates.README" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/test/client.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/test/deep-constructor.test.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/test/episodic-code-generation-test/client.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/test/episodic-code-generation-test/episodic_compilation.package.json" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/test/episodic-code-generation-test/server.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/test/exceptions.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/test/header.test.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/test/helpers.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/test/int64.test.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/test/server.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/test/server.key" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/test/test-cases.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/test/testAll.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/test/test_driver.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodejs/test/test_handler.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodets/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodets/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodets/test/client.ts" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodets/test/int64.test.ts" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodets/test/runClient.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodets/test/runServer.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodets/test/server.ts" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodets/test/test-cases.ts" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodets/test/testAll.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodets/test/test_driver.ts" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodets/test/test_handler.ts" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/nodets/test/tsconfig.json" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ocaml/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ocaml/TODO" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ocaml/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ocaml/src/TBinaryProtocol.ml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ocaml/src/TChannelTransport.ml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ocaml/src/TFramedTransport.ml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ocaml/src/TServer.ml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ocaml/src/TServerSocket.ml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ocaml/src/TSimpleServer.ml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ocaml/src/TSocket.ml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ocaml/src/TThreadedServer.ml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ocaml/src/Thrift.ml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/perl/Makefile.PL" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/perl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/perl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/perl/build-cpan-dist.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/perl/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/perl/t/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/perl/test.pl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/perl/tools/FixupDist.pl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/php/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/php/README.apache.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/php/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/php/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/php/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/setup.cfg" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/TMultiplexedProcessor.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/TRecursive.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/TSCons.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/TSerialization.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/TTornado.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/Thrift.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/compat.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/ext/protocol.tcc" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/protocol/TBase.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/protocol/TBinaryProtocol.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/protocol/TCompactProtocol.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/protocol/THeaderProtocol.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/protocol/TJSONProtocol.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/protocol/TMultiplexedProtocol.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/protocol/TProtocol.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/protocol/TProtocolDecorator.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/protocol/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/server/THttpServer.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/server/TNonblockingServer.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/server/TProcessPoolServer.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/server/TServer.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/server/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/transport/THeaderTransport.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/transport/THttpClient.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/transport/TSSLSocket.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/transport/TSocket.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/transport/TTransport.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/transport/TTwisted.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/transport/TZlibTransport.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/transport/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/src/transport/sslcompat.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/test/_import_local_thrift.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/test/test_socket.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/test/test_sslsocket.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/test/thrift_TBinaryProtocol.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/test/thrift_TCompactProtocol.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/test/thrift_TNonblockingServer.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/test/thrift_TSerializer.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/test/thrift_TZlibTransport.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/test/thrift_json.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/py/test/thrift_transport.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rb/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rb/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rb/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/RELEASING.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/release.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/src/autogen.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/src/errors.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/src/protocol/binary.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/src/protocol/compact.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/src/protocol/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/src/protocol/multiplexed.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/src/protocol/stored.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/src/server/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/src/server/multiplexed.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/src/server/threaded.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/src/transport/buffered.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/src/transport/framed.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/src/transport/mem.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/src/transport/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/src/transport/socket.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/test/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/test/src/bin/kitchen_sink_client.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/test/src/bin/kitchen_sink_server.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/test/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/test_recursive/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/test_recursive/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/test_recursive/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/test_recursive/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/test_recursive/src/maintenance/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/test_recursive/src/maintenance/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/test_recursive/src/transit/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/test_recursive/src/transit/light/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/test_recursive/src/transit/light/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/test_recursive/src/transit/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/test_recursive/src/transit/services/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/rs/test_recursive/src/transit/services/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/st/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/st/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/swift/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/swift/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ts/Gruntfile.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ts/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ts/coding_standards.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ts/dist/thrift.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ts/dist/thrift.min.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ts/package-lock.json" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ts/package.json" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ts/test/phantom-client.ts" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ts/test/server_http.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ts/test/test-int64.html" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ts/test/test-int64.ts" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ts/test/test.html" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ts/test/test.ts" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ts/test/test_handler.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ts/thrift.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/ts/tsconfig.json" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/xml/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/lib/xml/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/package-lock.json" />
+    <Text Include="../../thirdparty/owemdjee/thrift/package.json" />
+    <Text Include="../../thirdparty/owemdjee/thrift/sonar-project.properties" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/audit/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/audit/thrift_audit_test.pl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/c_glib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/c_glib/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/cl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/cpp/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/crossrunner/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/crossrunner/collect.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/crossrunner/compat.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/crossrunner/report.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/crossrunner/run.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/crossrunner/setup.cfg" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/crossrunner/test.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/crossrunner/util.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/dart/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/dart/test_client/pubspec.yaml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/erl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/erl/rebar.config" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/erl/src/test_client.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/erl/src/test_thrift_server.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/features/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/features/container_limit.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/features/index.html" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/features/known_failures_Linux.json" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/features/local_thrift/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/features/nosslv3.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/features/setup.cfg" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/features/string_limit.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/features/tests.json" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/features/theader_binary.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/features/tls.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/features/util.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/go/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/go/genmock.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/go/go.sum" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/haxe/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/haxe/cpp.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/haxe/csharp.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/haxe/flash.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/haxe/java.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/haxe/javascript.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/haxe/make_all.bat" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/haxe/make_all.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/haxe/neko.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/haxe/php-web-server.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/haxe/php.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/haxe/python.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/haxe/src/Arguments.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/haxe/src/Main.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/haxe/src/TestClient.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/haxe/src/TestMacro.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/haxe/src/TestServer.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/haxe/src/TestServerEventHandler.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/haxe/src/TestServerHandler.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/index.html" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/keys/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/keys/client.key" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/keys/client_v3.key" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/keys/keygen/make-serverkey.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/keys/server.key" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/known_failures_Linux.json" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/lua/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/lua/test_basic_client.lua" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/lua/test_basic_server.lua" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/netstd/Client/Performance/PerformanceTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/netstd/Client/Performance/TestDataFactory.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/netstd/Client/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/netstd/Client/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/netstd/Client/TestClient.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/netstd/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/netstd/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/netstd/Server/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/netstd/Server/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/netstd/Server/TestServer.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/netstd/build.cmd" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/netstd/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/ocaml/client/TestClient.ml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/ocaml/server/TestServer.ml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/perl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/perl/TestClient.pl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/perl/TestServer.pl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/php/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py.tornado/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py.tornado/setup.cfg" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py.tornado/test_suite.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py.twisted/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py.twisted/setup.cfg" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py.twisted/test_suite.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py/FastbinaryTest.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py/RunClientServer.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py/SerializationTest.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py/TSimpleJSONProtocolTest.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py/TestClient.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py/TestEof.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py/TestFrozen.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py/TestRenderedDoubleConstants.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py/TestServer.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py/TestSocket.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py/TestSyntax.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py/explicit_module/EnumSerializationTest.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py/explicit_module/runtest.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py/generate.cmake" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py/setup.cfg" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/py/util.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/rb/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/rebuild_known_failures.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/result.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/rs/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/rs/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/rs/src/bin/test_client.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/rs/src/bin/test_server.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/rs/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/swift/CrossTests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/swift/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/test.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/tests.json" />
+    <Text Include="../../thirdparty/owemdjee/thrift/test/valgrind.suppress" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/c_glib/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/cl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/cpp/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/d/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/dart/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/dart/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/dart/client/pubspec.yaml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/dart/client/web/index.html" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/dart/client/web/styles.css" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/dart/console_client/pubspec.yaml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/dart/server/pubspec.yaml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/erl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/erl/client.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/erl/client.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/erl/json_client.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/erl/server.erl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/erl/server.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/go/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/go/server.key" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/haxe/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/haxe/cpp.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/haxe/csharp.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/haxe/flash.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/haxe/java.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/haxe/javascript.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/haxe/make_all.bat" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/haxe/make_all.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/haxe/neko.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/haxe/php-web-server.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/haxe/php.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/haxe/python.hxml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/haxe/src/CalculatorHandler.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/haxe/src/Main.hx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/java/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/java/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/java/build.properties" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/js/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/js/build.properties" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/js/tutorial.html" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/netstd/Client/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/netstd/Client/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/netstd/Client/ThriftTest.pfx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/netstd/Interfaces/GlobalSuppressions.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/netstd/Interfaces/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/netstd/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/netstd/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/netstd/Server/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/netstd/Server/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/netstd/Server/ThriftTest.pfx" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/netstd/build.cmd" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/netstd/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/nodejs/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/nodejs/NodeClient.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/nodejs/NodeClientPromise.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/nodejs/NodeServer.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/nodejs/NodeServerPromise.js" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/ocaml/CalcClient.ml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/ocaml/CalcServer.ml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/ocaml/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/perl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/perl/PerlClient.pl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/perl/PerlServer.pl" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/php/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/php/runserver.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/py.tornado/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/py.tornado/PythonClient.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/py.tornado/PythonServer.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/py.twisted/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/py.twisted/PythonClient.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/py.twisted/PythonServer.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/py.twisted/PythonServer.tac" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/py/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/py/PythonClient.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/py/PythonServer.py" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/py/setup.cfg" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/rb/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/rs/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/rs/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/rs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/rs/src/bin/tutorial_client.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/rs/src/bin/tutorial_server.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/rs/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/swift/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/thrift/tutorial/swift/README.md" />
+    <Xml Include="../../thirdparty/owemdjee/thrift/contrib/fb303/java/build.xml" />
+    <Xml Include="../../thirdparty/owemdjee/thrift/contrib/thrift-maven-plugin/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/thrift/lib/java/android/src/main/AndroidManifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/thrift/lib/java/code_quality_tools/findbugs-filter.xml" />
+    <Xml Include="../../thirdparty/owemdjee/thrift/lib/js/test/build.xml" />
+    <Xml Include="../../thirdparty/owemdjee/thrift/lib/json/test/build.xml" />
+    <Xml Include="../../thirdparty/owemdjee/thrift/lib/kotlin/cross-test-client/src/main/resources/logback.xml" />
+    <Xml Include="../../thirdparty/owemdjee/thrift/lib/kotlin/cross-test-server/src/main/resources/logback.xml" />
+    <Xml Include="../../thirdparty/owemdjee/thrift/lib/st/package.xml" />
+    <Xml Include="../../thirdparty/owemdjee/thrift/lib/ts/test/build.xml" />
+    <Xml Include="../../thirdparty/owemdjee/thrift/lib/xml/test/build.xml" />
+    <Xml Include="../../thirdparty/owemdjee/thrift/tutorial/java/build.xml" />
+    <Xml Include="../../thirdparty/owemdjee/thrift/tutorial/js/build.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
