@@ -55,6 +55,8 @@
 #include "../../thirdparty/owemdjee/uchardet/src/tools/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/tvision/include/tvision/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/cpp-terminal/examples/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/libbf/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/libcsv2/include/monolithic_examples.h"
 #include "../../thirdparty/jbig2dec/monolithic_examples.h"
 #include "../../thirdparty/leptonica/prog/monolithic_examples.h"
 #include "../../source/fitz/tessocr.h"
@@ -782,6 +784,18 @@ static struct tool_spec {
 	{ {.f = cppterminal_slow_events_example_main }, "cppterm_slow_events", "cpp-terminal slow_events demo" },
 	{ {.f = cppterminal_styles_example_main }, "cppterm_styles", "cpp-terminal styles demo" },
 	{ {.f = cppterminal_utf8_example_main }, "cppterm_utf8", "cpp-terminal utf8 demo" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = libbf_bench_main }, "bf_bench", "libbf benchmark tool" },
+	{ {.fa = libbf_test_main }, "bf_test", "libbf test tool" },
+	{ {.fa = libbf_tinypi_main }, "bf_tinypi", "libbf tiny PI demo" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = csv2_bench_main }, "csv2_bench", "libcsv2 benchmark tool" },
+	{ {.fa = csv2_csv_count_main }, "csv_count", "libcsv2 csv_count row count tool" },
+	{ {.fa = csv2_fieldcount_main }, "csv_fieldcount", "libcsv2 fieldcount tool" },
 #endif
 
 	{ {.fa = report_version }, "version", "report version of this build / tools" },
