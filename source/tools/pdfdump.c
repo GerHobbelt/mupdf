@@ -27,6 +27,7 @@
 
 #include "mupdf/fitz.h"
 #include "mupdf/pdf.h"
+#include "mupdf/mutool.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -35,19 +36,20 @@ static pdf_document *doc = NULL;
 static fz_context *ctx = NULL;
 
 
-int pdfdump_main(int argc, char **argv)
+int pdfdump_main(int argc, const char **argv)
 {
-	
-	char *infile;
-	char *password = "";
+	const char *infile;
+	const char *password = "";
 	int c;
-	char *output = ".";
+	const char *output = ".";
 
 	while ((c = fz_getopt(argc, argv, "o:O:")) != -1)
 	{
 		switch (c)
 		{
-		case 'o': output = fz_optarg; break;
+		case 'o': 
+			output = fz_optarg; 
+			break;
 		}
 	}
 
@@ -60,7 +62,7 @@ int pdfdump_main(int argc, char **argv)
 	if (!ctx)
 	{
 		fprintf(stderr, "cannot initialise context\n");
-		exit(1);
+		return 1;
 	}
 
 	doc = pdf_open_document(ctx, infile);
@@ -82,13 +84,10 @@ int pdfdump_main(int argc, char **argv)
 	const char *filename;
 	unsigned char *data;
 
-
 	embeddedfiles = pdf_load_name_tree(ctx, doc, PDF_NAME(EmbeddedFiles));
 	for (i = 0; i < pdf_dict_len(ctx, embeddedfiles); ++i)
 	{
-
 		char filepath[1024] = "";
-
 
 		// Get name of embedded file with index i
 		name = pdf_dict_get_key(ctx, embeddedfiles, i);
@@ -108,7 +107,7 @@ int pdfdump_main(int argc, char **argv)
 		if (file == NULL)
 		{
 			fprintf(stderr, "Failed to open '%s' for writing\n", filepath);
-			exit(1);
+			return 1;
 		}
 		fwrite(data, 1, len, file);
 		fclose(file);
@@ -116,7 +115,6 @@ int pdfdump_main(int argc, char **argv)
 		pdf_drop_obj(ctx, embeddedfile);
 		pdf_drop_obj(ctx, name);
 		fz_drop_buffer(ctx, buf);
-		
 	}
 
 	pdf_drop_document(ctx, doc);
