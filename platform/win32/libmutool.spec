@@ -34,4 +34,3 @@ sources:
 	../../source/tools/pdfbake.c
 	../../source/tools/pdfdump.c
 	../../source/tools/rewrite-pdf-outline.c
-	../../source/tools/safe_file_copier.cpp
