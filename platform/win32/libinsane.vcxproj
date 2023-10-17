@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libinsane</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF464F78}</ProjectGuid>
+    <RootNamespace>libinsane</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINSANE;INSANE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINSANE;INSANE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINSANE;INSANE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINSANE;INSANE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINSANE;INSANE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINSANE;INSANE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINSANE;INSANE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINSANE;INSANE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINSANE;INSANE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINSANE;INSANE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINSANE;INSANE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBINSANE;INSANE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/src/device_descriptor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/src/error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/src/item.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/src/libinsane-api.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/src/log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/src/option_descriptor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/src/scan_parameters.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/src/scan_session.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/bmp/bmp_parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/examples/lis_scan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/bases/dumb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/bases/sane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/bases/twain/capabilities.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/bases/twain/twain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/bases/wia/properties.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/bases/wia/transfer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/bases/wia/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/bases/wia/wia_ll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/basewrapper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/bmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/multiplexer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/normalizers/all_opts_on_all_sources.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/normalizers/bmp2raw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/normalizers/clean_dev_descs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/normalizers/min_one_source.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/normalizers/opt_aliases.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/normalizers/raw24.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/normalizers/resolution.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/normalizers/safe_defaults.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/normalizers/source_names.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/normalizers/source_nodes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/normalizers/source_types.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/safebet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/str2impls.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/workarounds/cache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/workarounds/check_capabilities.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/workarounds/dedicated_process/master.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/workarounds/dedicated_process/pack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/workarounds/dedicated_process/protocol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/workarounds/dedicated_process/worker.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/workarounds/dedicated_thread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/workarounds/hide_source_auto.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/workarounds/invalid_page_size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/workarounds/lamp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/workarounds/one_page_flatbed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/workarounds/opt_names.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/workarounds/opt_values.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_multiplexer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_normalizer_all_opts_on_all_sources.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_normalizer_bmp2raw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_normalizer_clean_dev_descs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_normalizer_min_one_source.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_normalizer_opt_aliases.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_normalizer_raw24.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_normalizer_resolution.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_normalizer_safe_defaults.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_normalizer_source_names.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_normalizer_source_nodes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_normalizer_source_types.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_sane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_twain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_wia_ll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_workaround_cache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_workaround_check_capabilities.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_workaround_dedicated_process.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_workaround_dedicated_process_pack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_workaround_dedicated_thread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_workaround_hide_source_auto.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_workaround_invalid_page_size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_workaround_lamp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_workaround_one_page_flatbed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_workaround_opt_names.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/tests_workaround_opt_values.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/include/libinsane-gobject/capability.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/include/libinsane-gobject/constraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/include/libinsane-gobject/device_descriptor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/include/libinsane-gobject/device_descriptor_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/include/libinsane-gobject/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/include/libinsane-gobject/error_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/include/libinsane-gobject/img_format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/include/libinsane-gobject/item.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/include/libinsane-gobject/item_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/include/libinsane-gobject/item_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/include/libinsane-gobject/libinsane-api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/include/libinsane-gobject/log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/include/libinsane-gobject/option_descriptor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/include/libinsane-gobject/option_descriptor_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/include/libinsane-gobject/scan_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/include/libinsane-gobject/scan_parameters_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/include/libinsane-gobject/scan_session.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/include/libinsane-gobject/scan_session_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/include/libinsane-gobject/unit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/include/libinsane/capi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/include/libinsane/constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/include/libinsane/dumb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/include/libinsane/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/include/libinsane/log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/include/libinsane/multiplexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/include/libinsane/normalizers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/include/libinsane/safebet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/include/libinsane/sane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/include/libinsane/str2impls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/include/libinsane/twain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/include/libinsane/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/include/libinsane/wia_ll.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/include/libinsane/workarounds.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/bases/twain/capabilities.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/bases/twain/twain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/bases/wia/properties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/bases/wia/transfer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/bases/wia/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/bases/wia/wia2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/basewrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/bmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/endianess.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/normalizers/raw24.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/workarounds/dedicated_process/pack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/workarounds/dedicated_process/protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/workarounds/dedicated_process/worker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/main.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/tests/util.h" />
+    <Image Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/bmp/example_grayscale.bmp" />
+    <Image Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/bmp/w3c_home_256.bmp" />
+    <Image Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/bmp/w3c_home_bw.bmp" />
+    <Image Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/bmp/w3c_home_gray.bmp" />
+    <Image Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/bmp/w3c_home_rgb24.bmp" />
+    <Image Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/adf.png" />
+    <Image Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/design.png" />
+    <Image Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/flatbed.png" />
+    <Image Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/flatbed_and_feeder.png" />
+    <Image Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/handheld.png" />
+    <Image Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/insane.png" />
+    <Image Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/item_tree.png" />
+    <Image Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/portable.png" />
+    <Image Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/sane.png" />
+    <Image Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/twain.png" />
+    <Image Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/wia.png" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/libinsane/splint.rc" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/README.markdown" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/activate_test_env.sh" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/check_sparse.py" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/deliver_doc.sh" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/doc/index.html" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/rclone.conf" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/examples/list_devices.py" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/examples/list_options.py" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/examples/scan.py" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/tests/test_hw.py" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/api_multiplexer.dox" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/behavior_normalizations.dox" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/dev_rules.dox" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/doxygen.conf.in" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/gobject_introspection_api.dox" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/howto_c.dox" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/howto_general.dox" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/howto_python.dox" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/index.dox" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/install.dox" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/introduction.dox" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/libinsane_doxygen.css" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/logging.dox" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/normalized_api.dox" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/packaging.dox" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/safebet.dox" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/scan_apis.dox" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/structure.dox" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/tickets.dox" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/doc/workarounds.dox" />
+    <Text Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane/src/version.h.in" />
+    <Xml Include="../../thirdparty/owemdjee/libinsane/subprojects/libinsane-gobject/doc/libinsane_gobject-gtkdoc.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

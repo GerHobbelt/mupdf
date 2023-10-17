@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -113,8 +113,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBOLT;BOLT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -133,7 +133,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBOLT;BOLT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/bolt/common/uni/include;../../thirdparty/owemdjee/bolt/inference/engine/api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -160,7 +160,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBOLT;BOLT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/bolt/common/uni/include;../../thirdparty/owemdjee/bolt/inference/engine/api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -188,7 +188,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBOLT;BOLT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/bolt/common/uni/include;../../thirdparty/owemdjee/bolt/inference/engine/api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -215,7 +215,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBBOLT;BOLT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/bolt/common/uni/include;../../thirdparty/owemdjee/bolt/inference/engine/api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -228,7 +228,8 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/common/cmakes/blank.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/common/cmakes/blank_lib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/common/cmakes/blank_main.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/common/gcl/src/ocl_context.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/common/gcl/src/ocl_data_trans.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/common/gcl/tools/device_info/clinfo.cpp" />
@@ -243,16 +244,20 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/common/model_spec/src/model_serialize.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/common/model_spec/src/model_spec.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/common/uni/src/profiling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/common/uni/src/tensor_transpose.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/axpby.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/axpby.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/axpby.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/mmm.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/mmm_A55.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/mmm_A76.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/mvm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/mvm_A55.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/mvm_A76.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/v8.2/mmm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/v8.2/mmm_A55.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/v8.2/mmm_A76.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/v9/mmm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp32/axpby.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp32/mmm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp32/mvm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp32/mvm_col.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp32/mvm_row.cpp" />
@@ -265,6 +270,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/v8.2/mmm_A55.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/v8.2/mmm_A76.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/v8/mmm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/v9/mmm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/mmm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/mvm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/general/axpby.cpp" />
@@ -276,26 +282,35 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/x86/fp32/mvm_avx2_col.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/x86/fp32/mvm_avx2_pack.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/x86/fp32/mvm_avx2_row.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/x86/int8/mmm_avx512_vnni.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/x86/int8/mvm_avx512_vnni.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/x86/int8/mvm_avx512_vnni_row.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/x86/int8/avx/mmm_avx_vnni.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/x86/int8/avx/mvm_avx_vnni.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/x86/int8/avx/mvm_avx_vnni_row.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/x86/int8/avx512/mmm_avx512_vnni.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/x86/int8/avx512/mvm_avx512_vnni.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/x86/int8/avx512/mvm_avx512_vnni_row.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/x86/mmm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/x86/mvm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/mmm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/mvm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/tests/test_mmm.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/tests/test_mmm_int8.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/tests/test_mvm.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/tests/test_mvm_int8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/image/src/convert_color.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/image/src/cpu/arm/resize_bilinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/image/src/cpu/convert_color.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/image/src/cpu/general/resize_bilinear.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/image/src/cpu/grid_sample.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/image/src/cpu/resize_nearest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/image/src/cpu/x86/resize_bilinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/image/src/cpu/x86/resize_nearest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/image/src/gpu/mali/convert_color.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/image/src/gpu/mali/fp16/resize_mali_fp16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/image/src/gpu/mali/lut.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/image/src/gpu/mali/lut_preprocess.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/image/src/gpu/mali/resize.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/image/src/grid_sample.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/image/src/image_processing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/image/src/lut.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/image/src/lut_preprocess.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/image/src/resize.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/image/tests/test_image_processing.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/image/tests/test_image_resize.cpp" />
@@ -328,6 +343,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/depthwise_convolution.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/depthwise_pointwise_convolution.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/dequantize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/detectionoutput.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/eltwise.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp16/attention.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp16/attention_mask.cpp" />
@@ -350,10 +366,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp16/depthwise_pointwise_convolution_direct_no_padding_A55.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp16/depthwise_pointwise_convolution_direct_no_padding_A76.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp16/dequantize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp16/detectionoutput.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp16/eltwise.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp16/gru.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp16/layer_norm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp16/lstm.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp16/normalization.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp16/pooling.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp16/prelu.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp16/rnn.cpp" />
@@ -367,10 +384,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp32/deconvolution_transform.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp32/depthwise_pointwise_convolution.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp32/dequantize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp32/detectionoutput.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp32/eltwise.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp32/gru.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp32/layer_norm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp32/lstm.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp32/normalization.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp32/pooling.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp32/prelu.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp32/rnn.cpp" />
@@ -383,12 +401,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp32/v8/convolution_gemm_icnchw_V8.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp32/v8/convolution_winograd_V8.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp32/v8/depthwise_pointwise_convolution_direct_V8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int32/clip.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int32/scale.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int8/concat.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int8/convolution.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int8/convolution_transform.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int8/depthwise_pointwise_convolution.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int8/pooling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int8/rnn.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int8/v7/convolution_gemm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int8/v7/depthwise_pointwise_convolution_direct.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int8/v8.2/convolution_gemm_A55.cpp" />
@@ -396,13 +415,18 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int8/v8.2/convolution_winograd_A55.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int8/v8.2/convolution_winograd_A76.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int8/v8.2/depthwise_pointwise_convolution_direct.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/normalization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int8/v8.2/lstm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int8/v8/convolution_gemm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int8/v8/depthwise_pointwise_convolution_direct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/layer_norm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/padding.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/pooling.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/prelu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/requantize.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/rnn.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/scale.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/softmax.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/bilateral_slice_apply.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/cast.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/check.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/clip.cpp" />
@@ -421,14 +445,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/general/attention_mask.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/general/clip.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/general/convolution.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/general/cumsum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/general/cum.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/general/deconvolution.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/general/depthwise_convolution.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/general/depthwise_pointwise_convolution.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/general/dequantize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/general/detectionoutput.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/general/eltwise.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/general/instance_norm.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/general/normalization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/general/layer_norm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/general/padding.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/general/pooling.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/general/pooling_bp.cpp" />
@@ -438,7 +462,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/general/softmax.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/general/transpose.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/instance_norm.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/l2normalization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/l2norm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/lite/convolution.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/non_max_suppression.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/non_zero.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/onehot.cpp" />
@@ -447,6 +472,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/priorbox.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/quantize.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/reduction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/requantize.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/reshape.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/rnn.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/roialign.cpp" />
@@ -466,6 +492,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/depthwise_convolution.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/depthwise_pointwise_convolution.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/dequantize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/detectionoutput.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/eltwise.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/fp32/attention.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/fp32/attention_mask.cpp" />
@@ -481,12 +508,13 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/fp32/depthwise_convolution_transform.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/fp32/depthwise_pointwise_convolution.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/fp32/depthwise_pointwise_convolution_transform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/fp32/detectionoutput.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/fp32/eltwise.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/fp32/gru.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/fp32/instance_norm.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/fp32/l2normalization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/fp32/l2norm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/fp32/layer_norm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/fp32/lstm.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/fp32/normalization.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/fp32/pooling.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/fp32/pooling_avx512.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/fp32/pooling_bp.cpp" />
@@ -496,19 +524,26 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/fp32/scale.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/fp32/softmax.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/instance_norm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int32/clip.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int32/scale.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/avx/convolution_1x1_direct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/avx/convolution_direct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/avx/dequantize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/avx/pooling_int8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/avx/quantize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/avx512/convolution_1x1_direct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/avx512/convolution_direct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/avx512/depthwise_convolution_direct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/avx512/dequantize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/avx512/pooling_int8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/avx512/quantize.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/convolution.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/convolution_1x1_direct.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/convolution_direct.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/convolution_transform.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/depthwise_convolution_direct.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/deconvolution_transform.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/depthwise_convolution_transform.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/dequantize.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/lstm.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/pooling_int8.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/quantize.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/rnn.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/normalization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/layer_norm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/pooling.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/prelu.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/quantize.cpp" />
@@ -516,16 +551,16 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/scale.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/softmax.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/yolov3detectionoutput.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cumsum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cum.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/deconvolution.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/depth2space.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/depthwise_convolution.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/depthwise_pointwise_convolution.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/dequantize.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/detectionoutput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/einsum.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/eltwise.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/embedding.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/equal.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/expand.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/fully_connected.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gat.cpp" />
@@ -573,8 +608,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fp16/gather_mali_fp16.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fp16/gemv_mali_fp16.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fp16/generate_proposals_mali_fp16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fp16/instance_norm_mali_fp16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fp16/layer_norm_mali_fp16.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fp16/matmul_mali_fp16.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fp16/normalization_mali_fp16.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fp16/padding_mali_fp16.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fp16/pooling_mali_fp16.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fp16/power_mali_fp16.cpp" />
@@ -596,8 +632,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fully_connected.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/gather.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/generate_proposals.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/instance_norm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/layer_norm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/matmul.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/normalization.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/padding.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/pooling.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/power.cpp" />
@@ -617,15 +654,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/tile.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/topk.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/transpose.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/uchar/bilateral_slice_apply_mali_uchar.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/unsqueeze.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/instance_norm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/kl.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/l2normalization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/l2norm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/layer_norm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/matmul.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/non_max_suppression.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/non_zero.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/normalization.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/onehot.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/padding.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/pooling.cpp" />
@@ -635,6 +671,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/prelu.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/priorbox.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/quantize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/random.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/reduction.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/reshape.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/rnn.cpp" />
@@ -652,6 +689,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/tile.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/topk.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/transpose.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/unpooling.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/unsqueeze.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/where.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/yolov3detectionoutput.cpp" />
@@ -685,12 +723,12 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/tests/test_fully_connected_ocl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/tests/test_gather_ocl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/tests/test_generate_proposals_ocl.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/tests/test_l2normalization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/tests/test_l2norm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/tests/test_layer_norm.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/tests/test_matmul_int8.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/tests/test_matmul_ocl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/tests/test_matmul_ocl_f32.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/tests/test_non_max_suppression.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/tests/test_normalization.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/tests/test_padding.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/tests/test_padding_ocl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/tests/test_pooling.cpp" />
@@ -725,18 +763,20 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/tests/test_topk_ocl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/tests/test_transpose.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/compute/tensor/tests/test_transpose_ocl.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/engine/src/BoltModel_Jni.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/engine/src/bolt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/engine/src/bolt_c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/engine/src/bolt_c_simplify.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/engine/src/bolt_cpp.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/engine/src/bolt_dllite.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/engine/src/bolt_jni.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/engine/src/bolt_python.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/engine/src/cnn.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/engine/src/data_loader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/engine/src/model.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/engine/src/model_calibration.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/engine/src/result_format.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/engine/src/tdnn_fully_connected_cpu.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/engine/tools/common_algo_search/common_algo_search.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/engine/tools/model_finetuner/model_finetuner.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/engine/tools/preprocess_ocl/preprocess_ocl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/engine/tools/preprocess_ocl/update_ocl.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/examples/automatic_speech_recognition/asr_convolution_transformer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/examples/automatic_speech_recognition/asr_rnnt.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/examples/automatic_speech_recognition/audio_feature.cpp" />
@@ -748,15 +788,17 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/examples/bert/graph_tinybert.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/examples/bert/tinybert.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/examples/bert/tinybert_onnx.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/examples/c_api/c_common.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/examples/c_api/c_image_classification.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/examples/c_api/c_input_method.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/examples/c_api/c_set_inout.c" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/examples/c_api/c_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/examples/cpp_api/cpp_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/examples/dlaWOdcn/flow_dlaWOdcn.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/examples/facesr/flow_facesr.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/examples/image_classification/classification.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/examples/image_matting/u2net.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/examples/machine_translation/nmt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/examples/machine_translation/nmt_en-cs.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/examples/machine_translation/nmt_tsc.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/examples/machine_translation/tsc_ssru.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/inference/examples/object_detection/detection.cpp" />
@@ -1212,6 +1254,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/bolt/training/src/tests/tests/topologies/Test_ResNet.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/bolt/training/src/tests/tests/topologies/Test_Transformer.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/gcl/include/context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/common/gcl/include/dl_func.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/gcl/include/event.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/gcl/include/gcl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/gcl/include/gcl_common.h" />
@@ -1235,18 +1278,15 @@
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/memory/include/memory_ocl_img.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/memory/include/tensor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/memory/include/tensor_auxiliary.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/bolt/common/memory/include/tensor_common.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/bolt/common/memory/include/tensor_desc.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/bolt/common/memory/include/tensor_transpose.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/model_spec/include/model_common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/model_spec/include/model_print.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/model_spec/include/model_spec.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/uni/include/affinity_policy.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/uni/include/algorithm_map.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/uni/include/arm_neon_expand.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/bolt/common/uni/include/array_transpose.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/uni/include/data_type.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/uni/include/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/common/uni/include/file.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/uni/include/graph.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/uni/include/memory_cpu.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/uni/include/operator_type.h" />
@@ -1254,8 +1294,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/uni/include/profiling.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/uni/include/schedule.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/uni/include/secure_c_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/common/uni/include/shape_infer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/common/uni/include/string_functions.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/uni/include/sys.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/uni/include/task.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/common/uni/include/tensor_desc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/common/uni/include/tensor_transpose.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/uni/include/thread_affinity.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/uni/include/uni.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/common/uni/include/ut_util.h" />
@@ -1264,25 +1308,63 @@
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/include/blas_enhance.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/blas_arm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/blas_fp16.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/mmm.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/mmm_common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/mvm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/mvm_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/v8.2/blas_matrix_transpose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/v8.2/mmm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/v8.2/mmm_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/v9/blas_matrix_transpose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/v9/kernels/12x2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/v9/kernels/12x4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/v9/kernels/12x8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/v9/kernels/2x2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/v9/kernels/2x4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/v9/kernels/2x8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/v9/kernels/4x2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/v9/kernels/4x4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/v9/kernels/4x8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/v9/kernels/8x2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/v9/kernels/8x4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/v9/kernels/8x8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp16/v9/kernels/tail.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp32/blas_fp32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/fp32/kernels_fp32.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/blas_int8.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/blas_matrix_transpose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/v7/blas_matrix_transpose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/v7/mvm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/v8.2/blas_matrix_transpose.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/v8.2/mmm_common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/v8.2/mmm_v8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/v8.2/mvm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/v9/kernels/12x2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/v9/kernels/12x4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/v9/kernels/12x8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/v9/kernels/2x2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/v9/kernels/2x4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/v9/kernels/2x8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/v9/kernels/4x2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/v9/kernels/4x4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/v9/kernels/4x8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/v9/kernels/8x2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/v9/kernels/8x4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/v9/kernels/8x8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/arm/int8/v9/kernels/tail.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/general/blas_general.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/x86/blas_x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/x86/fp32/blas_common_fp32.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/x86/fp32/blas_fp32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/x86/int8/blas_common_int8.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/src/cpu/x86/int8/blas_int8.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/image/include/image.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/image/include/image_processing.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/image/src/cpu/arm/image_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/image/src/cpu/cpu_functions.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/image/src/cpu/general/image_general.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/image/src/cpu/image_cpu.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/image/src/cpu/x86/image_x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/image/src/gpu/mali/cl/kernel_option/convert_color_opt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/image/src/gpu/mali/cl/kernel_option/lut_opt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/image/src/gpu/mali/cl/kernel_option/lut_preprocess_opt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/image/src/gpu/mali/cl/kernel_option/resize_opt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/image/src/gpu/mali/fp16/resize_mali_fp16.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/image/src/gpu/mali/image_mali.h" />
@@ -1310,6 +1392,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp32/depthwise_pointwise_convolution.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp32/mvm_nkn32.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/fp32/tensor_computing_fp32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int32/arm_functions_int32.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int32/tensor_computing_int32.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int8/arm_functions_int8.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int8/depthwise_pointwise_convolution.h" />
@@ -1318,8 +1401,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int8/v8.2/convolution_gemm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int8/v8.2/convolution_winograd.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int8/v8.2/convolution_winograd_transform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/int8/v8/convolution_gemm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/tensor_computing_arm.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/arm/transform_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/bcast.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/cpu_functions.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/cpu_functions_template.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/general/general_functions.h" />
@@ -1333,14 +1418,16 @@
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/fp32/transform_functions_fp32.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/fp32/x86_functions_fp32.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int32/tensor_computing_int32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/avx/x86_functions_int8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/avx512/x86_functions_int8.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/convolution_functions.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/tensor_computing_int8.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/transform_functions_int8.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/int8/x86_functions_int8.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/tensor_computing_x86.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/cpu/x86/x86_functions.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/kernel_def.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/kernel_option/activation_opt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/kernel_option/bilateral_slice_apply_opt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/kernel_option/cast_opt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/kernel_option/channel_resize_opt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/kernel_option/clip_opt.h" />
@@ -1358,8 +1445,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/kernel_option/fill_memory_zero_vec4_opt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/kernel_option/gemm_tn_opt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/kernel_option/gemv_opt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/kernel_option/instance_norm_opt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/kernel_option/layer_norm_opt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/kernel_option/mem_trans_opt.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/kernel_option/normalization_opt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/kernel_option/padding_opt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/kernel_option/pooling_opt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/kernel_option/power_opt.h" />
@@ -1371,6 +1459,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/kernel_option/slice_opt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/kernel_option/softmax_opt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/kernel_option/space2depth_opt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/kernel_option/tfslice_opt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/kernel_option/tile_opt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/kernel_option/transpose_opt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fp16/activation_mali_fp16.h" />
@@ -1398,8 +1487,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fp16/gather_mali_fp16.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fp16/gemv_mali_fp16.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fp16/generate_proposals_mali_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fp16/instance_norm_mali_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fp16/layer_norm_mali_fp16.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fp16/matmul_mali_fp16.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fp16/normalization_mali_fp16.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fp16/padding_mali_fp16.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fp16/pooling_mali_fp16.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fp16/power_mali_fp16.h" />
@@ -1420,9 +1510,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fp16/transpose_mali_fp16.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/fp16/unsqueeze_mali_fp16.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/tensor_computing_mali.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/uchar/bilateral_slice_apply_mali_uchar.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/uchar/tensor_computing_uchar.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/api/c/bolt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/api/c/bolt_simplify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/api/cpp/Bolt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/api/dllite/Bolt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/BoltModel.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/activation.hpp" />
@@ -1439,35 +1529,42 @@
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/concat.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/constant.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/constant_of_shape.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/convert_color.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/convolution.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/copy.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/activation_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/argmax_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/batch_norm_cpu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/bilateral_slice_apply_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/cast_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/channel_resize_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/check_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/clip_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/concat_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/constant_of_shape_cpu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/convert_color_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/convolution_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/copy_cpu.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/cumsum_cpu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/cum_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/deconvolution_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/depth2space_cpu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/detection_output_cpu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/einsum_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/eltwise_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/embedding_cpu.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/equal_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/expand_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/factory_cpu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/flatten_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/fully_connected_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/gat_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/gather_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/grid_sample_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/instance_norm_cpu.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/l2normalization_cpu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/l2norm_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/layer_norm_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/logsoftmax_cpu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/lut_cpu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/lut_preprocess_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/matmul_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/non_max_suppression_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/non_zero_cpu.hpp" />
@@ -1477,7 +1574,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/power_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/preallocated_memory_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/prelu_cpu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/prior_box_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/quantizelinear_cpu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/random_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/range_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/reduction_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/repeat_cpu.hpp" />
@@ -1502,16 +1601,17 @@
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/tile_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/topk_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/transpose_cpu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/unpooling_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/unsqueeze_cpu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cpu/where_cpu.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cumsum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/cum.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/data_loader.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/deconvolution.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/depth2space.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/detection_output.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/einsum.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/eltwise.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/embedding.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/equal.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/expand.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/factory.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/fully_connected.hpp" />
@@ -1525,8 +1625,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/instance_norm.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/jni_header.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/jump.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/l2normalization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/l2norm.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/layer_norm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/lut.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/lut_preprocess.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/matmul.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/memory_tracker.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/model.hpp" />
@@ -1541,24 +1643,31 @@
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/check_ocl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/clip_ocl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/concat_ocl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/convert_color_ocl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/convolution_ocl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/copy_ocl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/deconvolution_ocl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/depth2space_ocl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/detection_output_ocl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/eltwise_ocl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/embedding_ocl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/expand_ocl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/factory_ocl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/flatten_ocl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/fully_connected_ocl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/gather_ocl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/generate_proposals_ocl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/instance_norm_ocl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/layer_norm_ocl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/lut_ocl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/lut_preprocess_ocl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/matmul_ocl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/padding_ocl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/pooling_ocl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/power_ocl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/preallocated_memory_ocl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/prelu_ocl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/prior_box_ocl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/reduction_ocl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/repeat_ocl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/ocl/reshape_ocl.hpp" />
@@ -1587,6 +1696,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/prelu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/prior_box.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/quantizelinear.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/random.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/range.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/reduction.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/relative_position_embedding.hpp" />
@@ -1615,10 +1725,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/weight_operator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/where.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/include/yolov3_detection_output.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/src/bolt_c_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/engine/tools/preprocess_ocl/preprocess_ocl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/examples/automatic_speech_recognition/audio_feature.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/examples/automatic_speech_recognition/flow_asr.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/examples/bert/tinybert_test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/examples/c_api/c_common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/examples/c_api/c_test.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/examples/ultra_face/ultra_face.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/inference/flow/include/TaskFlow.h" />
@@ -1652,9 +1763,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/bolt/kit/iOS/SimpleImageClassification/SimpleImageClassification/SceneDelegate.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/kit/iOS/SimpleImageClassification/SimpleImageClassification/ViewController.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/ActivationOptimizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/AdvancedLayerNormOptimizer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/BNScaleOptimizer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/ChannelPaddingOptimizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/CleanInputsOutputsOptimizer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/ClipOptimizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/ConcatConvolutionOptimizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/ConstantFuseOptimizer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/ConvConvOptimizer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/ConvFCOptimizer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/ConvolutionEltwiseOptimizer.hpp" />
@@ -1663,6 +1778,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/DeprecatedOPOptimizer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/DepthwisePointwiseOptimizer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/DilationConvOptimizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/Dynamic1ReshapeOptimizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/Dynamic2ReshapeOptimizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/EltwiseConstantOptimizer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/FCFCOptimizer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/FuseReshapeOptimizer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/GATOptimizer.hpp" />
@@ -1687,6 +1805,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/ReorderChannelResizeOptimizer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/ReshapeINOptimizer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/ReshapeOptimizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/ReshapeReduceMeanOptimizer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/ResizeFuseOptimizer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/RsqrtOptimizer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/ScaleWeightOptimizer.hpp" />
@@ -1706,6 +1825,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/TransposeOptimizer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/WeightBNOptimizer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/WeightScaleOptimizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/OPOptimizers/WhereSoftmaxWhereOptimizer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/model_converter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/model_data_type_converter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/model_tools/include/model_optimizer.hpp" />
@@ -2055,9 +2175,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/bolt/training/src/tests/tests/tools/callbacks/MultiCallback.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/training/src/tests/tests/tools/callbacks/TensorChecker.h" />
     <ClInclude Include="../../thirdparty/owemdjee/bolt/training/src/tests/tests/tools/callbacks/TensorTracer.h" />
-    <Image Include="../../thirdparty/owemdjee/bolt/docs/images/20_bolt_face_detection.gif" />
     <Image Include="../../thirdparty/owemdjee/bolt/docs/images/CameraEnlarge.PNG" />
     <Image Include="../../thirdparty/owemdjee/bolt/docs/images/ChineseSpeechRecognition.gif" />
+    <Image Include="../../thirdparty/owemdjee/bolt/docs/images/FaceDetection.gif" />
     <Image Include="../../thirdparty/owemdjee/bolt/docs/images/Framework.PNG" />
     <Image Include="../../thirdparty/owemdjee/bolt/docs/images/ImageClassification.gif" />
     <Image Include="../../thirdparty/owemdjee/bolt/docs/images/LOGO.PNG" />
@@ -2180,6 +2300,7 @@
     <Text Include="../../thirdparty/owemdjee/bolt/common/gcl/tools/device_info/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/bolt/common/gcl/tools/gcl_sample/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/bolt/common/gcl/tools/gcl_sample/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/bolt/common/gcl/tools/gcl_sample/cl/sample.cl" />
     <Text Include="../../thirdparty/owemdjee/bolt/common/gcl/tools/kernel_lib_compile/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/bolt/common/gcl/tools/kernel_lib_compile/buildKernelLib.sh" />
     <Text Include="../../thirdparty/owemdjee/bolt/common/gcl/tools/kernel_lib_compile/device_name/CMakeLists.txt" />
@@ -2208,21 +2329,132 @@
     <Text Include="../../thirdparty/owemdjee/bolt/compute/blas_enhance/tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/bolt/compute/image/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/bolt/compute/image/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/image/src/gpu/mali/cl/resize_bilinear.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/image/src/gpu/mali/cl/resize_nearest.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/image/src/gpu/mali/cl/rgb_to_yuv_nv21.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/image/src/gpu/mali/cl/yuv_nv21_to_rgb.cl" />
     <Text Include="../../thirdparty/owemdjee/bolt/compute/image/tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/activation.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/argmax_x.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/bilateral_slice_apply_c12.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/bilateral_slice_apply_pre.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/cast.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/channel_resize.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/check_int_spe.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/clip.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/col2im.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/concat.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/concat_nchw.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_depthwise_sh1.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_depthwise_sh1_dila.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_depthwise_sh2.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_depthwise_sh2_dila.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_depthwise_trans_fltbuf.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_direct_3d_sh1.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_direct_3d_sh2.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_direct_3d_sw1_nchw_to_nchwc4.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_direct_3d_sw2_nchw_to_nchwc4.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_direct_multi_batch_sh1.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_direct_multi_batch_sh2.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_direct_sh1.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_direct_sh1_dila.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_direct_sh1_fn_spe.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_direct_sh2.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_direct_sh2_dila.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_direct_sw1_nchw_to_nchwc4.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_direct_sw1_reuse_w.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_direct_sw2_nchw_to_nchwc4.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_direct_trans_flt.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_invgemm_col2img.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_invgemm_trans_flt.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_wino_preprocess_input.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_wino_rotate_fltbuf.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_wino_trans_fltbuf_3x3.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_wino_trans_outbuf.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/conv_wino_trans_picbuf_nchw.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/copy.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/deconv_gemm_f2s2.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/deconv_gemm_trans_fltbuf.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/depth2space_nchw.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/depth2space_nchwc4_2x2.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/eltwise.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/eltwise_broadcast.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/embedding.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/expand.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/fill_memory_zero_vec4.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/gather.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/gemm_tn.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/gemv.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/gemv_reduce.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/gemv_trans_mat.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/generate_proposals_apply_deltas.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/generate_proposals_update_output.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/instance_norm.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/layer_norm.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/matmul_trans_input.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/mem_trans.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/mem_trans_3d.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/mem_trans_c.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/padding.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/pooling.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/pooling_global_mean_h.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/pooling_global_mean_w.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/power.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/prelu.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/qualcomm/conv_depthwise_sh1_qc.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/qualcomm/conv_depthwise_sh2_qc.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/qualcomm/conv_direct_3d_sh1_qc.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/qualcomm/conv_direct_3d_sh2_qc.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/qualcomm/conv_direct_3d_sw1_nchw_to_nchwc4_qc.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/qualcomm/conv_direct_3d_sw2_nchw_to_nchwc4_qc.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/qualcomm/conv_direct_sh1_qc.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/qualcomm/conv_direct_sh1_qc_dila.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/qualcomm/conv_direct_sh2_qc.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/qualcomm/conv_direct_sh2_qc_dila.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/qualcomm/conv_direct_sw1_nchw_to_nchwc4_qc.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/qualcomm/conv_direct_sw2_nchw_to_nchwc4_qc.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/qualcomm/deconv_gemm_f2s2_qc.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/qualcomm/gemm_tn_qc.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/reduction.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/reduction_nchw.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/rnn_split_weight.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/rnncell_build_xh.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/rnncell_update_project_state.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/rnncell_update_res.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/roialign.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/scale.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/slice.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/softmax.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/softmax_vec_reduce.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/space2depth.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/tfslice.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/tile.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/topk_merge.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/topk_sort.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/topk_update.cl" />
+    <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/src/gpu/mali/cl/transpose_nchw.cl" />
     <Text Include="../../thirdparty/owemdjee/bolt/compute/tensor/tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/bolt/docs/ARCHITECTURE.md" />
     <Text Include="../../thirdparty/owemdjee/bolt/docs/BENCHMARK.md" />
     <Text Include="../../thirdparty/owemdjee/bolt/docs/CHANGELOG.md" />
     <Text Include="../../thirdparty/owemdjee/bolt/docs/CONTRIBUTORS.md" />
+    <Text Include="../../thirdparty/owemdjee/bolt/docs/DEPLOYMENT_GUIDE_CAFFE_CN.md" />
+    <Text Include="../../thirdparty/owemdjee/bolt/docs/DEPLOYMENT_GUIDE_ONNX_CN.md" />
+    <Text Include="../../thirdparty/owemdjee/bolt/docs/DEPLOYMENT_GUIDE_PYTORCH_CN.md" />
+    <Text Include="../../thirdparty/owemdjee/bolt/docs/DEPLOYMENT_GUIDE_TENSORFLOW_CN.md" />
+    <Text Include="../../thirdparty/owemdjee/bolt/docs/DEPLOYMENT_GUIDE_TFLITE_CN.md" />
     <Text Include="../../thirdparty/owemdjee/bolt/docs/DEVELOPER.md" />
     <Text Include="../../thirdparty/owemdjee/bolt/docs/FAQ.md" />
     <Text Include="../../thirdparty/owemdjee/bolt/docs/FEEDBACK.md" />
     <Text Include="../../thirdparty/owemdjee/bolt/docs/INSTALL.md" />
     <Text Include="../../thirdparty/owemdjee/bolt/docs/IOS_USAGE.md" />
     <Text Include="../../thirdparty/owemdjee/bolt/docs/KIT.md" />
+    <Text Include="../../thirdparty/owemdjee/bolt/docs/LITE.md" />
+    <Text Include="../../thirdparty/owemdjee/bolt/docs/MODEL_COMPATIBILITY.md" />
     <Text Include="../../thirdparty/owemdjee/bolt/docs/OPERATORS.md" />
+    <Text Include="../../thirdparty/owemdjee/bolt/docs/PYTHON_API_USAGE.md" />
     <Text Include="../../thirdparty/owemdjee/bolt/docs/QUANTIZATION.md" />
     <Text Include="../../thirdparty/owemdjee/bolt/docs/REDUCE_GPU_PREPARE_TIME.md" />
     <Text Include="../../thirdparty/owemdjee/bolt/docs/THIRD PARTY OPEN SOURCE SOFTWARE NOTICE.md" />
@@ -2231,40 +2463,86 @@
     <Text Include="../../thirdparty/owemdjee/bolt/inference/engine/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/bolt/inference/engine/src/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/bolt/inference/engine/tools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/bolt/inference/engine/tools/onnx_tools/add_output.py" />
+    <Text Include="../../thirdparty/owemdjee/bolt/inference/engine/tools/onnx_tools/benchmark.py" />
+    <Text Include="../../thirdparty/owemdjee/bolt/inference/engine/tools/onnx_tools/change_input_dim.py" />
+    <Text Include="../../thirdparty/owemdjee/bolt/inference/engine/tools/onnx_tools/change_reshape_param.py" />
+    <Text Include="../../thirdparty/owemdjee/bolt/inference/engine/tools/onnx_tools/common.py" />
+    <Text Include="../../thirdparty/owemdjee/bolt/inference/engine/tools/onnx_tools/custom_ops/GridSample.py" />
+    <Text Include="../../thirdparty/owemdjee/bolt/inference/engine/tools/onnx_tools/custom_ops/PixAdaConvNet.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/inference/engine/tools/preprocess_ocl/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/bolt/inference/engine/tools/preprocess_ocl/build_preprocess_ocl.sh" />
+    <Text Include="../../thirdparty/owemdjee/bolt/inference/engine/tools/preprocess_ocl/preprocess_ocl.sh" />
+    <Text Include="../../thirdparty/owemdjee/bolt/inference/engine/tools/tflite_tools/benchmark.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/inference/examples/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/bolt/inference/examples/automatic_speech_recognition/asr_labels.txt" />
+    <Text Include="../../thirdparty/owemdjee/bolt/inference/examples/automatic_speech_recognition/encoder_flow.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/bolt/inference/examples/automatic_speech_recognition/joint_flow.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/bolt/inference/examples/automatic_speech_recognition/pinyin2hanzi_flow.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/bolt/inference/examples/automatic_speech_recognition/pinyin_lm_embedding.bin" />
+    <Text Include="../../thirdparty/owemdjee/bolt/inference/examples/automatic_speech_recognition/prediction_flow.prototxt" />
     <Text Include="../../thirdparty/owemdjee/bolt/inference/examples/automatic_speech_recognition/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/bolt/inference/examples/benchmark/benchmark.py" />
+    <Text Include="../../thirdparty/owemdjee/bolt/inference/examples/bert/flow_tinybert.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/bolt/inference/examples/bilateral_slice_apply/README.md" />
+    <Text Include="../../thirdparty/owemdjee/bolt/inference/examples/c_api/compile.sh" />
+    <Text Include="../../thirdparty/owemdjee/bolt/inference/examples/convert_color/README.md" />
+    <Text Include="../../thirdparty/owemdjee/bolt/inference/examples/dlaWOdcn/flow_dlaWOdcn.prototxt" />
     <Text Include="../../thirdparty/owemdjee/bolt/inference/examples/dlaWOdcn/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/bolt/inference/examples/facesr/flow_facesr.prototxt" />
     <Text Include="../../thirdparty/owemdjee/bolt/inference/examples/facesr/run.sh" />
     <Text Include="../../thirdparty/owemdjee/bolt/inference/flow/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/bolt/inference/flow/src/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/bolt/install.sh" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/CameraEnlarge/app/src/main/assets/image_classification.prototxt" />
     <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/CameraEnlarge/app/src/main/cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/CameraEnlarge/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/CameraEnlarge/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/ChineseSpeechRecognition/app/src/main/assets/encoder_flow.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/ChineseSpeechRecognition/app/src/main/assets/joint_flow.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/ChineseSpeechRecognition/app/src/main/assets/pinyin2hanzi_flow.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/ChineseSpeechRecognition/app/src/main/assets/prediction_flow.prototxt" />
     <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/ChineseSpeechRecognition/app/src/main/cpp/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/ChineseSpeechRecognition/gradlew.bat" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/ChineseSpeechRecognition/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/ChineseSpeechRecognition/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/ChineseSpeechRecognition/local.properties" />
     <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/FaceDetection/app/src/main/cpp/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/FaceDetection/gradlew.bat" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/FaceDetection/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/FaceDetection/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/ImageClassification/app/src/main/assets/image_classification.prototxt" />
     <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/ImageClassification/app/src/main/cpp/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/ReadingComprehension/gradlew.bat" />
-    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/Semantics/gradlew.bat" />
-    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/SimpleImageClassification/gradlew.bat" />
-    <Text Include="../../thirdparty/owemdjee/bolt/kit/assets/ChineseSpeechRecognition/asr_labels.txt" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/ImageClassification/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/ImageClassification/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/ReadingComprehension/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/ReadingComprehension/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/Semantics/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/Semantics/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/SimpleImageClassification/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/Android/SimpleImageClassification/gradle/wrapper/gradle-wrapper.properties" />
     <Text Include="../../thirdparty/owemdjee/bolt/kit/assets/ImageClassification/imagenet_classes.txt" />
     <Text Include="../../thirdparty/owemdjee/bolt/kit/assets/ReadingComprehension/vocab.txt" />
     <Text Include="../../thirdparty/owemdjee/bolt/kit/assets/Semantics/vocab.txt" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/CameraEnlarge/CameraEnlarge/Assets.xcassets/" />
     <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/CameraEnlarge/CameraEnlarge/Assets.xcassets/AppIcon.appiconset/Contents.json" />
     <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/CameraEnlarge/CameraEnlarge/Assets.xcassets/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/CameraEnlarge/CameraEnlarge/libbolt/image_classification.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/ChineseSpeechRecognition/ChineseSpeechRecognition/Assets.xcassets/" />
     <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/ChineseSpeechRecognition/ChineseSpeechRecognition/Assets.xcassets/AppIcon.appiconset/Contents.json" />
     <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/ChineseSpeechRecognition/ChineseSpeechRecognition/Assets.xcassets/Contents.json" />
     <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/ChineseSpeechRecognition/ChineseSpeechRecognition/Assets.xcassets/Image.imageset/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/ChineseSpeechRecognition/ChineseSpeechRecognition/libbolt/encoder_flow.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/ChineseSpeechRecognition/ChineseSpeechRecognition/libbolt/joint_flow.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/ChineseSpeechRecognition/ChineseSpeechRecognition/libbolt/pinyin2hanzi_flow.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/ChineseSpeechRecognition/ChineseSpeechRecognition/libbolt/prediction_flow.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/FaceDetection/FaceDetection/Assets.xcassets/" />
     <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/FaceDetection/FaceDetection/Assets.xcassets/AccentColor.colorset/Contents.json" />
     <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/FaceDetection/FaceDetection/Assets.xcassets/AppIcon.appiconset/Contents.json" />
     <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/FaceDetection/FaceDetection/Assets.xcassets/Contents.json" />
     <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/FaceDetection/FaceDetection/Assets.xcassets/myImg.imageset/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/ImageClassification/ImageClassification/Assets.xcassets/" />
     <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/ImageClassification/ImageClassification/Assets.xcassets/AppIcon.appiconset/Contents.json" />
     <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/ImageClassification/ImageClassification/Assets.xcassets/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/ImageClassification/ImageClassification/libbolt/image_classification.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/SimpleImageClassification/SimpleImageClassification/Assets.xcassets/" />
     <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/SimpleImageClassification/SimpleImageClassification/Assets.xcassets/AppIcon.appiconset/Contents.json" />
     <Text Include="../../thirdparty/owemdjee/bolt/kit/iOS/SimpleImageClassification/SimpleImageClassification/Assets.xcassets/Contents.json" />
     <Text Include="../../thirdparty/owemdjee/bolt/kit/setup.sh" />
@@ -2283,6 +2561,7 @@
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/Caffe/layer_parameter.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/README.md" />
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/asr/convolution_transformer_params.py" />
+    <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/asr/convolution_transformer_params_slu.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/asr/convolution_transformer_params_v2.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/asr/convolution_transformer_reference_params.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/asr/tensorflow2caffe_convolution_transformer.py" />
@@ -2291,6 +2570,7 @@
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/asr/transform_convolution_transformer.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/asr/transform_convolution_transformer_keras.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/asr/transform_convolution_transformer_reference.py" />
+    <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/asr/transform_convolution_transformer_slu.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/asr/transform_rnnt.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/bert/albert/tensorflow2caffe_albert.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/bert/albert/transform_albert.py" />
@@ -2299,7 +2579,6 @@
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/bert/tinybert/result.txt" />
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/bert/tinybert/tensorflow2caffe_tinybert.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/bert/tinybert/tinybert-infer.py" />
-    <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/bert/tinybert/tokenization.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/bert/tinybert/transform_bert.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/bert/tinybert/transform_tinybert_disambiguate.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/bert/tinybert/transform_tinybert_intent_slot.py" />
@@ -2316,6 +2595,8 @@
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/requirements.txt" />
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/rotation/tensorflow2caffe_rotation.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/rotation/transform_rotation.py" />
+    <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/shakkala/tensorflow2caffe_shakkala.py" />
+    <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/shakkala/transform.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/tensorflow2caffe.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/tts/tensorflow2caffe_fastspeech2.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/model_tools/tools/tensorflow2caffe/tts/tensorflow2caffe_featherwave.py" />
@@ -2364,6 +2645,7 @@
     <Text Include="../../thirdparty/owemdjee/bolt/training/src/frontend/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/bolt/training/src/frontend/external/json/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/bolt/training/src/frontend/sources.cmake" />
+    <Text Include="../../thirdparty/owemdjee/bolt/training/src/raul.natvis" />
     <Text Include="../../thirdparty/owemdjee/bolt/training/src/system/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/bolt/training/src/system/external/half/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/bolt/training/src/system/sources.cmake" />
@@ -2453,7 +2735,6 @@
     <Text Include="../../thirdparty/owemdjee/bolt/training/src/tests/tests/python/mlp.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/training/src/tests/tests/python/mseloss.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/training/src/tests/tests/python/multi-head-attention.py" />
-    <Text Include="../../thirdparty/owemdjee/bolt/training/src/tests/tests/python/ngram.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/training/src/tests/tests/python/range_pe.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/training/src/tests/tests/python/reduce_max.py" />
     <Text Include="../../thirdparty/owemdjee/bolt/training/src/tests/tests/python/reduce_mean.py" />
@@ -2566,7 +2847,8 @@
     <Xml Include="../../thirdparty/owemdjee/bolt/kit/Android/SimpleImageClassification/app/src/main/res/values/strings.xml" />
     <Xml Include="../../thirdparty/owemdjee/bolt/kit/Android/SimpleImageClassification/app/src/main/res/values/themes.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

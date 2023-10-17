@@ -291,6 +291,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/core/src/gl_core_3_1.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/core/src/glob.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/core/src/hal_internal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/core/src/has_non_zero.dispatch.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/core/src/kmeans.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/core/src/lapack.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/core/src/lda.cpp" />
@@ -369,6 +370,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/core/test/test_dxt.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/core/test/test_eigen.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/core/test/test_hal_core.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/core/test/test_hasnonzero.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/core/test/test_intrin.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/core/test/test_intrin_emulator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/core/test/test_io.cpp" />
@@ -456,6 +458,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/core/include/opencv2/core/hal/intrin_neon.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/core/include/opencv2/core/hal/intrin_rvv.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/core/include/opencv2/core/hal/intrin_rvv071.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/core/include/opencv2/core/hal/intrin_rvv_010_compat_non-policy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/core/include/opencv2/core/hal/intrin_rvv_010_compat_overloaded-non-policy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/core/include/opencv2/core/hal/intrin_rvv_compat_overloaded.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/core/include/opencv2/core/hal/intrin_rvv_scalable.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/core/include/opencv2/core/hal/intrin_sse.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/core/include/opencv2/core/hal/intrin_sse_em.hpp" />
@@ -582,6 +587,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/core/misc/objc/common/TermCriteria.h" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/core/misc/objc/manual/core_manual.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/core/misc/python/pyopencv_async.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/core/misc/python/pyopencv_core.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/core/misc/python/pyopencv_cuda.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/core/misc/python/pyopencv_umat.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/core/misc/python/shadow_umat.hpp" />
@@ -597,6 +603,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/core/src/gl_core_3_1.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/core/src/hal_internal.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/core/src/hal_replacement.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/core/src/has_non_zero.simd.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/core/src/intel_gpu_gemm.inl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/core/src/mathfuncs.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/core/src/mathfuncs_core.simd.hpp" />
@@ -656,6 +663,26 @@
     <Text Include="../../thirdparty/owemdjee/opencv/modules/core/misc/plugins/parallel_tbb/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/core/misc/python/package/mat_wrapper/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/core/misc/python/package/utils/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/arithm.cl" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/convert.cl" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/copymakeborder.cl" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/copyset.cl" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/cvtclr_dx.cl" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/fft.cl" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/flip.cl" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/gemm.cl" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/halfconvert.cl" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/inrange.cl" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/intel_gemm.cl" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/lut.cl" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/meanstddev.cl" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/minmaxloc.cl" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/mixchannels.cl" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/mulspectrums.cl" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/normalize.cl" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/reduce.cl" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/reduce2.cl" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/repeat.cl" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/runtime/generator/common.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/runtime/generator/generate.sh" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/runtime/generator/parser_cl.py" />
@@ -672,6 +699,9 @@
     <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/runtime/generator/template/opencl_gl_impl.hpp.in" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/runtime/generator/template/opencl_gl_wrappers.hpp.in" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/runtime/generator/template/static_impl.hpp.in" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/set_identity.cl" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/split_merge.cl" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/core/src/opencl/transpose.cl" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

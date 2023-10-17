@@ -362,9 +362,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/hash/internal/city.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/hash/internal/city_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/hash/internal/hash.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/hash/internal/low_level_hash.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/hash/internal/low_level_hash_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/hash/internal/print_hash_of.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/hash/internal/wyhash.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/hash/internal/wyhash_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/memory/memory_exception_safety_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/memory/memory_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/meta/type_traits_test.cc" />
@@ -373,6 +373,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/numeric/int128_benchmark.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/numeric/int128_stream_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/numeric/int128_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/profiling/internal/sample_recorder_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/random/benchmarks.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/random/bernoulli_distribution_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/abseil-cpp/absl/random/beta_distribution_test.cc" />
@@ -691,6 +692,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/stacktrace_emscripten-inl.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/stacktrace_generic-inl.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/stacktrace_powerpc-inl.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/stacktrace_riscv-inl.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/stacktrace_unimplemented-inl.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/stacktrace_win32-inl.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/internal/stacktrace_x86-inl.inc" />
@@ -730,8 +732,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/hash/hash_testing.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/hash/internal/city.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/hash/internal/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/hash/internal/low_level_hash.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/hash/internal/spy_hash_state.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/hash/internal/wyhash.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/memory/memory.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/meta/type_traits.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/numeric/bits.h" />
@@ -740,6 +742,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/numeric/int128_no_intrinsic.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/numeric/internal/bits.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/numeric/internal/representation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/profiling/internal/sample_recorder.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/random/bernoulli_distribution.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/random/beta_distribution.h" />
     <ClInclude Include="../../thirdparty/owemdjee/abseil-cpp/absl/random/bit_gen_ref.h" />
@@ -920,12 +923,15 @@
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/container/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/copts/AbseilConfigureCopts.cmake" />
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/copts/GENERATED_AbseilCopts.cmake" />
+    <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/copts/GENERATED_copts.bzl" />
+    <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/copts/configure_copts.bzl" />
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/copts/copts.py" />
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/copts/generate_copts.py" />
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/debugging/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/flags/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/flags/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/flags/flag_benchmark.lds" />
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/functional/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/functional/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/hash/BUILD.bazel" />
@@ -936,6 +942,8 @@
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/meta/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/numeric/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/numeric/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/profiling/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/profiling/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/random/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/random/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/abseil-cpp/absl/random/internal/BUILD.bazel" />

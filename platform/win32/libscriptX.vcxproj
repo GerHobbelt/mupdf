@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -113,8 +113,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCRIPTX;SCRIPTX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -133,7 +133,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCRIPTX;SCRIPTX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/ScriptX/src/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -160,7 +160,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCRIPTX;SCRIPTX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/ScriptX/src/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -188,7 +188,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCRIPTX;SCRIPTX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/ScriptX/src/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -215,7 +215,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSCRIPTX;SCRIPTX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/ScriptX/src/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -228,6 +228,7 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/scriptX/backend/JavaScriptCore/JscEngine-Native.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/scriptX/backend/JavaScriptCore/JscEngine.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/scriptX/backend/JavaScriptCore/JscException.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/scriptX/backend/JavaScriptCore/JscHelper.cc" />
@@ -238,6 +239,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/scriptX/backend/JavaScriptCore/JscValue.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/scriptX/backend/JavaScriptCore/JscWeakRef.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/scriptX/backend/Lua/LuaByteBufferImpl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/scriptX/backend/Lua/LuaEngine-Native.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/scriptX/backend/Lua/LuaEngine.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/scriptX/backend/Lua/LuaException.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/scriptX/backend/Lua/LuaHelper.cc" />
@@ -279,6 +281,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/scriptX/backend/WebAssembly/WasmUtils.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/scriptX/backend/WebAssembly/WasmValue.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/scriptX/src/Engine.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/scriptX/src/Native.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/scriptX/src/Reference.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/scriptX/src/Scope.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/scriptX/src/Utils.cc" />
@@ -306,7 +309,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/scriptX/test/src/ValueTest.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/scriptX/test/src/gtest_main.cc" />
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/JavaScriptCore/JscEngine.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/JavaScriptCore/JscEngine.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/JavaScriptCore/JscHelper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/JavaScriptCore/JscHelper.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/JavaScriptCore/JscNative.hpp" />
@@ -322,7 +324,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/JavaScriptCore/trait/TraitUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/Lua/LuaByteBufferImpl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/Lua/LuaEngine.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/Lua/LuaEngine.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/Lua/LuaHelper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/Lua/LuaHelper.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/Lua/LuaNative.hpp" />
@@ -359,7 +360,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/Template/trait/TraitScope.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/Template/trait/TraitUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/V8/V8Engine.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/V8/V8Engine.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/V8/V8Helper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/V8/V8Helper.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/V8/V8Native.hpp" />
@@ -375,7 +375,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/V8/trait/TraitScope.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/V8/trait/TraitUtils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/WebAssembly/WasmEngine.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/WebAssembly/WasmEngine.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/WebAssembly/WasmHelper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/WebAssembly/WasmNative.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/WebAssembly/WasmReference.hpp" />
@@ -469,8 +468,10 @@
     <Text Include="../../thirdparty/owemdjee/scriptX/test/node_addon/README.md" />
     <Text Include="../../thirdparty/owemdjee/scriptX/test/node_addon/hello.js" />
     <Text Include="../../thirdparty/owemdjee/scriptX/test/node_addon/package.json" />
+    <Text Include="../../thirdparty/owemdjee/scriptX/test/src/wasm/run_test.html" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

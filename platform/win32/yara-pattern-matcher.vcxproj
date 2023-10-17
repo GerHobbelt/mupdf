@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -93,7 +93,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <DisableSpecificWarnings>4324;4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;4324;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
@@ -113,8 +113,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_YARA_PATTERN_MATCHER;YARA_PATTERN_MATCHER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -401,6 +401,10 @@
     <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/README.md" />
     <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/SECURITY.md" />
     <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/bazel/jansson.bzl" />
+    <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/bazel/yara.bzl" />
+    <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/bazel/yara_deps.bzl" />
     <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/bootstrap.sh" />
     <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/build.sh" />
     <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/configure.ac" />
@@ -425,6 +429,7 @@
     <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/docs/writingrules.rst" />
     <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/docs/yarapython.rst" />
     <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/extra/UltraEdit-wordfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/extra/codemirror/index.html" />
     <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/extra/codemirror/yara.js" />
     <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/grammar.y" />
@@ -434,16 +439,24 @@
     <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/modules/pb_to_module.rst" />
     <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/re_grammar.y" />
     <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/re_lexer.l" />
+    <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/stino.settings" />
     <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/libyara/yara.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/sample.rules" />
     <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/sandbox/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/data/079a472d22290a94ebb212aa8015cdc8dd28a968c6b4d3b88acdd58ce2d3b885.upx" />
+    <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/data/mtxex.dll" />
+    <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/data/mtxex_modified_rsrc_rva.dll" />
+    <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/data/test-pb.data.bin" />
+    <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/data/tiny.notes" />
     <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/tests/data/x.txt" />
     <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/windows/vs2015/NuGet.Config" />
     <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/windows/vs2015/libyara/packages.config" />
     <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/windows/vs2017/NuGet.Config" />
     <Text Include="../../thirdparty/owemdjee/yara-pattern-matcher/windows/vs2017/libyara/packages.config" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

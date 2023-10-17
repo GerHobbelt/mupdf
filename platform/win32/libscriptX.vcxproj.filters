@@ -129,47 +129,56 @@
     <Filter Include="Misc Files\test\node_addon">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0039}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\backend">
+    <Filter Include="Misc Files\test\src">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0041}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\backend\JavaScriptCore">
+    <Filter Include="Misc Files\test\src\wasm">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0040}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\backend\Lua">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0042}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\backend\QuickJs">
+    <Filter Include="Source Files\backend">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0043}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\backend\Template">
+    <Filter Include="Source Files\backend\JavaScriptCore">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\backend\Lua">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0044}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\backend\V8">
+    <Filter Include="Source Files\backend\QuickJs">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0045}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\backend\WebAssembly">
+    <Filter Include="Source Files\backend\Template">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0046}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src">
+    <Filter Include="Source Files\backend\V8">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0047}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src\utils">
+    <Filter Include="Source Files\backend\WebAssembly">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0048}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\test">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0051}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\test\node_addon">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0050}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\test\node_addon\src">
+    <Filter Include="Source Files\src">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0049}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\test\src">
+    <Filter Include="Source Files\src\utils">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0050}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\test">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0053}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\test\node_addon">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0052}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\test\node_addon\src">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0051}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\test\src">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0054}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/scriptX/backend/JavaScriptCore/JscEngine-Native.cc">
+      <Filter>Source Files\backend\JavaScriptCore</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/scriptX/backend/JavaScriptCore/JscEngine.cc">
       <Filter>Source Files\backend\JavaScriptCore</Filter>
     </ClCompile>
@@ -198,6 +207,9 @@
       <Filter>Source Files\backend\JavaScriptCore</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/scriptX/backend/Lua/LuaByteBufferImpl.cc">
+      <Filter>Source Files\backend\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/scriptX/backend/Lua/LuaEngine-Native.cc">
       <Filter>Source Files\backend\Lua</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/scriptX/backend/Lua/LuaEngine.cc">
@@ -323,6 +335,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/scriptX/src/Engine.cc">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/scriptX/src/Native.cc">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/scriptX/src/Reference.cc">
       <Filter>Source Files\src</Filter>
     </ClCompile>
@@ -404,9 +419,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/JavaScriptCore/JscEngine.h">
       <Filter>Header Files\backend\JavaScriptCore</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/JavaScriptCore/JscEngine.hpp">
-      <Filter>Header Files\backend\JavaScriptCore</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/JavaScriptCore/JscHelper.h">
       <Filter>Header Files\backend\JavaScriptCore</Filter>
     </ClInclude>
@@ -450,9 +462,6 @@
       <Filter>Header Files\backend\Lua</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/Lua/LuaEngine.h">
-      <Filter>Header Files\backend\Lua</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/Lua/LuaEngine.hpp">
       <Filter>Header Files\backend\Lua</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/Lua/LuaHelper.h">
@@ -563,9 +572,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/V8/V8Engine.h">
       <Filter>Header Files\backend\V8</Filter>
     </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/V8/V8Engine.hpp">
-      <Filter>Header Files\backend\V8</Filter>
-    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/V8/V8Helper.h">
       <Filter>Header Files\backend\V8</Filter>
     </ClInclude>
@@ -609,9 +615,6 @@
       <Filter>Header Files\backend\V8\trait</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/WebAssembly/WasmEngine.h">
-      <Filter>Header Files\backend\WebAssembly</Filter>
-    </ClInclude>
-    <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/WebAssembly/WasmEngine.hpp">
       <Filter>Header Files\backend\WebAssembly</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/scriptX/backend/WebAssembly/WasmHelper.h">
@@ -892,6 +895,9 @@
     </Text>
     <Text Include="../../thirdparty/owemdjee/scriptX/test/node_addon/package.json">
       <Filter>Misc Files\test\node_addon</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/scriptX/test/src/wasm/run_test.html">
+      <Filter>Misc Files\test\src\wasm</Filter>
     </Text>
   </ItemGroup>
 </Project>

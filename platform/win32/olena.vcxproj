@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -113,8 +113,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OLENA;OLENA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -133,7 +133,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OLENA;OLENA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/olena/milena;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -160,7 +160,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OLENA;OLENA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/olena/milena;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -188,7 +188,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OLENA;OLENA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/olena/milena;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -215,7 +215,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_OLENA;OLENA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/olena/milena;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -2895,6 +2895,8 @@
     <Image Include="../../thirdparty/owemdjee/olena/scribo/doc/images/output_sauvola_ms.png" />
     <Image Include="../../thirdparty/owemdjee/olena/scribo/doc/images/output_sauvola_ms_split.png" />
     <Image Include="../../thirdparty/owemdjee/olena/scribo/tests/img/multi_scale.png" />
+    <Text Include="../../thirdparty/owemdjee/olena/ANNOUNCE-1.0" />
+    <Text Include="../../thirdparty/owemdjee/olena/ANNOUNCE-2.0" />
     <Text Include="../../thirdparty/owemdjee/olena/ChangeLog" />
     <Text Include="../../thirdparty/owemdjee/olena/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/olena/NEWS" />
@@ -2910,10 +2912,30 @@
     <Text Include="../../thirdparty/owemdjee/olena/debian/README.Debian" />
     <Text Include="../../thirdparty/owemdjee/olena/debian/changelog" />
     <Text Include="../../thirdparty/owemdjee/olena/debian/gbp.conf" />
+    <Text Include="../../thirdparty/owemdjee/olena/debian/olena-bin.install" />
+    <Text Include="../../thirdparty/owemdjee/olena/debian/olena-bin.manpages" />
+    <Text Include="../../thirdparty/owemdjee/olena/debian/olena-dev.docs" />
+    <Text Include="../../thirdparty/owemdjee/olena/debian/olena-dev.install" />
+    <Text Include="../../thirdparty/owemdjee/olena/debian/olena.install" />
+    <Text Include="../../thirdparty/owemdjee/olena/debian/olena.manpages" />
     <Text Include="../../thirdparty/owemdjee/olena/debian/olena.xpm" />
     <Text Include="../../thirdparty/owemdjee/olena/distrib/macports/Portfile.in" />
     <Text Include="../../thirdparty/owemdjee/olena/doc/Doxyfile.in" />
     <Text Include="../../thirdparty/owemdjee/olena/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/olena/doc/about.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/doc/bibliography.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/doc/contributors.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/doc/doc.css" />
+    <Text Include="../../thirdparty/owemdjee/olena/doc/doxygen.css" />
+    <Text Include="../../thirdparty/owemdjee/olena/doc/footer.html" />
+    <Text Include="../../thirdparty/owemdjee/olena/doc/get_sources.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/doc/header.html" />
+    <Text Include="../../thirdparty/owemdjee/olena/doc/licensing.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/doc/mainpage.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/doc/modules_list.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/doc/online_resources.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/doc/subdoc_footer.html" />
+    <Text Include="../../thirdparty/owemdjee/olena/doc/supported_platforms.dox" />
     <Text Include="../../thirdparty/owemdjee/olena/dynamic-use-of-static-c++/ChangeLog" />
     <Text Include="../../thirdparty/owemdjee/olena/dynamic-use-of-static-c++/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/olena/dynamic-use-of-static-c++/README" />
@@ -2935,6 +2957,7 @@
     <Text Include="../../thirdparty/owemdjee/olena/dynamic-use-of-static-c++/swig/python/milena-libdynmilena.py" />
     <Text Include="../../thirdparty/owemdjee/olena/dynamic-use-of-static-c++/swig/run.in" />
     <Text Include="../../thirdparty/owemdjee/olena/dynamic-use-of-static-c++/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/olena/dynamic-use-of-static-c++/test/fixtures/tree/tree.yml" />
     <Text Include="../../thirdparty/owemdjee/olena/dynamic-use-of-static-c++/test/vaucanson/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/olena/dynamic-use-of-static-c++/test/wrappers/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/olena/lrde-scmstats.sh" />
@@ -2973,8 +2996,87 @@
     <Text Include="../../thirdparty/owemdjee/olena/milena/doc/Doxyfile.in" />
     <Text Include="../../thirdparty/owemdjee/olena/milena/doc/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/olena/milena/doc/benchmark/compression.txt" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/doxyfuns.sty" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/examples.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/figures/accu_image_morpher_big_picture.pdf" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/figures/technical/file_layout.pdf" />
     <Text Include="../../thirdparty/owemdjee/olena/milena/doc/img/src/standalone.cfg" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/img/src/standalone.cls" />
     <Text Include="../../thirdparty/owemdjee/olena/milena/doc/img/src/ydoc.cfg" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/img/src/ydoc.cls" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mainpage.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/milena.sty" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/accu/accu.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/canvas/canvas.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/convert.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/box1d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/box2d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/box2d_h.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/box3d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/complex_geometry.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/complex_image.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/dpoint1d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/dpoint2d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/dpoint3d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/neighb1d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/neighb2d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/neighb3d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/p_run2d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/p_runs2d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/point1d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/point2d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/point2d_h.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/point3d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/vec2d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/vec3d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/w_window1d_float.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/w_window1d_int.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/w_window2d_float.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/w_window2d_int.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/w_window3d_float.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/w_window3d_int.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/window1d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/window2d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/alias/window3d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/concept/concept.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/image/concrete.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/image/domain_morpher.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/image/identity_morpher.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/image/images.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/image/morphers.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/image/value_morpher.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/neighb.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/core/site_set/site_set.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/data/data.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/io/io.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/labeling/labeling.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/main.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/morpho/morpho.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/util/graph.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/util/util.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/value/hsl.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/value/int_s16.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/value/int_s24.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/value/int_s32.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/value/int_s8.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/value/int_u12.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/value/int_u16.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/value/int_u24.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/value/int_u32.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/value/int_u8.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/value/label_16.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/value/label_32.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/value/label_8.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/value/rgb16.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/value/rgb8.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/value/value.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/win/disk2d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/win/hline2d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/win/segment1d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/win/sline3d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/win/sphere3d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/win/vline2d.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/mln/win/win.dox" />
     <Text Include="../../thirdparty/owemdjee/olena/milena/doc/outputs/accu-right-instantiation.txt" />
     <Text Include="../../thirdparty/owemdjee/olena/milena/doc/outputs/borderthickness.txt" />
     <Text Include="../../thirdparty/owemdjee/olena/milena/doc/outputs/box2d-bbox.txt" />
@@ -3043,10 +3145,15 @@
     <Text Include="../../thirdparty/owemdjee/olena/milena/doc/outputs/win-create-1-display.txt" />
     <Text Include="../../thirdparty/owemdjee/olena/milena/doc/outputs/win-create-1.txt" />
     <Text Include="../../thirdparty/owemdjee/olena/milena/doc/outputs/win-create-2.txt" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/ref-guide.tex" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/technical.tex" />
     <Text Include="../../thirdparty/owemdjee/olena/milena/doc/tools/data.hh.in" />
     <Text Include="../../thirdparty/owemdjee/olena/milena/doc/tools/split_sample.sh" />
     <Text Include="../../thirdparty/owemdjee/olena/milena/doc/tools/todoxygen.sh" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/tutorial.tex" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/doc/white-paper.tex" />
     <Text Include="../../thirdparty/owemdjee/olena/milena/img/README" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/img/test.fits" />
     <Text Include="../../thirdparty/owemdjee/olena/milena/mesh/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/olena/milena/mln/core/concept/README" />
     <Text Include="../../thirdparty/owemdjee/olena/milena/mln/core/concept/status.txt" />
@@ -3101,6 +3208,10 @@
     <Text Include="../../thirdparty/owemdjee/olena/milena/tests/graph/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/olena/milena/tests/graph/attribute/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/olena/milena/tests/histo/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/tests/img/example.pdf" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/tests/img/test_bw.tif" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/tests/img/test_gl.tif" />
+    <Text Include="../../thirdparty/owemdjee/olena/milena/tests/img/test_rgb8.tif" />
     <Text Include="../../thirdparty/owemdjee/olena/milena/tests/io/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/olena/milena/tests/io/dicom/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/olena/milena/tests/io/dump/Makefile.am" />
@@ -3179,9 +3290,14 @@
     <Text Include="../../thirdparty/owemdjee/olena/old/doc/oldies/2006__tour_2.txt" />
     <Text Include="../../thirdparty/owemdjee/olena/old/technical.old/designs/properties/values.txt" />
     <Text Include="../../thirdparty/owemdjee/olena/old/technical.old/designs/site_psite_piter/README" />
+    <Text Include="../../thirdparty/owemdjee/olena/old/tutorial.old/design/design.tex" />
+    <Text Include="../../thirdparty/owemdjee/olena/old/tutorial.old/design/include/imagetours.tex" />
+    <Text Include="../../thirdparty/owemdjee/olena/old/tutorial.old/design/include/properties.tex" />
+    <Text Include="../../thirdparty/owemdjee/olena/old/tutorial.old/doxyfile_tuto.local" />
     <Text Include="../../thirdparty/owemdjee/olena/old/tutorial.old/image_types.txt" />
     <Text Include="../../thirdparty/owemdjee/olena/old/tutorial.old/image_values.txt" />
     <Text Include="../../thirdparty/owemdjee/olena/old/tutorial.old/images_tour.txt" />
+    <Text Include="../../thirdparty/owemdjee/olena/old/tutorial.old/slides.tex" />
     <Text Include="../../thirdparty/owemdjee/olena/scribo/ChangeLog" />
     <Text Include="../../thirdparty/owemdjee/olena/scribo/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/olena/scribo/NEWS" />
@@ -3193,8 +3309,45 @@
     <Text Include="../../thirdparty/owemdjee/olena/scribo/demo/xml2doc/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/olena/scribo/demo/xml2doc/README" />
     <Text Include="../../thirdparty/owemdjee/olena/scribo/demo/xml2doc/datarootdir.hh.in" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/demo/xml2doc/templates/html/css.css" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/demo/xml2doc/templates/html/main.xsl" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/demo/xml2doc/templates/html/main_base64.xsl" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/demo/xml2doc/templates/opendoc/css.css" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/demo/xml2doc/templates/opendoc/xsl.xsl" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/demo/xml2doc/templates/pdf/line.xsl" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/demo/xml2doc/templates/pdf/main.xsl" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/demo/xml2doc/templates/pdf/regions.xsl" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/demo/xml2doc/templates/svg/line.xsl" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/demo/xml2doc/templates/svg/main.xsl" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/demo/xml2doc/templates/svg/regions.xsl" />
     <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/Doxyfile.in" />
     <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/mainpage.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/research.tex" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/binarization/binarization.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/binarization/kim.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/binarization/niblack.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/binarization/otsu.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/binarization/sauvola.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/binarization/wolf.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/core/datastructures.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/debug/debug.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/filter/component_groups.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/filter/component_links.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/filter/components.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/filter/elements.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/filter/filter.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/filter/line_links.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/filter/paragraphs.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/layout/layout.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/namespaces.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/primitive/extract/components.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/primitive/extract/extract.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/primitive/extract/separators.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/routines.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/text/ocr.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/text/text.dox" />
+    <Text Include="../../thirdparty/owemdjee/olena/scribo/doc/scribo/toolchain/toolchain.dox" />
     <Text Include="../../thirdparty/owemdjee/olena/scribo/src/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/olena/scribo/src/README" />
     <Text Include="../../thirdparty/owemdjee/olena/scribo/src/binarization/Makefile.am" />
@@ -3244,6 +3397,22 @@
     <Text Include="../../thirdparty/owemdjee/olena/swilena/ChangeLog" />
     <Text Include="../../thirdparty/owemdjee/olena/swilena/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/olena/swilena/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/olena/swilena/box.ixx" />
+    <Text Include="../../thirdparty/owemdjee/olena/swilena/box_piter.ixx" />
+    <Text Include="../../thirdparty/owemdjee/olena/swilena/ch_value.ixx" />
+    <Text Include="../../thirdparty/owemdjee/olena/swilena/complex.ixx" />
+    <Text Include="../../thirdparty/owemdjee/olena/swilena/concat.ixx" />
+    <Text Include="../../thirdparty/owemdjee/olena/swilena/concrete.ixx" />
+    <Text Include="../../thirdparty/owemdjee/olena/swilena/coord.ixx" />
+    <Text Include="../../thirdparty/owemdjee/olena/swilena/fill.ixx" />
+    <Text Include="../../thirdparty/owemdjee/olena/swilena/image2d.ixx" />
+    <Text Include="../../thirdparty/owemdjee/olena/swilena/int_u.ixx" />
+    <Text Include="../../thirdparty/owemdjee/olena/swilena/intp.ixx" />
+    <Text Include="../../thirdparty/owemdjee/olena/swilena/morpho.ixx" />
+    <Text Include="../../thirdparty/owemdjee/olena/swilena/pgm.ixx" />
+    <Text Include="../../thirdparty/owemdjee/olena/swilena/ppm.ixx" />
+    <Text Include="../../thirdparty/owemdjee/olena/swilena/println.ixx" />
+    <Text Include="../../thirdparty/owemdjee/olena/swilena/python-utils.ixx" />
     <Text Include="../../thirdparty/owemdjee/olena/swilena/python/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/olena/swilena/python/box2d-misc.py" />
     <Text Include="../../thirdparty/owemdjee/olena/swilena/python/complex2-misc.py" />
@@ -3259,12 +3428,14 @@
     <Text Include="../../thirdparty/owemdjee/olena/swilena/python/sps.in" />
     <Text Include="../../thirdparty/owemdjee/olena/swilena/python/sps.py" />
     <Text Include="../../thirdparty/owemdjee/olena/swilena/python/swilena.py" />
+    <Text Include="../../thirdparty/owemdjee/olena/swilena/rgb.ixx" />
     <Text Include="../../thirdparty/owemdjee/olena/swilena/run.in" />
     <Xml Include="../../thirdparty/owemdjee/olena/doc/DoxygenLayout.xml" />
     <Xml Include="../../thirdparty/owemdjee/olena/milena/doc/DoxygenLayout.xml" />
     <Xml Include="../../thirdparty/owemdjee/olena/scribo/doc/DoxygenLayout.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

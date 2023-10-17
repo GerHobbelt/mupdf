@@ -318,7 +318,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/ocl/goclimgproc.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/ocl/goclkernel.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/onnx/bindings_onnx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/onnx/dml_ep.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/onnx/gonnxbackend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/ov/bindings_ov.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/ov/govbackend.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/plaidml/gplaidmlbackend.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/plaidml/gplaidmlcore.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/python/gpythonbackend.cpp" />
@@ -387,6 +390,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/source.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/source_priv.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/onevpl/utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/streaming/queue_source.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/utils/itt.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_compoundkernel_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/common/gapi_core_tests.cpp" />
@@ -435,6 +439,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/gpu/gapi_operators_tests_gpu.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/infer/gapi_infer_ie_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/infer/gapi_infer_onnx_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/infer/gapi_infer_ov_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/infer/gapi_infer_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/internal/gapi_int_backend_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/internal/gapi_int_dynamic_graph.cpp" />
@@ -465,6 +470,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/s11n/gapi_sample_pipelines_s11n.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/streaming/gapi_gstreamer_pipeline_facade_int_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/streaming/gapi_gstreamersource_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/streaming/gapi_streaming_queue_source_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/streaming/gapi_streaming_sync_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/streaming/gapi_streaming_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/opencv/modules/gapi/test/streaming/gapi_streaming_utils_test.cpp" />
@@ -515,8 +521,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/infer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/infer/bindings_ie.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/infer/bindings_onnx.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/infer/bindings_ov.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/infer/ie.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/infer/onnx.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/infer/ov.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/infer/parsers.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/media.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/oak/infer.hpp" />
@@ -557,6 +565,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/streaming/onevpl/default.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/streaming/onevpl/device_selector_interface.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/streaming/onevpl/source.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/streaming/queue_source.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/streaming/source.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/streaming/sync.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/include/opencv2/gapi/util/any.hpp" />
@@ -615,7 +624,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/ocl/goclbackend.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/ocl/goclcore.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/ocl/goclimgproc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/onnx/dml_ep.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/onnx/gonnxbackend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/ov/govbackend.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/ov/util.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/plaidml/gplaidmlbackend.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/plaidml/plaidml_util.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/backends/render/ft_render.hpp" />
@@ -719,17 +731,21 @@
     <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/doc/10-hld-overview.md" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/doc/slides/README.md" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/doc/slides/get_sty.sh" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/doc/slides/ocv_logo.eps" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/package/gapi/__init__.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/samples/gaze_estimation.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/test/test_gapi_core.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/test/test_gapi_imgproc.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/test/test_gapi_infer.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/test/test_gapi_infer_onnx.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/test/test_gapi_infer_ov.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/test/test_gapi_kernels.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/test/test_gapi_render.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/test/test_gapi_sample_pipelines.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/test/test_gapi_stateful_kernel.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/test/test_gapi_streaming.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/test/test_gapi_types.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/data/config_template.yml" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/samples/pipeline_modeling_tool/test_pipeline_modeling_tool.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/scripts/measure_privacy_masking.py" />
     <Text Include="../../thirdparty/owemdjee/opencv/modules/gapi/src/api/README.md" />

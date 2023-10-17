@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -113,8 +113,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUBPROCESS;SUBPROCESS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -367,88 +367,239 @@
     <Image Include="../../thirdparty/owemdjee/subprocess/docs/tab_s.png" />
     <Text Include="../../thirdparty/owemdjee/subprocess/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/subprocess/README.md" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/CMakeLists_8txt.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/CowData_8hpp.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/CowData_8hpp_source.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/PipeVar_8hpp.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/PipeVar_8hpp_source.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/ProcessBuilder_8hpp.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/ProcessBuilder_8hpp_source.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/README_8md.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/annotated.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/basic__types_8hpp.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/basic__types_8hpp_source.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/classes.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/classsubprocess_1_1CwdGuard-members.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/classsubprocess_1_1CwdGuard.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/classsubprocess_1_1EnvGuard-members.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/classsubprocess_1_1EnvGuard.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/classsubprocess_1_1Environ-members.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/classsubprocess_1_1Environ.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/classsubprocess_1_1EnvironSetter-members.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/classsubprocess_1_1EnvironSetter.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/classsubprocess_1_1ProcessBuilder-members.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/classsubprocess_1_1ProcessBuilder.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/classsubprocess_1_1StopWatch-members.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/classsubprocess_1_1StopWatch.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/dir_000001_000002.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/dir_68267d1309a1af8e8297ef4c3efbcdba.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/dir_bfad6e22d9e71bdb375def43aaf190cf.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/dir_dfdbda394c3f7a3aa55229f33a559c41.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/doxygen.css" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/dynsections.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/environ_8hpp.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/environ_8hpp_source.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/files.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/functions.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/functions_func.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/functions_vars.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/graph_legend.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/hierarchy.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/index.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/inherits.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/jquery.js" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/menu.js" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/menudata.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/namespacemembers.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/namespacemembers_enum.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/namespacemembers_eval.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/namespacemembers_func.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/namespacemembers_type.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/namespacemembers_vars.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/namespaces.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/namespacesubprocess.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/namespacesubprocess_1_1details.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/pipe_8hpp.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/pipe_8hpp_source.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_0.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_0.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_1.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_1.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_10.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_10.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_11.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_11.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_12.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_12.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_13.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_13.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_2.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_2.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_3.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_3.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_4.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_4.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_5.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_5.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_6.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_6.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_7.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_7.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_8.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_8.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_9.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_9.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_a.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_a.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_b.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_b.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_c.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_c.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_d.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_d.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_e.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_e.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_f.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/all_f.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/classes_0.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/classes_0.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/classes_1.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/classes_1.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/classes_2.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/classes_2.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/classes_3.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/classes_3.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/classes_4.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/classes_4.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/classes_5.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/classes_5.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/classes_6.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/classes_6.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/enums_0.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/enums_0.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/enums_1.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/enums_1.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/enumvalues_0.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/enumvalues_0.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/enumvalues_1.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/enumvalues_1.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/enumvalues_2.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/enumvalues_2.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/enumvalues_3.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/enumvalues_3.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/enumvalues_4.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/enumvalues_4.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/enumvalues_5.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/enumvalues_5.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/enumvalues_6.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/enumvalues_6.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/files_0.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/files_0.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/files_1.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/files_1.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/files_2.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/files_2.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/files_3.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/files_3.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/files_4.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/files_4.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/files_5.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/files_5.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/files_6.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/files_6.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_0.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_0.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_1.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_1.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_10.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_10.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_2.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_2.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_3.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_3.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_4.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_4.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_5.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_5.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_6.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_6.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_7.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_7.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_8.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_8.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_9.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_9.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_a.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_a.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_b.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_b.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_c.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_c.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_d.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_d.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_e.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_e.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_f.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/functions_f.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/namespaces_0.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/namespaces_0.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/nomatches.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/pages_0.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/pages_0.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/search.css" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/search.js" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/searchdata.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/typedefs_0.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/typedefs_0.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/typedefs_1.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/typedefs_1.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/typedefs_2.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/typedefs_2.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/variables_0.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/variables_0.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/variables_1.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/variables_1.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/variables_2.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/variables_2.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/variables_3.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/variables_3.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/variables_4.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/variables_4.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/variables_5.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/variables_5.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/variables_6.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/variables_6.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/variables_7.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/variables_7.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/variables_8.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/variables_8.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/variables_9.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/docs/search/variables_9.js" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/shell__utils_8hpp.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/shell__utils_8hpp_source.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/structsubprocess_1_1CalledProcessError-members.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/structsubprocess_1_1CalledProcessError.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/structsubprocess_1_1CommandNotFoundError.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/structsubprocess_1_1CompletedProcess-members.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/structsubprocess_1_1CompletedProcess.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/structsubprocess_1_1OSError.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/structsubprocess_1_1PipePair-members.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/structsubprocess_1_1PipePair.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/structsubprocess_1_1Popen-members.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/structsubprocess_1_1Popen.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/structsubprocess_1_1RunBuilder-members.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/structsubprocess_1_1RunBuilder.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/structsubprocess_1_1RunOptions-members.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/structsubprocess_1_1RunOptions.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/structsubprocess_1_1SpawnError.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/structsubprocess_1_1SubprocessError.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/structsubprocess_1_1TimeoutExpired-members.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/structsubprocess_1_1TimeoutExpired.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/subprocess_8hpp.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/subprocess_8hpp_source.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/tabs.css" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/utf8__to__utf16_8hpp.html" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/docs/utf8__to__utf16_8hpp_source.html" />
     <Text Include="../../thirdparty/owemdjee/subprocess/src/cpp/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/subprocess/test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/bin/cxxtestgen.bat" />
@@ -464,6 +615,13 @@
     <Text Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/python/cxxtest/cxxtest_parser.py" />
     <Text Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/python/cxxtest/cxxtestgen.py" />
     <Text Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/python/python3/cxxtest/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/python/python3/cxxtest/__pycache__/__init__.cpython-38.pyc" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/python/python3/cxxtest/__pycache__/__release__.cpython-38.pyc" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/python/python3/cxxtest/__pycache__/cxx_parser.cpython-38.pyc" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/python/python3/cxxtest/__pycache__/cxxtest_fog.cpython-38.pyc" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/python/python3/cxxtest/__pycache__/cxxtest_misc.cpython-38.pyc" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/python/python3/cxxtest/__pycache__/cxxtest_parser.cpython-38.pyc" />
+    <Text Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/python/python3/cxxtest/__pycache__/cxxtestgen.cpython-38.pyc" />
     <Text Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/python/python3/cxxtest/__release__.py" />
     <Text Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/python/python3/cxxtest/cxx_parser.py" />
     <Text Include="../../thirdparty/owemdjee/subprocess/test/dependencies/cxxtest/python/python3/cxxtest/cxxtest_fog.py" />
@@ -475,7 +633,8 @@
     <Text Include="../../thirdparty/owemdjee/subprocess/test/test_config.h.in" />
     <Text Include="../../thirdparty/owemdjee/subprocess/toolchain-x86_64-w64-mingw32.cmake" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

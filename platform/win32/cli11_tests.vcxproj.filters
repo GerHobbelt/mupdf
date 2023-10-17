@@ -57,10 +57,10 @@
     <Filter Include="Misc Files\src">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0015}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\test_package">
+    <Filter Include="Misc Files\tests">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0016}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\tests">
+    <Filter Include="Misc Files\tests\data">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0017}</UniqueIdentifier>
     </Filter>
     <Filter Include="Misc Files\tests\mesonTest">
@@ -87,10 +87,10 @@
     <Filter Include="Source Files\src">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0025}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\test_package">
+    <Filter Include="Source Files\tests">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0026}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\tests">
+    <Filter Include="Source Files\tests\applications">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0027}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\tests\mesonTest">
@@ -194,9 +194,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/cli11/src/Precompile.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/cli11/test_package/example.cpp">
-      <Filter>Source Files\test_package</Filter>
-    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cli11/tests/AppTest.cpp">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
@@ -213,6 +210,9 @@
       <Filter>Source Files\tests</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cli11/tests/DeprecatedTest.cpp">
+      <Filter>Source Files\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/tests/EncodingTest.cpp">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cli11/tests/FormatterTest.cpp">
@@ -260,6 +260,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/cli11/tests/WindowsTest.cpp">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
+    <ClCompile Include="../../thirdparty/owemdjee/cli11/tests/applications/system_args.cpp">
+      <Filter>Source Files\tests\applications</Filter>
+    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/cli11/tests/informational.cpp">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
@@ -281,6 +284,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/App.hpp">
       <Filter>Header Files\include\CLI</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/Argv.hpp">
+      <Filter>Header Files\include\CLI</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/CLI.hpp">
       <Filter>Header Files\include\CLI</Filter>
     </ClInclude>
@@ -288,6 +294,9 @@
       <Filter>Header Files\include\CLI</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/ConfigFwd.hpp">
+      <Filter>Header Files\include\CLI</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/Encoding.hpp">
       <Filter>Header Files\include\CLI</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/Error.hpp">
@@ -326,7 +335,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/impl/App_inl.hpp">
       <Filter>Header Files\include\CLI\impl</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/impl/Argv_inl.hpp">
+      <Filter>Header Files\include\CLI\impl</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/impl/Config_inl.hpp">
+      <Filter>Header Files\include\CLI\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/impl/Encoding_inl.hpp">
       <Filter>Header Files\include\CLI\impl</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/cli11/include/CLI/impl/Formatter_inl.hpp">
@@ -372,6 +387,9 @@
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/cli11/README.md">
+      <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/cli11/azure-pipelines.yml">
       <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/cli11/book/CMakeLists.txt">
@@ -440,9 +458,6 @@
     <Text Include="../../thirdparty/owemdjee/cli11/cmake/CodeCoverage.cmake">
       <Filter>Misc Files\cmake</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/cli11/conanfile.py">
-      <Filter>Misc Files</Filter>
-    </Text>
     <Text Include="../../thirdparty/owemdjee/cli11/docs/CMakeLists.txt">
       <Filter>Misc Files\docs</Filter>
     </Text>
@@ -473,14 +488,11 @@
     <Text Include="../../thirdparty/owemdjee/cli11/src/CMakeLists.txt">
       <Filter>Misc Files\src</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/cli11/test_package/CMakeLists.txt">
-      <Filter>Misc Files\test_package</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/cli11/test_package/conanfile.py">
-      <Filter>Misc Files\test_package</Filter>
-    </Text>
     <Text Include="../../thirdparty/owemdjee/cli11/tests/CMakeLists.txt">
       <Filter>Misc Files\tests</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/cli11/tests/data/unicode.txt">
+      <Filter>Misc Files\tests\data</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/cli11/tests/mesonTest/README.md">
       <Filter>Misc Files\tests\mesonTest</Filter>
