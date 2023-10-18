@@ -24,6 +24,7 @@
 #define MUPDF_PDF_CLEAN_H
 
 #include "mupdf/pdf/document.h"
+#include "mupdf/pdf/image-rewriter.h"
 
 #if FZ_ENABLE_RENDER_CORE 
 
@@ -31,10 +32,16 @@
 extern "C" {
 #endif
 
+typedef struct
+{
+	pdf_write_options write;
+	pdf_image_rewriter_options image;
+} pdf_clean_options;
+
 /*
 	Read infile, and write selected pages to outfile with the given options.
 */
-void pdf_clean_file(fz_context *ctx, const char *infile, const char *outfile, const char *password, pdf_write_options *opts, int retainlen, const char *retainlist[]);
+void pdf_clean_file(fz_context *ctx, const char *infile, const char *outfile, const char *password, pdf_clean_options *opts, int retainlen, const char *retainlist[]);
 
 #ifdef __cplusplus
 }

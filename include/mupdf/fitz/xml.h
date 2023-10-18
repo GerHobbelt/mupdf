@@ -167,6 +167,11 @@ char *fz_xml_text(fz_xml *item);
 /**
 	Pretty-print an XML tree to arbitrary output, cf. the fz_format_string() interface.
 */
+void fz_output_xml(fz_context *ctx, fz_output *out, fz_xml *item, int level);
+
+/**
+	Pretty-print an XML tree to stdout. (Deprecated, use fz_output_xml preferentially.)
+*/
 void fz_debug_xml(fz_context* ctx, void* user, void (*emit)(fz_context* ctx, void* user, int c), fz_xml* item, int level);
 
 /**

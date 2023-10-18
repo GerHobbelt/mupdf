@@ -145,9 +145,15 @@ static void xml_printf(struct fmtbuf* out, const char* s, ...)
 	va_end(ap);
 }
 
+static void xml_fz_output_emit(fz_context* ctx, void* user, int c)
+{
+	fz_output *out = (fz_output *)user;
+	fz_write_byte(ctx, out, c);
+}
+
 static void xml_print_xml(struct fmtbuf* out, fz_xml *item, int level)
 {
-	const char *s;
+	char *s;
 
 	if (item == NULL)
 		return;
@@ -160,10 +166,10 @@ static void xml_print_xml(struct fmtbuf* out, fz_xml *item, int level)
 	}
 
 	s = fz_xml_text(item);
+	xml_indent(out, level);
 	if (s)
 	{
 		int c;
-		xml_indent(out, level);
 		xml_putc(out, '"');
 		while (*s) {
 			int l = fz_chartorune_unsafe(&c, s);
@@ -200,7 +206,6 @@ static void xml_print_xml(struct fmtbuf* out, fz_xml *item, int level)
 		fz_xml *child;
 		struct attribute *att;
 
-		xml_indent(out, level);
 #ifdef FZ_XML_SEQ
 		xml_printf(out, "(%s <%d>\n", item->u.node.u.d.name, item->u.node.seq);
 #else
@@ -220,6 +225,23 @@ static void xml_print_xml(struct fmtbuf* out, fz_xml *item, int level)
 		xml_printf(out, ")%s\n", item->u.node.u.d.name);
 #endif
 	}
+}
+
+void fz_output_xml(fz_context *ctx, fz_output *stream, fz_xml *item, int level)
+{
+	struct fmtbuf out;
+
+	out.ctx = ctx;
+	out.user = stream;
+	out.emit = xml_fz_output_emit;
+
+	// Note: can't use the fzoutput_lock() critical section for these, as they will
+	// be calling the lower level APIs (buffered I/O) internally, and quite legally so.
+	//
+	// That's why we need two mutexes per `fz_output` instance.
+	//printf_lock(out);
+	xml_print_xml(&out, item, level);
+	//printf_unlock(out);
 }
 
 void fz_debug_xml(fz_context* ctx, void* user, void (*emit)(fz_context* ctx, void* user, int c), fz_xml* item, int level)
@@ -893,7 +915,8 @@ parse_attribute_value:
 	return "end of data in attribute value";
 }
 
-static int fast_tolower(int c) {
+static int fast_tolower(int c)
+{
 	if ((unsigned)c - 'A' < 26)
 		return c | 32;
 	return c;

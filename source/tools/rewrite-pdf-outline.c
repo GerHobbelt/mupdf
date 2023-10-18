@@ -16,7 +16,7 @@ int pdf_rewrite_outline_main(int argc, const char **argv)
 	fz_save_outline(ctx, doc, outline);
 	fz_drop_outline(ctx, outline);
 
-	pdf_save_document(ctx, doc, "out.pdf", NULL);
+	pdf_save_document(ctx, pdf_document_from_fz_document(ctx, doc), "out.pdf", NULL);
 	fz_drop_document(ctx, doc);
 	fz_drop_context(ctx);
 
