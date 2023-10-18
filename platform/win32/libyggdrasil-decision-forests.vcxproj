@@ -1,0 +1,826 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libyggdrasil-decision-forests</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF710D05}</ProjectGuid>
+    <RootNamespace>libyggdrasil-decision-forests</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYGGDRASIL_DECISION_FORESTS;YGGDRASIL_DECISION_FORESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYGGDRASIL_DECISION_FORESTS;YGGDRASIL_DECISION_FORESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYGGDRASIL_DECISION_FORESTS;YGGDRASIL_DECISION_FORESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYGGDRASIL_DECISION_FORESTS;YGGDRASIL_DECISION_FORESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYGGDRASIL_DECISION_FORESTS;YGGDRASIL_DECISION_FORESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYGGDRASIL_DECISION_FORESTS;YGGDRASIL_DECISION_FORESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYGGDRASIL_DECISION_FORESTS;YGGDRASIL_DECISION_FORESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYGGDRASIL_DECISION_FORESTS;YGGDRASIL_DECISION_FORESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYGGDRASIL_DECISION_FORESTS;YGGDRASIL_DECISION_FORESTS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYGGDRASIL_DECISION_FORESTS;YGGDRASIL_DECISION_FORESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYGGDRASIL_DECISION_FORESTS;YGGDRASIL_DECISION_FORESTS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYGGDRASIL_DECISION_FORESTS;YGGDRASIL_DECISION_FORESTS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/examples/beginner.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/examples/fast_8bits_numerical.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/examples/hyperparameter_sweep/manager_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/examples/hyperparameter_sweep/worker.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/examples/standalone/beginner.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/analyze_model_and_dataset.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/benchmark_inference.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/compile_model.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/compile_model_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/compute_variable_importances.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/convert_dataset.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/edit_model.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/evaluate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/infer_dataspec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/monitoring/benchmark_training.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/predict.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/show_dataspec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/show_model.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/train.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/utils/synthetic_dataset.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/csv_example_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/csv_example_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/data_spec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/data_spec_inference.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/data_spec_inference_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/data_spec_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/example_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/example_reader_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/example_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/example_writer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/formats.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/formats_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/synthetic_dataset.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/synthetic_dataset_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/tensorflow/tf_example.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/tensorflow/tf_example_io_interface.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/tensorflow/tf_example_io_interface_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/tensorflow/tf_example_io_tfrecord.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/tensorflow/tf_example_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/types.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/vertical_dataset.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/vertical_dataset_html.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/vertical_dataset_html_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/vertical_dataset_io.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/vertical_dataset_io_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/vertical_dataset_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/weight.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/weight_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/abstract_learner.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/abstract_learner_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/cart/cart.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/cart/cart_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/decision_tree/decision_tree_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/decision_tree/generic_parameters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/decision_tree/oblique.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/decision_tree/training.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/decision_tree/training_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/decision_tree/utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_decision_tree/dataset_cache/column_cache.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_decision_tree/dataset_cache/column_cache_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_decision_tree/dataset_cache/dataset_cache.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_decision_tree/dataset_cache/dataset_cache_common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_decision_tree/dataset_cache/dataset_cache_common_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_decision_tree/dataset_cache/dataset_cache_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_decision_tree/dataset_cache/dataset_cache_reader_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_decision_tree/dataset_cache/dataset_cache_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_decision_tree/dataset_cache/dataset_cache_worker.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_decision_tree/load_balancer/load_balancer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_decision_tree/load_balancer/load_balancer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_decision_tree/training.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_decision_tree/training_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_gradient_boosted_trees/common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_gradient_boosted_trees/distributed_gradient_boosted_trees.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_gradient_boosted_trees/distributed_gradient_boosted_trees_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_gradient_boosted_trees/worker.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/export_doc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/export_doc_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/export_doc_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/generic_worker/generic_worker.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/generic_worker/generic_worker_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/early_stopping/early_stopping.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/early_stopping/early_stopping_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/gradient_boosted_trees.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/gradient_boosted_trees_hparams_templates.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/gradient_boosted_trees_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_imp_binary_focal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_imp_binary_focal_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_imp_binomial.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_imp_binomial_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_imp_cross_entropy_ndcg.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_imp_mean_average_error.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_imp_mean_average_error_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_imp_mean_square_error.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_imp_mean_square_error_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_imp_multinomial.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_imp_multinomial_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_imp_ndcg.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_imp_ndcg_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_imp_poisson.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_imp_poisson_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_interface.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_library.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_library_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_utils_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/plot_training.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/hyperparameters_optimizer/hyperparameters_optimizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/hyperparameters_optimizer/hyperparameters_optimizer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/hyperparameters_optimizer/optimizers/random.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/hyperparameters_optimizer/optimizers/random_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/learner_library.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/learner_library_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/multitasker/multitasker.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/multitasker/multitasker_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/random_forest/random_forest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/random_forest/random_forest_hparams_templates.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/random_forest/random_forest_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/metric/comparison.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/metric/comparison_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/metric/metric.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/metric/metric_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/metric/ranking_mrr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/metric/ranking_ndcg.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/metric/report.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/metric/report_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/metric/uplift.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/metric/uplift_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/abstract_model.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/abstract_model_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/decision_tree/decision_tree.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/decision_tree/decision_tree_io.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/decision_tree/decision_tree_io_blob_sequence.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/decision_tree/decision_tree_io_tfrecord.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/decision_tree/decision_tree_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/decision_tree/structure_analysis.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/fast_engine_factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/gradient_boosted_trees/gradient_boosted_trees.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/gradient_boosted_trees/gradient_boosted_trees_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/metadata.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/model_engine_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/model_library.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/model_library_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/multitasker/multitasker.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/random_forest/random_forest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/random_forest/random_forest_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/inference.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/cc/ydf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/dataset/dataset.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/learner.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/wrapper/generate_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/wrapper/wrapper_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/wrapper/wrapper_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/metric/metric.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/model/model.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/model/model_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/8bits_numerical_features.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/8bits_numerical_features_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/benchmark_8bits_numerical_features.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/decision_forest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/decision_forest_serving.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/decision_forest_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/model_compiler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/quick_scorer_extended.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/quick_scorer_extended_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/register_engines.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/example_set.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/example_set_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/tf_example.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/tf_example_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/utils_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/accurate_sum_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/adaptive_work.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/adaptive_work_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/bitmap.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/bitmap_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/blob_sequence.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/blob_sequence_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/bytestream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/bytestream_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/circular_buffer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/concurrency.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/concurrency_default.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/concurrency_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/csv.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/csv_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute/core.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute/distribute.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute/distribute_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute/implementations/grpc/grpc_common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute/implementations/grpc/grpc_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute/implementations/grpc/grpc_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute/implementations/grpc/grpc_worker.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute/implementations/grpc/grpc_worker_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute/implementations/multi_thread/multi_thread.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute/test_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute/toy_worker.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute/utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute_cli/common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute_cli/distribute_cli.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute_cli/distribute_cli_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute_cli/distribute_cli_worker.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribution.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribution_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/evaluation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/evaluation_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/feature_importance.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/filesystem.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/filesystem_default.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/filesystem_tensorflow.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/filesystem_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/fold_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/fold_generator_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/histogram_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/html.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/html_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/hyper_parameters.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/hyper_parameters_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/logging_default.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/logging_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/math.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/math_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/model_analysis.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/model_analysis_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/partial_dependence_plot.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/partial_dependence_plot_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/plot.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/plot_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/protobuf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/protobuf_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/regex.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/regex_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/registration.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/registration_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/sharded_io.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/sharded_io_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/snapshot.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/snapshot_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/status_macros_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/test_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/testing_macros_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/usage_default.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/examples/model_compiler/generated_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/csv_example_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/csv_example_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/data_spec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/data_spec_inference.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/example_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/example_reader_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/example_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/example_writer_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/formats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/synthetic_dataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/tensorflow/tf_example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/tensorflow/tf_example_io_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/tensorflow/tf_example_io_tfrecord.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/vertical_dataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/vertical_dataset_html.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/vertical_dataset_io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/weight.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/abstract_learner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/cart/cart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/decision_tree/generic_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/decision_tree/oblique.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/decision_tree/splitter_accumulator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/decision_tree/splitter_accumulator_uplift.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/decision_tree/splitter_scanner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/decision_tree/splitter_structure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/decision_tree/training.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/decision_tree/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_decision_tree/dataset_cache/column_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_decision_tree/dataset_cache/dataset_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_decision_tree/dataset_cache/dataset_cache_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_decision_tree/dataset_cache/dataset_cache_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_decision_tree/dataset_cache/dataset_cache_worker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_decision_tree/label_accessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_decision_tree/load_balancer/load_balancer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_decision_tree/splitter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_decision_tree/training.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_gradient_boosted_trees/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_gradient_boosted_trees/distributed_gradient_boosted_trees.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/distributed_gradient_boosted_trees/worker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/export_doc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/generic_worker/generic_worker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/early_stopping/early_stopping.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/gradient_boosted_trees.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_imp_binary_focal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_imp_binomial.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_imp_cross_entropy_ndcg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_imp_mean_average_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_imp_mean_square_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_imp_multinomial.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_imp_ndcg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_imp_poisson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_library.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/loss/loss_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/gradient_boosted_trees/plot_training.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/hyperparameters_optimizer/hyperparameters_optimizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/hyperparameters_optimizer/optimizer_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/hyperparameters_optimizer/optimizers/random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/learner_library.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/multitasker/multitasker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/learner/random_forest/random_forest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/metric/comparison.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/metric/labels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/metric/metric.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/metric/ranking_mrr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/metric/ranking_ndcg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/metric/ranking_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/metric/report.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/metric/uplift.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/abstract_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/decision_tree/decision_forest_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/decision_tree/decision_tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/decision_tree/decision_tree_io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/decision_tree/decision_tree_io_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/decision_tree/structure_analysis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/fast_engine_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/gradient_boosted_trees/gradient_boosted_trees.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/model_engine_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/model_library.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/model_testing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/multitasker/multitasker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/model/random_forest/random_forest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/dataset/dataset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/learner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/wrapper/wrapper_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/metric/metric.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/model/model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/model/model_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/8bits_numerical_features.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/decision_forest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/decision_forest_serving.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/model_compiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/quick_scorer_extended.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/register_engines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/decision_forest/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/example_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/example_set_model_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/fast_engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/tf_example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/serving/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/accurate_sum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/adaptive_work.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/bitmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/blob_sequence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/bytestream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/cast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/circular_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/compatibility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/concurrency.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/concurrency_channel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/concurrency_default.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/concurrency_streamprocessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/csv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute/core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute/distribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute/implementations/grpc/grpc_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute/implementations/grpc/grpc_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute/implementations/grpc/grpc_worker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute/implementations/multi_thread/multi_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute/test_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute/toy_worker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute_cli/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute_cli/distribute_cli.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribute_cli/distribute_cli_worker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/distribution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/evaluation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/feature_importance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/filesystem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/filesystem_default.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/filesystem_tensorflow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/fold_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/histogram.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/html.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/hyper_parameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/logging_default.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/model_analysis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/partial_dependence_plot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/plot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/protobuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/regex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/registration.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/sharded_io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/sharded_io_blob_sequence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/sharded_io_tfrecord.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/snapshot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/status_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/status_macros_default.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/synchronization_primitives.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/tensorflow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/test_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/testing_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/uid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/usage.h" />
+    <Image Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/image/learner_and_model.png" />
+    <Image Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/image/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/image/adult_evaluation.png" />
+    <Image Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/image/both_logo.png" />
+    <Image Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/image/conditional_plots.png" />
+    <Image Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/image/learner_and_model.png" />
+    <Image Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/image/residual_normal_probability_plot.png" />
+    <Image Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/image/tfdf_logo.png" />
+    <Image Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/image/ydf_logo.png" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/README.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/configure/cli_readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/developer_manual.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/directory_structure.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/index.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/learner_distributed_gradient_boosted_trees.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/_templates/layout.html" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/apis.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/benchmark_inference.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/cli.txt" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/cli_commands.rst" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/cli_install.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/cli_quick_start.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/cli_user_manual.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/contributing.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/convert_model.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/cpp_serving.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/credit.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/early_stopping.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/features.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/go_serving.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/hyper_parameters.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/improve_model.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/intro_df.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/js_serving.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/lts.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/metrics.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/serving_apis.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/tf_serving.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/documentation/rtd/ydf_changelog.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/examples/beginner.bat" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/examples/beginner.sh" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/examples/distributed_training.sh" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/examples/hyperparameter_sweep/README.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/examples/hyperparameter_sweep/prepare_data.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/examples/hyperparameter_sweep/run_local.sh" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/examples/hyperparameter_tuning.sh" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/examples/standalone/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/examples/standalone/README.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/examples/standalone/compile_and_run.sh" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/examples/text_classification.sh" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/tools/build_binary_release.bat" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/tools/build_binary_release.sh" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/tools/build_binary_release_in_docker.sh" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/tools/clone_boost.sh" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/tools/generate_go_proto_wrappers.sh" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/tools/https_server.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/tools/start_build_docker.sh" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/tools/test_bazel.bat" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/tools/test_bazel.sh" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/tools/test_go.sh" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/tools/test_windows.sh" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/typos.toml" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/cli_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/monitoring/compare_benchmark.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/cli/monitoring/run_benchmark_training.sh" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/dataset/tensorflow/README.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/library.bzl" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/go/README.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/go/go.sum" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/README.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/example/example.html" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/example/model.zip" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/externs.js" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/karma.conf.js" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/test_data/README.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/test_data/model_2.zip" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/test_data/model_3.zip" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/test_data/model_small_sst.zip" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/tools/build_and_run_local_server.sh" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/tools/build_zipped_library.sh" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/wrapper.js" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/javascript/wrapper_test.js" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/config/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/config/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/dev_requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/documentation/glossary.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/documentation/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/tools/build_linux_release.sh" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/tools/build_linux_release_in_docker.sh" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/tools/build_pydf.sh" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/tools/submit_pip_package.sh" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/tools/test_pydf.sh" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/api_test.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/cc/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/dataset/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/dataset/dataset.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/dataset/dataset_test.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/dataset/dataspec.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/dataset/dataspec_test.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/generic_learner.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/hyperparameters.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/learner_test.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/specialized_learners_pre_generated.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/learner/wrapper/wrapper_generator.bzl" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/library.bzl" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/metric/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/metric/display_metric.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/metric/metric.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/metric/metric_test.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/model/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/model/analysis.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/model/decision_forest_model.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/model/generic_model.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/model/gradient_boosted_trees_model.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/model/model_lib.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/model/model_test.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/model/random_forest_model.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/utils/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/utils/documentation.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/utils/html.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/utils/html_test.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/utils/string_lib.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/utils/string_lib_test.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/port/python/ydf/utils/test_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/README.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/dataset/8bits_numerical_test.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/dataset/README.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/dataset/abalone.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/dataset/adult.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/dataset/adult_test.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/dataset/adult_train.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/dataset/dna.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/dataset/dna_guide.pbtxt" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/dataset/iris.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/dataset/sim_pte_test.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/dataset/sim_pte_train.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/dataset/sst_binary_test.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/dataset/sst_binary_train.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/dataset/sst_binary_train_10k.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/dataset/synthetic_ranking_test.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/dataset/synthetic_ranking_train.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/dataset/toy.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/dataset/toy.tfe-tfrecord-00000-of-00002" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/dataset/toy.tfe-tfrecord-00001-of-00002" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/model/abalone_regression_gbdt/description.txt" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/model/abalone_regression_rf/description.txt" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/model/adult_binary_class_gbdt/description.txt" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/model/adult_binary_class_gbdt_32cat/train_logs/training_logs.pbbin" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/model/adult_binary_class_gbdt_only_num/description.txt" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/model/adult_binary_class_oblique_rf/description.txt" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/model/adult_binary_class_rf/description.txt" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/model/adult_binary_class_rf_discret_numerical/description.txt" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/model/adult_binary_class_rf_only_num/description.txt" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/model/iris_multi_class_gbdt/description.txt" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/model/iris_multi_class_rf/description.txt" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/model/prefixed_adult_binary_class_gbdt/prefixed_description.txt" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/model/prefixed_adult_binary_class_rf/prefixed_description.txt" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/model/sst_binary_class_gbdt/description.txt" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/model/sst_binary_class_rf/description.txt" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/model/synthetic_ranking_gbdt/description.txt" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/model/synthetic_ranking_gbdt_numerical/description.txt" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/prediction/README.md" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/prediction/abalone_random.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/prediction/abalone_ranger.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/prediction/abalone_regression_gbdt.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/prediction/abalone_regression_rf.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/prediction/adult_random.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/prediction/adult_ranger.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/prediction/adult_test_binary_class_gbdt.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/prediction/adult_test_binary_class_oblique_rf.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/prediction/adult_test_binary_class_rf.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/test_data/prediction/synthetic_ranking_gbdt_test.csv" />
+    <Text Include="../../thirdparty/owemdjee/yggdrasil-decision-forests/yggdrasil_decision_forests/utils/compile.bzl" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -1,0 +1,1857 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libtensorstore</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFDF307D}</ProjectGuid>
+    <RootNamespace>libtensorstore</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORSTORE;TENSORSTORE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORSTORE;TENSORSTORE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORSTORE;TENSORSTORE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORSTORE;TENSORSTORE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORSTORE;TENSORSTORE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORSTORE;TENSORSTORE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORSTORE;TENSORSTORE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORSTORE;TENSORSTORE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORSTORE;TENSORSTORE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORSTORE;TENSORSTORE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORSTORE;TENSORSTORE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORSTORE;TENSORSTORE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/examples/compute_percentiles.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/examples/create_array.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/examples/extract_slice.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/examples/image_convolution.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/examples/map_apply.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/examples/status_result.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/array_type_caster.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/cast.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/cc_test_driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/chunk_layout.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/context.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/data_type.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/define_heap_type.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/dim_expression.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/downsample.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/future.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/garbage_collection.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/gil_safe.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/index.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/index_space.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/index_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/json_type_caster.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/keyword_arguments_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/kvstore.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/metrics.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/numpy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/numpy_indexing_spec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/python_imports.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/python_value_or_exception.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/serialization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/spec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/status.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tensorstore_class.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tensorstore_module.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tensorstore_module_components.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/time.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/transaction.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/unit.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/virtual_chunked.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/write_futures.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/array.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/array_nc_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/array_storage_statistics.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/array_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/array_testutil_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/box.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/box_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/chunk_layout.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/chunk_layout_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/codec_spec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/codec_spec_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/context.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/context_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/contiguous_layout.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/contiguous_layout_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/data_type.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/data_type_conversion_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/data_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/downsample_method.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/array/array.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/array/array_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/cast/cast.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/cast/cast_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/copy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/downsample/downsample.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/downsample/downsample_array.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/downsample/downsample_array_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/downsample/downsample_benchmark_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/downsample/downsample_nditerable.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/downsample/downsample_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/downsample/downsample_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/downsample/downsample_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/downsample/grid_occupancy_map.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/downsample/grid_occupancy_map_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/driver_spec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/driver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/driver_testutil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/image/avif/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/image/bmp/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/image/driver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/image/jpeg/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/image/png/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/image/test_image.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/image/tiff/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/image/webp/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/json/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/json/driver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/json/json_change_map.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/json/json_change_map_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/kvs_backed_chunk_driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/kvs_backed_chunk_driver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/blosc_compressor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/blosc_compressor_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/bzip2_compressor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/bzip2_compressor_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/compressor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/driver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/golden_file_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/gzip_compressor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/gzip_compressor_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/metadata.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/metadata_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/storage_statistics_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/xz_compressor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/xz_compressor_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/neuroglancer_precomputed/chunk_encoding.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/neuroglancer_precomputed/chunk_encoding_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/neuroglancer_precomputed/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/neuroglancer_precomputed/driver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/neuroglancer_precomputed/metadata.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/neuroglancer_precomputed/metadata_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/neuroglancer_precomputed/storage_statistics_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/read.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/stack/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/stack/driver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/stack/integration_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/virtual_chunked/virtual_chunked.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/virtual_chunked/virtual_chunked_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/write.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/blosc_compressor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/blosc_compressor_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/bzip2_compressor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/bzip2_compressor_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/compressor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/compressor_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/driver_impl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/driver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/dtype.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/dtype_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/metadata.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/metadata_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/metadata_testutil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/spec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/spec_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/storage_statistics_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/storage_statistics_test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/zlib_compressor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/zlib_compressor_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/zstd_compressor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/zstd_compressor_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/chunk_cache.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/blosc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/blosc_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/bytes.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/bytes_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/codec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/codec_chain_spec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/codec_chain_spec_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/codec_spec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/codec_test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/crc32c.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/gzip.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/gzip_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/sharding_indexed.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/sharding_indexed_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/transpose_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/zstd_codec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/zstd_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/driver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/metadata.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/metadata_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/sharding_benchmark_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/storage_statistics_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_interval.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_interval_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/add_new_dims_op_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/alignment.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/alignment_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/compose_transforms_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/deep_copy_transform_rep_ptr_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/diagonal_op_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/dim_expression_nc_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/dim_expression_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/dimension_identifier.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/dimension_identifier_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/dimension_permutation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/dimension_permutation_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/dimension_selection_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/dimension_units.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/dimension_units_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/get_output_range_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/identity_transform_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/index_array_slice_op_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/index_transform.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/index_transform_builder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/index_transform_builder_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/index_transform_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/index_transform_testutil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/index_vector_or_scalar.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/index_vector_or_scalar_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/add_new_dims_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/compose_transforms.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/diagonal_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/dimension_selection.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/identity_transform.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/index_array_slice_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/interval_slice_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/inverse_transform.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/iterate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/label_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/mark_explicit_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/numpy_indexing_spec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/propagate_bounds.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/single_index_slice_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/transform_array.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/transform_rep.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/translate_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/translate_output_dimensions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/transpose_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/interval_slice_op_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/inverse_transform_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/iterate_benchmark_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/iterate_nc_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/iterate_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/json.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/json_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/label_op_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/mark_explicit_op_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/move_to_op_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/output_index_map_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/output_index_method.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/propagate_bounds_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/propagate_input_domain_resize_to_output_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/single_index_slice_op_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/slice_by_box_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/slice_by_index_domain_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/transform_array_constraints_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/transform_array_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/transform_broadcastable_array.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/transform_broadcastable_array_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/transform_rep_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/transformed_array.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/transformed_array_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/translate_op_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/transpose_op_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/transpose_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/transpose_to_op_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/arena_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/async_write_array.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/async_write_array_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/benchmark/kvstore_benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/benchmark/kvstore_duration.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/benchmark/metric_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/benchmark/ts_benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/box_difference.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/box_difference_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/async_cache.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/async_cache_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/cache.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/cache_pool_resource.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/cache_pool_resource_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/cache_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/chunk_cache.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/chunk_cache_benchmark_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/chunk_cache_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/kvs_backed_cache.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/kvs_backed_cache_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/kvs_backed_cache_testutil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/kvs_backed_chunk_cache.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache_key/cache_key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/chunk_grid_specification.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compressed_pair_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/blosc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/blosc_compressor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/blosc_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/bzip2_compressor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/json_specified_compressor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/neuroglancer_compressed_segmentation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/neuroglancer_compressed_segmentation_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/xz_compressor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/xz_compressor_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/zip_details.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/zip_details_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/zlib.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/zlib_compressor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/zlib_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/zstd_compressor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/concurrency_resource.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/concurrent_testutil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/concurrent_testutil_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/container_to_shared_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cord_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/data_copy_concurrency_resource.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/data_type_endian_conversion.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/data_type_endian_conversion_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/data_type_random_generator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/decoded_matches.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/decoded_matches_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/digest/sha256.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/digest/sha256_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/dimension_labels.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/dimension_labels_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/elementwise_function_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/env.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/env_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/estimate_heap_usage/estimate_heap_usage_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/file_io_concurrency_resource.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/global_initializer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grid_chunk_key_ranges.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grid_chunk_key_ranges_base10.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grid_chunk_key_ranges_base10_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grid_chunk_key_ranges_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grid_partition.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grid_partition_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grid_partition_impl_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grid_partition_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grid_storage_statistics.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grpc/client_credentials.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grpc/client_credentials_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grpc/peer_address.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grpc/server_credentials.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grpc/server_credentials_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grpc/utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grpc/utils_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/heterogeneous_container_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/http/curl_factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/http/curl_handle.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/http/curl_transport.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/http/curl_transport_http2_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/http/curl_transport_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/http/curl_wrappers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/http/curl_wrappers_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/http/http_header.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/http/http_header_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/http/http_request.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/http/http_request_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/http/http_response.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/http/http_response_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/http/transport_test_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/avif_common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/avif_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/avif_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/avif_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/bmp_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/bmp_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/image_info.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/image_reader_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/image_view.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/image_writer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/jpeg_common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/jpeg_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/jpeg_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/jpeg_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/png_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/png_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/png_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/tiff_common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/tiff_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/tiff_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/tiff_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/webp_reader.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/webp_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/webp_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/integer_overflow_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/intrusive_linked_list_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/intrusive_ptr_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/intrusive_red_black_tree.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/intrusive_red_black_tree_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/irregular_grid.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/irregular_grid_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json/array.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json/array_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json/json.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json/json_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json/pprint_python.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json/pprint_python_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json/same.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json/same_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json/value_as.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json/value_as_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/absl_time_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/array_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/data_type.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/data_type_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/enum_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/json_binding_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/optional_object_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/rational_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/raw_bytes_hex.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/raw_bytes_hex_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/staleness_bound.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/staleness_bound_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/std_array_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/std_optional_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/std_tuple_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/std_variant.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/std_variant_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/unit.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_gtest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_gtest_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_metadata_matching.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_pointer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_pointer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_registry_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_registry_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/lock_collection.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/lock_collection_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/masked_array.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/masked_array_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/masked_array_testutil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/meta_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/metrics/collect.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/metrics/collect_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/metrics/metadata.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/metrics/metadata_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/metrics/metrics_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/metrics/prometheus.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/metrics/prometheus_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/metrics/protobuf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/metrics/protobuf_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/metrics/registry.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/metrics/registry_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/multi_barrier.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/multi_barrier_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/multi_vector_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/multi_vector_view_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable_array.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable_array_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable_copy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable_copy_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable_data_type_conversion.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable_data_type_conversion_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable_elementwise_input_transform.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable_elementwise_input_transform_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable_elementwise_output_transform.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable_elementwise_output_transform_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable_transformed_array.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable_transformed_array_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/no_destructor_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/auth_provider.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/fake_private_key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/fixed_token_auth_provider.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/fixed_token_auth_provider_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/gce_auth_provider.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/gce_auth_provider_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/google_auth_provider.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/google_auth_provider_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/google_auth_test_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/google_service_account_auth_provider.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/google_service_account_auth_provider_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/oauth2_auth_provider.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/oauth2_auth_provider_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/oauth_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/oauth_utils_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/refreshable_auth_provider.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/open_mode_spec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/os_error_code.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/parse_json_matches.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/parse_json_matches_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/path.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/path_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/poly/poly_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/poly/storage.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/poly/storage_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/preprocessor/cat_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/preprocessor/stringify_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/ref_counted_string.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/ref_counted_string_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/retry.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/retry_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/riegeli/array_endian_codec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/riegeli/array_endian_codec_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/riegeli/delimited.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/riegeli/digest_suffixed_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/riegeli/find.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/riegeli/find_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/riegeli/json_input.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/riegeli/json_io_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/riegeli/json_output.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/schedule_at.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/schedule_at_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/source_location_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/storage_statistics.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/string_like_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/subprocess.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/subprocess_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/tagged_ptr_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/thread.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/thread_pool.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/thread_pool_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/thread_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/type_traits_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/unaligned_data_type_functions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/unique_with_intrusive_allocator_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/uri_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/uri_utils_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/utf8.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/utf8_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/void_wrapper_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/byte_range.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/byte_range_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/copy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/file/file_key_value_store.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/file/file_key_value_store_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/file/posix_file_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/file/util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/file/util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/file/windows_file_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs/gcs_resource.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs/gcs_testbench.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs/validate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs/validate_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_grpc/gcs_grpc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_grpc/gcs_grpc_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_grpc/gcs_grpc_testbench_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_grpc/get_credentials.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_grpc/storage_stub_pool.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_http/admission_queue.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_http/admission_queue_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_http/gcs_key_value_store.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_http/gcs_key_value_store_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_http/gcs_mock.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_http/gcs_resource.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_http/gcs_testbench_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_http/object_metadata.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_http/object_metadata_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_http/rate_limiter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_http/scaling_rate_limiter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_http/scaling_rate_limiter_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/generation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/generation_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/grpc/common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/grpc/grpc_kvstore.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/grpc/grpc_kvstore_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/grpc/kvstore_server.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/grpc/kvstore_server_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/grpc/kvstore_server_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/http/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/http/driver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/key_range.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/key_range_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/kvstore.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/kvstore_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/live_kvstore_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/memory/memory_key_value_store.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/memory/memory_key_value_store_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/mock_kvstore.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/neuroglancer_uint64_sharded/murmurhash3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/neuroglancer_uint64_sharded/murmurhash3_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/neuroglancer_uint64_sharded/neuroglancer_uint64_sharded.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/neuroglancer_uint64_sharded/neuroglancer_uint64_sharded_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/neuroglancer_uint64_sharded/uint64_sharded.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/neuroglancer_uint64_sharded/uint64_sharded_decoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/neuroglancer_uint64_sharded/uint64_sharded_decoder_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/neuroglancer_uint64_sharded/uint64_sharded_encoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/neuroglancer_uint64_sharded/uint64_sharded_encoder_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/neuroglancer_uint64_sharded/uint64_sharded_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/distributed/btree_node_identifier.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/distributed/btree_node_write_mutation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/distributed/btree_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/distributed/cooperator_commit_mutations.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/distributed/cooperator_get_manifest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/distributed/cooperator_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/distributed/cooperator_server_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/distributed/cooperator_start.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/distributed/cooperator_submit_mutation_batch.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/distributed/coordinator_server.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/distributed/coordinator_server_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/distributed/driver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/distributed/lease_cache_for_cooperator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/distributed/rpc_security.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/driver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/dump_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/flush_promise_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/btree.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/btree_node_encoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/btree_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/codec_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/config.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/config_codec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/data_file_id.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/data_file_id_codec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/data_file_id_codec_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/dump.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/dump_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/indirect_data_reference.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/manifest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/manifest_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/version_tree.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/io/coalesce_kvstore.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/io/coalesce_kvstore_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/io/indirect_data_kvstore_driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/io/indirect_data_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/io/io_handle_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/io/manifest_cache.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/io/node_cache.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/io_handle.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/non_distributed/btree_writer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/non_distributed/create_new_manifest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/non_distributed/list.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/non_distributed/list_versions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/non_distributed/read.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/non_distributed/read_version.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/non_distributed/staged_mutations.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/non_distributed/storage_generation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/non_distributed/write_nodes.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/python/bindings.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/read_version_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/zarr_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/operations.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/read_result.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/s3/aws_credential_provider.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/s3/aws_credential_provider_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/s3/aws_metadata_credential_provider.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/s3/aws_metadata_credential_provider_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/s3/localstack_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/s3/s3_key_value_store.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/s3/s3_key_value_store_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/s3/s3_metadata.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/s3/s3_metadata_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/s3/s3_request_builder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/s3/s3_request_builder_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/s3/s3_resource.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/s3/validate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/s3/validate_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/spec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/test_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/transaction.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/transaction_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/url_registry.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/zarr3_sharding_indexed/key.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/zarr3_sharding_indexed/key_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/zarr3_sharding_indexed/shard_format.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/zarr3_sharding_indexed/shard_format_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/zarr3_sharding_indexed/zarr3_sharding_indexed.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/zarr3_sharding_indexed/zarr3_sharding_indexed_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/zip/zip_dir_cache.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/zip/zip_dir_cache_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/zip/zip_key_value_store.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/zip/zip_key_value_store_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/open_mode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/open_mode_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/progress.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/progress_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/proto/array.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/proto/array_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/proto/encode_time.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/proto/encode_time_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/proto/index_transform.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/proto/index_transform_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/proto/proto_binder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/proto/proto_binder_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/proto/proto_util.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/proto/proto_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/proto/protobuf_matchers.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/proto/schema.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/proto/schema_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/rank.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/rank_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/resize_options.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/resize_options_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/schema.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/schema_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/absl_time.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/absl_time_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/batch.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/function.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/function_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/json.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/json_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/protobuf.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/registry.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/registry_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/result_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/serialization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/serialization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/span_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/status.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/status_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/spec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/spec_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/static_cast.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/static_cast_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/strided_layout.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/strided_layout_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/tensorstore.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/tensorstore_serialization_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/transaction.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/transaction_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/apply_members/apply_members_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/bfloat16_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/bit_span_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/bit_vec_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/bit_vec_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/byte_strided_pointer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/constant_bit_vector_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/constant_vector.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/constant_vector_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/division_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/element_pointer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/element_pointer_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/element_traits_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/execution/any_receiver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/execution/any_sender_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/execution/collecting_sender_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/execution/future_collecting_receiver_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/execution/future_sender_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/execution/result_sender_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/execution/sender_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/execution/sender_util_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/execution/sync_flow_sender_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/executor_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/extents_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/float8_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/future.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/future_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/int4_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/iterate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/iterate_over_index_range_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/iterate_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/json_absl_flag_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/quote_string.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/quote_string_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/rational_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/result_nc_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/result_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/small_bit_set_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/span_json_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/span_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/status.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/status_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/status_testutil.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/status_testutil_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/stop_token_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/stop_token_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/str_cat_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/unit.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/unit_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/utf8_string.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/utf8_string_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/grpc_generate_cc/a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/local_mirror/a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/local_mirror/golden/_cmake_binary_dir_/_local_mirror/lpm-src/b.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/native_rules/a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/native_rules/subdir/x.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/rules_nasm/a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/third_party_http_archive/a.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/upb_proto_library/a.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/examples/data_type_invoker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/array_type_caster.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/chunk_layout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/chunk_layout_keyword_arguments.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/data_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/define_heap_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/dim_expression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/downsample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/future.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/garbage_collection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/gil_safe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/homogeneous_tuple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/index_space.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/intrusive_ptr_holder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/json_type_caster.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/keyword_arguments.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/kvstore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/numpy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/numpy_indexing_spec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/python_imports.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/python_value_or_exception.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/result_type_caster.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/sequence_parameter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/spec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/subscript_method.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tensorstore_class.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tensorstore_module_components.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/transaction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/type_name_override.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/typed_slice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/unit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/write_futures.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/array_storage_statistics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/array_testutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/array_testutil_matches_array.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/box.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/cast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/chunk_layout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/codec_spec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/codec_spec_registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/container_kind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/context_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/context_impl_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/context_resource_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/contiguous_layout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/data_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/data_type_conversion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/downsample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/downsample_method.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/array/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/cast/cast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/chunk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/chunk_cache_driver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/chunk_receiver_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/copy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/downsample/downsample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/downsample/downsample_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/downsample/downsample_method_json_binder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/downsample/downsample_nditerable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/downsample/downsample_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/downsample/grid_occupancy_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/driver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/driver_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/driver_spec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/driver_testutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/image/driver_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/image/test_image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/json/json_change_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/kvs_backed_chunk_driver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/kvs_backed_chunk_driver_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/compressor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/compressor_registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/neuroglancer_precomputed/chunk_encoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/neuroglancer_precomputed/metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/read.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/write.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/compressor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/compressor_registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/driver_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/dtype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/metadata_testutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/spec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/storage_statistics_test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/chunk_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/blosc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/bytes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/codec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/codec_chain_spec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/codec_spec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/codec_test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/crc32c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/gzip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/sharding_indexed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/transpose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/codec/zstd_codec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/name_configuration_json_binder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_interval.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/alignment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/dim_expression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/dimension_identifier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/dimension_index_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/dimension_permutation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/dimension_units.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/index_domain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/index_domain_builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/index_transform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/index_transform_builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/index_transform_testutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/index_vector_or_scalar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/add_new_dims_op.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/compose_transforms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/deep_copy_transform_rep_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/diagonal_op.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/dim_expression_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/dim_expression_testutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/dimension_selection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/identity_transform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/index_array_slice_op.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/interval_slice_op.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/inverse_transform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/iterate_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/label_op.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/mark_explicit_op.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/numpy_indexing_spec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/propagate_bounds.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/single_index_slice_op.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/transform_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/transform_rep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/transform_rep_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/translate_op.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/transpose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/internal/transpose_op.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/output_index_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/output_index_method.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/transform_array_constraints.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/transform_broadcastable_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/index_space/transformed_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/arena.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/async_write_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/attributes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/benchmark/metric_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/box_difference.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/aggregate_writeback_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/async_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/async_initialized_cache_mixin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/cache_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/cache_pool_limits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/cache_pool_resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/chunk_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/kvs_backed_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/kvs_backed_cache_testutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache/kvs_backed_chunk_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache_key/absl_time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache_key/cache_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache_key/fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache_key/std_optional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache_key/std_variant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cache_key/std_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/chunk_grid_specification.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compressed_pair.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/blosc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/blosc_compressor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/bzip2_compressor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/cord_stream_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/json_specified_compressor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/neuroglancer_compressed_segmentation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/xz_compressor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/zip_details.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/zlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/zlib_compressor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/zstd_compressor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/concurrency_resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/concurrency_resource_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/concurrent_testutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/container_to_shared.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/context_binding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/context_binding_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/cord_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/data_copy_concurrency_resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/data_type_endian_conversion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/data_type_random_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/decoded_matches.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/digest/sha256.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/dimension_labels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/element_copy_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/elementwise_function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/endian_elementwise_conversion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/env.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/estimate_heap_usage/estimate_heap_usage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/estimate_heap_usage/std_optional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/estimate_heap_usage/std_variant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/estimate_heap_usage/std_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/exception_macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/file_io_concurrency_resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/flat_cord_builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/gdb_scripting.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/global_initializer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grid_chunk_key_ranges.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grid_chunk_key_ranges_base10.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grid_partition.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grid_partition_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grid_storage_statistics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grpc/client_credentials.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grpc/grpc_mock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grpc/peer_address.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grpc/server_credentials.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/grpc/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/half_gtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/heterogeneous_container.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/http/curl_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/http/curl_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/http/curl_transport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/http/curl_wrappers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/http/http_header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/http/http_request.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/http/http_response.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/http/http_transport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/http/transport_test_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/avif_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/avif_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/avif_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/bmp_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/image_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/image_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/image_view.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/image_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/jpeg_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/jpeg_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/jpeg_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/png_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/png_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/tiff_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/tiff_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/tiff_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/webp_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/webp_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/integer_overflow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/integer_range.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/integer_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/intrusive_linked_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/intrusive_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/intrusive_red_black_tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/irregular_grid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json/json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json/pprint_python.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json/same.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json/value_as.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/absl_time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/bindable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/data_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/dimension_indexed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/enum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/gtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/json_binding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/optional_object.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/rational.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/raw_bytes_hex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/staleness_bound.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/std_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/std_optional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/std_tuple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/std_variant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_binding/unit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_gtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_metadata_matching.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_pointer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_registry_fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/json_registry_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/lexicographical_grid_index_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/lock_collection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/masked_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/masked_array_testutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/meta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/metrics/collect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/metrics/counter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/metrics/gauge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/metrics/histogram.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/metrics/metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/metrics/metric_hook.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/metrics/metric_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/metrics/prometheus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/metrics/protobuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/metrics/registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/metrics/value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/multi_barrier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/multi_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/multi_vector_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/multi_vector_view.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable_array_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable_buffer_management.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable_copy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable_data_type_conversion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable_elementwise_input_transform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable_elementwise_output_transform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable_transformed_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/nditerable_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/no_destructor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/non_compile_bypass.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/auth_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/fake_private_key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/fixed_token_auth_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/gce_auth_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/google_auth_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/google_auth_test_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/google_service_account_auth_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/oauth2_auth_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/oauth_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/oauth2/refreshable_auth_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/open_mode_spec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/os_error_code.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/parse_json_matches.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/poly/poly.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/poly/poly_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/poly/storage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/preprocessor/cat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/preprocessor/defer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/preprocessor/expand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/preprocessor/stringify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/queue_testutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/ref_counted_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/regular_grid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/retries_context_resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/retry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/riegeli/array_endian_codec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/riegeli/delimited.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/riegeli/digest_suffixed_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/riegeli/digest_suffixed_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/riegeli/find.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/riegeli/json_input.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/riegeli/json_output.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/schedule_at.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/source_location.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/storage_statistics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/string_like.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/subprocess.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/tagged_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/thread_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/tracing/tracing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/type_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/unaligned_data_type_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/unique_with_intrusive_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/unowned_to_shared.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/uri_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/void_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/json_serialization_options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/json_serialization_options_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/byte_range.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/driver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/file/file_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/file/posix_file_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/file/potentially_blocking_region.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/file/unique_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/file/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/file/windows_file_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs/gcs_resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs/gcs_testbench.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs/validate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_grpc/get_credentials.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_grpc/mock_storage_service.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_grpc/storage_stub_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_http/admission_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_http/gcs_mock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_http/gcs_resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_http/object_metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_http/rate_limiter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs_http/scaling_rate_limiter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/generation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/generation_testutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/grpc/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/grpc/handler_template.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/grpc/kvstore_server.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/grpc/mock_kvstore_service.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/key_range.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/kvstore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/memory/memory_key_value_store.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/mock_kvstore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/neuroglancer_uint64_sharded/murmurhash3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/neuroglancer_uint64_sharded/neuroglancer_uint64_sharded.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/neuroglancer_uint64_sharded/uint64_sharded.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/neuroglancer_uint64_sharded/uint64_sharded_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/neuroglancer_uint64_sharded/uint64_sharded_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/btree_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/debug_log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/distributed/btree_node_identifier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/distributed/btree_node_write_mutation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/distributed/btree_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/distributed/cooperator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/distributed/cooperator_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/distributed/coordinator_server.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/distributed/lease_cache_for_cooperator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/distributed/rpc_security.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/distributed/rpc_security_registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/driver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/btree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/btree_codec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/btree_node_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/codec_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/config_codec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/data_file_id.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/data_file_id_codec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/dump.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/indirect_data_reference.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/indirect_data_reference_codec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/manifest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/version_tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/format/version_tree_codec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/io/coalesce_kvstore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/io/indirect_data_kvstore_driver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/io/indirect_data_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/io/io_handle_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/io/manifest_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/io/node_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/io_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/non_distributed/btree_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/non_distributed/create_new_manifest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/non_distributed/list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/non_distributed/list_versions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/non_distributed/read.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/non_distributed/read_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/non_distributed/staged_mutations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/non_distributed/storage_generation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/non_distributed/write_nodes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/operations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/read_modify_write.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/read_result.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/read_result_testutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/s3/aws_credential_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/s3/aws_metadata_credential_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/s3/s3_metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/s3/s3_request_builder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/s3/s3_resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/s3/s3_uri_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/s3/validate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/spec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/supported_features.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/transaction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/url_registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/zarr3_sharding_indexed/key.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/zarr3_sharding_indexed/shard_format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/zarr3_sharding_indexed/zarr3_sharding_indexed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/zip/zip_dir_cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/make_array.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/open.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/open_mode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/open_options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/progress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/proto/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/proto/encode_time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/proto/index_transform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/proto/parse_text_proto_or_die.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/proto/proto_binder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/proto/proto_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/proto/protobuf_matchers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/proto/schema.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/rank.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/read_write_options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/resize_options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/schema.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/absl_time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/batch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/json_bindable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/protobuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/result.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/serialization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/span.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/std_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/std_complex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/std_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/std_optional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/std_pair.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/std_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/std_tuple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/std_variant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/std_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/serialization/test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/spec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/spec_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/staleness_bound.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/static_cast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/strided_layout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/tensorstore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/tensorstore_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/transaction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/transaction_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/apply_members/apply_members.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/apply_members/std_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/apply_members/std_complex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/apply_members/std_pair.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/apply_members/std_tuple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/bfloat16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/bit_span.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/bit_vec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/bit_vec_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/byte_strided_pointer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/constant_bit_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/constant_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/dimension_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/division.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/element_pointer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/element_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/endian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/execution/any_receiver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/execution/any_sender.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/execution/collecting_sender.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/execution/execution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/execution/flow_sender_operation_state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/execution/future_collecting_receiver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/execution/future_sender.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/execution/result_sender.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/execution/sender.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/execution/sender_testutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/execution/sender_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/execution/sync_flow_sender.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/executor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/extents.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/float8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/future.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/future_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/garbage_collection/fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/garbage_collection/garbage_collection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/garbage_collection/json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/garbage_collection/protobuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/garbage_collection/std_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/garbage_collection/std_map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/garbage_collection/std_optional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/garbage_collection/std_pair.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/garbage_collection/std_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/garbage_collection/std_tuple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/garbage_collection/std_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/int4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/internal/iterate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/internal/iterate_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/iterate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/iterate_over_index_range.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/json_absl_flag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/maybe_hard_constraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/option.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/quote_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/rational.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/result.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/result_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/small_bit_set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/span.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/span_json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/status_testutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/stop_token.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/stop_token_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/str_cat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/unit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/util/utf8_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tensorstore/virtual_chunked.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/bazel_skylib/golden/_cmake_binary_dir_/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/local_mirror/golden/_cmake_binary_dir_/_local_mirror/lpm-src/b.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/native_rules/x.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/native_rules/y.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/rules_nasm/a.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/rules_nasm/include/b.inc" />
+    <Image Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/testdata/1x1_405060ff.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/testdata/bmp/D75_08b.bmp" />
+    <Image Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/testdata/bmp/D75_08b_grey.bmp" />
+    <Image Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/testdata/image.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/testdata/png/D75_01b.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/testdata/png/D75_04b.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/testdata/png/D75_08b.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/testdata/png/D75_08b_grey.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/testdata/png/D75_16b.png" />
+    <Image Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/image/testdata/png/D75_16b_grey.png" />
+    <NASM Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/rules_nasm/a.asm" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/bazel/cc_grpc_library.bzl" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/bazel/constants.bzl" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/bazel/local_mirror.bzl" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/bazel/non_compile.bzl" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/bazel/pybind11.bzl" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/bazel/pybind11_cc_test.bzl" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/bazel/pytest.bzl" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/bazel/pytype.bzl" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/bazel/rules_nasm.bzl" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/bazel/tensorstore.bzl" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/bazel/utils.bzl" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/bazelisk.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/build_docs.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/chunk_layout_schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/codec_schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/conftest.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/context.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/context_schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/doctest.bzl" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/doctest_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/docutils.conf" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/environment.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/generate_logo.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/index_domain_schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/index_space.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/index_transform_schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/installation.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/intersphinx_inv/zarr-specs.txt" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/python/api/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/python/indexing.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/python/tutorial.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/schema.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/schema_schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/spec.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/tensorstore_schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/tensorstore_sphinx_ext/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/tensorstore_sphinx_ext/doctest.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/tensorstore_sphinx_ext/json_pprint.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/docs/update_intersphinx_inventories.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/examples/python/beam/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/examples/python/beam/compute_dfbyf.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/examples/python/beam/compute_percentiles.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/examples/python/beam/example.gin" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/examples/python/beam/pipeline_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/examples/python/beam/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/examples/python/beam/reshard_tensor.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/examples/python/beam/run_pipeline.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/examples/python/beam/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/external.bzl" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/pyproject.toml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/bazel_pytest_main.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/cc_test_driver_main.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/shell.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tests/bfloat16_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tests/chunk_layout_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tests/conftest.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tests/context_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tests/custom_dtypes_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tests/data_type_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tests/dim_expression_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tests/dim_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tests/downsample_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tests/exit_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tests/future_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tests/index_domain_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tests/index_transform_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tests/indexing_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tests/int4_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tests/kvstore_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tests/metrics_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tests/spec_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tests/tensorstore_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tests/transaction_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/tests/virtual_chunked_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/array/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/array/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/cast/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/cast/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/downsample/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/downsample/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/image/avif/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/image/avif/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/image/bmp/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/image/bmp/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/image/jpeg/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/image/jpeg/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/image/png/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/image/png/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/image/tiff/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/image/tiff/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/image/webp/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/image/webp/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/json/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/json/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/kvs_backed_chunk_driver_schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/testdata/blosc/attributes.json" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/testdata/bzip2/attributes.json" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/testdata/generate.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/testdata/gzip/attributes.json" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/testdata/raw/attributes.json" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/n5/testdata/xz/attributes.json" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/neuroglancer_precomputed/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/neuroglancer_precomputed/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/stack/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/stack/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/driver/zarr3/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/generate_data_type.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/generate_interval_slice_overloads.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/generate_make_array_overloads.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/generate_matches_array_overloads.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/internal/compression/testdata/data.zip" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/file/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/file/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/gcs/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/grpc/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/grpc/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/http/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/http/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/memory/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/memory/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/neuroglancer_uint64_sharded/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/neuroglancer_uint64_sharded/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/ocdbt/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/s3/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/s3/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/zarr3_sharding_indexed/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/zarr3_sharding_indexed/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/zip/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/kvstore/zip/schema.yml" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tensorstore/update_generated_source_code.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/bazel_platforms/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/ci/build_requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/ci/cibuildwheel.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/ci/cibuildwheel_linux_cache_setup.sh" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/ci/configure_bazel_remote_cache.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/FindAVIF.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/FindBlosc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/FindBrotli.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/FindLZ4.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/FindNGHTTP2.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/FindSnappy.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/FindWebP.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/FindZstd.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/TensorstoreDebugHelpers.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/bzl_library/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/bzl_library/bazel_skylib.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/bzl_library/bazel_tools_repo_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/bzl_library/default.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/bzl_library/expand_template.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/bzl_library/grpc_generate_cc.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/bzl_library/helpers.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/bzl_library/local_mirror.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/bzl_library/rules_cc.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/bzl_library/rules_nasm.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/bzl_library/rules_proto.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/bzl_library/third_party_http_archive.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/bzl_library/upb_proto_library.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/cmake_builder.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/cmake_repository.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/cmake_repository_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/cmake_target.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/emit_cc.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/evaluation.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/golden_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/main.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/native_rules.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/native_rules_alias.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/native_rules_cc.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/native_rules_cc_proto.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/native_rules_genrule.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/native_rules_proto.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/package.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/platforms.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/bazel_glob.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/bazel_glob_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/bazel_globals.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/bazel_globals_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/bazel_target.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/bazel_target_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/common_providers.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/depset.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/depset_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/dict_polyfill.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/ignored.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/ignored_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/invocation_context.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/label.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/provider.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/provider_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/rule.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/rule_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/select.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/select_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/struct.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/struct_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/starlark/toolchain.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/bazel_skylib/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/bazel_skylib/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/bazel_skylib/config.json" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/bazel_skylib/golden/build_rules.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/grpc_generate_cc/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/grpc_generate_cc/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/grpc_generate_cc/config.json" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/grpc_generate_cc/golden/build_rules.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/local_mirror/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/local_mirror/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/local_mirror/config.json" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/local_mirror/golden/_cmake_binary_dir_/_local_mirror/lpm-src/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/local_mirror/golden/_cmake_binary_dir_/_local_mirror/lpm-src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/local_mirror/golden/_find_pkg_redirects_/lpm-config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/local_mirror/golden/build_rules.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/native_rules/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/native_rules/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/native_rules/config.json" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/native_rules/golden/build_rules.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/native_rules/subdir/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/rules_nasm/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/rules_nasm/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/rules_nasm/config.json" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/rules_nasm/golden/build_rules.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/rules_proto/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/rules_proto/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/rules_proto/config.json" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/rules_proto/golden/build_rules.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/third_party_http_archive/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/third_party_http_archive/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/third_party_http_archive/config.json" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/third_party_http_archive/golden/_find_pkg_redirects_/half-extra.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/third_party_http_archive/golden/_find_pkg_redirects_/whole-config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/third_party_http_archive/golden/build_rules.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/third_party_http_archive/half.BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/upb_proto_library/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/upb_proto_library/WORKSPACE.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/upb_proto_library/config.json" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/testdata/upb_proto_library/golden/build_rules.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/util.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/util_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/variable_substitution.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/variable_substitution_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/bazel_to_cmake/workspace.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/btc_protobuf.cmake" />
+    <Text Include="../../thirdparty/owemdjee/tensorstore/tools/cmake/run_bazel_to_cmake.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

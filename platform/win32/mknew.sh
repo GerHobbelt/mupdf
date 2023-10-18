@@ -857,6 +857,26 @@ thrift
 libsiridb
 sdsl-lite
 
+tensorstore
+Sherwood
+treelite
+decision-tree
+random-forest
+cppdap
+crc32c
+farmhash
+capture-thread
+semimap
+fifo_map
+eytzinger
+cpp-netlib
+xsg
+flat.hpp
+ITK
+cdc-file-transfer
+yggdrasil-decision-forests
+slot_map
+
 libboost-context
 libboost-coroutine
 libboost-fiber

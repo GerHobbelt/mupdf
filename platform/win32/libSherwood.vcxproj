@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libSherwood</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF36E0E0}</ProjectGuid>
+    <RootNamespace>libSherwood</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSHERWOOD;SHERWOOD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSHERWOOD;SHERWOOD_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSHERWOOD;SHERWOOD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSHERWOOD;SHERWOOD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSHERWOOD;SHERWOOD_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSHERWOOD;SHERWOOD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSHERWOOD;SHERWOOD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSHERWOOD;SHERWOOD_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSHERWOOD;SHERWOOD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSHERWOOD;SHERWOOD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSHERWOOD;SHERWOOD_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSHERWOOD;SHERWOOD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/Classification.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/ClassificationExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/CommandLineParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/CumulativeNormalDistribution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/DataPointCollection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/DensityEstimation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/DensityEstimationExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/FeatureResponseFunctions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/FloydWarshall.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/Graphics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/Platform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/PlotCanvas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/Regression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/RegressionExample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/SemiSupervisedClassification.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/StatisticsAggregators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/dibCodec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/stdafx.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/Bitmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/Classification.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/ClassificationExample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/CommandLineParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/CumulativeNormalDistribution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/DataPointCollection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/DensityEstimation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/DensityEstimationExample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/FeatureResponseFunctions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/FloydWarshall.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/Graphics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/Platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/PlotCanvas.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/Regression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/RegressionExample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/SemiSupervisedClassification.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/StatisticsAggregators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/dibCodec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/stdafx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/stringUtilities.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/lib/Forest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/lib/ForestTrainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/lib/Interfaces.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/lib/Node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/lib/ParallelForestTrainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/lib/ProgressStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/lib/Random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/lib/Sherwood.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/lib/TrainingParameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sherwood/cpp/lib/Tree.h" />
+    <Image Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/sherwood.ico" />
+    <Image Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/small.ico" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/sherwood.rc" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/910000000143055-Decision-Forests-for-Computer-Vision-and-Medical-Image-Analysis.pdf" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/MSR-LA - Sherwood Code Library.rtf" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/density estimation/exp1.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/density estimation/exp2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/density estimation/exp3.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/density estimation/exp4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/density estimation/exp5.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/density estimation/exp6.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/density estimation/exp7.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/regression/exp1.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/regression/exp10.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/regression/exp11.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/regression/exp2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/regression/exp3.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/regression/exp4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/regression/exp5.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/regression/exp6.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/regression/exp7.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/regression/exp8.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/regression/exp9.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/semi-supervised classification/exp1.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/semi-supervised classification/exp10.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/semi-supervised classification/exp11.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/semi-supervised classification/exp12.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/semi-supervised classification/exp2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/semi-supervised classification/exp3.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/semi-supervised classification/exp4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/semi-supervised classification/exp5.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/semi-supervised classification/exp6.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/semi-supervised classification/exp7.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/semi-supervised classification/exp8.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/semi-supervised classification/exp9.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/supervised classification/exp1_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/supervised classification/exp1_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/supervised classification/exp2_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/supervised classification/exp2_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/supervised classification/exp3_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/supervised classification/exp3_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/supervised classification/exp4_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/supervised classification/exp4_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/supervised classification/exp5_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/supervised classification/exp5_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/supervised classification/exp6_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/supervised classification/exp6_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/supervised classification/exp7_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/supervised classification/exp7_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/supervised classification/exp8_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/supervised classification/exp8_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/supervised classification/exp9_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/bin/Win32/data/supervised classification/exp9_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/density estimation/exp1.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/density estimation/exp2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/density estimation/exp3.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/density estimation/exp4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/density estimation/exp5.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/density estimation/exp6.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/density estimation/exp7.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/regression/exp1.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/regression/exp10.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/regression/exp11.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/regression/exp2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/regression/exp3.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/regression/exp4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/regression/exp5.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/regression/exp6.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/regression/exp7.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/regression/exp8.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/regression/exp9.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/semi-supervised classification/exp1.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/semi-supervised classification/exp10.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/semi-supervised classification/exp11.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/semi-supervised classification/exp12.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/semi-supervised classification/exp2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/semi-supervised classification/exp3.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/semi-supervised classification/exp4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/semi-supervised classification/exp5.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/semi-supervised classification/exp6.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/semi-supervised classification/exp7.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/semi-supervised classification/exp8.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/semi-supervised classification/exp9.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/supervised classification/exp1_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/supervised classification/exp1_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/supervised classification/exp2_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/supervised classification/exp2_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/supervised classification/exp3_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/supervised classification/exp3_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/supervised classification/exp4_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/supervised classification/exp4_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/supervised classification/exp5_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/supervised classification/exp5_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/supervised classification/exp6_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/supervised classification/exp6_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/supervised classification/exp7_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/supervised classification/exp7_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/supervised classification/exp8_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/supervised classification/exp8_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/supervised classification/exp9_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/data/supervised classification/exp9_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/demo/source/sherwood.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/cpp/lib/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/Sherwood.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/density estimation/exp1.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/density estimation/exp2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/density estimation/exp3.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/density estimation/exp4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/density estimation/exp5.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/density estimation/exp6.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/density estimation/exp7.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/regression/exp1.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/regression/exp10.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/regression/exp11.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/regression/exp2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/regression/exp3.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/regression/exp4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/regression/exp5.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/regression/exp6.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/regression/exp7.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/regression/exp8.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/regression/exp9.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/semi-supervised classification/exp1.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/semi-supervised classification/exp10.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/semi-supervised classification/exp11.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/semi-supervised classification/exp12.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/semi-supervised classification/exp2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/semi-supervised classification/exp3.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/semi-supervised classification/exp4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/semi-supervised classification/exp5.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/semi-supervised classification/exp6.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/semi-supervised classification/exp7.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/semi-supervised classification/exp8.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/semi-supervised classification/exp9.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/supervised classification/exp1_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/supervised classification/exp1_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/supervised classification/exp2_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/supervised classification/exp2_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/supervised classification/exp3_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/supervised classification/exp3_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/supervised classification/exp4_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/supervised classification/exp4_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/supervised classification/exp5_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/supervised classification/exp5_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/supervised classification/exp6_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/supervised classification/exp6_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/supervised classification/exp7_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/supervised classification/exp7_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/supervised classification/exp8_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/supervised classification/exp8_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/supervised classification/exp9_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/bin/Net4.0/data/supervised classification/exp9_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/CommandLineParser.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/Usage Examples/CumulativeNormalDistribution.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/Usage Examples/DataPointCollection.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/Usage Examples/Density Estimation/DensityEstimation.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/Usage Examples/FeatureResponseFunctions.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/Usage Examples/PlotCanvas.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/Usage Examples/Regression/Regression.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/Usage Examples/Semi-supervised Classification/Djikstra.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/Usage Examples/Semi-supervised Classification/FloydWarshall.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/Usage Examples/Semi-supervised Classification/SemiSupervisedClassification.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/Usage Examples/StatisticsAggregators.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/Usage Examples/StatisticsAggregatorsExperimental.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/Usage Examples/Supervised Classification/Classification.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/app.config" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/Sherwood.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/density estimation/exp1.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/density estimation/exp2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/density estimation/exp3.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/density estimation/exp4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/density estimation/exp5.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/density estimation/exp6.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/density estimation/exp7.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/regression/exp1.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/regression/exp10.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/regression/exp11.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/regression/exp2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/regression/exp3.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/regression/exp4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/regression/exp5.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/regression/exp6.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/regression/exp7.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/regression/exp8.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/regression/exp9.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/semi-supervised classification/exp1.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/semi-supervised classification/exp10.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/semi-supervised classification/exp11.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/semi-supervised classification/exp12.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/semi-supervised classification/exp2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/semi-supervised classification/exp3.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/semi-supervised classification/exp4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/semi-supervised classification/exp5.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/semi-supervised classification/exp6.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/semi-supervised classification/exp7.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/semi-supervised classification/exp8.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/semi-supervised classification/exp9.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/supervised classification/exp1_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/supervised classification/exp1_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/supervised classification/exp2_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/supervised classification/exp2_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/supervised classification/exp3_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/supervised classification/exp3_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/supervised classification/exp4_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/supervised classification/exp4_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/supervised classification/exp5_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/supervised classification/exp5_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/supervised classification/exp6_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/supervised classification/exp6_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/supervised classification/exp7_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/supervised classification/exp7_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/supervised classification/exp8_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/supervised classification/exp8_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/supervised classification/exp9_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/data/supervised classification/exp9_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/sw.exe.config" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/bin/Debug/sw.vshost.exe.config" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/density estimation/exp1.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/density estimation/exp2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/density estimation/exp3.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/density estimation/exp4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/density estimation/exp5.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/density estimation/exp6.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/density estimation/exp7.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/regression/exp1.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/regression/exp10.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/regression/exp11.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/regression/exp2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/regression/exp3.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/regression/exp4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/regression/exp5.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/regression/exp6.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/regression/exp7.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/regression/exp8.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/regression/exp9.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/semi-supervised classification/exp1.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/semi-supervised classification/exp10.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/semi-supervised classification/exp11.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/semi-supervised classification/exp12.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/semi-supervised classification/exp2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/semi-supervised classification/exp3.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/semi-supervised classification/exp4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/semi-supervised classification/exp5.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/semi-supervised classification/exp6.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/semi-supervised classification/exp7.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/semi-supervised classification/exp8.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/semi-supervised classification/exp9.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/supervised classification/exp1_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/supervised classification/exp1_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/supervised classification/exp2_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/supervised classification/exp2_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/supervised classification/exp3_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/supervised classification/exp3_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/supervised classification/exp4_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/supervised classification/exp4_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/supervised classification/exp5_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/supervised classification/exp5_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/supervised classification/exp6_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/supervised classification/exp6_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/supervised classification/exp7_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/supervised classification/exp7_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/supervised classification/exp8_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/supervised classification/exp8_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/supervised classification/exp9_n2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/Demo/data/supervised classification/exp9_n4.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/SparkCLR/App.config" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/SparkCLR/CSharpWorker.exe.config" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/SparkCLR/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/SparkCLR/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/SparkCLR/bin/Debug/Microsoft.Spark.CSharp.Adapter.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/SparkCLR/bin/Debug/Newtonsoft.Json.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/SparkCLR/bin/Debug/Razorvine.Pyrolite.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/SparkCLR/bin/Debug/Razorvine.Serpent.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/SparkCLR/bin/Debug/SparkCLR.exe.config" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/SparkCLR/bin/Debug/SparkCLR.vshost.exe.config" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/SparkCLR/bin/Debug/log4net.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/SparkCLR/data/wordcount/words.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/SparkCLR/data/wordcount/words2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/SparkCLR/data/words.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/SparkCLR/data/words2.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/SparkCLR/packages.config" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/Microsoft.SparkCLR.2.0.200/" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/Microsoft.SparkCLR.2.0.200/lib/net45/CSharpWorker.exe.config" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/Microsoft.SparkCLR.2.0.200/lib/net45/Microsoft.Spark.CSharp.Adapter.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/Newtonsoft.Json.7.0.1/lib/net20/Newtonsoft.Json.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/Newtonsoft.Json.7.0.1/lib/net35/Newtonsoft.Json.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/Newtonsoft.Json.7.0.1/lib/net40/Newtonsoft.Json.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/Newtonsoft.Json.7.0.1/lib/net45/Newtonsoft.Json.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/Newtonsoft.Json.7.0.1/lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/Newtonsoft.Json.7.0.1/lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/Newtonsoft.Json.7.0.1/tools/install.ps1" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/Razorvine.Pyrolite.4.10.0.0/" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/Razorvine.Pyrolite.4.10.0.0/lib/net40/Razorvine.Pyrolite.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/Razorvine.Serpent.1.12.0.0/" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/Razorvine.Serpent.1.12.0.0/lib/net40/Razorvine.Serpent.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/log4net.2.0.5/lib/net10-full/log4net.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/log4net.2.0.5/lib/net11-full/log4net.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/log4net.2.0.5/lib/net20-full/log4net.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/log4net.2.0.5/lib/net35-client/log4net.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/log4net.2.0.5/lib/net35-full/log4net.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/log4net.2.0.5/lib/net40-client/log4net.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/log4net.2.0.5/lib/net40-full/log4net.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/log4net.2.0.5/lib/net45-full/log4net.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/lib/Forest.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/lib/ForestTrainer.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/lib/Interfaces.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/lib/Node.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/lib/ParallelForestTrainer.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/lib/ProgressWriter.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/lib/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/lib/ReadMe.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/lib/Tree.cs" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/lib/bin/Debug/Sherwood.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/csharp/lib/bin/Release/Sherwood.dll" />
+    <Text Include="../../thirdparty/owemdjee/Sherwood/sherwood.pdf" />
+    <Xml Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/Newtonsoft.Json.7.0.1/lib/net20/Newtonsoft.Json.xml" />
+    <Xml Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/Newtonsoft.Json.7.0.1/lib/net35/Newtonsoft.Json.xml" />
+    <Xml Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/Newtonsoft.Json.7.0.1/lib/net40/Newtonsoft.Json.xml" />
+    <Xml Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/Newtonsoft.Json.7.0.1/lib/net45/Newtonsoft.Json.xml" />
+    <Xml Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/Newtonsoft.Json.7.0.1/lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml" />
+    <Xml Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/Newtonsoft.Json.7.0.1/lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.xml" />
+    <Xml Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/log4net.2.0.5/lib/net10-full/log4net.xml" />
+    <Xml Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/log4net.2.0.5/lib/net11-full/log4net.xml" />
+    <Xml Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/log4net.2.0.5/lib/net20-full/log4net.xml" />
+    <Xml Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/log4net.2.0.5/lib/net35-client/log4net.xml" />
+    <Xml Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/log4net.2.0.5/lib/net35-full/log4net.xml" />
+    <Xml Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/log4net.2.0.5/lib/net40-client/log4net.xml" />
+    <Xml Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/log4net.2.0.5/lib/net40-full/log4net.xml" />
+    <Xml Include="../../thirdparty/owemdjee/Sherwood/csharp/demo/packages/log4net.2.0.5/lib/net45-full/log4net.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
