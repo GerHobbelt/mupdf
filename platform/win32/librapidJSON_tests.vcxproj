@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>librapidJSON</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF878680}</ProjectGuid>
+    <ProjectGuid>{1A8C1F05-39F4-46C3-9BA2-DADC8A7C2527}</ProjectGuid>
     <RootNamespace>librapidJSON</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -113,8 +113,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRAPIDJSON;RAPIDJSON_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -228,28 +228,40 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/example/archiver/archiver.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/example/archiver/archivertest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/example/capitalize/capitalize.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/example/condense/condense.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/example/filterkey/filterkey.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/example/filterkeydom/filterkeydom.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/example/jsonx/jsonx.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/example/lookaheadparser/lookaheadparser.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/example/messagereader/messagereader.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/example/parsebyparts/parsebyparts.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/example/pretty/pretty.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/example/prettyauto/prettyauto.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/example/schemavalidator/schemavalidator.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/example/serialize/serialize.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/example/simpledom/simpledom.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/example/simplepullreader/simplepullreader.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/example/simplereader/simplereader.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/example/simplewriter/simplewriter.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/example/sortkeys/sortkeys.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/example/traverseaspointer.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/example/tutorial/tutorial.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/rapidJSON/example/archiver/archiver.h" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/perftest/misctest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/perftest/perfplatformtest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/perftest/perfschematest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/perftest/perftest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/perftest/rapidjsontest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/allocatorstest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/bigintegertest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/clzlltest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/cursorstreamwrappertest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/documenttest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/dtoatest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/encodedstreamtest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/encodingstest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/filestreamtest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/fwdtest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/istreamwrappertest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/itoatest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/jsoncheckertest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/namespacetest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/ostreamwrappertest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/platformtest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/pointertest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/prettywritertest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/readertest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/regextest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/schematest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/simdtest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/strfunctest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/stringbuffertest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/strtodtest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/unittest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/uritest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/valuetest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/writertest.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/rapidJSON/include/rapidjson/allocators.h" />
     <ClInclude Include="../../thirdparty/owemdjee/rapidJSON/include/rapidjson/cursorstreamwrapper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/rapidJSON/include/rapidjson/document.h" />
@@ -288,6 +300,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/rapidJSON/include/rapidjson/stringbuffer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/rapidJSON/include/rapidjson/uri.h" />
     <ClInclude Include="../../thirdparty/owemdjee/rapidJSON/include/rapidjson/writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidJSON/test/perftest/perftest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/unittest.h" />
     <Image Include="../../thirdparty/owemdjee/rapidJSON/doc/diagram/architecture.png" />
     <Image Include="../../thirdparty/owemdjee/rapidJSON/doc/diagram/insituparsing.png" />
     <Image Include="../../thirdparty/owemdjee/rapidJSON/doc/diagram/iterative-parser-states-diagram.png" />
@@ -466,18 +480,19 @@
     <Text Include="../../thirdparty/owemdjee/rapidJSON/doc/stream.zh-cn.md" />
     <Text Include="../../thirdparty/owemdjee/rapidJSON/doc/tutorial.md" />
     <Text Include="../../thirdparty/owemdjee/rapidJSON/doc/tutorial.zh-cn.md" />
-    <Text Include="../../thirdparty/owemdjee/rapidJSON/example/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/rapidJSON/include_dirs.js" />
     <Text Include="../../thirdparty/owemdjee/rapidJSON/library.json" />
     <Text Include="../../thirdparty/owemdjee/rapidJSON/license.txt" />
     <Text Include="../../thirdparty/owemdjee/rapidJSON/package.json" />
     <Text Include="../../thirdparty/owemdjee/rapidJSON/readme.md" />
     <Text Include="../../thirdparty/owemdjee/rapidJSON/readme.zh-cn.md" />
+    <Text Include="../../thirdparty/owemdjee/rapidJSON/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rapidJSON/test/perftest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rapidJSON/test/unittest/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/rapidJSON/travis-doxygen.sh" />
     <Xml Include="../../thirdparty/owemdjee/rapidJSON/doc/misc/DoxygenLayout.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
