@@ -859,6 +859,107 @@ pdf_show_path(fz_context *ctx, pdf_run_processor *pr, int doclose, int dofill, i
  * Assemble and emit text
  */
 
+static int
+guess_bidi_level(int bidiclass, int cur_bidi)
+{
+	switch (bidiclass)
+	{
+	/* strong */
+	case UCDN_BIDI_CLASS_L:
+		return 0;
+	case UCDN_BIDI_CLASS_R:
+	case UCDN_BIDI_CLASS_AL:
+		return 1;
+
+	/* weak */
+	case UCDN_BIDI_CLASS_EN:
+	case UCDN_BIDI_CLASS_ES:
+	case UCDN_BIDI_CLASS_ET:
+	case UCDN_BIDI_CLASS_AN:
+		return 0;
+
+	case UCDN_BIDI_CLASS_CS:
+	case UCDN_BIDI_CLASS_NSM:
+	case UCDN_BIDI_CLASS_BN:
+		return cur_bidi;
+
+	/* neutral */
+	case UCDN_BIDI_CLASS_B:
+	case UCDN_BIDI_CLASS_S:
+	case UCDN_BIDI_CLASS_WS:
+	case UCDN_BIDI_CLASS_ON:
+		return cur_bidi;
+
+	/* embedding, override, pop ... we don't support them */
+	default:
+		return 0;
+	}
+}
+
+static int
+guess_markup_dir(int bidiclass)
+{
+	switch (bidiclass)
+	{
+	/* strong */
+	case UCDN_BIDI_CLASS_L:
+		return FZ_BIDI_LTR;
+	case UCDN_BIDI_CLASS_R:
+	case UCDN_BIDI_CLASS_AL:
+		return FZ_BIDI_RTL;
+
+	/* weak */
+	case UCDN_BIDI_CLASS_EN:
+	case UCDN_BIDI_CLASS_ES:
+	case UCDN_BIDI_CLASS_ET:
+	case UCDN_BIDI_CLASS_AN:
+		return FZ_BIDI_LTR;
+
+	case UCDN_BIDI_CLASS_CS:
+	case UCDN_BIDI_CLASS_NSM:
+	case UCDN_BIDI_CLASS_BN:
+		return FZ_BIDI_NEUTRAL;
+
+	default:
+		return FZ_BIDI_NEUTRAL;
+	}
+}
+
+static void patch_bidi(fz_context *ctx, fz_text *text)
+{
+	fz_text_span *span;
+	int rtl = 0;
+	int ltr = 0;
+
+	/* Hacky solution that just looks for majority strong LTR or RTL
+	 * characters to determine bidi level of neutral characters. This is
+	 * primarily used for reversing visual order text into logical order in
+	 * the stext-device.
+	 */
+
+	for (span = text->head; span; span = span->next)
+	{
+		if (span->markup_dir == FZ_BIDI_LTR)
+			ltr += span->len;
+		if (span->markup_dir == FZ_BIDI_RTL)
+			rtl += span->len;
+	}
+
+	if (rtl > ltr)
+	{
+		for (span = text->head; span; span = span->next)
+			if (span->markup_dir == FZ_BIDI_NEUTRAL)
+				span->bidi_level = 1;
+	}
+	else if (ltr > rtl)
+	{
+		for (span = text->head; span; span = span->next)
+			if (span->markup_dir == FZ_BIDI_NEUTRAL)
+				span->bidi_level = 0;
+	}
+}
+
+
 static pdf_gstate *
 pdf_flush_text(fz_context *ctx, pdf_run_processor *pr)
 {
@@ -1047,72 +1148,6 @@ pdf_flush_text(fz_context *ctx, pdf_run_processor *pr)
 	}
 
 	return pr->gstate + pr->gtop;
-}
-
-static int
-guess_bidi_level(int bidiclass, int cur_bidi)
-{
-	switch (bidiclass)
-	{
-	/* strong */
-	case UCDN_BIDI_CLASS_L:
-		return 0;
-	case UCDN_BIDI_CLASS_R:
-	case UCDN_BIDI_CLASS_AL:
-		return 1;
-
-	/* weak */
-	case UCDN_BIDI_CLASS_EN:
-	case UCDN_BIDI_CLASS_ES:
-	case UCDN_BIDI_CLASS_ET:
-		return 0;
-	case UCDN_BIDI_CLASS_AN:
-		return 1;
-	case UCDN_BIDI_CLASS_CS:
-	case UCDN_BIDI_CLASS_NSM:
-	case UCDN_BIDI_CLASS_BN:
-		return cur_bidi;
-
-	/* neutral */
-	case UCDN_BIDI_CLASS_B:
-	case UCDN_BIDI_CLASS_S:
-	case UCDN_BIDI_CLASS_WS:
-	case UCDN_BIDI_CLASS_ON:
-		return cur_bidi;
-
-	/* embedding, override, pop ... we don't support them */
-	default:
-		return 0;
-	}
-}
-
-static int
-guess_markup_dir(int bidiclass)
-{
-	switch (bidiclass)
-	{
-	/* strong */
-	case UCDN_BIDI_CLASS_L:
-		return FZ_BIDI_LTR;
-	case UCDN_BIDI_CLASS_R:
-	case UCDN_BIDI_CLASS_AL:
-		return FZ_BIDI_RTL;
-
-	/* weak */
-	case UCDN_BIDI_CLASS_EN:
-	case UCDN_BIDI_CLASS_ES:
-	case UCDN_BIDI_CLASS_ET:
-	case UCDN_BIDI_CLASS_AN:
-		return FZ_BIDI_LTR;
-
-	case UCDN_BIDI_CLASS_CS:
-	case UCDN_BIDI_CLASS_NSM:
-	case UCDN_BIDI_CLASS_BN:
-		return FZ_BIDI_NEUTRAL;
-
-	default:
-		return FZ_BIDI_NEUTRAL;
-	}
 }
 
 static void
