@@ -500,6 +500,7 @@ pdf_show_pattern(fz_context *ctx, pdf_run_processor *pr, pdf_pattern *pat, int p
 	int x0, y0, x1, y1;
 	float fx0, fy0, fx1, fy1;
 	fz_rect local_area;
+	int oldbot;
 	int id;
 
 	pdf_gsave(ctx, pr);
@@ -584,9 +585,17 @@ pdf_show_pattern(fz_context *ctx, pdf_run_processor *pr, pdf_pattern *pat, int p
 		if (!cached)
 		{
 			gstate->ctm = ptm;
+
+			oldbot = pr->gbot;
+			pr->gbot = pr->gtop;
+
 			pdf_gsave(ctx, pr);
 			pdf_process_contents(ctx, (pdf_processor*)pr, pat->document, pat->resources, pat->contents, NULL);
 			pdf_grestore(ctx, pr);
+
+			while (pr->gtop > pr->gbot)
+				pdf_grestore(ctx, pr);
+			pr->gbot = oldbot;
 		}
 		fz_end_tile(ctx, pr->dev);
 	}
@@ -621,9 +630,17 @@ pdf_show_pattern(fz_context *ctx, pdf_run_processor *pr, pdf_pattern *pat, int p
 				 * it each time round the loop. */
 				gstate = pr->gstate + pr->gtop;
 				gstate->ctm = fz_pre_translate(ptm, x * pat->xstep, y * pat->ystep);
+
+				oldbot = pr->gbot;
+				pr->gbot = pr->gtop;
+
 				pdf_gsave(ctx, pr);
 				pdf_process_contents(ctx, (pdf_processor*)pr, pat->document, pat->resources, pat->contents, NULL);
 				pdf_grestore(ctx, pr);
+
+				while (pr->gtop > pr->gbot)
+					pdf_grestore(ctx, pr);
+				pr->gbot = oldbot;
 			}
 		}
 	}
