@@ -690,62 +690,7 @@ no_more_matches:;
 	fz_catch(ctx)
 		fz_rethrow(ctx);
 
-	#ifndef NDEBUG
-	{
-		int *hit_mark2 = (hit_mark) ? fz_malloc(ctx, sizeof(*hit_mark2) * max_quads) : NULL;
-		fz_quad *quads2 = fz_malloc(ctx, sizeof(*quads2) * max_quads);
-		memset(quads2, 0, sizeof(*quads2) * max_quads);
-		int ret2 = fz_search_stext_page_test(ctx, page, needle, hit_mark2, quads2, max_quads);
-		assert(ret2 == hits.len);
-		int i;
-		for (i=0; i<ret2; ++i)
-		{
-			if (hit_mark2) assert(hit_mark2[i] == hit_mark[i]);
-		}
-		for (i=0; i<ret2; ++i)
-		{
-			if (hit_mark2) assert(hit_mark2[i] == hit_mark[i]);
-			assert(quads2[i].ul.x == quads[i].ul.x);
-			assert(quads2[i].ul.y == quads[i].ul.y);
-			assert(quads2[i].ur.x == quads[i].ur.x);
-			assert(quads2[i].ur.y == quads[i].ur.y);
-			assert(quads2[i].ll.x == quads[i].ll.x);
-			assert(quads2[i].ll.y == quads[i].ll.y);
-			assert(quads2[i].lr.x == quads[i].lr.x);
-			assert(quads2[i].lr.y == quads[i].lr.y);
-		}
-		fz_free(ctx, quads2);
-		fz_free(ctx, hit_mark2);
-	}
-	#endif
-
 	return hits.len;
-}
-
-int
-fz_search_stext_page_test(fz_context *ctx, fz_stext_page *page, const char *needle, int *hit_mark, fz_quad *quads, int max_quads)
-{
-	int i = 0;
-	fz_search_stext_state *state = fz_search_stext_create(ctx, page);
-	fz_search_stext_set_needle(ctx, state, needle);
-	while (fz_search_stext_next(ctx, state))
-	{
-		int first = 1;
-		for (; ; ++i, first=0)
-		{
-			const fz_quad *quad = fz_search_stext_next_quad(ctx, state);
-			if (!quad)
-				break;
-			if (i < max_quads)
-			{
-				if (hit_mark)
-					hit_mark[i] = first;
-				quads[i] = *quad;
-			}
-		}
-	}
-	fz_search_stext_destroy(ctx, state);
-	return (i < max_quads) ? i : max_quads;
 }
 
 /* Internal state for block/line/ch position. */
