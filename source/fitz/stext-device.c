@@ -25,6 +25,7 @@
 #endif
 
 #include "mupdf/fitz.h"
+#include "mupdf/ucdn.h"
 #include "mupdf/helpers/dir.h"
 
 #include "glyphbox.h"
@@ -779,20 +780,6 @@ int fz_is_whitespace(int c)
 	return is_whitespace(c);
 }
 
-
-static void
-flush_text(fz_context *ctx, fz_stext_device *dev)
-{
-	fz_stext_page *page = dev->page;
-
-	float size = fz_matrix_expansion(dev->trm);
-
-	/* Find current position to enter new text. */
-	if (dev->lasttext && dev->lasttext->tail)
-	{
-		prepend_line_if_possible(ctx, dev, page, page->last_block, dev->trm, dev->lasttext->tail->font, size, ' ', &dev->pen, dev->color);
-	}
-}
 
 static void
 fz_add_stext_char(fz_context *ctx, fz_stext_device *dev, fz_font *font, int c, int glyph, fz_matrix trm, float adv, int wmode, int bidi, int force_new_line)
