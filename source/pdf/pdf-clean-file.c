@@ -419,7 +419,6 @@ static void retainpages(fz_context *ctx, globals *glo, int argc, const char** ar
 	{
 		fz_free(ctx, page_object_nums);
 		pdf_drop_obj(ctx, allfields);
-		pdf_drop_obj(ctx, names_list);
 		pdf_drop_obj(ctx, root);
 	}
 	fz_catch(ctx)
