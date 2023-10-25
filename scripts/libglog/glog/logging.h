@@ -1479,7 +1479,7 @@ public:
   void SendToSyslogAndLog();  // Actually dispatch to syslog and the logs
 
   // Call abort() or similar to perform LOG(FATAL) crash.
-  [[noreturn]] __declspec(noreturn) static void Fail();
+  [[noreturn]] static void Fail();
 
   std::ostream& stream();
 
@@ -1530,9 +1530,9 @@ class GOOGLE_GLOG_DLL_DECL LogMessageFatal : public LogMessage {
  public:
   LogMessageFatal(const char* file, int line);
   LogMessageFatal(const char* file, int line, const CheckOpString& result);
-  [[noreturn]] __declspec(noreturn) ~LogMessageFatal();
+  [[noreturn]] ~LogMessageFatal();
  protected:
-  [[noreturn]] __declspec(noreturn) void __FlushAndFailAtEnd();
+  [[noreturn]] void __FlushAndFailAtEnd();
 };
 
 // A non-macro interface to the log facility; (useful
@@ -1738,7 +1738,7 @@ GOOGLE_GLOG_DLL_DECL void TruncateStdoutStderr();
 // Thread-safe.
 GOOGLE_GLOG_DLL_DECL const char* GetLogSeverityName(LogSeverity severity);
 
-GOOGLE_GLOG_DLL_DECL [[noreturn]] __declspec(noreturn) void logging_fail();
+GOOGLE_GLOG_DLL_DECL [[noreturn]] void logging_fail();
 
 
 // ---------------------------------------------------------------------
@@ -1777,7 +1777,7 @@ class GOOGLE_GLOG_DLL_DECL Logger {
   // Get the current LOG file size.
   // The returned value is approximate since some
   // logged data may not have been flushed to disk yet.
-  virtual uint32 LogSize() = 0;
+  virtual size_t LogSize() = 0;
 };
 
 // Get the logger for the specified severity level.  The logger
@@ -1847,11 +1847,11 @@ class GOOGLE_GLOG_DLL_DECL NullStreamFatal : public NullStream {
   NullStreamFatal() { }
   NullStreamFatal(const char* file, int line, const CheckOpString& result) :
       NullStream(file, line, result) { }
-  [[noreturn]] __declspec(noreturn) ~NullStreamFatal() {
+  [[noreturn]] ~NullStreamFatal() {
 	  __Fail();
   }
  protected:
-  [[noreturn]] __declspec(noreturn) void __Fail();
+  [[noreturn]] void __Fail();
 };
 
 // Install a signal handler that will dump signal information and a stack
