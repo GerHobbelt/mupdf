@@ -3464,6 +3464,7 @@ pdf_set_annot_appearance(fz_context *ctx, pdf_annot *annot, const char *appearan
 		if (!pdf_is_dict(ctx, form))
 		{
 			pdf_drop_obj(ctx, form);
+			form = NULL;
 			form = pdf_new_xobject(ctx, annot->page->doc, bbox, ctm, res, contents);
 		}
 		else
