@@ -1,4 +1,4 @@
-// Copyright (c) 1999, 2007, Google Inc.
+// Copyright (c) 2023, Google Inc.
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -61,6 +61,8 @@
 #ifndef BASE_VLOG_IS_ON_H_
 #define BASE_VLOG_IS_ON_H_
 
+#include <cstddef>
+
 #include <glog/log_severity.h>
 
 #if defined(__GNUC__)
@@ -73,6 +75,8 @@
 #define VLOG_IS_ON(verboselevel)                                \
   __extension__  \
   ({ static google::SiteFlag vlocal__{NULL, NULL, 0, NULL};       \
+     GLOG_IFDEF_THREAD_SANITIZER( \
+             AnnotateBenignRaceSized(__FILE__, __LINE__, &vlocal__, sizeof(google::SiteFlag), "")); \
      google::int32 verbose_level__ = (verboselevel);                    \
      (vlocal__.level == NULL ? google::InitVLOG3__(&vlocal__, &FLAGS_v, \
                         __FILE__, verbose_level__) : *vlocal__.level >= verbose_level__); \
@@ -98,11 +102,11 @@ extern GOOGLE_GLOG_DLL_DECL int SetVLOGLevel(const char* module_pattern, int log
 struct SiteFlag {
   google::int32* level;
   const char* base_name;
-  size_t base_len;
+  std::size_t base_len;
   SiteFlag* next;
 };
 
-// Helper routine which determines the logging info for a particalur VLOG site.
+// Helper routine which determines the logging info for a particular VLOG site.
 //   site_flag     is the address of the site-local pointer to the controlling
 //                 verbosity level
 //   site_default  is the default to use for *site_flag
