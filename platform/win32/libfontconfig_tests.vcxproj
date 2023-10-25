@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>libfontconfig</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF69837F}</ProjectGuid>
-    <RootNamespace>libfontconfig</RootNamespace>
+    <ProjectName>libfontconfig_tests</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-1970-7518FF69837F}</ProjectGuid>
+    <RootNamespace>libfontconfig_tests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -237,6 +237,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/fontconfig/fc-query/fc-query.c" />
     <ClCompile Include="../../thirdparty/owemdjee/fontconfig/fc-scan/fc-scan.c" />
     <ClCompile Include="../../thirdparty/owemdjee/fontconfig/fc-validate/fc-validate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fontconfig/meson-cc-tests/flexible-array-member-test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fontconfig/meson-cc-tests/intel-atomic-primitives-test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fontconfig/meson-cc-tests/solaris-atomic-operations.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fontconfig/meson-cc-tests/stdatomic-primitives-test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/fontconfig/src/fcarch.c" />
     <ClCompile Include="../../thirdparty/owemdjee/fontconfig/src/fcatomic.c" />
     <ClCompile Include="../../thirdparty/owemdjee/fontconfig/src/fccache.c" />
@@ -266,6 +270,22 @@
     <ClCompile Include="../../thirdparty/owemdjee/fontconfig/src/fcweight.c" />
     <ClCompile Include="../../thirdparty/owemdjee/fontconfig/src/fcxml.c" />
     <ClCompile Include="../../thirdparty/owemdjee/fontconfig/src/ftglue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fontconfig/test/test-bz106618.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fontconfig/test/test-bz106632.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fontconfig/test/test-bz131804.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fontconfig/test/test-bz1744377.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fontconfig/test/test-bz89617.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fontconfig/test/test-bz96676.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fontconfig/test/test-conf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fontconfig/test/test-crbug1004254.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fontconfig/test/test-d1f48f11.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fontconfig/test/test-family-matching.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fontconfig/test/test-issue107.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fontconfig/test/test-issue110.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fontconfig/test/test-issue180.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fontconfig/test/test-migration.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fontconfig/test/test-name-parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/fontconfig/test/test-pthread.c" />
     <ClInclude Include="../../thirdparty/owemdjee/fontconfig/config-fixups.h" />
     <ClInclude Include="../../thirdparty/owemdjee/fontconfig/fc-case/fccase.tmpl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/fontconfig/fc-lang/fclang.tmpl.h" />
@@ -396,6 +416,7 @@
     <Text Include="../../thirdparty/owemdjee/fontconfig/its/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/fontconfig/its/fontconfig.its" />
     <Text Include="../../thirdparty/owemdjee/fontconfig/local.conf" />
+    <Text Include="../../thirdparty/owemdjee/fontconfig/meson-cc-tests/gperf.txt" />
     <Text Include="../../thirdparty/owemdjee/fontconfig/meson_options.txt" />
     <Text Include="../../thirdparty/owemdjee/fontconfig/new-version.sh" />
     <Text Include="../../thirdparty/owemdjee/fontconfig/po-conf/ChangeLog" />
@@ -407,6 +428,21 @@
     <Text Include="../../thirdparty/owemdjee/fontconfig/src/fcstdint.h.in" />
     <Text Include="../../thirdparty/owemdjee/fontconfig/src/fontconfig.def.in" />
     <Text Include="../../thirdparty/owemdjee/fontconfig/src/makealias.py" />
+    <Text Include="../../thirdparty/owemdjee/fontconfig/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/fontconfig/test/fonts.conf.in" />
+    <Text Include="../../thirdparty/owemdjee/fontconfig/test/out.expected-long-family-names" />
+    <Text Include="../../thirdparty/owemdjee/fontconfig/test/out.expected-no-long-family-names" />
+    <Text Include="../../thirdparty/owemdjee/fontconfig/test/run-test-conf.sh" />
+    <Text Include="../../thirdparty/owemdjee/fontconfig/test/run-test-map.sh" />
+    <Text Include="../../thirdparty/owemdjee/fontconfig/test/run-test.d/remap-flatpak.sh" />
+    <Text Include="../../thirdparty/owemdjee/fontconfig/test/run-test.sh" />
+    <Text Include="../../thirdparty/owemdjee/fontconfig/test/test-45-generic.json" />
+    <Text Include="../../thirdparty/owemdjee/fontconfig/test/test-60-generic.json" />
+    <Text Include="../../thirdparty/owemdjee/fontconfig/test/test-90-synthetic.json" />
+    <Text Include="../../thirdparty/owemdjee/fontconfig/test/test-issue-286.json" />
+    <Text Include="../../thirdparty/owemdjee/fontconfig/test/test-namedinstance.json" />
+    <Text Include="../../thirdparty/owemdjee/fontconfig/test/test-style-match.json" />
+    <Text Include="../../thirdparty/owemdjee/fontconfig/test/wrapper-script.sh" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

@@ -1,0 +1,801 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libsile-typesetter</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF176B05}</ProjectGuid>
+    <RootNamespace>libsile-typesetter</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSILE_TYPESETTER;SILE_TYPESETTER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSILE_TYPESETTER;SILE_TYPESETTER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSILE_TYPESETTER;SILE_TYPESETTER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSILE_TYPESETTER;SILE_TYPESETTER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSILE_TYPESETTER;SILE_TYPESETTER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSILE_TYPESETTER;SILE_TYPESETTER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSILE_TYPESETTER;SILE_TYPESETTER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSILE_TYPESETTER;SILE_TYPESETTER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSILE_TYPESETTER;SILE_TYPESETTER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSILE_TYPESETTER;SILE_TYPESETTER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSILE_TYPESETTER;SILE_TYPESETTER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSILE_TYPESETTER;SILE_TYPESETTER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/sile-typesetter/src/fontmetrics.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sile-typesetter/src/hb-utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sile-typesetter/src/imagebbox.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sile-typesetter/src/justenoughfontconfig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sile-typesetter/src/justenoughharfbuzz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sile-typesetter/src/justenoughicu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sile-typesetter/src/justenoughlibtexpdf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sile-typesetter/src/podofo_wrap.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/sile-typesetter/src/svg.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/sile-typesetter/src/hb-utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sile-typesetter/src/nanosvg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sile-typesetter/src/silewin32.h" />
+    <Font Include="../../thirdparty/owemdjee/sile-typesetter/tests/TestCLR-Regular.ttf" />
+    <Image Include="../../thirdparty/owemdjee/sile-typesetter/documentation/discovery.png" />
+    <Image Include="../../thirdparty/owemdjee/sile-typesetter/documentation/fig1.png" />
+    <Image Include="../../thirdparty/owemdjee/sile-typesetter/documentation/grid-1.png" />
+    <Image Include="../../thirdparty/owemdjee/sile-typesetter/documentation/grid-2.png" />
+    <Image Include="../../thirdparty/owemdjee/sile-typesetter/documentation/gutenberg.png" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/README.md" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/action.yml" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/azure-pipelines.yml" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/bootstrap.sh" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/build-aux/action-updater.js" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/build-aux/create-homebrew-formula.pl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/build-aux/decore-automake.sh" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/build-aux/docker-bootstrap.sh" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/build-aux/docker-fontconfig.conf" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/build-aux/list-dist-files.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/classes/base.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/classes/bible.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/classes/book.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/classes/diglot.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/classes/docbook.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/classes/jbook.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/classes/jplain.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/classes/letter.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/classes/markdown.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/classes/pecha.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/classes/plain.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/classes/tbook.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/classes/tplain.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/classes/triglot.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/cmake/fonts_conf.cmake" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/break.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/cli.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/color.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/color_spec.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/deprecations.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/features.lua.in" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/font.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/fontmanager.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/frame.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/frameparser.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/hyphenator-liang.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/languages.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/length.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/makedeps.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/measurement.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/nodefactory.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/opentype-parser.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/packagemanager.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/pagebuilder.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/papersize.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/parserbits.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/pathsetup.lua.in" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/repl.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/settings.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/sile.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/tracestack.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/typesetter.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/units.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/utilities-numbers.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/utilities-sorting.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/utilities.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/core/version.lua.in" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/default.nix" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/documentation/c01-whatis.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/documentation/c02-gettingstarted.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/documentation/c03-input.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/documentation/c04-useful.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/documentation/c05-packages.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/documentation/c06-macroscommands.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/documentation/c07-settings.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/documentation/c08-language.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/documentation/c09-concepts.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/documentation/c10-classdesign.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/documentation/c11-inputoutput.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/documentation/c12-xmlproc.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/documentation/c13-tricks.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/documentation/macros.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/documentation/sile-logo.pdf" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/documentation/sile.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/flake.nix" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/fontconfig.conf" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/af.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/am.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/ar.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/as.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/bg.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/bn.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/bo.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/ca.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/cs.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/cy.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/da.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/de.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/el-monoton.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/el-polyton.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/el.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/en.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/eo.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/es.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/et.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/eu.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/fi.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/fr.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/ga.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/gu.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/hi.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/hr.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/hu.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/hy.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/id.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/is.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/it.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/ja.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/jv.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/ka.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/kn.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/la.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/lt.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/lv.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/ml.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/mr.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/my.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/nb.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/nl.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/nn.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/no.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/or.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/pa.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/pl.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/pt.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/rm.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/ro.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/ru.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/sa.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/sk.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/sl.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/sr.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/sv.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/ta.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/th.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/tk.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/tr.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/ug.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/uk.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/und.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/ur.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/yue.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/zh-hans.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/i18n/zh-hant.ftl" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/inputters/base.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/inputters/lua.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/inputters/lua_spec.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/inputters/sil.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/inputters/sil_spec.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/inputters/xml.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/inputters/xml_spec.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/af.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/am.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/as.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/bg.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/bn.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/ca.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/cs.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/cy.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/da.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/de.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/el-monoton.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/el-polyton.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/el.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/en.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/eo.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/es.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/et.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/eu.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/fi.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/fr.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/ga.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/gu.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/hi.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/hr.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/hu.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/hy.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/id.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/is.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/it.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/ja.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/jv.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/ka.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/kn.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/la.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/lt.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/lv.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/ml.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/mr.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/my.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/nb.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/nl.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/nn.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/no.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/or.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/pa.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/pl.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/pt.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/rm.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/ro.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/ru.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/sa.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/sk.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/sl.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/sr.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/sv.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/ta.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/th.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/tk.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/tr.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/ug.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/uk.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/und.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/languages/unicode.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/bitshim.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/char-def.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/imagesize.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/imagesize/format/bmp.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/imagesize/format/gif.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/imagesize/format/jpeg.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/imagesize/format/mng.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/imagesize/format/pcd.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/imagesize/format/png.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/imagesize/format/pnm.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/imagesize/format/psd.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/imagesize/format/swf.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/imagesize/format/tiff.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/imagesize/format/xbm.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/imagesize/format/xcf.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/imagesize/format/xpm.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/imagesize/util.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/lunamark.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/lunamark/entities.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/lunamark/reader.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/lunamark/reader/markdown.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/lunamark/util.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/lunamark/writer.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/lunamark/writer/ast.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/lunamark/writer/context.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/lunamark/writer/docbook.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/lunamark/writer/dzslides.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/lunamark/writer/generic.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/lunamark/writer/groff.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/lunamark/writer/html.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/lunamark/writer/html5.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/lunamark/writer/latex.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/lunamark/writer/man.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/lunamark/writer/tex.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/lunamark/writer/xml.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/lua-libraries/semver.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/outputters/base.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/outputters/cairo.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/outputters/debug.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/outputters/dummy.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/outputters/libtexpdf.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/outputters/podofo.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/outputters/text.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/package.json" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/autodoc/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/background/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/balanced-frames/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/base.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/bibtex/bibliography.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/bibtex/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/bibtex/styles/chicago.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/bidi/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/boustrophedon/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/break-firstfit/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/chapterverse/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/chordmode/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/color-fonts/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/color/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/complex-spaces/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/converters/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/counters/counters_spec.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/counters/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/cropmarks/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/date/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/debug/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/dropcaps/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/features/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/folio/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/font-fallback/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/footnotes/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/frametricks/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/grid/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/gutenberg/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/hanmenkyoshi/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/ifattop/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/image/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/indexer/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/infonode/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/inputfilter/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/insertions/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/leaders/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/linespacing/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/lists/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/lorem/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/masters/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/math/base-elements.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/math/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/math/texlike.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/math/typesetter.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/math/unicode-symbols.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/pagebuilder-bestfit/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/pandoc/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/parallel/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/pdf/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/pdfstructure/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/pullquote/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/raiselower/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/rebox/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/rotate/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/ruby/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/rules/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/scalebox/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/simpletable/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/specimen/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/svg/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/tableofcontents/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/tate/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/textcase/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/twoside/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/unichar/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/url/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/verbatim/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/packages/xmltricks/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/pagebuilders/base.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/pagebuilders/grid.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/shapers/base.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/shapers/fallback.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/shapers/harfbuzz.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/shapers/pango.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/shell.nix" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/sile.1.in" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/sile.in" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/sile.rockspec.in" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/spec/break_spec.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/spec/complex_frame_spec.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/spec/frame_spec.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/spec/frameparser_spec.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/spec/languages_spec.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/spec/measurements_spec.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/spec/nodefactory_spec.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/spec/opentype_spec.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/spec/packages_spec.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/spec/shaper_spec.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/spec/surrogate_spec.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/spec/utilities_spec.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/alignment.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/amharic.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/arabic-scripts.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/balanced.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bibtex.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bidi.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1003.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1005.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1044.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1069.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1101.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1142.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-117.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1171.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1244-fallback-after-color.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1259.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1280.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1297-hyph-fr-ca.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1317.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-132.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1320.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1321.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1343-dotfill-stretch.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1359.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1362.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1430.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1442-fallback-font-options.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1495-inline-math-layout.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1495-math-alone.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1528-discretionary.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1580.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1611.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-162.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1647.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1674.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1699.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-1708.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-182.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-192.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-200.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-214.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-226.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-241.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-243.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-244.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-248.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-252.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-252a.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-254.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-255.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-255b.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-262.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-264.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-264b.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-266.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-269.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-283.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-284.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-301.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-303.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-303b.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-307.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-308.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-309.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-317.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-337.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-342.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-344.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-353.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-355-tr-hyphenation.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-383.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-39.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-420.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-465-a.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-465-b.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-479-line-disappear.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-502.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-522.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-524.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-525.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-526.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-530.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-54.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-556.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-556b.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-583.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-61.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-62.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-621.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-702.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-704.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-723.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-76.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-79.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-80.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-859.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-865.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-892.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-915.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-926.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-979.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-990.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/bug-991-unichar.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/centering.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/chapterverse.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/classes/testsidenote.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/classes/testtwocol.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/color-fonts.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/combining.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/content-detection-lua.nil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/content-detection-sil.nil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/content-detection-xml.nil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/counters.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/crash.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/cursive-shaping.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/disappearing-skip.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/dropcaps.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/eject.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/feat-1092-raw.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/feat-1365-lists-alternate.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/feat-1365-lists-compact.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/feat-1365-lists-footnote.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/feat-875-dotfill-alignment.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/feat-875-leaders-alignment.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/feat-875-leaders-fixed-alignment.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/feat-fullrule-hfillrule.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/feat-urlstyle.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/fluent.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/font-fallback-empty.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/font-features-cvXX.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/font-features.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/footnote-skip.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/footnote.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/footnotes-twocols.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/frametricks.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/grid.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/hangafter.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/hyph-except.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/ifattop.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/image.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/inc/bug-337.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/inline-lua.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/inputter-args-from-declarative.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/insertions-sidenotes.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/italic.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/jbook.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/kannada.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/landscape.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/letter.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/letterspacing.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/lig-hyphens.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/linespacing.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/linespacing2.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/malayalam.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/masters.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/math-macros.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/math-ops.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/math-spaces.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/math-tables-tex.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/mini-arabic.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/mlcounter.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/negative-spaces-in-line.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/nondeterminism.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/openpaths.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/parallel.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/parshaping-simple.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/pdf.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/percent-units.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/process-commands.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/regressions.pl.in" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/rotate.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/rskip.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/settings.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/simplesvg.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/space-after-command.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/split-footnote.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/sura-2.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/tracking.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/twoside.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/variations-axis.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/tests/vertical.sil" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/typesetters/base.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/typesetters/firstfit.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/typesetters/grid.lua" />
+    <Text Include="../../thirdparty/owemdjee/sile-typesetter/typesetters/tate.lua" />
+    <Xml Include="../../thirdparty/owemdjee/sile-typesetter/tests/049EPH.xml" />
+    <Xml Include="../../thirdparty/owemdjee/sile-typesetter/tests/absmin.xml" />
+    <Xml Include="../../thirdparty/owemdjee/sile-typesetter/tests/math-bigops.xml" />
+    <Xml Include="../../thirdparty/owemdjee/sile-typesetter/tests/math-fractions.xml" />
+    <Xml Include="../../thirdparty/owemdjee/sile-typesetter/tests/math-stretchy.xml" />
+    <Xml Include="../../thirdparty/owemdjee/sile-typesetter/tests/math-subsup.xml" />
+    <Xml Include="../../thirdparty/owemdjee/sile-typesetter/tests/math-tables-mathml.xml" />
+    <Xml Include="../../thirdparty/owemdjee/sile-typesetter/tests/math-variants.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
