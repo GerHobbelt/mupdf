@@ -876,6 +876,7 @@ ITK
 cdc-file-transfer
 yggdrasil-decision-forests
 slot_map
+sile-typesetter
 
 libboost-context
 libboost-coroutine
@@ -940,6 +941,7 @@ horsejs
 visible-url-detector
 omaha
 bbe
+ex-leptonica-freetype-harfbuzz
 
 EOT
 )
