@@ -67,6 +67,7 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <limits.h>
 
 #ifdef _MSC_VER
 #define main main_utf8
@@ -812,6 +813,40 @@ namematch(const char *end, const char *start, const char *match)
 }
 
 static int
+namematch_partial(const char *end, const char *start, const char *match)
+{
+	if (!start)
+		return 0;
+	int len = (int)strlen(match);
+	int w = (int)(end - start);
+	if (w >= len)
+		return 0;
+
+	// viability factor: 
+	// 0 = no match at all
+	// >0 = partial match. Smaller value means better ~ partial has been found closer to the start of the name and is a bigger part of the entire name.
+	int best_match_score = 0;
+	for (int i = 0; i <= len - w; i++)
+	{
+		if (strnicmp(start, match + i, w) == 0)
+		{
+			// higher score is worse.
+			// higher: more distant from command start/prefix --> score: 1 + i
+			// higher: smaller part of entire command --> 1.0 - (w / len)    == (len - w) / len
+			//
+			// calculated in integer arithmetic (fixed point values: decimal point is at bit 4, i.e. factor 16)
+			int score = (1 + i) * 16 * (len - w);
+			// ROUND-UP while dividing so we'll be sure never to hit zero as a score value:
+			score = (score + len - 1) / len;
+			if (best_match_score == 0 || score < best_match_score)
+				best_match_score = score;
+		}
+	}
+
+	return best_match_score;
+}
+
+static int
 report_version(int argc, const char** argv)
 {
     const char* opt = (argc == 2 ? argv[1] : NULL);
@@ -973,52 +1008,94 @@ static void mu_drop_context(void)
     }
 }
 
+static void usage_mutool_options(void)
+{
+	fz_info(ctx, "\n\
+mutool-options:\n\
+\n\
+-t     measure time elapsed and report at exit\n\
+-d     report heap memory leakage for invoked tool\n\
+-z     report total heap leakage at exit\n\
+-v     print tool version number and exit\n\
+-h     print usage help and exit\n\
+\n");
+}
+
+/* Print usage */
+static void usage(void)
+{
+	fz_info(ctx, "mutool version %s\n", FZ_VERSION);
+	fz_info(ctx, "usage: mutool [mutool-options] <command> [command-options]\n");
+	usage_mutool_options();
+	fz_info(ctx, "\n\
+Commands:\n\n");
+
+	size_t max_tool_name_len = 0;
+	for (int i = 0; i < (int)nelem(tools); i++)
+		max_tool_name_len = fz_maxi(max_tool_name_len, strlen(tools[i].name));
+	const char* leaderdots = " . . . . . . . . . . . . . . . . . . . . . . . . . . .";
+	for (int i = 0; i < (int)nelem(tools); i++) {
+		const char* name = tools[i].name;
+		size_t name_len = strlen(tools[i].name);
+		size_t lead = (max_tool_name_len - name_len - 4) & ~1; // print even number of leaderdots characters
+		// ^^^ unsigned arithmetic so negative numbers are *huge* positive numbers instead!
+		if (lead > max_tool_name_len)
+			lead = 0;
+		size_t width = 1 + max_tool_name_len - name_len - lead;
+		fz_info(ctx, "\t%s%.*s%.*s -- %s", name, (int)width, "", (int)lead, leaderdots, tools[i].desc);
+	}
+}
+
 static int run_tool(struct tool_spec *spec, int argc, const char **argv, int time_the_run, int show_heap_leakage, const char *app_argv0)
 {
 	void* snapshot = fz_TakeHeapSnapshot();
 	char* exe_path = NULL;
 	const char** argarr = fz_malloc(ctx, (argc + 2) * sizeof(argarr[0]));
 
-		// do NOT damage the original argv[] array any further: plugging in arbitrary strings in there
-		// would cause memory corruption later on as we'll attempt to free() the elements at the end.
-		//
-		// So we make a local copy of the argv[] set and feed that one to the destination tool...
-		switch (spec->keep_path)
-		{
-		default:
-			argarr[0] = spec->name;
-			break;
+	// do NOT damage the original argv[] array any further: plugging in arbitrary strings in there
+	// would cause memory corruption later on as we'll attempt to free() the elements at the end.
+	//
+	// So we make a local copy of the argv[] set and feed that one to the destination tool...
+	switch (spec->keep_path)
+	{
+	default:
+		argarr[0] = spec->name;
+		break;
 
-		case 1:
-			const char *xp = app_argv0;
-			const char* pe = fz_basename(xp);
-			int plen = (pe - xp);
-			exe_path = fz_asprintf(ctx, "%.*s%s%s", plen, xp, spec->name,
+	case 1:
+		const char *xp = app_argv0;
+		const char* pe = fz_basename(xp);
+		int plen = (pe - xp);
+		exe_path = fz_asprintf(ctx, "%.*s%s%s", plen, xp, spec->name,
 #if defined(_WIN32)
-				".exe"
+			".exe"
 #else
-				""
+			""
 #endif
-				);
-			argarr[0] = exe_path;
-			break;
+			);
+		argarr[0] = exe_path;
+		break;
 
-		case 2:
-			argarr[0] = app_argv0;
-			break;
-		}
+	case 2:
+		argarr[0] = app_argv0;
+		break;
+	}
 
-		if (argc > 1)
-			memcpy(argarr + 1, argv + 1, (argc - 1) * sizeof(argarr[0]));
-		argarr[argc] = NULL;
+	if (argc > 1)
+		memcpy(argarr + 1, argv + 1, (argc - 1) * sizeof(argarr[0]));
+	argarr[argc] = NULL;
+	argarr[argc + 1] = NULL;
 
-		argv = argarr;
+	argv = argarr;
 
 	nanotimer_data_t timer;
 	nanotimer(&timer);
 	nanotimer_start(&timer);
 	int rv = spec->func.fa(argc, argv);
 	double dt = nanotimer_get_elapsed_ms(&timer);
+
+	fz_free(ctx, exe_path);
+	fz_free(ctx, argarr);
 
 	if (show_heap_leakage)
 	{
@@ -1030,10 +1107,108 @@ static int run_tool(struct tool_spec *spec, int argc, const char **argv, int tim
 		fz_info(ctx, "### Elapsed time: %f milliseconds\n", dt);
 	}
 
-	fz_free(ctx, exe_path);
-	fz_free(ctx, argarr);
 	fz_ReleaseHeapSnapshot(snapshot);
 	return rv;
+}
+
+struct found_t
+{
+	int found;
+	int exit_code;
+};
+
+static struct found_t find_and_exec_tool(const char *start, const char *end, int argc, const char **argv, const char *argv0, int time_the_run, int show_heap_leakage)
+{
+	char buf[64];
+
+	for (int i = 0; i < (int)nelem(tools); i++)
+	{
+		// test for variants: mupdf<NAME>, pdf<NAME>, mu<NAME> and <NAME>:
+		strcpy(buf, "mupdf");
+		strcat(buf, tools[i].name);
+		assert(strlen(buf) < sizeof(buf));
+		if (namematch(end, start, buf) || namematch(end, start, buf + 2))
+		{
+			struct found_t rv = {
+				TRUE,
+				run_tool(&tools[i], argc, argv, time_the_run, show_heap_leakage, argv0)
+			};
+			return rv;
+		}
+		strcpy(buf, "mu");
+		strcat(buf, tools[i].name);
+		assert(strlen(buf) < sizeof(buf));
+		if (namematch(end, start, buf) || namematch(end, start, buf + 2))
+		{
+			struct found_t rv = {
+				TRUE,
+				run_tool(&tools[i], argc, argv, time_the_run, show_heap_leakage, argv0)
+			};
+			return rv;
+		}
+	}
+	
+	struct found_t rv = {
+		FALSE,
+		-1
+	};
+	return rv;
+}
+
+struct approx_score_elem_t
+{
+	int score;
+	int index;
+};
+
+static struct found_t find_approx_and_exec_tool(const char *start, const char *end, int argc, const char **argv, const char *argv0, int time_the_run, int show_heap_leakage, struct approx_score_elem_t ambuous_name_set[])
+{
+	// When we get here, we know we only MAY have partial matches. Hence we first match against each of the known commands,
+	// while calculating a distance metric (viability) for each.
+	// Then we check if we have a single (unique) match and iff we do, we execute that command.
+	// Otherwise, we report failure and return the viability score array for the caller to process further, probably 
+	// using it to print a hint list for the user.
+	int match_count = 0;
+	int last_match_index = -1;
+	for (int i = 0; i < (int)nelem(tools); i++)
+	{
+		int viability = namematch_partial(end, start, tools[i].name);
+		ambuous_name_set[i].score = viability;
+		if (viability > 0) 
+		{
+			match_count++;
+			last_match_index = i;
+		}
+	}
+
+	// Do we have a unique match after all?
+	if (match_count == 1)
+	{
+		fz_info(ctx, "Execute %s (approximate-matched by the '%.*s' command):\n", tools[last_match_index].name, (int)(end - start), start);
+
+		struct found_t rv = {
+			TRUE,
+			run_tool(&tools[last_match_index], argc, argv, time_the_run, show_heap_leakage, argv0)
+		};
+		return rv;
+	}
+	
+	struct found_t rv = {
+		FALSE,
+		-1
+	};
+	return rv;
+}
+
+static int x_index_compare_elems(const struct approx_score_elem_t *a, const struct approx_score_elem_t *b)
+{
+	int as = a->score;
+	int bs = b->score;
+	if (as == 0)
+		as = INT_MAX - 2;
+	if (bs == 0)
+		bs = INT_MAX - 2;
+	return bs - as;
 }
 
 #ifdef GPERF
@@ -1059,10 +1234,6 @@ int mutool_main(int argc, const char** argv)
 #endif
 #endif
 {
-    const char *start, *end;
-    char buf[64];
-    int i;
-
     // reset global vars: this tool MAY be re-invoked via bulktest or others and should RESET completely between runs:
     //ctx = NULL;
     //mutool_is_toplevel_ctx = 0;
@@ -1117,20 +1288,55 @@ int mutool_main(int argc, const char** argv)
 	int time_the_run = 0;
 	int show_heap_leakage = 0;
 
-	for (; argc > argstart; argstart++)
+	fz_getopt_reset();
+
+	// WARNING:
+	// This works *assuming* fz_getopt() DOES NOT re-order argv[] so as to find
+	// and process all '-xyz' options and leave a set of non-ption argv[] arguments
+	// at the tail end of the argv[] array: GNU getopt() has that behaviour, but
+	// that is undesirable right here: we *only* want to see and parse mutool
+	// options, which *precede* the mutool *command*, which itself may be followed
+	// by an arbitrary number of command-specific '-xyz' options: we MUST NOT
+	// parse those in here!
+	int c;
+	while ((c = fz_getopt(argc, argv, "tdzvh")) != EOF)
 	{
-		const char* arg = argv[argstart];
-		if (!strcmp(arg, "-t"))
+		switch (c)
+		{
+		case 't':
 			time_the_run = 1;
-		else if (!strcmp(arg, "-d"))
-			show_heap_leakage = 1;
-		else if (!strcmp(arg, "-z"))
-			fz_TurnHeapLeakReportingAtProgramExitOn();
-		else
 			break;
+		case 'd':
+			show_heap_leakage = 1;
+			break;
+		case 'z':
+			fz_TurnHeapLeakReportingAtProgramExitOn();
+			break;
+		case 'v':
+			fz_info(ctx, "mutool version %s\n", FZ_VERSION);
+			return EXIT_SUCCESS;
+		case 'h':
+			usage();
+			return EXIT_SUCCESS;
+		default:
+			fz_error(ctx, "Unsupported mutool option %c (%s).\n", c, argv[fz_optind]);
+			usage_mutool_options();
+			return EXIT_FAILURE;
+		}
 	}
 
-    /* Check argv[0] */
+	argstart = fz_optind;
+
+	// array of numbers which flag which commands are viable in the approximate-match case: non-zero values indicate "nearness" / partial-match.
+	struct approx_score_elem_t ambuous_name_set[nelem(tools)] = {0};
+	for (int i = 0; i < (int)nelem(tools); i++)
+	{
+		ambuous_name_set[i].index = i;
+	}
+
+	const char *start, *end;
+
+	/* Check argv[0] */
 
     if (argc > 0)
     {
@@ -1138,88 +1344,63 @@ int mutool_main(int argc, const char** argv)
         end = start + strlen(start);
         if ((end-4 >= start) && (end[-4] == '.') && (end[-3] == 'e') && (end[-2] == 'x') && (end[-1] == 'e'))
             end = end-4;
-        for (i = 0; i < (int)nelem(tools); i++)
-        {
-            // test for variants: mupdf<NAME>, pdf<NAME>, mu<NAME> and <NAME>:
-            strcpy(buf, "mupdf");
-            strcat(buf, tools[i].name);
-            assert(strlen(buf) < sizeof(buf));
-			if (namematch(end, start, buf) || namematch(end, start, buf + 2))
-			{
-				argstart--;
-				return run_tool(&tools[i], argc - argstart, argv + argstart, time_the_run, show_heap_leakage, argv[0]);
-			}
-            strcpy(buf, "mu");
-            strcat(buf, tools[i].name);
-            assert(strlen(buf) < sizeof(buf));
-            if (namematch(end, start, buf) || namematch(end, start, buf + 2))
-			{
-				argstart--;
-				return run_tool(&tools[i], argc - argstart, argv + argstart, time_the_run, show_heap_leakage, argv[0]);
-			}
-        }
+		struct found_t rv = find_and_exec_tool(start, end, argc - argstart + 1, argv + argstart - 1, argv[0], time_the_run, show_heap_leakage);
+		if (rv.found)
+			return rv.exit_code;
     }
 
     /* Check argv[1] */
 
     if (argc > argstart)
     {
-        for (i = 0; i < (int)nelem(tools); i++)
-        {
-            start = argv[argstart];
-            end = start + strlen(start);
-            // test for variants: mupdf<NAME>, pdf<NAME>, mu<NAME> and <NAME>:
-            strcpy(buf, "mupdf");
-            strcat(buf, tools[i].name);
-            assert(strlen(buf) < sizeof(buf));
-            if (namematch(end, start, buf) || namematch(end, start, buf + 2))
-			{
-				return run_tool(&tools[i], argc - argstart, argv + argstart, time_the_run, show_heap_leakage, argv[0]);
-			}
-            strcpy(buf, "mu");
-            strcat(buf, tools[i].name);
-            assert(strlen(buf) < sizeof(buf));
-            if (namematch(end, start, buf) || namematch(end, start, buf + 2))
-			{
-				return run_tool(&tools[i], argc - argstart, argv + argstart, time_the_run, show_heap_leakage, argv[0]);
-			}
+		start = argv[argstart];
+		end = start + strlen(start);
+		struct found_t rv = find_and_exec_tool(start, end, argc - argstart, argv + argstart, argv[0], time_the_run, show_heap_leakage);
+		if (rv.found)
+			return rv.exit_code;
+
+		rv = find_approx_and_exec_tool(start, end, argc - argstart, argv + argstart, argv[0], time_the_run, show_heap_leakage, ambuous_name_set);
+		if (rv.found)
+			return rv.exit_code;
+	}
+	else
+	{
+		// only attempt to approximate-match basename(argv[0]) when there's no actual command given!
+		start = fz_basename(argv[0]);
+		end = start + strlen(start);
+		if ((end-4 >= start) && (end[-4] == '.') && (end[-3] == 'e') && (end[-2] == 'x') && (end[-1] == 'e'))
+			end = end-4;
+		struct found_t rv = find_approx_and_exec_tool(start, end, argc - argstart + 1, argv + argstart - 1, argv[0], time_the_run, show_heap_leakage, ambuous_name_set);
+		if (rv.found)
+			return rv.exit_code;
+	}
+
+	qsort(ambuous_name_set, nelem(tools), sizeof(ambuous_name_set[0]), x_index_compare_elems);
+
+	// Now, ambuous_name_set[] elements are sorted in SCORE order: best-to-worst.
+	//
+	// List these as suggestions to the user, iff there are any suggestions like that:
+	if (ambuous_name_set[0].score > 0)
+	{
+		fz_error(ctx, "mutool: ambiguous / unrecognized command '%s'. Did you mean to invoke one of these:\n", argv[argstart]);
+		for (int i = 0; i < (int)nelem(tools); i++)
+		{
+			struct approx_score_elem_t *p = &ambuous_name_set[i];
+			if (p->score == 0)
+				break;
+
+			fz_error(ctx, "    %s\n", tools[p->index].name);
 		}
-        if (!strcmp(argv[argstart], "-v"))
-        {
-            fz_info(ctx, "mutool version %s", FZ_VERSION);
-            return EXIT_SUCCESS;
-        }
-        fz_error(ctx, "mutool: unrecognized command '%s'\n", argv[argstart]);
-    }
+		return EXIT_FAILURE;
+	}
 
-    /* Print usage */
+	if (argc > argstart)
+	{
+		fz_error(ctx, "mutool: unrecognized command '%s'. Run '%s -h' to see generic usage help.\n", argv[argstart], fz_basename(argv[0]));
+		return EXIT_FAILURE;
+	}
 
-	fz_info(ctx, "mutool version %s\n", FZ_VERSION);
-    fz_info(ctx, "usage: mutool [mutool-options] <command> [command-options]\n");
-	fz_info(ctx, "\n\
-mutool-options:\n\
-\n\
--t     measure time elapsed and report at exit\n\
--d     report heap memory leakage for invoked tool\n\
--z     report total heap leakage at exit\n\
-\n\
-Commands:\n\n");
-
-    size_t max_tool_name_len = 0;
-    for (i = 0; i < (int)nelem(tools); i++)
-        max_tool_name_len = fz_maxi(max_tool_name_len, strlen(tools[i].name));
-    const char* leaderdots = " . . . . . . . . . . . . . . . . . . . . . . . . . . .";
-    for (i = 0; i < (int)nelem(tools); i++) {
-        const char* name = tools[i].name;
-        size_t name_len = strlen(tools[i].name);
-        size_t lead = (max_tool_name_len - name_len - 4) & ~1; // print even number of leaderdots characters
-        // ^^^ unsigned arithmetic so negative numbers are *huge* positive numbers instead!
-        if (lead > max_tool_name_len)
-            lead = 0;
-        size_t width = 1 + max_tool_name_len - name_len - lead;
-        fz_info(ctx, "\t%s%.*s%.*s -- %s", name, (int)width, "", (int)lead, leaderdots, tools[i].desc);
-    }
-
+	fz_error(ctx, "mutool: no command given.  You must specify a command, or run '%s -h' to see generic usage help.\n", fz_basename(argv[0]));
     return EXIT_FAILURE;
 }
 
