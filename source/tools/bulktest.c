@@ -2645,7 +2645,7 @@ bulktest_main(int argc, const char **argv)
 
                             if (rv != EXIT_SUCCESS)
                             {
-                                fz_error(ctx, "ERR: error executing MUTOOL command: %s", line);
+                                fz_error(ctx, "ERR: error (exit code: %d) executing MUTOOL command: %s\n", rv, line);
                                 errored++;
                             }
                             else if (verbosity >= 1)
@@ -2667,7 +2667,7 @@ bulktest_main(int argc, const char **argv)
                         rv = 1;
                         if (rv != EXIT_SUCCESS)
                         {
-                            fz_error(ctx, "ERR: error executing MUSERVE command: %s", line);
+                            fz_error(ctx, "ERR: error (exit code: %d) executing MUSERVE command: %s", rv, line);
                             errored++;
                         }
                         else if (verbosity >= 1)
@@ -2684,7 +2684,7 @@ bulktest_main(int argc, const char **argv)
                         rv = 1;
                         if (rv != EXIT_SUCCESS)
                         {
-                            fz_error(ctx, "ERR: error executing STOPSERVE command: %s", line);
+                            fz_error(ctx, "ERR: error (exit code: %d) executing STOPSERVE command: %s", rv, line);
                             errored++;
                         }
                         else if (verbosity >= 1)
@@ -2730,7 +2730,7 @@ bulktest_main(int argc, const char **argv)
 
                         if (rv != EXIT_SUCCESS)
                         {
-                            fz_error(ctx, "ERR: error executing BULKTEST command at script line %d.", linecounter);
+                            fz_error(ctx, "ERR: error (exit code: %d) executing BULKTEST command at script line %d.", rv, linecounter);
                             errored++;
                         }
                         else if (verbosity >= 1)

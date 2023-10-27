@@ -1088,6 +1088,9 @@ static int run_tool(struct tool_spec *spec, int argc, const char **argv, int tim
 
 	argv = argarr;
 
+	fflush(stdout);
+	fflush(stderr);
+
 	nanotimer_data_t timer;
 	nanotimer(&timer);
 	nanotimer_start(&timer);
@@ -1096,6 +1099,9 @@ static int run_tool(struct tool_spec *spec, int argc, const char **argv, int tim
 
 	fz_free(ctx, exe_path);
 	fz_free(ctx, argarr);
+
+	fflush(stdout);
+	fflush(stderr);
 
 	if (show_heap_leakage)
 	{
