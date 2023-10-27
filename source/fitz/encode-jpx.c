@@ -24,6 +24,7 @@
 
 #include <openjpeg.h>
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
 
 static opj_image_t *
 image_from_pixmap(fz_context *ctx, const fz_pixmap *pix)
@@ -343,3 +344,6 @@ fz_new_buffer_from_pixmap_as_jpx(fz_context *ctx, const fz_pixmap *pix, fz_color
 {
 	return jpx_from_pixmap(ctx, pix, color_params, quality, 0);
 }
+
+#endif // BUILDING_MUPDF_MINIMAL_CORE
+

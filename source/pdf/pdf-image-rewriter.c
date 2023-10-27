@@ -28,6 +28,8 @@
 #include <string.h>
 #include <math.h>
 
+#if BUILDING_MUPDF_MINIMAL_CORE < 2
+
 typedef struct
 {
 	int num;
@@ -951,3 +953,6 @@ void pdf_rewrite_images(fz_context *ctx, pdf_document *doc, pdf_image_rewriter_o
 	fz_free(ctx, info.list.uimg);
 	fz_free(ctx, info.uilist.img);
 }
+
+#endif // BUILDING_MUPDF_MINIMAL_CORE
+
