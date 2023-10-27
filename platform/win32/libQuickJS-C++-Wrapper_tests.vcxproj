@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>libQuickJS-C++-Wrapper2</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF9F13E5}</ProjectGuid>
-    <RootNamespace>libQuickJS-C++-Wrapper2</RootNamespace>
+    <ProjectName>libQuickJS-C++-Wrapper_tests</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF361583}</ProjectGuid>
+    <RootNamespace>libQuickJS-C++-Wrapper_tests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -116,7 +116,7 @@
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS_C++_WRAPPER2;QUICKJS_C++_WRAPPER2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS_C++_WRAPPER;QUICKJS_C++_WRAPPER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -126,14 +126,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/QuickJS-C++-Wrapper2;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/boost/libs/asio/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/boost;../../scripts/QuickJS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_QUICKJS_CPP_WRAPPER2;QUICKJS_WRAPPER2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/QuickJS-C++-Wrapper;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/boost/libs/asio/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/boost;../../scripts/QuickJS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x0A00;BUILD_MONOLITHIC;BUILDING_LIBQUICKJS_CPP_WRAPPER;QUICKJS_WRAPPER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS_C++_WRAPPER2;QUICKJS_C++_WRAPPER2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS_C++_WRAPPER;QUICKJS_C++_WRAPPER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/QuickJS-C++-Wrapper2;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/boost/libs/asio/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/boost;../../scripts/QuickJS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/QuickJS-C++-Wrapper;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/boost/libs/asio/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/boost;../../scripts/QuickJS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -144,7 +144,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS_C++_WRAPPER2;QUICKJS_C++_WRAPPER2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS_C++_WRAPPER;QUICKJS_C++_WRAPPER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -152,15 +152,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/QuickJS-C++-Wrapper2;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/boost/libs/asio/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/boost;../../scripts/QuickJS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_QUICKJS_CPP_WRAPPER2;QUICKJS_WRAPPER2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/QuickJS-C++-Wrapper;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/boost/libs/asio/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/boost;../../scripts/QuickJS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x0A00;BUILD_MONOLITHIC;BUILDING_LIBQUICKJS_CPP_WRAPPER;QUICKJS_WRAPPER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS_C++_WRAPPER2;QUICKJS_C++_WRAPPER2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS_C++_WRAPPER;QUICKJS_C++_WRAPPER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/QuickJS-C++-Wrapper2;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/boost/libs/asio/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/boost;../../scripts/QuickJS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/QuickJS-C++-Wrapper;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/boost/libs/asio/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/boost;../../scripts/QuickJS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -171,7 +171,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS_C++_WRAPPER2;QUICKJS_C++_WRAPPER2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS_C++_WRAPPER;QUICKJS_C++_WRAPPER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -181,14 +181,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/QuickJS-C++-Wrapper2;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/boost/libs/asio/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/boost;../../scripts/QuickJS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_QUICKJS_CPP_WRAPPER2;QUICKJS_WRAPPER2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/QuickJS-C++-Wrapper;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/boost/libs/asio/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/boost;../../scripts/QuickJS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x0A00;BUILD_MONOLITHIC;BUILDING_LIBQUICKJS_CPP_WRAPPER;QUICKJS_WRAPPER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS_C++_WRAPPER2;QUICKJS_C++_WRAPPER2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS_C++_WRAPPER;QUICKJS_C++_WRAPPER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/QuickJS-C++-Wrapper2;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/boost/libs/asio/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/boost;../../scripts/QuickJS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/QuickJS-C++-Wrapper;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/boost/libs/asio/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/boost;../../scripts/QuickJS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -199,7 +199,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS_C++_WRAPPER2;QUICKJS_C++_WRAPPER2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS_C++_WRAPPER;QUICKJS_C++_WRAPPER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -207,15 +207,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/QuickJS-C++-Wrapper2;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/boost/libs/asio/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/boost;../../scripts/QuickJS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_QUICKJS_CPP_WRAPPER2;QUICKJS_WRAPPER2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/QuickJS-C++-Wrapper;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/boost/libs/asio/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/boost;../../scripts/QuickJS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x0A00;BUILD_MONOLITHIC;BUILDING_LIBQUICKJS_CPP_WRAPPER;QUICKJS_WRAPPER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS_C++_WRAPPER2;QUICKJS_C++_WRAPPER2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS_C++_WRAPPER;QUICKJS_C++_WRAPPER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/QuickJS-C++-Wrapper2;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/boost/libs/asio/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/boost;../../scripts/QuickJS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/QuickJS-C++-Wrapper;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/boost/libs/asio/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/boost;../../scripts/QuickJS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -228,27 +228,10 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/qjs.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/test/class.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/test/conversions.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/test/enum.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/test/example.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/test/exception.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/test/function_call.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/test/inheritance.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/test/jobs.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/test/module_loader.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/test/multicontext.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/test/point.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/test/unhandled_rejection.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/test/value.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/test/variant.cpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/monolithic_examples.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/quickjspp.hpp" />
-    <Text Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/binding-generator/generator.py" />
-    <Text Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/readme.md" />
-    <Text Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper2/test/CMakeLists.txt" />
+    <ClCompile Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper/gtest/tests.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper/monolithic_examples.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper/quickjs.hpp" />
+    <Text Include="../../thirdparty/owemdjee/QuickJS-C++-Wrapper/README.md" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
