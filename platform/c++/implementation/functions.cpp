@@ -31655,7 +31655,7 @@ FZ_FUNCTION void *ll_fz_realloc_no_throw(void *p, size_t size)
 }
 
 /** Low-level wrapper for `::fz_realpath()`. */
-FZ_FUNCTION char *ll_fz_realpath(const char *path, char *resolved_path)
+FZ_FUNCTION char *ll_fz_realpath(const char *path, char resolved_path[PATH_MAX])
 {
 	#ifndef NDEBUG
 	if (s_trace > 1) {

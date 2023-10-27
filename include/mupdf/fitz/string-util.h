@@ -307,7 +307,7 @@ char *fz_cleanname(char *name);
 	Resolve a path to an absolute file name.
 	The resolved path buffer must be of at least PATH_MAX size.
 */
-char *fz_realpath(const char *path, char *resolved_path);
+char *fz_realpath(const char *path, char resolved_path[PATH_MAX]);
 
 /**
 	Case insensitive (ASCII only) string comparison.

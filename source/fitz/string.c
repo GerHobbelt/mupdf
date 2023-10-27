@@ -313,7 +313,7 @@ fz_dirname(char *dir, const char *path, size_t n)
 
 #ifdef _WIN32
 
-char *fz_realpath(const char *path, char *buf)
+char *fz_realpath(const char *path, char buf[PATH_MAX])
 {
 	wchar_t wpath[PATH_MAX];
 	wchar_t wbuf[PATH_MAX + 4];
@@ -352,7 +352,7 @@ char *fz_realpath(const char *path, char *buf)
 
 #else
 
-char *fz_realpath(const char *path, char *buf)
+char *fz_realpath(const char *path, char buf[PATH_MAX])
 {
 	if (!realpath(path, buf))
 		return NULL;
