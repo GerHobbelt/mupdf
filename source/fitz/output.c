@@ -182,7 +182,48 @@ stdio_write(fz_context* ctx, DWORD channel, const void* buffer, size_t count)
 		// Write the data to the pipe in chunks of limited size, so that we won't lock
 		// on a chunk. That's also why we size our chunks to HALF the known pipe nonblocking buffer size!
 		DWORD n_lim = fz_minz(PIPE_MAX_NONBLOCK_BUFFER_SIZE, n);
-		int rv = WriteFile(GetStdHandle(channel), p, n_lim, &written, NULL);
+		// Special tweak: write CRLF for every lone LF:
+		int rv;
+		unsigned char *lf = memchr(p, '\n', n_lim);
+		if (lf)
+		{
+			if (lf != p)
+			{
+				// LF is not at start of string part: print up to that point, unless it's preceded by a '\r':
+				if (lf[-1] == '\r')
+					lf--;
+			}
+
+			if (lf != p)
+			{
+				n_lim = (DWORD)(lf - p);
+				rv = WriteFile(GetStdHandle(channel), p, n_lim, &written, NULL);
+			}
+			else
+			{
+				// lf == p: LF or CRLF at the start of the string segment.
+
+				static const char *CRLF = "\r\n";
+
+				// we're at either a lone LF or a CRLF; process each accordingly
+				rv = WriteFile(GetStdHandle(channel), CRLF, 2, &written, NULL);
+				if (p[0] == '\n')
+				{
+					// the 'lone LF' scenario is the only one where we need to worry: make sure the reported length written matches outer expectations!
+					if (written > 0)
+						written = 1;
+				}
+				else
+				{
+					// CRLF combo at `p`: can be printed as-is
+				}
+			}
+		}
+		else
+		{
+			// no LF in the string segment we were about to print: print as-is:
+			rv = WriteFile(GetStdHandle(channel), p, n_lim, &written, NULL);
+		}
 		int err = GetLastError();
 		//fprintf(stderr, "stdout_write:WriteFile: %d bytes, %p, %d written, rv:%d, err:%d\n", (int)n_lim, p, (int)written, rv, err);
 		n -= written;
