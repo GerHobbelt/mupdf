@@ -1208,7 +1208,7 @@ static int x_index_compare_elems(const struct approx_score_elem_t *a, const stru
 		as = INT_MAX - 2;
 	if (bs == 0)
 		bs = INT_MAX - 2;
-	return bs - as;
+	return as - bs;
 }
 
 #ifdef GPERF
@@ -1389,7 +1389,7 @@ int mutool_main(int argc, const char** argv)
 			if (p->score == 0)
 				break;
 
-			fz_error(ctx, "    %s\n", tools[p->index].name);
+			fz_info(ctx, "    %s\n", tools[p->index].name);
 		}
 		return EXIT_FAILURE;
 	}
