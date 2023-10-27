@@ -48,22 +48,22 @@
     <Filter Include="Misc Files\common">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0012}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\dist">
+    <Filter Include="Misc Files\libfastpfor">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0013}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\libfastpfor">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0014}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Misc Files\misc">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0016}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Misc Files\misc\junit">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0015}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Misc Files\misc\junit">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0014}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Misc Files\pgm">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0017}</UniqueIdentifier>
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0016}</UniqueIdentifier>
     </Filter>
     <Filter Include="Misc Files\secondary">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0017}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\streamvbyte">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0018}</UniqueIdentifier>
     </Filter>
     <Filter Include="Misc Files\util">
@@ -158,13 +158,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/manticore-columnar/util/codec.cpp">
       <Filter>Source Files\util</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/manticore-columnar/util/delta.cpp">
-      <Filter>Source Files\util</Filter>
-    </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/manticore-columnar/util/reader.cpp">
       <Filter>Source Files\util</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/owemdjee/manticore-columnar/util/util.cpp">
+    <ClCompile Include="../../thirdparty/owemdjee/manticore-columnar/util/util_private.cpp">
       <Filter>Source Files\util</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/owemdjee/manticore-columnar/util/version.cpp">
@@ -254,10 +251,16 @@
     <ClInclude Include="../../thirdparty/owemdjee/manticore-columnar/util/delta.h">
       <Filter>Header Files\util</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/manticore-columnar/util/delta_impl.h">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/manticore-columnar/util/reader.h">
       <Filter>Header Files\util</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/owemdjee/manticore-columnar/util/util.h">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/owemdjee/manticore-columnar/util/util_private.h">
       <Filter>Header Files\util</Filter>
     </ClInclude>
     <Image Include="../../thirdparty/owemdjee/manticore-columnar/benchmarks/hn_small_es_ms_100MB.png">
@@ -290,6 +293,9 @@
     <Text Include="../../thirdparty/owemdjee/manticore-columnar/CMakeLists.txt">
       <Filter>Misc Files</Filter>
     </Text>
+    <Text Include="../../thirdparty/owemdjee/manticore-columnar/Changelog.md">
+      <Filter>Misc Files</Filter>
+    </Text>
     <Text Include="../../thirdparty/owemdjee/manticore-columnar/README.md">
       <Filter>Misc Files</Filter>
     </Text>
@@ -303,6 +309,9 @@
       <Filter>Misc Files\cmake</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/manticore-columnar/cmake/GetPGM.cmake">
+      <Filter>Misc Files\cmake</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/manticore-columnar/cmake/GetStreamvbyte.cmake">
       <Filter>Misc Files\cmake</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/manticore-columnar/cmake/SetBuildType.cmake">
@@ -395,14 +404,8 @@
     <Text Include="../../thirdparty/owemdjee/manticore-columnar/common/CMakeLists.txt">
       <Filter>Misc Files\common</Filter>
     </Text>
-    <Text Include="../../thirdparty/owemdjee/manticore-columnar/dist/upload_repo_arc.sh">
-      <Filter>Misc Files\dist</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/manticore-columnar/dist/upload_repo_deb.sh">
-      <Filter>Misc Files\dist</Filter>
-    </Text>
-    <Text Include="../../thirdparty/owemdjee/manticore-columnar/dist/upload_repo_rpm.sh">
-      <Filter>Misc Files\dist</Filter>
+    <Text Include="../../thirdparty/owemdjee/manticore-columnar/gitsync_columnar.sh">
+      <Filter>Misc Files</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/manticore-columnar/libfastpfor/CMakeLists.txt">
       <Filter>Misc Files\libfastpfor</Filter>
@@ -424,6 +427,9 @@
     </Text>
     <Text Include="../../thirdparty/owemdjee/manticore-columnar/smoke.sh">
       <Filter>Misc Files</Filter>
+    </Text>
+    <Text Include="../../thirdparty/owemdjee/manticore-columnar/streamvbyte/CMakeLists.txt">
+      <Filter>Misc Files\streamvbyte</Filter>
     </Text>
     <Text Include="../../thirdparty/owemdjee/manticore-columnar/testing.cmake">
       <Filter>Misc Files</Filter>

@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -113,8 +113,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_XXHASH;XXHASH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -233,6 +233,15 @@
     <ClCompile Include="../../thirdparty/owemdjee/xxHash/cli/xsum_output.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xxHash/cli/xsum_sanity_check.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xxHash/cli/xxhsum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/examples/xxh3-128bits-one-shot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/examples/xxh3-128bits-stream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/examples/xxh3-64bits-one-shot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/examples/xxh3-64bits-stream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/examples/xxh32-one-shot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/examples/xxh32-stream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/examples/xxh64-one-shot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/examples/xxh64-stream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/examples/xxhash-hello.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/bench/benchHash.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/bench/bench_main.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/bench/benchfn.c" />
@@ -246,6 +255,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/generate_unicode_test.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/multiInclude.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/ppc_define.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/sanity_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xxHash/tests/sanity_test_vectors_generator.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xxHash/xxh_x86dispatch.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xxHash/xxhash.c" />
     <ClInclude Include="../../thirdparty/owemdjee/xxHash/cli/xsum_arch.h" />
@@ -264,27 +275,33 @@
     <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/collisions/pool.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/collisions/sort.hh" />
     <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/collisions/threading.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xxHash/tests/sanity_test_vectors.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xxHash/xxh3.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xxHash/xxh_x86dispatch.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xxHash/xxhash.h" />
     <Text Include="../../thirdparty/owemdjee/xxHash/CHANGELOG" />
     <Text Include="../../thirdparty/owemdjee/xxHash/README.md" />
+    <Text Include="../../thirdparty/owemdjee/xxHash/SECURITY.md" />
     <Text Include="../../thirdparty/owemdjee/xxHash/appveyor.yml" />
     <Text Include="../../thirdparty/owemdjee/xxHash/cli/README.md" />
     <Text Include="../../thirdparty/owemdjee/xxHash/cli/xxhsum.1.md" />
     <Text Include="../../thirdparty/owemdjee/xxHash/cmake_unofficial/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/xxHash/cmake_unofficial/JoinPaths.cmake" />
     <Text Include="../../thirdparty/owemdjee/xxHash/cmake_unofficial/README.md" />
     <Text Include="../../thirdparty/owemdjee/xxHash/cmake_unofficial/xxHashConfig.cmake.in" />
     <Text Include="../../thirdparty/owemdjee/xxHash/doc/README.md" />
     <Text Include="../../thirdparty/owemdjee/xxHash/doc/xxhash.cry" />
     <Text Include="../../thirdparty/owemdjee/xxHash/doc/xxhash_spec.md" />
     <Text Include="../../thirdparty/owemdjee/xxHash/libxxhash.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/xxHash/tests/cli-comment-line.sh" />
+    <Text Include="../../thirdparty/owemdjee/xxHash/tests/cli-ignore-missing.sh" />
     <Text Include="../../thirdparty/owemdjee/xxHash/tests/collisions/README.md" />
     <Text Include="../../thirdparty/owemdjee/xxHash/tests/collisions/allcodecs/README.md" />
     <Text Include="../../thirdparty/owemdjee/xxHash/tests/filename-escape.sh" />
     <Text Include="../../thirdparty/owemdjee/xxHash/tests/unicode_lint.sh" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

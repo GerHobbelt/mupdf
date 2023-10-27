@@ -228,13 +228,11 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/stx-error-handling/examples/option/main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/stx-error-handling/examples/panic/main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/stx-error-handling/examples/panic_backtrace/main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/stx-error-handling/examples/panic_handler/main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/stx-error-handling/examples/panic_hook/main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/stx-error-handling/examples/result/main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/stx-error-handling/examples/signal_backtrace/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/stx-error-handling/examples/option.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/stx-error-handling/examples/panic.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/stx-error-handling/examples/panic_backtrace.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/stx-error-handling/examples/panic_hook.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/stx-error-handling/examples/result.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/stx-error-handling/src/async.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/stx-error-handling/src/await.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/stx-error-handling/src/backtrace.cc" />
@@ -283,6 +281,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/stx-error-handling/include/stx/allocator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/stx-error-handling/include/stx/async.h" />
     <ClInclude Include="../../thirdparty/owemdjee/stx-error-handling/include/stx/backtrace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stx-error-handling/include/stx/c_string_view.h" />
     <ClInclude Include="../../thirdparty/owemdjee/stx-error-handling/include/stx/common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/stx-error-handling/include/stx/config.h" />
     <ClInclude Include="../../thirdparty/owemdjee/stx-error-handling/include/stx/enable_if.h" />
@@ -292,7 +291,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/stx-error-handling/include/stx/limits.h" />
     <ClInclude Include="../../thirdparty/owemdjee/stx-error-handling/include/stx/lock_status.h" />
     <ClInclude Include="../../thirdparty/owemdjee/stx-error-handling/include/stx/manager.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/stx-error-handling/include/stx/mem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stx-error-handling/include/stx/memory.h" />
     <ClInclude Include="../../thirdparty/owemdjee/stx-error-handling/include/stx/none.h" />
     <ClInclude Include="../../thirdparty/owemdjee/stx-error-handling/include/stx/ok.h" />
     <ClInclude Include="../../thirdparty/owemdjee/stx-error-handling/include/stx/option.h" />
@@ -325,6 +324,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/stx-error-handling/include/stx/task/chain.h" />
     <ClInclude Include="../../thirdparty/owemdjee/stx-error-handling/include/stx/task/id.h" />
     <ClInclude Include="../../thirdparty/owemdjee/stx-error-handling/include/stx/task/priority.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/stx-error-handling/include/stx/text.h" />
     <ClInclude Include="../../thirdparty/owemdjee/stx-error-handling/include/stx/try_ok.h" />
     <ClInclude Include="../../thirdparty/owemdjee/stx-error-handling/include/stx/try_some.h" />
     <ClInclude Include="../../thirdparty/owemdjee/stx-error-handling/include/stx/vec.h" />
@@ -363,20 +363,8 @@
     <Text Include="../../thirdparty/owemdjee/stx-error-handling/docs/main_page.md" />
     <Text Include="../../thirdparty/owemdjee/stx-error-handling/docs/panicking.md" />
     <Text Include="../../thirdparty/owemdjee/stx-error-handling/docs/styles.css" />
+    <Text Include="../../thirdparty/owemdjee/stx-error-handling/examples/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/stx-error-handling/examples/README.md" />
-    <Text Include="../../thirdparty/owemdjee/stx-error-handling/examples/option/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/stx-error-handling/examples/option/README.md" />
-    <Text Include="../../thirdparty/owemdjee/stx-error-handling/examples/panic/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/stx-error-handling/examples/panic/README.md" />
-    <Text Include="../../thirdparty/owemdjee/stx-error-handling/examples/panic_backtrace/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/stx-error-handling/examples/panic_backtrace/README.md" />
-    <Text Include="../../thirdparty/owemdjee/stx-error-handling/examples/panic_handler/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/stx-error-handling/examples/panic_handler/README.md" />
-    <Text Include="../../thirdparty/owemdjee/stx-error-handling/examples/panic_hook/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/stx-error-handling/examples/panic_hook/README.md" />
-    <Text Include="../../thirdparty/owemdjee/stx-error-handling/examples/result/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/stx-error-handling/examples/result/README.md" />
-    <Text Include="../../thirdparty/owemdjee/stx-error-handling/examples/signal_backtrace/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/stx-error-handling/extensions/README.md" />
     <Text Include="../../thirdparty/owemdjee/stx-error-handling/scripts/plot.py" />
     <Xml Include="../../thirdparty/owemdjee/stx-error-handling/assets/DoxygenLayout.xml" />

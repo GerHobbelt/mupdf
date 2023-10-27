@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -113,8 +113,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTIDYHTML;TIDYHTML_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -231,6 +231,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/tidy-html5/console/tab2space.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tidy-html5/console/test71.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/tidy-html5/console/tidy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tidy-html5/experimental/TidyNodeIter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tidy-html5/experimental/httpio.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tidy-html5/src/access.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tidy-html5/src/alloc.c" />
     <ClCompile Include="../../thirdparty/owemdjee/tidy-html5/src/attrdict.c" />
@@ -259,6 +261,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/tidy-html5/src/utf8.c" />
     <ClInclude Include="../../thirdparty/owemdjee/tidy-html5/Headers/tidy-html5-Bridging-Header.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tidy-html5/Modules/tidy-html5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tidy-html5/experimental/TidyNodeIter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tidy-html5/experimental/httpio.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tidy-html5/include/buffio.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tidy-html5/include/platform.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tidy-html5/include/tidy.h" />
@@ -841,6 +845,8 @@
     <Text Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/dev-expects/case-004.txt" />
     <Text Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/dev-expects/case-005.txt" />
     <Text Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/github-cases/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/github-cases/case-1008.conf" />
+    <Text Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/github-cases/case-1008@1.html" />
     <Text Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/github-cases/case-119a.conf" />
     <Text Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/github-cases/case-119a@1.html" />
     <Text Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/github-cases/case-119b.conf" />
@@ -899,6 +905,8 @@
     <Text Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/github-cases/case-946.conf" />
     <Text Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/github-cases/case-946@1.html" />
     <Text Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/github-cases/config_default.conf" />
+    <Text Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/github-expects/case-1008.html" />
+    <Text Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/github-expects/case-1008.txt" />
     <Text Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/github-expects/case-119a.html" />
     <Text Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/github-expects/case-119a.txt" />
     <Text Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/github-expects/case-119b.html" />
@@ -1810,7 +1818,8 @@
     <Xml Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/xml-expects/case-640474.xml" />
     <Xml Include="../../thirdparty/owemdjee/tidy-html5/regression_testing/cases/xml-expects/case-646946.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

@@ -291,6 +291,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/jni/Logger_jni.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/jni/PrivacyGuard_jni.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/jni/SemanticContext_jni.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/jni/Signals_jni.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/jni/Utils_jni.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/offline/LogSessionDataProvider.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/offline/MemoryStorage.cpp" />
@@ -366,6 +367,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/tests/functests/MultipleLogManagersTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/tests/unittests/AIJsonSerializerTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/tests/unittests/AITelemetrySystemTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/tests/unittests/AnnexKTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/tests/unittests/BackoffTests_ExponentialWithJitter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/tests/unittests/BondSplicerTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/tests/unittests/ClockSkewManagerTests.cpp" />
@@ -534,6 +536,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/include/mat/config-compact-exp.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/include/mat/config-compact-min.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/include/mat/config-compact-noutc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/include/mat/config-compact-signals.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/include/mat/config-compact.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/include/mat/config-default-cs4.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/include/mat/config-default-exp.h" />
@@ -588,6 +591,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/include/public/mat.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/jni/JniConvertors.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/jni/PrivacyGuardHelper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/jni/SignalsHelper.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/jni/WrapperLogManager.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/linux/sal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/offline/ClockSkewManager.hpp" />
@@ -702,6 +706,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/wrappers/obj-c/OneDsCppSdk.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/wrappers/obj-c/objc_begin.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/wrappers/obj-c/objc_end.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/wrappers/swift/Headers/ObjCModule-Bridging-Header.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/as400/zlib.inc" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/blast/blast.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/zlib/contrib/infback9/infback9.h" />
@@ -791,6 +796,7 @@
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/Solutions/build.compact-dll.props" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/Solutions/build.compact-exp.props" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/Solutions/build.compact-min.props" />
+    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/Solutions/build.compact-signals.props" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/Solutions/build.compact.props" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/Solutions/build.csharp.props" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/Solutions/build.net40.props" />
@@ -841,6 +847,7 @@
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/docs/Coding style.md" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/docs/CsProtocol-decoding.md" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/docs/CsProtocol-upgrade.md" />
+    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/docs/EUDB-compliance.md" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/docs/JSON-Pointer-Properties.md" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/docs/List-of-OSS-Components.md" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/docs/LogManagerProvider.md" />
@@ -923,6 +930,10 @@
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/examples/objc/cocoa-app/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/examples/objc/cocoa-app/build.sh" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/examples/objc/cocoa-app/plist.in" />
+    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/examples/swift/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/examples/swift/SampleXcodeApp/SwiftWrapperApp/Preview Content/Preview Assets.xcassets/" />
+    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/examples/swift/SampleXcodeApp/SwiftWrapperApp/Preview Content/Preview Assets.xcassets/Contents.json" />
+    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/examples/swift/SampleXcodeApp/SwiftWrapperApp/SwiftWrapperApp.entitlements" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/install.sh" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/android_build/app/src/main/cpp/CMakeLists.txt" />
@@ -1046,6 +1057,9 @@
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/wrappers/go/src/Microsoft/Telemetry/EventLogger/build.go.mac" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/wrappers/obj-c/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/wrappers/obj-c/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/wrappers/swift/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/wrappers/swift/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/wrappers/swift/build.sh" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/wrappers/xamarin/sdk/OneDsCppSdk.Android.Bindings/" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/wrappers/xamarin/sdk/OneDsCppSdk.Android.Bindings/Additions/Library.cs" />
     <Text Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/wrappers/xamarin/sdk/OneDsCppSdk.Android.Bindings/Additions/LogManager.cs" />
@@ -1177,7 +1191,6 @@
     <Xml Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/android_build/app/src/main/res/layout/activity_main.xml" />
     <Xml Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/android_build/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" />
     <Xml Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/android_build/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" />
-    <Xml Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/android_build/app/src/main/res/values/colors.xml" />
     <Xml Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/android_build/app/src/main/res/values/strings.xml" />
     <Xml Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/android_build/app/src/main/res/values/styles.xml" />
     <Xml Include="../../thirdparty/owemdjee/ms_cpp_client_telemetry/lib/android_build/app/src/main/res/xml/network_security_config.xml" />

@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -113,8 +113,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPISA;PISA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -133,7 +133,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPISA;PISA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/pisa/include;../../thirdparty/owemdjee/pisa/include/pisa;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/libmio/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/spdlog/include;../../thirdparty/owemdjee/hypertextcpp/thirdparty/gsl/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -160,7 +160,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPISA;PISA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/pisa/include;../../thirdparty/owemdjee/pisa/include/pisa;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/libmio/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/spdlog/include;../../thirdparty/owemdjee/hypertextcpp/thirdparty/gsl/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -188,7 +188,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPISA;PISA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/pisa/include;../../thirdparty/owemdjee/pisa/include/pisa;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/libmio/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/spdlog/include;../../thirdparty/owemdjee/hypertextcpp/thirdparty/gsl/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -215,7 +215,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPISA;PISA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/pisa/include;../../thirdparty/owemdjee/pisa/include/pisa;../../thirdparty/owemdjee/cli11/include;../../thirdparty/owemdjee/libmio/include;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/spdlog/include;../../thirdparty/owemdjee/hypertextcpp/thirdparty/gsl/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -231,9 +231,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/pisa/benchmarks/index_perftest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/benchmarks/perftest_interpolative.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/benchmarks/scan_perftest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/microbench/topk_queue_bench.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/bit_vector.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/bit_vector_builder.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/compress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/cow_string.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/forward_index_builder.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/invert.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/io.cpp" />
@@ -242,9 +244,15 @@
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/parsing/html.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/progress.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/query/queries.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/query/query_parser.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/query/term_processor.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/sharding.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/temporary_directory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/term_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/text_analyzer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/text_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/token_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/src/token_stream.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/src/tokenizer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/in_memory_index.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_algorithm.cpp" />
@@ -255,6 +263,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_bmw_queries.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_compact_elias_fano.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_compact_ranked_bitvector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_cow_string.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_cursors.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_forward_index.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_forward_index_builder.cpp" />
@@ -264,6 +273,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_intersection.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_invert.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_mapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_memory.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_memory_source.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_partition_fwd_index.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_partitioned_sequence.cpp" />
@@ -274,15 +284,20 @@
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_ranked_queries.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_recursive_graph_bisection.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_sample_inverted_index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_scorer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_sequence_collection.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_stream_builder.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_strict_elias_fano.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_taily_stats.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_text_analyzer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_token_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_token_stream.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_tokenizer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_topk_queue.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_trec_topic_reader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_uniform_partitioned_sequence.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/test/test_wand_data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/tools/app.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/tools/compress_inverted_index.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/tools/compute_intersection.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/tools/count_postings.cpp" />
@@ -307,8 +322,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/pisa/tools/stem_queries.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/tools/taily_stats.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/tools/taily_thresholds.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/pisa/tools/tests/test_app.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/pisa/tools/thresholds.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/accumulator/lazy_accumulator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/accumulator/partial_score_accumulator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/accumulator/simple_accumulator.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/algorithm.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/binary_collection.hpp" />
@@ -334,7 +351,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/codec/strict_elias_fano.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/codec/varintgb.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/compress.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/concepts.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/configuration.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/cow_string.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/cursor/block_max_scored_cursor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/cursor/cursor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/cursor/max_scored_cursor.hpp" />
@@ -354,6 +373,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/linear_quantizer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/mappable/mappable_vector.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/mappable/mapper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/memory.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/memory_source.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/optimal_partition.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/parser.hpp" />
@@ -374,6 +394,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/query/algorithm/wand_query.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/query/aol_reader.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/query/queries.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/query/query_parser.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/query/query_stemmer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/query/term_processor.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/query/trec_topic_reader.hpp" />
@@ -396,7 +417,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/sharding.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/taily_stats.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/temporary_directory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/term_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/text_analyzer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/text_filter.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/timer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/token_filter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/token_stream.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/tokenizer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/topk_queue.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/include/pisa/type_alias.hpp" />
@@ -430,8 +456,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/pisa/tools/reorder_docids.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/tools/taily_stats.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/pisa/tools/taily_thresholds.hpp" />
-    <Image Include="../../thirdparty/owemdjee/pisa/docs/source/_static/img/logo.png" />
-    <Image Include="../../thirdparty/owemdjee/pisa/docs/source/_static/img/pipeline.png" />
+    <Font Include="../../thirdparty/owemdjee/pisa/docs/book/FontAwesome/fonts/FontAwesome.ttf" />
+    <Font Include="../../thirdparty/owemdjee/pisa/docs/book/FontAwesome/fonts/fontawesome-webfont.ttf" />
+    <Image Include="../../thirdparty/owemdjee/pisa/docs/book/favicon.png" />
+    <Image Include="../../thirdparty/owemdjee/pisa/docs/book/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/pisa/docs/book/pipeline.png" />
+    <Image Include="../../thirdparty/owemdjee/pisa/docs/src/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/pisa/docs/src/pipeline.png" />
     <Text Include="../../thirdparty/owemdjee/pisa/CHANGELOG.md" />
     <Text Include="../../thirdparty/owemdjee/pisa/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/pisa/README.md" />
@@ -439,23 +470,107 @@
     <Text Include="../../thirdparty/owemdjee/pisa/benchmarks/benchmarks.py" />
     <Text Include="../../thirdparty/owemdjee/pisa/bump.json" />
     <Text Include="../../thirdparty/owemdjee/pisa/clang.cmake" />
-    <Text Include="../../thirdparty/owemdjee/pisa/docs/source/compress_index.md" />
-    <Text Include="../../thirdparty/owemdjee/pisa/docs/source/conf.py" />
-    <Text Include="../../thirdparty/owemdjee/pisa/docs/source/document_reordering.md" />
-    <Text Include="../../thirdparty/owemdjee/pisa/docs/source/evaluate_precision.md" />
-    <Text Include="../../thirdparty/owemdjee/pisa/docs/source/experiments/regression-robust04.md" />
-    <Text Include="../../thirdparty/owemdjee/pisa/docs/source/getting_started.md" />
-    <Text Include="../../thirdparty/owemdjee/pisa/docs/source/index.rst" />
-    <Text Include="../../thirdparty/owemdjee/pisa/docs/source/indexing_pipeline.md" />
-    <Text Include="../../thirdparty/owemdjee/pisa/docs/source/inverting.md" />
-    <Text Include="../../thirdparty/owemdjee/pisa/docs/source/parsing.md" />
-    <Text Include="../../thirdparty/owemdjee/pisa/docs/source/query_index.md" />
-    <Text Include="../../thirdparty/owemdjee/pisa/docs/source/requirements.readthedocs.txt" />
-    <Text Include="../../thirdparty/owemdjee/pisa/docs/source/sharding.md" />
-    <Text Include="../../thirdparty/owemdjee/pisa/docs/source/tex/pipeline.tex" />
-    <Text Include="../../thirdparty/owemdjee/pisa/docs/source/threshold_estimation.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book.toml" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/404.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/FontAwesome/css/font-awesome.css" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/ayu-highlight.css" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/book.js" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/cli/compress_inverted_index.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/cli/compute_intersection.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/cli/count-postings.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/cli/create_wand_data.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/cli/evaluate_queries.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/cli/extract-maxscores.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/cli/extract_topics.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/cli/invert.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/cli/kth_threshold.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/cli/lexicon.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/cli/map_queries.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/cli/parse_collection.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/cli/partition_fwd_index.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/cli/queries.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/cli/read_collection.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/cli/reorder-docids.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/cli/sample_inverted_index.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/cli/selective_queries.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/cli/shards.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/cli/stem_queries.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/cli/taily-stats.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/cli/taily-thresholds.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/cli/thresholds.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/clipboard.min.js" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/css/chrome.css" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/css/general.css" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/css/print.css" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/css/variables.css" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/elasticlunr.min.js" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/guide/compressing.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/guide/indexing-pipeline.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/guide/installation.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/guide/inverting.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/guide/parsing.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/guide/querying.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/guide/reordering.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/guide/requirements.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/guide/sharding.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/guide/threshold-estimation.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/highlight.css" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/highlight.js" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/index.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/introduction.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/mark.min.js" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/print.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/searcher.js" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/searchindex.js" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/searchindex.json" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/tomorrow-night.css" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/book/tutorial/robust04.html" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/SUMMARY.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/chapter_1.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/compress_inverted_index.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/compute_intersection.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/count-postings.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/create_wand_data.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/evaluate_queries.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/extract-maxscores.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/extract.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/extract_topics.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/invert.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/kth_threshold.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/lexicon.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/map_queries.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/parse_collection.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/partition_fwd_index.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/perftest_interpolative.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/profile_queries.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/queries.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/read_collection.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/reorder-docids.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/reorder.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/sample_inverted_index.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/selective_queries.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/shards.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/stem_queries.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/taily-stats.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/taily-thresholds.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/thresholds.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/cli/topk_queue_bench.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/guide/compressing.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/guide/indexing-pipeline.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/guide/installation.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/guide/inverting.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/guide/parsing.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/guide/querying.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/guide/reordering.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/guide/requirements.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/guide/sharding.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/guide/threshold-estimation.md" />
+    <Text Include="../../thirdparty/owemdjee/pisa/docs/src/introduction.md" />
     <Text Include="../../thirdparty/owemdjee/pisa/external/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pisa/include/pisa/accumulator/README.md" />
     <Text Include="../../thirdparty/owemdjee/pisa/include/pisa/pisa_config.hpp.in" />
+    <Text Include="../../thirdparty/owemdjee/pisa/microbench/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/pisa/script/bench/bench.sh" />
     <Text Include="../../thirdparty/owemdjee/pisa/script/bench/config.sh" />
     <Text Include="../../thirdparty/owemdjee/pisa/script/bench/index.sh" />
@@ -478,6 +593,11 @@
     <Text Include="../../thirdparty/owemdjee/pisa/test/cli/setup.sh" />
     <Text Include="../../thirdparty/owemdjee/pisa/test/cli/test_count_postings.sh" />
     <Text Include="../../thirdparty/owemdjee/pisa/test/cli/test_taily_stats.sh" />
+    <Text Include="../../thirdparty/owemdjee/pisa/test/docker/benchmark/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/pisa/test/docker/cmake-3.25.2-SHA-256.txt" />
+    <Text Include="../../thirdparty/owemdjee/pisa/test/docker/coverage/cov.sh" />
+    <Text Include="../../thirdparty/owemdjee/pisa/test/docker/install-clang.sh" />
+    <Text Include="../../thirdparty/owemdjee/pisa/test/docker/install-cmake.sh" />
     <Text Include="../../thirdparty/owemdjee/pisa/test/test_data/bp-node-config.txt" />
     <Text Include="../../thirdparty/owemdjee/pisa/test/test_data/clueweb1k.documents" />
     <Text Include="../../thirdparty/owemdjee/pisa/test/test_data/clueweb1k.shard.00" />
@@ -486,8 +606,10 @@
     <Text Include="../../thirdparty/owemdjee/pisa/test/test_data/test_collection.freqs" />
     <Text Include="../../thirdparty/owemdjee/pisa/test/test_data/test_collection.sizes" />
     <Text Include="../../thirdparty/owemdjee/pisa/tools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/pisa/tools/tests/CMakeLists.txt" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -113,8 +113,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMNN;MNN_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -133,7 +133,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMNN;MNN_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/MNN/include;../../thirdparty/owemdjee/MNN/source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -160,7 +160,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMNN;MNN_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/MNN/include;../../thirdparty/owemdjee/MNN/source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -188,7 +188,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMNN;MNN_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/MNN/include;../../thirdparty/owemdjee/MNN/source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -215,7 +215,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMNN;MNN_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/MNN/include;../../thirdparty/owemdjee/MNN/source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -296,6 +296,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/MNN/express/module/PipelineModule.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/MNN/express/module/StaticModule.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/MNN/express/module/WhileModule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/MNN/llm/llm_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/MNN/llm/src/llm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/MNN/llm/src/tokenizer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/MNN/pymnn/src/MNN.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/MNN/pymnn/src/MNNTools.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/MNN/source/backend/arm82/Arm82Backend.cpp" />
@@ -1589,6 +1592,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/MNN/include/MNN/plugin/PluginContext.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/MNN/include/MNN/plugin/PluginKernel.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/MNN/include/MNN/plugin/PluginShapeInference.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/MNN/llm/include/llm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/MNN/llm/include/tokenizer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/MNN/project/android/demo/app/includes/MNN/AutoTime.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/MNN/project/android/demo/app/includes/MNN/ErrorCode.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/MNN/project/android/demo/app/includes/MNN/HalideRuntime.h" />
@@ -1818,8 +1823,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/MNN/source/backend/cuda/execution/UnaryExecution.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/MNN/source/backend/cuda/execution/bf16/ConvCutlassBf16Execution.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/MNN/source/backend/cuda/execution/bf16/CutlassGemmBf16Param.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/MNN/source/backend/cuda/execution/cutlass/CutlassConvCommonExecution.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/MNN/source/backend/cuda/execution/cutlass/CutlassDeconvCommonExecution.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/MNN/source/backend/cuda/execution/cutlass_common/CutlassConvCommonExecution.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/MNN/source/backend/cuda/execution/cutlass_common/CutlassDeconvCommonExecution.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/MNN/source/backend/cuda/execution/cutlass_common/tune/CudaCache_generated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/MNN/source/backend/cuda/execution/cutlass_common/tune/CutlassGemmBatchedParamTune.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/MNN/source/backend/cuda/execution/cutlass_common/tune/CutlassGemmParamTune.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/MNN/source/backend/cuda/execution/cutlass_common/tune/CutlassGemmTune.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/MNN/source/backend/cuda/execution/cutlass_common/tune/CutlassGemmTuneCommonExecution.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/MNN/source/backend/cuda/execution/int8/BinaryInt8Execution.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/MNN/source/backend/cuda/execution/int8/ConvInt8CutlassExecution.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/MNN/source/backend/cuda/execution/int8/CutlassGemmInt8Param.hpp" />
@@ -2650,6 +2660,7 @@
     <Text Include="../../thirdparty/owemdjee/MNN/docs/train/optim.md" />
     <Text Include="../../thirdparty/owemdjee/MNN/docs/train/quant.md" />
     <Text Include="../../thirdparty/owemdjee/MNN/express/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/MNN/llm/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/MNN/package_scripts/android/build.sh" />
     <Text Include="../../thirdparty/owemdjee/MNN/package_scripts/ios/buildiOS.sh" />
     <Text Include="../../thirdparty/owemdjee/MNN/package_scripts/ios/xcodebuildiOS.sh" />
@@ -2867,6 +2878,7 @@
     <Text Include="../../thirdparty/owemdjee/MNN/source/backend/cpu/arm/arm32/MNNQuanToDestUint8.S" />
     <Text Include="../../thirdparty/owemdjee/MNN/source/backend/cpu/arm/arm32/MNNReluInt8.S" />
     <Text Include="../../thirdparty/owemdjee/MNN/source/backend/cpu/arm/arm32/MNNReluWithSlopeChannel.S" />
+    <Text Include="../../thirdparty/owemdjee/MNN/source/backend/cpu/arm/arm32/MNNReluWithSlopeChannelInt8.S" />
     <Text Include="../../thirdparty/owemdjee/MNN/source/backend/cpu/arm/arm32/MNNSamplerC1BilinearOpt.S" />
     <Text Include="../../thirdparty/owemdjee/MNN/source/backend/cpu/arm/arm32/MNNSamplerC1NearestOpt.S" />
     <Text Include="../../thirdparty/owemdjee/MNN/source/backend/cpu/arm/arm32/MNNSamplerC4BilinearOpt.S" />
@@ -2954,6 +2966,7 @@
     <Text Include="../../thirdparty/owemdjee/MNN/source/backend/cpu/arm/arm64/MNNQuanToDestUint8.S" />
     <Text Include="../../thirdparty/owemdjee/MNN/source/backend/cpu/arm/arm64/MNNReluInt8.S" />
     <Text Include="../../thirdparty/owemdjee/MNN/source/backend/cpu/arm/arm64/MNNReluWithSlopeChannel.S" />
+    <Text Include="../../thirdparty/owemdjee/MNN/source/backend/cpu/arm/arm64/MNNReluWithSlopeChannelInt8.S" />
     <Text Include="../../thirdparty/owemdjee/MNN/source/backend/cpu/arm/arm64/MNNSamplerC1BilinearOpt.S" />
     <Text Include="../../thirdparty/owemdjee/MNN/source/backend/cpu/arm/arm64/MNNSamplerC1NearestOpt.S" />
     <Text Include="../../thirdparty/owemdjee/MNN/source/backend/cpu/arm/arm64/MNNSamplerC4BilinearOpt.S" />
@@ -3007,6 +3020,10 @@
     <Text Include="../../thirdparty/owemdjee/MNN/source/backend/cpu/x86_x64/avxfma/_AVX_MNNPackedSparseMatMulEpx4NFMA_ASM.S" />
     <Text Include="../../thirdparty/owemdjee/MNN/source/backend/cuda/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/MNN/source/backend/cuda/SelectCudaComputeArch.cmake" />
+    <Text Include="../../thirdparty/owemdjee/MNN/source/backend/cuda/execution/cutlass_common/tune/make_cutlass_tune_param.py" />
+    <Text Include="../../thirdparty/owemdjee/MNN/source/backend/cuda/execution/cutlass_common/tune/schema/CudaCache.fbs" />
+    <Text Include="../../thirdparty/owemdjee/MNN/source/backend/cuda/execution/cutlass_common/tune/schema/README.md" />
+    <Text Include="../../thirdparty/owemdjee/MNN/source/backend/cuda/execution/cutlass_common/tune/schema/generate.sh" />
     <Text Include="../../thirdparty/owemdjee/MNN/source/backend/cuda/execution/make_cutlass_param.py" />
     <Text Include="../../thirdparty/owemdjee/MNN/source/backend/hiai/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/MNN/source/backend/metal/CMakeLists.txt" />
@@ -3294,7 +3311,8 @@
     <Xml Include="../../thirdparty/owemdjee/MNN/project/android/demo/app/src/main/res/values/styles.xml" />
     <Xml Include="../../thirdparty/owemdjee/MNN/project/android/src/main/AndroidManifest.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

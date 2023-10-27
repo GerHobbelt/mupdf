@@ -232,15 +232,19 @@
     <ClCompile Include="../../thirdparty/owemdjee/libwil/tests/ComTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libwil/tests/CommonTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libwil/tests/CppWinRT20Tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libwil/tests/CppWinRTAuthoringTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libwil/tests/CppWinRTTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libwil/tests/FileSystemTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libwil/tests/NtResultTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libwil/tests/RegistryTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libwil/tests/ResourceTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libwil/tests/ResultTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libwil/tests/Rpc.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libwil/tests/SafeCastTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libwil/tests/StlTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libwil/tests/TokenHelpersTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libwil/tests/TraceLoggingTests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libwil/tests/TraceLoggingTests_PartB.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libwil/tests/UniqueWinRTEventTokenTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libwil/tests/WatcherTests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/libwil/tests/WinRTTests.cpp" />
@@ -252,12 +256,15 @@
     <ClInclude Include="../../thirdparty/owemdjee/libwil/include/wil/com.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libwil/include/wil/com_apartment_variable.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libwil/include/wil/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libwil/include/wil/coroutine.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libwil/include/wil/cppwinrt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libwil/include/wil/cppwinrt_authoring.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libwil/include/wil/cppwinrt_helpers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libwil/include/wil/cppwinrt_wrl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libwil/include/wil/filesystem.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libwil/include/wil/nt_result_macros.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libwil/include/wil/registry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libwil/include/wil/registry_helpers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libwil/include/wil/resource.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libwil/include/wil/result.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libwil/include/wil/result_macros.h" />
@@ -268,6 +275,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/libwil/include/wil/token_helpers.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libwil/include/wil/traceloggingconfig.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libwil/include/wil/win32_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libwil/include/wil/win32_result_macros.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libwil/include/wil/winrt.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libwil/include/wil/wistd_config.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libwil/include/wil/wistd_functional.h" />
@@ -276,6 +284,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/libwil/include/wil/wrl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libwil/tests/FakeWinRTTypes.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libwil/tests/MallocSpy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libwil/tests/TraceLoggingTests.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libwil/tests/catch.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/libwil/tests/common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libwil/tests/test_objects.h" />
@@ -284,6 +293,7 @@
     <Text Include="../../thirdparty/owemdjee/libwil/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libwil/CODE_OF_CONDUCT.md" />
     <Text Include="../../thirdparty/owemdjee/libwil/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libwil/SECURITY.md" />
     <Text Include="../../thirdparty/owemdjee/libwil/ThirdPartyNotices.txt" />
     <Text Include="../../thirdparty/owemdjee/libwil/cmake/common_build_flags.cmake" />
     <Text Include="../../thirdparty/owemdjee/libwil/natvis/wil.natvis" />
@@ -300,6 +310,8 @@
     <Text Include="../../thirdparty/owemdjee/libwil/tests/cpplatest/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libwil/tests/noexcept/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libwil/tests/normal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libwil/tests/sanitize-address/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libwil/tests/sanitize-undefined-behavior/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libwil/tests/win7/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/libwil/tests/workarounds/readme.md" />
   </ItemGroup>
