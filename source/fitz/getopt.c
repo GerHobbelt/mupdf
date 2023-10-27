@@ -193,20 +193,21 @@ fz_opt_from_list(const char *opt, const char *optlist)
 		while (*optend != 0 && *optend != '|' && *optend != ':')
 			optend++;
 
-		if (fz_strncasecmp(optlist, opt, optend-optlist))
+		int olen = optend - optlist;
+		if (fz_strncasecmp(optlist, opt, olen))
 		{
 			/* We didn't match. Carry on. */
 		}
-		else if (opt[optend-optlist] == 0)
+		else if (opt[olen] == 0)
 		{
 			/* We matched, ending in NUL */
 			fz_optarg = NULL;
 			return n;
 		}
-		else if (*optend == ':' && opt[optend-optlist] == ':')
+		else if (*optend == ':' && opt[olen] == ':')
 		{
 			/* We matched, and we both have some arguments and expected some. */
-			fz_optarg = &opt[optend-optlist+1];
+			fz_optarg = &opt[olen + 1];
 			return n;
 		}
 
