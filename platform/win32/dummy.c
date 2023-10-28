@@ -26,8 +26,6 @@
  * we can't just include them in the file list.
  */
 
-// quick hack: use this area for debugging Why The EFF the resource compile phase in MSVC2022 sometimes (rarely!) spits out an error about VS_FF_DEBUG being undefined...
-
 #if defined(_MSC_VER)
 
 //#define RC_INVOKED   //<-- SHOULD've been set by the resource compiler itself.
@@ -52,12 +50,6 @@
 #include <windows.h>
 #include <winver.h>
 
-
-#ifdef _DEBUG
-int rc_fileflags_dummy = VS_FF_DEBUG;
-#endif
-
 #endif   // end of MSVC/RC hack area
 
-
-int libresources_dummy;
+#include <assert.h>
