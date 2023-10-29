@@ -26,27 +26,27 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
@@ -125,7 +125,7 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -141,14 +141,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS;QUICKJS_STATICLIB;HAVE_QUICKJS_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS;QUICKJS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -187,7 +187,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS;QUICKJS_STATICLIB;HAVE_QUICKJS_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -195,7 +195,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS;QUICKJS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -236,14 +236,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS;QUICKJS_STATICLIB;HAVE_QUICKJS_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS;QUICKJS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -282,7 +282,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS;QUICKJS_STATICLIB;HAVE_QUICKJS_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -290,7 +290,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBQUICKJS;QUICKJS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/QuickJS;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/QuickJS;../../thirdparty/owemdjee/QuickJS/win;../../thirdparty/owemdjee/libbf;../../thirdparty/owemdjee/uint128_t;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -323,9 +323,16 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ProjectReference Include="libgetopt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518110e57b1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/getopt/getopt_long_tests.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/getopt/getopt_tests.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/getopt/main.c" />
     <ClCompile Include="../../thirdparty/owemdjee/getopt/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/getopt/testfx.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/getopt/getopt.h" />

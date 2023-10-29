@@ -558,7 +558,7 @@ static struct tool_spec {
 #endif
 
 #if defined(MUTOOL_EX)
-	//{ {.fa = jpeginfo_main }, "jpeginfo", "jpeginfo tool" },
+	{ {.fa = jpeginfo_main }, "jpeginfo", "jpeginfo tool" },
 #endif
 
 #if defined(MUTOOL_EX)
@@ -613,6 +613,7 @@ static struct tool_spec {
 	{ {.fa = qjsc_main }, "qjsc", "qjsc (QuickJS Compiler) tool" },
 #endif
 #if defined(MUTOOL_EX)
+	{ {.fa = qjsd_main }, "qjsd", "qjsd (Execute compiled QuickJS function / binary code blob) tool" },
 	{ {.fa = qjscompress_main }, "qjscompress", "qjscompress tool" },
 	{ {.fa = qjs_unicode_gen_main }, "qjs_unicode_gen", "qjs_unicode_gen tool" },
 	{ {.fa = qjs_test262_main }, "qjs_test262", "qjs_test262 conformance test tool" },

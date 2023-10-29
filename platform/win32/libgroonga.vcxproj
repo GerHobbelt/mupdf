@@ -126,14 +126,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGROONGA;GROONGA_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGROONGA;GROONGA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -152,7 +152,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGROONGA;GROONGA_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -160,7 +160,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGROONGA;GROONGA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -181,14 +181,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGROONGA;GROONGA_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGROONGA;GROONGA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -207,7 +207,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGROONGA;GROONGA_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -215,7 +215,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGROONGA;GROONGA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -420,6 +420,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/groonga/lib/token_metadata.c" />
     <ClCompile Include="../../thirdparty/owemdjee/groonga/lib/tokenizer.c" />
     <ClCompile Include="../../thirdparty/owemdjee/groonga/lib/tokenizers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/groonga/lib/trace_log.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/groonga/lib/type.c" />
     <ClCompile Include="../../thirdparty/owemdjee/groonga/lib/util.c" />
     <ClCompile Include="../../thirdparty/owemdjee/groonga/lib/vector.cpp" />
@@ -1066,6 +1067,7 @@
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/reference/commands/column_list.rst" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/reference/commands/column_remove.rst" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/reference/commands/column_rename.rst" />
+    <Text Include="../../thirdparty/owemdjee/groonga/doc/source/reference/commands/compress_filter.rst" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/reference/commands/config_delete.rst" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/reference/commands/config_get.rst" />
     <Text Include="../../thirdparty/owemdjee/groonga/doc/source/reference/commands/config_set.rst" />

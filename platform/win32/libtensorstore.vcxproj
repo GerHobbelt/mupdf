@@ -126,14 +126,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORSTORE;TENSORSTORE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORSTORE;TENSORSTORE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -152,7 +152,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORSTORE;TENSORSTORE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -160,7 +160,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORSTORE;TENSORSTORE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -181,14 +181,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORSTORE;TENSORSTORE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORSTORE;TENSORSTORE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -207,7 +207,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORSTORE;TENSORSTORE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -215,7 +215,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORSTORE;TENSORSTORE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -1634,15 +1634,6 @@
     <Text Include="../../thirdparty/owemdjee/tensorstore/docs/tensorstore_sphinx_ext/doctest.py" />
     <Text Include="../../thirdparty/owemdjee/tensorstore/docs/tensorstore_sphinx_ext/json_pprint.py" />
     <Text Include="../../thirdparty/owemdjee/tensorstore/docs/update_intersphinx_inventories.py" />
-    <Text Include="../../thirdparty/owemdjee/tensorstore/examples/python/beam/README.md" />
-    <Text Include="../../thirdparty/owemdjee/tensorstore/examples/python/beam/compute_dfbyf.py" />
-    <Text Include="../../thirdparty/owemdjee/tensorstore/examples/python/beam/compute_percentiles.py" />
-    <Text Include="../../thirdparty/owemdjee/tensorstore/examples/python/beam/example.gin" />
-    <Text Include="../../thirdparty/owemdjee/tensorstore/examples/python/beam/pipeline_test.py" />
-    <Text Include="../../thirdparty/owemdjee/tensorstore/examples/python/beam/requirements.txt" />
-    <Text Include="../../thirdparty/owemdjee/tensorstore/examples/python/beam/reshard_tensor.py" />
-    <Text Include="../../thirdparty/owemdjee/tensorstore/examples/python/beam/run_pipeline.py" />
-    <Text Include="../../thirdparty/owemdjee/tensorstore/examples/python/beam/setup.py" />
     <Text Include="../../thirdparty/owemdjee/tensorstore/external.bzl" />
     <Text Include="../../thirdparty/owemdjee/tensorstore/pyproject.toml" />
     <Text Include="../../thirdparty/owemdjee/tensorstore/python/tensorstore/__init__.py" />

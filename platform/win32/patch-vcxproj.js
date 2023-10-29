@@ -53,8 +53,8 @@ if (mode === "create") {
 	.replace(/<AdditionalDependencies>[^<]+<\/AdditionalDependencies>/g, "<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>")
 	//      <TypeLibraryName>.\Release/libcurl.tlb</TypeLibraryName>
 	.replace(/<TypeLibraryName>[^<]+<\/TypeLibraryName>/g, "<TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>")
-	//      <AdditionalIncludeDirectories>.;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\thirdparty\curl\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-	.replace(/<AdditionalIncludeDirectories>[^<]+<\/AdditionalIncludeDirectories>/g, "<AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>")
+	//      <AdditionalIncludeDirectories>..\..\include\system-override;;.;..\..\thirdparty\curl\include;..\..\thirdparty\curl\lib;..\..\thirdparty\curl\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	.replace(/<AdditionalIncludeDirectories>[^<]+<\/AdditionalIncludeDirectories>/g, "<AdditionalIncludeDirectories>..\..\include\system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>")
 	//       <PreprocessorDefinitions>BUILDING_LIBCURL;CURL_STATICLIB;CURL_DISABLE_LDAP;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;_USRDLL;BUILDING_LIBCURL;CURL_STATICLIB;CURL_DISABLE_LDAP;USE_SCHANNEL;USE_WINDOWS_SSPI;USE_SCHANNEL;USE_WINDOWS_SSPI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 	.replace(/<PreprocessorDefinitions>([^<]+)<\/PreprocessorDefinitions>/g, (m, p1) => {
 		p1 = p1
@@ -85,6 +85,20 @@ if (mode === "create") {
 		return `<ProjectGuid>${p1}</ProjectGuid>`;
 	})
 }
+
+src = src
+.replace(/<AdditionalIncludeDirectories>([^<]+)<\/AdditionalIncludeDirectories>/g, (m, p1) => {
+	p1 = p1
+	.trim()
+	.replace(/\\/g, '/')
+	.replace(/..\/..\/include\/system-override;/g, '')
+	.replace(/;%\(AdditionalIncludeDirectories\)/g, '')
+	
+	if (p1.length == 0)
+		p1 = ".";
+
+	return `<AdditionalIncludeDirectories>../../include/system-override;${p1};%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>`;
+})
 
 const sections_to_remove = [
 	"ClCompile", "Resourcecompile", "ClInclude", "MASM", "Text", "Image", "Font", "None"

@@ -77,7 +77,7 @@ int qiqqa_web_api_server_main(int argc, const char** argv);
 
 int sqlite_main(int argc, const char** argv);
 
-//int jpeginfo_main(int argc, const char** argv);
+int jpeginfo_main(int argc, const char** argv);
 
 int jpegturbo_jpegtran_main(int argc, const char** argv);
 int jpegturbo_rdjpegcom_main(int argc, const char** argv);

@@ -112,7 +112,7 @@
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUMATRAPDF;SUMATRAPDF_STATICLIB;FZ_DLL_CLIENT;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -129,7 +129,7 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -138,7 +138,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUMATRAPDF;SUMATRAPDF_STATICLIB;FZ_DLL_CLIENT;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -155,14 +155,14 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUMATRAPDF;SUMATRAPDF_STATICLIB;FZ_DLL_CLIENT;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -178,7 +178,7 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -188,7 +188,7 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_SUMATRAPDF;SUMATRAPDF_STATICLIB;FZ_DLL_CLIENT;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -204,7 +204,7 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -1610,6 +1610,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/html/html-outline.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/html/html-parse.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/html/mobi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/html/office.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/html/story-writer.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/html/xml-dom.c" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/mupdf/source/pdf/pdf-annot.c" />
@@ -1731,6 +1732,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/src/Flags.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/src/FzImgReader.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/src/GlobalPrefs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/src/HomePage.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/src/HtmlFormatter.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/src/Installer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/src/InstallerCommon.cpp" />
@@ -1752,7 +1754,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/src/SearchAndDDE.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/src/Selection.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/src/StressTesting.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/src/SumatraAbout.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/src/SumatraConfig.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/src/SumatraDialogs.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/sumatrapdf/src/SumatraPDF.cpp" />
@@ -3221,6 +3222,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/src/Flags.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/src/FzImgReader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/src/GlobalPrefs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/src/HomePage.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/src/HtmlFormatter.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/src/Installer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/src/MainWindow.h" />
@@ -3241,7 +3243,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/src/Selection.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/src/Settings.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/src/StressTesting.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/src/SumatraAbout.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/src/SumatraConfig.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/src/SumatraDialogs.h" />
     <ClInclude Include="../../thirdparty/owemdjee/sumatrapdf/src/SumatraPDF.h" />

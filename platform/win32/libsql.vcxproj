@@ -126,14 +126,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQL;SQL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQL;SQL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -152,7 +152,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQL;SQL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -160,7 +160,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQL;SQL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -181,14 +181,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQL;SQL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQL;SQL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -207,7 +207,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQL;SQL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -215,7 +215,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSQL;SQL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -1272,6 +1272,32 @@
     <Text Include="../../thirdparty/owemdjee/libsql/vendored/rusqlite/tests/config_log.rs" />
     <Text Include="../../thirdparty/owemdjee/libsql/vendored/rusqlite/tests/deny_single_threaded_sqlite_config.rs" />
     <Text Include="../../thirdparty/owemdjee/libsql/vendored/rusqlite/tests/vtab.rs" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/Sync.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/benches/keyword.rs" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/build.rs" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/examples/simple.y" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/examples/sql_check.rs" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/examples/sql_cmd.rs" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/examples/sql_cmds.rs" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/examples/sql_tokens.rs" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/sqlparser_bench/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/sqlparser_bench/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/sqlparser_bench/benches/sqlparser_bench.rs" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/src/dialect/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/src/dialect/token.rs" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/src/lexer/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/src/lexer/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/src/lexer/scan.rs" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/src/lexer/sql/error.rs" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/src/lexer/sql/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/src/lexer/sql/test.rs" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/src/parser/ast/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/src/parser/mod.rs" />
+    <Text Include="../../thirdparty/owemdjee/libsql/vendored/sqlite3-parser/src/parser/parse.y" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

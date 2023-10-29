@@ -119,7 +119,7 @@
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_SAMPLES_OPENGL_ISOSURF;WXW_SAMPLES_OPENGL_ISOSURF_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -132,7 +132,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -141,7 +141,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_SAMPLES_OPENGL_ISOSURF;WXW_SAMPLES_OPENGL_ISOSURF_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;_CRTDBG_MAP_ALLOC;HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;_DEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -154,14 +154,14 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_SAMPLES_OPENGL_ISOSURF;WXW_SAMPLES_OPENGL_ISOSURF_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;WIN32;NDEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -173,7 +173,7 @@
       <AdditionalDependencies>Shcore.lib;Rpcrt4.lib;Winmm.lib;Ws2_32.lib;Comctl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -183,7 +183,7 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_WXW_SAMPLES_OPENGL_ISOSURF;WXW_SAMPLES_OPENGL_ISOSURF_STATICLIB;FZ_DLL_CLIENT;HAVE_TESSERACT;HAVE_LEPTONICA;MUDRAW_STANDALONE;HAVE_TESSERACT;HAVE_LEPTONICA;WIN64;NDEBUG;MUDRAW_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -195,7 +195,7 @@
       <AdditionalDependencies>Shcore.lib;Rpcrt4.lib;Winmm.lib;Ws2_32.lib;Comctl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/wxWidgets/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>

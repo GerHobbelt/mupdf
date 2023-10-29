@@ -126,14 +126,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_IPC;CPP_IPC_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_IPC;CPP_IPC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -152,7 +152,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_IPC;CPP_IPC_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -160,7 +160,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_IPC;CPP_IPC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -181,14 +181,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_IPC;CPP_IPC_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_IPC;CPP_IPC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -207,7 +207,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_IPC;CPP_IPC_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -215,7 +215,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCPP_IPC;CPP_IPC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -229,8 +229,12 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/demo/chat/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/demo/linux_service/client/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/demo/linux_service/service/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/demo/msg_que/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/demo/send_recv/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/demo/win_service/client/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/demo/win_service/service/main.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/buffer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/ipc.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/a0/err.c" />
@@ -314,8 +318,12 @@
     <Text Include="../../thirdparty/owemdjee/cpp-ipc/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/cpp-ipc/README.md" />
     <Text Include="../../thirdparty/owemdjee/cpp-ipc/demo/chat/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/demo/linux_service/client/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/demo/linux_service/service/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/cpp-ipc/demo/msg_que/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/cpp-ipc/demo/send_recv/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/demo/win_service/client/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/cpp-ipc/demo/win_service/service/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/cpp-ipc/performance.xlsx" />
     <Text Include="../../thirdparty/owemdjee/cpp-ipc/src/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/cpp-ipc/src/libipc/platform/linux/a0/README.md" />

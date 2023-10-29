@@ -112,7 +112,7 @@
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHARFBUZZ_TESTS;HARFBUZZ_TESTS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -124,7 +124,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHARFBUZZ_TESTS;HARFBUZZ_TESTS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -134,7 +134,7 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHARFBUZZ_TESTS;HARFBUZZ_TESTS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;_CRT_NONSTDC_NO_WARNINGS;WIN32;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;JBIG_EXTERNAL_MEMENTO_H="memento.h";HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -146,7 +146,7 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBHARFBUZZ_TESTS;HARFBUZZ_TESTS_STATICLIB;HAVE_MUPDF;MUJS_ALL_FILES;WITH_GZFILEOP;_CRT_NONSTDC_NO_WARNINGS;WIN64;NDEBUG;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;OPJ_STATIC;USE_JPIP=1;FT_CONFIG_MODULES_H="slimftmodules.h";FT_CONFIG_OPTIONS_H="slimftoptions.h";verbose=-1;HAVE_FALLBACK=1;HAVE_OT;HAVE_UCDN;HB_NO_MT;hb_malloc_impl=fz_hb_malloc;hb_calloc_impl=fz_hb_calloc;hb_realloc_impl=fz_hb_realloc;hb_free_impl=fz_hb_free;HAVE_FREETYPE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -1935,6 +1935,8 @@
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/colrv1_copy_varstore/Foldit.retain-gids.41,42.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/colrv1_copy_varstore/Foldit.retain-gids.41.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/colrv1_copy_varstore/Foldit.retain-gids.retain-all-codepoint.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/empty_region_vardata/RobotoFlex-Variable.ABC.default.retain-all-codepoint.wght=200-300,opsz=14.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/empty_region_vardata/RobotoFlex-Variable.ABC.default.retain-all-codepoint.wght=400,wdth=100,opsz=14.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/full-font/Roboto-Regular.default.1FC,21,41,20,62,63.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/full-font/Roboto-Regular.default.61,62,63,64,65,66,67,68,69,6A,6B.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/full-font/Roboto-Regular.default.61,62,63.ttf" />
@@ -1991,12 +1993,11 @@
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/glyf_bug_3131/glyf_bug_3131.drop-hints-retain-gids.retain-all-codepoint.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/glyf_bug_3131/glyf_bug_3131.retain-gids.63,64,65,6F,70,71,72.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/glyf_bug_3131/glyf_bug_3131.retain-gids.retain-all-codepoint.ttf" />
-    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/glyf_partial_instancing/Roboto-Variable.ABC.no-tables-with-item-variations.retain-all-codepoint.wght=200-300-500,wdth=80-90.ttf" />
-    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/glyf_partial_instancing/Roboto-Variable.ABC.no-tables-with-item-variations.retain-all-codepoint.wght=300-600,wdth=85.ttf" />
-    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/glyf_partial_instancing/Roboto-Variable.composite.no-tables-with-item-variations.retain-all-codepoint.wght=200-300-500,wdth=80-90.ttf" />
-    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/glyf_partial_instancing/Roboto-Variable.composite.no-tables-with-item-variations.retain-all-codepoint.wght=300-600,wdth=85.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/glyf_partial_instancing/Roboto-Variable.ABC.default.retain-all-codepoint.wght=200-300-500,wdth=80-90.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/glyf_partial_instancing/Roboto-Variable.ABC.default.retain-all-codepoint.wght=300-600,wdth=85.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/glyf_partial_instancing/Roboto-Variable.composite.default.retain-all-codepoint.wght=200-300-500,wdth=80-90.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/glyf_partial_instancing/Roboto-Variable.composite.default.retain-all-codepoint.wght=300-600,wdth=85.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/glyph_map/Roboto-Regular.glyph_map_roboto.41,43,61,66,69.ttf" />
-    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/glyph_map/Roboto-Regular.glyph_map_roboto_retain_gids.41,43,61,66,69.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/glyph_names/Ubuntu-Regular.glyph-names.0x0,0x8,0x9,0x1d,0x20,0xb7.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/glyph_names/Ubuntu-Regular.glyph-names.retain-all-codepoint.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/instance_comp_glyph_empty_child/RobotoMono.default.retain-all-codepoint.wght=700.ttf" />
@@ -2418,9 +2419,9 @@
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/math_coverage_offset/Caudex-Regular.retain-gids.retain-all-codepoint.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/mvar_full_instance/NotoSans-VF.abc.no-layout.retain-all-codepoint.wght=150,wdth=80,CTGR=0.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/mvar_full_instance/NotoSans-VF.abc.no-layout.retain-all-codepoint.wght=300,wdth=90,CTGR=0.ttf" />
-    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/mvar_partial_instance/NotoSans-VF.abc.no-tables-with-item-variations.retain-all-codepoint.wght=200-600,wdth=80-90,CTGR=20-60.ttf" />
-    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/mvar_partial_instance/NotoSans-VF.abc.no-tables-with-item-variations.retain-all-codepoint.wght=300-600.ttf" />
-    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/mvar_partial_instance/NotoSans-VF.abc.no-tables-with-item-variations.retain-all-codepoint.wght=500-800.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/mvar_partial_instance/NotoSans-VF.abc.default.retain-all-codepoint.wght=200-600,wdth=80-90,CTGR=20-60.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/mvar_partial_instance/NotoSans-VF.abc.default.retain-all-codepoint.wght=300-600.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/mvar_partial_instance/NotoSans-VF.abc.default.retain-all-codepoint.wght=500-800.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/no_layout_closure/Roboto-Regular.no-layout-closure-gids.no-unicodes.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/no_layout_closure/Roboto-Regular.no-layout-closure-gids2.no-unicodes.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/pin_all_at_default/Roboto-Variable.ABC.default.retain-all-codepoint.wght=400,wdth=100.0.ttf" />
@@ -2447,8 +2448,8 @@
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/sbix/sbix.retain-gids.58,59.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/sbix/sbix.retain-gids.58.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/sbix/sbix.retain-gids.59.ttf" />
-    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/update_def_wght/SourceSerifVariable-Roman.no-tables-with-item-variations.retain-all-codepoint.wght=300-600.ttf" />
-    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/update_def_wght/SourceSerifVariable-Roman.no-tables-with-item-variations.retain-all-codepoint.wght=500-800.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/update_def_wght/SourceSerifVariable-Roman.default.retain-all-codepoint.wght=300-600.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/update_def_wght/SourceSerifVariable-Roman.default.retain-all-codepoint.wght=500-800.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/variable/Fraunces.default.26,66,69,124,125.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/variable/Fraunces.default.61.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/expected/variable/Fraunces.retain-gids.26,66,69,124,125.ttf" />
@@ -2494,6 +2495,7 @@
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/Roboto-Variable.ABC.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/Roboto-Variable.composite.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/Roboto-Variable.ttf" />
+    <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/RobotoFlex-Variable.ABC.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/RobotoFlex-Variable.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/RobotoMono.ttf" />
     <Font Include="../../thirdparty/harfbuzz/test/subset/data/fonts/STIXTwoMath-Regular.ttf" />
@@ -2956,7 +2958,6 @@
     <Text Include="../../thirdparty/harfbuzz/test/subset/data/profiles/gids.txt" />
     <Text Include="../../thirdparty/harfbuzz/test/subset/data/profiles/glyph-names.txt" />
     <Text Include="../../thirdparty/harfbuzz/test/subset/data/profiles/glyph_map_roboto.txt" />
-    <Text Include="../../thirdparty/harfbuzz/test/subset/data/profiles/glyph_map_roboto_retain_gids.txt" />
     <Text Include="../../thirdparty/harfbuzz/test/subset/data/profiles/keep-all-layout-features.txt" />
     <Text Include="../../thirdparty/harfbuzz/test/subset/data/profiles/keep-gdef-gpos.txt" />
     <Text Include="../../thirdparty/harfbuzz/test/subset/data/profiles/keep-gdef.txt" />
@@ -2971,7 +2972,6 @@
     <Text Include="../../thirdparty/harfbuzz/test/subset/data/profiles/no-layout.txt" />
     <Text Include="../../thirdparty/harfbuzz/test/subset/data/profiles/no-prune-unicode-ranges.txt" />
     <Text Include="../../thirdparty/harfbuzz/test/subset/data/profiles/no-scripts.txt" />
-    <Text Include="../../thirdparty/harfbuzz/test/subset/data/profiles/no-tables-with-item-variations.txt" />
     <Text Include="../../thirdparty/harfbuzz/test/subset/data/profiles/notdef-outline-desubroutinize-retain-gids.txt" />
     <Text Include="../../thirdparty/harfbuzz/test/subset/data/profiles/notdef-outline-desubroutinize.txt" />
     <Text Include="../../thirdparty/harfbuzz/test/subset/data/profiles/notdef-outline-drop-hints-desubroutinize-retain-gids.txt" />
@@ -3007,6 +3007,7 @@
     <Text Include="../../thirdparty/harfbuzz/test/subset/data/tests/colrv1.notoemoji.tests" />
     <Text Include="../../thirdparty/harfbuzz/test/subset/data/tests/colrv1.tests" />
     <Text Include="../../thirdparty/harfbuzz/test/subset/data/tests/colrv1_copy_varstore.tests" />
+    <Text Include="../../thirdparty/harfbuzz/test/subset/data/tests/empty_region_vardata.tests" />
     <Text Include="../../thirdparty/harfbuzz/test/subset/data/tests/full-font.tests" />
     <Text Include="../../thirdparty/harfbuzz/test/subset/data/tests/full_instance.tests" />
     <Text Include="../../thirdparty/harfbuzz/test/subset/data/tests/glyf_bug_3131.tests" />

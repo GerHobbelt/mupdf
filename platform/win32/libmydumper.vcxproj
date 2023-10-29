@@ -126,14 +126,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYDUMPER;MYDUMPER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYDUMPER;MYDUMPER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -152,7 +152,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYDUMPER;MYDUMPER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -160,7 +160,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYDUMPER;MYDUMPER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -181,14 +181,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYDUMPER;MYDUMPER_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYDUMPER;MYDUMPER_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -207,7 +207,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYDUMPER;MYDUMPER_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -215,7 +215,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYDUMPER;MYDUMPER_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -234,13 +234,16 @@
     <ClCompile Include="../../thirdparty/owemdjee/mydumper/src/logging.c" />
     <ClCompile Include="../../thirdparty/owemdjee/mydumper/src/mydumper.c" />
     <ClCompile Include="../../thirdparty/owemdjee/mydumper/src/mydumper_arguments.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mydumper/src/mydumper_char_chunks.c" />
     <ClCompile Include="../../thirdparty/owemdjee/mydumper/src/mydumper_chunks.c" />
     <ClCompile Include="../../thirdparty/owemdjee/mydumper/src/mydumper_common.c" />
     <ClCompile Include="../../thirdparty/owemdjee/mydumper/src/mydumper_daemon_thread.c" />
     <ClCompile Include="../../thirdparty/owemdjee/mydumper/src/mydumper_database.c" />
     <ClCompile Include="../../thirdparty/owemdjee/mydumper/src/mydumper_exec_command.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mydumper/src/mydumper_integer_chunks.c" />
     <ClCompile Include="../../thirdparty/owemdjee/mydumper/src/mydumper_jobs.c" />
     <ClCompile Include="../../thirdparty/owemdjee/mydumper/src/mydumper_masquerade.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mydumper/src/mydumper_partition_chunks.c" />
     <ClCompile Include="../../thirdparty/owemdjee/mydumper/src/mydumper_pmm_thread.c" />
     <ClCompile Include="../../thirdparty/owemdjee/mydumper/src/mydumper_start_dump.c" />
     <ClCompile Include="../../thirdparty/owemdjee/mydumper/src/mydumper_stream.c" />
@@ -270,14 +273,17 @@
     <ClInclude Include="../../thirdparty/owemdjee/mydumper/src/connection.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mydumper/src/logging.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mydumper/src/mydumper_arguments.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mydumper/src/mydumper_char_chunks.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mydumper/src/mydumper_chunks.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mydumper/src/mydumper_common.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mydumper/src/mydumper_daemon_thread.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mydumper/src/mydumper_database.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mydumper/src/mydumper_exec_command.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mydumper/src/mydumper_global.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mydumper/src/mydumper_integer_chunks.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mydumper/src/mydumper_jobs.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mydumper/src/mydumper_masquerade.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mydumper/src/mydumper_partition_chunks.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mydumper/src/mydumper_pmm_thread.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mydumper/src/mydumper_start_dump.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mydumper/src/mydumper_stream.h" />

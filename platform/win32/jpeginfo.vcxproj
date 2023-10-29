@@ -105,14 +105,14 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>..\..\scripts\jpeginfo;..\..\scripts\libjpeg-turbo;..\..\include;..\..\thirdparty\jpeginfo;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\owemdjee\plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/jpeginfo;../../scripts/libjpeg-turbo;../../include;../../thirdparty/jpeginfo;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/getopt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>HAVE_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;FT2_BUILD_LIBRARY;OPJ_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -128,7 +128,7 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>..\..\scripts\jpeginfo;..\..\scripts\libjpeg-turbo;..\..\include;..\..\thirdparty\jpeginfo;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\owemdjee\plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/jpeginfo;../../scripts/libjpeg-turbo;../../include;../../thirdparty/jpeginfo;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/getopt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -137,7 +137,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>..\..\scripts\jpeginfo;..\..\scripts\libjpeg-turbo;..\..\include;..\..\thirdparty\jpeginfo;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\owemdjee\plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/jpeginfo;../../scripts/libjpeg-turbo;../../include;../../thirdparty/jpeginfo;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/getopt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>HAVE_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;FT2_BUILD_LIBRARY;OPJ_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -153,14 +153,14 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>..\..\scripts\jpeginfo;..\..\scripts\libjpeg-turbo;..\..\include;..\..\thirdparty\jpeginfo;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\owemdjee\plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/jpeginfo;../../scripts/libjpeg-turbo;../../include;../../thirdparty/jpeginfo;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/getopt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>..\..\scripts\jpeginfo;..\..\scripts\libjpeg-turbo;..\..\include;..\..\thirdparty\jpeginfo;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\owemdjee\plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/jpeginfo;../../scripts/libjpeg-turbo;../../include;../../thirdparty/jpeginfo;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/getopt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>HAVE_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -175,7 +175,7 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>..\..\scripts\jpeginfo;..\..\scripts\libjpeg-turbo;..\..\include;..\..\thirdparty\jpeginfo;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\owemdjee\plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/jpeginfo;../../scripts/libjpeg-turbo;../../include;../../thirdparty/jpeginfo;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/getopt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -185,7 +185,7 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>..\..\scripts\jpeginfo;..\..\scripts\libjpeg-turbo;..\..\include;..\..\thirdparty\jpeginfo;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\owemdjee\plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/jpeginfo;../../scripts/libjpeg-turbo;../../include;../../thirdparty/jpeginfo;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/getopt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>HAVE_CONFIG_H;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -200,37 +200,52 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>..\..\scripts\jpeginfo;..\..\scripts\libjpeg-turbo;..\..\include;..\..\thirdparty\jpeginfo;..\..\thirdparty\owemdjee\libjpeg-turbo;..\..\thirdparty\owemdjee\plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/jpeginfo;../../scripts/libjpeg-turbo;../../include;../../thirdparty/jpeginfo;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/getopt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ProjectReference Include="libgetopt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518110e57b1}</Project>
+    </ProjectReference>
     <ProjectReference Include="libjpeg-turbo.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
     </ProjectReference>
     <ProjectReference Include="libmupdf_minimal_core.vcxproj">
       <Project>{6f1ee8ba-ccb7-4f76-b9da-337c41dd6fc0}</Project>
     </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/jpeginfo/getopt.c" />
-    <ClCompile Include="../../thirdparty/jpeginfo/getopt1.c" />
     <ClCompile Include="../../thirdparty/jpeginfo/jpeginfo.c" />
-    <ClCompile Include="../../thirdparty/jpeginfo/md5.c" />
+    <ClCompile Include="../../thirdparty/jpeginfo/jpegmarker.c" />
+    <ClCompile Include="../../thirdparty/jpeginfo/md5/md5.c" />
     <ClCompile Include="../../thirdparty/jpeginfo/misc.c" />
-    <ClCompile Include="../../thirdparty/jpeginfo/sha256/blocks.c" />
-    <ClCompile Include="../../thirdparty/jpeginfo/sha256/hash.c" />
-    <ClInclude Include="../../thirdparty/jpeginfo/getopt.h" />
+    <ClCompile Include="../../thirdparty/jpeginfo/sha256/sha256_blocks.c" />
+    <ClCompile Include="../../thirdparty/jpeginfo/sha256/sha256_hash.c" />
+    <ClCompile Include="../../thirdparty/jpeginfo/sha512/sha512_blocks.c" />
+    <ClCompile Include="../../thirdparty/jpeginfo/sha512/sha512_hash.c" />
     <ClInclude Include="../../thirdparty/jpeginfo/jpeginfo.h" />
-    <ClInclude Include="../../thirdparty/jpeginfo/md5.h" />
+    <ClInclude Include="../../thirdparty/jpeginfo/jpegmarker.h" />
+    <ClInclude Include="../../thirdparty/jpeginfo/md5/md5.h" />
     <ClInclude Include="../../thirdparty/jpeginfo/sha256/crypto_hash_sha256.h" />
     <ClInclude Include="../../thirdparty/jpeginfo/sha256/crypto_hashblocks_sha256.h" />
+    <ClInclude Include="../../thirdparty/jpeginfo/sha512/crypto_hash_sha512.h" />
+    <ClInclude Include="../../thirdparty/jpeginfo/sha512/crypto_hashblocks_sha512.h" />
+    <Image Include="../../thirdparty/jpeginfo/test/jpeginfo_test1.jpg" />
+    <Image Include="../../thirdparty/jpeginfo/test/jpeginfo_test2.jpg" />
+    <Image Include="../../thirdparty/jpeginfo/test/jpeginfo_test2_broken.jpg" />
+    <Image Include="../../thirdparty/jpeginfo/test/jpeginfo_test3.jpg" />
     <Text Include="../../thirdparty/jpeginfo/Makefile.in" />
     <Text Include="../../thirdparty/jpeginfo/README.md" />
     <Text Include="../../thirdparty/jpeginfo/config.h.in" />
     <Text Include="../../thirdparty/jpeginfo/configure.in" />
+    <Text Include="../../thirdparty/jpeginfo/test/README" />
+    <Text Include="../../thirdparty/jpeginfo/test/test.py" />
     <Text Include="../../thirdparty/jpeginfo/tools/config.guess" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >

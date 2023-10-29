@@ -126,14 +126,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXNNPACK;XNNPACK_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXNNPACK;XNNPACK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -152,7 +152,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXNNPACK;XNNPACK_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -160,7 +160,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXNNPACK;XNNPACK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -181,14 +181,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXNNPACK;XNNPACK_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXNNPACK;XNNPACK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -207,7 +207,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXNNPACK;XNNPACK_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -215,7 +215,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXNNPACK;XNNPACK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -494,6 +494,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/configs/conv-hwc2chw-config.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/configs/dwconv-config.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/configs/dwconv2d-chw-config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/configs/experiments-config.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/configs/gavgpool-config.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/configs/gavgpool-cw-config.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/configs/gemm-config.c" />
@@ -5970,6 +5971,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-1x1-minmax-scalar.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-1x16-minmax-neon-mlal-lane-prfm.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-1x16-minmax-neon-mlal-lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-1x16c4-minmax-avx512vnni.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-1x16c4-minmax-neondot.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-1x16c8-minmax-aarch64-neondot-ld128.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-1x16c8-minmax-avx512skx.c" />
@@ -5997,6 +5999,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-1x8c8-minmax-neoni8mm.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-2x16-minmax-neon-mlal-lane-prfm.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-2x16-minmax-neon-mlal-lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-2x16c4-minmax-avx512vnni.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-2x16c4-minmax-neondot.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-2x16c8-minmax-avx512skx.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-2x16c8-minmax-neoni8mm.c" />
@@ -6020,6 +6023,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-2x8c8-minmax-neoni8mm.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-3x16-minmax-neon-mlal-lane-prfm.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-3x16-minmax-neon-mlal-lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-3x16c4-minmax-avx512vnni.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-3x16c4-minmax-neondot.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-3x16c8-minmax-avx512skx.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-3x16c8-minmax-neoni8mm.c" />
@@ -6036,6 +6040,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-3x8c8-minmax-neoni8mm.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-4x16-minmax-neon-mlal-lane-prfm.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-4x16-minmax-neon-mlal-lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-4x16c4-minmax-avx512vnni.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-4x16c4-minmax-neondot.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-4x16c8-minmax-avx512skx.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-4x16c8-minmax-neoni8mm.c" />
@@ -6052,14 +6057,17 @@
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-4x4c8-minmax-xop-ld64.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-4x8c4-minmax-neondot.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-4x8c8-minmax-neoni8mm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-5x16c4-minmax-avx512vnni.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-5x16c8-minmax-avx512skx.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-6x16-minmax-neon-mlal-lane-prfm.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-6x16-minmax-neon-mlal-lane.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-6x16c4-minmax-avx512vnni.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-6x16c4-minmax-neondot.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-6x16c8-minmax-avx512skx.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-6x16c8-minmax-neoni8mm.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-6x8c4-minmax-neondot.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-6x8c8-minmax-neoni8mm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-7x16c4-minmax-avx512vnni.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-7x16c8-minmax-avx512skx.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-8x16c8-minmax-avx512skx.c" />
     <ClCompile Include="../../thirdparty/owemdjee/xnnpack/src/qd8-f32-qc4w-gemm/gen/qd8-f32-qc4w-gemm-8x16c8-minmax-neoni8mm.c" />
@@ -10709,6 +10717,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/xnnpack/bench/utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xnnpack/bench/vcvt-benchmark.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xnnpack/eval/math-evaluation-tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/xnnpack/include/experiments-config.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xnnpack/include/xnnpack.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xnnpack/src/xnnpack/aarch32-assembler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/xnnpack/src/xnnpack/aarch64-assembler.h" />

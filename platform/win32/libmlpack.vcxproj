@@ -126,14 +126,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/mlpack/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/mlpack/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMLPACK;MLPACK_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMLPACK;MLPACK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/mlpack/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/mlpack/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -152,7 +152,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/mlpack/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/mlpack/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMLPACK;MLPACK_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -160,7 +160,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMLPACK;MLPACK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/mlpack/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/mlpack/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -181,14 +181,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/mlpack/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/mlpack/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMLPACK;MLPACK_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMLPACK;MLPACK_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/mlpack/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/mlpack/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -207,7 +207,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/mlpack/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/mlpack/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMLPACK;MLPACK_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -215,7 +215,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMLPACK;MLPACK_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/mlpack/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/mlpack/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -322,9 +322,15 @@
     <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/layer/add_merge.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/layer/alpha_dropout.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/layer/batch_norm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/layer/c_relu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/layer/concat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/layer/concatenate.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/layer/convolution.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/layer/dropout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/layer/flexible_relu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/layer/ftswish.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/layer/grouped_convolution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/layer/hard_tanh.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/layer/identity.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/layer/linear3d.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/layer/linear_no_bias.cpp" />
@@ -332,7 +338,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/layer/max_pooling.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/layer/mean_pooling.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/layer/padding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/layer/parametric_relu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/layer/relu6.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/layer/softmax.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/layer/softmin.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/layer_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/loss_functions_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/ann/not_adapted/activation_functions_test.cpp" />
@@ -459,6 +468,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/one_hot_encoding_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/pca_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/perceptron_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/policy_gradient_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/prefixedoutstream_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/python_binding_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/q_learning_test.cpp" />
@@ -668,6 +678,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/bindings/tests/test_option.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/bindings/util/camel_case.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/bindings/util/strip_type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/config.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/core.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/core/arma_extend/Mat_extra_bones.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/core/arma_extend/SpMat_extra_bones.hpp" />
@@ -1042,12 +1053,14 @@
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/amf/update_rules/update_rules.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/activation_functions/activation_functions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/activation_functions/bipolar_sigmoid_function.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/activation_functions/elish_function.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/activation_functions/elliot_function.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/activation_functions/gaussian_function.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/activation_functions/gelu_function.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/activation_functions/hard_sigmoid_function.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/activation_functions/hard_swish_function.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/activation_functions/hyper_sinh_function.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/activation_functions/identity_function.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/activation_functions/inverse_quadratic_function.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/activation_functions/lisht_function.hpp" />
@@ -1114,6 +1127,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/base_layer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/batch_norm.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/batch_norm_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/c_relu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/c_relu_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/celu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/celu_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/concat.hpp" />
@@ -1128,8 +1143,14 @@
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/dropout_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/elu.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/elu_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/flexible_relu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/flexible_relu_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/ftswish.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/ftswish_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/grouped_convolution.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/grouped_convolution_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/hard_tanh.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/hard_tanh_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/identity.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/identity_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/layer.hpp" />
@@ -1160,8 +1181,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/bicubic_interpolation_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/bilinear_interpolation.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/bilinear_interpolation_impl.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/c_relu.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/c_relu_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/channel_shuffle.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/channel_shuffle_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/concat_performance.hpp" />
@@ -1172,16 +1191,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/fast_lstm_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/flatten_t_swish.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/flatten_t_swish_impl.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/flexible_relu.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/flexible_relu_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/glimpse.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/glimpse_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/group_norm.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/group_norm_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/gru.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/gru_impl.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/hard_tanh.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/hard_tanh_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/hardshrink.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/hardshrink_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/highway.hpp" />
@@ -1208,8 +1223,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/multiply_merge_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/nearest_interpolation.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/nearest_interpolation_impl.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/parametric_relu.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/parametric_relu_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/pixel_shuffle.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/pixel_shuffle_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/positional_encoding.hpp" />
@@ -1220,16 +1233,12 @@
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/recurrent_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/reinforce_normal.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/reinforce_normal_impl.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/relu6.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/relu6_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/reparametrization.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/reparametrization_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/select.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/select_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/sequential.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/sequential_impl.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/softmin.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/softmin_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/softshrink.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/softshrink_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/spatial_dropout.hpp" />
@@ -1243,13 +1252,19 @@
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/not_adapted/weight_norm_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/padding.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/padding_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/parametric_relu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/parametric_relu_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/radial_basis_function.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/radial_basis_function_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/recurrent_layer.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/recurrent_layer_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/relu6.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/relu6_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/serialization.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/softmax.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/softmax_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/softmin.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/layer/softmin_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/loss_functions/binary_cross_entropy_loss.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/loss_functions/binary_cross_entropy_loss_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/ann/loss_functions/cosine_embedding_loss.hpp" />
@@ -1346,8 +1361,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/cf/cf_model_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/cf/decomposition_policies/batch_svd_method.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/cf/decomposition_policies/bias_svd_method.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/cf/decomposition_policies/block_krylov_svd_method.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/cf/decomposition_policies/decomposition_policies.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/cf/decomposition_policies/nmf_method.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/cf/decomposition_policies/quic_svd_method.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/cf/decomposition_policies/randomized_svd_method.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/cf/decomposition_policies/regularized_svd_method.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/cf/decomposition_policies/svd_complete_method.hpp" />
@@ -1623,9 +1640,11 @@
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/async_learning.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/async_learning_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/ddpg.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/ddpg_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/environment/acrobot.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/environment/cart_pole.hpp" />
-    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/environment/continuous_double_pole_cart.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/environment/cont_double_pole_cart.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/environment/continuous_mountain_car.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/environment/double_pole_cart.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/environment/env_type.hpp" />
@@ -1635,6 +1654,9 @@
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/environment/mountain_car.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/environment/pendulum.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/environment/reward_clipping.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/noise/gaussian.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/noise/noise.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/noise/ornstein_uhlenbeck.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/policy/aggregated_policy.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/policy/greedy_policy.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/policy/policy.hpp" />
@@ -1651,6 +1673,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/replay/sumtree.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/sac.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/sac_impl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/td3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/td3_impl.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/training_config.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/worker/n_step_q_learning_worker.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/methods/reinforcement_learning/worker/one_step_q_learning_worker.hpp" />
@@ -1692,6 +1716,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/serialization.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/test_catch_tools.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/test_function_tools.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/test_reinforcement_learning_agent.hpp" />
     <Image Include="../../thirdparty/owemdjee/mlpack/dist/win-installer/res/banner.jpg" />
     <Image Include="../../thirdparty/owemdjee/mlpack/dist/win-installer/res/dialog_white.jpg" />
     <Image Include="../../thirdparty/owemdjee/mlpack/src/mlpack/bindings/markdown/res/menu_bg.png" />
@@ -1785,6 +1810,11 @@
     <Text Include="../../thirdparty/owemdjee/mlpack/doc/tutorials/neighbor_search.md" />
     <Text Include="../../thirdparty/owemdjee/mlpack/doc/tutorials/range_search.md" />
     <Text Include="../../thirdparty/owemdjee/mlpack/doc/tutorials/reinforcement_learning.md" />
+    <Text Include="../../thirdparty/owemdjee/mlpack/doc/tutorials/reinforcement_learning/asynchronous_learning.md" />
+    <Text Include="../../thirdparty/owemdjee/mlpack/doc/tutorials/reinforcement_learning/ddpg.md" />
+    <Text Include="../../thirdparty/owemdjee/mlpack/doc/tutorials/reinforcement_learning/q_learning.md" />
+    <Text Include="../../thirdparty/owemdjee/mlpack/doc/tutorials/reinforcement_learning/sac.md" />
+    <Text Include="../../thirdparty/owemdjee/mlpack/doc/tutorials/reinforcement_learning/td3.md" />
     <Text Include="../../thirdparty/owemdjee/mlpack/doc/user/build_windows.md" />
     <Text Include="../../thirdparty/owemdjee/mlpack/doc/user/cv.md" />
     <Text Include="../../thirdparty/owemdjee/mlpack/doc/user/formats.md" />
@@ -1884,6 +1914,7 @@
     <Text Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/data/labels.txt" />
     <Text Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/data/lars_dependent_x.csv" />
     <Text Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/data/lars_dependent_y.csv" />
+    <Text Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/data/lars_kkt.bin" />
     <Text Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/data/nbc_high_dim_test.csv" />
     <Text Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/data/nbc_high_dim_test_labels.csv" />
     <Text Include="../../thirdparty/owemdjee/mlpack/src/mlpack/tests/data/nbc_high_dim_train.csv" />

@@ -126,14 +126,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORFLOW;TENSORFLOW_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORFLOW;TENSORFLOW_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -152,7 +152,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORFLOW;TENSORFLOW_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -160,7 +160,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORFLOW;TENSORFLOW_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -181,14 +181,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORFLOW;TENSORFLOW_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORFLOW;TENSORFLOW_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -207,7 +207,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORFLOW;TENSORFLOW_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -215,7 +215,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTENSORFLOW;TENSORFLOW_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -811,8 +811,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/compiler/mlir/quantization/stablehlo/passes/bridge/passes.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/compiler/mlir/quantization/stablehlo/passes/bridge/verify_quant_legalization.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/compiler/mlir/quantization/stablehlo/passes/lift_quantizable_spots_as_functions.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/compiler/mlir/quantization/stablehlo/passes/post_quantize.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/compiler/mlir/quantization/stablehlo/passes/prepare_quantize.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/compiler/mlir/quantization/stablehlo/passes/quantize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/compiler/mlir/quantization/stablehlo/passes/quantize_composite_functions.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/compiler/mlir/quantization/stablehlo/passes/quantize_weight.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/compiler/mlir/quantization/stablehlo/passes/replace_stablehlo_ops_in_main_function_with_xla_call_module_ops.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/compiler/mlir/quantization/stablehlo/passes/restore_function_name.cc" />
@@ -4316,7 +4318,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/runtime/tf_threadpool_concurrent_work_queue_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/runtime/work_queue_interface.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/runtime/work_queue_interface_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/saved_model/python/saved_model_aot_compile_wrapper.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/saved_model/python/saved_model_load_and_run.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/saved_model/python/saved_model_load_and_run_wrapper.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/saved_model/saved_model.cc" />
@@ -4327,8 +4328,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/saved_model/tests/saved_model_aot_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/saved_model/tests/saved_model_gpu_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/saved_model/tests/saved_model_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/saved_model/utils/serialize_bef_utils.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/saved_model/utils/serialize_bef_utils_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/saved_model/utils/serialize_utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/saved_model/utils/serialize_utils_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/stubs/model_config_stub.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/stubs/tfrt_native_lowering_stub.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/tfrt_session/tfrt_session.cc" />
@@ -4767,6 +4768,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/acceleration/configuration/proto_to_flatbuffer_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/acceleration/configuration/stable_delegate_plugin.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/acceleration/configuration/stable_delegate_plugin_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/acceleration/configuration/xnnpack_plugin.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/acceleration/configuration/xnnpack_plugin_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/allocation.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/allocation_test.cc" />
@@ -4798,8 +4800,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/core/acceleration/configuration/nnapi_plugin_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/core/acceleration/configuration/stable_delegate_registry.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/core/acceleration/configuration/stable_delegate_registry_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/core/acceleration/configuration/xnnpack_plugin.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/core/acceleration/configuration/xnnpack_plugin_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/core/api/error_reporter.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/core/api/error_reporter_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/core/api/flatbuffer_conversions.cc" />
@@ -5990,6 +5990,9 @@
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/kernels/squared_difference_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/kernels/squeeze.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/kernels/squeeze_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/kernels/stablehlo_add.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/kernels/stablehlo_add_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/kernels/stablehlo_elementwise.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/kernels/stablehlo_gather.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/kernels/stablehlo_gather_test.cc" />
     <ClCompile Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/kernels/stablehlo_scatter.cc" />
@@ -7099,6 +7102,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow/tensorflow/compiler/mlir/quantization/tensorflow/calibrator/calibration_statistics_collector_histogram.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow/tensorflow/compiler/mlir/quantization/tensorflow/calibrator/calibration_statistics_collector_min_max.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow/tensorflow/compiler/mlir/quantization/tensorflow/calibrator/calibrator_singleton.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorflow/tensorflow/compiler/mlir/quantization/tensorflow/calibrator/id_assigner.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow/tensorflow/compiler/mlir/quantization/tensorflow/cc/const_op_size.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow/tensorflow/compiler/mlir/quantization/tensorflow/cc/constant_fold.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow/tensorflow/compiler/mlir/quantization/tensorflow/cc/convert_asset_args.h" />
@@ -8824,7 +8828,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/saved_model/saved_model_import_input.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/saved_model/saved_model_testutil.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/saved_model/saved_model_util.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/saved_model/utils/serialize_bef_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/saved_model/utils/serialize_utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/stubs/model_config_stub.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/stubs/tfrt_native_lowering_stub.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow/tensorflow/core/tfrt/tfrt_session/tfrt_session.h" />
@@ -10014,6 +10018,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/kernels/shim/tflite_op_shim.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/kernels/shim/tflite_op_wrapper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/kernels/shim/tflite_tensor_view.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/kernels/stablehlo_elementwise.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/kernels/subgraph_test_util.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/kernels/tensor_slice_util.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tensorflow/tensorflow/lite/kernels/test_delegate_providers.h" />
@@ -19991,6 +19996,7 @@
     <Text Include="../../thirdparty/owemdjee/tensorflow/tensorflow/python/ops/linalg_ops_impl.py" />
     <Text Include="../../thirdparty/owemdjee/tensorflow/tensorflow/python/ops/list_ops.py" />
     <Text Include="../../thirdparty/owemdjee/tensorflow/tensorflow/python/ops/logging_ops.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow/tensorflow/python/ops/lookup_grad.py" />
     <Text Include="../../thirdparty/owemdjee/tensorflow/tensorflow/python/ops/lookup_ops.py" />
     <Text Include="../../thirdparty/owemdjee/tensorflow/tensorflow/python/ops/lookup_ops_async_checkpoint_test.py" />
     <Text Include="../../thirdparty/owemdjee/tensorflow/tensorflow/python/ops/losses/__init__.py" />
@@ -20072,6 +20078,7 @@
     <Text Include="../../thirdparty/owemdjee/tensorflow/tensorflow/python/ops/parallel_for/test_util.py" />
     <Text Include="../../thirdparty/owemdjee/tensorflow/tensorflow/python/ops/parallel_for/xla_control_flow_ops_test.py" />
     <Text Include="../../thirdparty/owemdjee/tensorflow/tensorflow/python/ops/parsing_config.py" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow/tensorflow/python/ops/parsing_grad.py" />
     <Text Include="../../thirdparty/owemdjee/tensorflow/tensorflow/python/ops/parsing_ops.py" />
     <Text Include="../../thirdparty/owemdjee/tensorflow/tensorflow/python/ops/partitioned_variables.py" />
     <Text Include="../../thirdparty/owemdjee/tensorflow/tensorflow/python/ops/proto_ops.py" />
@@ -22542,6 +22549,7 @@
     <Text Include="../../thirdparty/owemdjee/tensorflow/tensorflow/tools/ci_build/install/install_centos_pip_packages.sh" />
     <Text Include="../../thirdparty/owemdjee/tensorflow/tensorflow/tools/ci_build/install/install_centos_python36.sh" />
     <Text Include="../../thirdparty/owemdjee/tensorflow/tensorflow/tools/ci_build/install/install_clang.sh" />
+    <Text Include="../../thirdparty/owemdjee/tensorflow/tensorflow/tools/ci_build/install/install_clang_17.sh" />
     <Text Include="../../thirdparty/owemdjee/tensorflow/tensorflow/tools/ci_build/install/install_cmake.sh" />
     <Text Include="../../thirdparty/owemdjee/tensorflow/tensorflow/tools/ci_build/install/install_deb_packages.sh" />
     <Text Include="../../thirdparty/owemdjee/tensorflow/tensorflow/tools/ci_build/install/install_gcc6.sh" />

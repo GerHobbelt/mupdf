@@ -126,14 +126,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/typesense/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/typesense/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTYPESENSE;TYPESENSE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTYPESENSE;TYPESENSE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/typesense/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/typesense/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -152,7 +152,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/typesense/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/typesense/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTYPESENSE;TYPESENSE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -160,7 +160,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTYPESENSE;TYPESENSE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/typesense/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/typesense/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -181,14 +181,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/typesense/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/typesense/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTYPESENSE;TYPESENSE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTYPESENSE;TYPESENSE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/typesense/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/typesense/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -207,7 +207,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/typesense/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/typesense/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTYPESENSE;TYPESENSE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -215,7 +215,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTYPESENSE;TYPESENSE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;../../thirdparty/owemdjee/typesense/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/typesense/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -229,6 +229,7 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/adi_tree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/typesense/src/analytics_manager.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/app_metrics.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/array.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/array_base.cpp" />
@@ -242,9 +243,11 @@
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/core_api.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/core_api_utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/cvt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/typesense/src/event_manager.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/field.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/file_utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/http_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/typesense/src/http_proxy.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/http_server.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/id_list.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/ids_t.cpp" />
@@ -256,6 +259,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/num_tree.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/or_iterator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/override.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/typesense/src/popular_queries.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/posting.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/posting_list.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/raft_server.cpp" />
@@ -264,12 +268,18 @@
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/string_utils.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/synonym_index.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/system_metrics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/typesense/src/text_embedder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/typesense/src/text_embedder_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/typesense/src/text_embedder_remote.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/typesense/src/text_embedder_tokenizer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/thread_local_vars.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/tokenizer.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/tsconfig.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/typesense_server_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/typesense/src/validator.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/src/vector_query_ops.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/test/adi_tree_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/typesense/test/analytics_manager_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/test/app_metrics_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/test/array_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/test/array_utils_test.cpp" />
@@ -284,6 +294,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/typesense/test/collection_locale_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/test/collection_manager_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/test/collection_nested_fields_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/typesense/test/collection_operations_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/test/collection_override_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/test/collection_schema_change_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/test/collection_sorting_test.cpp" />
@@ -299,6 +310,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/typesense/test/match_score_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/test/num_tree_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/test/or_iterator_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/typesense/test/popular_queries_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/test/posting_list_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/test/raft_server_test.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/typesense/test/ratelimit_test.cpp" />
@@ -314,6 +326,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/typesense/bazel/leveldb/port_config.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/INIReader.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/adi_tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/typesense/include/analytics_manager.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/app_metrics.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/array.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/array_base.h" />
@@ -329,11 +342,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/core_api.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/core_api_utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/cvt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/typesense/include/event_manager.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/exectime.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/field.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/file_utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/http_client.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/http_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/typesense/include/http_proxy.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/http_server.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/id_list.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/ids_t.h" />
@@ -349,6 +364,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/or_iterator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/override.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/parasort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/typesense/include/popular_queries.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/posting.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/posting_list.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/raft_server.h" />
@@ -361,6 +377,10 @@
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/string_utils.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/synonym_index.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/system_metrics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/typesense/include/text_embedder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/typesense/include/text_embedder_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/typesense/include/text_embedder_remote.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/typesense/include/text_embedder_tokenizer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/thread_local_vars.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/threadpool.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/timsort.hpp" />
@@ -375,6 +395,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/tsl/htrie_map.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/tsl/htrie_set.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/typesense_server_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/typesense/include/validator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/vector_query_ops.h" />
     <ClInclude Include="../../thirdparty/owemdjee/typesense/include/wyhash_v5.h" />
     <Image Include="../../thirdparty/owemdjee/typesense/assets/typesense_books_demo.gif" />
@@ -389,7 +410,9 @@
     <Text Include="../../thirdparty/owemdjee/typesense/TODO.md" />
     <Text Include="../../thirdparty/owemdjee/typesense/bazel/config/BUILD.bazel" />
     <Text Include="../../thirdparty/owemdjee/typesense/bazel/leveldb/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/typesense/bazel/onnxruntime_cuda_defs.bzl" />
     <Text Include="../../thirdparty/owemdjee/typesense/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/typesense/ci_build.sh" />
     <Text Include="../../thirdparty/owemdjee/typesense/cmake/For.cmake" />
     <Text Include="../../thirdparty/owemdjee/typesense/cmake/GoogleTest.cmake" />
     <Text Include="../../thirdparty/owemdjee/typesense/cmake/H2O.cmake" />
@@ -406,6 +429,7 @@
     <Text Include="../../thirdparty/owemdjee/typesense/cmake/kakasi.cmake" />
     <Text Include="../../thirdparty/owemdjee/typesense/cmake/lrucache.cmake" />
     <Text Include="../../thirdparty/owemdjee/typesense/cmake/onnxruntime.cmake" />
+    <Text Include="../../thirdparty/owemdjee/typesense/cmake/onnxruntime_ext.cmake" />
     <Text Include="../../thirdparty/owemdjee/typesense/cmake/s2.cmake" />
     <Text Include="../../thirdparty/owemdjee/typesense/debian-pkg/generate_deb_rpm.sh" />
     <Text Include="../../thirdparty/owemdjee/typesense/docker-build.sh" />

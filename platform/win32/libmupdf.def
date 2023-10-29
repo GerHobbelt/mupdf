@@ -8,6 +8,7 @@ EXPORTS
 
 	cmapdump_main
 	curl_main
+	jpeginfo_main
 	jpegturbo_cjpeg_main
 	jpegturbo_djpeg_main
 	jpegturbo_jpegtran_main
@@ -24,6 +25,7 @@ EXPORTS
 	muraster_main
 	murun_main
 	mutrace_main
+	pdfbake_main
 	pdfclean_main
 	pdfcreate_main
 	pdfextract_main
@@ -37,12 +39,33 @@ EXPORTS
 	pdfsign_main
 	pdftagged_main
 	pdftrim_main
+	qiqqa_chop_shop_main
+	qiqqa_content_importer_main
+	qiqqa_content_processor_main
+	qiqqa_convert_legacy_annot_blobs_main
+	qiqqa_convert_legacy_autotags_main
+	qiqqa_convert_legacy_configuration_main
+	qiqqa_convert_legacy_expedition_main
+	qiqqa_db_exporter_main
+	qiqqa_db_fts_indexer_main
+	qiqqa_db_fts_search_main
+	qiqqa_db_importer_main
+	qiqqa_db_pappy_main
+	qiqqa_doc_scrutinizer_main
 	qiqqa_documentid62_main
 	qiqqa_fingerprint0_main
 	qiqqa_fingerprint1_main
+	qiqqa_ingest_main
+	qiqqa_meta_exporter_main
+	qiqqa_meta_importer_main
 	qiqqa_muannot_main
 	qiqqa_mucontent_main
 	qiqqa_muserver_main
+	qiqqa_ocr_bezoar_main
+	qiqqa_pdf_hound_main
+	qiqqa_safe_file_copier_main
+	qiqqa_snarfl_main
+	qiqqa_web_api_server_main
 	sqlite_main
 	tesseract_main
 
@@ -71,12 +94,13 @@ EXPORTS
 
 ; Tesseract OCR exports
 
-	fz_clear_leptonica_mem
 	ocr_fin
 	ocr_init
 	ocr_recognise
-	fz_set_leptonica_mem
-	fz_set_leptonica_stderr_handler
+	tesseract_get_page_gradient_main
+	tesseract_svpaint_main
+	tesseract_test_issue_845_main
+	tesseract_test_issue_ML_1bba6c_main
 	tesseract_tool_main
 
 	tesseract_ambiguous_words_main
@@ -110,6 +134,7 @@ EXPORTS
 	curl_global_init
 	curl_global_init_mem
 	curl_global_sslset
+	curl_global_trace
 	curl_mime_addpart
 	curl_mime_data
 	curl_mime_data_cb
@@ -161,6 +186,7 @@ EXPORTS
 	curl_multi_cleanup
 	curl_multi_count_connections
 	curl_multi_fdset
+	curl_multi_get_handles
 	curl_multi_info_read
 	curl_multi_init
 	curl_multi_perform
@@ -187,6 +213,7 @@ EXPORTS
 
 	Curl_now
 	Curl_timediff
+	Curl_timediff_ceil
 	Curl_timediff_us
 
 	curlx_win32_open
@@ -206,6 +233,7 @@ EXPORTS
 	fz_set_cpu_core_count
 	fzPopHeapDbgPurpose
 	fzPushHeapDbgPurpose
+	fz_ReleaseHeapSnapshot
 	fz_ReportHeapLeakageAgainstSnapshot
 	fz_TakeHeapSnapshot
 	fz_TurnHeapLeakReportingAtProgramExitOn
@@ -247,6 +275,8 @@ EXPORTS
 
 	fz_authenticate_password
 	fz_bound_page
+	fz_bound_page_box
+	fz_box_type_from_string
 	fz_clamp_location
 	fz_count_chapter_pages
 	fz_count_chapters
@@ -293,6 +323,8 @@ EXPORTS
 	fz_previous_page
 	fz_process_opened_pages
 	fz_recognize_document
+	fz_recognize_document_content
+	fz_recognize_document_stream_content
 	fz_register_document_handler
 	fz_register_document_handlers
 	fz_resolve_link
@@ -302,6 +334,7 @@ EXPORTS
 	fz_run_page_contents
 	fz_save_accelerator
 	fz_set_metadata
+	fz_string_from_box_type
 
 ; Fitz exports
 
@@ -392,6 +425,9 @@ EXPORTS
 	fz_read_archive_entry
 	fz_tree_archive_add_buffer
 	fz_tree_archive_add_data
+	fz_try_open_archive_entry
+	fz_try_open_archive_with_stream
+	fz_try_read_archive_entry
 	fz_write_zip_entry
 	fz_close_band_writer
 	fz_drop_band_writer
@@ -404,6 +440,7 @@ EXPORTS
 	fz_default_halftone
 	fz_drop_bitmap
 	fz_drop_halftone
+	fz_invert_bitmap
 	fz_keep_bitmap
 	fz_keep_halftone
 	fz_new_bitmap
@@ -444,11 +481,13 @@ EXPORTS
 	fz_string_from_buffer
 	fz_terminate_buffer
 	fz_trim_buffer
+	fz_base_colorspace
 	fz_clamp_color
 	fz_clone_default_colorspaces
 	fz_colorspace_colorant
 	fz_colorspace_device_n_has_cmyk
 	fz_colorspace_device_n_has_only_cmyk
+	fz_colorspace_gamma_tables
 	fz_colorspace_is_cmyk
 	fz_colorspace_is_device
 	fz_colorspace_is_device_cmyk
@@ -477,6 +516,7 @@ EXPORTS
 	fz_drop_colorspace
 	fz_drop_colorspace_imp
 	fz_drop_default_colorspaces
+	fz_get_gamma_blending
 	fz_is_valid_blend_colorspace
 	fz_keep_colorspace
 	fz_keep_default_colorspaces
@@ -492,6 +532,7 @@ EXPORTS
 	fz_set_default_gray
 	fz_set_default_output_intent
 	fz_set_default_rgb
+	fz_set_gamma_blending
 	fz_compress_ccitt_fax_g3
 	fz_compress_ccitt_fax_g4
 	fz_deflate
@@ -499,6 +540,7 @@ EXPORTS
 	fz_drop_compressed_buffer
 	fz_image_type_name
 	fz_lookup_image_type
+	fz_new_compressed_buffer
 	fz_open_compressed_buffer
 	fz_open_image_decomp_stream
 	fz_open_image_decomp_stream_from_buffer
@@ -542,17 +584,24 @@ EXPORTS
 	fz_has_global_context
 	fz_has_locking_support
 	fz_info
+	fz_log_error
+	fz_log_errorFL
+	fz_log_error_printf
+	fz_log_error_printfFL
 	fz_malloc
 	fz_malloc_no_throw
 	fz_memrnd
 	fz_morph_error
+	fz_morph_errorFL
 	fz_new_context_imp
 	fz_push_try
 	fz_realloc
 	fz_realloc_no_throw
 	fz_replace_ephemeral_system_error
 	fz_rethrow
+	fz_rethrowFL
 	fz_rethrow_if
+	fz_rethrow_ifFL
 	fz_set_aa_level
 	fz_set_error_callback
 	fz_set_global_context
@@ -569,6 +618,7 @@ EXPORTS
 	fz_strdup
 	fz_text_aa_level
 	fz_throw
+	fz_throwFL
 	fz_tune_image_decode
 	fz_tune_image_scale
 	fz_use_document_css
@@ -577,10 +627,15 @@ EXPORTS
 	fz_var_imp
 	fz_verror
 	fz_vinfo
+	fz_vlog_error_printf
+	fz_vlog_error_printfFL
 	fz_vreplace_ephemeral_system_error
 	fz_vthrow
+	fz_vthrowFL
 	fz_vwarn
+	fz_vwarnFL
 	fz_warn
+	fz_warnFL
 	fz_aes_crypt_cbc
 	fz_aes_setkey_dec
 	fz_aes_setkey_enc
@@ -714,6 +769,9 @@ EXPORTS
 	fz_font_name
 	fz_font_shaper_data
 	fz_font_t3_procs
+	fz_ft_lock
+	fz_ft_lock_held
+	fz_ft_unlock
 	fz_get_glyph_name
 	fz_glyph_cacheable
 	fz_glyph_name_from_unicode_sc
@@ -732,6 +790,7 @@ EXPORTS
 	fz_lookup_cjk_font
 	fz_lookup_cjk_font_by_language
 	fz_lookup_cjk_ordering_by_language
+	fz_lookup_noto_boxes_font
 	fz_lookup_noto_emoji_font
 	fz_lookup_noto_font
 	fz_lookup_noto_math_font
@@ -802,7 +861,9 @@ EXPORTS
 	fz_try_invert_matrix
 	fz_union_rect
 	fz_getopt
+	fz_getopt_long
 	fz_getopt_reset
+	fz_opt_from_list
 	fz_dump_glyph_cache_stats
 	fz_prepare_t3_glyph
 	fz_purge_glyph_cache
@@ -825,6 +886,7 @@ EXPORTS
 	fz_hash_remove
 	fz_new_hash_table
 	fz_compressed_image_buffer
+	fz_compressed_image_type
 	fz_convert_indexed_pixmap_to_base
 	fz_convert_separation_pixmap_to_base
 	fz_decomp_image_from_stream
@@ -834,18 +896,23 @@ EXPORTS
 	fz_drop_image_store_key
 	fz_get_pixmap_from_image
 	fz_get_unscaled_pixmap_from_image
+	fz_image_info_from_buffer
 	fz_image_orientation
 	fz_image_resolution
 	fz_image_size
 	fz_keep_image
 	fz_keep_image_store_key
+	fz_load_bmp_info_subimage
 	fz_load_bmp_subimage
 	fz_load_bmp_subimage_count
+	fz_load_jbig2_info_subimage
 	fz_load_jbig2_subimage
 	fz_load_jbig2_subimage_count
 	fz_load_jpx
+	fz_load_pnm_info_subimage
 	fz_load_pnm_subimage
 	fz_load_pnm_subimage_count
+	fz_load_tiff_info_subimage
 	fz_load_tiff_subimage
 	fz_load_tiff_subimage_count
 	fz_new_image_from_buffer
@@ -856,6 +923,8 @@ EXPORTS
 	fz_pixmap_image_tile
 	fz_set_compressed_image_buffer
 	fz_set_pixmap_image_tile
+	opj_lock
+	opj_unlock
 	fz_drop_link
 	fz_is_external_link
 	fz_keep_link
@@ -1018,6 +1087,7 @@ EXPORTS
 	fz_add_separation
 	fz_add_separation_equivalents
 	fz_clone_separations_for_overprint
+	fz_compare_separations
 	fz_convert_separation_colors
 	fz_count_active_separations
 	fz_count_separations
@@ -1089,6 +1159,7 @@ EXPORTS
 	fz_read_int64
 	fz_read_int64_le
 	fz_read_line
+	fz_read_rune
 	fz_read_string
 	fz_read_uint16
 	fz_read_uint16_le
@@ -1098,15 +1169,24 @@ EXPORTS
 	fz_read_uint32_le
 	fz_read_uint64
 	fz_read_uint64_le
+	fz_read_utf16_be
+	fz_read_utf16_le
 	fz_seek
 	fz_skip
 	fz_skip_space
 	fz_skip_string
 	fz_tell
+	fz_try_open_file
+	fz_try_read_file
 	fz_basename
 	fz_chartorune
 	fz_cleanname
+	fz_decode_uri
+	fz_decode_uri_component
 	fz_dirname
+	fz_encode_uri
+	fz_encode_uri_component
+	fz_encode_uri_pathname
 	fz_format_output_path
 	fz_format_output_path_ex
 	fz_grisu
@@ -1190,6 +1270,7 @@ EXPORTS
 
 	fz_append_image_as_data_uri
 	fz_append_pixmap_as_data_uri
+	fz_fill_pixmap_from_display_list
 	fz_new_buffer_from_display_list
 	fz_new_buffer_from_page
 	fz_new_buffer_from_page_number
@@ -1224,12 +1305,22 @@ EXPORTS
 
 	fz_default_png_compression_level
 	fz_default_webp_quality
+	fz_new_buffer_from_image_as_jpeg
+	fz_new_buffer_from_image_as_jpx
 	fz_new_buffer_from_image_as_muraw
+	fz_new_buffer_from_image_as_pam
 	fz_new_buffer_from_image_as_png
+	fz_new_buffer_from_image_as_pnm
+	fz_new_buffer_from_image_as_psd
 	fz_new_buffer_from_image_as_tiff
 	fz_new_buffer_from_image_as_webp
+	fz_new_buffer_from_pixmap_as_jpeg
+	fz_new_buffer_from_pixmap_as_jpx
 	fz_new_buffer_from_pixmap_as_muraw
+	fz_new_buffer_from_pixmap_as_pam
 	fz_new_buffer_from_pixmap_as_png
+	fz_new_buffer_from_pixmap_as_pnm
+	fz_new_buffer_from_pixmap_as_psd
 	fz_new_buffer_from_pixmap_as_tiff
 	fz_new_buffer_from_pixmap_as_webp
 	fz_new_color_pcl_band_writer
@@ -1258,6 +1349,7 @@ EXPORTS
 	fz_save_bitmap_as_pkm
 	fz_save_bitmap_as_pwg
 	fz_save_pixmap_as_jpeg
+	fz_save_pixmap_as_jpx
 	fz_save_pixmap_as_muraw
 	fz_save_pixmap_as_pam
 	fz_save_pixmap_as_pbm
@@ -1277,6 +1369,7 @@ EXPORTS
 	fz_write_bitmap_as_pkm
 	fz_write_bitmap_as_pwg
 	fz_write_bitmap_as_pwg_page
+	fz_write_pixmap_as_jpx
 	fz_write_pixmap_as_muraw
 	fz_write_pixmap_as_pam
 	fz_write_pixmap_as_pcl
@@ -1357,8 +1450,12 @@ EXPORTS
 	fz_dom_remove_attribute
 	fz_drop_xml
 	fz_keep_xml
+	fz_output_xml
 	fz_parse_xml
+	fz_parse_xml_archive_entry
 	fz_parse_xml_from_html5
+	fz_parse_xml_stream
+	fz_try_parse_xml_archive_entry
 	fz_xml_add_att
 	fz_xml_att
 	fz_xml_att_alt
@@ -1366,11 +1463,13 @@ EXPORTS
 	fz_xml_down
 	fz_xml_find
 	fz_xml_find_dfs
+	fz_xml_find_dfs_top
 	fz_xml_find_down
 	fz_xml_find_down_match
 	fz_xml_find_match
 	fz_xml_find_next
 	fz_xml_find_next_dfs
+	fz_xml_find_next_dfs_top
 	fz_xml_find_next_match
 	fz_xml_is_tag
 	fz_xml_next
@@ -1455,11 +1554,15 @@ EXPORTS
 	pdf_annot_rect
 	pdf_annot_refs
 	pdf_annot_request_resynthesis
+	pdf_annot_request_synthesis
 	pdf_annot_transform
 	pdf_annot_type
 	pdf_annot_type_from_string
 	pdf_annot_vertex
 	pdf_annot_vertex_count
+	pdf_append_explicit_dest_to_uri
+	pdf_append_named_dest_to_uri
+	pdf_apply_redaction
 	pdf_bound_annot
 	pdf_clear_annot_border_dash
 	pdf_clear_annot_ink_list
@@ -1476,8 +1579,6 @@ EXPORTS
 	pdf_first_annot
 	pdf_first_raw_annot
 	pdf_first_widget
-	pdf_format_link_uri
-	pdf_format_remote_link_uri
 	pdf_get_embedded_file_params
 	pdf_get_widget_editing_state
 	pdf_is_embedded_file
@@ -1494,21 +1595,19 @@ EXPORTS
 	pdf_lookup_number
 	pdf_name_from_line_ending
 	pdf_new_action_from_link
-	pdf_new_destination_from_dest
-	pdf_new_destination_from_link
+	pdf_new_dest_from_link
 	pdf_new_display_list_from_annot
 	pdf_new_filespec
 	pdf_new_link
 	pdf_new_pixmap_from_annot
 	pdf_new_stext_page_from_annot
+	pdf_new_uri_from_explicit_dest
+	pdf_new_uri_from_path_and_explicit_dest
+	pdf_new_uri_from_path_and_named_dest
 	pdf_next_annot
 	pdf_next_raw_annot
 	pdf_next_widget
 	pdf_parse_default_appearance
-	pdf_parse_link_action
-	pdf_parse_link_dest
-	pdf_parse_link_dest_to_file
-	pdf_parse_link_uri
 	pdf_print_default_appearance
 	pdf_resolve_link
 	pdf_resolve_link_dest
@@ -1647,6 +1746,7 @@ EXPORTS
 	pdf_load_journal
 	pdf_load_outline
 	pdf_lookup_metadata
+	pdf_minimize_document
 	pdf_needs_password
 	pdf_new_graft_map
 	pdf_new_outline_iterator
@@ -1726,6 +1826,7 @@ EXPORTS
 	pdf_annot_field_event_keystroke
 	pdf_annot_is_readonly
 	pdf_annot_is_signed
+	pdf_bake_document
 	pdf_button_field_on_state
 	pdf_calculate_form
 	pdf_check_certificate
@@ -1759,7 +1860,6 @@ EXPORTS
 	pdf_field_event_validate
 	pdf_field_flags
 	pdf_field_label
-	pdf_field_name
 	pdf_field_reset
 	pdf_field_set_border_style
 	pdf_field_set_button_caption
@@ -1769,6 +1869,7 @@ EXPORTS
 	pdf_field_type
 	pdf_field_type_string
 	pdf_field_value
+	pdf_load_field_name
 	pdf_lookup_field
 	pdf_page_event_close
 	pdf_page_event_open
@@ -1795,6 +1896,7 @@ EXPORTS
 	pdf_text_widget_max_len
 	pdf_widget_type
 	pdf_widget_type_from_string
+	pdf_rewrite_images
 	pdf_close_processor
 	pdf_drop_processor
 	pdf_filter_xobject_instance
@@ -1832,6 +1934,7 @@ EXPORTS
 	pdf_js_execute
 	pdf_js_supported
 
+	pdf_abandon_operation
 	pdf_add_journal_fragment
 	pdf_array_contains
 	pdf_array_delete
@@ -1859,7 +1962,15 @@ EXPORTS
 	pdf_array_push_string
 	pdf_array_push_text_string
 	pdf_array_put
+	pdf_array_put_array
+	pdf_array_put_bool
+	pdf_array_put_dict
 	pdf_array_put_drop
+	pdf_array_put_int
+	pdf_array_put_name
+	pdf_array_put_real
+	pdf_array_put_string
+	pdf_array_put_text_string
 	pdf_begin_implicit_operation
 	pdf_begin_operation
 	pdf_can_redo
@@ -1876,14 +1987,28 @@ EXPORTS
 	pdf_dict_dels
 	pdf_dict_get
 	pdf_dict_get_bool
+	pdf_dict_get_bool_default
 	pdf_dict_get_date
 	pdf_dict_get_inheritable
+	pdf_dict_get_inheritable_bool
+	pdf_dict_get_inheritable_date
+	pdf_dict_get_inheritable_int
+	pdf_dict_get_inheritable_int64
+	pdf_dict_get_inheritable_matrix
+	pdf_dict_get_inheritable_name
+	pdf_dict_get_inheritable_real
+	pdf_dict_get_inheritable_rect
+	pdf_dict_get_inheritable_string
+	pdf_dict_get_inheritable_text_string
 	pdf_dict_get_int
+	pdf_dict_get_int64
+	pdf_dict_get_int_default
 	pdf_dict_get_key
 	pdf_dict_get_matrix
 	pdf_dict_get_name
 	pdf_dict_get_put_drop
 	pdf_dict_get_real
+	pdf_dict_get_real_default
 	pdf_dict_get_rect
 	pdf_dict_get_string
 	pdf_dict_get_text_string
@@ -1893,6 +2018,7 @@ EXPORTS
 	pdf_dict_getp
 	pdf_dict_getp_inheritable
 	pdf_dict_gets
+	pdf_dict_gets_inheritable
 	pdf_dict_getsa
 	pdf_dict_len
 	pdf_dict_put
@@ -1901,6 +2027,7 @@ EXPORTS
 	pdf_dict_put_date
 	pdf_dict_put_dict
 	pdf_dict_put_drop
+	pdf_dict_put_indirect
 	pdf_dict_put_int
 	pdf_dict_put_matrix
 	pdf_dict_put_name
@@ -1921,6 +2048,7 @@ EXPORTS
 	pdf_drop_journal
 	pdf_drop_mark_bits
 	pdf_drop_obj
+	pdf_drop_singleton_obj
 	pdf_enable_journal
 	pdf_end_operation
 	pdf_format_date
@@ -1988,16 +2116,19 @@ EXPORTS
 	pdf_sprint_obj_to_json
 	pdf_string_to_name_obj
 	pdf_to_bool
+	pdf_to_bool_default
 	pdf_to_date
 	pdf_to_gen
 	pdf_to_int
 	pdf_to_int64
+	pdf_to_int_default
 	pdf_to_matrix
 	pdf_to_name
 	pdf_to_name_not_null
 	pdf_to_num
 	pdf_to_quad
 	pdf_to_real
+	pdf_to_real_default
 	pdf_to_rect
 	pdf_to_str_buf
 	pdf_to_str_len
@@ -2022,7 +2153,6 @@ EXPORTS
 	pdf_load_page
 	pdf_load_page_imp
 	pdf_load_page_tree
-	pdf_lookup_anchor
 	pdf_lookup_page_number
 	pdf_lookup_page_obj
 	pdf_new_pixmap_from_page_contents_with_separations_and_usage
@@ -2033,10 +2163,12 @@ EXPORTS
 	pdf_page_group
 	pdf_page_has_transparency
 	pdf_page_obj_transform
+	pdf_page_obj_transform_box
 	pdf_page_presentation
 	pdf_page_resources
 	pdf_page_separations
 	pdf_page_transform
+	pdf_page_transform_box
 	pdf_read_ocg
 	pdf_redact_page
 	pdf_run_page
@@ -2162,6 +2294,7 @@ EXPORTS
 	pdf_was_pure_xfa
 	pdf_xref_ensure_incremental_object
 	pdf_xref_ensure_local_object
+	pdf_xref_entry_map
 	pdf_xref_is_incremental
 	pdf_xref_len
 	pdf_xref_obj_is_unsaved_signature
@@ -4258,10 +4391,12 @@ EXPORTS
 ; QuickJS exports
 
 	qjs_main
+	qjs_sample_app_main
 	qjs_test262_main
 	qjs_unicode_gen_main
 	qjsc_main
 	qjscompress_main
+	qjsd_main
 
 	js_debugger_parse_sockaddr
 	js_debugger_sockaddr_length
@@ -4291,6 +4426,7 @@ EXPORTS
 	js_module_loader
 	js_module_set_import_meta
 	js_std_add_helpers
+	js_std_dump_binary
 	js_std_dump_error
 	js_std_eval_binary
 	js_std_free_handlers
@@ -4347,9 +4483,14 @@ EXPORTS
 	JS_Call
 	JS_CallConstructor
 	JS_CallConstructor2
+	JS_CallConstructorInternal
+	JS_CallstackIterInit
+	JS_CallstackIterNext
+	JS_CaptureCallstack
 	JS_ComputeMemoryUsage
 	JS_CountModuleExport
 	JS_DefineProperty
+	JS_DefinePropertyDesc1
 	JS_DefinePropertyGetSet
 	JS_DefinePropertyValue
 	JS_DefinePropertyValueStr
@@ -4357,7 +4498,10 @@ EXPORTS
 	JS_DeleteProperty
 	JS_DetachArrayBuffer
 	JS_DetectModule
+	JS_Dump1
 	JS_DumpMemoryUsage
+	JS_DumpObjects
+	JS_DumpWithBuffer
 	JS_DupAtom
 	JS_DupContext
 	JS_EnableBignumExt
@@ -4371,6 +4515,7 @@ EXPORTS
 	JS_FreeAtom
 	JS_FreeAtomRT
 	JS_FreeCString
+	JS_FreeCallstack
 	JS_FreeContext
 	JS_FreeModules
 	JS_FreeRuntime
@@ -4381,6 +4526,7 @@ EXPORTS
 	JS_GetContextOpaque
 	JS_GetException
 	JS_GetGlobalObject
+	JS_GetGlobalVar
 	JS_GetImportMeta
 	JS_GetModuleExport
 	JS_GetModuleExportName
@@ -4392,6 +4538,7 @@ EXPORTS
 	JS_GetOwnPropertyCount
 	JS_GetOwnPropertyCountUnchecked
 	JS_GetOwnPropertyNames
+	JS_GetPromiseState
 	JS_GetPropertyInternal
 	JS_GetPropertyStr
 	JS_GetPropertyUint32
@@ -4447,6 +4594,7 @@ EXPORTS
 	JS_NewStringLen
 	JS_NewUncatchableError
 	JS_NewWeakRef
+	JS_OrdinaryIsInstanceOf1
 	JS_ParseJSON
 	JS_ParseJSON2
 	JS_PreventExtensions
@@ -4502,6 +4650,10 @@ EXPORTS
 	JS_WriteObject2
 	__JS_FreeValue
 	__JS_FreeValueRT
+	find_atom
+	getCallByClassId
+	getClassIdFromObject
+	js_operator_typeof1
 	qjs_assert
 	qjs_free
 	qjs_free_rt
@@ -4517,6 +4669,7 @@ EXPORTS
 	qjs_strdup
 	qjs_string_codePointRange
 	qjs_strndup
+	set_array_length1
 
 ; Zstd exports
 
@@ -4555,6 +4708,7 @@ EXPORTS
 	FIO_setLdmHashRateLog
 	FIO_setLdmMinMatch
 	FIO_setLiteralCompressionMode
+	FIO_setMMapDict
 	FIO_setMemLimit
 	FIO_setNbFilesTotal
 	FIO_setNbWorkers
@@ -4579,6 +4733,7 @@ EXPORTS
 	AIO_ReadPool_fillBuffer
 	AIO_ReadPool_free
 	AIO_ReadPool_getFile
+	AIO_ReadPool_setAsync
 	AIO_ReadPool_setFile
 	AIO_WritePool_acquireJob
 	AIO_WritePool_closeFile
@@ -4587,6 +4742,7 @@ EXPORTS
 	AIO_WritePool_free
 	AIO_WritePool_getFile
 	AIO_WritePool_releaseIoJob
+	AIO_WritePool_setAsync
 	AIO_WritePool_setFile
 	AIO_WritePool_sparseWriteEnd
 	AIO_supported
@@ -4608,6 +4764,7 @@ EXPORTS
 	UTIL_getSpanTimeMicro
 	UTIL_getSpanTimeNano
 	UTIL_getTime
+	UTIL_support_MT_measurements
 	UTIL_waitForNextTick
 	CountSetBits
 	UTIL_allocateFileNamesTable
@@ -4618,13 +4775,19 @@ EXPORTS
 	UTIL_countPhysicalCores
 	UTIL_createMirroredDestDirName
 	UTIL_expandFNT
+	UTIL_fakeStderrIsConsole
+	UTIL_fakeStdinIsConsole
+	UTIL_fakeStdoutIsConsole
+	UTIL_fchmod
 	UTIL_freeFileNamesTable
+	UTIL_fstat
 	UTIL_getFileExtension
 	UTIL_getFileSize
 	UTIL_getFileSizeStat
 	UTIL_getTotalFileSize
 	UTIL_isBlockDevStat
 	UTIL_isCompressedFile
+	UTIL_isConsole
 	UTIL_isDirectory
 	UTIL_isDirectoryStat
 	UTIL_isFIFO
@@ -4633,13 +4796,16 @@ EXPORTS
 	UTIL_isRegularFile
 	UTIL_isRegularFileStat
 	UTIL_isSameFile
+	UTIL_isSameFileStat
 	UTIL_makeHumanReadableSize
 	UTIL_mirrorSourceFilesDirectories
 	UTIL_refFilename
 	UTIL_requireUserConfirmation
 	UTIL_searchFileNamesTable
+	UTIL_setFDStat
 	UTIL_setFileStat
 	UTIL_stat
+	UTIL_traceFileStat
 	UTIL_utime
 	TRACE_enable
 	TRACE_finish

@@ -126,14 +126,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYSQL_CONNECTOR_CPP;MYSQL_CONNECTOR_CPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYSQL_CONNECTOR_CPP;MYSQL_CONNECTOR_CPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -152,7 +152,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYSQL_CONNECTOR_CPP;MYSQL_CONNECTOR_CPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -160,7 +160,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYSQL_CONNECTOR_CPP;MYSQL_CONNECTOR_CPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -181,14 +181,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYSQL_CONNECTOR_CPP;MYSQL_CONNECTOR_CPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYSQL_CONNECTOR_CPP;MYSQL_CONNECTOR_CPP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -207,7 +207,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYSQL_CONNECTOR_CPP;MYSQL_CONNECTOR_CPP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -215,7 +215,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMYSQL_CONNECTOR_CPP;MYSQL_CONNECTOR_CPP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -618,6 +618,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_resultset.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_resultset_metadata.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_statement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_telemetry.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_uri.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_util.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_warning.cpp" />
@@ -1010,6 +1011,8 @@
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/trees.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/zlib.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/zutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/allocations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/bits.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/bitstream.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/compiler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/cpu.h" />
@@ -1019,11 +1022,13 @@
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/huf.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/mem.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/portability_macros.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/threading.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/xxhash.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/zstd_deps.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/zstd_internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/common/zstd_trace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/clevels.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/hist.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/zstd_compress_internal.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/compress/zstd_compress_literals.h" />
@@ -1186,6 +1191,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_resultset_metadata.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_statement.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_statement_options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_telemetry.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_uri.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_util.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/mysql_warning.h" />
@@ -1203,6 +1209,119 @@
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/nativeapi/native_resultset_wrapper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/nativeapi/native_statement_wrapper.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/examples/examples.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/baggage/baggage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/baggage/baggage_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/baggage/propagation/baggage_propagator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/common/attribute_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/common/key_value_iterable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/common/key_value_iterable_view.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/common/kv_properties.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/common/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/common/spin_lock_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/common/string_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/common/timestamp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/context/context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/context/context_value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/context/propagation/composite_propagator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/context/propagation/global_propagator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/context/propagation/noop_propagator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/context/propagation/text_map_propagator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/context/runtime_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/detail/preprocessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/logs/event_logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/logs/event_logger_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/logs/log_record.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/logs/logger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/logs/logger_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/logs/logger_type_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/logs/noop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/logs/provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/logs/severity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/metrics/async_instruments.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/metrics/meter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/metrics/meter_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/metrics/noop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/metrics/observer_result.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/metrics/provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/metrics/sync_instruments.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/detail/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/detail/decay.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/detail/dependent_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/detail/functional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/detail/invoke.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/detail/trait.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/detail/type_pack_element.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/detail/valueless.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/detail/variant_alternative.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/detail/variant_fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/detail/variant_size.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/detail/void.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/function_ref.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/internal/absl/base/attributes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/internal/absl/base/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/internal/absl/base/internal/identity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/internal/absl/base/internal/inline_variable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/internal/absl/base/internal/invoke.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/internal/absl/base/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/internal/absl/base/optimization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/internal/absl/base/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/internal/absl/base/policy_checks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/internal/absl/base/port.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/internal/absl/meta/type_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/internal/absl/types/bad_variant_access.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/internal/absl/types/internal/variant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/internal/absl/types/variant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/internal/absl/utility/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/shared_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/span.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/string_view.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/type_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/unique_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/variant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/plugin/detail/dynamic_library_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/plugin/detail/dynamic_load_unix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/plugin/detail/dynamic_load_windows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/plugin/detail/loader_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/plugin/detail/tracer_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/plugin/detail/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/plugin/dynamic_load.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/plugin/factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/plugin/hook.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/plugin/tracer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/std/shared_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/std/span.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/std/string_view.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/std/type_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/std/unique_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/std/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/std/variant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/canonical_code.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/default_span.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/noop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/propagation/b3_propagator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/propagation/detail/hex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/propagation/detail/string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/propagation/http_trace_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/propagation/jaeger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/scope.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/semantic_conventions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/span.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/span_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/span_context_kv_iterable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/span_context_kv_iterable_view.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/span_id.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/span_metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/span_startoptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/trace_flags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/trace_id.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/trace_state.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/tracer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/trace/tracer_provider.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/version.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/BaseTestFixture.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/compliance/ConnectionTest.h" />
     <ClInclude Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/compliance/DatabaseMetaDataTest.h" />
@@ -1400,6 +1519,7 @@
     <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/zlib.pc.cmakein" />
     <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zlib/zlib.pc.in" />
     <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/extra/zstd/lib/decompress/huf_decompress_amd64.S" />
     <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/foundation/tests/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/cdk/include/CMakeLists.txt" />
@@ -1462,6 +1582,9 @@
     <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/driver/version_info.h.cmake" />
     <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/examples/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/examples/README" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/extra/otel/opentelemetry-cpp-1.8.3/api/include/opentelemetry/nostd/internal/absl/README.md" />
     <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/install_layout.cmake" />
     <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/link_test/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/mysql-connector-cpp/jdbc/test/CJUnitTestsPort/CMakeLists.txt" />

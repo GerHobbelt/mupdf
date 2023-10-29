@@ -1,5 +1,5 @@
 
 also-ignore:
 	.*test
-	main
+	main[.]cpp
 	

@@ -86,11 +86,11 @@ src = src
 
 	return `<PreprocessorDefinitions>${a.join(';')}</PreprocessorDefinitions>`;
 })
-.replace(/<BrowseInformation>[^]*?<\/BrowseInformation>/g, (m) => `<BrowseInformation>false</BrowseInformation>`)
+.replace(/<BrowseInformation>[^]*?<\/BrowseInformation>/g, `<BrowseInformation>false</BrowseInformation>`)
 //     <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
-.replace(/<OutDir>[^]*?<\/OutDir>/g, (m) => `<OutDir>$(SolutionDir)bin\\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\\</OutDir>`)
+.replace(/<OutDir>[^]*?<\/OutDir>/g, `<OutDir>$(SolutionDir)bin\\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\\</OutDir>`)
 //    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
-.replace(/<IntDir>[^]*?<\/IntDir>/g, (m) => `<IntDir>$(SolutionDir)obj\\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\\</IntDir>`)
+.replace(/<IntDir>[^]*?<\/IntDir>/g, `<IntDir>$(SolutionDir)obj\\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\\</IntDir>`)
 //       <OmitFramePointers>true</OmitFramePointers>
 .replace(/<OmitFramePointers>[^]*?<\/OmitFramePointers>/g, '')
 .replace(/<CopyLocalDeploymentContent>[^]*?<\/CopyLocalDeploymentContent>/g, '')
@@ -229,7 +229,7 @@ src = src.replace(/<ResourceCompile>([^]*?)<\/ResourceCompile>/g, (m, p1) => {
       <FloatingPointModel>Fast</FloatingPointModel>
       <ConformanceMode>true</ConformanceMode>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
     </ClCompile>
 */    
 
@@ -265,7 +265,7 @@ let compiler_settings = `
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -397,10 +397,15 @@ ${m}
 });
 
 // make sure all include path sets are the same: pick up the set from the largest entry and copy it around:
+//
+// Note: ResourceCmpiler SHOULD follow, NOT lead. This means we SHOULD NOT look at the include path listed for the 
+// (sometimes hidden) ResourceCompiler as this will thwart our editing efforts (done in the Clcompiler section, etc.)
+// when we actually REDUCE the paths' set! (We ran into this issue while editing the libleptonica paths for example)
 let include_paths = '.;%(AdditionalIncludeDirectories)';
 const inc_re = /<AdditionalIncludeDirectories>([^]*?)<\/AdditionalIncludeDirectories>/g;
+let search_src = src.replace(/<ResourceCompile>[^]*?<\/ResourceCompile>/g, '');
 for (;;) {
-	let m = inc_re.exec(src);
+	let m = inc_re.exec(search_src);
 	if (!m)
 		break;
 	let p1 = m[1].trim();
@@ -409,6 +414,21 @@ for (;;) {
 	}
 }
 
+// make sure the searchdir list has these entries and at the prioirty position where we want them (front = first):
+// - clean up
+// - append/prepend the required paths
+include_paths = `;${include_paths.trim()};`
+	.replace(/\\/g, '/')
+	.replace(/;..\/..\/include\/system-override;/g, ';')
+	.replace(/;%\(AdditionalIncludeDirectories\);/g, ';')
+	.replace(/;.;/g, ';')
+	.replace(/;;/g, ';')
+	.replace(/^;/, '')
+	.replace(/;$/, '')
+
+include_paths = `../../include/system-override;.;${include_paths};%(AdditionalIncludeDirectories)`
+	.replace(/;;/g, ';')
+	
 src = src
 .replace(/<AdditionalIncludeDirectories>[^]*?<\/AdditionalIncludeDirectories>/g, `<AdditionalIncludeDirectories>${include_paths}</AdditionalIncludeDirectories>`);
 
