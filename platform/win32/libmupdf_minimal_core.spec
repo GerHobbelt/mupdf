@@ -14,7 +14,8 @@ ignore:
 	/tools/
 	/tests/
 	/system_override/
-	
+	/include/fake/
+		
 	#pdf/
 	#html/
 	#xps/

@@ -13,4 +13,6 @@ ignore:
 	/helpers/base58/base58X.h
 	/tools/
 	/tests/
+	/system_override/
+	/include/fake/
 	

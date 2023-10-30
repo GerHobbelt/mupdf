@@ -12,7 +12,7 @@ let fs = require('fs');
 let path = require('path');
 let glob = require('@gerhobbelt/glob');
 
-let DEBUG = 4;
+let DEBUG = 0;
 
 const globDefaultOptions = {
   debug: (DEBUG > 4),

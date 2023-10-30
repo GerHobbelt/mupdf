@@ -1,11 +1,7 @@
 
 directories:
-	..\..\include\
-	
-sources:
-	..\..\source\dll\dll_init.cpp
+	../gl/
 	
 ignore:
 	/system_override/
 	/include/fake/
-	
