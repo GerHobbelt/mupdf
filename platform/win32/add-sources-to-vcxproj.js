@@ -12,7 +12,7 @@ let fs = require('fs');
 let path = require('path');
 let glob = require('@gerhobbelt/glob');
 
-let DEBUG = 0;
+let DEBUG = 4;
 
 const globDefaultOptions = {
   debug: (DEBUG > 4),
@@ -857,9 +857,14 @@ function process_path(rawSourcesPath, is_dir) {
     let pathWithWildCards = is_dir ? '*' : path.basename(sourcesPath);
     if (DEBUG > 2) console.error("process_path GLOB:", {pathWithWildCards, globConfig, cwd: globConfig.cwd, is_dir});
 
-    let files_rec = glob(pathWithWildCards, globConfig);
-    if (DEBUG > 2) console.error("process_path GLOB DONE:", {pathWithWildCards, globConfig, cwd: files_rec.cwd, is_dir, found: files_rec.found});
-    process_glob_list(files_rec.found, files_rec.cwd, is_dir, rawSourcesPath);
+	if (pathWithWildCards.indexOf('*') >= 0 || pathWithWildCards.indexOf('?') >= 0 || is_dir || !fs.existsSync(sourcesPath)) {
+		let files_rec = glob(pathWithWildCards, globConfig);
+		if (DEBUG > 2) console.error("process_path GLOB DONE:", {pathWithWildCards, globConfig, cwd: files_rec.cwd, is_dir, found: files_rec.found});
+		process_glob_list(files_rec.found, files_rec.cwd, is_dir, rawSourcesPath);
+	}
+	else {
+		process_glob_list([sourcesPath], globConfig.cwd, false, rawSourcesPath);
+	}
 }
 
 

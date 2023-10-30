@@ -15,13 +15,7 @@ sources:
 	../../../MuPDF/CONTRIBUTORS.md
 	../../../MuPDF/DEVELOPERS-README.md
 	../../../MuPDF/README.md
-	../../../Qiqqa-Software-Installer-Releases/README.md
-	../../../Qiqqa.Build/README.md
-	../../../QiqqaDocuBase/README.md
-	../../../QiqqaLegacyFileFormats/README.md
-	../../../QiqqaOCR/README.md
-	../../../QiqqaSearcher/README.md
-	../../../QiqqaSniffer/README.md
-	../../../README.md
-	../../../Technology.Tests/README.md
-	../../../Utilities/README.md
+
+ignore:
+	.*[.]c$
+	
