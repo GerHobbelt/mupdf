@@ -57,6 +57,7 @@ int tesseract_get_page_gradient_main(int argc, const char** argv);
 int tesseract_svpaint_main(int argc, const char** argv);
 int tesseract_test_issue_845_main(int argc, const char **argv);
 int tesseract_test_issue_ML_1bba6c_main(int argc, const char **argv);
+int tesseract_basic_example_main(int argc, const char **argv);
 
 #include "../../thirdparty/tesseract/include/tesseract/capi_training_tools.h"
 

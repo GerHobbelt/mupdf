@@ -136,6 +136,7 @@ static struct tool_spec {
 #if defined(MUTOOL_EX)
 	// DO NOT use tesseract_main() for this as that one does not set up the mupdf/fitz+leptonica+jpeg environments the way we need & expect in monolithic build mode.
 	{ {.fa = tesseract_tool_main }, "tesseract", "OCR given image or PDF" },
+	{ {.fa = tesseract_basic_example_main }, "tess_basic_example", "tesseract::basic_example demo app" },
 	{ {.fa = tesseract_get_page_gradient_main }, "tess_get_page_gradient", "tesseract::get_page_gradient tool" },
 	{ {.fa = tesseract_svpaint_main }, "tess_svpaint_demo", "tesseract SVPaint demo app" },
 
