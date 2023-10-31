@@ -322,7 +322,7 @@ jpx_from_pixmap(fz_context *ctx, const fz_pixmap *pix, fz_color_params color_par
 	{
 		if (drop)
 		{
-			fz_drop_pixmap(ctx, pix);
+			fz_drop_pixmap(ctx, (fz_pixmap *)pix);
 		}
 		fz_drop_output(ctx, out);
 	}
