@@ -7,21 +7,22 @@
 TARGETS=                            
 
 all : $(TARGETS)
-	echo "Target: all --> done"
-	echo "BINDIR=$(BINDIR)"
+	@echo "Target: all --> done"
+	@echo "leptonica/MSVC: copy test images to the expected target directory."
+	@echo "BINDIR=$(BINDIR)"
 	-mkdir "$(BINDIR)/../../lept/"
 	-mkdir "$(BINDIR)/../../lept/demo-data/"
 	-robocopy /S /COPY:DAT /DCOPY:DAT /PURGE ../../thirdparty/leptonica/prog/ "$(BINDIR)/../../lept/demo-data/" * /XF *.c /XF *.cc /XF *.h
 	-del "$(BINDIR)/../../lept/demo-data/*.c"
 	-del "$(BINDIR)/../../lept/demo-data/*.cc"
 	-del "$(BINDIR)/../../lept/demo-data/*.h"
-	-copy ../../thirdparty/leptonica/prog/kernel_reg.c "$(BINDIR)/../../lept/demo-data/"
+	-robocopy /COPY:DAT /DCOPY:DAT ../../thirdparty/leptonica/prog/ "$(BINDIR)/../../lept/demo-data/" kernel_reg.c
 
 rebuild : clean all
-	echo "Target: rebuild --> done"
+	@echo "Target: rebuild --> done"
 
 clean :
-	echo "Target: clean --> done"
+	@echo "Target: clean --> done"
 	-rmdir /S "$(BINDIR)/../../lept/demo-data/"
 
 
