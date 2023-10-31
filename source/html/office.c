@@ -1,7 +1,11 @@
 #include "mupdf/fitz.h"
 #include "html-imp.h"
 
+#include "mupdf/assertions.h"
+
 #undef DEBUG_OFFICE_TO_HTML
+
+#if FZ_ENABLE_RENDER_CORE 
 
 typedef struct
 {
@@ -1122,3 +1126,5 @@ fz_office_to_html(fz_context *ctx, fz_html_font_set *set, fz_buffer *buffer_in, 
 
 	return buffer_out;
 }
+
+#endif // FZ_ENABLE_RENDER_CORE 
