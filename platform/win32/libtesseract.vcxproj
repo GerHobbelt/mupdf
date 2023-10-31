@@ -134,7 +134,7 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -484,6 +484,7 @@
     <ClCompile Include="../../thirdparty/tesseract/src/dict/permdawg.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/dict/stopper.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/dict/trie.cpp" />
+    <ClCompile Include="../../thirdparty/tesseract/src/examples/basic-example.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/examples/get-page-gradient.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/examples/issue-845.cpp" />
     <ClCompile Include="../../thirdparty/tesseract/src/examples/issue-ML-1bba6c.cpp" />
@@ -926,69 +927,6 @@
     <Text Include="../../thirdparty/tesseract/tessdata/tessconfigs/batch.nochop" />
     <Text Include="../../thirdparty/tesseract/tesseract.pc.cmake" />
     <Text Include="../../thirdparty/tesseract/tesseract.pc.in" />
-    <Text Include="../../thirdparty/tesseract/test/README.md" />
-    <Text Include="../../thirdparty/tesseract/test/langtests/README.md" />
-    <Text Include="../../thirdparty/tesseract/test/langtests/counttestset.sh" />
-    <Text Include="../../thirdparty/tesseract/test/langtests/deva_setup.sh" />
-    <Text Include="../../thirdparty/tesseract/test/langtests/deva_test.sh" />
-    <Text Include="../../thirdparty/tesseract/test/langtests/frk_setup.sh" />
-    <Text Include="../../thirdparty/tesseract/test/langtests/frk_test.sh" />
-    <Text Include="../../thirdparty/tesseract/test/langtests/reports/Devanagari-2019-03-09.summary" />
-    <Text Include="../../thirdparty/tesseract/test/langtests/reports/Devanagari.summary" />
-    <Text Include="../../thirdparty/tesseract/test/langtests/reports/Fraktur-2019-03-09.summary" />
-    <Text Include="../../thirdparty/tesseract/test/langtests/reports/Fraktur.summary" />
-    <Text Include="../../thirdparty/tesseract/test/langtests/reports/frk-2019-03-09.summary" />
-    <Text Include="../../thirdparty/tesseract/test/langtests/reports/frk.summary" />
-    <Text Include="../../thirdparty/tesseract/test/langtests/reports/san-2019-03-09.summary" />
-    <Text Include="../../thirdparty/tesseract/test/langtests/reports/san.summary" />
-    <Text Include="../../thirdparty/tesseract/test/langtests/runlangtests.sh" />
-    <Text Include="../../thirdparty/tesseract/test/langtests/runtestset.sh" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/README.md" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/ara.unicharset" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/ara.wordlist" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/chi_sim.unicharset" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/chi_tra.unicharset" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/deu.Arial_Unicode_MS.exp0.lstmf" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/deu/deu.traineddata" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/deu/deu.unicharset" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/eng.Arial.exp0.lstmf" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/eng.Arial_Unicode_MS.exp0.lstmf" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/eng.params_model" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/eng.unicharset" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/eng/eng.traineddata" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/eng/eng.unicharset" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/fra.Arial_Unicode_MS.exp0.lstmf" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/fra/fra.traineddata" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/fra/fra.unicharset" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/jpn.unicharset" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/kan.Arial_Unicode_MS.exp0.lstmf" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/kan.unicharset" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/kan/kan.traineddata" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/kan/kan.unicharset" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/kor.Arial_Unicode_MS.exp0.lstmf" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/kor.unicharset" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/kor/kor.traineddata" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/kor/kor.unicharset" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/mar.unicharset" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/por.unicharset" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/scanftest.txt" />
-    <Text Include="../../thirdparty/tesseract/test/testdata/trivial.unicharset" />
-    <Text Include="../../thirdparty/tesseract/test/unlvtests/README.md" />
-    <Text Include="../../thirdparty/tesseract/test/unlvtests/counttestset.sh" />
-    <Text Include="../../thirdparty/tesseract/test/unlvtests/reorgdata.sh" />
-    <Text Include="../../thirdparty/tesseract/test/unlvtests/reports/1995.bus.3B.sum" />
-    <Text Include="../../thirdparty/tesseract/test/unlvtests/reports/1995.doe3.3B.sum" />
-    <Text Include="../../thirdparty/tesseract/test/unlvtests/reports/1995.mag.3B.sum" />
-    <Text Include="../../thirdparty/tesseract/test/unlvtests/reports/1995.news.3B.sum" />
-    <Text Include="../../thirdparty/tesseract/test/unlvtests/reports/2.03.summary" />
-    <Text Include="../../thirdparty/tesseract/test/unlvtests/reports/2.04.summary" />
-    <Text Include="../../thirdparty/tesseract/test/unlvtests/reports/4_best_int_spa.summary" />
-    <Text Include="../../thirdparty/tesseract/test/unlvtests/reports/4_best_spa.summary" />
-    <Text Include="../../thirdparty/tesseract/test/unlvtests/reports/4_fast_eng.summary" />
-    <Text Include="../../thirdparty/tesseract/test/unlvtests/reports/4_fast_spa.summary" />
-    <Text Include="../../thirdparty/tesseract/test/unlvtests/runalltests.sh" />
-    <Text Include="../../thirdparty/tesseract/test/unlvtests/runalltests_spa.sh" />
-    <Text Include="../../thirdparty/tesseract/test/unlvtests/runtestset.sh" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="../../scripts/tesseract/config_auto.h" />
