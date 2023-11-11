@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -113,8 +113,8 @@
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -126,7 +126,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/curl/src;../../scripts/curl/lib;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/libxml2/include;../../scripts/libxml2;../../thirdparty/owemdjee/libexpat/expat/lib;../../scripts/tidy-html5/include;../../thirdparty/owemdjee/htmlstreamparser/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/curl/src;../../scripts/curl/lib;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/libxml2/include;../../scripts/libxml2;../../thirdparty/owemdjee/libexpat/expat/lib;../../scripts/tidy-html5/include;../../thirdparty/owemdjee/htmlstreamparser/src;../../scripts/zlib;../../thirdparty/zlib;../../thirdparty/owemdjee/brotli/c/include;../../thirdparty/owemdjee/zstd/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>HAVE_CONFIG_H;BUILD_MONOLITHIC;BUILDING_LIBCURL;CURL_STATICLIB;CURL_DISABLE_LDAP;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;WIN32;NDEBUG;_WINDOWS;_USRDLL;BUILDING_LIBCURL;CURL_STATICLIB;CURL_DISABLE_LDAP;USE_SCHANNEL;USE_WINDOWS_SSPI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -152,7 +152,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/curl/src;../../scripts/curl/lib;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/libxml2/include;../../scripts/libxml2;../../thirdparty/owemdjee/libexpat/expat/lib;../../scripts/tidy-html5/include;../../thirdparty/owemdjee/htmlstreamparser/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/curl/src;../../scripts/curl/lib;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/libxml2/include;../../scripts/libxml2;../../thirdparty/owemdjee/libexpat/expat/lib;../../scripts/tidy-html5/include;../../thirdparty/owemdjee/htmlstreamparser/src;../../scripts/zlib;../../thirdparty/zlib;../../thirdparty/owemdjee/brotli/c/include;../../thirdparty/owemdjee/zstd/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>HAVE_CONFIG_H;BUILD_MONOLITHIC;BUILDING_LIBCURL;CURL_STATICLIB;CURL_DISABLE_LDAP;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;_USRDLL;BUILDING_LIBCURL;CURL_STATICLIB;CURL_DISABLE_LDAP;USE_SCHANNEL;USE_WINDOWS_SSPI;USE_SCHANNEL;USE_WINDOWS_SSPI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -181,7 +181,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/curl/src;../../scripts/curl/lib;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/libxml2/include;../../scripts/libxml2;../../thirdparty/owemdjee/libexpat/expat/lib;../../scripts/tidy-html5/include;../../thirdparty/owemdjee/htmlstreamparser/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/curl/src;../../scripts/curl/lib;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/libxml2/include;../../scripts/libxml2;../../thirdparty/owemdjee/libexpat/expat/lib;../../scripts/tidy-html5/include;../../thirdparty/owemdjee/htmlstreamparser/src;../../scripts/zlib;../../thirdparty/zlib;../../thirdparty/owemdjee/brotli/c/include;../../thirdparty/owemdjee/zstd/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>HAVE_CONFIG_H;BUILD_MONOLITHIC;BUILDING_LIBCURL;CURL_STATICLIB;CURL_DISABLE_LDAP;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;WIN64;NDEBUG;_WINDOWS;_USRDLL;BUILDING_LIBCURL;CURL_STATICLIB;CURL_DISABLE_LDAP;USE_SCHANNEL;USE_WINDOWS_SSPI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -207,7 +207,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/curl/src;../../scripts/curl/lib;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/libxml2/include;../../scripts/libxml2;../../thirdparty/owemdjee/libexpat/expat/lib;../../scripts/tidy-html5/include;../../thirdparty/owemdjee/htmlstreamparser/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/curl/src;../../scripts/curl/lib;../../thirdparty/owemdjee/pthread-win32;../../thirdparty/owemdjee/libxml2/include;../../scripts/libxml2;../../thirdparty/owemdjee/libexpat/expat/lib;../../scripts/tidy-html5/include;../../thirdparty/owemdjee/htmlstreamparser/src;../../scripts/zlib;../../thirdparty/zlib;../../thirdparty/owemdjee/brotli/c/include;../../thirdparty/owemdjee/zstd/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>HAVE_CONFIG_H;BUILD_MONOLITHIC;BUILDING_LIBCURL;CURL_STATICLIB;CURL_DISABLE_LDAP;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;_USRDLL;BUILDING_LIBCURL;CURL_STATICLIB;CURL_DISABLE_LDAP;USE_SCHANNEL;USE_WINDOWS_SSPI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -822,8 +822,7 @@
     <Text Include="../../thirdparty/curl/winbuild/gen_resp_file.bat" />
     <Text Include="../../thirdparty/curl/winbuild/makedebug.cmd" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  

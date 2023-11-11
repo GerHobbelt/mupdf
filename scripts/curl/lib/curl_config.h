@@ -458,13 +458,13 @@
 /* #undef HAVE_LIBZ */
 
 /* if zlib-ng is available */
-/* #undef HAVE_LIBZ_NG */
+#define HAVE_LIBZ_NG
 
 /* if brotli is available */
-/* #undef HAVE_BROTLI */
+#define HAVE_BROTLI
 
 /* if zstd is available */
-/* #undef HAVE_ZSTD */
+#define HAVE_ZSTD
 
 /* Define to 1 if you have the <limits.h> header file. */
 #define HAVE_LIMITS_H 1
@@ -695,7 +695,7 @@
 /* #undef HAVE_STRNCMPI */
 
 /* Define to 1 if you have the strnicmp function. */
-/* #undef HAVE_STRNICMP */
+#define HAVE_STRNICMP 1
 
 /* Define to 1 if you have the <stropts.h> header file. */
 /* #undef HAVE_STROPTS_H */
@@ -832,7 +832,7 @@
 /* #undef HAVE_ZLIB_H */
 
 /* if you have the zlib-ng.h header file */
-/* #undef HAVE_ZLIB_NG_H */
+#define HAVE_ZLIB_NG_H    1
 
 /* Define to the sub-directory in which libtool stores uninstalled libraries.
    */
@@ -1127,7 +1127,20 @@
 /* #undef size_t */
 
 /* the signed version of size_t */
-#define ssize_t __int64
+// #define ssize_t __int64    <-- this one will be defined in zlib-ng's zbuild.h; copied here (below) to prevent collision.
+
+// zlib-ng
+#if defined(_MSC_VER)
+#if !defined(_SSIZE_T_DEFINED)
+#  if defined(_WIN64)
+typedef __int64 ssize_t;
+#  else
+typedef long ssize_t;
+#  endif
+#define _SSIZE_T_DEFINED
+#endif
+#endif
+// /zlib-ng
 
 /* Define to 1 if you have the mach_absolute_time function. */
 /* #undef HAVE_MACH_ABSOLUTE_TIME */
