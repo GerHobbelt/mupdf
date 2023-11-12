@@ -58,6 +58,7 @@
 #include "../../thirdparty/owemdjee/libbf/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libcsv2/include/monolithic_examples.h"
 #include "../../thirdparty/jbig2dec/monolithic_examples.h"
+#include "../../thirdparty/lcms2/include/monolithic_examples.h"
 #include "../../thirdparty/leptonica/prog/monolithic_examples.h"
 #include "../../source/fitz/tessocr.h"
 #include "../../thirdparty/gumbo-parser/src/gumbo.h"
@@ -799,6 +800,27 @@ static struct tool_spec {
 	{ {.fa = csv2_bench_main }, "csv2_bench", "libcsv2 benchmark tool" },
 	{ {.fa = csv2_csv_count_main }, "csv_count", "libcsv2 csv_count row count tool" },
 	{ {.fa = csv2_fieldcount_main }, "csv_fieldcount", "libcsv2 fieldcount tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.f = lcms2_demo_cmyk_main }, "lcms2_demo_cmyk", "lcms2 demo_cmyk demo/tool" },
+	{ {.f = lcms2_fast_float_testbed_main }, "lcms2_fast_float_testbed", "lcms2 fast_float_testbed demo/tool" },
+	{ {.f = lcms2_threaded_testbed_main }, "lcms2_threaded_testbed", "lcms2 threaded_testbed demo/tool" },
+	{ {.f = lcms2_alpha_test_main }, "lcms2_alpha_test", "lcms2 alpha_test demo/tool" },
+	{ {.fa = lcms2_test_main }, "lcms2_test", "lcms2 test demo/tool" },
+	{ {.fa = lcms2_jpgicc_util_main }, "lcms2_jpgicc_util", "lcms2 jpgicc_util demo/tool" },
+	{ {.fa = lcms2_linkicc_util_main }, "lcms2_linkicc_util", "lcms2 linkicc_util demo/tool" },
+	{ {.fa = lcms2_psicc_util_main }, "lcms2_psicc_util", "lcms2 psicc_util demo/tool" },
+	//{ {.fa = lcms2_itufax_example_main }, "lcms2_itufax_example", "lcms2 itufax_example demo/tool" },
+	//{ {.f = lcms2_mkcmy_example_main }, "lcms2_mkcmy_example", "lcms2 mkcmy_example demo/tool" },
+	//{ {.fa = lcms2_mkgrayer_example_main }, "lcms2_mkgrayer_example", "lcms2 mkgrayer_example demo/tool" },
+	{ {.fa = lcms2_mktiff8_example_main }, "lcms2_mktiff8_example", "lcms2 mktiff8_example demo/tool" },
+	{ {.fa = lcms2_roundtrip_example_main }, "lcms2_roundtrip_example", "lcms2 roundtrip_example demo/tool" },
+	{ {.fa = lcms2_vericc_example_main }, "lcms2_vericc_example", "lcms2 vericc_example demo/tool" },
+	{ {.fa = lcms2_wtpt_example_main }, "lcms2_wtpt_example", "lcms2 wtpt_example demo/tool" },
+	{ {.fa = lcms2_tiffdiff_util_main }, "lcms2_tiffdiff_util", "lcms2 tiffdiff_util demo/tool" },
+	{ {.fa = lcms2_tificc_util_main }, "lcms2_tificc_util", "lcms2 tificc_util demo/tool" },
+	{ {.fa = lcms2_transicc_util_main }, "lcms2_transicc_util", "lcms2 transicc_util demo/tool" },
 #endif
 
 	{ {.fa = report_version }, "version", "report version of this build / tools" },

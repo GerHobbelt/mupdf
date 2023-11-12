@@ -140,7 +140,7 @@ void *ocr_init(fz_context *ctx, const char *language, const char *datadir)
 	// Initialize tesseract-ocr with English, without specifying tessdata path
 	std::vector<std::string> nil;
 
-	if (api->InitFullWithReader(datadir, 0, /* data, data_size */
+	if (api->InitFullWithReader(datadir, 
 		language,
 		tesseract::OcrEngineMode::OEM_DEFAULT,
 		nil, /* configs, */
