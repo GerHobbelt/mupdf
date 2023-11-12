@@ -194,13 +194,13 @@ fz_new_pixmap_from_page_contents_with_separations(fz_context *ctx, fz_page *page
 }
 
 fz_pixmap *
-fz_new_pixmap_from_page(fz_context *ctx, fz_page *page, fz_matrix ctm, fz_colorspace *cs, int alpha)
+fz_new_pixmap_from_page(fz_context *ctx, fz_page *page, fz_matrix ctm, fz_colorspace *cs, int alpha, int skip_text)
 {
-	return fz_new_pixmap_from_page_with_separations(ctx, page, ctm, cs, NULL, alpha);
+	return fz_new_pixmap_from_page_with_separations(ctx, page, ctm, cs, NULL, alpha, skip_text);
 }
 
 fz_pixmap *
-fz_new_pixmap_from_page_with_separations(fz_context *ctx, fz_page *page, fz_matrix ctm, fz_colorspace *cs, fz_separations *seps, int alpha)
+fz_new_pixmap_from_page_with_separations(fz_context *ctx, fz_page *page, fz_matrix ctm, fz_colorspace *cs, fz_separations *seps, int alpha, int skip_text)
 {
 	fz_rect rect;
 	fz_irect bbox;
@@ -223,7 +223,14 @@ fz_new_pixmap_from_page_with_separations(fz_context *ctx, fz_page *page, fz_matr
 			fz_clear_pixmap_with_value(ctx, pix, 0xFF);
 
 		dev = fz_new_draw_device(ctx, ctm, pix);
-		fz_run_page(ctx, page, dev, fz_identity, NULL);
+		fz_cookie cookie = {0};
+		if (skip_text) {
+			cookie.skip_text = 1;
+		} else {
+			cookie.skip_text = 0;
+		}
+
+		fz_run_page(ctx, page, dev, fz_identity, &cookie);
 		fz_close_device(ctx, dev);
 	}
 	fz_always(ctx)
@@ -240,20 +247,20 @@ fz_new_pixmap_from_page_with_separations(fz_context *ctx, fz_page *page, fz_matr
 }
 
 fz_pixmap *
-fz_new_pixmap_from_page_number(fz_context *ctx, fz_document *doc, int number, fz_matrix ctm, fz_colorspace *cs, int alpha)
+fz_new_pixmap_from_page_number(fz_context *ctx, fz_document *doc, int number, fz_matrix ctm, fz_colorspace *cs, int alpha, int skip_text)
 {
-	return fz_new_pixmap_from_page_number_with_separations(ctx, doc, number, ctm, cs, NULL, alpha);
+	return fz_new_pixmap_from_page_number_with_separations(ctx, doc, number, ctm, cs, NULL, alpha, skip_text);
 }
 
 fz_pixmap *
-fz_new_pixmap_from_page_number_with_separations(fz_context *ctx, fz_document *doc, int number, fz_matrix ctm, fz_colorspace *cs, fz_separations *seps, int alpha)
+fz_new_pixmap_from_page_number_with_separations(fz_context *ctx, fz_document *doc, int number, fz_matrix ctm, fz_colorspace *cs, fz_separations *seps, int alpha, int skip_text)
 {
 	fz_page *page;
 	fz_pixmap *pix = NULL;
 
 	page = fz_load_page(ctx, doc, number);
 	fz_try(ctx)
-		pix = fz_new_pixmap_from_page_with_separations(ctx, page, ctm, cs, seps, alpha);
+		pix = fz_new_pixmap_from_page_with_separations(ctx, page, ctm, cs, seps, alpha, skip_text);
 	fz_always(ctx)
 		fz_drop_page(ctx, page);
 	fz_catch(ctx)

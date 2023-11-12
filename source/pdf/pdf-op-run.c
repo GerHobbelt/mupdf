@@ -849,6 +849,11 @@ pdf_flush_text(fz_context *ctx, pdf_run_processor *pr)
 	if (pr->super.hidden)
 		dostroke = dofill = 0;
 
+	if (pr->cookie && pr->cookie->skip_text_invis == 1 && (doinvisible || (!dofill || gstate->fill.alpha == 0.0f) && (!dostroke || gstate->stroke.alpha == 0.0f))) {
+		return gstate;
+	}
+
+
 	fz_try(ctx)
 	{
 		fz_rect tb = fz_transform_rect(pr->tos.text_bbox, gstate->ctm);
@@ -2901,34 +2906,36 @@ pdf_new_run_processor(fz_context *ctx, pdf_document *doc, fz_device *dev, fz_mat
 		proc->super.op_W = pdf_run_W;
 		proc->super.op_Wstar = pdf_run_Wstar;
 
-		/* text objects */
-		proc->super.op_BT = pdf_run_BT;
-		proc->super.op_ET = pdf_run_ET;
+		if (!cookie || cookie->skip_text == 0) {
+			/* text objects */
+			proc->super.op_BT = pdf_run_BT;
+			proc->super.op_ET = pdf_run_ET;
 
-		/* text state */
-		proc->super.op_Tc = pdf_run_Tc;
-		proc->super.op_Tw = pdf_run_Tw;
-		proc->super.op_Tz = pdf_run_Tz;
-		proc->super.op_TL = pdf_run_TL;
-		proc->super.op_Tf = pdf_run_Tf;
-		proc->super.op_Tr = pdf_run_Tr;
-		proc->super.op_Ts = pdf_run_Ts;
+			/* text state */
+			proc->super.op_Tc = pdf_run_Tc;
+			proc->super.op_Tw = pdf_run_Tw;
+			proc->super.op_Tz = pdf_run_Tz;
+			proc->super.op_TL = pdf_run_TL;
+			proc->super.op_Tf = pdf_run_Tf;
+			proc->super.op_Tr = pdf_run_Tr;
+			proc->super.op_Ts = pdf_run_Ts;
 
-		/* text positioning */
-		proc->super.op_Td = pdf_run_Td;
-		proc->super.op_TD = pdf_run_TD;
-		proc->super.op_Tm = pdf_run_Tm;
-		proc->super.op_Tstar = pdf_run_Tstar;
+			/* text positioning */
+			proc->super.op_Td = pdf_run_Td;
+			proc->super.op_TD = pdf_run_TD;
+			proc->super.op_Tm = pdf_run_Tm;
+			proc->super.op_Tstar = pdf_run_Tstar;
 
-		/* text showing */
-		proc->super.op_TJ = pdf_run_TJ;
-		proc->super.op_Tj = pdf_run_Tj;
-		proc->super.op_squote = pdf_run_squote;
-		proc->super.op_dquote = pdf_run_dquote;
+			/* text showing */
+			proc->super.op_TJ = pdf_run_TJ;
+			proc->super.op_Tj = pdf_run_Tj;
+			proc->super.op_squote = pdf_run_squote;
+			proc->super.op_dquote = pdf_run_dquote;
 
-		/* type 3 fonts */
-		proc->super.op_d0 = pdf_run_d0;
-		proc->super.op_d1 = pdf_run_d1;
+			/* type 3 fonts */
+			proc->super.op_d0 = pdf_run_d0;
+			proc->super.op_d1 = pdf_run_d1;
+		}
 
 		/* color */
 		proc->super.op_CS = pdf_run_CS;

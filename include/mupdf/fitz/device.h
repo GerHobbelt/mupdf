@@ -426,6 +426,8 @@ typedef struct
 	size_t progress_max; /* (size_t)-1 for unknown */
 	int errors;
 	int incomplete;
+	int skip_text;
+	int skip_text_invis;
 } fz_cookie;
 
 /**

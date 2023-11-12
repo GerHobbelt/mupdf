@@ -27,7 +27,7 @@
 #include <math.h>
 
 /* Maximum number of errors before aborting */
-#define MAX_SYNTAX_ERRORS 100
+#define MAX_SYNTAX_ERRORS 100000
 
 void *
 pdf_new_processor(fz_context *ctx, int size)

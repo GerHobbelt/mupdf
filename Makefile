@@ -502,6 +502,9 @@ watch-recompile:
 wasm:
 	$(MAKE) -C platform/wasm
 
+wasm2:
+	$(MAKE) -C platform/wasm2
+
 java:
 	$(MAKE) -C platform/java build=$(build)
 
