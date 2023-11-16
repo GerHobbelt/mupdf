@@ -90,6 +90,10 @@ static const char *html_default_css =
 "caption{display:block;text-align:center}"
 ;
 
+static const char *story_extra_css =
+"@page{margin:0em 0em}"
+;
+
 static const char *mobi_default_css =
 "pagebreak{display:block;page-break-before:always}"
 "dl,ol,ul{margin:0}"
@@ -1489,7 +1493,7 @@ parse_to_xml(fz_context *ctx, fz_buffer *buf, int try_xml, int try_html5)
 
 static void
 xml_to_boxes(fz_context *ctx, fz_html_font_set *set, fz_archive *zip, const char *base_uri, const char *user_css,
-	fz_xml_doc *xml, fz_html_tree *tree, char **rtitle, int try_fictionbook, int is_mobi)
+	fz_xml_doc *xml, fz_html_tree *tree, char **rtitle, int try_fictionbook, int is_mobi, int is_story)
 {
 	fz_xml *root, *node;
 	char *title;
@@ -1550,6 +1554,8 @@ xml_to_boxes(fz_context *ctx, fz_html_font_set *set, fz_archive *zip, const char
 		{
 			g.is_fb2 = 0;
 			fz_parse_css(ctx, g.css, html_default_css, "<default:html>");
+			if (is_story)
+				fz_parse_css(ctx, g.css, story_extra_css, "<default:html>");
 			if (fz_use_document_css(ctx))
 				html_load_css(ctx, g.set, g.zip, g.base_uri, g.css, root);
 		}
@@ -1751,7 +1757,7 @@ fz_parse_html_tree(fz_context *ctx,
 		patch_mobi_html(ctx, xml->u.doc.pool, xml);
 
 	fz_try(ctx)
-		xml_to_boxes(ctx, set, zip, base_uri, user_css, xml, tree, rtitle, try_fictionbook, patch_mobi);
+		xml_to_boxes(ctx, set, zip, base_uri, user_css, xml, tree, rtitle, try_fictionbook, patch_mobi, 0);
 	fz_always(ctx)
 		fz_drop_xml(ctx, xml);
 	fz_catch(ctx)
@@ -2306,7 +2312,7 @@ convert_to_boxes(fz_context *ctx, fz_story *story)
 	fz_try(ctx)
 	{
 		redirect_warnings_to_buffer(ctx, story->warnings, &saved);
-		xml_to_boxes(ctx, story->font_set, story->zip, ".", story->user_css, story->dom, &story->tree, NULL, 0, 0);
+		xml_to_boxes(ctx, story->font_set, story->zip, ".", story->user_css, story->dom, &story->tree, NULL, 0, 0, 1);
 	}
 	fz_always(ctx)
 	{
