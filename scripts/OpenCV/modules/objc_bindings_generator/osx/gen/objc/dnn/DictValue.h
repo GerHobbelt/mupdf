@@ -6,7 +6,7 @@
 #ifdef __cplusplus
 //#import "opencv.hpp"
 #import "opencv2/dnn.hpp"
-#import "W:/Projects/sites/library.visyond.gov/80/lib/tooling/qiqqa/MuPDF/thirdparty/owemdjee/opencv\modules/dnn\include\opencv2\dnn\dict.hpp"
+#import "../../../../thirdparty/owemdjee/opencv\modules/dnn\include\opencv2\dnn\dict.hpp"
 #else
 #define CV_EXPORTS
 #endif

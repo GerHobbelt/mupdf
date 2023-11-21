@@ -1,15 +1,13 @@
 /*******************************************************************************
-* Copyright 2016-2019 Intel Corporation.
+* Copyright 2016 Intel Corporation.
 *
-* This software and the related documents are Intel copyrighted  materials,  and
-* your use of  them is  governed by the  express license  under which  they were
-* provided to you (License).  Unless the License provides otherwise, you may not
-* use, modify, copy, publish, distribute,  disclose or transmit this software or
-* the related documents without Intel's prior written permission.
 *
-* This software and the related documents  are provided as  is,  with no express
-* or implied  warranties,  other  than those  that are  expressly stated  in the
-* License.
+* This software and the related documents are Intel copyrighted materials, and your use of them is governed by
+* the express license under which they were provided to you ('License'). Unless the License provides otherwise,
+* you may not use, modify, copy, publish, distribute, disclose or transmit this software or the related
+* documents without Intel's prior written permission.
+* This software and the related documents are provided as is, with no express or implied warranties, other than
+* those that are expressly stated in the License.
 *******************************************************************************/
 
 #if !defined( __IPP_IW_VERSION__ )
@@ -18,11 +16,11 @@
 #include "ippversion.h"
 
 // Intel IPP IW version, equal to target Intel IPP package version
-#define IW_VERSION_MAJOR  2020
-#define IW_VERSION_MINOR  0
+#define IW_VERSION_MAJOR  2021
+#define IW_VERSION_MINOR  11
 #define IW_VERSION_UPDATE 0
 
-#define IW_VERSION_STR "2020.0.0"
+#define IW_VERSION_STR "2021.11.0"
 
 // Version of minimal compatible Intel IPP package
 #define IW_MIN_COMPATIBLE_IPP_MAJOR  2017

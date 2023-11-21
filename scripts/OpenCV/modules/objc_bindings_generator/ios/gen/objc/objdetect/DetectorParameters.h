@@ -6,7 +6,7 @@
 #ifdef __cplusplus
 //#import "opencv.hpp"
 #import "opencv2/objdetect.hpp"
-#import "W:/Projects/sites/library.visyond.gov/80/lib/tooling/qiqqa/MuPDF/thirdparty/owemdjee/opencv\modules/objdetect\include\opencv2\objdetect\aruco_detector.hpp"
+#import "../../../../thirdparty/owemdjee/opencv\modules/objdetect\include\opencv2\objdetect\aruco_detector.hpp"
 #else
 #define CV_EXPORTS
 #endif

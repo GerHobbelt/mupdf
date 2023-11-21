@@ -1,4 +1,4 @@
-#define CV_CPU_SIMD_FILENAME "W:/Projects/sites/library.visyond.gov/80/lib/tooling/qiqqa/MuPDF/thirdparty/owemdjee/opencv/modules/imgproc/src/smooth.simd.hpp"
+#define CV_CPU_SIMD_FILENAME "../../../../thirdparty/owemdjee/opencv/modules/imgproc/src/smooth.simd.hpp"
 #define CV_CPU_DISPATCH_MODE SSE4_1
 #include "opencv2/core/private/cv_cpu_include_simd_declarations.hpp"
 

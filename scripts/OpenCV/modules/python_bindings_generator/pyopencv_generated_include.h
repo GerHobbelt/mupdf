@@ -86,4 +86,4 @@
 #include "opencv2/gapi/streaming/onevpl/accel_types.hpp"
 #include "opencv2/gapi/streaming/sync.hpp"
 #include "opencv2/gapi/video.hpp"
-#include "W:/Projects/sites/library.visyond.gov/80/lib/tooling/qiqqa/MuPDF/thirdparty/owemdjee/opencv/modules/gapi/misc/python/python_bridge.hpp"
+#include "../../../../thirdparty/owemdjee/opencv/modules/gapi/misc/python/python_bridge.hpp"

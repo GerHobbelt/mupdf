@@ -1,15 +1,13 @@
 /*******************************************************************************
-* Copyright 2016-2019 Intel Corporation.
+* Copyright 2016 Intel Corporation.
 *
-* This software and the related documents are Intel copyrighted  materials,  and
-* your use of  them is  governed by the  express license  under which  they were
-* provided to you (License).  Unless the License provides otherwise, you may not
-* use, modify, copy, publish, distribute,  disclose or transmit this software or
-* the related documents without Intel's prior written permission.
 *
-* This software and the related documents  are provided as  is,  with no express
-* or implied  warranties,  other  than those  that are  expressly stated  in the
-* License.
+* This software and the related documents are Intel copyrighted materials, and your use of them is governed by
+* the express license under which they were provided to you ('License'). Unless the License provides otherwise,
+* you may not use, modify, copy, publish, distribute, disclose or transmit this software or the related
+* documents without Intel's prior written permission.
+* This software and the related documents are provided as is, with no express or implied warranties, other than
+* those that are expressly stated in the License.
 *******************************************************************************/
 
 #if !defined( __IPP_IW_CORE__ )
@@ -50,15 +48,15 @@ extern "C" {
 #endif
 
 // Default library linkage
-#if !defined( _IPP_NO_DEFAULT_LIB ) && !defined( _IW_NO_DEFAULT_LIB )
+#if !defined( IPP_NO_DEFAULT_LIB ) && !defined( IW_NO_DEFAULT_LIB )
   #if defined( _IPP_SEQUENTIAL_DYNAMIC )
-    #pragma comment( lib, __FILE__ "/../../../lib/" _INTEL_PLATFORM "ipp_iw" )
+    #pragma comment( lib, __FILE__ "/../../../../lib" IPP_LIB_SUBDIR_ARCH_SUFFIX "/ipp_iw" )
   #elif defined( _IPP_SEQUENTIAL_STATIC )
-    #pragma comment( lib, __FILE__ "/../../../lib/" _INTEL_PLATFORM "ipp_iw" )
+    #pragma comment( lib, __FILE__ "/../../../../lib" IPP_LIB_SUBDIR_ARCH_SUFFIX "/ipp_iw" )
   #elif defined( _IPP_PARALLEL_DYNAMIC )
-    #pragma comment( lib, __FILE__ "/../../../lib/" _INTEL_PLATFORM "ipp_iw" )
+    #pragma comment( lib, __FILE__ "/../../../../lib" IPP_LIB_SUBDIR_ARCH_SUFFIX "/ipp_iw" )
   #elif defined( _IPP_PARALLEL_STATIC )
-    #pragma comment( lib, __FILE__ "/../../../lib/" _INTEL_PLATFORM "ipp_iw" )
+    #pragma comment( lib, __FILE__ "/../../../../lib" IPP_LIB_SUBDIR_ARCH_SUFFIX "/ipp_iw" )
   #endif
 #endif
 

@@ -6,7 +6,7 @@
 #ifdef __cplusplus
 //#import "opencv.hpp"
 #import "opencv2/videoio.hpp"
-#import "W:/Projects/sites/library.visyond.gov/80/lib/tooling/qiqqa/MuPDF/thirdparty/owemdjee/opencv\modules/videoio\include\opencv2\videoio.hpp"
+#import "../../../../thirdparty/owemdjee/opencv\modules/videoio\include\opencv2\videoio.hpp"
 #else
 #define CV_EXPORTS
 #endif

@@ -72,6 +72,9 @@
 #define HAVE_OPENJPEG
 /* #undef HAVE_JASPER */
 
+/* AVIF codec */
+/* #undef HAVE_AVIF */
+
 /* IJG JPEG codec */
 #define HAVE_JPEG
 
