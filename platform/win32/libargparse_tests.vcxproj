@@ -110,7 +110,7 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -233,17 +233,19 @@
     <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_append.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_as_container.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_bool_operator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_choices.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_compound_arguments.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_const_correct.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_container_arguments.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_default_args.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_default_value.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_equals_form.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_error_reporting.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_get.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_help.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_invalid_arguments.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_is_used.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_issue_37.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_mutually_exclusive_group.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_negative_numbers.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_optional_arguments.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_parent_parsers.cpp" />
@@ -254,8 +256,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_repr.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_required_arguments.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_scan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_stringstream.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_subparsers.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_value_semantics.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/argparse/test/test_version.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/argparse/include/argparse/argparse.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/argparse/test/doctest.hpp" />
@@ -270,6 +272,7 @@
     <Text Include="../../thirdparty/owemdjee/argparse/test/README.md" />
     <Text Include="../../thirdparty/owemdjee/argparse/tools/build.bat" />
     <Text Include="../../thirdparty/owemdjee/argparse/tools/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/argparse/xmake.lua" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />

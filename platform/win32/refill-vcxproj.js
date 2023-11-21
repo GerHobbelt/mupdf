@@ -276,7 +276,22 @@ for (const key in projectMap) {
 	}
 }
 
+if (/[_-]tests$/.test(projname)) {
+	let tst_projname = projname.replace(/[_-]tests$/, '');
 
+	for (const key in projectMap) {
+		let value = projectMap[key];
+		if (tst_projname === key) {
+			testpath = `${scriptpath}/../../thirdparty/owemdjee/${value}`;
+
+			checkDirAndReportPlusExitOnSuccess(testpath);
+
+			testpath = `${scriptpath}/../../thirdparty/${value}`;
+
+			checkDirAndReportPlusExitOnSuccess(testpath);
+		}
+	}
+}
 
 testpath = `${scriptpath}/../../thirdparty/owemdjee/${projname}`;
 

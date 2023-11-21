@@ -110,7 +110,7 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -947,14 +947,6 @@
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_metadata/gen-cpp2/module_constants.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_metadata/gen-cpp2/module_data.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_metadata/gen-cpp2/module_types.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/MyService.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/MyServiceAsyncClient.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/MyService_processmap_binary.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/MyService_processmap_compact.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/module_constants.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/module_data.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/module_metadata.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/module_types.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/optionals/gen-cpp2/module_constants.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/optionals/gen-cpp2/module_data.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/optionals/gen-cpp2/module_metadata.cpp" />
@@ -1145,6 +1137,14 @@
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/transitive-deps/gen-python-capi/b/thrift_types_capi.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/transitive-deps/gen-python-capi/c/thrift_types_capi.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/transitive-deps/gen-python-capi/s/thrift_types_capi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/MyService.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/MyServiceAsyncClient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/MyService_processmap_binary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/MyService_processmap_compact.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/module_constants.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/module_data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/module_metadata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/module_types.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/types/gen-cpp2/SomeService.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/types/gen-cpp2/SomeServiceAsyncClient.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/types/gen-cpp2/SomeService_processmap_binary.cpp" />
@@ -1479,6 +1479,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/Cpp2Connection.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/Cpp2Worker.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/IOUringUtil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/InterceptorData.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/InternalPriorityRequestPile.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/LoggingEvent.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/LoggingEventHelper.cpp" />
@@ -1509,6 +1510,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/peeking/TLSHelper.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/test/CPUConcurrencyControllerTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/test/IOUringUtilTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/test/InterceptorDataTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/test/MockCPUConcurrencyControllerConfigTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/test/ParallelConcurrencyControllerTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/test/PerturbSourceTest.cpp" />
@@ -3006,6 +3008,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/folly/folly/test/MapUtilTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/folly/folly/test/MathBenchmark.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/folly/folly/test/MathTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/folly/folly/test/MaybeManagedPtrTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/folly/folly/test/MemcpyBenchmark.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/folly/folly/test/MemcpyTest.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/folly/folly/test/MemcpyUseTest.cpp" />
@@ -4421,21 +4424,6 @@
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_metadata/gen-cpp2/module_visit_by_thrift_field_metadata.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_metadata/gen-cpp2/module_visit_union.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_metadata/gen-cpp2/module_visitation.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/MyService.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/MyServiceAsyncClient.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/MyService_custom_protocol.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/module_clients.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/module_constants.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/module_data.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/module_for_each_field.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/module_handlers.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/module_metadata.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/module_types.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/module_types_custom_protocol.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/module_types_fwd.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/module_visit_by_thrift_field_metadata.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/module_visit_union.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/module_visitation.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/optionals/gen-cpp2/module_clients.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/optionals/gen-cpp2/module_constants.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/optionals/gen-cpp2/module_data.h" />
@@ -4809,6 +4797,21 @@
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/transitive-deps/gen-python-capi/b/thrift_types_capi.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/transitive-deps/gen-python-capi/c/thrift_types_capi.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/transitive-deps/gen-python-capi/s/thrift_types_capi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/MyService.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/MyServiceAsyncClient.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/MyService_custom_protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/module_clients.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/module_constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/module_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/module_for_each_field.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/module_handlers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/module_metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/module_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/module_types_custom_protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/module_types_fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/module_visit_by_thrift_field_metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/module_visit_union.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/module_visitation.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/types/gen-cpp2/SomeService.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/types/gen-cpp2/SomeServiceAsyncClient.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/types/gen-cpp2/SomeService_custom_protocol.h" />
@@ -5251,6 +5254,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/IOUringUtil.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/IOWorkerContext.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/IResourcePoolAcceptor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/InterceptorData.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/InternalPriorityRequestPile.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/LoggingEvent.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/LoggingEventHelper.h" />
@@ -5271,6 +5275,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/ResourcePoolHandle.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/ResourcePoolSet.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/RoundRobinRequestPile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/SecurityServerInterface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/ServerAttribute.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/ServerConfigs.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/lib/cpp2/server/ServerFlags.h" />
@@ -5637,6 +5642,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fizz/fizz/protocol/FizzBase.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fizz/fizz/protocol/HandshakeContext-inl.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fizz/fizz/protocol/HandshakeContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fizz/fizz/protocol/IFactory.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fizz/fizz/protocol/KeyScheduler.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fizz/fizz/protocol/OpenSSLFactory.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fizz/fizz/protocol/Params.h" />
@@ -5789,6 +5795,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/folly/folly/MacAddress.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/folly/folly/MapUtil.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/folly/folly/Math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/folly/folly/MaybeManagedPtr.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/folly/folly/Memory.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/folly/folly/MicroLock.h" />
     <ClInclude Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/folly/folly/MicroSpinLock.h" />
@@ -7050,7 +7057,6 @@
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/generate/templates/pyi/README.md" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/ast_generator_test.py" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/build_fixtures.py" />
-    <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/compiler_failure_test.py" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixture_test.py" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/adapter/gen-cpp2/AdapterService.tcc" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/adapter/gen-cpp2/Service.tcc" />
@@ -7753,8 +7759,6 @@
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/nimble/gen-cpp2/module_types.tcc" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_metadata/gen-cpp2/MyService.tcc" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_metadata/gen-cpp2/module_types.tcc" />
-    <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/MyService.tcc" />
-    <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/no_service_handler_coroutines/gen-cpp2/module_types.tcc" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/optionals/gen-cpp2/module_types.tcc" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/optionals/gen-json/module.json" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/optionals/gen-py3/module/builders.pyx" />
@@ -8249,6 +8253,8 @@
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/transitive-deps/gen-python/s/thrift_metadata.py" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/transitive-deps/gen-python/s/thrift_services.py" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/transitive-deps/gen-python/s/thrift_types.py" />
+    <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/MyService.tcc" />
+    <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/typed-interceptor/gen-cpp2/module_types.tcc" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/types/gen-cpp2/SomeService.tcc" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/types/gen-cpp2/module_types.tcc" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/types/gen-py/__init__.py" />
@@ -8307,7 +8313,6 @@
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/visitation/gen-cpp2/service3.tcc" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/fixtures/visitation/gen-cpp2/service_with_special_names.tcc" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/json_compiler_test.py" />
-    <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/compiler/test/py3_compiler_failure_test.py" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/conformance/data/nonconforming.txt" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/conformance/python/conformance_server.py" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/conformance/python/rpc_client.py" />
@@ -8337,7 +8342,7 @@
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/doc/features/field-mask.md" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/doc/features/index.md" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/doc/features/operators.md" />
-    <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/doc/features/patch.md" />
+    <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/doc/features/patch/patch.md" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/doc/features/schema.md" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/doc/features/serialization/index.md" />
     <Text Include="../../thirdparty/owemdjee/CacheLib/cachelib/external/fbthrift/thrift/doc/features/serialization/protocols.md" />

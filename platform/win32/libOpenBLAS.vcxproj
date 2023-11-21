@@ -110,7 +110,7 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
 </ItemDefinitionGroup>
@@ -126,14 +126,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/OpenBLAS;../../thirdparty/owemdjee/lapack/LAPACKE/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENBLAS;OPENBLAS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENBLAS;OPENBLAS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/OpenBLAS;../../thirdparty/owemdjee/lapack/LAPACKE/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -152,7 +152,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/OpenBLAS;../../thirdparty/owemdjee/lapack/LAPACKE/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENBLAS;OPENBLAS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -160,7 +160,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENBLAS;OPENBLAS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/OpenBLAS;../../thirdparty/owemdjee/lapack/LAPACKE/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -181,14 +181,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/OpenBLAS;../../thirdparty/owemdjee/lapack/LAPACKE/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENBLAS;OPENBLAS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENBLAS;OPENBLAS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/OpenBLAS;../../thirdparty/owemdjee/lapack/LAPACKE/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -207,7 +207,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/OpenBLAS;../../thirdparty/owemdjee/lapack/LAPACKE/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENBLAS;OPENBLAS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -215,7 +215,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENBLAS;OPENBLAS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/OpenBLAS;../../thirdparty/owemdjee/lapack/LAPACKE/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -4396,8 +4396,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/LAPACKE/utils/lapacke_ztz_trans.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/cgegs.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/cgegv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/cgelqs.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/cgelsx.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/cgeqpf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/cgeqrs.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/cggsvd.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/cggsvp.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/clahrd.c" />
@@ -4405,8 +4407,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/ctzrqf.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/dgegs.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/dgegv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/dgelqs.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/dgelsx.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/dgeqpf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/dgeqrs.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/dggsvd.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/dggsvp.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/dlahrd.c" />
@@ -4414,8 +4418,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/dtzrqf.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/sgegs.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/sgegv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/sgelqs.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/sgelsx.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/sgeqpf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/sgeqrs.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/sggsvd.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/sggsvp.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/slahrd.c" />
@@ -4423,8 +4429,10 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/stzrqf.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/zgegs.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/zgegv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/zgelqs.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/zgelsx.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/zgeqpf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/zgeqrs.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/zggsvd.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/zggsvp.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/DEPRECATED/zlahrd.c" />
@@ -4477,6 +4485,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/cgeql2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/cgeqlf.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/cgeqp3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/cgeqp3rk.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/cgeqr.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/cgeqr2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/cgeqr2p.c" />
@@ -4696,6 +4705,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/claqhe.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/claqhp.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/claqp2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/claqp2rk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/claqp3rk.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/claqps.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/claqr0.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/claqr1.c" />
@@ -4985,6 +4996,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/dgeql2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/dgeqlf.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/dgeqp3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/dgeqp3rk.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/dgeqr.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/dgeqr2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/dgeqr2p.c" />
@@ -5124,6 +5136,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/dlaqgb.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/dlaqge.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/dlaqp2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/dlaqp2rk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/dlaqp3rk.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/dlaqps.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/dlaqr0.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/dlaqr1.c" />
@@ -5514,6 +5528,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/sgeql2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/sgeqlf.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/sgeqp3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/sgeqp3rk.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/sgeqr.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/sgeqr2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/sgeqr2p.c" />
@@ -5653,6 +5668,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/slaqgb.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/slaqge.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/slaqp2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/slaqp2rk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/slaqp3rk.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/slaqps.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/slaqr0.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/slaqr1.c" />
@@ -6017,6 +6034,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/zgeql2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/zgeqlf.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/zgeqp3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/zgeqp3rk.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/zgeqr.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/zgeqr2.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/zgeqr2p.c" />
@@ -6235,6 +6253,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/zlaqhe.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/zlaqhp.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/zlaqp2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/zlaqp2rk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/zlaqp3rk.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/zlaqps.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/zlaqr0.c" />
     <ClCompile Include="../../thirdparty/owemdjee/OpenBLAS/lapack-netlib/SRC/zlaqr1.c" />

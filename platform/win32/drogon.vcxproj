@@ -19,53 +19,48 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>drogon</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFA46518}</ProjectGuid>
+    <ProjectGuid>{00811970-815B-4F64-BC9D-21907832734C}</ProjectGuid>
     <RootNamespace>drogon</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>false</UseOfMfc>
-    <UseDebugLibraries>true</UseDebugLibraries>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>false</UseOfMfc>
-    <UseDebugLibraries>true</UseDebugLibraries>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +74,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -110,624 +105,268 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableUnitySupport>true</EnableUnitySupport>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_DROGON;DROGON_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MkTypLibCompatible>true</MkTypLibCompatible>
-      <TargetEnvironment>Win32</TargetEnvironment>
-      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
-      <HeaderFileName />
-    </Midl>
-    <ClCompile>
-      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <Optimization>MaxSpeed</Optimization>
-      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/drogon/orm_lib/inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_DROGON;DROGON_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-    </ClCompile>
-    <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_DROGON;DROGON_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
-    <Lib>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    </Lib>
-    <Bscmake>
-      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
-    </Bscmake>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_DROGON;DROGON_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MkTypLibCompatible>true</MkTypLibCompatible>
-      <TargetEnvironment>Win32</TargetEnvironment>
-      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
-      <HeaderFileName />
-    </Midl>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/drogon/orm_lib/inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_DROGON;DROGON_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_DROGON;DROGON_STATICLIB;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
-    <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_DROGON;DROGON_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
-    <Lib>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX86</TargetMachine>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    </Lib>
-    <Bscmake>
-      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
-    </Bscmake>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_DROGON;DROGON_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MkTypLibCompatible>true</MkTypLibCompatible>
-      <TargetEnvironment>Win32</TargetEnvironment>
-      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
-      <HeaderFileName />
-    </Midl>
-    <ClCompile>
-      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <Optimization>MaxSpeed</Optimization>
-      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/drogon/orm_lib/inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_DROGON;DROGON_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-    </ClCompile>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_DROGON;DROGON_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
-    <Lib>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    </Lib>
-    <Bscmake>
-      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
-    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_DROGON;DROGON_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MkTypLibCompatible>true</MkTypLibCompatible>
-      <TargetEnvironment>Win32</TargetEnvironment>
-      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
-      <HeaderFileName />
+      <TargetEnvironment>X64</TargetEnvironment>
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/drogon/orm_lib/inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_DROGON;DROGON_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_DROGON;DROGON_STATICLIB;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
-    <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_DROGON;DROGON_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
-    <Lib>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX64</TargetMachine>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    </Lib>
-    <Bscmake>
-      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
-    </Bscmake>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_DROGON;DROGON_STATICLIB;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_DROGON;DROGON_STATICLIB;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="cryptlib.vcxproj">
+      <Project>{424334e5-addf-490d-ba7b-46cf3686b48d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libarchive.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff18377f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpp-terminal.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff2367fa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libhighway.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff021a57}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpthread-win32.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8df2c2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite_tools.vcxproj">
+      <Project>{6e890463-3eeb-4cce-b8bd-5aa89148c35a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="MuPDFLib_static.vcxproj">
+      <Project>{a60d8644-5815-4d29-8970-7518ff518d62}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbase58x.vcxproj">
+      <Project>{0501bedf-3191-46a9-9997-288466675b82}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libBLAKE3.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc1880387f83}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfmt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffaf3a53}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreetype.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-a58957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgumbo-parser.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-358957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libharfbuzz.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-258957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjbig2dec.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-958957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-turbo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblcms2.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-158957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuhelpers.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce88099485a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmujs.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-858957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-6222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbrotli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7760d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcrow.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff84e35}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcurl.vcxproj">
+      <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libextract.vcxproj">
+      <Project>{da38ca0b-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreeglut.vcxproj">
+      <Project>{a1b75d29-9f5c-4a0f-b368-322a10477d0c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgif.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffddd6be}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-xl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa838c1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libleptonica.vcxproj">
+      <Project>{ca0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblz4.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff50b44d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf_default_handlers.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-1222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuthreads.vcxproj">
+      <Project>{de21fa8a-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmutool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libopenjpeg.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-758957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpkcs7.vcxproj">
+      <Project>{22462382-b30d-42a5-bf07-ee1a35e25d21}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpng.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-658957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libqiqqatool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc18808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libQuickJS.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0e57ba}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libresources.vcxproj">
+      <Project>{52dcab29-c8ee-4422-954c-29afa6b33e22}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite-amalgamation.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3a7bc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsvgcharter.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7fcf79}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtesseract.vcxproj">
+      <Project>{ac0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtiff.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-558957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtinyexpr.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff33b1b5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libupskirt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff789ba9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libwebp.vcxproj">
+      <Project>{105f884a-c170-4c30-a810-c7da2103002f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libxml2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa57a44}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzlib.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzopfli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff03e6ca}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzstd.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="lib_nas_lockfile.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0a15c6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="png-pmt-tools-lib.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1147a4}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/cmake/tests/check_has_std_filesystem_path.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/cmake/tests/normal_uuid_lib_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/cmake/tests/ossp_uuid_lib_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/cmake/tests/test_libpq_batch_mode.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/drogon_ctl/cmd.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/drogon_ctl/create.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/drogon_ctl/create_controller.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/drogon_ctl/create_filter.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/drogon_ctl/create_model.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/drogon_ctl/create_plugin.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/drogon_ctl/create_project.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/drogon_ctl/create_view.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/drogon_ctl/help.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/drogon_ctl/main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/drogon_ctl/press.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/drogon_ctl/version.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/benchmark/BenchmarkCtrl.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/benchmark/JsonCtrl.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/benchmark/main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/client_example/main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/file_upload/file_upload.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/helloworld/HelloController.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/helloworld/HelloViewController.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/helloworld/main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/jsonstore/main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/login_session/main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/redis/controllers/Client.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/redis/main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/controllers/SlowCtrl.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/filters/TimeFilter.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/test/test_main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/simple_reverse_proxy/main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/simple_reverse_proxy/plugins/SimpleReverseProxy.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/websocket_client/WebSocketClient.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/examples/websocket_server/WebSocketServer.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/AOPAdvice.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/AccessLogger.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/CacheFile.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/ConfigLoader.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/Cookie.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/DbClientManagerSkipped.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/DrClassMap.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/DrTemplateBase.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/FiltersFunction.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/HttpAppFrameworkImpl.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/HttpBinder.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/HttpClientImpl.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/HttpControllersRouter.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/HttpFileImpl.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/HttpFileUploadRequest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/HttpRequestImpl.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/HttpRequestParser.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/HttpResponseImpl.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/HttpResponseParser.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/HttpServer.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/HttpSimpleControllersRouter.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/HttpUtils.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/HttpViewData.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/IntranetIpFilter.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/ListenerManager.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/LocalHostFilter.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/MultiPart.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/NotFound.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/PluginsManager.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/RangeParser.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/RedisClientManagerSkipped.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/RedisClientSkipped.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/RedisResultSkipped.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/SecureSSLRedirector.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/SessionManager.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/SharedLibManager.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/StaticFileRouter.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/TaskTimeoutFlag.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/Utilities.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/WebSocketClientImpl.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/WebSocketConnectionImpl.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/WebsocketControllersRouter.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/ssl_funcs/Md5.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/src/ssl_funcs/Sha1.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/client/HttpPipeliningTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/client/MultipleWsTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/client/WebSocketTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/client/main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/CustomCtrl.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/CustomHeaderFilter.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/DigestAuthFilter.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/DoNothingPlugin.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/ForwardCtrl.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/JsonTestController.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/ListParaCtl.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/MethodTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/PipeliningTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/RangeTestController.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/TestController.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/TestPlugin.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/TestViewCtl.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/TimeFilter.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/WebSocketTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/api_Attachment.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/api_v1_ApiTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/api_v1_CoroTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/unittests/Base64Test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/unittests/BrotliTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/unittests/CacheMapTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/unittests/ClassNameTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/unittests/CookieTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/unittests/CoroutineTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/unittests/DrObjectTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/unittests/FileTypeTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/unittests/GzipTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/unittests/HttpDateTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/unittests/HttpFullDateTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/unittests/HttpHeaderTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/unittests/HttpViewDataTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/unittests/MD5Test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/unittests/MainLoopTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/unittests/MsgBufferTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/unittests/OStringStreamTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/unittests/PubSubServiceUnittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/unittests/Sha1Test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/unittests/StringOpsTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/unittests/UrlCodecTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/lib/tests/unittests/main.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/nosql_lib/redis/src/RedisClientImpl.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/nosql_lib/redis/src/RedisClientLockFree.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/nosql_lib/redis/src/RedisClientManager.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/nosql_lib/redis/src/RedisConnection.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/nosql_lib/redis/src/RedisResult.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/nosql_lib/redis/src/RedisTransactionImpl.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/nosql_lib/redis/tests/redis_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/ArrayParser.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/Criteria.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/DbClient.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/DbClientImpl.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/DbClientLockFree.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/DbClientManager.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/DbConnection.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/Exception.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/Field.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/RestfulController.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/Result.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/Row.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/SqlBinder.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/TransactionImpl.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/mysql_impl/MysqlConnection.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/mysql_impl/MysqlResultImpl.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/mysql_impl/test/test1.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/postgresql_impl/PgBatchConnection.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/postgresql_impl/PgConnection.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/postgresql_impl/PostgreSQLResultImpl.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/postgresql_impl/test/test1.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/postgresql_impl/test/test2.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/sqlite3_impl/Sqlite3Connection.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/sqlite3_impl/Sqlite3ResultImpl.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/sqlite3_impl/test/Groups.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/src/sqlite3_impl/test/test1.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/tests/db_test.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/tests/mysql/Users.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/tests/postgresql/Users.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/orm_lib/tests/sqlite3/Users.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/Channel.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/EventLoop.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/EventLoopThread.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/EventLoopThreadPool.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/InetAddress.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/TcpClient.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/TcpServer.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/Acceptor.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/AresResolver.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/Connector.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/NormalResolver.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/Poller.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/Socket.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/TcpConnectionImpl.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/Timer.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/TimerQueue.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/poller/EpollPoller.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/poller/KQueue.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/poller/PollPoller.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/tlsprovider/BotanTLSProvider.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/tlsprovider/OpenSSLProvider.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/AsyncFileLoggerTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/AsyncFileLoggerTest1.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/ConcurrentTaskQueueTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/DelayedSSLClientTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/DelayedSSLServerTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/DnsTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/KickoffTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/LoggerMacroTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/LoggerTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/MTLSClient.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/MTLSServer.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/PathConversionTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/RunInLoopTest1.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/RunInLoopTest2.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/RunOnQuitTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/SSLClientTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/SSLServerTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/SendfileTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/SendstreamTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/SerialTaskQueueTest1.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/SerialTaskQueueTest2.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/SpdLoggerTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/TcpClientTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/TcpServerTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/TimerTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/TimerTest1.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/TimingWheelTest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/unittests/DateUnittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/unittests/HashUnittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/unittests/InetAddressUnittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/unittests/MsgBufferUnittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/unittests/splitStringUnittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/unittests/sslNameVerifyUnittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/unittests/stringEncodingUnittest.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/AsyncFileLogger.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/ConcurrentTaskQueue.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/Date.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/LogStream.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/Logger.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/MsgBuffer.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/SerialTaskQueue.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/TimingWheel.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/Utilities.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/WindowsSupport.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/crypto/blake2.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/crypto/botan.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/crypto/md5.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/crypto/openssl.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/crypto/sha1.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/crypto/sha256.cc" />
-    <ClCompile Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/crypto/sha3.cc" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/drogon_ctl/CommandHandler.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/drogon_ctl/cmd.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/drogon_ctl/create.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/drogon_ctl/create_controller.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/drogon_ctl/create_filter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/drogon_ctl/create_model.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/drogon_ctl/create_plugin.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/drogon_ctl/create_project.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/drogon_ctl/create_view.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/drogon_ctl/help.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/drogon_ctl/press.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/drogon_ctl/version.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/examples/benchmark/BenchmarkCtrl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/examples/benchmark/JsonCtrl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/examples/redis/controllers/Client.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/DateFuncs.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/RedisCache.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/controllers/SlowCtrl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/filters/TimeFilter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/examples/simple_reverse_proxy/plugins/SimpleReverseProxy.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/Attribute.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/CacheMap.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/Cookie.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/DrClassMap.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/DrObject.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/DrTemplate.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/DrTemplateBase.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/HttpAppFramework.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/HttpBinder.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/HttpClient.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/HttpController.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/HttpFilter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/HttpRequest.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/HttpResponse.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/HttpSimpleController.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/HttpTypes.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/HttpViewData.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/IOThreadStorage.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/IntranetIpFilter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/LocalHostFilter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/MultiPart.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/NotFound.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/PubSubService.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/Session.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/UploadFile.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/WebSocketClient.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/WebSocketConnection.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/WebSocketController.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/drogon.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/drogon_callbacks.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/drogon_test.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/plugins/AccessLogger.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/plugins/Plugin.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/plugins/SecureSSLRedirector.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/utils/FunctionTraits.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/utils/HttpConstraint.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/utils/OStringStream.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/utils/Utilities.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/utils/any.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/utils/coroutine.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/utils/optional.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/inc/drogon/utils/string_view.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/AOPAdvice.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/CacheFile.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/ConfigLoader.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/DbClientManager.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/FiltersFunction.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/HttpAppFrameworkImpl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/HttpClientImpl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/HttpControllersRouter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/HttpFileImpl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/HttpFileUploadRequest.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/HttpMessageBody.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/HttpRequestImpl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/HttpRequestParser.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/HttpResponseImpl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/HttpResponseParser.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/HttpServer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/HttpSimpleControllersRouter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/HttpUtils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/ListenerManager.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/PluginsManager.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/RangeParser.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/RedisClientManager.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/SessionManager.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/SharedLibManager.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/SpinLock.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/StaticFileRouter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/TaskTimeoutFlag.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/WebSocketClientImpl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/WebSocketConnectionImpl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/WebsocketControllersRouter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/filesystem.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/impl_forwards.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/ssl_funcs/Md5.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/src/ssl_funcs/Sha1.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/CustomCtrl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/CustomHeaderFilter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/DigestAuthFilter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/DoNothingPlugin.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/ForwardCtrl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/JsonTestController.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/ListParaCtl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/MethodTest.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/PipeliningTest.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/RangeTestController.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/TestController.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/TestPlugin.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/TestViewCtl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/TimeFilter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/WebSocketTest.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/api_Attachment.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/api_v1_ApiTest.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/api_v1_CoroTest.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/nosql_lib/redis/inc/drogon/nosql/RedisClient.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/nosql_lib/redis/inc/drogon/nosql/RedisException.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/nosql_lib/redis/inc/drogon/nosql/RedisResult.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/nosql_lib/redis/src/RedisClientImpl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/nosql_lib/redis/src/RedisClientLockFree.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/nosql_lib/redis/src/RedisConnection.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/nosql_lib/redis/src/RedisTransactionImpl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/inc/drogon/orm/ArrayParser.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/inc/drogon/orm/CoroMapper.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/inc/drogon/orm/Criteria.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/inc/drogon/orm/DbClient.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/inc/drogon/orm/DbTypes.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/inc/drogon/orm/Exception.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/inc/drogon/orm/Field.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/inc/drogon/orm/FunctionTraits.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/inc/drogon/orm/Mapper.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/inc/drogon/orm/RestfulController.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/inc/drogon/orm/Result.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/inc/drogon/orm/ResultIterator.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/inc/drogon/orm/Row.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/inc/drogon/orm/RowIterator.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/inc/drogon/orm/SqlBinder.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/src/DbClientImpl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/src/DbClientLockFree.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/src/DbConnection.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/src/ResultImpl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/src/TransactionImpl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/src/mysql_impl/MysqlConnection.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/src/mysql_impl/MysqlResultImpl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/src/postgresql_impl/PgConnection.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/src/postgresql_impl/PostgreSQLResultImpl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/src/sqlite3_impl/Sqlite3Connection.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/src/sqlite3_impl/Sqlite3ResultImpl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/src/sqlite3_impl/test/Groups.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/tests/mysql/Users.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/tests/postgresql/Users.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/orm_lib/tests/sqlite3/Users.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/Certificate.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/Channel.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/EventLoop.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/EventLoopThread.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/EventLoopThreadPool.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/InetAddress.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/Resolver.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/TLSPolicy.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/TcpClient.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/TcpConnection.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/TcpServer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/callbacks.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/Acceptor.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/AresResolver.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/Connector.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/NormalResolver.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/Poller.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/Socket.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/TLSProvider.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/TcpConnectionImpl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/Timer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/TimerQueue.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/poller/EpollPoller.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/poller/KQueue.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/net/inner/poller/PollPoller.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/AsyncFileLogger.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/ConcurrentTaskQueue.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/Date.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/Funcs.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/LockFreeQueue.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/LogStream.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/Logger.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/MsgBuffer.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/NonCopyable.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/ObjectPool.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/SerialTaskQueue.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/TaskQueue.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/TimingWheel.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/Utilities.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/WindowsSupport.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/crypto/blake2.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/crypto/md5.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/crypto/sha1.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/crypto/sha256.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/drogon/trantor/trantor/utils/crypto/sha3.h" />
-    <Image Include="../../thirdparty/owemdjee/drogon/drogon.jpg" />
-    <Text Include="../../thirdparty/owemdjee/drogon/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/drogon/CONTRIBUTING.md" />
-    <Text Include="../../thirdparty/owemdjee/drogon/ChangeLog.md" />
-    <Text Include="../../thirdparty/owemdjee/drogon/README.md" />
-    <Text Include="../../thirdparty/owemdjee/drogon/README.zh-CN.md" />
-    <Text Include="../../thirdparty/owemdjee/drogon/README.zh-TW.md" />
-    <Text Include="../../thirdparty/owemdjee/drogon/_config.yml" />
-    <Text Include="../../thirdparty/owemdjee/drogon/build.sh" />
-    <Text Include="../../thirdparty/owemdjee/drogon/cmake/DrogonUtilities.cmake" />
-    <Text Include="../../thirdparty/owemdjee/drogon/cmake/Packages.cmake" />
-    <Text Include="../../thirdparty/owemdjee/drogon/cmake/ParseAndAddDrogonTests.cmake" />
-    <Text Include="../../thirdparty/owemdjee/drogon/cmake/templates/DrogonConfig.cmake.in" />
-    <Text Include="../../thirdparty/owemdjee/drogon/cmake/templates/config.h.in" />
-    <Text Include="../../thirdparty/owemdjee/drogon/cmake/templates/version.h.in" />
-    <Text Include="../../thirdparty/owemdjee/drogon/cmake_modules/FindBrotli.cmake" />
-    <Text Include="../../thirdparty/owemdjee/drogon/cmake_modules/FindFilesystem.cmake" />
-    <Text Include="../../thirdparty/owemdjee/drogon/cmake_modules/FindHiredis.cmake" />
-    <Text Include="../../thirdparty/owemdjee/drogon/cmake_modules/FindJsoncpp.cmake" />
-    <Text Include="../../thirdparty/owemdjee/drogon/cmake_modules/FindMySQL.cmake" />
-    <Text Include="../../thirdparty/owemdjee/drogon/cmake_modules/FindSQLite3.cmake" />
-    <Text Include="../../thirdparty/owemdjee/drogon/cmake_modules/FindUUID.cmake" />
-    <Text Include="../../thirdparty/owemdjee/drogon/cmake_modules/Findcoz-profiler.cmake" />
-    <Text Include="../../thirdparty/owemdjee/drogon/cmake_modules/Findpg.cmake" />
-    <Text Include="../../thirdparty/owemdjee/drogon/conanfile.txt" />
-    <Text Include="../../thirdparty/owemdjee/drogon/config.example.json" />
-    <Text Include="../../thirdparty/owemdjee/drogon/docker/alpine/README.md" />
-    <Text Include="../../thirdparty/owemdjee/drogon/drogon_ctl/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/drogon/drogon_ctl/CopyDlls.cmake" />
-    <Text Include="../../thirdparty/owemdjee/drogon/examples/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/drogon/examples/README.md" />
-    <Text Include="../../thirdparty/owemdjee/drogon/examples/jsonstore/README.md" />
-    <Text Include="../../thirdparty/owemdjee/drogon/examples/redis/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/drogon/examples/redis/README.md" />
-    <Text Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/README.md" />
-    <Text Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/config.json" />
-    <Text Include="../../thirdparty/owemdjee/drogon/examples/redis_cache/test/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/drogon/examples/simple_reverse_proxy/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/drogon/examples/simple_reverse_proxy/README.md" />
-    <Text Include="../../thirdparty/owemdjee/drogon/examples/simple_reverse_proxy/config.json" />
-    <Text Include="../../thirdparty/owemdjee/drogon/format.sh" />
-    <Text Include="../../thirdparty/owemdjee/drogon/lib/tests/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/a-directory/page.html" />
-    <Text Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/index.html" />
-    <Text Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/test.md" />
-    <Text Include="../../thirdparty/owemdjee/drogon/lib/tests/integration_test/server/中文.txt" />
-    <Text Include="../../thirdparty/owemdjee/drogon/nosql_lib/redis/tests/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/drogon/orm_lib/src/mysql_impl/test/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/drogon/orm_lib/src/postgresql_impl/test/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/drogon/orm_lib/src/sqlite3_impl/test/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/drogon/orm_lib/tests/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/drogon/orm_lib/tests/mysql/model.json" />
-    <Text Include="../../thirdparty/owemdjee/drogon/orm_lib/tests/postgresql/model.json" />
-    <Text Include="../../thirdparty/owemdjee/drogon/orm_lib/tests/sqlite3/model.json" />
-    <Text Include="../../thirdparty/owemdjee/drogon/test.sh" />
-    <Text Include="../../thirdparty/owemdjee/drogon/trantor/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/drogon/trantor/ChangeLog.md" />
-    <Text Include="../../thirdparty/owemdjee/drogon/trantor/README.md" />
-    <Text Include="../../thirdparty/owemdjee/drogon/trantor/build.sh" />
-    <Text Include="../../thirdparty/owemdjee/drogon/trantor/cmake/templates/TrantorConfig.cmake.in" />
-    <Text Include="../../thirdparty/owemdjee/drogon/trantor/cmake_modules/FindBotan.cmake" />
-    <Text Include="../../thirdparty/owemdjee/drogon/trantor/cmake_modules/Findc-ares.cmake" />
-    <Text Include="../../thirdparty/owemdjee/drogon/trantor/conanfile.txt" />
-    <Text Include="../../thirdparty/owemdjee/drogon/trantor/format.sh" />
-    <Text Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/drogon/trantor/trantor/tests/server.key" />
-    <Text Include="../../thirdparty/owemdjee/drogon/trantor/trantor/unittests/CMakeLists.txt" />
-  </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  
