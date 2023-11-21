@@ -31,7 +31,7 @@ MONOLITHIC_CMD_TABLE_START()
 	{ "meta_exporter", {.fa = qiqqa_meta_exporter_main}},
 	{ "meta_import", { .fa = qiqqa_meta_importer_main } },
 	{ "muserver", {.fa = qiqqa_muserver_main}},
-	{ "ocr_bezoar", {.fa = qiqqa_ocr_bezoar_main}},
+	{ "bezoar", {.fa = qiqqa_ocr_bezoar_main}},
 	{ "pdf_annot", {.fa = qiqqa_muannot_main}},
 	{ "pdf_hound", {.fa = qiqqa_pdf_hound_main}},
 	{ "safe_file_copier", { .fa = qiqqa_safe_file_copier_main } },

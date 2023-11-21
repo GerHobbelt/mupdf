@@ -1,5 +1,38 @@
 ﻿//
 // Chop Shop: text/content processor/tokenizer.
+// 
+// tool which extracts text from PDFs (like the old Qiqqa extract tool 
+// would've done, but *better*!) & analyzes possible applicable heuristics 
+// which would improve the exported text, e.g. 
+// 
+// - **word separation** for those PDFs which produce a stream of 
+//   (English) text without the proper spacing, making keyword search 
+//   very hard.
+// 
+// - **whitespace cleanup** for the near-opposite behaviour we've also 
+//   observed: some PDFs spitting out slews of consecutive spaces 
+//   and/or TAB characters as *variable-width* word separators: 
+//   these lines could simply have been cleaned up to produce single 
+//   spaces between words.
+// 
+//   - **ditto**, but for the more usual and *curious & strange* choices 
+//     for whitespace separators for higher up the Unicode codepoint 
+//     range: We've observed plenty PDFs which spit out '?' question 
+//     marks for these, which would obviously have been whitespace 
+//     characters from a human perspective.
+//
+// - **recognize content written in non-WS languages**, 
+//   (such as Chinese or Japanese) which do not mandate word separators 
+//   & possibly suggest appropriate word separations.
+//   There's various libraries for that out there, but remember: 
+//   here we enter the heuristics/statistics arena at full tilt: it's 
+//   not about being 100% accurate 100% of the time, but getting near 
+//   (or even surpass) 99% accurate 99% of the time. 😉
+//
+// - **recognize content that's gobbledygook**, i.e. *possibly 
+//   **obfuscated** by way of font codepoint reshuffling*: we've seen 
+//   several PDFs exhibit this and here we MAY WANT to turn to our next 
+//   level of text extraction tooling: the OCR engine.
 //
 
 #pragma message("TODO: implement this tool")
