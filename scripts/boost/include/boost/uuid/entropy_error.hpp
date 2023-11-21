@@ -4,7 +4,7 @@
 // ** DO NOT EDIT ** (adjust the regenerator shell script mentioned above instead!)
 //
 
-#pragma once
+//#pragma once
 
 #include "../../../thirdparty/owemdjee/boost/libs/uuid/include/boost/uuid/entropy_error.hpp"
 

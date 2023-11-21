@@ -4,7 +4,7 @@
 // ** DO NOT EDIT ** (adjust the regenerator shell script mentioned above instead!)
 //
 
-#pragma once
+//#pragma once
 
 #include "../../../thirdparty/owemdjee/boost/libs/stacktrace/include/boost/stacktrace/detail/try_dec_convert.hpp"
 

@@ -4,7 +4,7 @@
 // ** DO NOT EDIT ** (adjust the regenerator shell script mentioned above instead!)
 //
 
-#pragma once
+//#pragma once
 
 #include "../../../thirdparty/owemdjee/boost/libs/histogram/include/boost/histogram/detail/ignore_deprecation_warning_end.hpp"
 

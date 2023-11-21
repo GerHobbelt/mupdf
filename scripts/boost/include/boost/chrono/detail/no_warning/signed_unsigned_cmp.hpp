@@ -4,7 +4,7 @@
 // ** DO NOT EDIT ** (adjust the regenerator shell script mentioned above instead!)
 //
 
-#pragma once
+//#pragma once
 
 #include "../../../thirdparty/owemdjee/boost/libs/chrono/include/boost/chrono/detail/no_warning/signed_unsigned_cmp.hpp"
 

@@ -4,7 +4,7 @@
 // ** DO NOT EDIT ** (adjust the regenerator shell script mentioned above instead!)
 //
 
-#pragma once
+//#pragma once
 
 #include "../../../thirdparty/owemdjee/boost/libs/local_function/include/boost/local_function/aux_/macro/typeof.hpp"
 

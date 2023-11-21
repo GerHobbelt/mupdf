@@ -4,7 +4,7 @@
 // ** DO NOT EDIT ** (adjust the regenerator shell script mentioned above instead!)
 //
 
-#pragma once
+//#pragma once
 
 #include "../../../thirdparty/owemdjee/boost/libs/phoenix/include/boost/phoenix/core/detail/cpp03/preprocessed/actor_result_of_30.hpp"
 
