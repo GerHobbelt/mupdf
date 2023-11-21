@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libArborX</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF5E027B}</ProjectGuid>
+    <RootNamespace>libArborX</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARBORX;ARBORX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARBORX;ARBORX_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARBORX;ARBORX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARBORX;ARBORX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARBORX;ARBORX_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARBORX;ARBORX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARBORX;ARBORX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARBORX;ARBORX_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARBORX;ARBORX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARBORX;ARBORX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARBORX;ARBORX_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBARBORX;ARBORX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/brute_force_vs_bvh/brute_force_vs_bvh.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/bvh_driver/bvh_driver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/dbscan/converter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/dbscan/dbscan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/dbscan/print_timers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/develop/develop.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/distributed_tree_driver/distributed_tree_driver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/execution_space_instances/execution_space_instances_driver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/benchmarks/union_find/union_find.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/examples/access_traits/example_cuda_access_traits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/examples/access_traits/example_host_access_traits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/examples/brute_force/brute_force.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/examples/callback/example_callback.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/examples/dbscan/example_dbscan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/examples/molecular_dynamics/example_molecular_dynamics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/examples/raytracing/example_raytracing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/examples/simple_intersection/example_intersection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/examples/triangle_intersection/triangle_intersection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/examples/viz/tree_visualization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/headers_self_contained/tstHeader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstBoostGeometryAdapters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstBoostRangeAdapters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstCompileOnlyAccessTraits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstCompileOnlyCallbacks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstCompileOnlyGeometry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstCompileOnlyMain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstCompileOnlyTypeRequirements.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstCompileOnlyWeightedEdges.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstContainerAdaptors.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDBSCAN.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDendrogram.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDetailsAlgorithms.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDetailsCrsGraphWrapperImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDetailsDistributedTreeImpl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDetailsExpandHalfToFull.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDetailsHalfTraversal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDetailsKokkosExtViewHelpers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDetailsMortonCodes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDetailsMutualReachabilityDistance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDetailsTreeConstruction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDetailsTreeNodeLabeling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDetailsUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstDistributedTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstException.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstHeapOperations.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstInterpDetailsCRBF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstInterpDetailsPolyBasis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstInterpDetailsSVD.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstKDOP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstKokkosToolsAnnotations.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstKokkosToolsDistributedAnnotations.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstMinimumSpanningTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstMinimumSpanningTreeGoldenTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstNeighborList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstPriorityQueueMiscellaneous.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstQueryTreeCallbackQueryPerThread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstQueryTreeCallbacks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstQueryTreeComparisonWithBoost.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstQueryTreeDegenerate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstQueryTreeIntersectsKDOP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstQueryTreeManufacturedSolution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstQueryTreeRay.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstQueryTreeTraversalPolicy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstRay.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstScopedProfileRegion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstSequenceContainers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/tstUnionFind.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ArborX/test/utf_main.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/brute_force_vs_bvh/brute_force_vs_bvh.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/brute_force_vs_bvh/brute_force_vs_bvh_timpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/bvh_driver/benchmark_registration.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/dbscan/ArborX_DBSCANVerification.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/dbscan/data.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/dbscan/dbscan.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/dbscan/dbscan_timpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/dbscan/print_timers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/benchmarks/point_clouds/point_clouds.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/ArborX.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/ArborX_BruteForce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/ArborX_CrsGraphWrapper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/ArborX_DBSCAN.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/ArborX_DistributedTree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/ArborX_HDBSCAN.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/ArborX_LinearBVH.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_AccessTraits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_Callbacks.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_Dendrogram.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsBatchedQueries.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsBruteForceImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsCartesianGrid.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsContainers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsCrsGraphWrapperImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsDendrogram.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsDistributedTreeImpl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsDistributor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsExpandHalfToFull.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsFDBSCAN.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsFDBSCANDenseBox.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsHalfTraversal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsHappyTreeFriends.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsHeap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsLegacy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsMinimumSpanningTree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsMortonCode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsMutualReachabilityDistance.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsNode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsOperatorFunctionObjects.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsPermutedData.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsPriorityQueue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsSortUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsStack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsTreeConstruction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsTreeNodeLabeling.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsTreeTraversal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsTreeVisualization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsUnionFind.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_DetailsWeightedEdge.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_Exception.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_IndexableGetter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_MinimumSpanningTree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_NeighborList.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_PairIndexRank.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_Predicates.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_SpaceFillingCurves.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/details/ArborX_TraversalPolicy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/geometry/ArborX_Box.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/geometry/ArborX_DetailsAlgorithms.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/geometry/ArborX_GeometryTraits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/geometry/ArborX_HyperBox.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/geometry/ArborX_HyperPoint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/geometry/ArborX_HyperSphere.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/geometry/ArborX_HyperTriangle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/geometry/ArborX_KDOP.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/geometry/ArborX_Point.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/geometry/ArborX_Ray.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/geometry/ArborX_Sphere.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/interpolation/details/ArborX_InterpDetailsCompactRadialBasisFunction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/interpolation/details/ArborX_InterpDetailsPolynomialBasis.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/interpolation/details/ArborX_InterpDetailsSymmetricPseudoInverseSVD.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/kokkos_ext/ArborX_DetailsKokkosExtAccessibilityTraits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/kokkos_ext/ArborX_DetailsKokkosExtArithmeticTraits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/kokkos_ext/ArborX_DetailsKokkosExtBitManipulation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/kokkos_ext/ArborX_DetailsKokkosExtMinMaxOperations.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/kokkos_ext/ArborX_DetailsKokkosExtScopedProfileRegion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/kokkos_ext/ArborX_DetailsKokkosExtSort.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/kokkos_ext/ArborX_DetailsKokkosExtSwap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/kokkos_ext/ArborX_DetailsKokkosExtVersion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/src/kokkos_ext/ArborX_DetailsKokkosExtViewHelpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/test/ArborXTest_Cloud.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/test/ArborXTest_LegacyTree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/test/ArborXTest_StdVectorToKokkosView.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/test/ArborXTest_TreeTypeTraits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/test/ArborX_BoostGeometryAdapters.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/test/ArborX_BoostRTreeHelpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/test/ArborX_BoostRangeAdapters.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/test/ArborX_EnableViewComparison.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/test/BoostTest_CUDA_clang_workarounds.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/test/Search_UnitTestHelpers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/test/boost_ext/ArborXPairIndexRankComparison.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/test/boost_ext/CompressedStorageComparison.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/test/boost_ext/KokkosPairComparison.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ArborX/test/boost_ext/TupleComparison.hpp" />
+    <Image Include="../../thirdparty/owemdjee/ArborX/docs/logos/arborx_logo_v1.0.png" />
+    <Image Include="../../thirdparty/owemdjee/ArborX/docs/logos/arborx_logo_v1.0_nobg.png" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/brute_force_vs_bvh/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/bvh_driver/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/dbscan/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/dbscan/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/dbscan/input.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/develop/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/distributed_tree_driver/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/execution_space_instances/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/benchmarks/union_find/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/cmake/ArborXConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/cmake/ArborXSettings.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/cmake/SetupVersion.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/docker/Dockerfile.hipcc" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/docker/Dockerfile.sycl" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/docker/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/docker/docker-compose.yml" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/docs/LICENSE.ECL" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/examples/access_traits/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/examples/brute_force/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/examples/callback/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/examples/dbscan/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/examples/molecular_dynamics/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/examples/raytracing/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/examples/simple_intersection/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/examples/triangle_intersection/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/examples/viz/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/examples/viz/arborx_query_sort.py" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/examples/viz/leaf_cloud.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/examples/viz/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/scripts/benchmark.py" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/scripts/benchmark_plot.py" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/scripts/check_format_cpp.sh" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/scripts/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/src/ArborX_Config.hpp.in" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/src/ArborX_Version.hpp.in" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/test/ArborX_EnableDeviceTypes.hpp.in" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/test/headers_self_contained/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/test/mst_golden_test_edges.csv" />
+    <Text Include="../../thirdparty/owemdjee/ArborX/test/mst_golden_test_points.csv" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

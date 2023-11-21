@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libmecab</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFF54283}</ProjectGuid>
+    <RootNamespace>libmecab</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMECAB;MECAB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMECAB;MECAB_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMECAB;MECAB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMECAB;MECAB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMECAB;MECAB_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMECAB;MECAB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMECAB;MECAB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMECAB;MECAB_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMECAB;MECAB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMECAB;MECAB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMECAB;MECAB_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMECAB;MECAB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/csharp/MeCab_wrap.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/example/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/example/example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/example/example_lattice.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/example/example_lattice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/example/thread_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/java/MeCab_wrap.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/perl/MeCab_wrap.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/python/MeCab_wrap.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/ruby/MeCab_wrap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/char_property.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/connector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/context_id.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/dictionary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/dictionary_compiler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/dictionary_generator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/dictionary_rewriter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/eval.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/feature_index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/iconv_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/lbfgs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/learner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/learner_tagger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/libmecab.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/mecab-cost-train.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/mecab-dict-gen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/mecab-dict-index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/mecab-system-eval.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/mecab-test-gen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/mecab.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/nbest_generator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/param.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/string_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/tagger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/tokenizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/viterbi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mecab/mecab/src/writer.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/char_property.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/connector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/context_id.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/darts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/dictionary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/dictionary_rewriter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/feature_index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/freelist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/iconv_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/lbfgs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/learner_node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/learner_tagger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/mecab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/mmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/nbest_generator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/param.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/scoped_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/stream_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/string_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/tokenizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/ucs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/ucstable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/viterbi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/winmain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/src/writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mecab/mecab/swig/version.h" />
+    <Image Include="../../thirdparty/owemdjee/mecab/doxygen/bc_s.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/doxygen/closed.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/doxygen/doxygen.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/doxygen/nav_f.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/doxygen/nav_h.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/doxygen/open.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/doxygen/tab_a.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/doxygen/tab_b.gif" />
+    <Image Include="../../thirdparty/owemdjee/mecab/doxygen/tab_b.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/doxygen/tab_h.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/doxygen/tab_l.gif" />
+    <Image Include="../../thirdparty/owemdjee/mecab/doxygen/tab_r.gif" />
+    <Image Include="../../thirdparty/owemdjee/mecab/doxygen/tab_s.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/feature.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/flow.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/bc_s.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/closed.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/doxygen.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/nav_f.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/nav_h.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/open.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/tab_a.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/tab_b.gif" />
+    <Image Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/tab_b.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/tab_h.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/tab_l.gif" />
+    <Image Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/tab_r.gif" />
+    <Image Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/tab_s.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/mecab/doc/feature.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/mecab/doc/flow.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/mecab/doc/result.png" />
+    <Image Include="../../thirdparty/owemdjee/mecab/result.png" />
+    <Text Include="../../thirdparty/owemdjee/mecab/bindings.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/dic-detail.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/dic.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/annotated.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/classMeCab_1_1Lattice-members.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/classMeCab_1_1Lattice.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/classMeCab_1_1Model-members.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/classMeCab_1_1Model.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/classMeCab_1_1Tagger-members.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/classMeCab_1_1Tagger.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/classes.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/doxygen.css" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/files.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/functions.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/functions_func.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/functions_vars.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/globals.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/globals_defs.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/globals_func.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/globals_type.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/index.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/mecab_8h-source.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/mecab_8h.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/mecab_8h_source.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/namespaceMeCab.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/namespacemembers.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/namespacemembers_func.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/namespacemembers_type.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/namespaces.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/structmecab__dictionary__info__t-members.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/structmecab__dictionary__info__t.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/structmecab__node__t-members.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/structmecab__node__t.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/structmecab__path__t-members.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/structmecab__path__t.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/doxygen/tabs.css" />
+    <Text Include="../../thirdparty/owemdjee/mecab/feature.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/format.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/index.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/learn.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/libmecab.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Adj.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Adnominal.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Adverb.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Auxil.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Conjunction.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Filler.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Interjection.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Noun.adjv.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Noun.adverbal.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Noun.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Noun.demonst.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Noun.nai.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Noun.name.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Noun.number.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Noun.org.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Noun.others.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Noun.place.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Noun.proper.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Noun.verbal.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Others.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Postp-col.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Postp.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Prefix.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/README" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Suffix.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Symbol.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/Verb.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/config.guess" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/configure.in" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/script/ipacorpus2mecabcorpus.pl" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/script/ipadic2mecabdic.pl" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-ipadic/upload.pl" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/Assert.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/Auto.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/AuxV.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/ContentW.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/Demonstrative.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/Emoticon.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/Makefile.train" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/Noun.hukusi.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/Noun.keishiki.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/Noun.koyuu.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/Noun.suusi.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/Postp.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/Prefix.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/README" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/Rengo.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/Special.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/Suffix.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/Wikipedia.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/char.bin" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/configure.in" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/matrix.bin" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/script/juman2mecab.pl" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/script/jumancorpus2mecabcorpus.pl" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab-jumandic/script/kc2mecabcorpus.pl" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab.cfg" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab.css" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/Makefile.train" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/README" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/config.guess" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/configure.in" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/csharp/DictionaryInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/csharp/Lattice.cs" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/csharp/MeCab.cs" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/csharp/MeCabPINVOKE.cs" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/csharp/Model.cs" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/csharp/Node.cs" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/csharp/Path.cs" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/csharp/SWIGTYPE_p_p_char.cs" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/csharp/Tagger.cs" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/csharp/test.cs" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/bindings.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/dic-detail.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/dic.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/annotated.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/classMeCab_1_1Lattice-members.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/classMeCab_1_1Lattice.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/classMeCab_1_1Model-members.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/classMeCab_1_1Model.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/classMeCab_1_1Tagger-members.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/classMeCab_1_1Tagger.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/classes.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/doxygen.css" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/files.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/functions.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/functions_func.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/functions_vars.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/globals.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/globals_defs.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/globals_func.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/globals_type.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/index.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/mecab_8h-source.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/mecab_8h.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/mecab_8h_source.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/namespaceMeCab.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/namespacemembers.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/namespacemembers_func.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/namespacemembers_type.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/namespaces.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/structmecab__dictionary__info__t-members.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/structmecab__dictionary__info__t.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/structmecab__node__t-members.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/structmecab__node__t.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/structmecab__path__t-members.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/structmecab__path__t.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/doxygen/tabs.css" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/en/bindings.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/feature.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/format.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/index.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/learn.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/libmecab.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/mecab.cfg" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/mecab.css" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/mecab.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/partial.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/posid.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/soft.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/doc/unk.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/java/README" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/man/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/man/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/mecab-config.in" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/mecab.iss.in" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/mecabrc.in" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/misc/JIS0201.TXT" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/misc/JIS0208.TXT" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/misc/JIS0212.TXT" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/misc/mkeuctable.pl" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/perl/Makefile.PL" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/perl/README" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/perl/test.pl" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/python/MeCab.py" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/python/README" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/python/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/python/test.py" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/ruby/README" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/src/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/src/Makefile.msvc.in" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/src/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/stamp-h.in" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/swig/version.h.in" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/tests/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/tests/autolink/dic.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/tests/chartype/dic.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/tests/cost-train/ipa.train" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/tests/cost-train/seed/dic.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/tests/katakana/dic.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/tests/latin/dic.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/tests/ngram/dic.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/tests/run-cost-train.sh" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/tests/run-dics.sh" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/tests/run-eval.sh" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/tests/shiin/dic.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/tests/shiin/mkdic.pl" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/tests/t9/dic.csv" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/tests/t9/ipadic.pl" />
+    <Text Include="../../thirdparty/owemdjee/mecab/mecab/tests/t9/mkdic.pl" />
+    <Text Include="../../thirdparty/owemdjee/mecab/partial.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/posid.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/soft.html" />
+    <Text Include="../../thirdparty/owemdjee/mecab/unk.html" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

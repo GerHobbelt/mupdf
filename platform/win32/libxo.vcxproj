@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libxo</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFC3584C}</ProjectGuid>
+    <RootNamespace>libxo</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXO;XO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXO;XO_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXO;XO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXO;XO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXO;XO_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXO;XO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXO;XO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXO;XO_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXO;XO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXO;XO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXO;XO_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXO;XO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libxo/encoder/cbor/enc_cbor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxo/encoder/csv/enc_csv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxo/encoder/test/enc_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxo/libxo/libxo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxo/libxo/xo_encoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxo/libxo/xo_syslog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxo/tests/core/test_01.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxo/tests/core/test_02.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxo/tests/core/test_03.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxo/tests/core/test_04.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxo/tests/core/test_05.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxo/tests/core/test_06.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxo/tests/core/test_07.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxo/tests/core/test_08.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxo/tests/core/test_09.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxo/tests/core/test_10.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxo/tests/core/test_11.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxo/tests/core/test_12.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxo/tests/gettext/gt_01.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxo/xo/xo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxo/xopo/xopo.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxo/libxo/xo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxo/libxo/xo_buf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxo/libxo/xo_encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxo/libxo/xo_explicit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxo/libxo/xo_humanize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxo/libxo/xo_wcwidth.h" />
+    <Text Include="../../thirdparty/owemdjee/libxo/INSTALL.md" />
+    <Text Include="../../thirdparty/owemdjee/libxo/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxo/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libxo/bin/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxo/bin/setup.sh" />
+    <Text Include="../../thirdparty/owemdjee/libxo/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/libxo/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxo/doc/_templates/localtoc.html" />
+    <Text Include="../../thirdparty/owemdjee/libxo/doc/api.rst" />
+    <Text Include="../../thirdparty/owemdjee/libxo/doc/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/libxo/doc/encoders.rst" />
+    <Text Include="../../thirdparty/owemdjee/libxo/doc/example.rst" />
+    <Text Include="../../thirdparty/owemdjee/libxo/doc/faq.rst" />
+    <Text Include="../../thirdparty/owemdjee/libxo/doc/field-formatting.rst" />
+    <Text Include="../../thirdparty/owemdjee/libxo/doc/field-modifiers.rst" />
+    <Text Include="../../thirdparty/owemdjee/libxo/doc/field-roles.rst" />
+    <Text Include="../../thirdparty/owemdjee/libxo/doc/format-strings.rst" />
+    <Text Include="../../thirdparty/owemdjee/libxo/doc/formatting.rst" />
+    <Text Include="../../thirdparty/owemdjee/libxo/doc/getting.rst" />
+    <Text Include="../../thirdparty/owemdjee/libxo/doc/howto.rst" />
+    <Text Include="../../thirdparty/owemdjee/libxo/doc/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/libxo/doc/intro.rst" />
+    <Text Include="../../thirdparty/owemdjee/libxo/doc/options.rst" />
+    <Text Include="../../thirdparty/owemdjee/libxo/doc/top-link.html.in" />
+    <Text Include="../../thirdparty/owemdjee/libxo/doc/xo.rst" />
+    <Text Include="../../thirdparty/owemdjee/libxo/doc/xohtml.rst" />
+    <Text Include="../../thirdparty/owemdjee/libxo/doc/xolint-errors.rst" />
+    <Text Include="../../thirdparty/owemdjee/libxo/doc/xolint.rst" />
+    <Text Include="../../thirdparty/owemdjee/libxo/doc/xopo.rst" />
+    <Text Include="../../thirdparty/owemdjee/libxo/encoder/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxo/encoder/cbor/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxo/encoder/csv/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxo/encoder/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxo/libxo-config.in" />
+    <Text Include="../../thirdparty/owemdjee/libxo/libxo/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxo/libxo/add.man.in" />
+    <Text Include="../../thirdparty/owemdjee/libxo/libxo/gen-wide.sh" />
+    <Text Include="../../thirdparty/owemdjee/libxo/packaging/libxo.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libxo/packaging/libxo.rb.base.in" />
+    <Text Include="../../thirdparty/owemdjee/libxo/packaging/libxo.spec.in" />
+    <Text Include="../../thirdparty/owemdjee/libxo/tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxo/tests/core/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxo/tests/gettext/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxo/tests/xo/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxo/tests/xo/xo_01.sh" />
+    <Text Include="../../thirdparty/owemdjee/libxo/tests/xo/xo_02.sh" />
+    <Text Include="../../thirdparty/owemdjee/libxo/xo/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxo/xohtml/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxo/xohtml/external/jquery.js" />
+    <Text Include="../../thirdparty/owemdjee/libxo/xohtml/external/jquery.qtip.css" />
+    <Text Include="../../thirdparty/owemdjee/libxo/xohtml/external/jquery.qtip.js" />
+    <Text Include="../../thirdparty/owemdjee/libxo/xohtml/xohtml.css" />
+    <Text Include="../../thirdparty/owemdjee/libxo/xohtml/xohtml.js" />
+    <Text Include="../../thirdparty/owemdjee/libxo/xohtml/xohtml.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/libxo/xolint/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxo/xolint/xolint.pl" />
+    <Text Include="../../thirdparty/owemdjee/libxo/xopo/Makefile.am" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

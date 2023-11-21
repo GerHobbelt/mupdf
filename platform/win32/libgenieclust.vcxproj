@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libgenieclust</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF23D003}</ProjectGuid>
+    <RootNamespace>libgenieclust</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGENIECLUST;GENIECLUST_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGENIECLUST;GENIECLUST_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGENIECLUST;GENIECLUST_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGENIECLUST;GENIECLUST_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGENIECLUST;GENIECLUST_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGENIECLUST;GENIECLUST_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGENIECLUST;GENIECLUST_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGENIECLUST;GENIECLUST_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGENIECLUST;GENIECLUST_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGENIECLUST;GENIECLUST_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGENIECLUST;GENIECLUST_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGENIECLUST;GENIECLUST_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/genieclust/src/RcppExports.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/genieclust/src/r_compare_partitions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/genieclust/src/r_cvi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/genieclust/src/r_emst.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/genieclust/src/r_gclust.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/genieclust/src/r_inequality.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/c_argfuns.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/c_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/c_compare_partitions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/c_cvi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/c_disjoint_sets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/c_distance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/c_genie.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/c_gini_disjoint_sets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/c_inequality.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/c_int_dict.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/c_matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/c_mst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/c_postprocess.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/c_preprocess.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/c_scipy_rectangular_lsap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/cvi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/cvi_calinski_harabasz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/cvi_davies_bouldin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/cvi_dunnowa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/cvi_generalized_dunn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/cvi_generalized_dunn_delta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/cvi_generalized_dunn_lowercase_d1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/cvi_generalized_dunn_lowercase_d2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/cvi_generalized_dunn_lowercase_d3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/cvi_generalized_dunn_lowercase_d4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/cvi_generalized_dunn_lowercase_d5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/cvi_generalized_dunn_lowercase_d6.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/cvi_generalized_dunn_uppercase_d1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/cvi_generalized_dunn_uppercase_d2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/cvi_generalized_dunn_uppercase_d3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/cvi_silhouette.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/cvi_wcnn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/genieclust/src/cvi_wcss.h" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_downloads/45852431f09dd0f067debdafd9183f89/genieclust_plots-4.hires.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_downloads/80b6e797cf4bfc1e75b448d4dd5ab97a/genieclust_plots-2.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_downloads/87a64c806a70c3933ae7971e4274766d/genieclust_plots-3.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_downloads/a93a0e04519e0a9f69f41a9fc3df0844/genieclust_plots-2.hires.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_downloads/aad27638b83bb016d016d86411e5bb69/genieclust_plots-4.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_downloads/e8b0369125c8b9186ee63322221ea81a/genieclust_plots-3.hires.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_downloads/ed494fd415c093d0a546f90cf51e4280/genieclust_plots-1.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_downloads/feb2bbc6c795930ee090591ae6c4e6c1/genieclust_plots-1.hires.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/basics-dendrogram-1-13.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/basics-dendrogram-2-15.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/basics-plot-genie2-11.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/basics-plot-hdbscan-7.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/basics-plot-hdbscan2-9.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/basics-plot-km-5.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/basics-plot-pred-3.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/basics-scatter-1.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/clustering-1.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/digits-3.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/g2mg-plot-1.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/gclust-1.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/genie_toy_example.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/genieclust_plots-1.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/genieclust_plots-2.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/genieclust_plots-3.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/genieclust_plots-4.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/indices_large-3.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/indices_small-1.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/noise-Genie1-3.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/noise-Genie2-5.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/noise-Genie3-7.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/noise-HDBSCAN1-9.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/noise-HDBSCAN2-11.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/noise-scatter-1.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/plot_large-3.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/plot_small-1.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/ssi-map-1.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_images/ssi-oecd-dendrogram-1.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_static/favicon.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_static/file.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_static/img/genie_toy_example.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_static/minus.png" />
+    <Image Include="../../thirdparty/owemdjee/genieclust/docs/_static/plus.png" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/README.md" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/codecov.yml" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_downloads/01c61da91a57cfdb372b0edb5845828a/genieclust_plots-4.pdf" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_downloads/36c4dad867b3fffadb9a35cb5700de0e/genieclust_plots-3.pdf" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_downloads/3db969050b6fe55b9afe4d23ba8ca159/genieclust_plots-1.pdf" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_downloads/f10d82cc1a8914330c4324f07e968726/genieclust_plots-2.pdf" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/basic.css" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/css/custom.css" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/css/fonts/Alegreya-AUTHORS.txt" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/css/fonts/Alegreya-CONTRIBUTORS.txt" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/css/fonts/Alegreya-LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/css/fonts/Alegreya-OFL.txt" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/css/fonts/Alegreya-README.txt" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/css/fonts/Alegreya-fontspec.css" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/css/fonts/ubuntu-LICENCE.txt" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/css/fonts/ubuntu-README.txt" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/css/fonts/ubuntu-fontspec.css" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/debug.css" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/doctools.js" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/documentation_options.js" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/graphviz.css" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/language_data.js" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/plot_directive.css" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/proof.css" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/proof.js" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/pygments.css" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/scripts/furo-extensions.js" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/scripts/furo.js" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/scripts/furo.js.LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/searchtools.js" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/skeleton.css" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/sphinx_highlight.js" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/styles/furo-extensions.css" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/_static/styles/furo.css" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/genieclust.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/genieclust_cluster_validity.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/genieclust_compare_partitions.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/genieclust_genie.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/genieclust_gic.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/genieclust_inequality.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/genieclust_internal.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/genieclust_plots.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/genieclust_tools.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/genindex.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/index.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/news.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/py-modindex.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/rapi.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/rapi/cluster_validity.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/rapi/compare_partitions.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/rapi/emst_mlpack.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/rapi/gclust.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/rapi/genieclust-package.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/rapi/inequality.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/rapi/mst.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/search.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/searchindex.js" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/weave/basics.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/weave/benchmarks_approx.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/weave/benchmarks_ar.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/weave/benchmarks_details.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/weave/noise.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/weave/r.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/weave/sklearn_toy_example.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/weave/timings.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/docs/z_bibliography.html" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/genieclust/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/genieclust/cluster_validity.pyx" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/genieclust/compare_partitions.pyx" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/genieclust/genie.py" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/genieclust/inequality.pyx" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/genieclust/internal.pyx" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/genieclust/plots.py" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/genieclust/tools.pyx" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/setup.cfg" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/genieclust/src/Makevars.win" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

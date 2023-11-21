@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libsist2</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF9F9A4C}</ProjectGuid>
+    <RootNamespace>libsist2</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIST2;SIST2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIST2;SIST2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIST2;SIST2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIST2;SIST2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIST2;SIST2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIST2;SIST2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIST2;SIST2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIST2;SIST2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIST2;SIST2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIST2;SIST2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIST2;SIST2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSIST2;SIST2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/scripts/sqlite_extension.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/src/auth0/auth0_c_api.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/src/cli.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/src/ctx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/src/database/database.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/src/database/database_embeddings.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/src/database/database_fts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/src/database/database_schema.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/src/database/database_stats.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/src/index/elastic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/src/index/web.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/src/io/serialize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/src/io/walk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/src/log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/src/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/src/parsing/magic_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/src/parsing/mime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/src/parsing/mime_generated.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/src/parsing/parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/src/tpool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/src/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/src/web/serve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/src/web/web_fts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/src/web/web_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/arc/arc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/comic/comic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/ebook/ebook.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/font/font.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/json/json.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/media/media.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/mobi/scan_mobi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/msdoc/msdoc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/ooxml/ooxml.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/raw/raw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/text/text.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/wpd/libwpd_c_api.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/wpd/wpd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/third-party/libscan/test/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/sist2/third-party/libscan/test/test_util.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/src/auth0/auth0_c_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/src/cli.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/src/ctx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/src/database/database.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/src/index/elastic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/src/index/web.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/src/io/serialize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/src/io/walk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/src/log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/src/parsing/fs_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/src/parsing/magic_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/src/parsing/mime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/src/parsing/parse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/src/sist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/src/tpool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/src/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/src/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/src/web/serve.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/src/web/web_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/arc/arc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/comic/comic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/ebook/ebook.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/font/font.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/json/json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/media/media.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/mobi/scan_mobi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/msdoc/msdoc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/ocr/ocr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/ooxml/ooxml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/raw/raw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/scan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/text/text.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/wpd/libwpd_c_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/third-party/libscan/libscan/wpd/wpd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/third-party/libscan/test/test_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/sist2/third-party/libscan/third-party/utf8.h/" />
+    <Image Include="../../thirdparty/owemdjee/sist2/docs/embeddings-1.png" />
+    <Image Include="../../thirdparty/owemdjee/sist2/docs/embeddings-2.png" />
+    <Image Include="../../thirdparty/owemdjee/sist2/docs/genre_example.png" />
+    <Image Include="../../thirdparty/owemdjee/sist2/docs/manual_tag.png" />
+    <Image Include="../../thirdparty/owemdjee/sist2/docs/ner.png" />
+    <Image Include="../../thirdparty/owemdjee/sist2/docs/sist2-admin-scripts.png" />
+    <Image Include="../../thirdparty/owemdjee/sist2/docs/sist2.gif" />
+    <Image Include="../../thirdparty/owemdjee/sist2/docs/stats.png" />
+    <Image Include="../../thirdparty/owemdjee/sist2/docs/thumbnail_size.png" />
+    <Image Include="../../thirdparty/owemdjee/sist2/sist2-admin/frontend/public/favicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/sist2/sist2-vue/src/assets/favicon.ico" />
+    <Text Include="../../thirdparty/owemdjee/sist2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sist2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/sist2/contrib/systemd/README.md" />
+    <Text Include="../../thirdparty/owemdjee/sist2/contrib/systemd/sist2-update-all.sh" />
+    <Text Include="../../thirdparty/owemdjee/sist2/contrib/systemd/sist2-update-files.sh" />
+    <Text Include="../../thirdparty/owemdjee/sist2/contrib/systemd/sist2-update-nextcloud.sh" />
+    <Text Include="../../thirdparty/owemdjee/sist2/docker-compose.yml" />
+    <Text Include="../../thirdparty/owemdjee/sist2/docs/USAGE.md" />
+    <Text Include="../../thirdparty/owemdjee/sist2/docs/auth0.md" />
+    <Text Include="../../thirdparty/owemdjee/sist2/docs/scripting.md" />
+    <Text Include="../../thirdparty/owemdjee/sist2/schema/mappings.json" />
+    <Text Include="../../thirdparty/owemdjee/sist2/schema/pipeline.json" />
+    <Text Include="../../thirdparty/owemdjee/sist2/schema/settings.json" />
+    <Text Include="../../thirdparty/owemdjee/sist2/schema/settings_legacy.json" />
+    <Text Include="../../thirdparty/owemdjee/sist2/scripts/before_build.sh" />
+    <Text Include="../../thirdparty/owemdjee/sist2/scripts/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/sist2/scripts/build_arm64.sh" />
+    <Text Include="../../thirdparty/owemdjee/sist2/scripts/index_static.py" />
+    <Text Include="../../thirdparty/owemdjee/sist2/scripts/magic_static.py" />
+    <Text Include="../../thirdparty/owemdjee/sist2/scripts/mime.csv" />
+    <Text Include="../../thirdparty/owemdjee/sist2/scripts/mime.py" />
+    <Text Include="../../thirdparty/owemdjee/sist2/scripts/serve_static.py" />
+    <Text Include="../../thirdparty/owemdjee/sist2/scripts/sqlite_extension_compile.sh" />
+    <Text Include="../../thirdparty/owemdjee/sist2/scripts/start_dev_es.sh" />
+    <Text Include="../../thirdparty/owemdjee/sist2/scripts/start_dev_es_6.sh" />
+    <Text Include="../../thirdparty/owemdjee/sist2/scripts/start_dev_es_8.sh" />
+    <Text Include="../../thirdparty/owemdjee/sist2/scripts/test_in_docker.sh" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-admin/frontend/babel.config.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-admin/frontend/package-lock.json" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-admin/frontend/package.json" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-admin/frontend/public/index.html" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-admin/frontend/src/Sist2AdminApi.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-admin/frontend/src/i18n/messages.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-admin/frontend/src/main.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-admin/frontend/src/router/index.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-admin/frontend/src/store/index.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-admin/frontend/src/util.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-admin/frontend/vue.config.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-admin/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-admin/sist2_admin/app.py" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-admin/sist2_admin/config.py" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-admin/sist2_admin/cron.py" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-admin/sist2_admin/jobs.py" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-admin/sist2_admin/notifications.py" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-admin/sist2_admin/script.py" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-admin/sist2_admin/sist2.py" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-admin/sist2_admin/state.py" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-admin/sist2_admin/tesseract.py" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-admin/sist2_admin/web.py" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/babel.config.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/package-lock.json" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/package.json" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/public/index.html" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/src/Sist2Api.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/src/Sist2ElasticsearchQuery.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/src/Sist2SqliteQuery.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/src/i18n/messages.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/src/main.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/src/ml/BPETokenizer.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/src/ml/BertNerModel.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/src/ml/BertTokenizer.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/src/ml/CLIPTransformerModel.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/src/ml/ModelStore.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/src/ml/mlUtils.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/src/ml/modelsRepo.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/src/plugins/auth0.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/src/plugins/bootstrap-vue.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/src/router/auth0.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/src/router/index.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/src/shims-tsx.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/src/shims-vue.d.ts" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/src/store/index.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/src/util.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/vue.config.js" />
+    <Text Include="../../thirdparty/owemdjee/sist2/sist2-vue/watch.sh" />
+    <Text Include="../../thirdparty/owemdjee/sist2/tests/test_scan.py" />
+    <Text Include="../../thirdparty/owemdjee/sist2/third-party/libscan/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/sist2/third-party/libscan/README.md" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

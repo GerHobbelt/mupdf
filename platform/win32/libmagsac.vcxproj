@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libmagsac</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFCDFC45}</ProjectGuid>
+    <RootNamespace>libmagsac</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAGSAC;MAGSAC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAGSAC;MAGSAC_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAGSAC;MAGSAC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAGSAC;MAGSAC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAGSAC;MAGSAC_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAGSAC;MAGSAC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAGSAC;MAGSAC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAGSAC;MAGSAC_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAGSAC;MAGSAC_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAGSAC;MAGSAC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAGSAC;MAGSAC_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMAGSAC;MAGSAC_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/magsac/examples/cpp_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/magsac/src/pymagsac/include/magsac.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/magsac/src/pymagsac/include/model_score.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/magsac/src/pymagsac/src/bindings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/magsac/src/pymagsac/src/magsac_python.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/magsac/src/pymagsac/include/adaptive_inlier_selector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/magsac/src/pymagsac/include/estimators.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/magsac/src/pymagsac/include/magsac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/magsac/src/pymagsac/include/magsac_python.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/magsac/src/pymagsac/include/magsac_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/magsac/src/pymagsac/include/model_score.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/magsac/src/pymagsac/include/most_similar_inlier_selector.h" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/essential_matrix/fountain1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/essential_matrix/fountain2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/BrusselsA.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/BrusselsB.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/DresdenA.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/DresdenB.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/KyotoA.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/KyotoB.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/Leuven1A.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/Leuven1B.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/Leuven2A.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/Leuven2B.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/barrsmithA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/barrsmithB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/bonhallA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/bonhallB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/bonythonA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/bonythonB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/bookshA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/bookshB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/boxA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/boxB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/boxesandbooksA.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/boxesandbooksB.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/castleA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/castleB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/corrA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/corrB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/dino1A.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/dino1B.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/dino2A.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/dino2B.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/elderhallaA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/elderhallaB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/elderhallbA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/elderhallbB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/glasscaseaA.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/glasscaseaB.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/glasscasebA.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/glasscasebB.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/graffA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/graffB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/hartleyA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/hartleyB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/headA.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/headB.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/johnssonaA.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/johnssonaB.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/johnssonbA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/johnssonbB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/kampaA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/kampaB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/ladysymonA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/ladysymonB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/leafsA.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/leafsB.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/libraryA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/libraryB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/napieraA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/napieraB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/napierbA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/napierbB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/neemA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/neemB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/neseA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/neseB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/oldclassicswingA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/oldclassicswingB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/physicsA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/physicsB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/plantA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/plantB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/rotundaA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/rotundaB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/seneA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/seneB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/shoutA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/shoutB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/stairsA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/stairsA_small.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/stairsB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/stairsB_small.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/temple1A.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/temple1A_rot.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/temple1B.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/temple1B_rot.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/temple2A.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/temple2B.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/unihouseA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/unihouseB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/unionhouseA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/unionhouseB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/valbonneA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/valbonneB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/wallA.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/wallB.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/washA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/washB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/zoomA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/zoomB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/BostonA.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/BostonB.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/BostonLibA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/BostonLibB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/BruggeSquareA.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/BruggeSquareB.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/BruggeTowerA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/BruggeTowerB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/BrusselsA.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/BrusselsB.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/CapitalRegionA.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/CapitalRegionB.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/EiffelA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/EiffelB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/ExtremeZoomA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/ExtremeZoomB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/LePoint1A.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/LePoint1B.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/LePoint2A.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/LePoint2B.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/LePoint3A.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/LePoint3B.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/WhiteBoardA.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/WhiteBoardB.jpg" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/adamA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/adamB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/boatA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/boatB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/cityA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/cityB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/adamA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/adamB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/cafeA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/cafeB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/catA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/catB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/dumA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/dumB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/faceA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/faceB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/foxA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/foxB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/girlA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/girlB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/grafA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/grafB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/grandA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/grandB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/indexA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/indexB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/magA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/magB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/pkkA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/pkkB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/shopA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/shopB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/thereA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/thereB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/vinA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/vinB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/grafA.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/data/homography/grafB.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/img/ransacs.png" />
+    <Image Include="../../thirdparty/owemdjee/magsac/img/ransacs2.png" />
+    <Text Include="../../thirdparty/owemdjee/magsac/BUILD.md" />
+    <Text Include="../../thirdparty/owemdjee/magsac/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/magsac/README.md" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/essential_matrix/fountain_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/Brussels_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/Dresden_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/Kyoto_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/Kyoto_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/Leuven1_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/Leuven2_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/barrsmith_annot.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/barrsmith_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/bonhall_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/bonython_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/booksh_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/booksh_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/box_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/box_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/boxesandbooks_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/castle_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/castle_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/corr_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/corr_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/dino1_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/dino2_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/elderhalla_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/elderhallb_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/glasscasea_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/glasscaseb_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/graff_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/graff_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/hartley_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/head_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/head_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/johnssona_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/johnssonb_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/kampa_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/kampa_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/ladysymon_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/leafs_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/leafs_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/library_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/napiera_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/napierb_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/neem_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/nese_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/oldclassicswing_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/physics_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/plant_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/plant_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/rotunda_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/rotunda_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/sene_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/shout_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/shout_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/stairs_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/temple1_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/temple2_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/unihouse_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/unionhouse_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/valbonne_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/valbonne_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/wall_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/wall_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/wash_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/wash_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/zoom_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/fundamental_matrix/zoom_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/BostonLib_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/BostonLib_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/Boston_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/Boston_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/BruggeSquare_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/BruggeSquare_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/BruggeTower_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/BruggeTower_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/Brussels_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/Brussels_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/CapitalRegion_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/CapitalRegion_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/Eiffel_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/Eiffel_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/ExtremeZoom_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/ExtremeZoom_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/LePoint1_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/LePoint1_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/LePoint2_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/LePoint2_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/LePoint3_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/LePoint3_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/WhiteBoard_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/WhiteBoard_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/adam_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/adam_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/boat_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/boat_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/city_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/city_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/adam_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/cafe_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/cat_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/dum_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/face_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/fox_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/girl_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/graf_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/grand_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/index_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/mag_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/pkk_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/shop_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/there_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/extremeview/vin_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/graf_model.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/data/homography/graf_pts.txt" />
+    <Text Include="../../thirdparty/owemdjee/magsac/pyproject.toml" />
+    <Text Include="../../thirdparty/owemdjee/magsac/scripts/build-gflags.ps1" />
+    <Text Include="../../thirdparty/owemdjee/magsac/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/magsac/src/pymagsac/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/magsac/tests/test_rigid_transform.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libClipper2</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF5F8561}</ProjectGuid>
+    <RootNamespace>libClipper2</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLIPPER2;CLIPPER2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLIPPER2;CLIPPER2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLIPPER2;CLIPPER2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLIPPER2;CLIPPER2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLIPPER2;CLIPPER2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLIPPER2;CLIPPER2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLIPPER2;CLIPPER2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLIPPER2;CLIPPER2_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLIPPER2;CLIPPER2_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLIPPER2;CLIPPER2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLIPPER2;CLIPPER2_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCLIPPER2;CLIPPER2_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/BenchMark/StripDuplicateBenchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Clipper2Lib/src/clipper.engine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Clipper2Lib/src/clipper.offset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Clipper2Lib/src/clipper.rectclip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Examples/Benchmarks/Benchmarks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Examples/Inflate/Inflate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Examples/MemLeakTest/MemLeakTest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Examples/PolygonSamples/PolygonSamples.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Examples/RandomClipping/RandomClipping.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Examples/RectClipping/RectClipping.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Examples/SimpleClipping/SimpleClipping.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Examples/UnionClipping/UnionClipping.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Examples/UsingZ/UsingZ.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Examples/VariableOffset/VariableOffset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Tests/TestExportHeaders.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Tests/TestLines.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Tests/TestOffsetOrientation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Tests/TestOffsets.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Tests/TestOrientation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Tests/TestPolygons.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Tests/TestPolytreeHoles.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Tests/TestPolytreeIntersection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Tests/TestPolytreeUnion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Tests/TestRandomPaths.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Tests/TestRectClip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Tests/TestTrimCollinear.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Tests/TestWindows.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Utils/ClipFileLoad.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Utils/ClipFileSave.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/CPP/Utils/clipper.svg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/DLL/CPP_DLL/dllmain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Clipper2/DLL/CPP_DLL/pch.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Clipper2/CPP/Clipper2Lib/include/clipper2/clipper.core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Clipper2/CPP/Clipper2Lib/include/clipper2/clipper.engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Clipper2/CPP/Clipper2Lib/include/clipper2/clipper.export.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Clipper2/CPP/Clipper2Lib/include/clipper2/clipper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Clipper2/CPP/Clipper2Lib/include/clipper2/clipper.minkowski.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Clipper2/CPP/Clipper2Lib/include/clipper2/clipper.offset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Clipper2/CPP/Clipper2Lib/include/clipper2/clipper.rectclip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Clipper2/CPP/Clipper2Lib/include/clipper2/clipper.version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Clipper2/CPP/Utils/ClipFileLoad.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Clipper2/CPP/Utils/ClipFileSave.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Clipper2/CPP/Utils/Colors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Clipper2/CPP/Utils/CommonUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Clipper2/CPP/Utils/Timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Clipper2/CPP/Utils/clipper.svg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Clipper2/CPP/Utils/clipper.svg.utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Clipper2/DLL/CPP_DLL/framework.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Clipper2/DLL/CPP_DLL/pch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Clipper2/Delphi/Clipper2Lib/Clipper.inc" />
+    <Image Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib.Examples/ConsoleDemo/Clipper2.ico" />
+    <Image Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib.Examples/InflateDemo/Clipper2.ico" />
+    <Image Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib.Examples/RectClip/Clipper2.ico" />
+    <Image Include="../../thirdparty/owemdjee/Clipper2/DLL/CSharp_TestApp/polytree_sample.png" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CPP/BenchMark/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CPP/BenchMark/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CPP/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CPP/Clipper2.pc.cmakein" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CPP/GoogleTest in Visual Studio.txt" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CPP/clipper.version.in" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib.Benchmark/Benchmarks.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib.Benchmark/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib.Examples/" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib.Examples/ConsoleDemo/Main.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib.Examples/ConsoleDemo/clip.bin" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib.Examples/ConsoleDemo/subj.bin" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib.Examples/InflateDemo/Main.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib.Examples/InflateDemo/rabbit.bin" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib.Examples/RectClip/Main.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib.Tests/" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib.Tests/Tests1/Tests/TestLines.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib.Tests/Tests1/Tests/TestOffset.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib.Tests/Tests1/Tests/TestPolygons.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib.Tests/Tests1/Tests/TestPolytree.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib.Tests/Tests2/Tests/TestZCallback1.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib/Clipper.Core.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib/Clipper.Engine.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib/Clipper.Minkowski.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib/Clipper.Offset.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib/Clipper.RectClip.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib/Clipper.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Clipper2Lib/HashCode.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/USINGZ.TestApp/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Utils/ClipFileIO/Clipper.FileIO.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Utils/Colors/Clipper.Colors.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Utils/SVG/Clipper.SVG.Utils.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/CSharp/Utils/SVG/Clipper.SVG.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/DLL/CSharp_TestApp/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/DLL/CSharp_TestApp2/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/DLL/ReadMe.md" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/Delphi/Clipper2Lib/Clipper.Core.pas" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/Delphi/Clipper2Lib/Clipper.Engine.pas" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/Delphi/Clipper2Lib/Clipper.Minkowski.pas" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/Delphi/Clipper2Lib/Clipper.Offset.pas" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/Delphi/Clipper2Lib/Clipper.RectClip.pas" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/Delphi/Clipper2Lib/Clipper.pas" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/Delphi/Utils/ClipMisc.pas" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/Delphi/Utils/Clipper.SVG.pas" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/Delphi/Utils/Colors.pas" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/Delphi/Utils/Timer.pas" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/Tests/Lines.txt" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/Tests/Offsets.txt" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/Tests/Polygons.txt" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/Tests/PolytreeHoleOwner.txt" />
+    <Text Include="../../thirdparty/owemdjee/Clipper2/Tests/PolytreeHoleOwner2.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

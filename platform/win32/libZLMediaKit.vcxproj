@@ -1,0 +1,961 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libZLMediaKit</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFE0C026}</ProjectGuid>
+    <RootNamespace>libZLMediaKit</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZLMEDIAKIT;ZLMEDIAKIT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZLMEDIAKIT;ZLMEDIAKIT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZLMEDIAKIT;ZLMEDIAKIT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZLMEDIAKIT;ZLMEDIAKIT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZLMEDIAKIT;ZLMEDIAKIT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZLMEDIAKIT;ZLMEDIAKIT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZLMEDIAKIT;ZLMEDIAKIT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZLMEDIAKIT;ZLMEDIAKIT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZLMEDIAKIT;ZLMEDIAKIT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZLMEDIAKIT;ZLMEDIAKIT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZLMEDIAKIT;ZLMEDIAKIT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBZLMEDIAKIT;ZLMEDIAKIT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/3rdpart/jsoncpp/json_reader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/3rdpart/jsoncpp/json_value.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/3rdpart/jsoncpp/json_writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/src/main/cpp/native-lib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/api/source/mk_common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/api/source/mk_events.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/api/source/mk_events_objects.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/api/source/mk_httpclient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/api/source/mk_media.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/api/source/mk_player.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/api/source/mk_proxyplayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/api/source/mk_pusher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/api/source/mk_recorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/api/source/mk_rtp_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/api/source/mk_tcp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/api/source/mk_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/api/source/mk_util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/api/tests/pusher.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/api/tests/server.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/api/tests/websocket.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/server/FFmpegSource.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/server/Process.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/server/System.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/server/WebApi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/server/WebHook.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/server/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Codec/AACEncoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Codec/H264Encoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Common/Device.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Common/MediaSink.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Common/MediaSource.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Common/MultiMediaSourceMuxer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Common/Parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Common/Stamp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Common/config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/AAC.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/AACRtmp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/AACRtp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/CommonRtmp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/CommonRtp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/Factory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/Frame.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/G711.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/H264.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/H264Rtmp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/H264Rtp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/H265.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/H265Rtmp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/H265Rtp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/L16.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/Opus.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/SPSParser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HlsParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HlsPlayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpBody.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpChunkedSplitter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpClient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpClientImp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpConst.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpCookie.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpCookieManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpDownloader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpFileManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpRequestSplitter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpRequester.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpSession.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpTSPlayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/WebSocketSplitter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/strCoding.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Player/MediaPlayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Player/PlayerBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Player/PlayerProxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Pusher/MediaPusher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Pusher/PusherBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Record/HlsMaker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Record/HlsMakerImp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Record/HlsMediaSource.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Record/MP4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Record/MP4Demuxer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Record/MP4Muxer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Record/MP4Reader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Record/MP4Recorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Record/Recorder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Record/TsMuxer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtcp/Rtcp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtcp/RtcpContext.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/FlvMuxer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/Rtmp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/RtmpDemuxer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/RtmpMuxer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/RtmpPlayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/RtmpProtocol.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/RtmpPusher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/RtmpSession.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/amf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/Decoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/GB28181Process.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/PSDecoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/PSEncoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/RtpCache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/RtpProcess.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/RtpSelector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/RtpSender.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/RtpServer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/RtpSession.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/RtpSplitter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/TSDecoder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/RtpCodec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/RtpMultiCaster.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/RtpReceiver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/Rtsp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/RtspDemuxer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/RtspMuxer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/RtspPlayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/RtspPusher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/RtspSession.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/RtspSplitter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/UDPServer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/src/Shell/ShellSession.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/tests/DeviceHK/DeviceHK.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/tests/bom.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/tests/tab.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/tests/test_bench_proxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/tests/test_bench_pull.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/tests/test_bench_push.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/tests/test_httpApi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/tests/test_httpClient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/tests/test_player.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/tests/test_pusher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/tests/test_pusherMp4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/tests/test_rtcp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/tests/test_rtp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/tests/test_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/tests/test_sortor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/tests/test_wsClient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/ZLMediaKit/tests/test_wsServer.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/3rdpart/assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/3rdpart/jsoncpp/assertions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/3rdpart/jsoncpp/autolink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/3rdpart/jsoncpp/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/3rdpart/jsoncpp/features.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/3rdpart/jsoncpp/forwards.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/3rdpart/jsoncpp/json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/3rdpart/jsoncpp/json_tool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/3rdpart/jsoncpp/reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/3rdpart/jsoncpp/value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/3rdpart/jsoncpp/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/3rdpart/jsoncpp/writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/__DECC_INCLUDE_EPILOGUE.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/__DECC_INCLUDE_PROLOGUE.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/aes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/asn1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/asn1_mac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/asn1t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/async.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/bio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/blowfish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/bn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/camellia.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/cast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/cmac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/cms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/comp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/conf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/conf_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/crypto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/ct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/des.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/dh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/dsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/dtls1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/e_os2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/ebcdic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/ec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/ecdh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/ecdsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/err.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/evp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/hmac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/idea.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/kdf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/lhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/md2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/md4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/md5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/mdc2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/modes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/obj_mac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/objects.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/ocsp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/opensslconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/opensslv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/ossl_typ.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/pem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/pem2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/pkcs12.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/pkcs7.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/rand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/rc2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/rc4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/rc5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/ripemd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/rsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/safestack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/seed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/sha.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/srp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/srtp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/ssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/ssl2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/ssl3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/symhacks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/tls1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/ts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/txt_db.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/ui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/whrlpool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/x509.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/x509_vfy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/x509v3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/__DECC_INCLUDE_EPILOGUE.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/__DECC_INCLUDE_PROLOGUE.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/aes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/asn1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/asn1_mac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/asn1t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/async.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/bio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/blowfish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/bn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/camellia.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/cast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/cmac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/cms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/comp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/conf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/conf_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/crypto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/ct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/des.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/dh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/dsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/dtls1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/e_os2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/ebcdic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/ec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/ecdh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/ecdsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/err.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/evp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/hmac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/idea.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/kdf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/lhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/md2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/md4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/md5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/mdc2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/modes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/obj_mac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/objects.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/ocsp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/opensslconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/opensslv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/ossl_typ.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/pem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/pem2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/pkcs12.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/pkcs7.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/rand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/rc2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/rc4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/rc5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/ripemd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/rsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/safestack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/seed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/sha.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/srp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/srtp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/ssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/ssl2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/ssl3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/symhacks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/tls1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/ts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/txt_db.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/ui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/whrlpool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/x509.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/x509_vfy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/x509v3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/__DECC_INCLUDE_EPILOGUE.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/__DECC_INCLUDE_PROLOGUE.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/aes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/asn1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/asn1_mac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/asn1t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/async.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/bio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/blowfish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/bn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/camellia.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/cast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/cmac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/cms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/comp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/conf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/conf_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/crypto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/ct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/des.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/dh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/dsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/dtls1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/e_os2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/ebcdic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/ec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/ecdh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/ecdsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/err.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/evp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/hmac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/idea.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/kdf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/lhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/md2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/md4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/md5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/mdc2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/modes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/obj_mac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/objects.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/ocsp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/opensslconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/opensslv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/ossl_typ.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/pem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/pem2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/pkcs12.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/pkcs7.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/rand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/rc2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/rc4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/rc5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/ripemd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/rsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/safestack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/seed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/sha.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/srp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/srtp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/ssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/ssl2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/ssl3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/symhacks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/tls1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/ts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/txt_db.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/ui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/whrlpool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/x509.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/x509_vfy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/x509v3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/__DECC_INCLUDE_EPILOGUE.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/__DECC_INCLUDE_PROLOGUE.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/aes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/asn1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/asn1_mac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/asn1t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/async.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/bio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/blowfish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/bn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/camellia.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/cast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/cmac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/cms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/comp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/conf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/conf_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/crypto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/ct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/des.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/dh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/dsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/dtls1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/e_os2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/ebcdic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/ec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/ecdh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/ecdsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/err.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/evp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/hmac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/idea.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/kdf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/lhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/md2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/md4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/md5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/mdc2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/modes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/obj_mac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/objects.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/ocsp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/opensslconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/opensslv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/ossl_typ.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/pem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/pem2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/pkcs12.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/pkcs7.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/rand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/rc2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/rc4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/rc5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/ripemd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/rsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/safestack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/seed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/sha.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/srp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/srtp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/ssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/ssl2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/ssl3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/symhacks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/tls1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/ts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/txt_db.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/ui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/whrlpool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/x509.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/x509_vfy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/x509v3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/__DECC_INCLUDE_EPILOGUE.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/__DECC_INCLUDE_PROLOGUE.H" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/aes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/asn1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/asn1_mac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/asn1t.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/async.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/bio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/blowfish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/bn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/camellia.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/cast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/cmac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/cms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/comp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/conf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/conf_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/crypto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/ct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/des.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/dh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/dsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/dtls1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/e_os2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/ebcdic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/ec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/ecdh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/ecdsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/err.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/evp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/hmac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/idea.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/kdf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/lhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/md2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/md4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/md5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/mdc2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/modes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/obj_mac.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/objects.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/ocsp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/opensslconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/opensslv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/ossl_typ.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/pem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/pem2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/pkcs12.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/pkcs7.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/rand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/rc2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/rc4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/rc5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/ripemd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/rsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/safestack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/seed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/sha.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/srp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/srtp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/ssl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/ssl2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/ssl3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/symhacks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/tls1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/ts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/txt_db.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/ui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/whrlpool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/x509.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/x509_vfy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/x509v3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/api/include/mk_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/api/include/mk_events.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/api/include/mk_events_objects.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/api/include/mk_httpclient.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/api/include/mk_media.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/api/include/mk_mediakit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/api/include/mk_player.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/api/include/mk_proxyplayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/api/include/mk_pusher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/api/include/mk_recorder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/api/include/mk_rtp_server.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/api/include/mk_tcp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/api/include/mk_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/api/include/mk_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/api/source/mk_tcp_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/server/FFmpegSource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/server/Process.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/server/System.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/server/WebApi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/server/WebHook.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Codec/AACEncoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Codec/H264Encoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Common/Device.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Common/MediaSink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Common/MediaSource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Common/MultiMediaSourceMuxer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Common/Parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Common/Stamp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Common/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Common/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/AAC.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/AACRtmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/AACRtp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/CommonRtmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/CommonRtp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/Factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/Frame.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/G711.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/H264.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/H264Rtmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/H264Rtp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/H265.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/H265Rtmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/H265Rtp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/L16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/Opus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/SPSParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Extension/Track.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/FMP4/FMP4MediaSource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/FMP4/FMP4MediaSourceMuxer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HlsParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HlsPlayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpBody.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpChunkedSplitter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpClient.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpClientImp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpConst.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpCookie.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpCookieManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpDownloader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpFileManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpRequestSplitter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpRequester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpSession.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/HttpTSPlayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/WebSocketClient.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/WebSocketSession.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/WebSocketSplitter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/strCoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Http/strptime_win.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Player/MediaPlayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Player/PlayerBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Player/PlayerProxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Pusher/MediaPusher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Pusher/PusherBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Record/HlsMaker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Record/HlsMakerImp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Record/HlsMediaSource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Record/HlsRecorder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Record/MP4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Record/MP4Demuxer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Record/MP4Muxer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Record/MP4Reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Record/MP4Recorder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Record/Recorder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Record/TsMuxer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtcp/Rtcp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtcp/RtcpContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/FlvMuxer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/Rtmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/RtmpCodec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/RtmpDemuxer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/RtmpMediaSource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/RtmpMediaSourceImp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/RtmpMediaSourceMuxer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/RtmpMuxer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/RtmpPlayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/RtmpPlayerImp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/RtmpProtocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/RtmpPusher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/RtmpSession.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/amf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtmp/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/Decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/GB28181Process.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/PSDecoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/PSEncoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/ProcessInterface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/RtpCache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/RtpProcess.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/RtpSelector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/RtpSender.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/RtpServer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/RtpSession.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/RtpSplitter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtp/TSDecoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/RtpCodec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/RtpMultiCaster.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/RtpReceiver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/Rtsp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/RtspDemuxer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/RtspMediaSource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/RtspMediaSourceImp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/RtspMediaSourceMuxer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/RtspMuxer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/RtspPlayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/RtspPlayerImp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/RtspPusher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/RtspSession.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/RtspSplitter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Rtsp/UDPServer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Shell/ShellCMD.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/Shell/ShellSession.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/TS/TSMediaSource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/src/TS/TSMediaSourceMuxer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/tests/DeviceHK/DeviceHK.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/tests/FFMpegDecoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ZLMediaKit/tests/YuvDisplayer.h" />
+    <Image Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/src/main/res/mipmap-hdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" />
+    <Image Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/src/main/res/mipmap-mdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" />
+    <Image Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" />
+    <Image Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" />
+    <Image Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" />
+    <Image Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" />
+    <Image Include="../../thirdparty/owemdjee/ZLMediaKit/www/logo.png" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/3rdpart/jsoncpp/json_valueiterator.inl" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/3rdpart/jsoncpp/version.h.in" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/arm64-v8a/include/openssl/opensslconf.h.in" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi-v7a/include/openssl/opensslconf.h.in" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/armeabi/include/openssl/opensslconf.h.in" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86/include/openssl/opensslconf.h.in" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/libs/x86_64/include/openssl/opensslconf.h.in" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/src/main/cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/Android/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/Android/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/Android/gradlew.bat" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/README_en.md" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/_config.yml" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/api/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/api/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/benchmark.md" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/build_docker_images.sh" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/build_for_linux.sh" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/build_for_mac.sh" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/cmake/AndroidNdkGdb.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/cmake/AndroidNdkModules.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/cmake/FindAVCODEC.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/cmake/FindAVUTIL.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/cmake/FindFAAC.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/cmake/FindJEMALLOC.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/cmake/FindMP4V2.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/cmake/FindMYSQL.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/cmake/FindSDL2.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/cmake/FindX264.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/cmake/android.toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/cmake/ios.toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/docker/ubuntu16.04/Dockerfile.devel" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/docker/ubuntu18.04/Dockerfile.devel" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/postman/127.0.0.1.postman_environment.json" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/postman/ZLMediaKit.postman_collection.json" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/postman/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/server/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/tests/README.md" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/www/readme/" />
+    <Text Include="../../thirdparty/owemdjee/ZLMediaKit/www/readme/index.html" />
+    <Xml Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/src/main/AndroidManifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/src/main/res/drawable/ic_launcher_background.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/src/main/res/layout/activity_main.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/src/main/res/values/colors.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/src/main/res/values/strings.xml" />
+    <Xml Include="../../thirdparty/owemdjee/ZLMediaKit/Android/app/src/main/res/values/styles.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

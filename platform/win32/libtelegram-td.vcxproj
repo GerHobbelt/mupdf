@@ -1,0 +1,1449 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libtelegram-td</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF7D31EA}</ProjectGuid>
+    <RootNamespace>libtelegram-td</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTELEGRAM_TD;TELEGRAM_TD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTELEGRAM_TD;TELEGRAM_TD_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTELEGRAM_TD;TELEGRAM_TD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTELEGRAM_TD;TELEGRAM_TD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTELEGRAM_TD;TELEGRAM_TD_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTELEGRAM_TD;TELEGRAM_TD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTELEGRAM_TD;TELEGRAM_TD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTELEGRAM_TD;TELEGRAM_TD_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTELEGRAM_TD;TELEGRAM_TD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTELEGRAM_TD;TELEGRAM_TD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTELEGRAM_TD;TELEGRAM_TD_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTELEGRAM_TD;TELEGRAM_TD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/benchmark/bench_actor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/benchmark/bench_crypto.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/benchmark/bench_db.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/benchmark/bench_empty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/benchmark/bench_handshake.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/benchmark/bench_http.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/benchmark/bench_http_reader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/benchmark/bench_http_server.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/benchmark/bench_http_server_cheat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/benchmark/bench_http_server_fast.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/benchmark/bench_log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/benchmark/bench_misc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/benchmark/bench_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/benchmark/bench_tddb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/benchmark/check_proxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/benchmark/check_tls.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/benchmark/hashmap_build.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/benchmark/hashset_memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/benchmark/rmdir.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/benchmark/wget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/example/cpp/td_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/example/cpp/tdjson_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/example/java/td_jni.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/memprof/memprof.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/memprof/memprof_stat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/sqlite/sqlite/sqlite3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/generate/generate_c.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/generate/generate_common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/generate/generate_dotnet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/generate/generate_java.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/generate/generate_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/generate/remove_documentation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl-parser/crc32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl-parser/tl-parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl-parser/tlc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl-parser/wgetopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl_json_converter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl_writer_cpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl_writer_h.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl_writer_hpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl_writer_java.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl_writer_jni_cpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl_writer_jni_h.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl_writer_td.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/AuthData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/ConnectionManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/DhHandshake.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/Handshake.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/HandshakeActor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/HttpTransport.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/IStreamTransport.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/KDF.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/Ping.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/PingConnection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/ProxySecret.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/RSA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/RawConnection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/SessionConnection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/TcpTransport.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/TlsInit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/TlsReaderByteFlow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/Transport.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/AccountManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/AnimationsManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Application.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/AttachMenuManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/AudiosManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/AuthManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/AutoDownloadSettings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/AutosaveManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/BackgroundInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/BackgroundManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/BackgroundType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/BotCommand.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/BotCommandScope.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/BotInfoManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/BotMenuButton.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/CallActor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/CallDiscardReason.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/CallManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/CallbackQueriesManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ChannelParticipantFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ChatReactions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ClientActor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ClientDotNet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ClientJson.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ConfigManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ConnectionState.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Contact.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ContactsManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/CountryInfoManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DelayDispatcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Dependencies.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DeviceTokenManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DhCache.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogAction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogActionBar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogAdministrator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogDb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogEventLog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogFilterInviteLink.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogFilterManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogId.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogInviteLink.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogLocation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogNotificationSettings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogParticipant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogParticipantFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogSource.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Dimensions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Document.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DocumentsManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DownloadManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DownloadManagerCallback.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DraftMessage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/EmailVerification.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/EmojiGroup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/EmojiGroupType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/EmojiStatus.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/FileReferenceManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ForumTopic.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ForumTopicEditedData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ForumTopicIcon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ForumTopicInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ForumTopicManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Game.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/GameManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Global.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/GlobalPrivacySettings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/GroupCallManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/GroupCallParticipant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/GroupCallParticipantOrder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/GroupCallVideoPayload.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/HashtagHints.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/InlineQueriesManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/InputDialogId.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/InputGroupCallId.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/InputInvoice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/InputMessageText.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/JsonValue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/LanguagePackManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/LinkManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Location.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/LogDotNet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Logging.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MediaArea.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MediaAreaCoordinates.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageContent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageContentType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageDb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageEntity.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageExtendedMedia.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageId.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageInputReplyTo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageOrigin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageReaction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageReplyHeader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageReplyInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageSearchFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageSender.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageSource.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageThreadDb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageTtl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageViewer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessagesInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessagesManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NewPasswordState.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NotificationGroupInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NotificationGroupType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NotificationManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NotificationSettingsManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NotificationSettingsScope.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NotificationSound.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NotificationType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/OptionManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/OrderInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/OrderedMessage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/PasswordManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Payments.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/PhoneNumberManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Photo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/PhotoSize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/PhotoSizeSource.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/PollManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Premium.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/PremiumGiftOption.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/PrivacyManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/QueryCombiner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/QueryMerger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ReactionManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ReactionType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/RecentDialogList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ReplyMarkup.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ReportReason.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/RequestedDialogType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/RestrictionReason.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ScopeNotificationSettings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SecretChatActor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SecretChatDb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SecretChatsManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SecretInputMedia.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SecureManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SecureStorage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SecureValue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SendCodeHelper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SentEmailCode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SequenceDispatcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SpecialStickerSetType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SponsoredMessageManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StateManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StatisticsManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StickerFormat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StickerListType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StickerMaskPosition.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StickerPhotoSize.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StickerSetId.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StickerType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StickersManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StorageManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StoryContent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StoryContentType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StoryDb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StoryInteractionInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StoryManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StoryStealthMode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StoryViewer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SuggestedAction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Td.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/TdDb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/TermsOfService.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ThemeManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/TopDialogCategory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/TopDialogManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/TranscriptionInfo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/TranslationManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/UpdatesManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/UserPrivacySetting.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/UserPrivacySettingRule.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Usernames.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Venue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/VideoNotesManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/VideosManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/VoiceNotesManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/WebApp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/WebPageBlock.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/WebPagesManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/cli.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileBitmask.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileDb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileDownloader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileEncryptionKey.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileFromBytes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileGcParameters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileGcWorker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileGenerateManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileHashUploader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileLoadManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileLoader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileLoaderUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileStats.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileStatsWorker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileUploader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/PartsManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/ResourceManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/logevent/LogEventHelper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/misc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/AuthDataShared.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/ConnectionCreator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/DcAuthManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/DcOptionsSet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/MtprotoHeader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/NetActor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/NetQuery.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/NetQueryCreator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/NetQueryDelayer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/NetQueryDispatcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/NetQueryStats.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/NetStatsManager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/Proxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/PublicRsaKeyShared.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/PublicRsaKeyWatchdog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/Session.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/SessionMultiProxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/SessionProxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/td_c_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/td_emscripten.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/td_json_client.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/telegram/td_log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/td/tl/tl_jni_object.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdactor/example/example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/ConcurrentScheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/MultiPromise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/MultiTimeout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/impl/Scheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdactor/test/actors_bugs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdactor/test/actors_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdactor/test/actors_simple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdactor/test/actors_workers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/SqliteConnectionSafe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/SqliteDb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/SqliteKeyValue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/SqliteKeyValueAsync.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/SqliteStatement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/TQueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/binlog/Binlog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/binlog/BinlogEvent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/binlog/ConcurrentBinlog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/binlog/binlog_dump.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/binlog/detail/BinlogEventsBuffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/binlog/detail/BinlogEventsProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/detail/RawSqliteDb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/GetHostByNameActor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/HttpChunkedByteFlow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/HttpConnectionBase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/HttpContentLengthByteFlow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/HttpFile.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/HttpInboundConnection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/HttpOutboundConnection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/HttpProxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/HttpQuery.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/HttpReader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/Socks5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/SslCtx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/SslStream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/TcpListener.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/TransparentProxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/Wget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdtl/td/tl/tl_config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdtl/td/tl/tl_core.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdtl/td/tl/tl_file_outputer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdtl/td/tl/tl_file_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdtl/td/tl/tl_generate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdtl/td/tl/tl_outputer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdtl/td/tl/tl_string_outputer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdtl/td/tl/tl_writer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/generate/generate_mime_types_gperf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/AsyncFileLog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/BigNum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/BufferedUdp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/ExitGuard.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/FileLog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/FlatHashTable.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/FloodControlGlobal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Gzip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/GzipByteFlow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Hints.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/HttpUrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/JsonBuilder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/MimeType.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/MpmcQueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/OptionParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/PathView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Random.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/SharedSlice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Slice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/StackAllocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Status.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/StringBuilder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Time.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Timer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/TsCerr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/TsFileLog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/TsLog.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/base64.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/check.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/crypto.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/emoji.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/filesystem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/find_boundary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/logging.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/misc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/Clocks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/FileFd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/IPAddress.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/MemoryMapping.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/PollFlags.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/ServerSocketFd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/SocketFd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/Stat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/StdStreams.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/UdpSocketFd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/Epoll.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/EventFdBsd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/EventFdLinux.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/EventFdWindows.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/Iocp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/KQueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/NativeFd.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/Poll.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/Select.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/ThreadIdGuard.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/ThreadPthread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/WineventPoll.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/path.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/platform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/rlimit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/signals.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/sleep.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/stacktrace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/thread_local.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/uname.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/user.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/wstring_convert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/tl_parsers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/translit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/unicode.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/ChainScheduler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/ConcurrentHashMap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/Enumerator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/EpochBasedMemoryReclamation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/HashSet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/HazardPointers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/HttpUrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/List.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/MpmcQueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/MpmcWaiter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/MpscLinkQueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/OptionParser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/OrderedEventsProcessor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/SharedObjectPool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/SharedSlice.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/StealingQueue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/WaitFreeHashMap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/WaitFreeHashSet.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/WaitFreeVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/bitmask.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/crypto.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/emoji.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/filesystem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/gzip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/hashset_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/heap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/log.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/misc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/port.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/pq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/tdutils/test/variant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/test/country_info.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/test/crypto.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/test/data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/test/db.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/test/http.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/test/link.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/test/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/test/message_entities.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/test/mtproto.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/test/online.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/test/poll.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/test/query_merger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/test/secret.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/test/secure_storage.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/test/set_with_position.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/test/string_cleaning.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/test/tdclient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/telegram-td/test/tqueue.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/example/swift/src/td-Bridging-Header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/memprof/memprof.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/memprof/memprof_stat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/sqlite/sqlite/sqlite3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/sqlite/sqlite/sqlite3ext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/sqlite/sqlite/sqlite3session.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl-parser/crc32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl-parser/portable_endian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl-parser/tl-parser-tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl-parser/tl-parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl-parser/tl-tl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl-parser/wgetopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl_json_converter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl_writer_c.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl_writer_cpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl_writer_dotnet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl_writer_h.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl_writer_hpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl_writer_java.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl_writer_jni_cpp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl_writer_jni_h.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl_writer_td.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/AuthData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/AuthKey.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/ConnectionManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/CryptoStorer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/DhCallback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/DhHandshake.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/Handshake.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/HandshakeActor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/HandshakeConnection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/HttpTransport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/IStreamTransport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/KDF.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/MessageId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/MtprotoQuery.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/NoCryptoStorer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/PacketInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/PacketStorer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/Ping.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/PingConnection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/ProxySecret.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/RSA.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/RawConnection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/SessionConnection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/TcpTransport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/TlsInit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/TlsReaderByteFlow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/Transport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/TransportType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/mtproto/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/AccessRights.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/AccountManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/AffectedHistory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/AnimationsManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/AnimationsManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Application.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/AttachMenuManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/AudiosManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/AudiosManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/AuthManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/AuthManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/AutoDownloadSettings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/AutosaveManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/BackgroundId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/BackgroundInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/BackgroundInfo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/BackgroundManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/BackgroundType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/BackgroundType.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/BlockListId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/BotCommand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/BotCommandScope.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/BotInfoManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/BotMenuButton.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/CallActor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/CallDiscardReason.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/CallId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/CallManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/CallbackQueriesManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ChainId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ChannelId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ChannelParticipantFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ChannelType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ChatId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ChatReactions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ChatReactions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ClientActor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ClientJson.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ConfigManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ConnectionState.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Contact.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ContactsManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/CountryInfoManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/CustomEmojiId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DelayDispatcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Dependencies.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DeviceTokenManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DhCache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DhConfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogAction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogActionBar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogAdministrator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogBoostLinkInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogDate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogDb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogEventLog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogFilterDialogInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogFilterId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogFilterInviteLink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogFilterManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogInviteLink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogListId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogLocation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogNotificationSettings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogNotificationSettings.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogParticipant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogParticipantFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DialogSource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Dimensions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Dimensions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Document.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Document.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DocumentsManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DocumentsManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DownloadManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DownloadManagerCallback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DraftMessage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/DraftMessage.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/EmailVerification.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/EmojiGroup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/EmojiGroup.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/EmojiGroupType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/EmojiStatus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/EncryptedFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/FileReferenceManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/FileReferenceManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/FolderId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ForumTopic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ForumTopic.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ForumTopicEditedData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ForumTopicEditedData.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ForumTopicIcon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ForumTopicIcon.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ForumTopicInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ForumTopicInfo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ForumTopicManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Game.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Game.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/GameManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/GitCommitHash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Global.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/GlobalPrivacySettings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/GroupCallId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/GroupCallManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/GroupCallParticipant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/GroupCallParticipantOrder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/GroupCallVideoPayload.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/HashtagHints.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/InlineQueriesManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/InputDialogId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/InputGroupCallId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/InputInvoice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/InputInvoice.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/InputMessageText.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/InputMessageText.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/JsonValue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/LabeledPricePart.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/LanguagePackManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/LinkManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Location.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MediaArea.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MediaArea.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MediaAreaCoordinates.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MediaAreaCoordinates.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageContent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageContentType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageCopyOptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageDb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageEntity.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageEntity.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageExtendedMedia.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageExtendedMedia.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageFullId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageInputReplyTo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageLinkInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageOrigin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageOrigin.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageReaction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageReaction.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageReplyHeader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageReplyInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageReplyInfo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageSearchFilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageSender.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageSource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageThreadDb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageThreadInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageTtl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessageViewer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessagesInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MessagesManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MinChannel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/MinChannel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NewPasswordState.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Notification.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NotificationGroupFromDatabase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NotificationGroupId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NotificationGroupInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NotificationGroupInfo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NotificationGroupKey.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NotificationGroupType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NotificationId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NotificationManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NotificationObjectFullId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NotificationObjectId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NotificationSettingsManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NotificationSettingsScope.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NotificationSound.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NotificationSoundType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/NotificationType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/OptionManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/OrderInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/OrderInfo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/OrderedMessage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/PasswordManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Payments.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/PhoneNumberManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Photo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Photo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/PhotoFormat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/PhotoSize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/PhotoSize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/PhotoSizeSource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/PhotoSizeSource.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/PollId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/PollId.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/PollManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/PollManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Premium.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/PremiumGiftOption.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/PremiumGiftOption.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/PrivacyManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/PtsManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/PublicDialogType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/QueryCombiner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/QueryMerger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ReactionManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ReactionManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ReactionType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ReactionType.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/RecentDialogList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ReplyMarkup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ReplyMarkup.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ReportReason.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/RequestActor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/RequestedDialogType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/RequestedDialogType.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/RestrictionReason.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ScheduledServerMessageId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ScopeNotificationSettings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ScopeNotificationSettings.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SecretChatActor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SecretChatDb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SecretChatId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SecretChatLayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SecretChatsManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SecretInputMedia.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SecureManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SecureStorage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SecureValue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SecureValue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SendCodeHelper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SendCodeHelper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SentEmailCode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SequenceDispatcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ServerMessageId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SetWithPosition.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SpecialStickerSetType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SponsoredMessageManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StateManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StatisticsManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StickerFormat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StickerListType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StickerMaskPosition.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StickerMaskPosition.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StickerPhotoSize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StickerPhotoSize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StickerSetId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StickerType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StickersManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StickersManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StorageManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StoryContent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StoryContentType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StoryDb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StoryFullId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StoryId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StoryInteractionInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StoryInteractionInfo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StoryListId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StoryManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StoryNotificationSettings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StoryStealthMode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StoryStealthMode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/StoryViewer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/SuggestedAction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Td.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/TdCallback.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/TdDb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/TermsOfService.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/ThemeManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/TopDialogCategory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/TopDialogManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/TranscriptionInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/TranscriptionInfo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/TranslationManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/UniqueId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/UpdatesManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/UserId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/UserPrivacySetting.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/UserPrivacySettingRule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Usernames.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Venue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/Version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/VideoNotesManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/VideoNotesManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/VideosManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/VideosManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/VoiceNotesManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/VoiceNotesManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/WebApp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/WebApp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/WebPageBlock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/WebPageId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/WebPagesManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileBitmask.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileData.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileData.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileDb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileDbId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileDownloader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileEncryptionKey.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileFromBytes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileGcParameters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileGcWorker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileGenerateManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileHashUploader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileId.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileLoadManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileLoader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileLoaderActor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileLoaderUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileLocation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileLocation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileManager.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileSourceId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileSourceId.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileStats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileStatsWorker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/FileUploader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/PartsManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/ResourceManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/files/ResourceState.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/logevent/LogEvent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/logevent/LogEventHelper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/logevent/SecretChatEvent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/misc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/AuthDataShared.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/AuthKeyState.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/ConnectionCreator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/DcAuthManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/DcId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/DcOptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/DcOptionsSet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/MtprotoHeader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/NetActor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/NetQuery.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/NetQueryCounter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/NetQueryCreator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/NetQueryDelayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/NetQueryDispatcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/NetQueryStats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/NetStatsManager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/NetType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/Proxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/PublicRsaKeyShared.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/PublicRsaKeyWatchdog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/Session.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/SessionMultiProxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/SessionProxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/net/TempAuthKeyWatchdog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/td_c_client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/td_json_client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/telegram/td_log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/tl/TlObject.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/tl/tl_dotnet_object.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/tl/tl_jni_object.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/tl/tl_json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/tl/tl_object_parse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/td/tl/tl_object_store.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/ConcurrentScheduler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/MultiPromise.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/MultiTimeout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/PromiseFuture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/SchedulerLocalStorage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/SignalSlot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/SleepActor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/Timeout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/actor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/impl/Actor-decl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/impl/Actor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/impl/ActorId-decl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/impl/ActorId.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/impl/ActorInfo-decl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/impl/ActorInfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/impl/Event.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/impl/EventFull-decl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/impl/EventFull.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/impl/Scheduler-decl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdactor/td/actor/impl/Scheduler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/BinlogKeyValue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/DbKey.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/KeyValueSyncInterface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/SeqKeyValue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/SqliteConnectionSafe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/SqliteDb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/SqliteKeyValue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/SqliteKeyValueAsync.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/SqliteKeyValueSafe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/SqliteStatement.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/TQueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/TsSeqKeyValue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/binlog/Binlog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/binlog/BinlogEvent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/binlog/BinlogHelper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/binlog/BinlogInterface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/binlog/ConcurrentBinlog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/binlog/detail/BinlogEventsBuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/binlog/detail/BinlogEventsProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tddb/td/db/detail/RawSqliteDb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/DarwinHttp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/GetHostByNameActor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/HttpChunkedByteFlow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/HttpConnectionBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/HttpContentLengthByteFlow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/HttpFile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/HttpHeaderCreator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/HttpInboundConnection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/HttpOutboundConnection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/HttpProxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/HttpQuery.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/HttpReader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/NetStats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/Socks5.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/SslCtx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/SslStream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/TcpListener.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/TransparentProxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdnet/td/net/Wget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdtl/td/tl/tl_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdtl/td/tl/tl_core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdtl/td/tl/tl_file_outputer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdtl/td/tl/tl_file_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdtl/td/tl/tl_generate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdtl/td/tl/tl_outputer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdtl/td/tl/tl_simple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdtl/td/tl/tl_simple_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdtl/td/tl/tl_string_outputer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdtl/td/tl/tl_writer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/AesCtrByteFlow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/AsyncFileLog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/AtomicRead.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/BigNum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/BufferedFd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/BufferedReader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/BufferedUdp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/ByteFlow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/CancellationToken.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/ChainScheduler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/ChangesProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Closure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/CombinedLog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/ConcurrentHashTable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Container.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/DecTree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Destructor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Enumerator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/EpochBasedMemoryReclamation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/ExitGuard.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/FileLog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/FlatHashMap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/FlatHashMapChunks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/FlatHashSet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/FlatHashTable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/FloodControlFast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/FloodControlGlobal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/FloodControlStrict.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Gzip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/GzipByteFlow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/HashMap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/HashSet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/HashTableUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/HazardPointers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Heap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Hints.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/HttpUrl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/JsonBuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/List.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/MapNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/MemoryLog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/MimeType.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/MovableValue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/MpmcQueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/MpmcWaiter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/MpscLinkQueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/MpscPollableQueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Named.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/NullLog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/ObjectPool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Observer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/OptionParser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/OrderedEventsProcessor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/PathView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Promise.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/ScopeGuard.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/SetNode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/SharedObjectPool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/SharedSlice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Slice-decl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Slice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/SliceBuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Span.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/SpinLock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/StackAllocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Status.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/StealingQueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Storer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/StorerBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/StringBuilder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/ThreadLocalStorage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/ThreadSafeCounter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/TimedStat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/TlDowncastHelper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/TlStorerToString.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/TsCerr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/TsFileLog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/TsList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/TsLog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/UInt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/Variant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/VectorQueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/WaitFreeHashMap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/WaitFreeHashSet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/WaitFreeVector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/algorithm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/as.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/base64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/benchmark.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/bits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/check.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/crypto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/emoji.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/filesystem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/find_boundary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/fixed_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/int_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/invoke.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/misc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/optional.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/overloaded.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/Clocks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/CxCli.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/EventFd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/EventFdBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/FileFd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/FromApp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/IPAddress.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/IoSlice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/MemoryMapping.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/Mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/Poll.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/PollBase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/PollFlags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/RwMutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/ServerSocketFd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/SocketFd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/Stat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/StdStreams.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/UdpSocketFd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/Epoll.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/EventFdBsd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/EventFdLinux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/EventFdWindows.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/Iocp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/KQueue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/NativeFd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/Poll.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/PollableFd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/Select.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/ThreadIdGuard.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/ThreadPthread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/ThreadStl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/WineventPoll.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/detail/skip_eintr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/rlimit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/signals.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/sleep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/stacktrace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/thread_local.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/uname.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/user.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/port/wstring_convert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/tests.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/tl_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/tl_parsers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/tl_storers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/translit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/type_traits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/uint128.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/unicode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/unique_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/unique_value_ptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/telegram-td/test/data.h" />
+    <Image Include="../../thirdparty/owemdjee/telegram-td/example/uwp/app/Assets/LockScreenLogo.scale-200.png" />
+    <Image Include="../../thirdparty/owemdjee/telegram-td/example/uwp/app/Assets/SplashScreen.scale-200.png" />
+    <Image Include="../../thirdparty/owemdjee/telegram-td/example/uwp/app/Assets/Square150x150Logo.scale-200.png" />
+    <Image Include="../../thirdparty/owemdjee/telegram-td/example/uwp/app/Assets/Square44x44Logo.scale-200.png" />
+    <Image Include="../../thirdparty/owemdjee/telegram-td/example/uwp/app/Assets/Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Image Include="../../thirdparty/owemdjee/telegram-td/example/uwp/app/Assets/StoreLogo.png" />
+    <Image Include="../../thirdparty/owemdjee/telegram-td/example/uwp/app/Assets/Wide310x150Logo.scale-200.png" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/CMake/AddCXXCompilerFlag.cmake" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/CMake/FindReadline.cmake" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/CMake/GeneratePkgConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/CMake/GetGitRevisionDescription.cmake" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/CMake/GetGitRevisionDescription.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/CMake/PreventInSourceBuild.cmake" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/CMake/TdSetUpCompiler.cmake" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/CMake/iOS.cmake" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/CMake/illumos.cmake" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/LICENSE_1_0.txt" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/README.md" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/TdConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/benchmark/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/build.html" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/android/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/android/README.md" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/android/build-openssl.sh" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/android/build-tdlib.sh" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/android/check-environment.sh" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/android/fetch-sdk.sh" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/cpp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/csharp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/csharp/TdExample.cs" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/ios/README.md" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/ios/build-openssl.sh" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/ios/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/java/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/java/README.md" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/python/tdjson_example.py" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/swift/README.md" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/uwp/LICENSE_1_0.txt" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/uwp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/uwp/Telegram.Td.UWP.targets" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/uwp/app/App.xaml" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/uwp/app/App.xaml.cs" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/uwp/app/ApplicationInsights.config" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/uwp/app/MainPage.xaml" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/uwp/app/MainPage.xaml.cs" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/uwp/app/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/uwp/app/TdApp_TemporaryKey.pfx" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/uwp/app/project.json" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/uwp/build.ps1" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/web/README.md" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/web/build-openssl.sh" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/web/build-tdlib.sh" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/web/build-tdweb.sh" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/web/copy-tdlib.sh" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/web/tdweb/README.md" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/web/tdweb/package-lock.json" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/web/tdweb/package.json" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/web/tdweb/src/index.js" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/web/tdweb/src/logger.js" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/web/tdweb/src/wasm-utils.js" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/web/tdweb/src/worker.js" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/example/web/tdweb/webpack.config.js" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/format.ps1" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/format.sh" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/gen_git_commit_h.ps1" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/gen_git_commit_h.sh" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/post.js" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/sqlite/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/src.ps1" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/src.sh" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/td/generate/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/td/generate/scheme/mtproto_api.tl" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/td/generate/scheme/secret_api.tl" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/td/generate/scheme/td_api.tl" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/td/generate/scheme/telegram_api.tl" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/td/generate/tl-parser/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/td/telegram/GitCommitHash.cpp.in" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/tdactor/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/tddb/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/tdnet/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/tdtl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/tdutils/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/tdutils/generate/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/tdutils/generate/mime_types.txt" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/tdutils/td/utils/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/telegram-td/update_version.sh" />
+    <Xml Include="../../thirdparty/owemdjee/telegram-td/example/uwp/SDKManifest.xml" />
+    <Xml Include="../../thirdparty/owemdjee/telegram-td/example/uwp/[Content_Types].xml" />
+    <Xml Include="../../thirdparty/owemdjee/telegram-td/example/uwp/app/Properties/Default.rd.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libcolormap-shaders</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFEB7001}</ProjectGuid>
+    <RootNamespace>libcolormap-shaders</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAP_SHADERS;COLORMAP_SHADERS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAP_SHADERS;COLORMAP_SHADERS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAP_SHADERS;COLORMAP_SHADERS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAP_SHADERS;COLORMAP_SHADERS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAP_SHADERS;COLORMAP_SHADERS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAP_SHADERS;COLORMAP_SHADERS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAP_SHADERS;COLORMAP_SHADERS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAP_SHADERS;COLORMAP_SHADERS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAP_SHADERS;COLORMAP_SHADERS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAP_SHADERS;COLORMAP_SHADERS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAP_SHADERS;COLORMAP_SHADERS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCOLORMAP_SHADERS;COLORMAP_SHADERS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/colormap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/16_Level.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Beach.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Black-White_Linear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Blue-Green-Red-Yellow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Blue-Pastel-Red.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Blue-Red.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Blue-Red_2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Blue-White_Linear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Blue_Waves.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-Accent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-Blues.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-BrBG.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-BuGn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-BuPu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-Dark2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-GnBu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-Greens.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-Greys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-OrRd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-Oranges.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-PRGn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-Paired.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-Pastel1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-Pastel2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-PiYG.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-PuBu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-PuBuGn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-PuOr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-PuRd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-Purples.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-RdBu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-RdGy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-RdPu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-RdYiBu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-RdYiGn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-Reds.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-Set1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-Set2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-Set3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-Spectral.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-YIGn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-YIGnBu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/CB-YIOrBr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Eos_A.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Eos_B.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Green-Pink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Green-Red-Blue-White.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Green-White_Exponential.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Green-White_Linear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Hardcandy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Haze.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Hue_Sat_Lightness_1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Hue_Sat_Lightness_2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Hue_Sat_Value_1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Hue_Sat_Value_2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Mac_Style.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Nature.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Ocean.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Pastels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Peppermint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Plasma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Prism.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Purple-Red+Stripes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Rainbow+Black.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Rainbow+White.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Rainbow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Rainbow_18.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Rainbow_2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Red-Purple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Red_Temperature.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Standard_Gamma-II.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Steps.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Stern_Special.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Volcano.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/IDL/Waves.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/MATLAB/autumn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/MATLAB/bone.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/MATLAB/cool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/MATLAB/copper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/MATLAB/hot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/MATLAB/hsv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/MATLAB/jet.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/MATLAB/parula.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/MATLAB/pink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/MATLAB/spring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/MATLAB/summer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/MATLAB/winter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/all_colormaps.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/init_colormap_list.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/kbinani/altitude.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/transform/apricot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/transform/carnation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/transform/ether.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/transform/grayscale_banded.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/transform/hot_metal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/transform/lava_waves.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/transform/malachite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/transform/morning_glory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/transform/peanut_butter_and_jerry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/transform/purple_haze.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/transform/rainbow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/transform/rose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/transform/saturn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/transform/seismic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/transform/space.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/colormap-shaders/include/colormap/private/transform/supernova.h" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_16_Level.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Beach.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Black-White_Linear.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Blue-Green-Red-Yellow.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Blue-Pastel-Red.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Blue-Red.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Blue-Red_2.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Blue-White_Linear.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Blue_Waves.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-Accent.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-Blues.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-BrBG.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-BuGn.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-BuPu.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-Dark2.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-GnBu.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-Greens.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-Greys.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-OrRd.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-Oranges.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-PRGn.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-Paired.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-Pastel1.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-Pastel2.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-PiYG.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-PuBu.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-PuBuGn.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-PuOr.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-PuRd.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-Purples.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-RdBu.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-RdGy.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-RdPu.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-RdYiBu.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-RdYiGn.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-Reds.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-Set1.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-Set2.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-Set3.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-Spectral.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-YIGn.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-YIGnBu.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_CB-YIOrBr.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Eos_A.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Eos_B.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Green-Pink.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Green-Red-Blue-White.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Green-White_Exponential.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Green-White_Linear.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Hardcandy.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Haze.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Hue_Sat_Lightness_1.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Hue_Sat_Lightness_2.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Hue_Sat_Value_1.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Hue_Sat_Value_2.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Mac_Style.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Nature.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Ocean.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Pastels.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Peppermint.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Plasma.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Prism.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Purple-Red+Stripes.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Rainbow+Black.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Rainbow+White.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Rainbow.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Rainbow_18.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Rainbow_2.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Red-Purple.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Red_Temperature.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Standard_Gamma-II.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Steps.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Stern_Special.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Volcano.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/IDL_Waves.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/MATLAB_autumn.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/MATLAB_bone.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/MATLAB_cool.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/MATLAB_copper.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/MATLAB_hot.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/MATLAB_hsv.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/MATLAB_jet.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/MATLAB_parula.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/MATLAB_pink.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/MATLAB_spring.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/MATLAB_summer.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/MATLAB_winter.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/gnuplot_21_22_23.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/gnuplot_23_28_3.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/gnuplot_30_31_32.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/gnuplot_33_13_10.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/gnuplot_34_35_36.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/gnuplot_3_11_6.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/gnuplot_7_5_15.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/kbinani_altitude.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/transform_apricot.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/transform_carnation.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/transform_ether.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/transform_grayscale_banded.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/transform_hot_metal.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/transform_lava_waves.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/transform_malachite.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/transform_morning_glory.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/transform_peanut_butter_and_jerry.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/transform_purple_haze.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/transform_rainbow.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/transform_rose.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/transform_saturn.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/transform_seismic.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/transform_space.png" />
+    <Image Include="../../thirdparty/owemdjee/colormap-shaders/sample/transform_supernova.png" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/README.md" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_16_Level.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Beach.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Black-White_Linear.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Blue-Green-Red-Yellow.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Blue-Pastel-Red.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Blue-Red.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Blue-Red_2.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Blue-White_Linear.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Blue_Waves.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-Accent.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-Blues.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-BrBG.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-BuGn.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-BuPu.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-Dark2.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-GnBu.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-Greens.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-Greys.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-OrRd.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-Oranges.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-PRGn.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-Paired.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-Pastel1.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-Pastel2.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-PiYG.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-PuBu.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-PuBuGn.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-PuOr.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-PuRd.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-Purples.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-RdBu.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-RdGy.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-RdPu.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-RdYiBu.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-RdYiGn.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-Reds.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-Set1.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-Set2.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-Set3.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-Spectral.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-YIGn.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-YIGnBu.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_CB-YIOrBr.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Eos_A.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Eos_B.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Green-Pink.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Green-Red-Blue-White.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Green-White_Exponential.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Green-White_Linear.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Hardcandy.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Haze.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Hue_Sat_Lightness_1.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Hue_Sat_Lightness_2.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Hue_Sat_Value_1.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Hue_Sat_Value_2.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Mac_Style.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Nature.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Ocean.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Pastels.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Peppermint.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Plasma.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Prism.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Purple-Red+Stripes.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Rainbow+Black.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Rainbow+White.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Rainbow.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Rainbow_18.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Rainbow_2.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Red-Purple.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Red_Temperature.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Standard_Gamma-II.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Steps.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Stern_Special.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Volcano.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/IDL_Waves.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/MATLAB_autumn.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/MATLAB_bone.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/MATLAB_cool.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/MATLAB_copper.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/MATLAB_hot.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/MATLAB_hsv.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/MATLAB_jet.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/MATLAB_parula.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/MATLAB_pink.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/MATLAB_spring.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/MATLAB_summer.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/MATLAB_winter.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/gnuplot.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/kbinani_altitude.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/transform_apricot.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/transform_carnation.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/transform_ether.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/transform_grayscale_banded.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/transform_hot_metal.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/transform_lava_waves.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/transform_malachite.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/transform_morning_glory.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/transform_peanut_butter_and_jerry.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/transform_purple_haze.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/transform_rainbow.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/transform_rose.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/transform_saturn.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/transform_seismic.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/transform_space.metal" />
+    <Text Include="../../thirdparty/owemdjee/colormap-shaders/shaders/metal/transform_supernova.metal" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

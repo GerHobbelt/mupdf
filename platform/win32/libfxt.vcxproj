@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libfxt</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF065DEC}</ProjectGuid>
+    <RootNamespace>libfxt</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFXT;FXT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFXT;FXT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFXT;FXT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFXT;FXT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFXT;FXT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFXT;FXT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFXT;FXT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFXT;FXT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFXT;FXT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFXT;FXT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFXT;FXT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBFXT;FXT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/fxt/src/compression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fxt/src/create_bigram_inverted_index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fxt/src/dump_fixture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fxt/src/extractor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fxt/src/fgen_term_qry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fxt/src/generate_static_doc_features.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fxt/src/generate_term_features.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fxt/src/indexer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fxt/src/inlink.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fxt/src/kstem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fxt/src/outlink.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fxt/src/preret_csv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fxt/src/query_features.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fxt/test/bm25.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fxt/test/forward_index.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fxt/test/forward_index_interactor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fxt/test/lexicon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fxt/test/lmds.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fxt/test/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fxt/test/sdm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/fxt/test/static_webdocument.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/external/catch2/catch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/doc_entry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/doc_entry_flag.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/doc_lens.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/feature_extractor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/feature_presenter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/bm25/bm25.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/bm25/doc_bm25_atire_feature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/bm25/doc_bm25_feature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/bm25/doc_bm25_trec3_feature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/bm25/doc_bm25_trec3_kmax_feature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/bose_einstein/be.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/bose_einstein/doc_be_feature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/dfr/dfr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/dfr/doc_dfr_feature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/doc_feature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/doc_feature/document_features.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/dph/doc_dph_feature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/dph/dph.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/features.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/lmds/doc_lm_dir_1000_feature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/lmds/doc_lm_dir_1500_feature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/lmds/doc_lm_dir_2500_feature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/lmds/doc_lm_dir_feature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/lmds/lm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/probability/doc_prob_feature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/probability/prob.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/proximity/bm25_proximity.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/proximity/doc_proximity_feature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/proximity/doc_sdm_feature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/proximity/sdm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/proximity/tp_dist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/static/web_document.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/stream/doc_stream_feature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/tfidf/doc_tfidf_feature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/tfidf/tfidf.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/features/tpscore/doc_tpscore_feature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/fgen_term_util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/field_id.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/field_map.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/forward_index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/forward_index_interactor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/inverted_index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/lexicon.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/query_environment_adapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/query_train_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/statdoc_entry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/statdoc_entry_flag.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/static_feature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/stopwords.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/term_feature.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/trec_run_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/w_scanner.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/include/fxt/web_1t_stopwords.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/src/fgen_bigram_qry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/src/fgen_term_qry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/src/query_features.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/test/fixture/stub_index.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/fxt/test/fixture/stub_query.hpp" />
+    <Text Include="../../thirdparty/owemdjee/fxt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/fxt/README.md" />
+    <Text Include="../../thirdparty/owemdjee/fxt/doc/configuration.md" />
+    <Text Include="../../thirdparty/owemdjee/fxt/doc/features.md" />
+    <Text Include="../../thirdparty/owemdjee/fxt/doc/index.md" />
+    <Text Include="../../thirdparty/owemdjee/fxt/doc/quick-start.md" />
+    <Text Include="../../thirdparty/owemdjee/fxt/external/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/fxt/script/doc-features.sh" />
+    <Text Include="../../thirdparty/owemdjee/fxt/script/feat2flag.sh" />
+    <Text Include="../../thirdparty/owemdjee/fxt/script/feat2ini.sh" />
+    <Text Include="../../thirdparty/owemdjee/fxt/script/feat2struct.sh" />
+    <Text Include="../../thirdparty/owemdjee/fxt/script/mk-nodeid-docno.sh" />
+    <Text Include="../../thirdparty/owemdjee/fxt/script/shuffle.sh" />
+    <Text Include="../../thirdparty/owemdjee/fxt/script/stopwords.sh" />
+    <Text Include="../../thirdparty/owemdjee/fxt/src/CMakeLists.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

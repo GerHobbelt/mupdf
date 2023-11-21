@@ -1,0 +1,796 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libxcam</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF0E41FA}</ProjectGuid>
+    <RootNamespace>libxcam</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXCAM;XCAM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXCAM;XCAM_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXCAM;XCAM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXCAM;XCAM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXCAM;XCAM_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXCAM;XCAM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXCAM;XCAM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXCAM;XCAM_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXCAM;XCAM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXCAM;XCAM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXCAM;XCAM_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBXCAM;XCAM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/capi/context_priv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/capi/ctxs/context_cl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/capi/ctxs/context_stitch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/capi/xcam_handle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/dnn/inference/dnn_inference_engine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/dnn/inference/dnn_inference_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/dnn/inference/dnn_object_detection.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/dnn/inference/dnn_semantic_segmentation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/dnn/inference/dnn_super_resolution.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/gles/egl/egl_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/gles/egl/egl_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_blender.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_command.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_compute_program.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_copy_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_dma_buffer_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_fastmap_blender.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_geomap_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_image_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_image_shader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_program.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_shader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_stitcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_sync.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_texture.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_video_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/gles/gles_std.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/isp/aiq3a_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/isp/aiq_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/isp/atomisp_device.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/isp/hybrid_analyzer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/isp/hybrid_analyzer_loader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/isp/iq/x3a_analyze_tuner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/isp/iq/x3a_ciq_bnr_ee_tuning_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/isp/iq/x3a_ciq_tnr_tuning_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/isp/iq/x3a_ciq_tuning_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/isp/iq/x3a_ciq_wavelet_tuning_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/isp/isp_config_translator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/isp/isp_controller.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/isp/isp_image_processor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/isp/isp_poll_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/isp/libtbd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/isp/sensor_descriptor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/isp/x3a_analyzer_aiq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/isp/x3a_isp_config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/isp/x3a_statistics_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/isp/xcam_cpf_reader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_3a_image_processor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_3a_stats_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_3d_denoise_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_argument.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_bayer_basic_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_bayer_pipe_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_blender.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_csc_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_csc_image_processor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_defog_dcp_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_demo_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_device.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_error.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_event.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_fisheye_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_gauss_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_geo_map_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_image_360_stitch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_image_bo_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_image_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_image_processor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_image_scaler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_image_warp_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_kernel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_multi_image_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_newtonemapping_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_newwavelet_denoise_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_post_image_processor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_pyramid_blender.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_retinex_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_rgb_pipe_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_tnr_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_tonemapping_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_video_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_video_stabilizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_wavelet_denoise_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_wire_frame_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_yuv_pipe_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocl/priority_buffer_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocv/cv_capi_feature_match.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocv/cv_edgetaper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocv/cv_feature_match.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocv/cv_feature_match_cluster.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocv/cv_image_deblurring.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocv/cv_image_process_helper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocv/cv_image_sharp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocv/cv_utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/ocv/cv_wiener_filter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/render/render_osg_camera_manipulator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/render/render_osg_model.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/render/render_osg_viewer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/soft/soft_blender.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/soft/soft_blender_tasks_priv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/soft/soft_copy_task.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/soft/soft_geo_mapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/soft/soft_geo_tasks_priv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/soft/soft_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/soft/soft_stitcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/soft/soft_video_buf_allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/soft/soft_worker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_blender.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_cmdbuf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_copy_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_descriptor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_device.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_geomap_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_instance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_memory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_pipeline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_shader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_stitcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_sync.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_video_buf_allocator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_worker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vulkan_common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/plugins/3a/aiq/aiq_wrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/plugins/3a/hybrid/sample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/plugins/smart/dvs/libdvs/libdvs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/plugins/smart/dvs/libdvs/stabilizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/plugins/smart/dvs/libdvs/test-image-stabilization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/plugins/smart/dvs/xcam_plugin_dvs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/plugins/smart/sample/sample_smart_analysis.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/tests/test-binary-kernel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/tests/test-cl-image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/tests/test-device-manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/tests/test-dnn-inference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/tests/test-gles-handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/tests/test-image-blend.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/tests/test-image-deblurring.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/tests/test-image-stitching.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/tests/test-pipe-manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/tests/test-poll-thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/tests/test-render-surround-view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/tests/test-soft-image.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/tests/test-surround-view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/tests/test-video-stabilization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/tests/test-vk-handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/wrapper/gstreamer/gstxcambuffermeta.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/wrapper/gstreamer/gstxcambufferpool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/wrapper/gstreamer/gstxcamfilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/wrapper/gstreamer/gstxcamsrc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/wrapper/gstreamer/interface/gstxcaminterface.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/wrapper/gstreamer/main_dev_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/wrapper/gstreamer/main_pipe_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/analyzer_loader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/buffer_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/calibration_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/device_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/dma_video_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/drm_bo_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/drm_display.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/drm_v4l2_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/dynamic_analyzer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/dynamic_analyzer_loader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/external_video_buffer_priv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/fake_poll_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/fisheye_dewarp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/fisheye_image_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/handler_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/image_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/image_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/image_processor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/image_projector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/interface/blender.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/interface/feature_match.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/interface/geo_mapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/interface/stitcher.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/pipe_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/poll_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/smart_analysis_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/smart_analyzer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/smart_analyzer_loader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/smart_buffer_priv.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/swapped_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/thread_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/uvc_device.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/v4l2_buffer_proxy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/v4l2_device.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/video_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/worker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/x3a_analyzer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/x3a_analyzer_manager.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/x3a_analyzer_simple.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/x3a_image_process_center.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/x3a_result.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/x3a_result_factory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/x3a_stats_pool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/xcam_analyzer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/xcam_buffer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/xcam_common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/xcam_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/libxcam/xcore/xcam_utils.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/capi/context_priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/capi/ctxs/context_cl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/capi/ctxs/context_stitch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/capi/ctxs/stitch_params.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/capi/xcam_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/dnn/inference/dnn_inference_engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/dnn/inference/dnn_inference_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/dnn/inference/dnn_object_detection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/dnn/inference/dnn_semantic_segmentation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/dnn/inference/dnn_super_resolution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/gles/egl/egl_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/gles/egl/egl_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_blender.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_command.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_compute_program.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_copy_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_dma_buffer_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_fastmap_blender.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_geomap_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_image_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_image_shader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_program.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_shader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_stitcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_sync.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_texture.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/gles/gl_video_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/gles/gles_std.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/isp/aiq3a_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/isp/aiq_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/isp/atomisp_device.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/isp/hybrid_analyzer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/isp/hybrid_analyzer_loader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/isp/iq/x3a_analyze_tuner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/isp/iq/x3a_ciq_bnr_ee_tuning_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/isp/iq/x3a_ciq_tnr_tuning_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/isp/iq/x3a_ciq_tuning_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/isp/iq/x3a_ciq_wavelet_tuning_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/isp/isp_config_translator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/isp/isp_controller.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/isp/isp_image_processor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/isp/isp_poll_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/isp/libtbd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/isp/sensor_descriptor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/isp/x3a_analyzer_aiq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/isp/x3a_isp_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/isp/x3a_statistics_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/isp/xcam_cpf_reader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_3a_image_processor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_3a_stats_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_3d_denoise_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_argument.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_bayer_basic_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_bayer_pipe_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_blender.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_csc_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_csc_image_processor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_defog_dcp_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_demo_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_device.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_event.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_fisheye_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_gauss_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_geo_map_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_image_360_stitch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_image_bo_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_image_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_image_processor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_image_scaler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_image_warp_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_kernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_multi_image_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_newtonemapping_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_newwavelet_denoise_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_post_image_processor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_pyramid_blender.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_retinex_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_rgb_pipe_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_tnr_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_tonemapping_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_video_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_video_stabilizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_wavelet_denoise_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_wire_frame_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/cl_yuv_pipe_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocl/priority_buffer_queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocv/cv_capi_feature_match.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocv/cv_edgetaper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocv/cv_feature_match.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocv/cv_feature_match_cluster.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocv/cv_image_deblurring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocv/cv_image_process_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocv/cv_image_sharp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocv/cv_std.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocv/cv_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/ocv/cv_wiener_filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/render/render_osg_camera_manipulator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/render/render_osg_model.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/render/render_osg_shader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/render/render_osg_viewer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/soft/soft_blender.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/soft/soft_blender_tasks_priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/soft/soft_copy_task.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/soft/soft_geo_mapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/soft/soft_geo_tasks_priv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/soft/soft_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/soft/soft_image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/soft/soft_stitcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/soft/soft_video_buf_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/soft/soft_worker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_blender.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_cmdbuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_copy_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_descriptor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_device.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_geomap_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_instance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_pipeline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_shader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_stitcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_sync.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_video_buf_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vk_worker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vulkan_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/vulkan_std.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/plugins/smart/dvs/libdvs/libdvs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/plugins/smart/dvs/libdvs/stabilizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/tests/test_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/tests/test_inline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/tests/test_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/tests/test_sv_params.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/wrapper/gstreamer/gst_xcam_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/wrapper/gstreamer/gstxcambuffermeta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/wrapper/gstreamer/gstxcambufferpool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/wrapper/gstreamer/gstxcamfilter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/wrapper/gstreamer/gstxcamsrc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/wrapper/gstreamer/interface/gstxcaminterface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/wrapper/gstreamer/main_dev_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/wrapper/gstreamer/main_pipe_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/analyzer_loader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/base/xcam_3a_description.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/base/xcam_3a_result.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/base/xcam_3a_stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/base/xcam_3a_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/base/xcam_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/base/xcam_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/base/xcam_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/base/xcam_params.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/base/xcam_smart_description.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/base/xcam_smart_result.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/buffer_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/calibration_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/device_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/dma_video_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/drm_bo_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/drm_display.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/drm_v4l2_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/dynamic_analyzer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/dynamic_analyzer_loader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/fake_poll_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/fake_v4l2_device.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/fisheye_dewarp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/fisheye_image_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/handler_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/image_file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/image_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/image_processor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/image_projector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/interface/blender.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/interface/data_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/interface/feature_match.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/interface/geo_mapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/interface/stitcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/meta_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/pipe_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/poll_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/safe_list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/smart_analysis_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/smart_analyzer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/smart_analyzer_loader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/smartptr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/stats_callback_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/swapped_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/thread_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/uvc_device.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/v4l2_buffer_proxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/v4l2_device.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/vec_mat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/video_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/worker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/x3a_analyzer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/x3a_analyzer_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/x3a_analyzer_simple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/x3a_event.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/x3a_image_process_center.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/x3a_result.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/x3a_result_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/x3a_stats_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/xcam_analyzer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/xcam_mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/xcam_obj_debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/xcam_std.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/xcam_thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libxcam/xcore/xcam_utils.h" />
+    <Image Include="../../thirdparty/owemdjee/libxcam/doc/xcam_360_video_stitching_2_cams.png" />
+    <Image Include="../../thirdparty/owemdjee/libxcam/doc/xcam_360_video_stitching_3_cams.png" />
+    <Image Include="../../thirdparty/owemdjee/libxcam/doc/xcam_cl_pipeline_20170407.png" />
+    <Image Include="../../thirdparty/owemdjee/libxcam/doc/xcam_dataflow_20160930.png" />
+    <Image Include="../../thirdparty/owemdjee/libxcam/doc/xcam_framework_20181017.png" />
+    <Image Include="../../thirdparty/owemdjee/libxcam/doc/xcam_framework_20190329.png" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/capi/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/code_style.sh" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/doc/xcam_footer.html" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/Feather_pytorch_2_onnx.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/README-template.md" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/README.md" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/cfgs/FeatherNetA-32.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/cfgs/FeatherNetB-32-ir.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/cfgs/FeatherNetB-32.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/cfgs/MobileLiteNet54-32.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/cfgs/MobileLiteNet54-se-64.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/cfgs/fishnet150-32.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/cfgs/mobilenetv2.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/cfgs/shufflenetv2_1.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/checkpoints/pre-trainedModels/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/data/fileList.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/data/ir_final_train.txt" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/data/ir_final_train_tmp.txt" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/data/label_ir_train.txt" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/data/our_filelist/2depth_train.txt" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/data/our_filelist/2ir_train.txt" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/data/our_filelist/2label_train.txt" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/data/our_filelist/2rgb_train.txt" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/data/train_list.txt" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/data/val_private_list.txt" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/data/val_public_list.txt" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/env.yml" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/license_related.md" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/losses.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/main.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/model_onnx2IR.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/models/FeatherNet.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/models/MobileLiteNet.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/models/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/read_data.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/roc.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/tools/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/tools/benchmark/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/tools/benchmark/compute_flops.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/tools/benchmark/compute_madd.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/tools/benchmark/compute_memory.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/tools/benchmark/compute_speed.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/tools/benchmark/model_hook.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/tools/benchmark/reporter.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/tools/benchmark/stat_tree.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/tools/benchmark/statistics.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/tools/gluon2pytorch.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/utils/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/utils/data_aug.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/feathernet/utils/profile.py" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/dnn/inference/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/gles/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/isp/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/ocl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/ocv/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/render/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/soft/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/modules/vulkan/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/pkgconfig/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/pkgconfig/libxcam.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/plugins/3a/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/plugins/3a/aiq/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/plugins/3a/hybrid/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/plugins/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/plugins/smart/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/plugins/smart/dvs/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/plugins/smart/dvs/libdvs/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/plugins/smart/sample/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_3d_denoise.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_3d_denoise_slm.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_bayer_basic.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_bayer_pipe.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_bi_filter.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_csc.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_defog_dcp.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_demo.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_fisheye.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_gauss.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_gauss_lap_pyramid.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_geo_map.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_image_scaler.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_image_warp.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_min_filter.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_newtonemapping.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_retinex.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_rgb_pipe.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_tnr.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_tonemapping.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_wavelet_coeff.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_wavelet_denoise.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_wavelet_haar.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_wire_frame.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/cl/kernel_yuv_pipe.cl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/clx/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/glsl/shader_blend_pyr.comp.sl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/glsl/shader_blend_pyr_yuv420.comp.sl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/glsl/shader_copy.comp.sl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/glsl/shader_copy_ssbo_to_tex.comp.sl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/glsl/shader_copy_tex_to_ssbo.comp.sl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/glsl/shader_fastmap_blend_uv_nv12.comp.sl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/glsl/shader_fastmap_blend_uv_yuv420.comp.sl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/glsl/shader_fastmap_blend_y.comp.sl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/glsl/shader_gauss_scale_pyr.comp.sl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/glsl/shader_gauss_scale_pyr_yuv420.comp.sl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/glsl/shader_geomap.comp.sl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/glsl/shader_geomap_fastmap_uv_nv12.comp.sl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/glsl/shader_geomap_fastmap_uv_yuv420.comp.sl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/glsl/shader_geomap_fastmap_y.comp.sl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/glsl/shader_geomap_yuv420.comp.sl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/glsl/shader_lap_trans_pyr.comp.sl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/glsl/shader_lap_trans_pyr_yuv420.comp.sl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/glsl/shader_reconstruct_pyr.comp.sl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/glsl/shader_reconstruct_pyr_yuv420.comp.sl" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/shaders/glslx/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/tests/camera_calibration_CamC3C8K.json" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/tests/camera_calibration_CamC6C8K.json" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/tests/test-xcamsrc-camera.sh" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/tools/add-quotation-marks.sh" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/tools/convert-binary-to-text.sh" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/tools/pre-commit-code-style.sh" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/wrapper/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/wrapper/gstreamer/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/wrapper/gstreamer/interface/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libxcam/xcore/Makefile.am" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

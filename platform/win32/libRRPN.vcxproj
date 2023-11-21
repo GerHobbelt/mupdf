@@ -1,0 +1,1450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libRRPN</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF51DCA0}</ProjectGuid>
+    <RootNamespace>libRRPN</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRPN;RRPN_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRPN;RRPN_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRPN;RRPN_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRPN;RRPN_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRPN;RRPN_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRPN;RRPN_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRPN;RRPN_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRPN;RRPN_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRPN;RRPN_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRPN;RRPN_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRPN;RRPN_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRPN;RRPN_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/cifar10/convert_cifar_data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/cpp_classification/classification.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/convert_mnist_data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/siamese/convert_mnist_siamese_data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/matlab/+caffe/private/caffe_.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/python/caffe/_caffe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/blob.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/data_reader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/data_transformer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/internal_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layer_factory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/absval_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/accuracy_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/argmax_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/base_conv_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/base_data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/batch_norm_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/batch_reindex_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/bias_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/bnll_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/concat_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/contrastive_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/conv_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/cudnn_conv_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/cudnn_lcn_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/cudnn_lrn_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/cudnn_pooling_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/cudnn_relu_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/cudnn_sigmoid_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/cudnn_softmax_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/cudnn_tanh_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/deconv_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/dropout_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/dummy_data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/eltwise_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/elu_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/embed_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/euclidean_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/exp_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/filter_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/flatten_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/hdf5_data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/hdf5_output_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/hinge_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/im2col_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/image_data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/infogain_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/inner_product_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/lrn_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/memory_data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/multinomial_logistic_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/mvn_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/neuron_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/pooling_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/power_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/prelu_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/reduction_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/relu_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/reshape_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/roi_pooling_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/rotate_roi_align_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/rotate_roi_pooling_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/scale_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/sigmoid_cross_entropy_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/sigmoid_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/silence_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/slice_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/smooth_L1_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/softmax_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/softmax_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/split_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/spp_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/tanh_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/threshold_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/tile_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/layers/window_data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/net.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/parallel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/solver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/solvers/adadelta_solver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/solvers/adagrad_solver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/solvers/adam_solver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/solvers/nesterov_solver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/solvers/rmsprop_solver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/solvers/sgd_solver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/syncedmem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_accuracy_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_argmax_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_batch_norm_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_batch_reindex_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_bias_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_blob.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_caffe_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_concat_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_contrastive_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_convolution_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_data_transformer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_db.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_deconvolution_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_dummy_data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_eltwise_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_embed_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_euclidean_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_filler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_filter_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_flatten_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_gradient_based_solver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_hdf5_output_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_hdf5data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_hinge_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_im2col_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_image_data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_infogain_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_inner_product_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_internal_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_io.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_layer_factory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_lrn_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_math_functions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_maxpool_dropout_layers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_memory_data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_multinomial_logistic_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_mvn_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_net.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_neuron_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_platform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_pooling_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_power_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_protobuf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_random_number_generator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_reduction_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_reshape_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_roi_pooling_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_scale_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_sigmoid_cross_entropy_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_slice_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_smooth_L1_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_softmax_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_softmax_with_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_solver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_solver_factory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_split_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_spp_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_stochastic_pooling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_syncedmem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_tanh_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_threshold_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_tile_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_upgrade_proto.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_util_blas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/util/benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/util/blocking_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/util/cudnn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/util/db.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/util/db_leveldb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/util/db_lmdb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/util/hdf5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/util/im2col.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/util/insert_splits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/util/io.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/util/math_functions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/util/signal_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/util/upgrade_proto.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/gtest/gtest-all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/gtest/gtest_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/tools/caffe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/tools/compute_image_mean.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/tools/convert_imageset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/tools/device_query.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/tools/extract_features.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/tools/finetune_net.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/tools/net_speed_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/tools/test_net.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/tools/train_net.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/tools/upgrade_net_proto_binary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/tools/upgrade_net_proto_text.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/tools/upgrade_solver_proto_text.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/lib/pycocotools/_mask.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/lib/pycocotools/maskApi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rbbox_overlaps.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rotate_circle_nms.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rotate_cython_nms.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rotate_gpu_nms.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rotate_polygon_nms.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/blob.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/caffe.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/data_reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/data_transformer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/fast_rcnn_layers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/filler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/internal_thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layer_factory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/absval_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/accuracy_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/argmax_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/base_conv_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/base_data_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/batch_norm_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/batch_reindex_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/bias_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/bnll_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/concat_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/contrastive_loss_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/conv_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/cudnn_conv_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/cudnn_lcn_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/cudnn_lrn_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/cudnn_pooling_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/cudnn_relu_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/cudnn_sigmoid_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/cudnn_softmax_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/cudnn_tanh_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/data_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/deconv_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/dropout_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/dummy_data_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/eltwise_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/elu_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/embed_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/euclidean_loss_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/exp_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/filter_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/flatten_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/hdf5_data_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/hdf5_output_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/hinge_loss_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/im2col_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/image_data_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/infogain_loss_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/inner_product_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/loss_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/lrn_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/memory_data_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/multinomial_logistic_loss_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/mvn_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/neuron_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/pooling_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/power_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/prelu_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/python_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/reduction_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/relu_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/reshape_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/scale_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/sigmoid_cross_entropy_loss_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/sigmoid_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/silence_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/slice_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/softmax_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/softmax_loss_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/split_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/spp_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/tanh_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/threshold_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/tile_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/layers/window_data_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/net.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/parallel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/sgd_solvers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/solver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/solver_factory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/syncedmem.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/test/test_caffe_main.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/test/test_gradient_check_util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/util/benchmark.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/util/blocking_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/util/cudnn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/util/db.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/util/db_leveldb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/util/db_lmdb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/util/device_alternate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/util/format.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/util/hdf5.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/util/im2col.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/util/insert_splits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/util/io.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/util/math_functions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/util/mkl_alternate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/util/rng.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/util/signal_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/include/caffe/util/upgrade_proto.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/gtest/gtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/lib/nms/gpu_nms.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/lib/pycocotools/maskApi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rbbox_overlaps.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rotate_gpu_nms.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rotate_polygon_nms.hpp" />
+    <Image Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/images/GitHub-Mark-64px.png" />
+    <Image Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/images/caffeine-icon.png" />
+    <Image Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/tutorial/fig/backward.jpg" />
+    <Image Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/tutorial/fig/forward.jpg" />
+    <Image Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/tutorial/fig/forward_backward.png" />
+    <Image Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/tutorial/fig/layer.jpg" />
+    <Image Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/images/cat.jpg" />
+    <Image Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/images/cat_gray.jpg" />
+    <Image Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/images/fish-bike.jpg" />
+    <Image Include="../../thirdparty/owemdjee/RRPN/data/demo/PICT0005.JPG" />
+    <Image Include="../../thirdparty/owemdjee/RRPN/data/demo/PICT0015.JPG" />
+    <Image Include="../../thirdparty/owemdjee/RRPN/data/demo/PICT0024.JPG" />
+    <Image Include="../../thirdparty/owemdjee/RRPN/data/demo/PICT0026.JPG" />
+    <Image Include="../../thirdparty/owemdjee/RRPN/data/demo/PICT0027.JPG" />
+    <Image Include="../../thirdparty/owemdjee/RRPN/data/demo/Pict0004.jpg" />
+    <Image Include="../../thirdparty/owemdjee/RRPN/data/demo/Pict0011.jpg" />
+    <Image Include="../../thirdparty/owemdjee/RRPN/data/demo/Pict0012.jpg" />
+    <Image Include="../../thirdparty/owemdjee/RRPN/data/demo/Pict0013.jpg" />
+    <Image Include="../../thirdparty/owemdjee/RRPN/data/demo/Pict0021.jpg" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/README.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/CONTRIBUTORS.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/INSTALL.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/README.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/ConfigGen.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/Cuda.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/Dependencies.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/External/gflags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/External/glog.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/Misc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/Modules/FindAtlas.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/Modules/FindGFlags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/Modules/FindGlog.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/Modules/FindLAPACK.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/Modules/FindLMDB.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/Modules/FindLevelDB.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/Modules/FindMKL.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/Modules/FindMatlabMex.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/Modules/FindNumPy.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/Modules/FindOpenBLAS.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/Modules/FindSnappy.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/Modules/FindvecLib.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/ProtoBuf.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/Summary.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/Targets.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/Templates/CaffeConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/Templates/CaffeConfigVersion.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/Templates/caffe_config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/Utils.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/cmake/lint.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/_config.yml" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/_layouts/default.html" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/development.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/index.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/install_apt.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/install_osx.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/install_yum.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/installation.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/model_zoo.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/multigpu.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/performance_hardware.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/stylesheets/pygment_trac.css" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/stylesheets/reset.css" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/stylesheets/styles.css" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/tutorial/convolution.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/tutorial/data.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/tutorial/forward_backward.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/tutorial/index.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/tutorial/interfaces.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/tutorial/layers.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/tutorial/loss.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/tutorial/net_layer_blob.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/docs/tutorial/solver.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/cifar10/cifar10_full.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/cifar10/cifar10_full_sigmoid_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/cifar10/cifar10_full_sigmoid_solver_bn.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/cifar10/cifar10_full_sigmoid_train_test.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/cifar10/cifar10_full_sigmoid_train_test_bn.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/cifar10/cifar10_full_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/cifar10/cifar10_full_solver_lr1.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/cifar10/cifar10_full_solver_lr2.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/cifar10/cifar10_full_train_test.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/cifar10/cifar10_quick.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/cifar10/cifar10_quick_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/cifar10/cifar10_quick_solver_lr1.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/cifar10/cifar10_quick_train_test.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/cifar10/create_cifar10.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/cifar10/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/cifar10/train_full.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/cifar10/train_full_sigmoid.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/cifar10/train_full_sigmoid_bn.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/cifar10/train_quick.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/cpp_classification/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/feature_extraction/imagenet_val.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/feature_extraction/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/finetune_flickr_style/assemble_data.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/finetune_flickr_style/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/finetune_flickr_style/style_names.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/finetune_pascal_detection/pascal_finetune_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/finetune_pascal_detection/pascal_finetune_trainval_test.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/hdf5_classification/nonlinear_auto_test.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/hdf5_classification/nonlinear_auto_train.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/hdf5_classification/nonlinear_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/hdf5_classification/nonlinear_train_val.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/hdf5_classification/solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/hdf5_classification/train_val.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/imagenet/create_imagenet.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/imagenet/make_imagenet_mean.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/imagenet/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/imagenet/resume_training.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/imagenet/train_caffenet.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/create_mnist.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/lenet.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/lenet_adadelta_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/lenet_auto_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/lenet_consolidated_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/lenet_multistep_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/lenet_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/lenet_solver_adam.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/lenet_solver_rmsprop.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/lenet_train_test.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/mnist_autoencoder.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/mnist_autoencoder_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/mnist_autoencoder_solver_adadelta.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/mnist_autoencoder_solver_adagrad.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/mnist_autoencoder_solver_nesterov.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/train_lenet.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/train_lenet_adam.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/train_lenet_consolidated.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/train_lenet_rmsprop.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/train_mnist_autoencoder.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/train_mnist_autoencoder_adadelta.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/train_mnist_autoencoder_adagrad.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/mnist/train_mnist_autoencoder_nesterov.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/net_surgery/bvlc_caffenet_full_conv.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/net_surgery/conv.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/pycaffe/caffenet.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/pycaffe/layers/pyloss.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/pycaffe/linreg.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/siamese/create_mnist_siamese.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/siamese/mnist_siamese.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/siamese/mnist_siamese_solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/siamese/mnist_siamese_train_test.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/siamese/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/siamese/train_mnist_siamese.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/web_demo/app.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/web_demo/exifutil.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/web_demo/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/web_demo/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/examples/web_demo/templates/index.html" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/matlab/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/python/caffe/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/python/caffe/classifier.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/python/caffe/detector.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/python/caffe/draw.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/python/caffe/imagenet/ilsvrc_2012_mean.npy" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/python/caffe/io.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/python/caffe/net_spec.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/python/caffe/pycaffe.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/python/caffe/test/test_io.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/python/caffe/test/test_layer_type_list.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/python/caffe/test/test_net.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/python/caffe/test/test_net_spec.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/python/caffe/test/test_python_layer.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/python/caffe/test/test_python_layer_with_param_str.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/python/caffe/test/test_solver.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/python/classify.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/python/detect.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/python/draw_net.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/python/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/scripts/build_docs.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/scripts/copy_notebook.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/scripts/cpp_lint.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/scripts/deploy_docs.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/scripts/download_model_binary.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/scripts/download_model_from_gist.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/scripts/gather_examples.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/scripts/travis/travis_build_and_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/scripts/travis/travis_install.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/scripts/travis/travis_setup_makefile_config.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/scripts/upload_model_to_gist.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_data/generate_sample_data.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_data/sample_data_list.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/caffe/test/test_data/solver_data_list.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/src/gtest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/tools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/tools/extra/extract_seconds.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/tools/extra/launch_resize_and_crop_images.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/tools/extra/parse_log.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/tools/extra/parse_log.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/tools/extra/resize_and_crop_images.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/caffe-fast-rcnn/tools/extra/summarize.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/README.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_10.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_100.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_101.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_102.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_103.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_104.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_105.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_106.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_107.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_108.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_109.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_11.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_110.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_111.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_112.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_113.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_114.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_115.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_116.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_117.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_118.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_119.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_12.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_120.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_121.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_122.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_123.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_124.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_125.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_126.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_127.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_128.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_129.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_13.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_130.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_131.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_132.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_133.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_134.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_135.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_136.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_137.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_138.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_139.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_14.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_140.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_141.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_142.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_143.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_144.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_145.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_146.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_147.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_148.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_149.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_15.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_150.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_151.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_152.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_153.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_154.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_155.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_156.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_157.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_158.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_159.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_16.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_160.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_161.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_162.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_163.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_164.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_165.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_166.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_167.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_168.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_169.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_17.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_170.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_171.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_172.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_173.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_174.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_175.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_176.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_177.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_178.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_179.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_18.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_180.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_181.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_182.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_183.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_184.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_185.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_186.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_187.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_188.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_189.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_19.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_190.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_191.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_192.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_193.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_194.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_195.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_196.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_197.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_198.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_199.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_2.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_20.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_200.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_201.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_202.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_203.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_204.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_205.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_206.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_207.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_208.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_209.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_21.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_210.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_211.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_212.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_213.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_214.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_215.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_216.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_217.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_218.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_219.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_22.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_220.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_221.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_222.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_223.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_224.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_225.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_226.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_227.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_228.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_229.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_23.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_230.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_231.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_232.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_233.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_234.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_235.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_236.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_237.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_238.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_239.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_24.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_240.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_241.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_242.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_243.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_244.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_245.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_246.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_247.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_248.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_249.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_25.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_250.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_251.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_252.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_253.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_254.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_255.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_256.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_257.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_258.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_259.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_26.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_260.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_261.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_262.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_263.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_264.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_265.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_266.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_267.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_268.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_269.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_27.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_270.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_271.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_272.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_273.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_274.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_275.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_276.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_277.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_278.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_279.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_28.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_280.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_281.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_282.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_283.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_284.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_285.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_286.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_287.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_288.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_289.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_29.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_290.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_291.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_292.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_293.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_294.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_295.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_296.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_297.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_298.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_299.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_3.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_30.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_300.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_301.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_302.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_303.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_304.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_305.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_306.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_307.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_308.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_309.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_31.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_310.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_311.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_312.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_313.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_314.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_315.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_316.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_317.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_318.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_319.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_32.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_320.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_321.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_322.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_323.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_324.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_325.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_326.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_327.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_328.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_329.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_33.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_330.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_331.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_332.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_333.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_334.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_335.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_336.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_337.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_338.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_339.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_34.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_340.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_341.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_342.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_343.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_344.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_345.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_346.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_347.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_348.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_349.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_35.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_350.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_351.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_352.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_353.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_354.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_355.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_356.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_357.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_358.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_359.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_36.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_360.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_361.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_362.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_363.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_364.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_365.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_366.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_367.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_368.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_369.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_37.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_370.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_371.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_372.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_373.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_374.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_375.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_376.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_377.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_378.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_379.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_38.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_380.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_381.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_382.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_383.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_384.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_385.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_386.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_387.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_388.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_389.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_39.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_390.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_391.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_392.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_393.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_394.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_395.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_396.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_397.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_398.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_399.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_4.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_40.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_400.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_401.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_402.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_403.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_404.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_405.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_406.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_407.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_408.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_409.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_41.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_410.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_411.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_412.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_413.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_414.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_415.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_416.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_417.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_418.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_419.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_42.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_420.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_421.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_422.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_423.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_424.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_425.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_426.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_427.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_428.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_429.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_43.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_430.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_431.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_432.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_433.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_434.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_435.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_436.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_437.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_438.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_439.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_44.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_440.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_441.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_442.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_443.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_444.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_445.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_446.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_447.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_448.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_449.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_45.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_450.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_451.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_452.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_453.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_454.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_455.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_456.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_457.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_458.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_459.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_46.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_460.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_461.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_462.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_463.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_464.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_465.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_466.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_467.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_468.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_469.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_47.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_470.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_471.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_472.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_473.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_474.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_475.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_476.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_477.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_478.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_479.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_48.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_480.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_481.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_482.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_483.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_484.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_485.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_486.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_487.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_488.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_489.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_49.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_490.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_491.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_492.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_493.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_494.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_495.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_496.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_497.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_498.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_499.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_5.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_50.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_500.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_51.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_52.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_53.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_54.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_55.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_56.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_57.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_58.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_59.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_6.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_60.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_61.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_62.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_63.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_64.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_65.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_66.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_67.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_68.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_69.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_7.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_70.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_71.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_72.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_73.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_74.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_75.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_76.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_77.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_78.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_79.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_8.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_80.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_81.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_82.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_83.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_84.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_85.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_86.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_87.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_88.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_89.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_9.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_90.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_91.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_92.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_93.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_94.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_95.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_96.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_97.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_98.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/Challenge4_Test_Task1_GT/gt_img_99.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/results_txt/res_img_203.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/results_txt/res_img_289.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/results_txt/res_img_296.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/results_txt/res_img_299.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/results_txt/res_img_360.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/results_txt/res_img_366.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/results_txt/res_img_395.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/results_txt/res_img_41.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/results_txt/res_img_451.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/dataset/ICDAR_2015/results_txt/res_img_89.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/scripts/fetch_faster_rcnn_models.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/scripts/fetch_imagenet_models.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/data/scripts/fetch_selective_search_data.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/experiments/README.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/experiments/cfgs/faster_rcnn_alt_opt.yml" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/experiments/cfgs/faster_rcnn_end2end.yml" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/experiments/scripts/fast_rcnn.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/experiments/scripts/faster_rcnn_alt_opt.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/experiments/scripts/faster_rcnn_end2end.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/datasets/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/datasets/__init__.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/datasets/coco.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/datasets/coco.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/datasets/ds_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/datasets/ds_utils.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/datasets/factory.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/datasets/factory.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/datasets/imdb.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/datasets/imdb.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/datasets/pascal_voc.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/datasets/pascal_voc.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/datasets/tools/mcg_munge.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/datasets/voc_eval.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/datasets/voc_eval.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/fast_rcnn/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/fast_rcnn/__init__.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/fast_rcnn/bbox_transform.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/fast_rcnn/bbox_transform.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/fast_rcnn/config.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/fast_rcnn/config.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/fast_rcnn/nms_wrapper.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/fast_rcnn/nms_wrapper.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/fast_rcnn/test.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/fast_rcnn/test.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/fast_rcnn/train.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/nms/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/nms/__init__.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/nms/cpu_nms.pyx" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/nms/gpu_nms.pyx" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/nms/py_cpu_nms.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/pycocotools/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/pycocotools/__init__.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/pycocotools/_mask.pyx" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/pycocotools/coco.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/pycocotools/coco.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/pycocotools/cocoeval.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/pycocotools/cocoeval.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/pycocotools/license.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/pycocotools/mask.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/pycocotools/mask.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/roi_data_layer/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/roi_data_layer/__init__.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/roi_data_layer/layer.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/roi_data_layer/layer.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/roi_data_layer/minibatch.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/roi_data_layer/minibatch.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/roi_data_layer/roidb.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/__init__.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/anchor_target_layer.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/anchor_target_layer.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/data_extractor.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/data_extractor.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/data_pick.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/data_pick.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/generate_anchors.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/generate_anchors.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/inside_judge.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/inside_judge.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/merge_box.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/merge_box.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/nms_test.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/picked_rois.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/r_minibatch.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/r_minibatch.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/r_roidb.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/r_roidb.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rbbox.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rbbox.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rbbox_overlaps.pyx" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rbbox_transform.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rbbox_transform.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rlayer.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rlayer.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rotate_circle_nms.pyx" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rotate_cpu_nms.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rotate_cpu_nms.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rotate_cpython_nms.pyx" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rotate_cython_nms.pyx" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rotate_gpu_nms.pyx" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rotate_polygon_nms.pyx" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rotation_test.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rproposal_layer.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rproposal_layer.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rproposal_target_layer.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rproposal_target_layer.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rt_test.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rt_test.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rt_test_crop.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rt_test_crop.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rt_train.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/rt_train.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/test.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rotation/test_IoU.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rpn/README.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rpn/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rpn/__init__.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rpn/anchor_target_layer.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rpn/anchor_target_layer.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rpn/generate.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rpn/generate_anchors.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rpn/generate_anchors.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rpn/proposal_layer.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rpn/proposal_layer.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rpn/proposal_target_layer.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/rpn/proposal_target_layer.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/transform/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/transform/torch_image_transform_layer.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/utils/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/utils/__init__.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/utils/bbox.pyx" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/utils/blob.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/utils/blob.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/utils/timer.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/lib/utils/timer.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/README.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/coco/VGG16/fast_rcnn/solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/coco/VGG16/fast_rcnn/test.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/coco/VGG16/fast_rcnn/train.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/coco/VGG16/faster_rcnn_end2end/solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/coco/VGG16/faster_rcnn_end2end/test.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/coco/VGG16/faster_rcnn_end2end/train.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/coco/VGG_CNN_M_1024/fast_rcnn/solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/coco/VGG_CNN_M_1024/fast_rcnn/test.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/coco/VGG_CNN_M_1024/fast_rcnn/train.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/coco/VGG_CNN_M_1024/faster_rcnn_end2end/solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/coco/VGG_CNN_M_1024/faster_rcnn_end2end/test.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/coco/VGG_CNN_M_1024/faster_rcnn_end2end/train.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/pascal_voc/VGG16/fast_rcnn/solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/pascal_voc/VGG16/fast_rcnn/test.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/pascal_voc/VGG16/fast_rcnn/train.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/pascal_voc/VGG16/faster_rcnn_end2end/solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/pascal_voc/VGG16/faster_rcnn_end2end/test.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/pascal_voc/VGG16/faster_rcnn_end2end/train.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/pascal_voc/VGG_CNN_M_1024/fast_rcnn/solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/pascal_voc/VGG_CNN_M_1024/fast_rcnn/test.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/pascal_voc/VGG_CNN_M_1024/fast_rcnn/train.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/pascal_voc/VGG_CNN_M_1024/faster_rcnn_end2end/solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/pascal_voc/VGG_CNN_M_1024/faster_rcnn_end2end/test.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/pascal_voc/VGG_CNN_M_1024/faster_rcnn_end2end/train.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/pascal_voc/ZF/fast_rcnn/solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/pascal_voc/ZF/fast_rcnn/test.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/pascal_voc/ZF/fast_rcnn/train.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/pascal_voc/ZF/faster_rcnn_end2end/solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/pascal_voc/ZF/faster_rcnn_end2end/test.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/pascal_voc/ZF/faster_rcnn_end2end/train.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/rrpn/RES101/faster_rcnn_end2end/solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/rrpn/RES101/faster_rcnn_end2end/solver_imagenet_aug_exp1.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/rrpn/RES101/faster_rcnn_end2end/solver_imagenet_aug_hardsample.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/rrpn/RES101/faster_rcnn_end2end/solver_imagenet_normal_exp1.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/rrpn/RES101/faster_rcnn_end2end/solver_imagenet_normal_hardsample.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/rrpn/RES101/faster_rcnn_end2end/test.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/rrpn/RES101/faster_rcnn_end2end/train.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/rrpn/RES101/faster_rcnn_end2end/train_hardsample.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/rrpn/VGG16/fast_rcnn/solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/rrpn/VGG16/fast_rcnn/test.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/rrpn/VGG16/fast_rcnn/train.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/rrpn/VGG16/faster_rcnn_end2end/solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/rrpn/VGG16/faster_rcnn_end2end/test.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/rrpn/VGG16/faster_rcnn_end2end/train.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/rrpn/ZF/faster_rcnn_end2end/solver.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/rrpn/ZF/faster_rcnn_end2end/test.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/models/rrpn/ZF/faster_rcnn_end2end/train.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/result/res_PICT0005.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/result/res_PICT0015.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/result/res_PICT0024.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/result/res_PICT0026.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/result/res_PICT0027.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/result/res_Pict0004.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/result/res_Pict0011.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/result/res_Pict0012.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/result/res_Pict0013.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/result/res_Pict0021.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/tools/README.md" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/tools/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/tools/__init__.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/tools/_init_paths.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/tools/_init_paths.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/tools/compress_net.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/tools/demo.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/tools/eval_recall.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/tools/joint_test.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/tools/rctw_multiscale_test_net.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/tools/reval.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/tools/rotation_demo.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/tools/rotation_demo.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/tools/rpn_generate.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/tools/rrpn_test_api.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/tools/service_demo.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/tools/service_demo.pyc" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/tools/test_net.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/tools/test_net_new.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/tools/train_faster_rcnn_alt_opt.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/tools/train_net.py" />
+    <Text Include="../../thirdparty/owemdjee/RRPN/tools/train_svms.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

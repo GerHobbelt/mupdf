@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>librgf</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFFC57B4}</ProjectGuid>
+    <RootNamespace>librgf</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRGF;RGF_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRGF;RGF_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRGF;RGF_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRGF;RGF_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRGF;RGF_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRGF;RGF_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRGF;RGF_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRGF;RGF_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRGF;RGF_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRGF;RGF_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRGF;RGF_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRGF;RGF_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/FastRGF/src/base/classifier.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/FastRGF/src/base/data.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/FastRGF/src/base/discretization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/FastRGF/src/base/utils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/FastRGF/src/exe/auc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/FastRGF/src/exe/discretized_gendata.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/FastRGF/src/exe/discretized_trainer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/FastRGF/src/exe/forest_predict.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/FastRGF/src/exe/forest_train.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/FastRGF/src/forest/dtree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/FastRGF/src/forest/dtree_trainer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/FastRGF/src/forest/forest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzDmat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzIntPool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzLoss.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzParam.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzSmat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzStrPool.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzSvDataS.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzTaskTools.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzTools.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzUtil.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzFindSplit.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzOptOnTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzOptOnTree_TreeReg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzReg_TsrOpt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzReg_TsrSib.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzReg_Tsrbase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzRgfTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzRgf_FindSplit_Dflt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzRgf_FindSplit_TreeReg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzRgf_Optimizer_Dflt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzRgforest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzSortedFeat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTETmain.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTETproc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTrTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTrTreeFeat.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTree.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTreeEnsemble.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/driv_rgf.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/FastRGF/include/classifier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/FastRGF/include/data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/FastRGF/include/discretization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/FastRGF/include/dtree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/FastRGF/include/forest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/FastRGF/include/header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/FastRGF/include/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/FastRGF/src/exe/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/FastRGF/src/exe/test_output.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/FastRGF/src/forest/feature_mapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/FastRGF/src/forest/forest_trainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/FastRGF/src/forest/node_trainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/FastRGF/src/forest/training_target.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzBmat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzDmat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzException.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzHelp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzIntPool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzLoss.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzMemTempl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzOut.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzParam.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzPerfResult.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzPrint.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzReadOnlyMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzSmat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzStrArray.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzStrPool.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzSvDataS.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzSvFeatInfo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzSvFeatInfoClone.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzTaskTools.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzTimer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzTools.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/com/AzUtil.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzDataForTrTree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzFindSplit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzFsinfo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzOptOnTree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzOptOnTree_TreeReg.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzOptimizerT.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzRegDepth.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzReg_TreeReg.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzReg_TreeRegArr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzReg_TreeRegArrImp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzReg_TsrOpt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzReg_TsrSib.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzReg_Tsrbase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzRgfTrainerSel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzRgfTree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzRgfTreeEnsImp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzRgfTreeEnsemble.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzRgf_FindSplit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzRgf_FindSplit_Dflt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzRgf_FindSplit_TreeReg.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzRgf_Optimizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzRgf_Optimizer_Dflt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzRgf_Optimizer_TreeReg.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzRgf_kw.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzRgforest.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzRgforest_TreeReg.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzSortedFeat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTET_Eval.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTET_Eval_Dflt.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTETmain.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTETmain_kw.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTETproc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTETrainer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTETselector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTE_ModelInfo.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTrTree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTrTreeEnsemble.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTrTreeEnsemble_ReadOnly.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTrTreeFeat.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTrTreeNode.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTrTree_ReadOnly.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTrTsplit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTrTtarget.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTree.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTreeEnsemble.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTreeNodes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/rgf/RGF/src/tet/AzTreeRule.hpp" />
+    <Text Include="../../thirdparty/owemdjee/rgf/AWESOME_RGF.md" />
+    <Text Include="../../thirdparty/owemdjee/rgf/FastRGF/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/rgf/FastRGF/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rgf/FastRGF/README.md" />
+    <Text Include="../../thirdparty/owemdjee/rgf/FastRGF/examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/rgf/FastRGF/examples/binary_classification/README.md" />
+    <Text Include="../../thirdparty/owemdjee/rgf/FastRGF/examples/binary_classification/inputs/madelon.train" />
+    <Text Include="../../thirdparty/owemdjee/rgf/FastRGF/examples/binary_classification/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/rgf/FastRGF/examples/regression/README.md" />
+    <Text Include="../../thirdparty/owemdjee/rgf/FastRGF/examples/regression/inputs/feature.names" />
+    <Text Include="../../thirdparty/owemdjee/rgf/FastRGF/examples/regression/inputs/housing.train" />
+    <Text Include="../../thirdparty/owemdjee/rgf/FastRGF/examples/regression/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/rgf/FastRGF/src/base/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rgf/FastRGF/src/exe/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rgf/FastRGF/src/forest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rgf/R-package/NEWS.md" />
+    <Text Include="../../thirdparty/owemdjee/rgf/R-package/README.md" />
+    <Text Include="../../thirdparty/owemdjee/rgf/R-package/vignettes/the_RGF_package.Rmd" />
+    <Text Include="../../thirdparty/owemdjee/rgf/README.md" />
+    <Text Include="../../thirdparty/owemdjee/rgf/RGF/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/rgf/RGF/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/rgf/RGF/README.md" />
+    <Text Include="../../thirdparty/owemdjee/rgf/RGF/examples/call_exe.pl" />
+    <Text Include="../../thirdparty/owemdjee/rgf/RGF/examples/sample/regress.test.x" />
+    <Text Include="../../thirdparty/owemdjee/rgf/RGF/examples/sample/regress.test.y" />
+    <Text Include="../../thirdparty/owemdjee/rgf/RGF/examples/sample/regress.train.x" />
+    <Text Include="../../thirdparty/owemdjee/rgf/RGF/examples/sample/regress.train.y" />
+    <Text Include="../../thirdparty/owemdjee/rgf/RGF/examples/sample/test.data.x" />
+    <Text Include="../../thirdparty/owemdjee/rgf/RGF/examples/sample/test.data.y" />
+    <Text Include="../../thirdparty/owemdjee/rgf/RGF/examples/sample/train.data.sparse.x" />
+    <Text Include="../../thirdparty/owemdjee/rgf/RGF/examples/sample/train.data.x" />
+    <Text Include="../../thirdparty/owemdjee/rgf/RGF/examples/sample/train.data.y" />
+    <Text Include="../../thirdparty/owemdjee/rgf/RGF/rgf-guide.rst" />
+    <Text Include="../../thirdparty/owemdjee/rgf/codecov.yml" />
+    <Text Include="../../thirdparty/owemdjee/rgf/python-package/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/rgf/python-package/Readme.rst" />
+    <Text Include="../../thirdparty/owemdjee/rgf/python-package/examples/FastRGF/FastRGF_classifier_on_iris_dataset.py" />
+    <Text Include="../../thirdparty/owemdjee/rgf/python-package/examples/FastRGF/FastRGF_regressor_on_boston_dataset.py" />
+    <Text Include="../../thirdparty/owemdjee/rgf/python-package/examples/RGF/comparison_RGF_and_GBM_classifiers_on_iris_dataset.py" />
+    <Text Include="../../thirdparty/owemdjee/rgf/python-package/examples/RGF/comparison_RGF_and_RF_regressors_on_diabetes_dataset.py" />
+    <Text Include="../../thirdparty/owemdjee/rgf/python-package/rgf/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/rgf/python-package/rgf/fastrgf_model.py" />
+    <Text Include="../../thirdparty/owemdjee/rgf/python-package/rgf/rgf_model.py" />
+    <Text Include="../../thirdparty/owemdjee/rgf/python-package/rgf/sklearn.py" />
+    <Text Include="../../thirdparty/owemdjee/rgf/python-package/rgf/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/rgf/python-package/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/rgf/python-package/tests/test_examples.py" />
+    <Text Include="../../thirdparty/owemdjee/rgf/python-package/tests/test_rgf_python.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

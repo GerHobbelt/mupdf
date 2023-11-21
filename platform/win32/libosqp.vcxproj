@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libosqp</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF214652}</ProjectGuid>
+    <RootNamespace>libosqp</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOSQP;OSQP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOSQP;OSQP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOSQP;OSQP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOSQP;OSQP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOSQP;OSQP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOSQP;OSQP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOSQP;OSQP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOSQP;OSQP_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOSQP;OSQP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOSQP;OSQP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOSQP;OSQP_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOSQP;OSQP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/_common/csc_math.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/_common/csc_utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/_common/kkt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/_common/lin_sys/qdldl/amd/src/SuiteSparse_config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/_common/lin_sys/qdldl/amd/src/amd_1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/_common/lin_sys/qdldl/amd/src/amd_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/_common/lin_sys/qdldl/amd/src/amd_aat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/_common/lin_sys/qdldl/amd/src/amd_control.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/_common/lin_sys/qdldl/amd/src/amd_defaults.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/_common/lin_sys/qdldl/amd/src/amd_info.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/_common/lin_sys/qdldl/amd/src/amd_order.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/_common/lin_sys/qdldl/amd/src/amd_post_tree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/_common/lin_sys/qdldl/amd/src/amd_postorder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/_common/lin_sys/qdldl/amd/src/amd_preprocess.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/_common/lin_sys/qdldl/amd/src/amd_valid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/_common/lin_sys/qdldl/qdldl_interface.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/_common/reduced_kkt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/builtin/algebra_libs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/builtin/matrix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/builtin/vector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/mkl/algebra_libs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/mkl/lin_sys/direct/pardiso_interface.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/mkl/lin_sys/indirect/mkl-cg_interface.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/mkl/matrix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/algebra/mkl/vector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/examples/osqp_codegen_demo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/examples/osqp_demo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/src/auxil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/src/codegen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/src/derivative.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/src/error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/src/interrupt_matlab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/src/interrupt_unix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/src/interrupt_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/src/osqp_api.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/src/polish.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/src/scaling.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/src/timing_linux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/src/timing_macos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/src/timing_windows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/src/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/basic_lp/test_basic_lp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/basic_qp/test_basic_qp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/basic_qp2/test_basic_qp2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/codegen/compilation_test/embedded_mode1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/codegen/compilation_test/embedded_mode2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/codegen/matrix/mat_codegen_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/codegen/matrix/mat_codegen_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/codegen/test_codegen.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/codegen/vector/vec_codegen_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/codegen/vector/vec_codegen_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/custom_memory/custom_memory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/custom_printing/custom_printing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/demo/test_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/large_qp/large_qp_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/large_qp/test_large_qp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/lin_alg/lin_alg_tester.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/lin_alg/test_mat_vec.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/lin_alg/test_matrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/lin_alg/testcases/test_vector_comparisons.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/lin_alg/testcases/test_vector_creation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/lin_alg/testcases/test_vector_math_ops.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/no_active_set/test_no_active_set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/non_cvx/test_non_cvx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/osqp_tester.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/primal_dual_infeasibility/test_primal_dual_infeasibility.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/primal_infeasibility/test_primal_infeasibility.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/unconstrained/test_unconstrained.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/update_matrices/test_update_matrices.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/osqp/tests/utils/test_utils.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/_common/csc_math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/_common/csc_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/_common/kkt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/_common/lin_sys/qdldl/amd/include/SuiteSparse_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/_common/lin_sys/qdldl/amd/include/amd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/_common/lin_sys/qdldl/amd/include/amd_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/_common/lin_sys/qdldl/qdldl_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/_common/reduced_kkt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/builtin/algebra_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/cuda/algebra_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/cuda/include/csr_type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/cuda/include/cuda_configure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/cuda/include/cuda_csr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/cuda/include/cuda_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/cuda/include/cuda_lin_alg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/cuda/include/cuda_malloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/cuda/include/cuda_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/cuda/include/helper_cuda.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/cuda/include/helper_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/cuda/lin_sys/indirect/cuda_pcg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/cuda/lin_sys/indirect/cuda_pcg_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/mkl/algebra_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/mkl/blas_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/mkl/lin_sys/direct/pardiso_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/algebra/mkl/lin_sys/indirect/mkl-cg_interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/include/private/algebra_matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/include/private/algebra_vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/include/private/auxil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/include/private/codegen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/include/private/derivative.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/include/private/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/include/private/glob_opts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/include/private/interrupt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/include/private/lin_alg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/include/private/polish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/include/private/printing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/include/private/scaling.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/include/private/timing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/include/private/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/include/private/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/include/private/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/include/public/osqp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/include/public/osqp_api_constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/include/public/osqp_api_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/include/public/osqp_api_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/include/public/osqp_api_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/include/public/osqp_export_define.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/tests/custom_memory/custom_memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/tests/custom_printing/custom_printing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/tests/large_qp/large_qp_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/tests/lin_alg/test_lin_alg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/tests/osqp_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/tests/osqp_tester.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/tests/solve_linsys/test_solve_linsys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/osqp/tests/utils/test_utils.h" />
+    <Image Include="../../thirdparty/owemdjee/osqp/docs/_static/img/favicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/osqp/docs/_static/img/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/benchmarks/performance_profiles.jpg" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/credits/alberto_bemporad.jpg" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/credits/bartolomeo_stellato.jpg" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/credits/goran_banjac.jpg" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/credits/ian_mcinerney.jpg" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/credits/john_lygeros.jpg" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/credits/michel_schubiger.jpg" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/credits/nicholas_moehle.jpg" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/credits/paul_goulart.jpg" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/credits/stephen_boyd.jpg" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/credits/vineet_bansal.jpg" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/favicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/home_header.jpg" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/oxford_rectangle.png" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/users/MIT.jpg" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/users/aptiv.png" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/users/berkeley.jpg" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/users/blackrock.jpg" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/users/eth.jpg" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/users/google.jpg" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/users/iit.png" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/users/kuleuven.png" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/users/linkedin.jpg" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/users/los_alamos.png" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/users/lund.jpg" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/users/lyft.png" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/users/macquarie.jpg" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/users/nyu.jpg" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/users/seervision.png" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/users/siemens.png" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/users/stanford.png" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/users/stuttgart.png" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/users/toyota.jpg" />
+    <Image Include="../../thirdparty/owemdjee/osqp/site/assets/images/users/ucdavis.png" />
+    <Text Include="../../thirdparty/owemdjee/osqp/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/osqp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/osqp/algebra/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/algebra/_common/lin_sys/qdldl/qdldl.cmake" />
+    <Text Include="../../thirdparty/owemdjee/osqp/algebra/_common/lin_sys/qdldl/qdldl_codegen_types.h.in" />
+    <Text Include="../../thirdparty/owemdjee/osqp/algebra/builtin/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/algebra/cuda/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/algebra/mkl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/configure/cmake/FindR.cmake" />
+    <Text Include="../../thirdparty/owemdjee/osqp/configure/cmake/MKLConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/osqp/configure/cmake/MKLConfigVersion.cmake" />
+    <Text Include="../../thirdparty/owemdjee/osqp/configure/cmake/Utils.cmake" />
+    <Text Include="../../thirdparty/owemdjee/osqp/configure/cmake/cmake_uninstall.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/osqp/configure/osqp-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/osqp/configure/osqp_configure.h.in" />
+    <Text Include="../../thirdparty/owemdjee/osqp/configure/version.h.in" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/_static/css/osqp_theme.css" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/_static/img/logo.pdf" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/_templates/layout.html" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/citing/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/codegen/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/codegen/matlab.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/codegen/python.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/contributing/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/contributing/python.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/contributing/solvers.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/doxygen.conf" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/examples/huber.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/examples/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/examples/lasso.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/examples/least-squares.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/examples/mpc.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/examples/portfolio.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/examples/setup-and-solve.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/examples/svm.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/examples/update-matrices.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/examples/update-vectors.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/get_started/C.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/get_started/cutest.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/get_started/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/get_started/julia.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/get_started/linear_system_solvers.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/get_started/matlab.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/get_started/python.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/get_started/r.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/get_started/sources.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/interfaces/C.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/interfaces/cutest.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/interfaces/eigen_google.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/interfaces/eigen_robotology.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/interfaces/fortran.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/interfaces/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/interfaces/julia.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/interfaces/linear_systems_solvers.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/interfaces/matlab.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/interfaces/python.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/interfaces/rlang.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/interfaces/ruby.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/interfaces/rust.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/interfaces/solver_settings.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/interfaces/status_values.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/parsers/cvxpy.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/parsers/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/parsers/jump.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/parsers/yalmip.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/docs/solver/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/osqp/include/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/README.md" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_config.yml" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_data/credits.yml" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_data/features.yml" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_data/users.yml" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_includes/footer.html" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_includes/google-analytics.html" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_includes/head.html" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_includes/js.html" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_includes/navbar.html" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_layouts/default.html" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_layouts/home.html" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_layouts/page.html" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_pages/404.md" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_pages/citing.md" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_pages/index.md" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/_bootstrap-grid.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/_bootstrap-reboot.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/_bootstrap.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_alert.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_badge.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_breadcrumb.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_button-group.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_buttons.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_card.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_carousel.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_close.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_code.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_custom-forms.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_dropdown.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_forms.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_functions.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_grid.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_images.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_input-group.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_jumbotron.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_list-group.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_media.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_mixins.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_modal.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_nav.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_navbar.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_pagination.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_popover.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_print.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_progress.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_reboot.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_root.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_tables.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_tooltip.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_transitions.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_type.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_utilities.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/_variables.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_alert.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_background-variant.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_badge.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_border-radius.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_box-shadow.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_breakpoints.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_buttons.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_caret.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_clearfix.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_float.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_forms.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_gradients.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_grid-framework.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_grid.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_hover.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_image.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_list-group.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_lists.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_nav-divider.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_pagination.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_reset-text.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_resize.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_screen-reader.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_size.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_table-row.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_text-emphasis.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_text-hide.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_text-truncate.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_transition.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/mixins/_visibility.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/utilities/_align.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/utilities/_background.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/utilities/_borders.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/utilities/_clearfix.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/utilities/_display.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/utilities/_embed.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/utilities/_flex.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/utilities/_float.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/utilities/_position.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/utilities/_screenreaders.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/utilities/_shadows.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/utilities/_sizing.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/utilities/_spacing.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/utilities/_text.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/bootstrap/utilities/_visibility.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/osqp.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/osqp/_base.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/osqp/_highlight.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/osqp/_layout.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/_sass/osqp/_variables.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/site/assets/css/osqp.scss" />
+    <Text Include="../../thirdparty/owemdjee/osqp/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/CMakeInstallTests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/README.md" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/basic_lp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/basic_lp/generate_problem.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/basic_qp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/basic_qp/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/basic_qp/generate_problem.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/basic_qp2/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/basic_qp2/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/basic_qp2/generate_problem.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/codegen/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/codegen/compilation_test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/codegen/generate_problem.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/codegen/matrix/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/codegen/vector/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/custom_memory/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/custom_printing/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/demo/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/generate_tests_data.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/large_qp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/lin_alg/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/lin_alg/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/lin_alg/generate_problem.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/no_active_set/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/no_active_set/generate_problem.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/non_cvx/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/non_cvx/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/non_cvx/generate_problem.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/primal_dual_infeasibility/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/primal_dual_infeasibility/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/primal_dual_infeasibility/generate_problem.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/primal_infeasibility/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/primal_infeasibility/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/primal_infeasibility/generate_problem.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/solve_linsys/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/solve_linsys/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/solve_linsys/generate_problem.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/unconstrained/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/unconstrained/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/unconstrained/generate_problem.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/update_matrices/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/update_matrices/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/update_matrices/generate_problem.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/utils/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/osqp/tests/utils/codegen_utils.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

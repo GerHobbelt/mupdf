@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libSophus</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF70A1E7}</ProjectGuid>
+    <RootNamespace>libSophus</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSOPHUS;SOPHUS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSOPHUS;SOPHUS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSOPHUS;SOPHUS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSOPHUS;SOPHUS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSOPHUS;SOPHUS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSOPHUS;SOPHUS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSOPHUS;SOPHUS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSOPHUS;SOPHUS_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSOPHUS;SOPHUS_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSOPHUS;SOPHUS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSOPHUS;SOPHUS_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSOPHUS;SOPHUS_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/examples/HelloSO3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/sophus/example_ensure_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/sophus_pybind/bindings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/sympy/cpp_gencode/Se2_Dx_exp_x.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/sympy/cpp_gencode/Se2_Dx_log_this.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/sympy/cpp_gencode/Se2_Dx_this_mul_exp_x_at_0.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/sympy/cpp_gencode/Se3_Dx_exp_x.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/sympy/cpp_gencode/Se3_Dx_log_this.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/sympy/cpp_gencode/Se3_Dx_this_mul_exp_x_at_0.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/sympy/cpp_gencode/So2_Dx_exp_x.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/sympy/cpp_gencode/So2_Dx_log_exp_x_times_this_at_0.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/sympy/cpp_gencode/So2_Dx_log_this.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/sympy/cpp_gencode/So2_Dx_this_mul_exp_x_at_0.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/sympy/cpp_gencode/So3_Dx_exp_x.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/sympy/cpp_gencode/So3_Dx_log_exp_x_times_this_at_0.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/sympy/cpp_gencode/So3_Dx_log_this.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/sympy/cpp_gencode/So3_Dx_this_mul_exp_x_at_0.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/test/ceres/test_ceres_rxso2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/test/ceres/test_ceres_rxso3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/test/ceres/test_ceres_se2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/test/ceres/test_ceres_se3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/test/ceres/test_ceres_sim2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/test/ceres/test_ceres_sim3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/test/ceres/test_ceres_so2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/test/ceres/test_ceres_so3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/test/core/test_cartesian2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/test/core/test_cartesian3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/test/core/test_common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/test/core/test_geometry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/test/core/test_rxso2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/test/core/test_rxso3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/test/core/test_se2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/test/core/test_se3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/test/core/test_sim2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/test/core/test_sim3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/test/core/test_so2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/test/core/test_so3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Sophus/test/core/test_velocities.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/average.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/cartesian.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/ceres_local_parameterization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/ceres_manifold.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/ceres_typetraits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/geometry.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/interpolate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/interpolate_details.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/num_diff.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/rotation_matrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/rxso2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/rxso3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/se2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/se3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/sim2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/sim3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/sim_details.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/so2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/so3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/spline.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/test_macros.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus/velocities.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus_pybind/SE3PyBind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus_pybind/SO3PyBind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/sophus_pybind/SophusPyBind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/test/ceres/tests.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Sophus/test/core/tests.hpp" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/SophusConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/cmake_modules/FindEigen3.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/doxyrest-config.lua" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/generate_stubs.py" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/make_docs.sh" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/rst-dir/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/rst-dir/page_index.rst" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/rst-dir/pysophus.rst" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/run_format.sh" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/scripts/install_docs_deps.sh" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/scripts/install_linux_deps.sh" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/scripts/install_linux_fmt_deps.sh" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/scripts/install_osx_deps.sh" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/scripts/run_cpp_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/sophus_pybind/README" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/sophus_pybind/tests/sophusPybindTests.py" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/sympy/run_tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/sympy/sophus/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/sympy/sophus/complex.py" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/sympy/sophus/cse_codegen.py" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/sympy/sophus/dual_quaternion.py" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/sympy/sophus/matrix.py" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/sympy/sophus/quaternion.py" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/sympy/sophus/se2.py" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/sympy/sophus/se3.py" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/sympy/sophus/so2.py" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/sympy/sophus/so3.py" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/test/ceres/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Sophus/test/core/CMakeLists.txt" />
+    <Xml Include="../../thirdparty/owemdjee/Sophus/package.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

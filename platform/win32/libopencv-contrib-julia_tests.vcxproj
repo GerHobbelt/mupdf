@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libopencv-contrib-julia_tests</ProjectName>
+    <ProjectGuid>{B98D7577-C1B1-431F-8586-2A06EA6FC2DA}</ProjectGuid>
+    <RootNamespace>libopencv-contrib-julia_tests</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5054;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_JULIA;OPENCV_CONTRIB_JULIA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/OpenCV;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/stitching;../../thirdparty/owemdjee/opencv/include;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/ts/include/;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../scripts/OpenCV/modules/imgproc;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include;../../thirdparty/owemdjee/caffe/include;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_JULIA;OPENCV_CONTRIB_JULIA_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_JULIA;OPENCV_CONTRIB_JULIA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/OpenCV;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/stitching;../../thirdparty/owemdjee/opencv/include;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/ts/include/;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../scripts/OpenCV/modules/imgproc;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include;../../thirdparty/owemdjee/caffe/include;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_JULIA;OPENCV_CONTRIB_JULIA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/OpenCV;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/stitching;../../thirdparty/owemdjee/opencv/include;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/ts/include/;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../scripts/OpenCV/modules/imgproc;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include;../../thirdparty/owemdjee/caffe/include;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_JULIA;OPENCV_CONTRIB_JULIA_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_JULIA;OPENCV_CONTRIB_JULIA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/OpenCV;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/stitching;../../thirdparty/owemdjee/opencv/include;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/ts/include/;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../scripts/OpenCV/modules/imgproc;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include;../../thirdparty/owemdjee/caffe/include;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_JULIA;OPENCV_CONTRIB_JULIA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/OpenCV;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/stitching;../../thirdparty/owemdjee/opencv/include;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/ts/include/;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../scripts/OpenCV/modules/imgproc;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include;../../thirdparty/owemdjee/caffe/include;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_JULIA;OPENCV_CONTRIB_JULIA_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_JULIA;OPENCV_CONTRIB_JULIA_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/OpenCV;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/stitching;../../thirdparty/owemdjee/opencv/include;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/ts/include/;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../scripts/OpenCV/modules/imgproc;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include;../../thirdparty/owemdjee/caffe/include;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_JULIA;OPENCV_CONTRIB_JULIA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/OpenCV;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/stitching;../../thirdparty/owemdjee/opencv/include;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/ts/include/;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../scripts/OpenCV/modules/imgproc;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include;../../thirdparty/owemdjee/caffe/include;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_JULIA;OPENCV_CONTRIB_JULIA_STATICLIB;__OPENCV_BUILD;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENCV_CONTRIB_JULIA;OPENCV_CONTRIB_JULIA_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/OpenCV;../../scripts/OpenCV/modules/core;../../scripts/OpenCV/modules/stitching;../../thirdparty/owemdjee/opencv/include;../../thirdparty/owemdjee/opencv/modules/calib3d/include;../../thirdparty/owemdjee/opencv/modules/core/include;../../thirdparty/owemdjee/opencv/modules/dnn;../../thirdparty/owemdjee/opencv/modules/dnn/include;../../thirdparty/owemdjee/opencv/modules/features2d/include;../../thirdparty/owemdjee/opencv/modules/flann/include;../../thirdparty/owemdjee/opencv/modules/gapi/include;../../thirdparty/owemdjee/opencv/modules/gapi/src;../../thirdparty/owemdjee/opencv/modules/highgui/include;../../thirdparty/owemdjee/opencv/modules/imgcodecs/include;../../thirdparty/owemdjee/opencv/modules/imgproc/include;../../thirdparty/owemdjee/opencv/modules/ml/include;../../thirdparty/owemdjee/opencv/modules/objdetect/include;../../thirdparty/owemdjee/opencv/modules/photo/include;../../thirdparty/owemdjee/opencv/modules/stitching/include;../../thirdparty/owemdjee/opencv/modules/ts/include;../../thirdparty/owemdjee/opencv/modules/ts/include/;../../thirdparty/owemdjee/opencv/modules/video/include;../../thirdparty/owemdjee/opencv/modules/videoio/include;../../thirdparty/owemdjee/opencv/modules/world/include;../../thirdparty/owemdjee/opencv_contrib/modules/alphamat/include;../../thirdparty/owemdjee/opencv_contrib/modules/aruco/include;../../thirdparty/owemdjee/opencv_contrib/modules/bgsegm/include;../../thirdparty/owemdjee/opencv_contrib/modules/bioinspired/include;../../thirdparty/owemdjee/opencv_contrib/modules/ccalib/include;../../thirdparty/owemdjee/opencv_contrib/modules/cnn_3dobj/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaarithm/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudacodec/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudalegacy/include;../../thirdparty/owemdjee/opencv_contrib/modules/cudaoptflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/cvv/include;../../thirdparty/owemdjee/opencv_contrib/modules/sfm/src/libmv_light;../../thirdparty/owemdjee/opencv_contrib/modules/viz/include;../../thirdparty/owemdjee/opencv_contrib/modules/xphoto/include;../../thirdparty/owemdjee/opencv_contrib/modules/xfeatures2d/include;../../thirdparty/owemdjee/opencv_contrib/modules/ximgproc/include;../../thirdparty/owemdjee/opencv_contrib/modules/intensity_transform/include;../../scripts/OpenCV/modules/imgproc;../../thirdparty/owemdjee/opencv_contrib/modules/optflow/include;../../thirdparty/owemdjee/opencv_contrib/modules/freetype/include;../../thirdparty/owemdjee/opencv_contrib/modules/hdf/include;../../thirdparty/owemdjee/opencv_contrib/modules/img_hash/include;../../thirdparty/owemdjee/opencv_contrib/modules/face/include;../../thirdparty/owemdjee/ADE-graph-management/sources/ade/include;../../thirdparty/owemdjee/caffe/include;../../thirdparty/owemdjee/dirent/include;../../thirdparty/owemdjee/opencv/3rdparty/openvx/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/gen/binding_templates_cpp/cv_core.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/src/cv.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/gen/cpp_files/jlcv.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/gen/cpp_files/jlcv_types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/gen/cpp_files/jlcxx/array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/include/opencv2/julia.hpp" />
+    <Image Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/tutorials/images/julia_facedetect_sample.jpg" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/cmake/FindJulia.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/cmake/hooks/STATUS_DUMP_EXTRA.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/cmake/init.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/gen/binding_templates_jl/template_cv2_root.jl" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/gen/binding_templates_jl/template_cv2_submodule.jl" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/gen/binding_templates_jl/template_cv2_submodule_cxx.jl" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/gen/defval.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/gen/funclist.csv" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/gen/gen3_cpp.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/gen/gen3_julia.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/gen/gen3_julia_cxx.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/gen/gen_all.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/gen/jl_cxx_files/Mat.jl" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/gen/jl_cxx_files/OpenCV.jl" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/gen/jl_cxx_files/Vec.jl" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/gen/jl_cxx_files/cv_cxx.jl" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/gen/jl_cxx_files/cv_manual_wrap.jl" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/gen/jl_cxx_files/mat_conversion.jl" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/gen/jl_cxx_files/types_conversion.jl" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/gen/jl_cxx_files/typestructs.jl" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/gen/parse_tree.py" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/gen/typemap.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/package/OpenCV/Artifacts.toml" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/package/OpenCV/Manifest.toml" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/package/OpenCV/Project.toml" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/package/install_package.jl" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/samples/chessboard_corners.jl" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/samples/face_detect.jl" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/samples/face_detect_dnn.jl" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/samples/filter2d.jl" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/samples/simpleBlobDetector_test.jl" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/test/test_dnn.jl" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/test/test_feature2d.jl" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/test/test_imgproc.jl" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/test/test_mat.jl" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/test/test_objdetect.jl" />
+    <Text Include="../../thirdparty/owemdjee/opencv_contrib/modules/julia/test/testsuite.jl" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

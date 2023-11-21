@@ -1,0 +1,672 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libRRD</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF986AFE}</ProjectGuid>
+    <RootNamespace>libRRD</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRD;RRD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRD;RRD_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRD;RRD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRD;RRD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRD;RRD_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRD;RRD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRD;RRD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRD;RRD_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRD;RRD_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRD;RRD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRD;RRD_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBRRD;RRD_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/matlab/+caffe/private/caffe_.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/python/caffe/_caffe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/blob.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/data_reader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/data_transformer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/internal_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layer_factory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/absval_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/accuracy_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/annotated_data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/argmax_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/base_conv_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/base_data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/batch_norm_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/batch_reindex_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/bias_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/bnll_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/concat_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/contrastive_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/conv_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/crop_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/ctc_decoder_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/ctc_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/cudnn_conv_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/cudnn_lcn_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/cudnn_lrn_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/cudnn_pooling_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/cudnn_relu_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/cudnn_sigmoid_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/cudnn_softmax_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/cudnn_tanh_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/deconv_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/detection_evaluate_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/detection_output_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/dropout_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/dummy_data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/eltwise_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/elu_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/embed_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/euclidean_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/exp_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/extend_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/filter_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/flatten_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/hdf5_data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/hdf5_output_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/hinge_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/im2col_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/image_data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/infogain_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/inner_product_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/input_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/log_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/lrn_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/lstm_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/lstm_unit_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/memory_data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/multibox_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/multinomial_logistic_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/mvn_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/neuron_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/normalize_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/orpooling_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/parameter_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/permute_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/pooling_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/power_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/prelu_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/prior_box_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/recurrent_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/reduction_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/relu_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/reshape_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/reverse_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/rnn_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/roi_pooling_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/scale_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/sigmoid_cross_entropy_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/sigmoid_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/silence_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/slice_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/smooth_L1_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/softmax_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/softmax_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/split_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/spp_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/tanh_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/threshold_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/tile_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/video_data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/layers/window_data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/net.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/parallel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/solver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/solvers/adadelta_solver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/solvers/adagrad_solver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/solvers/adam_solver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/solvers/nesterov_solver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/solvers/rmsprop_solver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/solvers/sgd_solver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/syncedmem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_accuracy_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_annotated_data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_argmax_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_batch_norm_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_batch_reindex_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_bbox_util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_bias_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_blob.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_caffe_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_common.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_concat_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_contrastive_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_convolution_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_crop_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_ctc_decoder_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_ctc_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_data_transformer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_db.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_deconvolution_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_detection_evaluate_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_detection_output_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_dummy_data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_eltwise_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_embed_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_euclidean_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_filler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_filter_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_flatten_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_gradient_based_solver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_hdf5_output_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_hdf5data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_hinge_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_im2col_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_im_transforms.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_image_data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_infogain_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_inner_product_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_internal_thread.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_io.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_layer_factory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_lrn_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_lstm_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_math_functions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_maxpool_dropout_layers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_memory_data_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_multibox_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_multinomial_logistic_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_mvn_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_net.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_neuron_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_normalize_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_permute_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_platform.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_pooling_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_power_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_prior_box_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_protobuf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_random_number_generator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_reduction_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_reshape_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_reverse_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_rnn_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_roi_pooling_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_scale_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_sigmoid_cross_entropy_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_slice_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_smooth_L1_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_softmax_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_softmax_with_loss_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_solver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_solver_factory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_split_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_spp_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_stochastic_pooling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_syncedmem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_tanh_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_threshold_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_tile_layer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_upgrade_proto.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_util_blas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/util/bbox_util.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/util/benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/util/blocking_queue.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/util/cudnn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/util/db.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/util/db_leveldb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/util/db_lmdb.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/util/hdf5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/util/im2col.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/util/im_transforms.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/util/insert_splits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/util/io.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/util/math_functions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/util/sampler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/util/signal_handler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/caffe/util/upgrade_proto.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/gtest/gtest-all.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/src/gtest/gtest_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/tools/caffe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/tools/compute_image_mean.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/tools/convert_annoset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/tools/convert_imageset.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/tools/create_label_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/tools/device_query.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/tools/extract_features.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/tools/finetune_net.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/tools/get_image_size.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/tools/net_speed_benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/tools/test_net.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/tools/train_net.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/tools/upgrade_net_proto_binary.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/tools/upgrade_net_proto_text.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/RRD/tools/upgrade_solver_proto_text.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/blob.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/caffe.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/common.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/data_reader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/data_transformer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/fast_rcnn_layers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/filler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/internal_thread.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layer_factory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/absval_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/accuracy_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/annotated_data_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/argmax_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/base_conv_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/base_data_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/batch_norm_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/batch_reindex_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/bias_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/bnll_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/concat_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/contrastive_loss_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/conv_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/crop_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/ctc_decoder_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/ctc_loss_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/cudnn_conv_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/cudnn_lcn_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/cudnn_lrn_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/cudnn_pooling_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/cudnn_relu_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/cudnn_sigmoid_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/cudnn_softmax_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/cudnn_tanh_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/data_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/deconv_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/detection_evaluate_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/detection_output_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/dropout_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/dummy_data_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/eltwise_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/elu_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/embed_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/euclidean_loss_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/exp_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/extend_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/filter_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/flatten_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/hdf5_data_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/hdf5_output_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/hinge_loss_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/im2col_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/image_data_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/infogain_loss_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/inner_product_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/input_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/log_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/loss_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/lrn_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/lstm_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/memory_data_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/multibox_loss_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/multinomial_logistic_loss_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/mvn_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/neuron_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/normalize_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/orpooling_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/parameter_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/permute_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/pooling_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/power_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/prelu_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/prior_box_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/python_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/recurrent_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/reduction_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/relu_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/reshape_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/reverse_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/rnn_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/scale_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/sigmoid_cross_entropy_loss_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/sigmoid_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/silence_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/slice_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/smooth_L1_loss_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/softmax_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/softmax_loss_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/split_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/spp_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/tanh_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/threshold_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/tile_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/video_data_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/layers/window_data_layer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/net.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/parallel.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/sgd_solvers.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/solver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/solver_factory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/syncedmem.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/test/test_caffe_main.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/test/test_gradient_check_util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/util/bbox_util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/util/benchmark.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/util/blocking_queue.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/util/cudnn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/util/db.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/util/db_leveldb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/util/db_lmdb.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/util/device_alternate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/util/format.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/util/hdf5.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/util/im2col.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/util/im_transforms.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/util/insert_splits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/util/io.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/util/math_functions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/util/mkl_alternate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/util/rng.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/util/sampler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/util/signal_handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/include/caffe/util/upgrade_proto.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/RRD/src/gtest/gtest.h" />
+    <Image Include="../../thirdparty/owemdjee/RRD/examples/text/demo.jpg" />
+    <Text Include="../../thirdparty/owemdjee/RRD/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRD/README.md" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/ConfigGen.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/Cuda.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/Dependencies.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/External/gflags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/External/glog.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/Misc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/Modules/FindAtlas.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/Modules/FindGFlags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/Modules/FindGlog.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/Modules/FindLAPACK.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/Modules/FindLMDB.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/Modules/FindLevelDB.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/Modules/FindMKL.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/Modules/FindMatlabMex.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/Modules/FindNumPy.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/Modules/FindOpenBLAS.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/Modules/FindSnappy.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/Modules/FindvecLib.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/ProtoBuf.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/Summary.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/Targets.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/Templates/CaffeConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/Templates/CaffeConfigVersion.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/Templates/caffe_config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/Utils.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRD/cmake/lint.cmake" />
+    <Text Include="../../thirdparty/owemdjee/RRD/data/text/labelmap_voc.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRD/examples/text/demo.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/examples/text/nms.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/matlab/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRD/models/ic15/deploy_ic15.prototxt" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/caffe/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/caffe/classifier.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/caffe/coord_map.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/caffe/detector.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/caffe/draw.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/caffe/imagenet/ilsvrc_2012_mean.npy" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/caffe/io.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/caffe/model_libs.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/caffe/net_spec.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/caffe/proposal_layer.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/caffe/proto/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/caffe/proto/caffe_pb2.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/caffe/pycaffe.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/caffe/test/test_coord_map.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/caffe/test/test_io.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/caffe/test/test_layer_type_list.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/caffe/test/test_net.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/caffe/test/test_net_spec.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/caffe/test/test_python_layer.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/caffe/test/test_python_layer_with_param_str.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/caffe/test/test_solver.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/classify.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/detect.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/draw_net.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/python/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRD/scripts/build_docs.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRD/scripts/convert_inception_v3.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/scripts/copy_notebook.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/scripts/cpp_lint.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/scripts/create_annoset.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/scripts/deploy_docs.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRD/scripts/download_model_binary.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/scripts/download_model_from_gist.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRD/scripts/gather_examples.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRD/scripts/travis/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRD/scripts/travis/configure-cmake.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRD/scripts/travis/configure-make.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRD/scripts/travis/configure.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRD/scripts/travis/defaults.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRD/scripts/travis/install-deps.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRD/scripts/travis/install-python-deps.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRD/scripts/travis/setup-venv.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRD/scripts/travis/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRD/scripts/upload_model_to_gist.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRD/src/caffe/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRD/src/caffe/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_data/generate_sample_data.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_data/sample_data_list.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRD/src/caffe/test/test_data/solver_data_list.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRD/src/gtest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRD/tools/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/RRD/tools/extra/extract_seconds.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/tools/extra/launch_resize_and_crop_images.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRD/tools/extra/parse_log.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/tools/extra/parse_log.sh" />
+    <Text Include="../../thirdparty/owemdjee/RRD/tools/extra/resize_and_crop_images.py" />
+    <Text Include="../../thirdparty/owemdjee/RRD/tools/extra/summarize.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

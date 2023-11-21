@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libmathtoolbox</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF76FA21}</ProjectGuid>
+    <RootNamespace>libmathtoolbox</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATHTOOLBOX;MATHTOOLBOX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATHTOOLBOX;MATHTOOLBOX_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATHTOOLBOX;MATHTOOLBOX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATHTOOLBOX;MATHTOOLBOX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATHTOOLBOX;MATHTOOLBOX_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATHTOOLBOX;MATHTOOLBOX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATHTOOLBOX;MATHTOOLBOX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATHTOOLBOX;MATHTOOLBOX_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATHTOOLBOX;MATHTOOLBOX_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATHTOOLBOX;MATHTOOLBOX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATHTOOLBOX;MATHTOOLBOX_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMATHTOOLBOX;MATHTOOLBOX_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/examples/acquisition-function/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/examples/bayesian-optimization/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/examples/bfgs/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/examples/classical-mds/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/examples/gaussian-process-regression/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/examples/gradient-descent/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/examples/l-bfgs/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/examples/log-determinant/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/examples/matrix-inversion/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/examples/probability-distributions/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/examples/rbf-interpolation/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/examples/som/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/src/acquisition-functions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/src/bayesian-optimization.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/src/bfgs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/src/classical-mds.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/src/gaussian-process-regression.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/src/gradient-descent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/src/kernel-functions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/src/l-bfgs.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/src/log-determinant.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/src/matrix-inversion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/src/probability-distributions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/src/pybind/python-bindings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/src/rbf-interpolation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mathtoolbox/src/som.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mathtoolbox/include/mathtoolbox/acquisition-functions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mathtoolbox/include/mathtoolbox/backtracking-line-search.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mathtoolbox/include/mathtoolbox/bayesian-optimization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mathtoolbox/include/mathtoolbox/bfgs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mathtoolbox/include/mathtoolbox/classical-mds.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mathtoolbox/include/mathtoolbox/constants.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mathtoolbox/include/mathtoolbox/data-normalization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mathtoolbox/include/mathtoolbox/gaussian-process-regression.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mathtoolbox/include/mathtoolbox/gradient-descent.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mathtoolbox/include/mathtoolbox/kernel-functions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mathtoolbox/include/mathtoolbox/l-bfgs.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mathtoolbox/include/mathtoolbox/log-determinant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mathtoolbox/include/mathtoolbox/matrix-inversion.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mathtoolbox/include/mathtoolbox/numerical-optimization.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mathtoolbox/include/mathtoolbox/probability-distributions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mathtoolbox/include/mathtoolbox/rbf-interpolation.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mathtoolbox/include/mathtoolbox/som.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/mathtoolbox/include/mathtoolbox/strong-wolfe-conditions-line-search.hpp" />
+    <Image Include="../../thirdparty/owemdjee/mathtoolbox/docs/bayesian-optimization/1d.gif" />
+    <Image Include="../../thirdparty/owemdjee/mathtoolbox/docs/bayesian-optimization/bo-vs-rand.png" />
+    <Image Include="../../thirdparty/owemdjee/mathtoolbox/docs/classical-mds/classical-mds-image-out.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mathtoolbox/docs/gaussian-process-regression/example1.png" />
+    <Image Include="../../thirdparty/owemdjee/mathtoolbox/docs/gaussian-process-regression/example2.png" />
+    <Image Include="../../thirdparty/owemdjee/mathtoolbox/docs/gaussian-process-regression/example3.png" />
+    <Image Include="../../thirdparty/owemdjee/mathtoolbox/docs/gaussian-process-regression/example4.png" />
+    <Image Include="../../thirdparty/owemdjee/mathtoolbox/docs/gaussian-process-regression/examples.png" />
+    <Image Include="../../thirdparty/owemdjee/mathtoolbox/docs/header.png" />
+    <Image Include="../../thirdparty/owemdjee/mathtoolbox/docs/rbf-interpolation/exact.png" />
+    <Image Include="../../thirdparty/owemdjee/mathtoolbox/docs/rbf-interpolation/polynomial.png" />
+    <Image Include="../../thirdparty/owemdjee/mathtoolbox/docs/rbf-interpolation/regularization.png" />
+    <Image Include="../../thirdparty/owemdjee/mathtoolbox/docs/rbf-interpolation/result.png" />
+    <Image Include="../../thirdparty/owemdjee/mathtoolbox/docs/som/som-image-1d.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mathtoolbox/docs/som/som-image.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mathtoolbox/python-examples/assets/autumn-leaves.jpg" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/UpdatingDocs.md" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/docs/acquisition-functions.md" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/docs/backtracking-line-search.md" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/docs/bayesian-optimization.md" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/docs/bfgs.md" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/docs/classical-mds.md" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/docs/constants.md" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/docs/data-normalization.md" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/docs/gaussian-process-regression.md" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/docs/gradient-descent.md" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/docs/index.md" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/docs/kernel-functions.md" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/docs/l-bfgs.md" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/docs/log-determinant.md" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/docs/matrix-inversion.md" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/docs/probability-distributions.md" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/docs/rbf-interpolation.md" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/docs/som.md" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/docs/strong-wolfe-conditions-line-search.md" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/examples/acquisition-function/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/examples/bayesian-optimization/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/examples/bayesian-optimization/main-visualize.py" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/examples/bfgs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/examples/classical-mds/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/examples/gaussian-process-regression/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/examples/gradient-descent/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/examples/l-bfgs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/examples/log-determinant/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/examples/matrix-inversion/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/examples/probability-distributions/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/examples/rbf-interpolation/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/examples/som/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/mkdocs.yml" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/python-examples/bayesian-optimization.py" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/python-examples/classical-mds-image.py" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/python-examples/classical-mds.py" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/python-examples/rbf-interpolation-comparison.py" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/python-examples/rbf-interpolation-exact.py" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/python-examples/rbf-interpolation-polynomial.py" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/python-examples/rbf-interpolation.py" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/python-examples/som-image-1d.py" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/python-examples/som-image.py" />
+    <Text Include="../../thirdparty/owemdjee/mathtoolbox/setup.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

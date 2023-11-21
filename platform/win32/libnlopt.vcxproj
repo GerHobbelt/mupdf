@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libnlopt</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF1B379C}</ProjectGuid>
+    <RootNamespace>libnlopt</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNLOPT;NLOPT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNLOPT;NLOPT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNLOPT;NLOPT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNLOPT;NLOPT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNLOPT;NLOPT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNLOPT;NLOPT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNLOPT;NLOPT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNLOPT;NLOPT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNLOPT;NLOPT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNLOPT;NLOPT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNLOPT;NLOPT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNLOPT;NLOPT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/ags/ags.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/ags/evolvent.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/ags/local_optimizer.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/ags/solver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/ags/tst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/auglag/auglag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/bobyqa/bobyqa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/cdirect/cdirect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/cdirect/hybrid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/cobyla/cobyla.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/cquad/cquad.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/crs/crs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/direct/DIRect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/direct/DIRparallel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/direct/DIRserial.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/direct/DIRsubrout.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/direct/direct_wrap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/direct/tstc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/esch/esch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/isres/isres.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/luksan/mssubs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/luksan/plip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/luksan/plis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/luksan/pnet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/luksan/pssubs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/mlsl/mlsl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/mma/ccsa_quadratic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/mma/mma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/neldermead/nldrmd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/neldermead/sbplx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/newuoa/newuoa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/praxis/praxis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/slsqp/slsqp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/stogo/global.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/stogo/linalg.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/stogo/local.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/stogo/prog.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/stogo/stogo.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/stogo/testros.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/stogo/tools.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/stogo/tst.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/stogo/tstc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/algs/subplex/subplex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/api/deprecated.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/api/f77api.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/api/general.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/api/optimize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/api/options.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/octave/dummy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/octave/nlopt_optimize-mex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/octave/nlopt_optimize-oct.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/util/mt19937ar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/util/mt19937ar_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/util/nlopt-getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/util/qsort_r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/util/redblack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/util/redblack_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/util/rescale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/util/sobolseq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/util/sobolseq_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/util/stop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/src/util/timer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/test/box.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/test/cpp_functor.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/test/lorentzfit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/test/t_tutorial.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/test/testfuncs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/nlopt/test/testopt.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/ags/ags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/ags/data_types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/ags/evolvent.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/ags/local_optimizer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/ags/solver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/auglag/auglag.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/bobyqa/bobyqa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/cdirect/cdirect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/cobyla/cobyla.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/cquad/cquad.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/crs/crs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/direct/direct-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/direct/direct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/esch/esch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/isres/isres.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/luksan/luksan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/mlsl/mlsl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/mma/mma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/neldermead/neldermead.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/newuoa/newuoa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/praxis/praxis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/slsqp/slsqp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/stogo/global.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/stogo/linalg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/stogo/local.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/stogo/rosen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/stogo/stogo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/stogo/stogo_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/stogo/testfun.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/stogo/tools.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/algs/subplex/subplex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/api/f77funcs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/api/f77funcs_.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/api/nlopt-in.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/api/nlopt-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/api/nlopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/util/nlopt-getopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/util/nlopt-util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/util/redblack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/src/util/soboldata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/nlopt/test/testfuncs.h" />
+    <Image Include="../../thirdparty/owemdjee/nlopt/doc/docs/images/NLopt-example-constraints.png" />
+    <Image Include="../../thirdparty/owemdjee/nlopt/doc/docs/images/Nlopt-logo.png" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/NEWS.md" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/README.md" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/TODO" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/cmake/FindGuile.cmake" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/cmake/FindNumPy.cmake" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/cmake/FindOctave.cmake" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/cmake/NLoptConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/cmake/NLoptConfigVersion.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/cmake/TargetLinkLibrariesWithDynamicLookup.cmake" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/cmake/generate-cpp.cmake" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/cmake/generate-fortran.cmake" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/cmake/toolchain-i686-w64-mingw32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/cmake/toolchain-x86_64-w64-mingw32.cmake" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/doc/README" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/doc/docs/Citing_NLopt.md" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/doc/docs/NLopt_Algorithms.md" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/doc/docs/NLopt_C-plus-plus_Reference.md" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/doc/docs/NLopt_Deprecated_API_Reference.md" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/doc/docs/NLopt_FAQ.md" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/doc/docs/NLopt_Fortran_Reference.md" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/doc/docs/NLopt_Guile_Reference.md" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/doc/docs/NLopt_Installation.md" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/doc/docs/NLopt_Introduction.md" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/doc/docs/NLopt_License_and_Copyright.md" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/doc/docs/NLopt_Matlab_Reference.md" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/doc/docs/NLopt_Python_Reference.md" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/doc/docs/NLopt_R_Reference.md" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/doc/docs/NLopt_Reference.md" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/doc/docs/NLopt_Tutorial.md" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/doc/docs/NLopt_manual.md" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/doc/docs/NLopt_on_Windows.md" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/doc/docs/index.md" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/doc/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/mkdocs.yml" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/nlopt.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/nlopt_config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/ags/README" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/auglag/README" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/bobyqa/README" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/bobyqa/README.orig" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/cdirect/README" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/cobyla/README" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/cobyla/README.orig" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/cquad/README" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/crs/README" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/direct/README" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/direct/userguide.pdf" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/esch/README" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/isres/README" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/luksan/README" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/luksan/plip.txt" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/luksan/plis.txt" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/luksan/pnet.txt" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/luksan/v999-07.pdf" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/mlsl/README" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/mma/README" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/neldermead/README" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/newuoa/README" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/newuoa/README.orig" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/praxis/README" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/slsqp/README" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/stogo/README" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/stogo/paper.pdf" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/stogo/techreport.pdf" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/algs/subplex/README" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/api/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/octave/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/octave/mkconstants.sh" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/src/swig/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/test/t_fortran.f90" />
+    <Text Include="../../thirdparty/owemdjee/nlopt/test/t_python.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

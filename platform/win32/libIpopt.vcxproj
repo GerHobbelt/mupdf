@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libIpopt</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFDC03AB}</ProjectGuid>
+    <RootNamespace>libIpopt</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIPOPT;IPOPT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIPOPT;IPOPT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIPOPT;IPOPT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIPOPT;IPOPT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIPOPT;IPOPT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIPOPT;IPOPT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIPOPT;IPOPT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIPOPT;IPOPT_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIPOPT;IPOPT_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIPOPT;IPOPT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIPOPT;IPOPT_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBIPOPT;IPOPT_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/contrib/RInterface/src/IpoptRJournal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/contrib/RInterface/src/IpoptRNLP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/contrib/RInterface/src/ipoptr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/AmplSolver/SensAmplTNLP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/AmplSolver/ampl_sipopt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/examples/parametric_cpp/parametricTNLP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/examples/parametric_cpp/parametric_driver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/examples/parametric_dsdp_cpp/parametricTNLP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/examples/parametric_dsdp_cpp/parametric_dsdp_driver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/examples/redhess_cpp/MySensTNLP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/examples/redhess_cpp/redhess_cpp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensAlgorithm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensApplication.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensBuilder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensDenseGenSchurDriver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensIndexPCalculator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensIndexSchurData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensMetadataMeasurement.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensReducedHessianCalculator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensRegOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensSimpleBacksolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensStdStepCalc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/examples/Cpp_example/MyNLP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/examples/Cpp_example/cpp_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/LuksanVlcek1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/LuksanVlcek2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/LuksanVlcek3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/LuksanVlcek4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/LuksanVlcek5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/LuksanVlcek6.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/LuksanVlcek7.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlDiri.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlDiri3D.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlDiri3D_27.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlDiri3Dsin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlNeum.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/MittelmannDistCntrlDiri.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/MittelmannDistCntrlNeumA.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/MittelmannDistCntrlNeumB.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/RegisteredTNLP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/solve_problem.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/examples/hs071_c/hs071_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/examples/hs071_cpp/hs071_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/examples/hs071_cpp/hs071_nlp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/examples/recursive_nlp/recursive_nlp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactAlgBuilder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactCq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactDoglegNormal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactLSAcceptor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactNewtonNormal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactNormalTerminationTester.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactPDSolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactPDTerminationTester.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactRegOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactSearchDirCalc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactTSymScalingMethod.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpIterativePardisoSolverInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpIterativeSolverTerminationTester.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpAdaptiveMuUpdate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpAlgBuilder.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpAlgorithmRegOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpAugRestoSystemSolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpBacktrackingLineSearch.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpDefaultIterateInitializer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpEquilibrationScaling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpExactHessianUpdater.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpFilter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpFilterLSAcceptor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpGenAugSystemSolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpGradientScaling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpIpoptAlg.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpIpoptCalculatedQuantities.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpIpoptData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpIteratesVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpLeastSquareMults.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpLimMemQuasiNewtonUpdater.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpLoqoMuOracle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpLowRankAugSystemSolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpLowRankSSAugSystemSolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpMonotoneMuUpdate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpNLPBoundsRemover.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpNLPScaling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpOptErrorConvCheck.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpOrigIpoptNLP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpOrigIterationOutput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpPDFullSpaceSolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpPDPerturbationHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpPDSearchDirCalc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpPenaltyLSAcceptor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpProbingMuOracle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpQualityFunctionMuOracle.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpRestoConvCheck.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpRestoFilterConvCheck.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpRestoIpoptNLP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpRestoIterateInitializer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpRestoIterationOutput.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpRestoMinC_1Nrm.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpRestoPenaltyConvCheck.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpRestoRestoPhase.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpStdAugSystemSolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpTimingStatistics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpUserScaling.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpWarmStartIterateInitializer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpIterativeWsmpSolverInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpLinearSolvers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpLinearSolversRegOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpMa27TSolverInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpMa28TDependencyDetector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpMa57TSolverInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpMa77SolverInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpMa86SolverInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpMa97SolverInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpMc19TSymScalingMethod.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpMumpsSolverInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpPardisoMKLSolverInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpPardisoSolverInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpSlackBasedTSymScalingMethod.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpSpralSolverInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpTSymDependencyDetector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpTSymLinearSolver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpTripletToCSRConverter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpWsmpSolverInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Apps/AmplSolver/AmplTNLP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Apps/AmplSolver/ampl_ipopt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpDebug.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpJournalist.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpLibraryLoader.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpObserver.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpOptionsList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpRegOptions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpTaggedObject.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpInterfacesRegOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpIpoptApplication.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpSolveStatistics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpStdCInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpStdFInterface.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpStdInterfaceTNLP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpStdJInterface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpTNLP.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpTNLPAdapter.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpTNLPReducer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpBlas.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpCompoundMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpCompoundSymMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpCompoundVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpDenseGenMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpDenseSymMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpDenseVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpDiagMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpExpandedMultiVectorMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpExpansionMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpIdentityMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpLapack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpLowRankUpdateSymMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpMultiVectorMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpScaledMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpSumMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpSumSymMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpSymScaledMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpTransposeMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpVector.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpZeroMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpZeroSymMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/TMatrices/IpGenTMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/TMatrices/IpSymTMatrix.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/TMatrices/IpTripletHelper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/contrib/CGPenalty/IpCGPenaltyCq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/contrib/CGPenalty/IpCGPenaltyData.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/contrib/CGPenalty/IpCGPenaltyLSAcceptor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/contrib/CGPenalty/IpCGPenaltyRegOp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/contrib/CGPenalty/IpCGPerturbationHandler.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/contrib/CGPenalty/IpCGSearchDirCalc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/src/contrib/CGPenalty/IpPiecewisePenalty.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/test/emptynlp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/test/getcurr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/C/1-skeleton/TutorialC.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/C/2-mistake/TutorialC.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/C/3-solution/TutorialC.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/Cpp/1-skeleton/TutorialCpp_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/Cpp/1-skeleton/TutorialCpp_nlp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/Cpp/2-mistake/TutorialCpp_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/Cpp/2-mistake/TutorialCpp_nlp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/Cpp/3-solution/TutorialCpp_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/Cpp/3-solution/TutorialCpp_nlp.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/RInterface/src/IpoptRJournal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/RInterface/src/IpoptRNLP.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/AmplSolver/SensAmplTNLP.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/examples/hicks_ampl/nmpcresults.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/examples/parametric_cpp/parametricTNLP.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/examples/parametric_dsdp_cpp/parametricTNLP.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/examples/redhess_cpp/MySensTNLP.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensAlgorithm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensApplication.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensBacksolver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensBuilder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensDenseGenSchurDriver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensIndexPCalculator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensIndexSchurData.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensMeasurement.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensMetadataMeasurement.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensPCalculator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensReducedHessianCalculator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensRegOp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensSchurData.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensSchurDriver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensSimpleBacksolver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensStdStepCalc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensStepCalc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensSuffixHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/SensUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/examples/Cpp_example/MyNLP.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/LuksanVlcek1.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/LuksanVlcek2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/LuksanVlcek3.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/LuksanVlcek4.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/LuksanVlcek5.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/LuksanVlcek6.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/LuksanVlcek7.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlDiri.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlDiri3D.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlDiri3D_27.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlDiri3Dsin.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlNeum.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/MittelmannDistCntrlDiri.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/MittelmannDistCntrlNeumA.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/MittelmannDistCntrlNeumB.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/MittelmannParaCntrl.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/RegisteredTNLP.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/examples/hs071_cpp/hs071_nlp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactAlgBuilder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactCq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactData.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactDoglegNormal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactLSAcceptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactNewtonNormal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactNormalStepCalc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactNormalTerminationTester.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactPDSolver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactPDTerminationTester.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactRegOp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactSearchDirCalc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpInexactTSymScalingMethod.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpIterativePardisoSolverInterface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/Inexact/IpIterativeSolverTerminationTester.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpAdaptiveMuUpdate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpAlgBuilder.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpAlgStrategy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpAlgorithmRegOp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpAugRestoSystemSolver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpAugSystemSolver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpBacktrackingLSAcceptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpBacktrackingLineSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpConvCheck.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpDefaultIterateInitializer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpEqMultCalculator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpEquilibrationScaling.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpExactHessianUpdater.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpFilter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpFilterLSAcceptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpGenAugSystemSolver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpGradientScaling.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpHessianUpdater.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpIpoptAlg.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpIpoptCalculatedQuantities.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpIpoptData.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpIpoptNLP.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpIterateInitializer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpIteratesVector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpIterationOutput.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpLeastSquareMults.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpLimMemQuasiNewtonUpdater.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpLineSearch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpLoqoMuOracle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpLowRankAugSystemSolver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpLowRankSSAugSystemSolver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpMonotoneMuUpdate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpMuOracle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpMuUpdate.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpNLPBoundsRemover.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpNLPScaling.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpOptErrorConvCheck.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpOrigIpoptNLP.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpOrigIterationOutput.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpPDFullSpaceSolver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpPDPerturbationHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpPDSearchDirCalc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpPDSystemSolver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpPenaltyLSAcceptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpProbingMuOracle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpQualityFunctionMuOracle.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpRestoConvCheck.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpRestoFilterConvCheck.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpRestoIpoptNLP.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpRestoIterateInitializer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpRestoIterationOutput.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpRestoMinC_1Nrm.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpRestoPenaltyConvCheck.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpRestoPhase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpRestoRestoPhase.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpSearchDirCalculator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpStdAugSystemSolver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpTimingStatistics.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpUserScaling.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/IpWarmStartIterateInitializer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpGenKKTSolverInterface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpIterativeWsmpSolverInterface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpLinearSolvers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpLinearSolversRegOp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpMa27TSolverInterface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpMa28TDependencyDetector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpMa57TSolverInterface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpMa77SolverInterface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpMa86SolverInterface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpMa97SolverInterface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpMc19TSymScalingMethod.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpMumpsSolverInterface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpPardisoMKLSolverInterface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpPardisoSolverInterface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpSlackBasedTSymScalingMethod.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpSparseSymLinearSolverInterface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpSpralSolverInterface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpSymLinearSolver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpTDependencyDetector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpTSymDependencyDetector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpTSymLinearSolver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpTSymScalingMethod.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpTripletToCSRConverter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/IpWsmpSolverInterface.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/hsl_ma77d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/hsl_ma77s.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/hsl_ma86d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/hsl_ma86s.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/hsl_ma97d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/hsl_ma97s.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Algorithm/LinearSolvers/hsl_mc68i.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Apps/AmplSolver/AmplTNLP.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpCachedResults.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpDebug.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpException.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpJournalist.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpLibraryLoader.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpObserver.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpOptionsList.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpReferenced.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpRegOptions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpSmartPtr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpTaggedObject.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpTimedTask.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpTypes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpUtils.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Common/IpoptConfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Common/config_default.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Common/config_ipopt_default.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Common/configall_system.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Common/configall_system_msc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpAlgTypes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpInterfacesRegOp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpIpoptApplication.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpNLP.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpReturnCodes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpReturnCodes.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpReturnCodes.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpReturnCodes_inc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpSolveStatistics.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpStdCInterface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpStdInterfaceTNLP.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpTNLP.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpTNLPAdapter.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/Interfaces/IpTNLPReducer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpBlas.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpCompoundMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpCompoundSymMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpCompoundVector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpDenseGenMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpDenseSymMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpDenseVector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpDiagMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpExpandedMultiVectorMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpExpansionMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpIdentityMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpLapack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpLowRankUpdateSymMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpMultiVectorMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpScaledMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpSumMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpSumSymMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpSymMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpSymScaledMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpTransposeMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpVector.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpZeroMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/IpZeroSymMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/TMatrices/IpGenTMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/TMatrices/IpSymTMatrix.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/LinAlg/TMatrices/IpTripletHelper.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/contrib/CGPenalty/IpCGPenaltyCq.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/contrib/CGPenalty/IpCGPenaltyData.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/contrib/CGPenalty/IpCGPenaltyLSAcceptor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/contrib/CGPenalty/IpCGPenaltyRegOp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/contrib/CGPenalty/IpCGPerturbationHandler.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/contrib/CGPenalty/IpCGSearchDirCalc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/src/contrib/CGPenalty/IpPiecewisePenalty.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/Cpp/1-skeleton/TutorialCpp_nlp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/Cpp/2-mistake/TutorialCpp_nlp.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/Cpp/3-solution/TutorialCpp_nlp.hpp" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/ChangeLog.md" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/config.guess" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/contrib/RInterface/CHANGELOG" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/contrib/RInterface/README" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/contrib/RInterface/inst/doc/ipoptr.pdf" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/contrib/RInterface/src/Makevars.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/AmplSolver/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/AmplSolver/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/doc/sipopt_manual.pdf" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/doc/sipopt_manual.tex" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/examples/parametric_cpp/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/examples/parametric_dsdp_cpp/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/examples/redhess_cpp/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/src/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/contrib/sIPOPT/toDo.txt" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/doc/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/doc/faq.dox" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/doc/footer.html" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/doc/header.html" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/doc/impl.dox" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/doc/install.dox" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/doc/interfaces.dox" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/doc/main.dox" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/doc/options.dox" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/doc/output.dox" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/doc/special.dox" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/doc/stylesheet.css" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/examples/Cpp_example/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems/README" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/examples/ScalableProblems_java/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/examples/hs071_c/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/examples/hs071_cpp/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/examples/hs071_f/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/examples/hs071_f/hs071_f.f.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/examples/hs071_f/hs071_fs.f.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/examples/hs071_java/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/examples/recursive_nlp/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/ltmain.sh" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/src/Apps/AmplSolver/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/src/Apps/AmplSolver/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/src/Apps/AmplSolver/ipoptamplinterface.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/src/Common/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/src/Common/config_ipopt.h.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/src/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/src/ipopt.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/test/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/test/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/test/mytoy.nl" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/test/run_unitTests.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/tutorial/AmplExperiments/MoreAmplModels.txt" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/C/1-skeleton/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/C/2-mistake/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/C/3-solution/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/Cpp/1-skeleton/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/Cpp/2-mistake/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/Cpp/3-solution/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/Fortran/1-skeleton/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/Fortran/1-skeleton/TutorialFortran.f.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/Fortran/2-mistake/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/Fortran/2-mistake/TutorialFortran.f.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/Fortran/3-solution/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/Fortran/3-solution/TutorialFortran.f.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/Matlab/1-skeleton/startup.m.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/Matlab/2-mistake/startup.m.in" />
+    <Text Include="../../thirdparty/owemdjee/Ipopt/tutorial/CodingExercise/Matlab/3-solution/startup.m.in" />
+    <Xml Include="../../thirdparty/owemdjee/Ipopt/doc/layout.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

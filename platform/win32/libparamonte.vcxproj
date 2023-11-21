@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libparamonte</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFACBD28}</ProjectGuid>
+    <RootNamespace>libparamonte</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPARAMONTE;PARAMONTE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPARAMONTE;PARAMONTE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPARAMONTE;PARAMONTE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPARAMONTE;PARAMONTE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPARAMONTE;PARAMONTE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPARAMONTE;PARAMONTE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPARAMONTE;PARAMONTE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPARAMONTE;PARAMONTE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPARAMONTE;PARAMONTE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPARAMONTE;PARAMONTE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPARAMONTE;PARAMONTE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPARAMONTE;PARAMONTE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/paramonte/example/himmelblau/C/logfunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/paramonte/example/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/paramonte/example/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/paramonte/example/mvn/C++/logfunc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/paramonte/example/mvn/C/logfunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/paramonte/src/kernel/paramonte.m.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/paramonte/example/himmelblau/C/logfunc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/paramonte/example/mvn/C++/logfunc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/paramonte/example/mvn/C/logfunc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/paramonte/src/interface/C++/paramonte.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/paramonte/src/interface/C/paramonte.h" />
+    <Image Include="../../thirdparty/owemdjee/paramonte/pubs/ParaMonte/kernel/JOSS2021/PredictedSpeedupActualSpeedup.png" />
+    <Image Include="../../thirdparty/owemdjee/paramonte/pubs/ParaMonte/kernel/JOSS2021/procContribution512.png" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/ACKNOWLEDGMENT.md" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/CONTRIBUTING-KERNEL.md" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/README.md" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/auxil/btar.sh" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/auxil/bzip.bat" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/auxil/compareVersions.sh" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/auxil/genReadme.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/auxil/genShield.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/auxil/getCompilerVersion.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/auxil/head.bat" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/auxil/installMPICH.sh" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/auxil/shields.html" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/auxil/testMPI.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/auxil/testRelease.sh" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/bmake/getCompilerVersion.bat" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/bmake/head.bat" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/bmake/string.bat" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/buildMatDRAM.bat" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/buildMatDRAM.sh" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/buildParaMonte.bat" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/buildParaMonte.sh" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/cmake/Modules/CMakeFortranInformation.cmake" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/cmake/Modules/CheckFortranCompilerFlag.cmake" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/cmake/Modules/FindCoarray.cmake" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/cmake/Modules/FindOpenMP_Fortran.cmake" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/cmake/Modules/SetCompileFlag.cmake" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/cmake/Modules/SetFortranFlags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/cmake/Modules/SetParaMonteCompilerSuite.cmake" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/cmake/Modules/SetParaMonteCompilerVersion.cmake" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/cmake/Modules/SetParaMonteFlags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/cmake/Modules/SetParaMonteParallelism.cmake" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/cmake/Modules/SetParaMonteVersion.cmake" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/cmake/Modules/SetParallelizationLibrary.cmake" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/cmake/Modules/SetUpLAPACK.cmake" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/cmake/Modules/TestFortranCompiler.cmake" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/cmake/Modules/overrideDefault.cmake" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/cmake/makeDist.cmake" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/codecov.yml" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/configParaMonte.bat" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/configParaMonte.sh" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/distclean.cmake" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/example/build.bat" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/example/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/example/buildParaMonteExample.bat" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/example/buildParaMonteExample.sh" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/example/himmelblau/Fortran/logfunc.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/example/himmelblau/Python/logfunc.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/example/himmelblau/input/paramonte.in" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/example/main.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/example/main.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/example/main_mpi.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/example/mvn/Fortran/logfunc.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/example/mvn/Python/logfunc.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/example/mvn/input/paramonte.in" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/install.bat" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/install.bat.usage.txt" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/install.cmake.md" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/install.macos.dynamic.sh" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/install.sh" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/install.sh.usage.txt" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/install.tacc.dynamic.sh" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/pubs/ParaMonte/kernel/JOSS2021/paper.md" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/pubs/ParaMonte/kernel/JOSS2021/sync.sh" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/C++/README.md" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/C/README.md" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Fortran/README.md" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Fortran/paramonte.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/MATLAB/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/MATLAB/README.MatDRAM.md" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/MATLAB/README.md" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/MATLAB/buildParaMonteMATLAB.bat" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/MATLAB/paramonte/vis/colornames/htm/colornames_doc.html" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/MATLAB/paramonte/vis/colornames/license.txt" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/MATLAB/paramonte/vis/export_fig/README.md" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/MATLAB/test/paramonte.in" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/README.md" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/buildParaMontePython.bat" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/_AutoCorr.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/_CorCovMat.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/_OutputFileContents.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/_ParaMonteSampler.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/_ReportFileContents.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/_RestartFileContents.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/_SpecBase.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/_SpecDRAM.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/_SpecMCMC.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/_TabularFileContents.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/_Version.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/_dfutils.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/_message.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/_paradram.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/_paramonte.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/_pmreqs.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/_pmutils.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/mvn.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/vis/DensityPlot.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/vis/EllipsoidPlot.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/vis/GridPlot.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/vis/HeatMapPlot.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/vis/LineScatterPlot.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/vis/Target.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/vis/_BasePlot.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/vis/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/vis/_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/paramonte/vis/kde2d.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/setup/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/setup/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/test/testParaMonte_debug.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/test/testParaMonte_debug_mpi.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/test/testParaMonte_release.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/test/testParaMonte_release_mpi.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/test/testParaMonte_testing.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/interface/Python/test/testParaMonte_testing_mpi.py" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/BandSpectrum_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/BandSpectrum_mod@EnergyFluence_smod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/BandSpectrum_mod@PhotonFluence_smod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/Batse_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/Constants_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/CorrCoef_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/Cosmology_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/CrossCorr_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/DateTime_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/Decoration_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/Decoration_mod@Routines_smod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/Err_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/FileContents_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/FileList_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/File_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/GeoCyclicFit_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/Integration_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/JaggedArray_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/KmeansOOP_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/Kmeans_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/Math_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/Matrix_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/MinVolPartition_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/Misc_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/Optimization_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaDISE_ChainFileContents_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaDISE_ProposalAbstract_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaDISE_ProposalNormal_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaDISE_ProposalUniform_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaDISE_RefinedChain_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaDISE_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaDISE_mod@Input_smod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaDISE_mod@Kernel_smod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaDISE_mod@Postprocess_smod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaDISE_mod@Setup_smod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaDRAM_ChainFileContents_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaDRAM_ProposalAbstract_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaDRAM_ProposalNormal_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaDRAM_ProposalUniform_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaDRAM_RefinedChain_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaDRAM_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaDRAM_mod@Input_smod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaDRAM_mod@Kernel_smod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaDRAM_mod@Postprocess_smod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaDRAM_mod@Setup_smod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaDXXX_Proposal_mod.inc.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaMCMC_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaMonte@runParaDRAM.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaMonteLogFunc_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaMonte_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaNest_ChainFileContents_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaNest_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaNest_mod@Input_smod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaNest_mod@Postprocess_smod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaNest_mod@Setup_smod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaXXXX_ChainFileContents_mod.inc.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaXXXX_ProposalAbstract_mod.inc.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaXXXX_RefinedChain_mod.inc.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaXXXX_mod.inc.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaXXXX_mod@Input_smod.inc.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaXXXX_mod@Input_smod.nml.inc.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaXXXX_mod@Kernel_smod.inc.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaXXXX_mod@Kernel_smod@nextMove.inc.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaXXXX_mod@Postprocess_smod.inc.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ParaXXXX_mod@Setup_smod.inc.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/Parallelism_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/Path_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/QuadPackSPR_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/RandomSeed_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/Sort_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_ChainFileFormat_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_Description_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_DomainLowerLimitVec_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_DomainUpperLimitVec_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_InputFileHasPriority_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_InterfaceType_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_MaxNumDomainCheckToStop_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_MaxNumDomainCheckToWarn_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_MpiFinalizeRequested_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_OutputColumnWidth_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_OutputDelimiter_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_OutputFileName_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_OutputRealPrecision_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_OverwriteRequested_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_ParallelizationModel_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_ProgressReportPeriod_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_RandomSeed_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_RestartFileFormat_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_SampleSize_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_SilentModeRequested_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_SystemInfoFilePath_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_TargetAcceptanceRate_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_VariableNameList_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecBase_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecDRAM_AdaptiveUpdateCount_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecDRAM_AdaptiveUpdatePeriod_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecDRAM_BurninAdaptationMeasure_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecDRAM_DelayedRejectionCount_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecDRAM_DelayedRejectionScaleFactorVec_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecDRAM_GreedyAdaptationCount_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecDRAM_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecMCMC_ChainSize_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecMCMC_ProposalModel_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecMCMC_ProposalStartCorMat_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecMCMC_ProposalStartCovMat_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecMCMC_ProposalStartStdVec_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecMCMC_RandomStartPointDomainLowerLimitVec_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecMCMC_RandomStartPointDomainUpperLimitVec_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecMCMC_RandomStartPointRequested_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecMCMC_SampleRefinementCount_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecMCMC_SampleRefinementMethod_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecMCMC_ScaleFactor_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecMCMC_StartPointVec_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecMCMC_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecNest_AdaptiveUpdateCount_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecNest_AdaptiveUpdatePeriod_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecNest_InclusionFraction_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecNest_LiveSampleSize_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecNest_MahalSqWeightExponent_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecNest_MaxAllowedKmeansFailure_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecNest_MaxAllowedMinVolFailure_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecNest_MaxKvolumeLoopRecursion_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecNest_ProposalModel_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecNest_ScaleFactor_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecNest_StabilizationRequested_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecNest_Tightness_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecNest_Tolerance_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/SpecNest_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/StarFormation_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/Statistics_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/String_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/System_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/TimerCPU_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/Timer_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/TranGaus_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/buildParaMonteKernel.bat" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/filelist.txt" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/ifport.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_BandSpectrum_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_Batse_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_Constants_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_CorrCoef_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_Cosmology_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_CrossCorr_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_DateTime_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_Decoration_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_EconomicsToolbox_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_Err_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_FileContents_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_FileList_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_File_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_GeoCyclicFit_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_Integration_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_KmeansOOP_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_Kmeans_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_Math_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_Matrix_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_Misc_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_Optimization_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_ParaDISE_ChainFileContents_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_ParaDISE_RefinedChain_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_ParaDISE_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_ParaDRAM_ChainFileContents_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_ParaDRAM_RefinedChain_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_ParaDRAM_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_ParaNest_ChainFileContents_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_ParaNest_RefinedChain_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_ParaXXXX_ChainFileContents_mod.inc.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_ParaXXXX_RefinedChain_mod.inc.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_ParaXXXX_mod.inc.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_ParaXXXX_mod@Test_SpecBase_smod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_ParaXXXX_mod@Test_SpecBase_smod.inc.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_ParaXXXX_mod@Test_SpecDRAM_smod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_ParaXXXX_mod@Test_SpecDRAM_smod.inc.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_ParaXXXX_mod@Test_SpecMCMC_smod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_ParaXXXX_mod@Test_SpecMCMC_smod.inc.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_ParaXXXX_mod@Test_runSampler_smod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_ParaXXXX_mod@Test_runSampler_smod.inc.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_Parallelism_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_Path_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_RandomSeed_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_Sort_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_StarFormation_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_Statistics_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_String_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_System_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_TimerCPU_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_Timer_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_TranGaus_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/Test_mod.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/buildParaMonteTest.bat" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/filelist.txt" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/input/Test_Batse_mod@batseDataLGRB1366.in" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/input/Test_Batse_mod@batseDataSGRB565.in" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/input/Test_CrossCorr_mod@AutoCorrFFT@Identity.txt" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/input/Test_CrossCorr_mod@WeightedData.txt" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/input/Test_CrossCorr_mod@WeightedData@AutoCorrFFT@Compact.txt" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/input/Test_CrossCorr_mod@WeightedData@AutoCorrFFT@Verbose.txt" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/input/Test_Kmeans_mod@points.txt" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/input/Test_ParaXXXX_mod@test_runSampler_13.in" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/input/Test_ParaXXXX_mod@test_runSampler_3.in" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/input/Test_ParaXXXX_mod@test_runSampler_5.in" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/input/Test_ParaXXXX_mod@test_runSampler_6.in" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/input/Test_ParaXXXX_mod@test_runSampler_8.in" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/src/kernel/tests/main.f90" />
+    <Text Include="../../thirdparty/owemdjee/paramonte/unconfigParaMonte.bat" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

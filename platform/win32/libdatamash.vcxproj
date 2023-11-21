@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libdatamash</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFBE0A57}</ProjectGuid>
+    <RootNamespace>libdatamash</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAMASH;DATAMASH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAMASH;DATAMASH_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAMASH;DATAMASH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAMASH;DATAMASH_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAMASH;DATAMASH_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAMASH;DATAMASH_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAMASH;DATAMASH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAMASH;DATAMASH_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAMASH;DATAMASH_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAMASH;DATAMASH_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAMASH;DATAMASH_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDATAMASH;DATAMASH_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/datamash/src/column-headers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/datamash/src/crosstab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/datamash/src/datamash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/datamash/src/decorate-functions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/datamash/src/decorate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/datamash/src/double-format.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/datamash/src/field-ops.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/datamash/src/key-compare.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/datamash/src/op-defs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/datamash/src/op-parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/datamash/src/op-scanner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/datamash/src/rand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/datamash/src/randutils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/datamash/src/text-lines.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/datamash/src/text-options.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/datamash/src/utils.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/datamash/src/column-headers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/datamash/src/crosstab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/datamash/src/decorate-functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/datamash/src/die.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/datamash/src/double-format.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/datamash/src/field-ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/datamash/src/key-compare.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/datamash/src/op-defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/datamash/src/op-parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/datamash/src/op-scanner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/datamash/src/randutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/datamash/src/system.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/datamash/src/text-lines.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/datamash/src/text-options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/datamash/src/utils.h" />
+    <Text Include="../../thirdparty/owemdjee/datamash/HACKING.md" />
+    <Text Include="../../thirdparty/owemdjee/datamash/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/datamash/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/datamash/README" />
+    <Text Include="../../thirdparty/owemdjee/datamash/bootstrap.conf" />
+    <Text Include="../../thirdparty/owemdjee/datamash/build-aux/create_corrupted_file_system.sh" />
+    <Text Include="../../thirdparty/owemdjee/datamash/build-aux/create_small_file_system.sh" />
+    <Text Include="../../thirdparty/owemdjee/datamash/build-aux/make-cygwin-dist.sh" />
+    <Text Include="../../thirdparty/owemdjee/datamash/build-aux/make_bin_dist.sh" />
+    <Text Include="../../thirdparty/owemdjee/datamash/build-aux/prerelease-checks.sh" />
+    <Text Include="../../thirdparty/owemdjee/datamash/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/datamash/doc/datamash-texinfo.css" />
+    <Text Include="../../thirdparty/owemdjee/datamash/examples/genes.txt" />
+    <Text Include="../../thirdparty/owemdjee/datamash/examples/genes_h.txt" />
+    <Text Include="../../thirdparty/owemdjee/datamash/examples/make_genes_example.sh" />
+    <Text Include="../../thirdparty/owemdjee/datamash/examples/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/datamash/examples/scores.txt" />
+    <Text Include="../../thirdparty/owemdjee/datamash/examples/scores_h.txt" />
+    <Text Include="../../thirdparty/owemdjee/datamash/hooks/README.md" />
+    <Text Include="../../thirdparty/owemdjee/datamash/hooks/pre-commit.sh" />
+    <Text Include="../../thirdparty/owemdjee/datamash/hooks/setup-hooks.sh" />
+    <Text Include="../../thirdparty/owemdjee/datamash/init.cfg" />
+    <Text Include="../../thirdparty/owemdjee/datamash/man/datamash.x" />
+    <Text Include="../../thirdparty/owemdjee/datamash/man/decorate.x" />
+    <Text Include="../../thirdparty/owemdjee/datamash/man/rand.x" />
+    <Text Include="../../thirdparty/owemdjee/datamash/po/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/datamash/po/POTFILES.in" />
+    <Text Include="../../thirdparty/owemdjee/datamash/po/insert-header.sin" />
+    <Text Include="../../thirdparty/owemdjee/datamash/po/remove-potcdate.sin" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-check-tabular.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-check.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-crosstab.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-error-msgs.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-i18n-de.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-io-errors-cheap.sh" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-io-errors.sh" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-md5.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-output-format.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-pair-tests.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-parser.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-rand.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-rand.sh" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-sha.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-show-env.sh" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-sort-errors.sh" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-sort-header-deprecated.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-sort-header.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-stats.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-strbin.sh" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-tests-2-deprecated.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-tests-2.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-tests-deprecated.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-tests.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-transpose.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-valgrind.sh" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/datamash-vnlog.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/decorate-errors.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/decorate-sort-tests.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/decorate-tests.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/init.sh" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/rand-tests.pl" />
+    <Text Include="../../thirdparty/owemdjee/datamash/tests/test.sh" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

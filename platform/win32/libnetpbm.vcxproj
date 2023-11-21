@@ -1,0 +1,1681 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libnetpbm</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF7223A6}</ProjectGuid>
+    <RootNamespace>libnetpbm</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNETPBM;NETPBM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNETPBM;NETPBM_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNETPBM;NETPBM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNETPBM;NETPBM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNETPBM;NETPBM_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNETPBM;NETPBM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNETPBM;NETPBM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNETPBM;NETPBM_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNETPBM;NETPBM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNETPBM;NETPBM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNETPBM;NETPBM_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNETPBM;NETPBM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/analyzer/pamfile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/analyzer/pamfind.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/analyzer/pamgetcolor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/analyzer/pammosaicknit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/analyzer/pamsharpmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/analyzer/pamsharpness.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/analyzer/pamslice.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/analyzer/pamsumm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/analyzer/pamtable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/analyzer/pamtilt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/analyzer/pbmminkowski.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/analyzer/pgmhist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/analyzer/pgmminkowski.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/analyzer/pgmtexture.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/analyzer/pnmhistmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/analyzer/pnmpsnr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/analyzer/ppmhist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/buildtools/endiangen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/buildtools/genfontc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/buildtools/libopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/buildtools/typegen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/avstopam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/bmptopnm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/cameratopam/camera.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/cameratopam/cameratopam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/cameratopam/canon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/cameratopam/decode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/cameratopam/dng.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/cameratopam/foveon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/cameratopam/identify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/cameratopam/ljpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/cameratopam/stdio_nofail.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/cameratopam/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/exif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/approx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/bintree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/coder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/coeff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/control.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/decoder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/dfiasco.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/domain-pool.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/ip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/motion.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/mwfa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/options.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/prediction.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/subdivide.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/tiling.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/wfalib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/fiascotopnm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/getopt1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/input/basis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/input/matrices.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/input/mc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/input/nd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/input/read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/input/tree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/input/weights.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/lib/arith.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/lib/bit-io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/lib/dither.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/lib/error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/lib/image.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/lib/list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/lib/misc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/lib/mvcode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/lib/rpf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/output/matrices.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/output/mc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/output/nd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/output/tree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/output/weights.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/output/write.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/params.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/pnmtofiasco.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/fitstopnm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/gemtopnm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/giftopnm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/hdifftopam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/infotopam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/ipdb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jbig/jbigtopnm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jbig/libjbig/jbig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jbig/libjbig/jbig_ar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jbig/pnmtojbig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/jpeg2ktopam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/base/jas_debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/base/jas_getopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/base/jas_image.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/base/jas_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/base/jas_malloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/base/jas_seq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/base/jas_stream.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/base/jas_string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/base/jas_tvp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/base/jas_version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jp2/jp2_cod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jp2/jp2_dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jp2/jp2_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_bs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_cs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_math.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_mct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_mqcod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_mqdec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_mqenc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_qmfb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_t1cod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_t1dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_t1enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_t2cod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_t2dec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_t2enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_tagtree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_tsfb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper_compat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/pamtojpeg2k.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpegdatasource.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/jpegtopnm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtoavs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtodjvurle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtofits.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtogif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtohdiff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtohtmltbl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtompfont.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtooctaveimg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtopam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtopdbimg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtopfm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtopng.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtopnm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtoqoi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosrf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/autotrace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/bitmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/curve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/epsilon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/exception.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/fit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/image-proc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/logreport.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/output-svg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/pamtosvg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/point.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/pxl-outline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/spline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/thin-image.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/vector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtotga.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtotiff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtouil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtowinicon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtoxvmini.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pbmtopgm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pdbimgtopam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pfmtopam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pgmtopbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pgmtoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pngtopam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pngtxt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pngx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pnmtoddif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pnmtojpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pnmtopalm/gen_palm_colormap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pnmtopalm/palmcolormap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pnmtopalm/palmtopnm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pnmtopalm/pnmtopalm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pnmtopclxl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pnmtopng.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pnmtops.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pnmtorast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pnmtorle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pnmtosgi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pnmtosir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pnmtotiffcmyk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pnmtoxwd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/ppmtopgm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/pstopnm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/qoitopam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/rast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/rasttopnm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/rlatopam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/rletopnm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/sgitopnm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/sirtopnm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/srf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/srftopam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/sunicontopnm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/svgtopam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/tiff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/tifftopnm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/winicontopam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/xwdtopnm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/yuy2topam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/other/zeisstopnm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/atktopbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/brushtopbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/cistopbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/cmuwmtopbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/ddbugtopbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/escp2topbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/g3prefab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/g3topbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/g3ttable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/macptopbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/mdatopbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/mgrtopbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/mrftopbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmto10x.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmto4425.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoascii.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoatk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtobbnbg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtocis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtocmuwm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtodjvurle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoepsi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoepson.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoescp2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtog3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtogem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtogo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoibm23xx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtolj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoln03.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtolps.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtomacp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtomatrixorbital.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtomda.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtomgr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtomrf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtonokia.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtopi3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtopk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoplot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoppa/cutswath.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoppa/pbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoppa/pbmtoppa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoppa/ppa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtopsg3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoptx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtosunicon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtowbmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoxbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoybm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtozinc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pi3topbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pktopbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/wbmptopbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/xbmtopbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pbm/ybmtopbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pgm/asciitopgm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pgm/bioradtopgm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pgm/fstopgm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pgm/hipstopgm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pgm/lispmtopgm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pgm/pgmtofs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pgm/pgmtolispm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pgm/pgmtopgm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pgm/pgmtosbig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pgm/pgmtost4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pgm/psidtopgm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pgm/rawtopgm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pgm/sbigtopgm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pgm/spottopgm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/pgm/st4topgm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/411toppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/eyuvtoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/gouldtoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ilbmtoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/imgtoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/leaftoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/mtvtoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/neotoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/pc1toppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/pcxtoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/pi1toppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/picttoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/pjtoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtoacad.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtoapplevol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtoarbtxt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtoascii.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtobmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtoeyuv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtogif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtoicr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtoilbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtoleaf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtolj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtomitsu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/bframe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/bitio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/block.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/bsearch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/combine.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/frame.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/frames.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/frametype.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/fsize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/gethostname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/gethostname_win32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/huff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/iframe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/input.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/jpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/jrevdct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/memory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/mfwddct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/mheaders.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/moutput.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/mpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/mquant.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/nojpeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/noparallel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/opts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/parallel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/param.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/pframe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/postdct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/ppmtompeg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/psearch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/psocket.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/qtest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/rate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/readframe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/rgbtoycc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/specifics.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/subsample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtoneo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtopcx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtopi1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtopict.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtopj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtopjxl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtopuzz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtorgb3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtosixel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtospu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtoterm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtowinicon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtoxpm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtoyuv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtoyuvsplit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/qrttoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/rawtoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/rgb3toppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/sldtoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/spctoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/sputoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/tgatoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/vidtoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/winicontoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ximtoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/xpmtoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/xvminitoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/yuvsplittoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/converter/ppm/yuvtoppm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamaddnoise.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamaltsat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pambackground.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pambrighten.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamcat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamcomp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamcut.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamdice.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamditherbw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamedge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamenlarge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamflip/pamflip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamflip/pamflip_sse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamfunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamhomography.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamhue.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamlevels.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pammasksharpen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pammixmulti.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamperspective.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamrecolor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamrestack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamrubber.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamscale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamshuffle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamsistoaglyph.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamstretch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamthreshold.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamundice.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pamwipeout.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pbmclean.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pbmmask.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pbmpscale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pbmreduce.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pgmdeshadow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pgmenhance.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pgmmedian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pnmalias.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pnmconvol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pnmcrop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pnmgamma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pnmhisteq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pnminvert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pnmmontage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pnmnlfilt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pnmnorm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pnmpad.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pnmpaste.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pnmremap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pnmrotate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pnmscalefixed.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pnmshear.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pnmsmooth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pnmstitch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/pnmtile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/ppmchange.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/ppmcolormask.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/ppmdim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/ppmdist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/ppmdither.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/ppmdraw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/ppmflash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/ppmlabel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/ppmmix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/specialty/pamdeinterlace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/specialty/pammixinterlace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/specialty/pamoil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/specialty/pampaintspill.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/specialty/pampop9.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/specialty/pbmlife.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/specialty/pgmabel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/specialty/pgmbentley.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/specialty/pgmmorphconv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/specialty/pnmindex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/specialty/pnmmercator.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/specialty/ppm3d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/specialty/ppmglobe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/specialty/ppmntsc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/specialty/ppmrelief.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/specialty/ppmshift.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/specialty/ppmspread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/editor/specialty/ppmtv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/pamcrater.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/pamgauss.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/pamgradient.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/pamseq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/pamshadedrelief.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/pamstereogram.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/pamtris/boundaries.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/pamtris/framebuffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/pamtris/input.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/pamtris/pamtris.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/pamtris/triangle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/pamtris/utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/pbmmake.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/pbmnoise.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/pbmpage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/pbmtext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/pbmtextps.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/pbmupc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/pgmkernel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/pgmmake.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/pgmnoise.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/pgmramp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/ppmcie.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/ppmcolors.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/ppmforge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/ppmmake.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/ppmpat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/ppmrough.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/generator/ppmwheel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/colorname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/fileio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libpam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libpamcolor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libpamd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libpammap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libpamn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libpamread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libpamwrite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libpbm1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libpbm2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libpbm3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libpbmfont0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libpbmfont1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libpbmfont2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libpbmfontdump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libpgm1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libpgm2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libpm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libpnm1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libpnm2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libpnm3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libppm1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libppm2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libppmcmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libppmcolor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libppmd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libsystem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/libsystem_dummy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/path.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/pbmfontdata0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/pbmfontdata1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/pbmfontdata2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/pmfileio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/ppmdfont.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/standardppmdfont.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/util/bitio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/util/filename.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/util/io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/util/mallocvar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/util/matrix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/util/nsleep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/util/nstring.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/util/rand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/util/randmersenne.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/util/randsysrand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/util/randsysrandom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/util/runlength.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/util/shhopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/util/testnstring.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/util/token.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/lib/util/vasprintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/netpbm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/pamarith.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/pambayer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/pamchannel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/pamdepth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/pamendian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/pamexec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/pamfix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/pamlookup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/pampick.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/pamsplit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/pamstack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/pamsummcol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/pamunlookup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/pamvalidate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/pamx/fill.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/pamx/image.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/pamx/pamx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/pamx/send.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/pamx/window.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/pnmcolormap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/ppmdcfont.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/ppmddumpfont.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/ppmdmkfont.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/other/ppmsvgalib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/test/testrandom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/urt/Runput.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/urt/cmd_name.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/urt/rle_addhist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/urt/rle_getcom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/urt/rle_getrow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/urt/rle_getskip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/urt/rle_global.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/urt/rle_hdr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/urt/rle_open_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/urt/rle_putcom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/urt/rle_putrow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/urt/rle_row_alc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/netpbm/urt/vaxshort.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/bmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/cameratopam/bayer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/cameratopam/camera.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/cameratopam/cameratopam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/cameratopam/canon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/cameratopam/decode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/cameratopam/dng.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/cameratopam/foveon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/cameratopam/global_variables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/cameratopam/identify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/cameratopam/ljpeg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/cameratopam/stdio_nofail.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/cameratopam/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/exif.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/approx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/bintree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/coder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/coeff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/control.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/cwfa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/dfiasco.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/domain-pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/ip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/motion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/mwfa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/prediction.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/subdivide.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/tiling.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/wfa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/codec/wfalib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/fiasco.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/getopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/input/basis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/input/matrices.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/input/mc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/input/nd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/input/read.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/input/tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/input/weights.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/lib/arith.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/lib/bit-io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/lib/dither.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/lib/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/lib/image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/lib/list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/lib/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/lib/misc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/lib/mvcode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/lib/rpf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/lib/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/output/matrices.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/output/mc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/output/nd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/output/tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/output/weights.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/output/write.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/params.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/ipdb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jbig/libjbig/include/jbig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jbig/libjbig/include/jbig_ar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/include/jasper/jas_debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/include/jasper/jas_fix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/include/jasper/jas_getopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/include/jasper/jas_image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/include/jasper/jas_init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/include/jasper/jas_malloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/include/jasper/jas_math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/include/jasper/jas_seq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/include/jasper/jas_stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/include/jasper/jas_string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/include/jasper/jas_tvp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/include/jasper/jas_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/include/jasper/jas_version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/include/jasper/jasper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jp2/jp2_cod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jp2/jp2_dec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_bs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_cod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_cs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_dec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_enc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_fix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_flt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_mct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_mqcod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_mqdec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_mqenc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_qmfb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_t1cod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_t1dec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_t1enc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_t2cod.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_t2dec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_t2enc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_tagtree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_tsfb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/jpc/jpc_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper_compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/jpegdatasource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/autotrace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/bitmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/curve.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/epsilon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/exception.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/fit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/image-header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/image-proc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/logreport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/output-svg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/point.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/pxl-outline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/spline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/thin-image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/pclxl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/pm_tiff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/pngtxt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/pngx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/pnmtopalm/palm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/pnmtopalm/palmcolormap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/qoi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/rast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/rla.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/sgi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/srf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/winicon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/x10wd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/other/x11wd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/pbm/g3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/pbm/g3prefab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/pbm/g3ttable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/pbm/macp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/pbm/mgr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoppa/cutswath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoppa/defaults.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoppa/ppa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoppa/ppapbm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/autocad.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ilbm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/mitsu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/gethostname.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/bitio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/block.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/byteorder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/combine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/dct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/frame.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/frames.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/frametype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/fsize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/general.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/huff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/iframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/input.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/jpeg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/mheaders.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/motion_search.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/mpeg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/mproto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/mtypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/opts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/parallel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/param.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/postdct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/prototypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/psocket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/rate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/readframe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/rgbtoycc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/specifics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/headers/subsample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/winico.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/ppm/xim.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/converter/tga.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/editor/pamflip/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/editor/pamflip/flip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/editor/pamflip/pamflip_sse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/generator/pamtris/boundaries.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/generator/pamtris/framebuffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/generator/pamtris/input.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/generator/pamtris/limits_pamtris.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/generator/pamtris/triangle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/generator/pamtris/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/generator/pamtris/varying.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/colorname.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/dithers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/fileio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/libpam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/libpbm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/libpgm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/libppm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/lum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/pam.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/pamdraw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/pammap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/pbm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/pbmfont.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/pbmfontdata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/pgm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/pm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/pm_gamma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/pm_system.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/pnm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/ppm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/ppmcmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/ppmdfont.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/ppmdraw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/util/bitarith.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/util/bitio.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/util/bitreverse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/util/filename.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/util/floatcode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/util/intcode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/util/io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/util/mallocvar.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/util/matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/util/nsleep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/util/nstring.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/util/pm_c_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/util/rand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/util/runlength.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/util/shhopt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/lib/util/token.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/other/pamx/fill.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/other/pamx/image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/other/pamx/send.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/other/pamx/valtomem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/other/pamx/window.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/other/pamx/ximageinfo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/pm_config.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/urt/Runput.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/urt/rle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/urt/rle_code.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/urt/rle_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/urt/rle_put.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/netpbm/urt/vaxshort.h" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/tst/ts/stennis.30.jpg" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/tst/ts/stennis.31.jpg" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/tst/ts/stennis.32.jpg" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/tst/ts/stennis.33.jpg" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/tst/ts/stennis.34.jpg" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/tst/ts/stennis.35.jpg" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/tst/ts/stennis.36.jpg" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/tst/ts/stennis.37.jpg" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/tst/ts/stennis.38.jpg" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/tst/ts/stennis.39.jpg" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/icon/netpbm.ico" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/userguide/blend1.gif" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/userguide/blend3.gif" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/userguide/blend4.gif" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/userguide/blend6.gif" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/userguide/blend7.gif" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/userguide/globe.jpg" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/userguide/gobot.gif" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/userguide/pamtris_earth.gif" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/userguide/pamtris_fan.png" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/userguide/pamtris_pierce.png" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/userguide/pamtris_polygons.png" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/userguide/pamtris_strip.png" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtompeg-par.gif" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtompeg-snr.gif" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/userguide/testimg.png" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/userguide/testimg_histbar.png" />
+    <Image Include="../../thirdparty/owemdjee/netpbm/userguide/testimg_histdot.png" />
+    <None Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/tst/ts.mpg" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/README" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/buildtools/README.pkg" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/buildtools/configure.pl" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/buildtools/debian/README" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/buildtools/install.sh" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/buildtools/installnetpbm.pl" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/buildtools/make_merge.sh" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/config.mk.in" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/other/README.JPEG" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/README.netpbm" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/other/fiasco/doc/README.LIB" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/other/jbig/README" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/other/jbig/libjbig/jbig.txt" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/other/jpeg2000/libjasper/README" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/other/pamtosvg/README" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/other/pnmtopalm/README" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/other/pstopnm.csh" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/pbm/mdaspec.txt" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoppa/README.Netpbm" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoppa/README.REDHAT" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoppa/pbmtoppa.conf.hp1000" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoppa/pbmtoppa.conf.hp720" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/pbm/pbmtoppa/pbmtoppa.conf.hp820" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/pbm/thinkjettopbm.l" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/hpcdtoppm/README" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/CHANGES" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/docs/parallel.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/docs/template.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/docs/users-guide.ps" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/basicspeed.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/decorig.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/default.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/fastspeed.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/foobar.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/gop1.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/hello.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/ispeed.jpeg.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/ispeed.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/jpeg19.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/jpegout19.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/localdisk.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/luxo.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/luxo18.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/luxo19.5.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/luxo19.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/luxo2.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/luxo48.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/luxo49.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/luxo50.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/luxo52.5.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/luxo52.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/luxo53.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/luxobug.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/luxoskip.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/med.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/med18.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/medspeed.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/nametest.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/nosearch.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/par3.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/par4.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/par5.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/parallel.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/payam.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/payam18.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/pnm.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/ppm.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/prof.b.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/prof.bhalf.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/prof.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/prof.ss.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/prof2.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/prof3.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/prof4.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search1.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search10.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search11.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search12.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search13.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search14.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search15.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search16.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search17.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search18.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search19.5.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search19.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search2.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search20.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search21.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search22.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search23.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search24.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search25.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search26.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search27.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search28.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search29.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search3.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search30.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search31.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search32.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search33.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search34.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search35.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search36.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search37.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search38.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search39.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search4.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search40.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search41.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search42.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search43.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search44.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search45.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search46.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search47.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search48.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search49.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search5.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search50.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search51.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search52.5.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search52.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search53.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search6.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search7.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search8.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/search9.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/seq.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/sequoia.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/sequoia19.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/sequoia2.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/simple.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/slice.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/slimed.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/slowspeed.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/stanford.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/subtest.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/temp.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/template.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/tennis.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/tennis18.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/tennis19.5.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/tennis19.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/tennis48.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/tennis49.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/tennis50.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/tennis52.5.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/tennis52.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/tennis53.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/tennisbug.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/testp.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/walk.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/walk1.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/walk18.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/walk19.5.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/walk19.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/walk2.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/walk3.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/walk4.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/walk48.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/walk49.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/walk5.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/walk50.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/walk52.5.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/walk52.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/walk53.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/examples/walk93.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/parse_huff.pl" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/tst/README" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/tst/gop.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/tst/par3.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/tst/short.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/tst/ts.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/tst/ts2.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/tst/ts3.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/tst/ts4.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/tst/tsd.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/ppmtompeg/tst/tstl.param" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/winico.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/converter/ppm/xpmtoppm.README" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/doc/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/doc/GPL_LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/doc/README.CYGWIN" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/doc/lgpl_v21.txt" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/doc/netpbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/editor/pnmsmooth.README" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/lib/rgb.txt" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/lib/util/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/lib/util/shhopt.README" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/urt/README" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/411toppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/anytopnm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/asciitopgm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/atktopbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/avstopam.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/bioradtopgm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/bmptopnm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/bmptoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/brushtopbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/cameratopam.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/cistopbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/cmuwmtopbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ddbugtopbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/directory.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/escp2topbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/extendedopacity.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/eyuvtoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/faxformat.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/fiascotopnm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/fitstopnm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/fstopgm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/g3topbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/gemtopbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/gemtopnm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/giftopnm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/gouldtoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/hdifftopam.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/hipstopgm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/hpcdtoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/icontopbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ilbmtoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/imgtoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/index.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/infotopam.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/jbigtopnm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/jpeg2ktopam.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/jpegtopnm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/leaftoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/liberror.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/libmaketmpfile.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/libmaketmpfilefd.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/libnetpbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/libnetpbm_dir.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/libnetpbm_draw.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/libnetpbm_font.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/libnetpbm_image.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/libnetpbm_ug.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/libpbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/libpgm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/libpm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/libpnm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/libppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/libsystem.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/libtmpfile.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/libtmpfilefd.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/lispmtopgm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/macptopbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/manweb.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/mdatopbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/mgrtopbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/mrf.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/mrftopbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/mtvtoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/neotoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/palmtopnm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pam.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamaddnoise.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamaltsat.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamarith.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pambackground.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pambayer.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pambrighten.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamcat.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamchannel.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamcomp.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamcrater.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamcut.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamdeinterlace.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamdepth.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamdice.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamditherbw.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamedge.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamendian.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamenlarge.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamexec.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamfile.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamfind.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamfix.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamfixtrunc.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamflip.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamfunc.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamgauss.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamgetcolor.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamgradient.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamhomography.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamhue.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamlevels.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamlookup.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pammasksharpen.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pammixinterlace.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pammixmulti.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pammosaicknit.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamoil.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pampaintspill.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamperspective.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pampick.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pampop9.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamrecolor.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamrestack.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamrgbatopng.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamrubber.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamscale.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamseq.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamshadedrelief.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamsharpmap.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamsharpness.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamshuffle.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamsistoaglyph.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamslice.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamsplit.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamstack.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamstereogram.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamstretch-gen.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamstretch.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamsumm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamsummcol.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtable.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamthreshold.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtilt.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtoavs.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtodjvurle.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtofits.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtogif.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtohdiff.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtohtmltbl.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtojpeg2k.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtompfont.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtooctaveimg.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtopam.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtopdbimg.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtopfm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtopng.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtopnm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtoqoi.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtosrf.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtosvg.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtotga.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtotiff.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtouil.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtowinicon.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtoxvmini.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamtris.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamundice.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamunlookup.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamvalidate.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamwipeout.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pamx.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmclean.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmlife.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmmake.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmmask.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmminkowski.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmnoise.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmpage.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmpscale.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmreduce.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtext.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtextps.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmto10x.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmto4425.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtoascii.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtoatk.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtobbnbg.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtocis.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtocmuwm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtodjvurle.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtoepsi.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtoepson.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtoescp2.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtog3.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtogem.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtogo.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtoibm23xx.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtoicon.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtolj.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtoln03.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtolps.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtomacp.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtomatrixorbital.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtomda.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtomgr.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtomrf.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtonokia.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtopgm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtopi3.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtopk.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtoplot.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtoppa.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtopsg3.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtoptx.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtosunicon.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtowbmp.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtox10bm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtoxbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtoybm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmtozinc.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pbmupc.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pc1toppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pcdindex.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pcdovtoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pcxtoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pdbimgtopam.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pfm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pfmtopam.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmabel.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmbentley.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmcrater.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmdeshadow.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmedge.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmenhance.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmhist.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmkernel.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmmake.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmmedian.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmminkowski.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmmorphconv.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmnoise.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmnorm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmoil.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmramp.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmslice.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmtexture.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmtofs.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmtolispm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmtopbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmtopgm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmtoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmtosbig.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pgmtost4.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pi1toppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pi3topbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/picttoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pjtoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pktopbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pngtopam.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pngtopnm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmalias.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmarith.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmcat.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmcolormap.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmcomp.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmconvol.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmcrop.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmcut.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmdepth.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmenlarge.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmfile.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmflip.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmgamma.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmhisteq.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmhistmap.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmindex.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnminterp.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnminvert.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmmargin.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmmercator.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmmontage.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmnlfilt.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmnoraw.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmnorm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmpad.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmpaste.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmpsnr.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmquant.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmquantall.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmremap.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmrotate.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmscale.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmscalefixed.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmshear.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmsmooth.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmsplit.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmstitch.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmtile.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmtoddif.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmtofiasco.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmtofits.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmtojbig.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmtojpeg.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmtopalm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmtopclxl.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmtoplainpnm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmtopng.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmtopnm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmtops.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmtorast.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmtorle.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmtosgi.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmtosir.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmtotiff.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmtotiffcmyk.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pnmtoxwd.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppm3d.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmbrighten.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmchange.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmcie.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmcolormask.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmcolors.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmdcfont.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmddumpfont.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmdim.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmdist.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmdither.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmdmkfont.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmdraw.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmfade.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmflash.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmforge.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmglobe.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmhist.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmlabel.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmmake.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmmix.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmnorm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmntsc.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmpat.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmquant.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmquantall.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmrainbow.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmrelief.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmrough.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmshadow.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmshift.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmspread.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmsvgalib.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtoacad.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtoapplevol.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtoarbtxt.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtoascii.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtobmp.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtoeyuv.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtogif.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtoicr.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtoilbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtojpeg.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtoleaf.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtolj.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtomap.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtomitsu.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtompeg.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtoneo.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtopcx.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtopgm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtopi1.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtopict.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtopj.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtopjxl.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtopuzz.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtorgb3.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtosixel.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtospu.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtoterm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtotga.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtouil.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtowinicon.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtoxpm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtoyuv.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtoyuvsplit.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmtv.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ppmwheel.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/psidtopgm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/pstopnm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/qoitopam.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/qrttoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/rasttopnm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/rawtopgm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/rawtoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/rgb3toppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/rlatopam.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/rletopnm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/sbigtopgm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/sgitopnm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/sirtopnm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/sldtoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/spctoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/spottopgm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/sputoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/srftopam.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/st4topgm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/sunicontopnm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/svgtopam.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/tgatoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/thinkjettopbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/tifftopnm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/vidtoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/wbmptopbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/winicon.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/winicontopam.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/winicontoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/xbmtopbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ximtoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/xpmtoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/xvminitoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/xwdtopnm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/ybmtopbm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/yuvsplittoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/yuvtoppm.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/yuy2topam.html" />
+    <Text Include="../../thirdparty/owemdjee/netpbm/userguide/zeisstopnm.html" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
