@@ -27,10 +27,10 @@ sources:
     ..\..\thirdparty\mujs\pp.c
     ..\..\source\tools\tesseract_tool.c
 
-	../../source/tools/misctools_main.c
 	../../source/tools/muannot.cpp
 	../../source/tools/mucontent.cpp
 	../../source/tools/muserver.cpp
 	../../source/tools/pdfbake.c
 	../../source/tools/pdfdump.c
-	../../source/tools/rewrite-pdf-outline.c
+	
+	../../source/tools/extract_text.c

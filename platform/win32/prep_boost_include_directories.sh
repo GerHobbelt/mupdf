@@ -29,7 +29,7 @@ for f in $( find ../../../thirdparty/owemdjee/boost -type f \( -name '*.h' -o -n
 // ** DO NOT EDIT ** (adjust the regenerator shell script mentioned above instead!)
 //
 
-#pragma once
+//#pragma once
 
 #include "$f"
 

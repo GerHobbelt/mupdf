@@ -112,7 +112,7 @@
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/owemdjee/sqlite-amalgamation;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/owemdjee/sqlite-amalgamation;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;HAVE_TESSERACT;HAVE_LEPTONICA;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -128,7 +128,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/owemdjee/sqlite-amalgamation;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/owemdjee/sqlite-amalgamation;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;HAVE_TESSERACT;HAVE_LEPTONICA;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -142,7 +142,7 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/owemdjee/sqlite-amalgamation;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/owemdjee/sqlite-amalgamation;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;HAVE_TESSERACT;HAVE_LEPTONICA;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -158,7 +158,7 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/owemdjee/sqlite-amalgamation;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../include;../../thirdparty/mujs;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/owemdjee/sqlite-amalgamation;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/pthread-win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;HAVE_TESSERACT;HAVE_LEPTONICA;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
@@ -170,6 +170,102 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../docs/examples/example.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../docs/examples/multi-threaded.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../docs/examples/storytest.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/base64test.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/cmapdump.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/muconvert.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/mudraw.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/muraster.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/murun.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/mutrace.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/pdfclean.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/pdfcreate.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/pdfextract.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/pdfinfo.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/pdfmerge.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/pdfmetadump.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/pdfpages.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/pdfposter.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/pdfrecolor.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/pdfshow.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/pdfsign.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/pdftrim.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/pdftagged.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/mujs/main.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/mujs/pp.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/tesseract_tool.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/muannot.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/mucontent.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/muserver.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/pdfbake.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/pdfdump.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../source/tools/extract_text.c" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>

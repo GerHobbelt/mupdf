@@ -4,15 +4,25 @@
 
 #pragma message("TODO: implement this tool")
 
+#include "mupdf/helpers/system-header-files.h"
+
 #include "mupdf/mutool.h"
 #include "mupdf/fitz.h"
 #include "mupdf/helpers/dir.h"
-#include "mupdf/helpers/system-header-files.h"
 
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
+
+#include <boost/contract/core/exception.hpp>
+#include <boost/exception/diagnostic_information.hpp>
+#include <boost/config.hpp>
+
 #include <iostream>
+
+#include <exception>
+#include <typeinfo>
+#include <stdexcept>
 
 #include <string.h>
 #include <ctype.h>
@@ -23,6 +33,8 @@
 #include <windows.h>
 #endif
 
+using namespace std;
+using namespace cv;
 
 static inline void memclr(void* ptr, size_t size)
 {
@@ -60,19 +72,22 @@ static void mu_drop_context(void)
 	ctx = NULL;
 }
 
-
-
-void show_wait_destroy(const char* winname, cv::Mat img);
-using namespace std;
-using namespace cv;
-int main(int argc, char** argv)
+static void show_wait_destroy(const char* winname, cv::Mat img) 
 {
-	CommandLineParser parser(argc, argv, "{@input | notes.png | input image}");
-	Mat src = imread( samples::findFile( parser.get<String>("@input") ), IMREAD_COLOR);
+	imshow(winname, img);
+	moveWindow(winname, 500, 0);
+	waitKey(0);
+	destroyWindow(winname);
+}
+
+
+static int do_opencv_threshold_demo(const char* filename)
+{
+	auto path = samples::findFile( filename );
+	Mat src = imread(path, IMREAD_COLOR);
 	if (src.empty())
 	{
 		cout << "Could not open or find the image!\n" << endl;
-		cout << "Usage: " << argv[0] << " <Input image>" << endl;
 		return -1;
 	}
 	// Show source image
@@ -143,12 +158,34 @@ int main(int argc, char** argv)
 	show_wait_destroy("smooth - final", vertical);
 	return 0;
 }
-void show_wait_destroy(const char* winname, cv::Mat img) {
-	imshow(winname, img);
-	moveWindow(winname, 500, 0);
-	waitKey(0);
-	destroyWindow(winname);
+
+static int fz_exec_cpp_code(const char *file)
+{
+	try 
+	{
+		return do_opencv_threshold_demo(file);
+	}
+	catch (std::exception &ex)
+	{
+		std::string msg = ex.what();
+		fz_throw(ctx, FZ_ERROR_GENERIC, msg.c_str());
+	}
+	catch (const std::string& ex) 
+	{
+		std::string msg = ex;
+		fz_throw(ctx, FZ_ERROR_GENERIC, msg.c_str());
+	} 
+	catch (...) 
+	{
+		// as per: https://stackoverflow.com/questions/315948/c-catching-all-exceptions
+		// (adapted and corrected)
+		std::exception_ptr p = std::current_exception();
+		// p.__cxa_exception_type()->name() 
+		auto msg = boost::current_exception_diagnostic_information();
+		fz_throw(ctx, FZ_ERROR_GENERIC, msg.c_str());
+	}
 }
+
 
 
 extern "C" int
@@ -190,104 +227,6 @@ qiqqa_ocr_bezoar_main(int argc, const char** argv)
 
 	if (fz_optind == argc)
 	{
-
-#include <opencv2/core.hpp>
-#include <opencv2/imgproc.hpp>
-#include <opencv2/highgui.hpp>
-#include <iostream>
-		void show_wait_destroy(const char* winname, cv::Mat img);
-		using namespace std;
-		using namespace cv;
-		int main(int argc, char** argv)
-		{
-			CommandLineParser parser(argc, argv, "{@input | notes.png | input image}");
-			Mat src = imread( samples::findFile( parser.get<String>("@input") ), IMREAD_COLOR);
-			if (src.empty())
-			{
-				cout << "Could not open or find the image!\n" << endl;
-				cout << "Usage: " << argv[0] << " <Input image>" << endl;
-				return -1;
-			}
-			// Show source image
-			imshow("src", src);
-			// Transform source image to gray if it is not already
-			Mat gray;
-			if (src.channels() == 3)
-			{
-				cvtColor(src, gray, COLOR_BGR2GRAY);
-			}
-			else
-			{
-				gray = src;
-			}
-			// Show gray image
-			show_wait_destroy("gray", gray);
-			// Apply adaptiveThreshold at the bitwise_not of gray, notice the ~ symbol
-			Mat bw;
-			adaptiveThreshold(~gray, bw, 255, ADAPTIVE_THRESH_MEAN_C, THRESH_BINARY, 15, -2);
-			// Show binary image
-			show_wait_destroy("binary", bw);
-			// Create the images that will use to extract the horizontal and vertical lines
-			Mat horizontal = bw.clone();
-			Mat vertical = bw.clone();
-			// Specify size on horizontal axis
-			int horizontal_size = horizontal.cols / 30;
-			// Create structure element for extracting horizontal lines through morphology operations
-			Mat horizontalStructure = getStructuringElement(MORPH_RECT, Size(horizontal_size, 1));
-			// Apply morphology operations
-			erode(horizontal, horizontal, horizontalStructure, Point(-1, -1));
-			dilate(horizontal, horizontal, horizontalStructure, Point(-1, -1));
-			// Show extracted horizontal lines
-			show_wait_destroy("horizontal", horizontal);
-			// Specify size on vertical axis
-			int vertical_size = vertical.rows / 30;
-			// Create structure element for extracting vertical lines through morphology operations
-			Mat verticalStructure = getStructuringElement(MORPH_RECT, Size(1, vertical_size));
-			// Apply morphology operations
-			erode(vertical, vertical, verticalStructure, Point(-1, -1));
-			dilate(vertical, vertical, verticalStructure, Point(-1, -1));
-			// Show extracted vertical lines
-			show_wait_destroy("vertical", vertical);
-			// Inverse vertical image
-			bitwise_not(vertical, vertical);
-			show_wait_destroy("vertical_bit", vertical);
-			// Extract edges and smooth image according to the logic
-			// 1. extract edges
-			// 2. dilate(edges)
-			// 3. src.copyTo(smooth)
-			// 4. blur smooth img
-			// 5. smooth.copyTo(src, edges)
-			// Step 1
-			Mat edges;
-			adaptiveThreshold(vertical, edges, 255, ADAPTIVE_THRESH_MEAN_C, THRESH_BINARY, 3, -2);
-			show_wait_destroy("edges", edges);
-			// Step 2
-			Mat kernel = Mat::ones(2, 2, CV_8UC1);
-			dilate(edges, edges, kernel);
-			show_wait_destroy("dilate", edges);
-			// Step 3
-			Mat smooth;
-			vertical.copyTo(smooth);
-			// Step 4
-			blur(smooth, smooth, Size(2, 2));
-			// Step 5
-			smooth.copyTo(vertical, edges);
-			// Show final result
-			show_wait_destroy("smooth - final", vertical);
-			return 0;
-		}
-		void show_wait_destroy(const char* winname, cv::Mat img) {
-			imshow(winname, img);
-			moveWindow(winname, 500, 0);
-			waitKey(0);
-			destroyWindow(winname);
-		}
-
-
-
-
-
-
 		fz_error(ctx, "No files specified to process\n\n");
 		usage();
 		return EXIT_FAILURE;
@@ -317,46 +256,7 @@ qiqqa_ocr_bezoar_main(int argc, const char** argv)
 			// load a datafile if we already have a script AND we're in "template mode".
 			datafilename = argv[fz_optind++];
 
-			datafeed = fz_open_file(ctx, datafilename);
-			if (datafeed == NULL)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot open datafile: %s", datafilename);
-
-			// Finalize the hash. BLAKE3_OUT_LEN is the default output length, 32 bytes.
-			uint8_t hashbytes[32] = { 1 };
-			size_t hash_width = 32;
-
-			// Print the hash as hexadecimal.
-			char qhbuf[60];
-			fz_snprintf(qhbuf, sizeof(qhbuf), "%.0H", hashbytes, hash_width);
-			// Now do the Qiqqa b0rk:
-			char* d = qhbuf;
-			char* s = qhbuf;
-			while (*s)
-			{
-				// ditch most-significant-nibbles that are ZERO:
-				if (*s != '0')
-					*d++ = *s++;
-				else
-					s++;
-				*d++ = *s++;
-			}
-			*d = 0;
-
-			// now print the resulting qiqqa hash
-			if (verbosity)
-			{
-				fz_write_printf(ctx, out, "%q: %s\n", datafilename, qhbuf);
-			}
-			else
-			{
-				fz_write_printf(ctx, out, "%s\n", qhbuf);
-			}
-
-			if (datafeed)
-			{
-				fz_drop_stream(ctx, datafeed);
-				datafeed = NULL;
-			}
+			errored = fz_exec_cpp_code(datafilename);
 		}
 	}
 	fz_catch(ctx)

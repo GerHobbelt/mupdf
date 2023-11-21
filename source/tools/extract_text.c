@@ -12,7 +12,31 @@ Unless otherwise stated, all functions return 0 on success or -1 with errno
 set.
 */
 
+
+// prevent link-time duplicate symbol errors in monolithic build mode, due to
+// the quick & dirty original hack to include the stext_device source code file
+// as part of *this* source; that way clashes and nasty surprises lay. But it's 
+// a hacky tool as it is. At least, with these, the stuff compiles once again...
+
+#define fz_parse_stext_options					fz_parse_stext_options2
+#define fz_set_stext_options_images_handler		fz_set_stext_options_images_handler2
+#define fz_copy_stext_options					fz_copy_stext_options2
+#define fz_drop_stext_options					fz_drop_stext_options2
+#define fz_new_stext_device						fz_new_stext_device2
+
+#define fz_add_layout_char						fz_add_layout_char2
+#define fz_add_layout_line						fz_add_layout_line2
+#define fz_drop_layout							fz_drop_layout2
+#define fz_drop_stext_page						fz_drop_stext_page2
+#define fz_get_ligature_replacement				fz_get_ligature_replacement2
+#define fz_is_whitespace						fz_is_whitespace2
+#define fz_new_layout							fz_new_layout2 
+#define fz_new_stext_page						fz_new_stext_page2
+#define fz_stext_options_usage					fz_stext_options_usage2 
+
+
 #include "../../include/mupdf/memento.h"
+#include "../../include/mupdf/mutool.h"
 
 #include "mupdf/fitz.h"
 #include "mupdf/ucdn.h"
@@ -34,6 +58,16 @@ set.
 
 /* Crudely #include the stext-device.c code. */
 #include "../fitz/stext-device.c"
+
+
+// quick porting code for Win32/Win64:
+#if defined(_MSC_VER)
+typedef signed long long int ssize_t;
+
+static void bzero(void *p, size_t len) {
+	memset(p, 0, len);
+}
+#endif
 
 
 /* Use this in preference to strdup() so that Memento works. */
@@ -498,7 +532,7 @@ fz_stext_device, which is returned.
 typedef struct
 {
     fz_stext_page* page;
-    fz_stext_device* dev;
+	fz_stext_device * dev;
 } stext_dev_and_page;
 
 /* Caller should clean up with:
@@ -512,7 +546,7 @@ static stext_dev_and_page spans_to_stext_device(fz_context* ctx, const char* pat
 {
     stext_dev_and_page  dev_page;
     dev_page.page = fz_new_stext_page(ctx, fz_infinite_rect);
-    dev_page.dev = (void*) fz_new_stext_device(ctx, dev_page.page, NULL /*options*/);
+    dev_page.dev = (fz_stext_device *)fz_new_stext_device(ctx, dev_page.page, NULL /*options*/);
 
     FILE* in = pparse_init(path);
     if (!in) {
@@ -617,7 +651,10 @@ static stext_dev_and_page spans_to_stext_device(fz_context* ctx, const char* pat
                 static fz_buffer*   t3procs[256];
                 font->t3procs = t3procs;
 
-                fz_add_stext_char(ctx, dev_page.dev, font, ucs, gid, trm2, adv, wmode);
+				const int bidi = FALSE;
+				const int force_new_line = FALSE;
+
+                fz_add_stext_char(ctx, dev_page.dev, font, ucs, gid, trm2, adv, wmode, bidi, force_new_line);
 
                 /* As of 2020-07-17, fz_add_stext_char() doesn't keep <font>
                 so we leak font here. We could keep track of fonts, but prob
@@ -1010,8 +1047,12 @@ static int docx_create(string_t* content, const char* path_out, const char* path
     if (local_asprintf(&path_tempdir, "%s.dir", path_out) < 0) goto end;
     if (systemf("rm -r '%s' 2>/dev/null", path_tempdir) < 0) goto end;
 
-    if (mkdir(path_tempdir, 0777)) {
-        fprintf(stderr, "%s:%i: Failed to create directory: %s\n",
+#if defined(_MSC_VER)
+	if (mkdir(path_tempdir)) {
+#else
+	if (mkdir(path_tempdir, 0777)) {
+#endif
+			fprintf(stderr, "%s:%i: Failed to create directory: %s\n",
                 __FILE__, __LINE__, path_tempdir);
         goto end;
     }

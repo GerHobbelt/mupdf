@@ -57,6 +57,7 @@
 #include "../../thirdparty/owemdjee/cpp-terminal/examples/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libbf/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libcsv2/include/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/libgif/gif_lib.h"
 #include "../../thirdparty/jbig2dec/monolithic_examples.h"
 #include "../../thirdparty/lcms2/include/monolithic_examples.h"
 #include "../../thirdparty/leptonica/prog/monolithic_examples.h"
@@ -112,6 +113,7 @@ static struct tool_spec {
 	{ {.fa = pdftrim_main }, "trim", "trim PDF page contents" },
 	{ {.fa = pdfbake_main }, "bake", "bake PDF form into static content" },
 	{ {.fa = pdftagged_main }, "tagged", "extract Tagged PDF content" },
+	{ {.fa = mutextextract_main }, "extextract", "Generates a .docx file from mudraw XML output" },
 #endif
 #endif
 #if FZ_ENABLE_JS
@@ -591,6 +593,23 @@ static struct tool_spec {
 	{ {.fa = webp_quality_main }, "webp_quality", "webp_quality tool" },
 	{ {.fa = webpinfo_main }, "webpinfo", "webpinfo tool" },
 	{ {.fa = webpmux_main }, "webpmux", "webpmux tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = gif2rgb_main }, "gif2rgb", "libgif's gif2rgb tool" },
+	{ {.fa = gifbg_main }, "gifbg", "libgif's gifbg tool" },
+	{ {.fa = gifbuild_main }, "gifbuild", "libgif's gifbuild tool" },
+	{ {.fa = gifclrmp_main }, "gifclrmp", "libgif's gifclrmp tool" },
+	{ {.fa = gifcolor_main }, "gifcolor", "libgif's gifcolor tool" },
+	{ {.fa = gifecho_main }, "gifecho", "libgif's gifecho tool" },
+	{ {.fa = giffilter_main }, "giffilter", "libgif's giffilter tool" },
+	{ {.fa = giffix_main }, "giffix", "libgif's giffix tool" },
+	{ {.fa = gifhisto_main }, "gifhisto", "libgif's gifhisto tool" },
+	{ {.fa = gifinto_main }, "gifinto", "libgif's gifinto tool" },
+	{ {.fa = gifsponge_main }, "gifsponge", "libgif's gifsponge tool" },
+	{ {.fa = giftext_main }, "giftext", "libgif's giftext tool" },
+	{ {.fa = giftool_main }, "giftool", "libgif's giftool tool" },
+	{ {.fa = gifwedge_main }, "gifwedge", "libgif's gifwedge tool" },
 #endif
 
 #if defined(MUTOOL_EX)

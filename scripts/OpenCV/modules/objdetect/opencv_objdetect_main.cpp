@@ -5,9 +5,7 @@
 #ifndef _WIN32
 #error "Build configuration error"
 #endif
-#ifndef CVAPI_EXPORTS
-#error "Build configuration error"
-#endif
+#ifdef CVAPI_EXPORTS
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -40,3 +38,5 @@ BOOL WINAPI DllMain(DLL_MAIN_ARG0, DWORD fdwReason, LPVOID lpReserved)
     }
     return TRUE;
 }
+
+#endif
