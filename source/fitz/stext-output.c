@@ -149,9 +149,34 @@ fz_print_style_end_html(fz_context *ctx, fz_output *out, fz_font *font, float si
 }
 
 static void
-fz_print_stext_image_as_html(fz_context *ctx, fz_output *out, fz_stext_block *block)
+fz_print_anchor_begin_html(fz_context *ctx, fz_output *out, fz_link *link, int notabindex)
+{
+	fz_write_printf(ctx, out, "<a href=\"%s\"", link->uri);
+	if (notabindex)
+		fz_write_string(ctx, out, " tabindex=\"-1\"");
+	fz_write_string(ctx, out, ">");
+}
+
+static void
+fz_print_anchor_end_html(fz_context *ctx, fz_output *out)
+{
+	fz_write_string(ctx, out, "</a>");
+}
+
+static void
+fz_print_stext_image_as_html(fz_context *ctx, fz_output *out, fz_stext_block *block, fz_link *first_link)
 {
 	fz_matrix ctm = block->u.i.transform;
+	fz_link *link;
+
+	for (link = first_link; link; link = link->next)
+	{
+		if (fz_is_quad_intersecting_quad(fz_quad_from_rect(block->bbox), fz_quad_from_rect(link->rect)))
+		{
+			fz_print_anchor_begin_html(ctx, out, link, 1);
+			break;
+		}
+	}
 
 #define USE_CSS_MATRIX_TRANSFORMS
 #ifdef USE_CSS_MATRIX_TRANSFORMS
@@ -274,11 +299,19 @@ fz_print_stext_image_as_html(fz_context *ctx, fz_output *out, fz_stext_block *bl
 	fz_write_printf(ctx, out, "<img style=\"position:absolute;%stop:%dpt;left:%dpt;width:%dpt;height:%dpt\" src=\"", flip, y, x, w, h);
 #endif
 	fz_write_image_as_data_uri(ctx, out, block->u.i.image);
-	fz_write_string(ctx, out, "\">\n");
+
+	if (link)
+	{
+		fz_write_string(ctx, out, "\" tabindex=\"0\">");
+		fz_print_anchor_end_html(ctx, out);
+		fz_write_string(ctx, out, "\n");
+	}
+	else
+		fz_write_string(ctx, out, "\">\n");
 }
 
 void
-fz_print_stext_block_as_html(fz_context *ctx, fz_output *out, fz_stext_block *block)
+fz_print_stext_block_as_html(fz_context *ctx, fz_output *out, fz_stext_block *block, fz_link *first_link)
 {
 	fz_stext_line *line;
 	fz_stext_char *ch;
@@ -291,6 +324,9 @@ fz_print_stext_block_as_html(fz_context *ctx, fz_output *out, fz_stext_block *bl
 
 	for (line = block->u.t.first_line; line; line = line->next)
 	{
+		fz_link *curr_link = NULL;
+		int is_link_open = 0;
+
 		x = line->bbox.x0;
 		y = line->bbox.y0;
 		h = line->bbox.y1 - line->bbox.y0;
@@ -306,16 +342,74 @@ fz_print_stext_block_as_html(fz_context *ctx, fz_output *out, fz_stext_block *bl
 
 		for (ch = line->first_char; ch; ch = ch->next)
 		{
+			int link_flags = 0;
+			fz_link *link = NULL, *next_link = NULL;
+			fz_rect ch_rect = fz_rect_from_quad(ch->quad);
 			int ch_sup = detect_super_script(line, ch);
+
+			fz_point important_point = fz_make_point(
+				(ch_rect.x0 + ch_rect.x1) / 2,
+				(ch_rect.y0 + ch_rect.y1) / 2
+			);
+
+			for (link = first_link; link; link = link->next)
+			{
+				if (important_point.x >= link->rect.x0 &&
+					important_point.y >= link->rect.y0 &&
+					important_point.x <= link->rect.x1 &&
+					important_point.y <= link->rect.y1)
+				{
+					next_link = link;
+					break;
+				}
+			}
+
+			if (next_link != curr_link)
+			{
+				if (curr_link)
+					/* Turn on the flag to close anchor. */
+					link_flags |= 1;
+				if (next_link)
+					/* Turn on the flag to open anchor. */
+					link_flags |= 2;
+				curr_link = next_link;
+			}
+
 			if (ch->font != font || ch->size != size || ch_sup != sup || ch->color != color)
 			{
 				if (font)
 					fz_print_style_end_html(ctx, out, font, size, sup, color);
+
+				if (link_flags & 1)
+				{
+					fz_print_anchor_end_html(ctx, out);
+					is_link_open = 0;
+				}
+
+				if (link_flags & 2)
+				{
+					fz_print_anchor_begin_html(ctx, out, curr_link, 0);
+					is_link_open = 1;
+				}
+
 				font = ch->font;
 				size = ch->size;
 				color = ch->color;
 				sup = ch_sup;
 				fz_print_style_begin_html(ctx, out, font, size, sup, color);
+			}
+			else {
+				if (link_flags & 1)
+				{
+					fz_print_anchor_end_html(ctx, out);
+					is_link_open = 0;
+				}
+
+				if (link_flags & 2)
+				{
+					fz_print_anchor_begin_html(ctx, out, curr_link, 0);
+					is_link_open = 1;
+				}
 			}
 
 			switch (ch->c)
@@ -337,29 +431,50 @@ fz_print_stext_block_as_html(fz_context *ctx, fz_output *out, fz_stext_block *bl
 		if (font)
 			fz_print_style_end_html(ctx, out, font, size, sup, color);
 
+		if (is_link_open)
+			fz_print_anchor_end_html(ctx, out);
+
 		fz_write_string(ctx, out, "</p>\n");
 	}
 }
 
 void
-fz_print_stext_page_as_html(fz_context *ctx, fz_output *out, fz_stext_page *page, int id)
+fz_print_stext_page_as_html_with_links(fz_context *ctx, fz_output *out, fz_stext_page *page, int id, fz_link *first_link, fz_navigation *first_navigation)
 {
 	fz_stext_block *block;
+	fz_navigation *navigation;
 
 	float w = page->mediabox.x1 - page->mediabox.x0;
 	float h = page->mediabox.y1 - page->mediabox.y0;
 
 	fz_write_printf(ctx, out, "<div id=\"page%d\" style=\"width:%.1fpt;height:%.1fpt\">\n", id, w, h);
 
+	for (navigation = first_navigation; navigation; navigation = navigation->next)
+	{
+		char *uri = navigation->uri;
+		if (uri)
+		{
+			if (*uri == '#')
+				uri++;
+			fz_write_printf(ctx, out, "<a name=\"%s\" style=\"top:%.1fpt;left:%.1fpt;\"></a>\n", uri, navigation->dest.y, navigation->dest.x);
+		}
+	}
+
 	for (block = page->first_block; block; block = block->next)
 	{
 		if (block->type == FZ_STEXT_BLOCK_IMAGE)
-			fz_print_stext_image_as_html(ctx, out, block);
+			fz_print_stext_image_as_html(ctx, out, block, first_link);
 		else if (block->type == FZ_STEXT_BLOCK_TEXT)
-			fz_print_stext_block_as_html(ctx, out, block);
+			fz_print_stext_block_as_html(ctx, out, block, first_link);
 	}
 
 	fz_write_string(ctx, out, "</div>\n");
+}
+
+void
+fz_print_stext_page_as_html(fz_context *ctx, fz_output *out, fz_stext_page *page, int id)
+{
+	fz_print_stext_page_as_html_with_links(ctx, out, page, id, NULL, NULL);
 }
 
 void
@@ -372,6 +487,8 @@ fz_print_stext_header_as_html(fz_context *ctx, fz_output *out)
 	fz_write_string(ctx, out, "body{background-color:slategray}\n");
 	fz_write_string(ctx, out, "div{position:relative;background-color:white;margin:1em auto;box-shadow:1px 1px 8px -2px black}\n");
 	fz_write_string(ctx, out, "p{position:absolute;white-space:pre;margin:0}\n");
+	fz_write_string(ctx, out, "a{color:inherit;text-decoration:inherit}a:visited{color:inherit}a:hover{color:inherit}\n");
+	fz_write_string(ctx, out, "a[name]{position:absolute}\n");
 	fz_write_string(ctx, out, "</style>\n");
 	fz_write_string(ctx, out, "</head>\n");
 	fz_write_string(ctx, out, "<body>\n");

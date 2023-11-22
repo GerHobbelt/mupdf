@@ -32,6 +32,7 @@
 #include "mupdf/fitz/output.h"
 #include "mupdf/fitz/device.h"
 #include "mupdf/fitz/pool.h"
+#include "mupdf/fitz/link.h"
 
 /**
 	Simple text layout (for use with annotation editing primarily).
@@ -211,6 +212,7 @@ void fz_drop_stext_page(fz_context *ctx, fz_stext_page *page);
 /**
 	Output structured text to a file in HTML (visual) format.
 */
+void fz_print_stext_page_as_html_with_links(fz_context *ctx, fz_output *out, fz_stext_page *page, int id, fz_link *first_link, fz_navigation *navigation);
 void fz_print_stext_page_as_html(fz_context *ctx, fz_output *out, fz_stext_page *page, int id);
 void fz_print_stext_header_as_html(fz_context *ctx, fz_output *out);
 void fz_print_stext_trailer_as_html(fz_context *ctx, fz_output *out);

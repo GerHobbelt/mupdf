@@ -327,6 +327,7 @@ static int showmd5 = 0;
 static pdf_document *pdfout = NULL;
 #endif
 
+static int make_hyperlinks = 0;
 static int no_icc = 0;
 static int ignore_errors = 0;
 static int uselist = 1;
@@ -387,6 +388,7 @@ static struct {
 	fz_page *page;
 	int interptime;
 	fz_separations *seps;
+	fz_navigation *pagenav;
 } bgprint;
 
 static struct {
@@ -465,6 +467,7 @@ static int usage(void)
 #else
 		"\t-P\tparallel interpretation/rendering (disabled in this non-threading build)\n"
 #endif
+		"\t-x\tenable making hyperlinks (html output only)\n"
 		"\t-N\tdisable ICC workflow (\"N\"o color management)\n"
 		"\t-O -\tControl spot/overprint rendering\n"
 #if FZ_ENABLE_SPOT_RENDERING
@@ -660,7 +663,7 @@ static void drawband(fz_context *ctx, fz_page *page, fz_display_list *list, fz_m
 	}
 }
 
-static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, int pagenum, fz_cookie *cookie, int start, int interptime, char *fname, int bg, fz_separations *seps)
+static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, int pagenum, fz_cookie *cookie, int start, int interptime, char *fname, int bg, fz_separations *seps, fz_navigation *pagenav)
 {
 	fz_rect mediabox;
 	fz_device *dev = NULL;
@@ -799,6 +802,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		float zoom;
 		fz_matrix ctm;
 		fz_device *pre_ocr_dev = NULL;
+		fz_link *pagelinks = NULL;
 		fz_rect tmediabox;
 
 		zoom = resolution / 72;
@@ -806,6 +810,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 
 		fz_var(text);
 		fz_var(pre_ocr_dev);
+		fz_var(pagelinks);
 
 		fz_try(ctx)
 		{
@@ -860,7 +865,13 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			}
 			else if (output_format == OUT_HTML || output_format == OUT_OCR_HTML)
 			{
-				fz_print_stext_page_as_html(ctx, out, text, pagenum);
+				if (make_hyperlinks)
+				{
+					pagelinks = fz_load_links(ctx, page);
+					fz_print_stext_page_as_html_with_links(ctx, out, text, pagenum, pagelinks, pagenav);
+				}
+				else
+					fz_print_stext_page_as_html_with_links(ctx, out, text, pagenum, NULL, NULL);
 			}
 			else if (output_format == OUT_XHTML || output_format == OUT_OCR_XHTML)
 			{
@@ -874,6 +885,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 		}
 		fz_always(ctx)
 		{
+			fz_drop_link(ctx, pagelinks);
 			fz_drop_device(ctx, pre_ocr_dev);
 			fz_drop_device(ctx, dev);
 			fz_drop_stext_page(ctx, text);
@@ -1314,7 +1326,7 @@ static void bgprint_flush(void)
 	bgprint.started = 0;
 }
 
-static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
+static void drawpage(fz_context *ctx, fz_document *doc, int pagenum, fz_navigation *pagenav)
 {
 	fz_page *page;
 	fz_display_list *list = NULL;
@@ -1465,11 +1477,13 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 			bgprint.page = page;
 			bgprint.list = list;
 			bgprint.seps = seps;
+			bgprint.pagenav = pagenav;
 			bgprint.filename = filename;
 			bgprint.pagenum = pagenum;
 			bgprint.interptime = start;
 			bgprint.error = 0;
 #ifndef DISABLE_MUTHREADS
+			fz_keep_navigation(ctx, bgprint.pagenav);
 			mu_trigger_semaphore(&bgprint.start);
 #else
 			fz_drop_display_list(ctx, list);
@@ -1483,7 +1497,7 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 		if (!quiet || showfeatures || showtime || showmd5)
 			fprintf(stderr, "page %s %d%s", filename, pagenum, features);
 		fz_try(ctx)
-			dodrawpage(ctx, page, list, pagenum, &cookie, start, 0, filename, 0, seps);
+			dodrawpage(ctx, page, list, pagenum, &cookie, start, 0, filename, 0, seps, pagenav);
 		fz_always(ctx)
 		{
 			fz_drop_display_list(ctx, list);
@@ -1499,9 +1513,57 @@ static void drawpage(fz_context *ctx, fz_document *doc, int pagenum)
 
 static void drawrange(fz_context *ctx, fz_document *doc, const char *range)
 {
+	fz_navigation **navigations = NULL;
 	int page, spage, epage, pagecount;
 
 	pagecount = fz_count_pages(ctx, doc);
+
+	if (make_hyperlinks) {
+		navigations = fz_malloc_array(ctx, pagecount, fz_navigation*);
+
+		for (page = 0; page < pagecount; page++)
+			navigations[page] = NULL;
+
+		for (page = 0; page < pagecount; page++)
+		{
+			fz_page *page_loaded = NULL;
+			fz_var(page_loaded);
+			fz_try(ctx)
+			{
+				fz_link *first_link, *link;
+				fz_link_dest dest;
+				page_loaded = fz_load_page(ctx, doc, page);
+				first_link = fz_load_links(ctx, page_loaded);
+				for (link = first_link; link; link = link->next)
+				{
+					if (!link->uri || fz_is_external_link(ctx, link->uri))
+						continue;
+					dest = fz_resolve_link_dest(ctx, doc, link->uri);
+					if (dest.loc.page >= 0 && dest.loc.page < pagecount)
+						fz_add_navigation(ctx, dest, link->uri, &navigations[dest.loc.page]);
+				}
+			}
+			fz_always(ctx)
+			{
+				fz_drop_page(ctx, page_loaded);
+			}
+			fz_catch(ctx)
+			{
+				if (ignore_errors)
+					fz_warn(ctx, "ignoring error on page %d in '%s'", page, filename);
+				else
+				{
+					if (navigations)
+					{
+						for (int i = 0; i < pagecount; ++i)
+							fz_drop_navigation(ctx, navigations[i]);
+						fz_free(ctx, navigations);
+					}
+					fz_rethrow(ctx);
+				}
+			}
+		}
+	}
 
 	while ((range = fz_parse_page_range(ctx, range, &spage, &epage, pagecount)))
 	{
@@ -1509,28 +1571,51 @@ static void drawrange(fz_context *ctx, fz_document *doc, const char *range)
 			for (page = spage; page <= epage; page++)
 			{
 				fz_try(ctx)
-					drawpage(ctx, doc, page);
+					drawpage(ctx, doc, page, navigations ? navigations[page - 1] : NULL);
 				fz_catch(ctx)
 				{
 					if (ignore_errors)
 						fz_warn(ctx, "ignoring error on page %d in '%s'", page, filename);
 					else
+					{
+						if (navigations)
+						{
+							for (int i = 0; i < pagecount; ++i)
+								fz_drop_navigation(ctx, navigations[i]);
+							fz_free(ctx, navigations);
+						}
 						fz_rethrow(ctx);
+					}
 				}
 			}
 		else
 			for (page = spage; page >= epage; page--)
 			{
 				fz_try(ctx)
-					drawpage(ctx, doc, page);
+					drawpage(ctx, doc, page, navigations ? navigations[page - 1] : NULL);
 				fz_catch(ctx)
 				{
 					if (ignore_errors)
 						fz_warn(ctx, "ignoring error on page %d in '%s'", page, filename);
 					else
+					{
+						if (navigations)
+						{
+							for (int i = 0; i < pagecount; ++i)
+								fz_drop_navigation(ctx, navigations[i]);
+							fz_free(ctx, navigations);
+						}
 						fz_rethrow(ctx);
+					}
 				}
 			}
+	}
+
+	if (navigations)
+	{
+		for (int i = 0; i < pagecount; ++i)
+			fz_drop_navigation(ctx, navigations[i]);
+		fz_free(ctx, navigations);
 	}
 }
 
@@ -1713,13 +1798,14 @@ static void bgprint_worker(void *arg)
 			memset(&cookie, 0, sizeof(cookie));
 			fz_try(bgprint.ctx)
 			{
-				dodrawpage(bgprint.ctx, bgprint.page, bgprint.list, pagenum, &cookie, start, bgprint.interptime, bgprint.filename, 1, bgprint.seps);
+				dodrawpage(bgprint.ctx, bgprint.page, bgprint.list, pagenum, &cookie, start, bgprint.interptime, bgprint.filename, 1, bgprint.seps, bgprint.pagenav);
 				DEBUG_THREADS(("BGPrint completed page %d\n", pagenum));
 			}
 			fz_always(bgprint.ctx)
 			{
 				fz_drop_display_list(bgprint.ctx, bgprint.list);
 				fz_drop_separations(bgprint.ctx, bgprint.seps);
+				fz_drop_navigation(bgprint.ctx, bgprint.pagenav);
 				fz_drop_page(bgprint.ctx, bgprint.page);
 			}
 			fz_catch(bgprint.ctx)
@@ -2028,7 +2114,7 @@ int mudraw_main(int argc, char **argv)
 
 	fz_var(doc);
 
-	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:d:U:XLvPl:y:Yz:Z:NO:am:Kb:")) != -1)
+	while ((c = fz_getopt(argc, argv, "qp:o:F:R:r:w:h:fB:c:e:G:Is:A:DiW:H:S:T:t:d:U:XLvPl:y:Yz:Z:xNO:am:Kb:")) != -1)
 	{
 		switch (c)
 		{
@@ -2097,6 +2183,7 @@ int mudraw_main(int argc, char **argv)
 		case 'D': uselist = 0; break;
 		case 'l': min_line_width = fz_atof(fz_optarg); break;
 		case 'i': ignore_errors = 1; break;
+		case 'x': make_hyperlinks = 1; break;
 		case 'N': no_icc = 1; break;
 
 		case 'T':
@@ -2304,6 +2391,31 @@ int mudraw_main(int argc, char **argv)
 					}
 					i = -1;
 				}
+			}
+		}
+
+		if (make_hyperlinks)
+		{
+			if (output_format != OUT_HTML &&
+				output_format != OUT_OCR_HTML)
+			{
+				fprintf(stderr, "Making hyperlinks only possible in HTML output\n");
+				exit(1);
+			}
+			if (kill == 1 || kill == 2)
+			{
+				fprintf(stderr, "No sense in making hyperlinks if the switch -K or -KK is used\n");
+				exit(1);
+			}
+			if (rotation)
+			{
+				fprintf(stderr, "Unable to make hyperlinks if rotation is used\n");
+				exit(1);
+			}
+			if (res_specified && resolution != 72)
+			{
+				fprintf(stderr, "Unable to make hyperlinks if non-default resolution is specified\n");
+				exit(1);
 			}
 		}
 
