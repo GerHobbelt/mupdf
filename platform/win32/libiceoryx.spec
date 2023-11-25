@@ -11,4 +11,6 @@ also-ignore:
 	mac/
 	unix/
 	
+	iceoryx_platform/freertos/
+	
 	

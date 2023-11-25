@@ -19,34 +19,34 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>libglfw</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF878BBF}</ProjectGuid>
-    <RootNamespace>libglfw</RootNamespace>
+    <ProjectName>glfw_tests</ProjectName>
+    <ProjectGuid>{A8FEE663-05F1-4F2C-A80A-38A0A2E75E94}</ProjectGuid>
+    <RootNamespace>glfw_tests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
@@ -126,14 +126,15 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/glfw/;../../thirdparty/owemdjee/getopt;....includesystem-override;../../thirdparty/owemdjee/glfw/deps;../../thirdparty/owemdjee/glfw/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_GLFW_USE_CONFIG_H;BUILD_MONOLITHIC;BUILDING_LIBGLFW;GLFW_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/glfw/examples;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLFW;GLFW_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PreprocessKeepComments>true</PreprocessKeepComments>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLFW;GLFW_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/glfw/;../../thirdparty/owemdjee/getopt;....includesystem-override;../../thirdparty/owemdjee/glfw/deps;../../thirdparty/owemdjee/glfw/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/glfw/examples;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -141,6 +142,12 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;Shlwapi.lib;glu32.lib;opengl32.lib;gdi32.lib;winmm.lib;user32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+              <EnableCOMDATFolding>true</EnableCOMDATFolding>
+              <OptimizeReferences>true</OptimizeReferences>
+              <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
@@ -152,15 +159,16 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/glfw/;../../thirdparty/owemdjee/getopt;....includesystem-override;../../thirdparty/owemdjee/glfw/deps;../../thirdparty/owemdjee/glfw/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_GLFW_USE_CONFIG_H;BUILD_MONOLITHIC;BUILDING_LIBGLFW;GLFW_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/glfw/examples;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLFW;GLFW_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PreprocessKeepComments>true</PreprocessKeepComments>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLFW;GLFW_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/glfw/;../../thirdparty/owemdjee/getopt;....includesystem-override;../../thirdparty/owemdjee/glfw/deps;../../thirdparty/owemdjee/glfw/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/glfw/examples;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -168,6 +176,12 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;Shlwapi.lib;glu32.lib;opengl32.lib;gdi32.lib;winmm.lib;user32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+              <EnableCOMDATFolding>true</EnableCOMDATFolding>
+              <OptimizeReferences>true</OptimizeReferences>
+              <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -181,14 +195,15 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/glfw/;../../thirdparty/owemdjee/getopt;....includesystem-override;../../thirdparty/owemdjee/glfw/deps;../../thirdparty/owemdjee/glfw/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_GLFW_USE_CONFIG_H;BUILD_MONOLITHIC;BUILDING_LIBGLFW;GLFW_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/glfw/examples;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLFW;GLFW_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PreprocessKeepComments>true</PreprocessKeepComments>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLFW;GLFW_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/glfw/;../../thirdparty/owemdjee/getopt;....includesystem-override;../../thirdparty/owemdjee/glfw/deps;../../thirdparty/owemdjee/glfw/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/glfw/examples;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -196,6 +211,12 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;Shlwapi.lib;glu32.lib;opengl32.lib;gdi32.lib;winmm.lib;user32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+              <EnableCOMDATFolding>true</EnableCOMDATFolding>
+              <OptimizeReferences>true</OptimizeReferences>
+              <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -207,15 +228,16 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/glfw/;../../thirdparty/owemdjee/getopt;....includesystem-override;../../thirdparty/owemdjee/glfw/deps;../../thirdparty/owemdjee/glfw/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_GLFW_USE_CONFIG_H;BUILD_MONOLITHIC;BUILDING_LIBGLFW;GLFW_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/glfw/examples;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLFW;GLFW_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PreprocessKeepComments>true</PreprocessKeepComments>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGLFW;GLFW_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/glfw/;../../thirdparty/owemdjee/getopt;....includesystem-override;../../thirdparty/owemdjee/glfw/deps;../../thirdparty/owemdjee/glfw/include;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/glfw/examples;../../thirdparty/monolithic_tmplt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -223,121 +245,39 @@
     <Bscmake>
       <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;Normaliz.lib;Shlwapi.lib;glu32.lib;opengl32.lib;gdi32.lib;winmm.lib;user32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+              <EnableCOMDATFolding>true</EnableCOMDATFolding>
+              <OptimizeReferences>true</OptimizeReferences>
+              <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+    </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/deps/getopt.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/deps/tinycthread.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/examples/boing.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/examples/gears.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/examples/heightmap.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/examples/monolithic_gle2_implementation.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/examples/monolithic_glfw_implementation.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/examples/monolithic_main.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/examples/monolithic_nuklear_implementation.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/examples/monolithic_vulkan_implementation.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/examples/offscreen.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/examples/particles.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/examples/sharing.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/examples/splitview.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/examples/triangle-opengl.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/examples/triangle-opengles.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/examples/wave.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/examples/windows.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/cocoa_time.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/context.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/egl_context.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/glx_context.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/init.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/input.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/linux_joystick.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/monitor.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/null_init.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/null_joystick.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/null_monitor.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/null_window.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/osmesa_context.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/platform.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/posix_module.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/posix_poll.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/posix_thread.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/posix_time.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/vulkan.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/wgl_context.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/win32_init.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/win32_joystick.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/win32_module.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/win32_monitor.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/win32_thread.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/win32_time.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/win32_window.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/window.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/wl_init.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/wl_monitor.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/wl_window.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/x11_init.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/x11_monitor.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/x11_window.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/src/xkb_unicode.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/tests/allocator.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/tests/clipboard.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/tests/cursor.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/tests/empty.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/tests/events.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/tests/gamma.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/tests/glfwindow.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/tests/glfwinfo.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/tests/icon.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/tests/iconify.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/tests/inputlag.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/tests/joysticks.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/tests/monitors.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/tests/msaa.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/tests/reopen.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/tests/tearing.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/tests/threads.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/tests/timeout.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/tests/title.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/glfw/tests/triangle-vulkan.c" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/deps/getopt.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/deps/glad/gl.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/deps/glad/gles2.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/deps/glad/vulkan.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/deps/linmath.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/deps/mingw/_mingw_dxhelper.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/deps/mingw/dinput.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/deps/mingw/xinput.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/deps/nuklear.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/deps/nuklear_glfw_gl2.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/deps/stb_image_write.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/deps/tinycthread.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/deps/vs2008/stdint.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/examples/monolithic_examples.h" />
+    <ProjectReference Include="libgetopt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518110e57b1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libglfw.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff878bbf}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf_default_handlers.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-1222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf_minimal_core.vcxproj">
+      <Project>{6f1ee8ba-ccb7-4f76-b9da-337c41dd6fc0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../scripts/glfw/tests_main.c" />
+  </ItemGroup>
+  <ItemGroup>
     <ClInclude Include="../../thirdparty/owemdjee/glfw/include/GLFW/glfw3.h" />
     <ClInclude Include="../../thirdparty/owemdjee/glfw/include/GLFW/glfw3native.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/src/cocoa_joystick.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/src/cocoa_platform.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/src/cocoa_time.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/src/internal.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/src/linux_joystick.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/src/mappings.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/src/null_joystick.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/src/null_platform.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/src/platform.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/src/posix_poll.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/src/posix_thread.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/src/posix_time.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/src/win32_joystick.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/src/win32_platform.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/src/win32_thread.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/src/win32_time.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/src/wl_platform.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/src/x11_platform.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/glfw/src/xkb_unicode.h" />
-    <Image Include="../../thirdparty/owemdjee/glfw/examples/glfw.ico" />
-    <ResourceCompile Include="../../thirdparty/owemdjee/glfw/examples/glfw.rc" />
     <Text Include="../../thirdparty/owemdjee/glfw/CMake/GenerateMappings.cmake" />
     <Text Include="../../thirdparty/owemdjee/glfw/CMake/Info.plist.in" />
     <Text Include="../../thirdparty/owemdjee/glfw/CMake/cmake_uninstall.cmake.in" />
@@ -375,12 +315,6 @@
     <Text Include="../../thirdparty/owemdjee/glfw/docs/quick.dox" />
     <Text Include="../../thirdparty/owemdjee/glfw/docs/vulkan.dox" />
     <Text Include="../../thirdparty/owemdjee/glfw/docs/window.dox" />
-    <Text Include="../../thirdparty/owemdjee/glfw/examples/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/glfw/examples/glfw.icns" />
-    <Text Include="../../thirdparty/owemdjee/glfw/src/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/glfw/src/glfw.rc.in" />
-    <Text Include="../../thirdparty/owemdjee/glfw/src/mappings.h.in" />
-    <Text Include="../../thirdparty/owemdjee/glfw/tests/CMakeLists.txt" />
     <Xml Include="../../thirdparty/owemdjee/glfw/docs/DoxygenLayout.xml" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" >

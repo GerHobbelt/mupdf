@@ -50,20 +50,20 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -89,7 +89,7 @@
     <NMakeOutput>__build_target.exe</NMakeOutput>
     <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -123,8 +123,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Technology.Tests\forking cleans up memory leaks\forking cleans up memory leaks.vcxproj">
@@ -163,6 +163,9 @@
     <ProjectReference Include="gflags.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff634baa}</Project>
     </ProjectReference>
+    <ProjectReference Include="glfw_tests.vcxproj">
+      <Project>{a8fee663-05f1-4f2c-a80a-38a0a2e75e94}</Project>
+    </ProjectReference>
     <ProjectReference Include="glob.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff17062e}</Project>
     </ProjectReference>
@@ -181,6 +184,12 @@
     <ProjectReference Include="libargparse.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffaece6d}</Project>
     </ProjectReference>
+    <ProjectReference Include="libassert.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffea6c7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libassert_tests.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffab2cb1}</Project>
+    </ProjectReference>
     <ProjectReference Include="libbase58x.vcxproj">
       <Project>{0501bedf-3191-46a9-9997-288466675b82}</Project>
     </ProjectReference>
@@ -189,6 +198,9 @@
     </ProjectReference>
     <ProjectReference Include="libbf_tests.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffd7494b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbhtsne--Barnes-Hut-t-SNE.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff622d18}</Project>
     </ProjectReference>
     <ProjectReference Include="libbitsery.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff0cc246}</Project>
@@ -199,8 +211,14 @@
     <ProjectReference Include="libcpr.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff55f506}</Project>
     </ProjectReference>
+    <ProjectReference Include="libcpuinfo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff24f32d}</Project>
+    </ProjectReference>
     <ProjectReference Include="libdebugbreak.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff0f0f12}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libdelegate.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff239b91}</Project>
     </ProjectReference>
     <ProjectReference Include="libdlfcn-win32-test-dladdr.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff2ce62c}</Project>
@@ -211,6 +229,21 @@
     <ProjectReference Include="libdlfcn-win32.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffcfa3c0}</Project>
     </ProjectReference>
+    <ProjectReference Include="libexpat.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff83ffca}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libexprtk.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff276c46}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfile.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7340da}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfort.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffbb62bd}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgcem.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa791d0}</Project>
+    </ProjectReference>
     <ProjectReference Include="libgetopt.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518110e57b1}</Project>
     </ProjectReference>
@@ -220,6 +253,12 @@
     <ProjectReference Include="libgflags.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffc19ff8}</Project>
     </ProjectReference>
+    <ProjectReference Include="libgibbs-lda.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff43a863}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libglfw.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff878bbf}</Project>
+    </ProjectReference>
     <ProjectReference Include="libgumbo-parser.vcxproj">
       <Project>{5edcf4fd-0291-4fb9-8d96-358957ca5e3c}</Project>
     </ProjectReference>
@@ -228,6 +267,30 @@
     </ProjectReference>
     <ProjectReference Include="libgumbo-parser_tests.vcxproj">
       <Project>{2874baac-7e03-4db4-b541-39ffec4a609d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgumbo-query.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff51b60c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libimagedistance.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff992f89}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg_default_handlers.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-1222b72071a8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf_default_handlers.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-1222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libnanosvg.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-751bff971987}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpcre.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518f174b2ba}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpillowfight.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffeecd60}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libplf_nanotimer.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe7ea82}</Project>
     </ProjectReference>
     <ProjectReference Include="libpthread-win32-EH.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff8df242}</Project>
@@ -253,8 +316,14 @@
     <ProjectReference Include="libQuickJS_examples.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff0e57b3}</Project>
     </ProjectReference>
+    <ProjectReference Include="libre2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff49f979}</Project>
+    </ProjectReference>
     <ProjectReference Include="libtag.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff2daf08}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtinyexpr.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff33b1b5}</Project>
     </ProjectReference>
     <ProjectReference Include="libtvision.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff5340c1}</Project>
@@ -270,6 +339,15 @@
     </ProjectReference>
     <ProjectReference Include="libutfcpp.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff0eba51}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libyaml-examples.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff4a52ca}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libyaml-tests.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffcfd499}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libyaml.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffcfd7a9}</Project>
     </ProjectReference>
     <ProjectReference Include="linenoise.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffac1208}</Project>
@@ -292,14 +370,32 @@
     <ProjectReference Include="mupdf.vcxproj">
       <Project>{e74f29f0-fa43-4adc-b92c-6afa08e4a417}</Project>
     </ProjectReference>
+    <ProjectReference Include="muq-core-unittest.vcxproj">
+      <Project>{fc63588d-259e-4e61-998a-08569c109110}</Project>
+    </ProjectReference>
     <ProjectReference Include="muraster.vcxproj">
       <Project>{0fdc74d7-d18c-45ce-94d6-edfcc5a0cdf2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="mutest_tess_threadpool_cleanup_at_exit.vcxproj">
+      <Project>{8156c20c-dd56-4200-b4a6-40c056e66d69}</Project>
+    </ProjectReference>
+    <ProjectReference Include="mutest_throw_without_context.vcxproj">
+      <Project>{8156c20c-dd56-4200-b4a6-40c056fa7a8e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="mutest_throw_without_try_catch.vcxproj">
+      <Project>{8156c20c-dd56-4200-b4a6-40c0560223be}</Project>
     </ProjectReference>
     <ProjectReference Include="mutool.vcxproj">
       <Project>{00811970-815b-4f64-bc9d-219078b1f3aa}</Project>
     </ProjectReference>
     <ProjectReference Include="mutool_ex.vcxproj">
       <Project>{00811970-1151-4f64-bc9d-219078b1f3aa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="nanosvg.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff9719b7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="pcre.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff74b2ba}</Project>
     </ProjectReference>
     <ProjectReference Include="png-pmt-tools.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ff035e08}</Project>
@@ -309,6 +405,9 @@
     </ProjectReference>
     <ProjectReference Include="qjsrepl.vcxproj">
       <Project>{8156c20c-dd56-4200-b4a6-4010561a118e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="re2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1d72b9}</Project>
     </ProjectReference>
     <ProjectReference Include="replxx.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518fffe817a}</Project>
@@ -335,8 +434,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
