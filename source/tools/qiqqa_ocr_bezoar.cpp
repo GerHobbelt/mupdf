@@ -180,10 +180,10 @@ static int fz_exec_cpp_code(const char *file)
 		// as per: https://stackoverflow.com/questions/315948/c-catching-all-exceptions
 		// (adapted and corrected)
 		std::exception_ptr p = std::current_exception();
-		// p.__cxa_exception_type()->name() 
 		auto msg = boost::current_exception_diagnostic_information();
 		fz_throw(ctx, FZ_ERROR_GENERIC, msg.c_str());
 	}
+	return -1;
 }
 
 
