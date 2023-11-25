@@ -336,10 +336,11 @@ static int usage(void)
 
 
 
-int main(int argc, const char** argv)
+static int setup_exe_for_monitor_dpi_etc(void)
 {
 #ifdef _WIN32
 #pragma comment(lib,"shcore.lib")
+
 	PROCESS_DPI_AWARENESS dpi = (PROCESS_DPI_AWARENESS)(-1);
 	HRESULT rv = GetProcessDpiAwareness(NULL, &dpi);
 	HMONITOR mon = NULL;
@@ -364,8 +365,20 @@ int main(int argc, const char** argv)
 	rv = SetProcessDpiAwareness(PROCESS_SYSTEM_DPI_AWARE);
 	rv = SetProcessDpiAwareness(PROCESS_PER_MONITOR_DPI_AWARE);
 #endif
+
+	return rv;
+#else
+	return 0;
+#endif
+}
+
+
+#ifdef __cplusplus
+extern "C" {
 #endif
 
+int MONOLITHIC_SUBCLUSTER_MAIN(int argc, const char** argv)
+{
 	char* input;
 	int status = 0;
 	int interactive = 0;
@@ -458,5 +471,52 @@ int main(int argc, const char** argv)
 	return status;
 }
 
+#ifdef __cplusplus
+}
+#endif
 
+
+
+#ifndef MONOLITHIC_SUBCLUSTER_MAIN
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+int main(int argc, const char** argv)
+{
+	int rv = setup_exe_for_monitor_dpi_etc();
+	return MONOLITHIC_SUBCLUSTER_MAIN(argc, argv);
+}
+
+#ifdef __cplusplus
+}
+#endif
+
+#else
+
+//
+// We now produce two functions for export:
+//
+// - <MONOLITHIC_SUBCLUSTER_MAIN>(argc, argv)
+// - <MONOLITHIC_SUBCLUSTER_MAIN>_init()
+//
+
+#include "monolithic_subcluster_main_defs.h"
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+int MONOLITHIC_SUBCLUSTER_MAIN_INIT(void)
+{
+	return setup_exe_for_monitor_dpi_etc();
+}
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
 
