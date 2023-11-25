@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -113,8 +113,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHOPSHOP;CHOPSHOP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -228,33 +228,6 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/NGram-CPP/Test/AdditiveSmoothingTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/NGram-CPP/Test/GoodTuringSmoothingTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/NGram-CPP/Test/InterpolatedSmoothingTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/NGram-CPP/Test/LaplaceSmoothingTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/NGram-CPP/Test/NGramTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/NGram-CPP/Test/NoSmoothingTest.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/NGram-CPP/Test/ReadCorpus.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/colibri-core/src/SpookyV2.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/colibri-core/src/algorithms.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/colibri-core/src/benchmarks.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/colibri-core/src/classdecode.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/colibri-core/src/classdecoder.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/colibri-core/src/classencode.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/colibri-core/src/classencoder.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/colibri-core/src/common.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/colibri-core/src/comparemodels.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/colibri-core/src/extractngrams.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/colibri-core/src/grep.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/colibri-core/src/pattern.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/colibri-core/src/patternmodel.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/colibri-core/src/patternmodeller.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/colibri-core/src/test.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/refinr/src/RcppExports.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/refinr/src/key_collision_merge.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/refinr/src/n_gram_merge.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/refinr/src/stringdist.cpp" />
-    <ClCompile Include="../../thirdparty/owemdjee/libchopshop/tmp/refinr/src/utils.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/libchopshop/tmp/NGram-CPP/Test/ReadCorpus.h" />
     <ClInclude Include="../../thirdparty/owemdjee/libchopshop/tmp/NGram-CPP/Test/catch.hpp" />
     <ClInclude Include="../../thirdparty/owemdjee/libchopshop/tmp/NGram-CPP/src/AdditiveSmoothing.h" />
@@ -1326,8 +1299,7 @@
     <Xml Include="../../thirdparty/owemdjee/libchopshop/tmp/OpenRefine/server/IDEs/netbeans/nbproject/project.xml" />
     <Xml Include="../../thirdparty/owemdjee/libchopshop/tmp/OpenRefine/server/pom.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
