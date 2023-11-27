@@ -922,7 +922,7 @@ svg_parse_viewbox(fz_context *ctx, svg_document *doc, fz_xml *node, svg_state *s
 {
 	char *viewbox_att = fz_xml_att(node, "viewBox");
 	char *preserve_att = fz_xml_att(node, "preserveAspectRatio");
-	if (viewbox_att)
+	if (viewbox_att && strlen(viewbox_att) > 0)
 	{
 		/* scale and translate to fit [minx miny minx+w miny+h] to [0 0 viewport.w viewport.h] */
 		float min_x, min_y, box_w, box_h, sx, sy;
@@ -1185,7 +1185,7 @@ svg_run_svg(fz_context *ctx, fz_device *dev, svg_document *doc, fz_xml *root, co
 	char *viewbox_att = fz_xml_att(root, "viewBox");
 
 	/* get default viewport from viewBox if width and/or height is missing */
-	if (viewbox_att && (!w_att || !h_att))
+	if (viewbox_att && strlen(viewbox_att) > 0 && (!w_att || !h_att))
 	{
 		float x, y;
 		svg_lex_viewbox(viewbox_att, &x, &y, &local_state.viewbox_w, &local_state.viewbox_h);
@@ -1622,7 +1622,7 @@ svg_parse_document_bounds(fz_context *ctx, svg_document *doc, fz_xml *root)
 		fz_warn(ctx, "svg document version is newer than we support");
 
 	/* If no width or height attributes, then guess from the viewbox */
-	if (w_att == NULL && h_att == NULL && viewbox_att != NULL)
+	if (w_att == NULL && h_att == NULL && viewbox_att != NULL && strlen(viewbox_att) > 0)
 	{
 		float min_x, min_y, box_w, box_h;
 		svg_lex_viewbox(viewbox_att, &min_x, &min_y, &box_w, &box_h);
