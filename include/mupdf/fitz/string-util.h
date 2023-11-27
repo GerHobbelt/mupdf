@@ -304,6 +304,14 @@ void fz_format_output_path_ex(fz_context* ctx, char* path, size_t size, const ch
 char *fz_cleanname(char *name);
 
 /**
+	rewrite path to the shortest string that names the same path.
+
+	Eliminates multiple and trailing slashes, interprets "." and
+	"..". Allocates a new string that the caller must free.
+*/
+char *fz_cleanname_dup(fz_context *ctx, const char *name);
+
+/**
 	Resolve a path to an absolute file name.
 	The resolved path buffer must be of at least PATH_MAX size.
 */
