@@ -824,7 +824,7 @@ pdf_add_cjk_font(fz_context *ctx, pdf_document *doc, fz_font *fzfont, int script
 pdf_obj *
 pdf_add_substitute_font(fz_context *ctx, pdf_document *doc, fz_font *font)
 {
-	fz_throw(ctx, FZ_ERROR_GENERIC, "substitute font creation is not implemented yet (font name: %q)", font->name);
+	fz_throw(ctx, FZ_ERROR_UNSUPPORTED, "substitute font creation is not implemented yet (font name: %q)", font->name);
 	return NULL;
 }
 

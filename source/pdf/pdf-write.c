@@ -1685,7 +1685,7 @@ static void preloadobjstms(fz_context *ctx, pdf_document *doc)
 				x->gen = 0;
 			}
 			/* Ignore the error, so we can carry on trying to load. */
-			fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+			fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
 			// fz_report_error(ctx) --> replaced by line below:
 			fz_warn(ctx, "(ignored) %s", fz_caught_message(ctx));
 		}
@@ -3028,7 +3028,7 @@ static void complete_signatures(fz_context *ctx, pdf_document *doc, pdf_write_st
 					fstr = fz_memmem(buf, bytes_read, SLASH_FILTER, sizeof(SLASH_FILTER)-1);
 
 					if (!(bstr && cstr && fstr && bstr < cstr && cstr < fstr))
-						fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to determine byte ranges while writing signature");
+						fz_throw(ctx, FZ_ERROR_FORMAT, "Failed to determine byte ranges while writing signature");
 
 					usig->byte_range_start = bstr - buf + sizeof(SLASH_BYTE_RANGE)-1 + opts->ofs_list[pnum];
 					usig->byte_range_end = cstr - buf + opts->ofs_list[pnum];
@@ -3495,7 +3495,7 @@ ensure_initial_incremental_contents(fz_context *ctx, fz_stream *in, fz_output *o
 	int same;
 
 	if (!in)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Can't copy contents for incremental write");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "no input file for incremental write");
 
 	verify = fz_stream_from_output(ctx, out);
 
@@ -3997,13 +3997,13 @@ void pdf_write_document(fz_context *ctx, pdf_document *doc, fz_output *out, cons
 		in_opts = &opts_defaults;
 
 	if (in_opts->do_incremental && doc->repair_attempted)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Can't do incremental writes on a repaired file");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Can't do incremental writes on a repaired file");
 	if (in_opts->do_incremental && in_opts->do_garbage)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Can't do incremental writes with garbage collection");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Can't do incremental writes with garbage collection");
 	if (in_opts->do_incremental && in_opts->do_linear)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Can't do incremental writes with linearisation");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Can't do incremental writes with linearisation");
 	if (in_opts->do_incremental && in_opts->do_encrypt != PDF_ENCRYPT_KEEP)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Can't do incremental writes when changing encryption");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Can't do incremental writes when changing encryption");
 	if (in_opts->do_snapshot)
 	{
 		if (in_opts->do_incremental == 0 ||
@@ -4019,10 +4019,10 @@ void pdf_write_document(fz_context *ctx, pdf_document *doc, fz_output *out, cons
 			in_opts->do_sanitize ||
 			in_opts->do_appearance ||
 			in_opts->do_encrypt != PDF_ENCRYPT_KEEP)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "Can't use these options when snapshotting!");
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "Can't use these options when snapshotting!");
 	}
 	if (pdf_has_unsaved_sigs(ctx, doc) && !fz_output_supports_stream(ctx, out))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Can't write pdf that has unsaved sigs to a fz_output unless it supports fz_stream_from_output!");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Can't write pdf that has unsaved sigs to a fz_output unless it supports fz_stream_from_output!");
 
 	prepare_for_save(ctx, doc, in_opts);
 
@@ -4043,15 +4043,15 @@ void pdf_save_document(fz_context *ctx, pdf_document *doc, const char *filename,
 		in_opts = &opts_defaults;
 
 	if (in_opts->do_incremental && !doc->file)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Can't do incremental writes on a new document");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Can't do incremental writes on a new document");
 	if (in_opts->do_incremental && doc->repair_attempted)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Can't do incremental writes on a repaired file");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Can't do incremental writes on a repaired file");
 	if (in_opts->do_incremental && in_opts->do_garbage)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Can't do incremental writes with garbage collection");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Can't do incremental writes with garbage collection");
 	if (in_opts->do_incremental && in_opts->do_linear)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Can't do incremental writes with linearisation");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Can't do incremental writes with linearisation");
 	if (in_opts->do_incremental && in_opts->do_encrypt != PDF_ENCRYPT_KEEP)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Can't do incremental writes when changing encryption");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Can't do incremental writes when changing encryption");
 	if (in_opts->do_snapshot)
 	{
 		if (in_opts->do_incremental == 0 ||
@@ -4067,7 +4067,7 @@ void pdf_save_document(fz_context *ctx, pdf_document *doc, const char *filename,
 			in_opts->do_sanitize ||
 			in_opts->do_appearance ||
 			in_opts->do_encrypt != PDF_ENCRYPT_KEEP)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "Can't use these options when snapshotting!");
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "Can't use these options when snapshotting!");
 	}
 
 	if (in_opts->do_appearance > 0)
@@ -4362,7 +4362,7 @@ void pdf_write_journal(fz_context *ctx, pdf_document *doc, fz_output *out)
 		return;
 
 	if (!doc->journal)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Can't write non-existent journal");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Can't write non-existent journal");
 
 	pdf_fingerprint_file(ctx, doc, digest, doc->num_incremental_sections);
 

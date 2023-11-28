@@ -543,7 +543,7 @@ fz_clone_text_span(fz_context *ctx, const fz_text_span *span)
 	if (cspan->items == NULL)
 	{
 		fz_free(ctx, cspan);
-		fz_throw(ctx, FZ_ERROR_MEMORY, "Failed to malloc while cloning text span");
+		fz_throw(ctx, FZ_ERROR_SYSTEM, "Failed to malloc while cloning text span");
 	}
 	memcpy(cspan->items, span->items, sizeof(*cspan->items) * cspan->len);
 	fz_keep_font(ctx, cspan->font);
@@ -1111,12 +1111,12 @@ fz_new_ocr_device(fz_context *ctx,
 		void *progress_arg)
 {
 #if !FZ_ENABLE_OCR
-	fz_throw(ctx, FZ_ERROR_GENERIC, "OCR Disabled in this build");
+	fz_throw(ctx, FZ_ERROR_UNSUPPORTED, "OCR Disabled in this build");
 #else
 	fz_ocr_device *dev;
 
 	if (target == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "OCR devices require a target");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "OCR devices require a target");
 
 	dev = fz_new_derived_device(ctx, fz_ocr_device);
 

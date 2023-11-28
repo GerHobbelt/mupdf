@@ -658,7 +658,7 @@ fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const c
 
 		if (pos >= dstsize)
 		{
-			fz_throw(ctx, FZ_ERROR_GENERIC, "fz_format_output_path_ex: out of bounds; path too long");
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "fz_format_output_path_ex: out of bounds; path too long");
 		}
 		memcpy(dstpath, fmt, pos);
 		dstpath += pos;
@@ -685,14 +685,14 @@ fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const c
 					char fstr[20];
 					size_t l = p2 - fmt;
 					if (l >= sizeof(fmt))
-						fz_throw(ctx, FZ_ERROR_GENERIC, "illegal (too large) marker in path name template: %.*q in %q", (int)l, fmt, fmt);
+						fz_throw(ctx, FZ_ERROR_ARGUMENT, "illegal (too large) marker in path name template: %.*q in %q", (int)l, fmt, fmt);
 					memcpy(fstr, fmt, l);
 					fstr[l] = 0;
 
 					// bingo: workable/legal %d particle:
 					l = fz_snprintf(dstpath, dstsize, fstr, page);
 					if (l >= dstsize)
-						fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
+						fz_throw(ctx, FZ_ERROR_ARGUMENT, "path name buffer overflow");
 					dstpath += l;
 					dstsize -= l;
 
@@ -711,7 +711,7 @@ fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const c
 
 				size_t l = fz_snprintf(dstpath, dstsize, "%0*d", (int)vl, page);
 				if (l >= dstsize)
-					fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
+					fz_throw(ctx, FZ_ERROR_ARGUMENT, "path name buffer overflow");
 				dstpath += l;
 				dstsize -= l;
 
@@ -727,7 +727,7 @@ fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const c
 
 				size_t l = fz_snprintf(dstpath, dstsize, "%0*d", (int)vl, sequence_number);
 				if (l >= dstsize)
-					fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
+					fz_throw(ctx, FZ_ERROR_ARGUMENT, "path name buffer overflow");
 				dstpath += l;
 				dstsize -= l;
 
@@ -744,7 +744,7 @@ fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const c
 
 				size_t l = fz_snprintf(dstpath, dstsize, "%s", label);
 				if (l >= dstsize)
-					fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
+					fz_throw(ctx, FZ_ERROR_ARGUMENT, "path name buffer overflow");
 				dstpath += l;
 				dstsize -= l;
 
@@ -761,7 +761,7 @@ fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const c
 
 				size_t l = fz_snprintf(dstpath, dstsize, "%0*d", (int)vl, chapter);
 				if (l >= dstsize)
-					fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
+					fz_throw(ctx, FZ_ERROR_ARGUMENT, "path name buffer overflow");
 				dstpath += l;
 				dstsize -= l;
 
@@ -788,14 +788,14 @@ fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const c
 	// edge case checks:
 	if (dstbase == dstpath)
 	{
-		fz_throw(ctx, FZ_ERROR_GENERIC, "fz_format_output_path_ex: invalid or empty path template specified; path name buffer underflow");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "fz_format_output_path_ex: invalid or empty path template specified; path name buffer underflow");
 	}
 	if (strchr("\\/:", dstpath[-1]))
 	{
 		static const char* fname = "NO-NAME";
 		size_t l = strlen(fname);
 		if (l + 1 >= dstsize)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "path name buffer overflow");
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "path name buffer overflow");
 		memcpy(dstpath, fname, l);
 
 		dstpath += l;
@@ -804,7 +804,7 @@ fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const c
 
 	if (!dstsize)
 	{
-		fz_throw(ctx, FZ_ERROR_GENERIC, "fz_format_output_path_ex: out of bounds; path too long");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "fz_format_output_path_ex: out of bounds; path too long");
 	}
 
 #if 0
@@ -850,7 +850,7 @@ fz_format_output_path_ex(fz_context* ctx, char* dstpath, size_t dstsize, const c
 
 	if (!dstsize)
 	{
-		fz_throw(ctx, FZ_ERROR_GENERIC, "fz_format_output_path_ex: out of bounds; path too long");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "fz_format_output_path_ex: out of bounds; path too long");
 	}
 
 	*dstpath = 0;

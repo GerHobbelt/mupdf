@@ -35,7 +35,7 @@ fz_buffer *fz_deflate(fz_context *ctx, fz_buffer *input, int effort)
 
 	/* check possible size_t / uLong precision mismatch */
 	if (input->len != (size_t)input_n)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "buffer is too large to deflate");
+		fz_throw(ctx, FZ_ERROR_LIBRARY, "buffer is too large to deflate");
 
 	output_n = zng_compressBound(input_n);
 	output_p = (unsigned char *)Memento_label(fz_malloc(ctx, output_n), "fz_deflate");
@@ -47,7 +47,7 @@ fz_buffer *fz_deflate(fz_context *ctx, fz_buffer *input, int effort)
 	if (result != Z_OK)
 	{
 		fz_free(ctx, output_p);
-		fz_throw(ctx, FZ_ERROR_GENERIC, "zlib error when deflating data");
+		fz_throw(ctx, FZ_ERROR_LIBRARY, "zlib error when deflating data");
 	}
 
 	fz_try(ctx)

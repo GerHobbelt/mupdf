@@ -252,15 +252,15 @@ next_jbig2d(fz_context *ctx, fz_stream *stm, size_t len)
 					break;
 
 				if (jbig2_data_in(state->ctx, tmp, n) < 0)
-					fz_throw(ctx, FZ_ERROR_GENERIC, "cannot decode jbig2 image");
+					fz_throw(ctx, FZ_ERROR_LIBRARY, "cannot decode jbig2 image");
 			}
 
 			if (jbig2_complete_page(state->ctx) < 0)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot complete jbig2 image");
+				fz_throw(ctx, FZ_ERROR_LIBRARY, "cannot complete jbig2 image");
 
 			state->page = jbig2_page_out(state->ctx);
 			if (!state->page)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "no jbig2 image decoded");
+				fz_throw(ctx, FZ_ERROR_LIBRARY, "no jbig2 image decoded");
 		}
 		fz_always(ctx)
 		{
@@ -311,7 +311,7 @@ fz_open_jbig2d(fz_context *ctx, fz_stream *chain, fz_jbig2_globals *globals, int
 	{
 		fz_drop_jbig2_globals(ctx, state->gctx);
 		fz_free(ctx, state);
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot allocate jbig2 context");
+		fz_throw(ctx, FZ_ERROR_LIBRARY, "cannot allocate jbig2 context");
 	}
 
 	state->page = NULL;

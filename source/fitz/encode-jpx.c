@@ -36,7 +36,7 @@ image_from_pixmap(fz_context *ctx, const fz_pixmap *pix)
 	OPJ_COLOR_SPACE cs;
 
 	if (pix->alpha || pix->s)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "No spots/alpha for JPX encode");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "No spots/alpha for JPX encode");
 
 	if (fz_colorspace_is_cmyk(ctx, pix->colorspace))
 		cs = OPJ_CLRSPC_CMYK;
@@ -45,7 +45,7 @@ image_from_pixmap(fz_context *ctx, const fz_pixmap *pix)
 	else if (fz_colorspace_is_gray(ctx, pix->colorspace))
 		cs = OPJ_CLRSPC_GRAY;
 	else
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Invalid colorspace for JPX encode");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Invalid colorspace for JPX encode");
 
 	/* Create image */
 	for (i = 0; i < pix->n; ++i)
@@ -60,7 +60,7 @@ image_from_pixmap(fz_context *ctx, const fz_pixmap *pix)
 
 	image = opj_image_create(pix->n, &cmptparm[0], cs);
 	if (image == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "OPJ image creation failed");
+		fz_throw(ctx, FZ_ERROR_LIBRARY, "OPJ image creation failed");
 
 	image->x0 = 0;
 	image->y0 = 0;
@@ -235,7 +235,7 @@ fz_write_pixmap_as_jpx(fz_context *ctx, fz_output *out, const fz_pixmap *pix, in
 		{
 			opj_destroy_codec(l_codec);
 			opj_image_destroy(image);
-			fz_throw(ctx, FZ_ERROR_GENERIC, "OpenJPEG encoder setup failed");
+			fz_throw(ctx, FZ_ERROR_LIBRARY, "OpenJPEG encoder setup failed");
 		}
 
 		/* open a byte stream for writing and allocate memory for all tiles */
@@ -244,7 +244,7 @@ fz_write_pixmap_as_jpx(fz_context *ctx, fz_output *out, const fz_pixmap *pix, in
 		{
 			opj_destroy_codec(l_codec);
 			opj_image_destroy(image);
-			fz_throw(ctx, FZ_ERROR_GENERIC, "OpenJPEG encoder setup failed (stream creation)");
+			fz_throw(ctx, FZ_ERROR_LIBRARY, "OpenJPEG encoder setup failed (stream creation)");
 		}
 
 		opj_stream_set_user_data(l_stream, &stm, close_stm);
@@ -260,7 +260,7 @@ fz_write_pixmap_as_jpx(fz_context *ctx, fz_output *out, const fz_pixmap *pix, in
 		{
 			opj_destroy_codec(l_codec);
 			opj_image_destroy(image);
-			fz_throw(ctx, FZ_ERROR_GENERIC, "OpenJPEG encode failed");
+			fz_throw(ctx, FZ_ERROR_LIBRARY, "OpenJPEG encode failed");
 		}
 
 		bSuccess = bSuccess && opj_encode(l_codec, l_stream);
@@ -275,7 +275,7 @@ fz_write_pixmap_as_jpx(fz_context *ctx, fz_output *out, const fz_pixmap *pix, in
 		opj_image_destroy(image);
 
 		if (!bSuccess)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "Encoding failed");
+			fz_throw(ctx, FZ_ERROR_LIBRARY, "Encoding failed");
 	}
 	fz_always(ctx)
 		opj_unlock(ctx);

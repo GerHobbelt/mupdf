@@ -280,17 +280,17 @@ pdf_select_layer_config(fz_context *ctx, pdf_document *doc, int config)
 		if (config == 0)
 			return;
 		else
-			fz_throw(ctx, FZ_ERROR_GENERIC, "Unknown Layer config (None known!)");
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "Unknown Layer config (None known!)");
 	}
 
 	cobj = pdf_array_get(ctx, pdf_dict_get(ctx, obj, PDF_NAME(Configs)), config);
 	if (!cobj)
 	{
 		if (config != 0)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "Illegal Layer config");
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "Illegal Layer config");
 		cobj = pdf_dict_get(ctx, obj, PDF_NAME(D));
 		if (!cobj)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "No default Layer config");
+			fz_throw(ctx, FZ_ERROR_FORMAT, "No default Layer config");
 	}
 
 	pdf_drop_obj(ctx, desc->intent);
@@ -369,7 +369,7 @@ pdf_layer_config_info(fz_context *ctx, pdf_document *doc, int config_num, pdf_la
 	info->creator = NULL;
 
 	if (config_num < 0 || config_num >= desc->num_configs)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Invalid layer config number");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Invalid layer config number");
 
 	ocprops = pdf_dict_getp(ctx, pdf_trailer(ctx, doc), "Root/OCProperties");
 	if (!ocprops)
@@ -381,7 +381,7 @@ pdf_layer_config_info(fz_context *ctx, pdf_document *doc, int config_num, pdf_la
 	else if (config_num == 0)
 		obj = pdf_dict_get(ctx, ocprops, PDF_NAME(D));
 	else
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Invalid layer config number");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Invalid layer config number");
 
 	info->creator = pdf_dict_get_string(ctx, obj, PDF_NAME(Creator), NULL);
 	info->name = pdf_dict_get_string(ctx, obj, PDF_NAME(Name), NULL);
@@ -451,7 +451,7 @@ void pdf_select_layer_config_ui(fz_context *ctx, pdf_document *doc, int ui)
 	pdf_ocg_ui *entry;
 
 	if (ui < 0 || ui >= desc->num_ui_entries)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Out of range UI entry selected");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Out of range UI entry selected");
 
 	entry = &desc->ui[ui];
 	if (entry->button_flags != PDF_LAYER_UI_RADIOBOX &&
@@ -473,7 +473,7 @@ void pdf_toggle_layer_config_ui(fz_context *ctx, pdf_document *doc, int ui)
 	int selected;
 
 	if (ui < 0 || ui >= desc->num_ui_entries)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Out of range UI entry toggled");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Out of range UI entry toggled");
 
 	entry = &desc->ui[ui];
 	if (entry->button_flags != PDF_LAYER_UI_RADIOBOX &&
@@ -496,7 +496,7 @@ void pdf_deselect_layer_config_ui(fz_context *ctx, pdf_document *doc, int ui)
 	pdf_ocg_ui *entry;
 
 	if (ui < 0 || ui >= desc->num_ui_entries)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Out of range UI entry deselected");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Out of range UI entry deselected");
 
 	entry = &desc->ui[ui];
 	if (entry->button_flags != PDF_LAYER_UI_RADIOBOX &&
@@ -524,7 +524,7 @@ pdf_layer_config_ui_info(fz_context *ctx, pdf_document *doc, int ui, pdf_layer_c
 	info->type = 0;
 
 	if (ui < 0 || ui >= desc->num_ui_entries)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Out of range UI entry selected");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "Out of range UI entry selected");
 
 	entry = &desc->ui[ui];
 	info->type = entry->button_flags;
@@ -845,7 +845,7 @@ pdf_read_ocg(fz_context *ctx, pdf_document *doc)
 		pdf_drop_ocg(ctx, doc);
 		doc->ocg = NULL;
 		fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
-		fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+		fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
 		fz_report_error(ctx);
 		fz_warn(ctx, "Ignoring broken Optional Content configuration");
 		doc->ocg = fz_malloc_struct(ctx, pdf_ocg_descriptor);

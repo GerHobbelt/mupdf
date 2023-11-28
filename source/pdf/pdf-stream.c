@@ -40,7 +40,7 @@ pdf_obj_num_is_stream(fz_context *ctx, pdf_document *doc, int num)
 	fz_catch(ctx)
 	{
 		fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
-		fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+		fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
 		fz_report_error(ctx);
 		return 0;
 	}
@@ -102,7 +102,7 @@ pdf_load_jbig2_globals(fz_context *ctx, pdf_obj *dict, pdf_cycle_list *cycle_up)
 
 	// TODO: Detect malicious mutually recursive JBIG2Globals
 	if (pdf_cycle(ctx, &cycle, cycle_up, dict))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cyclic reference when loading JBIG2 globals");
+		fz_throw(ctx, FZ_ERROR_FORMAT, "cyclic reference when loading JBIG2 globals");
 
 	fz_try(ctx)
 	{
@@ -457,7 +457,7 @@ pdf_open_raw_stream_number(fz_context *ctx, pdf_document *doc, int num)
 
 	x = pdf_cache_object(ctx, doc, num);
 	if (x->stm_ofs == 0)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "object is not a stream");
+		fz_throw(ctx, FZ_ERROR_FORMAT, "object is not a stream");
 
 	return pdf_open_raw_filter(ctx, doc->file, doc, x->obj, num, &orig_num, &orig_gen, x->stm_ofs);
 }
@@ -469,7 +469,7 @@ pdf_open_image_stream(fz_context *ctx, pdf_document *doc, int num, fz_compressio
 
 	x = pdf_cache_object(ctx, doc, num);
 	if (x->stm_ofs == 0 && x->stm_buf == NULL)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "object is not a stream");
+		fz_throw(ctx, FZ_ERROR_FORMAT, "object is not a stream");
 
 	return pdf_open_filter(ctx, doc, doc->file, x->obj, num, x->stm_ofs, params, cycle, might_be_image);
 }
@@ -484,7 +484,7 @@ fz_stream *
 pdf_open_stream_with_offset(fz_context *ctx, pdf_document *doc, int num, pdf_obj *dict, int64_t stm_ofs)
 {
 	if (stm_ofs == 0)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "object is not a stream");
+		fz_throw(ctx, FZ_ERROR_FORMAT, "object is not a stream");
 	return pdf_open_filter(ctx, doc, doc->file, dict, num, stm_ofs, NULL, NULL, 1);
 }
 
@@ -636,7 +636,7 @@ pdf_load_image_stream(fz_context *ctx, pdf_document *doc, int num, fz_compressio
 		/* In 32 bit builds, we might find a length being too
 		 * large for a size_t. */
 		if ((int64_t)len != ilen)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "Stream too large");
+			fz_throw(ctx, FZ_ERROR_LIMIT, "Stream too large");
 		obj = pdf_dict_get(ctx, dict, PDF_NAME(Filter));
 		len = pdf_guess_filter_length(len, pdf_to_name(ctx, obj));
 		n = pdf_array_len(ctx, obj);
@@ -715,7 +715,7 @@ pdf_open_object_array(fz_context *ctx, pdf_document *doc, pdf_obj *list)
 			fz_concat_push_drop(ctx, stm, pdf_open_stream(ctx, obj));
 		fz_catch(ctx)
 		{
-			if (fz_caught(ctx) == FZ_ERROR_TRYLATER || fz_caught(ctx) == FZ_ERROR_MEMORY)
+			if (fz_caught(ctx) == FZ_ERROR_TRYLATER || fz_caught(ctx) == FZ_ERROR_SYSTEM)
 			{
 				fz_drop_stream(ctx, stm);
 				fz_rethrow(ctx);
@@ -748,14 +748,14 @@ fz_buffer *pdf_load_raw_stream(fz_context *ctx, pdf_obj *ref)
 {
 	if (pdf_is_stream(ctx, ref))
 		return pdf_load_raw_stream_number(ctx, pdf_get_indirect_document(ctx, ref), pdf_to_num(ctx, ref));
-	fz_throw(ctx, FZ_ERROR_GENERIC, "object is not a stream");
+	fz_throw(ctx, FZ_ERROR_FORMAT, "object is not a stream");
 }
 
 fz_buffer *pdf_load_stream(fz_context *ctx, pdf_obj *ref)
 {
 	if (pdf_is_stream(ctx, ref))
 		return pdf_load_stream_number(ctx, pdf_get_indirect_document(ctx, ref), pdf_to_num(ctx, ref));
-	fz_throw(ctx, FZ_ERROR_GENERIC, "object is not a stream");
+	fz_throw(ctx, FZ_ERROR_FORMAT, "object is not a stream");
 }
 
 static fz_buffer *pdf_load_stream_no_cycle(fz_context *ctx, pdf_obj *ref, pdf_cycle_list *cycle)
@@ -769,14 +769,14 @@ fz_stream *pdf_open_raw_stream(fz_context *ctx, pdf_obj *ref)
 {
 	if (pdf_is_stream(ctx, ref))
 		return pdf_open_raw_stream_number(ctx, pdf_get_indirect_document(ctx, ref), pdf_to_num(ctx, ref));
-	fz_throw(ctx, FZ_ERROR_GENERIC, "object is not a stream");
+	fz_throw(ctx, FZ_ERROR_FORMAT, "object is not a stream");
 }
 
 fz_stream *pdf_open_stream(fz_context *ctx, pdf_obj *ref)
 {
 	if (pdf_is_stream(ctx, ref))
 		return pdf_open_stream_number(ctx, pdf_get_indirect_document(ctx, ref), pdf_to_num(ctx, ref));
-	fz_throw(ctx, FZ_ERROR_GENERIC, "object is not a stream");
+	fz_throw(ctx, FZ_ERROR_FORMAT, "object is not a stream");
 }
 
 #endif

@@ -211,7 +211,7 @@ void
 fz_resize_buffer(fz_context *ctx, fz_buffer *buf, size_t size)
 {
 	if (buf->shared)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot resize a buffer with shared storage");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot resize a buffer with shared storage");
 	if (buf->cap != size)
 	{
 		buf->data = (unsigned char*)fz_realloc(ctx, buf->data, size);

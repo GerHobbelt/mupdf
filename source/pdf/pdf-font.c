@@ -532,7 +532,7 @@ pdf_extract_cff_subtable(fz_context *ctx, unsigned char *data, size_t size)
 	size_t i;
 
 	if (12 + num_tables * 16 > size)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "invalid TTF header");
+		fz_throw(ctx, FZ_ERROR_SYNTAX, "invalid TTF header");
 
 	for (i = 0; i < num_tables; ++i)
 	{
@@ -543,7 +543,7 @@ pdf_extract_cff_subtable(fz_context *ctx, unsigned char *data, size_t size)
 			uint64_t length = TTF_U32(record + 12);
 			uint64_t end = offset + length;
 			if (end > size)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "invalid TTF subtable offset/length");
+				fz_throw(ctx, FZ_ERROR_SYNTAX, "invalid TTF subtable offset/length");
 			return fz_new_buffer_from_copied_data(ctx, data + offset, length);
 		}
 	}
@@ -1028,7 +1028,7 @@ pdf_load_simple_font(fz_context *ctx, pdf_document *doc, pdf_obj *dict)
 		fz_catch(ctx)
 		{
 			fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
-			fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+			fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
 			fz_report_error(ctx);
 			fz_warn(ctx, "cannot load ToUnicode CMap");
 		}
@@ -1445,7 +1445,7 @@ pdf_load_font_descriptor(fz_context *ctx, pdf_document *doc, pdf_font_desc *font
 		fz_catch(ctx)
 		{
 			fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
-			fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+			fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
 			fz_report_error(ctx);
 			fz_warn(ctx, "ignored error when loading embedded font; attempting to load system font");
 			if (!iscidfont && fontname != pdf_clean_font_name(fontname))
@@ -1534,7 +1534,7 @@ pdf_load_font(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *dict)
 		if (fontdesc->t3loading)
 		{
 			pdf_drop_font(ctx, fontdesc);
-			fz_throw(ctx, FZ_ERROR_GENERIC, "recursive type3 font");
+			fz_throw(ctx, FZ_ERROR_SYNTAX, "recursive type3 font");
 		}
 		return fontdesc;
 	}

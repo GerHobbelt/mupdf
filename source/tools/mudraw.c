@@ -3596,7 +3596,7 @@ int main(int argc, const char** argv)
 					if (fz_needs_password(ctx, doc))
 					{
 						if (!fz_authenticate_password(ctx, doc, password))
-							fz_throw(ctx, FZ_ERROR_GENERIC, "cannot authenticate password: %s", filename);
+							fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot authenticate password: %s", filename);
 					}
 
 #ifdef CLUSTER

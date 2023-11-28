@@ -1093,7 +1093,7 @@ fz_get_pixmap_from_image(fz_context *ctx, const fz_image *image, const fz_irect 
 	fz_catch(ctx)
 	{
 		/* Do nothing */
-		fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+		fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
 		fz_report_error(ctx);
 	}
 
@@ -1384,7 +1384,7 @@ fz_image_info_from_buffer(fz_context *ctx, fz_buffer *buffer, int *w, int *h, in
 	int type;
 
 	if (len < 8)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "unknown image file format");
+		fz_throw(ctx, FZ_ERROR_FORMAT, "unknown image file format");
 
 	*w = 0;
 	*h = 0;
@@ -1427,7 +1427,7 @@ fz_image_info_from_buffer(fz_context *ctx, fz_buffer *buffer, int *w, int *h, in
 		fz_load_jbig2_info(ctx, buf, len, w, h, xres, yres, cspace, orientation);
 		break;
 	default:
-		fz_throw(ctx, FZ_ERROR_GENERIC, "unknown image file format");
+		fz_throw(ctx, FZ_ERROR_FORMAT, "unknown image file format");
 	}
 }
 
@@ -1502,7 +1502,7 @@ fz_new_image_from_buffer(fz_context *ctx, fz_buffer *buffer)
 		bpc = 1;
 		break;
 	default:
-		fz_throw(ctx, FZ_ERROR_GENERIC, "unknown image file format");
+		fz_throw(ctx, FZ_ERROR_FORMAT, "unknown image file format");
 	}
 
 	fz_try(ctx)

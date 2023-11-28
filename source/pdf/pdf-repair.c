@@ -72,7 +72,7 @@ pdf_repair_obj(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf, int64_t *stm
 
 	*tmpofs = fz_tell(ctx, file);
 	if (*tmpofs < 0)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot tell in file");
+		fz_throw(ctx, FZ_ERROR_SYSTEM, "cannot tell in file");
 
 	/* On entry to this function, we know that we've just seen
 	 * '<int> <int> obj'. We expect the next thing we see to be a
@@ -95,7 +95,7 @@ pdf_repair_obj(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf, int64_t *stm
 		fz_catch(ctx)
 		{
 			fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
-			fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+			fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
 			/* Don't let a broken object at EOF overwrite a good one */
 			if (file->eof)
 				fz_rethrow(ctx);
@@ -165,7 +165,7 @@ pdf_repair_obj(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf, int64_t *stm
 	{
 		*tmpofs = fz_tell(ctx, file);
 		if (*tmpofs < 0)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot tell in file");
+			fz_throw(ctx, FZ_ERROR_SYSTEM, "cannot tell in file");
 		tok = pdf_lex(ctx, file, buf);
 	}
 
@@ -180,7 +180,7 @@ pdf_repair_obj(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf, int64_t *stm
 
 		*stmofsp = fz_tell(ctx, file);
 		if (*stmofsp < 0)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot seek in file");
+			fz_throw(ctx, FZ_ERROR_SYSTEM, "cannot tell in file");
 
 		if (stm_len > 0)
 		{
@@ -192,7 +192,7 @@ pdf_repair_obj(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf, int64_t *stm
 			fz_catch(ctx)
 			{
 				fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
-				fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+				fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
 				fz_report_error(ctx);
 				fz_warn(ctx, "cannot find endstream token, falling back to scanning");
 			}
@@ -218,7 +218,7 @@ pdf_repair_obj(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf, int64_t *stm
 atobjend:
 		*tmpofs = fz_tell(ctx, file);
 		if (*tmpofs < 0)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot tell in file");
+			fz_throw(ctx, FZ_ERROR_SYSTEM, "cannot tell in file");
 		tok = pdf_lex(ctx, file, buf);
 		if (tok != PDF_TOK_ENDOBJ)
 		{
@@ -229,7 +229,7 @@ atobjend:
 			/* Read another token as we always return the next one */
 			*tmpofs = fz_tell(ctx, file);
 			if (*tmpofs < 0)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot tell in file");
+				fz_throw(ctx, FZ_ERROR_SYSTEM, "cannot tell in file");
 			tok = pdf_lex(ctx, file, buf);
 		}
 	}
@@ -265,7 +265,7 @@ pdf_repair_obj_stm(fz_context *ctx, pdf_document *doc, int stm_num)
 
 			tok = pdf_lex(ctx, stm, &buf);
 			if (tok != PDF_TOK_INT)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "corrupt object stream (%d 0 R)", stm_num);
+				fz_throw(ctx, FZ_ERROR_FORMAT, "corrupt object stream (%d 0 R)", stm_num);
 
 			n = buf.i;
 			if (n < 0)
@@ -290,7 +290,7 @@ pdf_repair_obj_stm(fz_context *ctx, pdf_document *doc, int stm_num)
 
 			tok = pdf_lex(ctx, stm, &buf);
 			if (tok != PDF_TOK_INT)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "corrupt object stream (%d 0 R)", stm_num);
+				fz_throw(ctx, FZ_ERROR_FORMAT, "corrupt object stream (%d 0 R)", stm_num);
 		}
 	}
 	fz_always(ctx)
@@ -419,14 +419,14 @@ pdf_repair_xref(fz_context *ctx, pdf_document *doc)
 		{
 			tmpofs = fz_tell(ctx, doc->file);
 			if (tmpofs < 0)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "cannot tell in file");
+				fz_throw(ctx, FZ_ERROR_SYSTEM, "cannot tell in file");
 
 			fz_try(ctx)
 				tok = pdf_lex_no_string(ctx, doc->file, buf);
 			fz_catch(ctx)
 			{
 				fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
-				fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+				fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
 				fz_report_error(ctx);
 				fz_warn(ctx, "skipping ahead to next token");
 				do
@@ -476,7 +476,7 @@ pdf_repair_xref(fz_context *ctx, pdf_document *doc)
 				fz_catch(ctx)
 				{
 					fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
-					fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+					fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
 					/* If we haven't seen a root yet, there is nothing
 					 * we can do, but give up. Otherwise, we'll make
 					 * do. */
@@ -528,7 +528,7 @@ pdf_repair_xref(fz_context *ctx, pdf_document *doc)
 				fz_catch(ctx)
 				{
 					fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
-					fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+					fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
 					/* If this was the real trailer dict
 					 * it was broken, in which case we are
 					 * in trouble. Keep going though in
@@ -583,7 +583,7 @@ pdf_repair_xref(fz_context *ctx, pdf_document *doc)
 		}
 
 		if (listlen == 0)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "no objects found");
+			fz_throw(ctx, FZ_ERROR_FORMAT, "no objects found");
 
 		/* make xref reasonable */
 
@@ -761,7 +761,7 @@ pdf_repair_obj_stms(fz_context *ctx, pdf_document *doc)
 			}
 			fz_catch(ctx)
 			{
-				fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+				fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
 				fz_report_error(ctx);
 				fz_warn(ctx, "ignoring broken object stream (%d 0 R)", i);
 			}
@@ -775,7 +775,7 @@ pdf_repair_obj_stms(fz_context *ctx, pdf_document *doc)
 		pdf_xref_entry *entry = pdf_get_populating_xref_entry(ctx, doc, i);
 
 		if (entry->type == 'o' && pdf_get_populating_xref_entry(ctx, doc, entry->ofs)->type != 'n')
-			fz_throw(ctx, FZ_ERROR_GENERIC, "invalid reference to non-object-stream: %d (%d 0 R)", (int)entry->ofs, i);
+			fz_throw(ctx, FZ_ERROR_FORMAT, "invalid reference to non-object-stream: %d (%d 0 R)", (int)entry->ofs, i);
 	}
 }
 

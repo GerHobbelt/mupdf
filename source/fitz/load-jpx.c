@@ -300,7 +300,7 @@ safe_mul32(fz_context *ctx, int32_t a, int32_t b)
 	int32_t res32 = (int32_t)res;
 
 	if ((res32) != res)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Overflow while decoding jpx");
+		fz_throw(ctx, FZ_ERROR_LIMIT, "Overflow while decoding jpx");
 	return res32;
 }
 
@@ -311,7 +311,7 @@ safe_mla32(fz_context *ctx, int32_t a, int32_t b, int32_t c)
 	int32_t res32 = (int32_t)res;
 
 	if ((res32) != res)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Overflow while decoding jpx");
+		fz_throw(ctx, FZ_ERROR_LIMIT, "Overflow while decoding jpx");
 	return res32;
 }
 
@@ -418,7 +418,7 @@ copy_jpx_to_pixmap(fz_context *ctx, fz_pixmap *img, opj_image_t *jpx)
 		int sgnd = comp->sgnd;
 
 		if (comp->data == NULL)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "No data for JP2 image component %d", k);
+			fz_throw(ctx, FZ_ERROR_FORMAT, "No data for JP2 image component %d", k);
 
 		if (fz_colorspace_is_indexed(ctx, img->colorspace))
 		{
@@ -455,7 +455,7 @@ jpx_read_image(fz_context *ctx, fz_jpxd *state, const unsigned char *data, size_
 	fz_var(img);
 
 	if (size < 2)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "not enough data to determine image format");
+		fz_throw(ctx, FZ_ERROR_FORMAT, "not enough data to determine image format");
 
 	/* Check for SOC marker -- if found we have a bare J2K stream */
 	if (data[0] == 0xFF && data[1] == 0x4F)
@@ -474,7 +474,7 @@ jpx_read_image(fz_context *ctx, fz_jpxd *state, const unsigned char *data, size_
 	if (!opj_setup_decoder(codec, &params))
 	{
 		opj_destroy_codec(codec);
-		fz_throw(ctx, FZ_ERROR_GENERIC, "j2k decode failed");
+		fz_throw(ctx, FZ_ERROR_LIBRARY, "j2k decode failed");
 	}
 
 	stream = opj_stream_default_create(OPJ_TRUE);
@@ -493,7 +493,7 @@ jpx_read_image(fz_context *ctx, fz_jpxd *state, const unsigned char *data, size_
 	{
 		opj_stream_destroy(stream);
 		opj_destroy_codec(codec);
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to read JPX header");
+		fz_throw(ctx, FZ_ERROR_LIBRARY, "Failed to read JPX header");
 	}
 
 	if (!opj_decode(codec, stream, jpx))
@@ -501,7 +501,7 @@ jpx_read_image(fz_context *ctx, fz_jpxd *state, const unsigned char *data, size_
 		opj_stream_destroy(stream);
 		opj_destroy_codec(codec);
 		opj_image_destroy(jpx);
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to decode JPX image");
+		fz_throw(ctx, FZ_ERROR_LIBRARY, "Failed to decode JPX image");
 	}
 
 	opj_stream_destroy(stream);
@@ -509,7 +509,7 @@ jpx_read_image(fz_context *ctx, fz_jpxd *state, const unsigned char *data, size_
 
 	/* jpx should never be NULL here, but check anyway */
 	if (!jpx)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "opj_decode failed");
+		fz_throw(ctx, FZ_ERROR_LIBRARY, "opj_decode failed");
 
 	/* Count number of alpha and color channels */
 	n = a = 0;
@@ -526,7 +526,7 @@ jpx_read_image(fz_context *ctx, fz_jpxd *state, const unsigned char *data, size_
 		if (!jpx->comps[k].data)
 		{
 			opj_image_destroy(jpx);
-			fz_throw(ctx, FZ_ERROR_GENERIC, "image components are missing data");
+			fz_throw(ctx, FZ_ERROR_FORMAT, "image components are missing data");
 		}
 	}
 
@@ -538,7 +538,7 @@ jpx_read_image(fz_context *ctx, fz_jpxd *state, const unsigned char *data, size_
 	if (w < 0 || h < 0)
 	{
 		opj_image_destroy(jpx);
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Unbelievable size for jpx");
+		fz_throw(ctx, FZ_ERROR_LIMIT, "Unbelievable size for jpx");
 	}
 
 	state->cs = NULL;
@@ -566,7 +566,7 @@ jpx_read_image(fz_context *ctx, fz_jpxd *state, const unsigned char *data, size_
 			fz_drop_buffer(ctx, cbuf);
 		fz_catch(ctx)
 		{
-			fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+			fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
 			fz_report_error(ctx);
 			fz_warn(ctx, "ignoring embedded ICC profile in JPX");
 		}
@@ -590,7 +590,7 @@ jpx_read_image(fz_context *ctx, fz_jpxd *state, const unsigned char *data, size_
 		default:
 			{
 				opj_image_destroy(jpx);
-				fz_throw(ctx, FZ_ERROR_GENERIC, "unsupported number of components: %d", n);
+				fz_throw(ctx, FZ_ERROR_FORMAT, "unsupported number of components: %d", n);
 			}
 		}
 	}
@@ -674,13 +674,13 @@ fz_load_jpx_info(fz_context *ctx, const unsigned char *data, size_t size, int *w
 fz_pixmap *
 fz_load_jpx(fz_context *ctx, const unsigned char *data, size_t size, fz_colorspace *defcs)
 {
-	fz_throw(ctx, FZ_ERROR_GENERIC, "JPX support disabled");
+	fz_throw(ctx, FZ_ERROR_UNSUPPORTED, "JPX support disabled");
 }
 
 void
 fz_load_jpx_info(fz_context *ctx, const unsigned char *data, size_t size, int *wp, int *hp, int *xresp, int *yresp, fz_colorspace **cspacep)
 {
-	fz_throw(ctx, FZ_ERROR_GENERIC, "JPX support disabled");
+	fz_throw(ctx, FZ_ERROR_UNSUPPORTED, "JPX support disabled");
 }
 
 #endif // JPX_ENABLE_IMG_SUPPORT

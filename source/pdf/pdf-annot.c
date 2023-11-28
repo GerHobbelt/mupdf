@@ -485,7 +485,7 @@ static void check_allowed_subtypes(fz_context *ctx, pdf_annot *annot, pdf_obj *p
 {
 	pdf_obj *subtype = pdf_dict_get(ctx, annot->obj, PDF_NAME(Subtype));
 	if (!is_allowed_subtype(ctx, annot, property, allowed))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "%s annotations have no %s property", pdf_to_name_not_null(ctx, subtype), pdf_to_name_not_null(ctx, property));
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "%s annotations have no %s property", pdf_to_name_not_null(ctx, subtype), pdf_to_name_not_null(ctx, property));
 }
 
 pdf_annot *
@@ -506,7 +506,7 @@ pdf_create_annot_raw(fz_context *ctx, pdf_page *page, enum pdf_annot_type type)
 
 		type_str = pdf_string_from_annot_type(ctx, type);
 		if (type == PDF_ANNOT_UNKNOWN)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot create unknown annotation");
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot create unknown annotation");
 
 		annot_arr = pdf_dict_get(ctx, page->obj, PDF_NAME(Annots));
 		if (!pdf_is_array(ctx, annot_arr))
@@ -2180,9 +2180,9 @@ static void pdf_set_annot_color_imp(fz_context *ctx, pdf_annot *annot, pdf_obj *
 	if (allowed)
 		check_allowed_subtypes(ctx, annot, key, allowed);
 	if (n != 0 && n != 1 && n != 3 && n != 4)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "color must be 0, 1, 3 or 4 components");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "color must be 0, 1, 3 or 4 components");
 	if (!color)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "no color given");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "no color given");
 
 	arr = pdf_dict_put_array(ctx, annot->obj, key, n);
 	fz_try(ctx)
@@ -2526,7 +2526,7 @@ pdf_set_annot_vertices(fz_context *ctx, pdf_annot *annot, int n, const fz_point 
 	{
 		check_allowed_subtypes(ctx, annot, PDF_NAME(Vertices), vertices_subtypes);
 		if (n <= 0 || !v)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "invalid number of vertices");
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "invalid number of vertices");
 
 		pdf_page_transform(ctx, annot->page, NULL, &page_ctm);
 		inv_page_ctm = fz_invert_matrix(page_ctm);
@@ -2714,7 +2714,7 @@ pdf_set_annot_quad_points(fz_context *ctx, pdf_annot *annot, int n, const fz_qua
 	{
 		check_allowed_subtypes(ctx, annot, PDF_NAME(QuadPoints), quad_point_subtypes);
 		if (n <= 0 || !q)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "invalid number of quadrilaterals");
+			fz_throw(ctx, FZ_ERROR_ARGUMENT, "invalid number of quadrilaterals");
 
 		pdf_page_transform(ctx, annot->page, NULL, &page_ctm);
 		inv_page_ctm = fz_invert_matrix(page_ctm);
@@ -3441,7 +3441,7 @@ pdf_set_annot_appearance(fz_context *ctx, pdf_annot *annot, const char *appearan
 		else
 		{
 			if (strcmp(appearance, "N") && strcmp(appearance, "R") && strcmp(appearance, "D"))
-				fz_throw(ctx, FZ_ERROR_GENERIC, "Unknown annotation appearance");
+				fz_throw(ctx, FZ_ERROR_ARGUMENT, "Unknown annotation appearance");
 
 			app_name = pdf_new_name(ctx, appearance);
 			app = pdf_dict_get(ctx, ap, app_name);
@@ -3629,7 +3629,7 @@ void
 pdf_set_annot_filespec(fz_context *ctx, pdf_annot *annot, pdf_obj *fs)
 {
 	if (!pdf_is_embedded_file(ctx, fs))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot set non-filespec as annotation filespec");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot set non-filespec as annotation filespec");
 
 	begin_annot_op(ctx, annot, "Set filespec");
 

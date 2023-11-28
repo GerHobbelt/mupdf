@@ -110,7 +110,7 @@ static void error_exit(j_common_ptr cinfo)
 	fz_context *ctx = JZ_CTX_FROM_CINFO(cinfo);
 
 	cinfo->err->format_message(cinfo, msg);
-	fz_throw(ctx, FZ_ERROR_GENERIC, "jpeg error: %s", msg);
+	fz_throw(ctx, FZ_ERROR_LIBRARY, "jpeg error: %s", msg);
 }
 
 static void init_source(j_decompress_ptr cinfo)
@@ -225,7 +225,7 @@ static fz_colorspace *extract_icc_profile(fz_context *ctx, jpeg_saved_marker_ptr
 		fz_drop_buffer(ctx, buf);
 	fz_catch(ctx)
 	{
-		fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+		fz_rethrow_if(ctx, FZ_ERROR_SYSTEM);
 		fz_report_error(ctx);
 		fz_warn(ctx, "ignoring embedded ICC profile in JPEG");
 	}
@@ -428,7 +428,7 @@ fz_load_jpeg(fz_context *ctx, const unsigned char *rbuf, size_t rlen)
 			colorspace = fz_keep_colorspace(ctx, fz_device_cmyk(ctx));
 		colorspace = extract_icc_profile(ctx, cinfo.marker_list, cinfo.output_components, colorspace);
 		if (!colorspace)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot determine colorspace");
+			fz_throw(ctx, FZ_ERROR_FORMAT, "cannot determine colorspace");
 
 		image = fz_new_pixmap(ctx, colorspace, cinfo.output_width, cinfo.output_height, NULL, 0);
 
@@ -551,7 +551,7 @@ fz_load_jpeg_info(fz_context *ctx, const unsigned char *rbuf, size_t rlen, int *
 			*cspacep = fz_keep_colorspace(ctx, fz_device_cmyk(ctx));
 		*cspacep = extract_icc_profile(ctx, cinfo.marker_list, cinfo.num_components, *cspacep);
 		if (!*cspacep)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "cannot determine colorspace");
+			fz_throw(ctx, FZ_ERROR_FORMAT, "cannot determine colorspace");
 
 		if (extract_exif_resolution(cinfo.marker_list, xresp, yresp, orientation))
 			/* XPS prefers EXIF resolution to JFIF density */;

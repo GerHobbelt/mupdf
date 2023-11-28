@@ -223,7 +223,7 @@ fz_lookup_fast_color_converter(fz_context *ctx, fz_colorspace *ss, fz_colorspace
 		if (dtype == FZ_COLORSPACE_CMYK) return lab_to_cmyk;
 	}
 
-	fz_throw(ctx, FZ_ERROR_GENERIC, "cannot find color converter");
+	fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot find color converter");
 }
 
 /* Fast pixmap color conversions */
@@ -245,9 +245,9 @@ static void fast_gray_to_rgb(fz_context *ctx, const fz_pixmap *src, fz_pixmap *d
 
 	/* If copying spots, they must match, and we can never drop alpha (but we can invent it) */
 	if (copy_spots && ss != ds)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "incompatible number of spots when converting pixmap");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "incompatible number of spots when converting pixmap");
 	if (!da && sa)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot drop alpha when converting pixmap");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot drop alpha when converting pixmap");
 
 	if ((int)w < 0 || h < 0)
 		return;
@@ -399,10 +399,10 @@ static void fast_gray_to_cmyk(fz_context *ctx, const fz_pixmap *src, fz_pixmap *
 	int i;
 
 	if (copy_spots && ss != ds)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "incompatible number of spots when converting pixmap");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "incompatible number of spots when converting pixmap");
 
 	if ((int)w < 0 || h < 0)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "integer overflow");
+		fz_throw(ctx, FZ_ERROR_LIMIT, "integer overflow");
 
 	while (h--)
 	{
@@ -474,9 +474,9 @@ static void fast_rgb_to_gray(fz_context *ctx, const fz_pixmap *src, fz_pixmap *d
 
 	/* If copying spots, they must match, and we can never drop alpha (but we can invent it) */
 	if (copy_spots && ss != ds)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "incompatible number of spots when converting pixmap");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "incompatible number of spots when converting pixmap");
 	if (!da && sa)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot drop alpha when converting pixmap");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot drop alpha when converting pixmap");
 
 	if ((int)w < 0 || h < 0)
 		return;
@@ -598,9 +598,9 @@ static void fast_bgr_to_gray(fz_context *ctx, const fz_pixmap *src, fz_pixmap *d
 
 	/* If copying spots, they must match, and we can never drop alpha (but we can invent it) */
 	if (copy_spots && ss != ds)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "incompatible number of spots when converting pixmap");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "incompatible number of spots when converting pixmap");
 	if (!da && sa)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot drop alpha when converting pixmap");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot drop alpha when converting pixmap");
 
 	if ((int)w < 0 || h < 0)
 		return;
@@ -727,10 +727,10 @@ static void fast_rgb_to_cmyk(fz_context *ctx, const fz_pixmap *src, fz_pixmap *d
 	int i;
 
 	if (copy_spots && ss != ds)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "incompatible number of spots when converting pixmap");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "incompatible number of spots when converting pixmap");
 
 	if ((int)w < 0 || h < 0)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "integer overflow");
+		fz_throw(ctx, FZ_ERROR_LIMIT, "integer overflow");
 
 	while (h--)
 	{
@@ -814,10 +814,10 @@ static void fast_bgr_to_cmyk(fz_context *ctx, const fz_pixmap *src, fz_pixmap *d
 	int i;
 
 	if (copy_spots && ss != ds)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "incompatible number of spots when converting pixmap");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "incompatible number of spots when converting pixmap");
 
 	if ((int)w < 0 || h < 0)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "integer overflow");
+		fz_throw(ctx, FZ_ERROR_LIMIT, "integer overflow");
 
 	while (h--)
 	{
@@ -901,10 +901,10 @@ static void fast_cmyk_to_gray(fz_context *ctx, const fz_pixmap *src, fz_pixmap *
 	int i;
 
 	if (copy_spots && ss != ds)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "incompatible number of spots when converting pixmap");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "incompatible number of spots when converting pixmap");
 
 	if ((int)w < 0 || h < 0)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "integer overflow");
+		fz_throw(ctx, FZ_ERROR_LIMIT, "integer overflow");
 
 	while (h--)
 	{
@@ -978,10 +978,10 @@ static void fast_cmyk_to_rgb(fz_context *ctx, const fz_pixmap *src, fz_pixmap *d
 	int i;
 
 	if (copy_spots && ss != ds)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "incompatible number of spots when converting pixmap");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "incompatible number of spots when converting pixmap");
 
 	if ((int)w < 0 || h < 0)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "integer overflow");
+		fz_throw(ctx, FZ_ERROR_LIMIT, "integer overflow");
 
 	while (h--)
 	{
@@ -1061,10 +1061,10 @@ static void fast_cmyk_to_bgr(fz_context *ctx, const fz_pixmap *src, fz_pixmap *d
 	int i;
 
 	if (copy_spots && ss != ds)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "incompatible number of spots when converting pixmap");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "incompatible number of spots when converting pixmap");
 
 	if ((int)w < 0 || h < 0)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "integer overflow");
+		fz_throw(ctx, FZ_ERROR_LIMIT, "integer overflow");
 
 	while (h--)
 	{
@@ -1142,9 +1142,9 @@ static void fast_rgb_to_bgr(fz_context *ctx, const fz_pixmap *src, fz_pixmap *ds
 
 	/* If copying spots, they must match, and we can never drop alpha (but we can invent it) */
 	if (copy_spots && ss != ds)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "incompatible number of spots when converting pixmap");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "incompatible number of spots when converting pixmap");
 	if (!da && sa)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot drop alpha when converting pixmap");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot drop alpha when converting pixmap");
 
 	if ((int)w < 0 || h < 0)
 		return;
@@ -1270,9 +1270,9 @@ static void fast_gray_to_gray(fz_context *ctx, const fz_pixmap *src, fz_pixmap *
 
 	/* If copying spots, they must match, and we can never drop alpha (but we can invent it) */
 	if (copy_spots && ss != ds)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "incompatible number of spots when converting pixmap");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "incompatible number of spots when converting pixmap");
 	if (!da && sa)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot drop alpha when converting pixmap");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot drop alpha when converting pixmap");
 
 	if ((int)w < 0 || h < 0)
 		return;
@@ -1388,9 +1388,9 @@ static void fast_rgb_to_rgb(fz_context *ctx, const fz_pixmap *src, fz_pixmap *ds
 
 	/* If copying spots, they must match, and we can never drop alpha (but we can invent it) */
 	if (copy_spots && ss != ds)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "incompatible number of spots when converting pixmap");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "incompatible number of spots when converting pixmap");
 	if (!da && sa)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot drop alpha when converting pixmap");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot drop alpha when converting pixmap");
 
 	if ((int)w < 0 || h < 0)
 		return;
@@ -1516,9 +1516,9 @@ static void fast_cmyk_to_cmyk(fz_context *ctx, const fz_pixmap *src, fz_pixmap *
 
 	/* If copying spots, they must match, and we can never drop alpha (but we can invent it) */
 	if (copy_spots && ss != ds)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "incompatible number of spots when converting pixmap");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "incompatible number of spots when converting pixmap");
 	if (!da && sa)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "cannot drop alpha when converting pixmap");
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "cannot drop alpha when converting pixmap");
 
 	if ((int)w < 0 || h < 0)
 		return;
