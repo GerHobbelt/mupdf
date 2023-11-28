@@ -57,6 +57,7 @@
 #include "../../thirdparty/owemdjee/cpp-terminal/examples/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libbf/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libcsv2/include/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/nanosvg/example/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libgif/gif_lib.h"
 #include "../../thirdparty/jbig2dec/monolithic_examples.h"
 #include "../../thirdparty/lcms2/include/monolithic_examples.h"
@@ -627,6 +628,11 @@ static struct tool_spec {
 
 	{ {.fa = smartypants_main }, "smartypants", "smartypants tool" },
 	{ {.fa = upskirt_main }, "upskirt", "upskirt tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.f = nanosvg_example1_main }, "nanosvg_example1", "nanosvg example1 demo" },
+	{ {.f = nanosvg_example2_main }, "nanosvg_example2", "nanosvg example2 demo" },
 #endif
 
 #if defined(MUTOOL_EX)

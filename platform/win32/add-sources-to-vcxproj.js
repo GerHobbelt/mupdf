@@ -359,7 +359,9 @@ spec.ignores = spec.ignores
     if (DEBUG > 1) console.error("'ignore' line half-way through conversion to regex:", {f})
     
     let re = new RegExp(f);
-    
+
+   	if (DEBUG > 2) console.log("ignore path / RE:", { f, test: !/[()\[\]?:*+{}]/.test(f), re})
+
     return re;
 });
 
@@ -380,6 +382,7 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
     let f4f = '/' + f;    
     if (spec.ignores.length > 0) {
       for (const sp of spec.ignores) {
+        if (DEBUG > 2) console.log('??IGNORE??:', {f, f4f, sp, DO_IGNORE: sp.test(f4f)});
         if (sp.test(f4f)) {
           if (DEBUG > 1) console.log('IGNORE:', {f, f4f, sp});
           ignoreCount++;
