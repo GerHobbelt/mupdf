@@ -135,10 +135,13 @@ namespace impl
 {
 	static inline /* explicit */ bool validateBool4Assert(bool b) { return b; }
 	static inline bool validateBool4Assert(const void* b) { return !!b; }
-	static inline bool validateBool4Assert(int) = delete;      // catch unintended bool conversions, e.g. HRESULT
+	static inline /* explicit */ bool validateBool4Assert(int b) { return !!b; }
+	static inline bool validateBool4Assert(unsigned int) = delete;      // catch unintended bool conversions, e.g. HRESULT
 	static inline bool validateBool4Assert(float) = delete; 
 	static inline bool validateBool4Assert(double) = delete; 
+	static inline bool validateBool4Assert(long int) = delete; 
 	static inline bool validateBool4Assert(unsigned long int) = delete; 
+	static inline bool validateBool4Assert(long long int) = delete; 
 	static inline bool validateBool4Assert(unsigned long long int) = delete; 
 }
 
