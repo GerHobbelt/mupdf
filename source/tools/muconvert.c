@@ -269,6 +269,8 @@ int muconvert_main(int argc, const char** argv)
 		return EXIT_FAILURE;
 	}
 
+	fz_var(doc);
+
 	assert(retval == EXIT_SUCCESS);
 	{
 		const char *infname = NULL;

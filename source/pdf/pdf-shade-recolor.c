@@ -406,6 +406,7 @@ fz_recolor_shade_type4(fz_context *ctx, pdf_obj *shade, recolor_details *rd)
 
 	fz_var(outbuf);
 	fz_var(out);
+	fz_var(stream);
 
 	read_decode(ctx, shade, n_in, c_min, c_max, n_out, d_min, d_max);
 
@@ -499,6 +500,7 @@ fz_recolor_shade_type5(fz_context *ctx, pdf_obj *shade, recolor_details *rd)
 
 	fz_var(outbuf);
 	fz_var(out);
+	fz_var(stream);
 
 	read_decode(ctx, shade, n_in, c_min, c_max, n_out, d_min, d_max);
 
@@ -594,6 +596,7 @@ fz_recolor_shade_type6(fz_context *ctx, pdf_obj *shade, recolor_details *rd)
 
 	fz_var(outbuf);
 	fz_var(out);
+	fz_var(stream);
 
 	read_decode(ctx, shade, n_in, c_min, c_max, n_out, d_min, d_max);
 
@@ -733,6 +736,7 @@ fz_recolor_shade_type7(fz_context *ctx, pdf_obj *shade, recolor_details *rd)
 
 	fz_var(outbuf);
 	fz_var(out);
+	fz_var(stream);
 
 	read_decode(ctx, shade, n_in, c_min, c_max, n_out, d_min, d_max);
 
