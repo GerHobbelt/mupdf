@@ -95,10 +95,12 @@ pdf_repair_obj(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf, int64_t *stm
 		fz_catch(ctx)
 		{
 			fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
+			fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
 			/* Don't let a broken object at EOF overwrite a good one */
 			if (file->eof)
 				fz_rethrow(ctx);
 			/* Silently swallow the error */
+			fz_report_error(ctx);
 			dict = pdf_new_dict(ctx, doc, 2);
 		}
 
@@ -190,6 +192,8 @@ pdf_repair_obj(fz_context *ctx, pdf_document *doc, pdf_lexbuf *buf, int64_t *stm
 			fz_catch(ctx)
 			{
 				fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
+				fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+				fz_report_error(ctx);
 				fz_warn(ctx, "cannot find endstream token, falling back to scanning");
 			}
 			if (tok == PDF_TOK_ENDSTREAM)
@@ -422,6 +426,8 @@ pdf_repair_xref(fz_context *ctx, pdf_document *doc)
 			fz_catch(ctx)
 			{
 				fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
+				fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+				fz_report_error(ctx);
 				fz_warn(ctx, "skipping ahead to next token");
 				do
 					c = fz_read_byte(ctx, doc->file);
@@ -470,11 +476,13 @@ pdf_repair_xref(fz_context *ctx, pdf_document *doc)
 				fz_catch(ctx)
 				{
 					fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
+					fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
 					/* If we haven't seen a root yet, there is nothing
 					 * we can do, but give up. Otherwise, we'll make
 					 * do. */
 					if (!roots)
 						fz_rethrow(ctx);
+					fz_report_error(ctx);
 					fz_warn(ctx, "cannot parse object (%d %d R) - ignoring rest of file", num, gen);
 					break;
 				}
@@ -520,10 +528,12 @@ pdf_repair_xref(fz_context *ctx, pdf_document *doc)
 				fz_catch(ctx)
 				{
 					fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
+					fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
 					/* If this was the real trailer dict
 					 * it was broken, in which case we are
 					 * in trouble. Keep going though in
 					 * case this was just a bogus dict. */
+					fz_report_error(ctx);
 					continue;
 				}
 
@@ -751,6 +761,8 @@ pdf_repair_obj_stms(fz_context *ctx, pdf_document *doc)
 			}
 			fz_catch(ctx)
 			{
+				fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+				fz_report_error(ctx);
 				fz_warn(ctx, "ignoring broken object stream (%d 0 R)", i);
 			}
 			pdf_drop_obj(ctx, dict);

@@ -1916,7 +1916,10 @@ static void load_document(void)
 	fz_try(ctx)
 		outline = fz_load_outline(ctx, doc);
 	fz_catch(ctx)
+	{
+		fz_report_error(ctx);
 		outline = NULL;
+	}
 
 	load_history();
 
@@ -2339,6 +2342,7 @@ void do_console(void)
 				{
 					console->write(ctx, "\nError: ");
 					console->write(ctx, fz_caught_message(ctx));
+					fz_report_error(ctx);
 				}
 			}
 			fz_flush_warnings(ctx);
@@ -2868,10 +2872,14 @@ static void do_canvas(void)
 
 	if (search_active)
 	{
+		int chapters = fz_count_chapters(ctx, doc);
 		ui_layout(T, X, NW, 0, 0);
 		ui_panel_begin(0, ui.gridsize + ui.padsize*4, ui.padsize*2, ui.padsize*2, 1);
 		ui_layout(L, NONE, W, ui.padsize, 0);
-		ui_label("Searching chapter %d page %d...", search_page.chapter, search_page.page);
+		if (chapters == 1 && search_page.chapter == 0)
+			ui_label("Searching page %d...", search_page.page);
+		else
+			ui_label("Searching chapter %d page %d...", search_page.chapter, search_page.page);
 		ui_panel_end();
 	}
 	else
@@ -3054,7 +3062,10 @@ void run_main_loop(void)
 			do_main();
 	}
 	fz_catch(ctx)
+	{
 		ui_show_error_dialog("%s", fz_caught_message(ctx));
+		fz_report_error(ctx);
+	}
 	ui_end();
 }
 
@@ -3316,6 +3327,7 @@ int main(int argc, const char** argv)
 		fz_catch(ctx)
 		{
 			ui_show_error_dialog("%s", fz_caught_message(ctx));
+			fz_report_error(ctx);
 		}
 
 		fz_try(ctx)
@@ -3326,6 +3338,7 @@ int main(int argc, const char** argv)
 		fz_catch(ctx)
 		{
 			ui_show_error_dialog("%s", fz_caught_message(ctx));
+			fz_report_error(ctx);
 		}
 	}
 	else

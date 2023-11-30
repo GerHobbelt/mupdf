@@ -228,7 +228,7 @@ int muconvert_main(int argc, const char** argv)
 		fz_register_document_handlers(ctx);
 	fz_catch(ctx)
 	{
-		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_report_error(ctx);
 		fz_log_error(ctx, "cannot register document handlers.");
 		fz_drop_context(ctx);
 		return EXIT_FAILURE;
@@ -263,7 +263,7 @@ int muconvert_main(int argc, const char** argv)
     }
 	fz_catch(ctx)
 	{
-		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_report_error(ctx);
 		fz_log_error_printf(ctx, "cannot create document: %s", output);
 		fz_drop_context(ctx);
 		return EXIT_FAILURE;
@@ -304,7 +304,7 @@ int muconvert_main(int argc, const char** argv)
 		}
 		fz_catch(ctx)
 		{
-			fz_log_error(ctx, fz_caught_message(ctx));
+			fz_report_error(ctx);
 			fz_log_error_printf(ctx, "cannot load document: %s", infname);
 			retval = EXIT_FAILURE;
 		}

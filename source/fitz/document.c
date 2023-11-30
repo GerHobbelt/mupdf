@@ -720,6 +720,7 @@ fz_run_page_contents(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix t
 		{
 			dev->close_device = NULL; /* aborted run, don't warn about unclosed device */
 			fz_rethrow_unless(ctx, FZ_ERROR_ABORT);
+			fz_ignore_error(ctx);
 		}
 	}
 }
@@ -737,6 +738,7 @@ fz_run_page_annots(fz_context *ctx, fz_page *page, fz_device *dev, fz_matrix tra
 		{
 			dev->close_device = NULL; /* aborted run, don't warn about unclosed device */
 			fz_rethrow_unless(ctx, FZ_ERROR_ABORT);
+			fz_ignore_error(ctx);
 		}
 	}
 }

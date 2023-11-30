@@ -177,6 +177,16 @@ fz_drop_context(fz_context *ctx)
 	if (!ctx)
 		return;
 
+	if (ctx->error.errcode)
+	{
+		fz_flush_warnings(ctx);
+		fz_warn(ctx, "UNHANDLED EXCEPTION!");
+		fz_report_error(ctx);
+#ifdef CLUSTER
+		abort();
+#endif
+	}
+
 #if FZ_ENABLE_PDF    // TODO: this is a rough cut condition; re-check when you need particular (minor) parts of the mupdf library in your application.
 	/* Other finalisation calls go here (in reverse order) */
 	fz_drop_document_handler_context(ctx);

@@ -748,7 +748,7 @@ int pdfshow_main(int argc, const char** argv)
 		int code = fz_caught(ctx);
 		if (code == FZ_ERROR_ABORT || code == FZ_ERROR_TRYLATER)
 		{
-			fz_log_error(ctx, fz_caught_message(ctx));
+			fz_report_error(ctx);
 		}
 		errored = EXIT_FAILURE;
 	}

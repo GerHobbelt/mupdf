@@ -366,6 +366,8 @@ pdf_lookup_page_obj(fz_context *ctx, pdf_document *doc, int needle)
 		fz_catch(ctx)
 		{
 			doc->page_tree_broken = 1;
+			fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+			fz_report_error(ctx);
 			fz_warn(ctx, "Page tree load failed. Falling back to slow lookup");
 		}
 	}
@@ -889,6 +891,8 @@ find_seps(fz_context *ctx, fz_separations **seps, pdf_obj *obj, pdf_mark_list *c
 		fz_catch(ctx)
 		{
 			fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
+			fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+			fz_report_error(ctx);
 			return; /* ignore broken colorspace */
 		}
 		fz_try(ctx)
@@ -964,6 +968,8 @@ find_devn(fz_context *ctx, fz_separations **seps, pdf_obj *obj, pdf_mark_list *c
 			fz_catch(ctx)
 			{
 				fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
+				fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+				fz_report_error(ctx);
 				continue; /* ignore broken colorspace */
 			}
 			fz_try(ctx)
@@ -1203,7 +1209,11 @@ pdf_load_default_colorspaces_imp(fz_context *ctx, fz_default_colorspaces *defaul
 			fz_drop_colorspace(ctx, cs);
 		}
 		fz_catch(ctx)
+		{
 			fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
+			fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+			fz_report_error(ctx);
+		}
 	}
 
 	cs_obj = pdf_dict_get(ctx, obj, PDF_NAME(DefaultRGB));
@@ -1216,7 +1226,11 @@ pdf_load_default_colorspaces_imp(fz_context *ctx, fz_default_colorspaces *defaul
 			fz_drop_colorspace(ctx, cs);
 		}
 		fz_catch(ctx)
+		{
 			fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
+			fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+			fz_report_error(ctx);
+		}
 	}
 
 	cs_obj = pdf_dict_get(ctx, obj, PDF_NAME(DefaultCMYK));
@@ -1229,7 +1243,11 @@ pdf_load_default_colorspaces_imp(fz_context *ctx, fz_default_colorspaces *defaul
 			fz_drop_colorspace(ctx, cs);
 		}
 		fz_catch(ctx)
+		{
 			fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
+			fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+			fz_report_error(ctx);
+		}
 	}
 }
 
@@ -1261,6 +1279,7 @@ pdf_load_default_colorspaces(fz_context *ctx, pdf_document *doc, pdf_page *page)
 			fz_drop_default_colorspaces(ctx, default_cs);
 			fz_rethrow(ctx);
 		}
+		fz_ignore_error(ctx);
 		page->super.incomplete = 1;
 	}
 
@@ -1344,6 +1363,7 @@ pdf_load_page_imp(fz_context *ctx, fz_document *doc_, int chapter, int number)
 			fz_drop_page(ctx, &page->super);
 			fz_rethrow(ctx);
 		}
+		fz_ignore_error(ctx);
 		page->super.incomplete = 1;
 		fz_drop_link(ctx, page->links);
 		page->links = NULL;
@@ -1388,6 +1408,7 @@ pdf_load_page_imp(fz_context *ctx, fz_document *doc_, int chapter, int number)
 			fz_drop_page(ctx, &page->super);
 			fz_rethrow(ctx);
 		}
+		fz_ignore_error(ctx);
 		page->super.incomplete = 1;
 	}
 

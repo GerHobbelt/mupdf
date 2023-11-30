@@ -67,7 +67,7 @@ int main(int argc, const char** argv)
 		fz_register_document_handlers(ctx);
 	fz_catch(ctx)
 	{
-		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_report_error(ctx);
 		fz_log_error(ctx, "cannot register document handlers.");
 		fz_drop_context(ctx);
 		return EXIT_FAILURE;
@@ -78,7 +78,7 @@ int main(int argc, const char** argv)
 		doc = fz_open_document(ctx, input);
 	fz_catch(ctx)
 	{
-		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_report_error(ctx);
 		fz_log_error_printf(ctx, "cannot open document: %s", input);
 		fz_drop_context(ctx);
 		return EXIT_FAILURE;
@@ -89,7 +89,7 @@ int main(int argc, const char** argv)
 		page_count = fz_count_pages(ctx, doc);
 	fz_catch(ctx)
 	{
-		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_report_error(ctx);
 		fz_log_error(ctx, "cannot count number of pages.");
 		fz_drop_document(ctx, doc);
 		fz_drop_context(ctx);
@@ -114,7 +114,7 @@ int main(int argc, const char** argv)
 		pix = fz_new_pixmap_from_page_number(ctx, doc, page_number, ctm, fz_device_rgb(ctx), 0);
 	fz_catch(ctx)
 	{
-		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_report_error(ctx);
 		fz_log_error_printf(ctx, "cannot render page #%d.", page_number);
 		fz_drop_document(ctx, doc);
 		fz_drop_context(ctx);

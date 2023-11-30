@@ -3270,6 +3270,8 @@ retry_after_repair:
 				fz_catch(ctx)
 				{
 					fz_rethrow_if(ctx, FZ_ERROR_REPAIRED);
+					fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+					fz_report_error(ctx);
 					fz_warn(ctx, "cannot create appearance stream");
 				}
 			}
@@ -3302,7 +3304,10 @@ retry_after_repair:
 		 * Repairs only ever happen once for a document, so no infinite
 		 * loop potential here. */
 		if (fz_caught(ctx) == FZ_ERROR_REPAIRED)
+		{
+			fz_report_error(ctx);
 			goto retry_after_repair;
+		}
 		fz_rethrow(ctx);
 	}
 }

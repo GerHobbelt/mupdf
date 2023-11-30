@@ -2090,11 +2090,16 @@ visible:
 		}
 		fz_catch(ctx)
 		{
+			fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
 			/* Swallow the error */
 			/* Do NOT count ignored 'errors': "Page found as color; stopping interpolation" is
 			   the FZ_ERROR_ABORT message here (no other exception anywhere is of type FZ_ERROR_ABORT) */
 			if (fz_caught(ctx) == FZ_ERROR_ABORT)
+			{
+				fz_ignore_error(ctx);
 				break;
+			}
+			fz_report_error(ctx);
 			fz_warn(ctx, "Ignoring error during interpretation: %s", fz_caught_message(ctx));
 			if (cookie)
 				cookie->d.errors++;

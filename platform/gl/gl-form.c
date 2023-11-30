@@ -106,6 +106,7 @@ int do_sign(void)
 	fz_catch(ctx)
 	{
 		ui_show_warning_dialog("%s", fz_caught_message(ctx));
+		fz_report_error(ctx);
 		ok = 0;
 	}
 	return ok;
@@ -120,7 +121,10 @@ static void do_clear_signature(void)
 		ui_show_warning_dialog("Signature cleared successfully.");
 	}
 	fz_catch(ctx)
+	{
 		ui_show_warning_dialog("%s", fz_caught_message(ctx));
+		fz_report_error(ctx);
+	}
 }
 
 static int image_file_filter(const char *fn)
@@ -145,6 +149,7 @@ static void signature_select_image_dialog(void)
 			fz_catch(ctx)
 			{
 				ui_show_warning_dialog("%s", fz_caught_message(ctx));
+				fz_report_error(ctx);
 				ui.dialog = signature_select_image_dialog;
 			}
 		}
@@ -383,6 +388,7 @@ static void cert_password_dialog(void)
 					ui.dialog = signature_appearance_dialog;
 				} else {
 					ui_show_warning_dialog("%s", fz_caught_message(ctx));
+					fz_report_error(ctx);
 				}
 			}
 		}
@@ -543,7 +549,10 @@ static void show_sig_dialog(pdf_annot *widget)
 		}
 	}
 	fz_catch(ctx)
+	{
 		ui_show_warning_dialog("%s", fz_caught_message(ctx));
+		fz_report_error(ctx);
+	}
 }
 
 static pdf_annot *tx_widget;

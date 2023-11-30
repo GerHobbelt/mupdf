@@ -411,6 +411,7 @@ static inline size_t fz_available(fz_context *ctx, fz_stream *stm, size_t max)
 	fz_catch(ctx)
 	{
 		fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
+		fz_report_error(ctx);
 		fz_warn(ctx, "read error; treating as end of file");
 		stm->error = 1;
 		c = EOF;
@@ -447,6 +448,7 @@ static inline int fz_read_byte(fz_context *ctx, fz_stream *stm)
 	fz_catch(ctx)
 	{
 		fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
+		fz_report_error(ctx);
 		fz_warn(ctx, "read error; treating as end of file");
 		stm->error = 1;
 		c = EOF;
@@ -482,6 +484,7 @@ static inline int fz_peek_byte(fz_context *ctx, fz_stream *stm)
 	fz_catch(ctx)
 	{
 		fz_rethrow_if(ctx, FZ_ERROR_TRYLATER);
+		fz_report_error(ctx);
 		fz_warn(ctx, "read error; treating as end of file");
 		stm->error = 1;
 		c = EOF;

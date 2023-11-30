@@ -3476,6 +3476,7 @@ int main(int argc, const char** argv)
 					fz_catch(ctx)
 					{
 						/* Drop any error */
+						fz_report_error(ctx);
 					}
 #endif
 
@@ -3493,6 +3494,7 @@ int main(int argc, const char** argv)
 					fz_catch(ctx)
 					{
 						/* Drop any error */
+						fz_report_error(ctx);
 					}
 #endif
 
@@ -3563,6 +3565,7 @@ int main(int argc, const char** argv)
 						fz_rethrow(ctx);
 
 					bgprint_flush();
+					fz_report_error(ctx);
 					fz_warn(ctx, "ignoring error in '%s'", filename);
 				}
 			}
@@ -3571,7 +3574,7 @@ int main(int argc, const char** argv)
 		{
 			bgprint_flush();
 			fz_drop_document(ctx, doc);
-			fz_log_error(ctx, fz_caught_message(ctx));
+			fz_report_error(ctx);
 			fz_log_error_printf(ctx, "cannot draw '%s'", filename);
 			errored = 1;
 		}
@@ -3681,7 +3684,7 @@ int main(int argc, const char** argv)
 	}
 	fz_catch(ctx)
 	{
-		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_report_error(ctx);
 		if (!errored) {
 			fz_error(ctx, "Rendering failed.");
 			errored = 1;

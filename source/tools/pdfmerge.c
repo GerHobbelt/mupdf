@@ -353,7 +353,7 @@ int pdfmerge_main(int argc, const char** argv)
 	}
 	fz_catch(ctx)
 	{
-		fz_log_error(ctx, fz_caught_message(ctx));
+		fz_report_error(ctx);
 		fz_log_error(ctx, "Cannot create destination document.");
 		fz_flush_warnings(ctx);
 		fz_drop_context(ctx);
@@ -378,7 +378,7 @@ int pdfmerge_main(int argc, const char** argv)
 			pdf_drop_document(ctx, doc_src);
 		fz_catch(ctx)
 		{
-			fz_log_error(ctx, fz_caught_message(ctx));
+			fz_report_error(ctx);
 			fz_log_error_printf(ctx, "Cannot merge document '%s'.", input);
 		}
 	}
@@ -389,7 +389,7 @@ int pdfmerge_main(int argc, const char** argv)
 			pdf_save_document(ctx, doc_des, output, &opts);
 		fz_catch(ctx)
 		{
-			fz_log_error(ctx, fz_caught_message(ctx));
+			fz_report_error(ctx);
 			fz_log_error_printf(ctx, "Cannot save output file: '%s'.", output);
 		}
 	}

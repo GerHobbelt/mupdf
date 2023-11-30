@@ -194,6 +194,7 @@ int mutrace_main(int argc, const char** argv)
 	}
 	fz_catch(ctx)
 	{
+		fz_report_error(ctx);
 		fz_error(ctx, "cannot initialize mupdf: %s",  fz_caught_message(ctx));
 		fz_drop_context(ctx);
 		return EXIT_FAILURE;
@@ -238,6 +239,7 @@ int mutrace_main(int argc, const char** argv)
 	}
 	fz_catch(ctx)
 	{
+		fz_report_error(ctx);
 		fz_error(ctx, "cannot run document: %s", fz_caught_message(ctx));
 		fz_drop_document(ctx, doc);
 		errored = 1;

@@ -315,7 +315,10 @@ int main(int argc, const char** argv)
 		fz_drop_document(ctx, doc);
 	}
 	fz_catch(ctx)
-		fail(fz_caught_message(ctx));
+	{
+		fz_report_error(ctx);
+		fail("error");
+	}
 
 	fprintf(stderr, "finally!\n");
 	fflush(stderr);

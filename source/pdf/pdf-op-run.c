@@ -489,6 +489,8 @@ pdf_grestore(fz_context *ctx, pdf_run_processor *pr)
 		{
 			/* Silently swallow the problem - restores must
 			 * never throw! */
+			fz_rethrow_if(ctx, FZ_ERROR_MEMORY); // FIXME - unsure if we can throw here?
+			fz_report_error(ctx);
 		}
 		clip_depth--;
 	}
@@ -1985,7 +1987,8 @@ push_marked_content(fz_context *ctx, pdf_run_processor *proc, const char *tagstr
 			}
 			fz_catch(ctx)
 			{
-				fz_warn(ctx, "structure tree broken, assume tree is missing: %s", fz_caught_message(ctx));
+				fz_report_error(ctx);
+				fz_warn(ctx, "structure tree broken, assume tree is missing.");
 				proc->broken_struct_tree = 1;
 			}
 		}
@@ -2226,6 +2229,7 @@ pdf_run_xobject(fz_context *ctx, pdf_run_processor *pr, pdf_obj *xobj, pdf_obj *
 		fz_catch(ctx)
 		{
 			fz_rethrow_unless(ctx, FZ_ERROR_TRYLATER);
+			fz_ignore_error(ctx);
 			if (cookie)
 				cookie->d.incomplete = 1;
 		}
@@ -2292,8 +2296,7 @@ pdf_run_xobject(fz_context *ctx, pdf_run_processor *pr, pdf_obj *xobj, pdf_obj *
 		/* Note: Any SYNTAX errors should have been swallowed
 		 * by pdf_process_contents, but in case any escape from other
 		 * functions, recast the error type here to be safe. */
-		if (fz_caught(ctx) == FZ_ERROR_SYNTAX)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "syntax error in xobject");
+		fz_morph_error(ctx, FZ_ERROR_SYNTAX, FZ_ERROR_GENERIC);
 		fz_rethrow(ctx);
 	}
 }

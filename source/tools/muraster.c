@@ -2288,6 +2288,7 @@ int main(int argc, const char** argv)
 						fz_rethrow(ctx);
 					}
 
+					fz_report_error(ctx);
 					fz_warn(ctx, "ignoring error in '%s'", filename);
 				}
 			}
