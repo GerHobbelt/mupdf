@@ -483,7 +483,7 @@ void pdf_clean_file(fz_context *ctx, const char *infile, const char *outfile, co
 			pdf_rearrange_pages(ctx, pdf, len, pages);
 		}
 
-		pdf_save_document(ctx, pdf, outfile, opts);
+		pdf_save_document(ctx, pdf, outfile, &opts->write);
 	}
 	fz_always(ctx)
 	{

@@ -236,7 +236,7 @@ lookup_archive_entry(fz_context *ctx, fz_libarchive_archive *arch, const char *n
 
 	for (idx = 0; idx < arch->entries_len; idx++)
 	{
-		if (!strcmp(name, arch->entries[idx]->name))
+		if (!strcmp(name, (const char *)(arch->entries[idx]->name)))
 			return idx;
 	}
 
@@ -254,7 +254,7 @@ static const char *list_libarchive_entry(fz_context *ctx, fz_archive *arch_, int
 	fz_libarchive_archive *arch = (fz_libarchive_archive *)arch_;
 	if (idx < 0 || idx >= arch->entries_len)
 		return NULL;
-	return arch->entries[idx]->name;
+	return (const char *)(arch->entries[idx]->name);
 }
 
 static int count_libarchive_entries(fz_context *ctx, fz_archive *arch_)

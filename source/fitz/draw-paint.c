@@ -3193,8 +3193,8 @@ fz_paint_over_pixmap_with_mask(fz_pixmap * FZ_RESTRICT dst, const fz_pixmap * FZ
 	fz_irect bbox;
 	int x, y, w, h;
 
-	assert(dst->n == src->n);
-	assert(msk->n == 1);
+	ASSERT0(dst->n == src->n);
+	ASSERT0(msk->n == 1);
 
 	bbox = fz_pixmap_bbox_no_ctx(dst);
 	bbox = fz_intersect_irect(bbox, fz_pixmap_bbox_no_ctx(src));
@@ -3208,7 +3208,7 @@ fz_paint_over_pixmap_with_mask(fz_pixmap * FZ_RESTRICT dst, const fz_pixmap * FZ
 		return;
 
 	/* sa == da, or something has gone very wrong! */
-	assert(src->alpha == dst->alpha && dst->alpha == 1 && src->n == 1);
+	ASSERT0(src->alpha == dst->alpha && dst->alpha == 1 && src->n == 1);
 	sp = src->samples + (y - src->y) * (size_t)src->stride + (size_t)(x - src->x);
 	mp = msk->samples + (y - msk->y) * (size_t)msk->stride + (size_t)(x - msk->x);
 	dp = dst->samples + (y - dst->y) * (size_t)dst->stride + (size_t)(x - dst->x);
