@@ -49,4 +49,9 @@ void pdf_clean_file(fz_context *ctx, const char *infile, const char *outfile, co
 
 #endif
 
+/*
+	Recreate page tree to include only the pages listed in the array, in the order listed.
+*/
+void pdf_rearrange_pages(fz_context *ctx, pdf_document *doc, int count, int *pages);
+
 #endif

@@ -1506,14 +1506,7 @@ xml_to_boxes(fz_context *ctx, fz_html_font_set *set, fz_archive *zip, const char
 		*rtitle = NULL;
 
 	root = fz_xml_root(g.xml);
-
-	fz_try(ctx)
-		g.css = fz_new_css(ctx);
-	fz_catch(ctx)
-	{
-		fz_drop_xml(ctx, g.xml);
-		fz_rethrow(ctx);
-	}
+	g.css = fz_new_css(ctx);
 
 #ifndef NDEBUG
 	if (fz_atoi(getenv("FZ_DEBUG_XML")))
@@ -2297,11 +2290,11 @@ convert_to_boxes(fz_context *ctx, fz_story *story)
 	{
 		redirect_warnings_to_buffer(ctx, story->warnings, &saved);
 		xml_to_boxes(ctx, story->font_set, story->zip, ".", story->user_css, story->dom, &story->tree, NULL, 0, 0);
-		fz_drop_xml(ctx, story->dom);
-		story->dom = NULL;
 	}
 	fz_always(ctx)
 	{
+		fz_drop_xml(ctx, story->dom);
+		story->dom = NULL;
 		restore_warnings(ctx, &saved);
 	}
 	fz_catch(ctx)
@@ -2480,7 +2473,7 @@ fz_txt_buffer_to_html(fz_context *ctx, fz_buffer *in)
 		outbuf = fz_new_buffer(ctx, 1024);
 		out = fz_new_output_with_buffer(ctx, outbuf);
 
-		fz_write_string(ctx, out, "<!doctype html><style>pre{white-space:pre-wrap}</style><pre>");
+		fz_write_string(ctx, out, "<!doctype html><style>body{margin:0}pre{page-break-before:always;margin:0;white-space:pre-wrap;}</style><pre>");
 
 		if (encoding == ENCODING_UTF16_LE || encoding == ENCODING_UTF16_BE)
 		{
@@ -2527,6 +2520,11 @@ fz_txt_buffer_to_html(fz_context *ctx, fz_buffer *in)
 				col += n-1;
 				while (n--)
 					fz_write_byte(ctx, out, ' ');
+			}
+			else if (c == 12)
+			{
+				col = -1;
+				fz_write_string(ctx, out, "</pre><pre>\n");
 			}
 			else if (c == '<')
 				fz_write_string(ctx, out, "&lt;");

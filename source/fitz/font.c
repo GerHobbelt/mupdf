@@ -2188,6 +2188,14 @@ fz_encode_character_with_fallback(fz_context *ctx, fz_font *user_font, int unico
 			return *out_font = font, gid;
 	}
 
+	font = fz_load_fallback_boxes_font(ctx);
+	if (font)
+	{
+		gid = fz_encode_character(ctx, font, unicode);
+		if (gid > 0)
+			return *out_font = font, gid;
+	}
+
 	font = fz_new_base14_font(ctx, "Symbol");
 	if (font)
 	{

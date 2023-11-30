@@ -149,6 +149,8 @@ public class PDFDocument extends Document
 	public native boolean canBeSavedIncrementally();
 	public native boolean isRedacted();
 
+	public native void rearrangePages(int[] pages);
+
 	public native void save(String filename, String options);
 	public native void redactSaveSecure(String filename, String options);
 
