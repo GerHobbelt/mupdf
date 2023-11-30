@@ -24,8 +24,13 @@
 
 #ifdef HAVE_LIBARCHIVE
 
+#ifdef _WIN32
 #include "libarchive/archive.h"
 #include "libarchive/archive_entry.h"
+#else
+#include <archive.h>
+#include <archive_entry.h>
+#endif
 
 typedef struct
 {
@@ -53,68 +58,104 @@ static la_ssize_t
 libarchive_read(struct archive *a, void *client_data, const void **buf)
 {
 	fz_libarchive_archive *arch = (fz_libarchive_archive *)client_data;
-	size_t z = fz_available(arch->ctx, arch->super.file, 1024);
+	size_t z;
 	uint8_t *p;
 	size_t left;
+	fz_context *ctx = arch->ctx;
+	la_ssize_t ret = 0;
 
-	/* If we're at the EOF, can't read anything! */
-	if (z == 0)
-		return 0;
-
-	/* If we have at least 1K, then just return the pointer to that
-	 * directly. */
-	if (z >= 1024)
+	fz_try(ctx)
 	{
-		*buf = arch->super.file->rp;
-		arch->super.file->rp += z;
-		return (la_ssize_t)z;
-	}
+		z = fz_available(arch->ctx, arch->super.file, 1024);
 
-	/* If not, let's pull a large enough lump out. */
+		/* If we're at the EOF, can't read anything! */
+		if (z == 0)
+			break;
 
-	left = sizeof(arch->block);
-	p = arch->block;
-	do
-	{
-		memcpy(p, arch->super.file->rp, z);
-		p += z;
-		arch->super.file->rp += z;
-		left -= z;
-		if (left)
+		/* If we have at least 1K, then just return the pointer to that
+		 * directly. */
+		if (z >= 1024)
 		{
-			z = fz_available(arch->ctx, arch->super.file, left);
-			if (z > left)
-				z = left;
-			if (z == 0)
-				break;
+			*buf = arch->super.file->rp;
+			arch->super.file->rp += z;
+			ret = (la_ssize_t)z;
+			break;
 		}
+
+		/* If not, let's pull a large enough lump out. */
+
+		left = sizeof(arch->block);
+		p = arch->block;
+		do
+		{
+			memcpy(p, arch->super.file->rp, z);
+			p += z;
+			arch->super.file->rp += z;
+			left -= z;
+			if (left)
+			{
+				z = fz_available(arch->ctx, arch->super.file, left);
+				if (z > left)
+					z = left;
+				if (z == 0)
+					break;
+			}
+		}
+		while (left != 0);
+
+		ret = p - arch->block;
+		*buf = arch->block;
 	}
-	while (left != 0);
+	fz_catch(ctx)
+	{
+		/* Ignore error */
+		return -1;
+	}
 
-	*buf = arch->block;
-
-	return p - arch->block;
+	return ret;
 }
 
 static la_int64_t
 libarchive_skip(struct archive *a, void *client_data, la_int64_t skip)
 {
 	fz_libarchive_archive *arch = (fz_libarchive_archive *)client_data;
-	int64_t pos = fz_tell(arch->ctx, arch->super.file);
+	int64_t pos;
+	fz_context *ctx = arch->ctx;
 
-	fz_seek(arch->ctx, arch->super.file, pos + skip, SEEK_SET);
+	fz_try(ctx)
+	{
+		pos = fz_tell(arch->ctx, arch->super.file);
+		fz_seek(arch->ctx, arch->super.file, pos + skip, SEEK_SET);
+		pos = fz_tell(arch->ctx, arch->super.file) - pos;
+	}
+	fz_catch(ctx)
+	{
+		/* Ignore error */
+		return -1;
+	}
 
-	return fz_tell(arch->ctx, arch->super.file) - pos;
+	return pos;
 }
 
 static la_int64_t
 libarchive_seek(struct archive *a, void *client_data, la_int64_t offset, int whence)
 {
 	fz_libarchive_archive *arch = (fz_libarchive_archive *)client_data;
+	fz_context *ctx = arch->ctx;
+	int64_t pos;
 
-	fz_seek(arch->ctx, arch->super.file, offset, whence);
+	fz_try(ctx)
+	{
+		fz_seek(arch->ctx, arch->super.file, offset, whence);
+		pos = fz_tell(arch->ctx, arch->super.file);
+	}
+	fz_catch(ctx)
+	{
+		/* Ignore error */
+		return -1;
+	}
 
-	return fz_tell(arch->ctx, arch->super.file);
+	return pos;
 }
 
 static int
@@ -142,7 +183,7 @@ libarchive_open(fz_context *ctx, fz_libarchive_archive *arch)
 	arch->ctx = NULL;
 	if (r != ARCHIVE_OK)
 	{
-		archive_read_finish(arch->archive);
+		archive_read_free(arch->archive);
 		arch->archive = NULL;
 	}
 
@@ -154,7 +195,7 @@ libarchive_reset(fz_context *ctx, fz_libarchive_archive *arch)
 {
 	if (arch->archive)
 	{
-		archive_read_finish(arch->archive);
+		archive_read_free(arch->archive);
 		arch->archive = NULL;
 	}
 	fz_seek(ctx, arch->super.file, 0, SEEK_SET);
@@ -169,7 +210,7 @@ drop_libarchive_archive(fz_context *ctx, fz_archive *arch_)
 {
 	fz_libarchive_archive *arch = (fz_libarchive_archive *)arch_;
 
-	archive_read_finish(arch->archive);
+	archive_read_free(arch->archive);
 	arch->archive = NULL;
 }
 
@@ -183,7 +224,7 @@ fz_is_libarchive_archive(fz_context *ctx, fz_stream *file)
 	fz_seek(ctx, file, 0, SEEK_SET);
 	fail = libarchive_open(ctx, &arch);
 	if (!fail)
-		archive_read_finish(arch.archive);
+		archive_read_free(arch.archive);
 
 	return !fail;
 }
@@ -227,7 +268,7 @@ read_libarchive_entry(fz_context *ctx, fz_archive *arch_, const char *name)
 {
 	fz_libarchive_archive *arch = (fz_libarchive_archive *)arch_;
 	fz_stream *file = arch->super.file;
-	fz_buffer *ubuf;
+	fz_buffer *ubuf = NULL;
 	int idx;
 	struct archive_entry *entry;
 	size_t size;
@@ -239,29 +280,32 @@ read_libarchive_entry(fz_context *ctx, fz_archive *arch_, const char *name)
 	if (arch->current_entry_idx > idx)
 		libarchive_reset(ctx, arch);
 
+	fz_var(ubuf);
+
 	arch->ctx = ctx;
 	fz_try(ctx)
 	{
 		while (arch->current_entry_idx < idx)
 		{
 			int r = archive_read_next_header(arch->archive, &entry);
+			if (r == ARCHIVE_OK)
+				r = archive_read_data_skip(arch->archive);
 			if (r != ARCHIVE_OK)
-				fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to read archive");
+				fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to skip over archive entry");
 			arch->current_entry_idx++;
-			archive_read_data_skip(arch->archive);
 		}
 
 		/* This is the one we want. */
 		if (archive_read_next_header(arch->archive, &entry) != ARCHIVE_OK)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to read archive");
+			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to read archive entry header");
 
 		arch->current_entry_idx++;
 		size = arch->entries[idx]->len;
 		ubuf = fz_new_buffer(ctx, size);
 
-		if (archive_read_data(arch->archive, ubuf->data, size) != size)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "Failed to read archive");
-		ubuf->len = size;
+		ubuf->len = archive_read_data(arch->archive, ubuf->data, size);
+		if (ubuf->len != size)
+			fz_warn(ctx, "Premature end of data reading archive entry data (%z vs %z)", (size_t)ubuf->len, (size_t)size);
 	}
 	fz_always(ctx)
 		arch->ctx = NULL;

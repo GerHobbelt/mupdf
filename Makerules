@@ -45,6 +45,12 @@ ifeq ($(jpegxl),yes)
   build_suffix += -jpegxl
 endif
 
+ifeq ($(archive),yes)
+  build_suffix := $(build_suffix)-archive
+  XCFLAGS += -DHAVE_LIBARCHIVE
+  HAVE_LIBARCHIVE := yes
+endif
+
 # System specific features
 
 ifeq ($(findstring -fembed-bitcode,$(XCFLAGS)),)
@@ -166,6 +172,7 @@ SYS_ZLIB_LIBS := -lz
 SYS_TESSERACT_LIBS := -ltesseract
 SYS_LEPTONICA_LIBS := -llept
 SYS_JPEGXL_LIBS := -ljpeg-xl
+SYS_LIBARCHIVE_LIBS := -larchive
 
 ifneq "$(CLUSTER)" ""
   CFLAGS += -DCLUSTER
@@ -284,6 +291,12 @@ else ifeq ($(LINUX_OR_OPENBSD),yes)
   ifeq ($(HAVE_SYS_JPEGXL),yes)
 	SYS_JPEGXL_CFLAGS := $(shell pkg-config --cflags jpegxl)
 	SYS_JPEGXL_LIBS := $(shell pkg-config --libs jpegxl)
+  endif
+
+  HAVE_SYS_LIBARCHIVE := $(shell pkg-config --exists 'libarchive' && echo yes)
+  ifeq ($(HAVE_SYS_LIBARCHIVE),yes)
+	SYS_LIBARCHIVE_CFLAGS := $(shell pkg-config --cflags libarchive)
+	SYS_LIBARCHIVE_LIBS := $(shell pkg-config --libs libarchive)
   endif
 
   HAVE_SYS_CURL := $(shell pkg-config --exists libcurl && echo yes)
