@@ -90,10 +90,14 @@ void fz_new_document_handler_context(fz_context *ctx);
 void fz_drop_document_handler_context(fz_context *ctx);
 fz_document_handler_context *fz_keep_document_handler_context(fz_context *ctx);
 
+void fz_new_archive_handler_context(fz_context *ctx);
+void fz_drop_archive_handler_context(fz_context *ctx);
+fz_archive_handler_context *fz_keep_archive_handler_context(fz_context *ctx);
+
 #ifdef __cplusplus
 }
 #endif
 
-#endif
+#endif     // FZ_ENABLE_RENDER_CORE
 
 #endif

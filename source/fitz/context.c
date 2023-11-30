@@ -180,6 +180,7 @@ fz_drop_context(fz_context *ctx)
 #if FZ_ENABLE_PDF    // TODO: this is a rough cut condition; re-check when you need particular (minor) parts of the mupdf library in your application.
 	/* Other finalisation calls go here (in reverse order) */
 	fz_drop_document_handler_context(ctx);
+	fz_drop_archive_handler_context(ctx);
 	fz_drop_glyph_cache_context(ctx);
 	fz_drop_store_context(ctx);
 	fz_drop_style_context(ctx);
@@ -329,6 +330,7 @@ fz_new_context_imp(const fz_alloc_context *alloc, const fz_locks_context *locks,
 		fz_new_colorspace_context(ctx);
 		fz_new_font_context(ctx);
 		fz_new_document_handler_context(ctx);
+		fz_new_archive_handler_context(ctx);
 		fz_new_style_context(ctx);
 		fz_new_tuning_context(ctx);
 	}
@@ -365,6 +367,7 @@ fz_clone_context(fz_context *ctx)
 #if FZ_ENABLE_PDF    // TODO: this is a rough cut condition; re-check when you need particular (minor) parts of the mupdf library in your application.
 	/* Then keep lock checking happy by keeping shared contexts with new context */
 	fz_keep_document_handler_context(new_ctx);
+	fz_keep_archive_handler_context(new_ctx);
 	fz_keep_style_context(new_ctx);
 	fz_keep_tuning_context(new_ctx);
 	fz_keep_font_context(new_ctx);

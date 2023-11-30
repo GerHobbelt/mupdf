@@ -69,6 +69,7 @@ typedef struct fz_store fz_store;
 typedef struct fz_glyph_cache fz_glyph_cache;
 typedef struct fz_document_handler_context fz_document_handler_context;
 typedef struct fz_secondary_outputs fz_secondary_outputs;
+typedef struct fz_archive_handler_context fz_archive_handler_context;
 typedef struct fz_output fz_output;
 typedef struct fz_context fz_context;
 typedef struct fz_cookie fz_cookie;
@@ -1028,6 +1029,7 @@ struct fz_context
 
     /* TODO: should these be unshared? */
     fz_document_handler_context *handler;
+	fz_archive_handler_context *archive;
     fz_style_context *style;
     fz_tuning_context *tuning;
 
