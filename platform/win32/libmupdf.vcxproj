@@ -47,20 +47,20 @@
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,12 +108,12 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/freetype;../../scripts/libjpeg-turbo;../../include;../../thirdparty/jbig2dec;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/gumbo-parser/src;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/extract/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/zlib;../../thirdparty/freetype/include;../../thirdparty/mujs;../../thirdparty/harfbuzz/src;../../thirdparty/lcms2/include;../../thirdparty/tesseract/include;../../scripts/tesseract;../../scripts/leptonica/include;../../scripts/zlib;../../scripts/libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../scripts/libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/fmt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>LIBJPEG_TURBO;HAVE_TESSERACT;HAVE_LEPTONICA;HAVE_WEBP;HAVE_JPEGXL;JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;OPJ_STATIC;HAVE_LCMS2MT=1;HAVE_EXTRACT;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/freetype;../../scripts/libjpeg-turbo;../../include;../../thirdparty/jbig2dec;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/gumbo-parser/src;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/extract/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/zlib;../../thirdparty/freetype/include;../../thirdparty/mujs;../../thirdparty/harfbuzz/src;../../thirdparty/lcms2/include;../../thirdparty/tesseract/include;../../scripts/tesseract;../../scripts/leptonica/include;../../scripts/zlib;../../scripts/libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../scripts/libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_LIBARCHIVE;LIBARCHIVE_STATIC;LIBJPEG_TURBO;HAVE_TESSERACT;HAVE_LEPTONICA;HAVE_WEBP;HAVE_JPEGXL;JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;OPJ_STATIC;HAVE_LCMS2MT=1;HAVE_EXTRACT;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -127,8 +127,8 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/freetype;../../scripts/libjpeg-turbo;../../include;../../thirdparty/jbig2dec;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/gumbo-parser/src;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/extract/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/zlib;../../thirdparty/freetype/include;../../thirdparty/mujs;../../thirdparty/harfbuzz/src;../../thirdparty/lcms2/include;../../thirdparty/tesseract/include;../../scripts/tesseract;../../scripts/leptonica/include;../../scripts/zlib;../../scripts/libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../scripts/libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/fmt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>LIBJPEG_TURBO;HAVE_TESSERACT;HAVE_LEPTONICA;HAVE_WEBP;HAVE_JPEGXL;JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;OPJ_STATIC;HAVE_LCMS2MT=1;HAVE_EXTRACT;HAVE_TESSERACT;HAVE_LEPTONICA;OPJ_STATIC;HAVE_LCMS2MT=1;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/freetype;../../scripts/libjpeg-turbo;../../include;../../thirdparty/jbig2dec;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/gumbo-parser/src;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/extract/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/zlib;../../thirdparty/freetype/include;../../thirdparty/mujs;../../thirdparty/harfbuzz/src;../../thirdparty/lcms2/include;../../thirdparty/tesseract/include;../../scripts/tesseract;../../scripts/leptonica/include;../../scripts/zlib;../../scripts/libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../scripts/libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_LIBARCHIVE;LIBARCHIVE_STATIC;LIBJPEG_TURBO;HAVE_TESSERACT;HAVE_LEPTONICA;HAVE_WEBP;HAVE_JPEGXL;JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;OPJ_STATIC;HAVE_LCMS2MT=1;HAVE_EXTRACT;HAVE_TESSERACT;HAVE_LEPTONICA;OPJ_STATIC;HAVE_LCMS2MT=1;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -140,8 +140,8 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/freetype;../../scripts/libjpeg-turbo;../../include;../../thirdparty/jbig2dec;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/gumbo-parser/src;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/extract/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/zlib;../../thirdparty/freetype/include;../../thirdparty/mujs;../../thirdparty/harfbuzz/src;../../thirdparty/lcms2/include;../../thirdparty/tesseract/include;../../scripts/tesseract;../../scripts/leptonica/include;../../scripts/zlib;../../scripts/libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../scripts/libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/fmt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>LIBJPEG_TURBO;HAVE_TESSERACT;HAVE_LEPTONICA;HAVE_WEBP;HAVE_JPEGXL;JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;OPJ_STATIC;HAVE_LCMS2MT=1;HAVE_TESSERACT;HAVE_LEPTONICA;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/freetype;../../scripts/libjpeg-turbo;../../include;../../thirdparty/jbig2dec;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/gumbo-parser/src;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/extract/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/zlib;../../thirdparty/freetype/include;../../thirdparty/mujs;../../thirdparty/harfbuzz/src;../../thirdparty/lcms2/include;../../thirdparty/tesseract/include;../../scripts/tesseract;../../scripts/leptonica/include;../../scripts/zlib;../../scripts/libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../scripts/libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_LIBARCHIVE;LIBARCHIVE_STATIC;LIBJPEG_TURBO;HAVE_TESSERACT;HAVE_LEPTONICA;HAVE_WEBP;HAVE_JPEGXL;JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;OPJ_STATIC;HAVE_LCMS2MT=1;HAVE_TESSERACT;HAVE_LEPTONICA;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ProjectReference>
@@ -155,8 +155,8 @@
     <ClCompile>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/freetype;../../scripts/libjpeg-turbo;../../include;../../thirdparty/jbig2dec;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/gumbo-parser/src;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/extract/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/zlib;../../thirdparty/freetype/include;../../thirdparty/mujs;../../thirdparty/harfbuzz/src;../../thirdparty/lcms2/include;../../thirdparty/tesseract/include;../../scripts/tesseract;../../scripts/leptonica/include;../../scripts/zlib;../../scripts/libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../scripts/libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/fmt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>LIBJPEG_TURBO;HAVE_TESSERACT;HAVE_LEPTONICA;HAVE_WEBP;HAVE_JPEGXL;JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;OPJ_STATIC;HAVE_LCMS2MT=1;HAVE_EXTRACT;HAVE_TESSERACT;HAVE_LEPTONICA;OPJ_STATIC;HAVE_LCMS2MT=1;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/freetype;../../scripts/libjpeg-turbo;../../include;../../thirdparty/jbig2dec;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/gumbo-parser/src;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/extract/include;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/zlib;../../thirdparty/freetype/include;../../thirdparty/mujs;../../thirdparty/harfbuzz/src;../../thirdparty/lcms2/include;../../thirdparty/tesseract/include;../../scripts/tesseract;../../scripts/leptonica/include;../../scripts/zlib;../../scripts/libjpeg-xl;../../thirdparty/owemdjee/jpeg-xl/lib/include;../../scripts/libwebp;../../thirdparty/owemdjee/libwebp/src;../../thirdparty/owemdjee/plf_nanotimer;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/libarchive;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_LIBARCHIVE;LIBARCHIVE_STATIC;LIBJPEG_TURBO;HAVE_TESSERACT;HAVE_LEPTONICA;HAVE_WEBP;HAVE_JPEGXL;JXL_STATIC_DEFINE;JXL_THREADS_STATIC_DEFINE;OPJ_STATIC;HAVE_LCMS2MT=1;HAVE_EXTRACT;HAVE_TESSERACT;HAVE_LEPTONICA;OPJ_STATIC;HAVE_LCMS2MT=1;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ProjectReference>
@@ -470,7 +470,6 @@
     <ClCompile Include="../../source/fitz/pool.c" />
     <ClCompile Include="../../source/fitz/printf.c" />
     <ClCompile Include="../../source/fitz/random.c" />
-    <ClCompile Include="..\..\source\fitz\unlibarchive.c" />
     <ClCompile Include="../../source/fitz/raw-device.c" />
     <ClCompile Include="../../source/fitz/separation.c" />
     <ClCompile Include="../../source/fitz/shade.c" />
@@ -694,8 +693,7 @@
     <Text Include="../../source/html/css-properties.gperf" />
     <Text Include="../../source/pdf/js/util.js" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
