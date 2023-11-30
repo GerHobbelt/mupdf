@@ -1942,6 +1942,9 @@ def build( build_dirs, swig_command, args, vs_upgrade, make_command):
                         flags_compile = python_flags.includes
                         flags_link = python_flags.ldflags
 
+                            python_flags = pipcl.PythonFlags()
+                            flags_compile = python_flags.includes
+                            flags_link = python_flags.ldflags
                         if state.state_.macos:
                             # We need this to avoid numerous errors like:
                             #
