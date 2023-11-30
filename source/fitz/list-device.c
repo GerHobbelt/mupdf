@@ -2090,7 +2090,13 @@ visible:
 		}
 		fz_catch(ctx)
 		{
-			fz_rethrow_if(ctx, FZ_ERROR_MEMORY);
+			if (fz_caught(ctx) == FZ_ERROR_MEMORY)
+			{
+				fz_drop_colorspace(ctx, colorspace);
+				fz_drop_stroke_state(ctx, stroke);
+				fz_drop_path(ctx, path);
+				fz_rethrow(ctx);
+			}
 			/* Swallow the error */
 			/* Do NOT count ignored 'errors': "Page found as color; stopping interpolation" is
 			   the FZ_ERROR_ABORT message here (no other exception anywhere is of type FZ_ERROR_ABORT) */

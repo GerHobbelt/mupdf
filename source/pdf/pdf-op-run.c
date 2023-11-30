@@ -1946,7 +1946,6 @@ push_marked_content(fz_context *ctx, pdf_run_processor *proc, const char *tagstr
 	int drop_tag = 1;
 	fz_structure standard;
 	pdf_obj *mc_dict = NULL;
-	// int fallback = 0;    --> proc->broken_struct_tree
 
 	/* Flush any pending text so it's not in the wrong layer. */
 	pdf_flush_text(ctx, proc);
