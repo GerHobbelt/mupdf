@@ -1,6 +1,7 @@
 
 #define BUILD_MONOLITHIC 1
 #include "examples/monolithic_examples.h"
+#include "test/monolithic_tests.h"
 
 #define USAGE_NAME   "clipp"
 
@@ -41,6 +42,49 @@ MONOLITHIC_CMD_TABLE_START()
 	{ "clipp_transform", {.fa = clipp_transform_main } },
 
 	{ "clipp_sanity", {.f = clipp_sanity_main } },
+
+	{ "clipp_run_all_tests", {.f = clipp_run_all_tests_main } },
+
+	{ "test_actions", {.f = clipp_actions_test_main } },
+	{ "test_alternative_groups", {.f = clipp_alternative_groups_test_main } },
+	{ "test_alternative_options", {.f = clipp_alternative_options_test_main } },
+	{ "test_alternative_required", {.f = clipp_alternative_required_test_main } },
+	{ "test_blocking_t", {.f = clipp_blocking_test01_main } },
+	{ "test_blocking_t", {.f = clipp_blocking_test02_main } },
+	{ "test_blocking_t", {.f = clipp_blocking_test03_main } },
+	{ "test_blocking_t", {.f = clipp_blocking_test04_main } },
+	{ "test_blocking_t", {.f = clipp_blocking_test05_main } },
+	{ "test_blocking_t", {.f = clipp_blocking_test06_main } },
+	{ "test_blocking_t", {.f = clipp_blocking_test07_main } },
+	{ "test_blocking_t", {.f = clipp_blocking_test08_main } },
+	{ "test_blocking_t", {.f = clipp_blocking_test09_main } },
+	{ "test_blocking_t", {.f = clipp_blocking_test10_main } },
+	{ "test_documentation", {.f = clipp_documentation_test_main } },
+	{ "test_empty", {.f = clipp_empty_args_main } },
+	{ "test_flag_param_factories", {.fa = clipp_flag_param_factories_test_main } },
+	{ "test_joined_flags_", {.f = clipp_joined_flags_test1_main } },
+	{ "test_joined_flags_", {.f = clipp_joined_flags_test2_main } },
+	{ "test_joined_flags_", {.f = clipp_joined_flags_test3_main } },
+	{ "test_joined_flags_", {.f = clipp_joined_flags_test4_main } },
+	{ "test_joined_flags_", {.f = clipp_joined_flags_test5_main } },
+	{ "test_joined_flags_", {.f = clipp_joined_flags_test6_main } },
+	{ "test_joined_params_", {.f = clipp_joined_params_test1_main } },
+	{ "test_joined_params_", {.f = clipp_joined_params_test2_main } },
+	{ "test_joined_sequence", {.f = clipp_joined_sequence_test_main } },
+	{ "test_mixed_params", {.f = clipp_mixed_params_test_main } },
+	{ "test_nesting", {.f = clipp_nesting_test_main } },
+	{ "test_options", {.f = clipp_options_test_main } },
+	{ "test_prefix_free", {.f = clipp_prefix_free_test_main } },
+	{ "test_prefix", {.f = clipp_prefix_test_main } },
+	{ "test_repeatability", {.f = clipp_repeatability_test_main } },
+	{ "test_repeatable_alternatives", {.f = clipp_repeatable_alternatives_test_main } },
+	{ "test_required_params_", {.f = clipp_required_params_test1_main } },
+	{ "test_required_params_", {.f = clipp_required_params_test2_main } },
+	{ "test_usage_lines", {.f = clipp_usage_lines_test_main } },
+	{ "test_values_conversion", {.f = clipp_values_conversion_test_main } },
+	{ "test_values_filter", {.f = clipp_values_filter_test_main } },
+	{ "test_values_sequencing", {.f = clipp_values_sequencing_test_main } },
+
 MONOLITHIC_CMD_TABLE_END();
 
 #include "monolithic_main_tpl.h"
