@@ -1087,6 +1087,9 @@ pdf_process_stream(fz_context *ctx, pdf_processor *proc, pdf_csi *csi, fz_stream
 	}
 	while (tok != PDF_TOK_EOF);
 
+	if (syntax_errors > 0)
+		fz_warn(ctx, "encountered syntax errors; page may not be correct");
+
 	if (cookie && !cookie->d.abort)
 	{
 		cookie->check_back(ctx, FZ_PROGRESS_RUN_FINISH, 0);

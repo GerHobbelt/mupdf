@@ -95,17 +95,17 @@ pdf_load_image_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *di
 		bpc = 1;
 
 	if (w <= 0)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "image width is zero (or less)");
+		fz_throw(ctx, FZ_ERROR_SYNTAX, "image width is zero (or less)");
 	if (h <= 0)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "image height is zero (or less)");
+		fz_throw(ctx, FZ_ERROR_SYNTAX, "image height is zero (or less)");
 	if (bpc <= 0)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "image depth is zero (or less)");
+		fz_throw(ctx, FZ_ERROR_SYNTAX, "image depth is zero (or less)");
 	if (bpc > 16)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "image depth is too large: %d", bpc);
+		fz_throw(ctx, FZ_ERROR_SYNTAX, "image depth is too large: %d", bpc);
 	if (SIZE_MAX / w < (size_t)(bpc+7)/8)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "image is far too wide (abs. max. width: %1.0lf px)", floor((SIZE_MAX * 8.0) / (bpc+7)));
+		fz_throw(ctx, FZ_ERROR_SYNTAX, "image is far too wide (abs. max. width: %1.0lf px)", floor((SIZE_MAX * 8.0) / (bpc+7)));
 	if (SIZE_MAX / h < w * (size_t)((bpc+7)/8))
-		fz_throw(ctx, FZ_ERROR_GENERIC, "image is too large (abs. max. single dimension for square image: %1.0lf px)", floor(sqrt((SIZE_MAX * 8.0) / (bpc+7.0))));
+		fz_throw(ctx, FZ_ERROR_SYNTAX, "image is too large (abs. max. single dimension for square image: %1.0lf px)", floor(sqrt((SIZE_MAX * 8.0) / (bpc+7.0))));
 
 	fz_var(mask);
 	fz_var(image);
@@ -135,7 +135,7 @@ pdf_load_image_imp(fz_context *ctx, pdf_document *doc, pdf_obj *rdb, pdf_obj *di
 		}
 
 		if (SIZE_MAX / n < h * ((size_t)w) * ((bpc+7)/8))
-			fz_throw(ctx, FZ_ERROR_GENERIC, "image is too large (max. single dimension for square image: %1.0lf px)", floor(sqrt((SIZE_MAX * 8.0) / (n * (bpc+7.0)))));
+			fz_throw(ctx, FZ_ERROR_SYNTAX, "image is too large (max. single dimension for square image: %1.0lf px)", floor(sqrt((SIZE_MAX * 8.0) / (n * (bpc+7.0)))));
 
 		obj = pdf_dict_geta(ctx, dict, PDF_NAME(Decode), PDF_NAME(D));
 		if (obj)
