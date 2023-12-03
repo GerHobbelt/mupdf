@@ -127,7 +127,7 @@ pdf_lookup_name(fz_context *ctx, pdf_document *doc, pdf_obj *which, pdf_obj *nee
 	pdf_obj *root = pdf_dict_get(ctx, pdf_trailer(ctx, doc), PDF_NAME(Root));
 	pdf_obj *names = pdf_dict_get(ctx, root, PDF_NAME(Names));
 	pdf_obj *tree = pdf_dict_get(ctx, names, which);
-	return pdf_lookup_name_imp(ctx, tree, pdf_to_text_string(ctx, needle), NULL);
+	return pdf_lookup_name_imp(ctx, tree, pdf_to_text_string(ctx, needle, NULL), NULL);
 }
 
 pdf_obj *
@@ -150,7 +150,7 @@ pdf_lookup_dest(fz_context *ctx, pdf_document *doc, pdf_obj *needle)
 	if (names)
 	{
 		pdf_obj *tree = pdf_dict_get(ctx, names, PDF_NAME(Dests));
-		return pdf_lookup_name_imp(ctx, tree, pdf_to_text_string(ctx, needle), NULL);
+		return pdf_lookup_name_imp(ctx, tree, pdf_to_text_string(ctx, needle, NULL), NULL);
 	}
 
 	return NULL;

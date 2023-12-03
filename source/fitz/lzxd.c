@@ -1144,7 +1144,7 @@ block_decode_element(fz_context *ctx, block_t *self, bitstream_t *bstm, uint32_t
 		break;
 	}
 	default:
-		assert("This never happens" == NULL);
+		assert(!"This never happens");
 	}
 	return decoded;
 }

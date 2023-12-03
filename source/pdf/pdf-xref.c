@@ -1925,7 +1925,7 @@ pdf_init_document(fz_context *ctx, pdf_document *doc)
 void pdf_repair_trailer(fz_context *ctx, pdf_document *doc)
 {
 	int hasroot, hasinfo;
-	pdf_obj *obj, *nobj;
+	pdf_obj *obj;
 	pdf_obj *dict = NULL;
 	int i;
 
