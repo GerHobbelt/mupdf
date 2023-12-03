@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libminizip-ng</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFC2B854}</ProjectGuid>
+    <RootNamespace>libminizip-ng</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINIZIP_NG;MINIZIP_NG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINIZIP_NG;MINIZIP_NG_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINIZIP_NG;MINIZIP_NG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINIZIP_NG;MINIZIP_NG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINIZIP_NG;MINIZIP_NG_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINIZIP_NG;MINIZIP_NG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINIZIP_NG;MINIZIP_NG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINIZIP_NG;MINIZIP_NG_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINIZIP_NG;MINIZIP_NG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINIZIP_NG;MINIZIP_NG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINIZIP_NG;MINIZIP_NG_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMINIZIP_NG;MINIZIP_NG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/minigzip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/minizip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_compat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_crypt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_crypt_apple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_crypt_openssl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_crypt_winvista.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_crypt_winxp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_os.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_os_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_os_win32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_strm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_strm_buf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_strm_bzip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_strm_libcomp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_strm_lzma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_strm_mem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_strm_os_posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_strm_os_win32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_strm_pkcrypt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_strm_split.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_strm_wzaes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_strm_zlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_strm_zstd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_zip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/mz_zip_rw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/test/test_compat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/test/test_crypt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/test/test_encoding.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/test/test_main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/test/test_path.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/test/test_stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/test/test_stream_compress.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/minizip-ng/test/test_stream_crypt.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/mz.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/mz_compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/mz_crypt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/mz_os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/mz_strm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/mz_strm_buf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/mz_strm_bzip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/mz_strm_libcomp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/mz_strm_lzma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/mz_strm_mem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/mz_strm_os.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/mz_strm_pkcrypt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/mz_strm_split.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/mz_strm_wzaes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/mz_strm_zlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/mz_strm_zstd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/mz_zip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/minizip-ng/mz_zip_rw.h" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/INDEX.md" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/README.md" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/cmake/FindZLIBNG.cmake" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/cmake/clone-repo.cmake" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/cmake/detect-sanitizer.cmake" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/doc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/doc/mz_compress_level.md" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/doc/mz_compress_method.md" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/doc/mz_encoding.md" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/doc/mz_error.md" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/doc/mz_extrafield.md" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/doc/mz_hash.md" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/doc/mz_host_system.md" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/doc/mz_open_mode.md" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/doc/mz_os.md" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/doc/mz_seek.md" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/doc/mz_zip.md" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/doc/mz_zip64.md" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/doc/mz_zip_file.md" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/doc/mz_zip_rw.md" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/doc/zip/appnote.iz.txt" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/doc/zip/appnote.txt" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/doc/zip/extra.fld.txt" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/doc/zip/winzip_aes.md" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/doc/zip/winzip_aes_attack.pdf" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/minizip.pc.cmakein" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/mz_compat_shim.h.in" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/test/empty.txt" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/test/random.bin" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/test/single.txt" />
+    <Text Include="../../thirdparty/owemdjee/minizip-ng/test/uniform.bin" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

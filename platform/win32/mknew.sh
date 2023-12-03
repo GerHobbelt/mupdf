@@ -977,6 +977,8 @@ sist2
 libunibreak
 SipHash
 reproc
+vmaf 
+openlibm
 
 EOT
 )

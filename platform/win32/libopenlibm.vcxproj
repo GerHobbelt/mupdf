@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libopenlibm</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFB0E02A}</ProjectGuid>
+    <RootNamespace>libopenlibm</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENLIBM;OPENLIBM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENLIBM;OPENLIBM_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENLIBM;OPENLIBM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENLIBM;OPENLIBM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENLIBM;OPENLIBM_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENLIBM;OPENLIBM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENLIBM;OPENLIBM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENLIBM;OPENLIBM_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENLIBM;OPENLIBM_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENLIBM;OPENLIBM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENLIBM;OPENLIBM_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENLIBM;OPENLIBM_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/aarch64/fenv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/amd64/fenv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/arm/fenv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/bsdsrc/b_exp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/bsdsrc/b_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/bsdsrc/b_tgamma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/i387/fenv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/i387/invtrig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/e_acoshl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/e_atanhl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/e_coshl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/e_expl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/e_fmodl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/e_hypotl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/e_lgammal_r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/e_log10l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/e_log2l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/e_logl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/e_powl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/e_sinhl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/e_tgammal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/invtrig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/k_cosl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/k_sinl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/k_tanl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/s_asinhl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/s_ceill.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/s_erfl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/s_exp2l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/s_expm1l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/s_floorl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/s_log1pl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/s_modfl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/s_nanl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/s_nextafterl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/s_nexttoward.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/s_nexttowardf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/s_remquol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/s_tanhl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld128/s_truncl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/e_acoshl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/e_atanhl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/e_coshl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/e_expl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/e_fmodl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/e_hypotl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/e_lgammal_r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/e_log10l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/e_log2l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/e_logl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/e_powl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/e_sinhl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/e_tgammal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/invtrig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/k_cosl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/k_sinl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/k_tanl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/s_asinhl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/s_ceill.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/s_erfl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/s_exp2l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/s_expm1l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/s_floorl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/s_log1pl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/s_modfl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/s_nanl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/s_nextafterl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/s_nexttoward.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/s_nexttowardf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/s_remquol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/s_tanhl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/ld80/s_truncl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/mips/fenv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/powerpc/fenv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/riscv64/fenv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/s390/fenv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_acos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_acosf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_acosh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_acoshf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_acosl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_asin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_asinf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_asinl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_atan2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_atan2f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_atan2l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_atanh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_atanhf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_cosh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_coshf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_exp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_expf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_fmod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_fmodf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_fmodl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_hypot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_hypotf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_hypotl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_j0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_j0f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_j1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_j1f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_jn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_jnf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_lgamma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_lgamma_r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_lgammaf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_lgammaf_r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_lgammal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_log10.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_log10f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_log2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_log2f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_logf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_pow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_powf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_rem_pio2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_rem_pio2f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_remainder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_remainderf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_remainderl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_sinh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_sinhf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_sqrt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_sqrtf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/e_sqrtl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/k_cos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/k_cosf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/k_exp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/k_expf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/k_rem_pio2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/k_sin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/k_sinf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/k_tan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/k_tanf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/polevll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_asinh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_asinhf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_atan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_atanf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_atanl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cabs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cabsf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cabsl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cacos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cacosf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cacosh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cacoshf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cacoshl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cacosl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_carg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cargf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cargl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_casin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_casinf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_casinh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_casinhf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_casinhl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_casinl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_catan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_catanf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_catanh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_catanhf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_catanhl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_catanl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cbrt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cbrtf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cbrtl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_ccos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_ccosf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_ccosh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_ccoshf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_ccoshl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_ccosl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_ceil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_ceilf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_ceill.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cexp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cexpf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cexpl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cimag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cimagf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cimagl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_clog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_clogf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_clogl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_conj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_conjf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_conjl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_copysign.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_copysignf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_copysignl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cosf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cosl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cpow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cpowf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cpowl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cproj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cprojf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_cprojl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_creal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_crealf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_creall.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_csin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_csinf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_csinh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_csinhf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_csinhl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_csinl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_csqrt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_csqrtf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_csqrtl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_ctan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_ctanf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_ctanh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_ctanhf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_ctanhl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_ctanl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_erf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_erff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_exp2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_exp2f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_expm1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_expm1f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_fabs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_fabsf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_fabsl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_fdim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_floor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_floorf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_floorl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_fma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_fmaf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_fmal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_fmax.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_fmaxf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_fmaxl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_fmin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_fminf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_fminl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_fpclassify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_frexp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_frexpf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_frexpl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_ilogb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_ilogbf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_ilogbl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_isfinite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_isinf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_isnan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_isnormal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_llrint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_llrintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_llrintl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_llround.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_llroundf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_llroundl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_log1p.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_log1pf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_logb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_logbf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_logbl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_lrint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_lrintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_lrintl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_lround.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_lroundf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_lroundl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_modf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_modff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_modfl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_nan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_nearbyint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_nextafter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_nextafterf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_nextafterl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_nexttoward.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_nexttowardf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_remquo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_remquof.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_remquol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_rint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_rintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_rintl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_round.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_roundf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_roundl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_scalbln.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_scalbn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_scalbnf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_scalbnl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_signbit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_signgam.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_sin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_sincos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_sincosf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_sincosl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_sinf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_sinl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_tan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_tanf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_tanh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_tanhf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_tanl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_tgammaf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_trunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_truncf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/s_truncl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/w_cabs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/w_cabsf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/src/w_cabsl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/test/inf_torture.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/test/libm-bench.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/test/libm-test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/test/test-211.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/test/test-double.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/openlibm/test/test-float.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/Make.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/amd64/bsd_asm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/amd64/bsd_fpu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/amd64/bsd_ieeefp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/bsdsrc/mathimpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/i387/bsd_asm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/i387/bsd_ieeefp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/i387/bsd_npx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/i387/osx_asm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/include/openlibm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/include/openlibm_complex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/include/openlibm_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/include/openlibm_fenv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/include/openlibm_fenv_amd64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/include/openlibm_fenv_arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/include/openlibm_fenv_i387.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/include/openlibm_fenv_mips.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/include/openlibm_fenv_powerpc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/include/openlibm_fenv_riscv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/include/openlibm_fenv_s390.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/include/openlibm_math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/ld128/e_rem_pio2l.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/ld128/invtrig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/ld80/e_rem_pio2l.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/ld80/invtrig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/mips/fenv-softfloat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/src/aarch64_fpmath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/src/amd64_fpmath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/src/bsd_cdefs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/src/cdefs-compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/src/fpmath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/src/i386_fpmath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/src/k_log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/src/k_logf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/src/math_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/src/math_private_openbsd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/src/mips_fpmath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/src/powerpc_fpmath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/src/riscv_fpmath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/src/s390_fpmath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/src/types-compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/test/libm-test-ulps.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/wasm32/assert.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/wasm32/float.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/wasm32/limits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/openlibm/wasm32/stdint.h" />
+    <Image Include="../../thirdparty/owemdjee/openlibm/docs/images/arrow-down.png" />
+    <Image Include="../../thirdparty/owemdjee/openlibm/docs/images/octocat-small.png" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/aarch64/Make.files" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/Make.files" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/e_fmod.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/e_fmodf.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/e_fmodl.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/e_remainder.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/e_remainderf.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/e_remainderl.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/e_sqrt.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/e_sqrtf.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/e_sqrtl.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/s_llrint.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/s_llrintf.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/s_llrintl.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/s_logbl.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/s_lrint.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/s_lrintf.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/s_lrintl.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/s_remquo.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/s_remquof.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/s_remquol.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/s_rintl.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/s_scalbn.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/s_scalbnf.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/amd64/s_scalbnl.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/arm/Make.files" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/bsdsrc/Make.files" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/docs/index.html" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/docs/javascripts/scale.fix.js" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/docs/params.json" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/docs/stylesheets/pygment_trac.css" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/docs/stylesheets/styles.css" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/Make.files" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/e_exp.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/e_fmod.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/e_log.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/e_log10.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/e_log10f.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/e_logf.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/e_remainder.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/e_remainderf.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/e_remainderl.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/e_sqrt.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/e_sqrtf.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/e_sqrtl.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_ceil.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_ceilf.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_ceill.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_copysign.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_copysignf.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_copysignl.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_cos.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_floor.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_floorf.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_floorl.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_llrint.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_llrintf.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_llrintl.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_logb.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_logbf.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_logbl.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_lrint.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_lrintf.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_lrintl.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_remquo.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_remquof.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_remquol.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_rint.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_rintf.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_rintl.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_scalbn.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_scalbnf.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_scalbnl.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_sin.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_tan.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_trunc.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_truncf.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/i387/s_truncl.S" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/ld128/Make.files" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/ld80/Make.files" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/mips/Make.files" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/openlibm.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/powerpc/Make.files" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/riscv64/Make.files" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/s390/Make.files" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/src/Make.files" />
+    <Text Include="../../thirdparty/owemdjee/openlibm/wasm32/Make.files" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

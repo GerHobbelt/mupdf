@@ -47,20 +47,20 @@
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/ogdf/include/coin;../../thirdparty/owemdjee/ogdf/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -129,7 +129,7 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/ogdf/include/coin;../../thirdparty/owemdjee/ogdf/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -155,7 +155,7 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/ogdf/include/coin;../../thirdparty/owemdjee/ogdf/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -178,7 +178,7 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/ogdf/include/coin;../../thirdparty/owemdjee/ogdf/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -204,7 +204,7 @@
       <MapExports>true</MapExports>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/ogdf/include/coin;../../thirdparty/owemdjee/ogdf/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -1891,6 +1891,7 @@
     <Text Include="../../thirdparty/owemdjee/ogdf/include/ogdf/geometric/README.md" />
     <Text Include="../../thirdparty/owemdjee/ogdf/include/ogdf/lib/minisat/doc/ReleaseNotes-2.2.0.txt" />
     <Text Include="../../thirdparty/owemdjee/ogdf/makeMakefile.sh" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/sonar-project.properties" />
     <Text Include="../../thirdparty/owemdjee/ogdf/src/coin/Readme.txt" />
     <Text Include="../../thirdparty/owemdjee/ogdf/src/ogdf/lib/minisat/doc/ReleaseNotes-2.2.0.txt" />
     <Text Include="../../thirdparty/owemdjee/ogdf/test/include/bandit/LICENSE.txt" />
@@ -1941,30 +1942,28 @@
     <Text Include="../../thirdparty/owemdjee/ogdf/test/resources/north/g.73.8.gml" />
     <Text Include="../../thirdparty/owemdjee/ogdf/util/build.bat" />
     <Text Include="../../thirdparty/owemdjee/ogdf/util/compile_for_tests.sh" />
-    <Text Include="../../thirdparty/owemdjee/ogdf/util/deploy_doxygen.sh" />
     <Text Include="../../thirdparty/owemdjee/ogdf/util/docker/README.md" />
     <Text Include="../../thirdparty/owemdjee/ogdf/util/docker/build.sh" />
-    <Text Include="../../thirdparty/owemdjee/ogdf/util/find_unused_headers.sh" />
     <Text Include="../../thirdparty/owemdjee/ogdf/util/get_macro_defs.sh" />
     <Text Include="../../thirdparty/owemdjee/ogdf/util/perform_separate_tests.sh" />
-    <Text Include="../../thirdparty/owemdjee/ogdf/util/perform_static_analysis.sh" />
     <Text Include="../../thirdparty/owemdjee/ogdf/util/run_examples.sh" />
     <Text Include="../../thirdparty/owemdjee/ogdf/util/sonar.sh" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/util/style/indent_comments.py" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/util/style/test_clang_format.sh" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/util/style/test_eols.sh" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/util/style/test_indent_comments.sh" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/util/style/test_license.sh" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/util/style/test_line_length.sh" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/util/style/test_macros.sh" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/util/style/test_no_enums.sh" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/util/style/test_no_typedefs.sh" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/util/style/test_number_newlines.sh" />
+    <Text Include="../../thirdparty/owemdjee/ogdf/util/style/test_tabs.sh" />
     <Text Include="../../thirdparty/owemdjee/ogdf/util/test_build_and_run.ps1" />
     <Text Include="../../thirdparty/owemdjee/ogdf/util/test_build_and_run.sh" />
-    <Text Include="../../thirdparty/owemdjee/ogdf/util/test_clang_format.sh" />
-    <Text Include="../../thirdparty/owemdjee/ogdf/util/test_coverage.sh" />
     <Text Include="../../thirdparty/owemdjee/ogdf/util/test_directory_structure.sh" />
     <Text Include="../../thirdparty/owemdjee/ogdf/util/test_doxygen.sh" />
-    <Text Include="../../thirdparty/owemdjee/ogdf/util/test_eols.sh" />
-    <Text Include="../../thirdparty/owemdjee/ogdf/util/test_license.sh" />
-    <Text Include="../../thirdparty/owemdjee/ogdf/util/test_line_length.sh" />
-    <Text Include="../../thirdparty/owemdjee/ogdf/util/test_macros.sh" />
-    <Text Include="../../thirdparty/owemdjee/ogdf/util/test_no_enums.sh" />
-    <Text Include="../../thirdparty/owemdjee/ogdf/util/test_no_typedefs.sh" />
-    <Text Include="../../thirdparty/owemdjee/ogdf/util/test_number_newlines.sh" />
     <Text Include="../../thirdparty/owemdjee/ogdf/util/test_self-sufficiency.sh" />
-    <Text Include="../../thirdparty/owemdjee/ogdf/util/test_tabs.sh" />
     <Text Include="../../thirdparty/owemdjee/ogdf/util/util-functions.sh" />
     <Xml Include="../../thirdparty/owemdjee/ogdf/doc/ogdf-layout.xml" />
     <Xml Include="../../thirdparty/owemdjee/ogdf/test/resources/fileformats/tsplibxml/invalid/invalid_vertex.xml" />
@@ -1979,7 +1978,8 @@
     <Xml Include="../../thirdparty/owemdjee/ogdf/test/resources/fileformats/tsplibxml/valid/selfloop.xml" />
     <Xml Include="../../thirdparty/owemdjee/ogdf/test/resources/fileformats/tsplibxml/valid/undirected.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  
