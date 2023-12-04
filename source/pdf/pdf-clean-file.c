@@ -471,10 +471,10 @@ void pdf_clean_file(fz_context *ctx, const char *infile, const char *outfile, co
 
 					if (spage < epage)
 						for (page = spage; page <= epage; ++page)
-							pages[len++] = page - 1;
+							pages[len++] = page;
 					else
 						for (page = spage; page >= epage; --page)
-							pages[len++] = page - 1;
+							pages[len++] = page;
 				}
 
 				argidx++;
@@ -482,6 +482,8 @@ void pdf_clean_file(fz_context *ctx, const char *infile, const char *outfile, co
 
 			pdf_rearrange_pages(ctx, pdf, len, pages);
 		}
+
+		pdf_rewrite_images(ctx, pdf, &opts->image);
 
 		pdf_save_document(ctx, pdf, outfile, &opts->write);
 	}
