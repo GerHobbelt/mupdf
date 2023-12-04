@@ -138,6 +138,26 @@ int fz_is_external_link(fz_context *ctx, const char *uri);
 void fz_set_link_rect(fz_context *ctx, fz_link *link, fz_rect rect);
 void fz_set_link_uri(fz_context *ctx, fz_link *link, const char *uri);
 
+typedef struct fz_navigation fz_navigation;
+
+typedef struct fz_navigation
+{
+	int refs;
+	struct fz_navigation *next;
+	fz_link_dest dest;
+	char *uri;
+} fz_navigation;
+
+fz_navigation *fz_new_navigation_of_size(fz_context *ctx, int size, fz_link_dest dest, const char *uri);
+#define fz_new_derived_navigation(CTX,TYPE,DEST,URI) \
+	   ((TYPE *)Memento_label(fz_new_navigation_of_size(CTX,sizeof(TYPE),DEST,URI),#TYPE))
+
+fz_navigation *fz_keep_navigation(fz_context *ctx, fz_navigation *navigation);
+
+void fz_drop_navigation(fz_context *ctx, fz_navigation *navigation);
+
+void fz_add_navigation(fz_context *ctx, fz_link_dest dest, char *uri, fz_navigation **head);
+
 #ifdef __cplusplus
 }
 #endif
