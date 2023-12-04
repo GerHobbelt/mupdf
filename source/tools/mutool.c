@@ -645,6 +645,7 @@ static struct tool_spec {
 	{ {.fa = qjs_unicode_gen_main }, "qjs_unicode_gen", "qjs_unicode_gen tool" },
 	{ {.fa = qjs_test262_main }, "qjs_test262", "qjs_test262 conformance test tool" },
 	{ {.fa = qjs_sample_app_main }, "qjs_sample_app", "quickjs_sample_app tool" },
+	{ {.fa = qjs_benchmark_main }, "qjs_benchmark", "quickjs benchmark tool" },
 #endif
 
 #if defined(MUTOOL_EX)
