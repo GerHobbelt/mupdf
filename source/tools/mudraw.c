@@ -558,7 +558,7 @@ static int usage(void)
 		"  -J -  set PNG output compression level: 0 (none), 1 (fast)..9 (best)\n"
 		"  -i    ignore errors\n"
 		"  -L    low memory mode (avoid caching, clear objects after each page)\n"
-		"  -x    enable making hyperlinks (html output only)\n"
+		"  -n    enable making hyperlinks (html output only)\n"
 		"  -N    disable ICC workflow (\"N\"o color management)\n"
 		"  -O -  Control spot/overprint rendering\n"
 #if FZ_ENABLE_SPOT_RENDERING
@@ -2962,7 +2962,7 @@ int main(int argc, const char** argv)
 		case 'D': uselist = 0; break;
 		case 'l': min_line_width = fz_atof(fz_optarg); break;
 		case 'i': ignore_errors = 1; break;
-		case 'X': make_hyperlinks = 1; break;
+		case 'n': make_hyperlinks = 1; break;
 		case 'N': no_icc = 1; break;
 
 		case 'T':
@@ -3254,26 +3254,26 @@ int main(int argc, const char** argv)
 
 		if (make_hyperlinks)
 		{
-			if (output_format != OUT_HTML &&
-				output_format != OUT_OCR_HTML)
+			if (output_format->format != OUT_HTML &&
+				output_format->format != OUT_OCR_HTML)
 			{
-				fprintf(stderr, "Making hyperlinks only possible in HTML output\n");
-				exit(1);
+				fz_error(ctx, "Making hyperlinks only possible in HTML output\n");
+				make_hyperlinks = 0;
 			}
 			if (kill == 1 || kill == 2)
 			{
-				fprintf(stderr, "No sense in making hyperlinks if the switch -K or -KK is used\n");
-				exit(1);
+				fz_error(ctx, "No sense in making hyperlinks if the switch -K or -KK is used\n");
+				make_hyperlinks = 0;
 			}
 			if (rotation)
 			{
-				fprintf(stderr, "Unable to make hyperlinks if rotation is used\n");
-				exit(1);
+				fz_error(ctx, "Unable to make hyperlinks if rotation is used\n");
+				make_hyperlinks = 0;
 			}
 			if (res_specified && resolution != 72)
 			{
-				fprintf(stderr, "Unable to make hyperlinks if non-default resolution is specified\n");
-				exit(1);
+				fz_error(ctx, "Unable to make hyperlinks if non-default resolution is specified\n");
+				make_hyperlinks = 0;
 			}
 		}
 
