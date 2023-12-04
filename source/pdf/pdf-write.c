@@ -2115,6 +2115,25 @@ static int is_jpx_filter(fz_context *ctx, pdf_obj *o)
 	return 0;
 }
 
+static int is_image_codec(fz_context *ctx, pdf_obj *o)
+{
+	o = pdf_dict_get(ctx, o, PDF_NAME(Filter));
+	if (o == NULL)
+		return 0;
+
+	if (is_image_filter(o))
+		return 1;
+	if (pdf_is_array(ctx, o))
+	{
+		int i, len;
+		len = pdf_array_len(ctx, o);
+		for (i = 0; i < len; i++)
+			if (is_image_filter(pdf_array_get(ctx, o, i)))
+				return 1;
+	}
+	return 0;
+}
+
 static int is_image_stream(fz_context *ctx, pdf_obj *obj)
 {
 	pdf_obj *o;
@@ -2155,7 +2174,6 @@ static int is_jpx_stream(fz_context *ctx, pdf_obj *obj)
 		return 1;
 	return 0;
 }
-
 
 static int is_xml_metadata(fz_context *ctx, pdf_obj *obj)
 {
@@ -2207,7 +2225,7 @@ static void writeobject(fz_context *ctx, pdf_document *doc, pdf_write_state *opt
 			{
 				do_deflate = opts->do_compress;
 				do_expand = opts->do_expand;
-				if (opts->do_compress_images && is_image_stream(ctx, obj))
+				if (is_image_stream(ctx, obj) && opts->do_compress_images && is_image_codec(ctx, obj))
 					do_deflate = 1, do_expand = 0;
 				if (opts->do_compress_fonts && is_font_stream(ctx, obj))
 					do_deflate = 1, do_expand = 0;
