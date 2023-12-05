@@ -309,7 +309,7 @@ char *fz_cleanname(char *name);
 	Eliminates multiple and trailing slashes, interprets "." and
 	"..". Allocates a new string that the caller must free.
 */
-char *fz_cleanname_dup(fz_context *ctx, const char *name);
+char *fz_cleanname_strdup(fz_context *ctx, const char *name);
 
 /**
 	Resolve a path to an absolute file name.
