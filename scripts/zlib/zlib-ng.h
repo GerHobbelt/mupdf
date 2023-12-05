@@ -48,12 +48,13 @@
 extern "C" {
 #endif
 
-#define ZLIBNG_VERSION "2.1.0.devel"
-#define ZLIBNG_VERNUM 0x02010000L   /* MMNNRRMS: major minor revision status modified */
+#define ZLIBNG_VERSION "2.1.5"
+#define ZLIBNG_VERNUM 0x020105F0L   /* MMNNRRSM: major minor revision status modified */
 #define ZLIBNG_VER_MAJOR 2
 #define ZLIBNG_VER_MINOR 1
-#define ZLIBNG_VER_REVISION 0
-#define ZLIBNG_VER_STATUS 0         /* 0=devel, 1-E=beta, F=Release */
+#define ZLIBNG_VER_REVISION 5
+#define ZLIBNG_VER_STATUS F         /* 0=devel, 1-E=beta, F=Release (DEPRECATED) */
+#define ZLIBNG_VER_STATUSH 0xF      /* Hex values: 0=devel, 1-E=beta, F=Release */
 #define ZLIBNG_VER_MODIFIED 0       /* non-zero if modified externally from zlib-ng */
 
 #define WITH_GZFILEOP 1
@@ -234,8 +235,8 @@ int32_t zng_deflateInit(zng_stream *strm, int32_t level);
 /*
      Initializes the internal stream state for compression.  The fields
    zalloc, zfree and opaque must be initialized before by the caller.  If
-   zalloc and zfree are set to NULL, deflateInit updates them to use default
-   allocation functions.
+   zalloc and zfree are set to Z_NULL, deflateInit updates them to use default
+   allocation functions.  total_in, total_out, adler, and msg are initialized.
 
      The compression level must be Z_DEFAULT_COMPRESSION, or between 0 and 9:
    1 gives best speed, 9 gives best compression, 0 gives no compression at all
@@ -324,8 +325,8 @@ int32_t zng_deflate(zng_stream *strm, int32_t flush);
   with the same value of the flush parameter and more output space (updated
   avail_out), until the flush is complete (deflate returns with non-zero
   avail_out).  In the case of a Z_FULL_FLUSH or Z_SYNC_FLUSH, make sure that
-  avail_out is greater than six to avoid repeated flush markers due to
-  avail_out == 0 on return.
+  avail_out is greater than six when the flush marker begins, in order to avoid
+  repeated flush markers upon calling deflate() again when avail_out == 0.
 
     If the parameter flush is set to Z_FINISH, pending input is processed,
   pending output is flushed and deflate returns with Z_STREAM_END if there was
@@ -387,8 +388,9 @@ int32_t zng_inflateInit(zng_stream *strm);
    the caller.  In the current version of inflate, the provided input is not
    read or consumed.  The allocation of a sliding window will be deferred to
    the first call of inflate (if the decompression does not complete on the
-   first call).  If zalloc and zfree are set to NULL, inflateInit updates
-   them to use default allocation functions.
+   first call).  If zalloc and zfree are set to Z_NULL, inflateInit updates
+   them to use default allocation functions.  total_in, total_out, adler, and
+   msg are initialized.
 
      inflateInit returns Z_OK if success, Z_MEM_ERROR if there was not enough
    memory, or Z_STREAM_ERROR if the parameters are invalid, such as a null
@@ -694,7 +696,7 @@ int32_t zng_deflateReset(zng_stream *strm);
      This function is equivalent to deflateEnd followed by deflateInit, but
    does not free and reallocate the internal compression state.  The stream
    will leave the compression level and any other attributes that may have been
-   set unchanged.
+   set unchanged.  total_in, total_out, adler, and msg are initialized.
 
      deflateReset returns Z_OK if success, or Z_STREAM_ERROR if the source
    stream state was inconsistent (such as zalloc or state being NULL).
@@ -813,8 +815,9 @@ int32_t zng_deflateSetHeader(zng_stream *strm, zng_gz_headerp head);
    gzip file" and give up.
 
      If deflateSetHeader is not used, the default gzip header has text false,
-   the time set to zero, and os set to 255, with no extra, name, or comment
-   fields.  The gzip header is returned to the default state by deflateReset().
+   the time set to zero, and os set to the current operating system, with no
+   extra, name, or comment fields.  The gzip header is returned to the default
+   state by deflateReset().
 
      deflateSetHeader returns Z_OK if success, or Z_STREAM_ERROR if the source
    stream state was inconsistent.
@@ -950,6 +953,7 @@ int32_t zng_inflateReset(zng_stream *strm);
      This function is equivalent to inflateEnd followed by inflateInit,
    but does not free and reallocate the internal decompression state.  The
    stream will keep attributes that may have been set by inflateInit2.
+   total_in, total_out, adler, and msg are initialized.
 
      inflateReset returns Z_OK if success, or Z_STREAM_ERROR if the source
    stream state was inconsistent (such as zalloc or state being NULL).
@@ -1417,9 +1421,7 @@ size_t zng_gzfread(void *buf, size_t size, size_t nitems, gzFile file);
 /*
      Read and decompress up to nitems items of size size from file into buf,
    otherwise operating as gzread() does.  This duplicates the interface of
-   stdio's fread(), with size_t request and return types.  If the library
-   defines size_t, then z_size_t is identical to size_t.  If not, then z_size_t
-   is an unsigned integer type that can contain a pointer.
+   stdio's fread(), with size_t request and return types.
 
      gzfread() returns the number of full items read of size size, or zero if
    the end of the file was reached and a full item could not be read, or if
@@ -1795,17 +1797,6 @@ Z_EXTERN Z_EXPORT int32_t zng_inflateInit2_(zng_stream *strm, int32_t  windowBit
 Z_EXTERN Z_EXPORT int32_t zng_inflateBackInit_(zng_stream *strm, int32_t windowBits, uint8_t *window,
                                          const char *version, int32_t stream_size);
 
-#if 0
-#define zng_deflateInit(strm, level) zng_deflateInit_((strm), (level), ZLIBNG_VERSION, (int32_t)sizeof(zng_stream))
-#define zng_inflateInit(strm) zng_inflateInit_((strm), ZLIBNG_VERSION, (int32_t)sizeof(zng_stream))
-#define zng_deflateInit2(strm, level, method, windowBits, memLevel, strategy) \
-        zng_deflateInit2_((strm), (level), (method), (windowBits), (memLevel), \
-                     (strategy), ZLIBNG_VERSION, (int32_t)sizeof(zng_stream))
-#define zng_inflateInit2(strm, windowBits) zng_inflateInit2_((strm), (windowBits), ZLIBNG_VERSION, (int32_t)sizeof(zng_stream))
-#define zng_inflateBackInit(strm, windowBits, window) \
-                        zng_inflateBackInit_((strm), (windowBits), (window), ZLIBNG_VERSION, (int32_t)sizeof(zng_stream))
-#endif
-
 #ifdef WITH_GZFILEOP
 
 /* gzgetc() macro and its supporting function and exposed data structure.  Note
@@ -1820,9 +1811,6 @@ struct gzFile_s {
     unsigned char *next;
     z_off64_t pos;
 };
-#if 0
-Z_EXTERN Z_EXPORT int32_t zng_gzgetc_(gzFile file);  /* backward compatibility */
-#endif
 #  define zng_gzgetc(g) ((g)->have ? ((g)->have--, (g)->pos++, *((g)->next)++) : (zng_gzgetc)(g))
 
 #endif /* WITH_GZFILEOP */

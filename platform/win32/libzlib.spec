@@ -1,4 +1,7 @@
 
+directories:
+	../../scripts/zlib/
+	
 also-ignore:
 	/cmake/
 	/test/

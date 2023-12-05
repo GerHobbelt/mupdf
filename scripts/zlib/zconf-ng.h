@@ -12,14 +12,6 @@
 #  define _WIN32
 #endif
 
-#ifdef __STDC_VERSION__
-#  if __STDC_VERSION__ >= 199901L
-#    ifndef STDC99
-#      define STDC99
-#    endif
-#  endif
-#endif
-
 /* Clang macro for detecting declspec support
  * https://clang.llvm.org/docs/LanguageExtensions.html#has-declspec-attribute
  */
@@ -40,6 +32,9 @@
  * created by gzip. (Files created by minigzip can still be extracted by
  * gzip.)
  */
+#ifndef MIN_WBITS
+#  define MIN_WBITS   8  /* 256 LZ77 window */
+#endif
 #ifndef MAX_WBITS
 #  define MAX_WBITS   15 /* 32K LZ77 window */
 #endif
@@ -243,9 +238,11 @@ typedef PTRDIFF_TYPE ptrdiff_t;
 
 #define X86_FEATURES        1
 
+#ifdef __AVX2__   // hacky check
 #define X86_PCLMULQDQ_CRC   1
 
 #define X86_VPCLMULQDQ_CRC  1
+#endif
 
 #if defined(_M_IX86_FP) && (_M_IX86_FP > 0)
 #define X86_SSE2            1
