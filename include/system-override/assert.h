@@ -166,6 +166,12 @@ namespace impl
             (fz_sysassert_and_continue(#expression, __FILE__, __func__, __LINE__), 0)	\
         )
 
+#else 
+
+#define assert(expression) (void)(0)
+
+#define assert_and_continue(expression) (void)(expression)
+
 #endif  // !NDEBUG
 
 #endif   // FZ_DO_NOT_VALIDATE_BOOL_FOR_ASSERT
@@ -177,12 +183,7 @@ namespace impl
 
 _CRT_BEGIN_C_HEADER
 
-#ifdef NDEBUG
-
-#define assert(expression) ((void)0)
-#define assert_and_continue(expression) ((void)0)
-
-#else
+#ifndef NDEBUG
 
 #if 0
 
@@ -202,6 +203,12 @@ _CRT_BEGIN_C_HEADER
             (!!(expression)) ||                                                         \
             (fz_sysassert_and_continue(#expression, __FILE__, __func__, __LINE__), 0)	\
         )
+
+#else
+
+#define assert(expression) (void)(0)
+
+#define assert_and_continue(expression) (void)(expression)
 
 #endif   // NDEBUG
 
