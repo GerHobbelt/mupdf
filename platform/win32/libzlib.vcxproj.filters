@@ -24,62 +24,71 @@
     <Filter Include="Header Files\arch\power">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0004}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\arch\s390">
+    <Filter Include="Header Files\arch\riscv">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0005}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\arch\x86">
+    <Filter Include="Header Files\arch\s390">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0006}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\wx">
+    <Filter Include="Header Files\arch\x86">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0007}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\arch">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0009}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Misc Files\arch\arm">
+    <Filter Include="Header Files\wx">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0008}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\arch\generic">
+    <Filter Include="Misc Files\arch">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0010}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\arch\power">
+    <Filter Include="Misc Files\arch\arm">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0009}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc Files\arch\generic">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0011}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\arch\s390">
+    <Filter Include="Misc Files\arch\power">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0012}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\arch\x86">
+    <Filter Include="Misc Files\arch\riscv">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0013}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\doc">
+    <Filter Include="Misc Files\arch\s390">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0014}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Misc Files\win32">
+    <Filter Include="Misc Files\arch\x86">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0015}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
+    <Filter Include="Misc Files\doc">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0016}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\win32">
+    <Filter Include="Misc Files\win32">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0017}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\arch">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0019}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\arch\arm">
+    <Filter Include="Resource Files">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0018}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\arch\power">
-      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0020}</UniqueIdentifier>
+    <Filter Include="Resource Files\win32">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0019}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\arch\s390">
+    <Filter Include="Source Files\arch">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0021}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\arch\x86">
+    <Filter Include="Source Files\arch\arm">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0020}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\arch\power">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0022}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\tools">
+    <Filter Include="Source Files\arch\riscv">
       <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0023}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\arch\s390">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0024}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\arch\x86">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0025}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tools">
+      <UniqueIdentifier>{d2a97047-4937-4f7a-ab2f-4485e03f0026}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +114,9 @@
       <Filter>Source Files\arch\arm</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/zlib/arch/arm/insert_string_acle.c">
+      <Filter>Source Files\arch\arm</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/zlib/arch/arm/slide_hash_armv6.c">
       <Filter>Source Files\arch\arm</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/zlib/arch/arm/slide_hash_neon.c">
@@ -133,6 +145,21 @@
     </ClCompile>
     <ClCompile Include="../../thirdparty/zlib/arch/power/slide_hash_vmx.c">
       <Filter>Source Files\arch\power</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/zlib/arch/riscv/adler32_rvv.c">
+      <Filter>Source Files\arch\riscv</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/zlib/arch/riscv/chunkset_rvv.c">
+      <Filter>Source Files\arch\riscv</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/zlib/arch/riscv/compare256_rvv.c">
+      <Filter>Source Files\arch\riscv</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/zlib/arch/riscv/riscv_features.c">
+      <Filter>Source Files\arch\riscv</Filter>
+    </ClCompile>
+    <ClCompile Include="../../thirdparty/zlib/arch/riscv/slide_hash_rvv.c">
+      <Filter>Source Files\arch\riscv</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/zlib/arch/s390/crc32-vx.c">
       <Filter>Source Files\arch\s390</Filter>
@@ -164,13 +191,13 @@
     <ClCompile Include="../../thirdparty/zlib/arch/x86/adler32_ssse3.c">
       <Filter>Source Files\arch\x86</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/zlib/arch/x86/chunkset_avx.c">
+    <ClCompile Include="../../thirdparty/zlib/arch/x86/chunkset_avx2.c">
       <Filter>Source Files\arch\x86</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/zlib/arch/x86/chunkset_sse2.c">
       <Filter>Source Files\arch\x86</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/zlib/arch/x86/chunkset_sse41.c">
+    <ClCompile Include="../../thirdparty/zlib/arch/x86/chunkset_ssse3.c">
       <Filter>Source Files\arch\x86</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/zlib/arch/x86/compare256_avx2.c">
@@ -179,10 +206,10 @@
     <ClCompile Include="../../thirdparty/zlib/arch/x86/compare256_sse2.c">
       <Filter>Source Files\arch\x86</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/zlib/arch/x86/crc32_fold_pclmulqdq.c">
+    <ClCompile Include="../../thirdparty/zlib/arch/x86/crc32_pclmulqdq.c">
       <Filter>Source Files\arch\x86</Filter>
     </ClCompile>
-    <ClCompile Include="../../thirdparty/zlib/arch/x86/crc32_fold_vpclmulqdq.c">
+    <ClCompile Include="../../thirdparty/zlib/arch/x86/crc32_vpclmulqdq.c">
       <Filter>Source Files\arch\x86</Filter>
     </ClCompile>
     <ClCompile Include="../../thirdparty/zlib/arch/x86/insert_string_sse42.c">
@@ -296,6 +323,9 @@
     <ClInclude Include="../../thirdparty/zlib/adler32_p.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/zlib/arch/arm/acle_intrins.h">
+      <Filter>Header Files\arch\arm</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/zlib/arch/arm/arm_features.h">
       <Filter>Header Files\arch\arm</Filter>
     </ClInclude>
@@ -316,6 +346,9 @@
     </ClInclude>
     <ClInclude Include="../../thirdparty/zlib/arch/power/slide_ppc_tpl.h">
       <Filter>Header Files\arch\power</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/zlib/arch/riscv/riscv_features.h">
+      <Filter>Header Files\arch\riscv</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/zlib/arch/s390/dfltcc_common.h">
       <Filter>Header Files\arch\s390</Filter>
@@ -353,10 +386,19 @@
     <ClInclude Include="../../thirdparty/zlib/arch/x86/crc32_fold_vpclmulqdq_tpl.h">
       <Filter>Header Files\arch\x86</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/zlib/arch/x86/crc32_pclmulqdq_tpl.h">
+      <Filter>Header Files\arch\x86</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/zlib/arch/x86/x86_features.h">
       <Filter>Header Files\arch\x86</Filter>
     </ClInclude>
+    <ClInclude Include="../../thirdparty/zlib/arch/x86/x86_intrins.h">
+      <Filter>Header Files\arch\x86</Filter>
+    </ClInclude>
     <ClInclude Include="../../thirdparty/zlib/chunkset_tpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="../../thirdparty/zlib/compare256_rle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="../../thirdparty/zlib/cpu_features.h">
@@ -464,6 +506,9 @@
     <Text Include="../../thirdparty/zlib/arch/power/Makefile.in">
       <Filter>Misc Files\arch\power</Filter>
     </Text>
+    <Text Include="../../thirdparty/zlib/arch/riscv/README.md">
+      <Filter>Misc Files\arch\riscv</Filter>
+    </Text>
     <Text Include="../../thirdparty/zlib/arch/s390/Makefile.in">
       <Filter>Misc Files\arch\s390</Filter>
     </Text>
@@ -542,5 +587,19 @@
     <Text Include="../../thirdparty/zlib/zlib_name_mangling.h.in">
       <Filter>Misc Files</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="../../scripts/zlib/zconf-ng.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="../../scripts/zlib/zconf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="../../scripts/zlib/zlib-ng.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="../../scripts/zlib/zlib_name_mangling-ng.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -47,20 +47,20 @@
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -74,7 +74,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -88,7 +88,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4324;4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <SupportJustMyCode>false</SupportJustMyCode>
@@ -108,8 +108,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/lcms2/include;../../scripts/freetype;../../scripts/libpng;../../scripts/libtiff;../../scripts/libjpeg-turbo;../../thirdparty/jbig2dec;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/freetype/include;../../thirdparty/freetype/include/freetype;../../thirdparty/harfbuzz/src;../../thirdparty/gumbo-parser/src;../../thirdparty/gumbo-parser/visualc/include;../../thirdparty/libpng;../../thirdparty/libtiff/libtiff;../../thirdparty/zlib;../../include/;../../include/mupdf;../../scripts/zlib;../../thirdparty/owemdjee/zstd/lib;../../thirdparty/owemdjee/libwebp/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -175,6 +175,7 @@
     <ClCompile Include="../../thirdparty/zlib/arch/arm/compare256_neon.c" />
     <ClCompile Include="../../thirdparty/zlib/arch/arm/crc32_acle.c" />
     <ClCompile Include="../../thirdparty/zlib/arch/arm/insert_string_acle.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/arm/slide_hash_armv6.c" />
     <ClCompile Include="../../thirdparty/zlib/arch/arm/slide_hash_neon.c" />
     <ClCompile Include="../../thirdparty/zlib/arch/power/adler32_power8.c" />
     <ClCompile Include="../../thirdparty/zlib/arch/power/adler32_vmx.c" />
@@ -184,6 +185,11 @@
     <ClCompile Include="../../thirdparty/zlib/arch/power/power_features.c" />
     <ClCompile Include="../../thirdparty/zlib/arch/power/slide_hash_power8.c" />
     <ClCompile Include="../../thirdparty/zlib/arch/power/slide_hash_vmx.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/riscv/adler32_rvv.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/riscv/chunkset_rvv.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/riscv/compare256_rvv.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/riscv/riscv_features.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/riscv/slide_hash_rvv.c" />
     <ClCompile Include="../../thirdparty/zlib/arch/s390/crc32-vx.c" />
     <ClCompile Include="../../thirdparty/zlib/arch/s390/dfltcc_common.c" />
     <ClCompile Include="../../thirdparty/zlib/arch/s390/dfltcc_deflate.c" />
@@ -194,13 +200,13 @@
     <ClCompile Include="../../thirdparty/zlib/arch/x86/adler32_avx512_vnni.c" />
     <ClCompile Include="../../thirdparty/zlib/arch/x86/adler32_sse42.c" />
     <ClCompile Include="../../thirdparty/zlib/arch/x86/adler32_ssse3.c" />
-    <ClCompile Include="../../thirdparty/zlib/arch/x86/chunkset_avx.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/x86/chunkset_avx2.c" />
     <ClCompile Include="../../thirdparty/zlib/arch/x86/chunkset_sse2.c" />
-    <ClCompile Include="../../thirdparty/zlib/arch/x86/chunkset_sse41.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/x86/chunkset_ssse3.c" />
     <ClCompile Include="../../thirdparty/zlib/arch/x86/compare256_avx2.c" />
     <ClCompile Include="../../thirdparty/zlib/arch/x86/compare256_sse2.c" />
-    <ClCompile Include="../../thirdparty/zlib/arch/x86/crc32_fold_pclmulqdq.c" />
-    <ClCompile Include="../../thirdparty/zlib/arch/x86/crc32_fold_vpclmulqdq.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/x86/crc32_pclmulqdq.c" />
+    <ClCompile Include="../../thirdparty/zlib/arch/x86/crc32_vpclmulqdq.c" />
     <ClCompile Include="../../thirdparty/zlib/arch/x86/insert_string_sse42.c" />
     <ClCompile Include="../../thirdparty/zlib/arch/x86/slide_hash_avx2.c" />
     <ClCompile Include="../../thirdparty/zlib/arch/x86/slide_hash_sse2.c" />
@@ -238,6 +244,7 @@
     <ClCompile Include="../../thirdparty/zlib/zutil.c" />
     <ClInclude Include="../../thirdparty/zlib/adler32_fold.h" />
     <ClInclude Include="../../thirdparty/zlib/adler32_p.h" />
+    <ClInclude Include="../../thirdparty/zlib/arch/arm/acle_intrins.h" />
     <ClInclude Include="../../thirdparty/zlib/arch/arm/arm_features.h" />
     <ClInclude Include="../../thirdparty/zlib/arch/arm/neon_intrins.h" />
     <ClInclude Include="../../thirdparty/zlib/arch/generic/chunk_permute_table.h" />
@@ -245,6 +252,7 @@
     <ClInclude Include="../../thirdparty/zlib/arch/power/fallback_builtins.h" />
     <ClInclude Include="../../thirdparty/zlib/arch/power/power_features.h" />
     <ClInclude Include="../../thirdparty/zlib/arch/power/slide_ppc_tpl.h" />
+    <ClInclude Include="../../thirdparty/zlib/arch/riscv/riscv_features.h" />
     <ClInclude Include="../../thirdparty/zlib/arch/s390/dfltcc_common.h" />
     <ClInclude Include="../../thirdparty/zlib/arch/s390/dfltcc_deflate.h" />
     <ClInclude Include="../../thirdparty/zlib/arch/s390/dfltcc_detail.h" />
@@ -257,8 +265,11 @@
     <ClInclude Include="../../thirdparty/zlib/arch/x86/adler32_ssse3_p.h" />
     <ClInclude Include="../../thirdparty/zlib/arch/x86/crc32_fold_pclmulqdq_tpl.h" />
     <ClInclude Include="../../thirdparty/zlib/arch/x86/crc32_fold_vpclmulqdq_tpl.h" />
+    <ClInclude Include="../../thirdparty/zlib/arch/x86/crc32_pclmulqdq_tpl.h" />
     <ClInclude Include="../../thirdparty/zlib/arch/x86/x86_features.h" />
+    <ClInclude Include="../../thirdparty/zlib/arch/x86/x86_intrins.h" />
     <ClInclude Include="../../thirdparty/zlib/chunkset_tpl.h" />
+    <ClInclude Include="../../thirdparty/zlib/compare256_rle.h" />
     <ClInclude Include="../../thirdparty/zlib/cpu_features.h" />
     <ClInclude Include="../../thirdparty/zlib/crc32_braid_comb_p.h" />
     <ClInclude Include="../../thirdparty/zlib/crc32_braid_p.h" />
@@ -294,6 +305,7 @@
     <Text Include="../../thirdparty/zlib/arch/arm/Makefile.in" />
     <Text Include="../../thirdparty/zlib/arch/generic/Makefile.in" />
     <Text Include="../../thirdparty/zlib/arch/power/Makefile.in" />
+    <Text Include="../../thirdparty/zlib/arch/riscv/README.md" />
     <Text Include="../../thirdparty/zlib/arch/s390/Makefile.in" />
     <Text Include="../../thirdparty/zlib/arch/s390/README.md" />
     <Text Include="../../thirdparty/zlib/arch/x86/Makefile.in" />
@@ -321,8 +333,13 @@
     <Text Include="../../thirdparty/zlib/zlib_name_mangling.h.empty" />
     <Text Include="../../thirdparty/zlib/zlib_name_mangling.h.in" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ItemGroup>
+    <ClInclude Include="../../scripts/zlib/zconf-ng.h" />
+    <ClInclude Include="../../scripts/zlib/zconf.h" />
+    <ClInclude Include="../../scripts/zlib/zlib-ng.h" />
+    <ClInclude Include="../../scripts/zlib/zlib_name_mangling-ng.h" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
