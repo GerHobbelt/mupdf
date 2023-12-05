@@ -658,12 +658,12 @@ do_objcmp(fz_context *ctx, pdf_obj *a, pdf_obj *b, int check_streams)
 		return 0;
 
 	case PDF_STRING:
-		i = strcmp(pdf_to_text_string(ctx, a), pdf_to_text_string(ctx, b));
+		i = strcmp(pdf_to_text_string(ctx, a, NULL), pdf_to_text_string(ctx, b, NULL));
 		if (i < 0)
 			return -1;
 		if (i > 0)
 			return 1;
-		return 0
+		return 0;
 
 	case PDF_NAME:
 		return strcmp(NAME(a)->n, NAME(b)->n);
