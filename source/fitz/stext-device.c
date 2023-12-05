@@ -361,8 +361,12 @@ static int may_add_space(int lastchar)
 {
 	if (lastchar != ' ')
 	{
-		/* basic latin, greek, cyrillic, hebrew, arabic unicode blocks */
-		if (lastchar < 0x700)
+	/* Basic latin, greek, cyrillic, hebrew, arabic,
+	 * general punctuation,
+	 * superscripts and subscripts,
+	 * and currency symbols.
+	 */
+		if (lastchar < 0x700 || (lastchar >= 0x2000 && lastchar <= 0x20CF))
 			return 1;
 		switch (ucdn_get_script(lastchar))
 		{
