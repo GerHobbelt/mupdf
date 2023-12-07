@@ -28,7 +28,7 @@
 
 #include <gumbo.h>
 
-#define FZ_XML_MAX_DEPTH 4096
+#define FZ_XML_MAX_DEPTH 152
 
 /* #define FZ_XML_SEQ */
 
