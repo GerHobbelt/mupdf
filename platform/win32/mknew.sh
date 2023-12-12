@@ -490,6 +490,7 @@ libeternaltimestamp
 libevent
 libevt
 libexpat
+libfann
 libffi
 libfolia
 libfort
@@ -998,7 +999,6 @@ bbe
 bebop
 calibre
 cpplocate
-drogon
 ex-leptonica-freetype-harfbuzz
 filecopyex3
 fswatch
@@ -1007,7 +1007,6 @@ grok-jpeg2000
 h2o-server
 horsejs
 jbig2enc
-libfann
 lzbench
 metalink-cli
 metalink-mini-downloader
@@ -1103,6 +1102,7 @@ c-blosc2
 cpp-btree
 cryptopp
 cxxtest_catch_2_gtest
+drogon
 enkiTS-TaskScheduler
 google-marl
 gperf-hash

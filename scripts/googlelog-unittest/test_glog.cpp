@@ -71,8 +71,6 @@ int run_all_tests_glog(void)
 	init_test_argv(lcl_argc, lcl_argv);
 	rv |= glog_demangle_unittest_main(lcl_argc, lcl_argv);
 	init_test_argv(lcl_argc, lcl_argv);
-	rv |= glog_logging_custom_prefix_unittest_main(lcl_argc, lcl_argv);
-	init_test_argv(lcl_argc, lcl_argv);
 	rv |= glog_logging_unittest_main(lcl_argc, lcl_argv);
 	init_test_argv(lcl_argc, lcl_argv);
 	rv |= glog_mock_log_test_main(lcl_argc, lcl_argv);

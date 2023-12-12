@@ -22,6 +22,9 @@
     <ProjectReference Include="libgoogletest.vcxproj">
       <Project>{a60d8644-5a1c-4d29-8970-7518ffd7a17e}</Project>
     </ProjectReference>
+    <ProjectReference Include="libsystem_override_4_googletests.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82e}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>google-gtest-demos</ProjectName>
@@ -131,14 +134,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GOOGLETEST_SAMPLES;GOOGLETEST_SAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;../../thirdparty/owemdjee/googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GOOGLETEST_SAMPLES;GOOGLETEST_SAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GOOGLETEST_SAMPLES;GOOGLETEST_SAMPLES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;../../thirdparty/owemdjee/googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -171,15 +174,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GOOGLETEST_SAMPLES;GOOGLETEST_SAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;../../thirdparty/owemdjee/googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GOOGLETEST_SAMPLES;GOOGLETEST_SAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GOOGLETEST_SAMPLES;GOOGLETEST_SAMPLES_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;../../thirdparty/owemdjee/googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -215,14 +218,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GOOGLETEST_SAMPLES;GOOGLETEST_SAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;../../thirdparty/owemdjee/googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GOOGLETEST_SAMPLES;GOOGLETEST_SAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GOOGLETEST_SAMPLES;GOOGLETEST_SAMPLES_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;../../thirdparty/owemdjee/googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -255,15 +258,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GOOGLETEST_SAMPLES;GOOGLETEST_SAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;../../thirdparty/owemdjee/googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GOOGLETEST_SAMPLES;GOOGLETEST_SAMPLES_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_GOOGLETEST_SAMPLES;GOOGLETEST_SAMPLES_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;../../thirdparty/owemdjee/googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>

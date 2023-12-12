@@ -6,3 +6,6 @@ also-ignore:
 	/googletest/test/
 	/googletest/samples/
 	
+	gtest_main.cc
+	gtest-all.cc
+	
