@@ -28,8 +28,8 @@
     <ProjectReference Include="libmupdf_default_handlers.vcxproj">
       <Project>{5f615f91-dff8-4f05-bf48-1222b7d86519}</Project>
     </ProjectReference>
-    <ProjectReference Include="libzlib.vcxproj">
-      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
+    <ProjectReference Include="libsystem_override_4_googletests.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82e}</Project>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -141,7 +141,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/tesseract/unittest;../../scripts/tesseract-unittest;../../include;../../scripts/tesseract;../../thirdparty/tesseract/include;../../thirdparty/tesseract/src/api;../../thirdparty/tesseract/src/arch;../../thirdparty/tesseract/src/ccmain;../../thirdparty/tesseract/src/ccstruct;../../thirdparty/tesseract/src/ccutil;../../thirdparty/tesseract/src/classify;../../thirdparty/tesseract/src/dict;../../thirdparty/tesseract/src/lstm;../../thirdparty/tesseract/src/textord;../../thirdparty/tesseract/src/viewer;../../thirdparty/tesseract/src/wordrec;../../thirdparty/tesseract/src/cutil;../../thirdparty/tesseract/src/training/unicharset;../../thirdparty/tesseract/src/training/common;../../thirdparty/leptonica/src;../../thirdparty/tesseract/abseil;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;../../scripts/zlib;../../thirdparty/openjpeg/thirdparty/liblcms2/include;../../thirdparty/jbig2dec;../../thirdparty/freetype/include;../../thirdparty/harfbuzz/src;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/extract/include;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/mujs;../../thirdparty/gumbo-parser/src;../../thirdparty/lcms2/include;../../scripts/leptonica/include;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>HAVE_TESSERACT_CONFIG_H;HAVE_LCMS2MT;BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TESSERACT_CONFIG_H;HAVE_LCMS2MT;BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <OpenMPSupport>
       </OpenMPSupport>
@@ -182,7 +182,7 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/tesseract/unittest;../../scripts/tesseract-unittest;../../include;../../scripts/tesseract;../../thirdparty/tesseract/include;../../thirdparty/tesseract/src/api;../../thirdparty/tesseract/src/arch;../../thirdparty/tesseract/src/ccmain;../../thirdparty/tesseract/src/ccstruct;../../thirdparty/tesseract/src/ccutil;../../thirdparty/tesseract/src/classify;../../thirdparty/tesseract/src/dict;../../thirdparty/tesseract/src/lstm;../../thirdparty/tesseract/src/textord;../../thirdparty/tesseract/src/viewer;../../thirdparty/tesseract/src/wordrec;../../thirdparty/tesseract/src/cutil;../../thirdparty/tesseract/src/training/unicharset;../../thirdparty/tesseract/src/training/common;../../thirdparty/leptonica/src;../../thirdparty/tesseract/abseil;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;../../scripts/zlib;../../thirdparty/openjpeg/thirdparty/liblcms2/include;../../thirdparty/jbig2dec;../../thirdparty/freetype/include;../../thirdparty/harfbuzz/src;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/extract/include;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/mujs;../../thirdparty/gumbo-parser/src;../../thirdparty/lcms2/include;../../scripts/leptonica/include;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>HAVE_TESSERACT_CONFIG_H;HAVE_LCMS2MT;BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TESSERACT_CONFIG_H;HAVE_LCMS2MT;BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <OpenMPSupport>
@@ -227,7 +227,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/tesseract/unittest;../../scripts/tesseract-unittest;../../include;../../scripts/tesseract;../../thirdparty/tesseract/include;../../thirdparty/tesseract/src/api;../../thirdparty/tesseract/src/arch;../../thirdparty/tesseract/src/ccmain;../../thirdparty/tesseract/src/ccstruct;../../thirdparty/tesseract/src/ccutil;../../thirdparty/tesseract/src/classify;../../thirdparty/tesseract/src/dict;../../thirdparty/tesseract/src/lstm;../../thirdparty/tesseract/src/textord;../../thirdparty/tesseract/src/viewer;../../thirdparty/tesseract/src/wordrec;../../thirdparty/tesseract/src/cutil;../../thirdparty/tesseract/src/training/unicharset;../../thirdparty/tesseract/src/training/common;../../thirdparty/leptonica/src;../../thirdparty/tesseract/abseil;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;../../scripts/zlib;../../thirdparty/openjpeg/thirdparty/liblcms2/include;../../thirdparty/jbig2dec;../../thirdparty/freetype/include;../../thirdparty/harfbuzz/src;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/extract/include;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/mujs;../../thirdparty/gumbo-parser/src;../../thirdparty/lcms2/include;../../scripts/leptonica/include;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>HAVE_TESSERACT_CONFIG_H;HAVE_LCMS2MT;BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TESSERACT_CONFIG_H;HAVE_LCMS2MT;BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <OpenMPSupport>
       </OpenMPSupport>
@@ -268,7 +268,7 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/tesseract/unittest;../../scripts/tesseract-unittest;../../include;../../scripts/tesseract;../../thirdparty/tesseract/include;../../thirdparty/tesseract/src/api;../../thirdparty/tesseract/src/arch;../../thirdparty/tesseract/src/ccmain;../../thirdparty/tesseract/src/ccstruct;../../thirdparty/tesseract/src/ccutil;../../thirdparty/tesseract/src/classify;../../thirdparty/tesseract/src/dict;../../thirdparty/tesseract/src/lstm;../../thirdparty/tesseract/src/textord;../../thirdparty/tesseract/src/viewer;../../thirdparty/tesseract/src/wordrec;../../thirdparty/tesseract/src/cutil;../../thirdparty/tesseract/src/training/unicharset;../../thirdparty/tesseract/src/training/common;../../thirdparty/leptonica/src;../../thirdparty/tesseract/abseil;../../thirdparty/owemdjee/fmt/include;../../thirdparty/owemdjee/googletest/googletest/include;../../thirdparty/owemdjee/googletest/googlemock/include;../../thirdparty/owemdjee/googletest/googletest;../../thirdparty/owemdjee/googletest/googlemock;../../scripts/zlib;../../thirdparty/openjpeg/thirdparty/liblcms2/include;../../thirdparty/jbig2dec;../../thirdparty/freetype/include;../../thirdparty/harfbuzz/src;../../thirdparty/owemdjee/libjpeg-turbo;../../thirdparty/extract/include;../../thirdparty/zlib;../../scripts/libjpeg-turbo;../../thirdparty/openjpeg/src/lib/openjp2;../../thirdparty/curl/include;../../thirdparty/curl/lib;../../thirdparty/mujs;../../thirdparty/gumbo-parser/src;../../thirdparty/lcms2/include;../../scripts/leptonica/include;../../thirdparty/owemdjee/plf_nanotimer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>HAVE_TESSERACT_CONFIG_H;HAVE_LCMS2MT;BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HAVE_MUPDF;HAVE_TESSERACT_CONFIG_H;HAVE_LCMS2MT;BUILD_MONOLITHIC;BUILDING_TESSERACT_UNITTESTS;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <OpenMPSupport>
@@ -304,7 +304,8 @@
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="../../thirdparty/tesseract/unittest/commandlineflags_test.cc" />
-    <ClCompile Include="../../thirdparty/tesseract/unittest/tfile_test.cc" />
+    <ClCompile Include="..\..\scripts\tesseract-unittest\cmd_params_test_main.cpp" />
+    <ClCompile Include="..\..\thirdparty\tesseract\src\ccutil\params.cpp" />
     <ClInclude Include="../../thirdparty/tesseract/unittest/cycletimer.h" />
     <ClInclude Include="../../thirdparty/tesseract/unittest/doubleptr.h" />
     <ClInclude Include="../../thirdparty/tesseract/unittest/include_gunit.h" />
@@ -315,6 +316,7 @@
     <ClInclude Include="../../thirdparty/tesseract/unittest/util/utf8/unicodetext.h" />
     <ClInclude Include="../../thirdparty/tesseract/unittest/util/utf8/unilib.h" />
     <ClInclude Include="../../thirdparty/tesseract/unittest/util/utf8/unilib_utf8_utils.h" />
+    <ClInclude Include="..\..\thirdparty\tesseract\src\ccutil\params.h" />
     <Text Include="../../thirdparty/tesseract/unittest/README.md" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets">

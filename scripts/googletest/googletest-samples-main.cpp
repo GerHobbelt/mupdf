@@ -114,7 +114,7 @@ int main(int argc, const char** argv)
 			"  Tests #: ................. %6d\n"
 			"  Tests run #: ............. %6d\n"
 			"  Failed #: ................ %6d\n"
-			"  %sUNEXPECTED Fail #: ....... %6d@D\n",
+			"  %sUNEXPECTED Fail #: ....... %6d@D\n\n\n",
 			total_tests,
 			total_run_tests,
 			total_failed_tests,

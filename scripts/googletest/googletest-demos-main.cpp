@@ -68,21 +68,21 @@ int main(int argc, const char** argv)
 	TestEventListeners& listeners = UnitTest::GetInstance()->listeners();
 	listeners.Append(new ExpectNFailuresListener(1));
 
-	rv |= gtest_catch_exceptions_test_main(argc, argv);
+	rv |= gtest_listener_test_main(argc, argv);
 	rv |= gtest_color_test_main(argc, argv);
 	rv |= gtest_env_var_test_main(argc, argv);
 	rv |= gtest_failfast_test_main(argc, argv);
 	rv |= gtest_filter_test_main(argc, argv);
 	rv |= gtest_global_env_test_main(argc, argv);
 	rv |= gtest_list_test_main(argc, argv);
-	rv |= gtest_listener_test_main(argc, argv);
 	rv |= gtest_output_test_main(argc, argv);
 	rv |= gtest_param_test_main(argc, argv);
 	rv |= gtest_shuffle_test_main(argc, argv);
+	rv |= gtest_break_on_failure_test_main(argc, argv);
 	rv |= gtest_throw_on_fail_test_main(argc, argv);
 	rv |= gtest_uninitialized_test_main(argc, argv);
+	rv |= gtest_catch_exceptions_test_main(argc, argv);
 	rv |= gtest_death_test_main(argc, argv);
-	rv |= gtest_break_on_failure_test_main(argc, argv);
 
 	rv |= gtest_main(argc, argv);
 #elif defined(GTEST_DEMO_INV_NAME1)
