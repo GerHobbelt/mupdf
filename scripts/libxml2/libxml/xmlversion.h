@@ -11,7 +11,7 @@
 #define __XML_VERSION_H__
 
 #include <libxml/xmlexports.h>
-#include <libxml/xmlwin32version.h>
+//#include <libxml/xmlwin32version.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -30,21 +30,21 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
  *
  * the version string like "1.2.3"
  */
-#define LIBXML_DOTTED_VERSION "2.9.9"
+#define LIBXML_DOTTED_VERSION "2.13.0"
 
 /**
  * LIBXML_VERSION:
  *
  * the version number: 1.2.3 value is 10203
  */
-#define LIBXML_VERSION 20909
+#define LIBXML_VERSION 21300
 
 /**
  * LIBXML_VERSION_STRING:
  *
  * the version number string, 1.2.3 value is "10203"
  */
-#define LIBXML_VERSION_STRING "20909"
+#define LIBXML_VERSION_STRING "21300"
 
 /**
  * LIBXML_VERSION_EXTRA:
@@ -59,32 +59,7 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
  * Macro to check that the libxml version in use is compatible with
  * the version the software has been compiled against
  */
-#define LIBXML_TEST_VERSION() xmlCheckVersion(20909)
-
-#ifndef VMS
-#if 0
-/**
- * WITH_TRIO:
- *
- * defined if the trio support need to be configured in
- */
-#define WITH_TRIO
-#else
-/**
- * WITHOUT_TRIO:
- *
- * defined if the trio support should not be configured in
- */
-#define WITHOUT_TRIO
-#endif
-#else /* VMS */
-/**
- * WITH_TRIO:
- *
- * defined if the trio support need to be configured in
- */
-#define WITH_TRIO 1
-#endif /* VMS */
+#define LIBXML_TEST_VERSION() xmlCheckVersion(21300)
 
 /**
  * LIBXML_THREAD_ENABLED:
@@ -476,28 +451,40 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
 #endif
 
 #ifndef XML_DEPRECATED
-#  ifdef IN_LIBXML
+#  if defined (IN_LIBXML) || (__GNUC__ * 100 + __GNUC_MINOR__ < 301)
 #    define XML_DEPRECATED
-#  else
+#  elif defined (_MSC_VER) && (_MSC_VER >= 1400)
+#    define XML_DEPRECATED __declspec(deprecated)
 /* Available since at least GCC 3.1 */
+#  else
 #    define XML_DEPRECATED __attribute__((deprecated))
 #  endif
 #endif
 
-#if defined(__clang__) || (defined(__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__ >= 406))
-#define XML_IGNORE_FPTR_CAST_WARNINGS \
-    _Pragma("GCC diagnostic push") \
-    _Pragma("GCC diagnostic ignored \"-Wpedantic\"") \
-    _Pragma("GCC diagnostic ignored \"-Wcast-function-type\"")
-#define XML_POP_WARNINGS \
+#if defined(__LCC__)
+  #define XML_IGNORE_FPTR_CAST_WARNINGS
+  #define XML_POP_WARNINGS \
+    _Pragma("diag_default 1215")
+#elif defined(__clang__) || (defined(__GNUC__) && (__GNUC__ * 100 + __GNUC_MINOR__ >= 406))
+  #if defined(__clang__) || (__GNUC__ * 100 + __GNUC_MINOR__ >= 800)
+    #define XML_IGNORE_FPTR_CAST_WARNINGS \
+      _Pragma("GCC diagnostic push") \
+      _Pragma("GCC diagnostic ignored \"-Wpedantic\"") \
+      _Pragma("GCC diagnostic ignored \"-Wcast-function-type\"")
+  #else
+    #define XML_IGNORE_FPTR_CAST_WARNINGS \
+      _Pragma("GCC diagnostic push") \
+      _Pragma("GCC diagnostic ignored \"-Wpedantic\"")
+  #endif
+  #define XML_POP_WARNINGS \
     _Pragma("GCC diagnostic pop")
 #else
-#define XML_IGNORE_FPTR_CAST_WARNINGS
-#define XML_POP_WARNINGS
+  #define XML_IGNORE_FPTR_CAST_WARNINGS
+  #define XML_POP_WARNINGS
 #endif
 
-/** DOC_ENABLE */
 #else /* ! __GNUC__ */
+
 /**
  * ATTRIBUTE_UNUSED:
  *
@@ -523,8 +510,14 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
  * is deprecated.
  */
 #ifndef XML_DEPRECATED
-#define XML_DEPRECATED
+#  if defined (IN_LIBXML) || !defined (_MSC_VER)
+#    define XML_DEPRECATED
+/* Available since Visual Studio 2005 */
+#  elif defined (_MSC_VER) && (_MSC_VER >= 1400)
+#    define XML_DEPRECATED __declspec(deprecated)
+#  endif
 #endif
+
 /**
  * LIBXML_IGNORE_FPTR_CAST_WARNINGS:
  *
@@ -538,6 +531,17 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
  */
 #define XML_POP_WARNINGS
 #endif /* __GNUC__ */
+
+#define XML_NO_ATTR
+
+#ifdef LIBXML_THREAD_ENABLED
+  #define XML_DECLARE_GLOBAL(name, type, attrs) \
+    attrs XMLPUBFUN type *__##name(void);
+  #define XML_GLOBAL_MACRO(name) (*__##name())
+#else
+  #define XML_DECLARE_GLOBAL(name, type, attrs) \
+    attrs XMLPUBVAR type name;
+#endif
 
 #ifdef __cplusplus
 }
