@@ -82,7 +82,7 @@ extern "C" {
  * compiled in the libxml2 library.
  */
 
-#if 1
+#if 0
 #define XSLT_NEED_TRIO
 #endif
 #ifdef __VMS

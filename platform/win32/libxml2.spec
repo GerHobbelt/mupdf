@@ -1,4 +1,7 @@
 
+directories:
+	../../scripts/libxml2/libxml/
+	
 also-ignore:
 	/doc/examples/
 	/doc/tutorial/

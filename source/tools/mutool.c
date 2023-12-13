@@ -37,6 +37,7 @@
 #include "../../thirdparty/owemdjee/pmt-png-tools/pngtools-monolithic.h"
 #include "../../thirdparty/owemdjee/upskirt-markdown/bin/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/libxml2/include/libxml/monolithic_examples.h"
+#include "../../thirdparty/owemdjee/libxslt/examples/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/QuickJS/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/brotli/c/include/monolithic_examples.h"
 #include "../../thirdparty/owemdjee/jpeg-xl/lib/include/monolithic_examples.h"
@@ -847,6 +848,45 @@ static struct tool_spec {
 	{ {.fa = lcms2_tiffdiff_util_main }, "lcms2_tiffdiff_util", "lcms2 tiffdiff_util demo/tool" },
 	{ {.fa = lcms2_tificc_util_main }, "lcms2_tificc_util", "lcms2 tificc_util demo/tool" },
 	{ {.fa = lcms2_transicc_util_main }, "lcms2_transicc_util", "lcms2 transicc_util demo/tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.fa = xml_gio_bread_example_main }, "xml_gio_bread_example", "libxml gio_bread_example demo/tool" },
+	{ {.fa = xml_nanoftp_main }, "xml_nanoftp", "libxml nanoftp demo/tool" },
+	{ {.fa = xml_nanohttp_main }, "xml_nanohttp", "libxml nanohttp demo/tool" },
+	{ {.fa = xml_runsuite_tests_main }, "xml_runsuite_tests", "libxml runsuite_tests demo/tool" },
+	{ {.fa = xml_runtest_main }, "xml_runtest", "libxml runtest demo/tool" },
+	{ {.fa = xml_runxmlconfig_main }, "xml_runxmlconfig", "libxml runxmlconfig demo/tool" },
+	{ {.fa = xml_schematron_main }, "xml_schematron", "libxml schematron demo/tool" },
+	{ {.fa = xml_testapi_main }, "xml_testapi", "libxml testapi demo/tool" },
+	{ {.fa = xml_testC14N_main }, "xml_testC14N", "libxml testC14N demo/tool" },
+	{ {.f = xml_testdict_main }, "xml_testdict", "libxml testdict demo/tool" },
+	{ {.fa = xml_testhtml_main }, "xml_testhtml", "libxml testhtml demo/tool" },
+	{ {.fa = xml_testlimits_main }, "xml_testlimits", "libxml testlimits demo/tool" },
+	{ {.fa = xml_testmodule_main }, "xml_testmodule", "libxml testmodule demo/tool" },
+	{ {.fa = xml_testOOM_main }, "xml_testOOM", "libxml testOOM demo/tool" },
+	{ {.fa = xml_testreader_main }, "xml_testreader", "libxml testreader demo/tool" },
+	{ {.fa = xml_testrecurse_main }, "xml_testrecurse", "libxml testrecurse demo/tool" },
+	{ {.fa = xml_testregexp_main }, "xml_testregexp", "libxml testregexp demo/tool" },
+	{ {.fa = xml_testrelax_main }, "xml_testrelax", "libxml testrelax demo/tool" },
+	{ {.fa = xml_testSAX_main }, "xml_testSAX", "libxml testSAX demo/tool" },
+	{ {.fa = xml_testschemas_main }, "xml_testschemas", "libxml testschemas demo/tool" },
+	{ {.fa = xml_testURI_main }, "xml_testURI", "libxml testURI demo/tool" },
+	{ {.fa = xml_testXPath_main }, "xml_testXPath", "libxml testXPath demo/tool" },
+	{ {.fa = xml_xmlcatalog_main }, "xmlcatalog", "libxml xmlcatalog demo/tool" },
+	{ {.fa = xml_xmllint_main }, "xmllint", "libxml xmllint demo/tool" },
+	{ {.fa = xml_test_xmlreader_main }, "xml_test_xmlreader", "libxml test_xmlreader demo/tool" },
+
+	{ {.f = xml_testthreads_main }, "xml_testthreads", "libxml testthreads demo/tool" },
+	{ {.f = xml_trionan_main }, "xml_trionan", "libxml trionan demo/tool" },
+	{ {.f = xml_testchar_main }, "xml_testchar", "libxml testchar demo/tool" },
+#endif
+
+#if defined(MUTOOL_EX)
+	{ {.f = xslt_icu_sort_sample_main }, "xslt_icu_sort_sample", "libxslt icu_sort_sample demo" },
+	{ {.fa = xslt_runtest_main }, "xslt_runtest", "libxslt runtest demo/tool" },
+	{ {.fa = xslt_test_threads_main }, "xslt_test_threads", "libxslt test_threads demo/tool" },
+	{ {.fa = xsltproc_main }, "xsltproc", "libxslt xsltproc tool" },
 #endif
 
 	{ {.fa = report_version }, "version", "report version of this build / tools" },
