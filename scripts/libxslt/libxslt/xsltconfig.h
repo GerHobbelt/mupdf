@@ -20,28 +20,28 @@ extern "C" {
  *
  * the version string like "1.2.3"
  */
-#define LIBXSLT_DOTTED_VERSION "@VERSION@"
+#define LIBXSLT_DOTTED_VERSION "1.1.39"
 
 /**
  * LIBXSLT_VERSION:
  *
  * the version number: 1.2.3 value is 10203
  */
-#define LIBXSLT_VERSION @LIBXSLT_VERSION_NUMBER@
+#define LIBXSLT_VERSION 10139
 
 /**
  * LIBXSLT_VERSION_STRING:
  *
  * the version number string, 1.2.3 value is "10203"
  */
-#define LIBXSLT_VERSION_STRING "@LIBXSLT_VERSION_NUMBER@"
+#define LIBXSLT_VERSION_STRING "10139"
 
 /**
  * LIBXSLT_VERSION_EXTRA:
  *
  * extra version information, used to show a Git commit description
  */
-#define	LIBXSLT_VERSION_EXTRA "@LIBXSLT_VERSION_EXTRA@"
+#define	LIBXSLT_VERSION_EXTRA ""
 
 /**
  * WITH_XSLT_DEBUG:
@@ -132,7 +132,7 @@ extern "C" {
 #ifndef WITH_MODULES
 #define WITH_MODULES
 #endif
-#define LIBXSLT_DEFAULT_PLUGINS_PATH() "@LIBXSLT_DEFAULT_PLUGINS_PATH@"
+#define LIBXSLT_DEFAULT_PLUGINS_PATH() ""
 #endif
 
 /**
