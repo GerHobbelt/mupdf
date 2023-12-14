@@ -403,7 +403,7 @@ fz_stats_begin_mask(fz_context* ctx, fz_device* dev, fz_rect rect, int luminosit
 }
 
 static void
-fz_stats_end_mask(fz_context* ctx, fz_device* dev)
+fz_stats_end_mask(fz_context* ctx, fz_device* dev, fz_function* fn)
 {
 	fz_stats_device* writer = (fz_stats_device*)dev;
 

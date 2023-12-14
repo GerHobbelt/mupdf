@@ -1533,156 +1533,6 @@ pdf_set_pattern(fz_context *ctx, pdf_run_processor *pr, int what, pdf_pattern *p
 	mat->gstate_num = pr->gparent;
 }
 
-fz_structure
-structure_type(fz_context *ctx, pdf_run_processor *proc, pdf_obj *tag)
-{
-	/* Perform Structure mapping to go from tag to standard. */
-	if (proc->role_map)
-	{
-		pdf_obj *o = pdf_dict_get(ctx, proc->role_map, tag);
-		if (o)
-			tag = o;
-	}
-
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Document)))
-		return FZ_STRUCTURE_DOCUMENT;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Part)))
-		return FZ_STRUCTURE_PART;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Art)))
-		return FZ_STRUCTURE_ART;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Sect)))
-		return FZ_STRUCTURE_SECT;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Div)))
-		return FZ_STRUCTURE_DIV;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(BlockQuote)))
-		return FZ_STRUCTURE_BLOCKQUOTE;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Caption)))
-		return FZ_STRUCTURE_CAPTION;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(TOC)))
-		return FZ_STRUCTURE_TOC;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(TOCI)))
-		return FZ_STRUCTURE_TOCI;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Index)))
-		return FZ_STRUCTURE_INDEX;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(NonStruct)))
-		return FZ_STRUCTURE_NONSTRUCT;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Private)))
-		return FZ_STRUCTURE_PRIVATE;
-	/* Grouping elements (PDF 2.0 - Table 364) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(DocumentFragment)))
-		return FZ_STRUCTURE_DOCUMENTFRAGMENT;
-	/* Grouping elements (PDF 2.0 - Table 365) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Aside)))
-		return FZ_STRUCTURE_ASIDE;
-	/* Grouping elements (PDF 2.0 - Table 366) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Title)))
-		return FZ_STRUCTURE_TITLE;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(FENote)))
-		return FZ_STRUCTURE_FENOTE;
-	/* Grouping elements (PDF 2.0 - Table 367) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Sub)))
-		return FZ_STRUCTURE_SUB;
-
-	/* Paragraphlike elements (PDF 1.7 - Table 10.21) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(P)))
-		return FZ_STRUCTURE_P;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(H)))
-		return FZ_STRUCTURE_H;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(H1)))
-		return FZ_STRUCTURE_H1;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(H2)))
-		return FZ_STRUCTURE_H2;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(H3)))
-		return FZ_STRUCTURE_H3;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(H4)))
-		return FZ_STRUCTURE_H4;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(H5)))
-		return FZ_STRUCTURE_H5;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(H6)))
-		return FZ_STRUCTURE_H6;
-
-	/* List elements (PDF 1.7 - Table 10.23) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(List)))
-		return FZ_STRUCTURE_LIST;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(LI)))
-		return FZ_STRUCTURE_LISTITEM;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Lbl)))
-		return FZ_STRUCTURE_LABEL;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(LBody)))
-		return FZ_STRUCTURE_LISTBODY;
-
-	/* Table elements (PDF 1.7 - Table 10.24) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Table)))
-		return FZ_STRUCTURE_TABLE;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(TR)))
-		return FZ_STRUCTURE_TR;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(TH)))
-		return FZ_STRUCTURE_TH;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(TD)))
-		return FZ_STRUCTURE_TD;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(THead)))
-		return FZ_STRUCTURE_THEAD;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(TBody)))
-		return FZ_STRUCTURE_TBODY;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(TFoot)))
-		return FZ_STRUCTURE_TFOOT;
-
-	/* Inline elements (PDF 1.7 - Table 10.25) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Span)))
-		return FZ_STRUCTURE_SPAN;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Quote)))
-		return FZ_STRUCTURE_QUOTE;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Note)))
-		return FZ_STRUCTURE_NOTE;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Reference)))
-		return FZ_STRUCTURE_REFERENCE;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(BibEntry)))
-		return FZ_STRUCTURE_BIBENTRY;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Code)))
-		return FZ_STRUCTURE_CODE;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Link)))
-		return FZ_STRUCTURE_LINK;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Annot)))
-		return FZ_STRUCTURE_ANNOT;
-	/* Inline elements (PDF 2.0 - Table 368) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Em)))
-		return FZ_STRUCTURE_EM;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Strong)))
-		return FZ_STRUCTURE_STRONG;
-
-	/* Ruby inline element (PDF 1.7 - Table 10.26) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Ruby)))
-		return FZ_STRUCTURE_RUBY;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(RB)))
-		return FZ_STRUCTURE_RB;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(RT)))
-		return FZ_STRUCTURE_RT;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(RP)))
-		return FZ_STRUCTURE_RP;
-
-	/* Warichu inline element (PDF 1.7 - Table 10.26) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Warichu)))
-		return FZ_STRUCTURE_WARICHU;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(WT)))
-		return FZ_STRUCTURE_WT;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(WP)))
-		return FZ_STRUCTURE_WP;
-
-	/* Illustration elements (PDF 1.7 - Table 10.27) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Figure)))
-		return FZ_STRUCTURE_FIGURE;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Formula)))
-		return FZ_STRUCTURE_FORMULA;
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Form)))
-		return FZ_STRUCTURE_FORM;
-
-	/* Artifact structure type (PDF 2.0 - Table 375) */
-	if (pdf_name_eq(ctx, tag, PDF_NAME(Artifact)))
-		return FZ_STRUCTURE_ARTIFACT;
-
-	return FZ_STRUCTURE_INVALID;
-}
-
 static void
 begin_metatext(fz_context *ctx, pdf_run_processor *proc, pdf_obj *val, pdf_obj *mcid, fz_metatext meta, pdf_obj *name)
 {
@@ -1845,7 +1695,7 @@ pop_structure_to(fz_context *ctx, pdf_run_processor *proc, pdf_obj *common)
 	{
 		pdf_obj *p = pdf_dict_get(ctx, proc->mcid_sent, PDF_NAME(P));
 		pdf_obj *tag = pdf_dict_get(ctx, proc->mcid_sent, PDF_NAME(S));
-		fz_structure standard = structure_type(ctx, proc, tag);
+		fz_structure standard = pdf_structure_type(ctx, proc->role_map, tag);
 		if (standard != FZ_STRUCTURE_INVALID)
 			fz_end_structure(ctx, proc->dev);
 		pdf_drop_obj(ctx, proc->mcid_sent);
@@ -1985,7 +1835,7 @@ send_begin_structure(fz_context *ctx, pdf_run_processor *proc, pdf_obj *mc_dict)
 #endif
 		idx = get_struct_index(ctx, send);
 		tag = pdf_dict_get(ctx, send, PDF_NAME(S));
-		standard = structure_type(ctx, proc, tag);
+		standard = pdf_structure_type(ctx, proc->role_map, tag);
 		if (standard != FZ_STRUCTURE_INVALID)
 			fz_begin_structure(ctx, proc->dev, standard, pdf_to_name(ctx, tag), idx);
 
@@ -2053,7 +1903,7 @@ push_marked_content(fz_context *ctx, pdf_run_processor *proc, const char *tagstr
 
 		if (!mc_dict || proc->broken_struct_tree)
 		{
-			standard = structure_type(ctx, proc, tag);
+			standard = pdf_structure_type(ctx, proc->role_map, tag);
 			if (standard != FZ_STRUCTURE_INVALID)
 			{
 				pdf_flush_text(ctx, proc);
@@ -2136,7 +1986,7 @@ pop_marked_content(fz_context *ctx, pdf_run_processor *proc, int neat)
 		else
 		{
 			/* Maybe drop this entirely? */
-			standard = structure_type(ctx, proc, tag);
+			standard = pdf_structure_type(ctx, proc->role_map, tag);
 			if (standard != FZ_STRUCTURE_INVALID)
 			{
 				pdf_flush_text(ctx, proc);

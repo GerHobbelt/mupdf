@@ -219,7 +219,7 @@ fz_raw_begin_mask(fz_context *ctx, fz_device *dev_, fz_rect bbox, int luminosity
 }
 
 static void
-fz_raw_end_mask(fz_context *ctx, fz_device *dev_)
+fz_raw_end_mask(fz_context *ctx, fz_device *dev_, fz_function* fn)
 {
 }
 

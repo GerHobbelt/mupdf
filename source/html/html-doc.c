@@ -276,7 +276,7 @@ int htdoc_recognize_html_content(fz_context *ctx, fz_stream *stream, fz_archive 
 	if (stream == NULL)
 		return 0;
 
-	n = fz_read(ctx, stream, buffer, sizeof(buffer));
+	n = fz_read(ctx, stream, (unsigned char *)buffer, sizeof(buffer));
 	fz_seek(ctx, stream, 0, SEEK_SET);
 	if (n == 0)
 		return 0;
