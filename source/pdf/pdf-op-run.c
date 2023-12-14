@@ -1915,6 +1915,34 @@ find_most_recent_ancestor(fz_context *ctx, pdf_obj *a, pdf_obj *b)
 	return find_most_recent_common_ancestor_imp(ctx, a, NULL, b, NULL, NULL, NULL);
 }
 
+static int
+get_struct_index(fz_context *ctx, pdf_obj *send)
+{
+	pdf_obj *p = pdf_dict_get(ctx, send, PDF_NAME(P));
+	pdf_obj *k;
+	int i, n;
+
+	if (p == NULL)
+		return 0; /* Presumably the StructTreeToot */
+
+	/* So, get the kids array. */
+	k = pdf_dict_get(ctx, p, PDF_NAME(K));
+	n = pdf_array_len(ctx, k);
+	if (n == 0)
+	{
+		/* Not an array, presumably a singleton. */
+		if (pdf_objcmp(ctx, k, send) == 0)
+			return 0;
+		return -1;
+	}
+	for (i = 0; i < n; i++)
+	{
+		if (pdf_objcmp(ctx, pdf_array_get(ctx, k, i), send) == 0)
+			return i;
+	}
+	return -1;
+}
+
 static void
 send_begin_structure(fz_context *ctx, pdf_run_processor *proc, pdf_obj *mc_dict)
 {
@@ -1942,7 +1970,7 @@ send_begin_structure(fz_context *ctx, pdf_run_processor *proc, pdf_obj *mc_dict)
 		pdf_obj *send = mc_dict;
 		fz_structure standard;
 		pdf_obj *tag;
-		int uid;
+		int idx;
 
 		while (1) {
 			pdf_obj *p = pdf_dict_get(ctx, send, PDF_NAME(P));
@@ -1955,11 +1983,11 @@ send_begin_structure(fz_context *ctx, pdf_run_processor *proc, pdf_obj *mc_dict)
 #ifdef DEBUG_STRUCTURE
 		printf("sending %d\n", pdf_to_num(ctx, send));
 #endif
-		uid = pdf_to_num(ctx, send);
+		idx = get_struct_index(ctx, send);
 		tag = pdf_dict_get(ctx, send, PDF_NAME(S));
 		standard = structure_type(ctx, proc, tag);
 		if (standard != FZ_STRUCTURE_INVALID)
-			fz_begin_structure(ctx, proc->dev, standard, pdf_to_name(ctx, tag), uid);
+			fz_begin_structure(ctx, proc->dev, standard, pdf_to_name(ctx, tag), idx);
 
 		pdf_drop_obj(ctx, proc->mcid_sent);
 		proc->mcid_sent = pdf_keep_obj(ctx, send);
