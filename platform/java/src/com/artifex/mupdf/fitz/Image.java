@@ -76,6 +76,7 @@ public class Image
 	public native int getOrientation();
 	public native Image getMask();
 	public native void setOrientation(int orientation);
+	public native long getSize();
 
 	public native Pixmap toPixmap();
 }
