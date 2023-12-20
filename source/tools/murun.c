@@ -4759,6 +4759,13 @@ static void ffi_Image_getMask(js_State *J)
 		js_pushnull(J);
 }
 
+static void ffi_Image_getSize(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_image *image = js_touserdata(J, 0, "fz_image");
+	js_pushnumber(J, fz_image_size(ctx, image));
+}
+
 static void ffi_Image_getColorSpace(js_State *J)
 {
 	fz_image *image = js_touserdata(J, 0, "fz_image");
@@ -10231,6 +10238,7 @@ int murun_main(int argc, char **argv)
 		jsB_propfun(J, "Image.getDecode", ffi_Image_getDecode, 0);
 		jsB_propfun(J, "Image.getOrientation", ffi_Image_getOrientation, 0);
 		jsB_propfun(J, "Image.getMask", ffi_Image_getMask, 0);
+		jsB_propfun(J, "Image.getSize", ffi_Image_getSize, 0);
 		jsB_propfun(J, "Image.toPixmap", ffi_Image_toPixmap, 2);
 		jsB_propfun(J, "Image.setOrientation", ffi_Image_setOrientation, 1);
 	}

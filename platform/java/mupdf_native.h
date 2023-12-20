@@ -2058,6 +2058,14 @@ JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_Image_setOrientation
 
 /*
  * Class:     com_artifex_mupdf_fitz_Image
+ * Method:    getSize
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_artifex_mupdf_fitz_Image_getSize
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_Image
  * Method:    toPixmap
  * Signature: ()Lcom/artifex/mupdf/fitz/Pixmap;
  */
