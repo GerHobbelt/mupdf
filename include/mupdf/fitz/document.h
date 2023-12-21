@@ -974,6 +974,31 @@ void fz_delete_link(fz_context *ctx, fz_page *page, fz_link *link);
 */
 void *fz_process_opened_pages(fz_context *ctx, fz_document *doc, fz_process_opened_page_fn *process_openend_page, void *state);
 
+/**
+	Create a new CFI for a given point on a page (under a given
+	transformation).
+
+	Out of memory errors etc, will throw an exception.
+
+	This may return NULL if no CFI can be formed. This will happen
+	for PDF files with no structure information.
+
+	The caller takes ownership.
+*/
+char *fz_cfi_from_point(fz_context *ctx, fz_page *page, fz_matrix ctm, fz_point p);
+
+/**
+	Return a reference to the page that contains a given CFI.
+*/
+fz_page *fz_page_from_cfi(fz_context *ctx, fz_document *doc, char *cfi);
+
+/**
+	Return the bbox represented by a given CFI.
+
+	If the CFI is not on the given page, an exception will be thrown.
+*/
+fz_rect fz_rect_from_cfi(fz_context *ctx, fz_page *page, char *cfi);
+
 /* Implementation details: subject to change. */
 
 /**
