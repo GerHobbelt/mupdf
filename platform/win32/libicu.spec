@@ -5,3 +5,4 @@ also-ignore:
 	samples/
 	tools/
 	
+	docs/design/struct/tries/bytestrie/
