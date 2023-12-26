@@ -878,14 +878,14 @@ static struct tool_spec {
 	{ {.fa = xml_test_xmlreader_main }, "xml_test_xmlreader", "libxml test_xmlreader demo/tool" },
 
 	{ {.f = xml_testthreads_main }, "xml_testthreads", "libxml testthreads demo/tool" },
-	{ {.f = xml_trionan_main }, "xml_trionan", "libxml trionan demo/tool" },
+	// { {.f = xml_trionan_main }, "xml_trionan", "libxml trionan demo/tool" },
 	{ {.f = xml_testchar_main }, "xml_testchar", "libxml testchar demo/tool" },
 #endif
 
 #if defined(MUTOOL_EX)
 	{ {.f = xslt_icu_sort_sample_main }, "xslt_icu_sort_sample", "libxslt icu_sort_sample demo" },
 	{ {.fa = xslt_runtest_main }, "xslt_runtest", "libxslt runtest demo/tool" },
-	{ {.fa = xslt_test_threads_main }, "xslt_test_threads", "libxslt test_threads demo/tool" },
+	{ {.f = xslt_test_threads_main }, "xslt_test_threads", "libxslt test_threads demo/tool" },
 	{ {.fa = xsltproc_main }, "xsltproc", "libxslt xsltproc tool" },
 #endif
 
