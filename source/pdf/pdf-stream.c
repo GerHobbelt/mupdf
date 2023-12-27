@@ -762,7 +762,7 @@ static fz_buffer *pdf_load_stream_no_cycle(fz_context *ctx, pdf_obj *ref, pdf_cy
 {
 	if (pdf_is_stream(ctx, ref))
 		return pdf_load_stream_number_no_cycle(ctx, pdf_get_indirect_document(ctx, ref), pdf_to_num(ctx, ref), cycle);
-	fz_throw(ctx, FZ_ERROR_GENERIC, "object is not a stream");
+	fz_throw(ctx, FZ_ERROR_FORMAT, "object is not a stream");
 }
 
 fz_stream *pdf_open_raw_stream(fz_context *ctx, pdf_obj *ref)

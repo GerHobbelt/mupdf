@@ -261,7 +261,7 @@ const char *fz_convert_error(fz_context *ctx, int *code);
 
 enum fz_error_type
 {
-	FZ_ERROR_NONE = 0,
+	FZ_ERROR_NONE,
 	FZ_ERROR_GENERIC,
 
 	FZ_ERROR_SYSTEM, // fatal out of memory or syscall error

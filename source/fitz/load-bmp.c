@@ -1277,7 +1277,7 @@ fz_load_bmp_info_subimage(fz_context *ctx, const unsigned char *buf, size_t len,
 		p = begin + nextoffset;
 
 		if (end - p < 14)
-			fz_throw(ctx, FZ_ERROR_GENERIC, "not enough data for bitmap array (%02x%02x) in bmp image", p[0], p[1]);
+			fz_throw(ctx, FZ_ERROR_FORMAT, "not enough data for bitmap array (%02x%02x) in bmp image", p[0], p[1]);
 
 		if (!is_bitmap_array(p))
 		{
@@ -1305,7 +1305,7 @@ fz_load_bmp_info_subimage(fz_context *ctx, const unsigned char *buf, size_t len,
 	} while (subimage >= 0 && nextoffset > 0);
 
 	if (subimage != -1)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "subimage index (%d) out of range in bmp image", origidx);
+		fz_throw(ctx, FZ_ERROR_ARGUMENT, "subimage index (%d) out of range in bmp image", origidx);
 
 	fz_try(ctx)
 	{

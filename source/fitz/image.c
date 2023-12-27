@@ -1456,7 +1456,7 @@ fz_new_image_from_buffer(fz_context *ctx, fz_buffer *buffer)
 		fz_load_jpx_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 #else
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Jpeg2000 (JPX) not supported in this build");
+		fz_throw(ctx, FZ_ERROR_FORMAT, "Jpeg2000 (JPX) not supported in this build");
 #endif
 	case FZ_IMAGE_JPEG:
 		fz_load_jpeg_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
@@ -1465,7 +1465,7 @@ fz_new_image_from_buffer(fz_context *ctx, fz_buffer *buffer)
 #if FZ_ENABLE_JPEGXL
 		fz_load_jpegxl_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 #else
-		fz_throw(ctx, FZ_ERROR_GENERIC, "JpegXL not supported in this build");
+		fz_throw(ctx, FZ_ERROR_FORMAT, "JpegXL not supported in this build");
 #endif
 		break;
 	case FZ_IMAGE_PNG:
@@ -1482,14 +1482,14 @@ fz_new_image_from_buffer(fz_context *ctx, fz_buffer *buffer)
 		fz_load_webp_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 #else
-		fz_throw(ctx, FZ_ERROR_GENERIC, "WEBP not supported in this build");
+		fz_throw(ctx, FZ_ERROR_FORMAT, "WEBP not supported in this build");
 #endif
 	case FZ_IMAGE_TIFF:
 #if FZ_ENABLE_TIFF
 		fz_load_tiff_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);
 		break;
 #else
-		fz_throw(ctx, FZ_ERROR_GENERIC, "TIFF not supported in this build");
+		fz_throw(ctx, FZ_ERROR_FORMAT, "TIFF not supported in this build");
 #endif
 	case FZ_IMAGE_GIF:
 		fz_load_gif_info(ctx, buf, len, &w, &h, &xres, &yres, &cspace, &orientation);

@@ -539,11 +539,11 @@ fz_clone_text_span(fz_context *ctx, const fz_text_span *span)
 	cspan = fz_malloc_struct(ctx, fz_text_span);
 	*cspan = *span;
 	cspan->cap = cspan->len;
-	cspan->items = fz_malloc_no_throw(ctx, sizeof(*cspan->items) * cspan->len);
+	cspan->items = fz_calloc_no_throw(ctx, cspan->len, sizeof(*cspan->items));
 	if (cspan->items == NULL)
 	{
 		fz_free(ctx, cspan);
-		fz_throw(ctx, FZ_ERROR_SYSTEM, "Failed to malloc while cloning text span");
+		fz_throw(ctx, FZ_ERROR_SYSTEM, "Failed to malloc while cloning text span: calloc (%zu x %zu bytes) failed", (size_t)cspan->len, sizeof(*cspan->items));
 	}
 	memcpy(cspan->items, span->items, sizeof(*cspan->items) * cspan->len);
 	fz_keep_font(ctx, cspan->font);

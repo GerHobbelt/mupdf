@@ -100,7 +100,7 @@ fz_malloc(fz_context *ctx, size_t size   FZDBG_DECL_ARGS)
 		return NULL;
 	p = do_scavenging_malloc(ctx, size   FZDBG_PASS);
 	if (!p)
-		fz_throw(ctx, FZ_ERROR_SYSTEM, "malloc of %zu bytes failed", size);
+		fz_throw(ctx, FZ_ERROR_SYSTEM, "malloc (%zu bytes) failed", size);
 	return p;
 }
 
