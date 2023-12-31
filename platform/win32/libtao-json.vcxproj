@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libtao-json</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF1FC4E8}</ProjectGuid>
+    <RootNamespace>libtao-json</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAO_JSON;TAO_JSON_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAO_JSON;TAO_JSON_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAO_JSON;TAO_JSON_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAO_JSON;TAO_JSON_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAO_JSON;TAO_JSON_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAO_JSON;TAO_JSON_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAO_JSON;TAO_JSON_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAO_JSON;TAO_JSON_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAO_JSON;TAO_JSON_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAO_JSON;TAO_JSON_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAO_JSON;TAO_JSON_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAO_JSON;TAO_JSON_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/contrib/nlohmann/test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/cbor_to_jaxn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/cbor_to_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/cbor_to_msgpack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/cbor_to_pretty_jaxn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/cbor_to_pretty_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/cbor_to_ubjson.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/jaxn_to_cbor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/jaxn_to_cplusplus.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/jaxn_to_jaxn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/jaxn_to_msgpack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/jaxn_to_pretty_jaxn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/jaxn_to_ubjson.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/json_to_cbor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/json_to_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/json_to_msgpack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/json_to_pretty_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/json_to_ubjson.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/msgpack_to_cbor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/msgpack_to_jaxn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/msgpack_to_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/msgpack_to_pretty_jaxn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/msgpack_to_pretty_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/msgpack_to_ubjson.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/printf_doubles.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/ubjson_to_cbor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/ubjson_to_jaxn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/ubjson_to_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/ubjson_to_msgpack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/ubjson_to_pretty_jaxn.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/ubjson_to_pretty_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/validate_event_order.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/example/json/validate_integer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/perf/json/benchmark.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/perf/json/parse_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/perf/json/pretty_print_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/perf/json/print_double.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/perf/json/print_file.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/perf/json/sizes.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/perf/json/syntax_only.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/big_list_of_naughty_strings.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/binding_array.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/binding_factory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/binding_function.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/binding_object.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/binding_versions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/cbor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/cbor_parts_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/contrib_diff.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/contrib_get.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/contrib_patch_add.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/contrib_patch_copy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/contrib_patch_move.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/contrib_patch_remove.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/contrib_patch_replace.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/contrib_patch_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/contrib_position.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/contrib_reference.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/contrib_schema.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/contrib_traits.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/double.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/enable_implicit_constructor.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/escape.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/events_binary_to.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/events_compare.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/events_debug.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/events_hash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/events_to_stream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/events_to_string.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/include_json.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/integer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/jaxn_ostream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/jaxn_parse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/jaxn_parts_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/json_ostream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/json_parse.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/json_parts_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/json_pointer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/key_camel_case_to_snake_case.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/key_snake_case_to_camel_case.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/literal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/msgpack.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/object_construction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/opaque_pointer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/operators.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/optional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/public_base.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/self_contained.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/sha256.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/temporary_parsing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/type.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/ubjson.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/uri_fragment.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/validate_event_interfaces.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/validate_utf8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/value_access.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/value_basics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/value_create.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/value_ptr.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/value_subscript.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tao-json/src/test/json/with_arguments.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/contrib/nlohmann/json.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/basic_value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/binary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/binary_view.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/binding.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/binding/constant.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/binding/element.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/binding/element2.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/binding/factory.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/binding/for_nothing_value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/binding/for_unknown_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/binding/inherit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/binding/internal/array.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/binding/internal/elementr.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/binding/internal/elementw.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/binding/internal/inherit.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/binding/internal/object.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/binding/internal/type_key.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/binding/member.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/binding/member_kind.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/binding/versions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/cbor.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/cbor/consume_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/cbor/consume_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/cbor/events/from_binary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/cbor/events/from_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/cbor/events/from_input.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/cbor/events/from_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/cbor/events/to_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/cbor/events/to_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/cbor/from_binary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/cbor/from_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/cbor/from_input.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/cbor/from_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/cbor/internal/grammar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/cbor/internal/major.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/cbor/parts_parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/cbor/to_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/cbor/to_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/consume.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/consume_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/consume_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/array_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/deque_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/diff.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/from_nlohmann.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/get.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/internal/array_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/internal/indirect_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/internal/object_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/internal/type_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/list_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/map_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/multimap_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/multiset_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/pair_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/patch.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/pointer_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/position.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/reference.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/schema.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/set_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/shared_ptr_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/to_nlohmann.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/tuple_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/unique_ptr_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/unordered_map_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/unordered_set_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/variant_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/vector_bool_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/contrib/vector_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/apply.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/binary_to_base64.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/binary_to_base64url.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/binary_to_exception.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/binary_to_hex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/capture.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/compare.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/debug.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/discard.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/from_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/from_input.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/from_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/from_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/from_value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/hash.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/invalid_string_to_binary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/invalid_string_to_exception.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/invalid_string_to_hex.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/key_camel_case_to_snake_case.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/key_snake_case_to_camel_case.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/limit_nesting_depth.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/limit_value_count.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/non_finite_to_exception.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/non_finite_to_null.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/non_finite_to_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/prefer_signed.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/prefer_unsigned.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/produce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/ref.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/set_value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/statistics.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/tee.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/to_pretty_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/to_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/to_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/to_value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/transformer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/validate_event_order.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/validate_keys.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/virtual_base.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/virtual_ref.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/virtual_wrap.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/events/virtualize.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/external/double.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/external/itoa.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/external/ryu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/forward.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/from_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/from_input.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/from_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/from_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/internal/action.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/internal/base64.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/internal/base64url.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/internal/dependent_false.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/internal/endian.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/internal/endian_gcc.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/internal/endian_win.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/internal/errors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/internal/escape.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/internal/format.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/internal/grammar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/internal/hexdump.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/internal/identity.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/internal/number_state.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/internal/number_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/internal/pair.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/internal/parse_util.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/internal/sha256.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/internal/single.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/internal/string_t.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/internal/type_traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/internal/unescape_action.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/internal/uri_fragment.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn/consume_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn/consume_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn/events/from_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn/events/from_input.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn/events/from_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn/events/from_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn/events/to_pretty_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn/events/to_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn/events/to_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn/from_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn/from_input.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn/from_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn/from_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn/internal/action.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn/internal/bunescape_action.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn/internal/errors.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn/internal/grammar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn/internal/integer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn/internal/unescape_action.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn/is_identifier.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn/parts_parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn/to_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/jaxn/to_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/message_extension.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/msgpack.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/msgpack/consume_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/msgpack/consume_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/msgpack/events/from_binary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/msgpack/events/from_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/msgpack/events/from_input.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/msgpack/events/from_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/msgpack/events/to_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/msgpack/events/to_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/msgpack/from_binary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/msgpack/from_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/msgpack/from_input.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/msgpack/from_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/msgpack/internal/format.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/msgpack/internal/grammar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/msgpack/parts_parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/msgpack/to_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/msgpack/to_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/operators.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/parts_parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/pointer.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/produce.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/self_contained.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/span.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/to_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/to_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/traits.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/type.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/ubjson.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/ubjson/consume_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/ubjson/consume_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/ubjson/events/from_binary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/ubjson/events/from_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/ubjson/events/from_input.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/ubjson/events/from_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/ubjson/events/to_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/ubjson/events/to_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/ubjson/from_binary.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/ubjson/from_file.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/ubjson/from_input.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/ubjson/from_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/ubjson/internal/grammar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/ubjson/internal/marker.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/ubjson/parts_parser.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/ubjson/to_stream.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/ubjson/to_string.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/utf8.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/include/tao/json/value.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/src/perf/json/bench_mark.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/src/test/json/main.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/src/test/json/make_events.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/src/test/json/test.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/src/test/json/test_events.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/src/test/json/test_types.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/tao-json/src/test/json/test_unhex.hpp" />
+    <Image Include="../../thirdparty/owemdjee/tao-json/doc/Overview.png" />
+    <Image Include="../../thirdparty/owemdjee/tao-json/doc/Types.png" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/doc/Advanced-Use-Cases.md" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/doc/Batteries-Included.md" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/doc/Binding-Traits.md" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/doc/Changelog.md" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/doc/Common-Use-Cases.md" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/doc/Design-Decisions.md" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/doc/Events-Interface.md" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/doc/Getting-Started.md" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/doc/Instance-Sharing.md" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/doc/Interoperability.md" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/doc/Overview.md" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/doc/Parser-Interface.md" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/doc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/doc/Scratchpad.md" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/doc/Type-Traits.md" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/doc/Value-Class.md" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/src/example/json/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/src/perf/json/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/src/test/json/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/blns.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/canada.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/citm_catalog.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/additionalItems.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/additionalProperties.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/allOf.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/anyOf.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/default.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/definitions.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/dependencies.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/enum.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/items.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/maxItems.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/maxLength.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/maxProperties.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/maximum.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/minItems.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/minLength.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/minProperties.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/minimum.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/multipleOf.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/not.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/oneOf.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/optional/bignum.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/optional/format.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/optional/zeroTerminatedFloats.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/pattern.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/patternProperties.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/properties.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/ref.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/refRemote.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/required.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/type.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/draft4/uniqueItems.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/taocpp/dateTime.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/taocpp/number.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/taocpp/position.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/taocpp/schema.json" />
+    <Text Include="../../thirdparty/owemdjee/tao-json/tests/twitter.json" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

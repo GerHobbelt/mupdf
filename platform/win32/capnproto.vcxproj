@@ -1,0 +1,813 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{00811970-815B-4F64-BC9D-219078F6FAB8}</ProjectGuid>
+    <RootNamespace>capnproto</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CAPNPROTO;CAPNPROTO_STATICLIB;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CAPNPROTO;CAPNPROTO_STATICLIB;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CAPNPROTO;CAPNPROTO_STATICLIB;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_CAPNPROTO;CAPNPROTO_STATICLIB;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="cryptlib.vcxproj">
+      <Project>{424334e5-addf-490d-ba7b-46cf3686b48d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libarchive.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff18377f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpp-terminal.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff2367fa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libhighway.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff021a57}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libnanosvg.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-751bff971987}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpthread-win32.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8df2c2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite_tools.vcxproj">
+      <Project>{6e890463-3eeb-4cce-b8bd-5aa89148c35a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="MuPDFLib_static.vcxproj">
+      <Project>{a60d8644-5815-4d29-8970-7518ff518d62}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbase58x.vcxproj">
+      <Project>{0501bedf-3191-46a9-9997-288466675b82}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libBLAKE3.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc1880387f83}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfmt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffaf3a53}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreetype.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-a58957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgumbo-parser.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-358957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libharfbuzz.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-258957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjbig2dec.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-958957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-turbo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblcms2.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-158957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuhelpers.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce88099485a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmujs.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-858957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-6222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbrotli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7760d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcrow.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff84e35}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcurl.vcxproj">
+      <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libextract.vcxproj">
+      <Project>{da38ca0b-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreeglut.vcxproj">
+      <Project>{a1b75d29-9f5c-4a0f-b368-322a10477d0c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgif.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffddd6be}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-xl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa838c1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libleptonica.vcxproj">
+      <Project>{ca0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblz4.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff50b44d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf_default_handlers.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-1222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuthreads.vcxproj">
+      <Project>{de21fa8a-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmutool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libopenjpeg.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-758957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpkcs7.vcxproj">
+      <Project>{22462382-b30d-42a5-bf07-ee1a35e25d21}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpng.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-658957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libqiqqatool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc18808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libQuickJS.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0e57ba}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libresources.vcxproj">
+      <Project>{52dcab29-c8ee-4422-954c-29afa6b33e22}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite-amalgamation.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3a7bc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsvgcharter.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7fcf79}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtesseract.vcxproj">
+      <Project>{ac0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtiff.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-558957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtinyexpr.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff33b1b5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libupskirt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff789ba9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libwebp.vcxproj">
+      <Project>{105f884a-c170-4c30-a810-c7da2103002f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libxml2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa57a44}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzlib.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzopfli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff03e6ca}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzstd.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="lib_nas_lockfile.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0a15c6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="png-pmt-tools-lib.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1147a4}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/samples/addressbook.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/samples/calculator-client.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/samples/calculator-server.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/benchmark/capnproto-carsales.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/benchmark/capnproto-catrank.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/benchmark/capnproto-eval.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/benchmark/null-carsales.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/benchmark/null-catrank.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/benchmark/null-eval.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/benchmark/protobuf-carsales.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/benchmark/protobuf-catrank.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/benchmark/protobuf-eval.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/benchmark/runner.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/afl-testcase.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/any-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/any.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/arena.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/blob-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/blob.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/c++.capnp.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/canonicalize-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/capability-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/capability.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/common-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compat/byte-stream-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compat/byte-stream.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compat/http-over-capnp-old-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compat/http-over-capnp-perf-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compat/http-over-capnp-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compat/http-over-capnp.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compat/json-rpc-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compat/json-rpc.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compat/json-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compat/json.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compat/json.capnp.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compat/websocket-rpc-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compat/websocket-rpc.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/capnp.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/capnpc-c++.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/capnpc-capnp.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/compiler.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/error-reporter.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/evolution-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/generics.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/grammar.capnp.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/lexer-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/lexer.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/lexer.capnp.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/module-loader.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/node-translator.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/parser.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/type-id-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/type-id.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/dynamic-capability.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/dynamic-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/dynamic.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/encoding-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/endian-fallback-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/endian-reverse-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/endian-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/ez-rpc-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/ez-rpc.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/layout-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/layout.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/list.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/membrane-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/membrane.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/message-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/message.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/orphan-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/persistent.capnp.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/reconnect-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/reconnect.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/rpc-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/rpc-twoparty-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/rpc-twoparty.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/rpc-twoparty.capnp.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/rpc.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/rpc.capnp.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/schema-loader-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/schema-loader.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/schema-parser-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/schema-parser.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/schema-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/schema.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/schema.capnp.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/serialize-async-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/serialize-async.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/serialize-packed-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/serialize-packed.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/serialize-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/serialize-text-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/serialize-text.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/serialize.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/stream.capnp.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/stringify-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/stringify.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/test-util.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/arena-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/arena.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/array-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/array.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/async-coroutine-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/async-io-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/async-io-unix.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/async-io-win32.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/async-io.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/async-queue-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/async-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/async-unix-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/async-unix-xthread-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/async-unix.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/async-win32-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/async-win32-xthread-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/async-win32.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/async-xthread-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/async.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/cidr.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/common-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/common.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/compat/brotli-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/compat/brotli.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/compat/gzip-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/compat/gzip.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/compat/http-socketpair-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/compat/http-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/compat/http.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/compat/readiness-io-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/compat/readiness-io.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/compat/tls-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/compat/tls.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/compat/url-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/compat/url.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/debug-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/debug.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/encoding-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/encoding.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/exception-override-symbolizer-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/exception-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/exception.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/filesystem-disk-generic-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/filesystem-disk-old-kernel-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/filesystem-disk-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/filesystem-disk-unix.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/filesystem-disk-win32.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/filesystem-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/filesystem.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/function-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/hash.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/io-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/io.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/list-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/list.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/main.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/map-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/memory-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/memory.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/mutex-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/mutex.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/one-of-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/parse/char-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/parse/char.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/parse/common-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/refcount-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/refcount.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/source-location.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/std/iostream-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/string-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/string-tree-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/string-tree.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/string.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/table-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/table.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/test-helpers.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/test-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/thread-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/thread.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/threadlocal-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/time-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/time.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/timer.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/tuple-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/units-test.c++" />
+    <ClCompile Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/units.c++" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/benchmark/capnproto-common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/benchmark/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/benchmark/null-common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/benchmark/protobuf-common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/any.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/arena.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/blob.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/c++.capnp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/capability.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compat/byte-stream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compat/http-over-capnp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compat/json-rpc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compat/json.capnp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compat/json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compat/std-iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compat/websocket-rpc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/compiler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/error-reporter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/generics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/grammar.capnp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/lexer.capnp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/lexer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/module-loader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/node-translator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/resolver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/type-id.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/dynamic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/endian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/ez-rpc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/generated-header-support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/layout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/membrane.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/message.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/orphan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/persistent.capnp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/pointer-helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/pretty-print.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/raw-schema.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/reconnect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/rpc-prelude.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/rpc-twoparty.capnp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/rpc-twoparty.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/rpc.capnp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/rpc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/schema-lite.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/schema-loader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/schema-parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/schema.capnp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/schema.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/serialize-async.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/serialize-packed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/serialize-text.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/serialize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/stream.capnp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/test-util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/arena.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/async-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/async-io-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/async-io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/async-prelude.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/async-queue.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/async-unix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/async-win32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/async.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/cidr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/compat/brotli.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/compat/gtest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/compat/gzip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/compat/http.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/compat/readiness-io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/compat/tls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/compat/url.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/encoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/exception.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/filesystem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/function.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/main.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/miniposix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/mutex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/one-of.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/parse/char.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/parse/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/refcount.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/source-location.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/std/iostream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/string-tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/thread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/threadlocal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/timer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/tuple.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/units.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/vector.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/win32-api-version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/windows-sanity.h" />
+    <Image Include="../../thirdparty/owemdjee/capnproto/doc/images/bg_hr.png" />
+    <Image Include="../../thirdparty/owemdjee/capnproto/doc/images/blacktocat.png" />
+    <Image Include="../../thirdparty/owemdjee/capnproto/doc/images/capnp-vs-ice.png" />
+    <Image Include="../../thirdparty/owemdjee/capnproto/doc/images/capnp-vs-thrift-vs-ice.png" />
+    <Image Include="../../thirdparty/owemdjee/capnproto/doc/images/gittip.png" />
+    <Image Include="../../thirdparty/owemdjee/capnproto/doc/images/gittip15.png" />
+    <Image Include="../../thirdparty/owemdjee/capnproto/doc/images/groups-logo.png" />
+    <Image Include="../../thirdparty/owemdjee/capnproto/doc/images/icon_download.png" />
+    <Image Include="../../thirdparty/owemdjee/capnproto/doc/images/infinitely_faster.png" />
+    <Image Include="../../thirdparty/owemdjee/capnproto/doc/images/infinity-times-faster.png" />
+    <Image Include="../../thirdparty/owemdjee/capnproto/doc/images/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/capnproto/doc/images/sprite_download.png" />
+    <Image Include="../../thirdparty/owemdjee/capnproto/doc/images/time-travel.png" />
+    <Image Include="../../thirdparty/owemdjee/capnproto/doc/slides-2017.05.18/3ph-0rt.png" />
+    <Image Include="../../thirdparty/owemdjee/capnproto/doc/slides-2017.05.18/3ph-proxy.png" />
+    <Image Include="../../thirdparty/owemdjee/capnproto/doc/slides-2017.05.18/3ph-redirect.png" />
+    <Image Include="../../thirdparty/owemdjee/capnproto/doc/slides-2017.05.18/3ph.png" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/README.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/RELEASE-PROCESS.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/Makefile.ekam" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/build/configure.bzl" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/build/load_br.bzl" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/cmake/CapnProtoConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/cmake/CapnProtoConfigVersion.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/cmake/CapnProtoMacros.cmake" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/cmake/CapnProtoTargets.cmake" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/compile_flags.txt" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/ekam-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/ekam-provider/this-dir-is-to-trick-gdb.txt" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/pkgconfig/capnp-json.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/pkgconfig/capnp-rpc.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/pkgconfig/capnp-websocket.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/pkgconfig/capnp.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/pkgconfig/capnpc.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/pkgconfig/kj-async.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/pkgconfig/kj-gzip.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/pkgconfig/kj-http.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/pkgconfig/kj-test.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/pkgconfig/kj-tls.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/pkgconfig/kj.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/regenerate-bootstraps.sh" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/samples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/samples/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/setup-autotools.sh" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/setup-ekam.sh" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/cc_capnp_library.bzl" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compat/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/compiler/capnp-test.sh" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/testdata/annotated-json.binary" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/testdata/annotated.json" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/testdata/errors.txt" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/testdata/errors2.txt" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/testdata/lists.binary" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/testdata/pretty.json" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/testdata/pretty.txt" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/testdata/short.json" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/src/capnp/testdata/short.txt" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/compat/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/c++/src/kj/compat/make-test-certs.sh" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_config.yml" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_config_next.yml" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_includes/buttons.html" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_includes/footer.html" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_includes/header.html" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_layouts/page.html" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_layouts/post.html" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_layouts/slides.html" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_plugins/capnp_lexer.py" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_posts/2013-04-01-announcing-capn-proto.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_posts/2013-06-27-capn-proto-beta-release.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_posts/2013-08-12-capnproto-0.2-no-more-haskell.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_posts/2013-08-19-capnproto-0.2.1.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_posts/2013-09-04-capnproto-0.3-python-tools-features.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_posts/2013-12-12-capnproto-0.4-time-travel.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_posts/2013-12-13-promise-pipelining-capnproto-vs-ice.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_posts/2014-03-11-capnproto-0.4.1-bugfixes.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_posts/2014-06-17-capnproto-flatbuffers-sbe.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_posts/2014-12-15-capnproto-0.5-generics-msvc-java-csharp.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_posts/2015-01-23-capnproto-0.5.1-bugfixes.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_posts/2015-03-02-security-advisory-and-integer-overflow-protection.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_posts/2015-03-05-another-cpu-amplification.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_posts/2017-05-01-capnproto-0.6-msvc-json-http-more.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_posts/2018-08-28-capnproto-0.7.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_posts/2020-04-23-capnproto-0.8.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_posts/2021-08-14-capnproto-0.9.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_posts/2022-06-03-capnproto-0.10.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_posts/2022-11-30-CVE-2022-46149-security-advisory.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/_posts/2023-07-28-capnproto-1.0.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/capnp-tool.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/cxx.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/cxxrpc.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/encoding.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/faq.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/go/capnp/index.html" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/index.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/install.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/javascripts/main.js" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/language.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/news/" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/news/index.html" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/otherlang.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/push-site.sh" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/roadmap.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/rpc.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/slides-2017.05.18/index.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/stylesheets/pygment_trac.css" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/doc/stylesheets/stylesheet.css" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/highlighting/emacs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/highlighting/emacs/capnp-mode.el" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/kjdoc/index.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/kjdoc/style-guide.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/kjdoc/tour.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/mega-test-kenton-home.cfg" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/mega-test-kenton-work.cfg" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/mega-test-quick.cfg" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/mega-test.py" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/release.sh" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/security-advisories/2015-03-02-0-c++-integer-overflow.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/security-advisories/2015-03-02-1-c++-integer-underflow.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/security-advisories/2015-03-02-2-all-cpu-amplification.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/security-advisories/2015-03-05-0-c++-addl-cpu-amplification.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/security-advisories/2017-04-17-0-apple-clang-elides-bounds-check.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/security-advisories/2022-11-30-0-pointer-list-bounds.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/security-advisories/README.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/style-guide.md" />
+    <Text Include="../../thirdparty/owemdjee/capnproto/super-test.sh" />
+    <Xml Include="../../thirdparty/owemdjee/capnproto/doc/feed.xml" />
+    <Xml Include="../../thirdparty/owemdjee/capnproto/highlighting/qtcreator/capnp.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

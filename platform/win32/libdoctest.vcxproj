@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libdoctest</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF9CA9CA}</ProjectGuid>
+    <RootNamespace>libdoctest</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCTEST;DOCTEST_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCTEST;DOCTEST_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCTEST;DOCTEST_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCTEST;DOCTEST_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCTEST;DOCTEST_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCTEST;DOCTEST_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCTEST;DOCTEST_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCTEST;DOCTEST_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCTEST;DOCTEST_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCTEST;DOCTEST_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCTEST;DOCTEST_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBDOCTEST;DOCTEST_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/doctest/parts/doctest.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/alternative_macros.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/assert_returns_disabled.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/assert_returns_disabled_evaluate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/assertion_macros.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/asserts_used_outside_of_tests.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/concurrency.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/coverage_maxout.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/decomposition.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/double_stringification.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/enums.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/logging.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/namespace1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/namespace2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/namespace3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/namespace4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/namespace5.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/namespace6.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/namespace7.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/namespace8.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/namespace9.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/no_failures.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/reporters_and_listeners.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/stringification.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/subcases.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/templated_test_cases.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_cases_and_suites.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/combining_the_same_tests_built_differently_in_multiple_shared_objects/default.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/combining_the_same_tests_built_differently_in_multiple_shared_objects/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/combining_the_same_tests_built_differently_in_multiple_shared_objects/return42.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/combining_the_same_tests_built_differently_in_multiple_shared_objects/test_runner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/exe_with_static_libs/lib_1_src1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/exe_with_static_libs/lib_1_src2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/exe_with_static_libs/lib_2_src.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/exe_with_static_libs/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/executable_dll_and_plugin/dll.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/executable_dll_and_plugin/implementation.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/executable_dll_and_plugin/implementation_2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/executable_dll_and_plugin/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/executable_dll_and_plugin/plugin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/installed_doctest_cmake/dll/dll.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/installed_doctest_cmake/dll/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/installed_doctest_cmake/executable/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/mpi/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/examples/mpi/mpi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/scripts/hello_world.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/scripts/how_stuff_works/how_exception_translators_work.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/scripts/how_stuff_works/how_subcases_work.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/scripts/how_stuff_works/testing_crash_scenarios.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/scripts/playground/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/doctest/scripts/playground/test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/doctest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/extensions/doctest_mpi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/extensions/doctest_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/extensions/mpi_reporter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/extensions/mpi_sub_comm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/doctest/doctest/parts/doctest_fwd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/doctest/examples/all_features/doctest_proxy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/doctest/examples/all_features/header.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/doctest/examples/combining_the_same_tests_built_differently_in_multiple_shared_objects/foo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/doctest/examples/installed_doctest_cmake/dll/dll.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/doctest/examples/installed_doctest_cmake/dll/exporting.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/doctest/scripts/development_only/doctest/doctest.h" />
+    <Image Include="../../thirdparty/owemdjee/doctest/scripts/data/benchmarks/asserts.png" />
+    <Image Include="../../thirdparty/owemdjee/doctest/scripts/data/benchmarks/header.png" />
+    <Image Include="../../thirdparty/owemdjee/doctest/scripts/data/benchmarks/implement.png" />
+    <Image Include="../../thirdparty/owemdjee/doctest/scripts/data/benchmarks/runtime_assert.png" />
+    <Image Include="../../thirdparty/owemdjee/doctest/scripts/data/benchmarks/runtime_info.png" />
+    <Image Include="../../thirdparty/owemdjee/doctest/scripts/data/cover.png" />
+    <Image Include="../../thirdparty/owemdjee/doctest/scripts/data/cover_888px_wide.png" />
+    <Image Include="../../thirdparty/owemdjee/doctest/scripts/data/initial_release_traffic.png" />
+    <Image Include="../../thirdparty/owemdjee/doctest/scripts/data/using_doctest_888px_wide.gif" />
+    <Image Include="../../thirdparty/owemdjee/doctest/scripts/data/youtube-cppcon-talk-thumbnail.png" />
+    <Text Include="../../thirdparty/owemdjee/doctest/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/doctest/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/doctest/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/README.md" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/assertions.html" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/benchmarks.html" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/build-systems.html" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/commandline.html" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/configuration.html" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/extensions.html" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/faq.html" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/features.html" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/logging.html" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/main.html" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/parameterized-tests.html" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/readme.html" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/reporters.html" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/strapdown.js/" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/strapdown.js/README.md" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/strapdown.js/index.html" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/strapdown.js/strapdown.css" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/strapdown.js/strapdown.js" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/strapdown.js/themes/bootstrap-responsive.min.css" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/strapdown.js/themes/bootstrap.min.css" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/strapdown.js/themes/cyborg.min.css" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/strapdown.js/themes/united.min.css" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/stringification.html" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/testcases.html" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/html_generated/tutorial.html" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/markdown/assertions.md" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/markdown/benchmarks.md" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/markdown/build-systems.md" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/markdown/commandline.md" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/markdown/configuration.md" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/markdown/extensions.md" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/markdown/faq.md" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/markdown/features.md" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/markdown/logging.md" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/markdown/main.md" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/markdown/parameterized-tests.md" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/markdown/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/markdown/reporters.md" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/markdown/stringification.md" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/markdown/testcases.md" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doc/markdown/tutorial.md" />
+    <Text Include="../../thirdparty/owemdjee/doctest/doctest/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/abort_after.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/abort_after_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/abort_after_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/all_binary.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/all_binary_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/all_binary_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/alternative_macros.cpp.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/alternative_macros.cpp_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/alternative_macros.cpp_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/assertion_macros.cpp.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/assertion_macros.cpp_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/assertion_macros.cpp_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/asserts_used_outside_of_tests.cpp.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/asserts_used_outside_of_tests.cpp_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/asserts_used_outside_of_tests.cpp_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/count.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/count_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/count_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/coverage_maxout.cpp.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/coverage_maxout.cpp_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/coverage_maxout.cpp_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/decomposition.cpp.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/decomposition.cpp_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/decomposition.cpp_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/disabled.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/disabled_but_evaluated.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/doctest_proxy.h.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/doctest_proxy.h_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/doctest_proxy.h_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/double_stringification.cpp.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/double_stringification.cpp_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/double_stringification.cpp_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/enums.cpp.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/enums.cpp_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/enums.cpp_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/filter_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/filter_1_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/filter_1_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/filter_2.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/filter_2_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/filter_2_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/filter_3.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/filter_3_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/filter_3_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/filter_4.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/filter_4_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/filter_4_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/first_last.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/first_last_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/first_last_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/header.h.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/header.h_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/header.h_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/help.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/help_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/help_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/list_reporters.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/list_reporters_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/list_reporters_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/list_test_cases.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/list_test_cases_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/list_test_cases_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/list_test_suites.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/list_test_suites_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/list_test_suites_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/logging.cpp.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/logging.cpp_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/logging.cpp_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/main.cpp.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/main.cpp_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/main.cpp_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/minimal.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/minimal_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/minimal_no_fail.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/minimal_no_fail_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/minimal_no_fail_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/minimal_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/no_multi_lane_atomics.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/no_multithreading.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/order_1.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/order_1_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/order_1_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/order_2.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/order_2_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/order_2_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/order_3.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/order_3_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/order_3_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/reporters_and_listeners.cpp.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/reporters_and_listeners.cpp_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/reporters_and_listeners.cpp_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/std_headers.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/stringification.cpp.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/stringification.cpp_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/stringification.cpp_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/subcases.cpp.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/subcases.cpp_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/subcases.cpp_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/templated_test_cases.cpp.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/templated_test_cases.cpp_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/templated_test_cases.cpp_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/test_cases_and_suites.cpp.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/test_cases_and_suites.cpp_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/test_cases_and_suites.cpp_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/version.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/version_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/all_features/test_output/version_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/combining_the_same_tests_built_differently_in_multiple_shared_objects/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/combining_the_same_tests_built_differently_in_multiple_shared_objects/test_output/same_tests_multiple_configurations.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/combining_the_same_tests_built_differently_in_multiple_shared_objects/test_output/same_tests_multiple_configurations_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/combining_the_same_tests_built_differently_in_multiple_shared_objects/test_output/same_tests_multiple_configurations_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/exe_with_static_libs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/exe_with_static_libs/doctest_force_link_static_lib_in_target.cmake" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/exe_with_static_libs/test_output/exe_with_static_libs.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/exe_with_static_libs/test_output/exe_with_static_libs_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/exe_with_static_libs/test_output/exe_with_static_libs_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/executable_dll_and_plugin/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/executable_dll_and_plugin/test_output/executable_dll_and_plugin.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/executable_dll_and_plugin/test_output/executable_dll_and_plugin_junit.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/executable_dll_and_plugin/test_output/executable_dll_and_plugin_xml.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/installed_doctest_cmake/dll/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/installed_doctest_cmake/executable/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/mpi/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/examples/range_based_execution.py" />
+    <Text Include="../../thirdparty/owemdjee/doctest/scripts/bench/bench.py" />
+    <Text Include="../../thirdparty/owemdjee/doctest/scripts/bench/run_all.py" />
+    <Text Include="../../thirdparty/owemdjee/doctest/scripts/bench/tests.json" />
+    <Text Include="../../thirdparty/owemdjee/doctest/scripts/cmake/Config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/doctest/scripts/cmake/assemble_single_header.cmake" />
+    <Text Include="../../thirdparty/owemdjee/doctest/scripts/cmake/common.cmake" />
+    <Text Include="../../thirdparty/owemdjee/doctest/scripts/cmake/doctest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/doctest/scripts/cmake/doctestAddTests.cmake" />
+    <Text Include="../../thirdparty/owemdjee/doctest/scripts/cmake/exec_test.cmake" />
+    <Text Include="../../thirdparty/owemdjee/doctest/scripts/data/article.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/scripts/data/article2.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/scripts/generate_html.py" />
+    <Text Include="../../thirdparty/owemdjee/doctest/scripts/how_stuff_works/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/scripts/playground/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/doctest/scripts/random_dev_notes.md" />
+    <Text Include="../../thirdparty/owemdjee/doctest/scripts/release_process.md" />
+    <Text Include="../../thirdparty/owemdjee/doctest/scripts/update_stuff.py" />
+    <Text Include="../../thirdparty/owemdjee/doctest/scripts/version.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

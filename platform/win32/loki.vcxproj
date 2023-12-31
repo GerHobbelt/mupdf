@@ -1,0 +1,1941 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{00811970-815B-4F64-BC9D-21907887D07E}</ProjectGuid>
+    <RootNamespace>loki</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LOKI;LOKI_STATICLIB;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LOKI;LOKI_STATICLIB;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LOKI;LOKI_STATICLIB;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LOKI;LOKI_STATICLIB;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="cryptlib.vcxproj">
+      <Project>{424334e5-addf-490d-ba7b-46cf3686b48d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libarchive.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff18377f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpp-terminal.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff2367fa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libhighway.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff021a57}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libnanosvg.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-751bff971987}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpthread-win32.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8df2c2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite_tools.vcxproj">
+      <Project>{6e890463-3eeb-4cce-b8bd-5aa89148c35a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="MuPDFLib_static.vcxproj">
+      <Project>{a60d8644-5815-4d29-8970-7518ff518d62}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbase58x.vcxproj">
+      <Project>{0501bedf-3191-46a9-9997-288466675b82}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libBLAKE3.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc1880387f83}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfmt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffaf3a53}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreetype.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-a58957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgumbo-parser.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-358957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libharfbuzz.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-258957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjbig2dec.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-958957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-turbo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblcms2.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-158957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuhelpers.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce88099485a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmujs.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-858957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-6222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbrotli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7760d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcrow.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff84e35}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcurl.vcxproj">
+      <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libextract.vcxproj">
+      <Project>{da38ca0b-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreeglut.vcxproj">
+      <Project>{a1b75d29-9f5c-4a0f-b368-322a10477d0c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgif.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffddd6be}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-xl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa838c1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libleptonica.vcxproj">
+      <Project>{ca0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblz4.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff50b44d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf_default_handlers.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-1222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuthreads.vcxproj">
+      <Project>{de21fa8a-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmutool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libopenjpeg.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-758957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpkcs7.vcxproj">
+      <Project>{22462382-b30d-42a5-bf07-ee1a35e25d21}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpng.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-658957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libqiqqatool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc18808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libQuickJS.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0e57ba}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libresources.vcxproj">
+      <Project>{52dcab29-c8ee-4422-954c-29afa6b33e22}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite-amalgamation.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3a7bc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsvgcharter.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7fcf79}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtesseract.vcxproj">
+      <Project>{ac0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtiff.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-558957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtinyexpr.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff33b1b5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libupskirt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff789ba9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libwebp.vcxproj">
+      <Project>{105f884a-c170-4c30-a810-c7da2103002f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libxml2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa57a44}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzlib.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzopfli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff03e6ca}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzstd.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="lib_nas_lockfile.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0a15c6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="png-pmt-tools-lib.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1147a4}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/cpu/cpu_gccgo_x86.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/gccgo_c.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/loki/vendor/github.com/envoyproxy/protoc-gen-validate/validate/validate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/loki/vendor/github.com/fluent/fluent-bit-go/output/flb_output.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/loki/vendor/github.com/fluent/fluent-bit-go/output/flb_plugin.h" />
+    <Font Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/bootstrap4-glyphicons/fonts/fontawesome/fa-brands-400.ttf" />
+    <Font Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/bootstrap4-glyphicons/fonts/fontawesome/fa-regular-400.ttf" />
+    <Font Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/bootstrap4-glyphicons/fonts/fontawesome/fa-solid-900.ttf" />
+    <Font Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/bootstrap4-glyphicons/fonts/glyphicons/glyphicons-halflings-regular.ttf" />
+    <Image Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/img/favicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/community/lids/scheduler-component-diagram.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/community/lids/scheduler-proposal-1-component-diagram.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/community/lids/scheduler-proposal-2-component-diagram.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/community/lids/scheduler-sequence-diagram.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/get-started/chunks_diagram.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/get-started/get-started-flog.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/get-started/grafana-query-builder.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/get-started/loki-install.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/get-started/loki-overview-2.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/get-started/microservices-mode.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/get-started/monolithic-mode.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/get-started/ring-overview.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/get-started/scalable-monolithic-mode.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/logo_and_name.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/operations/loki-canary/loki-canary-block.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/operations/query-fairness/hierarchical-queues.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/operations/shuffle-sharding/shuffle-sharding-probability.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/operations/storage/schema/schema.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/operations/storage/table-manager/table-manager-active-vs-inactive-tables.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/operations/storage/table-manager/table-manager-periodic-tables.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/operations/storage/table-manager/table-manager-retention.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/query/log_queries/query_components.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/cloud/ec2/promtail-ec2-discovery.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/cloud/ec2/promtail-ec2-logs.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/cloud/ecs/ecs-grafana.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/cloud/eks/namespace-grafana.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/cloud/gcp/gcp-logs-diagram.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/logrotation/logrotation-components.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/logrotation/logrotation-copy-and-truncate.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/logrotation/logrotation-rename-and-create.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/troubleshooting/inspect.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/operator/website/static/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-playground/locales/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-playground/universal-translator/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-playground/validator/v10/logo.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/vendor/github.com/grpc-ecosystem/go-grpc-middleware/slack.png" />
+    <Image Include="../../thirdparty/owemdjee/loki/vendor/github.com/morikuni/aec/sample.gif" />
+    <Image Include="../../thirdparty/owemdjee/loki/vendor/github.com/thanos-io/objstore/Thanos-logo_fullmedium.png" />
+    <NASM Include="../../thirdparty/owemdjee/loki/vendor/github.com/minio/sha256-simd/sha256blockAvx512_amd64.asm" />
+    <Text Include="../../thirdparty/owemdjee/loki/ADOPTERS.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/LICENSING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/MAINTAINERS.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/docker-driver/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/docker-driver/config.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/docker-driver/docker-compose.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/docker-driver/pipeline-example.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/fluent-bit/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/fluent-bit/fluent-bit.conf" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/fluentd/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/fluentd/docker/conf/loki.conf" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/fluentd/docker/docker-compose.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/fluentd/docker/fluent-bit.conf" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/fluentd/docker/fluentd.conf" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/logstash/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/logstash/loki-metadata.conf" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/logstash/loki-test.conf" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/logstash/loki.conf" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/promtail/Dockerfile.cross" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/promtail/promtail-cloudflare.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/promtail/promtail-docker-config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/promtail/promtail-gelf.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/promtail/promtail-journal.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/promtail/promtail-kafka-sasl-plain.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/promtail/promtail-kafka-sasl-scram.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/promtail/promtail-kafka-sasl-ssl.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/promtail/promtail-kafka-ssl.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/promtail/promtail-kafka.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/promtail/promtail-local-config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/promtail/promtail-local-limit-config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/promtail/promtail-local-pubsub-config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/cmd/promtail/promtail-windows.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/logentry/logql/expr.y" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/css/config.css" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/css/promtail.css" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/css/targets.css" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/js/config.js" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/js/targets.js" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/bootstrap-4.1.3/css/bootstrap-grid.css" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/bootstrap-4.1.3/css/bootstrap-grid.min.css" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/bootstrap-4.1.3/css/bootstrap-reboot.css" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/bootstrap-4.1.3/css/bootstrap-reboot.min.css" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/bootstrap-4.1.3/css/bootstrap.css" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/bootstrap-4.1.3/css/bootstrap.min.css" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/bootstrap-4.1.3/js/bootstrap.bundle.js" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/bootstrap-4.1.3/js/bootstrap.bundle.min.js" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/bootstrap-4.1.3/js/bootstrap.js" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/bootstrap-4.1.3/js/bootstrap.min.js" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/bootstrap3-typeahead/bootstrap3-typeahead.min.js" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/bootstrap4-glyphicons/css/bootstrap-glyphicons.css" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/bootstrap4-glyphicons/css/bootstrap-glyphicons.min.css" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/bootstrap4-glyphicons/maps/glyphicons-fontawesome.css" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/bootstrap4-glyphicons/maps/glyphicons-fontawesome.less" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/bootstrap4-glyphicons/maps/glyphicons-fontawesome.min.css" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/js/jquery-3.5.1.min.js" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/js/jquery.hotkeys.js" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/js/jquery.min.js" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/js/jquery.selection.js" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/static/vendor/js/popper.min.js" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/templates/_base.html" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/templates/config.html" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/templates/service-discovery.html" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/server/ui/templates/targets.html" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/targets/azureeventhubs/testdata/custom_message_and_logic_app_logs.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/targets/azureeventhubs/testdata/custom_payload_json.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/targets/azureeventhubs/testdata/custom_payload_json_with_records_array.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/targets/azureeventhubs/testdata/custom_payload_json_with_records_string.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/targets/azureeventhubs/testdata/custom_payload_text.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/targets/azureeventhubs/testdata/function_app_logs_message.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/targets/azureeventhubs/testdata/logic_app_logs_message.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/targets/azureeventhubs/testdata/message_with_invalid_time.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/clients/pkg/promtail/targets/windows/win_eventlog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/cmd/chunks-inspect/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/cmd/chunks-inspect/go.sum" />
+    <Text Include="../../thirdparty/owemdjee/loki/cmd/logql-analyzer/docker-compose.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/cmd/loki-canary/Dockerfile.cross" />
+    <Text Include="../../thirdparty/owemdjee/loki/cmd/loki/Dockerfile.cross" />
+    <Text Include="../../thirdparty/owemdjee/loki/cmd/loki/loki-docker-config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/cmd/loki/loki-local-config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/cmd/migrate/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/cmd/querytee/Dockerfile.cross" />
+    <Text Include="../../thirdparty/owemdjee/loki/codecov.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/debug/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/debug/docker-compose.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/alert/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/contributing.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/design-documents/2020-02-Promtail-Push-API.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/design-documents/2020-09-Write-Ahead-Log.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/design-documents/2021-01-Ordering-Constraint-Removal.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/design-documents/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/design-documents/labels.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/getting-in-touch.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/governance.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/lids/0001-Introduction.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/lids/0002-RemoteRuleEvaluation.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/lids/0003-QueryFairnessInScheduler.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/lids/0004-IndexGatewaySharding.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/lids/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/lids/scheduler-component-diagram.plantuml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/lids/scheduler-proposal-1-component-diagram.plantuml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/lids/scheduler-proposal-2-component-diagram.plantuml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/lids/scheduler-sequence-diagram.plantuml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/lids/template.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/maintaining/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/maintaining/release-loki-build-image.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/maintaining/release/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/maintaining/release/backport-commits.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/maintaining/release/concepts/version.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/maintaining/release/create-release-branch.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/maintaining/release/document-metrics-configurations-changes.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/maintaining/release/patch-go-version.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/maintaining/release/patch-vulnerabilities.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/maintaining/release/prepare-changelog.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/maintaining/release/prepare-release-notes.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/maintaining/release/prepare-upgrade-guide.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/maintaining/release/publish-release.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/maintaining/release/tag-release.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/community/maintaining/release/update-version-numbers.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/configure/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/configure/bp-configure.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/configure/examples/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/configure/examples/configuration-examples.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/configure/examples/query-frontend.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/configure/examples/yaml/1-Local-Configuration-Example.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/configure/examples/yaml/10-Expanded-S3-Snippet.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/configure/examples/yaml/11-COS-HMAC-Example.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/configure/examples/yaml/12-COS-APIKey-Example.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/configure/examples/yaml/13-COS-Trusted-Profile-Example.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/configure/examples/yaml/15-Memberlist-Ring-Snippet.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/configure/examples/yaml/16-(Deprecated)-Cassandra-Snippet.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/configure/examples/yaml/17-(Deprecated)-S3-And-DynamoDB-Snippet.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/configure/examples/yaml/2-S3-Cluster-Example.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/configure/examples/yaml/3-S3-Without-Credentials-Snippet.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/configure/examples/yaml/4-GCS-Example.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/configure/examples/yaml/5-BOS-Example.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/configure/examples/yaml/6-Compactor-Snippet.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/configure/examples/yaml/7-Schema-Migration-Snippet.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/configure/examples/yaml/8-alibaba-cloud-storage-Snippet.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/configure/examples/yaml/9-S3-With-SSE-KMS-Snippet.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/configure/examples/yaml/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/get-started/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/get-started/architecture.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/get-started/components.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/get-started/deployment-modes.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/get-started/hash-rings.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/get-started/labels/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/get-started/labels/bp-labels.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/get-started/labels/structured-metadata.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/get-started/overview.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/get-started/quick-start.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/authentication.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/automatic-stream-sharding.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/autoscaling_queriers.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/blocking-queries.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/caching.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/loki-canary/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/multi-tenancy.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/observability.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/overrides-exporter.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/query-fairness/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/recording-rules.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/request-validation-rate-limits.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/scalability.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/shuffle-sharding/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/storage/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/storage/boltdb-shipper.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/storage/filesystem.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/storage/legacy-storage.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/storage/logs-deletion.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/storage/retention.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/storage/schema/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/storage/table-manager/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/storage/tsdb.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/storage/wal.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/troubleshooting.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/operations/zone-ingesters.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/query/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/query/analyzer.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/query/analyzer/handlebars.js" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/query/analyzer/script.js" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/query/analyzer/style.css" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/query/ip.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/query/log_queries/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/query/logcli.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/query/metric_queries.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/query/query_examples.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/query/template_functions.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/reference/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/reference/api.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/release-notes/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/release-notes/cadence.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/release-notes/next.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/release-notes/v2-3.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/release-notes/v2-4.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/release-notes/v2-5.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/release-notes/v2-6.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/release-notes/v2-7.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/release-notes/v2-8.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/release-notes/v2-9.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/docker-driver/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/docker-driver/configuration.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/fluentbit/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/fluentd/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/k6/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/k6/log-generation.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/k6/query-scenario.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/k6/write-scenario.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/lambda-promtail/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/logstash/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/otel/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/cloud/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/cloud/ec2/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/cloud/ec2/promtail-ec2-final.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/cloud/ec2/promtail-ec2.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/cloud/ecs/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/cloud/ecs/ecs-role.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/cloud/ecs/ecs-task.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/cloud/eks/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/cloud/eks/eventrouter.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/cloud/eks/values.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/cloud/gcp/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/configuration.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/installation.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/logrotation/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/pipelines.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/scraping.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/cri.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/decolorize.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/docker.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/drop.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/eventlogmessage.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/geoip.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/json.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/labelallow.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/labeldrop.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/labels.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/limit.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/logfmt.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/match.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/metrics.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/multiline.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/output.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/pack.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/regex.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/replace.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/sampling.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/static_labels.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/structured_metadata.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/template.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/tenant.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/stages/timestamp.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/send-data/promtail/troubleshooting/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/setup/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/setup/install/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/setup/install/docker.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/setup/install/helm/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/setup/install/helm/concepts.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/setup/install/helm/configure-storage/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/setup/install/helm/install-monolithic/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/setup/install/helm/install-scalable/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/setup/install/helm/monitor-and-alert/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/setup/install/helm/monitor-and-alert/with-grafana-cloud.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/setup/install/helm/monitor-and-alert/with-local-monitoring.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/setup/install/helm/reference.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/setup/install/install-from-source.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/setup/install/istio.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/setup/install/local.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/setup/install/tanka.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/setup/migrate/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/setup/migrate/migrate-from-distributed/index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/setup/migrate/migrate-to-three-scalable-targets/index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/setup/migrate/migrate-to-tsdb/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/setup/size/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/setup/upgrade/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/setup/upgrade/upgrade-from-2x/index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/storage/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/docs/sources/visualize/grafana.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/examples/getting-started/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/examples/getting-started/docker-compose.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/examples/getting-started/loki-config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/examples/getting-started/promtail-local-config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/examples/promtail-heroku/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/examples/promtail-heroku/config.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/examples/promtail-heroku/heroku.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/flake.nix" />
+    <Text Include="../../thirdparty/owemdjee/loki/go.sum" />
+    <Text Include="../../thirdparty/owemdjee/loki/loki-build-image/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/loki-build-image/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/loki-build-image/version-updater.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/mkdocs.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/nix/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/nix/default.nix" />
+    <Text Include="../../thirdparty/owemdjee/loki/nix/packages/chart-releaser.nix" />
+    <Text Include="../../thirdparty/owemdjee/loki/nix/packages/faillint.nix" />
+    <Text Include="../../thirdparty/owemdjee/loki/nix/packages/loki.nix" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/ADOPTERS.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/Dockerfile.cross" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/_config.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/apis/loki/go.sum" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community-openshift/manifests/loki-operator-controller-manager-metrics-service_v1_service.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community-openshift/manifests/loki-operator-manager-config_v1_configmap.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community-openshift/manifests/loki-operator-metrics-monitor_monitoring.coreos.com_v1_servicemonitor.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community-openshift/manifests/loki-operator-metrics-reader_rbac.authorization.k8s.io_v1_clusterrole.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community-openshift/manifests/loki-operator-prometheus_rbac.authorization.k8s.io_v1_role.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community-openshift/manifests/loki-operator-prometheus_rbac.authorization.k8s.io_v1_rolebinding.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community-openshift/manifests/loki-operator-webhook-service_v1_service.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community-openshift/manifests/loki-operator.clusterserviceversion.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community-openshift/manifests/loki.grafana.com_alertingrules.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community-openshift/manifests/loki.grafana.com_lokistacks.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community-openshift/manifests/loki.grafana.com_recordingrules.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community-openshift/manifests/loki.grafana.com_rulerconfigs.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community-openshift/metadata/annotations.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community-openshift/tests/scorecard/config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community/manifests/loki-operator-controller-manager-metrics-service_v1_service.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community/manifests/loki-operator-manager-config_v1_configmap.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community/manifests/loki-operator-metrics-reader_rbac.authorization.k8s.io_v1_clusterrole.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community/manifests/loki-operator-prometheus_rbac.authorization.k8s.io_v1_role.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community/manifests/loki-operator-prometheus_rbac.authorization.k8s.io_v1_rolebinding.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community/manifests/loki-operator-webhook-service_v1_service.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community/manifests/loki-operator.clusterserviceversion.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community/manifests/loki.grafana.com_alertingrules.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community/manifests/loki.grafana.com_lokistacks.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community/manifests/loki.grafana.com_recordingrules.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community/manifests/loki.grafana.com_rulerconfigs.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community/metadata/annotations.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/community/tests/scorecard/config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/openshift/manifests/loki-operator-controller-manager-metrics-service_v1_service.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/openshift/manifests/loki-operator-manager-config_v1_configmap.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/openshift/manifests/loki-operator-metrics-monitor_monitoring.coreos.com_v1_servicemonitor.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/openshift/manifests/loki-operator-metrics-reader_rbac.authorization.k8s.io_v1_clusterrole.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/openshift/manifests/loki-operator-prometheus_rbac.authorization.k8s.io_v1_role.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/openshift/manifests/loki-operator-prometheus_rbac.authorization.k8s.io_v1_rolebinding.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/openshift/manifests/loki-operator-webhook-service_v1_service.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/openshift/manifests/loki-operator.clusterserviceversion.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/openshift/manifests/loki.grafana.com_alertingrules.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/openshift/manifests/loki.grafana.com_lokistacks.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/openshift/manifests/loki.grafana.com_recordingrules.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/openshift/manifests/loki.grafana.com_rulerconfigs.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/openshift/metadata/annotations.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/openshift/metadata/properties.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/bundle/openshift/tests/scorecard/config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/certmanager/certificate.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/certmanager/kustomization.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/certmanager/kustomizeconfig.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/crd/bases/config.grafana.com_projectconfigs.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/crd/bases/loki.grafana.com_alertingrules.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/crd/bases/loki.grafana.com_lokistacks.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/crd/bases/loki.grafana.com_recordingrules.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/crd/bases/loki.grafana.com_rulerconfigs.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/crd/kustomization.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/crd/kustomizeconfig.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/crd/patches/webhook_in_alertingrules.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/crd/patches/webhook_in_lokistacks.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/crd/patches/webhook_in_recordingrules.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/crd/patches/webhook_in_rulerconfigs.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/docs/config.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/docs/templates/members.tpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/docs/templates/pkg.tpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/docs/templates/type.tpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/manager/kustomization.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/manager/manager.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/manifests/community-openshift/bases/loki-operator.clusterserviceversion.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/manifests/community-openshift/kustomization.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/manifests/community/bases/loki-operator.clusterserviceversion.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/manifests/community/kustomization.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/manifests/openshift/bases/loki-operator.clusterserviceversion.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/manifests/openshift/kustomization.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/community-openshift/controller_manager_config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/community-openshift/kustomization.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/community-openshift/manager_related_image_patch.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/community-openshift/prometheus_service_monitor_patch.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/community/controller_manager_config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/community/kustomization.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/community/manager_auth_proxy_patch.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/community/manager_related_image_patch.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/community/manager_run_flags_patch.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/community/manager_webhook_patch.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/community/prometheus_service_monitor_patch.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/community/webhookcainjection_patch.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/development/controller_manager_config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/development/kustomization.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/development/manager_image_pull_policy_patch.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/development/manager_related_image_patch.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/development/manager_run_flags_patch.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/development/manager_security_context_patch.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/development/minio/deployment.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/development/minio/kustomization.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/development/minio/pvc.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/development/minio/secret.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/development/minio/service.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/openshift/auth_proxy_service_annotations_patch.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/openshift/controller_manager_config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/openshift/kustomization.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/openshift/manager_auth_proxy_patch.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/openshift/manager_related_image_patch.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/openshift/manager_run_flags_patch.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/openshift/manager_security_context_patch.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/openshift/manager_webhook_patch.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/openshift/prometheus_service_monitor_patch.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/openshift/size-calculator/cluster_monitoring_config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/openshift/size-calculator/kustomization.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/openshift/size-calculator/logfile_metric_daemonset.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/openshift/size-calculator/logfile_metric_role.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/openshift/size-calculator/logfile_metric_role_binding.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/openshift/size-calculator/logfile_metric_scc.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/openshift/size-calculator/logfile_metric_service.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/openshift/size-calculator/logfile_metric_service_account.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/openshift/size-calculator/logfile_metric_service_monitor.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/openshift/size-calculator/storage_size_calculator.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/openshift/size-calculator/storage_size_calculator_config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/overlays/openshift/size-calculator/user_workload_monitoring_config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/prometheus/kustomization.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/prometheus/monitor.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/rbac/alertingrule_editor_role.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/rbac/alertingrule_viewer_role.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/rbac/auth_proxy_client_clusterrole.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/rbac/auth_proxy_role.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/rbac/auth_proxy_role_binding.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/rbac/auth_proxy_service.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/rbac/kustomization.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/rbac/leader_election_role.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/rbac/leader_election_role_binding.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/rbac/lokistack_editor_role.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/rbac/lokistack_viewer_role.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/rbac/prometheus_role.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/rbac/prometheus_role_binding.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/rbac/recordingrule_editor_role.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/rbac/recordingrule_viewer_role.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/rbac/role.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/rbac/role_binding.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/rbac/rulerconfig_editor_role.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/rbac/rulerconfig_viewer_role.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/samples/kustomization.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/samples/loki_v1_alertingrule.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/samples/loki_v1_lokistack.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/samples/loki_v1_recordingrule.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/samples/loki_v1_rulerconfig.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/scorecard/bases/config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/scorecard/kustomization.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/scorecard/patches/basic.config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/scorecard/patches/olm.config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/webhook/kustomization.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/webhook/kustomizeconfig.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/webhook/manifests.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/config/webhook/service.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/docs/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/docs/enhancements/enhancement_template.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/docs/enhancements/retention_support.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/docs/enhancements/ruler_support.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/docs/enhancements/zone_aware_replication.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/docs/lokistack/object_storage.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/docs/lokistack/sop.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/docs/operator/api.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/docs/operator/compatibility.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/docs/operator/design.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/docs/operator/feature-gates.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/docs/operator/hack_loki_operator.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/docs/operator/hack_operator_make_run.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/docs/operator/storage_size_calculator.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/docs/prologue/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/docs/prologue/contributing.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/docs/prologue/introduction.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/docs/prologue/quickstart.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/docs/user-guides/forwarding_logs_to_gateway.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/docs/user-guides/forwarding_logs_without_gateway.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/docs/user-guides/howto_connect_grafana.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/docs/user-guides/recover_ingester_pods_in_zone_failure_outages.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/go.sum" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/addon_grafana_gateway_ocp.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/addon_grafana_gateway_ocp_oauth.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/addons_cert_manager.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/addons_dev.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/addons_hydra.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/addons_kind_certs.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/addons_logger.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/addons_ocp.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/addons_token_refresher.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/addons_traefik.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/boilerplate.go.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/deploy-aws-storage-secret.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/deploy-azure-storage-secret.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/deploy-gcp-storage-secret.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/deploy-prometheus-secret.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/kind_config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/large-rules-app.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/large-rules-infra.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/lokirules_invalid.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/lokirules_ocp.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/lokistack_dev.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/lokistack_gateway_dev.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/lokistack_gateway_ocp.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/lokistack_gateway_ocp_azure.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/lokistack_gateway_ocp_gcp.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/hack/operatorhub.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/internal/manifests/internal/alerts/prometheus-alerts.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/internal/manifests/internal/alerts/prometheus-rules.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/internal/manifests/internal/alerts/testdata/test.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/internal/manifests/internal/config/loki-config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/internal/manifests/internal/config/loki-runtime-config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/internal/manifests/internal/gateway/gateway-rbac.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/internal/manifests/internal/gateway/gateway-tenants.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/internal/manifests/openshift/internal/dashboards/static/grafana-dashboard-lokistack-chunks.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/internal/manifests/openshift/internal/dashboards/static/grafana-dashboard-lokistack-reads.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/internal/manifests/openshift/internal/dashboards/static/grafana-dashboard-lokistack-retention.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/internal/manifests/openshift/internal/dashboards/static/grafana-dashboard-lokistack-rules.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/internal/manifests/openshift/internal/dashboards/static/grafana-dashboard-lokistack-writes.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/jsonnet/jsonnetfile.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/jsonnet/jsonnetfile.lock.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/netlify.toml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/quickstart.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/website/archetypes/default.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/website/archetypes/docs.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/website/assets/js/clipboard.js" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/website/assets/js/index.js" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/website/assets/scss/_variables.scss" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/website/assets/scss/app.scss" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/website/config.toml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/website/config/_default/config.toml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/website/config/_default/menus.toml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/website/config/_default/params.toml" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/website/config/postcss.config.js" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/website/content/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/website/content/adopters.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/operator/website/layouts/index.html" />
+    <Text Include="../../thirdparty/owemdjee/loki/pkg/chunkenc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/pkg/logql/log/jsonexpr/jsonexpr.y" />
+    <Text Include="../../thirdparty/owemdjee/loki/pkg/logql/log/logfmt/logfmtexpr.y" />
+    <Text Include="../../thirdparty/owemdjee/loki/pkg/logql/log/pattern/expr.y" />
+    <Text Include="../../thirdparty/owemdjee/loki/pkg/logql/log/pattern/lexer.rl" />
+    <Text Include="../../thirdparty/owemdjee/loki/pkg/logql/sketch/testdata/monte_cristo.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/pkg/logql/sketch/testdata/shakspeare.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/pkg/logql/sketch/testdata/war_peace.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/pkg/logql/syntax/expr.y" />
+    <Text Include="../../thirdparty/owemdjee/loki/pkg/lokifrontend/frontend/v2/testdata/k173.bin" />
+    <Text Include="../../thirdparty/owemdjee/loki/pkg/push/go.sum" />
+    <Text Include="../../thirdparty/owemdjee/loki/pkg/scheduler/testdata/frontend_to_scheduler_k173.bin" />
+    <Text Include="../../thirdparty/owemdjee/loki/pkg/scheduler/testdata/scheduler_to_querier_k173.bin" />
+    <Text Include="../../thirdparty/owemdjee/loki/pkg/storage/bloom/v1/TODO.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/pkg/storage/chunk/client/cassandra/testdata/password-with-trailing-newline.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/pkg/storage/chunk/client/cassandra/testdata/password-without-trailing-newline.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/pkg/storage/stores/shipper/indexshipper/tsdb/testdata/20kseries.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/docker-compose.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/docker/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/docker/config/alertmanager.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/docker/config/datasources.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/docker/config/loki.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/docker/config/nginx.conf" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/docker/config/prometheus.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/docker/config/promtail.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/docker/docker-compose.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/docker/rules/docker/rules.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/cr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/ct.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/fluent-bit/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki-stack/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/Chart.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/README.md.gotmpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/ci/default-values.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/ci/enterprise.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/ci/ingress-values.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/docs/examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/docs/examples/enterprise/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/docs/examples/enterprise/enterprise-secrets.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/docs/examples/enterprise/overrides-enterprise-gcs.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/docs/examples/oss/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/docs/examples/oss/oss-secrets.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/docs/examples/oss/overrides-oss-gcs.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/reference.md.gotmpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/src/alerts.yaml.tpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/src/dashboards/loki-chunks.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/src/dashboards/loki-deletion.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/src/dashboards/loki-logs.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/src/dashboards/loki-mixin-recording-rules.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/src/dashboards/loki-operational.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/src/dashboards/loki-reads-resources.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/src/dashboards/loki-reads.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/src/dashboards/loki-retention.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/src/dashboards/loki-writes-resources.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/src/dashboards/loki-writes.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/src/helm-test/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/src/helm-test/default.nix" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/src/rules.yaml.tpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/NOTES.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/_helpers.tpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/backend/_helpers-backend.tpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/backend/clusterrole.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/backend/clusterrolebinding.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/backend/hpa.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/backend/poddisruptionbudget-backend.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/backend/query-scheduler-discovery.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/backend/service-backend-headless.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/backend/service-backend.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/backend/statefulset-backend.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/ciliumnetworkpolicy.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/extra-manifests.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/gateway/_helpers-gateway.tpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/gateway/configmap-gateway.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/gateway/deployment-gateway.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/gateway/hpa.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/gateway/ingress-gateway.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/gateway/poddisruptionbudget-gateway.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/gateway/secret-gateway.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/gateway/service-gateway.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/ingress.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/loki-canary/_helpers.tpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/loki-canary/daemonset.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/loki-canary/service.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/loki-canary/serviceaccount.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/monitoring/_helpers-monitoring.tpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/monitoring/dashboards/_helpers-dashboards.tpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/monitoring/dashboards/configmap-1.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/monitoring/dashboards/configmap-2.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/monitoring/grafana-agent.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/monitoring/logs-instance.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/monitoring/loki-alerts.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/monitoring/loki-rules.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/monitoring/metrics-instance.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/monitoring/pod-logs.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/monitoring/servicemonitor.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/networkpolicy.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/podsecuritypolicy.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/provisioner/_helpers.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/provisioner/job-provisioner.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/provisioner/role-provisioner.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/provisioner/rolebinding-provisioner.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/provisioner/serviceaccount-provisioner.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/read/_helpers-read.tpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/read/deployment-read.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/read/hpa.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/read/poddisruptionbudget-read.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/read/service-read-headless.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/read/service-read.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/read/statefulset-read.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/role.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/rolebinding.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/runtime-configmap.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/secret-license.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/securitycontextconstraints.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/service-memberlist.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/serviceaccount.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/single-binary/_helpers-single-binary.tpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/single-binary/hpa.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/single-binary/pdb.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/single-binary/service-headless.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/single-binary/service.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/single-binary/statefulset.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/table-manager/_helpers-table-manager.tpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/table-manager/deployment-table-manager.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/table-manager/service-table-manager.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/table-manager/servicemonitor-table-manager.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/tests/_helpers.tpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/tests/test-canary.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/tokengen/_helpers.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/tokengen/clusterrole-tokengen.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/tokengen/clusterrolebinding-tokengen.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/tokengen/job-tokengen.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/tokengen/serviceaccount-tokengen.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/validate.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/write/_helpers-write.tpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/write/hpa.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/write/poddisruptionbudget-write.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/write/service-write-headless.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/write/service-write.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/templates/write/statefulset-write.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/loki/values.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/helm/promtail/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/ksonnet/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/ksonnet/enterprise-logs/jsonnetfile.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/ksonnet/enterprise-logs/jsonnetfile.lock.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/ksonnet/enterprise-logs/test/jsonnetfile.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/ksonnet/enterprise-logs/test/jsonnetfile.lock.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/ksonnet/loki-canary/jsonnetfile.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/ksonnet/loki-simple-scalable/example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/ksonnet/loki/jsonnetfile.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/ksonnet/loki/jsonnetfile.lock.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/ksonnet/promtail/jsonnetfile.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled-ssd/alerts.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled-ssd/dashboards/loki-chunks.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled-ssd/dashboards/loki-deletion.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled-ssd/dashboards/loki-logs.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled-ssd/dashboards/loki-mixin-recording-rules.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled-ssd/dashboards/loki-operational.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled-ssd/dashboards/loki-reads-resources.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled-ssd/dashboards/loki-reads.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled-ssd/dashboards/loki-retention.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled-ssd/dashboards/loki-writes-resources.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled-ssd/dashboards/loki-writes.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled-ssd/rules.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled/alerts.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled/dashboards/loki-chunks.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled/dashboards/loki-deletion.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled/dashboards/loki-logs.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled/dashboards/loki-mixin-recording-rules.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled/dashboards/loki-operational.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled/dashboards/loki-reads-resources.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled/dashboards/loki-reads.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled/dashboards/loki-retention.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled/dashboards/loki-writes-resources.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled/dashboards/loki-writes.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin-compiled/rules.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin/dashboards/dashboard-loki-logs.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin/dashboards/dashboard-loki-operational.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin/dashboards/dashboard-recording-rules.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin/jsonnetfile.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/loki-mixin/jsonnetfile.lock.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/nomad/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/nomad/loki-distributed/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/nomad/loki-distributed/config.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/nomad/loki-distributed/job.nomad.hcl" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/nomad/loki-simple/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/nomad/loki-simple/config.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/nomad/loki-simple/job.nomad.hcl" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/nomad/loki/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/nomad/loki/config.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/nomad/loki/job.nomad.hcl" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/nomad/loki/rules/fake/alerts.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/promtail-mixin/jsonnetfile.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/production/promtail-mixin/jsonnetfile.lock.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/bigtable-backup/bigtable-backup.py" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/bigtable-backup/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/check-drone-drift.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/deprecated-config-checker/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/deprecated-config-checker/deleted-config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/deprecated-config-checker/deprecated-config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/deprecated-config-checker/test-fixtures/config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/deprecated-config-checker/test-fixtures/runtime-config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/dev.values.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/dev/k3d/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/dev/k3d/chartfile.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/dev/k3d/environments/helm-cluster/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/dev/k3d/environments/helm-cluster/spec.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/dev/k3d/environments/helm-cluster/values/enterprise-logs-cloud-monitoring.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/dev/k3d/environments/helm-cluster/values/enterprise-logs-ha-single-binary.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/dev/k3d/environments/helm-cluster/values/enterprise-logs.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/dev/k3d/environments/helm-cluster/values/kube-state-metrics.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/dev/k3d/environments/helm-cluster/values/loki-ha-single-binary.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/dev/k3d/environments/helm-cluster/values/loki.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/dev/k3d/jsonnetfile.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/dev/k3d/jsonnetfile.lock.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/dev/k3d/scripts/create_cluster.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/dev/loki-boltdb-storage-s3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/dev/loki-boltdb-storage-s3/compose-down.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/dev/loki-boltdb-storage-s3/compose-up.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/dev/loki-boltdb-storage-s3/config/datasource.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/dev/loki-boltdb-storage-s3/config/loki.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/dev/loki-boltdb-storage-s3/docker-compose.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/diff-config.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/diff-metrics.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/diff_coverage.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/doc-generator/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/gcplog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/go-version-bump.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/helm.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/increment_version.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/kafka/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/kafka/broker-list.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/kafka/plain/docker-compose.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/kafka/sasl-plain/conf/kafka.jaas.conf" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/kafka/sasl-plain/conf/zookeeper.jaas.conf" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/kafka/sasl-plain/docker-compose.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/kafka/sasl-scram/conf/kafka.jaas.conf" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/kafka/sasl-scram/conf/zookeeper.jaas.conf" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/kafka/sasl-scram/docker-compose.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/kafka/sasl-ssl/conf/kafka.jaas.conf" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/kafka/sasl-ssl/conf/zookeeper.jaas.conf" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/kafka/sasl-ssl/docker-compose.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/kafka/secrets/create-certs.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/kafka/ssl/docker-compose.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/lambda-promtail/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/lambda-promtail/go.sum" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/lambda-promtail/template-eventbridge.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/lambda-promtail/template.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/lambda-promtail/testdata/eventbridge-s3-event.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/lambda-promtail/testdata/kinesis-event.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/packaging/loki-postinstall.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/packaging/nfpm.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/packaging/promtail-postinstall.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/packaging/verify-deb-install.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/packaging/verify-rpm-install.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/promtail.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/release-note.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/release_prepare.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/release_update_tags.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/scrape_config.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/tsdb/tsdb-map/diff.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/tools/which-release.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/RELEASING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/bigtable/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/bigtable/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/compute/metadata/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/compute/metadata/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/debug.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/iam/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/iam/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/internal/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/internal/version/update_version.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/longrunning/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/longrunning/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/longrunning/autogen/gapic_metadata.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/migration.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/pubsub/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/pubsub/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/release-please-config-individual.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/release-please-config-yoshi-submodules.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/release-please-config.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/storage/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/storage/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/storage/emulator_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/storage/internal/apiv2/gapic_metadata.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/storage/storage.replay" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/cloud.google.com/go/testing.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/azure-sdk-for-go/sdk/azcore/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/azure-sdk-for-go/sdk/azcore/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/azure-sdk-for-go/sdk/azcore/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/azure-sdk-for-go/sdk/azcore/ci.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/azure-sdk-for-go/sdk/azidentity/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/azure-sdk-for-go/sdk/azidentity/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/azure-sdk-for-go/sdk/azidentity/MIGRATION.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/azure-sdk-for-go/sdk/azidentity/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/azure-sdk-for-go/sdk/azidentity/TROUBLESHOOTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/azure-sdk-for-go/sdk/azidentity/assets.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/azure-sdk-for-go/sdk/azidentity/ci.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/azure-sdk-for-go/sdk/internal/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/ci.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/internal/generated/autorest.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/migrationguide.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/test-resources.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/azure-storage-blob-go/azblob/blob.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/go-ansiterm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/go-autorest/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/go-autorest/Gopkg.toml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/go-autorest/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/go-autorest/autorest/adal/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/go-autorest/autorest/azure/auth/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Azure/go-autorest/azure-pipelines.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/AzureAD/microsoft-authentication-library-for-go/apps/errors/error_design.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/AzureAD/microsoft-authentication-library-for-go/apps/internal/base/internal/storage/test_serialized_cache.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/AzureAD/microsoft-authentication-library-for-go/apps/internal/json/design.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/DataDog/sketches-go/LICENSE-3rdparty.csv" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/DmitriyVTitov/size/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/IBM/ibm-cos-sdk-go/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/IBM/ibm-cos-sdk-go/NOTICE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Masterminds/goutils/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Masterminds/goutils/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Masterminds/goutils/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Masterminds/goutils/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Masterminds/semver/v3/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Masterminds/semver/v3/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Masterminds/semver/v3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Masterminds/sprig/v3/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Masterminds/sprig/v3/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Masterminds/sprig/v3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Microsoft/go-winio/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Microsoft/go-winio/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/NYTimes/gziphandler/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/NYTimes/gziphandler/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/NYTimes/gziphandler/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Shopify/sarama/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Shopify/sarama/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Shopify/sarama/dev.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Shopify/sarama/docker-compose.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/Shopify/sarama/entrypoint.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/alecthomas/template/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/alecthomas/units/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/alicebob/gopher-json/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/alicebob/miniredis/v2/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/alicebob/miniredis/v2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/alicebob/miniredis/v2/geohash/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/alicebob/miniredis/v2/hyperloglog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/alicebob/miniredis/v2/metro/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/armon/go-metrics/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/asaskevich/govalidator/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/asaskevich/govalidator/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/asaskevich/govalidator/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/asaskevich/govalidator/wercker.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/DESIGN.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/NOTICE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/buildspec.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/config/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/config/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/credentials/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/credentials/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/feature/ec2/imds/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/feature/ec2/imds/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/internal/configsources/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/internal/configsources/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/internal/endpoints/v2/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/internal/endpoints/v2/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/internal/ini/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/internal/ini/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/local-mod-replace.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/modman.toml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/service/internal/presigned-url/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/service/internal/presigned-url/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/service/sso/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/service/sso/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/service/sso/generated.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/service/sts/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/service/sts/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go-v2/service/sts/generated.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/aws-sdk-go/NOTICE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/smithy-go/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/smithy-go/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/smithy-go/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/smithy-go/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/aws/smithy-go/local-mod-replace.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/axiomhq/hyperloglog/Contributing.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/axiomhq/hyperloglog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/beorn7/perks/quantile/exampledata.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/bmatcuk/doublestar/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/buger/jsonparser/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/c2h5oh/datasize/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/cespare/xxhash/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/cespare/xxhash/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/cespare/xxhash/v2/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/cespare/xxhash/v2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/cespare/xxhash/v2/testall.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/cespare/xxhash/v2/xxhash_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/cespare/xxhash/v2/xxhash_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/cespare/xxhash/xxhash_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/containerd/fifo/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/cristalhq/hedgedhttp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/d4l3k/messagediff/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/d4l3k/messagediff/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/dennwc/varint/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/dgryski/go-metro/README" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/dgryski/go-metro/metro.py" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/dgryski/go-metro/metro_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/digitalocean/godo/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/digitalocean/godo/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/digitalocean/godo/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/digitalocean/godo/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/dimchansky/utfbom/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/docker/docker/api/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/docker/docker/api/swagger-gen.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/docker/docker/api/swagger.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/docker/docker/api/types/versions/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/docker/docker/client/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/docker/go-connections/sockets/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/docker/go-metrics/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/docker/go-metrics/LICENSE.docs" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/docker/go-metrics/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/docker/go-units/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/docker/go-units/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/docker/go-units/circle.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/drone/envsubst/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/dustin/go-humanize/README.markdown" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/eapache/go-resiliency/breaker/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/eapache/go-xerial-snappy/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/eapache/queue/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/edsrzf/mmap-go/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/emicklei/go-restful/v3/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/emicklei/go-restful/v3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/emicklei/go-restful/v3/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/emicklei/go-restful/v3/bench_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/emicklei/go-restful/v3/coverage.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/facette/natsort/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/fatih/color/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/fatih/color/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/felixge/fgprof/BenchmarkProfilerGoroutines.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/felixge/fgprof/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/felixge/fgprof/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/felixge/httpsnoop/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/felixge/httpsnoop/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/fsnotify/fsnotify/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/fsnotify/fsnotify/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/fsnotify/fsnotify/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/fsnotify/fsnotify/mkdoc.zsh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-kit/kit/log/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-kit/log/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-kit/log/staticcheck.conf" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-logfmt/logfmt/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-logfmt/logfmt/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-logr/logr/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-logr/logr/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-logr/logr/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-logr/stdr/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-openapi/analysis/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-openapi/analysis/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-openapi/analysis/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-openapi/errors/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-openapi/errors/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-openapi/jsonpointer/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-openapi/jsonpointer/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-openapi/jsonreference/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-openapi/jsonreference/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-openapi/loads/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-openapi/loads/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-openapi/spec/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-openapi/spec/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-openapi/spec/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-openapi/strfmt/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-openapi/strfmt/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-openapi/swag/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-openapi/swag/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-openapi/validate/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-openapi/validate/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-openapi/validate/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-openapi/validate/update-fixtures.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-playground/locales/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-playground/universal-translator/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-playground/validator/v10/MAINTAINERS.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-playground/validator/v10/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-redis/redis/v8/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-redis/redis/v8/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-redis/redis/v8/RELEASING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-redis/redis/v8/package.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-zookeeper/zk/CONTRIBUTION.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/go-zookeeper/zk/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/gocql/gocql/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/gocql/gocql/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/gocql/gocql/install_test_deps.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/gocql/gocql/integration.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/gofrs/flock/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/gofrs/flock/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/gogo/protobuf/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/gogo/status/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/golang-jwt/jwt/v4/MIGRATION_GUIDE.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/golang-jwt/jwt/v4/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/golang-jwt/jwt/v4/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/golang-jwt/jwt/v4/VERSION_HISTORY.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/golang-jwt/jwt/v4/staticcheck.conf" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/golang/protobuf/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/golang/snappy/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/golang/snappy/README" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/golang/snappy/decode_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/golang/snappy/decode_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/golang/snappy/encode_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/golang/snappy/encode_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/google/btree/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/google/gnostic-models/compiler/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/google/gnostic-models/extensions/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/google/gnostic-models/jsonschema/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/google/gnostic-models/jsonschema/schema.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/google/gnostic-models/openapiv2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/google/gnostic-models/openapiv2/openapi-2.0.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/google/gnostic-models/openapiv3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/google/pprof/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/google/renameio/v2/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/google/renameio/v2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/google/s2a-go/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/google/s2a-go/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/google/s2a-go/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/google/s2a-go/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/google/s2a-go/internal/v2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/google/uuid/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/google/uuid/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/google/uuid/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/google/uuid/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/googleapis/gax-go/v2/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/googleapis/gax-go/v2/apierror/internal/proto/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/googleapis/gax-go/v2/release-please-config.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/gophercloud/gophercloud/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/gophercloud/gophercloud/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/gophercloud/gophercloud/RELEASE.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/gorilla/mux/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/gorilla/websocket/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/grafana/cloudflare-go/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/grafana/cloudflare-go/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/grafana/dskit/httpgrpc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/grafana/dskit/kv/memberlist/status.gohtml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/grafana/dskit/ring/status.gohtml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/grafana/dskit/services/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/grafana/regexp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/grafana/regexp/syntax/make_perl_groups.pl" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/grafana/tail/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/grafana/tail/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/grafana/tail/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/grafana/tail/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/grpc-ecosystem/go-grpc-middleware/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/grpc-ecosystem/go-grpc-middleware/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/grpc-ecosystem/go-grpc-middleware/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/grpc-ecosystem/grpc-opentracing/go/otgrpc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/hailocab/go-hostpool/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/hashicorp/consul/api/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/hashicorp/errwrap/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/hashicorp/go-cleanhttp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/hashicorp/go-hclog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/hashicorp/go-immutable-radix/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/hashicorp/go-immutable-radix/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/hashicorp/go-msgpack/codec/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/hashicorp/go-msgpack/codec/msgpack_test.py" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/hashicorp/go-multierror/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/hashicorp/go-retryablehttp/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/hashicorp/go-retryablehttp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/hashicorp/go-rootcerts/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/hashicorp/go-sockaddr/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/hashicorp/go-uuid/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/hashicorp/golang-lru/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/hashicorp/memberlist/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/hashicorp/memberlist/tag.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/hashicorp/memberlist/todo.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/heroku/x/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/heroku/x/logplex/encoding/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/huandu/xstrings/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/huandu/xstrings/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/imdario/mergo/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/imdario/mergo/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/imdario/mergo/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/imdario/mergo/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/influxdata/go-syslog/v3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/influxdata/go-syslog/v3/common/common.rl" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/influxdata/go-syslog/v3/nontransparent/parser.go.rl" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/influxdata/go-syslog/v3/rfc5424/builder.go.rl" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/influxdata/go-syslog/v3/rfc5424/machine.go.rl" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/influxdata/tdigest/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/influxdata/telegraf/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/influxdata/telegraf/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/influxdata/telegraf/EXTERNAL_PLUGINS.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/influxdata/telegraf/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/influxdata/telegraf/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/influxdata/telegraf/build_version.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/influxdata/telegraf/docker-compose.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/influxdata/telegraf/plugins/inputs/EXAMPLE_README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/jcmturner/gofork/encoding/asn1/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/jcmturner/gokrb5/v8/gssapi/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/jmespath/go-jmespath/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/joncrlsn/dque/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/josharian/intern/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/josharian/intern/license.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/jpillora/backoff/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/json-iterator/go/Gopkg.toml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/json-iterator/go/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/json-iterator/go/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/json-iterator/go/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/julienschmidt/httprouter/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/compress/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/compress/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/compress/fse/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/compress/gen.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/compress/huff0/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/compress/huff0/decompress_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/compress/internal/cpuinfo/cpuinfo_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/compress/s2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/compress/s2/decode_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/compress/s2/decode_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/compress/s2/encodeblock_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/compress/s2sx.sum" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/compress/zstd/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/compress/zstd/fse_decoder_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/compress/zstd/internal/xxhash/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/compress/zstd/internal/xxhash/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/compress/zstd/internal/xxhash/xxhash_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/compress/zstd/internal/xxhash/xxhash_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/compress/zstd/matchlen_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/compress/zstd/seqdec_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/cpuid/v2/CONTRIBUTING.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/cpuid/v2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/cpuid/v2/cpuid_386.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/cpuid/v2/cpuid_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/cpuid/v2/cpuid_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/cpuid/v2/test-architectures.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/klauspost/pgzip/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/leodido/go-urn/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/leodido/go-urn/machine.go.rl" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/leodido/ragel-machinery/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/mattn/go-colorable/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/mattn/go-colorable/go.test.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/mattn/go-ieproxy/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/mattn/go-isatty/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/mattn/go-isatty/go.test.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/miekg/dns/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/miekg/dns/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/minio/md5-simd/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/minio/md5-simd/block16_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/minio/md5-simd/block8_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/minio/md5-simd/md5block_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/minio/minio-go/v7/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/minio/minio-go/v7/MAINTAINERS.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/minio/minio-go/v7/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/minio/minio-go/v7/code_of_conduct.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/minio/minio-go/v7/pkg/credentials/credentials.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/minio/sha256-simd/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/minio/sha256-simd/sha256blockAvx512_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/minio/sha256-simd/sha256block_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/minio/sha256-simd/sha256block_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/minio/sha256-simd/test-architectures.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/mitchellh/copystructure/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/mitchellh/go-homedir/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/mitchellh/go-wordwrap/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/mitchellh/go-wordwrap/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/mitchellh/mapstructure/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/mitchellh/mapstructure/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/mitchellh/reflectwalk/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/moby/term/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/modern-go/concurrent/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/modern-go/concurrent/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/modern-go/reflect2/Gopkg.toml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/modern-go/reflect2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/modern-go/reflect2/reflect2_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/modern-go/reflect2/relfect2_386.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/modern-go/reflect2/relfect2_amd64p32.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/modern-go/reflect2/relfect2_arm.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/modern-go/reflect2/relfect2_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/modern-go/reflect2/relfect2_mips64x.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/modern-go/reflect2/relfect2_mipsx.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/modern-go/reflect2/relfect2_ppc64x.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/modern-go/reflect2/relfect2_s390x.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/morikuni/aec/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/munnerz/goautoneg/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/mwitkow/go-conntrack/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/ncw/swift/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/ncw/swift/notes.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/ncw/swift/travis_realserver.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/oklog/run/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/oklog/ulid/AUTHORS.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/oklog/ulid/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/oklog/ulid/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/oklog/ulid/Gopkg.toml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/oklog/ulid/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/pkg/translator/prometheus/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/pkg/translator/prometheus/metadata.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/opencontainers/go-digest/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/opencontainers/go-digest/LICENSE.docs" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/opencontainers/go-digest/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/opentracing-contrib/go-grpc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/opentracing/opentracing-go/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/opentracing/opentracing-go/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/oschwald/geoip2-golang/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/oschwald/maxminddb-golang/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/pierrec/lz4/v4/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/pierrec/lz4/v4/internal/lz4block/decode_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/pierrec/lz4/v4/internal/lz4block/decode_arm.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/pierrec/lz4/v4/internal/lz4block/decode_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/pierrec/lz4/v4/internal/xxh32/xxh32zero_arm.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/pkg/browser/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/pkg/errors/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/pkg/errors/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/alertmanager/COPYRIGHT.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/client_golang/prometheus/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/common/internal/bitbucket.org/ww/goautoneg/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/exporter-toolkit/web/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/exporter-toolkit/web/landing_page.css" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/exporter-toolkit/web/landing_page.html" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/exporter-toolkit/web/web-config.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/procfs/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/procfs/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/procfs/MAINTAINERS.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/procfs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/procfs/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/prometheus/discovery/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/prometheus/model/textparse/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/prometheus/model/textparse/openmetricslex.l" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/prometheus/model/textparse/promlex.l" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/prometheus/model/textparse/promtestdata.nometa.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/prometheus/model/textparse/promtestdata.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/prometheus/prompb/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/prometheus/prompb/buf.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/prometheus/promql/parser/generated_parser.y" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/prometheus/promql/parser/prettier_rules.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/prometheus/storage/remote/azuread/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/prometheus/tsdb/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/prometheus/prometheus/tsdb/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/rcrowley/go-metrics/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/rcrowley/go-metrics/memory.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/rcrowley/go-metrics/validate.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/richardartoul/molecule/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/richardartoul/molecule/src/codec/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/rootless-containers/rootlesskit/pkg/api/openapi.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/rs/xid/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/sean-/seed/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/sercand/kuberesolver/v5/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/shopspring/decimal/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/shopspring/decimal/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/shurcooL/vfsgen/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/shurcooL/vfsgen/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/sirupsen/logrus/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/sirupsen/logrus/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/sirupsen/logrus/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/soheilhy/cmux/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/soheilhy/cmux/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/sony/gobreaker/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/spaolacci/murmur3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/spf13/afero/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/spf13/afero/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/spf13/afero/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/spf13/cast/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/spf13/pflag/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/stretchr/objx/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/stretchr/objx/Taskfile.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/stretchr/testify/assert/assertion_format.go.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/stretchr/testify/assert/assertion_forward.go.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/stretchr/testify/require/require.go.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/stretchr/testify/require/require_forward.go.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/thanos-io/objstore/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/thanos-io/objstore/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/tonistiigi/fifo/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/uber/jaeger-client-go/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/uber/jaeger-client-go/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/uber/jaeger-client-go/Gopkg.toml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/uber/jaeger-client-go/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/uber/jaeger-client-go/RELEASE.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/uber/jaeger-client-go/glide.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/uber/jaeger-client-go/rpcmetrics/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/uber/jaeger-client-go/thrift/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/ugorji/go/codec/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/ugorji/go/codec/fast-path.go.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/ugorji/go/codec/gen-dec-array.go.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/ugorji/go/codec/gen-dec-map.go.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/ugorji/go/codec/gen-enc-chan.go.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/ugorji/go/codec/gen-helper.go.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/ugorji/go/codec/helper.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/ugorji/go/codec/mammoth-test.go.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/ugorji/go/codec/mammoth2-test.go.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/ugorji/go/codec/sort-slice.go.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/ugorji/go/codec/test-cbor-goldens.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/ugorji/go/codec/test.py" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/willf/bitset/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/willf/bitset/azure-pipelines.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/willf/bitset/popcnt_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/willf/bloom/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/xdg-go/pbkdf2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/xdg-go/scram/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/xdg-go/scram/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/xdg-go/stringprep/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/xdg-go/stringprep/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/yuin/gopher-lua/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/github.com/yuin/gopher-lua/parse/parser.go.y" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.etcd.io/bbolt/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.etcd.io/etcd/client/v3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.opencensus.io/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.opencensus.io/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.opencensus.io/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.opentelemetry.io/collector/featuregate/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.opentelemetry.io/otel/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.opentelemetry.io/otel/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.opentelemetry.io/otel/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.opentelemetry.io/otel/RELEASING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.opentelemetry.io/otel/VERSIONING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.opentelemetry.io/otel/get_main_pkgs.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.opentelemetry.io/otel/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.opentelemetry.io/otel/semconv/v1.17.0/" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.opentelemetry.io/otel/verify_examples.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.opentelemetry.io/otel/versions.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.uber.org/atomic/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.uber.org/atomic/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.uber.org/atomic/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.uber.org/goleak/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.uber.org/goleak/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.uber.org/goleak/glide.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.uber.org/multierr/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.uber.org/multierr/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.uber.org/multierr/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.uber.org/zap/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.uber.org/zap/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.uber.org/zap/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.uber.org/zap/FAQ.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.uber.org/zap/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.uber.org/zap/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.uber.org/zap/checklicense.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go.uber.org/zap/glide.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/go4.org/netipx/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/crypto/argon2/blamka_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/crypto/blake2b/blake2bAVX2_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/crypto/blake2b/blake2b_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/crypto/chacha20/chacha_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/crypto/chacha20/chacha_ppc64le.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/crypto/chacha20/chacha_s390x.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/crypto/chacha20poly1305/chacha20poly1305_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/crypto/internal/poly1305/sum_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/crypto/internal/poly1305/sum_ppc64le.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/crypto/internal/poly1305/sum_s390x.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/crypto/sha3/keccakf_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/crypto/sha3/sha3_s390x.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/net/internal/socket/empty.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/net/internal/socket/sys_linux_386.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/net/internal/socket/sys_linux_s390x.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/net/internal/socket/sys_zos_s390x.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/oauth2/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/oauth2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/cpu/asm_aix_ppc64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/cpu/cpu_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/cpu/cpu_openbsd_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/cpu/cpu_s390x.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/cpu/cpu_x86.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/plan9/asm.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/plan9/asm_plan9_386.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/plan9/asm_plan9_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/plan9/asm_plan9_arm.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/plan9/mkall.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/plan9/mkerrors.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/plan9/mksysnum_plan9.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/asm_aix_ppc64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/asm_bsd_386.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/asm_bsd_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/asm_bsd_arm.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/asm_bsd_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/asm_bsd_ppc64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/asm_bsd_riscv64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/asm_linux_386.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/asm_linux_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/asm_linux_arm.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/asm_linux_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/asm_linux_loong64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/asm_linux_mips64x.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/asm_linux_mipsx.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/asm_linux_ppc64x.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/asm_linux_riscv64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/asm_linux_s390x.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/asm_openbsd_mips64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/asm_solaris_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/asm_zos_s390x.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/mkall.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/mkerrors.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/zsyscall_darwin_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/zsyscall_darwin_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/zsyscall_openbsd_386.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/zsyscall_openbsd_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/zsyscall_openbsd_arm.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/zsyscall_openbsd_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/zsyscall_openbsd_mips64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/zsyscall_openbsd_ppc64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/unix/zsyscall_openbsd_riscv64.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/windows/empty.s" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/windows/mkerrors.bash" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/sys/windows/mkknownfolderids.bash" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/term/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/term/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/term/codereview.cfg" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/xerrors/README" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/golang.org/x/xerrors/codereview.cfg" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/google.golang.org/api/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/google.golang.org/api/cloudresourcemanager/v1/cloudresourcemanager-api.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/google.golang.org/api/compute/v1/compute-api.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/google.golang.org/api/iamcredentials/v1/iamcredentials-api.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/google.golang.org/api/storage/v1/storage-api.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/google.golang.org/appengine/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/google.golang.org/appengine/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/google.golang.org/appengine/internal/regen.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/google.golang.org/appengine/travis_install.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/google.golang.org/appengine/travis_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/google.golang.org/grpc/CODE-OF-CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/google.golang.org/grpc/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/google.golang.org/grpc/GOVERNANCE.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/google.golang.org/grpc/MAINTAINERS.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/google.golang.org/grpc/NOTICE.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/google.golang.org/grpc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/google.golang.org/grpc/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/google.golang.org/grpc/codegen.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/google.golang.org/grpc/regenerate.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/google.golang.org/grpc/vet.sh" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/gopkg.in/" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/gopkg.in/alecthomas/kingpin.v2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/gopkg.in/alecthomas/kingpin.v2/values.json" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/gopkg.in/fsnotify/fsnotify.v1/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/gopkg.in/fsnotify/fsnotify.v1/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/gopkg.in/fsnotify/fsnotify.v1/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/gopkg.in/inf.v0/" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/gopkg.in/ini.v1/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/gopkg.in/ini.v1/codecov.yml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/gopkg.in/tomb.v1/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/gopkg.in/yaml.v2/LICENSE.libyaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/gopkg.in/yaml.v2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/gopkg.in/yaml.v3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/k8s.io/apimachinery/pkg/util/managedfields/endpoints.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/k8s.io/apimachinery/pkg/util/managedfields/node.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/k8s.io/apimachinery/pkg/util/managedfields/pod.yaml" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/k8s.io/klog/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/k8s.io/klog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/k8s.io/klog/RELEASE.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/k8s.io/klog/code-of-conduct.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/k8s.io/klog/v2/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/k8s.io/klog/v2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/k8s.io/klog/v2/RELEASE.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/k8s.io/klog/v2/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/k8s.io/klog/v2/code-of-conduct.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/k8s.io/klog/v2/internal/clock/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/k8s.io/utils/clock/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/k8s.io/utils/pointer/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/k8s.io/utils/trace/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/modules.txt" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/sigs.k8s.io/json/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/sigs.k8s.io/json/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/sigs.k8s.io/json/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/sigs.k8s.io/json/code-of-conduct.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/sigs.k8s.io/yaml/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/sigs.k8s.io/yaml/README.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/sigs.k8s.io/yaml/RELEASE.md" />
+    <Text Include="../../thirdparty/owemdjee/loki/vendor/sigs.k8s.io/yaml/code-of-conduct.md" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

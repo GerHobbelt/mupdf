@@ -1,0 +1,1208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libmosquitto</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF5F66DB}</ProjectGuid>
+    <RootNamespace>libmosquitto</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOSQUITTO;MOSQUITTO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOSQUITTO;MOSQUITTO_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOSQUITTO;MOSQUITTO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOSQUITTO;MOSQUITTO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOSQUITTO;MOSQUITTO_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOSQUITTO;MOSQUITTO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOSQUITTO;MOSQUITTO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOSQUITTO;MOSQUITTO_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOSQUITTO;MOSQUITTO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOSQUITTO;MOSQUITTO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOSQUITTO;MOSQUITTO_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBMOSQUITTO;MOSQUITTO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/apps/db_dump/db_dump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/apps/db_dump/print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/apps/db_dump/stubs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/apps/mosquitto_ctrl/client.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/apps/mosquitto_ctrl/dynsec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/apps/mosquitto_ctrl/dynsec_client.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/apps/mosquitto_ctrl/dynsec_group.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/apps/mosquitto_ctrl/dynsec_role.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/apps/mosquitto_ctrl/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/apps/mosquitto_ctrl/mosquitto_ctrl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/apps/mosquitto_ctrl/options.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/apps/mosquitto_passwd/get_password.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/apps/mosquitto_passwd/mosquitto_passwd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/client/client_props.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/client/client_shared.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/client/pub_client.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/client/pub_shared.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/client/rr_client.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/client/sub_client.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/client/sub_client_output.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/examples/mysql_log/mysql_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/examples/publish/basic-1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/examples/subscribe/basic-1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/examples/subscribe_simple/callback.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/examples/subscribe_simple/multiple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/examples/subscribe_simple/single.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/examples/temperature_conversion/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/examples/temperature_conversion/temperature_conversion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/actions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/alias_mosq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/callbacks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/connect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/cpp/mosquittopp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/handle_auth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/handle_connack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/handle_disconnect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/handle_ping.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/handle_pubackcomp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/handle_publish.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/handle_pubrec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/handle_pubrel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/handle_suback.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/handle_unsuback.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/helpers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/logging_mosq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/loop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/memory_mosq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/messages_mosq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/misc_mosq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/mosquitto.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/net_mosq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/net_mosq_ocsp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/options.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/packet_datatypes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/packet_mosq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/property_mosq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/read_handle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/send_connect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/send_disconnect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/send_mosq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/send_publish.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/send_subscribe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/send_unsubscribe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/socks_mosq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/srv_mosq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/strings_mosq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/thread_mosq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/time_mosq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/tls_mosq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/utf8_mosq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/util_mosq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/util_topic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/lib/will_mosq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/plugins/auth-by-ip/mosquitto_auth_by_ip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/plugins/deny-protocol-version/mosquitto_deny_protocol_version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/plugins/dynamic-security/acl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/plugins/dynamic-security/auth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/plugins/dynamic-security/clientlist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/plugins/dynamic-security/clients.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/plugins/dynamic-security/grouplist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/plugins/dynamic-security/groups.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/plugins/dynamic-security/json_help.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/plugins/dynamic-security/plugin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/plugins/dynamic-security/rolelist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/plugins/dynamic-security/roles.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/plugins/dynamic-security/sub_matches_sub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/plugins/message-timestamp/mosquitto_message_timestamp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/plugins/payload-modification/mosquitto_payload_modification.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/bridge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/bridge_topic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/conf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/conf_includedir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/context.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/control.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/database.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/handle_auth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/handle_connack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/handle_connect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/handle_disconnect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/handle_publish.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/handle_subscribe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/handle_unsubscribe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/keepalive.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/logging.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/loop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/memory_public.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/mosquitto.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/mux.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/mux_epoll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/mux_poll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/net.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/password_mosq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/persist_read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/persist_read_v234.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/persist_read_v5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/persist_write.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/persist_write_v5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/plugin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/plugin_debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/plugin_defer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/plugin_public.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/property_broker.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/read_handle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/retain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/security.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/security_default.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/send_auth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/send_connack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/send_suback.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/send_unsuback.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/service.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/session_expiry.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/signals.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/subs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/sys_tree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/topic_tok.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/websockets.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/will_delay.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/src/xtreport.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/broker/c/08-tls-psk-bridge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/broker/c/08-tls-psk-pub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/broker/c/auth_plugin_acl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/broker/c/auth_plugin_acl_change.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/broker/c/auth_plugin_acl_sub_denied.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/broker/c/auth_plugin_context_params.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/broker/c/auth_plugin_extended_multiple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/broker/c/auth_plugin_extended_reauth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/broker/c/auth_plugin_extended_single.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/broker/c/auth_plugin_extended_single2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/broker/c/auth_plugin_msg_params.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/broker/c/auth_plugin_publish.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/broker/c/auth_plugin_pwd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/broker/c/auth_plugin_v2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/broker/c/auth_plugin_v4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/broker/c/auth_plugin_v5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/broker/c/auth_plugin_v5_handle_message.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/broker/c/auth_plugin_v5_handle_tick.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/broker/c/plugin_control.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/01-con-discon-success.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/01-keepalive-pingreq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/01-no-clean-session.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/01-server-keepalive-pingreq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/01-unpwd-set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/01-will-set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/01-will-unpwd-set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/02-subscribe-qos0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/02-subscribe-qos1-async1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/02-subscribe-qos1-async2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/02-subscribe-qos1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/02-subscribe-qos2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/02-unsubscribe-multiple-v5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/02-unsubscribe-v5.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/02-unsubscribe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/03-publish-b2c-qos1-unexpected-puback.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/03-publish-b2c-qos1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/03-publish-b2c-qos2-len.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/03-publish-b2c-qos2-unexpected-pubcomp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/03-publish-b2c-qos2-unexpected-pubrel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/03-publish-b2c-qos2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/03-publish-c2b-qos1-disconnect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/03-publish-c2b-qos1-len.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/03-publish-c2b-qos1-receive-maximum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/03-publish-c2b-qos2-disconnect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/03-publish-c2b-qos2-len.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/03-publish-c2b-qos2-maximum-qos-0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/03-publish-c2b-qos2-maximum-qos-1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/03-publish-c2b-qos2-pubrec-error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/03-publish-c2b-qos2-receive-maximum-1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/03-publish-c2b-qos2-receive-maximum-2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/03-publish-c2b-qos2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/03-publish-qos0-no-payload.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/03-publish-qos0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/03-request-response-1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/03-request-response-2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/03-request-response-correlation-1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/04-retain-qos0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/08-ssl-bad-cacert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/08-ssl-connect-cert-auth-custom-ssl-ctx-default.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/08-ssl-connect-cert-auth-custom-ssl-ctx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/08-ssl-connect-cert-auth-enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/08-ssl-connect-cert-auth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/08-ssl-connect-no-auth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/08-ssl-fake-cacert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/09-util-topic-tokenise.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/11-prop-oversize-packet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/11-prop-recv-qos0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/11-prop-recv-qos1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/11-prop-recv-qos2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/11-prop-send-content-type.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/c/11-prop-send-payload-format.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/01-con-discon-success.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/01-keepalive-pingreq.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/01-no-clean-session.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/01-unpwd-set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/01-will-set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/01-will-unpwd-set.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/02-subscribe-qos0.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/02-subscribe-qos1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/02-subscribe-qos2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/02-unsubscribe.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/03-publish-b2c-qos1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/03-publish-b2c-qos2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/03-publish-c2b-qos1-disconnect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/03-publish-c2b-qos2-disconnect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/03-publish-c2b-qos2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/03-publish-qos0-no-payload.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/03-publish-qos0.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/04-retain-qos0.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/08-ssl-bad-cacert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/08-ssl-connect-cert-auth-enc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/08-ssl-connect-cert-auth.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/08-ssl-connect-no-auth.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/08-ssl-fake-cacert.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/lib/cpp/09-util-topic-tokenise.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/old/msgsps_pub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/old/msgsps_sub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/random/auth_plugin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/unit/bridge_topic_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/unit/datatype_read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/unit/datatype_write.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/unit/misc_trim_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/unit/persist_read_stubs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/unit/persist_read_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/unit/persist_write_stubs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/unit/persist_write_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/unit/property_add.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/unit/property_read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/unit/property_user_read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/unit/property_write.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/unit/publish_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/unit/stubs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/unit/subs_stubs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/unit/subs_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/unit/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/unit/tls_stubs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/unit/tls_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/unit/utf8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/mosquitto/test/unit/util_topic_test.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/apps/db_dump/db_dump.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/apps/mosquitto_ctrl/mosquitto_ctrl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/apps/mosquitto_passwd/get_password.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/client/client_shared.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/client/pub_shared.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/client/sub_client_output.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/deps/uthash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/deps/utlist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/examples/temperature_conversion/temperature_conversion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/include/mosquitto.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/include/mosquitto_broker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/include/mosquitto_plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/include/mqtt_protocol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/lib/alias_mosq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/lib/cpp/mosquittopp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/lib/dummypthread.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/lib/logging_mosq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/lib/memory_mosq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/lib/messages_mosq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/lib/misc_mosq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/lib/mosquitto_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/lib/net_mosq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/lib/packet_mosq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/lib/property_mosq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/lib/read_handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/lib/send_mosq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/lib/socks_mosq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/lib/time_mosq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/lib/tls_mosq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/lib/util_mosq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/lib/will_mosq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/plugins/dynamic-security/dynamic_security.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/plugins/dynamic-security/json_help.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/src/lib_load.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/src/mosquitto_broker_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/src/mux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/src/password_mosq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/src/persist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/src/sys_tree.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/test/broker/c/mosquitto_plugin_v2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/mosquitto/test/old/msgsps_common.h" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/logo/legacy/mosquitto-14x14.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/logo/legacy/mosquitto-16x16.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/logo/mosquitto.ico" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/misc/currentcost/gnome-panel/currentcost.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/android-chrome-192x192.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/android-chrome-512x512.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/apple-touch-icon.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/blog/uploads/2010/06/powermeter-example-150x150.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/blog/uploads/2010/06/powermeter-example-300x138.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/blog/uploads/2010/06/powermeter-example.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/blog/uploads/2011/08/image-150x150.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/blog/uploads/2011/08/image-300x225.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/blog/uploads/2011/08/image.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/blog/uploads/2012/08/IMAG0006-150x150.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/blog/uploads/2012/08/IMAG0006-300x199.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/blog/uploads/2012/08/IMAG0006.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/blog/uploads/2014/05/14098345978_c15d12f19a_z-150x150.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/blog/uploads/2014/05/14098345978_c15d12f19a_z-300x200.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/blog/uploads/2014/05/14098345978_c15d12f19a_z.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/blog/uploads/2016/05/stickers-150x150.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/blog/uploads/2016/05/stickers-300x225.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/blog/uploads/2016/05/stickers.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/blog/uploads/2017/03/img_20170308_155049248_33196894011_o-1024x576.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/blog/uploads/2017/03/img_20170308_155049248_33196894011_o-150x150.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/blog/uploads/2017/03/img_20170308_155049248_33196894011_o-300x169.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/blog/uploads/2017/03/img_20170308_155049248_33196894011_o-768x432.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/blog/uploads/2017/03/img_20170308_155049248_33196894011_o.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/favicon-16x16.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/favicon-32x32.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/favicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/images/eclipse_logo_colour.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/images/github-icon.jpg" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/images/iot-logo.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/images/mosquitto-logo-47.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/images/mosquitto-logo.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/images/mosquitto-text-side-28.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/images/mosquitto-text-side.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/mstile-144x144.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/mstile-150x150.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/mstile-310x150.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/mstile-310x310.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/mstile-70x70.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/stickers/mosquitto-colour-deselected.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/stickers/mosquitto-colour.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/stickers/mosquitto-mono-deselected.png" />
+    <Image Include="../../thirdparty/owemdjee/mosquitto/www/files/stickers/mosquitto-mono.png" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/ChangeLog.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/NOTICE.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/README-compiling.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/README-letsencrypt.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/README-tests.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/README-windows.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/THANKS.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/about.html" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/apps/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/apps/mosquitto_ctrl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/apps/mosquitto_passwd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/buildtest.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/client/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/client/args.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/cmake/FindcJSON.cmake" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/doc/historical/old-regex.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/doc/historical/topic-match.kds" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/doc/joss-paper/codemeta.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/doc/joss-paper/paper.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/1.5-openssl/" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/1.5-openssl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/1.5-openssl/docker-entrypoint.sh" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/1.5/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/1.5/docker-entrypoint.sh" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/1.6-openssl/" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/1.6-openssl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/1.6-openssl/docker-entrypoint.sh" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/1.6/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/1.6/docker-entrypoint.sh" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/2.0-openssl/" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/2.0-openssl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/2.0-openssl/docker-entrypoint.sh" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/2.0-openssl/mosquitto-no-auth.conf" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/2.0/" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/2.0/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/2.0/docker-entrypoint.sh" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/2.0/mosquitto-no-auth.conf" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/generic/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/generic/docker-entrypoint.sh" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/generic/mosquitto-no-auth.conf" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/local/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/docker/local/docker-entrypoint.sh" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/examples/temperature_conversion/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/installer/mosquitto.nsi" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/installer/mosquitto64.nsi" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/lib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/lib/cpp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/libmosquitto.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/libmosquittopp.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/man/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/man/html.xsl" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/man/manpage.xsl" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/misc/currentcost/cc128_log_mysql.pl" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/misc/currentcost/cc128_parse.pl" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/misc/currentcost/cc128_read.pl" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/misc/currentcost/cc128_read.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/misc/currentcost/gnome-panel/CurrentCostMQTT.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/misc/letsencrypt/mosquitto-copy.sh" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/mosquitto.conf" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/plugins/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/plugins/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/plugins/auth-by-ip/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/plugins/deny-protocol-version/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/plugins/deny-protocol-version/test.conf" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/plugins/deny-protocol-version/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/plugins/dynamic-security/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/plugins/dynamic-security/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/plugins/message-timestamp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/plugins/payload-modification/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/service/systemd/README" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/service/systemd/mosquitto.service.notify" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/service/upstart/mosquitto.conf" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/set-version.sh" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/snap/local/default_config.conf" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/snap/local/launcher.sh" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/snap/snapcraft.yaml" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/src/linker-macosx.syms" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/src/linker.syms" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/01-bad-initial-packets.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/01-connect-575314.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/01-connect-allow-anonymous.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/01-connect-disconnect-v5.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/01-connect-max-connections.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/01-connect-max-keepalive.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/01-connect-take-over.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/01-connect-uname-no-password-denied.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/01-connect-uname-or-anon.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/01-connect-uname-password-denied-no-will.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/01-connect-uname-password-denied.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/01-connect-uname-password-success-no-tls.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/01-connect-windows-line-endings.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/01-connect-zero-length-id.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-shared-qos0-v5.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subhier-crash.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subpub-qos0-long-topic.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subpub-qos0-oversize-payload.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subpub-qos0-queued-bytes.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subpub-qos0-retain-as-publish.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subpub-qos0-send-retain.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subpub-qos0-subscription-id.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subpub-qos0-topic-alias-unknown.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subpub-qos0-topic-alias.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subpub-qos1-message-expiry-retain.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subpub-qos1-message-expiry-will.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subpub-qos1-message-expiry.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subpub-qos1-nolocal.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subpub-qos1-oversize-payload.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subpub-qos1.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subpub-qos2-1322.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subpub-qos2-max-inflight-bytes.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subpub-qos2-pubrec-error.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subpub-qos2-receive-maximum-1.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subpub-qos2-receive-maximum-2.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subpub-qos2-receive-maximum-helper.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subpub-qos2.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subpub-recover-subscriptions.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subscribe-dollar-v5.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subscribe-invalid-utf8.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subscribe-long-topic.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/02-subscribe-persistence-flipflop.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/03-pattern-matching.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/03-publish-b2c-disconnect-qos1.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/03-publish-b2c-disconnect-qos2.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/03-publish-b2c-qos1-len.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/03-publish-b2c-qos2-len.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/03-publish-c2b-disconnect-qos2.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/03-publish-c2b-qos2-len.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/03-publish-dollar-v5.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/03-publish-dollar.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/03-publish-invalid-utf8.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/03-publish-long-topic.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/03-publish-qos1-max-inflight-expire.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/03-publish-qos1-max-inflight.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/03-publish-qos1-no-subscribers-v5.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/03-publish-qos1-queued-bytes.conf" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/03-publish-qos1-queued-bytes.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/03-publish-qos1-retain-disabled.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/03-publish-qos1.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/03-publish-qos2-dup.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/03-publish-qos2-max-inflight.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/03-publish-qos2.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/04-retain-check-source-persist-diff-port.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/04-retain-check-source-persist.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/04-retain-check-source.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/04-retain-clear-multiple.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/04-retain-qos0-clear.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/04-retain-qos0-fresh.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/04-retain-qos0-repeated.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/04-retain-qos0.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/04-retain-qos1-qos0.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/04-retain-upgrade-outgoing-qos.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/05-clean-session-qos1.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/05-session-expiry-v5.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/06-bridge-b2br-disconnect-qos1.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/06-bridge-b2br-disconnect-qos2.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/06-bridge-b2br-late-connection-retain.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/06-bridge-b2br-late-connection.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/06-bridge-b2br-remapping.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/06-bridge-br2b-disconnect-qos1.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/06-bridge-br2b-disconnect-qos2.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/06-bridge-br2b-remapping.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/06-bridge-clean-session-core.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/06-bridge-clean-session-csF-lcsF.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/06-bridge-clean-session-csF-lcsN.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/06-bridge-clean-session-csF-lcsT.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/06-bridge-clean-session-csT-lcsF.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/06-bridge-clean-session-csT-lcsN.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/06-bridge-clean-session-csT-lcsT.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/06-bridge-fail-persist-resend-qos1.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/06-bridge-fail-persist-resend-qos2.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/06-bridge-no-local.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/06-bridge-outgoing-retain.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/06-bridge-per-listener-settings.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/06-bridge-reconnect-local-out.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/07-will-control.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/07-will-delay-invalid-573191.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/07-will-delay-reconnect.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/07-will-delay-recover.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/07-will-delay-session-expiry.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/07-will-delay-session-expiry2.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/07-will-delay.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/07-will-disconnect-with-will.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/07-will-invalid-utf8.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/07-will-no-flag.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/07-will-null-topic.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/07-will-null.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/07-will-oversize-payload.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/07-will-per-listener.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/07-will-properties.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/07-will-qos0.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/07-will-reconnect-1273.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/07-will-takeover.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/08-ssl-bridge-helper.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/08-ssl-bridge.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/08-ssl-connect-cert-auth-crl.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/08-ssl-connect-cert-auth-expired.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/08-ssl-connect-cert-auth-revoked.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/08-ssl-connect-cert-auth-without.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/08-ssl-connect-cert-auth.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/08-ssl-connect-identity.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/08-ssl-connect-no-auth-wrong-ca.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/08-ssl-connect-no-auth.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/08-ssl-connect-no-identity.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/08-ssl-hup-disconnect.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/08-tls-psk-bridge.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/08-tls-psk-pub.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-acl-access-variants.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-acl-change.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-acl-empty-file.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-auth-bad-method.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-extended-auth-change-username.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-extended-auth-multistep-reauth.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-extended-auth-multistep.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-extended-auth-reauth.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-extended-auth-single.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-extended-auth-single2.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-plugin-acl-change.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-plugin-auth-acl-pub.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-plugin-auth-acl-sub-denied.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-plugin-auth-acl-sub.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-plugin-auth-context-params.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-plugin-auth-defer-unpwd-fail.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-plugin-auth-defer-unpwd-success.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-plugin-auth-msg-params.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-plugin-auth-unpwd-fail.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-plugin-auth-unpwd-success.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-plugin-auth-v2-unpwd-fail.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-plugin-auth-v2-unpwd-success.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-plugin-publish.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-plugin-tick.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/09-pwfile-parse-invalid.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/10-listener-mount-point.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/11-message-expiry.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/11-persistent-subscription-no-local.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/11-persistent-subscription-v5.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/11-persistent-subscription.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/11-pub-props.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/11-subscription-id.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/12-prop-assigned-client-identifier.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/12-prop-maximum-packet-size-broker.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/12-prop-maximum-packet-size-publish-qos1.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/12-prop-maximum-packet-size-publish-qos2.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/12-prop-response-topic-correlation-data.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/12-prop-response-topic.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/12-prop-server-keepalive.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/12-prop-subpub-content-type.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/12-prop-subpub-payload-format.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/13-malformed-publish-v5.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/13-malformed-subscribe-v5.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/13-malformed-unsubscribe-v5.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/14-dynsec-acl.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/14-dynsec-anon-group.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/14-dynsec-auth.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/14-dynsec-client-invalid.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/14-dynsec-client.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/14-dynsec-default-access.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/14-dynsec-disable-client.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/14-dynsec-group-invalid.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/14-dynsec-group.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/14-dynsec-modify-client.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/14-dynsec-modify-group.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/14-dynsec-modify-role.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/14-dynsec-plugin-invalid.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/14-dynsec-role-invalid.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/14-dynsec-role.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/data/AUTH.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/data/CONNACK.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/data/CONNECT.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/data/DISCONNECT.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/data/FLOW.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/data/FORBIDDEN.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/data/PINGREQ.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/data/PINGRESP.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/data/PUBACK.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/data/PUBCOMP.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/data/PUBLISH.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/data/PUBREC.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/data/PUBREL.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/data/REGRESSION.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/data/SUBACK.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/data/SUBSCRIBE.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/data/UNSUBACK.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/data/UNSUBSCRIBE.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/data/ZZ-broker-check.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/dynamic-security-init.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/mosq_test_helper.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/msg_sequence_test.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/prop_subpub_helper.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/broker/test.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/client/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/01-con-discon-success.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/01-keepalive-pingreq.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/01-no-clean-session.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/01-server-keepalive-pingreq.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/01-unpwd-set.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/01-will-set.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/01-will-unpwd-set.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/02-subscribe-qos0.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/02-subscribe-qos1.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/02-subscribe-qos2.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/02-unsubscribe-multiple-v5.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/02-unsubscribe-v5.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/02-unsubscribe.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/03-publish-b2c-qos1-unexpected-puback.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/03-publish-b2c-qos1.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/03-publish-b2c-qos2-len.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/03-publish-b2c-qos2-unexpected-pubcomp.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/03-publish-b2c-qos2-unexpected-pubrel.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/03-publish-b2c-qos2.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/03-publish-c2b-qos1-disconnect.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/03-publish-c2b-qos1-len.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/03-publish-c2b-qos1-receive-maximum.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/03-publish-c2b-qos1-timeout.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/03-publish-c2b-qos2-disconnect.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/03-publish-c2b-qos2-len.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/03-publish-c2b-qos2-maximum-qos-0.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/03-publish-c2b-qos2-maximum-qos-1.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/03-publish-c2b-qos2-pubrec-error.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/03-publish-c2b-qos2-receive-maximum-1.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/03-publish-c2b-qos2-receive-maximum-2.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/03-publish-c2b-qos2-timeout.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/03-publish-c2b-qos2.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/03-publish-qos0-no-payload.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/03-publish-qos0.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/03-request-response-correlation.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/03-request-response.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/04-retain-qos0.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/08-ssl-bad-cacert.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/08-ssl-connect-cert-auth-enc.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/08-ssl-connect-cert-auth.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/08-ssl-connect-no-auth.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/08-ssl-fake-cacert.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/09-util-topic-tokenise.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/11-prop-oversize-packet.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/11-prop-recv-qos0.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/11-prop-recv-qos1.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/11-prop-recv-qos2.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/11-prop-send-content-type.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/11-prop-send-payload-format.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/mosq_test_helper.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/lib/test.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/mosq_test.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/mqtt5_opts.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/mqtt5_props.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/mqtt5_rc.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/ptest.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/random/random.conf" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/random/random_client.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/random/test.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/ssl/client-encrypted.key" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/ssl/client-expired.key" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/ssl/client-revoked.key" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/ssl/client.key" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/ssl/gen.sh" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/ssl/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/ssl/rootCA/index.txt.attr" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/ssl/server-expired.key" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/ssl/server.key" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/ssl/signingCA/index.txt.attr" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/ssl/test-alt-ca.key" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/ssl/test-bad-root-ca.key" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/ssl/test-fake-root-ca.key" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/ssl/test-root-ca.key" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/test/ssl/test-signing-ca.key" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/travis-configure.sh" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/travis-install.sh" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/README.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/files/manifest.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/files/stickers/index.html" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/pages/documentation.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/pages/documentation/authentication-methods.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/pages/documentation/dynamic-security.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/pages/documentation/migrating-to-2-0.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/pages/documentation/using-the-snap.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/pages/download.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/pages/index.html" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/pages/roadmap.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/pages/security.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/plugins/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/plugins/docbookmanpage/docbookmanpage.plugin" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/plugins/docbookmanpage/docbookmanpage.py" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/plugins/docbookmanpage/html.xsl" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2009/12/version-0-2-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2009/12/version-0-3-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/01/mailing-list-irc.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/01/version-0-4-1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/01/version-0-4-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/02/version-0-4-2-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/03/google-powermeter.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/03/upgrading-to-0-5-1.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/03/version-0-5-1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/03/version-0-5-2-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/03/version-0-5-3-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/03/version-0-5-4-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/04/help-wanted-rpm-packaging.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/04/mind-control-mqtt.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/04/oggcamp.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/05/fedora-packages-available.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/05/gentoo-ebuilds-available.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/05/mosquitto-org.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/05/mqtt-push-on-android.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/05/mqtt-wiki.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/05/version-0-6-1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/05/version-0-6-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/06/automation-has-the-oven-warmed-up-yet.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/06/google-powermeter-step-by-step.attachments.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/06/google-powermeter-step-by-step.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/06/mosquitto-0-7rc1.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/06/version-0-7-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/07/mosquitto-on-opensuse-11-3.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/07/mqtt-client-library.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/08/compiling-mosquitto-on-mac-os-x.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/08/mosquitto-running-on-mac-os-x.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/08/mqtt-v3-1.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/08/version-0-8-1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/08/version-0-8-2.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/08/version-0-8-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/09/debian-packages.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/09/mqtt-with-php.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/10/man-page-translations.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/10/one-year-old.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/10/version-0-8-3-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/11/distro-packaging.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/11/mosquitto-0-9test2.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/11/version-0-9-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2010/12/version-0-9-1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/01/mosquitto-for-slackware.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/01/mqtt-news.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/02/lightweight-messaging-and-linux.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/02/mosquitto-on-maemo.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/02/mqtt-on-android.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/02/version-0-9-2-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/03/api-documentation.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/03/mosquitto-in-mac-homebrew.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/03/version-0-9-3-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/04/version-0-10-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/05/mqtt-ontology.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/05/version-0-10-1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/06/nanode-a-cheap-networked-arduino-clone.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/06/version-0-10-2-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/06/version-0-11-1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/06/version-0-11-2-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/06/version-0-11-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/07/debian-and-ubuntu-packaging.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/07/lua-mqtt-client.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/07/mosquitto-on-qnx.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/07/version-0-11-3-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/07/version-0-12-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/07/wireshark-mqtt-decoder.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/08/arch-linux-package.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/08/facebook-using-mqtt.attachments.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/08/facebook-using-mqtt.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/08/mosquitto-on-openwrt.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/08/mqtt-standardisation.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/09/version-0-13-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/10/mqtt-power-usage-on-android.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/10/two.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/11/android-mqtt-example-project.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/11/ibm-java-and-c-clients-to-be-open-source.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/11/new-linux-repositories.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/11/version-0-14-1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/11/version-0-14-2-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/11/version-0-14-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/12/mqtt-on-nanode.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2011/12/version-0-14-3-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/01/challenge-web-based-mqtt-graphing.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/01/do-you-use-mqtt.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/01/mosquitto-test-server.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/01/version-0-14-4-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/02/mqtt2pachube.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/02/version-0-15-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/03/quick-start-guide-for-mqtt-with-pachube.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/03/upcoming-incompatible-library-changes.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/05/python-client-module-available-for-testing.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/06/ipv6-on-test-server.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/06/ssl-support-on-test-server.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/07/upcoming-release.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/08/baby.attachments.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/08/baby.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/08/bugfix-coming-soon.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/08/version-1-0-1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/08/version-1-0-2-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/08/version-1-0-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/09/updating-password-files.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/09/version-1-0-3-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/10/version-1-0-4-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/11/making-mosquitto-packages-for-debian-yourself.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/11/version-1-0-5-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/12/libmosquitto-go-bindings.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2012/12/version-1-1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2013/01/mosquitto-debian-repository.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2013/01/version-1-1-1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2013/01/version-1-1-2-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2013/02/mqtt-standardisation-oasis-call-for-participation.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2013/02/version-1-1-3-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2013/04/some-interesting-mqtt-things.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2013/05/mosquitto-javascript-client-deprecated.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2013/07/authentication-plugins.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2013/07/version-1-2-near-complete.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2013/08/mosquitto-on-fedora.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2013/08/mqtt-watchdir.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2013/08/version-1-2-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2013/09/version-1-2-1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2013/10/version-1-2-2-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2013/12/paho-mqtt-python-client.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2013/12/version-1-2-3-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2014/03/version-1-3-1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2014/03/version-1-3-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2014/05/new-arrival.attachments.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2014/05/new-arrival.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2014/07/version-1-3-2-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2014/08/version-1-3-3-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2014/08/version-1-3-4-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2014/10/mosquitto-and-poodle.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2014/10/unintended-change-of-behaviour-in-1-3-4.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2014/10/version-1-3-5-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2015/01/seeking-sponsorship.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2015/02/version-1-4-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2015/04/version-1-4-1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2015/05/mosquitto-and-current-unreleased-libwebsockets-branch.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2015/05/version-1-4-2-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2015/08/version-1-4-3-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2015/09/version-1-4-4-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2015/11/version-1-4-5-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2015/12/using-lets-encrypt-certificates-with-mosquitto.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2015/12/version-1-4-7-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2016/01/test6-mosquitto-org.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2016/02/version-1-4-8-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2016/03/logo-contest-results-for-shortlisting.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2016/03/logo-contest.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2016/03/repository-moved-to-github.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2016/05/stickers.attachments.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2016/05/stickers.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2016/06/version-1-4-9-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2016/08/mqtt-v5-draft-features.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2016/08/version-1-4-10-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2016/12/pre-christmas-update.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2017/02/version-1-4-11-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2017/03/for-the-final-time.attachments.json" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2017/03/for-the-final-time.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2017/05/security-advisory-cve-2017-7650.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2017/06/citing-eclipse-mosquitto.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2017/06/security-advisory-cve-2017-9868.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2017/07/version-1-4-13-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2017/07/version-1-4-14-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2018/01/mosquitto-debian-repo-key-updated.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2018/02/security-advisory-cve-2017-7651-cve-2017-7652.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2018/05/press-release.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2018/05/version-1-5-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2018/08/updated-debian-repository-backend.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2018/08/version-151-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2018/09/security-advisory-cve-2018-12543.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2018/09/version-152-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2018/11/mqtt5-progress.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2018/11/version-154-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2018/12/version-155-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2019/02/mqtt5-test-release.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2019/02/version-1-5-6-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2019/02/version-1-5-7-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2019/02/version-1-5-8-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2019/04/version-1-6-1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2019/04/version-1-6-2-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2019/04/version-1-6-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2019/06/version-1-6-3-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2019/08/version-1-6-4-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2019/09/version-1-6-5-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2019/09/version-1-6-6-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2019/09/version-1-6-7-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2019/11/version-1-6-8-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2020/02/version-1-6-9-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2020/05/version-1-6-10-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2020/06/mosquitto-ubuntu-appliance.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2020/06/test-mosquitto-org-cert-updated.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2020/08/version-1-6-11-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2020/08/version-1-6-12-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2020/12/version-2-0-0-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2020/12/version-2-0-2-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2020/12/version-2-0-3-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2020/12/version-2-0-4-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2021/01/version-2-0-5-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2021/01/version-2-0-6-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2021/02/version-2-0-7-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2021/02/version-2-0-8-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2021/03/version-2-0-9-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2021/04/version-2-0-10-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2021/06/version-2-0-11-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2021/08/version-2-0-12-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2021/10/version-2-0-13-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2021/11/version-2-0-14-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2022/08/version-2-0-15-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2023/08/version-2-0-16-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2023/08/version-2-0-17-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/posts/2023/09/version-2-0-18-released.md" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/templates/book.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/themes/mosquitto/assets/css/bulma.css" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/themes/mosquitto/assets/css/local.css" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/themes/mosquitto/assets/css/man.css" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/themes/mosquitto/templates/base.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/themes/mosquitto/templates/base_footer.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/themes/mosquitto/templates/base_header.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/themes/mosquitto/templates/base_helper.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/themes/mosquitto/templates/index.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/themes/mosquitto/templates/post.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/themes/mosquitto/templates/post_header.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/mosquitto/www/themes/mosquitto/templates/story.tmpl" />
+    <Xml Include="../../thirdparty/owemdjee/mosquitto/man/libmosquitto.3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/mosquitto/man/mosquitto-tls.7.xml" />
+    <Xml Include="../../thirdparty/owemdjee/mosquitto/man/mosquitto.8.xml" />
+    <Xml Include="../../thirdparty/owemdjee/mosquitto/man/mosquitto.conf.5.xml" />
+    <Xml Include="../../thirdparty/owemdjee/mosquitto/man/mosquitto_ctrl.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/mosquitto/man/mosquitto_ctrl_dynsec.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/mosquitto/man/mosquitto_passwd.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/mosquitto/man/mosquitto_pub.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/mosquitto/man/mosquitto_rr.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/mosquitto/man/mosquitto_sub.1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/mosquitto/man/mqtt.7.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

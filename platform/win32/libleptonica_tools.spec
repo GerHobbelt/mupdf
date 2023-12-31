@@ -8,4 +8,5 @@ ignore:
 	
 	sw.cpp
 	/prog/xtractprotos.c
+	/prog/monolithic_main.c
 	

@@ -1,0 +1,1449 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{00811970-815B-4F64-BC9D-21907859DC82}</ProjectGuid>
+    <RootNamespace>tempo</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TEMPO;TEMPO_STATICLIB;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TEMPO;TEMPO_STATICLIB;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TEMPO;TEMPO_STATICLIB;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TEMPO;TEMPO_STATICLIB;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>DebugFastLink</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(OutDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="cryptlib.vcxproj">
+      <Project>{424334e5-addf-490d-ba7b-46cf3686b48d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libarchive.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff18377f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcpp-terminal.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff2367fa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libhighway.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff021a57}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libnanosvg.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-751bff971987}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpthread-win32.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff8df2c2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite_tools.vcxproj">
+      <Project>{6e890463-3eeb-4cce-b8bd-5aa89148c35a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="MuPDFLib_static.vcxproj">
+      <Project>{a60d8644-5815-4d29-8970-7518ff518d62}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbase58x.vcxproj">
+      <Project>{0501bedf-3191-46a9-9997-288466675b82}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libBLAKE3.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc1880387f83}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfmt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffaf3a53}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreetype.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-a58957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgumbo-parser.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-358957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libharfbuzz.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-258957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjbig2dec.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-958957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-turbo.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff92ba30}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblcms2.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-158957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuhelpers.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce88099485a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmujs.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-858957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-6222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libbrotli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffd7760d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcrow.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fff84e35}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libcurl.vcxproj">
+      <Project>{87ee9da4-de1e-4448-8324-183c98dca588}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libextract.vcxproj">
+      <Project>{da38ca0b-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libfreeglut.vcxproj">
+      <Project>{a1b75d29-9f5c-4a0f-b368-322a10477d0c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libgif.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffddd6be}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libjpeg-xl.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa838c1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libleptonica.vcxproj">
+      <Project>{ca0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="liblz4.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff50b44d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf_default_handlers.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-1222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmuthreads.vcxproj">
+      <Project>{de21fa8a-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmutool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dce8808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libopenjpeg.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-758957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpkcs7.vcxproj">
+      <Project>{22462382-b30d-42a5-bf07-ee1a35e25d21}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpng.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-658957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libqiqqatool.vcxproj">
+      <Project>{fa8ade21-fc8a-47e0-87e4-dc18808bfc9b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libQuickJS.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0e57ba}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libresources.vcxproj">
+      <Project>{52dcab29-c8ee-4422-954c-29afa6b33e22}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsqlite-amalgamation.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffe3a7bc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsvgcharter.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff7fcf79}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtesseract.vcxproj">
+      <Project>{ac0bda38-89b9-4703-a77d-8049ac3a0d04}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtiff.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-558957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtinyexpr.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff33b1b5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libupskirt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff789ba9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libwebp.vcxproj">
+      <Project>{105f884a-c170-4c30-a810-c7da2103002f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libxml2.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ffa57a44}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzlib.vcxproj">
+      <Project>{5edcf4fd-0291-4fb9-8d96-458957ca5e3c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzopfli.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff03e6ca}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libzstd.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518fffeb6e4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="lib_nas_lockfile.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff0a15c6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="png-pmt-tools-lib.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff1147a4}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/tempo/vendor/github.com/power-devops/perfstat/c_helpers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/cpu/cpu_gccgo_x86.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/gccgo_c.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/tempo/vendor/github.com/power-devops/perfstat/c_helpers.h" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/design-proposals/assets/vparquet3-compaction.jpg" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/internal/Tempo Encoding.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/api_docs/pushing-spans-with-http.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/api_docs/pushing-spans-with-http2.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/configuration/ds75.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/configuration/grafana-agent/automatic-logging-example-query.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/configuration/grafana-agent/automatic-logging-example-results.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/configuration/grafana-agent/automatic-logging.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/configuration/grafana-agent/tail-based-sampling.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/getting-started/assets/apm-overview.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/getting-started/assets/getting-started.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/getting-started/assets/grafana-query.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/getting-started/assets/log-search.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/getting-started/assets/tempo-ds.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/getting-started/assets/tempo-search.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/getting-started/assets/trace_custom_metrics_dash.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/getting-started/assets/trace_exemplars.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/getting-started/assets/trace_sample.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/getting-started/assets/trace_search.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/getting-started/assets/trace_service_graph.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/getting-started/assets/trace_to_logs.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/logo_and_name.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/apm-error-example-editor.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/apm-error-rate-example.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/apm-filter-example-numbered.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/apm-filter-example2.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/apm-filter-operator.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/apm-overview-numbered.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/apm-query-filter-label.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/apm-query-filter-value1.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/apm-rate-drilldown.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/apm-remove-filter.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/apm-service-graph-drilldown.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/apm-service-graph-rows.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/apm-service-graph-web.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/apm-span-metrics.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/grafana-service-graphs-panel.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/server-side-metrics-arch-overview.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/service_graphs/screenshot-serv-graph-instant-query.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/service_graphs/screenshot-serv-graph-range-query.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/span-metrics-example.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/cache-summary.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/caching_memcached_connection_limit.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/grafana_datasource_tempo.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/grafana_datasource_tempo_headers.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/tempo_arch.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/setup/assets/setup-linux-node-graph.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/setup/assets/setup-linux-run-query.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/traceql/assets/query-editor-auto-complete.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/traceql/assets/query-editor-http-method.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/traceql/assets/query-editor-results-span.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/traceql/assets/screenshot-explore-traceql-search.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/traceql/assets/span-resource-attributes.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/example/docker-compose/debug/goland-remote-debug.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/integration/microservices/dashboard.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/vendor/github.com/alecthomas/kong/kong.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/vendor/github.com/alecthomas/participle/v2/railroad.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/vendor/github.com/grpc-ecosystem/go-grpc-middleware/slack.png" />
+    <Image Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/statsd_exporter/pkg/mapper/fsm/fsm.png" />
+    <NASM Include="../../thirdparty/owemdjee/tempo/vendor/github.com/minio/sha256-simd/sha256blockAvx512_amd64.asm" />
+    <Text Include="../../thirdparty/owemdjee/tempo/ADOPTERS.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/GOVERNANCE.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/LICENSING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/MAINTAINERS.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/RELEASES.MD" />
+    <Text Include="../../thirdparty/owemdjee/tempo/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/WORKFLOW.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/cmd/tempo-cli/test-data/single-tenant/b18beca6-4d7f-4464-9f72-f343e688a4a0/meta.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/cmd/tempo-serverless/cloud-run/go.sum" />
+    <Text Include="../../thirdparty/owemdjee/tempo/cmd/tempo-serverless/lambda/go.sum" />
+    <Text Include="../../thirdparty/owemdjee/tempo/cmd/tempo-serverless/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/cmd/tempo-vulture/testdata/trace.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/cmd/tempo/entrypoint-debug.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/design-proposals/2022-01 Metrics-generator.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/design-proposals/2022-04 Parquet.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/design-proposals/2022-04 TraceQL Concepts.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/design-proposals/2023-05 vParquet3.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/design-proposals/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/helm-charts/tempo-distributed/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/helm-charts/tempo-distributed/get-started-helm-charts/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/helm-charts/tempo-distributed/release-notes/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/api_docs/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/api_docs/metrics-summary.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/api_docs/pushing-spans-with-http.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/community/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/configuration/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/configuration/azure.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/configuration/compression.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/configuration/gcs.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/configuration/grafana-agent/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/configuration/grafana-agent/automatic-logging.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/configuration/grafana-agent/service-graphs.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/configuration/grafana-agent/span-metrics.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/configuration/grafana-agent/tail-based-sampling.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/configuration/ipv6.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/configuration/manifest.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/configuration/parquet.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/configuration/polling.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/configuration/querying.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/configuration/s3.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/configuration/sidecar-proxy.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/configuration/tls.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/getting-started/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/getting-started/docker-example.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/getting-started/example-demo-app.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/getting-started/instrumentation.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/getting-started/metrics-from-traces.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/getting-started/tempo-in-grafana.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/active-series.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/cardinality.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/service-graph-view.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/service_graphs/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/service_graphs/enable-service-graphs.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/service_graphs/estimate-cardinality.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/service_graphs/metrics-queries.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/metrics-generator/span_metrics.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/architecture.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/backend_search.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/best-practices.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/caching.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/consistent_hash_ring.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/cross_tenant_query.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/dedicated_columns.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/generic_forwarding.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/grafana_datasource.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/ingester_pvcs.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/monitoring.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/multitenancy.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/polling.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/schema.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/server_side_metrics.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/serverless_aws.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/serverless_gcp.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/operations/tempo_cli.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/release-notes/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/release-notes/v1-2.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/release-notes/v1-3.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/release-notes/v1-4.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/release-notes/v1-5.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/release-notes/v2-0.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/release-notes/v2-1.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/release-notes/v2-2.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/release-notes/v2-3.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/setup/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/setup/deployment.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/setup/helm-chart.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/setup/linux.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/setup/operator/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/setup/operator/api-docs.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/setup/operator/monitor.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/setup/operator/multitenancy.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/setup/operator/object-storage.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/setup/operator/quickstart.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/setup/set-up-test-app.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/setup/tanka.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/setup/upgrade.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/traceql/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/traceql/architecture.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/traceql/query-editor/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/traceql/query-editor/traceql-editor.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/traceql/query-editor/traceql-search.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/traces.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/troubleshooting/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/troubleshooting/agent.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/troubleshooting/bad-blocks.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/troubleshooting/max-trace-limit-reached.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/troubleshooting/metrics-generator.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/troubleshooting/response-too-large.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/troubleshooting/search-tag.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/troubleshooting/too-many-jobs-in-queue.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/docs/sources/tempo/troubleshooting/unable-to-see-trace.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/agent/agent.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/agent/docker-compose.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/agent/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/azure/docker-compose.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/azure/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/azure/tempo-azure.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/cross-cluster/docker-compose.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/cross-cluster/grafana-datasources.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/cross-cluster/prometheus.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/cross-cluster/tempo-distributed-a.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/cross-cluster/tempo-distributed-b.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/debug/docker-compose.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/debug/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/distributed/docker-compose.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/distributed/grafana-datasources.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/distributed/prometheus.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/distributed/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/distributed/tempo-distributed.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/gcs/docker-compose.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/gcs/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/gcs/tempo-gcs.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/grafana7.4/docker-compose.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/grafana7.4/grafana-datasources.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/grafana7.4/load-generator.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/grafana7.4/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/grafana7.4/tempo-query.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/local/docker-compose.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/local/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/otel-collector-multitenant/docker-compose.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/otel-collector-multitenant/grafana-datasources.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/otel-collector-multitenant/otel-collector.multitenant.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/otel-collector-multitenant/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/otel-collector/docker-compose.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/otel-collector/otel-collector.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/otel-collector/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/s3/docker-compose.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/s3/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/s3/tempo-s3.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/scalable-single-binary/docker-compose.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/scalable-single-binary/grafana-datasources.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/scalable-single-binary/prometheus.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/scalable-single-binary/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/scalable-single-binary/tempo-scalable-single-binary.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/shared/grafana-datasources.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/shared/prometheus.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/docker-compose/shared/tempo.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/helm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/helm/enterprise.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/helm/microservices-extras.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/helm/microservices-grafana-values.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/helm/microservices-tempo-values.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/helm/single-binary-extras.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/helm/single-binary-grafana-values.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/tk/jsonnetfile.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/tk/jsonnetfile.lock.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/tk/lib/synthetic-load-generator/load-generator.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/tk/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/tk/tempo-microservices/spec.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/tk/tempo-single-binary/spec.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/tk/vendor/github.com/grafana/jsonnet-libs/grafana/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/tk/vendor/github.com/grafana/jsonnet-libs/grafana/example/tanka/environments/default/dashboards/nyc.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/tk/vendor/github.com/grafana/jsonnet-libs/grafana/example/tanka/environments/default/spec.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/tk/vendor/github.com/grafana/jsonnet-libs/grafana/example/tanka/jsonnetfile.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/tk/vendor/github.com/grafana/jsonnet-libs/grafana/jsonnetfile.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/tk/vendor/github.com/grafana/jsonnet-libs/kube-state-metrics/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/tk/vendor/github.com/grafana/jsonnet-libs/kube-state-metrics/jsonnetfile.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/tk/vendor/github.com/grafana/jsonnet-libs/memcached/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/tk/vendor/github.com/grafana/jsonnet-libs/memcached/jsonnetfile.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/tk/vendor/github.com/grafana/jsonnet-libs/prometheus/jsonnetfile.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/tk/vendor/github.com/grafana/jsonnet-libs/tanka-util/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/tk/vendor/github.com/grafana/jsonnet-libs/tanka-util/README.md.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/tk/vendor/github.com/grafana/jsonnet-libs/tanka-util/jsonnetfile.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/example/tk/vendor/github.com/jsonnet-libs/docsonnet/doc-util/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/go.sum" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/bench/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/bench/config.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/bench/modules/util.js" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/bench/smoke_test.js" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/bench/stress_test_write_path.js" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/e2e/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/e2e/config-all-in-one-azurite.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/e2e/config-all-in-one-gcs.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/e2e/config-all-in-one-local.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/e2e/config-all-in-one-s3.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/e2e/config-cross-cluster-a.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/e2e/config-cross-cluster-b.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/e2e/config-encodings.tmpl.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/e2e/config-limits-query.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/e2e/config-limits.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/e2e/config-metrics-generator-targetinfo.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/e2e/config-metrics-generator.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/e2e/config-microservices.tmpl.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/e2e/config-multi-tenant-local.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/e2e/config-plugin-test.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/e2e/config-scalable-single-binary.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/e2e/config-tempo-query.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/e2e/serverless/config-serverless-gcr.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/e2e/serverless/config-serverless-lambda.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/microservices/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/microservices/docker-compose.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/microservices/grafana/dashboards-provisioning/dashboards.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/microservices/grafana/dashboards/Tempo benchmarking.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/microservices/grafana/datasources/datasource.yml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/microservices/load-generator.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/microservices/prometheus.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/microservices/tempo.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/poller/config-azurite.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/poller/config-gcs.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/integration/poller/config-s3.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/modules/generator/processor/servicegraphs/testdata/trace-with-failed-requests.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/modules/generator/processor/servicegraphs/testdata/trace-with-queue-database.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/modules/generator/processor/servicegraphs/testdata/trace-with-virtual-nodes.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/helm/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/ConfigMap-tempo-compactor.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/ConfigMap-tempo-distributor.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/ConfigMap-tempo-ingester.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/ConfigMap-tempo-metrics-generator.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/ConfigMap-tempo-overrides.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/ConfigMap-tempo-querier.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/ConfigMap-tempo-query-frontend.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/Deployment-compactor.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/Deployment-distributor.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/Deployment-metrics-generator.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/Deployment-querier.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/Deployment-query-frontend.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/Deployment-vulture.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/Namespace-tracing.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/PodDisruptionBudget-ingester.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/Service-compactor.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/Service-distributor.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/Service-gossip-ring.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/Service-ingest.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/Service-ingester.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/Service-memcached.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/Service-metrics-generator.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/Service-querier.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/Service-query-frontend-discovery.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/Service-query-frontend.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/StatefulSet-ingester.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/StatefulSet-memcached.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/StatefulSet-metrics-generator.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/util/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/util/example/spec.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/util/jsonnetfile.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/util/jsonnetfile.lock.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/util/vendor/github.com/grafana/jsonnet-libs/memcached/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet-compiled/util/vendor/github.com/grafana/jsonnet-libs/memcached/jsonnetfile.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet/enterprise/jsonnetfile.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet/enterprise/jsonnetfile.lock.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet/enterprise/test/jsonnetfile.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet/enterprise/test/jsonnetfile.lock.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet/microservices/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet/microservices/test/environments/default/spec.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet/microservices/test/jsonnetfile.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/jsonnet/microservices/test/jsonnetfile.lock.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/tempo-mixin-compiled/alerts.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/tempo-mixin-compiled/dashboards/tempo-operational.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/tempo-mixin-compiled/dashboards/tempo-reads.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/tempo-mixin-compiled/dashboards/tempo-resources.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/tempo-mixin-compiled/dashboards/tempo-rollout-progress.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/tempo-mixin-compiled/dashboards/tempo-tenants.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/tempo-mixin-compiled/dashboards/tempo-writes.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/tempo-mixin-compiled/rules.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/tempo-mixin/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/tempo-mixin/dashboards/tempo-operational.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/tempo-mixin/jsonnetfile.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/tempo-mixin/jsonnetfile.lock.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/tempo-mixin/runbook.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/tempo-mixin/vendor/github.com/grafana/jsonnet-libs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/tempo-mixin/vendor/github.com/grafana/jsonnet-libs/grafana/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/operations/tempo-mixin/vendor/github.com/grafana/jsonnet-libs/grafana/jsonnetfile.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/pkg/traceql/expr.y" />
+    <Text Include="../../thirdparty/owemdjee/tempo/pkg/traceql/test_examples.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/tempodb/backend/s3/testdata/minio-config.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/tempodb/encoding/v2/v2test/fake/4cd3c468-6398-481b-b5ec-de56d1048427/meta.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/tempodb/encoding/vparquet/test-data/single-tenant/b27b0e53-66a0-4505-afd6-434ae3cd4a10/meta.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/tempodb/encoding/vparquet2/test-data/single-tenant/b27b0e53-66a0-4505-afd6-434ae3cd4a10/meta.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/tempodb/encoding/vparquet3/test-data/single-tenant/b27b0e53-66a0-4505-afd6-434ae3cd4a10/meta.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/tools/go.sum" />
+    <Text Include="../../thirdparty/owemdjee/tempo/tools/packaging/tempo-postinstall.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/tools/packaging/verify-deb-install.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/tools/packaging/verify-rpm-install.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/tools/packaging/wait-for-ready.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/cloud.google.com/go/compute/metadata/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/cloud.google.com/go/compute/metadata/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/cloud.google.com/go/iam/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/cloud.google.com/go/iam/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/cloud.google.com/go/internal/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/cloud.google.com/go/internal/version/update_version.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/cloud.google.com/go/storage/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/cloud.google.com/go/storage/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/cloud.google.com/go/storage/emulator_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/cloud.google.com/go/storage/internal/apiv2/gapic_metadata.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/cloud.google.com/go/storage/storage.replay" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/contrib.go.opencensus.io/exporter/prometheus/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/azure-sdk-for-go/sdk/azcore/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/azure-sdk-for-go/sdk/azcore/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/azure-sdk-for-go/sdk/azcore/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/azure-sdk-for-go/sdk/azcore/ci.yml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/azure-sdk-for-go/sdk/azidentity/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/azure-sdk-for-go/sdk/azidentity/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/azure-sdk-for-go/sdk/azidentity/MIGRATION.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/azure-sdk-for-go/sdk/azidentity/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/azure-sdk-for-go/sdk/azidentity/TROUBLESHOOTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/azure-sdk-for-go/sdk/azidentity/assets.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/azure-sdk-for-go/sdk/azidentity/ci.yml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/azure-sdk-for-go/sdk/internal/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/assets.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/ci.yml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/internal/generated/autorest.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/migrationguide.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/test-resources.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/go-autorest/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/go-autorest/Gopkg.toml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/go-autorest/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/go-autorest/autorest/adal/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/go-autorest/autorest/azure/auth/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/Azure/go-autorest/azure-pipelines.yml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/AzureAD/microsoft-authentication-library-for-go/apps/errors/error_design.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/AzureAD/microsoft-authentication-library-for-go/apps/internal/base/internal/storage/test_serialized_cache.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/AzureAD/microsoft-authentication-library-for-go/apps/internal/json/design.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/IBM/sarama/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/IBM/sarama/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/IBM/sarama/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/IBM/sarama/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/IBM/sarama/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/IBM/sarama/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/IBM/sarama/dev.yml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/IBM/sarama/docker-compose.yml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/IBM/sarama/entrypoint.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/VividCortex/gohistogram/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/alecthomas/kong/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/alecthomas/participle/v2/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/alecthomas/participle/v2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/alecthomas/participle/v2/TUTORIAL.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/alecthomas/units/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/alicebob/gopher-json/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/alicebob/miniredis/v2/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/alicebob/miniredis/v2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/alicebob/miniredis/v2/geohash/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/alicebob/miniredis/v2/hyperloglog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/alicebob/miniredis/v2/metro/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/andybalholm/brotli/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/antonmedv/expr/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/antonmedv/expr/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/apache/thrift/lib/go/thrift/staticcheck.conf" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/armon/go-metrics/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/asaskevich/govalidator/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/asaskevich/govalidator/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/asaskevich/govalidator/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/asaskevich/govalidator/wercker.yml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/aws/aws-sdk-go/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/aws/aws-sdk-go/NOTICE.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/beorn7/perks/quantile/exampledata.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/cenkalti/backoff/v4/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/cespare/xxhash/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/cespare/xxhash/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/cespare/xxhash/v2/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/cespare/xxhash/v2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/cespare/xxhash/v2/testall.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/cespare/xxhash/v2/xxhash_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/cespare/xxhash/v2/xxhash_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/cespare/xxhash/xxhash_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/cristalhq/hedgedhttp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/dennwc/varint/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/dimchansky/utfbom/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/drone/envsubst/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/dustin/go-humanize/README.markdown" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/eapache/go-resiliency/breaker/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/eapache/go-xerial-snappy/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/eapache/queue/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/edsrzf/mmap-go/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/evanphx/json-patch/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/facette/natsort/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/fatih/color/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/fatih/color/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/felixge/httpsnoop/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/felixge/httpsnoop/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/fsnotify/fsnotify/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/fsnotify/fsnotify/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/fsnotify/fsnotify/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/fsnotify/fsnotify/mkdoc.zsh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-kit/kit/metrics/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-kit/log/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-kit/log/staticcheck.conf" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-logfmt/logfmt/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-logfmt/logfmt/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-logr/logr/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-logr/logr/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-logr/logr/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-logr/logr/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-logr/stdr/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-ole/go-ole/ChangeLog.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-ole/go-ole/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-ole/go-ole/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-openapi/analysis/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-openapi/analysis/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-openapi/analysis/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-openapi/errors/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-openapi/errors/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-openapi/jsonpointer/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-openapi/jsonpointer/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-openapi/jsonreference/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-openapi/jsonreference/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-openapi/loads/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-openapi/loads/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-openapi/spec/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-openapi/spec/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-openapi/spec/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-openapi/strfmt/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-openapi/strfmt/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-openapi/swag/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-openapi/swag/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-openapi/validate/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-openapi/validate/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-openapi/validate/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-openapi/validate/update-fixtures.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-redis/redis/v8/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-redis/redis/v8/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-redis/redis/v8/RELEASING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-redis/redis/v8/package.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-test/deep/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-test/deep/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/go-test/deep/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/gobwas/glob/bench.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/gobwas/glob/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/gogo/protobuf/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/gogo/status/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/golang-jwt/jwt/v4/MIGRATION_GUIDE.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/golang-jwt/jwt/v4/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/golang-jwt/jwt/v4/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/golang-jwt/jwt/v4/VERSION_HISTORY.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/golang-jwt/jwt/v4/staticcheck.conf" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/golang/protobuf/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/golang/snappy/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/golang/snappy/README" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/golang/snappy/decode_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/golang/snappy/decode_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/golang/snappy/encode_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/golang/snappy/encode_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/google/btree/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/google/s2a-go/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/google/s2a-go/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/google/s2a-go/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/google/s2a-go/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/google/s2a-go/internal/v2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/google/uuid/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/google/uuid/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/google/uuid/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/google/uuid/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/googleapis/gax-go/v2/CHANGES.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/googleapis/gax-go/v2/apierror/internal/proto/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/googleapis/gax-go/v2/release-please-config.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/gorilla/handlers/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/gorilla/mux/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/gorilla/websocket/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/grafana/dskit/httpgrpc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/grafana/dskit/kv/memberlist/status.gohtml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/grafana/dskit/ring/status.gohtml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/grafana/dskit/services/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/grafana/e2e/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/grafana/regexp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/grafana/regexp/syntax/make_perl_groups.pl" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/grpc-ecosystem/go-grpc-middleware/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/grpc-ecosystem/go-grpc-middleware/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/grpc-ecosystem/grpc-gateway/v2/internal/httprule/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/grpc-ecosystem/grpc-gateway/v2/runtime/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/grpc-ecosystem/grpc-gateway/v2/utilities/BUILD.bazel" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/grpc-ecosystem/grpc-opentracing/go/otgrpc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/hashicorp/consul/api/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/hashicorp/errwrap/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/hashicorp/go-cleanhttp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/hashicorp/go-hclog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/hashicorp/go-immutable-radix/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/hashicorp/go-immutable-radix/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/hashicorp/go-msgpack/codec/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/hashicorp/go-msgpack/codec/msgpack_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/hashicorp/go-multierror/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/hashicorp/go-plugin/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/hashicorp/go-plugin/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/hashicorp/go-rootcerts/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/hashicorp/go-sockaddr/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/hashicorp/go-uuid/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/hashicorp/go-version/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/hashicorp/go-version/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/hashicorp/hcl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/hashicorp/hcl/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/hashicorp/memberlist/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/hashicorp/memberlist/tag.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/hashicorp/memberlist/todo.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/hashicorp/yamux/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/hashicorp/yamux/spec.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/iancoleman/strcase/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/inconshreveable/mousetrap/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/jaegertracing/jaeger/model/json/fixture.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/jaegertracing/jaeger/plugin/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/jaegertracing/jaeger/plugin/storage/grpc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/jaegertracing/jaeger/storage/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/jcmturner/gofork/encoding/asn1/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/jcmturner/gokrb5/v8/gssapi/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/jedib0t/go-pretty/v6/table/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/jmespath/go-jmespath/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/josharian/intern/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/josharian/intern/license.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/jpillora/backoff/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/json-iterator/go/Gopkg.toml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/json-iterator/go/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/json-iterator/go/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/json-iterator/go/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/jsternberg/zap-logfmt/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/julienschmidt/httprouter/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/flate/matchlen_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/fse/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/gen.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/gzhttp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/huff0/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/huff0/decompress_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/internal/cpuinfo/cpuinfo_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/s2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/s2/decode_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/s2/decode_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/s2/encodeblock_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/s2sx.sum" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/snappy/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/snappy/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/zstd/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/zstd/fse_decoder_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/zstd/internal/xxhash/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/zstd/internal/xxhash/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/zstd/internal/xxhash/xxhash_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/zstd/internal/xxhash/xxhash_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/zstd/matchlen_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/compress/zstd/seqdec_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/cpuid/v2/CONTRIBUTING.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/cpuid/v2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/cpuid/v2/cpuid_386.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/cpuid/v2/cpuid_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/cpuid/v2/cpuid_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/klauspost/cpuid/v2/test-architectures.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/knadh/koanf/v2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/lufia/plan9stats/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/magiconair/properties/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/magiconair/properties/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/magiconair/properties/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/mattn/go-colorable/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/mattn/go-colorable/go.test.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/mattn/go-ieproxy/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/mattn/go-isatty/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/mattn/go-isatty/go.test.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/mattn/go-runewidth/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/miekg/dns/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/miekg/dns/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/minio/md5-simd/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/minio/md5-simd/block16_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/minio/md5-simd/block8_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/minio/md5-simd/md5block_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/minio/minio-go/v7/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/minio/minio-go/v7/MAINTAINERS.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/minio/minio-go/v7/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/minio/minio-go/v7/code_of_conduct.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/minio/minio-go/v7/pkg/credentials/credentials.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/minio/sha256-simd/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/minio/sha256-simd/sha256blockAvx512_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/minio/sha256-simd/sha256block_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/minio/sha256-simd/sha256block_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/minio/sha256-simd/test-architectures.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/mitchellh/copystructure/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/mitchellh/go-homedir/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/mitchellh/go-testing-interface/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/mitchellh/mapstructure/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/mitchellh/mapstructure/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/mitchellh/reflectwalk/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/modern-go/concurrent/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/modern-go/concurrent/test.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/modern-go/reflect2/Gopkg.toml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/modern-go/reflect2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/modern-go/reflect2/reflect2_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/modern-go/reflect2/relfect2_386.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/modern-go/reflect2/relfect2_amd64p32.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/modern-go/reflect2/relfect2_arm.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/modern-go/reflect2/relfect2_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/modern-go/reflect2/relfect2_mips64x.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/modern-go/reflect2/relfect2_mipsx.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/modern-go/reflect2/relfect2_ppc64x.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/modern-go/reflect2/relfect2_s390x.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/munnerz/goautoneg/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/mwitkow/go-conntrack/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/oklog/run/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/oklog/ulid/AUTHORS.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/oklog/ulid/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/oklog/ulid/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/oklog/ulid/Gopkg.toml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/oklog/ulid/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/olekukonko/tablewriter/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/olekukonko/tablewriter/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/exporter/jaegerexporter/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/exporter/kafkaexporter/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/exporter/kafkaexporter/metadata.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/exporter/zipkinexporter/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/exporter/zipkinexporter/metadata.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/internal/kafka/metadata.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/internal/sharedcomponent/metadata.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/pkg/ottl/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/pkg/ottl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/pkg/ottl/contexts/ottldatapoint/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/pkg/ottl/contexts/ottllog/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/pkg/ottl/contexts/ottlmetric/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/pkg/ottl/contexts/ottlresource/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/pkg/ottl/contexts/ottlspan/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/pkg/ottl/contexts/ottlspanevent/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/pkg/ottl/metadata.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/pkg/ottl/ottlfuncs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/pkg/pdatautil/metadata.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/pkg/translator/jaeger/metadata.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/pkg/translator/opencensus/metadata.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/processor/filterprocessor/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/processor/filterprocessor/metadata.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/receiver/jaegerreceiver/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/receiver/jaegerreceiver/internal/jaegerreceiverdeprecated/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/receiver/jaegerreceiver/internal/jaegerreceiverdeprecated/metadata.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/receiver/jaegerreceiver/metadata.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/receiver/kafkareceiver/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/receiver/kafkareceiver/metadata.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/receiver/opencensusreceiver/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/receiver/opencensusreceiver/metadata.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/receiver/zipkinreceiver/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/open-telemetry/opentelemetry-collector-contrib/receiver/zipkinreceiver/metadata.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/opentracing-contrib/go-grpc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/opentracing/opentracing-go/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/opentracing/opentracing-go/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/AUTHORS.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/bloom/block_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/bloom/filter_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/bloom/xxhash/sum64uint_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/bloom/xxhash/xxhash_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/column_buffer_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/compress/testdata/Mark.Twain-Tom.Sawyer.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/compress/testdata/e.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/compress/testdata/gettysburg.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/compress/testdata/html.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/compress/testdata/pi.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/compress/testdata/pngdata.bin" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/dictionary_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/encoding/bytestreamsplit/bytestreamsplit_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/encoding/delta/binary_packed_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/encoding/delta/byte_array_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/encoding/delta/delta_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/encoding/delta/length_byte_array_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/encoding/rle/rle_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/hashprobe/aeshash/aeshash_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/hashprobe/hashprobe_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/hashprobe/wyhash/wyhash_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/internal/bitpack/masks_int32_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/internal/bitpack/unpack_int32_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/internal/bitpack/unpack_int64_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/internal/bytealg/broadcast_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/internal/bytealg/count_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/null_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/order_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/page_bounds_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/page_max_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/page_min_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/sparse/gather_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/parquet-go/parquet-go/value_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/pelletier/go-toml/v2/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/pelletier/go-toml/v2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/pelletier/go-toml/v2/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/pelletier/go-toml/v2/ci.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/pierrec/lz4/v4/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/pierrec/lz4/v4/internal/lz4block/decode_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/pierrec/lz4/v4/internal/lz4block/decode_arm.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/pierrec/lz4/v4/internal/lz4block/decode_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/pierrec/lz4/v4/internal/xxh32/xxh32zero_arm.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/pkg/browser/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/pkg/errors/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/pkg/errors/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/alertmanager/COPYRIGHT.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/client_golang/prometheus/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/common/internal/bitbucket.org/ww/goautoneg/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/exporter-toolkit/web/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/exporter-toolkit/web/landing_page.css" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/exporter-toolkit/web/landing_page.html" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/exporter-toolkit/web/web-config.yml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/procfs/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/procfs/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/procfs/MAINTAINERS.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/procfs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/procfs/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/prometheus/discovery/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/prometheus/model/textparse/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/prometheus/model/textparse/openmetricslex.l" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/prometheus/model/textparse/promlex.l" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/prometheus/model/textparse/promtestdata.nometa.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/prometheus/model/textparse/promtestdata.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/prometheus/prompb/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/prometheus/prompb/buf.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/prometheus/promql/parser/generated_parser.y" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/prometheus/promql/parser/prettier_rules.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/prometheus/storage/remote/azuread/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/prometheus/tsdb/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/prometheus/tsdb/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/prometheus/statsd_exporter/pkg/mapper/fsm/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/rcrowley/go-metrics/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/rcrowley/go-metrics/memory.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/rcrowley/go-metrics/validate.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/rivo/uniseg/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/rivo/uniseg/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/rs/cors/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/rs/xid/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/sean-/seed/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/sercand/kuberesolver/v5/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/shoenig/go-m1cpu/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/sirupsen/logrus/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/sirupsen/logrus/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/sirupsen/logrus/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/soheilhy/cmux/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/soheilhy/cmux/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/sony/gobreaker/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/spaolacci/murmur3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/spf13/afero/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/spf13/afero/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/spf13/afero/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/spf13/cast/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/spf13/cobra/CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/spf13/cobra/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/spf13/cobra/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/spf13/cobra/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/spf13/jwalterweatherman/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/spf13/pflag/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/spf13/viper/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/spf13/viper/TROUBLESHOOTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/stretchr/objx/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/stretchr/objx/Taskfile.yml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/stretchr/testify/assert/assertion_format.go.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/stretchr/testify/assert/assertion_forward.go.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/stretchr/testify/require/require.go.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/stretchr/testify/require/require_forward.go.tmpl" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/subosito/gotenv/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/subosito/gotenv/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/tklauser/go-sysconf/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/tklauser/numcpus/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/uber-go/atomic/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/uber-go/atomic/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/uber-go/atomic/glide.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/uber/jaeger-client-go/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/uber/jaeger-client-go/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/uber/jaeger-client-go/Gopkg.toml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/uber/jaeger-client-go/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/uber/jaeger-client-go/RELEASE.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/uber/jaeger-client-go/glide.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/uber/jaeger-client-go/rpcmetrics/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/uber/jaeger-client-go/thrift/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/willf/bitset/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/willf/bitset/azure-pipelines.yml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/willf/bitset/popcnt_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/willf/bloom/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/xdg-go/pbkdf2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/xdg-go/scram/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/xdg-go/scram/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/xdg-go/stringprep/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/xdg-go/stringprep/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/yuin/gopher-lua/README.rst" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/yuin/gopher-lua/parse/parser.go.y" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/github.com/yusufpapurcu/wmi/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.etcd.io/etcd/client/v3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opencensus.io/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opencensus.io/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opencensus.io/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/config/configauth/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/config/configgrpc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/config/confighttp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/config/confignet/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/config/configtls/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/confmap/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/confmap/provider/httpprovider/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/confmap/provider/httpsprovider/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/connector/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/exporter/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/exporter/exporterhelper/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/exporter/otlpexporter/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/exporter/otlpexporter/cfg-schema.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/extension/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/extension/experimental/storage/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/featuregate/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/processor/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/receiver/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/receiver/otlpreceiver/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/receiver/otlpreceiver/config.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/semconv/v1.18.0/" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/semconv/v1.9.0/" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/service/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/service/internal/zpages/templates/component_header.html" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/service/internal/zpages/templates/extensions_table.html" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/service/internal/zpages/templates/features_table.html" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/service/internal/zpages/templates/page_footer.html" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/service/internal/zpages/templates/page_header.html" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/service/internal/zpages/templates/pipelines_table.html" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/collector/service/internal/zpages/templates/properties_table.html" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/otel/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/otel/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/otel/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/otel/RELEASING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/otel/VERSIONING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/otel/bridge/opentracing/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/otel/exporters/jaeger/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/otel/get_main_pkgs.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/otel/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/otel/semconv/v1.17.0/" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/otel/semconv/v1.18.0/" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/otel/semconv/v1.21.0/" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/otel/verify_examples.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.opentelemetry.io/otel/versions.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.uber.org/atomic/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.uber.org/atomic/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.uber.org/atomic/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.uber.org/goleak/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.uber.org/goleak/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.uber.org/multierr/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.uber.org/multierr/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.uber.org/multierr/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.uber.org/zap/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.uber.org/zap/CODE_OF_CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.uber.org/zap/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.uber.org/zap/FAQ.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.uber.org/zap/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.uber.org/zap/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.uber.org/zap/checklicense.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/go.uber.org/zap/glide.yaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/crypto/argon2/blamka_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/crypto/blake2b/blake2bAVX2_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/crypto/blake2b/blake2b_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/crypto/chacha20/chacha_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/crypto/chacha20/chacha_ppc64le.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/crypto/chacha20/chacha_s390x.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/crypto/chacha20poly1305/chacha20poly1305_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/crypto/internal/poly1305/sum_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/crypto/internal/poly1305/sum_ppc64le.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/crypto/internal/poly1305/sum_s390x.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/net/internal/socket/empty.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/net/internal/socket/sys_linux_386.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/net/internal/socket/sys_linux_s390x.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/net/internal/socket/sys_zos_s390x.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/oauth2/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/oauth2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/cpu/asm_aix_ppc64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/cpu/cpu_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/cpu/cpu_openbsd_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/cpu/cpu_s390x.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/cpu/cpu_x86.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/asm_aix_ppc64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/asm_bsd_386.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/asm_bsd_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/asm_bsd_arm.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/asm_bsd_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/asm_bsd_ppc64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/asm_bsd_riscv64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/asm_linux_386.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/asm_linux_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/asm_linux_arm.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/asm_linux_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/asm_linux_loong64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/asm_linux_mips64x.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/asm_linux_mipsx.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/asm_linux_ppc64x.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/asm_linux_riscv64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/asm_linux_s390x.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/asm_openbsd_mips64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/asm_solaris_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/asm_zos_s390x.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/mkall.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/mkerrors.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/zsyscall_darwin_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/zsyscall_darwin_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/zsyscall_openbsd_386.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/zsyscall_openbsd_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/zsyscall_openbsd_arm.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/zsyscall_openbsd_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/zsyscall_openbsd_mips64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/zsyscall_openbsd_ppc64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/unix/zsyscall_openbsd_riscv64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/windows/empty.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/windows/mkerrors.bash" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/sys/windows/mkknownfolderids.bash" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/xerrors/README" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/golang.org/x/xerrors/codereview.cfg" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/blas/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/blas/conversions.bash" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/blas/gonum/single_precision.bash" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/floats/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/graph/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/graph/iterator/map.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/c128/axpyinc_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/c128/axpyincto_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/c128/axpyunitary_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/c128/axpyunitaryto_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/c128/dotcinc_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/c128/dotcunitary_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/c128/dotuinc_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/c128/dotuunitary_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/c128/dscalinc_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/c128/dscalunitary_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/c128/scalUnitary_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/c128/scalinc_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/c64/axpyinc_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/c64/axpyincto_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/c64/axpyunitary_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/c64/axpyunitaryto_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/c64/dotcinc_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/c64/dotcunitary_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/c64/dotuinc_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/c64/dotuunitary_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f32/axpyinc_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f32/axpyincto_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f32/axpyunitary_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f32/axpyunitaryto_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f32/ddotinc_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f32/ddotunitary_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f32/dotinc_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f32/dotunitary_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f32/ge_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f32/sum_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/abssum_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/abssuminc_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/add_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/addconst_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/axpyinc_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/axpyincto_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/axpyunitary_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/axpyunitaryto_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/cumprod_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/cumsum_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/div_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/divto_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/dot_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/gemvN_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/gemvT_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/ger_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/l1norm_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/l2norm_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/l2normdist_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/l2norminc_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/linfnorm_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/scalinc_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/scalincto_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/scalunitary_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/scalunitaryto_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/asm/f64/sum_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/math32/sqrt_amd64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/internal/math32/sqrt_arm64.s" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/lapack/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gonum.org/v1/gonum/mat/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/google.golang.org/api/CONTRIBUTORS" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/google.golang.org/api/iamcredentials/v1/iamcredentials-api.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/google.golang.org/api/storage/v1/storage-api.json" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/google.golang.org/appengine/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/google.golang.org/appengine/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/google.golang.org/appengine/internal/regen.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/google.golang.org/appengine/travis_install.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/google.golang.org/appengine/travis_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/google.golang.org/grpc/CODE-OF-CONDUCT.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/google.golang.org/grpc/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/google.golang.org/grpc/GOVERNANCE.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/google.golang.org/grpc/MAINTAINERS.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/google.golang.org/grpc/NOTICE.txt" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/google.golang.org/grpc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/google.golang.org/grpc/SECURITY.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/google.golang.org/grpc/codegen.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/google.golang.org/grpc/reflection/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/google.golang.org/grpc/regenerate.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/google.golang.org/grpc/vet.sh" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gopkg.in/" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gopkg.in/ini.v1/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gopkg.in/ini.v1/codecov.yml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gopkg.in/yaml.v2/LICENSE.libyaml" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gopkg.in/yaml.v2/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/gopkg.in/yaml.v3/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tempo/vendor/modules.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
