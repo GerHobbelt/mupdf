@@ -981,6 +981,18 @@ reproc
 vmaf 
 openlibm
 
+PEGTL
+doctest
+fpng
+jsoncpp
+libparameters
+mosquitto
+qoi
+safeclib
+tao-json
+u8_to_std_string
+vizzu
+
 EOT
 )
 
@@ -989,6 +1001,10 @@ EOT
 myapplist=$(
 grep -v '#' <<EOT
 
+capnproto
+loki
+netdata
+tempo
 EtwExplorer
 FreeFileSync
 GraphicsMagick
@@ -1180,6 +1196,10 @@ if false ; then
 fi
 
 
+#echo "FILTER: $FILTER"
+#echo "ARG: $ARG"
+
+
 if [[ "$ARG" =~ [1] ]] ; then
 	for f in  $mylist  ; do
 		if [[ $f =~ $FILTER ]] ; then
@@ -1202,14 +1222,16 @@ if [[ "$ARG" =~ [2] ]] ; then
 	done
 fi
 
-if [[ "$ARG" =~ [12] ]] ; then
+if [[ "$ARG" =~ [0] ]] ; then
 	for f in  $deletelist  ; do
 	  delnewproj $f
 	done
 	for f in  $deletelist2  ; do
 	  delnewproj2 $f
 	done
+fi
 
+if [[ "$ARG" =~ [12] ]] ; then
 	# and only now do we add all those generated project files to the overview solution!
 	# we do this brute-force by simply adding ALL projects to that solution again; the next
 	# load by Visual Studio will clean up the .sln file for us.
