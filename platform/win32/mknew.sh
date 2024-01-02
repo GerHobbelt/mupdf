@@ -1222,15 +1222,6 @@ if [[ "$ARG" =~ [2] ]] ; then
 	done
 fi
 
-if [[ "$ARG" =~ [0] ]] ; then
-	for f in  $deletelist  ; do
-	  delnewproj $f
-	done
-	for f in  $deletelist2  ; do
-	  delnewproj2 $f
-	done
-fi
-
 if [[ "$ARG" =~ [12] ]] ; then
 	# and only now do we add all those generated project files to the overview solution!
 	# we do this brute-force by simply adding ALL projects to that solution again; the next
@@ -1262,3 +1253,13 @@ if [[ "$ARG" =~ [4] ]] ; then
 		fi
 	done
 fi
+
+if [[ "$ARG" =~ [0] ]] ; then
+	for f in  $deletelist  ; do
+	  delnewproj $f
+	done
+	for f in  $deletelist2  ; do
+	  delnewproj2 $f
+	done
+fi
+
