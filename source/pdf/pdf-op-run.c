@@ -1193,6 +1193,11 @@ pdf_show_char(fz_context *ctx, pdf_run_processor *pr, int cid, fz_text_language 
 		ucsbuf[0] = FZ_REPLACEMENT_CHARACTER;
 		ucslen = 1;
 	}
+	/* Fall back to identity cid->ucs mapping if other mappings fail. */
+	if (ucslen == 1 && ucsbuf[0] == FZ_REPLACEMENT_CHARACTER && cid >= 32)
+	{
+		ucsbuf[0] = cid;
+	}
 
 	/* guess bidi level from unicode value */
 	pr->bidi = guess_bidi_level(ucdn_get_bidi_class(ucsbuf[0]), pr->bidi);
