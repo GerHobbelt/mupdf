@@ -136,6 +136,7 @@ pdf_cmap *pdf_load_system_cmap(fz_context *ctx, const char *name);
 	Load built-in CMap resource.
 */
 pdf_cmap *pdf_load_builtin_cmap(fz_context *ctx, const char *name);
+pdf_cmap *pdf_load_to_unicode_cmap(fz_context *ctx, const char *name);
 
 /*
 	Load CMap stream in PDF file

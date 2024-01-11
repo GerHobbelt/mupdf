@@ -148,6 +148,12 @@ pdf_load_builtin_cmap(fz_context *ctx, const char *name)
 	return NULL;
 }
 
+pdf_cmap *
+pdf_load_to_unicode_cmap(fz_context *ctx, const char *name)
+{
+	return NULL;
+}
+
 #else
 
 /* To regenerate this list: :r !bash scripts/runcmapdump.sh */
@@ -297,6 +303,34 @@ static pdf_cmap *table[] = {
 	&cmap_V,
 };
 
+#include "to_unicode/FangSong.h"
+#include "to_unicode/KaiTi.h"
+#include "to_unicode/MS-Gothic.h"
+#include "to_unicode/MS-Mincho.h"
+#include "to_unicode/MS-PGothic.h"
+#include "to_unicode/MS-PMincho.h"
+#include "to_unicode/MS-UIGothic.h"
+#include "to_unicode/MingLiU.h"
+#include "to_unicode/NSimSun.h"
+#include "to_unicode/PMingLiU.h"
+#include "to_unicode/SimHei.h"
+#include "to_unicode/SimSun.h"
+
+static pdf_cmap *to_unicode_table[] = {
+&cmap_FangSong,
+&cmap_KaiTi,
+&cmap_MS_Gothic,
+&cmap_MS_Mincho,
+&cmap_MS_PGothic,
+&cmap_MS_PMincho,
+&cmap_MS_UIGothic,
+&cmap_MingLiU,
+&cmap_NSimSun,
+&cmap_PMingLiU,
+&cmap_SimHei,
+&cmap_SimSun,
+};
+
 pdf_cmap *
 pdf_load_builtin_cmap(fz_context *ctx, const char *name)
 {
@@ -319,6 +353,25 @@ pdf_load_builtin_cmap(fz_context *ctx, const char *name)
 			l = m + 1;
 		else
 			return table[m];
+	}
+	return NULL;
+}
+
+pdf_cmap *
+pdf_load_to_unicode_cmap(fz_context *ctx, const char *name)
+{
+	int r = nelem(to_unicode_table)-1;
+	int l = 0;
+	while (l <= r)
+	{
+		int m = (l + r) >> 1;
+		int c = strcmp(name, to_unicode_table[m]->cmap_name);
+		if (c < 0)
+			r = m - 1;
+		else if (c > 0)
+			l = m + 1;
+		else
+			return to_unicode_table[m];
 	}
 	return NULL;
 }

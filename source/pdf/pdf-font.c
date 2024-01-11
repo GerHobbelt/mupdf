@@ -1311,8 +1311,12 @@ load_cid_font(fz_context *ctx, pdf_document *doc, pdf_obj *dict, pdf_obj *encodi
 				}
 				else
 				{
+					// Attempt to find a font specific ToUnicode (for MS-Mincho, SimSun, etc)
+					fontdesc->to_ttf_cmap = pdf_load_to_unicode_cmap(ctx, basefont);
+
 					// Attempt a generic ToUnicode (default MacRoman ordering for TrueType)
-					fontdesc->to_ttf_cmap = pdf_load_builtin_cmap(ctx, "TrueType-UCS2");
+					if (!fontdesc->to_ttf_cmap)
+						fontdesc->to_ttf_cmap = pdf_load_builtin_cmap(ctx, "TrueType-UCS2");
 				}
 			}
 
