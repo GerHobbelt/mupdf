@@ -1,0 +1,1183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libguile</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF91ECBD}</ProjectGuid>
+    <RootNamespace>libguile</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGUILE;GUILE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGUILE;GUILE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGUILE;GUILE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGUILE;GUILE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGUILE;GUILE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGUILE;GUILE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGUILE;GUILE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGUILE;GUILE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGUILE;GUILE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGUILE;GUILE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGUILE;GUILE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGUILE;GUILE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/guile/examples/box-dynamic-module/box.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/examples/box-dynamic/box.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/examples/box-module/box.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/examples/box/box.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/guile-readline/readline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/accept.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/accept4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/access.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/alloca.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/asnprintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/basename-lgpl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/binary-io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/bind.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/btowc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/c-ctype.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/c-strcasecmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/c-strncasecmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/canonicalize-lgpl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/ceil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/cloexec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/close.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/concat-filename.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/connect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/copysign.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/dirfd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/dirname-lgpl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/dup2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/duplocale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/fcntl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/fd-hook.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/findprog-in.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/float.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/flock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/floor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/free.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/frexp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/fstat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/fsync.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/full-read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/full-write.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/gai_strerror.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/getaddrinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/getdtablesize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/gethostname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/getlogin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/getpeername.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/getrandom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/getsockname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/getsockopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/hard-locale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/iconv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/iconv_close.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/iconv_open.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/inet_ntop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/inet_pton.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/isfinite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/isinf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/isnan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/isnand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/isnanf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/isnanl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/itold.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/lc-charset-dispatch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/link.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/listen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/localcharset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/localeconv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/log1p.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/lstat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/malloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/malloc/dynarray-skeleton.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/malloc/dynarray_at_failure.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/malloc/dynarray_emplace_enlarge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/malloc/dynarray_finalize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/malloc/dynarray_resize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/malloc/dynarray_resize_clear.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/malloc/scratch_buffer_grow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/malloc/scratch_buffer_grow_preserve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/malloc/scratch_buffer_set_array_size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/malloca.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/math.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/mbrtowc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/mbsinit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/mbtowc-lock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/mbtowc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/memchr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/mempcpy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/mkdir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/mkostemp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/mktime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/msvc-inval.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/msvc-nothrow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/nl_langinfo-lock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/nl_langinfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/nproc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/nstrftime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/open.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/pipe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/pipe2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/poll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/printf-args.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/printf-parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/putenv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/raise.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/rawmemchr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/readlink.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/realloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/recv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/recvfrom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/regcomp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/regex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/regex_internal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/regexec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/rename.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/rmdir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/round.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/safe-read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/safe-write.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/select.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/send.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/sendto.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/setenv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/setlocale-lock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/setlocale_null.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/setsockopt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/shutdown.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/signbitd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/signbitf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/signbitl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/snprintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/socket.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/sockets.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/spawn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/spawn_faction_addclose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/spawn_faction_adddup2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/spawn_faction_addopen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/spawn_faction_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/spawni.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/spawnp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/stat-time.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/stat-w32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/stat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/stdio-read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/stdio-write.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/stpcpy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/strchrnul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/strdup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/striconveh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/stripslash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/sys_socket.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/tempname.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/time_r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/time_rz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/timegm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/times.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/trunc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/tzset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/unistd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/unsetenv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/vasnprintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/vsnprintf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/wcrtomb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/wctype-h.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/windows-spawn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/write.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/lib/xsize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/alist.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/array-handle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/array-map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/arrays.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/async.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/atomic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/backtrace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/bitvectors.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/boolean.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/bytevectors.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/chars.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/chooks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/continuations.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/control.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/custom-ports.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/debug-malloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/deprecated.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/deprecation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/dynl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/dynstack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/dynwind.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/eq.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/error.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/eval.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/evalext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/exceptions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/expand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/extensions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/fdes-finalizers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/feature.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/filesys.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/finalizers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/fluids.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/foreign-object.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/foreign.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/fports.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/frames.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/gc-malloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/gc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/gen-scmconfig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/generalized-vectors.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/gettext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/goops.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/gsubr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/guardians.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/guile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/hashtab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/hooks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/i18n.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/inline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/instructions.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/integers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/intrinsics.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/ioext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/jit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/keywords.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/aarch64-cpu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/aarch64-fpu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/aarch64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/arm-cpu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/arm-vfp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/arm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/lightening.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/mips-cpu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/mips-fpu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/mips.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/ppc-cpu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/ppc-fpu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/ppc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/s390-cpu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/s390-fpu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/s390.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/x86-cpu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/x86-sse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/x86.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/absr_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/absr_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/addi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/addr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/addr_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/addr_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/addx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/andi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/andr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/beqi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/beqr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/beqr_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/beqr_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bgei.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bgei_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bger.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bger_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bger_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bger_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bgti.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bgti_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bgtr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bgtr_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bgtr_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bgtr_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/blei.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/blei_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bler_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bler_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bler_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bltgtr_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bltgtr_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/blti.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/blti_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bltr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bltr_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bltr_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bltr_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bmci.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bmcr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bmsi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bmsr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bnei.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bner_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bner_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/boaddi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/boaddi_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/boaddr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/boaddr_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bordr_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bordr_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bosubi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bosubi_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bosubr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bosubr_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bswapr_ui.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bswapr_ul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bswapr_us.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/buneqr_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/buneqr_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bunger_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bunger_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bungtr_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bungtr_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bunler_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bunler_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bunltr_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bunltr_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bunordr_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bunordr_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bxaddi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bxaddi_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bxaddr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bxaddr_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bxsubi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bxsubi_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bxsubr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/bxsubr_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/call_10.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/callee_9.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/comr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/divr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/divr_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/divr_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/divr_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/extr_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/extr_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/extr_d_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/extr_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/extr_f_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/extr_i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/extr_s.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/extr_uc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/extr_ui.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/extr_us.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/jmp0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/jmp_table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/jmpi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/jmpi_local.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/jmpr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldi_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldi_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldi_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldi_i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldi_l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldi_s.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldi_uc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldi_ui.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldi_us.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldr_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldr_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldr_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldr_i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldr_l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldr_s.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldr_uc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldr_ui.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldr_us.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldxi_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldxi_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldxi_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldxi_i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldxi_l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldxi_s.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldxi_uc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldxi_ui.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldxi_us.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldxr_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldxr_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldxr_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldxr_i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldxr_l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldxr_s.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldxr_uc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldxr_ui.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ldxr_us.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/link-register.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/lshi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/lshr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/mov_addr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/movi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/movi_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/movi_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/mulr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/mulr_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/mulr_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/negr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/negr_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/negr_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/ori.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/orr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/qdivr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/qdivr_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/qmulr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/qmulr_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/remr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/remr_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/rshi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/rshi_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/rshr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/rshr_u.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/sqrtr_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/sqrtr_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/sti_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/sti_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/sti_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/sti_i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/sti_l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/sti_s.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/str_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/str_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/str_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/str_i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/str_l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/str_s.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/stxi_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/stxi_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/stxi_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/stxi_i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/stxi_l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/stxi_s.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/stxr_c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/stxr_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/stxr_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/stxr_i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/stxr_l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/stxr_s.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/subr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/subr_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/subr_f.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/subx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/truncr_d_i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/truncr_d_l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/truncr_f_i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/truncr_f_l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/xori.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/xorr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/loader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/macros.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/mallocs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/memoize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/mini-gmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/modules.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/net_db.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/null-threads.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/numbers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/objprop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/options.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/pairs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/poll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/ports.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/posix-w32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/procprop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/procs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/programs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/promises.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/quicksort.i.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/r6rs-ports.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/random.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/rdelim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/regex-posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/rw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/scmsigs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/script.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/simpos.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/smob.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/socket.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/sort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/srcprop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/srfi-1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/srfi-13.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/srfi-14.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/srfi-4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/srfi-60.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/stackchk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/stacks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/stime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/strings.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/strorder.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/strports.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/struct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/symbols.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/syntax.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/threads.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/throw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/unicode.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/uniform.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/values.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/variable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/vectors.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/vm-engine.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/vm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/vports.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/weak-set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/weak-table.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/libguile/weak-vector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-asmobs-lib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-conversion.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-extensions-lib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-ffi-lib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-foreign-object-c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-hashing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-loose-ends.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-num2integral.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-pthread-create-secondary.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-pthread-create.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-round.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-scm-c-bind-keyword-arguments.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-scm-c-read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-scm-spawn-thread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-scm-take-locale-symbol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-scm-take-u8vector.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-scm-to-latin1-string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-scm-values.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-scm-with-guile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-smob-mark-race.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-smob-mark.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-srfi-4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-unwind.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-with-guile-module.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/examples/compat/acconfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/examples/compat/compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/guile-readline/readline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/_Noreturn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/alignof.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/alloca.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/arg-nonnull.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/arpa_inet.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/assert.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/assure.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/attribute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/basename-lgpl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/binary-io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/byteswap.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/c++defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/c-ctype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/c-strcase.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/c-strcaseeq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/cdefs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/cloexec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/concat-filename.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/dirent.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/dirname.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/dynarray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/eloop-threshold.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/errno.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/fcntl.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/fd-hook.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/filename.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/findprog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/flexmember.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/float+.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/float.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/full-read.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/full-write.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/gettext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/glthread/lock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/hard-locale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/iconv.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/iconv_open-aix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/iconv_open-hpux.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/iconv_open-irix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/iconv_open-osf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/iconv_open-solaris.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/iconv_open-zos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/iconveh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/idx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/ignore-value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/intprops-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/intprops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/inttypes.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/isnand-nolibm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/isnanf-nolibm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/isnanl-nolibm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/langinfo.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/lc-charset-dispatch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/libc-config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/limits.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/localcharset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/locale.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/malloc/dynarray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/malloc/scratch_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/malloca.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/math.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/mbrtowc-impl-utf8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/mbrtowc-impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/mbtowc-impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/mbtowc-lock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/minmax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/mktime-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/msvc-inval.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/msvc-nothrow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/netdb.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/netinet_in.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/nproc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/pathmax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/poll.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/printf-args.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/printf-parse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/regex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/regex_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/safe-read.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/safe-write.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/same-inode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/sched.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/scratch_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/setlocale_null.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/signal.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/size_max.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/sockets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/spawn.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/spawn_int.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/stat-time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/stat-w32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/stdckdint.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/stddef.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/stdint.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/stdio.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/stdlib.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/streq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/strftime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/striconveh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/string.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/sys-limits.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/sys_file.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/sys_random.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/sys_select.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/sys_socket.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/sys_stat.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/sys_time.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/sys_times.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/sys_types.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/sys_uio.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/tempname.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/time-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/time.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/unistd.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/vasnprintf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/verify.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/w32sock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/warn-on-use.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/wchar.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/wctype.in.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/windows-initguard.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/windows-spawn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/xalloc-oversized.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/lib/xsize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/__scm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/alist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/array-handle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/array-map.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/arrays.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/async.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/atomic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/atomics-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/backtrace.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/bdw-gc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/bitvectors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/boolean.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/bytevectors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/cache-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/chars.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/chooks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/continuations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/control.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/custom-ports.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/debug-malloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/deprecated.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/deprecation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/dynl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/dynstack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/dynwind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/elf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/eq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/error.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/eval.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/evalext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/exceptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/expand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/extensions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/fdes-finalizers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/feature.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/filesys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/finalizers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/fluids.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/foreign-object.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/foreign.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/fports.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/frames.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/gc-inline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/gc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/generalized-vectors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/gettext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/goops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/gsubr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/guardians.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/hashtab.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/hooks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/i18n.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/inline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/instructions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/integers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/intrinsics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/ioext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/iselect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/jit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/keywords.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/libgettext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/aarch64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/arm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/endian.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/mips.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/ppc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/s390.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening/x86.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/lightening/tests/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/load.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/loader.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/locale-categories.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/mallocs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/memoize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/mini-gmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/modules.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/net_db.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/null-threads.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/numbers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/objprop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/pairs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/poll.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/ports-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/ports.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/posix-w32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/posix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/print.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/private-options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/procprop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/procs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/programs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/promises.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/pthread-threads.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/r6rs-ports.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/rdelim.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/read.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/regex-posix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/rw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/scm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/scmsigs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/script.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/simpos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/smob.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/snarf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/socket.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/sort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/srcprop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/srfi-1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/srfi-13.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/srfi-14.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/srfi-4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/srfi-60.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/stackchk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/stacks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/stime.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/strings.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/strorder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/strports.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/struct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/symbols.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/syntax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/syscalls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/tags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/threads.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/throw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/unicode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/uniform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/validate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/values.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/variable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/vectors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/vm-builtins.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/vm-expand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/vm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/vports.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/weak-list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/weak-set.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/weak-table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/guile/libguile/weak-vector.h" />
+    <Image Include="../../thirdparty/owemdjee/guile/doc/ref/hierarchy.png" />
+    <Text Include="../../thirdparty/owemdjee/guile/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/guile/ChangeLog-2008" />
+    <Text Include="../../thirdparty/owemdjee/guile/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/guile/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/guile/README" />
+    <Text Include="../../thirdparty/owemdjee/guile/am/ChangeLog-2008" />
+    <Text Include="../../thirdparty/owemdjee/guile/am/README" />
+    <Text Include="../../thirdparty/owemdjee/guile/am/bootstrap.am" />
+    <Text Include="../../thirdparty/owemdjee/guile/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/guile/benchmark-guile.in" />
+    <Text Include="../../thirdparty/owemdjee/guile/benchmark-suite/ChangeLog-2008" />
+    <Text Include="../../thirdparty/owemdjee/guile/benchmark-suite/README" />
+    <Text Include="../../thirdparty/owemdjee/guile/bootstrap/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/guile/build-aux/gendocs.sh" />
+    <Text Include="../../thirdparty/owemdjee/guile/build-aux/gitlog-to-changelog" />
+    <Text Include="../../thirdparty/owemdjee/guile/check-guile.in" />
+    <Text Include="../../thirdparty/owemdjee/guile/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/ChangeLog-2008" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/ChangeLog-guile-doc" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/README" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/goops.mail" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/hacks.el" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/r5rs/ChangeLog-2008" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/r5rs/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/recipe-guidelines.txt" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/ref/ChangeLog-2008" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/ref/ChangeLog-goops-2008" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/ref/ChangeLog-guile-doc-ref" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/ref/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/ref/api.txt" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/ref/effective-version.texi.in" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/ref/gds.eps" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/ref/gds.pdf" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/ref/gds.txt" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/ref/hierarchy.eps" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/ref/hierarchy.pdf" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/ref/hierarchy.txt" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/ref/scheme.eps" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/ref/scheme.pdf" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/ref/scheme.txt" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/texinfo.tex" />
+    <Text Include="../../thirdparty/owemdjee/guile/doc/use-cases.txt" />
+    <Text Include="../../thirdparty/owemdjee/guile/emacs/ChangeLog-2008" />
+    <Text Include="../../thirdparty/owemdjee/guile/emacs/README" />
+    <Text Include="../../thirdparty/owemdjee/guile/emacs/gud-guile.el" />
+    <Text Include="../../thirdparty/owemdjee/guile/emacs/guile-c.el" />
+    <Text Include="../../thirdparty/owemdjee/guile/emacs/guile-scheme.el" />
+    <Text Include="../../thirdparty/owemdjee/guile/emacs/guile.el" />
+    <Text Include="../../thirdparty/owemdjee/guile/emacs/multistring.el" />
+    <Text Include="../../thirdparty/owemdjee/guile/emacs/patch.el" />
+    <Text Include="../../thirdparty/owemdjee/guile/emacs/ppexpand.el" />
+    <Text Include="../../thirdparty/owemdjee/guile/emacs/update-changelog.el" />
+    <Text Include="../../thirdparty/owemdjee/guile/examples/ChangeLog-2008" />
+    <Text Include="../../thirdparty/owemdjee/guile/examples/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/guile/examples/README" />
+    <Text Include="../../thirdparty/owemdjee/guile/examples/box-dynamic-module/README" />
+    <Text Include="../../thirdparty/owemdjee/guile/examples/box-dynamic/README" />
+    <Text Include="../../thirdparty/owemdjee/guile/examples/box-module/README" />
+    <Text Include="../../thirdparty/owemdjee/guile/examples/box/README" />
+    <Text Include="../../thirdparty/owemdjee/guile/examples/compat/configure.in" />
+    <Text Include="../../thirdparty/owemdjee/guile/examples/modules/README" />
+    <Text Include="../../thirdparty/owemdjee/guile/examples/safe/README" />
+    <Text Include="../../thirdparty/owemdjee/guile/examples/scripts/README" />
+    <Text Include="../../thirdparty/owemdjee/guile/gc-benchmarks/larceny/README" />
+    <Text Include="../../thirdparty/owemdjee/guile/guile-readline/ChangeLog-2008" />
+    <Text Include="../../thirdparty/owemdjee/guile/guile-readline/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/guile/lib/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/guile/lib/iconv_open-aix.gperf" />
+    <Text Include="../../thirdparty/owemdjee/guile/lib/iconv_open-hpux.gperf" />
+    <Text Include="../../thirdparty/owemdjee/guile/lib/iconv_open-irix.gperf" />
+    <Text Include="../../thirdparty/owemdjee/guile/lib/iconv_open-osf.gperf" />
+    <Text Include="../../thirdparty/owemdjee/guile/lib/iconv_open-solaris.gperf" />
+    <Text Include="../../thirdparty/owemdjee/guile/lib/iconv_open-zos.gperf" />
+    <Text Include="../../thirdparty/owemdjee/guile/libguile/ChangeLog-1996-1999" />
+    <Text Include="../../thirdparty/owemdjee/guile/libguile/ChangeLog-2000" />
+    <Text Include="../../thirdparty/owemdjee/guile/libguile/ChangeLog-2008" />
+    <Text Include="../../thirdparty/owemdjee/guile/libguile/ChangeLog-scm" />
+    <Text Include="../../thirdparty/owemdjee/guile/libguile/ChangeLog-srfi" />
+    <Text Include="../../thirdparty/owemdjee/guile/libguile/ChangeLog-threads" />
+    <Text Include="../../thirdparty/owemdjee/guile/libguile/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/guile/libguile/UnicodeData.txt" />
+    <Text Include="../../thirdparty/owemdjee/guile/libguile/c-tokenize.lex" />
+    <Text Include="../../thirdparty/owemdjee/guile/libguile/cpp-E.syms" />
+    <Text Include="../../thirdparty/owemdjee/guile/libguile/cpp-SIG.syms" />
+    <Text Include="../../thirdparty/owemdjee/guile/libguile/gen-scmconfig.h.in" />
+    <Text Include="../../thirdparty/owemdjee/guile/libguile/guile-snarf-docs.in" />
+    <Text Include="../../thirdparty/owemdjee/guile/libguile/guile-snarf.awk.in" />
+    <Text Include="../../thirdparty/owemdjee/guile/libguile/guile-snarf.in" />
+    <Text Include="../../thirdparty/owemdjee/guile/libguile/lightening/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/guile/libguile/lightening/ChangeLog.lightning" />
+    <Text Include="../../thirdparty/owemdjee/guile/libguile/lightening/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/guile/libguile/lightening/README.md" />
+    <Text Include="../../thirdparty/owemdjee/guile/libguile/lightening/lightening.am" />
+    <Text Include="../../thirdparty/owemdjee/guile/libguile/version.h.in" />
+    <Text Include="../../thirdparty/owemdjee/guile/m4/ChangeLog-2008" />
+    <Text Include="../../thirdparty/owemdjee/guile/meta/ChangeLog-2008" />
+    <Text Include="../../thirdparty/owemdjee/guile/meta/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/guile/meta/build-env.in" />
+    <Text Include="../../thirdparty/owemdjee/guile/meta/gdb-uninstalled-guile.in" />
+    <Text Include="../../thirdparty/owemdjee/guile/meta/guild.in" />
+    <Text Include="../../thirdparty/owemdjee/guile/meta/guile-3.0-uninstalled.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/guile/meta/guile-3.0.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/guile/meta/guile-config.in" />
+    <Text Include="../../thirdparty/owemdjee/guile/meta/guile.in" />
+    <Text Include="../../thirdparty/owemdjee/guile/meta/uninstalled-env.in" />
+    <Text Include="../../thirdparty/owemdjee/guile/module/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/guile/module/ice-9/ChangeLog-2008" />
+    <Text Include="../../thirdparty/owemdjee/guile/module/ice-9/README" />
+    <Text Include="../../thirdparty/owemdjee/guile/module/language/elisp/README" />
+    <Text Include="../../thirdparty/owemdjee/guile/module/language/elisp/boot.el" />
+    <Text Include="../../thirdparty/owemdjee/guile/module/oop/ChangeLog-2008" />
+    <Text Include="../../thirdparty/owemdjee/guile/module/scripts/ChangeLog-2008" />
+    <Text Include="../../thirdparty/owemdjee/guile/module/scripts/README" />
+    <Text Include="../../thirdparty/owemdjee/guile/module/sxml/sxml-match.ss" />
+    <Text Include="../../thirdparty/owemdjee/guile/module/sxml/upstream/COPYING.SSAX" />
+    <Text Include="../../thirdparty/owemdjee/guile/prebuilt/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/guile/prebuilt/i686-pc-linux-gnu/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/guile/prebuilt/mips-unknown-linux-gnu/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/guile/prebuilt/x86_64-unknown-linux-gnu/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/guile/stage0/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/guile/stage1/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/guile/stage2/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/guile/test-suite/ChangeLog-2008" />
+    <Text Include="../../thirdparty/owemdjee/guile/test-suite/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/guile/test-suite/README" />
+    <Text Include="../../thirdparty/owemdjee/guile/test-suite/lalr/run-guile-test.sh" />
+    <Text Include="../../thirdparty/owemdjee/guile/test-suite/standalone/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/guile/test-suite/standalone/README" />
+    <Text Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-fast-slot-ref.in" />
+    <Text Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-language.el" />
+    <Text Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-language.js" />
+    <Text Include="../../thirdparty/owemdjee/guile/test-suite/standalone/test-use-srfi.in" />
+    <Text Include="../../thirdparty/owemdjee/guile/test-suite/tests/match.test.upstream" />
+    <Text Include="../../thirdparty/owemdjee/guile/test-suite/tests/sxml-match-tests.ss" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

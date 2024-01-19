@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libchibi-scheme</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF41F37D}</ProjectGuid>
+    <RootNamespace>libchibi-scheme</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHIBI_SCHEME;CHIBI_SCHEME_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHIBI_SCHEME;CHIBI_SCHEME_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHIBI_SCHEME;CHIBI_SCHEME_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHIBI_SCHEME;CHIBI_SCHEME_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHIBI_SCHEME;CHIBI_SCHEME_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHIBI_SCHEME;CHIBI_SCHEME_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHIBI_SCHEME;CHIBI_SCHEME_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHIBI_SCHEME;CHIBI_SCHEME_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHIBI_SCHEME;CHIBI_SCHEME_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHIBI_SCHEME;CHIBI_SCHEME_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHIBI_SCHEME;CHIBI_SCHEME_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBCHIBI_SCHEME;CHIBI_SCHEME_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/bignum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/eval.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/gc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/gc_heap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/include/chibi/sexp-hufftabs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/lib/chibi/accept.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/lib/chibi/ast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/lib/chibi/crypto/sha2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/lib/chibi/disasm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/lib/chibi/filesystem_win32_shim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/lib/chibi/heap-stats.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/lib/chibi/io/port.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/lib/chibi/json.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/lib/chibi/optimize/profile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/lib/chibi/optimize/rest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/lib/chibi/signal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/lib/chibi/weak.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/lib/scheme/time.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/lib/srfi/144/lgamma_r.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/lib/srfi/151/bit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/lib/srfi/18/threads.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/lib/srfi/27/rand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/lib/srfi/39/param.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/lib/srfi/69/hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/lib/srfi/95/qsort.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/lib/srfi/98/env.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/opcodes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/opt/fcall.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/opt/plan9-opcodes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/plan9.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/sexp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/simplify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/tests/foreign/apply-loop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/tests/foreign/typeid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/tests/snow/repo3/pythagoras/hyp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/chibi-scheme/vm.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/chibi-scheme/include/chibi/bignum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/chibi-scheme/include/chibi/eval.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/chibi-scheme/include/chibi/features.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/chibi-scheme/include/chibi/gc_heap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/chibi-scheme/include/chibi/sexp-huff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/chibi-scheme/include/chibi/sexp-hufftabdefs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/chibi-scheme/include/chibi/sexp-hufftabs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/chibi-scheme/include/chibi/sexp-unhuff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/chibi-scheme/include/chibi/sexp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/chibi-scheme/opt/opcode_names.h" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/Makefile.libs" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/README-win32.md" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/README.libs" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/README.md" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/TODO" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/benchmarks/gabriel/difftimes.sh" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/benchmarks/gabriel/input.txt" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/benchmarks/gabriel/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/benchmarks/shootout/knucleotide-input.txt" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/benchmarks/shootout/knucleotide-output.txt" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/chibi-scheme.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/contrib/chibi-generate-install-meta-helper.cmake" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/contrib/chibi-genstatic-helper.cmake" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/contrib/chibi-scheme-config.cmake" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/contrib/chibi-scheme.pc.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/contrib/scheme-keywords.el" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/doc/chibi.scrbl" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/doc/lib/chibi/README" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/include/chibi/install.h.in" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/js/exported_functions.json" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/js/index.html" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/js/post.js" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/js/pre.js" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/basic/test00-fact-3.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/basic/test01-apply.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/basic/test02-closure.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/basic/test03-nested-closure.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/basic/test04-nested-let.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/basic/test05-internal-define.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/basic/test06-letrec.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/basic/test07-mutation.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/basic/test08-callcc.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/basic/test09-hygiene.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/basic/test10-unhygiene.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/build/build-opts.txt" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/build/build-tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/install/install-tests.pl" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/install/run-install-test.sh" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/memory/memory-tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/memory/test00-read-string.err-res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/memory/test00-read-string.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/memory/test01-read-symbol.err-res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/memory/test01-read-symbol.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/re-tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/command-line-tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test00-p.args" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test00-p.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test01-p-short.args" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test01-p-short.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test02-h.args" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test02-h.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test03-q.args" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test03-q.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test04-Q.args" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test04-Q.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test05-xscheme-r5rs.args" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test05-xscheme-r5rs.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test06-xscheme-base.args" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test06-xscheme-base.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test07-xchibi.args" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test07-xchibi.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test08-xchibi-primitive.args" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test08-xchibi-primitive.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test09-m.args" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test09-m.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test10-xscheme-base-m.args" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test10-xscheme-base-m.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test11-xscheme-r5rs-m.args" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test11-xscheme-r5rs-m.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test12-xchibi-m.args" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test12-xchibi-m.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test13-A-m.args" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test13-A-m.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test14-R.args" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test14-R.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test15-R-args.args" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test15-R-args.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test16-R-r.args" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test16-R-r.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test17-R-r-args.args" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test17-R-r-args.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test18-t.args" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test18-t.err-res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test18-t.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test19-l.args" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/run/test19-l.res" />
+    <Text Include="../../thirdparty/owemdjee/chibi-scheme/tests/snow/repo3/pingala/ganas.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -1,0 +1,1070 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libavro</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFFA39F7}</ProjectGuid>
+    <RootNamespace>libavro</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAVRO;AVRO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAVRO;AVRO_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAVRO;AVRO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAVRO;AVRO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAVRO;AVRO_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAVRO;AVRO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAVRO;AVRO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAVRO;AVRO_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAVRO;AVRO_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAVRO;AVRO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAVRO;AVRO_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAVRO;AVRO_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/examples/custom.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/examples/datafile.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/examples/generated.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/examples/generic.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/examples/resolving.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/examples/schemaload.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/examples/validating.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/BinaryDecoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/BinaryEncoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/Compiler.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/CustomAttributes.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/DataFile.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/FileStream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/Generic.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/GenericDatum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/LogicalType.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/Node.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/NodeImpl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/Resolver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/ResolverSchema.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/Schema.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/Stream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/Types.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/ValidSchema.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/Validator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/Zigzag.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/avrogencpp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/json/JsonDom.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/json/JsonIO.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/parsing/JsonCodec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/parsing/ResolvingDecoder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/parsing/Symbol.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/impl/parsing/ValidatingCodec.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/test/AvrogencppTestReservedWords.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/test/AvrogencppTests.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/test/CodecTests.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/test/CompilerTests.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/test/DataFileTests.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/test/JsonTests.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/test/LargeSchemaTests.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/test/SchemaTests.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/test/SpecificTests.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/test/StreamTests.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/test/buffertest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/test/precompile.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/test/testgentest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/test/testparser.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c++/test/unittest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/examples/quickstop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/allocation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/avroappend.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/avrocat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/avromod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/avropipe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/codec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/consume-binary.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/consumer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/datafile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/datum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/datum_equal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/datum_read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/datum_size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/datum_skip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/datum_validate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/datum_value.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/datum_write.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/dump.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/encoding_binary.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/errors.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/generic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/io.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/memoize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/resolved-reader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/resolved-writer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/resolver.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/schema.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/schema_equal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/schema_specific.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/st.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/value-hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/value-json.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/value-read.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/value-sizeof.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/value-write.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/value.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/src/wrapped-buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/generate_interop_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/performance.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_avro_1034.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_avro_1084.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_avro_1087.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_avro_1165.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_avro_1167.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_avro_1237.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_avro_1238.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_avro_1279.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_avro_1379.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_avro_1405.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_avro_1572.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_avro_1691.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_avro_1904.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_avro_1906.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_avro_766.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_avro_968.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_avro_984.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_avro_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_avro_errors_are_thread_safe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_avro_schema.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_avro_schema_names.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_avro_values.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_data_structures.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_interop_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/avro/lang/c/tests/test_refcount.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/AvroParse.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/AvroSerialize.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/AvroTraits.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/Compiler.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/Config.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/CustomAttributes.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/DataFile.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/Decoder.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/Encoder.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/Exception.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/Generic.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/GenericDatum.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/Layout.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/LogicalType.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/Node.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/NodeConcepts.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/NodeImpl.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/Parser.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/Reader.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/Resolver.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/ResolverSchema.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/ResolvingReader.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/Schema.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/SchemaResolution.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/Serializer.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/Specific.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/Stream.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/Types.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/ValidSchema.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/Validator.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/Writer.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/Zigzag.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/buffer/Buffer.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/buffer/BufferPrint.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/buffer/BufferReader.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/buffer/BufferStream.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/buffer/BufferStreambuf.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/buffer/detail/BufferDetail.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/api/buffer/detail/BufferDetailIterator.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/examples/cpx.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/examples/imaginary.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/impl/json/JsonDom.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/impl/json/JsonIO.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/impl/parsing/Symbol.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c++/impl/parsing/ValidatingCodec.hh" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/avro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/avro/allocation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/avro/basics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/avro/consumer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/avro/data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/avro/errors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/avro/generic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/avro/io.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/avro/legacy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/avro/msinttypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/avro/msstdint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/avro/platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/avro/refcount.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/avro/resolver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/avro/schema.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/avro/value.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/avro_generic_internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/avro_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/codec.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/datum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/dump.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/encoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/schema.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/src/st.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/avro/lang/c/tests/msdirent.h" />
+    <Image Include="../../thirdparty/owemdjee/avro/doc-deprecated/src/resources/images/apache_feather.gif" />
+    <Image Include="../../thirdparty/owemdjee/avro/doc-deprecated/src/resources/images/avro-logo.png" />
+    <Image Include="../../thirdparty/owemdjee/avro/doc-deprecated/src/resources/images/favicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/avro/doc/assets/icons/logo.png" />
+    <Text Include="../../thirdparty/owemdjee/avro/BUILD.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/DIST_README.txt" />
+    <Text Include="../../thirdparty/owemdjee/avro/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/avro/NOTICE.txt" />
+    <Text Include="../../thirdparty/owemdjee/avro/README.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/avro/composer.json" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc-deprecated/forrest.properties" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc-deprecated/src/cli.xconf" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc-deprecated/src/content/htmldocs/canonical-completeness.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc-deprecated/src/content/htmldocs/performance-testing.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc-deprecated/src/content/mddocs/refactoring-resolution.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/assets/scss/_styles_project.scss" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/assets/scss/_variables_project.scss" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/config.toml" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/_index.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/news/" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/news/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/news/avro-joins-apache.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/news/new-committer-david-mollitor.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/news/new-committer-martin-grigorov.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/news/new-committer-zoltan-csizmadia.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/news/new-pmc-martin-grigorov.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.0.0-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.1.0-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.10.0-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.10.1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.10.2-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.11.0-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.11.1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.2.0-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.3.0-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.3.1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.3.2-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.3.3-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.4.0-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.4.1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.5.0-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.5.1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.5.2-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.5.3-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.5.4-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.6.0-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.6.1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.6.2-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.6.3-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.7.0-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.7.1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.7.2-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.7.3-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.7.4-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.7.5-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.7.6-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.7.7-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.8.0-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.8.1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.8.2-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.9.0-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.9.1-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-1.9.2-released.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/blog/releases/avro-joins-apache.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/community/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/docs/++version++/Getting started (Java)/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/docs/++version++/Getting started (Python)/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/docs/++version++/IDL Language/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/docs/++version++/MapReduce guide/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/docs/++version++/SASL profile/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/docs/++version++/Specification/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/docs/++version++/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/docs/++version++/api-c++.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/docs/++version++/api-c.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/docs/++version++/api-csharp.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/docs/++version++/api-java.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/docs/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/project/Credits/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/project/Donate/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/project/Download/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/project/Events/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/project/How to contribute/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/project/License/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/project/Privacy policy/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/project/Security/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/project/Thanks/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/project/_index.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/content/en/search.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/docker-compose.yaml" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/examples/example.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/layouts/404.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/layouts/partials/favicons.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/layouts/partials/footer.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/layouts/partials/navbar-asf-links.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/layouts/partials/navbar-docs-selector.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/layouts/partials/navbar.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/layouts/project/baseof.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/layouts/project/baseof.print.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/layouts/project/list.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/layouts/project/list.print.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/layouts/project/single.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/layouts/shortcodes/avro_version.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/doc/package.json" />
+    <Text Include="../../thirdparty/owemdjee/avro/docker-compose.yml" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c++/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c++/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c++/FindSnappy.cmake" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c++/MSBUILD.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c++/MainPage.dox" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c++/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c++/README" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c++/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c++/examples/cpx.json" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c++/examples/imaginary.json" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c++/m4/README" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c++/parser/AvroLex.ll" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c++/parser/AvroYacc.yy" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c/CPackConfig.txt" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c/FindSnappy.cmake" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c/README" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c/README.maintaining_win32.txt" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c/cmake_avrolib.bat" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c/cmake_avrolib.sh" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c/cmake_pretty.cmake" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c/docs/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c/docs/index.txt" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c/src/avro-c.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/c/version.sh" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/Avro.dox" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/CODECOVERAGE.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/CodeAnalysis.src.globalconfig" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/CodeAnalysis.test.globalconfig" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/STYLING.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/common.props" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/benchmark/Benchmarks.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/benchmark/Program.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/benchmark/org/apache/avro/benchmark/big/mailing_address.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/benchmark/org/apache/avro/benchmark/big/userInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/benchmark/org/apache/avro/benchmark/small/test.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/codec/Avro.File.BZip2.Test/BZip2Tests.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/codec/Avro.File.BZip2/BZip2.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/codec/Avro.File.Snappy.Test/SnappyTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/codec/Avro.File.Snappy/" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/codec/Avro.File.Snappy/Crc32.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/codec/Avro.File.Snappy/Snappy.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/codec/Avro.File.XZ.Test/XZTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/codec/Avro.File.XZ/XZ.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/codec/Avro.File.Zstandard.Test/ZstandardTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/codec/Avro.File.Zstandard/Zstandard.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/codegen/AvroGen.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/codegen/app.config" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/GeneratedFiles/org/apache/avro/test/All.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/GeneratedFiles/org/apache/avro/test/AllCallback.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/GeneratedFiles/org/apache/avro/test/AllEnum.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/GeneratedFiles/org/apache/avro/test/AllTestRecord.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/GeneratedFiles/org/apache/avro/test/AllTestRecordPartial.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/GeneratedFiles/org/apache/avro/test/FixedTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/GeneratedFiles/org/apache/avro/test/Kind.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/GeneratedFiles/org/apache/avro/test/MD5.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/GeneratedFiles/org/apache/avro/test/Mail.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/GeneratedFiles/org/apache/avro/test/MailCallback.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/GeneratedFiles/org/apache/avro/test/Message.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/GeneratedFiles/org/apache/avro/test/Simple.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/GeneratedFiles/org/apache/avro/test/SimpleCallback.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/GeneratedFiles/org/apache/avro/test/TestError.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/GeneratedFiles/org/apache/avro/test/TestRecord.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/GeneratedFiles/org/apache/avro/test/TestRecordExtensions.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/GeneratedFiles/org/apache/avro/test/TestRecordWithUnion.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/HttpClientServerTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/LocalTransceiverTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/MailResponder.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/SerializationTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/SocketServerConcurrentExecutionTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/SocketServerTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/SocketServerWithCallbacksTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc.test/SocketTransceiverWhenServerStopsTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc/CallFuture.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc/CountdownLatch.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc/Generic/GenericRequestor.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc/Generic/GenericResponder.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc/HttpListenerServer.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc/HttpTransceiver.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc/LocalTransceiver.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc/OutputStream.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc/Requestor.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc/Responder.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc/RpcContext.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc/RpcRequest.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc/SocketServer.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc/SocketTransceiver.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc/Specific/SpecificRequestor.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc/Specific/SpecificResponder.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc/Transceiver.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc/org/apache/avro/ipc/HandshakeMatch.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc/org/apache/avro/ipc/HandshakeRequest.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc/org/apache/avro/ipc/HandshakeResponse.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/ipc/org/apache/avro/ipc/MD5.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/AvroDecimal.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/CodeGen/AvroRuntimeException.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/CodeGen/CodeGen.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/CodeGen/CodeGenException.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/CodeGen/CodeGenUtil.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/File/Codec.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/File/DataFileConstants.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/File/DataFileReader.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/File/DataFileWriter.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/File/DeflateCodec.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/File/Header.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/File/IFileReader.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/File/IFileWriter.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/File/NullCodec.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Generic/DatumReader.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Generic/DatumWriter.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Generic/GenericDatumReader.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Generic/GenericDatumWriter.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Generic/GenericEnum.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Generic/GenericFixed.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Generic/GenericReader.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Generic/GenericRecord.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Generic/GenericWriter.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Generic/PreresolvingDatumReader.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Generic/PreresolvingDatumWriter.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/GlobalSuppressions.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/IO/BinaryDecoder.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/IO/BinaryDecoder.netstandard2.0.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/IO/BinaryDecoder.notnetstandard2.0.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/IO/BinaryEncoder.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/IO/ByteBufferInputStream.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/IO/ByteBufferOutputStream.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/IO/Decoder.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/IO/Encoder.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/IO/ICallback.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/IO/InputStream.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/IO/JsonDecoder.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/IO/JsonEncoder.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/IO/OutputStream.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/IO/Parsing/JsonGrammarGenerator.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/IO/Parsing/Parser.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/IO/Parsing/SkipParser.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/IO/Parsing/Symbol.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/IO/Parsing/ValidatingGrammarGenerator.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/IO/ParsingDecoder.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/IO/ParsingEncoder.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/IO/Resolver.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Protocol/Message.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Protocol/Protocol.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Protocol/ProtocolParseException.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Reflect/ArrayHelper.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Reflect/ArraySchemaExtensions.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Reflect/AvroFieldAttribute.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Reflect/ClassCache.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Reflect/DateTimeOffsetToLongConverter.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Reflect/DotnetClass.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Reflect/DotnetProperty.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Reflect/EnumCache.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Reflect/FuncFieldConverter.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Reflect/IAvroFieldConverter.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Reflect/README.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Reflect/ReflectDefaultReader.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Reflect/ReflectDefaultWriter.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Reflect/ReflectReader.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Reflect/ReflectWriter.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Reflect/TypedFieldConverter.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Schema/Aliases.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Schema/ArraySchema.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Schema/AvroException.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Schema/AvroTypeException.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Schema/EnumSchema.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Schema/Field.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Schema/FixedSchema.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Schema/JsonHelper.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Schema/LogicalSchema.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Schema/MapSchema.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Schema/NamedSchema.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Schema/PrimitiveSchema.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Schema/Property.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Schema/RecordSchema.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Schema/Schema.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Schema/SchemaName.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Schema/SchemaNormalization.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Schema/SchemaParseException.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Schema/UnionSchema.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Schema/UnnamedSchema.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Specific/ObjectCreator.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Specific/SpecificDatumReader.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Specific/SpecificDatumWriter.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Specific/SpecificException.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Specific/SpecificFixed.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Specific/SpecificProtocol.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Specific/SpecificReader.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Specific/SpecificRecord.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Specific/SpecificWriter.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Util/Date.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Util/Decimal.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Util/LocalTimestampMicrosecond.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Util/LocalTimestampMillisecond.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Util/LogicalType.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Util/LogicalTypeFactory.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Util/LogicalUnixEpochType.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Util/TimeMicrosecond.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Util/TimeMillisecond.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Util/TimestampMicrosecond.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Util/TimestampMillisecond.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/main/Util/Uuid.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/msbuild/AvroBuilldTask.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/msbuild/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/perf/PerfTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/perf/app.config" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/perf/com/foo/A.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/perf/com/foo/Complex.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/perf/com/foo/MyEnum.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/perf/com/foo/MyFixed.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/perf/com/foo/Narrow.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/perf/com/foo/Simple.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/perf/com/foo/Wide.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/perf/com/foo/newRec.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/AvroDecimalTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/AvroGen/AvroGenHelper.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/AvroGen/AvroGenProtocolTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/AvroGen/AvroGenSchemaTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/AvroGen/AvroGenToolTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/CodGen/CodeGenTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/File/FileTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Generic/GenericEnumTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Generic/GenericRecordTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Generic/GenericTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/IO/BinaryCodecTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/IO/JsonCodecTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Interop/InteropDataConstants.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Interop/InteropDataGenerator.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Interop/InteropDataTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Properties/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Protocol/ProtocolParseExceptionTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Protocol/ProtocolTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Reflect/CompareUtils.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Reflect/TestArray.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Reflect/TestFixed.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Reflect/TestFromAvroProject.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Reflect/TestLogMessage.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Reflect/TestLogicalSchema.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Reflect/TestRecursive.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Reflect/TestReflect.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Reflect/TestUnion.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Schema/AliasTest.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Schema/AliasesTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Schema/ArraySchemaTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Schema/SchemaNormalizationTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Schema/SchemaTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Specific/ArrayItem.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Specific/ComplexTypeWithReservedWords.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Specific/DoubleLongUnionRecord.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Specific/EmbeddedGenericRecordUser.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Specific/EmbeddedGenericsRecord.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Specific/ObjectCreatorTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Specific/Record.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Specific/RecordWithOptionalLogicalType.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Specific/SpecificTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Util/LogicalTypeTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Utils/CaseFinder.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Utils/CaseFinderTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/src/apache/test/Utils/VersionTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/csharp/versions.props" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/archetypes/avro-service-archetype/src/test/integration/projects/basic/archetype.properties" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/archetypes/avro-service-archetype/src/test/integration/projects/basic/goal.txt" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/avro/src/main/java/org/apache/avro/data/package.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/avro/src/main/java/org/apache/avro/file/package.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/avro/src/main/java/org/apache/avro/generic/package.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/avro/src/main/java/org/apache/avro/io/package.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/avro/src/main/java/org/apache/avro/io/parsing/doc-files/parsing.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/avro/src/main/java/org/apache/avro/io/parsing/package.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/avro/src/main/java/org/apache/avro/package.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/avro/src/main/java/org/apache/avro/path/package.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/avro/src/main/java/org/apache/avro/reflect/package.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/avro/src/main/java/org/apache/avro/specific/package.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/avro/src/main/java/org/apache/avro/util/package.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/avro/src/main/java/overview.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/avro/src/test/resources/META-INF/services/org.apache.avro.LogicalTypes$LogicalTypeFactory" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/avro/src/test/resources/schema-location-read.json" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/avro/src/test/resources/schema-location-write.json" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/avro/src/test/resources/schema-location.json" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/compiler/src/test/idl/AnnotationOnTypeReference.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/compiler/src/test/idl/cycle.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/compiler/src/test/idl/input/baseball.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/compiler/src/test/idl/input/comments.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/compiler/src/test/idl/input/cycle.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/compiler/src/test/idl/input/forward_ref.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/compiler/src/test/idl/input/import.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/compiler/src/test/idl/input/interop.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/compiler/src/test/idl/input/mr_events.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/compiler/src/test/idl/input/namespaces.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/compiler/src/test/idl/input/nestedimport.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/compiler/src/test/idl/input/reservedwords.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/compiler/src/test/idl/input/simple.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/compiler/src/test/idl/input/unicode.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/compiler/src/test/idl/input/uuid.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/compiler/src/test/idl/logicalTypes.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/compiler/src/test/idl/putOnClassPath/OnTheClasspath.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/compiler/src/test/idl/putOnClassPath/folder/relativePath.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/compiler/src/test/idl/putOnClassPath/nestedtypes.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/grpc/src/test/avro/TestService.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/integration-test/codegen-test/src/test/resources/avro/custom_conversion_idl.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/ipc/src/main/java/org/apache/avro/ipc/package.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/ipc/src/main/java/org/apache/avro/ipc/stats/package.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/ipc/src/main/velocity/org/apache/avro/ipc/stats/static/avro.css" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/ipc/src/main/velocity/org/apache/avro/ipc/stats/static/avro.js" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/ipc/src/main/velocity/org/apache/avro/ipc/stats/static/g.bar.js" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/ipc/src/main/velocity/org/apache/avro/ipc/stats/static/jquery-1.4.2.min.js" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/ipc/src/main/velocity/org/apache/avro/ipc/stats/static/jquery.tipsy.js" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/ipc/src/main/velocity/org/apache/avro/ipc/stats/static/protovis-r3.2.js" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/ipc/src/main/velocity/org/apache/avro/ipc/stats/static/tipsy.css" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/ipc/src/main/velocity/org/apache/avro/ipc/stats/static/tipsy.js" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/mapred/src/main/java/org/apache/avro/mapred/package.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/mapred/src/main/java/org/apache/avro/mapred/tether/package.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/mapred/src/test/resources/log4j.properties" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/mapred/src/test/resources/org/apache/avro/mapreduce/mapreduce-test-input.txt" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/maven-plugin/src/test/avro/AvdlClasspathImport.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/maven-plugin/src/test/avro/User.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/perf/README.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/protobuf/src/main/java/org/apache/avro/protobuf/package.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/thrift/README.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/thrift/src/main/java/org/apache/avro/thrift/package.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/tools/src/main/java/org/apache/avro/tool/package.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/tools/src/main/resources/META-INF/LICENSE.txt" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/tools/src/main/resources/META-INF/NOTICE.txt" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/tools/src/main/resources/log4j.properties" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/tools/src/test/idl/protocol.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/trevni/avro/src/main/java/org/apache/trevni/avro/package.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/trevni/avro/src/test/cases/dremel/input.json" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/trevni/avro/src/test/cases/dremel/sub1/sub.json" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/trevni/avro/src/test/cases/enum/input.json" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/trevni/core/src/main/java/org/apache/trevni/package.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/trevni/core/src/main/java/overview.html" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/java/trevni/doc/resources/css/site.css" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/README.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/doc/API.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/doc/Advanced-usage.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/doc/Home.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/etc/browser/avro.js" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/etc/browser/crypto.js" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/etc/deprecated/Gruntfile.js" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/etc/deprecated/README" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/etc/deprecated/test_validator.js" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/etc/deprecated/validator.js" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/lib/files.js" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/lib/index.js" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/lib/protocols.js" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/lib/schemas.js" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/lib/utils.js" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/package-lock.json" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/package.json" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/test/interop_data_generate.js" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/test/interop_data_test.js" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/test/mocha.opts" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/test/test_files.js" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/test/test_protocols.js" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/test/test_schemas.js" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/js/test/test_utils.js" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/perl/Changes" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/perl/Makefile.PL" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/perl/README" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/perl/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/php/README.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/php/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/php/monorepo.json" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/MANIFEST.in" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/README.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/__main__.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/codecs.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/compatibility.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/constants.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/datafile.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/errors.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/io.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/ipc.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/name.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/protocol.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/schema.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/test/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/test/gen_interop_data.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/test/mock_tether_parent.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/test/sample_http_client.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/test/sample_http_server.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/test/test_bench.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/test/test_compatibility.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/test/test_datafile.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/test/test_datafile_interop.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/test/test_init.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/test/test_io.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/test/test_ipc.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/test/test_protocol.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/test/test_schema.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/test/test_script.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/test/test_tether_task.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/test/test_tether_task_runner.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/test/test_tether_word_count.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/test/word_count_task.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/tether/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/tether/tether_task.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/tether/tether_task_runner.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/tether/util.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/timezones.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/tool.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/avro/utils.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/pyproject.toml" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/setup.cfg" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/py/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/ruby/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/README.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/README.tpl" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/README.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/benches/serde.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/benches/serde_json.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/benches/single.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/examples/benchmark.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/examples/generate_interop_data.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/examples/test_interop_data.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/examples/test_interop_single_object_encoding.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/examples/to_value.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/src/codec.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/src/de.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/src/decimal.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/src/decode.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/src/duration.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/src/encode.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/src/error.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/src/rabin.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/src/reader.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/src/schema.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/src/schema_compatibility.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/src/ser.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/src/types.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/src/util.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/src/writer.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/tests/append_to_existing.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/tests/io.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro/tests/schema.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro_derive/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro_derive/README.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro_derive/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro_derive/tests/derive.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro_test_helper/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro_test_helper/README.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro_test_helper/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/avro_test_helper/src/logger.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/migration_guide.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/rustfmt.toml" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/wasm-demo/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/wasm-demo/README.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/wasm-demo/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/lang/rust/wasm-demo/tests/demos.rs" />
+    <Text Include="../../thirdparty/owemdjee/avro/share/VERSION.txt" />
+    <Text Include="../../thirdparty/owemdjee/avro/share/docker/run-tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/avro/share/editors/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/avro/share/precommit/README.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/share/precommit/buildtest.sh" />
+    <Text Include="../../thirdparty/owemdjee/avro/share/test/data/messageV1/README.md" />
+    <Text Include="../../thirdparty/owemdjee/avro/share/test/data/messageV1/test_message.bin" />
+    <Text Include="../../thirdparty/owemdjee/avro/share/test/data/schema-tests.txt" />
+    <Text Include="../../thirdparty/owemdjee/avro/share/test/data/weather.json" />
+    <Text Include="../../thirdparty/owemdjee/avro/share/test/interop/bin/test_rpc_interop.sh" />
+    <Text Include="../../thirdparty/owemdjee/avro/share/test/run-perf.sh" />
+    <Text Include="../../thirdparty/owemdjee/avro/share/test/schemas/contexts.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/share/test/schemas/echo.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/share/test/schemas/http.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/share/test/schemas/nestedNullable.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/share/test/schemas/schemaevolution.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/share/test/schemas/social.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/share/test/schemas/specialtypes.avdl" />
+    <Text Include="../../thirdparty/owemdjee/avro/share/test/schemas/stringables.avdl" />
+    <Xml Include="../../thirdparty/owemdjee/avro/doc-deprecated/build.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/doc-deprecated/src/content/xdocs/gettingstartedjava.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/doc-deprecated/src/content/xdocs/gettingstartedpython.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/doc-deprecated/src/content/xdocs/idl.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/doc-deprecated/src/content/xdocs/index.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/doc-deprecated/src/content/xdocs/mr.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/doc-deprecated/src/content/xdocs/sasl.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/doc-deprecated/src/content/xdocs/site.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/doc-deprecated/src/content/xdocs/spec.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/doc-deprecated/src/content/xdocs/tabs.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/doc-deprecated/src/skinconf.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/doc/examples/java-example/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/doc/examples/mr-example/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/android/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/archetypes/avro-service-archetype/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/archetypes/avro-service-archetype/src/main/pom/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/archetypes/avro-service-archetype/src/main/resources/META-INF/maven/archetype-metadata.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/archetypes/avro-service-archetype/src/main/resources/archetype-resources/src/main/resources/logback.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/archetypes/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/avro/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/checkstyle.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/compiler/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/eclipse-java-formatter.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/grpc/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/integration-test/codegen-test/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/integration-test/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/integration-test/test-custom-conversions/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/ipc-jetty/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/ipc-netty/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/ipc/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/mapred/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/maven-plugin/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/maven-plugin/src/main/resources/META-INF/m2e/lifecycle-mapping-metadata.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/maven-plugin/src/test/resources/unit/idl/pom-injecting-velocity-tools.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/maven-plugin/src/test/resources/unit/idl/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/maven-plugin/src/test/resources/unit/protocol/induce-pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/maven-plugin/src/test/resources/unit/protocol/pom-injecting-velocity-tools.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/maven-plugin/src/test/resources/unit/protocol/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/maven-plugin/src/test/resources/unit/schema/induce-pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/maven-plugin/src/test/resources/unit/schema/pom-injecting-velocity-tools.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/maven-plugin/src/test/resources/unit/schema/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/perf/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/protobuf/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/suppressions.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/thrift/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/tools/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/trevni/avro/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/trevni/core/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/trevni/doc/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/trevni/doc/site.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/java/trevni/pom.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/lang/php/phpunit.xml" />
+    <Xml Include="../../thirdparty/owemdjee/avro/pom.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

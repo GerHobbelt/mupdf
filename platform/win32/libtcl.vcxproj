@@ -1,0 +1,999 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libtcl</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFC8B4A0}</ProjectGuid>
+    <RootNamespace>libtcl</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTCL;TCL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTCL;TCL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTCL;TCL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTCL;TCL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTCL;TCL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTCL;TCL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTCL;TCL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTCL;TCL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTCL;TCL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTCL;TCL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTCL;TCL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTCL;TCL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/fake-rfc2553.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/gettod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/mkstemp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/strncasecmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/waitpid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/adler32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/compress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/blast/blast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/infback9/infback9.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/infback9/inftree9.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/inflate86/inffas86.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/iostream/test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/iostream/zfstream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/iostream2/zstream_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/iostream3/test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/iostream3/zfstream.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/minizip/ioapi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/minizip/iowin32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/minizip/miniunz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/minizip/minizip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/minizip/mztools.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/minizip/unzip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/minizip/zip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/puff/puff.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/puff/pufftest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/testzlib/testzlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/untgz/untgz.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/crc32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/deflate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/examples/enough.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/examples/fitblk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/examples/gun.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/examples/gzappend.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/examples/gzjoin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/examples/gzlog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/examples/gznorm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/examples/zpipe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/examples/zran.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/gzclose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/gzlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/gzread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/gzwrite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/infback.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/inffast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/inflate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/inftrees.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/test/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/test/infcover.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/test/minigzip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/trees.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/uncompr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/zutil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/regc_color.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/regc_cvec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/regc_lex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/regc_locale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/regc_nfa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/regcomp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/rege_dfa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/regerror.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/regexec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/regfree.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/regfronts.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclAlloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclArithSeries.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclAssembly.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclAsync.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclBasic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclBinary.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclCkalloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclClock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclCmdAH.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclCmdIL.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclCmdMZ.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclCompCmds.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclCompCmdsGR.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclCompCmdsSZ.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclCompExpr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclCompile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclConfig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclDate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclDictObj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclDisassemble.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclEncoding.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclEnsemble.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclEnv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclEvent.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclExecute.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclFCmd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclFileName.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclGet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclHash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclHistory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclIO.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclIOCmd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclIOGT.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclIORChan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclIORTrans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclIOSock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclIOUtil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclIndexObj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclInterp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclLink.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclListObj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclLiteral.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclLoad.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclLoadNone.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclMain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclNamesp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclNotify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclOO.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclOOBasic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclOOCall.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclOODefineCmds.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclOOInfo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclOOMethod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclOOStubInit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclOOStubLib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclObj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclOptimize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclPanic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclParse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclPathObj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclPipe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclPkg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclPkgConfig.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclPosixStr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclPreserve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclProc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclProcess.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclRegexp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclResolve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclResult.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclScan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclStrToD.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclStringObj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclStubCall.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclStubInit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclStubLib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclStubLibTbl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclTest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclTestABSList.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclTestObj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclTestProcBodyObj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclThread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclThreadAlloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclThreadJoin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclThreadStorage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclThreadTest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclTimer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclTomMathInterface.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclTomMathStubLib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclTrace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclUniData.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclUtf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclUtil.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclVar.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclZipfs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/generic/tclZlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_cutoffs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_deprecated.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_2expt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_abs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_add.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_add_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_addmod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_and.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_clamp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_clear.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_clear_multi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_cmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_cmp_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_cmp_mag.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_cnt_lsb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_complement.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_copy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_count_bits.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_decr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_div.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_div_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_div_2d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_div_3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_div_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_dr_is_modulus.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_dr_reduce.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_dr_setup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_error_to_string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_exch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_expt_u32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_exptmod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_exteuclid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_fread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_from_sbin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_from_ubin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_fwrite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_gcd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_get_double.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_get_i32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_get_i64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_get_l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_get_ll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_get_mag_u32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_get_mag_u64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_get_mag_ul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_get_mag_ull.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_grow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_incr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init_copy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init_i32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init_i64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init_l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init_ll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init_multi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init_set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init_size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init_u32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init_u64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init_ul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_init_ull.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_invmod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_is_square.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_iseven.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_isodd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_kronecker.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_lcm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_log_u32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_lshd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_mod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_mod_2d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_mod_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_montgomery_calc_normalization.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_montgomery_reduce.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_montgomery_setup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_mul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_mul_2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_mul_2d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_mul_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_mulmod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_neg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_or.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_pack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_pack_count.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_prime_fermat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_prime_frobenius_underwood.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_prime_is_prime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_prime_miller_rabin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_prime_next_prime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_prime_rabin_miller_trials.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_prime_rand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_prime_strong_lucas_selfridge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_radix_size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_radix_smap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_rand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_read_radix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_reduce.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_reduce_2k.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_reduce_2k_l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_reduce_2k_setup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_reduce_2k_setup_l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_reduce_is_2k.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_reduce_is_2k_l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_reduce_setup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_root_u32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_rshd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_sbin_size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_set_double.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_set_i32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_set_i64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_set_l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_set_ll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_set_u32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_set_u64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_set_ul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_set_ull.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_shrink.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_signed_rsh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_sqr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_sqrmod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_sqrt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_sqrtmod_prime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_sub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_sub_d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_submod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_to_radix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_to_sbin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_to_ubin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_ubin_size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_unpack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_xor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_mp_zero.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_prime_tab.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_add.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_balance_mul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_exptmod.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_exptmod_fast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_get_bit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_invmod_fast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_invmod_slow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_karatsuba_mul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_karatsuba_sqr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_montgomery_reduce_fast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_mul_digs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_mul_digs_fast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_mul_high_digs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_mul_high_digs_fast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_prime_is_divisible.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_rand_jenkins.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_rand_platform.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_reverse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_sqr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_sqr_fast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_sub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_toom_mul.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/libtommath/bn_s_mp_toom_sqr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/macosx/tclMacOSXBundle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/macosx/tclMacOSXFCmd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/macosx/tclMacOSXNotify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/tools/encoding/txt2enc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/tools/tsdPerf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/dltest/embtest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/dltest/pkga.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/dltest/pkgb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/dltest/pkgc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/dltest/pkgd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/dltest/pkge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/dltest/pkgooa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/dltest/pkgt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/dltest/pkgua.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/dltest/pkgπ.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclAppInit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclEpollNotfy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclKqueueNotfy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclLoadAix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclLoadDl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclLoadDyld.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclLoadNext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclLoadOSF.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclLoadShl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclSelectNotfy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclUnixChan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclUnixCompat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclUnixEvent.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclUnixFCmd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclUnixFile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclUnixInit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclUnixNotfy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclUnixPipe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclUnixSock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclUnixTest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclUnixThrd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclUnixTime.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclXtNotify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/unix/tclXtTest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/win/cat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/win/nmakehlp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/win/tclAppInit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/win/tclWin32Dll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/win/tclWinChan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/win/tclWinConsole.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/win/tclWinDde.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/win/tclWinError.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/win/tclWinFCmd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/win/tclWinFile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/win/tclWinInit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/win/tclWinLoad.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/win/tclWinNotify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/win/tclWinPanic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/win/tclWinPipe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/win/tclWinReg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/win/tclWinSerial.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/win/tclWinSock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/win/tclWinTest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/win/tclWinThrd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/tcl/win/tclWinTime.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/dlfcn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/fake-rfc2553.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/blast/blast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/infback9/infback9.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/infback9/inffix9.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/infback9/inflate9.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/infback9/inftree9.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/iostream/zfstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/iostream2/zstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/iostream3/zfstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/minizip/crypt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/minizip/ioapi.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/minizip/iowin32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/minizip/mztools.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/minizip/tinydir.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/minizip/unzip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/minizip/zip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/puff/puff.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/crc32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/deflate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/examples/gzlog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/examples/zran.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/gzguts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/inffast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/inffixed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/inflate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/inftrees.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/os400/zlib.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/trees.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/zconf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/zlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/compat/zlib/zutil.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/regcustom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/regerrs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/regex.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/regguts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tcl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclCompile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclDecls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclFileSystem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclIO.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclInt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclIntDecls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclIntPlatDecls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclOO.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclOODecls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclOOInt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclOOIntDecls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclOOScript.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclParse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclPlatDecls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclPort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclRegexp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclStringRep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclStringTrim.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclTomMath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclTomMathDecls.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/generic/tclTomMathInt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/libtommath/tommath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/libtommath/tommath_class.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/libtommath/tommath_cutoffs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/libtommath/tommath_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/libtommath/tommath_superclass.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/unix/tclUnixPort.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/win/tclWinInt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tcl/win/tclWinPort.h" />
+    <Image Include="../../thirdparty/owemdjee/tcl/tools/feather.bmp" />
+    <Image Include="../../thirdparty/owemdjee/tcl/tools/white.bmp" />
+    <Image Include="../../thirdparty/owemdjee/tcl/win/tclsh.ico" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/vstudio/vc10/zlib.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/vstudio/vc11/zlib.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/vstudio/vc12/zlib.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/vstudio/vc14/zlib.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/vstudio/vc9/zlib.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/tcl/compat/zlib/win32/zlib1.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/tcl/win/tcl.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/tcl/win/tclsh.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/tcl/win/tcltest.rc" />
+    <Text Include="../../thirdparty/owemdjee/tcl/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tcl/changes" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/README" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/README" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/amiga/Makefile.sas" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/README.contrib" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/ada/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/ada/zlib-streams.ads" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/ada/zlib-thin.ads" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/ada/zlib.ads" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/asm686/match.S" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/blast/README" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/blast/test.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/delphi/ZLib.pas" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/delphi/ZLibConst.pas" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/delphi/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/dotzlib/DotZLib/AssemblyInfo.cs" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/dotzlib/DotZLib/ChecksumImpl.cs" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/dotzlib/DotZLib/CircularBuffer.cs" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/dotzlib/DotZLib/CodecBase.cs" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/dotzlib/DotZLib/Deflater.cs" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/dotzlib/DotZLib/DotZLib.cs" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/dotzlib/DotZLib/GZipStream.cs" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/dotzlib/DotZLib/Inflater.cs" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/dotzlib/DotZLib/UnitTests.cs" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/dotzlib/LICENSE_1_0.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/dotzlib/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/gcc_gvmat64/gvmat64.S" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/infback9/README" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/iostream3/README" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/iostream3/TODO" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/minizip/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/minizip/MiniZip64_Changes.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/minizip/MiniZip64_info.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/minizip/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/minizip/minizip.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/pascal/example.pas" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/pascal/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/pascal/zlibpas.pas" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/puff/README" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/testzlib/testzlib.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/untgz/Makefile.msc" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/vstudio/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/vstudio/vc10/miniunz.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/vstudio/vc10/minizip.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/vstudio/vc10/testzlib.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/vstudio/vc10/testzlibdll.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/vstudio/vc10/zlibstat.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/contrib/vstudio/vc10/zlibvc.vcxproj.filters" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/examples/README.examples" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/examples/zlib_how.html" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/msdos/Makefile.emx" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/msdos/Makefile.msc" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/nintendods/README" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/old/Makefile.emx" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/old/Makefile.riscos" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/old/README" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/old/descrip.mms" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/old/visual-basic.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/os400/README400" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/os400/make.sh" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/win32/DLL_FAQ.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/win32/Makefile.gcc" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/win32/Makefile.msc" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/win32/README-WIN32.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/win32/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/win32/USAGE.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/win32/VisualC.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/win32/zlib1.dll" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/win64-arm/zlib1.dll" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/win64/zlib1.dll" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/zconf.h.cmakein" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/zconf.h.in" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/zlib.3.pdf" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/zlib.pc.cmakein" />
+    <Text Include="../../thirdparty/owemdjee/tcl/compat/zlib/zlib.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/tcl/doc/man.macros" />
+    <Text Include="../../thirdparty/owemdjee/tcl/generic/README" />
+    <Text Include="../../thirdparty/owemdjee/tcl/generic/tcl.decls" />
+    <Text Include="../../thirdparty/owemdjee/tcl/generic/tclGetDate.y" />
+    <Text Include="../../thirdparty/owemdjee/tcl/generic/tclInt.decls" />
+    <Text Include="../../thirdparty/owemdjee/tcl/generic/tclOO.decls" />
+    <Text Include="../../thirdparty/owemdjee/tcl/generic/tclTomMath.decls" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/auto.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/clock.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/cookiejar/cookiejar.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/cookiejar/idna.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/cookiejar/pkgIndex.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/dde/pkgIndex.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/foreachline.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/history.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/http/http.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/http/pkgIndex.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/init.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/install.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/manifest.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/msgcat/msgcat.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/msgcat/pkgIndex.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/opt/optparse.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/opt/pkgIndex.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/package.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/parray.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/platform/pkgIndex.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/platform/platform.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/platform/shell.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/readfile.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/registry/pkgIndex.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/safe.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/tcltest/pkgIndex.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/tcltest/tcltest.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/tm.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/word.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/library/writefile.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/libtommath/README.md" />
+    <Text Include="../../thirdparty/owemdjee/tcl/libtommath/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/tcl/libtommath/changes.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/libtommath/helper.pl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/libtommath/libtommath.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/tcl/libtommath/makefile.msvc" />
+    <Text Include="../../thirdparty/owemdjee/tcl/libtommath/makefile.unix" />
+    <Text Include="../../thirdparty/owemdjee/tcl/libtommath/win32/libtommath.dll" />
+    <Text Include="../../thirdparty/owemdjee/tcl/libtommath/win64-arm/libtommath.dll" />
+    <Text Include="../../thirdparty/owemdjee/tcl/libtommath/win64/libtommath.dll" />
+    <Text Include="../../thirdparty/owemdjee/tcl/license.terms" />
+    <Text Include="../../thirdparty/owemdjee/tcl/macosx/README" />
+    <Text Include="../../thirdparty/owemdjee/tcl/macosx/Tcl-Common.xcconfig" />
+    <Text Include="../../thirdparty/owemdjee/tcl/macosx/Tcl-Debug.xcconfig" />
+    <Text Include="../../thirdparty/owemdjee/tcl/macosx/Tcl-Info.plist.in" />
+    <Text Include="../../thirdparty/owemdjee/tcl/macosx/Tcl-Release.xcconfig" />
+    <Text Include="../../thirdparty/owemdjee/tcl/macosx/Tclsh-Info.plist.in" />
+    <Text Include="../../thirdparty/owemdjee/tcl/macosx/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/tcl/pkgs/README" />
+    <Text Include="../../thirdparty/owemdjee/tcl/pkgs/package.list.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests-perf/clock.perf.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests-perf/comparePerf.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests-perf/listPerf.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests-perf/test-performance.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests-perf/timer-event.perf.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/README" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/all.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/auto-files.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/auto0/auto1/file1.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/auto0/auto1/package1.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/auto0/auto1/pkgIndex.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/auto0/auto2/file2.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/auto0/auto2/package2.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/auto0/auto2/pkgIndex.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/encodingVectors.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/httpProxySquidConfigForWindowsDiladele.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/httpTest.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/httpTestScript.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/httpd11.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/icuUcmTests.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/internals.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/pkgIndex.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/remote.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/tcltests.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/twapiTlsPlus.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/README" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/broken.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/empty.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/incons-cdoffset.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/incons-central-crc.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/incons-central-magic-bad.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/incons-file-count-high.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/incons-file-count-low.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/incons-local-crc.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/incons-local-magic-bad.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/junk-at-end.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/junk-at-start.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/streamed.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/test-overlay.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/test-password.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/test-password2.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/test-paths.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/test-zip-in-zip.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/test.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/testbzip2.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/testdeflated2.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/testfile-UTF8.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/testfile-cp437.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/testfile-lzma.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/testfile-nocompression.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/testfile-xz.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/testfile-zstd.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/teststored.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tests/zipfiles/zip64.zip" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/README" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/addVerToFile.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/checkLibraryDoc.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/README" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/ascii.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/big5.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cns11643.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp1250.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp1251.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp1252.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp1253.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp1254.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp1255.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp1256.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp1257.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp1258.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp437.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp737.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp775.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp850.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp852.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp855.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp857.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp860.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp861.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp862.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp863.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp864.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp865.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp866.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp869.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp874.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp932.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp936.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp949.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/cp950.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/dingbats.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/ebcdic.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/gb12345.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/gb1988.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/gb2312.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/iso8859-1.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/iso8859-10.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/iso8859-11.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/iso8859-13.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/iso8859-14.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/iso8859-15.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/iso8859-16.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/iso8859-2.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/iso8859-3.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/iso8859-4.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/iso8859-5.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/iso8859-6.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/iso8859-7.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/iso8859-8.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/iso8859-9.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/jis0201.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/jis0208.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/jis0212.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/koi8-r.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/ksc5601.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/macCentEuro.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/macCroatian.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/macCyrillic.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/macDingbats.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/macGreek.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/macIceland.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/macJapan.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/macRoman.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/macRomania.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/macThai.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/macTurkish.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/macUkraine.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/shiftjis.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/symbol.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/encoding/tis-620.txt" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/findBadExternals.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/genStubs.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/index.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/installData.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/installVfs.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/loadICU.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/makeHeader.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/makeTestCases.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/mkVfs.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/mkdepend.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/regexpTestLib.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/tclOOScript.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/tclZIC.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/tcltk-man2html-utils.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/tcltk-man2html.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/tsdPerf.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/uniClass.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/tools/uniParse.tcl" />
+    <Text Include="../../thirdparty/owemdjee/tcl/unix/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/tcl/unix/README" />
+    <Text Include="../../thirdparty/owemdjee/tcl/unix/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/tcl/unix/dltest/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/tcl/unix/dltest/README" />
+    <Text Include="../../thirdparty/owemdjee/tcl/unix/tcl.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/tcl/unix/tclConfig.h.in" />
+    <Text Include="../../thirdparty/owemdjee/tcl/unix/tclConfig.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/tcl/unix/tclooConfig.sh" />
+    <Text Include="../../thirdparty/owemdjee/tcl/win/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/tcl/win/README" />
+    <Text Include="../../thirdparty/owemdjee/tcl/win/buildall.vc.bat" />
+    <Text Include="../../thirdparty/owemdjee/tcl/win/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/tcl/win/gitmanifest.in" />
+    <Text Include="../../thirdparty/owemdjee/tcl/win/makefile.vc" />
+    <Text Include="../../thirdparty/owemdjee/tcl/win/rules-ext.vc" />
+    <Text Include="../../thirdparty/owemdjee/tcl/win/rules.vc" />
+    <Text Include="../../thirdparty/owemdjee/tcl/win/svnmanifest.in" />
+    <Text Include="../../thirdparty/owemdjee/tcl/win/targets.vc" />
+    <Text Include="../../thirdparty/owemdjee/tcl/win/tclConfig.sh.in" />
+    <Text Include="../../thirdparty/owemdjee/tcl/win/tclUuid.h.in" />
+    <Text Include="../../thirdparty/owemdjee/tcl/win/tclooConfig.sh" />
+    <Text Include="../../thirdparty/owemdjee/tcl/win/tclsh.exe.manifest.in" />
+    <Xml Include="../../thirdparty/owemdjee/tcl/compat/zlib/treebuild.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

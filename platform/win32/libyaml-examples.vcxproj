@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -113,8 +113,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBYAML_EXAMPLES;YAML_EXAMPLES_STATICLIB;CHM_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -233,17 +233,61 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml-examples/emit.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml-examples/fruit.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml-examples/parse.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/libyaml-examples/scan.c" />
-    <ClInclude Include="../../thirdparty/owemdjee/libyaml-examples/fruit.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/libyaml-examples/monolithic_examples.h" />
-    <Text Include="../../thirdparty/owemdjee/libyaml-examples/README.md" />
-    <Text Include="../../thirdparty/owemdjee/libyaml-examples/fruit-long.yaml" />
-    <Text Include="../../thirdparty/owemdjee/libyaml-examples/fruit.yaml" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/src/api.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/src/dumper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/src/emitter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/src/loader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/src/parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/src/reader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/src/scanner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/src/writer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/example-deconstructor-alt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/example-deconstructor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/example-reformatter-alt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/example-reformatter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/run-dumper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/run-emitter-test-suite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/run-emitter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/run-loader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/run-parser-test-suite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/run-parser.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/run-scanner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/test-reader.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/libyaml/tests/test-version.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyaml/include/yaml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyaml/src/yaml_private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/libyaml/tests/monolithic_examples.h" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/Changes" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/ReadMe.md" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/cmake/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/doc/doxygen.cfg" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/docker/README.mkd" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/examples/anchors.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/examples/array.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/examples/global-tag.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/examples/json.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/examples/mapping.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/examples/numbers.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/examples/strings.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/examples/tags.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/examples/yaml-version.yaml" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/include/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/pkg/ReadMe.md" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/pkg/docker/output/ReadMe" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/pkg/docker/scripts/libyaml-dist.sh" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/tests/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/tests/ReadMe.md" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/tests/run-all-tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/yaml-0.1.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/libyaml/yamlConfig.cmake.in" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  

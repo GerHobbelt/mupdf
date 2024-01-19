@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libopentelemetry-cpp-contrib</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF62FA9A}</ProjectGuid>
+    <RootNamespace>libopentelemetry-cpp-contrib</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENTELEMETRY_CPP_CONTRIB;OPENTELEMETRY_CPP_CONTRIB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENTELEMETRY_CPP_CONTRIB;OPENTELEMETRY_CPP_CONTRIB_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENTELEMETRY_CPP_CONTRIB;OPENTELEMETRY_CPP_CONTRIB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENTELEMETRY_CPP_CONTRIB;OPENTELEMETRY_CPP_CONTRIB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENTELEMETRY_CPP_CONTRIB;OPENTELEMETRY_CPP_CONTRIB_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENTELEMETRY_CPP_CONTRIB;OPENTELEMETRY_CPP_CONTRIB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENTELEMETRY_CPP_CONTRIB;OPENTELEMETRY_CPP_CONTRIB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENTELEMETRY_CPP_CONTRIB;OPENTELEMETRY_CPP_CONTRIB_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENTELEMETRY_CPP_CONTRIB;OPENTELEMETRY_CPP_CONTRIB_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENTELEMETRY_CPP_CONTRIB;OPENTELEMETRY_CPP_CONTRIB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENTELEMETRY_CPP_CONTRIB;OPENTELEMETRY_CPP_CONTRIB_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBOPENTELEMETRY_CPP_CONTRIB;OPENTELEMETRY_CPP_CONTRIB_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/examples/ffi/cpprust/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/example/log/foo_library/foo_library.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/example/log/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/example/trace/foo_library/foo_library.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/example/trace/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/src/log/fluentd_exporter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/src/log/recordable.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/src/trace/fluentd_exporter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/src/trace/recordable.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/test/log/fluentd_recordable_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/test/trace/fluentd_baseline_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/test/trace/fluentd_recordable_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva-trace/example/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/example/example_metrics.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/example/foo_library.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/example/stress_test_linux.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/src/etw_data_transport.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/src/exporter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/src/unix_domain_socket_data_transport.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/test/decoder/ifx_metrics_bin.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/test/decoder/kaitai/kaitaistream.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/test/metrics_exporter_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/prometheus/src/push_exporter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/prometheus/src/push_exporter_factory.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/prometheus/test/push_exporter_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/user_events/benchmark/logger_benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/user_events/example/logs/foo_library.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/user_events/example/logs/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/user_events/example/metrics/foo_library.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/user_events/example/metrics/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/user_events/src/logs_exporter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/user_events/src/metrics_exporter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/user_events/src/recordable.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/user_events/src/utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/user_events/test/logs_exporter_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/src/otel/mod_otel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/src/otel/opentelemetry.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/src/agent_config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/src/nginx_config.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/src/otel_ngx_module.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/src/otel_ngx_module_modules.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/src/propagate.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/src/script.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/src/toml.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/src/trace_context.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/data/win/large-pdb-shim.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/apache/ApacheConfig.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/apache/ApacheHooks.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/apache/ApacheTracing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/apache/ExcludedModules.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/apache/HookContainer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/apache/mod_apache_otel.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/core/AgentCore.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/core/AgentLogger.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/core/api/ApiUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/core/api/RequestProcessingEngine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/core/api/SpanNamer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/core/api/WSAgent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/core/api/opentelemetry_ngx_api.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/core/sdkwrapper/ScopedSpan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/core/sdkwrapper/SdkHelperFactory.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/core/sdkwrapper/SdkWrapper.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/core/sdkwrapper/ServerSpan.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/nginx/ngx_http_opentelemetry_log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/nginx/ngx_http_opentelemetry_module.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/util/SpanNamingUtils.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/test/unit/AgentCore_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/test/unit/ApiUtils_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/test/unit/RequestProcessingEngine_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/test/unit/ScopedSpan_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/test/unit/SdkUtils_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/test/unit/SdkWrapper_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/test/unit/ServerSpan_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/test/unit/SpanNamer_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/test/unit/WSAgent_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/test/unit/integration_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/test/unit/unit_test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/examples/ffi/cpprust/src/animal.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/example/log/foo_library/foo_library.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/example/trace/foo_library/foo_library.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/include/opentelemetry/exporters/fluentd/common/fluentd_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/include/opentelemetry/exporters/fluentd/common/fluentd_fields.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/include/opentelemetry/exporters/fluentd/common/fluentd_logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/include/opentelemetry/exporters/fluentd/common/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/include/opentelemetry/exporters/fluentd/common/socket_tools.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/include/opentelemetry/exporters/fluentd/log/fluentd_exporter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/include/opentelemetry/exporters/fluentd/log/recordable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/include/opentelemetry/exporters/fluentd/trace/fluentd_exporter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/include/opentelemetry/exporters/fluentd/trace/recordable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/test/common/msgpack_timestamp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/test/common/socket_server.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva-trace/include/opentelemetry/exporters/geneva/geneva_fields.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva-trace/include/opentelemetry/exporters/geneva/geneva_logger_exporter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva-trace/include/opentelemetry/exporters/geneva/geneva_tracer_exporter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/example/foo_library.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/include/opentelemetry/exporters/geneva/metrics/connection_string_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/include/opentelemetry/exporters/geneva/metrics/data_transport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/include/opentelemetry/exporters/geneva/metrics/etw_data_transport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/include/opentelemetry/exporters/geneva/metrics/exporter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/include/opentelemetry/exporters/geneva/metrics/exporter_options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/include/opentelemetry/exporters/geneva/metrics/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/include/opentelemetry/exporters/geneva/metrics/socket_tools.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/include/opentelemetry/exporters/geneva/metrics/unix_domain_socket_data_transport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/test/common/generate_metrics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/test/common/socket_server.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/test/decoder/ifx_metrics_bin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/test/decoder/kaitai/custom_decoder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/test/decoder/kaitai/exceptions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/test/decoder/kaitai/kaitaistream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/test/decoder/kaitai/kaitaistruct.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/prometheus/include/opentelemetry/exporters/prometheus/push_exporter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/prometheus/include/opentelemetry/exporters/prometheus/push_exporter_factory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/prometheus/include/opentelemetry/exporters/prometheus/push_exporter_options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/prometheus/test/prometheus_test_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/user_events/example/logs/foo_library.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/user_events/example/metrics/foo_library.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/user_events/include/opentelemetry/exporters/user_events/logs/exporter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/user_events/include/opentelemetry/exporters/user_events/logs/exporter_options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/user_events/include/opentelemetry/exporters/user_events/logs/recordable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/user_events/include/opentelemetry/exporters/user_events/logs/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/user_events/include/opentelemetry/exporters/user_events/metrics/exporter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/user_events/include/opentelemetry/exporters/user_events/metrics/exporter_options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/src/otel/opentelemetry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/src/agent_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/src/location_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/src/nginx_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/src/nginx_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/src/propagate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/src/script.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/src/toml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/src/trace_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/apache/ApacheConfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/apache/ApacheHooks.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/apache/ExcludedModules.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/apache/HookContainer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/core/AgentCore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/core/AgentLogger.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/core/RequestContext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/core/api/ApiUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/core/api/Interface.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/core/api/OpentelemetrySdk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/core/api/Payload.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/core/api/RequestProcessingEngine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/core/api/SpanNamer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/core/api/TenantConfig.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/core/api/WSAgent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/core/api/opentelemetry_ngx_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/core/sdkwrapper/IScopedSpan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/core/sdkwrapper/ISdkHelperFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/core/sdkwrapper/ISdkWrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/core/sdkwrapper/ScopedSpan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/core/sdkwrapper/SdkConstants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/core/sdkwrapper/SdkEnums.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/core/sdkwrapper/SdkHelperFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/core/sdkwrapper/SdkUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/core/sdkwrapper/SdkWrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/core/sdkwrapper/ServerSpan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/include/util/SpanNamingUtils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/apache/ApacheTracing.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/module_version_template.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/nginx/ngx_http_opentelemetry_log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/nginx/ngx_http_opentelemetry_module.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/test/unit/mocks/mock_OpenTelemetry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/test/unit/mocks/mock_RequestProcessingEngine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/test/unit/mocks/mock_SdkHelperFactory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/test/unit/mocks/mock_core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/test/unit/mocks/mock_dummy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/test/unit/mocks/mock_sdkwrapper.h" />
+    <Image Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva-trace/tools/nuget/opentelemetry-icon-color.png" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/docs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/examples/ffi/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/examples/ffi/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/examples/ffi/cpprust/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/examples/ffi/cpprust/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/examples/ffi/cpprust/build.rs" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/examples/ffi/cpprust/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/examples/ffi/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/cmake/nlohmann-json.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/cmake/opentelemetry-cpp-fluentd-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/cmake/opentelemetry-cpp.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/example/fluentd-docker/entrypoint.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/example/fluentd-docker/fluent.conf" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/example/fluentd-docker/run.cmd" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/example/fluentd-docker/run.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/fluentd/vcpkg.json" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva-trace/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva-trace/example/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva-trace/tools/build-nuget.cmd" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva-trace/tools/build-nuget.ps1" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva-trace/tools/nuget/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva-trace/tools/nuget/build/native/OpenTelemetry.Cpp.Geneva.targets" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/INSTALL.md" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/build_tools/build_geneva_metrics_exporter.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/build_tools/ports/opentelemetry-etw-metrics-exporter/portfile.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/build_tools/ports/opentelemetry-etw-metrics-exporter/vcpkg.json" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/cmake/ParseOsRelease.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/cmake/package.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/geneva/test/decoder/ifx_metrics_bin.ksy" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/prometheus/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/prometheus/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/prometheus/opentelemetry-cpp-contrib-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/prometheus/repository.bzl" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/prometheus/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/exporters/user_events/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/Dockerfile.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/create-otel-load.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/httpd_install_otel.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/opentelemetry.conf" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/setup-buildtools.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/setup-cmake.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/setup-environment.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/tests/00-apache-configtest.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/tests/01-create-root-span.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/tests/02-accept-inbound-trace.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/tests/03-accept-inbound-b3.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/tests/04-accept-inbound-b3-multi.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/tests/05-check-batch-spans.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/tests/06-check-batch-spans-x1000.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/tests/07-create-outbound-spans.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/tests/08-create-outbound-spans-b3.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/tests/09-check-environment-vars.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/tests/run-all.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/tests/setup-tools.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/tests/tools.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/tools/check-formatting.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/tools/format-bazel.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/tools/format-code.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/httpd/tools/setup-tools.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/ci/setup_environment.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/nginx.cmake" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/test/backend/files/content.txt" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/test/backend/files/file.js" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/test/backend/simple_express/index.js" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/test/backend/simple_express/package-lock.json" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/test/backend/simple_express/package.json" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/test/conf/collector.yml" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/test/conf/nginx.conf" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/test/conf/otel-nginx.toml" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/test/data/trace.json" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/test/docker-compose.yml" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/test/instrumentation/lib/mix/tasks/dockerfiles.ex" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/test/instrumentation/mix.exs" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/test/instrumentation/test/instrumentation_test.exs" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/nginx/test/instrumentation/test/test_helper.exs" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/CHANGELOG.md" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/README.md" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/codeql-env.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/conf/nginx/nginx.conf" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/conf/nginx/opentelemetry_module.conf" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/dist/VERSION.txt" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/dist/install.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/docker-compose.yml" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/entrypoint.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/gradle.properties" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/gradle/conf/checkstyle/checkstyle.xsl" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/gradle/wrapper/gradle-wrapper.properties" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/gradlew.bat" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/install.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/opentelemetry_module.conf" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/otel-config.yml" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/PRESUBMIT.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/buildbot/buildbot_run.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/codereview.settings" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/gyp.bat" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/gyp_main.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/gyptest.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/MSVSNew.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/MSVSProject.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/MSVSSettings.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/MSVSSettings_test.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/MSVSToolFile.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/MSVSUserFile.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/MSVSUtil.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/MSVSVersion.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/common.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/common_test.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/easy_xml.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/easy_xml_test.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/flock_tool.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/generator/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/generator/android.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/generator/cmake.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/generator/dump_dependency_json.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/generator/eclipse.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/generator/gypd.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/generator/gypsh.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/generator/make.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/generator/msvs.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/generator/msvs_test.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/generator/ninja.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/generator/ninja_test.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/generator/xcode.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/generator/xcode_test.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/input.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/input_test.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/mac_tool.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/msvs_emulation.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/ninja_syntax.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/ordered_dict.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/simple_copy.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/win_tool.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/xcode_emulation.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/xcode_ninja.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/xcodeproj_file.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/pylib/gyp/xml_fix.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/samples/samples.bat" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/tools/README" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/tools/Xcode/README" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/tools/emacs/README" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/tools/emacs/gyp-tests.el" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/tools/emacs/gyp.el" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/tools/emacs/run-unit-tests.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/tools/graphviz.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/tools/pretty_gyp.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/tools/pretty_sln.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/scripts/gyp/r1919/tools/pretty_vcproj.py" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/sonar-project.properties" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/src/nginx/script.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/test/ApacheTesting.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/test/NginxTesting.sh" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/version.properties" />
+    <Text Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/tools/README.md" />
+    <Xml Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/gradle/conf/checkstyle/checkstyle.xml" />
+    <Xml Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/gradle/conf/checkstyle/suppressions.xml" />
+    <Xml Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/gradle/conf/dependency-check/suppressions.xml" />
+    <Xml Include="../../thirdparty/owemdjee/opentelemetry-cpp-contrib/instrumentation/otel-webserver-module/test/integration/src/test/resources/testngsuites/testng.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

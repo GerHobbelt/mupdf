@@ -10,7 +10,12 @@ fi
 if [ -z "$2" ] ; then
 	FILTER=.
 else
-	FILTER=$2
+	# WARNING: this is used as a regex, so reckon with special behaviour for $^.*+?[]
+	#
+	# The brutal fix we employ here is to nuke everything at or after the first regex operator
+	#
+	#echo "$2" | sed -E -e 's/[ \t\r\n.*+\[\]\(\)?].*$//'    -- somehow brafs on the ] in the [..] set no matter what I try for escapes   :-S
+	FILTER=$( echo "$2" | sed -E -e 'sX[.*+?()\[].*$XX' )
 fi
 
 
@@ -220,7 +225,6 @@ catboost
 cctz
 ccv-nnc
 cdc-file-transfer
-cef-pdf
 cereal
 ceres-solver
 circlehash
@@ -993,6 +997,28 @@ tao-json
 u8_to_std_string
 vizzu
 
+FastGlobbing
+GQ-gumbo-css-selectors
+GSL
+avro
+cachelot
+chibi-scheme
+chromium-snss-parse
+guile
+itcl
+jimtcl
+libhog
+libparameters
+lru_cache
+ngrams-weighted
+opentelemetry-cpp-contrib
+poco
+sqlplot-tools
+stlcache
+tcl
+tclap
+tclclockmod
+
 EOT
 )
 
@@ -1020,7 +1046,6 @@ filecopyex3
 fswatch
 gperf
 grok-jpeg2000
-h2o-server
 horsejs
 jbig2enc
 lzbench
@@ -1050,7 +1075,6 @@ misclist=$(
 grep -v '#' <<EOT
 
 calibre
-cef-pdf
 curl-www
 everything-curl
 hunspell-dictionaries
@@ -1102,6 +1126,8 @@ stopwords
 
 doxygen-awesome-css
 
+javascript-serialization-benchmark
+
 EOT
 )
 
@@ -1114,6 +1140,7 @@ CHM-lib
 OptimizationTemplateLibrary
 XMP-Toolkit-SDK
 bibtex-robust-decoder
+cef-pdf
 c-blosc2
 cpp-btree
 cryptopp
@@ -1122,6 +1149,7 @@ drogon
 enkiTS-TaskScheduler
 google-marl
 gperf-hash
+h2o-server
 json-jansson
 lda-Familia
 libQuickJSpp
@@ -1196,8 +1224,11 @@ if false ; then
 fi
 
 
-#echo "FILTER: $FILTER"
-#echo "ARG: $ARG"
+# debugging:
+if false ; then
+	echo "FILTER: $FILTER"
+	echo "ARG: $ARG"
+fi
 
 
 if [[ "$ARG" =~ [1] ]] ; then

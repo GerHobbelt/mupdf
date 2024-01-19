@@ -707,6 +707,7 @@
     <ClCompile Include="../../thirdparty/owemdjee/ITK/Modules/Core/Common/test/itkDataObjectTest.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/ITK/Modules/Core/Common/test/itkDataTypeTest.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/ITK/Modules/Core/Common/test/itkDecoratorTest.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/ITK/Modules/Core/Common/test/itkDerefGTest.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/ITK/Modules/Core/Common/test/itkDerivativeOperatorTest.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/ITK/Modules/Core/Common/test/itkDirectoryTest.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/ITK/Modules/Core/Common/test/itkDownCastTest.cxx" />
@@ -2074,8 +2075,8 @@
     <ClCompile Include="../../thirdparty/owemdjee/ITK/Modules/IO/XML/test/itkDOMTest4.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/ITK/Modules/IO/XML/test/itkDOMTest5.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/ITK/Modules/IO/XML/test/itkDOMTest6.cxx" />
-    <ClCompile Include="../../thirdparty/owemdjee/ITK/Modules/IO/XML/test/itkDOMTest7.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/ITK/Modules/IO/XML/test/itkDOMTest8.cxx" />
+    <ClCompile Include="../../thirdparty/owemdjee/ITK/Modules/IO/XML/test/itkFancyStringTest.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/ITK/Modules/IO/XML/test/itkFileToolsTest.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/ITK/Modules/Nonunit/IntegratedTest/test/itkAlgorithmsPrintTest.cxx" />
     <ClCompile Include="../../thirdparty/owemdjee/ITK/Modules/Nonunit/IntegratedTest/test/itkAlgorithmsPrintTest2.cxx" />
@@ -5104,6 +5105,7 @@
     <ClInclude Include="../../thirdparty/owemdjee/ITK/Modules/Core/Common/include/itkDefaultStaticMeshTraits.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ITK/Modules/Core/Common/include/itkDefaultVectorPixelAccessor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ITK/Modules/Core/Common/include/itkDefaultVectorPixelAccessorFunctor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/ITK/Modules/Core/Common/include/itkDeref.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ITK/Modules/Core/Common/include/itkDerivativeOperator.h" />
     <ClInclude Include="../../thirdparty/owemdjee/ITK/Modules/Core/Common/include/itkDerivativeOperator.hxx" />
     <ClInclude Include="../../thirdparty/owemdjee/ITK/Modules/Core/Common/include/itkDiffusionTensor3D.h" />
@@ -10022,11 +10024,9 @@
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/Doxygen/Registration.dox" />
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/Doxygen/Streaming.dox" />
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/Doxygen/Threading.dox" />
-    <Text Include="../../thirdparty/owemdjee/ITK/Documentation/ITK5MigrationGuide.md" />
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/Maintenance/Dashboard.md" />
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/Maintenance/Introduction.md" />
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/Maintenance/Release.md" />
-    <Text Include="../../thirdparty/owemdjee/ITK/Documentation/SupportedCompilers.md" />
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/README.md" />
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/_static/icon/README.md" />
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/_static/icon/html_head_content.txt" />
@@ -10038,14 +10038,19 @@
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/contributing/enforcement.md" />
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/contributing/git_help.md" />
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/contributing/index.md" />
+    <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/contributing/module_workflows.md" />
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/contributing/motivation.md" />
+    <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/contributing/python_packaging.md" />
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/contributing/reporting.md" />
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/contributing/updating_third_party.md" />
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/contributing/upload_binary_data.md" />
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/download.md" />
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/index.md" />
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/learn/courses.md" />
+    <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/licenses.md" />
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/migration_guides/index.md" />
+    <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/migration_guides/itk_5_migration_guide.md" />
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/releases/1.0.md" />
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/releases/1.8.md" />
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/releases/2.0.md" />
@@ -10092,6 +10097,7 @@
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/releases/5.4rc01.md" />
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/releases/index.md" />
     <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/ITK/Documentation/docs/supported_compilers.md" />
     <Text Include="../../thirdparty/owemdjee/ITK/Examples/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/ITK/Examples/Data/BSplineDisplacements1.txt" />
     <Text Include="../../thirdparty/owemdjee/ITK/Examples/Data/BSplineDisplacements2.txt" />
@@ -11655,9 +11661,7 @@
     <Text Include="../../thirdparty/owemdjee/ITK/Utilities/Maintenance/BuildHeaderTest.py" />
     <Text Include="../../thirdparty/owemdjee/ITK/Utilities/Maintenance/BumpITKVersionInCI.sh" />
     <Text Include="../../thirdparty/owemdjee/ITK/Utilities/Maintenance/CodeSwarmWithGource.sh" />
-    <Text Include="../../thirdparty/owemdjee/ITK/Utilities/Maintenance/ContentLinkSynchronization.sh" />
     <Text Include="../../thirdparty/owemdjee/ITK/Utilities/Maintenance/DownloadLinksCookieCutter/cookiecutter.json" />
-    <Text Include="../../thirdparty/owemdjee/ITK/Utilities/Maintenance/DownloadLinksCookieCutter/{{cookiecutter.output_directory}}/ReleaseDownloadLinks.html" />
     <Text Include="../../thirdparty/owemdjee/ITK/Utilities/Maintenance/DownloadLinksCookieCutter/{{cookiecutter.output_directory}}/ReleaseDownloadLinks.md" />
     <Text Include="../../thirdparty/owemdjee/ITK/Utilities/Maintenance/DynamicAnalysis.xsl" />
     <Text Include="../../thirdparty/owemdjee/ITK/Utilities/Maintenance/DynamicAnalysisFile.xsl" />

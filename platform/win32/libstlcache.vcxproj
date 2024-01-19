@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>efsw</ProjectName>
-    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF418A1F}</ProjectGuid>
-    <RootNamespace>efsw</RootNamespace>
+    <ProjectName>libstlcache</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF0EE44C}</ProjectGuid>
+    <RootNamespace>libstlcache</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -116,7 +116,7 @@
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EFSW;EFSW_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTLCACHE;STLCACHE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -126,14 +126,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/efsw/include;../../thirdparty/owemdjee/efsw/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EFSW;EFSW_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTLCACHE;STLCACHE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EFSW;EFSW_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTLCACHE;STLCACHE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/efsw/include;../../thirdparty/owemdjee/efsw/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -144,7 +144,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EFSW;EFSW_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTLCACHE;STLCACHE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -152,15 +152,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/efsw/include;../../thirdparty/owemdjee/efsw/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EFSW;EFSW_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTLCACHE;STLCACHE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EFSW;EFSW_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTLCACHE;STLCACHE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/efsw/include;../../thirdparty/owemdjee/efsw/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -171,7 +171,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EFSW;EFSW_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTLCACHE;STLCACHE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -181,14 +181,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/efsw/include;../../thirdparty/owemdjee/efsw/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EFSW;EFSW_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTLCACHE;STLCACHE_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EFSW;EFSW_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTLCACHE;STLCACHE_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/efsw/include;../../thirdparty/owemdjee/efsw/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -199,7 +199,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EFSW;EFSW_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTLCACHE;STLCACHE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -207,15 +207,15 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/efsw/include;../../thirdparty/owemdjee/efsw/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EFSW;EFSW_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTLCACHE;STLCACHE_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_EFSW;EFSW_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBSTLCACHE;STLCACHE_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/efsw/include;../../thirdparty/owemdjee/efsw/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -227,6 +227,49 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/stlcache/benchmarks/eviction_perf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stlcache/benchmarks/insdel_perf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stlcache/benchmarks/insert_perf.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stlcache/tests/test_adaptive.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stlcache/tests/test_copy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stlcache/tests/test_insert_assign.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stlcache/tests/test_iterator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stlcache/tests/test_lfu.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stlcache/tests/test_lfu_multi.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stlcache/tests/test_lfuaging.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stlcache/tests/test_lfuagingstar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stlcache/tests/test_lfustar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stlcache/tests/test_lru.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stlcache/tests/test_main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stlcache/tests/test_map.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stlcache/tests/test_map_interface.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stlcache/tests/test_mru.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stlcache/tests/test_optional.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stlcache/tests/test_policy.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/stlcache/tests/test_victim.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stlcache/include/stlcache/exceptions.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stlcache/include/stlcache/lock.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stlcache/include/stlcache/lock_exclusive.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stlcache/include/stlcache/lock_none.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stlcache/include/stlcache/lock_shared.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stlcache/include/stlcache/policy.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stlcache/include/stlcache/policy_adaptive.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stlcache/include/stlcache/policy_lfu.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stlcache/include/stlcache/policy_lfu_multi.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stlcache/include/stlcache/policy_lfuaging.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stlcache/include/stlcache/policy_lfuagingstar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stlcache/include/stlcache/policy_lfustar.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stlcache/include/stlcache/policy_lru.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stlcache/include/stlcache/policy_mru.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stlcache/include/stlcache/stlcache.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/stlcache/include/stlcache/victim.hpp" />
+    <Text Include="../../thirdparty/owemdjee/stlcache/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/stlcache/Doxyfile.in" />
+    <Text Include="../../thirdparty/owemdjee/stlcache/LICENSE_1_0.txt" />
+    <Text Include="../../thirdparty/owemdjee/stlcache/README" />
+    <Text Include="../../thirdparty/owemdjee/stlcache/UseDoxygen.cmake" />
+  </ItemGroup>
   <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>

@@ -296,7 +296,7 @@ const projectMap = {
 
 for (const key in projectMap) {
 	let value = projectMap[key];
-	if (projname === key || `lib${projname}` === key) {
+	if (projname === key || `lib${projname}` === key || `${projname}-tools` === key) {
 		testpath = `${scriptpath}/../../thirdparty/owemdjee/${value}`;
 
 		checkDirAndReportPlusExitOnSuccess(testpath);
@@ -312,6 +312,10 @@ testpath = `${scriptpath}/../../thirdparty/owemdjee/${projname}`;
 checkDirAndReportPlusExitOnSuccess(testpath);
 
 testpath = `${scriptpath}/../../thirdparty/owemdjee/lib${projname}`;
+
+checkDirAndReportPlusExitOnSuccess(testpath);
+
+testpath = `${scriptpath}/../../thirdparty/owemdjee/${projname}-tools`;
 
 checkDirAndReportPlusExitOnSuccess(testpath);
 

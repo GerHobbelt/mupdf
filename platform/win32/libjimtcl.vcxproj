@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libjimtcl</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFE237DA}</ProjectGuid>
+    <RootNamespace>libjimtcl</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJIMTCL;JIMTCL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJIMTCL;JIMTCL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJIMTCL;JIMTCL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJIMTCL;JIMTCL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJIMTCL;JIMTCL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJIMTCL;JIMTCL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJIMTCL;JIMTCL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJIMTCL;JIMTCL_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJIMTCL;JIMTCL_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJIMTCL;JIMTCL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJIMTCL;JIMTCL_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBJIMTCL;JIMTCL_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/autosetup/jimsh0.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/examples.api/jim_command.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/examples.api/jim_hello.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/examples.api/jim_list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/examples.api/jim_obj.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/examples.api/jim_return.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/examples.ext/helloworld.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-aio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-array.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-clock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-eventloop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-exec.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-format.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-history.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-interactive.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-interp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-json.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-mk.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-namespace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-nosignal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-pack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-package.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-posix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-readdir.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-readline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-redis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-regexp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-sdl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-signal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-sqlite3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-subcmd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-syslog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-tclprefix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-tty.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-win32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-win32compat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim-zlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jim.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jimiocompat.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jimregexp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jimsh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/jsmn/jsmn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/linenoise-win32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/linenoise.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/sqlite3/jim-sqlite.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/sqlite3/shell.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/sqlite3/sqlite3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/tests/loadtest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/jimtcl/utf8.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/jimtcl/jim-eventloop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jimtcl/jim-signal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jimtcl/jim-subcmd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jimtcl/jim-tty.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jimtcl/jim-win32compat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jimtcl/jim.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jimtcl/jimiocompat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jimtcl/jimregexp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jimtcl/jsmn/jsmn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jimtcl/linenoise.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jimtcl/sqlite3/sqlite3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jimtcl/sqlite3/sqlite3ext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/jimtcl/utf8.h" />
+    <Font Include="../../thirdparty/owemdjee/jimtcl/examples/COPYING.FreeSans.ttf" />
+    <Font Include="../../thirdparty/owemdjee/jimtcl/examples/FreeSans.ttf" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/EastAsianWidth.txt" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/README" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/README.ensemble" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/README.extensions" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/README.linenoise" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/README.metakit" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/README.namespaces" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/README.oo" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/README.redis" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/README.sqlite" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/README.utf-8" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/TODO" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/Tcl_shipped.html" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/UnicodeData.txt" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/autosetup/README.autosetup" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/autosetup/autosetup-config.guess" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/autosetup/cc-db.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/autosetup/cc-lib.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/autosetup/cc-shared.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/autosetup/cc.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/autosetup/local.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/autosetup/pkg-config.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/autosetup/system.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/autosetup/tmake.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/bench.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/binary.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/bootstrap.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/build-jim-ext.in" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/ensemble.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples.api/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples.api/README" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples.api/print.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples.ext/README" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples/client-server.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples/dbgtest.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples/dns.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples/dnstest.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples/jtclsh.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples/metakit.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples/nonblocking-gets.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples/ootest.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples/parray.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples/pipe.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples/popen.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples/redis-async.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples/redis-pubsub.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples/redis.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples/sdlcircles.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples/sdlevents.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples/sdltest.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples/socket-show-filename.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples/sqlite3test.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples/timedread.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples/tip.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/examples/vwaitsignal.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/freebsd/andrew.txt" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/freebsd/clemens.txt" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/freebsd/duane.txt" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/freebsd/oharboe.txt" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/freebsd/pat.txt" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/freebsd/salvatore.txt" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/freebsd/uwe.txt" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/glob.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/initjimsh.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/jim-config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/jim_tcl.txt" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/jimtcl.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/jsonencode.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/make-c-ext.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/make-load-static-exts.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/make-release.sh" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/nshelper.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/oo.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/parse-unidata.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/regtest.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/rlprompt.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/sqlite3/README" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/sqlite3/test-sqlite.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/stdlib.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/tcl.license.terms" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/tclcompat.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/tcltest.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/tests/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/tests/break.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/tests/dummy.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/tests/errors.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/tests/exitpackage.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/tests/expect.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/tests/return-break.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/tests/runall.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/tests/testing.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/tests/testio.in" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/tools/benchtable.tcl" />
+    <Text Include="../../thirdparty/owemdjee/jimtcl/tree.tcl" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

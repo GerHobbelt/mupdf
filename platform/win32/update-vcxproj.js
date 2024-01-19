@@ -422,19 +422,86 @@ include_paths = `;${include_paths.trim()};`
 	.replace(/;..\/..\/include\/system-override;/g, ';')
 	.replace(/;%\(AdditionalIncludeDirectories\);/g, ';')
 	.replace(/;.;/g, ';')
-	.replace(/;;/g, ';')
-	.replace(/^;/, '')
-	.replace(/;$/, '')
 
 // patch: when there's a single /boost/ reference in there, get the whole damn bunch:
 if (/\/owemdjee\/boost\//.test(include_paths) || /\/scripts\/boost\//.test(include_paths)) {
-	include_paths = `${include_paths};../../scripts/boost/include;../../thirdparty/owemdjee/boost;../../thirdparty/owemdjee/boost/libs/algorithm/include;../../thirdparty/owemdjee/boost/libs/any/include;../../thirdparty/owemdjee/boost/libs/array/include;../../thirdparty/owemdjee/boost/libs/asio/include;../../thirdparty/owemdjee/boost/libs/assert/include;../../thirdparty/owemdjee/boost/libs/atomic/include;../../thirdparty/owemdjee/boost/libs/bind/include;../../thirdparty/owemdjee/boost/libs/chrono/include;../../thirdparty/owemdjee/boost/libs/concept_check/include;../../thirdparty/owemdjee/boost/libs/config/include;../../thirdparty/owemdjee/boost/libs/container/include;../../thirdparty/owemdjee/boost/libs/container_hash/include;../../thirdparty/owemdjee/boost/libs/core/include;../../thirdparty/owemdjee/boost/libs/crc/include;../../thirdparty/owemdjee/boost/libs/date_time/include;../../thirdparty/owemdjee/boost/libs/detail/include;../../thirdparty/owemdjee/boost/libs/dll/include;../../thirdparty/owemdjee/boost/libs/fiber/include;../../thirdparty/owemdjee/boost/libs/filesystem/include;../../thirdparty/owemdjee/boost/libs/function/include;../../thirdparty/owemdjee/boost/libs/fusion/include;../../thirdparty/owemdjee/boost/libs/integer/include;../../thirdparty/owemdjee/boost/libs/io/include;../../thirdparty/owemdjee/boost/libs/iterator/include;../../thirdparty/owemdjee/boost/libs/lexical_cast/include;../../thirdparty/owemdjee/boost/libs/locale/include;../../thirdparty/owemdjee/boost/libs/lockfree/include;../../thirdparty/owemdjee/boost/libs/log/include;../../thirdparty/owemdjee/boost/libs/logic/include;../../thirdparty/owemdjee/boost/libs/move/include;../../thirdparty/owemdjee/boost/libs/mp11/include;../../thirdparty/owemdjee/boost/libs/mp11/include/;../../thirdparty/owemdjee/boost/libs/mpl/include;../../thirdparty/owemdjee/boost/libs/multiprecision/include;../../thirdparty/owemdjee/boost/libs/numeric/conversion/include;../../thirdparty/owemdjee/boost/libs/optional/include;../../thirdparty/owemdjee/boost/libs/parameter/include;../../thirdparty/owemdjee/boost/libs/phoenix/include;../../thirdparty/owemdjee/boost/libs/predef/include;../../thirdparty/owemdjee/boost/libs/preprocessor/include;../../thirdparty/owemdjee/boost/libs/program_options/include;../../thirdparty/owemdjee/boost/libs/proto/include;../../thirdparty/owemdjee/boost/libs/range/include;../../thirdparty/owemdjee/boost/libs/ratio/include;../../thirdparty/owemdjee/boost/libs/regex/include;../../thirdparty/owemdjee/boost/libs/smart_ptr/include;../../thirdparty/owemdjee/boost/libs/static_assert/include;../../thirdparty/owemdjee/boost/libs/system/include;../../thirdparty/owemdjee/boost/libs/test/include;../../thirdparty/owemdjee/boost/libs/thread/include;../../thirdparty/owemdjee/boost/libs/throw_exception/include;../../thirdparty/owemdjee/boost/libs/type_index/include;../../thirdparty/owemdjee/boost/libs/type_traits/include;../../thirdparty/owemdjee/boost/libs/typeof/include;../../thirdparty/owemdjee/boost/libs/utility/include;../../thirdparty/owemdjee/boost/libs/uuid/include;../../thirdparty/owemdjee/boost/libs/winapi/include`
-		.replace(/;;/g, ';');
+	include_paths = `${include_paths}
+	../../scripts/boost/include
+	../../thirdparty/owemdjee/boost
+	../../thirdparty/owemdjee/boost/libs/algorithm/include
+	../../thirdparty/owemdjee/boost/libs/any/include
+	../../thirdparty/owemdjee/boost/libs/array/include
+	../../thirdparty/owemdjee/boost/libs/asio/include
+	../../thirdparty/owemdjee/boost/libs/assert/include
+	../../thirdparty/owemdjee/boost/libs/atomic/include
+	../../thirdparty/owemdjee/boost/libs/bind/include
+	../../thirdparty/owemdjee/boost/libs/chrono/include
+	../../thirdparty/owemdjee/boost/libs/concept_check/include
+	../../thirdparty/owemdjee/boost/libs/config/include
+	../../thirdparty/owemdjee/boost/libs/container/include
+	../../thirdparty/owemdjee/boost/libs/container_hash/include
+	../../thirdparty/owemdjee/boost/libs/core/include
+	../../thirdparty/owemdjee/boost/libs/crc/include
+	../../thirdparty/owemdjee/boost/libs/date_time/include
+	../../thirdparty/owemdjee/boost/libs/detail/include
+	../../thirdparty/owemdjee/boost/libs/dll/include
+	../../thirdparty/owemdjee/boost/libs/fiber/include
+	../../thirdparty/owemdjee/boost/libs/filesystem/include
+	../../thirdparty/owemdjee/boost/libs/function/include
+	../../thirdparty/owemdjee/boost/libs/fusion/include
+	../../thirdparty/owemdjee/boost/libs/integer/include
+	../../thirdparty/owemdjee/boost/libs/io/include
+	../../thirdparty/owemdjee/boost/libs/iterator/include
+	../../thirdparty/owemdjee/boost/libs/lexical_cast/include
+	../../thirdparty/owemdjee/boost/libs/locale/include
+	../../thirdparty/owemdjee/boost/libs/lockfree/include
+	../../thirdparty/owemdjee/boost/libs/log/include
+	../../thirdparty/owemdjee/boost/libs/logic/include
+	../../thirdparty/owemdjee/boost/libs/move/include
+	../../thirdparty/owemdjee/boost/libs/mp11/include
+	../../thirdparty/owemdjee/boost/libs/mp11/include/
+	../../thirdparty/owemdjee/boost/libs/mpl/include
+	../../thirdparty/owemdjee/boost/libs/multiprecision/include
+	../../thirdparty/owemdjee/boost/libs/numeric/conversion/include
+	../../thirdparty/owemdjee/boost/libs/optional/include
+	../../thirdparty/owemdjee/boost/libs/parameter/include
+	../../thirdparty/owemdjee/boost/libs/phoenix/include
+	../../thirdparty/owemdjee/boost/libs/predef/include
+	../../thirdparty/owemdjee/boost/libs/preprocessor/include
+	../../thirdparty/owemdjee/boost/libs/program_options/include
+	../../thirdparty/owemdjee/boost/libs/proto/include
+	../../thirdparty/owemdjee/boost/libs/range/include
+	../../thirdparty/owemdjee/boost/libs/ratio/include
+	../../thirdparty/owemdjee/boost/libs/regex/include
+	../../thirdparty/owemdjee/boost/libs/smart_ptr/include
+	../../thirdparty/owemdjee/boost/libs/static_assert/include
+	../../thirdparty/owemdjee/boost/libs/system/include
+	../../thirdparty/owemdjee/boost/libs/test/include
+	../../thirdparty/owemdjee/boost/libs/thread/include
+	../../thirdparty/owemdjee/boost/libs/throw_exception/include
+	../../thirdparty/owemdjee/boost/libs/type_index/include
+	../../thirdparty/owemdjee/boost/libs/type_traits/include
+	../../thirdparty/owemdjee/boost/libs/typeof/include
+	../../thirdparty/owemdjee/boost/libs/utility/include
+	../../thirdparty/owemdjee/boost/libs/uuid/include
+	../../thirdparty/owemdjee/boost/libs/winapi/include
+	`.replace(/\n/g, ';')
+	.replace(/\s+/g, '');
 }
+
+include_paths = `../../include/system-override;.;${include_paths};`;
+	
 
 // deduplicate the include paths set:
 let inc_set_hash = {};
 include_paths = include_paths.split(';')
+.filter(function flt(el) {
+	if (el.trim().length === 0)
+		return false;
+	if (el === `%(AdditionalIncludeDirectories)`)
+		return false;
+	return true;
+})
 .map(function (el) {
 	if (inc_set_hash[el])
 		return "";
@@ -442,11 +509,14 @@ include_paths = include_paths.split(';')
 	inc_set_hash[el] = true;
 	return el;
 })
-.join(';')
-.replace(/;;/g, ';');
+.filter(function flt(el) {
+	return (el.trim().length > 0);
+})
+.join(';');
 
-include_paths = `../../include/system-override;.;${include_paths};%(AdditionalIncludeDirectories)`
+include_paths = `${include_paths};%(AdditionalIncludeDirectories)`
 	.replace(/;;/g, ';')
+	.replace(/^;/g, '')
 	
 src = src
 .replace(/<AdditionalIncludeDirectories>[^]*?<\/AdditionalIncludeDirectories>/g, `<AdditionalIncludeDirectories>${include_paths}</AdditionalIncludeDirectories>`);
