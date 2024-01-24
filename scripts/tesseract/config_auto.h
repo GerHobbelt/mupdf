@@ -53,6 +53,11 @@
 
 #define HAS_LIBICU                       1
 
+// icu defines required to produce a matching compile/build:
+#define U_CHARSET_IS_UTF8                1
+#define U_STATIC_IMPLEMENTATION
+#define U_IMPORT /**/
+
 #if !defined(DISABLED_LEGACY_ENGINE)
 #define DISABLED_LEGACY_ENGINE           0
 #endif
