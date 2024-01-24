@@ -2,6 +2,7 @@
 also-ignore:
 	/bench/
 	/tests/
+	/src/
+	example.cpp
 	
-	monolithic_main.c
 	
