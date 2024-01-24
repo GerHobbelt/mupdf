@@ -131,7 +131,7 @@ _CRT_END_C_HEADER
 
 #if !defined FZ_DO_NOT_VALIDATE_BOOL_FOR_ASSERT
 
-namespace impl
+namespace fz_assert_impl
 {
 	static inline /* explicit */ bool validateBool4Assert(bool b) { return b; }
 	static inline bool validateBool4Assert(const void* b) { return !!b; }
@@ -150,19 +150,19 @@ namespace impl
 #if 0
 
 #define assert(expression) (void)(                                                      \
-            (!!::impl::validateBool4Assert(expression)) ||                              \
+            (!!::fz_assert_impl::validateBool4Assert(expression)) ||                    \
             (fz_sysassert(#expression, __FILE__, __FUNCTION__, __LINE__), 0)			\
         )
 
 #endif
 
 #define assert(expression) (void)(                                                      \
-            (!!::impl::validateBool4Assert(expression)) ||                              \
+            (!!::fz_assert_impl::validateBool4Assert(expression)) ||                    \
             (fz_sysassert(#expression, __FILE__, __func__, __LINE__), 0)				\
         )
 
 #define assert_and_continue(expression) (void)(                                         \
-            (!!::impl::validateBool4Assert(expression)) ||                              \
+            (!!::fz_assert_impl::validateBool4Assert(expression)) ||                    \
             (fz_sysassert_and_continue(#expression, __FILE__, __func__, __LINE__), 0)	\
         )
 
