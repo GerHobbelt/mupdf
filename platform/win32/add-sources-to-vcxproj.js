@@ -1,6 +1,6 @@
 ﻿//
 // add C/C++ source files to a vcxproj file & vcxproj.filters file
-// 
+//
 // usage: run as
 //
 //     node ./add-sources-to-vcxproj.js your_project.vcxproj path-to-sources/ [ignoreSpecFile]
@@ -89,6 +89,7 @@ if (!fs.existsSync(filepath)) {
 let spec = {
     nasm_or_masm: 0,   // 0: auto; -1: masm; +1: nasm
     ignores: [
+        '.git/',
         'thirdparty/',
         'third_party/',
         '3rd_party/',
@@ -130,9 +131,9 @@ if (fs.existsSync(specPath)) {
   .join('\n');
 
   rawSpec = '\n' + rawSpec + '\n';
-  
+
   if (DEBUG > 1) console.error("RAW PREPROC'D SPEC [START]:", {rawSpec, spec});
-  
+
   if (/^NASM/im.test(rawSpec))
       spec.nasm_or_masm = 1;
   else if (/^MASM/im.test(rawSpec))
@@ -153,7 +154,7 @@ if (fs.existsSync(specPath)) {
     .split('\n')
     .map((line) => line.trim())
     .filter((line) => line.trim().length > 0);
-    
+
     spec.ignores = spec.ignores.concat(a);
   }
 
@@ -178,7 +179,7 @@ if (fs.existsSync(specPath)) {
     .split('\n')
     .map((line) => line.trim())
     .filter((line) => line.trim().length > 0);
-    
+
     spec.sources = spec.sources.concat(a);
   }
 
@@ -247,7 +248,7 @@ if (fs.existsSync(filterFilepath)) {
 
 if (!filterSrc.match(/<\?xml/)) {
     filterSrc = `<?xml version="1.0" encoding="utf-8"?>
-    ` + filterSrc; 
+    ` + filterSrc;
 }
 
 if (!filterSrc.match(/<\/Project>/)) {
@@ -259,12 +260,23 @@ if (!filterSrc.match(/<\/Project>/)) {
 
 
 const specialFilenames = [
-  "README[^/]*", 
-  "NEWS", 
-  "TODO", 
-  "CHANGES", 
-  "ChangeLog[^/]*", 
+  "README[^/]*",
+  "HOWTO[^/]*",
+  "AUTHORS",
+  "NEWS",
+  "LICENSE",
+  "TODO",
+  "CHANGES",
+  "ChangeLog[^/]*",
   "Contributors",
+  "CUSTOMIZE",
+  "DOCGUIDE",
+  "INSTALL",
+  "Makefile",
+  "Jamfile",
+  "Doxyfile",
+  "PROBLEMS",
+  "TODO",
   "SConstruct",
   "SConscript"
 ];
@@ -286,18 +298,18 @@ function isSpecialMiscFile(f) {
   }
 
   if (specialFileExtensionRes.length === 0) {
-  	// Parse the extra_accepted_file_extensions.lst file:
-	  let fname = "extra_accepted_file_extensions.filelist";
+    // Parse the extra_accepted_file_extensions.filelist file:
+    let fname = "extra_accepted_file_extensions.filelist";
     let extsPath = unixify(path.resolve(fname));
     if (!fs.existsSync(extsPath)) {
       console.error(`ERROR: cannot find file "${extsPath}".`);
       process.exit(1);
     }
     let extlist = fs.readFileSync(extsPath, 'utf8').split('\n')
-	  .map((line) => line.trim())
-	  .filter((line) => line.length > 0 && !/^[#;]/.test(line));
-	
-	  //console.log("extlist", extlist);
+      .map((line) => line.trim())
+      .filter((line) => line.length > 0 && !/^[#;]/.test(line));
+
+    //console.log("extlist", extlist);
     for (let i = 0, len = extlist.length; i < len; i++) {
       let mre = new RegExp(`${ extlist[i] }$`, 'i');
       specialFileExtensionRes[i] = mre;
@@ -326,11 +338,11 @@ if (DEBUG > 2) console.error({spec})
 spec.ignores = spec.ignores
 .map(f => {
     //
-    // we use the next heuristic to detect 'literal paths' instead of regexes: 
+    // we use the next heuristic to detect 'literal paths' instead of regexes:
     //
-    // 1. when the path does not contain any special regex char (except '.') 
-    //    then it's a literal filename (or directory/path); 
-    // 2. when it does not start with a '/' we assume it's an *entire* directory or file name, 
+    // 1. when the path does not contain any special regex char (except '.')
+    //    then it's a literal filename (or directory/path);
+    // 2. when it does not start with a '/' we assume it's an *entire* directory or file name,
     //    i.e. 'ger.c' would then not be meant to match 'bugger.c'...
     // 3. anything else is a regex that can match ANY part of a filename/path.
     //
@@ -357,10 +369,10 @@ spec.ignores = spec.ignores
     }
 
     if (DEBUG > 1) console.error("'ignore' line half-way through conversion to regex:", {f})
-    
+
     let re = new RegExp(f);
 
-   	if (DEBUG > 2) console.log("ignore path / RE:", { f, test: !/[()\[\]?:*+{}]/.test(f), re})
+    if (DEBUG > 2) console.log("ignore path / RE:", { f, test: !/[()\[\]?:*+{}]/.test(f), re})
 
     return re;
 });
@@ -379,7 +391,7 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
     return f.replace(sourcesPath + '/', '');
   })
   .filter((f) => {
-    let f4f = '/' + f;    
+    let f4f = '/' + f;
     if (spec.ignores.length > 0) {
       for (const sp of spec.ignores) {
         if (DEBUG > 2) console.log('??IGNORE??:', {f, f4f, sp, DO_IGNORE: sp.test(f4f)});
@@ -823,7 +835,7 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
     ${ filesToAdd.join('\n') }
   </ItemGroup>
     `;
-  
+
   let fsrc1 = `
   <ItemGroup>
     ${ filesToAddToProj.join('\n') }
@@ -844,7 +856,7 @@ function process_path(rawSourcesPath, is_dir) {
     while (/\/[^.\/][^\/]*\/\.\.\//.test(rawSourcesPath)) {
         rawSourcesPath = rawSourcesPath.replace(/\/[^.\/][^\/]*\/\.\.\//, '/')
     }
-    
+
     let sourcesPath = unixify(path.resolve(rawSourcesPath.trim()));
     if (DEBUG > 1) console.error("process_path NORMALIZED:", {rawSourcesPath, sourcesPath, is_dir});
     if (!fs.existsSync(sourcesPath)) {
@@ -860,14 +872,14 @@ function process_path(rawSourcesPath, is_dir) {
     let pathWithWildCards = is_dir ? '*' : path.basename(sourcesPath);
     if (DEBUG > 2) console.error("process_path GLOB:", {pathWithWildCards, globConfig, cwd: globConfig.cwd, is_dir});
 
-	if (pathWithWildCards.indexOf('*') >= 0 || pathWithWildCards.indexOf('?') >= 0 || is_dir || !fs.existsSync(sourcesPath)) {
-		let files_rec = glob(pathWithWildCards, globConfig);
-		if (DEBUG > 2) console.error("process_path GLOB DONE:", {pathWithWildCards, globConfig, cwd: files_rec.cwd, is_dir, found: files_rec.found});
-		process_glob_list(files_rec.found, files_rec.cwd, is_dir, rawSourcesPath);
-	}
-	else {
-		process_glob_list([sourcesPath], globConfig.cwd, false, rawSourcesPath);
-	}
+    if (pathWithWildCards.indexOf('*') >= 0 || pathWithWildCards.indexOf('?') >= 0 || is_dir || !fs.existsSync(sourcesPath)) {
+        let files_rec = glob(pathWithWildCards, globConfig);
+        if (DEBUG > 2) console.error("process_path GLOB DONE:", {pathWithWildCards, globConfig, cwd: files_rec.cwd, is_dir, found: files_rec.found});
+        process_glob_list(files_rec.found, files_rec.cwd, is_dir, rawSourcesPath);
+    }
+    else {
+        process_glob_list([sourcesPath], globConfig.cwd, false, rawSourcesPath);
+    }
 }
 
 
@@ -885,7 +897,7 @@ for (let f of spec.directories) {
     process_path(f, true);
 }
 
-    
+
 filterSrc = filterSrc.replace(/<\/Project>[\s\r\n]*$/, fsrc2_arr.join('\n') + `
 </Project>
 `)
