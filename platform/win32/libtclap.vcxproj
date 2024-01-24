@@ -52,20 +52,20 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -79,7 +79,7 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ItemDefinitionGroup>
+<ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -113,8 +113,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTCLAP;TCLAP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -133,7 +133,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTCLAP;TCLAP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/tclap/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -160,7 +160,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTCLAP;TCLAP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/tclap/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -188,7 +188,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTCLAP;TCLAP_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/tclap/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -215,7 +215,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTCLAP;TCLAP_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/tclap/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -253,19 +253,39 @@
     <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test29.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test3.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test30.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test31.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test32.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test33.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test34.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test35.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test36.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test38.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test39.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test4.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test40.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test41.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test42.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test43.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test44.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test45.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test46.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test47.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test5.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test6.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test7.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test8.cpp" />
     <ClCompile Include="../../thirdparty/owemdjee/tclap/examples/test9.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/tclap/unittests/CmdLineOutputTest.cpp" />
     <ClInclude Include="../../thirdparty/owemdjee/tclap/include/tclap/Arg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tclap/include/tclap/ArgContainer.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tclap/include/tclap/ArgException.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tclap/include/tclap/ArgGroup.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tclap/include/tclap/ArgTraits.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tclap/include/tclap/CmdLine.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tclap/include/tclap/CmdLineInterface.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tclap/include/tclap/CmdLineOutput.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tclap/include/tclap/Constraint.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tclap/include/tclap/DeferDelete.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tclap/include/tclap/DocBookOutput.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tclap/include/tclap/HelpVisitor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tclap/include/tclap/IgnoreRestVisitor.h" />
@@ -281,136 +301,152 @@
     <ClInclude Include="../../thirdparty/owemdjee/tclap/include/tclap/ValuesConstraint.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tclap/include/tclap/VersionVisitor.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tclap/include/tclap/Visitor.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tclap/include/tclap/XorHandler.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tclap/include/tclap/ZshCompletionOutput.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tclap/include/tclap/sstream.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tclap/unittests/testing.h" />
+    <Text Include="../../thirdparty/owemdjee/tclap/AUTHORS" />
     <Text Include="../../thirdparty/owemdjee/tclap/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tclap/CTestConfig.cmake" />
     <Text Include="../../thirdparty/owemdjee/tclap/ChangeLog" />
-    <Text Include="../../thirdparty/owemdjee/tclap/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/tclap/INSTALL" />
     <Text Include="../../thirdparty/owemdjee/tclap/NEWS" />
     <Text Include="../../thirdparty/owemdjee/tclap/README" />
-    <Text Include="../../thirdparty/owemdjee/tclap/autotools.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/config/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/tclap/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/tclap/config.h.in" />
+    <Text Include="../../thirdparty/owemdjee/tclap/docs/CMakeLists.txt" />
     <Text Include="../../thirdparty/owemdjee/tclap/docs/Doxyfile.in" />
-    <Text Include="../../thirdparty/owemdjee/tclap/docs/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/tclap/docs/README" />
     <Text Include="../../thirdparty/owemdjee/tclap/docs/build.html" />
     <Text Include="../../thirdparty/owemdjee/tclap/docs/index.html" />
-    <Text Include="../../thirdparty/owemdjee/tclap/docs/manual.html" />
     <Text Include="../../thirdparty/owemdjee/tclap/docs/style.css" />
     <Text Include="../../thirdparty/owemdjee/tclap/docs/upload.sh" />
     <Text Include="../../thirdparty/owemdjee/tclap/examples/CMakeLists.txt" />
-    <Text Include="../../thirdparty/owemdjee/tclap/examples/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/tclap/include/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/tclap/include/tclap/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/tclap/msc/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/tclap/msc/README" />
-    <Text Include="../../thirdparty/owemdjee/tclap/msc/examples/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/tclap/scripts/check_dead_headers.py" />
-    <Text Include="../../thirdparty/owemdjee/tclap/scripts/check_tests_enabled.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/include/tclap/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tclap/packaging/pkgconfig.pc.in" />
     <Text Include="../../thirdparty/owemdjee/tclap/scripts/fix-test.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/scripts/lint.py" />
     <Text Include="../../thirdparty/owemdjee/tclap/scripts/modeline.py" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tclap.pc.in" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/genOut.pl" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/runtests.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/simple-test.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test1.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test10.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test11.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test12.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test13.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test14.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test15.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test16.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test17.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test18.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test19.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test2.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test20.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test21.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test22.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test23.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test24.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test25.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test26.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test27.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test28.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test29.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test3.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test30.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test31.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test32.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test33.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test34.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test35.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test36.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test37.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test38.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test39.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test4.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test40.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test41.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test42.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test43.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test44.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test45.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test46.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test47.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test48.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test49.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test5.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test50.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test51.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test52.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test53.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test54.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test55.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test56.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test57.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test58.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test59.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test6.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test60.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test61.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test62.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test63.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test64.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test65.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test66.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test67.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test68.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test69.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test7.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test70.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test71.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test72.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test73.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test74.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test75.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test76.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test77.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test78.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test79.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test8.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test80.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test81.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test82.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test83.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test84.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test85.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test86.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test87.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test88.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test89.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test9.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test90.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/test91.sh" />
-    <Text Include="../../thirdparty/owemdjee/tclap/tests/testCheck.sh" />
+    <Text Include="../../thirdparty/owemdjee/tclap/scripts/release.sh" />
+    <Text Include="../../thirdparty/owemdjee/tclap/test_runner.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/expected-failures.txt" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/simple_test.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test1.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test10.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test100.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test101.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test102.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test103.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test106.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test107.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test108.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test109.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test11.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test110.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test111.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test112.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test113.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test114.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test115.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test12.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test13.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test14.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test15.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test16.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test17.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test18.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test19.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test2.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test20.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test21.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test22.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test23.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test24.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test25.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test26.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test27.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test28.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test29.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test3.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test30.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test31.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test32.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test33.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test34.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test35.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test36.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test37.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test38.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test39.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test4.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test40.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test41.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test42.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test43.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test44.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test45.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test46.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test47.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test48.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test49.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test5.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test50.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test51.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test52.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test53.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test54.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test55.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test56.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test57.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test58.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test59.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test6.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test60.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test61.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test62.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test63.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test64.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test65.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test66.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test67.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test68.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test69.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test7.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test70.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test71.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test72.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test73.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test74.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test75.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test76.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test77.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test78.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test79.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test8.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test80.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test81.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test82.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test83.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test84.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test86.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test87.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test88.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test89.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test9.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test90.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test91.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test92.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test93.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test94.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test95.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test96.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test97.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test98.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/tests/test99.py" />
+    <Text Include="../../thirdparty/owemdjee/tclap/unittests/CMakeLists.txt" />
     <Xml Include="../../thirdparty/owemdjee/tclap/docs/manual.xml" />
   </ItemGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" >
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
+  
