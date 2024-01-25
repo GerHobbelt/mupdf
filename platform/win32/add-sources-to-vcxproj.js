@@ -377,7 +377,7 @@ spec.ignores = spec.ignores
     return re;
 });
 
-if (DEBUG > 1) console.error({spec})
+if (DEBUG >= 1) console.error({spec})
 
 
 
@@ -401,7 +401,7 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
           return false;
         }
       }
-      //console.log('PASS: testing:', f);
+      if (DEBUG >= 1) console.log('PASS: testing:', f);
     }
     return true;
   })
@@ -518,6 +518,8 @@ function process_glob_list(files, sourcesPath, is_dir, rawSourcesPath) {
 
   // sort the filter list to ensure parents come before childs:
   extraFilters.sort();
+
+  if (DEBUG >= 1) console.error("filtered files.map:", {a})
 
   // construct the files to add
   let filesToAdd = [];
