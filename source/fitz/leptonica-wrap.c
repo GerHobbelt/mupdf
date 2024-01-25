@@ -103,7 +103,7 @@ static void lept_stderr_print(const char *msg)
 		fz_info(ctx, "INFO: Leptonica::%s", msg + 8);
 		return;
 	}
-	fz_error(ctx, "Leptonica::%s", msg);
+	fz_info(ctx, "Leptonica::%s", msg);
 }
 
 
