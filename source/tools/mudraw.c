@@ -1359,7 +1359,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			{
 				fz_write_header(ctx, bander, pix->w, totalheight, pix->n, pix->alpha, pix->xres, pix->yres, output_pagenum++, pix->colorspace, pix->seps);
 			}
-			if (output_format == OUT_J2K && bands > 1)
+			if (output_format->format == OUT_J2K && bands > 1)
 			{
 				fz_throw(ctx, FZ_ERROR_GENERIC, "Can't band with J2k output!");
 			}
@@ -1395,7 +1395,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 					ASSERT(drawheight <= pix->h);
 					fz_write_band(ctx, bander, bit ? bit->stride : pix->stride, drawheight, bit ? bit->samples : pix->samples);
 				}
-				if (output_format == OUT_J2K)
+				if (output_format->format == OUT_J2K)
 				{
 					fz_write_pixmap_as_jpx(ctx, out, pix, 80);
 				}
