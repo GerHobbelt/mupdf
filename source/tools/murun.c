@@ -6842,6 +6842,8 @@ static void ffi_PDFDocument_getEmbeddedFileParams(js_State *J)
 
 	fz_try(ctx)
 		pdf_get_embedded_file_params(ctx, fs, &params);
+	fz_always(ctx)
+		pdf_drop_obj(ctx, fs);
 	fz_catch(ctx)
 		rethrow(J);
 
@@ -6857,6 +6859,8 @@ static void ffi_PDFDocument_getEmbeddedFileContents(js_State *J)
 
 	fz_try(ctx)
 		contents = pdf_load_embedded_file_contents(ctx, fs);
+	fz_always(ctx)
+		pdf_drop_obj(ctx, fs);
 	fz_catch(ctx)
 		rethrow(J);
 
@@ -6872,6 +6876,8 @@ static void ffi_PDFDocument_verifyEmbeddedFileChecksum(js_State *J)
 
 	fz_try(ctx)
 		valid = pdf_verify_embedded_file_checksum(ctx, fs);
+	fz_always(ctx)
+		pdf_drop_obj(ctx, fs);
 	fz_catch(ctx)
 		rethrow(J);
 
@@ -6902,6 +6908,8 @@ static void ffi_PDFDocument_loadImage(js_State *J)
 
 	fz_try(ctx)
 		img = pdf_load_image(ctx, pdf, obj);
+	fz_always(ctx)
+		pdf_drop_obj(ctx, obj);
 	fz_catch(ctx)
 		rethrow(J);
 
