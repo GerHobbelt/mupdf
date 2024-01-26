@@ -241,6 +241,7 @@ static const char *txt_extensions[] =
 {
 	"txt",
 	"text",
+	"log",
 	NULL
 };
 
