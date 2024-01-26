@@ -237,6 +237,11 @@ void fz_save_pixmap_as_pdfocr(fz_context *ctx, const fz_pixmap *pixmap, char *fi
 void fz_save_pixmap_as_png(fz_context *ctx, const fz_pixmap *pixmap, const char *filename);
 
 /**
+	Write a pixmap as a JPEG.
+*/
+void fz_write_pixmap_as_jpeg(fz_context *ctx, fz_output *out, fz_pixmap *pix, int quality, int invert_cmyk);
+
+/**
 	Save a pixmap as a JPEG.
 */
 void fz_save_pixmap_as_jpeg(fz_context *ctx, const fz_pixmap *pixmap, const char *filename, int quality);
