@@ -233,7 +233,6 @@ static void savefont(pdf_obj *dict)
 
 	if (!stream)
 	{
-		fz_warn(ctx, "unhandled font type");
 		return;
 	}
 
