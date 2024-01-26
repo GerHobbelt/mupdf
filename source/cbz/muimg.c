@@ -202,11 +202,9 @@ img_lookup_metadata(fz_context *ctx, fz_document *doc_, const char *key, char *b
 }
 
 static fz_document *
-img_open_document_with_stream(fz_context *ctx, fz_stream *file)
+img_open_document(fz_context *ctx, fz_stream *file, fz_stream *accel, fz_archive *dir)
 {
-	img_document *doc = NULL;
-
-	doc = fz_new_derived_document(ctx, img_document);
+	img_document *doc = fz_new_derived_document(ctx, img_document);
 
 	doc->super.drop_document = img_drop_document;
 	doc->super.count_pages = img_count_pages;
@@ -274,11 +272,16 @@ img_open_document_with_stream(fz_context *ctx, fz_stream *file)
 }
 
 static int
-img_recognize_content(fz_context *ctx, fz_stream *stream)
+img_recognize_content(fz_context *ctx, fz_stream *stream, fz_archive *dir)
 {
 	unsigned char data[16];
-	size_t n = fz_read(ctx, stream, data, sizeof(data));
+	size_t n;
 	int fmt;
+
+	if (stream == NULL)
+		return 0;
+
+	n = fz_read(ctx, stream, data, sizeof(data));
 
 	if (n != 8)
 		return 0;
@@ -352,12 +355,9 @@ static const char *img_mimetypes[] =
 fz_document_handler img_document_handler =
 {
 	NULL,
-	NULL,
-	img_open_document_with_stream,
+	img_open_document,
 	img_extensions,
 	img_mimetypes,
-	NULL,
-	NULL,
 	img_recognize_content
 };
 
