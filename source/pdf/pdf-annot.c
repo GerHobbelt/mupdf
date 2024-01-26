@@ -495,9 +495,11 @@ pdf_create_annot_raw(fz_context *ctx, pdf_page *page, enum pdf_annot_type type)
 	pdf_document *doc = page->doc;
 	pdf_obj *annot_obj = pdf_new_dict(ctx, doc, 0);
 	pdf_obj *ind_obj = NULL;
+	pdf_obj *free_arr = NULL;
 
 	fz_var(annot);
 	fz_var(ind_obj);
+	fz_var(free_arr);
 	fz_try(ctx)
 	{
 		int ind_obj_num;
@@ -511,6 +513,11 @@ pdf_create_annot_raw(fz_context *ctx, pdf_page *page, enum pdf_annot_type type)
 		annot_arr = pdf_dict_get(ctx, page->obj, PDF_NAME(Annots));
 		if (!pdf_is_array(ctx, annot_arr))
 			annot_arr = pdf_dict_put_array(ctx, page->obj, PDF_NAME(Annots), 0);
+		else if (pdf_is_indirect(ctx, annot_arr))
+		{
+			free_arr = annot_arr = pdf_copy_array(ctx, annot_arr);
+			pdf_dict_put(ctx, page->obj, PDF_NAME(Annots), annot_arr);
+		}
 
 		pdf_dict_put(ctx, annot_obj, PDF_NAME(Type), PDF_NAME(Annot));
 		pdf_dict_put_name(ctx, annot_obj, PDF_NAME(Subtype), type_str);
@@ -537,6 +544,7 @@ pdf_create_annot_raw(fz_context *ctx, pdf_page *page, enum pdf_annot_type type)
 	}
 	fz_always(ctx)
 	{
+		pdf_drop_obj(ctx, free_arr);
 		pdf_drop_obj(ctx, annot_obj);
 		pdf_drop_obj(ctx, ind_obj);
 	}
@@ -562,11 +570,13 @@ pdf_create_link(fz_context *ctx, pdf_page *page, fz_rect bbox, const char *uri)
 	fz_rect page_mediabox;
 	fz_matrix page_ctm;
 	fz_rect rect;
+	pdf_obj *free_arr = NULL;
 
 	fz_var(link);
 	fz_var(ind_obj);
 	fz_var(bs);
 	fz_var(a);
+	fz_var(free_arr);
 
 	pdf_begin_operation(ctx, page->doc, "Create Link");
 
@@ -582,6 +592,11 @@ pdf_create_link(fz_context *ctx, pdf_page *page, fz_rect bbox, const char *uri)
 		annot_arr = pdf_dict_get(ctx, page->obj, PDF_NAME(Annots));
 		if (!pdf_is_array(ctx, annot_arr))
 			annot_arr = pdf_dict_put_array(ctx, page->obj, PDF_NAME(Annots), 0);
+		else if (pdf_is_indirect(ctx, annot_arr))
+		{
+			free_arr = annot_arr = pdf_copy_array(ctx, annot_arr);
+			pdf_dict_put(ctx, page->obj, PDF_NAME(Annots), annot_arr);
+		}
 
 		pdf_dict_put(ctx, annot_obj, PDF_NAME(Type), PDF_NAME(Annot));
 		pdf_dict_put(ctx, annot_obj, PDF_NAME(Subtype), PDF_NAME(Link));
@@ -617,6 +632,7 @@ pdf_create_link(fz_context *ctx, pdf_page *page, fz_rect bbox, const char *uri)
 	}
 	fz_always(ctx)
 	{
+		pdf_drop_obj(ctx, free_arr);
 		pdf_drop_obj(ctx, annot_obj);
 		pdf_drop_obj(ctx, ind_obj);
 	}
