@@ -1645,6 +1645,10 @@ def build_swig(
         def make_command( module, cpp, swig_i):
             cpp = os.path.relpath( cpp)
             swig_i = os.path.relpath( swig_i)
+            # We need to predefine MUPDF_FITZ_HEAP_H to disable parsing of
+            # include/mupdf/fitz/heap.h. Otherwise swig's preprocessor seems to
+            # ignore #undef's in include/mupdf/fitz/heap-imp.h then complains
+            # about redefinition of macros in include/mupdf/fitz/heap.h.
             command = (
                     textwrap.dedent(
                     f'''
@@ -1663,6 +1667,7 @@ def build_swig(
                         -I{os.path.relpath(include1)}
                         -I{os.path.relpath(include2)}
                         -ignoremissing
+                        -DMUPDF_FITZ_HEAP_H
                         {swig_i}
                     ''').strip().replace( '\n', "" if state_.windows else " \\\n")
                     )
@@ -1763,6 +1768,7 @@ def build_swig(
                     -I{os.path.relpath(include1)}
                     -I{os.path.relpath(include2)}
                     -ignoremissing
+                    -DMUPDF_FITZ_HEAP_H
                     {os.path.relpath(swig_i)}
                 ''').strip().replace( '\n', "" if state_.windows else "\\\n")
                 )

@@ -169,10 +169,10 @@ def test(path):
     document = mupdf.FzDocument(path)
     try:
         mupdf.fz_load_page(document, 99999999)
-    except mupdf.FzErrorGeneric as e:
+    except mupdf.FzErrorArgument as e:
         log(f'{type(e)=} {str(e)=} {repr(e)=}.')
         log(f'{e.what()=}.')
-        expected = 'code=2: Page not found: 100000000'
+        expected = 'code=4: invalid page number: 100000000'
         assert str(e) == expected and e.what() == expected, (
                 f'Incorrect exception text:\n'
                 f'    {str(e)=}\n'
