@@ -50,20 +50,20 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props" Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props" Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props" Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -89,7 +89,7 @@
     <NMakeOutput>__build_target.exe</NMakeOutput>
     <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
   </PropertyGroup>
-<ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <ClCompile>
       <Optimization>Custom</Optimization>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -123,8 +123,8 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
-</ItemDefinitionGroup>
-<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Technology.Tests\forking cleans up memory leaks\forking cleans up memory leaks.vcxproj">
@@ -412,6 +412,51 @@
     <ProjectReference Include="sync_nas_filelock.vcxproj">
       <Project>{87ee9da4-de1e-4448-8324-183c98f87eaa}</Project>
     </ProjectReference>
+    <ProjectReference Include="tesseract-ambiguous_words.vcxproj">
+      <Project>{56109a0d-2cd3-4ac7-b344-5db0295bc7c9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="tesseract-classifier_tester.vcxproj">
+      <Project>{a303a365-dc1c-4072-92e7-5852cd63d0c0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="tesseract-cn_training.vcxproj">
+      <Project>{02975355-f70e-415b-aef9-acb556c571a4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="tesseract-combine_lang_model.vcxproj">
+      <Project>{b06213ed-7406-4462-9958-e167e418b79f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="tesseract-combine_tessdata.vcxproj">
+      <Project>{429d7e9a-ab02-4d41-84c2-e4feaac14d8f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="tesseract-dawg2wordlist.vcxproj">
+      <Project>{7458ce24-b282-4446-9dc9-a87cdc02fb4e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="tesseract-lstm_eval.vcxproj">
+      <Project>{9bd1770c-a856-4fef-a093-a0d318af6279}</Project>
+    </ProjectReference>
+    <ProjectReference Include="tesseract-lstm_training.vcxproj">
+      <Project>{c3e6b70f-a036-432d-a411-54bbe55f06fb}</Project>
+    </ProjectReference>
+    <ProjectReference Include="tesseract-merge_unicharsets.vcxproj">
+      <Project>{cca9e0a1-7177-4854-9813-78df883ddaa2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="tesseract-mf_training.vcxproj">
+      <Project>{abb45633-d66d-45eb-9e24-e8db6562c621}</Project>
+    </ProjectReference>
+    <ProjectReference Include="tesseract-set_unicharset_properties.vcxproj">
+      <Project>{b9ec2f6e-311b-4995-99d9-942cd43e3c08}</Project>
+    </ProjectReference>
+    <ProjectReference Include="tesseract-shape_clustering.vcxproj">
+      <Project>{03525cc3-c92c-493c-baf0-c60833a1bf7e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="tesseract-text2image.vcxproj">
+      <Project>{cc99dac8-15df-464d-adc9-d5a81a84c21c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="tesseract-unicharset_extractor.vcxproj">
+      <Project>{899deaaa-4bfc-4b85-8a1c-3b3e7e7c8b6e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="tesseract-wordlist2dawg.vcxproj">
+      <Project>{d05636ba-a83a-44ed-9e12-f98f5efb8efa}</Project>
+    </ProjectReference>
     <ProjectReference Include="tesseract.vcxproj">
       <Project>{00115919-815b-4f64-bc9d-219078b1f3aa}</Project>
     </ProjectReference>
@@ -425,8 +470,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
   </ImportGroup>
 </Project>
-  
