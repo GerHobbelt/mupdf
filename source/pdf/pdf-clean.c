@@ -851,7 +851,7 @@ pdf_redact_image_filter_pixels(fz_context *ctx, void *opaque, fz_matrix ctm, con
 			fz_rethrow(ctx);
 		return image;
 	}
-	return fz_keep_image(ctx, image);
+	return image;
 }
 
 static int
