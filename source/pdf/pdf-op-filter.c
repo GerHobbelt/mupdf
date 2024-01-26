@@ -1202,7 +1202,7 @@ pdf_filter_gs_TK(fz_context *ctx, pdf_processor *proc, int tk)
 }
 
 static void
-pdf_filter_gs_SMask(fz_context *ctx, pdf_processor *proc, pdf_obj *smask, float *bc, int luminosity)
+pdf_filter_gs_SMask(fz_context *ctx, pdf_processor *proc, pdf_obj *smask, float *bc, int luminosity, pdf_obj *tr)
 {
 	pdf_sanitize_processor *p = (pdf_sanitize_processor*)proc;
 
@@ -1210,7 +1210,7 @@ pdf_filter_gs_SMask(fz_context *ctx, pdf_processor *proc, pdf_obj *smask, float 
 		return;
 
 	if (p->chain->op_gs_SMask)
-		p->chain->op_gs_SMask(ctx, p->chain, smask, bc, luminosity);
+		p->chain->op_gs_SMask(ctx, p->chain, smask, bc, luminosity, tr);
 }
 
 static void
