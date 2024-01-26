@@ -356,7 +356,12 @@ public class PDFAnnotation
 	public native boolean getHiddenForEditing();
 	public native void setHiddenForEditing(boolean hidden);
 
-	public native boolean applyRedaction(boolean blackBoxes, int imageMethod);
+	public boolean applyRedaction(boolean blackBoxes, int imageMethod)
+	{
+		return applyRedaction(blackBoxes, imageMethod, 0);
+	}
+
+	public native boolean applyRedaction(boolean blackBoxes, int imageMethod, int lineArt);
 	
 	public native void setStampImage(Image image);
 

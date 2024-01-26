@@ -6145,11 +6145,12 @@ static void ffi_Story_place(js_State *J)
 	fz_context *ctx = js_getcontext(J);
 	fz_story *story = js_touserdata(J, 0, "fz_story");
 	fz_rect rect = ffi_torect(J, 1);
+	int flags = js_iscoercible(J, 2) ? js_tointeger(J, 2) : 0;
 	fz_rect filled = fz_empty_rect;
 	int more;
 
 	fz_try(ctx)
-		more = fz_place_story(ctx, story, rect, &filled);
+		more = fz_place_story_flags(ctx, story, rect, &filled, flags);
 	fz_catch(ctx)
 		rethrow(J);
 
@@ -6158,7 +6159,7 @@ static void ffi_Story_place(js_State *J)
 	ffi_pushrect(J, filled);
 	js_setproperty(J, -2, "filled");
 
-	js_pushboolean(J, !!more);
+	js_pushnumber(J, more);
 	js_setproperty(J, -2, "more");
 }
 
@@ -8449,9 +8450,10 @@ static void ffi_PDFPage_applyRedactions(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
 	pdf_page *page = js_touserdata(J, 0, "pdf_page");
-	pdf_redact_options opts = { 1, PDF_REDACT_IMAGE_PIXELS };
+	pdf_redact_options opts = { 1, PDF_REDACT_IMAGE_PIXELS, 0 };
 	if (js_isdefined(J, 1)) opts.black_boxes = js_toboolean(J, 1);
 	if (js_isdefined(J, 2)) opts.image_method = js_tointeger(J, 2);
+	if (js_isdefined(J, 3)) opts.line_art = js_tointeger(J, 3);
 	fz_try(ctx)
 		pdf_redact_page(ctx, page->doc, page, &opts);
 	fz_catch(ctx)
@@ -9832,9 +9834,10 @@ static void ffi_PDFAnnotation_applyRedaction(js_State *J)
 {
 	fz_context *ctx = js_getcontext(J);
 	pdf_annot *annot = ffi_toannot(J, 0);
-	pdf_redact_options opts = { 1, PDF_REDACT_IMAGE_PIXELS };
+	pdf_redact_options opts = { 1, PDF_REDACT_IMAGE_PIXELS, 0 };
 	if (js_isdefined(J, 1)) opts.black_boxes = js_toboolean(J, 1);
 	if (js_isdefined(J, 2)) opts.image_method = js_tointeger(J, 2);
+	if (js_isdefined(J, 3)) opts.line_art = js_tointeger(J, 3);
 	fz_try(ctx)
 		pdf_apply_redaction(ctx, annot, &opts);
 	fz_catch(ctx)
@@ -10730,7 +10733,7 @@ int murun_main(int argc, const char** argv)
 	js_getregistry(J, "Userdata");
 	js_newobjectx(J);
 	{
-		jsB_propfun(J, "Story.place", ffi_Story_place, 1);
+		jsB_propfun(J, "Story.place", ffi_Story_place, 2);
 		jsB_propfun(J, "Story.draw", ffi_Story_draw, 2);
 		jsB_propfun(J, "Story.document", ffi_Story_document, 0);
 	}
@@ -11154,7 +11157,7 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "PDFPage.createAnnotation", ffi_PDFPage_createAnnotation, 1);
 		jsB_propfun(J, "PDFPage.deleteAnnotation", ffi_PDFPage_deleteAnnotation, 1);
 		jsB_propfun(J, "PDFPage.update", ffi_PDFPage_update, 0);
-		jsB_propfun(J, "PDFPage.applyRedactions", ffi_PDFPage_applyRedactions, 2);
+		jsB_propfun(J, "PDFPage.applyRedactions", ffi_PDFPage_applyRedactions, 3);
 		jsB_propfun(J, "PDFPage.process", ffi_PDFPage_process, 1);
 		jsB_propfun(J, "PDFPage.toPixmap", ffi_PDFPage_toPixmap, 6);
 		jsB_propfun(J, "PDFPage.getTransform", ffi_PDFPage_getTransform, 0);
@@ -11263,7 +11266,7 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "PDFAnnotation.getIsOpen", ffi_PDFAnnotation_getIsOpen, 0);
 		jsB_propfun(J, "PDFAnnotation.setIsOpen", ffi_PDFAnnotation_setIsOpen, 1);
 
-		jsB_propfun(J, "PDFAnnotation.applyRedaction", ffi_PDFAnnotation_applyRedaction, 2);
+		jsB_propfun(J, "PDFAnnotation.applyRedaction", ffi_PDFAnnotation_applyRedaction, 3);
 		jsB_propfun(J, "PDFAnnotation.process", ffi_PDFAnnotation_process, 1);
 
 		jsB_propfun(J, "PDFAnnotation.getHiddenForEditing", ffi_PDFAnnotation_getHiddenForEditing, 0);
