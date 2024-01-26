@@ -32,6 +32,7 @@
 #include "mupdf/fitz/link.h"
 #include "mupdf/fitz/outline.h"
 #include "mupdf/fitz/separation.h"
+#include "mupdf/fitz/archive.h"
 
 #if FZ_ENABLE_RENDER_CORE 
 
