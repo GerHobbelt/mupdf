@@ -160,6 +160,7 @@ enum
 	FZ_STEXT_NO_TEXT_AS_PATH = 1024,
 	FZ_STEXT_EXTERNAL_STYLES = 2048,
 	FZ_STEXT_RESOLUTION = 4096,
+	FZ_STEXT_USE_CID_FOR_UNKNOWN_UNICODE = 8192,
 };
 
 /**
@@ -212,7 +213,7 @@ struct fz_stext_line
 */
 struct fz_stext_char
 {
-	int c;
+	int c; /* unicode character value */
 	int bidi; /* even for LTR, odd for RTL */
 	int color; /* sRGB hex color */
 	fz_point origin;

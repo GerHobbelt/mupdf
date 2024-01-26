@@ -162,6 +162,7 @@ const char *fz_stext_options_usage =
 	"                  =yes: output image reference URI only\n"
 	"  reuse-images:         duplicate images share the same URI\n"
 	"  dehyphenate:          attempt to join up hyphenated words\n"
+	"  use-cid-for-unknown-unicode: guess unicode from cid if normal mapping fails\n"
 	"  mediabox-clip=no:     include characters outside mediabox\n"
 	"  glyph-bbox:           use painted area of glyphs instead of font size for bounding boxes\n"
 	"  text-as-path:         (SVG: default) output text as curves\n"
@@ -896,6 +897,7 @@ do_extract(fz_context *ctx, fz_stext_device *dev, fz_text_span *span, fz_matrix 
 	fz_font *font = span->font;
 	fz_matrix tm = span->trm;
 	float adv;
+	int unicode;
 	int i;
 
 	for (i = start; i < end; i++)
@@ -932,9 +934,13 @@ do_extract(fz_context *ctx, fz_stext_device *dev, fz_text_span *span, fz_matrix 
 		if (adv == 0 && span->wmode)
 			adv = 1;
 
+		unicode = span->items[i].ucs;
+		if (unicode == FZ_REPLACEMENT_CHARACTER && (dev->opts.flags & FZ_STEXT_USE_CID_FOR_UNKNOWN_UNICODE))
+			unicode = span->items[i].cid;
+
 		/* Send the chars we have through. */
 		fz_add_stext_char(ctx, dev, font,
-			span->items[i].ucs,
+			unicode,
 			span->items[i].gid,
 			dev->last.trm,
 			adv,
@@ -1521,6 +1527,12 @@ fz_parse_stext_options(fz_context *ctx, fz_stext_options *opts, const char *stri
 		opts->flags_conf_mask |= FZ_STEXT_PRESERVE_SPANS;
 		if (fz_option_eq(val, "yes"))
 			opts->flags |= FZ_STEXT_PRESERVE_SPANS;
+	}
+	if (fz_has_option(ctx, string, "use-cid-for-unknown-unicode", &val))
+	{
+		opts->flags_conf_mask |= FZ_STEXT_USE_CID_FOR_UNKNOWN_UNICODE;
+		if (fz_option_eq(val, "yes"))
+			opts->flags |= FZ_STEXT_USE_CID_FOR_UNKNOWN_UNICODE;
 	}
 	if (fz_has_option(ctx, string, "glyph-bbox", &val))
 	{
