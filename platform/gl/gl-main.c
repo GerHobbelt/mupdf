@@ -3163,7 +3163,15 @@ cleanup_destruction(void)
 	fz_drop_page(ctx, fzpage);
 	fz_drop_outline(ctx, outline);
 	fz_drop_document(ctx, doc);
+
+	// WARNING: do NOT drop the context yet as the GUI loop is still probably running and
+	// the code there needs a valid ctx to handle any lingering faults / exceptions.
+	//
+	// Hence we defer dropping the context ctx till the very end of the application run.
+#if 0	
 	fz_drop_context(ctx);
+	ctx = NULL;
+#endif
 
 	console_fin();
 }
@@ -3359,6 +3367,11 @@ int main(int argc, const char** argv)
 	glutMainLoop();
 
 	cleanup();
+
+	// WARNING: we defered dropping rothe context ctx till the very end of the application run here.
+	// See also the comment in the cleanup code section.
+	fz_drop_context(ctx);
+	ctx = NULL;
 
 	return 0;
 }
