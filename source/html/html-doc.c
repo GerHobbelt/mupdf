@@ -268,6 +268,42 @@ fz_htdoc_open_document_with_stream_and_dir(fz_context *ctx, fz_stream *stm, fz_a
 
 /* Generic HTML document handler */
 
+int htdoc_recognize_html_content(fz_context *ctx, fz_stream *stream, fz_archive *dir)
+{
+	char buffer[4096];
+	size_t i, n, len;
+
+	if (stream == NULL)
+		return 0;
+
+	n = fz_read(ctx, stream, buffer, sizeof(buffer));
+	fz_seek(ctx, stream, 0, SEEK_SET);
+	if (n == 0)
+		return 0;
+
+	len = 0;
+	for (i = 0; i < n; i++)
+	{
+		char c = buffer[i];
+		if (c >= 'A' && c <= 'Z')
+			c += 'a' - 'A';
+		if ("<html"[len] == c)
+		{
+			len++;
+			if (len == 5)
+			{
+				/* Only return a score of 50, so that other, more
+				 * specific recognisers have scope to override this. */
+				return 50;
+			}
+		}
+		else
+			len = 0;
+	}
+
+	return 0;
+}
+
 static const fz_htdoc_format_t fz_htdoc_html5 =
 {
 	"HTML5",
@@ -300,6 +336,7 @@ fz_document_handler html_document_handler =
 	htdoc_open_document,
 	htdoc_extensions,
 	htdoc_mimetypes,
+	htdoc_recognize_html_content
 };
 
 /* XHTML document handler */
