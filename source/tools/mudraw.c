@@ -95,6 +95,7 @@ enum {
 	OUT_PCLM,
 	OUT_PGM,
 	OUT_MURAW,
+	OUT_J2K,
 	OUT_PNM,
 	OUT_PPM,
 	OUT_PKM,
@@ -141,6 +142,7 @@ static const suffix_t suffix_table[] =
 	{ ".emptybox", OUT_EMPTY_BOX, 0 },
 
 	/* And the 'single extension' ones go last. */
+	{ ".j2k", OUT_J2K, 0 },
 	{ ".png", OUT_PNG, 0 },
 	{ ".tiff", OUT_TIFF, 0 },
 	{ ".muraw", OUT_MURAW, 0 },
@@ -205,6 +207,7 @@ typedef struct
 static const format_cs_table_t format_cs_table[] =
 {
 	{ OUT_PNG, CS_RGB, { CS_GRAY, CS_GRAY_ALPHA, CS_RGB, CS_RGB_ALPHA, CS_ICC } },
+	{ OUT_J2K, CS_RGB, { CS_GRAY, CS_RGB } },
 	{ OUT_MURAW, CS_RGB_ALPHA, { CS_MONO, CS_GRAY, CS_GRAY_ALPHA, CS_RGB, CS_RGB_ALPHA, CS_CMYK, CS_CMYK_ALPHA, CS_ICC } },
 	{ OUT_PPM, CS_RGB, { CS_GRAY, CS_RGB } },
 	{ OUT_PNM, CS_GRAY, { CS_GRAY, CS_RGB } },
@@ -1356,6 +1359,10 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			{
 				fz_write_header(ctx, bander, pix->w, totalheight, pix->n, pix->alpha, pix->xres, pix->yres, output_pagenum++, pix->colorspace, pix->seps);
 			}
+			if (output_format == OUT_J2K && bands > 1)
+			{
+				fz_throw(ctx, FZ_ERROR_GENERIC, "Can't band with J2k output!");
+			}
 
 			for (band = 0; band < bands; band++)
 			{
@@ -1387,6 +1394,10 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 					ASSERT(bander->w == pix->w);
 					ASSERT(drawheight <= pix->h);
 					fz_write_band(ctx, bander, bit ? bit->stride : pix->stride, drawheight, bit ? bit->samples : pix->samples);
+				}
+				if (output_format == OUT_J2K)
+				{
+					fz_write_pixmap_as_jpx(ctx, out, pix, 80);
 				}
 				fz_drop_bitmap(ctx, bit);
 				bit = NULL;
