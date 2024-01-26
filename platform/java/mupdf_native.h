@@ -2119,6 +2119,14 @@ JNIEXPORT void JNICALL Java_com_artifex_mupdf_fitz_Image_setOrientation
 
 /*
  * Class:     com_artifex_mupdf_fitz_Image
+ * Method:    getSize
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_artifex_mupdf_fitz_Image_getSize
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_artifex_mupdf_fitz_Image
  * Method:    toPixmap
  * Signature: ()Lcom/artifex/mupdf/fitz/Pixmap;
  */
@@ -6049,10 +6057,10 @@ JNIEXPORT jobject JNICALL Java_com_artifex_mupdf_fitz_Pixmap_convertToColorSpace
 
 /*
  * Class:     com_artifex_mupdf_fitz_Pixmap
- * Method:    getMD5
+ * Method:    computeMD5
  * Signature: ()[B
  */
-JNIEXPORT jbyteArray JNICALL Java_com_artifex_mupdf_fitz_Pixmap_getMD5
+JNIEXPORT jbyteArray JNICALL Java_com_artifex_mupdf_fitz_Pixmap_computeMD5
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus

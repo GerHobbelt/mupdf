@@ -201,6 +201,14 @@ FUN(Image_getOrientation)(JNIEnv *env, jobject self)
 	return fz_image_orientation(ctx, image);
 }
 
+JNIEXPORT jlong JNICALL
+FUN(Image_getSize)(JNIEnv *env, jobject self)
+{
+	fz_context *ctx = get_context(env);
+	fz_image *image = from_Image(env, self);
+	return fz_image_size(ctx, image);
+}
+
 JNIEXPORT jobject JNICALL
 FUN(Image_getMask)(JNIEnv *env, jobject self)
 {

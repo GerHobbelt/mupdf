@@ -4752,6 +4752,26 @@ static void ffi_Pixmap_clear(js_State *J)
 	}
 }
 
+static void ffi_Pixmap_computeMD5(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_pixmap *pixmap = ffi_topixmap(J, 0);
+	unsigned char digest[16] = { 0 };
+	size_t i;
+
+	fz_try(ctx)
+		fz_md5_pixmap(ctx, pixmap, digest);
+	fz_catch(ctx)
+		rethrow(J);
+
+	js_newarray(J);
+	for (i = 0; i < nelem(digest); i++)
+	{
+		js_pushnumber(J, digest[i]);
+		js_setindex(J, -2, i);
+	}
+}
+
 static void ffi_Pixmap_getX(js_State *J)
 {
 	fz_pixmap *pixmap = ffi_topixmap(J, 0);
@@ -5206,6 +5226,13 @@ static void ffi_Image_getMask(js_State *J)
 		ffi_pushimage(J, image->mask);
 	else
 		js_pushnull(J);
+}
+
+static void ffi_Image_getSize(js_State *J)
+{
+	fz_context *ctx = js_getcontext(J);
+	fz_image *image = js_touserdata(J, 0, "fz_image");
+	js_pushnumber(J, fz_image_size(ctx, image));
 }
 
 static void ffi_Image_getColorSpace(js_State *J)
@@ -10893,6 +10920,7 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "Image.getDecode", ffi_Image_getDecode, 0);
 		jsB_propfun(J, "Image.getOrientation", ffi_Image_getOrientation, 0);
 		jsB_propfun(J, "Image.getMask", ffi_Image_getMask, 0);
+		jsB_propfun(J, "Image.getSize", ffi_Image_getSize, 0);
 		jsB_propfun(J, "Image.toPixmap", ffi_Image_toPixmap, 2);
 		jsB_propfun(J, "Image.setOrientation", ffi_Image_setOrientation, 1);
 		jsB_propfun(J, "Image.getImageData", ffi_Image_getImageData, 0);
@@ -10968,6 +10996,7 @@ int murun_main(int argc, const char** argv)
 		jsB_propfun(J, "Pixmap.getBounds", ffi_Pixmap_getBounds, 0);
 		jsB_propfun(J, "Pixmap.clear", ffi_Pixmap_clear, 1);
 
+		jsB_propfun(J, "Pixmap.computeMD5", ffi_Pixmap_computeMD5, 0);
 		jsB_propfun(J, "Pixmap.getX", ffi_Pixmap_getX, 0);
 		jsB_propfun(J, "Pixmap.getY", ffi_Pixmap_getY, 0);
 		jsB_propfun(J, "Pixmap.getWidth", ffi_Pixmap_getWidth, 0);
