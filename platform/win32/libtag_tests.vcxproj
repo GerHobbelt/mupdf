@@ -116,7 +116,7 @@
 </ItemDefinitionGroup>
 <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -127,11 +127,11 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>TAGLIB_STATIC;BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TAGLIB_STATIC;BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -144,7 +144,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -153,12 +153,12 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>TAGLIB_STATIC;BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TAGLIB_STATIC;BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -171,7 +171,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -182,11 +182,11 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>TAGLIB_STATIC;BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TAGLIB_STATIC;BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
@@ -199,7 +199,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
@@ -208,12 +208,12 @@
     <ClCompile>
       <Optimization>Custom</Optimization>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>TAGLIB_STATIC;BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_CRT_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TAGLIB_STATIC;BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBTAG;TAG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
       <AdditionalIncludeDirectories>../../include/system-override;.;../../thirdparty/owemdjee/taglib/taglib/ogg/opus;../../thirdparty/owemdjee/taglib/taglib/mp4;../../thirdparty/owemdjee/taglib/taglib/ogg/flac;../../thirdparty/owemdjee/taglib/taglib/flac;../../thirdparty/owemdjee/taglib/taglib/mod;../../thirdparty/owemdjee/taglib/taglib/ogg/vorbis;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2/frames;../../thirdparty/owemdjee/taglib/taglib/riff/aiff;../../thirdparty/owemdjee/taglib/taglib/wavpack;../../thirdparty/owemdjee/taglib/taglib/riff;../../thirdparty/owemdjee/taglib/taglib/asf;../../thirdparty/owemdjee/taglib/taglib/mpc;../../thirdparty/owemdjee/taglib/taglib/riff/wav;../../thirdparty/owemdjee/taglib/taglib/ogg;../../thirdparty/owemdjee/taglib/taglib/mpeg;../../thirdparty/owemdjee/taglib/taglib;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v1;../../thirdparty/owemdjee/taglib/taglib/ape;../../thirdparty/owemdjee/taglib/taglib/toolkit;../../thirdparty/owemdjee/taglib/taglib/ogg/speex;../../thirdparty/owemdjee/taglib/taglib/s3m;../../thirdparty/owemdjee/taglib/taglib/mpeg/id3v2;../../scripts/taglib;../../thirdparty/owemdjee/taglib/3rdparty;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>

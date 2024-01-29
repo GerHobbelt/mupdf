@@ -68,6 +68,8 @@ if (mode === "create") {
 		.replace(/[A-Z_-]+-_CRT_/g, '_CRT_')	
 		.replace(/USE_SCHANNEL;/g, '')	
 		.replace(/USE_WINDOWS_SSPI;/g, '')	
+		.replace(/\bNDEBUG;/g, '')	
+		.replace(/\b_DEBUG;/g, '')	
 
 		let pnu = projectName.toUpperCase().replace(/-/g, '_');
 		p1 = `BUILD_MONOLITHIC;BUILDING_${pnu};${ pnu.replace(/LIB/, '')}_STATICLIB;${p1}`;

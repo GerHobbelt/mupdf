@@ -79,9 +79,27 @@ src = src
 			return "_CRT_SECURE_NO_WARNINGS";
 		if ("MAIN_IS_MONOLITHIC" === l)
 			return "BUILD_MONOLITHIC";
+		
+		// also remove defines which now reside in the project's *.props files already:
+		if ("NDEBUG" === l)
+			return "";
+		if ("_DEBUG" === l)
+			return "";
+		if ("WIN32" === l)
+			return "";
+		if ("WIN64" === l)
+			return "";
+		if ("_CRT_SECURE_NO_WARNINGS" === l)
+			return "";
+		if ("_CRT_NONSTDC_NO_WARNINGS" === l)
+			return "";
+		if ("_CRTDBG_MAP_ALLOC" === l)
+			return "";
+		
 		return l;
 	})
-
+	.filter((l) => l.trim().length > 0);
+	
 	let pnu = projectName.toUpperCase();
 
 	return `<PreprocessorDefinitions>${a.join(';')}</PreprocessorDefinitions>`;

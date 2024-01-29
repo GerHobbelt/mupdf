@@ -1028,6 +1028,7 @@ EOT
 myapplist=$(
 grep -v '#' <<EOT
 
+pikchr
 capnproto
 loki
 netdata
