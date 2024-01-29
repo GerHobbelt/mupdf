@@ -57,8 +57,9 @@
    8: dump stdlib functions
   16: dump bytecode in hex
   32: dump line number table
+  64: dump compute_stack_size
  */
-#define DUMP_BYTECODE 0xFF
+#define DUMP_BYTECODE 0x3F
 
  /* DUMP_FREE - Define this if you want to dump a message on freeing objects */
 #define DUMP_FREE 1
