@@ -364,6 +364,29 @@ open_libarchive_entry(fz_context *ctx, fz_archive *arch_, const char *name)
 	return stm;
 }
 
+static char *
+wchar_to_utf8(fz_context *ctx, wchar_t *w)
+{
+	size_t count;
+	wchar_t *s;
+	char *d, *e;
+
+	if (w == NULL)
+		return NULL;
+
+	count = 1;
+	s = w;
+	while (*s)
+		count += fz_runelen(*s++);
+
+	e = d = fz_malloc(ctx, count);
+	while (*w)
+		d += fz_runetochar(d, *w++);
+	*d = 0;
+
+	return e;
+}
+
 fz_archive *
 fz_open_libarchive_archive_with_stream(fz_context *ctx, fz_stream *file)
 {
@@ -404,6 +427,8 @@ fz_open_libarchive_archive_with_stream(fz_context *ctx, fz_stream *file)
 				fz_throw(ctx, FZ_ERROR_LIBRARY, "Corrupt archive");
 
 			path = archive_entry_pathname_utf8(entry);
+			if (!path)
+				path = wchar_to_utf8(ctx, archive_entry_pathname_w(entry));
 			if (!path)
 				continue;
 
