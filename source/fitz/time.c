@@ -62,8 +62,11 @@ int gettimeofday(struct timeval *tv, struct timezone *tz)
 #endif /* !_WINRT */
 #endif /* _MSC_VER */
 
-char *
-fz_utf8_from_wchar(const wchar_t *s)
+/* Static version of fz_utf8_from_wchar that can
+ * operate without an fz_context * - only used for
+ * argc/argv handling. */
+static char *
+utf8_from_wchar(const wchar_t *s)
 {
 	const wchar_t *src = s;
 	char *d;
@@ -89,59 +92,39 @@ fz_utf8_from_wchar(const wchar_t *s)
 	return d;
 }
 
-wchar_t *
-fz_wchar_from_utf8(const char *s)
-{
-	wchar_t *d, *r;
-	int c;
-	r = d = malloc((strlen(s) + 1) * sizeof(wchar_t));
-	if (!r)
-		return NULL;
-	while (*s) {
-		s += fz_chartorune(&c, s);
-		/* Truncating c to a wchar_t can be problematic if c
-		 * is 0x10000. */
-		if (c >= 0x10000)
-			c = FZ_REPLACEMENT_CHARACTER;
-		*d++ = c;
-	}
-	*d = 0;
-	return r;
-}
-
 void *
-fz_fopen_utf8(const char *name, const char *mode)
+fz_fopen_utf8(fz_context *ctx, const char *name, const char *mode)
 {
 	wchar_t *wname, *wmode;
 	FILE *file;
 
-	wname = fz_wchar_from_utf8(name);
+	wname = fz_wchar_from_utf8(ctx, name);
 	if (wname == NULL)
 	{
 		return NULL;
 	}
 
-	wmode = fz_wchar_from_utf8(mode);
+	wmode = fz_wchar_from_utf8(ctx, mode);
 	if (wmode == NULL)
 	{
-		free(wname);
+		fz_free(ctx, wname);
 		return NULL;
 	}
 
 	file = _wfopen(wname, wmode);
 
-	free(wname);
-	free(wmode);
+	fz_free(ctx, wname);
+	fz_free(ctx, wmode);
 	return file;
 }
 
 int
-fz_remove_utf8(const char *name)
+fz_remove_utf8(fz_context *ctx, const char *name)
 {
 	wchar_t *wname;
 	int n;
 
-	wname = fz_wchar_from_utf8(name);
+	wname = fz_wchar_from_utf8(ctx, name);
 	if (wname == NULL)
 	{
 		errno = ENOMEM;
@@ -150,7 +133,7 @@ fz_remove_utf8(const char *name)
 
 	n = _wremove(wname);
 
-	free(wname);
+	fz_free(ctx, wname);
 	return n;
 }
 
@@ -169,7 +152,7 @@ fz_argv_from_wargv(int argc, wchar_t **wargv)
 
 	for (i = 0; i < argc; i++)
 	{
-		argv[i] = Memento_label(fz_utf8_from_wchar(wargv[i]), "fz_arg");
+		argv[i] = Memento_label(utf8_from_wchar(wargv[i]), "fz_arg");
 		if (argv[i] == NULL)
 		{
 			fprintf(stderr, "Out of memory while processing command line args!\n");
@@ -190,47 +173,47 @@ fz_free_argv(int argc, char **argv)
 }
 
 int64_t
-fz_stat_ctime(const char *path)
+fz_stat_ctime(fz_context *ctx, const char *path)
 {
 	struct _stat info;
 	wchar_t *wpath;
 
-	wpath = fz_wchar_from_utf8(path);
+	wpath = fz_wchar_from_utf8(ctx, path);
 	if (wpath == NULL)
 		return 0;
 
 	if (_wstat(wpath, &info) < 0) {
-		free(wpath);
+		fz_free(ctx, wpath);
 		return 0;
 	}
 
-	free(wpath);
+	fz_free(ctx, wpath);
 	return info.st_ctime;
 }
 
 int64_t
-fz_stat_mtime(const char *path)
+fz_stat_mtime(fz_context *ctx, const char *path)
 {
 	struct _stat info;
 	wchar_t *wpath;
 
-	wpath = fz_wchar_from_utf8(path);
+	wpath = fz_wchar_from_utf8(ctx, path);
 	if (wpath == NULL)
 		return 0;
 
 	if (_wstat(wpath, &info) < 0) {
-		free(wpath);
+		fz_free(ctx, wpath);
 		return 0;
 	}
 
-	free(wpath);
+	fz_free(ctx, wpath);
 	return info.st_mtime;
 }
 
 #else
 
 int64_t
-fz_stat_ctime(const char *path)
+fz_stat_ctime(fz_context *ctx, const char *path)
 {
 	struct stat info;
 	if (stat(path, &info) < 0)
@@ -239,7 +222,7 @@ fz_stat_ctime(const char *path)
 }
 
 int64_t
-fz_stat_mtime(const char *path)
+fz_stat_mtime(fz_context *ctx, const char *path)
 {
 	struct stat info;
 	if (stat(path, &info) < 0)

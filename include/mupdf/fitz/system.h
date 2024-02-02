@@ -41,6 +41,8 @@
 
 #include "export.h"
 
+typedef struct fz_context fz_context;
+
 #if defined(_MSC_VER) && (_MSC_VER < 1700) /* MSVC older than VS2012 */
 typedef signed char int8_t;
 typedef short int int16_t;
@@ -163,14 +165,14 @@ static __inline int signbit(double x)
 
 #endif
 
+char *fz_utf8_from_wchar(fz_context *ctx, const wchar_t *s);
+wchar_t *fz_wchar_from_utf8(fz_context *ctx, const char *s);
+
 #ifdef _WIN32
 
-char *fz_utf8_from_wchar(const wchar_t *s);
-wchar_t *fz_wchar_from_utf8(const char *s);
-
 /* really a FILE* but we don't want to include stdio.h here */
-void *fz_fopen_utf8(const char *name, const char *mode);
-int fz_remove_utf8(const char *name);
+void *fz_fopen_utf8(fz_context *ctx, const char *name, const char *mode);
+int fz_remove_utf8(fz_context *ctx, const char *name);
 
 char **fz_argv_from_wargv(int argc, wchar_t **wargv);
 void fz_free_argv(int argc, char **argv);
@@ -182,8 +184,8 @@ void fz_free_argv(int argc, char **argv);
 #define S_ISDIR(mode) ((mode) & S_IFDIR)
 #endif
 
-int64_t fz_stat_ctime(const char *path);
-int64_t fz_stat_mtime(const char *path);
+int64_t fz_stat_ctime(fz_context *ctx, const char *path);
+int64_t fz_stat_mtime(fz_context *ctx, const char *path);
 
 /* inline is standard in C++. For some compilers we can enable it within
  * C too. Some compilers think they know better than we do about when

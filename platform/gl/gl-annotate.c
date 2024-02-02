@@ -417,7 +417,7 @@ static void do_save_pdf_dialog(int for_signing)
 					fz_strlcpy(filename, save_filename, PATH_MAX);
 					fz_strlcat(save_filename, ".journal", PATH_MAX);
 #ifdef _WIN32
-					fz_remove_utf8(save_filename);
+					fz_remove_utf8(ctx, save_filename);
 #else
 					remove(save_filename);
 #endif
@@ -508,8 +508,8 @@ static void open_attachment_dialog(void)
 
 				filename = fz_basename(attach_filename);
 				contents = fz_read_file(ctx, attach_filename);
-				created = fz_stat_ctime(attach_filename);
-				modified = fz_stat_mtime(attach_filename);
+				created = fz_stat_ctime(ctx, attach_filename);
+				modified = fz_stat_mtime(ctx, attach_filename);
 
 				fs = pdf_add_embedded_file(ctx, pdf, filename, NULL, contents,
 					created, modified, 0);

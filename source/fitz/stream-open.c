@@ -36,7 +36,7 @@ fz_file_exists(fz_context *ctx, const char *path)
 {
 	FILE *file;
 #ifdef _WIN32
-	file = fz_fopen_utf8(path, "rb");
+	file = fz_fopen_utf8(ctx, path, "rb");
 #else
 	file = fopen(path, "rb");
 #endif
@@ -184,7 +184,7 @@ fz_open_file(fz_context *ctx, const char *name)
 {
 	FILE *file;
 #ifdef _WIN32
-	file = fz_fopen_utf8(name, "rb");
+	file = fz_fopen_utf8(ctx, name, "rb");
 #else
 	file = fopen(name, "rb");
 #endif
@@ -198,7 +198,7 @@ fz_try_open_file(fz_context *ctx, const char *name)
 {
 	FILE *file;
 #ifdef _WIN32
-	file = fz_fopen_utf8(name, "rb");
+	file = fz_fopen_utf8(ctx, name, "rb");
 #else
 	file = fopen(name, "rb");
 #endif

@@ -1899,18 +1899,18 @@ static void apply_layer_config(fz_context *ctx, fz_document *doc, const char *lc
 }
 
 static int
-fz_mkdir(char *path)
+fz_mkdir(fz_context *ctx, char *path)
 {
 #ifdef _WIN32
 	int ret;
-	wchar_t *wpath = fz_wchar_from_utf8(path);
+	wchar_t *wpath = fz_wchar_from_utf8(ctx, path);
 
 	if (wpath == NULL)
 		return -1;
 
 	ret = _wmkdir(wpath);
 
-	free(wpath);
+	fz_free(ctx, wpath);
 
 	return ret;
 #else
@@ -1934,7 +1934,7 @@ static int create_accel_path(fz_context *ctx, char outname[], size_t len, int cr
 			goto fail; /* won't fit */
 
 		if (create)
-			(void) fz_mkdir(outname);
+			(void) fz_mkdir(ctx, outname);
 		if (!fz_is_directory(ctx, outname))
 			goto fail; /* directory creation failed, or that dir doesn't exist! */
 #ifdef _WIN32
@@ -2544,8 +2544,8 @@ int mudraw_main(int argc, char **argv)
 					{
 						/* Check whether that file exists, and isn't older than
 						 * the document. */
-						atime = fz_stat_mtime(accelpath);
-						dtime = fz_stat_mtime(filename);
+						atime = fz_stat_mtime(ctx, accelpath);
+						dtime = fz_stat_mtime(ctx, filename);
 						if (atime == 0)
 						{
 							/* No accelerator */
@@ -2556,7 +2556,7 @@ int mudraw_main(int argc, char **argv)
 						{
 							/* Accelerator data is out of date */
 #ifdef _WIN32
-							fz_remove_utf8(accelpath);
+							fz_remove_utf8(ctx, accelpath);
 #else
 							remove(accelpath);
 #endif

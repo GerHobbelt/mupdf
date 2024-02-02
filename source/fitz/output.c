@@ -262,19 +262,19 @@ fz_new_output_with_path(fz_context *ctx, const char *filename, int append)
 	/* Ensure we create a brand new file. We don't want to clobber our old file. */
 	if (!append)
 	{
-		if (fz_remove_utf8(filename) < 0)
+		if (fz_remove_utf8(ctx, filename) < 0)
 			if (errno != ENOENT)
 				fz_throw(ctx, FZ_ERROR_SYSTEM, "cannot remove file '%s': %s", filename, strerror(errno));
 	}
 #if defined(__MINGW32__) || defined(__MINGW64__)
-	file = fz_fopen_utf8(filename, append ? "rb+" : "wb+"); /* 'x' flag not suported. */
+	file = fz_fopen_utf8(ctx, filename, append ? "rb+" : "wb+"); /* 'x' flag not suported. */
 #else
-	file = fz_fopen_utf8(filename, append ? "rb+" : "wb+x");
+	file = fz_fopen_utf8(ctx, filename, append ? "rb+" : "wb+x");
 #endif
 	if (append)
 	{
 		if (file == NULL)
-			file = fz_fopen_utf8(filename, "wb+");
+			file = fz_fopen_utf8(ctx, filename, "wb+");
 		else
 			fseek(file, 0, SEEK_END);
 	}
