@@ -25,6 +25,7 @@
 
 #include "mupdf/assertions.h"
 #include <string.h>
+#include <errno.h>
 
 #if FZ_ENABLE_RENDER_CORE
 
@@ -543,6 +544,7 @@ fz_clone_text_span(fz_context *ctx, const fz_text_span *span)
 	if (cspan->items == NULL)
 	{
 		fz_free(ctx, cspan);
+		errno = ENOMEM;
 		fz_throw(ctx, FZ_ERROR_SYSTEM, "Failed to malloc while cloning text span: calloc (%zu x %zu bytes) failed", (size_t)cspan->len, sizeof(*cspan->items));
 	}
 	memcpy(cspan->items, span->items, sizeof(*cspan->items) * cspan->len);
