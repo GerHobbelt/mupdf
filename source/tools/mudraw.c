@@ -1361,7 +1361,7 @@ static void dodrawpage(fz_context *ctx, fz_page *page, fz_display_list *list, in
 			}
 			if (output_format->format == OUT_J2K && bands > 1)
 			{
-				fz_throw(ctx, FZ_ERROR_GENERIC, "Can't band with J2k output!");
+				fz_throw(ctx, FZ_ERROR_ARGUMENT, "Can't band with J2k output!");
 			}
 
 			for (band = 0; band < bands; band++)

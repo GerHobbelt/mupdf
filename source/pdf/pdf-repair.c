@@ -374,7 +374,8 @@ pdf_repair_xref(fz_context *ctx, pdf_document *doc)
 		fz_warn(ctx, "repairing FDF document");
 
 	if (doc->repair_attempted & 0x01)
-		fz_throw(ctx, FZ_ERROR_GENERIC, "Repair failed already - not trying again");
+		fz_throw(ctx, FZ_ERROR_FORMAT, "Repair failed already - not trying again");
+
 	doc->repair_attempted |= 0x01;
 	doc->repair_in_progress = 1;
 
