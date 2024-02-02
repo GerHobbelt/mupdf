@@ -103,7 +103,7 @@ match_long_option(int argc, const char * const *argv, const fz_getopt_long_optio
 static const char *scan = NULL; /* Private scan pointer. */
 
 int
-fz_getopt_long(int argc, const char * const *argv, const char *optstring, const fz_getopt_long_options *longopts)
+fz_getopt_long(int argc, const char **argv, const char *optstring, const fz_getopt_long_options *longopts)
 {
 	int c;
 	const char *place;
@@ -170,7 +170,7 @@ void fz_getopt_reset(void)
 }
 
 int
-fz_getopt(int argc, const char *const *argv, const char *optstring)
+fz_getopt(int argc, const char **argv, const char *optstring)
 {
 	return fz_getopt_long(argc, argv, optstring, NULL);
 }

@@ -74,13 +74,13 @@ typedef struct
 	at the start of the argument. Examples of supported argument formats: '-r500', '-r 500',
 	'--resolution 500', '--resolution=500'.
 */
-extern int fz_getopt_long(int nargc, const char * const *nargv, const char *ostr, const fz_getopt_long_options *longopts);
+extern int fz_getopt_long(int nargc, const char **nargv, const char *ostr, const fz_getopt_long_options *longopts);
 
 /**
 	Identical to fz_getopt_long, but with a NULL longopts field, signifying no long
 	options.
 */
-extern int fz_getopt(int nargc, const char * const *nargv, const char *ostr);
+extern int fz_getopt(int nargc, const char **nargv, const char *ostr);
 
 /**
 	fz_optind is updated to point to the current index being read from the
