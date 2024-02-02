@@ -30,6 +30,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <intrin.h>		// __debugbreak()
+#include <errno.h>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -720,6 +721,12 @@ int fz_caught(fz_context *ctx)
 {
 	assert(ctx && ctx->error.errcode >= FZ_ERROR_NONE);
 	return ctx->error.errcode;
+}
+
+int fz_caught_errno(fz_context *ctx)
+{
+	assert(ctx && ctx->error.errcode == FZ_ERROR_SYSTEM);
+	return ctx->error.errnum;
 }
 
 const char *fz_caught_message(fz_context *ctx)
