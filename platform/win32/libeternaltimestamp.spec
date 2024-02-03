@@ -1,4 +1,6 @@
 
 also-ignore:
 	/test/
+	/demo/
+	
 	
