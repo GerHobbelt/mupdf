@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libnewlisp</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFB5F2BF}</ProjectGuid>
+    <RootNamespace>libnewlisp</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNEWLISP;NEWLISP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNEWLISP;NEWLISP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNEWLISP;NEWLISP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNEWLISP;NEWLISP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNEWLISP;NEWLISP_STATICLIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNEWLISP;NEWLISP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNEWLISP;NEWLISP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNEWLISP;NEWLISP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNEWLISP;NEWLISP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNEWLISP;NEWLISP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNEWLISP;NEWLISP_STATICLIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBNEWLISP;NEWLISP_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/newlisp/newlisp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/newlisp/nl-debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/newlisp/nl-filesys.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/newlisp/nl-import.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/newlisp/nl-list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/newlisp/nl-liststr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/newlisp/nl-math.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/newlisp/nl-matrix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/newlisp/nl-sock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/newlisp/nl-string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/newlisp/nl-symbol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/newlisp/nl-utf8.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/newlisp/nl-web.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/newlisp/nl-xml-json.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/newlisp/pcre-chartables.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/newlisp/pcre.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/newlisp/unix-lib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/newlisp/util/ffitest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/newlisp/util/sql.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/newlisp/util/types.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/newlisp/win-dll.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/newlisp/win-path.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/newlisp/win-util.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/newlisp/newlisp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/newlisp/pcre-config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/newlisp/pcre-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/newlisp/pcre.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/newlisp/primes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/newlisp/protos.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/newlisp/win-ffi.h" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/README" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/appveyor.yml" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/ci/before_install_linux.sh" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/ci/before_install_osx.sh" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/ci/coveralls/before_install_linux.sh" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/ci/coveralls/before_install_osx.sh" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/ANDROID.txt" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/Android.html" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/CHANGES" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/CHANGES.txt" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/COPYING.txt" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/CREDITS.txt" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/CodePatterns.html" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/ExpressionEvaluation.html" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/INSTALL" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/INSTALL.txt" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/LOCALIZATION.txt" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/License.html" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/MemoryManagement.html" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/TRU64BUILD.txt" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/manual_frame.html" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/newLISP-10.7.5-Release.html" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/newLISP-10.7.6-Release.html" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/newLISPdoc.html" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/newlisp-man.txt" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/newlisp.1" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/newlisp_index.html" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/newlisp_manual.html" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/newlispdoc-man.txt" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/doc/newlispdoc.1" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/examples/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/examples/form.html" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/examples/httpd-conf.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/examples/newLISP-Excel-Import.xls" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/examples/opengl-demo-ffi-lsp.txt" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/examples/opengl-demo-ffi.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/examples/opengl-demo.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/examples/prodcons.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/examples/tcltk.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/examples/udp-client.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/examples/udp-server.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/examples/upload.html" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/examples/win32demo.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/make-win-everything.bat" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/makefile_original_install" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/modules/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/modules/canvas.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/modules/cgi.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/modules/crypto.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/modules/ftp.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/modules/getopts.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/modules/gsl.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/modules/infix.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/modules/mysql.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/modules/odbc.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/modules/plot.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/modules/pop3.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/modules/postgres.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/modules/postscript.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/modules/smtp.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/modules/smtpx.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/modules/sqlite3.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/modules/stat.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/modules/unix.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/modules/xmlrpc-client.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/modules/zlib.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/newlisp-js/README.html" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/newlisp-js/newlisp-js.html" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/newlisp-js/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/newlisp-js/simple.html" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/qa-specific-tests/HOWTOTEST.txt" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/qa-specific-tests/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/qa-specific-tests/pipe-child.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/qa-specific-tests/primes.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/qa-specific-tests/qa-editor-highlighting.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/util/Android-utf8.mk" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/util/Android.mk" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/util/Application.mk" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/util/README.txt" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/util/newLISP-OSX-README.rtf" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/util/newlisp.jsf" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/util/newlispdoc.css" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/util/standard.lsp" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/win-dll.def" />
+    <Text Include="../../thirdparty/owemdjee/newlisp/win64-dll.def" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

@@ -1019,6 +1019,9 @@ tcl
 tclap
 tclclockmod
 glyph_name
+libgnurx
+duckdb
+newlisp
 
 EOT
 )
