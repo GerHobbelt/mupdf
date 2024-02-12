@@ -1922,6 +1922,14 @@ fz_get_glyph_name(fz_context *ctx, fz_font *font, int glyph, char *buf, int size
 float
 fz_advance_glyph(fz_context *ctx, fz_font *font, int gid, int wmode)
 {
+	/* Use PDF font widths table if available */
+	if (font->width_table)
+	{
+		if (gid >= 0 && gid < font->width_count)
+			return font->width_table[gid] / 1000.0f;
+		return font->width_default / 1000.0f;
+	}
+
 	if (font->ft_face)
 	{
 		if (wmode)
