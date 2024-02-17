@@ -1023,6 +1023,38 @@ libgnurx
 duckdb
 newlisp
 
+AFLplusplus
+PaddleClas
+PaddleDetection
+PaddleNLP
+PaddleOCR
+VTK
+agg
+cfgpath
+gegl
+gencolormap
+gnuplot
+gnuplot-palettes
+gnuplot_i
+leptonica-hillshade
+libgnurx
+libmodbus
+libpathutils
+libpipeline
+libserialport
+linecook
+modbus-esp8266
+nano-signal-slot
+newlisp
+owl
+pikchr
+radamsa
+sbcl
+tee-win32
+tray
+utf8proc
+wcwidth9
+
 EOT
 )
 
@@ -1070,6 +1102,11 @@ visible-url-detector
 
 fontview
 vcpkg
+
+gnuplot
+pikchr
+radamsa
+tray
 
 EOT
 )
@@ -1132,6 +1169,11 @@ stopwords
 doxygen-awesome-css
 
 javascript-serialization-benchmark
+
+1D-RGB-color-gradient
+2D-color-gradient-or-Procedural-texture
+awesome-c
+hsluv-color-gradient
 
 EOT
 )
