@@ -249,7 +249,7 @@ css_property_lookup (register const char *str, register size_t len)
         {
           register const char *s = css_property_list[key].name;
 
-          if (*str == *s && !strcmp (str + 1, s + 1))
+          if (*str == *s && !fz_strcasecmp (str + 1, s + 1))
             return &css_property_list[key];
         }
     }

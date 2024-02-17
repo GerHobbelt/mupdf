@@ -708,7 +708,7 @@ static fz_css_property *parse_declaration(struct lexbuf *buf)
 	if (accept(buf, '!'))
 	{
 		white(buf);
-		if (buf->lookahead != CSS_KEYWORD || strcmp(buf->string, "important"))
+		if (buf->lookahead != CSS_KEYWORD || fz_strcasecmp(buf->string, "important"))
 			fz_css_error(buf, "expected keyword 'important' after '!'");
 		if (p)
 			p->important = 1;
@@ -1056,13 +1056,13 @@ static fz_css_rule *parse_stylesheet(struct lexbuf *buf, fz_css_rule *chain)
 	{
 		if (accept(buf, '@'))
 		{
-			if (buf->lookahead == CSS_KEYWORD && !strcmp(buf->string, "page"))
+			if (buf->lookahead == CSS_KEYWORD && !fz_strcasecmp(buf->string, "page"))
 			{
 				next(buf);
 				rule = *nextp = parse_at_page(buf);
 				nextp = &rule->next;
 			}
-			else if (buf->lookahead == CSS_KEYWORD && !strcmp(buf->string, "font-face"))
+			else if (buf->lookahead == CSS_KEYWORD && !fz_strcasecmp(buf->string, "font-face"))
 			{
 				next(buf);
 				rule = *nextp = parse_at_font_face(buf);
