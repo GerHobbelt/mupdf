@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{3644E12D-D934-41FD-BF7E-83745A17E226}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/h.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/j.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/p.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/s.c" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/0_3d_60_75_v.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/0hsv.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/17_3d_60_75_v.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/BlueCubicInv_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/BlueCubicInv_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/BlueCubicInv_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/BlueCubicInv_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/BlueCubicInv_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/BlueCubicInv_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/CoolWarm_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/CoolWarm_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/CoolWarm_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/CoolWarm_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/CoolWarm_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/CoolWarm_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Cubehelix_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Cubehelix_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Cubehelix_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Cubehelix_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Cubehelix_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Cubehelix_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/CubicInv_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/CubicInv_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/CubicInv_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/CubicInv_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/CubicInv_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/CubicInv_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Cubic_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Cubic_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Cubic_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Cubic_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Cubic_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Cubic_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Gamma_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Gamma_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Gamma_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Gamma_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Gamma_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Gamma_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenCubicInv_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenCubicInv_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenCubicInv_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenCubicInv_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenCubicInv_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenCubicInv_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenCubicRoot_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenCubicRoot_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenCubicRoot_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenCubicRoot_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenCubicRoot_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenCubicRoot_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenCubic_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenCubic_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenCubic_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenCubic_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenCubic_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenCubic_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenSin_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenSin_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenSin_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenSin_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenSin_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/GreenSin_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/HSP_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/HSP_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/HSP_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/HSP_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/HSP_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/HSP_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/LSin_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/LSin_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/LSin_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/LSin_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/LSin_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/LSin_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Linas2_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Linas2_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Linas2_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Linas2_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Linas2_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Linas2_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Linas_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Linas_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Linas_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Linas_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Linas_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Linas_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Linear_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Linear_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Linear_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Linear_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Linear_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Linear_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Magma_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Magma_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Magma_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Magma_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Magma_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Magma_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/OrangeBlueFractalizer_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/OrangeBlueFractalizer_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/OrangeBlueFractalizer_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/OrangeBlueFractalizer_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/OrangeBlueFractalizer_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/OrangeBlueFractalizer_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Quadratic_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Quadratic_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Quadratic_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Quadratic_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Quadratic_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Quadratic_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RainbowFractalizer_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RainbowFractalizer_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RainbowFractalizer_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RainbowFractalizer_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RainbowFractalizer_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RainbowFractalizer_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RainbowHSP_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RainbowHSP_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RainbowHSP_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RainbowHSP_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RainbowHSP_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RainbowHSP_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RainbowHSV_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RainbowHSV_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RainbowHSV_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RainbowHSV_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RainbowHSV_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RainbowHSV_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RedCubicInv_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RedCubicInv_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RedCubicInv_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RedCubicInv_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RedCubicInv_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/RedCubicInv_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Root_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Root_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Root_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Root_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Root_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Root_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/SinExp_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/SinExp_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/SinExp_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/SinExp_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/SinExp_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/SinExp_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Sin_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Sin_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Sin_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Sin_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Sin_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Sin_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Smooth_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Smooth_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Smooth_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Smooth_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Smooth_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Smooth_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Sqrt_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Sqrt_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Sqrt_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Sqrt_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Sqrt_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Sqrt_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Tanh_no.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Tanh_no_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Tanh_steps.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Tanh_steps_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Tanh_tubes.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/Tanh_tubes_2D.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/arctic.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/coolwarm3dRGB_60_75.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/cpmm.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/fractint.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/julia85.png" />
+    <Image Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/images/siegel.png" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/README.md" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/doc/DICTIONARY.md" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/doc/FAQ.md" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/doc/LINKS.md" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/doc/THEORY.md" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/doc/TODO.md" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/doc/colorwheel.md" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/ GrayNL2.json" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/CoolWarm.json" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/Cubehelix.json" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/GrayGamma.json" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/GrayL.json" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/GrayLWave.json" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/GrayLWaveInverted.json" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/GrayNL2.json" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/GrayNL3.json" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/GrayNL3Wave10.json" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/GrayNL3Wave2.json" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/GraySqrt.json" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/GraySqrtWave.json" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/Green.json" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/Linas.json" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/Magma.json" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/NL3Wave5NonInv.json" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/NewLinas.json" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/RainbowHSV.json" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/arctic.gpf" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/diverging_map_gnuplot.pal" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/g.sh" />
+    <Text Include="../../thirdparty/owemdjee/1D-RGB-color-gradient/src/simplest_regression.py" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

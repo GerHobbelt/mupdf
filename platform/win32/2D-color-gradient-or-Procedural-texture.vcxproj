@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{3644E12D-D934-41FD-BF7E-83745A3BE4E7}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeOutput>collection-1.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+  </PropertyGroup>
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/src/c/d.c" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/Jacco179SinXSinY.bmp" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/Jacco179SinXSinY.jpg" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/absz.jpg" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/b.jpg" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/c.jpg" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/cabs.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/cabsi.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/cargm.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/cartesian_grid.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/cartesiangrid.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/checker.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/checkersin.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/conic.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/cturn.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/d.jpg" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/delphi.gif" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/e.jpg" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/f.jpg" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/g.jpg" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/h.jpg" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/himmelblau.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/hsv.jpg" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/l.jpg" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/max.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/maxabs.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/maxreim.jpg" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/min.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/minsqrt.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/p4.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/polar_grid.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/polar_grid2.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/polar_grid2_minus.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/polar_grid2_normal.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/polar_grid2_tan.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/pow.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/powxy.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/product.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/repeatingp.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/repeatingp_1.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/sin.jpg" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/sin.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/sinbw.jpg" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/sinbw1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/sincosin.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/singray.jpg" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/sinx.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/sinxmy.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/sinxpy.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/sinxy.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/sinxyxy.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/sqrtp.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/star8.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/star8i.png" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/whirl.jpg" />
+    <Image Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/images/xxory.png" />
+    <Text Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/README.md" />
+    <Text Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/doc/HowToAdd.txt" />
+    <Text Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/doc/NewFunction.html" />
+    <Text Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/doc/NewFunction.txt" />
+    <Text Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/doc/Rainbow.html" />
+    <Text Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/doc/Rainbow.pdf" />
+    <Text Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/doc/help.rtf" />
+    <Text Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/src/c/g.sh" />
+    <Text Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/src/pas/BitmapDlgM.pas" />
+    <Text Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/src/pas/ColorM.pas" />
+    <Text Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/src/pas/FunctionsM.pas" />
+    <Text Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/src/pas/OptionsDlgM.pas" />
+    <Text Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/src/pas/Rainbow.cfg" />
+    <Text Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/src/pas/Rainbow.dof" />
+    <Text Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/src/pas/Rainbow.dpr" />
+    <Text Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/src/pas/Rainbow.res" />
+    <Text Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/src/pas/bmpM.pas" />
+    <Text Include="../../thirdparty/owemdjee/2D-color-gradient-or-Procedural-texture/src/pas/mainM.pas" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

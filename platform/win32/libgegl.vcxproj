@@ -1,0 +1,1466 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libgegl</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF1AB106}</ProjectGuid>
+    <RootNamespace>libgegl</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGEGL;GEGL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGEGL;GEGL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGEGL;GEGL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGEGL;GEGL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGEGL;GEGL_STATICLIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGEGL;GEGL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGEGL;GEGL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGEGL;GEGL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGEGL;GEGL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGEGL;GEGL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGEGL;GEGL_STATICLIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGEGL;GEGL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/bin/argvs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/bin/gegl-options.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/bin/gegl-path-smooth.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/bin/gegl-path-spiro.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/bin/gegl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/bin/mrg-gegl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/bin/ui-collection.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/bin/ui-core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/bin/ui-viewer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/examples/2geglbuffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/examples/frame-counter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/examples/gegl-convert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/examples/gegl-slicer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/examples/gegl-video.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/examples/geglbuffer-add-image.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/examples/geglbuffer-clock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/examples/hello-world.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/examples/sdl-draw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/examples/video-invert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-algorithms.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer-access.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer-config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer-enums.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer-iterator.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer-iterator2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer-linear.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer-load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer-matrix2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer-save.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer-swap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-compression-nop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-compression-rle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-compression-zlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-compression.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-memory.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-rectangle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-sampler-cubic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-sampler-linear.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-sampler-lohalo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-sampler-nearest.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-sampler-nohalo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-sampler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-scratch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-backend-buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-backend-file-async.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-backend-ram.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-backend-swap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-backend.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-handler-cache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-handler-chain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-handler-empty.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-handler-log.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-handler-zoom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-handler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-source.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-storage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/gegl-apply.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/gegl-config.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/gegl-cpuaccel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/gegl-dot-visitor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/gegl-dot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/gegl-enums.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/gegl-gio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/gegl-init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/gegl-instrument.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/gegl-introspection-support.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/gegl-lookup.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/gegl-matrix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/gegl-metadata.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/gegl-metadatahash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/gegl-metadatastore.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/gegl-parallel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/gegl-random.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/gegl-serialize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/gegl-stats.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/gegl-utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/gegl-xml.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/graph/gegl-cache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/graph/gegl-callback-visitor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/graph/gegl-connection.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/graph/gegl-node-output-visitable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/graph/gegl-node.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/graph/gegl-pad.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/graph/gegl-region-generic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/graph/gegl-visitable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/graph/gegl-visitor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/module/gegldatafiles.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/module/geglmodule.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/module/geglmoduledb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/opencl/gegl-buffer-cl-cache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/opencl/gegl-buffer-cl-iterator.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/opencl/gegl-cl-color.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/opencl/gegl-cl-init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/opencl/gegl-cl-random.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/opencl/gegl-cl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-extension-handler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-area-filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-composer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-composer3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-context.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-handlers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-meta-json.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-meta.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-point-composer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-point-composer3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-point-filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-point-render.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-property-keys.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-sink.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-source.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-temporal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operations.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/process/gegl-eval-manager.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/process/gegl-graph-traversal-debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/process/gegl-graph-traversal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/process/gegl-processor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/property-types/gegl-audio-fragment.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/property-types/gegl-color.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/property-types/gegl-curve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/property-types/gegl-paramspecs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/gegl/property-types/gegl-path.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/libs/ctx/gegl_ctx.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/libs/npd/deformation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/libs/npd/graphics.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/libs/npd/lattice_cut.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/libs/npd/npd_common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/libs/npd/npd_debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/libs/npd/npd_gegl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/libs/npd/npd_math.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/libs/rgbe/rgbe.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-cxx/denoise-dct.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-cxx/distance-transform.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-cxx/focus-blur.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-cxx/lens-blur.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-cxx/piecewise-blend.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-cxx/variable-blur.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-cxx/warp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/antialias.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/apply-lens.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/bayer-matrix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/bump-map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/cartoon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/channel-mixer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/color-exchange.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/color-to-alpha.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/cubism.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/deinterlace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/diffraction-patterns.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/displace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/edge-laplace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/edge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/emboss.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/engrave.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/fractal-explorer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/fractal-trace.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/gaussian-blur-selective.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/illusion.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/lens-distortion.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/lens-flare.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/linear-sinusoid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/maze.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/mosaic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/motion-blur-circular.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/motion-blur-zoom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/noise-slur.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/noise-solid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/oilify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/photocopy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/plasma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/polar-coordinates.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/red-eye-removal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/ripple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/shadows-highlights-correction.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/shadows-highlights.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/shift.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/sinus.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/softglow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/spiral.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/supernova.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/texturize-canvas.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/tile-glass.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/tile-paper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/value-propagate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/video-degradation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/waves.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/whirl-pinch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common-gpl3+/wind.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/absolute.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/alien-map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/alpha-clip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/bilateral-filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/bloom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/box-blur.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/brightness-contrast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/buffer-sink.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/buffer-source.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/c2g.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/checkerboard.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/color-assimilation-grid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/color-enhance.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/color-overlay.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/color-rotate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/color-temperature.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/color-warp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/color.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/component-extract.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/contrast-curve.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/convolution-matrix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/copy-buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/difference-of-gaussians.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/display.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/dither.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/domain-transform.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/dropshadow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/edge-neon.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/edge-sobel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/exp-combine.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/exposure.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/fattal02.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/gaussian-blur.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/gblur-1d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/gegl-buffer-load-op.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/gegl-buffer-save-op.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/gegl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/grey.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/grid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/high-pass.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/hue-chroma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/icc-load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/icc-save.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/image-compare.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/image-gradient.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/introspect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/invert-gamma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/invert-linear.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/layer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/levels.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/linear-gradient.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/little-planet.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/local-threshold.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/long-shadow.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/magick-load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/mantiuk06.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/map-absolute.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/map-relative.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/matting-global.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/mblur.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/mean-curvature-blur.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/median-blur.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/mirrors.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/mix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/mono-mixer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/motion-blur-linear.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/negative-darkroom.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/negative-darkroom/negative-darkroom-curve-enum.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/newsprint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/noise-cell.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/noise-cie-lch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/noise-hsv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/noise-hurl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/noise-perlin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/noise-pick.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/noise-reduction.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/noise-rgb.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/noise-simplex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/noise-spread.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/normal-map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/opacity.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/open-buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/over.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/pack.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/panorama-projection.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/perlin/perlin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/pixelize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/posterize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/radial-gradient.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/rectangle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/recursive-transform.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/reinhard05.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/remap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/rgb-clip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/saturation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/save.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/sepia.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/slic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/snn-mean.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/spherize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/stress.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/stretch-contrast-hsv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/stretch-contrast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/svg-huerotate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/svg-luminancetoalpha.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/svg-matrix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/svg-saturate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/threshold.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/tile-seamless.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/tile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/unpremultiply.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/unsharp-mask.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/value-invert.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/vignette.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/waterpixels.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/watershed-transform.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/wavelet-blur-1d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/wavelet-blur.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/weighted-blend.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/common/write-buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/core/cache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/core/cast-format.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/core/cast-space.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/core/clone.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/core/convert-format.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/core/convert-space.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/core/crop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/core/json.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/core/load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/core/nop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/exr-load.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/exr-save.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/ff-load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/ff-save.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/gif-load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/jp2-load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/jpg-load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/jpg-save.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/lcms-from-profile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/matting-levin-cblas.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/matting-levin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/npd.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/npy-save.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/path.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/pdf-load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/pixbuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/png-load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/png-save.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/ppm-load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/ppm-save.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/raw-load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/rgbe-load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/rgbe-save.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/save-pixbuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/sdl-display.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/sdl2-display.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/svg-load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/text.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/tiff-load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/tiff-save.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/v4l.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/v4lutils/v4lutils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/vector-fill.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/vector-stroke.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/webp-load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/external/webp-save.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/add.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/clear.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/color-burn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/color-dodge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/darken.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/difference.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/divide.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/dst-atop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/dst-in.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/dst-out.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/dst-over.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/dst.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/exclusion.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/gamma.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/hard-light.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/lighten.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/multiply.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/overlay.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/plus.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/screen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/soft-light.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/src-atop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/src-in.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/src-out.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/src.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/subtract.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/generated/xor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/seamless-clone/seamless-clone-compose.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/seamless-clone/seamless-clone.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/transform/border-align.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/transform/module.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/transform/reflect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/transform/reset-origin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/transform/rotate-on-center.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/transform/rotate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/transform/scale-ratio.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/transform/scale-size-keepaspect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/transform/scale-size.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/transform/scale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/transform/shear.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/transform/transform-core.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/transform/transform.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/transform/translate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/aces-rrt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/alpha-inpaint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/band-tune.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/bilateral-filter-fast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/boxblur-1d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/boxblur.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/chamfer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/connected-components.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/demosaic-bimedian.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/demosaic-simple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/ditto.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/external/gluas.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/external/lens-correct.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/external/line-profile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/external/paint-select.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/external/spyrograph.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/external/v4l2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/external/voronoi-diagram.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/gcr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/generated/average.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/generated/blend-reflect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/generated/negation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/generated/soft-burn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/generated/soft-dodge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/generated/subtractive.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/gradient-map.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/integral-image.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/rawbayer-load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/segment-kmeans.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/selective-hue-saturation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/operations/workshop/shuffle-search.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/perf/test-bcontrast-4x.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/perf/test-bcontrast-minichunk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/perf/test-bcontrast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/perf/test-blur.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/perf/test-compression.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/perf/test-gegl-buffer-access.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/perf/test-init.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/perf/test-rotate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/perf/test-samplers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/perf/test-saturation.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/perf/test-scale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/perf/test-translate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/perf/test-unsharpmask.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/seamless-clone/sc-context.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/seamless-clone/sc-outline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/seamless-clone/sc-sample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/libnsgif/gif.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/libnsgif/lzw.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/p2t/common/shapes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/p2t/common/utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/p2t/sweep/advancing_front.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/p2t/sweep/cdt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/p2t/sweep/sweep.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/p2t/sweep/sweep_context.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/bounded-line.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/cdt-flipfix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/cdt.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/circle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/cluster.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/delaunay-terminator.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/edge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/line.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/mesh-action.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/mesh.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/point.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/pslg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/refiner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/rmath.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/triangle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/utils.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/vector2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/vedge.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/visibility.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/vtriangle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/render/mesh-render.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/render/svg-plot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/buffer-test-wrapper.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/buffer-test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/blank.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_copy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_copy_abyss.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_copy_lower_left.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_copy_lower_right.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_copy_self.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_copy_upper_left.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_copy_upper_right.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_dup_copy1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_dup_copy2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_dup_delete1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_dup_delete2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_dup_write1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_dup_write2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_dup_write3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_dup_write4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_iterator1.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_iterator1sub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_iterator2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_iterator2sub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_iterator3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_iterator3sub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_iterator4.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_iterator4sub.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_linear_copy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_linear_iter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_linear_iter2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_multcopy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_set_pattern.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_shift_diagonal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_shift_horizontal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/buffer_shift_vertical.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/checks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/disabled_abyss.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/dup_linear_from_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/get_abyss_black.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/get_abyss_clamp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/get_abyss_empty_buffer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/get_abyss_loop.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/get_abyss_none.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/get_abyss_white.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/get_buffer_scaled.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/get_buffer_scaled2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/get_shifted.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/gray.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/grow_extent.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/linear_from_data.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/linear_from_data_rows.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/linear_modify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/linear_new.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/linear_proxy_modify.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/linear_shift.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/mipmap_iterator.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/mipmap_iterator2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/mipmap_sampler.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/mipmap_set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/mipmap_set2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/rect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/sample.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/save_small_roi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/sub_rect_fills_and_gets.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/sub_sub_fill.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/sub_sub_fill2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/buffer/tests/vertical_gradient.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-backend-file.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-buffer-cast.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-buffer-changes.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-buffer-extract.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-buffer-hot-tile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-buffer-iterator-aliasing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-buffer-sharing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-buffer-tile-voiding.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-buffer-unaligned-access.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-change-processor-rect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-color-op.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-compression.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-convert-format.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-empty-tile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-format-sensing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-gegl-color.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-gegl-rectangle.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-gegl-tile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-image-compare.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-license-check.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-misc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-node-connections.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-node-exponential.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-node-passthrough.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-node-properties.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-object-forked.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-opencl-colors.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-path.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-proxynop-processing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-scaled-blit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-serialize.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/simple/test-svg-abyss.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/xml/common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/xml/test-load.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/xml/test-roundtrip.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tests/xml/test-save.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tools/detect_opencl.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tools/exp_combine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tools/gegl-imgcmp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tools/gegl-tester.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tools/introspect.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tools/operation_reference.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gegl/tools/operations_html.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/bin/argvs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/bin/gegl-options.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/bin/gegl-path-smooth.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/bin/gegl-path-spiro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/bin/mrg-gegl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/bin/ui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-algorithms-2x2-downscale.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-algorithms-bilinear.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-algorithms-boxfilter.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-algorithms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer-backend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer-config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer-enums.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer-formats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer-index.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer-iterator-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer-iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer-iterator2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer-matrix2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer-swap-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer-swap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer-types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-compression-nop.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-compression-rle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-compression-zlib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-compression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-memory-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-memory.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-rectangle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-sampler-cubic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-sampler-linear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-sampler-lohalo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-sampler-nearest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-sampler-nohalo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-sampler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-scratch-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-scratch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-backend-buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-backend-file.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-backend-ram.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-backend-swap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-backend.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-handler-cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-handler-chain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-handler-empty.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-handler-log.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-handler-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-handler-zoom.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-source.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile-storage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-tile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/buffer/gegl-variants.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-apply.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-cpuaccel-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-cpuaccel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-dot-visitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-dot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-enums.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-gio-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-init-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-instrument.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-introspection-support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-lookup.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-metadata.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-metadatahash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-metadatastore.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-module.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-op.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-operations-util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-parallel-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-parallel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-random-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-types-internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl-xml.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/gegl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/graph/gegl-cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/graph/gegl-callback-visitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/graph/gegl-connection.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/graph/gegl-node-output-visitable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/graph/gegl-node-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/graph/gegl-node.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/graph/gegl-pad.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/graph/gegl-region-generic.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/graph/gegl-region.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/graph/gegl-visitable.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/graph/gegl-visitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/module/gegldatafiles.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/module/geglmodule.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/module/geglmoduledb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/opencl/cl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/opencl/cl_d3d10.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/opencl/cl_ext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/opencl/cl_gl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/opencl/cl_gl_ext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/opencl/cl_platform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/opencl/gegl-buffer-cl-cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/opencl/gegl-buffer-cl-iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/opencl/gegl-cl-color.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/opencl/gegl-cl-init.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/opencl/gegl-cl-introspection-support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/opencl/gegl-cl-random.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/opencl/gegl-cl-types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/opencl/gegl-cl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/opencl/opencl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-extension-handler.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-area-filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-composer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-composer3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-context-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-handlers-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-handlers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-meta-json.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-meta.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-point-composer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-point-composer3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-point-filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-point-render.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-property-keys.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-sink.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-source.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation-temporal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/operation/gegl-operations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/process/gegl-eval-manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/process/gegl-graph-debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/process/gegl-graph-traversal-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/process/gegl-graph-traversal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/process/gegl-processor-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/process/gegl-processor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/property-types/gegl-audio-fragment.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/property-types/gegl-color.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/property-types/gegl-curve.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/property-types/gegl-paramspecs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/gegl/property-types/gegl-path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/libs/ctx/ctx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/libs/npd/deformation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/libs/npd/graphics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/libs/npd/lattice_cut.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/libs/npd/npd.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/libs/npd/npd_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/libs/npd/npd_debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/libs/npd/npd_gegl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/libs/npd/npd_math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/libs/rgbe/rgbe.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/operations/common-cxx/dct-basis.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/operations/common/blue-noise-data.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/operations/common/envelopes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/operations/common/invert-common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/operations/common/map-common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/operations/common/negative-darkroom/negative-darkroom-curve-enum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/operations/common/perlin/perlin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/operations/external/matting-levin-cblas.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/operations/external/v4lutils/v4lutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/operations/seamless-clone/seamless-clone.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/operations/transform/module.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/operations/transform/scale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/operations/transform/transform-core.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/perf/test-common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/seamless-clone/sc-common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/seamless-clone/sc-context-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/seamless-clone/sc-context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/seamless-clone/sc-outline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/seamless-clone/sc-sample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/libnsgif/lzw.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/libnsgif/nsgif.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/p2t/common/cutils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/p2t/common/poly2tri-private.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/p2t/common/shapes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/p2t/common/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/p2t/poly2tri.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/p2t/sweep/advancing_front.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/p2t/sweep/cdt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/p2t/sweep/sweep.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/p2t/sweep/sweep_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/bounded-line.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/cdt-flipfix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/cdt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/circle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/cluster.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/delaunay-terminator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/edge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/line.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/mesh-action.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/mesh.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/point.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/pslg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/refine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/refiner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/rmath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/triangle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/triangulation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/vector2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/vedge.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/visibility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/refine/vtriangle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/render/mesh-render.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/poly2tri-c/render/svg-plot.h" />
+    <Image Include="../../thirdparty/owemdjee/gegl/docs/images/GEGL-250.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/docs/images/GEGL.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/docs/images/gaussian-blur-graph.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/docs/images/gegl.ico" />
+    <Image Include="../../thirdparty/owemdjee/gegl/docs/images/standard-aux.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/docs/images/standard-input.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/docs/images/standard-panorama.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/examples/data/surfer.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/data/boats.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/data/car-stack.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/data/duck.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/data/duck_scribble.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/data/gegl.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/data/grid.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/data/matting-global.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/data/matting-global_scribble.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/data/mid_grey_dot.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/data/parliament_0.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/data/parliament_1.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/data/parliament_2.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/data/red-eye.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/affine-with-negative.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/alien-map.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/apply-lens.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/apply-lens3.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/bump-map.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/checkerboard.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/clones.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/color-enhance.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/color-exchange.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/color-reduction.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/color-to-alpha.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/colors.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/composite-transform.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/contrast-curve.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/convolve1.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/convolve2.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/dropshadow-json.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/edge.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/exposure.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/fattal02.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/gamma.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/gegl.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/grey-json.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/illusion.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/image-compare.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/jp2-load.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/jpg-load-datauri.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/lens-flare.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/mantiuk06.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/matting-global.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/matting-levin.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/noise-cell.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/noise-hurl.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/noise-simplex.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/noise-solid.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/pnm-ascii-load.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/pnm-raw-load.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/posterize.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/rectangles.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/red-eye-removal.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/reflect.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/reflect2.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/reinhard05.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/rgbe-load.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/rotate-on-center.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/rotate.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/saturation.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/scale-size-keepaspect.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/shift.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/simple-scale.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/sinus.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/stretch-contrast-hsv.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/stretch-contrast.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/supernova.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/tiff-load.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/tile.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/transform.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/weighted-blend.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/mipmap/reference/invert-crop.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/mipmap/reference/invert.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/mipmap/reference/rotate-crop.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/mipmap/reference/rotate.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/mipmap/reference/unsharp-crop.png" />
+    <Image Include="../../thirdparty/owemdjee/gegl/tests/mipmap/reference/unsharp.png" />
+    <Text Include="../../thirdparty/owemdjee/gegl/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/gegl/COPYING.LESSER" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/cairo.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/cairo_h.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/gegl_box-blur.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/gegl_c2g.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/gegl_crop.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/gegl_edge-neon.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/gegl_fill-path.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/gegl_gaussian-blur.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/gegl_linear-gradient.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/gegl_median-blur.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/gegl_radial-gradient.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/gegl_rectangle.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/gegl_rotate.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/gegl_snn-mean.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/gegl_stress.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/gegl_translate.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/gegl_unsharp-mask.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/gegl_vector-stroke.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/init.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/mime.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/mrg.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/mrl.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/preferences.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/bin/lua/viewer.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/NEWS.adoc" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/abyss_policy.adoc" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/build.adoc.in" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/commandline.adoc" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/contribute.adoc" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/copyright.adoc" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/development.adoc" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/devhelp.css" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/editor.adoc" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/environment.adoc" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/features.adoc" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/gegl-chain.adoc" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/gegl-usage.py" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/gegl.css" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/glossary.adoc" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/hello-world.adoc" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/images/GEGL.svg" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/index.adoc" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/journal.adoc" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/obsolete/gcut.adoc" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/obsolete/gegl-sharp/index.html" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/obsolete/gegl-vala/index.html" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/obsolete/pygegl/index.html" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/obsolete/references.adoc" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/obsolete/rgegl/index.html" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/operation-api.adoc" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/reference/gegl.toml.in" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/reference/urlmap.js" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/release-notes.adoc" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/source-overview.adoc" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/website/website-content.adoc" />
+    <Text Include="../../thirdparty/owemdjee/gegl/docs/website/website-listing.adoc" />
+    <Text Include="../../thirdparty/owemdjee/gegl/examples/lgitest.lua" />
+    <Text Include="../../thirdparty/owemdjee/gegl/examples/simple-graph.py" />
+    <Text Include="../../thirdparty/owemdjee/gegl/examples/xml-graph.py" />
+    <Text Include="../../thirdparty/owemdjee/gegl/gegl/Gegl.metadata.in" />
+    <Text Include="../../thirdparty/owemdjee/gegl/gegl/gegl-version.h.in" />
+    <Text Include="../../thirdparty/owemdjee/gegl/meson_options.txt" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/alien-map.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/bilateral-filter-fast.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/bilateral-filter.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/box-blur.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/box-max.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/box-min.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/boxblur-1d.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/brightness-contrast.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/c2g.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/checkerboard.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/cltostring.py" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/color-exchange.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/color-temperature.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/color-to-alpha.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/colors-8bit-lut.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/colors.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/contrast-curve.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/diffraction-patterns.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/edge-laplace.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/edge-sobel.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/gaussian-blur-selective.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/gblur-1d.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/hue-chroma.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/invert-linear.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/levels.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/mono-mixer.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/motion-blur-circular.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/motion-blur-linear.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/noise-cell.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/noise-hsv.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/noise-hurl.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/noise-reduction.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/noise-simplex.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/oilify.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/opacity.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/pixelize.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/posterize.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/random.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/red-eye-removal.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/shadows-highlights-correction.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/snn-mean.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/stretch-contrast.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/svg-src-over.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/texturize-canvas.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/threshold.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/value-invert.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/video-degradation.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/vignette.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/opencl/weighted-blend.cl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/operations/Makefile-common.am" />
+    <Text Include="../../thirdparty/owemdjee/gegl/operations/external/v4lutils/README" />
+    <Text Include="../../thirdparty/owemdjee/gegl/operations/json/dropshadow2.fbp" />
+    <Text Include="../../thirdparty/owemdjee/gegl/operations/json/dropshadow2.json" />
+    <Text Include="../../thirdparty/owemdjee/gegl/operations/json/grey2.fbp" />
+    <Text Include="../../thirdparty/owemdjee/gegl/operations/json/grey2.json" />
+    <Text Include="../../thirdparty/owemdjee/gegl/perf/perf-build.sh" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/POTFILES.in" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/bs.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/ca.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/da.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/de.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/el.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/en_GB.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/eo.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/es.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/eu.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/fr.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/gl.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/hr.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/id.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/is.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/it.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/ka.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/kab.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/ko.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/lv.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/mr.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/nb.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/ne.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/nl.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/oc.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/pl.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/pt.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/pt_BR.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/ro.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/ru.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/sk.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/sl.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/sr.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/sr@latin.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/sv.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/tr.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/uk.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/po/zh_CN.po" />
+    <Text Include="../../thirdparty/owemdjee/gegl/seamless-clone/gegl-sc.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/gegl/subprojects/libnsgif/README.md" />
+    <Text Include="../../thirdparty/owemdjee/gegl/subprojects/libnsgif/update.sh" />
+    <Text Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/LICENSE-Poly2Tri-C.txt" />
+    <Text Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/LICENSE-Poly2Tri.txt" />
+    <Text Include="../../thirdparty/owemdjee/gegl/subprojects/poly2tri-c/README" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/README" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/buffer-test.py" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/blank.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_copy.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_copy_abyss.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_copy_lower_left.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_copy_lower_right.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_copy_self.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_copy_upper_left.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_copy_upper_right.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_dup_copy1.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_dup_copy2.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_dup_delete1.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_dup_delete2.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_dup_write1.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_dup_write2.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_dup_write3.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_dup_write4.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_iterator1.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_iterator1sub.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_iterator2.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_iterator2sub.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_iterator3.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_iterator3sub.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_iterator4.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_iterator4sub.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_linear_copy.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_linear_iter.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_linear_iter2.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_multcopy.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_set_pattern.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_shift_diagonal.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_shift_horizontal.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/buffer_shift_vertical.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/checks.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/disabled_abyss.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/dup_linear_from_data.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/get_abyss_black.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/get_abyss_clamp.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/get_abyss_empty_buffer.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/get_abyss_loop.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/get_abyss_none.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/get_abyss_white.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/get_buffer_scaled.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/get_buffer_scaled2.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/get_shifted.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/gray.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/grow_extent.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/linear_from_data.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/linear_from_data_rows.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/linear_modify.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/linear_new.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/linear_proxy_modify.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/linear_shift.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/mipmap_iterator.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/mipmap_iterator2.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/mipmap_sampler.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/mipmap_set.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/mipmap_set2.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/rect.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/sample.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/save_small_roi.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/sub_rect_fills_and_gets.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/sub_sub_fill.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/sub_sub_fill2.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/buffer/reference/vertical_gradient.buf" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/compositions/data/car-stack-eighth.hdr" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/compositions/data/gegl-16bit-float-4ch-assoc-contiguous.tif" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/compositions/data/gegl-8bit-4ch-assoc-contiguous.tif" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/compositions/data/gegl-8bit-4ch-assoc-separated.tif" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/compositions/data/gegl-8bit-4ch-unassoc-contiguous.tif" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/compositions/data/om.jp2" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/compositions/data/parliament.hdr" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/hdr-color.little-endian.gegl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/rgb-params.little-endian.gegl" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/compositions/reference/rgbe-save.hdr" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/compositions/run-compositions.py" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/ff-load-save/tests_ff_load_save.sh" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/opencl/TODO" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/opencl/opencl_test.sh" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/python/test-gegl-buffer.py" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/python/test-gegl-color.py" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/python/test-gegl-format.py" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/python/test-gegl-node.py" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/python/test-gegl.py" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/simple/reference/exp-combine.hdr" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/simple/test-exp-combine.sh" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tests/test-runner.py" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tools/argvs_extract.sh" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tools/dist-script.sh" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tools/gen-loader.sh" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tools/gobj2dot.py" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tools/make-init-types.sh" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tools/run-exe.py" />
+    <Text Include="../../thirdparty/owemdjee/gegl/tools/xml_insert.sh" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/docs/reference/gegl-docs.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/affine-with-negative.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/alien-map.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/apply-lens.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/apply-lens3.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/bump-map.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/checkerboard.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/clones.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/color-enhance.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/color-exchange.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/color-reduction.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/color-to-alpha.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/colors.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/composite-transform.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/contrast-curve.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/convolve1.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/convolve2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/dropshadow-json.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/edge.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/exposure.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/fattal02.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/gamma.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/gegl.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/grey-json.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/hdr-color.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/illusion.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/image-compare.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/jp2-load.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/jpg-load-datauri.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/lens-flare.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/mantiuk06.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/matting-global.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/matting-levin.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/noise-cell.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/noise-hurl.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/noise-simplex.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/noise-solid.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/pnm-ascii-load.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/pnm-raw-load.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/posterize.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/rectangles.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/red-eye-removal.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/reflect.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/reflect2.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/reinhard05.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/rgb-params.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/rgbe-load.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/rgbe-save.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/rotate-on-center.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/rotate.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/saturation.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/scale-size-keepaspect.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/shift.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/simple-scale.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/sinus.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/stretch-contrast-hsv.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/stretch-contrast.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/supernova.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/tiff-load.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/tile.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/transform.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/compositions/weighted-blend.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/opencl/bilateral-filter.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/opencl/box-blur.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/opencl/brightness-contrast.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/opencl/color-temperature.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/opencl/edge-sobel.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/opencl/gaussian-blur.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/opencl/invert-linear.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/opencl/levels.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/opencl/mono-mixer.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/opencl/motion-blur.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/opencl/noise-reduction.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/opencl/oilify.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/opencl/opacity.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/opencl/pixelize.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/opencl/snn-mean.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/opencl/svg-src-over.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/opencl/threshold.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/opencl/value-invert.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/opencl/vignette.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/xml/data/hdr-color.xml" />
+    <Xml Include="../../thirdparty/owemdjee/gegl/tests/xml/data/rgb-params.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

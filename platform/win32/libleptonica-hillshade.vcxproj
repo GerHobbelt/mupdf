@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libleptonica-hillshade</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF6F31D2}</ProjectGuid>
+    <RootNamespace>libleptonica-hillshade</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEPTONICA_HILLSHADE;LEPTONICA_HILLSHADE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEPTONICA_HILLSHADE;LEPTONICA_HILLSHADE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEPTONICA_HILLSHADE;LEPTONICA_HILLSHADE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEPTONICA_HILLSHADE;LEPTONICA_HILLSHADE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEPTONICA_HILLSHADE;LEPTONICA_HILLSHADE_STATICLIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEPTONICA_HILLSHADE;LEPTONICA_HILLSHADE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEPTONICA_HILLSHADE;LEPTONICA_HILLSHADE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEPTONICA_HILLSHADE;LEPTONICA_HILLSHADE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEPTONICA_HILLSHADE;LEPTONICA_HILLSHADE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEPTONICA_HILLSHADE;LEPTONICA_HILLSHADE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEPTONICA_HILLSHADE;LEPTONICA_HILLSHADE_STATICLIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBLEPTONICA_HILLSHADE;LEPTONICA_HILLSHADE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/Slope_aspect_Hillshade/dtm_hillshade.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/almondbread/lodepng.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/almondbread/main.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/mnt-hillshade/src/Point.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/mnt-hillshade/src/display.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/mnt-hillshade/src/hillshading.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/mnt-hillshade/src/main.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/mnt-hillshade/src/projection.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/almondbread/lodepng.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/mnt-hillshade/src/Point.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/mnt-hillshade/src/delaunator.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/mnt-hillshade/src/display.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/mnt-hillshade/src/hillshading.hpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/mnt-hillshade/src/projection.hpp" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/almondbread/public/cursor1.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/almondbread/public/cursor2.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/almondbread/public/cursor3.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/almondbread/public/cursor4.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/almondbread/public/cursor5.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/choropleth-hillshade/docs/ChoroSample.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/choropleth-hillshade/docs/Shadow4.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/choropleth-hillshade/docs/Shadow5.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/choropleth-hillshade/docs/Shadow6.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/gdal_hillshade_tutorial/presentation/img/dem.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/gdal_hillshade_tutorial/presentation/img/dem_sm.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/gdal_hillshade_tutorial/presentation/img/example-output.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/gdal_hillshade_tutorial/presentation/img/gdal_hillshade.jpg" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/gdal_hillshade_tutorial/presentation/img/hawaii-seafloor.jpg" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/gdal_hillshade_tutorial/presentation/img/ne_hyp_sr.jpg" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/gdal_hillshade_tutorial/presentation/img/ne_hyp_sr_zoomed.jpg" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/gdal_hillshade_tutorial/presentation/img/ne_msr.jpg" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/gdal_hillshade_tutorial/presentation/img/sr_hr_zoomed.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/gdal_hillshade_tutorial/presentation/img/sr_hr_zoomed2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/gdal_hillshade_tutorial/presentation/img/sr_lr_zoomed.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/gdal_hillshade_tutorial/presentation/img/sr_lr_zoomed2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/gdal_hillshade_tutorial/presentation/img/usgs-ned.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/gdal_hillshade_tutorial/presentation/img/usgs-srtm.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/gdal_hillshade_tutorial/resources/ESRI_VE_chart.jpg" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/GeoToolkit/graphics/output/mag_default.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/Filters_search_TotHoriz.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/Filters_synth_DerivX.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/GIF.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/GeoTIFFSynthetic.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/Geodynamo_Between_Reversals.gif" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/Intro_Response.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/MDRU.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/Magnetization_Domain.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/Redblue.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/SearchQuestII.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/SyntheticModel.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/ToolkitLogo.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/UserDefine_GE.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/arrow_dropdown.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/arrow_location_10per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/color_normalization_25per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/colormap_range_20per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/components.gif" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/depthcolor_50per_ppt.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/draped_mag_placeholder.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/earthfield.gif" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/gray_15per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/greys.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/grid_filters_dropdown_20per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/grid_filters_dropdown_tilt_50per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/grid_filters_dropdown_vert_50per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/incl_decl_40per_ppt.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/indexnotebook.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/inducing_field.gif" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/instructions_loading_data_40per_ppt.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/jet.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/jet_15per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/jupyter_icon_top_right_10_per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/location_dropdown.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/location_dropdown2_20per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/magnetic_anomaly.gif" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/measurements.gif" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/mincurv_nearest.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/no_field.gif" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/no_shading_vs_shading.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/notebook_output_15per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/rainbow.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/rainbow_15per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/redblue_15per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/refresh_20per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/restartandclearoutput.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/runcell_30per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/search_placeholder.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/search_profile.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/search_tiltdepth.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/shading_contours_20per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/susceptibility_chart.gif" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/synth_mag_location_global.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/synth_vis_viridis_shaded_contours.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/synthetic_profile.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/tilt_synthetic_edges_depths_grey.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/updist_height_20per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/updist_height_upC_50per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/viridis.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/images/viridis_15per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/Filters_search_AnSig.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/Filters_search_TiltAngle.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/Filters_search_TotHoriz.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/Filters_search_VertDeriv.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/Filters_search_XYDeriv.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/Filters_search_up0_up100.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/Filters_synth_AnSig.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/Filters_synth_DerivX.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/Filters_synth_DerivY.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/Filters_synth_RTP.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/Filters_synth_TMI.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/Filters_synth_TMI_upcontin50.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/Filters_synth_TiltAngle.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/Filters_synth_TotHoriz.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/Filters_synth_VertDeriv.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/Filters_synth_XY_Deriv.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/GeoTIFFSynthetic.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/SearchQuestII.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/Search_subset_and_TMI.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/Search_tilt_contours_no_upC_tmi_rb.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/Search_tilt_contours_upC_100_tmi_rb.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/SyntheticModel.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/arrow_location_10per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/color_maps_and_grayscale.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/color_normalization_25per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/draped_mag_search.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/gray_15per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/grid_cubic.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/grid_min_curve.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/grid_nearest.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/jet_15per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/linear_histoeq.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/location_dropdown2_20per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/mincurv_nearest.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/no_shading_vs_shading.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/rainbow_15per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/redblue_15per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/runcell_30per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/search_colormap_jet.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/search_filter_notebook_snapshot.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/search_stretch_linear_histoeq.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/search_subset_profile.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/search_tilt_depth_tmi_0_and_100_upC.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/search_tiltdepth_notebook_snapshot.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/search_vis_colour_maps.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/search_vis_notebook_snapshot.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/search_vis_without_and_with_shading.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/shading_contours_20per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/synthEWprofile.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/synthGridding.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/synthProfile.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/synth_filter_notebook_snapshot.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/synth_mag_location_global.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/synth_mag_response.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/synth_tiltdepth_notebook_snapshot.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/synth_vis_notebook_snapshot.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/synth_vis_viridis_shaded_contours.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/tilt_45_deg_Salem.JPG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/tilt_45_deg_Salem.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/tilt_TMI_and_depth.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/tilt_synthetic_edges_depths_grey.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/images/viridis_15per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Interp/images/Dentith_Mudge_shallow_deep_interp.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Interp/images/MDRU_SRK_Iran_interp.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Interp/images/Ugalde_Morris_topo_mag.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Interp/images/YGS_Mira_Yukon_Tanana_interp.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Interp/images/mag_sus_data_GBC_QW.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Interp/images/mag_sus_data_wsamps_GBC_QW.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Interp/images/milligan.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Interp/images/survey_lines_AS_White_Beamish.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/AnacondaPath.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/ClickInstall.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/CloudFiles.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/GIF.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/GeoTIFFSynthetic.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/Geodynamo_Between_Reversals.gif" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/Geotoolkit_Binder_landing.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/InstallEnvironment.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/Intro_Response.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/Jupyter_python.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/LaunchNotebook.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/MDRU.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/MVS2017.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/Magnetization_Domain.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/MinicondaInstaller.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/Notebook_full_list.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/OpenCommand.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/Redblue.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/RunAllCells.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/SearchQuestII.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/SyntheticModel.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/ToolkitApps.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/ToolkitLogo.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/UserDefine_GE.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/VC_Community.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/anaconda.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/arrow_location_10per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/color_normalization_25per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/colormap_range_20per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/components.gif" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/draped_mag_search.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/earthfield.gif" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/earths_field.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/fatiando.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/gdal.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/gray_15per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/greys.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/indexnotebook.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/inducing_field.gif" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/jet.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/jet_15per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/jupyter.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/location_dropdown.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/location_dropdown2_20per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/magnetic_anomaly.gif" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/matplotlib.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/measurements.gif" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/no_field.gif" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/numpy.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/rainbow.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/rainbow_15per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/redblue_15per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/restartandclearoutput.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/runcell_30per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/scikitlearn.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/scipy.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/search_placeholder.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/search_profile.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/shading_contours_20per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/simpeg.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/sphinx.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/susceptibility_chart.gif" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/synthetic_profile.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/tilt_depth_over_tmi.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/viridis.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/images/viridis_15per_ppt.PNG" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/jobar8-graphics/output/mag_default.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/icons/PANOiFullHD.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/icons/aboutIcon.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/icons/icon.png" />
+    <Image Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/icons/terrain&amp;surfaces.png" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/README.md" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/Slope_aspect_Hillshade/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/Slope_aspect_Hillshade/README.md" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/Slope_aspect_Hillshade/ext_create.sh" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/Slope_aspect_Hillshade/ext_delete.sh" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/Slope_aspect_Hillshade/ext_select.sh" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/almondbread/BUILD.toml" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/almondbread/README.md" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/almondbread/package-lock.json" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/almondbread/package.json" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/almondbread/public/client.js" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/almondbread/public/common.js" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/almondbread/public/cursor1.xcf" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/almondbread/public/cursor2.xcf" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/almondbread/public/cursor3.xcf" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/almondbread/public/cursor4.xcf" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/almondbread/public/cursor5.xcf" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/almondbread/public/index.html" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/almondbread/public/style.css" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/almondbread/server.js" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/choropleth-hillshade/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/choropleth-hillshade/README.md" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/gdal_hillshade_tutorial/README.md" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/gdal_hillshade_tutorial/presentation/big.css" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/gdal_hillshade_tutorial/presentation/big.js" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/gdal_hillshade_tutorial/presentation/index.html" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/gdal_hillshade_tutorial/resources/Web_relief_chart.pdf" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/gdal_hillshade_tutorial/resources/make-hillshades.sh" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/GeoToolkit/Mag/DataIO.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/GeoToolkit/Mag/Mag.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/GeoToolkit/Mag/MathUtils.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/GeoToolkit/Mag/ProblemSetter.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/GeoToolkit/Mag/Simulator.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/GeoToolkit/Mag/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/GeoToolkit/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/GeoToolkit/graphics/README.md" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/GeoToolkit/graphics/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/GeoToolkit/graphics/colors.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/GeoToolkit/graphics/data/mag4017.npy" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/GeoToolkit/graphics/data/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/GeoToolkit/graphics/graphics.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Install_Environment.bat" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/Gabbs_USGS_CBA2p60_ALL_gridded.tif" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/Output/DataHillshade_EPSG26909.tiff" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/assets/Continents/Continents.lyr" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/assets/Continents/continent.avl" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/assets/Continents/continent.dbf" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/assets/Continents/continent.htm" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/assets/Continents/continent.prj" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/assets/Continents/continent.sbx" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/assets/Continents/continent.shx" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/assets/Continents/continentDwnS50.dbf" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/assets/Continents/continentDwnS50.prj" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/assets/Continents/continentDwnS50.shx" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/assets/MAGlocations_w_field.json" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/assets/Search/MAG_UTM09.tiff" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/assets/Synthetic/DataGrid.tiff" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/assets/Synthetic/Synthetic_Zcontours.dbf" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/assets/Synthetic/Synthetic_Zcontours.prj" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/assets/Synthetic/Synthetic_Zcontours.shx" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/assets/TKC/DIGHEM_Mag_floor10nt_25m.obs" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/assets/TKC/Mesh20m.msh" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/assets/country-capitals.csv" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/notebook.tex" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/README.md" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/condaList.yml" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/AUTHORS.rst" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/_ext/Add2Build.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/_ext/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/_ext/autodoc.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/_ext/edit_on_github.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/_ext/environmentSetup.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/_ext/fetch_gae_sdk.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/_templates/breadcrumbs.html" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/_templates/footer.html" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/_templates/layout.html" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/app.yaml" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/SearchExample.rst" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/SearchFilters.rst" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/SearchTiltDepth.rst" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/SearchVis.rst" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/SyntheticExample.rst" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/SyntheticFilters.rst" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/SyntheticGrid.rst" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/SyntheticMagResponse.rst" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/SyntheticTiltDepth.rst" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/SyntheticVis.rst" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Demos/demos.rst" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Interp/interp.rst" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Magnetics/Mag_index.rst" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Magnetics/buried_dipole.html" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/Tools/tools.rst" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/apps.rst" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/installation.rst" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/content/references.rst" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/geologytoolkit.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/index.yaml" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/docs/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/environment-dev.yml" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/environment.yml" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/readthedocs.yml" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/requirements_dev.txt" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/setup.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/test.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/tests/test_docs.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/tests/test_notebooks.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/jobar8-graphics/README.md" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/jobar8-graphics/colors.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/jobar8-graphics/data/mag4017.npy" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/jobar8-graphics/data/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/jobar8-graphics/graphics.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/mnt-hillshade/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/mnt-hillshade/README.md" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/mnt-hillshade/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/mnt-hillshade/data/rade.txt" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/mnt-hillshade/src/qat.doxygen" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/nst-terrain/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/nst-terrain/README.md" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/nst-terrain/code/contours.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/nst-terrain/code/download.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/nst-terrain/code/imperial_prefilter.sh" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/nst-terrain/code/make_contours_10m.sh" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/nst-terrain/code/make_contours_40ft.sh" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/nst-terrain/code/metric_prefilter.sh" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/nst-terrain/code/unzip.sh" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/nst-terrain/color_relief.txt" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/nst-terrain/environment.yml" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/nst-terrain/tilejson/contour_10m.json" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/nst-terrain/tilejson/contour_40ft.json" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/nst-terrain/tilejson/hillshade.json" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/nst-terrain/tilejson/slope_angle.json" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/nst-terrain/tippecanoe/contour_10m_filter.json" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/nst-terrain/tippecanoe/contour_40ft_filter.json" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/LICENSE.md" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/License.txt" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/README.md" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/bandCalc.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/batch_hillshader.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/batch_hillshader_dialog.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/bh_errors.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/dlgabout.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/external_dependencies_install.txt" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/help/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/help/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/help/source/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/help/source/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/hillshade.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/hillshader_process.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/i18n/af.ts" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/laspy_utils.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/metadata.txt" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/plugin_upload.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/plugin_utils/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/plugin_utils/files_and_dirs_funs.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/plugin_utils/raster_funs.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/plugin_utils/unicodeencodeerror_fix.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/resources.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/test_data/batch_hillshader_output/classified_cloud_r1/Terrain_classified_cloud_dem_ComposedHillshade.tif" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/test_data/batch_hillshader_output/classified_cloud_r2/Surfaces_classified_cloud_dem_ComposedHillshade.tif" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/test_data/batch_hillshader_output/dtm_input_r1/dtm_input_ComposedHillshade.tif" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/test_data/classified_cloud.las" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/test_data/dtm_input.asc" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/test_data/dtm_input.tif" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/test_dtm_process.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/test_files_and_dirs.py" />
+    <Text Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/pano_hillshader/version.py" />
+    <Xml Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/assets/Continents/Continents.lyr.xml" />
+    <Xml Include="../../thirdparty/owemdjee/leptonica-hillshade/ext/geo-toolkit/Notebooks/assets/Continents/continent.shp.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

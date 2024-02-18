@@ -1,0 +1,708 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libgnuplot</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FFB70966}</ProjectGuid>
+    <RootNamespace>libgnuplot</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGNUPLOT;GNUPLOT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGNUPLOT;GNUPLOT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGNUPLOT;GNUPLOT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGNUPLOT;GNUPLOT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGNUPLOT;GNUPLOT_STATICLIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGNUPLOT;GNUPLOT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGNUPLOT;GNUPLOT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGNUPLOT;GNUPLOT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGNUPLOT;GNUPLOT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGNUPLOT;GNUPLOT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGNUPLOT;GNUPLOT_STATICLIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBGNUPLOT;GNUPLOT_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/demo/plugin/demo_plugin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/demo/plugin/uigamma_plugin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/docs/checkdoc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/docs/doc2gih.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/docs/doc2hlp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/docs/doc2ipf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/docs/doc2rtf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/docs/doc2tex.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/docs/doc2web.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/docs/termdoc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/docs/windows/doc2html.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/docs/xref.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/amos_airy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/axis.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/beos/GPApp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/beos/GPBitmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/beos/GPView.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/beos/GPWindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/beos/XStringList.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/bf_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/bitmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/boundary.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/breaders.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/color.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/command.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/complexfun.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/contour.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/datablock.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/datafile.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/dynarray.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/encoding.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/eval.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/external.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/filters.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/fit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/gadgets.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/getcolor.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/gpexecute.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/gplocale.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/gplt_x11.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/graph3d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/graphics.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/help.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/hidden3d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/history.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/internal.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/interpol.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/jitter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/libcerf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/loadpath.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/matrix.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/misc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/mouse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/multiplot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/os2/dialogs.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/os2/gclient.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/os2/gnupmdrv.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/os2/print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/parse.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/plot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/plot2d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/plot3d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/pm3d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/QtGnuplotApplication.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/QtGnuplotEvent.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/QtGnuplotInstance.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/QtGnuplotItems.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/QtGnuplotScene.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/QtGnuplotWidget.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/QtGnuplotWindow.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/gnuplot_qt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/qt_conversion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/qt_embed_example.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/qt_term.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/readline.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/save.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/scanner.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/set.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/show.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/specfun.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/standard.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/stats.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/stdfn.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/tables.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/tabulate.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/term.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/time.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/unset.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/util3d.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/version.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/vms.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/voxelgrid.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/vplot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/watch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/win/pgnuplot.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/win/screenbuf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/win/wd2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/win/wgdiplus.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/win/wgnuplib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/win/wgraph.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/win/winmain.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/win/wmenu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/win/wpause.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/win/wprinter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/win/wredirect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/win/wtext.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/gp_cairo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/gp_cairo_helpers.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/wxt_gui.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/src/xdg.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/term/kitty.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/term/sixel.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/gnuplot/term/write_png_image.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/config/djgpp/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/config/watcom/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/demo/gen-random.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/demo/plugin/gnuplot_plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/demo/stat.inc" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/docs/doc2x.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/docs/xref.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/alloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/amos_airy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/axis.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/beos/GPApp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/beos/GPBitmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/beos/GPView.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/beos/GPWindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/beos/XStringList.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/beos/constants.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/bitmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/boundary.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/breaders.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/color.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/command.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/complexfun.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/contour.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/datablock.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/datafile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/dynarray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/encoding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/eval.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/external.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/filters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/fit.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/gadgets.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/getcolor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/gp_hist.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/gp_time.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/gp_types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/gpexecute.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/gplocale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/gplt_x11.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/graph3d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/graphics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/help.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/hidden3d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/internal.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/interpol.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/jitter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/libcerf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/loadpath.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/marching_cubes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/matrix.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/misc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/mouse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/mousecmn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/multiplot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/os2/dialogs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/os2/gnupmdrv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/os2/pm_msgs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/parse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/plot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/plot2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/plot3d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/pm3d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/qt_table.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/QtGnuplotApplication.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/QtGnuplotEvent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/QtGnuplotInstance.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/QtGnuplotItems.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/QtGnuplotScene.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/QtGnuplotWidget.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/QtGnuplotWindow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/qt_embed_example.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/qt_term.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/readline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/save.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/scanner.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/setshow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/specfun.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/standard.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/stdfn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/syscfg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/tables.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/tabulate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/term.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/term_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/util3d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/version.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/vms.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/voxelgrid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/vplot.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/watch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/win/screenbuf.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/win/wcommon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/win/wd2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/win/wgdiplus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/win/wgnuplib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/win/winmain.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/win/wresourc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/win/wtext.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/png/autoscale_png.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/png/clipboard_png.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/png/config_png.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/png/grid_png.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/png/help_png.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/png/nextzoom_png.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/png/previouszoom_png.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/png/replot_png.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/gp_cairo.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/gp_cairo_helpers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/wxt_gui.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/wxt_term.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/src/xdg.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/term/PostScript/prologues.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/term/driver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/term/fig_defs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/term/hpgeneric.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/term/impcodes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/term/latex_old.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/gnuplot/term/post.h" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/demo/aries.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/demo/bldg.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/demo/gradient.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/demo/html/favicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/demo/icon64x64.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/docs/html/figure_static_d20.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/faq/pdf-icon.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/src/os2/gnuplot.ico" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/images/application-pdf.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/images/configure.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/images/document-export.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/images/document-print.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/images/edit-paste.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/images/grid.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/images/image-bmp.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/images/image-x-eps.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/images/view-refresh.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/images/zoom-in.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/images/zoom-original.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/images/zoom-out.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/src/win/grpicon.ico" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/src/win/texticon.ico" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/png/autoscale.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/png/clipboard.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/png/config.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/png/grid.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/png/help.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/png/nextzoom.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/png/previouszoom.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/png/replot.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/term/js/grid.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/term/js/help.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/term/js/nextzoom.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/term/js/previouszoom.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/term/js/return.png" />
+    <Image Include="../../thirdparty/owemdjee/gnuplot/term/js/textzoom.png" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/gnuplot/src/os2/gnupmdrv.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/gnuplot/src/win/wgnuplib.rc" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/gnuplot/src/win/wgnuplot.rc" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/INSTALL" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/README" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/README.emacs" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/TODO" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/config/MacOSX/PkgResources/English.lproj/InstallationCheck.strings" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/config/MacOSX/PkgResources/License.rtf" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/config/MacOSX/PkgResources/postinstall" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/config/MacOSX/ReadMe.rtf" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/config/MacOSX/createdist.sh" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/config/Makefile.am.in" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/config/README" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/config/config.dj2" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/config/config.mgw" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/config/config.os2" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/config/config.oww" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/config/configh_strip4compare.sh" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/config/cygwin/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/config/djconfig.sh" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/config/djgpp/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/config/makefile.os2" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/config/makefile.vms" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/config/mingw/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/config/msvc/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/config/watcom/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/configure.vms" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/Makefile.am.in" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/demo.edf" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/gnuplot.cfg" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/gpdemos.tcl" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/html/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/html/Makefile.canvas" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/html/Makefile.svg" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/html/gnuplot_demo.css" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/html/index.6new" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/html/index.canvas" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/html/index.special_functions" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/html/index.svg" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/html/webify.pl" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/html/webify_canvas.pl" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/html/webify_svg.pl" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/latex_demo.tex" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/plugin/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/plugin/README" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/scatter2.bin" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/sine.bin" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/sound.par" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/sound2.par" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/start.par" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/using.bin" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/weather.csv" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/demo/world.cor" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/README" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/README.ja" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/doc2texi.el" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/gnuplot-ja.doc" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/gnuplot.doc" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/html/gnuplot_docs.css" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/ChangeLog.0" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/ChangeLog.1" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/ChangeLog.2" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/ChangeLog.3" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/ChangeLog.4" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/ChangeLog.5" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/ChangeLog.old" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/README.3d" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/README.3p1" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/README.3p2" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/README.3p3" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/README.3p4" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/README.3p5" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/README.emx" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/README.fit" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/README.gnu" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/README.internals" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/README.iso" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/README.mf" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/README.nex" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/README.pic" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/README.pro" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/old/gpcard.tex" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/plotstyles_cvt.cmd" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/psdoc/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/psdoc/README" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/psdoc/ps_file.doc" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/psdoc/ps_fontfile_doc.tex" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/psdoc/ps_guide.ps" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/term-ja.diff" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/title-ja.tex" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/titlepag.ipf" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/titlepag.tex" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/docs/toc_entr.sty" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/faq/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/faq/faq-ja.tex" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/faq/faq.tex" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/faq/htlatex.cfg" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/m4/Makefile.am.in" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/m4/README" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/m4/alpha.m4" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/m4/apple.m4" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/m4/beos.m4" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/m4/msdos.m4" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/m4/pkg.m4" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/man/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/man/ja/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/man/ja/man1/gnuplot.1" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/man/man1/gnuplot.1" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/pm3d/README" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/pm3d/contrib/README" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/pm3d/contrib/colorpts.awk" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/pm3d/contrib/pm3dCompress.awk" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/pm3d/contrib/pm3dConvertToImage.awk" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/share/Gnuplot.app-defaults" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/share/LaTeX/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/share/LaTeX/README" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/share/LaTeX/gnuplot.cfg" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/share/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/beos/Makefile.in" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/gnuplot.opt" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/linkopt.vms" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/makefile.all" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/os2/4allterm.cmd" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/os2/gnupmdrv.def" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/os2/gnupmdrv.ipf" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/os2/ptrcross.ptr" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/os2/rotating.ptr" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/os2/scaling.ptr" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/README.Qt" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/images/icon32x32.xpm" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/po/qtgnuplot_fr.ts" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/qtterminal/po/qtgnuplot_ja.ts" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/win/README-ja.win" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/win/rotating.cur" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/win/scaling.cur" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/win/wgnuplot.exe.manifest" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/win/wgnuplot.exe.manifest64" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/png/README.embedding" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/xpm/cross.xpm" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/xpm/icon16x16.xpm" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/xpm/icon32x32.xpm" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/xpm/icon64x64.xpm" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/xpm/notfound.xpm" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/xpm/right.xpm" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/xpm/rotate.xpm" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/wxterminal/bitmaps/xpm/size.xpm" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/src/x11.opt" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/stamp-h.in" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/Makefile.am.in" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/PostScript/8859-1.ps" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/PostScript/8859-15.ps" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/PostScript/8859-2.ps" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/PostScript/8859-9.ps" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/PostScript/README" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/PostScript/aglfn.txt" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/PostScript/cp1250.ps" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/PostScript/cp1251.ps" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/PostScript/cp1252.ps" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/PostScript/cp437.ps" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/PostScript/cp850.ps" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/PostScript/cp852.ps" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/PostScript/koi8r.ps" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/PostScript/koi8u.ps" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/PostScript/prologue.ps" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/PostScript/ps_header.sh" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/PostScript/unicode_maps.README" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/PostScript/utf-8.ps" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/README" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/js/README" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/js/canvas_help.html" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/js/canvasmath.js" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/js/canvastext.js" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/js/gnuplot_common.js" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/js/gnuplot_dashedlines.js" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/js/gnuplot_mouse.css" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/js/gnuplot_mouse.js" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/js/gnuplot_svg.js" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/js/gnuplot_svg_2018.js" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/lua/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/lua/README" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/lua/TODO" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/term/lua/gnuplot-tikz.lua" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/tutorial/Makefile.am.in" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/tutorial/header.tex" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/tutorial/tutorial.tex" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/win/Copyright-ja.txt" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/win/README-Windows-ja.txt" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/win/README-Windows.txt" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/win/gnuplot.iss" />
+    <Text Include="../../thirdparty/owemdjee/gnuplot/win/modpath.iss" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

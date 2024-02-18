@@ -1,0 +1,1637 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libPaddle-Lite</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF9707A4}</ProjectGuid>
+    <RootNamespace>libPaddle-Lite</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPADDLE_LITE;PADDLE_LITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPADDLE_LITE;PADDLE_LITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPADDLE_LITE;PADDLE_LITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPADDLE_LITE;PADDLE_LITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPADDLE_LITE;PADDLE_LITE_STATICLIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPADDLE_LITE;PADDLE_LITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPADDLE_LITE;PADDLE_LITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPADDLE_LITE;PADDLE_LITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPADDLE_LITE;PADDLE_LITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPADDLE_LITE;PADDLE_LITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPADDLE_LITE;PADDLE_LITE_STATICLIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBPADDLE_LITE;PADDLE_LITE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/android/jni/native/paddle_lite_jni.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/android/jni/native/tensor_jni.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/cxx_api.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/cxx_api_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/googlenet_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/light_api.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/light_api_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/paddle_api.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/paddle_place.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/python/pybind/pybind.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/apis_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/cxx_api_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/efficientnet_b0_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/fast_rcnn_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/inceptionv4_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/light_api_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/lite_api_test_helper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/lite_multithread_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/mobilenetv1_int16_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/mobilenetv1_int8_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/mobilenetv1_opt_quant_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/mobilenetv1_ssd_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/mobilenetv1_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/mobilenetv1_yolov3_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/mobilenetv2_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/model_run_test_image.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/model_test_classify.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/model_test_detection.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/ocr_attention_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/paddle_api_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/resnet18_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/resnet50_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/shufflenetv2_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/test_googlenet_lite.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/test_inceptionv4_lite_x86.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/test_mobilenetv1_lite_metal.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/test_mobilenetv1_lite_x86.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/test_mobilenetv2_lite_x86.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/test_resnet50_lite_x86.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/test_step_rnn_lite_x86.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/transform_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/unet_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/tools/benchmark/benchmark.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/tools/benchmark/precision_evaluation/imagenet_image_classification/prepost_process.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/tools/benchmark/precision_evaluation/utils.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/tools/benchmark/profile/cpu_usage_info.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/tools/benchmark/profile/memory_info.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/tools/benchmark/profile/resource_usage_monitor.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/tools/benchmark/utils/flags.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/tools/get_performance.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/tools/model_test.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/tools/opt.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/tools/opt_base.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/src/core/types.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/src/operators/concat/kernels.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/src/operators/concat/op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/src/operators/relu/codegen/fp32_aarch32_neon_x8.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/src/operators/relu/codegen/fp32_aarch64_neon_x16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/src/operators/relu/fp16_neon_x32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/src/operators/relu/kernels.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/src/operators/relu/op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/src/runtime/context.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/src/runtime/device.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/src/utilities/cpu_info.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/src/utilities/logging.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/src/utilities/thread_pool.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/activation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/affine_channel.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/argmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/axpy.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/box_coder.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/clip.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/col_im_transform.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/concat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv3x3_winograd_fp32_c4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv3x3_winograd_int8.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv3x3s1_depthwise_int8.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv3x3s1_direct_int8.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv3x3s1p01_depthwise_fp32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv3x3s1p01_depthwise_fp32_relu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv3x3s1px_depthwise_fp32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv3x3s2_depthwise_int8.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv3x3s2_direct_fp32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv3x3s2_direct_int8.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv3x3s2p01_depthwise_fp32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv3x3s2p01_depthwise_fp32_relu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv3x3s2px_depthwise_fp32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv5x5s1_depthwise_fp32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv5x5s1_depthwise_int8.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv5x5s2_depthwise_fp32.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv5x5s2_depthwise_int8.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv_transpose_depthwise.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv_winograd_3x3.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/decode_bboxes.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/dropout.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/elementwise.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fill_bias_relu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/activation_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/box_coder_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/conv3x3_winograd_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/conv3x3s1_depthwise_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/conv3x3s1_direct_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/conv3x3s2_depthwise_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/conv3x3s2_direct_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/conv5x5s1_depthwise_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/conv5x5s2_depthwise_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/conv_depthwise_common_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/conv_impl_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/conv_transpose_depthwise_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/elementwise_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/fill_bias_act_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/funcs_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/gemm_c8_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/gemm_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/gemv_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/interpolate_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/pad2d_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/pooling_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/power_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/sgemm_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/softmax_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/sparse_conv_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/sparse_semi_conv_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/type_trans_fp16.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/funcs.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/gemm_prepacked_int8.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/gemm_s8.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/gemv_arm_int8.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/interpolate.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/layout.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/lrn.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/lstm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/negative.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/norm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/packed_sgemm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/packed_sgemm_c4.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/pad2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/pixel_shuffle.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/pooling.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/power.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/quantize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/reduce.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/scale.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/scatter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sequence_expand.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sequence_pool.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sequence_pool_grad.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sgemm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sgemv.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/slice.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/softmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sparse_conv_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sparse_semi_conv_impl.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/split_merge_lod_tenosr.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sve/conv3x3s2_direct_int8_sve.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sve/conv_impl_sve.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sve/gemm_sve.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sve/gemm_sve_i8mm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sve/pooling_sve.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sve/softmax_sve.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/type_trans.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/viterbi_decode.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/argmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/beam_search.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/concat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/gpc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/inverse.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/norm.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/pad3d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/prior_box.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/reduce.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/reverse.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/sequence_padding.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/slice.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/split.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/stack.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/temporal_shift.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/topk.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/target_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/converter/concat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/converter/conv2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/converter/conv2d_transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/converter/converter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/converter/elementwise.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/converter/flatten.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/converter/fully_connected.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/converter/pool2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/converter/reshape.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/converter/softmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/converter/transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/converter/unary_activations.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/converter/unsqueeze.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/engine.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/optimizer/unpack_op_fusion.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/utility.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/converter/batch_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/converter/concat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/converter/conv2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/converter/conv2d_transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/converter/converter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/converter/elementwise.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/converter/flatten.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/converter/fully_connected.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/converter/leaky_relu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/converter/mat_mul.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/converter/pool2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/converter/reshape.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/converter/resize_linear.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/converter/resize_nearest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/converter/softmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/converter/transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/converter/unary_activations.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/converter/unsqueeze.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/converter/validator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/engine.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/nnapi_implementation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/optimizer/resolve_operation_liminations.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/optimizer/restrict_input_output_quant_params.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/utility.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/activation.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/adaptive_pool2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/arg_max.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/assign.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/batch_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/binary_logical_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/cast.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/clip.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/comparisons.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/concat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/conv2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/conv2d_transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/deformable_conv2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/div.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/elementwise.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/exp.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/expand.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/fill.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/fill_like.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/flatten.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/fully_connected.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/gather.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/gelu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/layer_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/leaky_relu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/log.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/lp_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/multiclass_nms.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/pad.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/pool2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/pow.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/quantize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/range.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/reduce.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/reshape.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/resize_linear.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/resize_nearest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/roi_align.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/shape.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/slice.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/softmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/split.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/squeeze.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/top_k.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/unary_logical_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/unsqueeze.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/yolo_box.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/engine.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/optimizer/convert_datalayout_nchw_to_nhwc.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/optimizer/fix_non_max_suppression.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/optimizer/fix_quantized_ops.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/utility.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/converter/batch_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/converter/concat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/converter/conv2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/converter/converter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/converter/elementwise.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/converter/flatten.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/converter/fully_connected.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/converter/hard_swish.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/converter/pool2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/converter/reshape.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/converter/resize_linear.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/converter/resize_nearest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/converter/split.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/converter/transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/converter/unary_activations.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/converter/unsqueeze.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/engine.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/optimizer/unpack_op_fusion.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/utility.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/converter/conv2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/converter/converter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/converter/validator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/engine.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/fake_ddk/src/conv2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/fake_ddk/src/execution.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/fake_ddk/src/graph.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/fake_ddk/src/logging.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/fake_ddk/src/utility.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/utility.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/google_xnnpack/converter/converter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/google_xnnpack/converter/elementwise.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/google_xnnpack/converter/reshape.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/google_xnnpack/converter/softmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/google_xnnpack/converter/validator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/google_xnnpack/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/google_xnnpack/engine.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/google_xnnpack/optimizer/resolve_operation_liminations.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/google_xnnpack/utility.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/adaptive_pool2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/arg_min_max.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/assign.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/batch_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/binary_logical_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/cast.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/channel_shuffle.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/clip.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/comparisons.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/concat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/conv2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/conv2d_transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/converter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/cum_sum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/deformable_conv2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/dequantize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/elementwise.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/expand.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/fill.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/fill_like.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/flatten.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/fully_connected.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/gather.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/gelu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/group_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/hard_sigmoid.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/hard_swish.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/instance_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/layer_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/leaky_relu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/log_softmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/lp_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/lrn.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/mat_mul.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/meshgrid.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/pad.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/pool2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/pow.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/prelu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/quantize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/range.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/reduce.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/reshape.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/resize_linear.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/resize_nearest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/roi_align.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/roll.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/shape.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/slice.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/softmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/softplus.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/split.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/squeeze.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/stack.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/sum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/swish.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/tile.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/top_k.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/unary_activations.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/unary_logical_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/unsqueeze.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/where.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/engine.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/model_client.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/optimizer/fix_multiple_outputs_ops.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/optimizer/fix_no_inputs_ops.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/optimizer/fix_quantized_ops.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/optimizer/fix_reduce_ops_scalar_output.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/utility.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/arg_min_max.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/batch_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/binary_logical_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/cast.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/channel_shuffle.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/clip.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/comparisons.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/concat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/conv2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/conv2d_transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/converter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/elementwise.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/flatten.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/fully_connected.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/gather.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/gelu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/hard_sigmoid.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/hard_swish.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/instance_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/layer_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/leaky_relu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/lp_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/mat_mul.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/pad.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/pool2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/prelu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/reduce.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/reshape.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/resize_linear.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/resize_nearest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/slice.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/softmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/softplus.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/split.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/squeeze.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/swish.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/tile.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/top_k.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/unary_activations.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/unary_logical_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/unsqueeze.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/where.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/engine.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/optimizer/fix_multiple_outputs_ops.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/utility.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/imagination_nna/converter/conv2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/imagination_nna/converter/converter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/imagination_nna/converter/elementwise.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/imagination_nna/converter/fully_connected.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/imagination_nna/converter/mat_mul.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/imagination_nna/converter/pool2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/imagination_nna/converter/reshape.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/imagination_nna/converter/softmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/imagination_nna/converter/unary_activations.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/imagination_nna/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/imagination_nna/engine.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/imagination_nna/imgdnn_manager.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/imagination_nna/utility.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/adaptive_pool2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/arg_max.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/assign.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/batch_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/cast.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/clip.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/comparisons.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/concat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/conv2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/conv2d_transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/converter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/cum_sum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/deformable_conv2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/elementwise.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/expand.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/fill.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/fill_like.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/flatten.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/gather.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/gelu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/hard_sigmoid.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/hard_swish.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/layer_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/leaky_relu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/matmul.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/multiclass_nms.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/pad.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/pool2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/prior_box.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/range.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/reduce.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/relu6.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/reshape.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/resize_linear.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/resize_nearest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/shape.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/slice.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/softmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/softplus.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/split.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/squeeze.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/stack.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/swish.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/unary_activations.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/unsqueeze.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/yolo_box.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/engine.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/utility.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/adaptive_pool2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/arg_min_max.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/assign.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/batch_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/binary_logical_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/cast.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/clip.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/comparisons.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/concat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/conv2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/conv2d_transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/converter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/cum_sum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/deformable_conv2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/elementwise.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/expand.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/fill.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/fill_like.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/flatten.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/fully_connected.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/gather.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/gelu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/group_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/hard_sigmoid.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/hard_swish.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/instance_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/layer_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/leaky_relu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/log_softmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/lp_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/mat_mul.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/meshgrid.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/pad.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/pool2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/prelu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/range.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/reduce.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/reshape.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/resize_linear.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/resize_nearest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/roi_align.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/shape.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/slice.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/softmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/softplus.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/split.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/squeeze.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/stack.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/sum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/swish.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/tile.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/top_k.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/unary_activations.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/unary_logical_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/unsqueeze.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/where.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/engine.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/utility.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/converter/channel_shuffle.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/converter/concat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/converter/conv2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/converter/conv2d_transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/converter/converter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/converter/elementwise.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/converter/flatten.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/converter/fully_connected.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/converter/hard_swish.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/converter/pool2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/converter/reshape.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/converter/resize_linear.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/converter/resize_nearest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/converter/softmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/converter/split.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/converter/transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/converter/unary_activations.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/converter/unsqueeze.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/engine.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/neuron_adapter_wrapper.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/optimizer/resolve_operation_liminations.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/optimizer/restrict_input_output_quant_params.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/utility.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/calibrator.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/activations.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/arg_max.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/assign.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/batch_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/cast.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/clip.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/comparisons.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/concat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/conv2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/conv2d_transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/converter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/elementwise.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/fill.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/flatten.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/full_connected.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/hard_swish.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/leaky_relu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/log_softmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/mat_mul.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/plugin/cast.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/plugin/hard_swish.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/plugin/plugin.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/plugin/split.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/pool2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/prior_box.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/reduce.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/reshape.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/resize_linear.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/resize_nearest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/shape.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/slice.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/softmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/split.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/squeeze.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/stack.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/swish.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/unary_operations.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/unsqueeze.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/yolo_box.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/engine.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/kernel/host/naive_softmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/optimizer/remove_reshape_before_fully_connected.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/optimizer/replace_softmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/optimizer/unpack_op_fusion.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/program.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/utility.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/converter/concat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/converter/conv2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/converter/converter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/converter/elementwise.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/converter/flatten.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/converter/fully_connected.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/converter/pool2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/converter/reshape.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/converter/softmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/converter/transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/converter/unary_activations.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/converter/unsqueeze.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/engine.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/optimizer/fix_ops.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/optimizer/unpack_op_fusion.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/utility.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/arg_min_max.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/assign.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/batch_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/binary_logical_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/cast.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/channel_shuffle.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/clip.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/comparisons.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/concat.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/conv2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/conv2d_transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/converter.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/dequantize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/elementwise.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/expand.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/fill.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/flatten.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/fully_connected.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/gather.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/gelu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/hard_sigmoid.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/hard_swish.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/instance_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/layer_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/leaky_relu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/log_softmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/lp_normalization.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/mat_mul.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/pool2d.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/prelu.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/quantize.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/reduce.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/reshape.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/resize_linear.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/resize_nearest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/slice.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/softmax.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/softplus.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/split.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/squeeze.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/stack.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/sum.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/transpose.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/unary_activations.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/unary_logical_op.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/unsqueeze.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/unstack.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/where.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/driver.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/engine.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/optimizer/convert_fill_like_into_mul_add.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/optimizer/convert_meshgrid_into_reshape_expand.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/optimizer/unpack_op_fusion.cc" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/_paddle_use_ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/android/jni/native/convert_util_jni.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/android/jni/native/paddle_lite_jni.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/android/jni/native/tensor_jni.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/cxx_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/light_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/paddle_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/paddle_lite_factory_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/paddle_place.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/paddle_use_passes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/python/pybind/pybind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/python/pybind/tensor_py.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/lite_api_test_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/test_helper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/tools/benchmark/benchmark.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/tools/benchmark/precision_evaluation/imagenet_image_classification/prepost_process.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/tools/benchmark/precision_evaluation/utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/tools/benchmark/profile/cpu_usage_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/tools/benchmark/profile/memory_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/tools/benchmark/profile/resource_usage_monitor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/tools/benchmark/utils/flags.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/tools/opt_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/include/arm_dnn_library/arm_dnn_library.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/include/arm_dnn_library/core/bfloat16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/include/arm_dnn_library/core/float16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/include/arm_dnn_library/core/macros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/include/arm_dnn_library/core/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/include/arm_dnn_library/operators/array_ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/include/arm_dnn_library/operators/math_ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/include/arm_dnn_library/operators/nn_ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/include/arm_dnn_library/runtime/context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/include/arm_dnn_library/runtime/device.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/src/operators/concat/kernels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/src/operators/concat/op.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/src/operators/relu/kernels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/src/operators/relu/op.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/src/runtime/context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/src/runtime/device.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/src/utilities/cpu_info.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/src/utilities/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/src/utilities/thread_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/activation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/affine_channel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/argmax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/axpy.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/box_coder.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/clip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/col_im_transform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/concat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv_block_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv_depthwise.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/conv_transpose_depthwise.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/decode_bboxes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/dot_toolchain_support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/dotprod/__gemm_sdot_meta__.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/dotprod/__gemm_vsdot_meta__.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/dropout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/elementwise.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/elementwise_common_broadcast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/elementwise_common_broadcast_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/elementwise_naive_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fill_bias_relu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/activation_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/box_coder_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/common_preprocess.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/conv3x3_depthwise_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/conv_block_utils_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/conv_depthwise_common_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/conv_impl_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/conv_transpose_depthwise_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/elementwise_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/fill_bias_act_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/funcs_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/gemm_c8_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/gemm_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/gemv_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/gru_utils_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/interpolate_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/pad2d_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/pooling_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/power_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/sgemm_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/softmax_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/sparse_conv_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/sparse_semi_conv_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/fp16/type_trans_fp16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/funcs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/gemm_prepacked_int8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/gemm_s8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/gemv_arm_int8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/gru.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/gru_utils.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/interpolate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/layout.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/lrn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/lstm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/negative.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/norm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/packed_sgemm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/packed_sgemm_a35.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/packed_sgemm_c4.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/pad2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/pixel_shuffle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/pooling.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/power.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/quantize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/reduce.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/saturate.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/scale.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/scatter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sequence2batch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sequence_expand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sequence_pool.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sequence_pool_grad.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sgemm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sgemv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/slice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/softmax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sparse_conv_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sparse_semi_conv_impl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/split_merge_lod_tenosr.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sve/conv3x3s2_direct_int8_sve.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sve/conv_impl_sve.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sve/funcs_sve.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sve/gemm_sve.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sve/gemm_sve_i8mm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sve/pooling_sve.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/sve/softmax_sve.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/type_trans.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/viterbi_decode.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/argmax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/bbox_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/beam_search.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/concat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/gather.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/gpc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/inverse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/nms_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/norm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/pad2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/pad3d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/poly_util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/prior_box.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/reduce.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/reverse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/sequence_padding.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/slice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/split.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/temporal_shift.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/topk.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/transpose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/unbind.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/yolo_box.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_context.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_context_imp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_converter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_half.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_mtl_data.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_timestats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/mps_conv_datasource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/target_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/core/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/driver/device.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/nnadapter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/adaptive_pool2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/arg_min_max.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/assign.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/batch_normalization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/binary_logical_op.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/cast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/channel_shuffle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/clip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/comparisons.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/concat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/conv2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/conv2d_transpose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/cum_sum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/deformable_conv2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/dequantize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/elementwise.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/expand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/fill.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/fill_like.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/flatten.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/fully_connected.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/gather.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/gelu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/grid_sample.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/group_normalization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/hard_sigmoid_swish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/instance_normalization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/layer_normalization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/leaky_relu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/log_softmax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/lp_normalization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/lrn.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/mat_mul.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/math/batch_normalization.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/math/broadcast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/math/concat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/math/conv2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/math/cum_sum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/math/dequantize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/math/elementwise.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/math/expand.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/math/fully_connected.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/math/gather.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/math/log_softmax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/math/meshgrid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/math/pool2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/math/quantize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/math/slice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/math/softmax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/math/split.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/math/stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/math/unary_activations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/math/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/meshgrid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/non_max_suppression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/pad.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/pool2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/pow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/prelu.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/prior_box.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/quantize.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/range.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/reduce.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/reshape.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/resize_linear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/resize_nearest.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/roi_align.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/roll.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/shape.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/slice.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/softmax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/softplus.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/split.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/squeeze.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/stack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/sum.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/tile.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/top_k.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/transpose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/unary_activations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/unary_logical_op.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/unsqueeze.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/unstack.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/where.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/operation/yolo_box.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/optimizer/constant_fold_operations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/optimizer/constant_fold_shape_and_associated_operations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/optimizer/convert_adaptive_pool2d_into_pool2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/optimizer/convert_datalayout_nchw_to_nhwc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/optimizer/convert_quantization_symm_to_asymm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/optimizer/convert_reshape_transpose_reshape_5d_into_4d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/optimizer/fuse_batch_norm_conv2d_into_conv2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/optimizer/fuse_conv2d_activation_into_conv2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/optimizer/fuse_conv2d_add_into_conv2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/optimizer/fuse_conv2d_batch_norm_into_conv2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/optimizer/fuse_matmul_add_into_fully_connected.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/optimizer/fuse_matmul_dequant_add_into_fully_connected_dequant.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/optimizer/fuse_reshape_transpose_reshape_into_channel_shuffle.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/optimizer/fuse_reshape_transpose_slice3_squeeze3_into_reshape_transpose_slice3.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/optimizer/fuse_sigmoid_mul_into_swish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/optimizer/fuse_transpose_inverse_transpose_into_identity_transpose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/optimizer/fuse_unsqueeze_pad_squeeze_into_pad.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/optimizer/partition_model_into_submodels.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/optimizer/pattern_matcher.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/optimizer/remove_identity_transpose.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/optimizer/remove_useless_operations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/utility/cache.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/utility/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/utility/hints.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/utility/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/utility/micros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/utility/modeling.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/utility/string.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/include/nnadapter/utility/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/converter/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/converter/converter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/optimizer/unpack_op_fusion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/NeuralNetworksTypes.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/converter/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/converter/converter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/converter/validator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/nnapi_implementation.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/optimizer/resolve_operation_liminations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/optimizer/restrict_input_output_quant_params.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/converter/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/optimizer/convert_datalayout_nchw_to_nhwc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/optimizer/fix_non_max_suppression.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/optimizer/fix_quantized_ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/converter/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/converter/converter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/optimizer/unpack_op_fusion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/converter/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/converter/converter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/converter/validator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/fake_ddk/include/fake_ddk/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/fake_ddk/include/fake_ddk/execution.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/fake_ddk/include/fake_ddk/graph.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/fake_ddk/include/fake_ddk/micros.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/fake_ddk/include/fake_ddk/operator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/fake_ddk/include/fake_ddk/tensor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/fake_ddk/include/fake_ddk/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/fake_ddk/src/conv2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/fake_ddk/src/logging.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/fake_ddk/src/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/google_xnnpack/converter/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/google_xnnpack/converter/converter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/google_xnnpack/converter/validator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/google_xnnpack/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/google_xnnpack/optimizer/resolve_operation_liminations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/google_xnnpack/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/converter/converter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/model_client.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/optimizer/fix_multiple_outputs_ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/optimizer/fix_no_inputs_ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/optimizer/fix_quantized_ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/optimizer/fix_reduce_ops_scalar_output.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/converter/converter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/optimizer/fix_multiple_outputs_ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/imagination_nna/converter/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/imagination_nna/converter/converter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/imagination_nna/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/imagination_nna/imgdnn_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/imagination_nna/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/converter/converter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/default_opset.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/converter/converter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/converter/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/converter/converter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/neuron_adapter_wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/optimizer/resolve_operation_liminations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/optimizer/restrict_input_output_quant_params.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/calibrator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/converter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/plugin/cast.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/plugin/fill.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/plugin/hard_swish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/plugin/plugin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/plugin/prior_box.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/plugin/split.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/plugin/swish.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/converter/plugin/yolo_box.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/kernel/cuda/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/kernel/cuda/special_softmax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/kernel/host/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/kernel/host/naive_softmax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/kernel/kernel.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/operation/naive_softmax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/operation/special_softmax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/operation/type.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/optimizer/remove_reshape_before_fully_connected.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/optimizer/replace_softmax.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/optimizer/unpack_op_fusion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/program.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/converter/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/converter/converter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/optimizer/fix_ops.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/optimizer/unpack_op_fusion.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/utility.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/all.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/converter/converter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/engine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/optimizer/convert_fill_like_into_mul_add.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/optimizer/convert_meshgrid_into_reshape_expand.h" />
+    <Image Include="../../thirdparty/owemdjee/Paddle-Lite/docs/images/all_ops.png" />
+    <Image Include="../../thirdparty/owemdjee/Paddle-Lite/docs/images/architecture.png" />
+    <Image Include="../../thirdparty/owemdjee/Paddle-Lite/docs/images/lr_loss.png" />
+    <Image Include="../../thirdparty/owemdjee/Paddle-Lite/docs/images/ops_in_model.png" />
+    <Image Include="../../thirdparty/owemdjee/Paddle-Lite/docs/images/opt_help_info.png" />
+    <Image Include="../../thirdparty/owemdjee/Paddle-Lite/docs/images/predict_workflow.png" />
+    <Image Include="../../thirdparty/owemdjee/Paddle-Lite/docs/images/qq-group-chat.png" />
+    <Image Include="../../thirdparty/owemdjee/Paddle-Lite/docs/images/supportedops.png" />
+    <Image Include="../../thirdparty/owemdjee/Paddle-Lite/docs/images/visulazation.png" />
+    <Image Include="../../thirdparty/owemdjee/Paddle-Lite/docs/images/visulazation_2.png" />
+    <Image Include="../../thirdparty/owemdjee/Paddle-Lite/docs/images/workflow.png" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/README_en.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/DownloadGoogleBenchmark.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/FindGflags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/FindGlog.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/FindGperftools.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/FindJeMalloc.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/FindNumPy.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/backends/common.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/backends/opencl.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/backends/x86.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/backends/xpu.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/cblas.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/ccache.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/configure.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/coveralls.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/coverallsGcovJsons.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/external/arm_dnn_library.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/external/dirent.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/external/eigen.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/external/flatbuffers.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/external/gflags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/external/glog.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/external/gtest.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/external/libxsmm.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/external/mkldnn.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/external/mklml.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/external/openblas.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/external/protobuf.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/external/pybind11.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/external/python.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/external/xbyak.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/external/xxhash.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/findar.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/flags.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/functions.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/generic.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/lite.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/make_resource.py" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/operators.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/os/android.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/os/armlinux.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/os/armmacos.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/os/common.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/os/ios.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/os/qnx.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/os/windows.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/package.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/postproject.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/python_module.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/simd.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/system.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/util.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/cmake/version.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/api_reference/cv.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/api_reference/cxx_api_doc.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/api_reference/java_api_doc.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/api_reference/python_api/CxxConfig.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/api_reference/python_api/CxxPredictor.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/api_reference/python_api/LightPredictor.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/api_reference/python_api/MobileConfig.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/api_reference/python_api/PowerMode.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/api_reference/python_api/Tensor.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/api_reference/python_api/TypePlace.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/api_reference/python_api/create_paddle_predictor.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/api_reference/python_api/opt.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/api_reference/python_api_doc.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/conf.py" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/demo_guides/android_app_demo.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/demo_guides/android_nnapi.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/demo_guides/arm_cpu.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/demo_guides/cambricon_mlu.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/demo_guides/cpp_train_demo.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/demo_guides/eeasytech_npu.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/demo_guides/huawei_ascend_npu.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/demo_guides/huawei_kirin_npu.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/demo_guides/imagination_nna.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/demo_guides/intel_openvino.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/demo_guides/ios_app_demo.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/demo_guides/kunlunxin_xpu.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/demo_guides/kunlunxin_xtcl.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/demo_guides/linux_arm_demo.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/demo_guides/mediatek_apu.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/demo_guides/metal.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/demo_guides/opencl.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/demo_guides/qualcomm_qnn.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/demo_guides/verisilicon_timvx.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/demo_guides/x86.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/develop_guides/add_hardware.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/develop_guides/add_layout.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/develop_guides/add_new_pass.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/develop_guides/add_operation.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/develop_guides/add_unit_test.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/develop_guides/architecture-intro.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/develop_guides/for-developer.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/develop_guides/nnadapter.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/guide/introduction.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/guide/roadmap.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/index.rst" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/introduction/architecture.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/introduction/roadmap.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/introduction/tech_highlights.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/introduction/training_to_deployment.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/make.bat" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/performance/benchmark.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/performance/benchmark_tools.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/performance/best_practices.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/performance/gpu.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/quick_start/faq.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/quick_start/quick_run_demo.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/quick_start/release_lib.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/quick_start/support_hardware.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/quick_start/support_model_list.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/quick_start/support_operation_list.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/quick_start/tutorial.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/requirements.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/arm_linux_compile_arm_linux.rst" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/compile_env.rst" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/compile_options.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/docker_env.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/include/download_code.rst" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/include/multi_device_support/nnadapter_support_android_nnapi.rst" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/include/multi_device_support/nnadapter_support_eeasytech_npu.rst" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/include/multi_device_support/nnadapter_support_huawei_ascend_npu.rst" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/include/multi_device_support/nnadapter_support_huawei_kirin_npu.rst" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/include/multi_device_support/nnadapter_support_imagination_nna.rst" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/include/multi_device_support/nnadapter_support_introduction.rst" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/include/multi_device_support/nnadapter_support_kunlunxin_xpu.rst" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/include/multi_device_support/nnadapter_support_mediatek_apu.rst" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/include/multi_device_support/nnadapter_support_verisilicon_timvx.rst" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/include/multi_device_support/opencl.rst" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/library.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/library_tailoring.rst" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/linux_x86_compile_android.rst" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/linux_x86_compile_arm_linux.rst" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/linux_x86_compile_linux_x86.rst" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/macos_compile_android.rst" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/macos_compile_ios.rst" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/macos_compile_macos.rst" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/v2.3_compile.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/source_compile/windows_compile_windows.rst" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/user_guides/cpp_demo.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/user_guides/development_overview.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/user_guides/java_demo.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/user_guides/model_optimize_tool.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/user_guides/model_visualization.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/user_guides/opt/opt_bin.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/user_guides/opt/opt_python.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/user_guides/opt/x2paddle&amp;opt.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/user_guides/profiler.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/user_guides/python_demo.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/user_guides/quant/quant_post_dynamic.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/user_guides/quant/quant_post_dynamic_demo.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/user_guides/quant/quant_post_static.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/user_guides/quant_aware.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/user_guides/sparse.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/docs/user_guides/x2paddle.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/android/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/android/jni/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/android/jni/native/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/android/jni/src/com/baidu/paddle/lite/ConfigBase.java" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/android/jni/src/com/baidu/paddle/lite/CxxConfig.java" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/android/jni/src/com/baidu/paddle/lite/MobileConfig.java" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/android/jni/src/com/baidu/paddle/lite/PaddleLiteInitializer.java" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/android/jni/src/com/baidu/paddle/lite/PaddlePredictor.java" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/android/jni/src/com/baidu/paddle/lite/Place.java" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/android/jni/src/com/baidu/paddle/lite/PowerMode.java" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/android/jni/src/com/baidu/paddle/lite/Tensor.java" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/android/jni/test/com/baidu/paddle/lite/PaddlePredictorTest.java" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/python/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/python/__init__.py" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/python/setup.py.in" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/python/setup_mac.py.in" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/test/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/tools/benchmark/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/tools/benchmark/precision_evaluation/imagenet_image_classification/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/api/tools/benchmark/precision_evaluation/imagenet_image_classification/config.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/README.md" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/cmake/platforms/linux/aarch64.toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/cmake/platforms/linux/armhf.toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/cmake/platforms/qnx/aarch64.toolchain.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/scripts/build_android.sh" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/scripts/build_linux.sh" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/scripts/build_qnx.sh" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/scripts/codegen/gen_relu.sh" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/src/operators/relu/fp32_neon.cc.in" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/arm_dnn_library/tools/codegen.py" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/arm/math/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/host/math/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/ActivationKernel.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/BatchNormKernel.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/BatchNormRelu.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/BilinearInterp.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/BoxCoder.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/BufferToTexture.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/BufferToTextureArrayKernel.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/Cast.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/Common.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/Compare.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/ConcatKernel.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/ConvAddBNReluKernel.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/ConvAddReluMetal.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/ConvBNReluKernel.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/ConvTransposeKernel.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/DropoutKernel.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/Elementwise.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/ElementwiseAddActKernel.inc.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/ElementwiseAddActKernel.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/FetchKernel.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/GridSampler.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/InstanceNorm.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/InstanceNormRelu.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/Kernels.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/LrnKernel.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/Macro.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/MaxKernel.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/Mul.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/NMSFetchResultKernel.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/NearestInterpKernel.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/Pad2d.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/PixelShuffle.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/PoolKernel.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/PreluKernel.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/PriorBoxKernel.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/Reduce.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/ReshapeKernel.inc.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/ResizeBilinear.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/Scale.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/ScaleKernel.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/Shape.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/ShuffleChannel.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/SliceKernel.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/Softmax.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/Split.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/Tanh.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/TransposeKernel.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/metal/metal_kernel/texture/YoloBoxKernel.metal" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/core/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/amlogic_npu/dependencies.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/android_nnapi/dependencies.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/cambricon_mlu/dependencies.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/configuration.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/eeasytech_npu/dependencies.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/dependencies.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/fake_device/fake_ddk/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/google_xnnpack/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/google_xnnpack/dependencies.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_ascend_npu/dependencies.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/huawei_kirin_npu/dependencies.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/imagination_nna/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/imagination_nna/dependencies.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/intel_openvino/dependencies.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/kunlunxin_xtcl/dependencies.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/mediatek_apu/dependencies.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/nvidia_tensorrt/dependencies.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/rockchip_npu/dependencies.cmake" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/Paddle-Lite/lite/backends/nnadapter/nnadapter/src/driver/verisilicon_timvx/dependencies.cmake" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

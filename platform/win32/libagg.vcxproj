@@ -1,0 +1,1500 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libagg</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF0D79A4}</ProjectGuid>
+    <RootNamespace>libagg</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAGG;AGG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAGG;AGG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAGG;AGG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAGG;AGG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAGG;AGG_STATICLIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAGG;AGG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAGG;AGG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAGG;AGG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAGG;AGG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAGG;AGG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAGG;AGG_STATICLIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAGG;AGG_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/agg2d/agg2d.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/aa_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/aa_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/agg2d_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/alpha_gradient.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/alpha_mask.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/alpha_mask2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/alpha_mask3.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/bezier_div.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/blend_color.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/blur.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/bspline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/circles.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/component_rendering.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/compositing.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/compositing2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/conv_contour.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/conv_dash_marker.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/conv_stroke.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/distortions.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/flash_rasterizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/flash_rasterizer2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/freetype_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/gamma_correction.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/gamma_ctrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/gamma_tuner.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/gouraud.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/gouraud_mesh.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/gpc_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/gradient_focal.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/gradients.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/gradients_contour.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/graph_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/idea.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/image1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/image_alpha.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/image_filters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/image_filters2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/image_fltr_graph.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/image_perspective.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/image_resample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/image_transforms.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/interactive_polygon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/line_patterns.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/line_patterns_clip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/line_thickness.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/lion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/lion_lens.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/lion_outline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/make_arrows.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/make_gb_poly.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/mol_view.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/multi_clip.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/parse_lion.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/pattern_fill.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/pattern_perspective.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/pattern_resample.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/perspective.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/polymorphic_renderer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/raster_text.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/rasterizer_compound.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/rasterizers.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/rasterizers2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/rounded_rect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/scanline_boolean.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/scanline_boolean2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/simple_blur.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/svg_viewer/agg_svg_parser.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/svg_viewer/agg_svg_path_renderer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/svg_viewer/agg_svg_path_tokenizer.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/svg_viewer/svg_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/trans_curve1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/trans_curve1_ft.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/trans_curve2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/trans_curve2_ft.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/trans_polar.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/truetype_test.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/pure_api/StdAfx.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/pure_api/pure_api.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/font_freetype/agg_font_freetype.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/font_freetype/agg_font_freetype2.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/font_win32_tt/agg_font_win32_tt.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/gpc/gpc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/myapp/agg2d_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/myapp/my_demo.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_arc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_arrowhead.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_bezier_arc.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_bspline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_color_rgba.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_curves.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_embedded_raster_fonts.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_gsv_text.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_image_filters.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_line_aa_basics.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_line_profile_aa.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_rounded_rect.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_sqrt_tables.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_trans_affine.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_trans_double_path.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_trans_single_path.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_trans_warp_magnifier.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_vcgen_bspline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_vcgen_contour.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_vcgen_dash.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_vcgen_markers_term.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_vcgen_smooth_poly1.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_vcgen_stroke.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_vpgen_clip_polygon.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_vpgen_clip_polyline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/agg_vpgen_segmentator.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/ctrl/agg_bezier_ctrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/ctrl/agg_cbox_ctrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/ctrl/agg_gamma_ctrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/ctrl/agg_gamma_spline.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/ctrl/agg_polygon_ctrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/ctrl/agg_rbox_ctrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/ctrl/agg_scale_ctrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/ctrl/agg_slider_ctrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/ctrl/agg_spline_ctrl.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/platform/AmigaOS/agg_platform_support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/platform/BeOS/agg_platform_support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/platform/X11/agg_platform_support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/platform/mac/agg_mac_pmap.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/platform/mac/agg_platform_support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/platform/nano-X/agg_platform_support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/platform/sdl/agg_platform_support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/platform/sdl2/agg_platform_support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/platform/win32/agg_platform_support.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/src/platform/win32/agg_win32_bmp.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-src/test_package/test_package.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-web/tips/gradients_tutorial/gradients.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/agg/agg-web/tips/win_ce/agg_test.cpp" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/agg2d/agg2d.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/examples/interactive_polygon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/examples/pixel_formats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/examples/svg_viewer/agg_svg_exception.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/examples/svg_viewer/agg_svg_parser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/examples/svg_viewer/agg_svg_path_renderer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/examples/svg_viewer/agg_svg_path_tokenizer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/pure_api/StdAfx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/pure_api/pure_api.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/pure_api/resource.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/font_freetype/agg_font_freetype.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/font_freetype/agg_font_freetype2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/font_win32_tt/agg_font_win32_tt.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/gpc/gpc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_alpha_mask_u8.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_arc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_array.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_arrowhead.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_basics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_bezier_arc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_bitset_iterator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_blur.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_bounding_rect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_bspline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_clip_liang_barsky.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_color_gray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_color_rgba.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_conv_adaptor_vcgen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_conv_adaptor_vpgen.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_conv_bspline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_conv_clip_polygon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_conv_clip_polyline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_conv_close_polygon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_conv_concat.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_conv_contour.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_conv_curve.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_conv_dash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_conv_gpc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_conv_marker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_conv_marker_adaptor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_conv_segmentator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_conv_shorten_path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_conv_smooth_poly1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_conv_stroke.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_conv_transform.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_conv_unclose_polygon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_curves.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_dda_line.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_ellipse.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_ellipse_bresenham.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_embedded_raster_fonts.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_font_cache_manager.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_font_cache_manager2.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_gamma_functions.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_gamma_lut.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_glyph_raster_bin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_gradient_lut.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_gsv_text.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_image_accessors.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_image_filters.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_line_aa_basics.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_math.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_math_stroke.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_path_length.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_path_storage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_path_storage_integer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_pattern_filters_rgba.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_pixfmt_amask_adaptor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_pixfmt_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_pixfmt_gray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_pixfmt_rgb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_pixfmt_rgb_packed.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_pixfmt_rgba.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_pixfmt_transposer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_rasterizer_cells_aa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_rasterizer_compound_aa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_rasterizer_outline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_rasterizer_outline_aa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_rasterizer_scanline_aa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_rasterizer_scanline_aa_nogamma.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_rasterizer_sl_clip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_renderer_base.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_renderer_markers.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_renderer_mclip.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_renderer_outline_aa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_renderer_outline_image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_renderer_primitives.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_renderer_raster_text.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_renderer_scanline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_rendering_buffer.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_rendering_buffer_dynarow.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_rounded_rect.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_scanline_bin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_scanline_boolean_algebra.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_scanline_p.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_scanline_storage_aa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_scanline_storage_bin.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_scanline_u.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_shorten_path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_simul_eq.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_span_allocator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_span_converter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_span_gouraud.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_span_gouraud_gray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_span_gouraud_rgba.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_span_gradient.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_span_gradient_alpha.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_span_gradient_contour.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_span_gradient_image.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_span_image_filter.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_span_image_filter_gray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_span_image_filter_rgb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_span_image_filter_rgba.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_span_interpolator_adaptor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_span_interpolator_linear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_span_interpolator_persp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_span_interpolator_trans.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_span_pattern_gray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_span_pattern_rgb.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_span_pattern_rgba.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_span_solid.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_span_subdiv_adaptor.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_trans_affine.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_trans_bilinear.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_trans_double_path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_trans_perspective.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_trans_single_path.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_trans_viewport.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_trans_warp_magnifier.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_vcgen_bspline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_vcgen_contour.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_vcgen_dash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_vcgen_markers_term.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_vcgen_smooth_poly1.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_vcgen_stroke.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_vcgen_vertex_sequence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_vertex_sequence.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_vpgen_clip_polygon.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_vpgen_clip_polyline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/agg_vpgen_segmentator.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/ctrl/agg_bezier_ctrl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/ctrl/agg_cbox_ctrl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/ctrl/agg_ctrl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/ctrl/agg_gamma_ctrl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/ctrl/agg_gamma_spline.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/ctrl/agg_polygon_ctrl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/ctrl/agg_rbox_ctrl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/ctrl/agg_scale_ctrl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/ctrl/agg_slider_ctrl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/ctrl/agg_spline_ctrl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/platform/agg_platform_support.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/platform/mac/agg_mac_pmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/platform/win32/agg_win32_bmp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/util/agg_color_conv.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/util/agg_color_conv_rgb16.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/agg/agg-src/include/util/agg_color_conv_rgb8.h" />
+    <Font Include="../../thirdparty/owemdjee/agg/agg-src/examples/SDL2/timesi.ttf" />
+    <Font Include="../../thirdparty/owemdjee/agg/agg-src/examples/X11/timesi.ttf" />
+    <Font Include="../../thirdparty/owemdjee/agg/agg-src/examples/nano-X/timesi.ttf" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-doc/basic_renderers/pixfmt_rgb24.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-doc/basic_renderers/rendering_buffer1.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-doc/basic_renderers/rendering_buffer2.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-doc/basic_renderers/rendering_buffer3.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-doc/basic_renderers/rendering_buffer4.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-doc/basic_renderers/spectrum.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-doc/basic_renderers/spectrum_amask1.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-doc/basic_renderers/spectrum_amask2.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-doc/introduction/aliased_pix_accuracy.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-doc/introduction/aliased_subpix_accuracy.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-doc/introduction/anti_aliased.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-doc/introduction/cie_1931.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-doc/introduction/line_thickness.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-doc/introduction/qual_gdip_agg.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-doc/introduction/stereo_enlarged.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-doc/introduction/stereo_small.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-doc/introduction/subpixel_accuracy1.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-doc/introduction/subpixel_accuracy2.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-doc/introduction/subpixel_bresenham.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-doc/introduction/typical_scheme.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-doc/link.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-doc/scanlines/scanline_p.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-doc/scanlines/scanline_u.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-src/examples/SDL2/1.bmp" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-src/examples/SDL2/2.bmp" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-src/examples/SDL2/3.bmp" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-src/examples/SDL2/4.bmp" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-src/examples/SDL2/5.bmp" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-src/examples/SDL2/6.bmp" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-src/examples/SDL2/7.bmp" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-src/examples/SDL2/8.bmp" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-src/examples/SDL2/9.bmp" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-src/examples/SDL2/agg.bmp" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-src/examples/SDL2/compositing.bmp" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-src/examples/SDL2/spheres.bmp" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-src/examples/art/agg.bmp" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-src/examples/art/compositing.bmp" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-src/examples/art/spheres.bmp" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/pure_api/pure_api.ico" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/pure_api/small.ico" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/agdoc/test_project/output/aqua.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/agdoc/test_project/output/download.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/agdoc/test_project/output/image_on_the_left.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/agdoc/test_project/output/image_on_the_right.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/agdoc/test_project/output/inline_image.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/agdoc/test_project/output/link2.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/agg_button.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/agg_logo.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/agg_title.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/articles/architecture.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/articles/example_pipeline1.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/articles/example_pipeline2.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/articles/example_pipeline3.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/articles/example_pipeline31.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/articles/example_pipeline4.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/articles/example_pipeline5.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/articles/example_pipeline6.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/articles/example_pipeline7.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/articles/line_patterns.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/articles/subpixel_accuracy2.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/creative_docs.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/customers/context_free.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/customers/enthought.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/customers/karto.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/customers/ksvg.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/customers/ltsbutton.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/customers/nuonsoft_small.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/customers/opac.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/customers/pdftron.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/customers/real_world.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/customers/rebol.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/customers/runrev.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/customers/vcf.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/customers/yellowbites.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/aa_demo.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/aa_demo_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/aa_test.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/aa_test_s.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/alpha_gradient.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/alpha_gradient_s.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/alpha_mask.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/alpha_mask2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/alpha_mask2_s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/alpha_mask3.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/alpha_mask3_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/alpha_mask_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/bezier_div.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/bezier_div_s.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/blur.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/blur_s.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/circles.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/circles_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/component_rendering.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/component_rendering_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/compositing.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/compositing2.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/compositing2_s.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/compositing_s.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/conv_contour.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/conv_contour_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/conv_dash_marker.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/conv_dash_marker_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/conv_stroke.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/conv_stroke_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/distortions.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/distortions_s.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/examples.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/examples_s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/flash_rasterizer.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/flash_rasterizer2.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/flash_rasterizer2_s.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/flash_rasterizer_s.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/freetype_test.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/freetype_test_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/gamma_correction.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/gamma_correction_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/gamma_ctrl.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/gamma_ctrl_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/gamma_tuner.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/gamma_tuner_s.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/gdip_curves.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/gouraud.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/gouraud_mesh.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/gouraud_mesh_s.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/gouraud_s.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/gpc_test.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/gpc_test_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/gradient_focal.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/gradient_focal_s.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/gradients.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/gradients_s.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/graph_test.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/graph_test_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/idea.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/idea_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/image1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/image1_s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/image_alpha.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/image_alpha_s.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/image_filters.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/image_filters2.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/image_filters2_s.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/image_filters_s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/image_fltr_graph.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/image_fltr_graph_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/image_perspective.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/image_perspective_s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/image_resample.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/image_resample_s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/image_transforms.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/image_transforms_s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/line_patterns.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/line_patterns_clip.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/line_patterns_clip_s.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/line_patterns_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/lion.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/lion_lens.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/lion_lens_black_hole.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/lion_lens_cyclop.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/lion_lens_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/lion_lens_sad.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/lion_outline.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/lion_outline_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/lion_s.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/mol_view.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/mol_view_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/multi_clip.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/multi_clip_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/pattern_fill.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/pattern_fill_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/pattern_perspective.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/pattern_perspective_s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/pattern_resample.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/pattern_resample_s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/perspective.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/perspective_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/polymorphic_renderer.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/polymorphic_renderer_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/raster_text.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/raster_text_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/rasterizer_compound.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/rasterizer_compound_s.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/rasterizers.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/rasterizers2.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/rasterizers2_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/rasterizers_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/rounded_rect.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/rounded_rect_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/scanline_boolean.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/scanline_boolean2.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/scanline_boolean2_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/scanline_boolean_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/simple_blur.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/simple_blur_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/trans_curve1.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/trans_curve1_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/trans_curve2.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/trans_curve2_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/trans_polar.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/demo/trans_polar_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/dl_amigaos.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/dl_irix64.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/dl_linux.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/dl_sunos.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/dl_win32.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/doc/basic_renderers/pixfmt_rgb24.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/doc/basic_renderers/rendering_buffer1.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/doc/basic_renderers/rendering_buffer2.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/doc/basic_renderers/rendering_buffer3.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/doc/basic_renderers/rendering_buffer4.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/doc/basic_renderers/spectrum.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/doc/basic_renderers/spectrum_amask1.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/doc/basic_renderers/spectrum_amask2.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/doc/introduction/aliased_pix_accuracy.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/doc/introduction/aliased_subpix_accuracy.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/doc/introduction/anti_aliased.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/doc/introduction/cie_1931.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/doc/introduction/line_thickness.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/doc/introduction/qual_gdip_agg.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/doc/introduction/stereo_enlarged.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/doc/introduction/stereo_small.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/doc/introduction/subpixel_accuracy1.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/doc/introduction/subpixel_accuracy2.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/doc/introduction/subpixel_bresenham.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/doc/introduction/typical_scheme.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/doc/scanlines/scanline_p.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/doc/scanlines/scanline_u.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/download.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/historic.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/img/agg_logo_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/img/lion2s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/img/lion3s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/link.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/links/bm4.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/links/boost.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/links/freetype.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/links/pbourke.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/links/quasimondo.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/links/svg.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/links/vector_graphics.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/mcseem/mcseem.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/mp_menu_ptr.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/adaptive_bezier/bezier01.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/adaptive_bezier/bezier02.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/adaptive_bezier/bezier03.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/adaptive_bezier/bezier04.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/adaptive_bezier/bezier05.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/adaptive_bezier/bezier06.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/adaptive_bezier/bezier07.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/adaptive_bezier/bezier08.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/adaptive_bezier/bezier09.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/adaptive_bezier/bezier10.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/adaptive_bezier/bezier11.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/adaptive_bezier/bezier12.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/adaptive_bezier/bezier13.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/adaptive_bezier/bezier14.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/adaptive_bezier/bezier15.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/bezier_interpolation/bezier_interpolation.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/bezier_interpolation/bezier_interpolation_s1.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/bezier_interpolation/bezier_interpolation_s2.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/bezier_interpolation/bezier_interpolation_s3.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/bezier_interpolation/bezier_interpolation_s4.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/bezier_interpolation/bezier_lion1.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/bezier_interpolation/bezier_lion2.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/bezier_interpolation/bezier_lion3.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/bezier_interpolation/bezier_lion4.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/bezier_interpolation/bezier_self_intersecting1.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/bezier_interpolation/bezier_self_intersecting2.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/bezier_interpolation/bezier_self_intersecting3.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/bezier_interpolation/spline_polygon1.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/bezier_interpolation/spline_polygon2.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/adobe_text_rendering.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/compare_text.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/compare_text_zoomed.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/font_focus01.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/gamma_1020.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/gamma_effect.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/jeff_text_normal.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/jeff_text_zoomed.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/linux_screenshot01.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/linux_screenshot01_fragment.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/linux_screenshot01_fragment_g2.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/linux_screenshot02_fragment.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/ms_text_same_height.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/msword_1line.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/msword_1third_offset.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/msword_gray_mask.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/msword_iiiiiiii.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/msword_text_rendering.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/sample_arial_01.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/sample_arial_02.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/sample_arial_03.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/sample_arial_1tenth_int.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/sample_arial_1tenth_shift.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/sample_georgia_01.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/sample_georgia_02.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/sample_georgia_03_distorted.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/sample_tahoma_01_distorted.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/text_ft_antigrain.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/text_ft_autohint_g15.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/text_ft_unhinted_g15.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/text_tt_hinting_13pix.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/text_tt_hinting_arial_100x.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/text_tt_hinting_g1.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/text_tt_hinting_g15.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/text_tt_hinting_times_16x.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/text_tt_hinting_times_1x.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/text_tt_hinting_wordpad.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/truetype_ft_lcd.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/truetype_ft_lcd_bold.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/truetype_ft_lcd_bold1.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/white_pixels.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/win_dpi_120percent.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/win_dpi_121percent.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/xp_vista_default_font.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/zoom_lcd_gray.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/zoom_lcd_lcd.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/gamma_correction/gamma.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/gamma_correction/gamma1.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/gamma_correction/gamma2.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/gamma_correction/gamma3.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/gamma_correction/gamma4.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/gamma_correction/gamma5.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/gamma_correction/gamma_lion1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/gamma_correction/gamma_lion1e.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/gamma_correction/gamma_lion2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/gamma_correction/gamma_lion2e.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/gamma_correction/gamma_lion3.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/research/gamma_correction/gamma_lion3e.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/agg0_01.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/agg0_01s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/agg1_01.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/agg1_01s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/agg1_03.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/agg1_03s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/agg1_04.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/agg1_04s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/agg1_06.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/agg1_06s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/agg2_01.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/agg2_01s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/agg2_03.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/agg2_03s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/agg2_04.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/agg2_04s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/agg2_05.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/agg2_05s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/compare_to_xara.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/compare_to_xara_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/distortions.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/distortions_s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/gradients.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/gradients_s.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/image_rotation1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/image_rotation1_s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/image_rotation_bilinear.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/image_rotation_initial.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/image_rotation_spline16.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/lion1.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/lion1s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/lion2.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/lion2s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/lion3.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/lion3s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/perspective1.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/perspective1_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/perspective2.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/perspective2_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/perspective4.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/perspective4_s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/perspective5.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/perspective5_s.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/pictograms.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/pictograms_s.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/scalable_toolbar.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/scalable_toolbar_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/sketcher1.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/sketcher1_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/sketcher2.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/sketcher2_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/tiger.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/tiger_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/xenia4.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/xenia4_s.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/spheres.bmp" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/sponsors/epsitec.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/sponsors/lib_sys.jpg" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/stuff/tiger_div.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/stuff/tiger_inc.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/svg/adobe_vs_agg.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/svg/b8.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/svg/cowboy.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/svg/longhorn.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/svg/picasso.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/svg/xenia4_animated.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/tips/gradients_tutorial/gradients1.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/tips/gradients_tutorial/gradients2.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/tips/gradients_tutorial/gradients3.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/tips/gradients_tutorial/gradients4.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/tips/gradients_tutorial/gradients5.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/tips/gradients_tutorial/gradients6.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/tips/image_plg/image_plg.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/tips/line_alignment/conv_order.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/tips/line_alignment/rect1.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/tips/line_alignment/rect2.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/tips/line_alignment/rect3.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/tips/line_alignment/rect4.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/tips/line_alignment/rect5.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/tips/line_alignment/rect6.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/tips/line_alignment/rect61.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/tips/line_alignment/rect7.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/tips/line_alignment/rect8.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/tips/square_color_interpolation/agg_color_interpolation.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/tips/square_color_interpolation/xarax_color_control.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/tips/win_ce/screenshot.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/tips/win_ce/screenshot_s.png" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/tips/win_glyph/quality.gif" />
+    <Image Include="../../thirdparty/owemdjee/agg/agg-web/tips/win_glyph/win_glyph.gif" />
+    <ResourceCompile Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/pure_api/pure_api.rc" />
+    <Text Include="../../thirdparty/owemdjee/agg/README.md" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/agg.styles.css" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/basic_renderers/basic_renderers.agdoc.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/introduction/introduction.agdoc.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - A Simple SVG Viewer.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - AGDoc Formatter.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - About the Project.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - Adaptive Subdivision of Bezier Curves.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - Basic Renderers.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - Color Interpolation.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - Compiling AGG under Microsoft eMbedded VC 4.0.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - Demo Examples.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - Download.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - Gamma Correction.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - Image Parallelogram Transformations.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - Interpolation with Bezier Curves.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - Introduction.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - News and History.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - Scanlines and Scanline Renderers.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - Screenshots.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - Texts Rasterization Exposures.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - The License.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - The Mailing List.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - The Problem of Line Alignment.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - Users and Customers.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - Using WinAPI to Render Text.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - Version 2.1 Release Notes.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - Version 2.2 Release Notes.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - Version 2.3 Release Notes.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - Version 2.4 Release Notes.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry - Working with Gradients.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/Anti-Grain Geometry.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/GPC General Polygon Clipper library from The University of Manchester.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/pdf/The cl-aa algorithm.pdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-doc/scanlines/scanlines.agdoc.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/AUTHORS" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/ChangeLog" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/Makefile.AmigaOS" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/Makefile.in.BeOS" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/Makefile.in.CYGWIN_NT-5.0" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/Makefile.in.CYGWIN_NT-5.1" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/Makefile.in.Darwin" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/Makefile.in.Darwin.SDL" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/Makefile.in.Darwin.SDL2" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/Makefile.in.Darwin.nano-X" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/Makefile.in.IRIX64" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/Makefile.in.Linux" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/Makefile.in.Linux.SDL" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/Makefile.in.Linux.SDL2" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/Makefile.in.Linux.nano-X" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/Makefile.in.MINGW32_NT-5.0" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/Makefile.in.MINGW32_NT-5.1" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/Makefile.in.SunOS" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/NEWS" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/README" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/agg2d/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/autogen.sh" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/bin/AggConfig.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/bin/AggConfigOutBuild.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/bin/FindAgg.cmake" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/bin/FindEXPAT.cmake" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/bin/FindFreetype.cmake" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/bin/UseAgg.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/cmake/CPackConfig.cmake" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/cmake/agg-config-version.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/cmake/agg-config.cmake.in" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/cmake_install.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/conanfile.py" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/conanfile.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/configure.ac" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/doc/AggCP-Gradients1_readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/BeOS/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/BeOS/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/SDL2/1.sdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/SDL2/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/SDL2/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/SDL2/shapes.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/SDL2/tiger.svg" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/X11/1.sdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/X11/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/X11/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/X11/shapes.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/X11/tiger.svg" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/art/shapes.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/macosx_carbon/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/macosx_carbon/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/macosx_sdl/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/macosx_sdl/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/nano-X/1.sdf" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/nano-X/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/nano-X/readme.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/nano-X/shapes.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/nano-X/tiger.svg" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/aa_demo/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/aa_demo/aa_demo.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/aa_test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/aa_test/aa_test.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/agg.props" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/agg2d_demo/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/alpha_gradient/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/alpha_gradient/alpha_gradient.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/alpha_mask/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/alpha_mask/alpha_mask.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/alpha_mask2/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/alpha_mask2/alpha_mask2.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/alpha_mask3/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/alpha_mask3/alpha_mask3.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/bezier_div/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/bezier_div/bezier_div.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/blend_color/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/blend_color/blend_color.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/blur/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/blur/blur.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/bspline/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/bspline/bspline.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/circles/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/circles/circles.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/component_rendering/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/component_rendering/component_rendering.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/compositing/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/compositing/compositing.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/compositing/readme" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/compositing2/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/compositing2/compositing2.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/conv_contour/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/conv_contour/conv_contour.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/conv_dash_marker/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/conv_dash_marker/conv_dash_marker.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/conv_stroke/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/conv_stroke/conv_stroke.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/distortions/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/distortions/distortions.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/distortions/readme" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/examples.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/flash_rasterizer/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/flash_rasterizer/flash_rasterizer.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/flash_rasterizer2/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/flash_rasterizer2/flash_rasterizer2.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/freetype_test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/freetype_test/freetype_test.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/freetype_test/readme" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/gamma_correction/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/gamma_correction/gamma_correction.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/gamma_ctrl/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/gamma_ctrl/gamma_ctrl.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/gamma_tuner/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/gamma_tuner/gamma_tuner.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/gouraud/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/gouraud/gouraud.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/gouraud_mesh/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/gouraud_mesh/gouraud_mesh.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/gpc_test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/gpc_test/gpc_test.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/gradient_focal/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/gradient_focal/gradient_focal.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/gradients/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/gradients/gradients.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/graph_test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/graph_test/graph_test.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/idea/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/idea/idea.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/image1/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/image1/image1.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/image1/readme" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/image_alpha/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/image_alpha/image_alpha.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/image_alpha/readme" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/image_filters/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/image_filters/image_filters.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/image_filters/readme" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/image_filters2/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/image_filters2/image_filters2.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/image_filters2/readme" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/image_fltr_graph/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/image_fltr_graph/image_fltr_graph.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/image_perspective/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/image_perspective/image_perspective.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/image_perspective/readme" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/image_resample/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/image_resample/image_resample.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/image_resample/readme" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/image_transforms/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/image_transforms/image_transforms.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/image_transforms/readme!" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/line_patterns/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/line_patterns/line_patterns.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/line_patterns_clip/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/line_patterns_clip/line_patterns_clip.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/lion/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/lion/lion.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/lion_lens/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/lion_lens/lion_lens.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/lion_outline/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/lion_outline/lion_outline.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/mol_view/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/mol_view/mol_view.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/mol_view/readme" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/multi_clip/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/multi_clip/multi_clip.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/pattern_fill/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/pattern_fill/pattern_fill.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/pattern_perspective/pattern_perspective.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/pattern_resample/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/pattern_resample/pattern_resample.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/perspective/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/perspective/perspective.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/polymorphic_renderer/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/polymorphic_renderer/polymorphic_renderer.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/pure_api/pure_api.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/raster_text/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/raster_text/raster_text.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/rasterizer_compound/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/rasterizer_compound/rasterizer_compound.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/rasterizers/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/rasterizers/rasterizers.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/rasterizers2/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/rasterizers2/rasterizers2.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/rounded_rect/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/rounded_rect/rounded_rect.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/scanline_boolean/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/scanline_boolean/scanline_boolean.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/scanline_boolean2/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/scanline_boolean2/scanline_boolean2.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/simple_blur/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/simple_blur/simple_blur.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/svg_test/svg_test.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/trans_curve1/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/trans_curve1/trans_curve1.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/trans_curve2/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/trans_curve2/trans_curve2.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/trans_polar/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/trans_polar/trans_polar.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/truetype_test/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api/truetype_test/truetype_test.dsw" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api_dmc/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/examples/win32_api_dmc/readme" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/font_freetype/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/font_freetype/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/font_win32_tt/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/font_win32_tt/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/gpc/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/gpc/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/gpc/VERSIONS.TXT" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/gpc/copying.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/include/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/include/ctrl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/include/platform/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/include/util/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/install" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/libagg.m4" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/libagg.pc.in" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/myapp/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/myapp/CMakeLists.txt.in" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/myapp/myproject.cmake" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/src/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/src/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/src/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/src/ctrl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/src/ctrl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/src/platform/AmigaOS/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/src/platform/BeOS/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/src/platform/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/src/platform/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/src/platform/X11/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/src/platform/X11/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/src/platform/mac/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/src/platform/mac/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/src/platform/sdl/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/src/platform/sdl/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/src/platform/win32/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/src/platform/win32/Makefile.am" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/test_package/CMakeLists.txt" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-src/test_package/conanfile.py" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/font_freetype/agg_font_freetype.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/font_freetype/agg_font_freetype.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/font_win32_tt/agg_font_win32_tt.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/font_win32_tt/agg_font_win32_tt.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_alpha_mask_u8.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_arc.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_array.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_arrowhead.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_basics.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_bezier_arc.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_bitset_iterator.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_blur.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_bounding_rect.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_bspline.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_clip_liang_barsky.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_color_gray.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_color_rgba.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_config.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_conv_adaptor_vcgen.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_conv_adaptor_vpgen.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_conv_bspline.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_conv_clip_polygon.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_conv_clip_polyline.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_conv_close_polygon.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_conv_concat.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_conv_contour.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_conv_curve.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_conv_dash.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_conv_gpc.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_conv_marker.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_conv_marker_adaptor.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_conv_segmentator.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_conv_shorten_path.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_conv_smooth_poly1.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_conv_stroke.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_conv_transform.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_conv_unclose_polygon.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_curves.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_dda_line.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_ellipse.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_ellipse_bresenham.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_embedded_raster_fonts.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_font_cache_manager.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_gamma_functions.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_gamma_lut.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_glyph_raster_bin.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_gradient_lut.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_gsv_text.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_image_accessors.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_image_filters.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_line_aa_basics.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_math.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_math_stroke.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_path_length.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_path_storage.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_path_storage_integer.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_pattern_filters_rgba.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_pixfmt_amask_adaptor.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_pixfmt_gray.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_pixfmt_rgb.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_pixfmt_rgb_packed.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_pixfmt_rgba.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_pixfmt_transposer.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_rasterizer_cells_aa.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_rasterizer_compound_aa.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_rasterizer_outline.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_rasterizer_outline_aa.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_rasterizer_scanline_aa.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_rasterizer_sl_clip.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_renderer_base.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_renderer_markers.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_renderer_mclip.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_renderer_outline_aa.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_renderer_outline_image.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_renderer_primitives.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_renderer_raster_text.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_renderer_scanline.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_rendering_buffer.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_rendering_buffer_dynarow.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_rounded_rect.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_scanline_bin.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_scanline_boolean_algebra.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_scanline_p.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_scanline_storage_aa.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_scanline_storage_bin.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_scanline_u.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_shorten_path.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_simul_eq.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_span_allocator.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_span_converter.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_span_gouraud.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_span_gouraud_gray.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_span_gouraud_rgba.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_span_gradient.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_span_gradient_alpha.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_span_image_filter.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_span_image_filter_gray.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_span_image_filter_rgb.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_span_image_filter_rgba.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_span_interpolator_adaptor.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_span_interpolator_linear.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_span_interpolator_persp.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_span_interpolator_trans.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_span_pattern_gray.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_span_pattern_rgb.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_span_pattern_rgba.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_span_solid.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_span_subdiv_adaptor.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_trans_affine.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_trans_bilinear.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_trans_double_path.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_trans_perspective.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_trans_single_path.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_trans_viewport.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_trans_warp_magnifier.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_vcgen_bspline.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_vcgen_contour.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_vcgen_dash.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_vcgen_markers_term.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_vcgen_smooth_poly1.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_vcgen_stroke.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_vcgen_vertex_sequence.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_vertex_sequence.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_vpgen_clip_polygon.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_vpgen_clip_polyline.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/include/agg_vpgen_segmentator.h.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_arc.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_arrowhead.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_bezier_arc.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_bspline.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_curves.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_gsv_text.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_image_filters.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_line_aa_basics.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_line_profile_aa.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_rounded_rect.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_sqrt_tables.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_trans_affine.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_trans_double_path.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_trans_single_path.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_trans_warp_magnifier.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_vcgen_bspline.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_vcgen_contour.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_vcgen_dash.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_vcgen_markers_term.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_vcgen_smooth_poly1.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_vcgen_stroke.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_vpgen_clip_polygon.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_vpgen_clip_polyline.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/__code/src/agg_vpgen_segmentator.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/about/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/agdoc/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/agdoc/test.agdoc.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/agdoc/test_project/output/test.agdoc.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/agdoc/test_project/output/test.styles.css" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/agg.styles.css" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/articles/ddj1.agdoc.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/articles/graphics/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/customers/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/cvs/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/aa_demo.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/aa_test.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/alpha_gradient.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/alpha_mask.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/alpha_mask2.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/alpha_mask3.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/bezier_div.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/blend_color.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/blur.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/bspline.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/circles.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/component_rendering.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/compositing.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/compositing2.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/conv_contour.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/conv_dash_marker.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/conv_stroke.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/distortions.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/flash_rasterizer.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/flash_rasterizer2.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/freetype_test.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/gamma_correction.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/gamma_ctrl.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/gamma_tuner.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/gouraud.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/gouraud_mesh.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/gpc_test.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/gradient_focal.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/gradients.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/graph_test.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/idea.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/ideaDA.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/image1.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/image_alpha.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/image_filters.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/image_filters2.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/image_fltr_graph.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/image_perspective.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/image_resample.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/image_transforms.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/interactive_polygon.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/line_patterns.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/line_patterns_clip.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/lion.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/lion_lens.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/lion_outline.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/make_arrows.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/make_gb_poly.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/mol_view.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/multi_clip.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/parse_lion.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/pattern_fill.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/pattern_perspective.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/pattern_resample.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/perspective.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/polymorphic_renderer.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/raster_text.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/rasterizer_compound.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/rasterizers.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/rasterizers2.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/rounded_rect.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/scanline_boolean.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/scanline_boolean2.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/simple_blur.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/svg_viewer/agg_svg_parser.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/svg_viewer/agg_svg_path_renderer.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/svg_viewer/agg_svg_path_tokenizer.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/svg_viewer/svg_test.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/trans_curve1.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/trans_curve1_ft.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/trans_curve2.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/trans_curve2_ft.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/trans_polar.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/demo/truetype_test.cpp.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/doc/basic_renderers/basic_renderers.agdoc.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/doc/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/doc/introduction/introduction.agdoc.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/doc/scanlines/scanlines.agdoc.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/download/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/faq/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/forum/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/license/" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/license/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/links/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/maillist/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/mcseem/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/news/" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/news/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/news/release_notes/v21.agdoc.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/news/release_notes/v22.agdoc.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/news/release_notes/v23.agdoc.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/news/release_notes/v24.agdoc.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/research/adaptive_bezier/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/research/bezier_interpolation/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/research/flash_rasterizer/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/research/font_rasterization/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/research/gamma_correction/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/research/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/screenshots/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/sponsors/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/svg/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/svn/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/tips/gradients_tutorial/gradients_tutorial.agdoc.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/tips/image_plg/image_plg.agdoc.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/tips/index.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/tips/line_alignment/line_alignment.agdoc.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/tips/square_color_interpolation/square_color_interpolation.agdoc.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/tips/win_ce/win_ce.agdoc.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/agg-web/tips/win_glyph/win_glyph.agdoc.html" />
+    <Text Include="../../thirdparty/owemdjee/agg/requirements.txt" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  

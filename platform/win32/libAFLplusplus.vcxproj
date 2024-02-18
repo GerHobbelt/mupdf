@@ -1,0 +1,829 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libAFLplusplus</ProjectName>
+    <ProjectGuid>{A60D8644-5A1C-4D29-8970-7518FF74135A}</ProjectGuid>
+    <RootNamespace>libAFLplusplus</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project.props" Label="SolutionWideSettings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win32.props')" Label="SolutionWideDebugWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win32.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win32.props')" Label="SolutionWideReleaseWin32Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(SolutionDir)\common-project-Debug-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Debug-Win64.props')" Label="SolutionWideDebugWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(SolutionDir)\common-project-Release-Win64.props"  Condition="exists('$(SolutionDir)\common-project-Release-Win64.props')" Label="SolutionWideReleaseWin64Settings" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Configuration)-$(CharacterSet)-$(PlatformArchitecture)bit-$(PlatformShortname)\$(RootNamespace)-$(ConfigurationType)-$(ProjectName)\</IntDir>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+<ItemDefinitionGroup>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <BrowseInformation>false</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DisableSpecificWarnings>4018;4100;4127;4180;4206;4244;4267;5105;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <ConformanceMode>true</ConformanceMode>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableUnitySupport>true</EnableUnitySupport>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>/bigobj /utf-8 /Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+</ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAFLPLUSPLUS;AFLPLUSPLUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAFLPLUSPLUS;AFLPLUSPLUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAFLPLUSPLUS;AFLPLUSPLUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAFLPLUSPLUS;AFLPLUSPLUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAFLPLUSPLUS;AFLPLUSPLUS_STATICLIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAFLPLUSPLUS;AFLPLUSPLUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAFLPLUSPLUS;AFLPLUSPLUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAFLPLUSPLUS;AFLPLUSPLUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAFLPLUSPLUS;AFLPLUSPLUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAFLPLUSPLUS;AFLPLUSPLUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Custom</Optimization>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAFLPLUSPLUS;AFLPLUSPLUS_STATICLIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_LIBAFLPLUSPLUS;AFLPLUSPLUS_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>../../include/system-override;.;....includesystem-override;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Bscmake>
+      <OutputFile>$(OutDir)$(TargetName).bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/aflpp/aflpp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/aflpp/standalone/aflpp-standalone.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/atnwalk/atnwalk.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/autotokens/autotokens.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/examples/custom_post_run.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/examples/custom_send.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/examples/elf_header_mutator.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/examples/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/examples/post_library_gif.so.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/examples/post_library_png.so.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/examples/simple_example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/hashmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/libprotobuf-mutator-example/lpm_aflpp_custom_mutator_input.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/libprotobuf-mutator-example/vuln.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/radamsa/libradamsa-test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/radamsa/libradamsa.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/radamsa/radamsa-mutator.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/symcc/symcc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/symcc/test_examples/file_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/symcc/test_examples/stdin_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/symqemu/symqemu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/addr/addr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/hook/frida_hook.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/hook/qemu_hook.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/asan/asan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/asan/asan_arm32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/asan/asan_arm64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/asan/asan_x64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/asan/asan_x86.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/cmplog/cmplog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/cmplog/cmplog_arm32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/cmplog/cmplog_arm64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/cmplog/cmplog_x64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/cmplog/cmplog_x86.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/ctx/ctx_arm32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/ctx/ctx_arm64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/ctx/ctx_x64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/ctx/ctx_x86.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/entry.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/instrument/instrument.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/instrument/instrument_arm32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/instrument/instrument_arm64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/instrument/instrument_coverage.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/instrument/instrument_debug.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/instrument/instrument_x64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/instrument/instrument_x64_cache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/instrument/instrument_x86.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/intercept.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/js/js.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/js/js_api.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/lib/lib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/lib/lib_apple.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/main.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/module.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/output.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/persistent/persistent.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/persistent/persistent_arm32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/persistent/persistent_arm64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/persistent/persistent_x64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/persistent/persistent_x86.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/prefetch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/ranges.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/seccomp/seccomp.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/seccomp/seccomp_atomic.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/seccomp/seccomp_callback.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/seccomp/seccomp_child.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/seccomp/seccomp_event.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/seccomp/seccomp_filter.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/seccomp/seccomp_print.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/seccomp/seccomp_socket.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/seccomp/seccomp_syscall.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/shm.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/stalker.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/stats/stats.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/stats/stats_arm32.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/stats/stats_arm64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/stats/stats_x86_64.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/util.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/cache/cache.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/cmov/cmov.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/cmplog/cmplog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/deferred/testinstr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/dynamic/testinstr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/dynamic/testinstrlib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/entry_point/testinstr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/exe/testinstr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/fasan/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/js/test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/js/test2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/osx-lib/harness.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/osx-lib/harness2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/osx-lib/harness3.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/osx-lib/lib.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/osx-lib/lib2.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/output/testinstr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/perf/perf.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/persistent_ret/testinstr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/testinstr/testinstr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/unstable/unstable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/util/bin2c.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/SanitizerCoverageLTO.so.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/SanitizerCoveragePCGUARD.so.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/afl-compiler-rt.o.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/afl-gcc-cmplog-pass.so.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/afl-gcc-cmptrs-pass.so.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/afl-gcc-pass.so.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/afl-llvm-common.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/afl-llvm-dict2file.so.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/afl-llvm-lto-instrumentlist.so.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/afl-llvm-pass.so.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/afl-llvm-rt-lto.o.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/cmplog-instructions-pass.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/cmplog-routines-pass.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/cmplog-switches-pass.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/compare-transform-pass.so.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/injection-pass.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/split-compares-pass.so.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/split-switches-pass.so.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/nyx_mode/custom_harness/example.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/fastexit/fastexit.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/libcompcov/compcovtest.cc" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/libcompcov/libcompcov.so.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/libqasan/dlmalloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/libqasan/hooks.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/libqasan/libqasan.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/libqasan/malloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/libqasan/patch.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/libqasan/string.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/libqasan/uninstrument.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/unsigaction/unsigaction.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/src/afl-analyze.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/src/afl-as.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/src/afl-cc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/src/afl-common.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/src/afl-forkserver.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/src/afl-gotcpu.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/src/afl-ld-lto.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/src/afl-performance.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/src/afl-sharedmem.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/src/afl-showmap.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/src/afl-tmin.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test-instr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-cmplog.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-compcov.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-custom-mutator.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-dlopen.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-floatingpoint.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-fp_Infcases.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-fp_NaNcases.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-fp_cases.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-fp_minusZerocases.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-int_cases.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-multiple-mutators.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-uint_cases.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/test-unsigaction.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/unittests/unit_hash.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/unittests/unit_list.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/unittests/unit_maybe_alloc.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/unittests/unit_preallocable.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/test/unittests/unit_rand.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/c/harness.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/c/persistent_target.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/compcov_x64/compcov_target.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/persistent/harness.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/persistent/persistent_target.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/persistent/simple_target_noncrashing.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/python_simple/simple_target.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/speedtest/c/harness.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/speedtest/target.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_network_proxy/afl-network-client.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_network_proxy/afl-network-server.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_proxy/afl-proxy.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_untracer/afl-untracer.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_untracer/libtestinstr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/aflpp_driver/aflpp_driver.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/aflpp_driver/aflpp_driver_test.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/aflpp_driver/aflpp_qemu_driver.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/aflpp_driver/aflpp_qemu_driver_hook.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/defork/defork.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/defork/forking_target.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/libdislocator/libdislocator.so.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/libtokencap/libtokencap.so.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/persistent_mode/persistent_demo.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/persistent_mode/persistent_demo_new.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/persistent_mode/test-instr.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/plot_ui/afl-plot-ui.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/qbdi_mode/demo-so.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/qbdi_mode/template.cpp" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/qemu_persistent_hook/read_into_rdi.c" />
+    <ClCompile Include="../../thirdparty/owemdjee/AFLplusplus/utils/qemu_persistent_hook/test.c" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/hashmap.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/test.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/utarray.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/uthash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/libprotobuf-mutator-example/lpm_aflpp_custom_mutator_input.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/radamsa/radamsa.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/rust/custom_mutator-sys/wrapper.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/include/asan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/include/ctx.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/include/entry.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/include/frida_cmplog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/include/instrument.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/include/intercept.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/include/js.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/include/lib.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/include/module.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/include/output.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/include/persistent.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/include/prefetch.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/include/ranges.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/include/seccomp.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/include/shm.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/include/stalker.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/include/stats.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/include/util.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/afl-as.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/afl-mutations.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/afl-prealloc.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/alloc-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/android-ashmem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/cmplog.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/config.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/coverage-32.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/coverage-64.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/debug.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/envs.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/forkserver.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/hash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/list.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/sharedmem.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/snapshot-inl.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/types.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/include/xxhash.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/afl-gcc-common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/afl-llvm-common.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/llvm-alternative-coverage.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/libcompcov/pmparser.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/libqasan/libqasan.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/libqasan/map_macro.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/AFLplusplus/types.h" />
+    <Image Include="../../thirdparty/owemdjee/AFLplusplus/docs/resources/afl_gzip.png" />
+    <Image Include="../../thirdparty/owemdjee/AFLplusplus/docs/resources/screenshot.png" />
+    <Image Include="../../thirdparty/owemdjee/AFLplusplus/docs/resources/statsd-grafana.png" />
+    <Image Include="../../thirdparty/owemdjee/AFLplusplus/testcases/images/bmp/not_kitty.bmp" />
+    <Image Include="../../thirdparty/owemdjee/AFLplusplus/testcases/images/gif/not_kitty.gif" />
+    <Image Include="../../thirdparty/owemdjee/AFLplusplus/testcases/images/ico/not_kitty.ico" />
+    <Image Include="../../thirdparty/owemdjee/AFLplusplus/testcases/images/jpeg/not_kitty.jpg" />
+    <Image Include="../../thirdparty/owemdjee/AFLplusplus/testcases/images/png/not_kitty.png" />
+    <Image Include="../../thirdparty/owemdjee/AFLplusplus/testcases/images/png/not_kitty_alpha.png" />
+    <Image Include="../../thirdparty/owemdjee/AFLplusplus/testcases/images/png/not_kitty_gamma.png" />
+    <Image Include="../../thirdparty/owemdjee/AFLplusplus/testcases/images/png/not_kitty_icc.png" />
+    <Image Include="../../thirdparty/owemdjee/AFLplusplus/utils/qbdi_mode/assets/screen1.png" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/CITATION.cff" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/CONTRIBUTING.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/Changelog.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/GNUmakefile.gcc_plugin" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/TODO.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/afl-cmin.bash" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/benchmark/COMPARISON.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/benchmark/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/benchmark/benchmark-results.jsonl" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/benchmark/benchmark.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/coresight_mode/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/coresight_mode/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/coresight_mode/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/aflpp/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/aflpp/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/aflpp/standalone/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/aflpp/standalone/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/aflpp_tritondse/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/aflpp_tritondse/aflpp_tritondse.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/atnwalk/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/atnwalk/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/autotokens/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/autotokens/README" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/examples/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/examples/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/examples/XmlMutatorMin.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/examples/common.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/examples/example.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/examples/simple-chunk-replace.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/examples/wrapper_afl_min.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/build_gramatron_mutator.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/grammars/js/source.json" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/grammars/js/source_automata.json" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/grammars/php/source.json" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/grammars/php/source_automata.json" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/grammars/ruby/source.json" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/grammars/ruby/source_automata.json" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/preprocess/construct_automata.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/preprocess/gnf_converter.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/gramatron/preprocess/prep_automaton.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/grammar_mutator/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/grammar_mutator/build_grammar_mutator.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/grammar_mutator/update_grammar_ref.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/libafl_base/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/libafl_base/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/libafl_base/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/libafl_base/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/libprotobuf-mutator-example/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/radamsa/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/radamsa/LICENSE" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/radamsa/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/rust/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/rust/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/rust/custom_mutator-sys/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/rust/custom_mutator-sys/build.rs" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/rust/custom_mutator-sys/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/rust/custom_mutator/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/rust/custom_mutator/src/lib.rs" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/rust/example/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/rust/example/src/example_mutator.rs" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/rust/example_lain/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/rust/example_lain/src/lain_mutator.rs" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/symcc/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/symcc/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/symqemu/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/custom_mutators/symqemu/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/dictionaries/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/Changelog.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/FAQ.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/INSTALL.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/best_practices.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/custom_mutators.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/env_variables.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/features.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/ideas.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/important_changes.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/resources/1_instrument_target.drawio.svg" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/resources/2_prepare_campaign.drawio.svg" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/resources/4_manage_campaign.drawio.svg" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/resources/grafana-afl++.json" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/rpc_statsd.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/third_party_tools.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/docs/tutorials.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/dynamic_list.txt" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/DEBUGGING.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/MapDensity.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/Scripting.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/many-linux/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/many-linux/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/many-linux/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/src/js/api.js" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/bloaty/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/bloaty/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/cache/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/cache/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/cmov/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/cmov/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/cmplog/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/cmplog/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/cmplog/get_section_addrs.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/deferred/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/deferred/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/dynamic/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/dynamic/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/entry_point/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/entry_point/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/exe/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/exe/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/fasan/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/fasan/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/freetype2/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/freetype2/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/jpeg/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/jpeg/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/js/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/js/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/js/entry.js" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/js/main.js" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/js/patch.js" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/js/replace.js" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/js/stalker.js" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/libpcap/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/libpcap/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/libxml/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/libxml/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/libxslt/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/libxslt/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/osx-lib/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/osx-lib/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/output/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/output/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/output/frida_stderr.txt" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/output/frida_stdout.txt" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/perf/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/perf/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/persistent_ret/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/persistent_ret/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/persistent_ret/test.js" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/png/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/png/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/png/persistent/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/png/persistent/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/png/persistent/hook/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/png/persistent/hook/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/png/persistent/hook/cmodule.js" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/png/persistent/hook/load.js" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/proj4/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/proj4/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/python/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/python/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/re2/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/re2/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/sqlite/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/sqlite/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/testinstr/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/testinstr/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/unstable/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/unstable/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/vorbis/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/test/vorbis/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/ts/lib/afl.ts" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/ts/package-lock.json" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/ts/package.json" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/ts/tsconfig.json" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/ts/tslint.json" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/ub1804/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/ub1804/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/update_frida_version.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/frida_mode/util/frida_get_symbol_addr.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/README.cmplog.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/README.gcc_plugin.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/README.injections.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/README.instrument_list.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/README.laf-intel.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/README.llvm.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/README.lto.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/README.persistent_mode.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/instrumentation/gcc_plugin.COPYING3" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/nyx_mode/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/nyx_mode/build_nyx_support.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/nyx_mode/update_ref.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/README.deferred_initialization_example.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/README.persistent.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/README.wine.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/build_qemu_support.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/fastexit/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/fastexit/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/libcompcov/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/libcompcov/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/libqasan/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/libqasan/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/unsigaction/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/unsigaction/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/update_ref.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/qemu_mode/util/qemu_get_symbol_addr.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/src/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/checkcommit.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-all.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-basic.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-compilers.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-custom-mutators.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-fpExtra.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-frida-mode.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-gcc-plugin.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-libextensions.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-llvm-lto.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-llvm.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-nyx-mode.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-performance.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-post.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-pre.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-qemu-mode.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-unicorn-mode.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/test/test-unittests.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/testcases/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/testcases/archives/common/bzip2/small_archive.bz2" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/testcases/archives/common/rar/small_archive.rar" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/testcases/archives/common/tar/small_archive.tar" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/testcases/images/jp2/not_kitty.jp2" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/testcases/images/jxr/not_kitty.jxr" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/testcases/images/tiff/not_kitty.tiff" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/testcases/multimedia/h264/small_movie.mp4" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/testcases/others/elf/small_exec.elf" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/testcases/others/js/small_script.js" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/testcases/others/pdf/small.pdf" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/testcases/others/rtf/small_document.rtf" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/testcases/others/sql/simple_queries.sql" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/testcases/others/text/hello_world.txt" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/build_unicorn_support.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/helper_scripts/ida_context_loader.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/helper_scripts/unicorn_dumper_gdb.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/helper_scripts/unicorn_dumper_ida.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/helper_scripts/unicorn_dumper_lldb.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/helper_scripts/unicorn_dumper_pwndbg.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/helper_scripts/unicorn_loader.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/c/COMPILE.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/c/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/c/sample_all.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/c/sample_inputs/sample1.bin" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/c/sample_inputs/sample2.bin" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/c/sample_inputs/sample3.bin" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/c/sample_inputs/sample4.bin" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/c/sample_inputs/sample5.bin" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/compcov_x64/COMPILE.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/compcov_x64/compcov_target.bin" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/compcov_x64/compcov_target.elf" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/compcov_x64/compcov_test_harness.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/compcov_x64/sample_inputs/sample1.bin" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/persistent/COMPILE.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/persistent/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/persistent/sample_all.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/persistent/sample_inputs/sample1.bin" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/persistent/sample_inputs/sample2.bin" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/persistent/sample_inputs/sample3.bin" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/persistent/sample_inputs/sample4.bin" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/persistent/sample_inputs/sample5.bin" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/python_simple/COMPILE.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/python_simple/sample_inputs/sample1.bin" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/python_simple/sample_inputs/sample2.bin" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/python_simple/sample_inputs/sample3.bin" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/python_simple/sample_inputs/sample4.bin" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/python_simple/sample_inputs/sample5.bin" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/python_simple/simple_target.bin" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/python_simple/simple_test_harness.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/python_simple/simple_test_harness_alt.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/speedtest/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/speedtest/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/speedtest/c/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/speedtest/get_offsets.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/speedtest/python/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/speedtest/python/harness.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/speedtest/rust/Cargo.toml" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/speedtest/rust/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/samples/speedtest/rust/src/main.rs" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/unicorn_mode/update_uc_ref.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_network_proxy/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_network_proxy/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_network_proxy/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_proxy/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_proxy/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_untracer/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_untracer/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_untracer/TODO" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_untracer/ghidra_get_patchpoints.java" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_untracer/ida_get_patchpoints.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/afl_untracer/patches.txt" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/aflpp_driver/GNUmakefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/aflpp_driver/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/aflpp_driver/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/analysis_scripts/queue2csv.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/asan_cgroups/limit_memory.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/autodict_ql/autodict-ql.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/autodict_ql/build-codeql.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/autodict_ql/litan.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/autodict_ql/litool.ql" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/autodict_ql/memcmp-str.ql" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/autodict_ql/memcmp-strings.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/autodict_ql/qlpack.yml" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/autodict_ql/readme.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/autodict_ql/stan-strings.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/autodict_ql/strcmp-str.ql" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/autodict_ql/strcmp-strings.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/autodict_ql/strncmp-str.ql" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/autodict_ql/strncmp-strings.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/autodict_ql/strtool.ql" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/canvas_harness/canvas_harness.html" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/crash_triage/triage_crashes.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/defork/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/defork/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/dynamic_covfilter/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/dynamic_covfilter/make_symbol_list.py" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/libdislocator/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/libdislocator/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/libtokencap/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/libtokencap/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/persistent_mode/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/plot_ui/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/plot_ui/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/qbdi_mode/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/qbdi_mode/build.sh" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/qemu_persistent_hook/Makefile" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/qemu_persistent_hook/README.md" />
+    <Text Include="../../thirdparty/owemdjee/AFLplusplus/utils/target_intelligence/README.md" />
+    <Xml Include="../../thirdparty/owemdjee/AFLplusplus/testcases/others/xml/small_document.xml" />
+  </ItemGroup>
+  <ImportGroup Label="PropertySheets" >
+    <Import Project="$(SolutionDir)\common-project-ultimate-override.props" Label="SolutionWideSettingsOverride" />
+  </ImportGroup>
+</Project>
+  
