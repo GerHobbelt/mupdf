@@ -185,6 +185,8 @@ static __inline int signbit(double x)
 
 #if defined(_WIN32) || defined(_WIN64)
 
+typedef struct fz_context fz_context;
+
 char **fz_argv_from_wargv(fz_context *ctx, int argc, const wchar_t **wargv);
 void fz_free_argv(fz_context *ctx, int argc, const char** argv);
 
