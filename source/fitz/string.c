@@ -1383,3 +1383,50 @@ void *fz_memmem(const void *h0, size_t k, const void *n0, size_t l)
 
 	return twoway_memmem(h, h+k, n, l);
 }
+
+char *
+fz_utf8_from_wchar(fz_context *ctx, const wchar_t *s)
+{
+	const wchar_t *src = s;
+	char *d;
+	char *dst;
+	int len = 1;
+
+	while (*src)
+	{
+		len += fz_runelen(*src++);
+	}
+
+	d = Memento_label(fz_malloc(ctx, len), "utf8_from_wchar");
+	if (d != NULL)
+	{
+		dst = d;
+		src = s;
+		while (*src)
+		{
+			dst += fz_runetochar(dst, *src++);
+		}
+		*dst = 0;
+	}
+	return d;
+}
+
+wchar_t *
+fz_wchar_from_utf8(fz_context *ctx, const char *s)
+{
+	wchar_t *d, *r;
+	int c;
+	r = d = fz_malloc(ctx, (strlen(s) + 1) * sizeof(wchar_t));
+	if (!r)
+		return NULL;
+	while (*s) {
+		s += fz_chartorune_unsafe(&c, s);
+		/* Truncating c to a wchar_t can be problematic if c
+		 * is 0x10000. */
+		if (c >= 0x10000)
+			c = FZ_REPLACEMENT_CHARACTER;
+		*d++ = c;
+	}
+	*d = 0;
+	return r;
+}

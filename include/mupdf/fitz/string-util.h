@@ -420,6 +420,16 @@ const char *fz_runeptr(const char *str, int idx);
 int fz_utflen(const char *s);
 
 /**
+	Convert a wchar string into a new heap allocated utf8 one.
+*/
+char *fz_utf8_from_wchar(fz_context *ctx, const wchar_t *s);
+
+/**
+	Convert an utf8 string into a new heap allocated wchar one.
+*/
+wchar_t *fz_wchar_from_utf8(fz_context *ctx, const char *s);
+
+/**
 	Locale-independent decimal to binary conversion. On overflow
 	return (-)INFINITY and set errno to ERANGE. On underflow return
 	0 and set errno to ERANGE. Special inputs (case insensitive):
