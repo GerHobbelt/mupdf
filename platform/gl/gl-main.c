@@ -3227,7 +3227,12 @@ int main(int argc, const char** argv)
 
 	oldzoom = currentzoom = currentzoom * ui.scale;
 
-	ctx = fz_new_context(NULL, NULL, FZ_STORE_DEFAULT);
+	ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
+	if (!ctx)
+	{
+		fz_error(ctx, "cannot initialise MuPDF context");
+		return EXIT_FAILURE;
+	}
 
 	console_init();
 
@@ -3363,11 +3368,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 {
 	int argc;
 	LPWSTR *wargv = CommandLineToArgvW(GetCommandLineW(), &argc);
-	const char **argv = fz_argv_from_wargv(argc, wargv);
+	fz_context *ctx = fz_get_global_context();
+	const char **argv = fz_argv_from_wargv(ctx, argc, wargv);
 	if (!argv)
 		return EXIT_FAILURE;
 	int ret = main_utf8(argc, argv);
-	fz_free_argv(argc, argv);
+	fz_free_argv(ctx, argc, argv);
 	LocalFree(wargv);
 	return ret;
 }

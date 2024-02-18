@@ -1368,7 +1368,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
         case 'X': gapp.layout_use_doc_css = 0; break;
         default: 
             usage(argv[0]);
-			fz_argv_free(ctx, argc, argv);
+			fz_free_argv(ctx, argc, argv);
 			LocalFree(wargv);
 			return EXIT_FAILURE;
         }

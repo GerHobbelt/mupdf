@@ -1044,8 +1044,32 @@ int fz_is_absolute_path(const char* path)
 
 #if defined(_WIN32)
 
+static int fz_is_UNC_path(const wchar_t* path)
+{
+	// anything with prefix '//yadayada'
+	return (path && (
+		(path[0] == '/') ||
+		(path[0] == '\\')
+	) && (
+		(path[1] == '/') ||
+		(path[1] == '\\')
+	) && (
+		isalnum(path[2]) ||
+		path[2] == '$' ||
+		path[2] == '.' ||
+		path[2] == '?'
+	));
+}
+
 static wchar_t* fz_UNC_wfullpath_from_name(fz_context* ctx, const char* path)
 {
+	if (!path) {
+		errno = EINVAL;
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		return NULL;
+	}
+
 	// don't use PATH_MAX fixed-sized arrays as the input path MAY be larger than this!
 	size_t slen = strlen(path);
 	size_t wlen = slen + 5;
@@ -1069,7 +1093,7 @@ err:
 	}
 	const wchar_t* fp = wbuf + 4;
 	// Is full path an UNC path already? If not, make it so:
-	if (wbuf[4] != '\\' && wbuf[4] != '/')
+	if (!fz_is_UNC_path(wbuf + 4))
 	{
 		wbuf[0] = '\\';
 		wbuf[1] = '\\';
@@ -1089,7 +1113,7 @@ err:
 
 int fz_chdir(fz_context* ctx, const char *path)
 {
-#ifdef _MSC_VER
+#if defined(_WIN32)
 	wchar_t* wname = fz_UNC_wfullpath_from_name(ctx, path);
 
 	if (!wname)
@@ -1117,22 +1141,21 @@ int fz_chdir(fz_context* ctx, const char *path)
 		{
 			fz_freplace_ephemeral_system_error(ctx, 0, "chdir: Unable to locate the directory: %s", path);
 		}
-#ifdef _MSC_VER
+#if defined(_WIN32)
 		fz_free(ctx, wname);
 #endif
 		return -1;
 	}
 
-#ifdef _MSC_VER
+#if defined(_WIN32)
 	fz_free(ctx, wname);
 #endif
 	return 0;
 }
 
-#if defined(_WIN32)
-
 void fz_mkdir_for_file(fz_context* ctx, const char* path)
 {
+#if defined(_WIN32)
 	char* buf = fz_strdup(ctx, path);
 	ASSERT(buf);
 
@@ -1163,12 +1186,7 @@ void fz_mkdir_for_file(fz_context* ctx, const char* path)
 	}
 
 	fz_free(ctx, buf);
-}
-
 #else
-
-void fz_mkdir_for_file(fz_context* ctx, const char* path)
-{
 	char* buf = fz_strdup(ctx, path);
 	ASSERT(buf);
 
@@ -1213,17 +1231,14 @@ void fz_mkdir_for_file(fz_context* ctx, const char* path)
 		}
 	}
 	fz_free(ctx, buf);
+#endif
 }
 
-#endif
-
-
-
-#if defined(_WIN32)
 
 int64_t
 fz_stat_ctime(fz_context *ctx, const char* path)
 {
+#if defined(_WIN32)
 	struct _stat info;
 	wchar_t* wpath = fz_UNC_wfullpath_from_name(ctx, path);
 
@@ -1241,130 +1256,7 @@ fz_stat_ctime(fz_context *ctx, const char* path)
 
 	fz_free(ctx, wpath);
 	return info.st_ctime;
-}
-
-int64_t
-fz_stat_mtime(fz_context* ctx, const char* path)
-{
-	struct _stat info;
-	wchar_t* wpath = fz_UNC_wfullpath_from_name(ctx, path);
-
-	if (!wpath)
-		return 0;
-
-	int n = _wstat(wpath, &info);
-	if (n)
-	{
-		fz_copy_ephemeral_errno(ctx);
-		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
-		fz_free(ctx, wpath);
-		return 0;
-	}
-
-	fz_free(ctx, wpath);
-	return info.st_mtime;
-}
-
-int64_t
-fz_stat_atime(fz_context* ctx, const char* path)
-{
-	struct _stat info;
-	wchar_t* wpath = fz_UNC_wfullpath_from_name(ctx, path);
-
-	if (!wpath)
-		return 0;
-
-	int n = _wstat(wpath, &info);
-	if (n)
-	{
-		fz_copy_ephemeral_errno(ctx);
-		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
-		fz_free(ctx, wpath);
-		return 0;
-	}
-
-	fz_free(ctx, wpath);
-	return info.st_atime;
-}
-
-int64_t
-fz_stat_size(fz_context* ctx, const char* path)
-{
-	struct _stat info;
-	wchar_t* wpath = fz_UNC_wfullpath_from_name(ctx, path);
-
-	if (!wpath)
-		return 0;
-
-	int n = _wstat(wpath, &info);
-	if (n)
-	{
-		fz_copy_ephemeral_errno(ctx);
-		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
-		fz_free(ctx, wpath);
-		return -1;
-	}
-
-	fz_free(ctx, wpath);
-
-	// directories should be reported as size=0 or 1...
-
-	if (info.st_mode & _S_IFDIR)
-		return 0;
-	if (info.st_mode & _S_IFREG)
-		return info.st_size;
-	return 0;
-}
-
-int
-fz_path_is_regular_file(fz_context* ctx, const char* path)
-{
-	struct _stat info;
-	wchar_t wpath[PATH_MAX];
-
-	if (fz_UNC_wfullpath_from_name(ctx, wpath, path))
-		return FALSE;
-
-	int n = _wstat(wpath, &info);
-	if (n)
-	{
-		fz_copy_ephemeral_errno(ctx);
-		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
-		return FALSE;
-	}
-
-	// directories should be reported as size=0 or 1...
-
-	return (info.st_mode & _S_IFREG) && !(info.st_mode & _S_IFDIR);
-}
-
-int
-fz_path_is_directory(fz_context* ctx, const char* path)
-{
-	struct _stat info;
-	wchar_t wpath[PATH_MAX];
-
-	if (fz_UNC_wfullpath_from_name(ctx, wpath, path))
-		return FALSE;
-
-	int n = _wstat(wpath, &info);
-	if (n)
-	{
-		fz_copy_ephemeral_errno(ctx);
-		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
-		return FALSE;
-	}
-
-	// directories should be reported as size=0 or 1...
-
-	return !!(info.st_mode & _S_IFDIR);
-}
-
 #else
-
-int64_t
-fz_stat_ctime(fz_context* ctx, const char* path)
-{
 	struct stat info;
 	if (stat(path, &info))
 	{
@@ -1373,11 +1265,31 @@ fz_stat_ctime(fz_context* ctx, const char* path)
 		return 0;
 	}
 	return info.st_ctime;
+#endif
 }
 
 int64_t
 fz_stat_mtime(fz_context* ctx, const char* path)
 {
+#if defined(_WIN32)
+	struct _stat info;
+	wchar_t* wpath = fz_UNC_wfullpath_from_name(ctx, path);
+
+	if (!wpath)
+		return 0;
+
+	int n = _wstat(wpath, &info);
+	if (n)
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		fz_free(ctx, wpath);
+		return 0;
+	}
+
+	fz_free(ctx, wpath);
+	return info.st_mtime;
+#else
 	struct stat info;
 	if (stat(path, &info))
 	{
@@ -1386,11 +1298,31 @@ fz_stat_mtime(fz_context* ctx, const char* path)
 		return 0;
 	}
 	return info.st_mtime;
+#endif
 }
 
 int64_t
 fz_stat_atime(fz_context* ctx, const char* path)
 {
+#if defined(_WIN32)
+	struct _stat info;
+	wchar_t* wpath = fz_UNC_wfullpath_from_name(ctx, path);
+
+	if (!wpath)
+		return 0;
+
+	int n = _wstat(wpath, &info);
+	if (n)
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		fz_free(ctx, wpath);
+		return 0;
+	}
+
+	fz_free(ctx, wpath);
+	return info.st_atime;
+#else
 	struct stat info;
 	if (stat(path, &info))
 	{
@@ -1399,11 +1331,38 @@ fz_stat_atime(fz_context* ctx, const char* path)
 		return 0;
 	}
 	return info.st_atime;
+#endif
 }
 
 int64_t
 fz_stat_size(fz_context* ctx, const char* path)
 {
+#if defined(_WIN32)
+	struct _stat info;
+	wchar_t* wpath = fz_UNC_wfullpath_from_name(ctx, path);
+
+	if (!wpath)
+		return 0;
+
+	int n = _wstat(wpath, &info);
+	if (n)
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		fz_free(ctx, wpath);
+		return -1;
+	}
+
+	fz_free(ctx, wpath);
+
+	// directories should be reported as size=0 or 1...
+
+	if (info.st_mode & _S_IFDIR)
+		return 0;
+	if (info.st_mode & _S_IFREG)
+		return info.st_size;
+	return 0;
+#else
 	struct stat info;
 	if (stat(path, &info))
 	{
@@ -1416,11 +1375,34 @@ fz_stat_size(fz_context* ctx, const char* path)
 	if (info.st_mode & _S_IFREG)
 		return info.st_size;
 	return 0;
+#endif
 }
 
 int
 fz_path_is_regular_file(fz_context* ctx, const char* path)
 {
+#if defined(_WIN32)
+	struct _stat info;
+	wchar_t* wpath = fz_UNC_wfullpath_from_name(ctx, path);
+
+	if (!wpath)
+		return FALSE;
+
+	int n = _wstat(wpath, &info);
+	if (n)
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		fz_free(ctx, wpath);
+		return FALSE;
+	}
+
+	fz_free(ctx, wpath);
+
+	// directories should be reported as size=0 or 1...
+
+	return (info.st_mode & _S_IFREG) && !(info.st_mode & _S_IFDIR);
+#else
 	struct stat info;
 	if (stat(path, &info))
 	{
@@ -1430,11 +1412,34 @@ fz_path_is_regular_file(fz_context* ctx, const char* path)
 	}
 
 	return (info.st_mode & _S_IFREG) && !(info.st_mode & _S_IFDIR);
+#endif
 }
 
 int
 fz_path_is_directory(fz_context* ctx, const char* path)
 {
+#if defined(_WIN32)
+	struct _stat info;
+	wchar_t* wpath = fz_UNC_wfullpath_from_name(ctx, path);
+
+	if (!wpath)
+		return FALSE;
+
+	int n = _wstat(wpath, &info);
+	if (n)
+	{
+		fz_copy_ephemeral_errno(ctx);
+		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
+		fz_free(ctx, wpath);
+		return FALSE;
+	}
+
+	fz_free(ctx, wpath);
+
+	// directories should be reported as size=0 or 1...
+
+	return !!(info.st_mode & _S_IFDIR);
+#else
 	struct stat info;
 	if (stat(path, &info))
 	{
@@ -1444,42 +1449,43 @@ fz_path_is_directory(fz_context* ctx, const char* path)
 	}
 
 	return !!(info.st_mode & _S_IFDIR);
+#endif
 }
-
-#endif /* _WIN32 */
 
 
 FILE *
-fz_fopen_utf8(fz_context* ctx, const char* name, const char* mode)
+fz_fopen_utf8(fz_context* ctx, const char* path, const char* mode)
 {
 #if defined(_WIN32)
-	wchar_t wname[PATH_MAX];
 	wchar_t *wmode;
 	FILE* file;
+	wchar_t* wpath = fz_UNC_wfullpath_from_name(ctx, path);
 
-	if (fz_UNC_wfullpath_from_name(ctx, wname, name))
+	if (!wpath)
 	{
 		return NULL;
 	}
 
-	wmode = fz_wchar_from_utf8(mode);
+	wmode = fz_wchar_from_utf8(ctx, mode);
 	if (wmode == NULL)
 	{
+		fz_free(ctx, wpath);
 		return NULL;
 	}
 
-	file = _wfopen(wname, wmode);
+	file = _wfopen(wpath, wmode);
 	if (!file)
 	{
 		fz_copy_ephemeral_errno(ctx);
 		ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
 	}
 
-	free(wmode);
+	fz_free(ctx, wmode);
+	fz_free(ctx, wpath);
 
 	return file;
 #else
-	if (name == NULL)
+	if (path == NULL)
 	{
 		errno = EINVAL;
 		fz_copy_ephemeral_errno(ctx);
@@ -1495,7 +1501,7 @@ fz_fopen_utf8(fz_context* ctx, const char* name, const char* mode)
 		return NULL;
 	}
 
-	FILE* rv = fopen(name, mode);
+	FILE* rv = fopen(path, mode);
 	if (!rv)
 	{
 		fz_copy_ephemeral_errno(ctx);
@@ -1507,18 +1513,18 @@ fz_fopen_utf8(fz_context* ctx, const char* name, const char* mode)
 }
 
 int
-fz_remove_utf8(fz_context* ctx, const char* name)
+fz_remove_utf8(fz_context* ctx, const char* path)
 {
 #if defined(_WIN32)
-	wchar_t wname[PATH_MAX];
 	int n;
+	wchar_t* wpath = fz_UNC_wfullpath_from_name(ctx, path);
 
-	if (fz_UNC_wfullpath_from_name(ctx, wname, name))
+	if (!wpath)
 	{
 		return -1;
 	}
 
-	n = _wremove(wname);
+	n = _wremove(wpath);
 	if (n)
 	{
 		fz_copy_ephemeral_errno(ctx);
@@ -1528,7 +1534,7 @@ fz_remove_utf8(fz_context* ctx, const char* name)
 
 	return n;
 #else
-	if (name == NULL)
+	if (path == NULL)
 	{
 		errno = EINVAL;
 		fz_copy_ephemeral_errno(ctx);
@@ -1536,7 +1542,7 @@ fz_remove_utf8(fz_context* ctx, const char* name)
 		return -1;
 	}
 
-	int rv = remove(name);
+	int rv = remove(path);
 	if (rv)
 	{
 		fz_copy_ephemeral_errno(ctx);
@@ -1548,18 +1554,18 @@ fz_remove_utf8(fz_context* ctx, const char* name)
 }
 
 int
-fz_mkdirp_utf8(fz_context* ctx, const char* name)
+fz_mkdirp_utf8(fz_context* ctx, const char* path)
 {
 #if defined(_WIN32)
-	wchar_t wname[PATH_MAX];
+	wchar_t* wpath = fz_UNC_wfullpath_from_name(ctx, path);
 
-	if (fz_UNC_wfullpath_from_name(ctx, wname, name))
+	if (!wpath)
 	{
 		return -1;
 	}
 
 	// as this is now an UNC path, we can only mkdir beyond the drive letter:
-	wchar_t* p = wname + 4;
+	wchar_t* p = wpath + 4;
 	wchar_t* q = wcschr(p, ':');
 	if (!q)
 		q = p;
@@ -1579,7 +1585,7 @@ fz_mkdirp_utf8(fz_context* ctx, const char* name)
 		wchar_t c = *d;
 		*d = 0;
 
-		int n = _wmkdir(wname);
+		int n = _wmkdir(wpath);
 		int e = errno;
 		if (n && e != EEXIST)
 		{
@@ -1603,7 +1609,7 @@ fz_mkdirp_utf8(fz_context* ctx, const char* name)
 #else
 	char* pname;
 
-	pname = fz_strdup_no_throw(ctx, name);
+	pname = fz_strdup_no_throw(ctx, path);
 	if (pname == NULL)
 	{
 		errno = ENOMEM;
@@ -1630,7 +1636,7 @@ fz_mkdirp_utf8(fz_context* ctx, const char* name)
 		{
 			fz_copy_ephemeral_errno(ctx);
 			ASSERT(fz_ctx_get_system_errormsg(ctx) != NULL);
-			free(pname);
+			fz_free(ctx, pname);
 			return -1;
 		}
 		*d = c;
@@ -1644,7 +1650,7 @@ fz_mkdirp_utf8(fz_context* ctx, const char* name)
 			d += strlen(d);  // make sure the sentinel-patching doesn't damage the last part of the original path spec
 	}
 
-	free(wname);
+	fz_free(ctx, pname);
 	return 0;
 #endif
 }
@@ -1671,4 +1677,5 @@ fz_mkdir(fz_context* ctx, const char* path)
 }
 
 
-// TODO: code review re ephemeral errorcode handling
+#pragma message("TODO: code review re ephemeral errorcode handling")
+

@@ -32,59 +32,6 @@
 #endif
 
 
-void *
-fz_fopen_utf8(fz_context* ctx, const char *name, const char *mode)
-{
-#ifdef _WIN32
-	wchar_t *wname, *wmode;
-	FILE *file;
-
-	wname = fz_wchar_from_utf8(ctx, name);
-	if (wname == NULL)
-	{
-		return NULL;
-	}
-
-	wmode = fz_wchar_from_utf8(ctx, mode);
-	if (wmode == NULL)
-	{
-		fz_free(ctx, wname);
-		return NULL;
-	}
-
-	file = _wfopen(wname, wmode);
-
-	fz_free(ctx, wname);
-	fz_free(ctx, wmode);
-	return file;
-#else
-	return fopen(name, mode);
-#endif
-}
-
-int
-fz_remove_utf8(fz_context* ctx, const char *name)
-{
-#ifdef _WIN32
-	wchar_t *wname;
-	int n;
-
-	wname = fz_wchar_from_utf8(ctx, name);
-	if (wname == NULL)
-	{
-		errno = ENOMEM;
-		return -1;
-	}
-
-	n = _wremove(wname);
-
-	fz_free(ctx, wname);
-	return n;
-#else
-	return remove(name);
-#endif
-}
-
 /*
 Return NULL on (out of memory) error.
 */
