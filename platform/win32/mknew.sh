@@ -1028,6 +1028,7 @@ PaddleClas
 PaddleDetection
 PaddleNLP
 PaddleOCR
+Paddle-Lite
 VTK
 agg
 cfgpath
