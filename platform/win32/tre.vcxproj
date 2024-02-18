@@ -126,14 +126,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/tre;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TRE;TRE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TRE;TRE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/tre;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -152,7 +152,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/tre;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TRE;TRE_STATICLIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -160,7 +160,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TRE;TRE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/tre;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -181,14 +181,14 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/tre;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TRE;TRE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TRE;TRE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/tre;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -207,7 +207,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Custom</Optimization>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/tre;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TRE;TRE_STATICLIB;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -215,7 +215,7 @@
     <ResourceCompile>
       <PreprocessorDefinitions>BUILD_MONOLITHIC;BUILDING_TRE;TRE_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>0x0409</Culture>
-      <AdditionalIncludeDirectories>../../include/system-override;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/system-override;.;../../scripts/tre;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -228,38 +228,29 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/regcomp.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/regerror.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/regexec.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-ast.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-compile.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-filter.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-match-approx.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-match-backtrack.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-match-parallel.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-mem.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-parse.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/tre-stack.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tre/lib/xmalloc.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tre/python/tre-python.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tre/src/agrep.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tre/tests/bench.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tre/tests/randtest.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tre/tests/retest.c" />
-    <ClCompile Include="../../thirdparty/owemdjee/tre/tests/test-str-source.c" />
+    <ProjectReference Include="libgetopt.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518110e57b1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf_default_handlers.vcxproj">
+      <Project>{5f615f91-dff8-4f05-bf48-1222b7d86519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libmupdf_minimal_core.vcxproj">
+      <Project>{6f1ee8ba-ccb7-4f76-b9da-337c41dd6fc0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libsystem_override.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8318-7518ff7ef82f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libtre.vcxproj">
+      <Project>{a60d8644-5a1c-4d29-8970-7518ff371d1a}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="../../thirdparty/owemdjee/tre/tests/monolithic-main.c" />
     <ClInclude Include="../../thirdparty/owemdjee/tre/contrib/ps3/config.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tre/contrib/ps3/tre-config.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-ast.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-compile.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-filter.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-internal.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-match-utils.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-mem.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-parse.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/tre-stack.h" />
-    <ClInclude Include="../../thirdparty/owemdjee/tre/lib/xmalloc.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tre/local_includes/regex.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tre/local_includes/tre.h" />
+    <ClInclude Include="../../thirdparty/owemdjee/tre/tests/monolithic_examples.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tre/win32/config.h" />
     <ClInclude Include="../../thirdparty/owemdjee/tre/win32/tre-config.h" />
     <Text Include="../../thirdparty/owemdjee/tre/AUTHORS" />
@@ -282,8 +273,6 @@
     <Text Include="../../thirdparty/owemdjee/tre/doc/default.css" />
     <Text Include="../../thirdparty/owemdjee/tre/doc/tre-api.html" />
     <Text Include="../../thirdparty/owemdjee/tre/doc/tre-syntax.html" />
-    <Text Include="../../thirdparty/owemdjee/tre/lib/Makefile.am" />
-    <Text Include="../../thirdparty/owemdjee/tre/lib/README" />
     <Text Include="../../thirdparty/owemdjee/tre/local_includes/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/tre/local_includes/tre-config.h.in" />
     <Text Include="../../thirdparty/owemdjee/tre/m4/Makefile.am" />
@@ -296,17 +285,6 @@
     <Text Include="../../thirdparty/owemdjee/tre/po/fi.po" />
     <Text Include="../../thirdparty/owemdjee/tre/po/sv.po" />
     <Text Include="../../thirdparty/owemdjee/tre/po/zh_CN.po" />
-    <Text Include="../../thirdparty/owemdjee/tre/python/README_py_ext.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/python/data/example/expected/nls_ap_nc_sb_ti/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/python/data/example/expected/nls_ap_wc_mb_ti/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/python/data/example/expected/nls_ap_wc_sb_ti/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/python/data/example/expected/sls_ap_nc_sb_ti/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/python/data/example/expected/sls_ap_wc_mb_ti/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/python/data/example/expected/sls_ap_wc_sb_ti/foo.txt" />
-    <Text Include="../../thirdparty/owemdjee/tre/python/example.py" />
-    <Text Include="../../thirdparty/owemdjee/tre/python/setup.py" />
-    <Text Include="../../thirdparty/owemdjee/tre/python/setup.py.in" />
-    <Text Include="../../thirdparty/owemdjee/tre/src/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/tre/tests/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/tre/tests/agrep/Makefile.am" />
     <Text Include="../../thirdparty/owemdjee/tre/tests/agrep/basic.args" />
