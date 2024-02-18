@@ -185,8 +185,8 @@ static __inline int signbit(double x)
 
 #if defined(_WIN32) || defined(_WIN64)
 
-char **fz_argv_from_wargv(int argc, const wchar_t **wargv);
-void fz_free_argv(int argc, const char** argv);
+char **fz_argv_from_wargv(fz_context *ctx, int argc, const wchar_t **wargv);
+void fz_free_argv(fz_context *ctx, int argc, const char** argv);
 
 #endif
 
@@ -194,10 +194,6 @@ void fz_free_argv(int argc, const char** argv);
 #ifndef S_ISDIR
 #define S_ISDIR(mode) ((mode) & S_IFDIR)
 #endif
-
-int64_t fz_stat_ctime(const char *path);
-int64_t fz_stat_mtime(const char *path);
-int fz_mkdir(char *path);
 
 #ifdef __cplusplus
 }

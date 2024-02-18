@@ -18,6 +18,8 @@ extern "C" {
 
 int fz_chdir(fz_context* ctx, const char* path);
 
+int fz_mkdir(fz_context* ctx, const char *path);
+
 FILE *fz_fopen_utf8(fz_context *ctx, const char *name, const char *mode);
 int fz_remove_utf8(fz_context *ctx, const char *name);
 int fz_mkdirp_utf8(fz_context *ctx, const char* name);

@@ -1340,7 +1340,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
 
     pdfapp_init(ctx, &gapp);
 
-    argv = fz_argv_from_wargv(argc, wargv);
+    argv = fz_argv_from_wargv(ctx, argc, wargv);
     if (!argv) {
         LocalFree(wargv);
         return EXIT_FAILURE;
@@ -1368,8 +1368,9 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
         case 'X': gapp.layout_use_doc_css = 0; break;
         default: 
             usage(argv[0]);
-            LocalFree(wargv);
-            return EXIT_FAILURE;
+			fz_argv_free(ctx, argc, argv);
+			LocalFree(wargv);
+			return EXIT_FAILURE;
         }
     }
 
@@ -1388,7 +1389,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
     {
         if (!winfilename(wbuf, nelem(wbuf)))
         {
-            fz_free_argv(argc, argv);
+            fz_free_argv(ctx, argc, argv);
             LocalFree(wargv);
             return EXIT_FAILURE;
         }
@@ -1411,7 +1412,7 @@ WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShow
         DispatchMessage(&msg);
     }
 
-    fz_free_argv(argc, argv);
+    fz_free_argv(ctx, argc, argv);
     LocalFree(wargv);
 
     do_close(&gapp);

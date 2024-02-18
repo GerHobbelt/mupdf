@@ -24,48 +24,52 @@
 
 #include "mupdf/helpers/system-header-files.h"
 
-#ifdef _WIN32
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#ifdef _WIN32
 #include <windows.h>
-#include <direct.h> /* for mkdir */
+#endif
 
 
 void *
-fz_fopen_utf8(const char *name, const char *mode)
+fz_fopen_utf8(fz_context* ctx, const char *name, const char *mode)
 {
+#ifdef _WIN32
 	wchar_t *wname, *wmode;
 	FILE *file;
 
-	wname = wchar_from_utf8(name);
+	wname = fz_wchar_from_utf8(ctx, name);
 	if (wname == NULL)
 	{
 		return NULL;
 	}
 
-	wmode = wchar_from_utf8(mode);
+	wmode = fz_wchar_from_utf8(ctx, mode);
 	if (wmode == NULL)
 	{
-		free(wname);
+		fz_free(ctx, wname);
 		return NULL;
 	}
 
 	file = _wfopen(wname, wmode);
 
-	free(wname);
-	free(wmode);
+	fz_free(ctx, wname);
+	fz_free(ctx, wmode);
 	return file;
+#else
+	return fopen(name, mode);
+#endif
 }
 
 int
-fz_remove_utf8(const char *name)
+fz_remove_utf8(fz_context* ctx, const char *name)
 {
+#ifdef _WIN32
 	wchar_t *wname;
 	int n;
 
-	wname = wchar_from_utf8(name);
+	wname = fz_wchar_from_utf8(ctx, name);
 	if (wname == NULL)
 	{
 		errno = ENOMEM;
@@ -74,20 +78,23 @@ fz_remove_utf8(const char *name)
 
 	n = _wremove(wname);
 
-	free(wname);
+	fz_free(ctx, wname);
 	return n;
+#else
+	return remove(name);
+#endif
 }
 
 /*
 Return NULL on (out of memory) error.
 */
 char **
-fz_argv_from_wargv(int argc, const wchar_t **wargv)
+fz_argv_from_wargv(fz_context* ctx, int argc, const wchar_t **wargv)
 {
 	char **argv;
 	int i;
 
-	argv = Memento_label(calloc(argc, sizeof(char *)), "fz_argv");
+	argv = Memento_label(fz_calloc(ctx, argc, sizeof(char *)), "fz_argv");
 	if (argv == NULL)
 	{
 		fz_error(NULL, "Out of memory while processing command line args!");
@@ -96,10 +103,11 @@ fz_argv_from_wargv(int argc, const wchar_t **wargv)
 
 	for (i = 0; i < argc; i++)
 	{
-		argv[i] = Memento_label(fz_utf8_from_wchar(wargv[i]), "fz_arg");
+		argv[i] = Memento_label(fz_utf8_from_wchar(ctx, wargv[i]), "fz_arg");
 		if (argv[i] == NULL)
 		{
 			fz_error(NULL, "Out of memory while processing command line args!");
+			fz_free_argv(ctx, argc, argv);
 			return NULL;
 		}
 	}
@@ -108,92 +116,10 @@ fz_argv_from_wargv(int argc, const wchar_t **wargv)
 }
 
 void
-fz_free_argv(int argc, const char** argv)
+fz_free_argv(fz_context* ctx, int argc, const char** argv)
 {
 	int i;
 	for (i = 0; i < argc; i++)
-		free((void *)argv[i]);
-	free((void *)argv);
+		fz_free(ctx, (void *)argv[i]);
+	fz_free(ctx, (void *)argv);
 }
-
-int64_t
-fz_stat_ctime(const char *path)
-{
-	struct _stat info;
-	wchar_t *wpath;
-
-	wpath = wchar_from_utf8(path);
-	if (wpath == NULL)
-		return 0;
-
-	if (_wstat(wpath, &info) < 0) {
-		free(wpath);
-		return 0;
-	}
-
-	free(wpath);
-	return info.st_ctime;
-}
-
-int64_t
-fz_stat_mtime(const char *path)
-{
-	struct _stat info;
-	wchar_t *wpath;
-
-	wpath = wchar_from_utf8(path);
-	if (wpath == NULL)
-		return 0;
-
-	if (_wstat(wpath, &info) < 0) {
-		free(wpath);
-		return 0;
-	}
-
-	free(wpath);
-	return info.st_mtime;
-}
-
-int
-fz_mkdir(char *path)
-{
-	int ret;
-	wchar_t *wpath = wchar_from_utf8(path);
-
-	if (wpath == NULL)
-		return -1;
-
-	ret = _wmkdir(wpath);
-
-	free(wpath);
-
-	return ret;
-}
-
-#else
-
-int64_t
-fz_stat_ctime(const char *path)
-{
-	struct stat info;
-	if (stat(path, &info) < 0)
-		return 0;
-	return info.st_ctime;
-}
-
-int64_t
-fz_stat_mtime(const char *path)
-{
-	struct stat info;
-	if (stat(path, &info) < 0)
-		return 0;
-	return info.st_mtime;
-}
-
-int
-fz_mkdir(char *path)
-{
-	return mkdir(path, S_IRWXU | S_IRWXG | S_IRWXO);
-}
-
-#endif /* _WIN32 */
